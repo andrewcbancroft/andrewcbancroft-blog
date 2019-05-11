@@ -197,7 +197,8 @@ Let's continue with the zoo theme. Suppose that our zoo issues `AnnualPasses` to
 
 To model this kind of relationship, we may define some classes as follows:
 
-<pre class="lang:default decode:true " title="AnnualPass, Visitor" >class Visitor {
+```swift
+class Visitor {
     let name: String
     var annualPass: AnnualPass?
     init(name: String) {

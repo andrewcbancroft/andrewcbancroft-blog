@@ -41,7 +41,8 @@ For your convenience, I've created a simple GitHub repository with an example Xc
 
 The first step is to import the Social module into your .swift file. It's a simple declaration at the top of your file:
 
-<pre class="lang:default mark:4 decode:true " title="Import Social" >// ...
+```swift
+// ...
 
 import UIKit
 import Social

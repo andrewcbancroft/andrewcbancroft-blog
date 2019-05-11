@@ -66,7 +66,8 @@ In C#, we've got two possibilities: Create an interface, or create an abstract c
 
 Using an interface may look something like this:
 
-<pre class="lang:default decode:true " title="C# Interface" >public interface Athlete
+```swift
+public interface Athlete
 {
     public void Run();
     public void Swim();

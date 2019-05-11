@@ -50,7 +50,8 @@ Here is an example of initializing the `CLLocationManager` instance, and setting
 
 There's also a `currentLocation` variable that will get continually updated&#8230;
 
-<pre class="lang:default decode:true mark:1,2,5,12" title="Init CLLocationManager and Set Delegate" >class NameOfViewController: UIViewController, CLLocationManagerDelegate {
+```swift
+class NameOfViewController: UIViewController, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
 
     // This will get updated via the location manager delegate's didUpdateLocations method
@@ -70,7 +71,8 @@ There's also a `currentLocation` variable that will get continually updated&#823
 
 Here is an example of how to implement the two `CLLocationManagerDelegate` methods:
 
-<pre class="lang:default decode:true " title="CLLocationManagerDelegate" >// Monitor location services authorization changes
+```swift
+// Monitor location services authorization changes
 func locationManager(_ manager: CLLocationManager,
                         didChangeAuthorization status: CLAuthorizationStatus) {
     switch status {

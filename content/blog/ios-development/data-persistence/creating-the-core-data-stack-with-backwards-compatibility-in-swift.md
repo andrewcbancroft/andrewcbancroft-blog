@@ -58,7 +58,8 @@ The reason you create the `NSManagedObjectModel` instance first is because the _
 
 In the code example that follows, I used `NSSQLiteStoreType` to create a SQLite persistent store. Regardless of what kind of persistent store you use though, `NSPersistentStoreCoordinator` needs your managed object model instance.
 
-<pre class="lang:default decode:true " title="Initialize and Configure NSPersistentStoreCoordinator" >// Configure NSPersistentStoreCoordinator with an NSPersistentStore
+```swift
+// Configure NSPersistentStoreCoordinator with an NSPersistentStore
 let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
 
 let storeURL = try! FileManager

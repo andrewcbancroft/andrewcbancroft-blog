@@ -77,7 +77,8 @@ The table view is using one prototype cell with an **Identifier** of **&#8220;Ce
 
 MainViewController.swift is where the action is happening. Here's a quick outline of what we need to accomplish in this class:
 
-<pre class="lang:default decode:true " title="MainViewController.swift" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+```swift
+public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     // maintain a reference to NSManagedObjectContext instance
 
@@ -95,7 +96,8 @@ With the class declaration out of the way, we'll investigate the class implement
 
 #### Maintain NSManagedObjectContext instance reference
 
-<pre class="lang:default decode:true " title="NSManagedObjectContext reference" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+```swift
+public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     public var context: NSManagedObjectContext!
 

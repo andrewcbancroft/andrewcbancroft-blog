@@ -112,7 +112,8 @@ func alertCameraAccessNeeded() {
 
 To use the image that the camera captured, you need to set up your view controller to adhere to and implement couple of delegate protocols:
 
-<pre class="lang:default decode:true " title="Adhere to delegate protocols" >class NameOfViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+```swift
+class NameOfViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 // ...
 }
 ```
@@ -121,7 +122,8 @@ To use the image that the camera captured, you need to set up your view controll
 
 ## UIImagePickerControllerDelegate
 
-<pre class="lang:default decode:true " title="UIImagePickerControllerDelegate" >func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+```swift
+func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     let photo = info[UIImagePickerControllerOriginalImage] as! UIImage
     // do something with the photo... set to UIImageView, save it, etc.
 

@@ -168,7 +168,8 @@ Running the tests at this point should produce a passing test using the mock obj
 
 Now, if I wanted to test the &#8220;false&#8221; branch of my class' method, I could simply create another test method following the same steps, only this time, I'd provide a new implementation for the overridden `executeFetchRequest`&nbsp;&nbsp;method that's appropriate:
 
-<pre class="lang:default mark:4,17 decode:true">func testDatabaseHasRecordsForSomeEntityReturnsFalseWhenFetchRequestReturnsEMPTYArray() {
+```swift
+func testDatabaseHasRecordsForSomeEntityReturnsFalseWhenFetchRequestReturnsEMPTYArray() {
         class MockNSManagedObjectContext: NSManagedObjectContext {
             override func executeFetchRequest(request: NSFetchRequest, error: NSErrorPointer) -> [AnyObject]? {
                 return [] // Provided a different stub implementation to test the "false" branch of my method under test

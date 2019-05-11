@@ -85,7 +85,8 @@ Third, whenever some step along the way fails, I'm utilizing Swift's error handl
 
 The enum's definition is simple right now, but it will grow as time goes on with various other error conditions related to receipt validation (and why validation might fail):
 
-<pre class="lang:default decode:true " title="ReceiptValidationError Enum" >enum ReceiptValidationError : Error {
+```swift
+enum ReceiptValidationError : Error {
     case couldNotFindReceipt
 }
 ```
