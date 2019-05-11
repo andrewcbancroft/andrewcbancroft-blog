@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Listing Calendar Events with Event Kit and Swift" />
-<meta property="og:description" content="This is the continuation of a series of articles I&#8217;ve writing for Swift developers working with Event Kit.
+<meta property="og:description" content="This is the continuation of a series of articles I've writing for Swift developers working with Event Kit.
 Supposing that after asking the user for permission to use their calendars, and even allowing users to create new calendars from within your iOS app, one possible next step could be to list out all of the events for a calendar that they tap on.
 Jump to&#8230;   Demo   Example project   Querying for events    Context: View controller   Configure start and end dates   Use the event store to generate NSPredicate   Query the event store with generated NSPredicate" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@ Jump to&#8230;   Demo   Example project   Querying for events    Context: View c
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Listing Calendar Events with Event Kit and Swift"/>
-<meta name="twitter:description" content="This is the continuation of a series of articles I&#8217;ve writing for Swift developers working with Event Kit.
+<meta name="twitter:description" content="This is the continuation of a series of articles I've writing for Swift developers working with Event Kit.
 Supposing that after asking the user for permission to use their calendars, and even allowing users to create new calendars from within your iOS app, one possible next step could be to list out all of the events for a calendar that they tap on.
 Jump to&#8230;   Demo   Example project   Querying for events    Context: View controller   Configure start and end dates   Use the event store to generate NSPredicate   Query the event store with generated NSPredicate"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
@@ -168,7 +168,7 @@ MathJax.Hub.Config({
 
     
 
-<p>This is the continuation of a series of articles I&#8217;ve writing for Swift developers working with Event Kit.</p>
+<p>This is the continuation of a series of articles I've writing for Swift developers working with Event Kit.</p>
 
 <p>Supposing that after <a href="https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/">asking the user for permission</a> to use their calendars, and even allowing users to <a href="https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/">create <em>new</em> calendars</a> from within your iOS app, one possible next step could be to list out all of the events for a calendar that they tap on.</p>
 
@@ -218,17 +218,17 @@ MathJax.Hub.Config({
 
 <h1 id="demo">Demo</h1>
 
-<p>Here&#8217;s what we&#8217;re going for by the end of this:</p>
+<p>Here's what we're going for by the end of this:</p>
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/list-events-demo.gif"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/list-events-demo.gif" alt="List Events Demo" width="468" height="844" class="alignnone size-full wp-image-12819" /></a></p>
 
-<p>In this walk-through, I&#8217;ll explore the Event Kit API that allows us to query the user&#8217;s device to find and list out events for a calendar that match a date range.</p>
+<p>In this walk-through, I'll explore the Event Kit API that allows us to query the user's device to find and list out events for a calendar that match a date range.</p>
 
 <p><a name="example-project" class="jump-target"></a></p>
 
 <h1 id="example-project">Example project</h1>
 
-<p>I&#8217;ve got an example project up on GitHub that contains all the code necessary to list out events for a calendar inside of a table view. You can download that project here:</p>
+<p>I've got an example project up on GitHub that contains all the code necessary to list out events for a calendar inside of a table view. You can download that project here:</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -247,9 +247,9 @@ MathJax.Hub.Config({
 
 <h1 id="querying-for-events">Querying for events</h1>
 
-<p>The primary thing you&#8217;ll need to do in order to display a list of events from a calendar is to query the event store for events matching a properly configured <code>NSPredicate</code>.</p>
+<p>The primary thing you'll need to do in order to display a list of events from a calendar is to query the event store for events matching a properly configured <code>NSPredicate</code>.</p>
 
-<p>Here&#8217;s a snippet of code, followed by an analysis of what&#8217;s going on:</p>
+<p>Here's a snippet of code, followed by an analysis of what's going on:</p>
 
 <pre class="lang:swift decode:true mark:20,23" title="Query for events" >class EventsViewController: UIViewController, UITableViewDataSource {
     var calendar: EKCalendar! // Passed in from previous view controller
@@ -287,7 +287,7 @@ MathJax.Hub.Config({
 
 <h2 id="context-view-controller">Context: View controller</h2>
 
-<p>The context of the above snippet is a view controller. Inside the view controller class, there&#8217;s a calendar instance that is presumably set in the previous view controller&#8217;s <code>prepareForSegue</code> method. There&#8217;s also an optional array of <code>EKEvent</code> instances that acts as the data source for a table view, and a function called <code>loadEvents</code> in this view controller.</p>
+<p>The context of the above snippet is a view controller. Inside the view controller class, there's a calendar instance that is presumably set in the previous view controller's <code>prepareForSegue</code> method. There's also an optional array of <code>EKEvent</code> instances that acts as the data source for a table view, and a function called <code>loadEvents</code> in this view controller.</p>
 
 <p><a name="configure-start-end-dates" class="jump-target"></a></p>
 
@@ -299,19 +299,19 @@ MathJax.Hub.Config({
 
 <h2 id="use-the-event-store-to-generate-nspredicate">Use the event store to generate NSPredicate</h2>
 
-<p>To actually query the store, you need to create an <code>NSPredicate</code> instance. However, rather than calling <code>NSPredicate's</code> initializer, you will use an <code>EKEventStore</code> instance to <em>generate</em> a predicate. Apparently there&#8217;s some under-the-hood work that goes on to get a properly configured <code>NSPredicate</code> instance to use in your query.</p>
+<p>To actually query the store, you need to create an <code>NSPredicate</code> instance. However, rather than calling <code>NSPredicate's</code> initializer, you will use an <code>EKEventStore</code> instance to <em>generate</em> a predicate. Apparently there's some under-the-hood work that goes on to get a properly configured <code>NSPredicate</code> instance to use in your query.</p>
 
-<p>So assuming you&#8217;ve got a valid start date, end date (both <code>NSDate</code> instances), and one or more calendars to search for events within, you&#8217;ll use the event store&#8217;s <code>predicateForEventsWithStartDate(_: endDate: calendars:)</code> method to get an <code>NSPredicate</code> instance.</p>
+<p>So assuming you've got a valid start date, end date (both <code>NSDate</code> instances), and one or more calendars to search for events within, you'll use the event store's <code>predicateForEventsWithStartDate(_: endDate: calendars:)</code> method to get an <code>NSPredicate</code> instance.</p>
 
 <p><a name="query-with-nspredicate" class="jump-target"></a></p>
 
 <h2 id="query-the-event-store-with-generated-nspredicate">Query the event store with generated NSPredicate</h2>
 
-<p>The last step is to call <code>eventsMatchingPredicate(_:)</code> on the event store, and use the predicate you just generated. You can optionally sort them, as I&#8217;ve done in the snippet.</p>
+<p>The last step is to call <code>eventsMatchingPredicate(_:)</code> on the event store, and use the predicate you just generated. You can optionally sort them, as I've done in the snippet.</p>
 
 <h1 id="wrapping-up">Wrapping up</h1>
 
-<p>That&#8217;s the meat of querying the event store for a list of events. To learn how display them in a table view, I would recommend going ahead and <a href="https://github.com/andrewcbancroft/EventTracker/tree/list-events-for-calendar">grabbing the example project that I&#8217;ve provided</a>. I&#8217;ve also got a couple of guides on working with table views if you need assistance with that part:</p>
+<p>That's the meat of querying the event store for a list of events. To learn how display them in a table view, I would recommend going ahead and <a href="https://github.com/andrewcbancroft/EventTracker/tree/list-events-for-calendar">grabbing the example project that I've provided</a>. I've also got a couple of guides on working with table views if you need assistance with that part:</p>
 
 <div class="resources">
   <div class="resources-header">

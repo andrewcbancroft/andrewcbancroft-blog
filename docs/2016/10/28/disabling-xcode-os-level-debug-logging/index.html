@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Disabling Xcode’s OS-Level Debug Logging" />
-<meta property="og:description" content="Full credit to Russell Ivanovic for his tweet for figuring out how to disable Xcode 8&#8217;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&#8217;s helpful to you as well.
-If you&#8217;re tired of sifting through operating system-level logging to the debug console while you&#8217;re debugging your app, it&#8217;s actually fairly easy to silence.
+<meta property="og:description" content="Full credit to Russell Ivanovic for his tweet for figuring out how to disable Xcode 8's extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it's helpful to you as well.
+If you're tired of sifting through operating system-level logging to the debug console while you're debugging your app, it's actually fairly easy to silence.
 Jump to&#8230;   Edit the scheme for your app   Add a new environment variable for OS_ACTIVITY_MODE   Was this article helpful?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2016/10/28/disabling-xcode-os-level-debug-logging/" />
@@ -35,8 +35,8 @@ Jump to&#8230;   Edit the scheme for your app   Add a new environment variable f
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Disabling Xcode’s OS-Level Debug Logging"/>
-<meta name="twitter:description" content="Full credit to Russell Ivanovic for his tweet for figuring out how to disable Xcode 8&#8217;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&#8217;s helpful to you as well.
-If you&#8217;re tired of sifting through operating system-level logging to the debug console while you&#8217;re debugging your app, it&#8217;s actually fairly easy to silence.
+<meta name="twitter:description" content="Full credit to Russell Ivanovic for his tweet for figuring out how to disable Xcode 8's extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it's helpful to you as well.
+If you're tired of sifting through operating system-level logging to the debug console while you're debugging your app, it's actually fairly easy to silence.
 Jump to&#8230;   Edit the scheme for your app   Add a new environment variable for OS_ACTIVITY_MODE   Was this article helpful?"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
@@ -166,9 +166,9 @@ MathJax.Hub.Config({
     </header>
     <div class="content">
 
-    <p>Full credit to <a href="https://twitter.com/rustyshelf">Russell Ivanovic</a> for his <a href="https://twitter.com/rustyshelf/status/775505191160328194">tweet</a> for figuring out how to disable Xcode 8&#8217;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&#8217;s helpful to you as well.</p>
+    <p>Full credit to <a href="https://twitter.com/rustyshelf">Russell Ivanovic</a> for his <a href="https://twitter.com/rustyshelf/status/775505191160328194">tweet</a> for figuring out how to disable Xcode 8's extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it's helpful to you as well.</p>
 
-<p>If you&#8217;re tired of sifting through operating system-level logging to the debug console while you&#8217;re debugging your app, it&#8217;s actually fairly easy to silence.</p>
+<p>If you're tired of sifting through operating system-level logging to the debug console while you're debugging your app, it's actually fairly easy to silence.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -194,10 +194,10 @@ MathJax.Hub.Config({
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png" alt="Edit Scheme" width="529" height="182" class="alignnone size-full wp-image-13064" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png 529w, https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2-300x103.png 300w" sizes="(max-width: 529px) 100vw, 529px" /></a></p>
 
 <p><a name="new-environment-variable" class="jump-target"></a><br />
-2. In the &#8216;Run&#8217; section, click on &#8216;Arguments&#8217; tab, and add a new Environment Variable. Use <code>OS_ACTIVITY_MODE</code> for the name, and <code>disable</code> for the value:<br />
+2. In the &#8216;Run' section, click on &#8216;Arguments' tab, and add a new Environment Variable. Use <code>OS_ACTIVITY_MODE</code> for the name, and <code>disable</code> for the value:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png" alt="New Environment Variable" width="895" height="506" class="alignnone size-full wp-image-13068" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png 895w, https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4-300x170.png 300w" sizes="(max-width: 895px) 100vw, 895px" /></a></p>
 
-<p>That&#8217;s it! Closing the Scheme editor and re-running your app will produce a beautifully silent console window, leaving you free to see what you wanted to see with <code>print()</code>, or other app-specific info (such as runtime exceptions) without having to sift through all that OS-level logging.</p>
+<p>That's it! Closing the Scheme editor and re-running your app will produce a beautifully silent console window, leaving you free to see what you wanted to see with <code>print()</code>, or other app-specific info (such as runtime exceptions) without having to sift through all that OS-level logging.</p>
 
 <p><a name="share" class="jump-target"></a></p>
 

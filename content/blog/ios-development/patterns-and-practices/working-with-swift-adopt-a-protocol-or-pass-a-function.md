@@ -17,34 +17,9 @@ tags:
 ---
 Without fail, any time [Rob Napier][1] ([@cocoaphony][2]) speaks or writes, I gain insight into new and deeper ways to solve problems with Swift.
 
-In January 2016, he [gave a talk at dotSwift][3], and I wanted to record my thoughts on something he said that made a lot of sense when it comes to the topic of, &#8220;Should I create and adopt a protocol for this Type I&#8217;m creating, or should I just pass it a function instead?&#8221;
+In January 2016, he [gave a talk at dotSwift][3], and I wanted to record my thoughts on something he said that made a lot of sense when it comes to the topic of, &#8220;Should I create and adopt a protocol for this Type I'm creating, or should I just pass it a function instead?&#8221;
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#two-insights">Two insights</a>
-    </li>
-    <li>
-      <a href="#when-to-pass-a-function">When to pass a function</a>
-    </li>
-    <li>
-      <a href="#when-to-use-a-protocol">When to use a protocol</a>
-    </li>
-    <li>
-      <a href="#how-to-depend-on-a-function">How to depend on a function</a>
-    </li>
-    <li>
-      <a href="#related">You might also enjoy&#8230;</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
+
 
 <a name="two-insights" class="jump-target"></a>
 
@@ -79,8 +54,8 @@ Rob gave us a couple or three **rules of thumb**. Not hard-and-fast, &#8220;It s
 
 When it comes to finding opportunities that lend themselves to going the &#8220;just pass the function&#8221; route, consider the following:
 
-  * If you&#8217;re creating a Type that depends on a single piece of functionality (a single function), maybe try depending on / passing just the function, rather than creating a protocol.
-  * If you&#8217;re creating a Type that depends on more than a single function, but the nature of the dependent relationship is short-lived, maybe try depending on / passing just the function. How do you know if it&#8217;s short-lived? Ask, &#8220;How many times am I going to call the function(s) that I depend on? Once, and then I&#8217;m done? Or multiple times throughout the application life-cycle?&#8221; If it&#8217;s a once and done kind of relationship, much like a [callback][4], then perhaps just depending on and passing the function, rather than creating a protocol, is the simpler route.
+  * If you're creating a Type that depends on a single piece of functionality (a single function), maybe try depending on / passing just the function, rather than creating a protocol.
+  * If you're creating a Type that depends on more than a single function, but the nature of the dependent relationship is short-lived, maybe try depending on / passing just the function. How do you know if it's short-lived? Ask, &#8220;How many times am I going to call the function(s) that I depend on? Once, and then I'm done? Or multiple times throughout the application life-cycle?&#8221; If it's a once and done kind of relationship, much like a [callback][4], then perhaps just depending on and passing the function, rather than creating a protocol, is the simpler route.
 
 <a name="when-to-use-a-protocol" class="jump-target"></a>
 
@@ -88,16 +63,16 @@ When it comes to finding opportunities that lend themselves to going the &#8220;
 
 For some rules of thumb when it comes to choosing a protocol over just passing a function, you might consider:
 
-  * If you&#8217;re creating a Type that depends on 3 or more related functions, wrapping those functions up in a protocol might be cleaner and more clear.
-  * If you&#8217;re creating a Type that depends on some functions for a long period of time, consider a protocol. Long-lived relationships are better-described in a protocol. Think of something like a table view&#8217;s data source. This is a good example of when to use a protocol to describe the dependency and the relationship, because as data changes, the table view will need to constantly call into those protocol methods to refresh itself.
+  * If you're creating a Type that depends on 3 or more related functions, wrapping those functions up in a protocol might be cleaner and more clear.
+  * If you're creating a Type that depends on some functions for a long period of time, consider a protocol. Long-lived relationships are better-described in a protocol. Think of something like a table view's data source. This is a good example of when to use a protocol to describe the dependency and the relationship, because as data changes, the table view will need to constantly call into those protocol methods to refresh itself.
 
 <a name="how-to-depend-on-a-function" class="jump-target"></a>
 
 # How to depend on a function
 
-In order to fully grasp how to go the &#8220;just depend on / pass the function&#8221; route, you need to have an understanding of how [function Types are described in Swift][5]. With this knowledge, you&#8217;re set to do a couple of things:
+In order to fully grasp how to go the &#8220;just depend on / pass the function&#8221; route, you need to have an understanding of how [function Types are described in Swift][5]. With this knowledge, you're set to do a couple of things:
 
-1 &#8211; Create a property on the Type you&#8217;re implementing that is of some function Type. For example:
+1 – Create a property on the Type you're implementing that is of some function Type. For example:
 
 <pre class="lang:swift decode:true " title="Function property" >struct Vehicle&lt;Fuel> {
     let move: (Fuel) -> Void
@@ -117,7 +92,7 @@ rocket.move(RocketFuel())
 
 A full explanation of indicating function Types can be found by reviewing my guide on [Swift Functions as Types][5]
 
-2 &#8211; Declare that such-and-such parameter on a function within your Type must be a function Type. For example:
+2 – Declare that such-and-such parameter on a function within your Type must be a function Type. For example:
 
 <pre class="lang:swift decode:true " title="Function parameter" >func getData(completion: (NSData) -&gt; Void) {
     let data: NSData = // do something to go get data

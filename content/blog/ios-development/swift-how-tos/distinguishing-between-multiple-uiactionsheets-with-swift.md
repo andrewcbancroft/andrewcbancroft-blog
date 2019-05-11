@@ -17,11 +17,11 @@ tags:
   - UIView Tag Property
 
 ---
-The challenge when dealing with the presentation and handling of more than one <span class="lang:swift decode:true  crayon-inline " >UIActionSheet</span> in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I&#8217;m dealing with so that I can handle the user&#8217;s choice appropriately?&#8221;
+The challenge when dealing with the presentation and handling of more than one <span class="lang:swift decode:true  crayon-inline " >UIActionSheet</span> in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I'm dealing with so that I can handle the user's choice appropriately?&#8221;
 
-Presumably, the user&#8217;s interaction with one of the action sheets will be different than the other(s), so you&#8217;ll need to think through how to distinguish between them, in order to respond to that interaction appropriately.
+Presumably, the user's interaction with one of the action sheets will be different than the other(s), so you'll need to think through how to distinguish between them, in order to respond to that interaction appropriately.
 
-I faced such a scenario in a recent project, and I thought I&#8217;d share my solution. Check out my [GitHub example][1] to dive in if you prefer learning by exploration!
+I faced such a scenario in a recent project, and I thought I'd share my solution. Check out my [GitHub example][1] to dive in if you prefer learning by exploration!
 
 ### Using UIView Tags
 
@@ -31,7 +31,7 @@ Essentially, I chose to make use of the <span class="lang:swift decode:true  cra
 
 ### Example
 
-Here&#8217;s a quick example showing the setting of this property so that the action sheet can be differentiated when it comes time to handle the user&#8217;s choice:
+Here's a quick example showing the setting of this property so that the action sheet can be differentiated when it comes time to handle the user's choice:
 
 <pre class="lang:swift decode:true " title="Set tag property" >let actionSheet1 = UIActionSheet()
         actionSheet1.tag = 0
@@ -43,9 +43,9 @@ Here&#8217;s a quick example showing the setting of this property so that the ac
 
 ### Better Solution in Swift?
 
-Simple enough, right? Here&#8217;s my only problem with the above implementation if I&#8217;m using Swift: We have language features available to us that allow us to avoid setting the tag property to the integer value in-line like I did in this code snippet.
+Simple enough, right? Here's my only problem with the above implementation if I'm using Swift: We have language features available to us that allow us to avoid setting the tag property to the integer value in-line like I did in this code snippet.
 
-Here, instead of assigning in-line, I&#8217;m going to refactor and employ a Swift enumeration to help _name_ the tag. Underneath, there will still be integers involved, but my goal in using an enumeration is two-fold:
+Here, instead of assigning in-line, I'm going to refactor and employ a Swift enumeration to help _name_ the tag. Underneath, there will still be integers involved, but my goal in using an enumeration is two-fold:
 
   * Identify the action sheet in code with a name. This should help my code be more coherent and readable.
   * Encapsulate a single source of truth for the tag values and avoid &#8220;magic integers&#8221; in my code. While the integers assigned to the tags can be arbitrary, if they ever _do_ need to be changed, I change the enumeration, rather than changing each place where the tag is set or checked to perform branching logic.
@@ -70,9 +70,9 @@ The refactored version of the code snippet previously presented could look like 
         actionSheet2.tag = ActionSheetTag.ActionSheet2.toRaw()
         // set other properties, such as delegate, as well as buttons...</pre>
 
-It&#8217;s worth noting that rather than using an enumeration, I could have chosen to define a couple of constants at a scope visible to both my setting of the tag, and the conditional logic I&#8217;d use in my UIActionSheetDelegate callback. The end goal and result would be the same: Clarity, achieved by assigning _names_ to the tags, and the avoidance of &#8220;magic integers&#8221; appearing in my code.
+It's worth noting that rather than using an enumeration, I could have chosen to define a couple of constants at a scope visible to both my setting of the tag, and the conditional logic I'd use in my UIActionSheetDelegate callback. The end goal and result would be the same: Clarity, achieved by assigning _names_ to the tags, and the avoidance of &#8220;magic integers&#8221; appearing in my code.
 
-### Wrapping Up &#8211; UIActionSheetDelegate Implementation
+### Wrapping Up – UIActionSheetDelegate Implementation
 
 To see how to perform the conditional logic needed in the UIActionSheetDelegate callback method, take a look at this final code snippet:
 
@@ -91,7 +91,7 @@ To see how to perform the conditional logic needed in the UIActionSheetDelegate 
 
 ### Summary
 
-I&#8217;ve done it before, but by using Swift enumerations again in a new context, I was able to provide better clarity to the intention of my code when I had multiple UIActionSheet instances that I needed to handle in a single view controller. In addition to this clarity, I also encapsulated a single source of truth for identifying my UIActionSheet instances, rather than placing &#8220;magic integers&#8221; throughout my code. Have a look at (and play with) [the example I&#8217;ve put up on GitHub][1] for further study and improvement!
+I've done it before, but by using Swift enumerations again in a new context, I was able to provide better clarity to the intention of my code when I had multiple UIActionSheet instances that I needed to handle in a single view controller. In addition to this clarity, I also encapsulated a single source of truth for identifying my UIActionSheet instances, rather than placing &#8220;magic integers&#8221; throughout my code. Have a look at (and play with) [the example I've put up on GitHub][1] for further study and improvement!
 
 <div class="related-posts">
   You might also enjoy</p> 

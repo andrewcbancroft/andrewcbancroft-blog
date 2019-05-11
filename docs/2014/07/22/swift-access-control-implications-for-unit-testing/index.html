@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Swift Access Control – Implications for Unit Testing" />
-<meta property="og:description" content="If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you&#8217;re not alone!
+<meta property="og:description" content="If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you're not alone!
 Unit Tests and Swift Access Control When Swift access control came into the picture, we suddenly had a little more to consider. From the Apple docs:
 Swift access control has three access levels:
  private entities can only be accessed from within the source file where they are defined." />
@@ -36,7 +36,7 @@ Swift access control has three access levels:
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Access Control – Implications for Unit Testing"/>
-<meta name="twitter:description" content="If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you&#8217;re not alone!
+<meta name="twitter:description" content="If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you're not alone!
 Unit Tests and Swift Access Control When Swift access control came into the picture, we suddenly had a little more to consider. From the Apple docs:
 Swift access control has three access levels:
  private entities can only be accessed from within the source file where they are defined."/>
@@ -170,7 +170,7 @@ MathJax.Hub.Config({
 
     
 
-<p>If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you&#8217;re not alone!</p>
+<p>If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you're not alone!</p>
 
 <h3 id="unit-tests-and-swift-access-control">Unit Tests and Swift Access Control</h3>
 
@@ -190,7 +190,7 @@ So given the following&#8230;</p>
 
 <ul>
 <li>Out of the box, your unit tests are part of a separate test target</li>
-<li>The default access control for a class is <em>internal</em>, (meaning that if you do not explicitly specify an access control on the class / properties / functions, they&#8217;re marked internal behind the scenes)</li>
+<li>The default access control for a class is <em>internal</em>, (meaning that if you do not explicitly specify an access control on the class / properties / functions, they're marked internal behind the scenes)</li>
 </ul>
 
 <p>&#8230; we now know why the unit tests break, unless we make a few tweaks:  classes marked internal are only seen <em>within a set of specified targets</em> and our unit tests are in a separate target that our class is not a part of by default.</p>
@@ -213,7 +213,7 @@ So given the following&#8230;</p>
   
   <ul>
     <li>
-      <a href="http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/" title="Don’t Write Legacy Swift">Don&#8217;t Write Legacy Swift</a>
+      <a href="http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/" title="Don’t Write Legacy Swift">Don't Write Legacy Swift</a>
     </li>
     <li>
       <a href="http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/" title="Getting Started with Unit Testing in Swift">Getting Started with Unit Testing in Swift</a>

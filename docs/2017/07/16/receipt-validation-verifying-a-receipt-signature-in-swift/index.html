@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Receipt Validation – Verifying a Receipt Signature in Swift" />
-<meta property="og:description" content="You&#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect. You&#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you&#8217;ve even done it the &#8220;easy way&#8221; with CocoaPods. You&#8217;ve located and loaded the receipt for validation. You&#8217;ve extracted the PKCS #7 container.  The aim of this guide is to help you take a look inside the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt." />
+<meta property="og:description" content="You've prepared to test receipt validation by setting up your app in iTunes Connect. You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it the &#8220;easy way&#8221; with CocoaPods. You've located and loaded the receipt for validation. You've extracted the PKCS #7 container.  The aim of this guide is to help you take a look inside the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" />
 <meta property="article:published_time" content="2017-07-16T21:43:21&#43;00:00"/>
@@ -33,7 +33,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Receipt Validation – Verifying a Receipt Signature in Swift"/>
-<meta name="twitter:description" content="You&#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect. You&#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you&#8217;ve even done it the &#8220;easy way&#8221; with CocoaPods. You&#8217;ve located and loaded the receipt for validation. You&#8217;ve extracted the PKCS #7 container.  The aim of this guide is to help you take a look inside the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt."/>
+<meta name="twitter:description" content="You've prepared to test receipt validation by setting up your app in iTunes Connect. You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it the &#8220;easy way&#8221; with CocoaPods. You've located and loaded the receipt for validation. You've extracted the PKCS #7 container.  The aim of this guide is to help you take a look inside the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -165,10 +165,10 @@ MathJax.Hub.Config({
     
 
 <ul>
-<li>You&#8217;ve <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</li>
-<li>You&#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you&#8217;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &#8220;easy way&#8221; with CocoaPods</a>.</li>
-<li>You&#8217;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</li>
-<li>You&#8217;ve <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/">extracted the PKCS #7 container</a>.</li>
+<li>You've <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</li>
+<li>You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &#8220;easy way&#8221; with CocoaPods</a>.</li>
+<li>You've <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</li>
+<li>You've <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/">extracted the PKCS #7 container</a>.</li>
 </ul>
 
 <p>The aim of this guide is to help you take a look <em>inside</em> the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt.</p>
@@ -199,7 +199,7 @@ MathJax.Hub.Config({
       <a href="#recap">Recap from the previous guide</a>
     </li>
     <li>
-      <a href="#apple-root-cert">Preparation step: Download Apple&#8217;s root certificate</a>
+      <a href="#apple-root-cert">Preparation step: Download Apple's root certificate</a>
     </li>
     <li>
       <a href="#what-can-go-wrong">What can go wrong with receipt signature verification?</a>
@@ -219,7 +219,7 @@ MathJax.Hub.Config({
       </li>
       <ul>
         <li>
-          <a href="#load-apple-root-cert">Loading Apple&#8217;s root certificate</a>
+          <a href="#load-apple-root-cert">Loading Apple's root certificate</a>
         </li>
         <li>
           <a href="#verify-authenticity">Verifying signature authenticity</a>
@@ -266,7 +266,7 @@ MathJax.Hub.Config({
 
 <p>Accordingly, I’ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">created a ReceiptLoader</a> that finds the receipt on the file system and loads it into memory.</p>
 
-<p>As of the last entry in this series of guides, I&#8217;ve also <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/#receiptextractor-implementation">got a <code>ReceiptExtractor</code></a> to extract the receipt contents from its PKCS #7 container.</p>
+<p>As of the last entry in this series of guides, I've also <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/#receiptextractor-implementation">got a <code>ReceiptExtractor</code></a> to extract the receipt contents from its PKCS #7 container.</p>
 
 <p>If a validation step ever fails along the way, I’ve decided to take advantage of Swift’s error throwing features to clearly describe what failed. So far, there’s only two cases:</p>
 
@@ -277,9 +277,9 @@ MathJax.Hub.Config({
 
 <p><a name="apple-root-cert" class="jump-target"></a></p>
 
-<h1 id="preparation-step-download-apple-8217-s-root-certificate">Preparation step: Download Apple&#8217;s root certificate</h1>
+<h1 id="preparation-step-download-apple-8217-s-root-certificate">Preparation step: Download Apple's root certificate</h1>
 
-<p>You need a copy of Apple&#8217;s root certificate in order to fully complete this phase of receipt validation.</p>
+<p>You need a copy of Apple's root certificate in order to fully complete this phase of receipt validation.</p>
 
 <p>How do you get a copy of it? Great question (with an answer)!</p>
 
@@ -287,22 +287,22 @@ MathJax.Hub.Config({
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI.png" alt="Apple Certificate Page" width="798" height="688" class="alignnone size-full wp-image-12375" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI.png 798w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI-300x259.png 300w" sizes="(max-width: 798px) 100vw, 798px" /></a></p>
 
-<p>Once you have it, you need to add the certificate to your Xcode project, and add it to your app&#8217;s target:<br />
+<p>Once you have it, you need to add the certificate to your Xcode project, and add it to your app's target:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership-1024x621.png" alt="Apple Root Certificate Target Membership" width="1024" height="621" class="alignnone size-large wp-image-12920" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership-1024x621.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership-300x182.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership.png 1223w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 
 <p><a name="what-can-go-wrong" class="jump-target"></a></p>
 
 <h1 id="what-can-go-wrong-with-receipt-signature-verification">What can go wrong with receipt signature verification?</h1>
 
-<p>I&#8217;ll start off the code piece of this guide by asking, &#8220;What could go wrong?&#8221;. That&#8217;ll help define a few more <code>ReceiptValidationError</code> cases, and might point us in a direction when it comes to implementing a new Type to use within the <code>ReceiptValidator</code>.</p>
+<p>I'll start off the code piece of this guide by asking, &#8220;What could go wrong?&#8221;. That'll help define a few more <code>ReceiptValidationError</code> cases, and might point us in a direction when it comes to implementing a new Type to use within the <code>ReceiptValidator</code>.</p>
 
 <p>Right off the bat, I can think of two or three things that could go awry at this stage of the receipt validation process:</p>
 
 <p>1 &#8211; The receipt that we loaded may not be signed at all<br />
-2 &#8211; We don&#8217;t have a copy of Apple&#8217;s root certificate to validate the signature with<br />
-3 &#8211; The signature on the receipt is invalid because it doesn&#8217;t match against Apple&#8217;s root certificate</p>
+2 &#8211; We don't have a copy of Apple's root certificate to validate the signature with<br />
+3 &#8211; The signature on the receipt is invalid because it doesn't match against Apple's root certificate</p>
 
-<p>I&#8217;ll add those three new error states to the <code>ReceiptValidationError</code> enum now:</p>
+<p>I'll add those three new error states to the <code>ReceiptValidationError</code> enum now:</p>
 
 <pre class="lang:swift decode:true mark:4-6" title="ReceiptValidationError" >enum ReceiptValidationError : Error {
     case couldNotFindReceipt
@@ -316,9 +316,9 @@ MathJax.Hub.Config({
 
 <h1 id="receiptsignaturevalidator-concept">ReceiptSignatureValidator concept</h1>
 
-<p>Another step, another Type. This has been my strategy so far, so I&#8217;m stickin&#8217; to it!</p>
+<p>Another step, another Type. This has been my strategy so far, so I'm stickin' to it!</p>
 
-<p>I&#8217;m validating the <strong>presence</strong> and <strong>authenticity</strong> of the signature on the receipt, so I picked the name <code>ReceiptSignatureValidator</code> for this one.</p>
+<p>I'm validating the <strong>presence</strong> and <strong>authenticity</strong> of the signature on the receipt, so I picked the name <code>ReceiptSignatureValidator</code> for this one.</p>
 
 <p>When I identified three new <code>ReceiptValidationError</code> cases earlier, I had in mind that they could potentially point me in a direction when implementing this new <code>ReceiptSignatureValidator</code> Type.</p>
 
@@ -329,11 +329,11 @@ MathJax.Hub.Config({
 <li><code>checkSignatureAuthenticity</code></li>
 </ul>
 
-<p>In <code>checkSignaturePresence</code>, I&#8217;ll look, and if the receipt isn&#8217;t signed at all, I&#8217;ll throw the <code>receiptNotSigned</code> Error case.</p>
+<p>In <code>checkSignaturePresence</code>, I'll look, and if the receipt isn't signed at all, I'll throw the <code>receiptNotSigned</code> Error case.</p>
 
-<p>In <code>checkSignatureAuthenticity</code>, I&#8217;ll look, and if the Apple root certificate is missing from the bundle for some reason, I&#8217;ll throw <code>appleRootCertificateNotFound</code>. And if the signature on the receipt doesn&#8217;t jive with Apple&#8217;s root certificate, I&#8217;ll throw <code>receiptSignatureInvalid</code>.</p>
+<p>In <code>checkSignatureAuthenticity</code>, I'll look, and if the Apple root certificate is missing from the bundle for some reason, I'll throw <code>appleRootCertificateNotFound</code>. And if the signature on the receipt doesn't jive with Apple's root certificate, I'll throw <code>receiptSignatureInvalid</code>.</p>
 
-<p>Here&#8217;s the skeleton of the struct:</p>
+<p>Here's the skeleton of the struct:</p>
 
 <pre class="lang:swift decode:true " title="ReceiptSignatureValidator" >struct ReceiptSignatureValidator {
     func checkSignaturePresence(_ PKCS7Container: UnsafeMutablePointer&lt;PKCS7&gt;) throws {
@@ -347,7 +347,7 @@ MathJax.Hub.Config({
 
 <p>Both <code>checkSignaturePresence</code> and <code>checkSignatureAuthenticity</code> need to peek into the PKCS #7 container that encapsulates the receipt data, so each function asks for a reference to an <code>UnsafeMutablePointer&lt;PKCS7&gt;</code> as one of its arguments.</p>
 
-<p>If you&#8217;re following along with the series, you&#8217;ll be glad to know that <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/#receiptextractor-implementation">the <code>ReceiptExtractor</code> that we built previously</a> has a method called <code>extractPKCS7Container</code> that actually <em>returns</em> a <code>UnsafeMutablePointer&lt;PKCS7&gt;</code>, so you can just use the a call to <code>extractPKCS7Container</code> with the new <code>ReceiptSignatureValidator's</code> functions.</p>
+<p>If you're following along with the series, you'll be glad to know that <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/#receiptextractor-implementation">the <code>ReceiptExtractor</code> that we built previously</a> has a method called <code>extractPKCS7Container</code> that actually <em>returns</em> a <code>UnsafeMutablePointer&lt;PKCS7&gt;</code>, so you can just use the a call to <code>extractPKCS7Container</code> with the new <code>ReceiptSignatureValidator's</code> functions.</p>
 
 <p><a name="implementation" class="jump-target"></a></p>
 
@@ -376,9 +376,9 @@ MathJax.Hub.Config({
 }
 </pre>
 
-<p>The PKCS #7 container has a type code associated with it if it&#8217;s <em>signed</em>. All we need to do is access that type code, and compare it against the <code>NID_pkcs7_signed</code> constant.</p>
+<p>The PKCS #7 container has a type code associated with it if it's <em>signed</em>. All we need to do is access that type code, and compare it against the <code>NID_pkcs7_signed</code> constant.</p>
 
-<p>In order to be valid, the receipt <em>must</em> be signed, so I&#8217;ve implemented this as a guard.</p>
+<p>In order to be valid, the receipt <em>must</em> be signed, so I've implemented this as a guard.</p>
 
 <p><a name="signature-authenticity" class="jump-target"></a></p>
 
@@ -386,11 +386,11 @@ MathJax.Hub.Config({
 
 <p><a name="load-apple-root-cert" class="jump-target"></a></p>
 
-<h3 id="loading-apple-8217-s-root-certificate">Loading Apple&#8217;s root certificate</h3>
+<h3 id="loading-apple-8217-s-root-certificate">Loading Apple's root certificate</h3>
 
 <p>Now comes the part where we check whether the signature on the receipt is authentic or not.</p>
 
-<p>First, we&#8217;ve got to load up Apple&#8217;s root certificate (assuming it exists in the app bundle). Here&#8217;s a function that can be nested inside of <code>ReceiptSignatureValidator</code> to do the job:</p>
+<p>First, we've got to load up Apple's root certificate (assuming it exists in the app bundle). Here's a function that can be nested inside of <code>ReceiptSignatureValidator</code> to do the job:</p>
 
 <pre class="lang:swift decode:true " title="loadAppleRootCertificate" >fileprivate func loadAppleRootCertificate() throws -> UnsafeMutablePointer&lt;X509> {
     guard
@@ -412,11 +412,11 @@ MathJax.Hub.Config({
     return appleRootCertificateX509!
 }</pre>
 
-<p>This function guards against the absence of Apple&#8217;s root certificate. If it can&#8217;t be found in the main bundle, the function throws <code>appleRootCertificateNotFound</code>. This error is obviously preventable, but hey &#8211; never hurts to protect yourself if you&#8217;re using this code in multiple projects and forget to grab a copy of Apple&#8217;s root certificate.</p>
+<p>This function guards against the absence of Apple's root certificate. If it can't be found in the main bundle, the function throws <code>appleRootCertificateNotFound</code>. This error is obviously preventable, but hey &#8211; never hurts to protect yourself if you're using this code in multiple projects and forget to grab a copy of Apple's root certificate.</p>
 
-<p>① As long as the .cer file exists in the app bundle, the next step is to create a new in-memory BIO (basic input-output) pointer. That&#8217;s what <code>let appleRootCertificateBIO = BIO_new(BIO_s_mem())</code> does.</p>
+<p>① As long as the .cer file exists in the app bundle, the next step is to create a new in-memory BIO (basic input-output) pointer. That's what <code>let appleRootCertificateBIO = BIO_new(BIO_s_mem())</code> does.</p>
 
-<p>② Next, we&#8217;ve got to write the contents of the certificate to memory so we can work with it:</p>
+<p>② Next, we've got to write the contents of the certificate to memory so we can work with it:</p>
 
 <pre class="lang:swift decode:true " title="BIO_write">BIO_write(appleRootCertificateBIO, (appleRootCertificateData as NSData).bytes, Int32(appleRootCertificateData.count))
 </pre>
@@ -427,7 +427,7 @@ MathJax.Hub.Config({
 
 <p>Finally, it needs to know the length of the data to write: <code>Int32(appleRootCertificateData.count)</code></p>
 
-<p>③ Once that&#8217;s complete, we can obtain pointer to an <code>X509</code>, which will be used for the next step: verifying the authenticity of the signature on the receipt with the x509 certificate from Apple&#8217;s root certificate authority. <code>let appleRootCertificateX509 = d2i_X509_bio(appleRootCertificateBIO, nil)</code> gives us our return value!</p>
+<p>③ Once that's complete, we can obtain pointer to an <code>X509</code>, which will be used for the next step: verifying the authenticity of the signature on the receipt with the x509 certificate from Apple's root certificate authority. <code>let appleRootCertificateX509 = d2i_X509_bio(appleRootCertificateBIO, nil)</code> gives us our return value!</p>
 
 <p><a name="verify-authenticity" class="jump-target"></a></p>
 
@@ -435,7 +435,7 @@ MathJax.Hub.Config({
 
 <p>The final step is to take the <code>X509</code> pointer, and use it to verify the authenticity of the signature on the PKCS #7 Container.</p>
 
-<p>Once again, here&#8217;s a function that can take both items and do the work:</p>
+<p>Once again, here's a function that can take both items and do the work:</p>
 
 <pre class="lang:swift decode:true " title="verifyAuthenticity" >fileprivate func verifyAuthenticity(_ x509Certificate: UnsafeMutablePointer&lt;X509&gt;, PKCS7Container: UnsafeMutablePointer&lt;PKCS7&gt;) throws {
     //①
@@ -524,7 +524,7 @@ MathJax.Hub.Config({
 
 <h2 id="additions-to-receiptvalidator">Additions to ReceiptValidator</h2>
 
-<p>The <code>ReceiptValidator</code> struct that&#8217;s been growing to accommodate each of the steps now looks like this (additions highlighted):</p>
+<p>The <code>ReceiptValidator</code> struct that's been growing to accommodate each of the steps now looks like this (additions highlighted):</p>
 
 <pre class="lang:swift decode:true mark:4,12-13" title="ReceiptValidator" >struct ReceiptValidator {
     let receiptLoader = ReceiptLoader()
@@ -550,7 +550,7 @@ MathJax.Hub.Config({
 
 <h2 id="handling-errors">Handling errors</h2>
 
-<p>The final piece is to attempt to do something intelligent with any of the possible error conditions that could be included with the <code>ReceiptValidator</code> validation result. Here&#8217;s a sample implementation at the call site for <code>validateReceipt()</code> (probably in a view controller somewhere in your app:</p>
+<p>The final piece is to attempt to do something intelligent with any of the possible error conditions that could be included with the <code>ReceiptValidator</code> validation result. Here's a sample implementation at the call site for <code>validateReceipt()</code> (probably in a view controller somewhere in your app:</p>
 
 <pre>override public func viewDidLoad() {
     super.viewDidLoad()
@@ -573,7 +573,7 @@ MathJax.Hub.Config({
 
 <h1 id="upcoming-hurdles">Upcoming hurdles</h1>
 
-<p>Wait, there&#8217;s more? In short, yes. We&#8217;ve made significant progress, but <a href="https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html#//apple_ref/doc/uid/TP40010573-CH1-SW2">there&#8217;s still more work to be done</a> if you want to fully validate a receipt for your app, or for an in-app purchase.</p>
+<p>Wait, there's more? In short, yes. We've made significant progress, but <a href="https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html#//apple_ref/doc/uid/TP40010573-CH1-SW2">there's still more work to be done</a> if you want to fully validate a receipt for your app, or for an in-app purchase.</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

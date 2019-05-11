@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Swift Cheat Sheet for iPhone Location Services Access &amp; Usage" />
-<meta property="og:description" content="This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&#8217;s device.
-Jump to&#8230;   Framework Import   Set Location Usage Description in Info.plist   Initialize CLLocationManager and Implement CLLocationManagerDelegate   Start Location Services, Check Location Authorization Status, Request Permission   Alert Location Access Needed   Use the User&#8217;s Location   Was this article helpful?" />
+<meta property="og:description" content="This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user's device.
+Jump to&#8230;   Framework Import   Set Location Usage Description in Info.plist   Initialize CLLocationManager and Implement CLLocationManagerDelegate   Start Location Services, Check Location Authorization Status, Request Permission   Alert Location Access Needed   Use the User's Location   Was this article helpful?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2018/07/16/swift-cheat-sheet-iphone-location-access-usage/" />
 <meta property="article:published_time" content="2018-07-17T00:43:03&#43;00:00"/>
@@ -34,8 +34,8 @@ Jump to&#8230;   Framework Import   Set Location Usage Description in Info.plist
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Cheat Sheet for iPhone Location Services Access &amp; Usage"/>
-<meta name="twitter:description" content="This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&#8217;s device.
-Jump to&#8230;   Framework Import   Set Location Usage Description in Info.plist   Initialize CLLocationManager and Implement CLLocationManagerDelegate   Start Location Services, Check Location Authorization Status, Request Permission   Alert Location Access Needed   Use the User&#8217;s Location   Was this article helpful?"/>
+<meta name="twitter:description" content="This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user's device.
+Jump to&#8230;   Framework Import   Set Location Usage Description in Info.plist   Initialize CLLocationManager and Implement CLLocationManagerDelegate   Start Location Services, Check Location Authorization Status, Request Permission   Alert Location Access Needed   Use the User's Location   Was this article helpful?"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -166,7 +166,7 @@ MathJax.Hub.Config({
 
     
 
-<p>This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&#8217;s device.</p>
+<p>This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user's device.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -191,7 +191,7 @@ MathJax.Hub.Config({
       <a href="#alert-location-access-needed">Alert Location Access Needed</a>
     </li>
     <li>
-      <a href="#use-location">Use the User&#8217;s Location</a>
+      <a href="#use-location">Use the User's Location</a>
     </li>
     <li>
       <a href="#share">Was this article helpful? Please share!</a>
@@ -211,9 +211,9 @@ MathJax.Hub.Config({
 
 <p><strong>This is a required first step</strong></p>
 
-<p>If you <strong>don&#8217;t</strong> set this, your app simply won&#8217;t present the user with the system alert to request access to the location (and, of course, you won&#8217;t be getting any location data for your app either).</p>
+<p>If you <strong>don't</strong> set this, your app simply won't present the user with the system alert to request access to the location (and, of course, you won't be getting any location data for your app either).</p>
 
-<p>When you request permission to use the device&#8217;s location, a short message will appear in the default iOS system dialog. You customize this message by adding one of the following keys to your Info.plist file:</p>
+<p>When you request permission to use the device's location, a short message will appear in the default iOS system dialog. You customize this message by adding one of the following keys to your Info.plist file:</p>
 
 <ul>
 <li>Privacy &#8211; Location Always and When In Use Usage Description</li>
@@ -221,7 +221,7 @@ MathJax.Hub.Config({
 <li>Privacy &#8211; Location When In Use Usage Description</li>
 </ul>
 
-<p>For the <strong>value</strong> of this plist property, type a short string describing what you&#8217;re using the location for.</p>
+<p>For the <strong>value</strong> of this plist property, type a short string describing what you're using the location for.</p>
 
 <p><a name="location-manager-delegate" class="jump-target"></a></p>
 
@@ -231,11 +231,11 @@ MathJax.Hub.Config({
 
 <p>It needs a corresponding <code>CLLocationManagerDelegate</code> to be assigned. The location manager instance you initialize will alert you to location services authorization changes (ie, if the user turns off location services permissions for your app) <em>through</em> the one of the methods that your delegate class implements.</p>
 
-<p>The location manager instance will also send you the user&#8217;s current location through one of the methods your delegate class implements.</p>
+<p>The location manager instance will also send you the user's current location through one of the methods your delegate class implements.</p>
 
 <p>Here is an example of initializing the <code>CLLocationManager</code> instance, and setting its delegate.</p>
 
-<p>There&#8217;s also a <code>currentLocation</code> variable that will get continually updated&#8230;</p>
+<p>There's also a <code>currentLocation</code> variable that will get continually updated&#8230;</p>
 
 <pre class="lang:default decode:true mark:1,2,5,12" title="Init CLLocationManager and Set Delegate" >class NameOfViewController: UIViewController, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
@@ -281,15 +281,15 @@ func locationManager(_ manager: CLLocationManager,
 
 <h1 id="start-location-services-check-location-authorization-status-request-permission">Start Location Services, Check Location Authorization Status, Request Permission</h1>
 
-<p>When you first start location services in your app, you will want to immediately check your app&#8217;s current authorization status for location services, just in case the user has gone in and disabled location services permission for your app since the last time he/she used it.</p>
+<p>When you first start location services in your app, you will want to immediately check your app's current authorization status for location services, just in case the user has gone in and disabled location services permission for your app since the last time he/she used it.</p>
 
-<p>If it&#8217;s the first time the user has launched your app, the <code>.notDetermined</code> case will get hit. This is where you request permission for the first time.</p>
+<p>If it's the first time the user has launched your app, the <code>.notDetermined</code> case will get hit. This is where you request permission for the first time.</p>
 
-<p>If the user grants permission, you can use the <code>CLLocationManager</code> instance that your class is using to start updating the user&#8217;s location.</p>
+<p>If the user grants permission, you can use the <code>CLLocationManager</code> instance that your class is using to start updating the user's location.</p>
 
 <p>If, however, the user denies permission, you can alert them to the fact that your app needs access to his/her location for [<a href="#location-usage-description">insert some good reason here</a>].</p>
 
-<p>Here&#8217;s a code snippet showing this in action:</p>
+<p>Here's a code snippet showing this in action:</p>
 
 <pre class="lang:swift decode:true " title="Start Location Services and Check Location Authorization Status" >func startLocationServices() {
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -309,7 +309,7 @@ func locationManager(_ manager: CLLocationManager,
 }
 </pre>
 
-<p><strong>Note</strong>: You can test for the <code>.notDetermined</code> case by deleting the app on the device, if it&#8217;s already been installed or run on a device from the debugger.</p>
+<p><strong>Note</strong>: You can test for the <code>.notDetermined</code> case by deleting the app on the device, if it's already been installed or run on a device from the debugger.</p>
 
 <p><a name="alert-location-access-needed" class="jump-target"></a></p>
 
@@ -338,7 +338,7 @@ func locationManager(_ manager: CLLocationManager,
     present(alert, animated: true, completion: nil)
 }</pre>
 
-<p><strong>Note</strong>: You can test for this case (<code>.restricted</code> and <code>.denied</code>) by going to the Settings app and turning off location services access for your app, if it&#8217;s been previously granted.</p>
+<p><strong>Note</strong>: You can test for this case (<code>.restricted</code> and <code>.denied</code>) by going to the Settings app and turning off location services access for your app, if it's been previously granted.</p>
 
 <p><a name="share" class="jump-target"></a></p>
 

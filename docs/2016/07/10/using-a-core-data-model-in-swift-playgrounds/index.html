@@ -172,9 +172,9 @@ MathJax.Hub.Config({
 
 <p><a href="https://twitter.com/JCubedApps">Jeremiah Jessel</a>, author at <a href="http://www.learncoredata.com">http://www.learncoredata.com</a>, wrote up an article in 2015 <a href="http://www.learncoredata.com/core-data-and-playgrounds/">detailing how you can use the Core Data framework inside a playground</a>. He shows how you can do everything from setting up the Core Data stack, to creating NSManagedObjects programmatically in code. Great stuff!</p>
 
-<p>After I read his guide, I got to thinking: <em>I wonder</em> if you can take an .xcdatamodeld file created with Xcode&#8217;s Data Model designer and use <em>it</em> in a Playground&#8230;.</p>
+<p>After I read his guide, I got to thinking: <em>I wonder</em> if you can take an .xcdatamodeld file created with Xcode's Data Model designer and use <em>it</em> in a Playground&#8230;.</p>
 
-<p>The short answer is, <strong>kinda</strong>. You can&#8217;t use the .xcdatamodeld file (at least, I couldn&#8217;t find a way), BUT, you <em>can</em> use the <em>compiled</em> &#8220;momd&#8221; file that gets created when you build your app.</p>
+<p>The short answer is, <strong>kinda</strong>. You can't use the .xcdatamodeld file (at least, I couldn't find a way), BUT, you <em>can</em> use the <em>compiled</em> &#8220;momd&#8221; file that gets created when you build your app.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -234,29 +234,29 @@ MathJax.Hub.Config({
 
 <h1 id="limitations">Limitations</h1>
 
-<p>There&#8217;s at least two limitations / caveats I&#8217;ve come across as I&#8217;ve been playing with this concept:</p>
+<p>There's at least two limitations / caveats I've come across as I've been playing with this concept:</p>
 
 <h2 id="no-nsmanagedobject-subclasses">No NSManagedObject subclasses</h2>
 
-<p>While you can create instances of the Entities in the model, if you&#8217;ve created <code>NSManagedObject</code> subclasses for your Entities, you won&#8217;t be able to use those in the playground. You&#8217;d have to resort back to setting properties on your <code>NSManagedObject</code> instances using <code>setValue(_: forKey:)</code>.</p>
+<p>While you can create instances of the Entities in the model, if you've created <code>NSManagedObject</code> subclasses for your Entities, you won't be able to use those in the playground. You'd have to resort back to setting properties on your <code>NSManagedObject</code> instances using <code>setValue(_: forKey:)</code>.</p>
 
-<p>But this is a minor drawback, especially if you&#8217;re just wanting to tinker.</p>
+<p>But this is a minor drawback, especially if you're just wanting to tinker.</p>
 
 <h2 id="model-updates">Model updates</h2>
 
-<p>After you read the <a href="#walkthrough">walkthrough</a>, you&#8217;ll know how to get the model into your playground.</p>
+<p>After you read the <a href="#walkthrough">walkthrough</a>, you'll know how to get the model into your playground.</p>
 
-<p>Here&#8217;s the deal though: If you ever make <em>changes</em> to your model, you&#8217;ll need to go through the steps necessary to <em>re</em>-add a freshly-compiled model to the playground&#8217;s Resources folder that includes the changes. This is because resources that are added to a playground are <em>copied</em>, not referenced.</p>
+<p>Here's the deal though: If you ever make <em>changes</em> to your model, you'll need to go through the steps necessary to <em>re</em>-add a freshly-compiled model to the playground's Resources folder that includes the changes. This is because resources that are added to a playground are <em>copied</em>, not referenced.</p>
 
-<p>I don&#8217;t think that&#8217;s a terrible draw-back, especially once you know how to do it.</p>
+<p>I don't think that's a terrible draw-back, especially once you know how to do it.</p>
 
-<p>So how do you do it? Here&#8217;s how:</p>
+<p>So how do you do it? Here's how:</p>
 
 <p><a name="walkthrough" class="jump-target"></a></p>
 
 <h1 id="walkthrough">Walkthrough</h1>
 
-<p>Get started by adding a Data Model to your project. If you&#8217;ve got a project already going that uses Core Data, you probably already have a .xcdatamodeld file in your project. If you don&#8217;t, though, one is easily add-able from the File menu:</p>
+<p>Get started by adding a Data Model to your project. If you've got a project already going that uses Core Data, you probably already have a .xcdatamodeld file in your project. If you don't, though, one is easily add-able from the File menu:</p>
 
 <p><a name="add-data-model" class="jump-target"></a></p>
 
@@ -288,7 +288,7 @@ MathJax.Hub.Config({
 
 <h2 id="build-project-locate-8220-momd-8221-file">Build project; Locate &#8220;momd&#8221; file</h2>
 
-<p>With a playground and a data model has some structure to it, I built the project (CMD + B) so that the .xcdatamodeld file would be compiled into an &#8220;momd&#8221; file. It&#8217;s the <em>momd</em> file that needs to be added to the playground as a resource.</p>
+<p>With a playground and a data model has some structure to it, I built the project (CMD + B) so that the .xcdatamodeld file would be compiled into an &#8220;momd&#8221; file. It's the <em>momd</em> file that needs to be added to the playground as a resource.</p>
 
 <p>To find the &#8220;momd&#8221; file, expand &#8220;Products&#8221; in your project navigator, right-click the .app file, and click &#8220;Show in Finder&#8221;:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/show-product-in-finder.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/show-product-in-finder.png" alt="Show product in finder" width="620" height="515" class="alignnone size-full wp-image-13008" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/show-product-in-finder.png 620w, https://www.andrewcbancroft.com/wp-content/uploads/2016/07/show-product-in-finder-300x249.png 300w" sizes="(max-width: 620px) 100vw, 620px" /></a></p>
@@ -312,7 +312,7 @@ MathJax.Hub.Config({
 
 <h2 id="write-core-data-code-to-use-model">Write Core Data code to use model</h2>
 
-<p>That&#8217;s it! Now that the &#8220;momd&#8221; file is in the playground&#8217;s Resources folder, you&#8217;re set to write code against it. You can insert <code>NSManagedObject</code> instances, perform fetch requests, etc. Here&#8217;s an example that I wrote up:</p>
+<p>That's it! Now that the &#8220;momd&#8221; file is in the playground's Resources folder, you're set to write code against it. You can insert <code>NSManagedObject</code> instances, perform fetch requests, etc. Here's an example that I wrote up:</p>
 
 <pre class="lang:swift decode:true " title="Core Data Playground" >import UIKit
 import CoreData
@@ -351,7 +351,7 @@ print(result)</pre>
 
 <p>Woohoo! I thought this was pretty cool.</p>
 
-<p><strong>Don&#8217;t forget</strong>: If you make updates to your model, you need to re-build your app, delete the &#8220;momd&#8221; folder from your playground&#8217;s resources, re-drag the freshly-compiled &#8220;momd&#8221; file to your playground again to work with the latest version of the model.</p>
+<p><strong>Don't forget</strong>: If you make updates to your model, you need to re-build your app, delete the &#8220;momd&#8221; folder from your playground's resources, re-drag the freshly-compiled &#8220;momd&#8221; file to your playground again to work with the latest version of the model.</p>
 
 <p><a name="potential-usefulness" class="jump-target"></a></p>
 
@@ -360,9 +360,9 @@ print(result)</pre>
 <p>The other important question to ask, besides &#8220;I wonder if this is possible?&#8221; is &#8220;How is this useful?&#8221;</p>
 
 <ul>
-<li>Learning. Playgrounds in and of themselves make sense as a learning tool. How cool is it to be able to build the model you&#8217;re thinking of in the Xcode designer, import that into a playground, and tinker with it as a learning exercise??</li>
-<li>This could also be useful when you need to try out your data model but don&#8217;t really want to wire it up to an actual user interface yet. Strip away all the UI complexity and just work with the data model&#8230; in a playground! It just seems like a more elegant solution to the &#8220;print it out to the console&#8221; method of experimenting with the model.</li>
-<li>There might be situations when you&#8217;re building semi-complicated <code>NSPredicate</code> instances for a fetch request &#8211; why not get it working in a playground first, then migrate it over to your app? Just an idea!</li>
+<li>Learning. Playgrounds in and of themselves make sense as a learning tool. How cool is it to be able to build the model you're thinking of in the Xcode designer, import that into a playground, and tinker with it as a learning exercise??</li>
+<li>This could also be useful when you need to try out your data model but don't really want to wire it up to an actual user interface yet. Strip away all the UI complexity and just work with the data model&#8230; in a playground! It just seems like a more elegant solution to the &#8220;print it out to the console&#8221; method of experimenting with the model.</li>
+<li>There might be situations when you're building semi-complicated <code>NSPredicate</code> instances for a fetch request &#8211; why not get it working in a playground first, then migrate it over to your app? Just an idea!</li>
 </ul>
 
 <p><a name="related" class="jump-target"></a></p>

@@ -15,28 +15,7 @@ tags:
   - Mono
 
 ---
-Following along with Steve Smith&#8217;s [&#8220;Your First ASP.NET 5 Application on a Mac&#8221;][1], I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&#8217;t work due to a problem with restoring the project&#8217;s dependencies.
-
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#retracing-steps">Retracing my steps</a>
-    </li>
-    <li>
-      <a href="#mis-matched-mono">Mis-matched Mono versions</a>
-    </li>
-    <li>
-      <a href="#resolved">Resolved</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
+Following along with Steve Smith's [&#8220;Your First ASP.NET 5 Application on a Mac&#8221;][1], I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn't work due to a problem with restoring the project's dependencies.
 
 <a name="retracing-steps" class="jump-target"></a>
 
@@ -48,11 +27,11 @@ I opened up my scaffolded project using Visual Studio Code, and began the depend
 
 &#8220;Restore failed Unknown header: 3208085783&#8221;.
 
-I found David Fowler&#8217;s [&#8220;Diagnosing Dependency Issues with ASP.NET 5&#8221;][4], but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:
+I found David Fowler's [&#8220;Diagnosing Dependency Issues with ASP.NET 5&#8221;][4], but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:
 
 > Make sure your DNX and packages are on the same version &#8220;train&#8221; 
 
-My issue wasn&#8217;t with DNX, but with **Mono**.
+My issue wasn't with DNX, but with **Mono**.
 
 <a name="mis-matched-mono" class="jump-target"></a>
 
@@ -60,7 +39,7 @@ My issue wasn&#8217;t with DNX, but with **Mono**.
 
 When I followed the instructions for installing ASP.NET, I distinctly remember installing Mono using the installer package available at their website.
 
-What I _failed_ to realize, however, was that a while back (long enough ago to where it didn&#8217;t hit me until just a few minutes ago), I installed Mono using Homebrew.
+What I _failed_ to realize, however, was that a while back (long enough ago to where it didn't hit me until just a few minutes ago), I installed Mono using Homebrew.
 
 So despite my efforts to install Mono using the installer package, the Mono that everything in my system was using was the one installed by Homebrew, which was version 3.10.
 

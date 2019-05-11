@@ -180,7 +180,7 @@ MathJax.Hub.Config({
 
 <p>Even after adding the Reporting Services service account to the SSAS Tabular instance as a server administrator, we still hit this error.</p>
 
-<p>Once again I found little documentation out there as I was troubleshooting, presumably because SQL Server 2012 is still quite new.  Here&#8217;s what we did to fix our problem:</p>
+<p>Once again I found little documentation out there as I was troubleshooting, presumably because SQL Server 2012 is still quite new.  Here's what we did to fix our problem:</p>
 
 <div class="note">
   <strong>The Analysis Services service must be running under a domain account.</strong>  When I installed SSAS, I took all the defaults for the server installation.  The SSAS service was running under some default built-in account which ended up being the problem.

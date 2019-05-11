@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Swift Cheat Sheet for iPhone Camera Access &amp; Usage" />
-<meta property="og:description" content="This is a cheat sheet of the code and workflow for iPhone camera access and usage, from requesting permission to using the photo taken with a user&#8217;s device.
+<meta property="og:description" content="This is a cheat sheet of the code and workflow for iPhone camera access and usage, from requesting permission to using the photo taken with a user's device.
 Jump to&#8230;   Framework Import   Set Camera Usage Description in Info.plist   Check and Respond to Camera Authorization Status   Request Camera Permission   Present Camera   Alert Camera Access Needed   Use the Captured Image    UIImagePickerControllerDelegate" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2018/02/24/swift-cheat-sheet-for-iphone-camera-access-usage/" />
@@ -34,7 +34,7 @@ Jump to&#8230;   Framework Import   Set Camera Usage Description in Info.plist  
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Cheat Sheet for iPhone Camera Access &amp; Usage"/>
-<meta name="twitter:description" content="This is a cheat sheet of the code and workflow for iPhone camera access and usage, from requesting permission to using the photo taken with a user&#8217;s device.
+<meta name="twitter:description" content="This is a cheat sheet of the code and workflow for iPhone camera access and usage, from requesting permission to using the photo taken with a user's device.
 Jump to&#8230;   Framework Import   Set Camera Usage Description in Info.plist   Check and Respond to Camera Authorization Status   Request Camera Permission   Present Camera   Alert Camera Access Needed   Use the Captured Image    UIImagePickerControllerDelegate"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
@@ -166,7 +166,7 @@ MathJax.Hub.Config({
 
     
 
-<p>This is a cheat sheet of the code and workflow for iPhone camera access and usage, from requesting permission to using the photo taken with a user&#8217;s device.</p>
+<p>This is a cheat sheet of the code and workflow for iPhone camera access and usage, from requesting permission to using the photo taken with a user's device.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -220,11 +220,11 @@ MathJax.Hub.Config({
 
 <h1 id="set-camera-usage-description-in-info-plist">Set Camera Usage Description in Info.plist</h1>
 
-<p>When you request permission to use the device&#8217;s camera, a short message will appear in the default iOS system dialog. You customize this message by adding the <code>Privacy - Camera Usage Description</code> key to your Info.plist file.</p>
+<p>When you request permission to use the device's camera, a short message will appear in the default iOS system dialog. You customize this message by adding the <code>Privacy - Camera Usage Description</code> key to your Info.plist file.</p>
 
-<p>For the <strong>value</strong> of this plist property, type a short string describing what you&#8217;re using the camera for.</p>
+<p>For the <strong>value</strong> of this plist property, type a short string describing what you're using the camera for.</p>
 
-<p>If you <strong>don&#8217;t</strong> set this, your app will crash when you request access to the camera.</p>
+<p>If you <strong>don't</strong> set this, your app will crash when you request access to the camera.</p>
 
 <p><a name="check-authorization-status" class="jump-target"></a></p>
 
@@ -252,7 +252,7 @@ case .restricted, .denied: alertCameraAccessNeeded()
     })
 }</pre>
 
-<p><strong>Note</strong>: You can test for this case by deleting the app on the device, if it&#8217;s already been installed or run on a device from the debugger.</p>
+<p><strong>Note</strong>: You can test for this case by deleting the app on the device, if it's already been installed or run on a device from the debugger.</p>
 
 <p><a name="present-camera" class="jump-target"></a></p>
 
@@ -289,7 +289,7 @@ case .restricted, .denied: alertCameraAccessNeeded()
     present(alert, animated: true, completion: nil)
 }</pre>
 
-<p><strong>Note</strong>: You can test for this case by going to the Settings app and turning off camera access for your app, if it&#8217;s been previously granted.</p>
+<p><strong>Note</strong>: You can test for this case by going to the Settings app and turning off camera access for your app, if it's been previously granted.</p>
 
 <p><a name="use-captured-image" class="jump-target"></a></p>
 

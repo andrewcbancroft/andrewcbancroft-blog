@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Enums Instead of Booleans – An Example Implementation" />
-<meta property="og:description" content="This blog entry was inspired by Objc.io&#8217;s snippet titled &#8220;Enums instead of Booleans&#8221;. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven&#8217;t seen it, check it out before continuing on!
-Objc.io&#8217;s snippet focused primarily on the definition and consumption of the enumeration values. What I&#8217;d like to focus on here is the implementation of the thing that produces those values for the switch-case that will consume them later on." />
+<meta property="og:description" content="This blog entry was inspired by Objc.io's snippet titled &#8220;Enums instead of Booleans&#8221;. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven't seen it, check it out before continuing on!
+Objc.io's snippet focused primarily on the definition and consumption of the enumeration values. What I'd like to focus on here is the implementation of the thing that produces those values for the switch-case that will consume them later on." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/04/01/enums-instead-of-booleans-an-example-implementation/" />
 <meta property="article:published_time" content="2015-04-01T12:00:52&#43;00:00"/>
@@ -34,8 +34,8 @@ Objc.io&#8217;s snippet focused primarily on the definition and consumption of t
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Enums Instead of Booleans – An Example Implementation"/>
-<meta name="twitter:description" content="This blog entry was inspired by Objc.io&#8217;s snippet titled &#8220;Enums instead of Booleans&#8221;. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven&#8217;t seen it, check it out before continuing on!
-Objc.io&#8217;s snippet focused primarily on the definition and consumption of the enumeration values. What I&#8217;d like to focus on here is the implementation of the thing that produces those values for the switch-case that will consume them later on."/>
+<meta name="twitter:description" content="This blog entry was inspired by Objc.io's snippet titled &#8220;Enums instead of Booleans&#8221;. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven't seen it, check it out before continuing on!
+Objc.io's snippet focused primarily on the definition and consumption of the enumeration values. What I'd like to focus on here is the implementation of the thing that produces those values for the switch-case that will consume them later on."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -166,9 +166,9 @@ MathJax.Hub.Config({
 
     
 
-<p>This blog entry was inspired by <a href="http://www.objc.io/snippets/12.html">Objc.io&#8217;s snippet titled &#8220;Enums instead of Booleans&#8221;</a>. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven&#8217;t seen it, check it out before continuing on!</p>
+<p>This blog entry was inspired by <a href="http://www.objc.io/snippets/12.html">Objc.io's snippet titled &#8220;Enums instead of Booleans&#8221;</a>. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven't seen it, check it out before continuing on!</p>
 
-<p>Objc.io&#8217;s snippet focused primarily on the definition and <em>consumption</em> of the enumeration values. What I&#8217;d like to focus on here is the implementation of the thing that <em>produces</em> those values for the switch-case that will consume them later on.</p>
+<p>Objc.io's snippet focused primarily on the definition and <em>consumption</em> of the enumeration values. What I'd like to focus on here is the implementation of the thing that <em>produces</em> those values for the switch-case that will consume them later on.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -202,17 +202,17 @@ MathJax.Hub.Config({
 <p>To put an example before us, consider the following scenario:</p>
 
 <ul>
-<li>Suppose that we&#8217;re building an app that utilizes a subscription-style service to deliver premium content.</li>
+<li>Suppose that we're building an app that utilizes a subscription-style service to deliver premium content.</li>
 <li>Special things, such as providing access to the premium content, need to happen in the app if the user is a Subscriber in good standing.</li>
-<li>Other things need to happen, such as denial of access to the premium content, if the user <em>had</em> a subscription, but it&#8217;s expired.</li>
-<li>Finally, if the user has never had a subscription, we&#8217;d still like to deny access to the content, but perhaps offer them the opportunity to subscribe.</li>
+<li>Other things need to happen, such as denial of access to the premium content, if the user <em>had</em> a subscription, but it's expired.</li>
+<li>Finally, if the user has never had a subscription, we'd still like to deny access to the content, but perhaps offer them the opportunity to subscribe.</li>
 </ul>
 
-<p>Using Objc.io&#8217;s idea as a springboard, we could program this in a couple of ways:</p>
+<p>Using Objc.io's idea as a springboard, we could program this in a couple of ways:</p>
 
 <p><a name="booleans" class="jump-target"></a></p>
 
-<h3 id="1-8211-we-could-define-a-few-boolean-properties-throughout-that-would-indicate-the-user-8217-s-subscription-status">1 &#8211; We could define a few boolean properties throughout that would indicate the user&#8217;s subscription status:</h3>
+<h3 id="1-8211-we-could-define-a-few-boolean-properties-throughout-that-would-indicate-the-user-8217-s-subscription-status">1 – We could define a few boolean properties throughout that would indicate the user's subscription status:</h3>
 
 <ul>
 <li><code>isSubscriber</code></li>
@@ -220,13 +220,13 @@ MathJax.Hub.Config({
 <li><code>isNonSubscriber</code></li>
 </ul>
 
-<p>What I find interesting about this approach is that it&#8217;s not clear, from looking at the properties, that they&#8217;re all mutually exclusive. Can I be a <strong>subscriber</strong> whose <strong>subscription has expired</strong>? If my <strong>subscription expired</strong>, am I a <strong>non-subscriber</strong>?</p>
+<p>What I find interesting about this approach is that it's not clear, from looking at the properties, that they're all mutually exclusive. Can I be a <strong>subscriber</strong> whose <strong>subscription has expired</strong>? If my <strong>subscription expired</strong>, am I a <strong>non-subscriber</strong>?</p>
 
-<p>It could be that I&#8217;ve chosen poor names for the properties, but if I wanted to make clear that the statuses are mutually exclusive, there&#8217;s a better way to encapsulate them. Objc.io helpfully pointed us in the direction of that better encapsulation method. Yep&#8230; you got it: enumerations!</p>
+<p>It could be that I've chosen poor names for the properties, but if I wanted to make clear that the statuses are mutually exclusive, there's a better way to encapsulate them. Objc.io helpfully pointed us in the direction of that better encapsulation method. Yep&#8230; you got it: enumerations!</p>
 
 <p><a name="enums-instead" class="jump-target"></a></p>
 
-<h3 id="2-8211-as-the-title-of-the-blog-entry-signals-we-could-replace-the-booleans-with-an-enumeration">2 &#8211; As the title of the blog entry signals, we could replace the booleans with an enumeration:</h3>
+<h3 id="2-8211-as-the-title-of-the-blog-entry-signals-we-could-replace-the-booleans-with-an-enumeration">2 – As the title of the blog entry signals, we could replace the booleans with an enumeration:</h3>
 
 <pre class="lang:swift decode:true " >public enum SubscriberStatus {
     case CurrentSubscriber
@@ -234,9 +234,9 @@ MathJax.Hub.Config({
     case NonSubscriber
 }</pre>
 
-<p>Immediately, this clarifies the mutually exclusive part. Enumerations, by definition, expose mutually exclusive values. By defining the <code>SubscriberStatus</code> enumeration, I&#8217;ve made clear that my intent is to have someone be <em>either</em> a <code>CurrentSubscriber</code>, an <code>ExpiredSubscriber</code>, or a <code>NonSubscriber</code>, but not combinations of each.</p>
+<p>Immediately, this clarifies the mutually exclusive part. Enumerations, by definition, expose mutually exclusive values. By defining the <code>SubscriberStatus</code> enumeration, I've made clear that my intent is to have someone be <em>either</em> a <code>CurrentSubscriber</code>, an <code>ExpiredSubscriber</code>, or a <code>NonSubscriber</code>, but not combinations of each.</p>
 
-<p>Not only that, but rather than including complicated branching logic when I need to determine someone&#8217;s subscription status, I can simply switch-case over the enumeration possibilities and perform the appropriate behavior.</p>
+<p>Not only that, but rather than including complicated branching logic when I need to determine someone's subscription status, I can simply switch-case over the enumeration possibilities and perform the appropriate behavior.</p>
 
 <pre class="lang:swift decode:true " >func checkSubscriberStatusForRegistrant(registrant: Registrant) {
     // We're coming to the definition of Registrant...
@@ -257,9 +257,9 @@ MathJax.Hub.Config({
 
 <h3 id="producing-the-enumeration-values">Producing the enumeration values</h3>
 
-<p>The one thing that left me scratching my head on at first was the part of the whole scheme that would <em>produce</em> the enumeration values. In my example above, I&#8217;ve left out what the implementation of <code>Registrant</code> looks like.</p>
+<p>The one thing that left me scratching my head on at first was the part of the whole scheme that would <em>produce</em> the enumeration values. In my example above, I've left out what the implementation of <code>Registrant</code> looks like.</p>
 
-<p>When I&#8217;m consuming the enumeration values, I&#8217;m riding on the fact that <code>registrant.subscriberStatus</code> has some way of producing a correct <code>SubscriberStatus</code> for the registrant. But what does that look like? Well&#8230; here&#8217;s one possibility:</p>
+<p>When I'm consuming the enumeration values, I'm riding on the fact that <code>registrant.subscriberStatus</code> has some way of producing a correct <code>SubscriberStatus</code> for the registrant. But what does that look like? Well&#8230; here's one possibility:</p>
 
 <pre class="lang:swift decode:true " >public struct Registrant {
     public var subscriberStatus: SubscriberStatus {
@@ -285,9 +285,9 @@ MathJax.Hub.Config({
     }
 }</pre>
 
-<p>So as you can see, the thing that <em>produces</em> the enumeration values <em>does</em> have some <code>if</code>s and <code>Bool</code>s in it. I couldn&#8217;t really think of another way to do this. To simplify the readability of the <code>subscriberStatus</code> property&#8217;s implementation, I&#8217;ve abstracted the more complicated computational logic for figuring out whether or not a subscription is on file or if the registrant is overdue for payment into functions.</p>
+<p>So as you can see, the thing that <em>produces</em> the enumeration values <em>does</em> have some <code>if</code>s and <code>Bool</code>s in it. I couldn't really think of another way to do this. To simplify the readability of the <code>subscriberStatus</code> property's implementation, I've abstracted the more complicated computational logic for figuring out whether or not a subscription is on file or if the registrant is overdue for payment into functions.</p>
 
-<p>Even though we do still have some <code>Bool</code>s to deal with, what we&#8217;ve gained (in my opinion) is clarity on the consumption end. To me, it&#8217;s worth it to have the <code>Bool</code> logic buried in one spot so that throughout the rest of my app, I can deal with clear, understandable, enumeration values.</p>
+<p>Even though we do still have some <code>Bool</code>s to deal with, what we've gained (in my opinion) is clarity on the consumption end. To me, it's worth it to have the <code>Bool</code> logic buried in one spot so that throughout the rest of my app, I can deal with clear, understandable, enumeration values.</p>
 
 <p><a name="share" class="jump-target"></a></p>
 

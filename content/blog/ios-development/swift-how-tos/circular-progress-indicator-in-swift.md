@@ -15,49 +15,20 @@ tags:
   - Swift
 
 ---
-<small>Updated on April 17, 2017 &#8211; Swift 3</small>
+<small>Updated on April 17, 2017 – Swift 3</small>
 
-Circular progress indicators are a nice and compact way to visualize progress information for users of your iOS app. I was extremely grateful to come across [Kaan Dedeoglu&#8217;s KDCircularProgress project on GitHub][1]. It&#8217;s a versatile little UI component written in Swift that provides a great amount of flexibility and customization options. I love it!
+Circular progress indicators are a nice and compact way to visualize progress information for users of your iOS app. I was extremely grateful to come across [Kaan Dedeoglu's KDCircularProgress project on GitHub][1]. It's a versatile little UI component written in Swift that provides a great amount of flexibility and customization options. I love it!
 
 As a bonus to this amazing component, recent contributions by Kaan have opened up the ability for us to lay out and set up the circular progress indicator in the Storyboard!
 
 My goal in this article is to help get you up and running with this library in your own Storyboard-based Swift project.
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#example">Example project</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting started</a>
-    </li>
-    <li>
-      <a href="#to-storyboard">To the Storyboard!</a>
-    </li>
-    <li>
-      <a href="#view-did-load">viewDidLoad()</a>
-    </li>
-    <li>
-      <a href="#increasing-progress">Increasing progress</a>
-    </li>
-    <li>
-      <a href="#resetting">Resetting the indicator</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="example" class="jump-target"></a>
 
 ### Example project
 
-Kaan&#8217;s GitHub repository has an example project, but I&#8217;ve also gone ahead and made one as well for showing how to use this indicator in a Storyboard. We&#8217;ll be using the example I created as a reference point for the forthcoming walk-through.
+Kaan's GitHub repository has an example project, but I've also gone ahead and made one as well for showing how to use this indicator in a Storyboard. We'll be using the example I created as a reference point for the forthcoming walk-through.
 
 <div class="resources">
   <div class="resources-header">
@@ -89,11 +60,11 @@ To get started, all you need to do is drag a plain View over to the Storyboard S
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/UIView-with-Constraints.png" alt="UIView with Constraints" width="906" height="855" class="alignnone size-full wp-image-12080" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/UIView-with-Constraints.png 906w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/UIView-with-Constraints-300x283.png 300w" sizes="(max-width: 906px) 100vw, 906px" />][4]
 
-Next, you need to set the View&#8217;s class to a _custom_ class, namely, `KDCircularProgress`:
+Next, you need to set the View's class to a _custom_ class, namely, `KDCircularProgress`:
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Set-View-Class.png" alt="Set View Class" width="916" height="701" class="alignnone size-full wp-image-12081" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Set-View-Class.png 916w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Set-View-Class-300x230.png 300w" sizes="(max-width: 916px) 100vw, 916px" />][5]
 
-With that in place, Xcode will process things and allow you to modify the properties of the progress indicator directly in the attributes section of the Utilities pane. Best of all, you&#8217;ll see those changes be reflected in the Storyboard scene in real-time as you adjust values!
+With that in place, Xcode will process things and allow you to modify the properties of the progress indicator directly in the attributes section of the Utilities pane. Best of all, you'll see those changes be reflected in the Storyboard scene in real-time as you adjust values!
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Customized-in-storyboard.png" alt="Customized in Storyboard" width="841" height="702" class="alignnone size-full wp-image-12083" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Customized-in-storyboard.png 841w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Customized-in-storyboard-300x250.png 300w" sizes="(max-width: 841px) 100vw, 841px" />][6]
 
@@ -103,17 +74,17 @@ With that in place, Xcode will process things and allow you to modify the proper
 
 While in the Storyboard, I set a few values so that I could actually see certain colors when progress had been made. However, to get things set to their true initial state, there may be some values you want to reset in `viewDidLoad()`. For example, I set the `angle` property to 90 degrees so that I could see the color of the progress track in the storyboard. But when I load the app, I want the angle to be 0 degrees (since no progress has been made when the app first loads).
 
-To accomplish this, you&#8217;d simply make sure there&#8217;s an outlet between your progress view in the Storyboard and the View Controller. Once they&#8217;re connected, you can write something as simple as `circularProgressView.angle = 0` to start off with no progress.
+To accomplish this, you'd simply make sure there's an outlet between your progress view in the Storyboard and the View Controller. Once they're connected, you can write something as simple as `circularProgressView.angle = 0` to start off with no progress.
 
 <a name="increasing-progress" class="jump-target"></a>
 
 ### Increasing progress
 
-We&#8217;re dealing with a progress indicator here, so this implies that there&#8217;s a beginning, some incremental steps taken toward a completion goal, and of course, the fully completed _whatever it was you were doing_.
+We're dealing with a progress indicator here, so this implies that there's a beginning, some incremental steps taken toward a completion goal, and of course, the fully completed _whatever it was you were doing_.
 
-The example I&#8217;ve contrived is a simple counter with an upper limit of 5. So as you tap &#8220;Increase Progress&#8221;, the circular progress view should update to be some fraction of the way around the 360 degree circle based upon how close we are to completing the count to 5.
+The example I've contrived is a simple counter with an upper limit of 5. So as you tap &#8220;Increase Progress&#8221;, the circular progress view should update to be some fraction of the way around the 360 degree circle based upon how close we are to completing the count to 5.
 
-There&#8217;s a function I&#8217;ve built to calculate the new angle:
+There's a function I've built to calculate the new angle:
 
 <pre class="lang:swift decode:true " title="newAngle()" >func newAngle() -> Double {
     return 360 * (currentCount / maxCount)
@@ -134,9 +105,9 @@ The rest is simply a matter of updating the current count and animating to the n
 
 ### Resetting the indicator
 
-To reset everything, we&#8217;d want to update the state of our current count back to 0.
+To reset everything, we'd want to update the state of our current count back to 0.
 
-The change to the circular progress indicator&#8217;s visualization of the progress state can be animated by calling the view&#8217;s `animate(fromAngle:toAngle:duration:completion:)` method:
+The change to the circular progress indicator's visualization of the progress state can be animated by calling the view's `animate(fromAngle:toAngle:duration:completion:)` method:
 
 <pre class="lang:swift decode:true " title="resetButtonTapped" >@IBAction func resetButtonTapped(sender: UIButton) {
     currentCount = 0
@@ -145,7 +116,7 @@ The change to the circular progress indicator&#8217;s visualization of the progr
 
 ### Wrapping up
 
-There are a _ton_ of other customization options that you can play with. I highly recommend this UI component if you&#8217;re looking for an easy-to-use, versatile circular progress indicator!
+There are a _ton_ of other customization options that you can play with. I highly recommend this UI component if you're looking for an easy-to-use, versatile circular progress indicator!
 
 <a name="share" class="jump-target"></a>
 

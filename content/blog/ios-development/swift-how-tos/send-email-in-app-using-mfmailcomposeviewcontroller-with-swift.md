@@ -15,55 +15,12 @@ tags:
   - Swift
 
 ---
-<small>Updated on October 11, 2016 &#8211; Swift 3.0</small>
+<small>Updated on October 11, 2016 – Swift 3.0</small>
 
-In this writing, I want explore how to use `MFMailComposeViewController` with Swift to send e-mails within your app as a walkthrough. My focus here is &#8220;quick and dirty&#8221; pragmatism, so that we can easily see what the inter-working components of `MFMailComposeViewController` are. That being said, here&#8217;s an important _disclaimer_ &#8211; I&#8217;m going to overload the View Controller&#8217;s responsibilities in the examples to follow.
+In this writing, I want explore how to use `MFMailComposeViewController` with Swift to send e-mails within your app as a walkthrough. My focus here is &#8220;quick and dirty&#8221; pragmatism, so that we can easily see what the inter-working components of `MFMailComposeViewController` are. That being said, here's an important _disclaimer_ – I'm going to overload the View Controller's responsibilities in the examples to follow.
 
 <a title="Pick a Delegate… Any Delegate… On Clean View Controllers in Swift" href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/" target="_blank">An op-ed with my thoughts and experimentation on how to keep the View Controller clean</a> by factoring out some of the configuration and delegate methods to another class is now live as well.
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#define-requirements">Defining the requirements</a>
-    </li>
-    <li>
-      <a href="#implementation-overview">Implementation overview</a>
-    </li>
-    <li>
-      <a href="#step-by-step-implementation">Step-by-step implementation</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#vc-setup">Setting up the View Controller</a>
-      </li>
-      <li>
-        <a href="#send-button-tapped">sendEmailButtonTapped()</a>
-      </li>
-      <li>
-        <a href="#configured-controller">configuredMailComposeViewController()</a>
-      </li>
-      <li>
-        <a href="#show-send-mail-error">showSendMailErrorAlert()</a>
-      </li>
-      <li>
-        <a href="#delegate-method">MFMailComposeViewController&#8217;s delegate method</a>
-      </li>
-    </ul>
-    
-    <li>
-    </li>
-    <li>
-      <a href="#related">You might also enjoy&#8230;</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="define-requirements" class="jump-target"></a>
 
@@ -79,7 +36,7 @@ Not only is this possible, the API for accomplishing it is pretty straight forwa
 
 In order to implement the solution for this requirement, you need a few things:
 
-  1. A View Controller from which your user will initiate the display of the email composer screen, presumably by tapping on a button or something else that&#8217;s wired up to an \`@IBAction\`.
+  1. A View Controller from which your user will initiate the display of the email composer screen, presumably by tapping on a button or something else that's wired up to an \`@IBAction\`.
   2. A configured \`MFMailComposeViewController\` to present.
   3. An \`MFMailCompseViewControllerDelegate\` to handle dismissing the email composer screen.
 
@@ -132,7 +89,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
 ## Step-by-step implementation
 
-With the above example in front of you, let&#8217;s explore what&#8217;s going on here in detail.
+With the above example in front of you, let's explore what's going on here in detail.
 
 <a name="vc-setup" class="jump-target"></a>
 
@@ -140,7 +97,7 @@ With the above example in front of you, let&#8217;s explore what&#8217;s going o
 
 First of all, we need to import the `MessageUI` module.
 
-Second, we need to specify that the View Controller will conform to the `MFMailComposeViewControllerDelegate` protocol. Later, we&#8217;ll actually implement the method that this protocol outlines, which will allow us to make the email composer screen go away once the user is finished either sending an e-mail or cancels out of sending one.
+Second, we need to specify that the View Controller will conform to the `MFMailComposeViewControllerDelegate` protocol. Later, we'll actually implement the method that this protocol outlines, which will allow us to make the email composer screen go away once the user is finished either sending an e-mail or cancels out of sending one.
 
 <a name="send-button-tapped" class="jump-target"></a>
 
@@ -159,19 +116,19 @@ This is the method that responds to the user tapping on a button. Assuming this 
 
 I decided to encapsulate the configuration of an `MFMailComposeViewController` instance inside a function. I found that it made things a little more readable, perhaps more testable, and kept the spirit of [decomposing sub-steps of a process into individual, single-responsibility functions][1].
 
-One vital property to set is the `mailComposeDelegate` property (otherwise, you can never get rid of the e-mail composer screen after it&#8217;s presented). Now, there&#8217;s a &#8220;gotcha&#8221; here &#8211; `MFMailComposeViewController` instances _also_ have a property named `delegate` . **The _delegate_** **property is _not_ the one to set** (I did this at first and wondered why my implemented delegate &#8220;callback&#8221; method never got called). Set the `mailComposeDelegate` property to the instance of whatever you want to handle dismissing the email composer screen once the user is finished sending an e-mail or cancels. In the example, I set it to `self`, since the View Controller itself will implement the appropriate delegate method (<a title="Pick a Delegate… Any Delegate… On Clean View Controllers in Swift" href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/" target="_blank">Read my thoughts on cleaning this up a bit</a>).
+One vital property to set is the `mailComposeDelegate` property (otherwise, you can never get rid of the e-mail composer screen after it's presented). Now, there's a &#8220;gotcha&#8221; here – `MFMailComposeViewController` instances _also_ have a property named `delegate` . **The _delegate_** **property is _not_ the one to set** (I did this at first and wondered why my implemented delegate &#8220;callback&#8221; method never got called). Set the `mailComposeDelegate` property to the instance of whatever you want to handle dismissing the email composer screen once the user is finished sending an e-mail or cancels. In the example, I set it to `self`, since the View Controller itself will implement the appropriate delegate method (<a title="Pick a Delegate… Any Delegate… On Clean View Controllers in Swift" href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/" target="_blank">Read my thoughts on cleaning this up a bit</a>).
 
-As you can see, setting up the &#8220;To&#8221;, &#8220;Subject&#8221;, and &#8220;Body&#8221; are simply a matter of setting properties of an `MFMailComposeViewController` instance. Notice that `setToRecipients()` accepts an _array_ of e-mail address strings, so don&#8217;t forget to wrap that argument in an array, even for a single recipient. The same would work for Cc, and Bcc recipients, had I configured those.
+As you can see, setting up the &#8220;To&#8221;, &#8220;Subject&#8221;, and &#8220;Body&#8221; are simply a matter of setting properties of an `MFMailComposeViewController` instance. Notice that `setToRecipients()` accepts an _array_ of e-mail address strings, so don't forget to wrap that argument in an array, even for a single recipient. The same would work for Cc, and Bcc recipients, had I configured those.
 
 <a name="show-send-mail-error" class="jump-target"></a>
 
 ### showSendMailErrorAlert()
 
-This method shows a simple UIAlertView if the user&#8217;s device cannot send an e-mail at the moment.
+This method shows a simple UIAlertView if the user's device cannot send an e-mail at the moment.
 
 <a name="delegate-method" class="jump-target"></a>
 
-### MFMailComposeViewController&#8217;s delegate method
+### MFMailComposeViewController's delegate method
 
 The implementation of this delegate method simply dismisses the email composer screen.
 

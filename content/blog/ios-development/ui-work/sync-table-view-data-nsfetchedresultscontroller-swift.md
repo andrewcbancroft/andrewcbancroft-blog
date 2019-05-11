@@ -15,13 +15,13 @@ tags:
   - UITableView
 
 ---
-<small>Updated on September 23, 2015 &#8211; Swift 2.0</small>
+<small>Updated on September 23, 2015 – Swift 2.0</small>
 
 My goal with this article is to help you utilize the full power of `NSFetchedResultsController`.
 
-This is a continuation on a series of articles I&#8217;ve written on Core Data and `NSFetchedResultsController`, so you may want to check out those previous posts to get an idea of where I&#8217;m picking up in this walk-through. Previously I touched on [how to seed a Core Data database][1], and [how to take that data and display it in a table view with an NSFetchedResultsController][2].
+This is a continuation on a series of articles I've written on Core Data and `NSFetchedResultsController`, so you may want to check out those previous posts to get an idea of where I'm picking up in this walk-through. Previously I touched on [how to seed a Core Data database][1], and [how to take that data and display it in a table view with an NSFetchedResultsController][2].
 
-As with the previous posts, I&#8217;m providing an example XCode project over at GitHub, so feel free to follow along with the live working example:
+As with the previous posts, I'm providing an example XCode project over at GitHub, so feel free to follow along with the live working example:
 
 <div class="resources">
   <div class="resources-header">
@@ -37,35 +37,12 @@ As with the previous posts, I&#8217;m providing an example XCode project over at
 
 In this installment to the series, I want to answer the question, &#8220;How do I update the rows in a table view when I add or remove objects from the Core Data database?&#8221; I will show how to implement the `NSFetchedResultsControllerDelegate` protocol, which is the key to automatically synchronizing changes made to your Core Data persistent store with a table view.
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#examine-delegate-protocol">Examining the NSFetchedResultsControllerDelegate protocol</a>
-    </li>
-    <li>
-      <a href="#did-change-object">controller(_:didChangeObject:atIndexPath:forChangeType:newIndexPath:)</a>
-    </li>
-    <li>
-      <a href="#did-change-section">controller(_:didChangeSection:atIndex:forChangeType:)</a>
-    </li>
-    <li>
-      <a href="#related">You might also enjoy&#8230;</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="examine-delegate-protocol" class="jump-target"></a>
 
 ### Examining the NSFetchedResultsControllerDelegate protocol
 
-The `NSFetchedResultsControllerDelegate` protocol is the piece of the puzzle that helps us update a table view with changes made to the Core Data persistent store. There are five methods that we&#8217;ll be taking a look at:
+The `NSFetchedResultsControllerDelegate` protocol is the piece of the puzzle that helps us update a table view with changes made to the Core Data persistent store. There are five methods that we'll be taking a look at:
 
   * `controllerWillChangeContent(_:)`
   * `controller(_:didChangeObject:atIndexPath:forChangeType:newIndexPath:)`
@@ -73,7 +50,7 @@ The `NSFetchedResultsControllerDelegate` protocol is the piece of the puzzle tha
   * `controller(_:sectionIndexTitleForSectionName:)`
   * `controllerDidChangeContent(_:)`
 
-The two methods that are responsible for doing the actual updates to the table view&#8217;s structure are `controller(_:didChangeSection:atIndex:forChangeType:)` and `controller(_:didChangeObject:atIndexPath:forChangeType:newIndexPath:)`. If some of the changes to the table view result in new sections being created, `controller(_:sectionIndexTitleForSectionName:)` will help give it an appropriate title (and make sure the _other_ sections keep their appropriate titles as well).
+The two methods that are responsible for doing the actual updates to the table view's structure are `controller(_:didChangeSection:atIndex:forChangeType:)` and `controller(_:didChangeObject:atIndexPath:forChangeType:newIndexPath:)`. If some of the changes to the table view result in new sections being created, `controller(_:sectionIndexTitleForSectionName:)` will help give it an appropriate title (and make sure the _other_ sections keep their appropriate titles as well).
 
 `controllerWillChangeContent(_:)` and `controllerDidChangeContent(_:)` help inform the table view that changes are about to happen / just finished happening. Sandwiching the primary &#8220;didChangeObject&#8221; and &#8220;didChangeSection&#8221; protocol methods with these two methods allows the table view to animate in all of the changes to its structure in one batch.
 
@@ -117,7 +94,7 @@ public func controllerDidChangeContent(controller: NSFetchedResultsController) {
 
 This is the method that governs how we want to handle the rows in a table view when the synchronization would require inserting rows, updating existing ones, removing them, or reordering them.
 
-I&#8217;ll give you the implementation and then point out a couple of &#8220;gotchas&#8221; and expound a little more. Recall that we&#8217;re working with a sample app named &#8220;Zootastic&#8221;, so if you see references to `Animals` in the example, you&#8217;ll know why. :]
+I'll give you the implementation and then point out a couple of &#8220;gotchas&#8221; and expound a little more. Recall that we're working with a sample app named &#8220;Zootastic&#8221;, so if you see references to `Animals` in the example, you'll know why. :]
 
 <pre class="lang:swift decode:true " title="Insert, Update, Delete Rows" >public func controller(
         controller: NSFetchedResultsController,
@@ -159,22 +136,22 @@ I&#8217;ll give you the implementation and then point out a couple of &#8220;got
             }
 }</pre>
 
-Right away you&#8217;ll notice we enter a switch on the `type` parameter of the method. There are four options possible in the `NSFetchedResultsChangeType` enum: Insert, Delete, Update, and Move.
+Right away you'll notice we enter a switch on the `type` parameter of the method. There are four options possible in the `NSFetchedResultsChangeType` enum: Insert, Delete, Update, and Move.
 
 Beware of a few common gotchas with each case of the switch:
 
   1. First of all, notice that first argument of the majority of the `tableView` methods takes an _array_ of `NSIndexPaths`. Be sure to wrap your argument in `[` and `]` to create an array.
-  2. Pay extra attention to which index path parameter you&#8217;re referencing in each case. For insert, the goal is to add a row at the `newIndexPath`. For Delete, the goal is to remove the row at `indexPath`. Move will require a deletion of the `indexPath` and an insertion at the `newIndexPath`. Getting these mixed up will cause runtime errors, so pay close attention here!
+  2. Pay extra attention to which index path parameter you're referencing in each case. For insert, the goal is to add a row at the `newIndexPath`. For Delete, the goal is to remove the row at `indexPath`. Move will require a deletion of the `indexPath` and an insertion at the `newIndexPath`. Getting these mixed up will cause runtime errors, so pay close attention here!
 
 <a name="did-change-section" class="jump-target"></a>
 
 ### controller(_:didChangeSection:atIndex:forChangeType:)
 
-If your table view only has one section, you don&#8217;t need to worry with this one.
+If your table view only has one section, you don't need to worry with this one.
 
-If your table view has multiple sections, you want to make sure and implement this protocol method &#8211; if you fail to do so and the change to the persistent store results in adjustments to the table view that can&#8217;t be handled, runtime errors can occur. For example, deleting all rows in a section would result in the section needing to be deleted as well, but without this protocol method being implemented, the update to the table view can&#8217;t be made and the app crashes.
+If your table view has multiple sections, you want to make sure and implement this protocol method – if you fail to do so and the change to the persistent store results in adjustments to the table view that can't be handled, runtime errors can occur. For example, deleting all rows in a section would result in the section needing to be deleted as well, but without this protocol method being implemented, the update to the table view can't be made and the app crashes.
 
-Once again, I&#8217;ll throw the code your way and follow up with commentary:
+Once again, I'll throw the code your way and follow up with commentary:
 
 <pre class="lang:swift decode:true " title="Insert, Update, Delete Sections" >public func controller(
     controller: NSFetchedResultsController,
@@ -199,9 +176,9 @@ public func controller(controller: NSFetchedResultsController, sectionIndexTitle
 }
 </pre>
 
-For this one, we&#8217;re only implementing code for Insert and Delete. The necessary information to insert a section or remove a section (ie, the `sectionIndex`) comes as a parameter to the method.
+For this one, we're only implementing code for Insert and Delete. The necessary information to insert a section or remove a section (ie, the `sectionIndex`) comes as a parameter to the method.
 
-We utilize an `NSIndexSet` to wrap up the section that needs to be inserted or deleted and pass it to the table view&#8217;s `insertSections()` and `deleteSections()` methods, respectively.
+We utilize an `NSIndexSet` to wrap up the section that needs to be inserted or deleted and pass it to the table view's `insertSections()` and `deleteSections()` methods, respectively.
 
 <a name="related" class="jump-target"></a>
 

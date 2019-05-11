@@ -25,9 +25,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Using Swift to Seed a Core Data Database" />
-<meta property="og:description" content="Updated on September 23, 2015 &#8211; Swift 2.0
-Designing an application&#8217;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
-During development, I&#8217;ve found that it&#8217;s often convenient to seed a Core Data database with sample data so that I can preview how it&#8217;ll look in my application." />
+<meta property="og:description" content="Updated on September 23, 2015 – Swift 2.0
+Designing an application's UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
+During development, I've found that it's often convenient to seed a Core Data database with sample data so that I can preview how it'll look in my application." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/" />
 <meta property="article:published_time" content="2015-02-26T03:44:53&#43;00:00"/>
@@ -35,9 +35,9 @@ During development, I&#8217;ve found that it&#8217;s often convenient to seed a 
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Using Swift to Seed a Core Data Database"/>
-<meta name="twitter:description" content="Updated on September 23, 2015 &#8211; Swift 2.0
-Designing an application&#8217;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
-During development, I&#8217;ve found that it&#8217;s often convenient to seed a Core Data database with sample data so that I can preview how it&#8217;ll look in my application."/>
+<meta name="twitter:description" content="Updated on September 23, 2015 – Swift 2.0
+Designing an application's UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
+During development, I've found that it's often convenient to seed a Core Data database with sample data so that I can preview how it'll look in my application."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -168,11 +168,11 @@ MathJax.Hub.Config({
 
     
 
-<p><small>Updated on September 23, 2015 &#8211; Swift 2.0</small></p>
+<p><small>Updated on September 23, 2015 – Swift 2.0</small></p>
 
-<p>Designing an application&#8217;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.</p>
+<p>Designing an application's UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.</p>
 
-<p>During development, I&#8217;ve found that it&#8217;s often convenient to seed a Core Data database with sample data so that I can preview how it&#8217;ll look in my application. Along with that, it&#8217;s nice to start with a fresh copy of the data each time I run the app. Let&#8217;s explore how to accomplish this task in Swift!</p>
+<p>During development, I've found that it's often convenient to seed a Core Data database with sample data so that I can preview how it'll look in my application. Along with that, it's nice to start with a fresh copy of the data each time I run the app. Let's explore how to accomplish this task in Swift!</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -239,7 +239,7 @@ MathJax.Hub.Config({
   </ul>
 </div></p>
 
-<p>I&#8217;ve created a fictitious Core Data app called &#8220;Zootastic&#8221;, which is intended to model zoos, and the animals that each zoo cares for. (I&#8217;ll give you one guess as to what kinds of shows and activities my two year old and I have been in to lately). :]</p>
+<p>I've created a fictitious Core Data app called &#8220;Zootastic&#8221;, which is intended to model zoos, and the animals that each zoo cares for. (I'll give you one guess as to what kinds of shows and activities my two year old and I have been in to lately). :]</p>
 
 <p>Specifically, I have the following Entities:</p>
 
@@ -269,15 +269,15 @@ MathJax.Hub.Config({
 </ul></li>
 </ul>
 
-<p>I&#8217;ve <a href="http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">created NSManagedObject subclasses</a> for each of my entities, to make it easier to set properties.</p>
+<p>I've <a href="http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">created NSManagedObject subclasses</a> for each of my entities, to make it easier to set properties.</p>
 
 <p><a name="data-helper" class="jump-target"></a></p>
 
 <h3 id="datahelper-swift">DataHelper.swift</h3>
 
-<p>Once a Core Data data model is set up, we&#8217;re ready to create what I called <code>DataHelper</code>. It serves the purpose of seeding the data store, and logging the data store&#8217;s contents back out to the console. It violates the single-responsibility principle, but wait! Don&#8217;t lynch me!</p>
+<p>Once a Core Data data model is set up, we're ready to create what I called <code>DataHelper</code>. It serves the purpose of seeding the data store, and logging the data store's contents back out to the console. It violates the single-responsibility principle, but wait! Don't lynch me!</p>
 
-<p>Knowing that this class is intended to be used <em>solely</em> for development, I didn&#8217;t put a lot of effort into separating concerns. I opted for a &#8220;here&#8217;s where I go to do all my seeding for manual testing purposes&#8221; approach.</p>
+<p>Knowing that this class is intended to be used <em>solely</em> for development, I didn't put a lot of effort into separating concerns. I opted for a &#8220;here's where I go to do all my seeding for manual testing purposes&#8221; approach.</p>
 
 <p>Here are a few snippets from the class (<a href="https://github.com/andrewcbancroft/Zootastic/tree/BaseProject_SeedDataStore">grab the full XCode project</a> over at GitHub):</p>
 
@@ -296,7 +296,7 @@ MathJax.Hub.Config({
 
 }</pre>
 
-<p>The primary thing to take away from the initialization routine is that instead of calling out to the AppDelegate to get an instance of the <code>NSManagedObjectContext</code>, I&#8217;m choosing to require it to be passed in during the initialization of <code>DataHelper</code>. It&#8217;s a pattern I like to practice because it allows me to do unit tests in real-world applications that use Core Data.</p>
+<p>The primary thing to take away from the initialization routine is that instead of calling out to the AppDelegate to get an instance of the <code>NSManagedObjectContext</code>, I'm choosing to require it to be passed in during the initialization of <code>DataHelper</code>. It's a pattern I like to practice because it allows me to do unit tests in real-world applications that use Core Data.</p>
 
 <p><a name="data-helper-seed-zoos" class="jump-target"></a></p>
 
@@ -332,8 +332,8 @@ MathJax.Hub.Config({
 <p>A few observations on the code above:</p>
 
 <ul>
-<li>This function may look a bit interesting. I&#8217;ve chosen to create an array of <em>tuples</em> that I loop over and use to extract actual <code>Zoo</code> information when I call <code>NSEntityDescription.insertNewObjectForEntityForName()</code>. It just looked nice to me to have two chunks of code to analyze inside the function: One (the array of tuples) to see all of the zoo information I plan to insert, and another (the for-loop) to do the actual inserting into the data store. Adding more <code>Zoo</code>s in the future would mean simply adding another tuple to the array. Convenient!</li>
-<li>Since I&#8217;ve <a href="http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">created NSManagedObject subclasses</a> for my entities, I can cast the result of <code>NSEntityDescription.insertNewObjectForEntityForName()</code> to an actual <code>Zoo</code>, to work with the properties directly.</li>
+<li>This function may look a bit interesting. I've chosen to create an array of <em>tuples</em> that I loop over and use to extract actual <code>Zoo</code> information when I call <code>NSEntityDescription.insertNewObjectForEntityForName()</code>. It just looked nice to me to have two chunks of code to analyze inside the function: One (the array of tuples) to see all of the zoo information I plan to insert, and another (the for-loop) to do the actual inserting into the data store. Adding more <code>Zoo</code>s in the future would mean simply adding another tuple to the array. Convenient!</li>
+<li>Since I've <a href="http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">created NSManagedObject subclasses</a> for my entities, I can cast the result of <code>NSEntityDescription.insertNewObjectForEntityForName()</code> to an actual <code>Zoo</code>, to work with the properties directly.</li>
 </ul>
 
 <p><a name="data-helper-print-all-zoos" class="jump-target"></a></p>
@@ -424,9 +424,9 @@ MathJax.Hub.Config({
 
 <p><code>seedAnimals()</code> is the most complicated piece of the whole scenario because it depends on entities that have been previously inserted into the data store. An <code>Animal</code>, which is a member of some <code>Classification</code> lives in some habitat at a <code>Zoo</code>. So in order to get a complete <code>Animal</code> into the data store, we need to have a <code>Classification</code> and one or more <code>Zoo</code> to assign it.</p>
 
-<p>I&#8217;ve chosen to go ahead and execute fetch requests for the entities I made in previous <code>seed___()</code> functions. Additionally, rather than deal with <code>NSPredicate</code>, I just grab <em>all</em> <code>Classifications</code> and <em>all</em> <code>Zoos</code>, and use array&#8217;s <code>filter</code> function to get the exact Entity I want.</p>
+<p>I've chosen to go ahead and execute fetch requests for the entities I made in previous <code>seed___()</code> functions. Additionally, rather than deal with <code>NSPredicate</code>, I just grab <em>all</em> <code>Classifications</code> and <em>all</em> <code>Zoos</code>, and use array's <code>filter</code> function to get the exact Entity I want.</p>
 
-<p>The last thing I&#8217;ll mention / warn against, is that I <em>am</em> using explicitly unwrapped optionals in this function. I&#8217;ve gone ahead and &#8220;risked it&#8221;, trusting that I&#8217;m only using this technique during development time to help me see how things will look in my UI. In other words, this isn&#8217;t code that will end up in Production. It&#8217;s simply meant to help me while I&#8217;m developing, so I&#8217;ve gone ahead and done things the quick way here.</p>
+<p>The last thing I'll mention / warn against, is that I <em>am</em> using explicitly unwrapped optionals in this function. I've gone ahead and &#8220;risked it&#8221;, trusting that I'm only using this technique during development time to help me see how things will look in my UI. In other words, this isn't code that will end up in Production. It's simply meant to help me while I'm developing, so I've gone ahead and done things the quick way here.</p>
 
 <p>The rest of the function follows the same patterns that have already been used in this example.</p>
 
@@ -447,13 +447,13 @@ MathJax.Hub.Config({
         return true
     }</pre>
 
-<p>Above is a peek at what my AppDelegate.swift file&#8217;s <code>application:didFinishLaunchingWithOptions:</code> function looks like. Nothing fancy going on here. I&#8217;m simply initializing a <code>DataHelper</code> instance with the <code>NSManagedObjectContext</code> instance that&#8217;s created in this class, and calling the seed and print functions I defined earlier.</p>
+<p>Above is a peek at what my AppDelegate.swift file's <code>application:didFinishLaunchingWithOptions:</code> function looks like. Nothing fancy going on here. I'm simply initializing a <code>DataHelper</code> instance with the <code>NSManagedObjectContext</code> instance that's created in this class, and calling the seed and print functions I defined earlier.</p>
 
 <p><a name="starting-fresh" class="jump-target"></a></p>
 
 <h3 id="starting-fresh-every-time">Starting fresh every time</h3>
 
-<p>I&#8217;ve found that sometimes it helps to have a freshly seeded data store every time I the app while I&#8217;m in development mode. When I&#8217;m testing the UI, I may create new entities during my manual testing, but one of the convenient things about seeding the data store is that I don&#8217;t <em>have</em> to. And even if I did, it&#8217;s often quite nice to start fresh each run. To do this we&#8217;ll dive into some of the boilerplate code that XCode generates for us when we choose to use Core Data when we create the project. Specifically, we&#8217;ll target the <code>persistentStoreCoordinator</code> closure:</p>
+<p>I've found that sometimes it helps to have a freshly seeded data store every time I the app while I'm in development mode. When I'm testing the UI, I may create new entities during my manual testing, but one of the convenient things about seeding the data store is that I don't <em>have</em> to. And even if I did, it's often quite nice to start fresh each run. To do this we'll dive into some of the boilerplate code that XCode generates for us when we choose to use Core Data when we create the project. Specifically, we'll target the <code>persistentStoreCoordinator</code> closure:</p>
 
 <pre class="lang:swift decode:true mark:8 " title="persistentStoreCoordinator closure" >lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
@@ -487,11 +487,11 @@ MathJax.Hub.Config({
         return coordinator
         }()</pre>
 
-<p>I&#8217;ve highlighted the key line that I added (everything else was already in place, generated for me by XCode). Adding that line removes the sqlite database. The lines that follow add it back in a fresh state.</p>
+<p>I've highlighted the key line that I added (everything else was already in place, generated for me by XCode). Adding that line removes the sqlite database. The lines that follow add it back in a fresh state.</p>
 
 <h3 id="wrapping-up">Wrapping up</h3>
 
-<p>Designing an application&#8217;s UI can be difficult without actual data to present. During development, it&#8217;s often convenient to seed a Core Data database with sample data so that we can preview how it&#8217;ll look in our application. Along with that, it&#8217;s nice to start with a fresh copy of the data each time we run the app. We explored how to accomplish this task in Swift!</p>
+<p>Designing an application's UI can be difficult without actual data to present. During development, it's often convenient to seed a Core Data database with sample data so that we can preview how it'll look in our application. Along with that, it's nice to start with a fresh copy of the data each time we run the app. We explored how to accomplish this task in Swift!</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

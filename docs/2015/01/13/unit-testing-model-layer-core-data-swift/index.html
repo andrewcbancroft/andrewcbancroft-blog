@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Unit Testing Model Layer with Core Data and Swift" />
-<meta property="og:description" content="Updated on November 19, 2015 &#8211; Swift 2.0
+<meta property="og:description" content="Updated on November 19, 2015 – Swift 2.0
 As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.
 To my surprise, unit testing my Core Data model layer has been… well… amazing." />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@ To my surprise, unit testing my Core Data model layer has been… well… amazin
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Unit Testing Model Layer with Core Data and Swift"/>
-<meta name="twitter:description" content="Updated on November 19, 2015 &#8211; Swift 2.0
+<meta name="twitter:description" content="Updated on November 19, 2015 – Swift 2.0
 As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.
 To my surprise, unit testing my Core Data model layer has been… well… amazing."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
@@ -168,7 +168,7 @@ MathJax.Hub.Config({
 
     
 
-<p><small>Updated on November 19, 2015 &#8211; Swift 2.0</small></p>
+<p><small>Updated on November 19, 2015 – Swift 2.0</small></p>
 
 <p>As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.</p>
 
@@ -184,7 +184,7 @@ MathJax.Hub.Config({
 
 <h3 id="set-up-an-in-memory-nsmanagedobjectcontext">Set up an in-memory NSManagedObjectContext</h3>
 
-<p>A <a href="http://stackoverflow.com/questions/1849802/how-to-unit-test-my-models-now-that-i-am-using-core-data">Stack Overflow</a> question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I&#8217;ve written it in Swift. In my project, I created a new Swift file called &#8220;CoreDataHelpers.swift&#8221; in my tests target. Here&#8217;s a look at the helper function:</p>
+<p>A <a href="http://stackoverflow.com/questions/1849802/how-to-unit-test-my-models-now-that-i-am-using-core-data">Stack Overflow</a> question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I've written it in Swift. In my project, I created a new Swift file called &#8220;CoreDataHelpers.swift&#8221; in my tests target. Here's a look at the helper function:</p>
 
 <pre class="lang:swift mark:9 decode:true " title="CoreDataHelpers.swift" >import CoreData
 
@@ -207,23 +207,23 @@ func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
 
 <h4 id="observations">Observations</h4>
 
-<p>I&#8217;ll be honest, I&#8217;m only starting to put together the pieces involved in setting up the Core Data stack. Working through these unit testing techniques has solidified a <em>lot</em>. Analyzing the helper method from the bottom up has made some sense out of how to configure everything:</p>
+<p>I'll be honest, I'm only starting to put together the pieces involved in setting up the Core Data stack. Working through these unit testing techniques has solidified a <em>lot</em>. Analyzing the helper method from the bottom up has made some sense out of how to configure everything:</p>
 
 <ul>
 <li>I need an <code>NSManagedObjectContext</code> whose <code>NSPersistentStoreCoordinator</code> property uses an in-memory store.</li>
-<li>To get such an <code>NSManagedObjectContext</code>, I need to add a persistent store with a type of <code>NSInMemoryStoreType</code> to an <code>NSPersistentStoreCoordinator</code> instance. (note the line that&#8217;s highlighted)</li>
-<li>Of course, in order to do <em>that</em>, I need an <code>NSPersistentStoreCoordinator</code> <em>instance</em>, and I can&#8217;t get one of <em>those</em> unless I initialize it with an <code>NSManagedObjectModel</code>.</li>
+<li>To get such an <code>NSManagedObjectContext</code>, I need to add a persistent store with a type of <code>NSInMemoryStoreType</code> to an <code>NSPersistentStoreCoordinator</code> instance. (note the line that's highlighted)</li>
+<li>Of course, in order to do <em>that</em>, I need an <code>NSPersistentStoreCoordinator</code> <em>instance</em>, and I can't get one of <em>those</em> unless I initialize it with an <code>NSManagedObjectModel</code>.</li>
 <li>To get an <code>NSManagedObjectModel</code>, I use the class method, <code>mergedModelFromBundles()</code> to grab it from my main bundle.</li>
 <li>Fast-forwarding now: With a proper <code>NSManagedObjectModel</code> instance, I can create an <code>NSPersistentStoreCoordinator</code> instance with it and add an <code>NSInMemoryStoreType</code> to that <code>persistentStoreCoordinator</code>. Finally, I can initialize an <code>NSManagedObjectContext</code>, assign the configured <code>persistentStoreCoordinator</code> to the context, and return it.</li>
 </ul>
 
-<p>Whew! This whole process felt a lot like reading <a href="http://en.wikipedia.org/wiki/If_You_Give_a_Mouse_a_Cookie">If You Give a Mouse a Cookie</a>, but that may be because I&#8217;ve read it a few hundred times to my 2 year old. :]</p>
+<p>Whew! This whole process felt a lot like reading <a href="http://en.wikipedia.org/wiki/If_You_Give_a_Mouse_a_Cookie">If You Give a Mouse a Cookie</a>, but that may be because I've read it a few hundred times to my 2 year old. :]</p>
 
 <h3 id="writing-the-unit-test-s">Writing the unit test(s)</h3>
 
-<p>With the ability to get an <code>NSManagedObjectContext</code> instance that&#8217;s using an in-memory store, the unit tests using Entities from my Core Data model are quite easy.</p>
+<p>With the ability to get an <code>NSManagedObjectContext</code> instance that's using an in-memory store, the unit tests using Entities from my Core Data model are quite easy.</p>
 
-<p>Here&#8217;s a sample test:</p>
+<p>Here's a sample test:</p>
 
 <pre class="lang:swift decode:true " title="XCTestCase &#038; CoreData" >import CoreData
 

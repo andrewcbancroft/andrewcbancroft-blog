@@ -11,37 +11,8 @@ tags:
   - Location Services
 
 ---
-This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&#8217;s device.
+This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user's device.
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#framework-import">Framework Import</a>
-    </li>
-    <li>
-      <a href="#location-usage-description">Set Location Usage Description in Info.plist</a>
-    </li>
-    <li>
-      <a href="#location-manager-delegate">Initialize CLLocationManager and Implement CLLocationManagerDelegate</a>
-    </li>
-    <li>
-      <a href="#start-location-services">Start Location Services, Check Location Authorization Status, Request Permission</a>
-    </li>
-    <li>
-      <a href="#alert-location-access-needed">Alert Location Access Needed</a>
-    </li>
-    <li>
-      <a href="#use-location">Use the User&#8217;s Location</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="framework-import" class="jump-target"></a>
 
@@ -55,15 +26,15 @@ This is a cheat sheet of the code and workflow for iPhone location access and us
 
 **This is a required first step**
 
-If you **don&#8217;t** set this, your app simply won&#8217;t present the user with the system alert to request access to the location (and, of course, you won&#8217;t be getting any location data for your app either).
+If you **don't** set this, your app simply won't present the user with the system alert to request access to the location (and, of course, you won't be getting any location data for your app either).
 
-When you request permission to use the device&#8217;s location, a short message will appear in the default iOS system dialog. You customize this message by adding one of the following keys to your Info.plist file:
+When you request permission to use the device's location, a short message will appear in the default iOS system dialog. You customize this message by adding one of the following keys to your Info.plist file:
 
-  * Privacy &#8211; Location Always and When In Use Usage Description
-  * Privacy &#8211; Location Always Usage Description
-  * Privacy &#8211; Location When In Use Usage Description
+  * Privacy – Location Always and When In Use Usage Description
+  * Privacy – Location Always Usage Description
+  * Privacy – Location When In Use Usage Description
 
-For the **value** of this plist property, type a short string describing what you&#8217;re using the location for.
+For the **value** of this plist property, type a short string describing what you're using the location for.
 
 <a name="location-manager-delegate" class="jump-target"></a>
 
@@ -73,11 +44,11 @@ For the **value** of this plist property, type a short string describing what yo
 
 It needs a corresponding `CLLocationManagerDelegate` to be assigned. The location manager instance you initialize will alert you to location services authorization changes (ie, if the user turns off location services permissions for your app) _through_ the one of the methods that your delegate class implements.
 
-The location manager instance will also send you the user&#8217;s current location through one of the methods your delegate class implements.
+The location manager instance will also send you the user's current location through one of the methods your delegate class implements.
 
 Here is an example of initializing the `CLLocationManager` instance, and setting its delegate.
 
-There&#8217;s also a `currentLocation` variable that will get continually updated&#8230;
+There's also a `currentLocation` variable that will get continually updated&#8230;
 
 <pre class="lang:default decode:true mark:1,2,5,12" title="Init CLLocationManager and Set Delegate" >class NameOfViewController: UIViewController, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
@@ -123,15 +94,15 @@ func locationManager(_ manager: CLLocationManager,
 
 # Start Location Services, Check Location Authorization Status, Request Permission
 
-When you first start location services in your app, you will want to immediately check your app&#8217;s current authorization status for location services, just in case the user has gone in and disabled location services permission for your app since the last time he/she used it.
+When you first start location services in your app, you will want to immediately check your app's current authorization status for location services, just in case the user has gone in and disabled location services permission for your app since the last time he/she used it.
 
-If it&#8217;s the first time the user has launched your app, the `.notDetermined` case will get hit. This is where you request permission for the first time.
+If it's the first time the user has launched your app, the `.notDetermined` case will get hit. This is where you request permission for the first time.
 
-If the user grants permission, you can use the `CLLocationManager` instance that your class is using to start updating the user&#8217;s location.
+If the user grants permission, you can use the `CLLocationManager` instance that your class is using to start updating the user's location.
 
 If, however, the user denies permission, you can alert them to the fact that your app needs access to his/her location for [[insert some good reason here][1]].
 
-Here&#8217;s a code snippet showing this in action:
+Here's a code snippet showing this in action:
 
 <pre class="lang:swift decode:true " title="Start Location Services and Check Location Authorization Status" >func startLocationServices() {
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -151,7 +122,7 @@ Here&#8217;s a code snippet showing this in action:
 }
 </pre>
 
-**Note**: You can test for the `.notDetermined` case by deleting the app on the device, if it&#8217;s already been installed or run on a device from the debugger.
+**Note**: You can test for the `.notDetermined` case by deleting the app on the device, if it's already been installed or run on a device from the debugger.
 
 <a name="alert-location-access-needed" class="jump-target"></a>
 
@@ -180,7 +151,7 @@ If location services access has been denied or restricted, you can alert the use
     present(alert, animated: true, completion: nil)
 }</pre>
 
-**Note**: You can test for this case (`.restricted` and `.denied`) by going to the Settings app and turning off location services access for your app, if it&#8217;s been previously granted.
+**Note**: You can test for this case (`.restricted` and `.denied`) by going to the Settings app and turning off location services access for your app, if it's been previously granted.
 
 <a name="share" class="jump-target"></a>
 

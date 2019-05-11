@@ -15,7 +15,7 @@ tags:
   - Swift
 
 ---
-It&#8217;s always the little things that lead to flatter foreheads (or at least it is for me).
+It's always the little things that lead to flatter foreheads (or at least it is for me).
 
 Banging my head against the desk this evening working on a Parse migration, I finally figured out what was causing an error condition in a `PFCloud` function call.
 
@@ -23,9 +23,9 @@ The request to the server succeeded, but the response was malformed somehow:
 
 > Error Domain=NSCocoaErrorDomain Code=3840 &#8220;JSON text did not start with array or object and option to allow fragments not set.&#8221; UserInfo={NSDebugDescription=JSON text did not start with array or object and option to allow fragments not set.} 
 
-&#8220;What?? I _know_ the response is supposed to be JSON &#8211; I can even test it out and it works great in [Postman][1].&#8221;
+&#8220;What?? I _know_ the response is supposed to be JSON – I can even test it out and it works great in [Postman][1].&#8221;
 
-Weeeelll, it turns out that if you don&#8217;t get the URL to your self-hosted Parse Server correct, you&#8217;re going to get a response that&#8217;s not JSON. Doh!
+Weeeelll, it turns out that if you don't get the URL to your self-hosted Parse Server correct, you're going to get a response that's not JSON. Doh!
 
 I had left off the &#8220;/parse&#8221; portion of the URL to my self-hosted parse server:
 

@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Send a Type to Obedience School – Using Swift Extensions for Additional Protocol Conformance" />
-<meta property="og:description" content="Did you know that you can make any Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don&#8217;t have the source code for, adopt a protocol that it doesn&#8217;t normally conform to out of the box?
-You can &#8211; even if you don&#8217;t have the original source code for that Type! It&#8217;s a powerful and intriguing proposition. Let&#8217;s explore how this is possible.
+<meta property="og:description" content="Did you know that you can make any Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don't have the source code for, adopt a protocol that it doesn't normally conform to out of the box?
+You can – even if you don't have the original source code for that Type! It's a powerful and intriguing proposition. Let's explore how this is possible.
 How, you ask? Well, as the title of this article suggests, Swift extensions are the way to do it." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/" />
@@ -35,8 +35,8 @@ How, you ask? Well, as the title of this article suggests, Swift extensions are 
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Send a Type to Obedience School – Using Swift Extensions for Additional Protocol Conformance"/>
-<meta name="twitter:description" content="Did you know that you can make any Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don&#8217;t have the source code for, adopt a protocol that it doesn&#8217;t normally conform to out of the box?
-You can &#8211; even if you don&#8217;t have the original source code for that Type! It&#8217;s a powerful and intriguing proposition. Let&#8217;s explore how this is possible.
+<meta name="twitter:description" content="Did you know that you can make any Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don't have the source code for, adopt a protocol that it doesn't normally conform to out of the box?
+You can – even if you don't have the original source code for that Type! It's a powerful and intriguing proposition. Let's explore how this is possible.
 How, you ask? Well, as the title of this article suggests, Swift extensions are the way to do it."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
@@ -168,22 +168,22 @@ MathJax.Hub.Config({
 
     
 
-<p>Did you know that you can make <em>any</em> Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don&#8217;t have the source code for, adopt a protocol that it doesn&#8217;t normally conform to out of the box?</p>
+<p>Did you know that you can make <em>any</em> Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don't have the source code for, adopt a protocol that it doesn't normally conform to out of the box?</p>
 
-<p><strong>You can</strong> &#8211; <em>even if you don&#8217;t have the original source code for that Type</em>! It&#8217;s a powerful and intriguing proposition. Let&#8217;s explore how this is possible.</p>
+<p><strong>You can</strong> – <em>even if you don't have the original source code for that Type</em>! It's a powerful and intriguing proposition. Let's explore how this is possible.</p>
 
 <h3 id="how-you-ask">How, you ask?</h3>
 
 <p>Well, as the title of this article suggests, Swift extensions are the way to do it. To demonstrate this capability, consider the following scenario:</p>
 
 <ul>
-<li>You&#8217;re using a library that lets you create instances of <span class="lang:swift decode:true  crayon-inline " >Bird</span> , and you don&#8217;t have access to the source code for the library.</li>
+<li>You're using a library that lets you create instances of <span class="lang:swift decode:true  crayon-inline " >Bird</span> , and you don't have access to the source code for the library.</li>
 <li><span class="lang:swift decode:true  crayon-inline " >Bird </span> has a property called <span class="lang:swift decode:true  crayon-inline " >species </span> and a property called <span class="lang:swift decode:true  crayon-inline " >commonName</span> .</li>
-<li>You&#8217;d like <span class="lang:swift decode:true  crayon-inline " >Bird </span> to conform to the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/SwiftStandardLibraryReference/Printable.html" title="Swift Standard Library Reference - Printable Protocol">Printable protocol, defined in the Swift standard library</a>, so that you can call <span class="lang:swift decode:true  crayon-inline " >println(_:)</span> on <span class="lang:swift decode:true  crayon-inline " >Bird </span> instances, and have it log something useful to the console.</li>
-<li>When <span class="lang:swift decode:true  crayon-inline " >println(_:)</span> is passed a <span class="lang:swift decode:true  crayon-inline " >Bird </span> instance, you&#8217;d like it to print out something like &#8220;[species] (ie, [commonName]).&#8221;, and have [species] and [commonName] be replaced by the <span class="lang:swift decode:true  crayon-inline " >Bird</span>&#8216;s real values.</li>
+<li>You'd like <span class="lang:swift decode:true  crayon-inline " >Bird </span> to conform to the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/SwiftStandardLibraryReference/Printable.html" title="Swift Standard Library Reference - Printable Protocol">Printable protocol, defined in the Swift standard library</a>, so that you can call <span class="lang:swift decode:true  crayon-inline " >println(_:)</span> on <span class="lang:swift decode:true  crayon-inline " >Bird </span> instances, and have it log something useful to the console.</li>
+<li>When <span class="lang:swift decode:true  crayon-inline " >println(_:)</span> is passed a <span class="lang:swift decode:true  crayon-inline " >Bird </span> instance, you'd like it to print out something like &#8220;[species] (ie, [commonName]).&#8221;, and have [species] and [commonName] be replaced by the <span class="lang:swift decode:true  crayon-inline " >Bird</span>&#8216;s real values.</li>
 </ul>
 
-<p>Remember that you don&#8217;t have access to the original source code of <span class="lang:swift decode:true  crayon-inline " >Bird</span> . Without Swift extensions, there would be no way for you to tell the compiler that you&#8217;d like <span class="lang:swift decode:true  crayon-inline " >Bird </span> to adopt and conform to the <span class="lang:swift decode:true  crayon-inline " >Printable </span> protocol.</p>
+<p>Remember that you don't have access to the original source code of <span class="lang:swift decode:true  crayon-inline " >Bird</span> . Without Swift extensions, there would be no way for you to tell the compiler that you'd like <span class="lang:swift decode:true  crayon-inline " >Bird </span> to adopt and conform to the <span class="lang:swift decode:true  crayon-inline " >Printable </span> protocol.</p>
 
 <p>Thankfully, extensions <em>do</em> exist, and we can teach a <span class="lang:swift decode:true  crayon-inline " >Bird </span> new tricks, enabling its conformance to <span class="lang:swift decode:true  crayon-inline " >Printable</span> .</p>
 
@@ -210,7 +210,7 @@ extension Bird: Printable {
 
 <h3 id="conclusion">Conclusion</h3>
 
-<p>With this little example, you&#8217;ve seen how using an extension can enable a Class, Enumeration, or Struct to adopt and conform to a protocol that it normally wouldn&#8217;t out of the box. It&#8217;s especially neat that you can do this for <em>any</em> such Type, whether you have control over its original source code or not.</p>
+<p>With this little example, you've seen how using an extension can enable a Class, Enumeration, or Struct to adopt and conform to a protocol that it normally wouldn't out of the box. It's especially neat that you can do this for <em>any</em> such Type, whether you have control over its original source code or not.</p>
 
 
     <div id="disqus_thread"></div>

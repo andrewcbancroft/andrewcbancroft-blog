@@ -23,35 +23,12 @@ Adding dependencies to your project doesn’t come without cost, so it’s best 
 
 If you are going to seek out modules of code from a 3rd party, what are some key assessment factors that could help you in this important decision?
 
-Josh Brown wrote a [_really_ comprehensive list of questions][1] that guided me a lot in my own considerations of choosing a 3rd party library. I&#8217;m really grateful for his article &#8211; if you&#8217; haven&#8217;t read it, go check it out!
+Josh Brown wrote a [_really_ comprehensive list of questions][1] that guided me a lot in my own considerations of choosing a 3rd party library. I'm really grateful for his article – if you' haven't read it, go check it out!
 
 My own list that follows takes a more categorical approach for those of us who think in box-like structures. I thought of at least four broad categories that we should think about and ask questions about when it comes to choosing our dependencies.
 
-How can you avoid depending on bad Swift libraries? What are some markers of good ones? Let&#8217;s find out!
+How can you avoid depending on bad Swift libraries? What are some markers of good ones? Let's find out!
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#community">Community matters</a>
-    </li>
-    <li>
-      <a href="#maintenance">Maintenance matters</a>
-    </li>
-    <li>
-      <a href="#documentation">Documentation matters</a>
-    </li>
-    <li>
-      <a href="#quality">Quality Matters</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="community" class="jump-target"></a>
 
@@ -80,11 +57,11 @@ How can you avoid depending on bad Swift libraries? What are some markers of goo
 
 ### Quality matters
 
-  * If you&#8217;re using CocoaPods, know that each CocoaPod that’s submitted to the central ‘Trunk’, as they call it, receives a quality index that is based on various pieces of analysis that can be done on the repository and on the code within the pod itself. Some of the analysis that’s done is based on some of the things I just discussed, such as GitHub stars, documentation, etc. A full list of how the CocoaPods quality index is assessed and assigned can be found at <https://guides.cocoapods.org/making/quality-indexes>
+  * If you're using CocoaPods, know that each CocoaPod that’s submitted to the central ‘Trunk’, as they call it, receives a quality index that is based on various pieces of analysis that can be done on the repository and on the code within the pod itself. Some of the analysis that’s done is based on some of the things I just discussed, such as GitHub stars, documentation, etc. A full list of how the CocoaPods quality index is assessed and assigned can be found at <https://guides.cocoapods.org/making/quality-indexes>
 
 ### Wrapping up
 
-So there you have it &#8211; a few broad categories to think in terms of when trying to get direction on whether or not you should bring a given 3rd party library into your own Swift project.
+So there you have it – a few broad categories to think in terms of when trying to get direction on whether or not you should bring a given 3rd party library into your own Swift project.
 
 Do you have other &#8220;box-like&#8221; categories that you use to guide your dependency decisions? Feel free to sound off in the comments with your thoughts!
 

@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="UITableView Swipe to Delete Workflow in Swift" />
-<meta property="og:description" content="Data management applications, by which I mean an app where you&#8217;re allowing users to add, edit, and delete bits of data as part of your app&#8217;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.
+<meta property="og:description" content="Data management applications, by which I mean an app where you're allowing users to add, edit, and delete bits of data as part of your app's core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.
 Making changes to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/" />
@@ -34,7 +34,7 @@ Making changes to the information listed in the table view and signaling those c
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="UITableView Swipe to Delete Workflow in Swift"/>
-<meta name="twitter:description" content="Data management applications, by which I mean an app where you&#8217;re allowing users to add, edit, and delete bits of data as part of your app&#8217;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.
+<meta name="twitter:description" content="Data management applications, by which I mean an app where you're allowing users to add, edit, and delete bits of data as part of your app's core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.
 Making changes to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
@@ -166,11 +166,11 @@ MathJax.Hub.Config({
 
     
 
-<p>Data management applications, by which I mean an app where you&#8217;re allowing users to add, edit, and delete bits of data as part of your app&#8217;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.</p>
+<p>Data management applications, by which I mean an app where you're allowing users to add, edit, and delete bits of data as part of your app's core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.</p>
 
 <p>Making <em>changes</em> to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps. How do we allow users to add or remove &#8220;records&#8221; to the system? Furthermore, how do we signal that those changes were effective and refresh the view of the data in the UI?</p>
 
-<p>The primary concern I want to focus in on in this article is the ever-common paradigm of &#8220;swipe to delete&#8221; when using a table view. What could the workflow of deleting a row from the table view (and its data source) look like? How could it be implemented in Swift? Let&#8217;s explore&#8230;</p>
+<p>The primary concern I want to focus in on in this article is the ever-common paradigm of &#8220;swipe to delete&#8221; when using a table view. What could the workflow of deleting a row from the table view (and its data source) look like? How could it be implemented in Swift? Let's explore&#8230;</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -217,18 +217,18 @@ MathJax.Hub.Config({
 <ul>
 <li><strong>Swipe</strong> a table view row and have the Delete button appear.</li>
 <li>Press the delete button, which triggers a <strong>confirmation</strong>: &#8220;Do you really want to delete this?&#8221;</li>
-<li>Based on the user&#8217;s response to the confirmation, <strong>delete the object</strong> from the data source and remove it from the table view, <strong>or cancel</strong>.</li>
+<li>Based on the user's response to the confirmation, <strong>delete the object</strong> from the data source and remove it from the table view, <strong>or cancel</strong>.</li>
 </ul>
 
-<p>The confirmation step is atypical for iOS it seems. Swiping to delete an e-mail or a reminder or just about anything else in Apple&#8217;s own apps simply deletes the item right away.</p>
+<p>The confirmation step is atypical for iOS it seems. Swiping to delete an e-mail or a reminder or just about anything else in Apple's own apps simply deletes the item right away.</p>
 
-<p>There may be a good reason for this, but I like to give folks an out if they didn&#8217;t mean to do it. It&#8217;s fair enough to say, &#8220;Well, they went to the effort of swiping the row <em>and</em> pressing the button&#8230; surely they mean to do it!&#8221;. I still feel more comfortable if I get the opportunity to cancel something like a delete operation. Feel free to disagree there &#8211; for this article, I&#8217;ll assume you want to include that into your delete workflow, and will demonstrate a simple way to implement all three steps of the strategy.</p>
+<p>There may be a good reason for this, but I like to give folks an out if they didn't mean to do it. It's fair enough to say, &#8220;Well, they went to the effort of swiping the row <em>and</em> pressing the button&#8230; surely they mean to do it!&#8221;. I still feel more comfortable if I get the opportunity to cancel something like a delete operation. Feel free to disagree there &#8211; for this article, I'll assume you want to include that into your delete workflow, and will demonstrate a simple way to implement all three steps of the strategy.</p>
 
 <p><a name="implementation" class="jump-target"></a></p>
 
 <h3 id="implementation">Implementation</h3>
 
-<p>To demonstrate the implementation of this workflow, suppose that we&#8217;ve got a table view listing out all of the planets in our solar system (all of the news on Pluto this week has me thinking in this direction, so I just went with it). Feel free to grab the example project over at GitHub:</p>
+<p>To demonstrate the implementation of this workflow, suppose that we've got a table view listing out all of the planets in our solar system (all of the news on Pluto this week has me thinking in this direction, so I just went with it). Feel free to grab the example project over at GitHub:</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -257,13 +257,13 @@ MathJax.Hub.Config({
 
 <p>To accomplish this, we need to do a couple of things.</p>
 
-<p>First, your view controller needs to conform to the <code>UITableViewDelegate</code> protocol, because the swipe to delete functionality is encapsulated by one of the table view delegate methods. It&#8217;s a simple change at the class declaration:</p>
+<p>First, your view controller needs to conform to the <code>UITableViewDelegate</code> protocol, because the swipe to delete functionality is encapsulated by one of the table view delegate methods. It's a simple change at the class declaration:</p>
 
 <p><code>class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate { ... }</code></p>
 
 <p>The delegate method that causes the buttons to appear on swipe is called <code>tableView(_:commitEditingStyle:forRowAtIndexPath</code></p>
 
-<p>Its implementation for the example I&#8217;m working through looks like this:</p>
+<p>Its implementation for the example I'm working through looks like this:</p>
 
 <pre class="lang:swift decode:true " title="commitEditingStyle" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -284,9 +284,9 @@ MathJax.Hub.Config({
     // ...
 }</pre>
 
-<p>So what&#8217;s happening here? The primary thing to notice is that we&#8217;re evaluating the editingStyle from the method&#8217;s parameter list. Comparing it to the <code>.Delete</code> <code>UITableViewCellEditingStyle</code> value is what allows us to know that the Delete button was tapped.</p>
+<p>So what's happening here? The primary thing to notice is that we're evaluating the editingStyle from the method's parameter list. Comparing it to the <code>.Delete</code> <code>UITableViewCellEditingStyle</code> value is what allows us to know that the Delete button was tapped.</p>
 
-<p>Since I have a confirmation step to take care of, I&#8217;ve chosen to store the <code>indexPath</code> of the row we&#8217;re wanting to delete in a class-viewable variable so that I can use it later on when we handle the deletion (if the user confirms it).</p>
+<p>Since I have a confirmation step to take care of, I've chosen to store the <code>indexPath</code> of the row we're wanting to delete in a class-viewable variable so that I can use it later on when we handle the deletion (if the user confirms it).</p>
 
 <p>The final step of this function is to call <code>confirmDelete()</code>, which has its own explanation coming up&#8230;</p>
 
@@ -294,11 +294,11 @@ MathJax.Hub.Config({
 
 <h4 id="confirm">Confirm</h4>
 
-<p>The next step is confirming that the user really wants to delete the particular planet they&#8217;ve initiated the delete action on:</p>
+<p>The next step is confirming that the user really wants to delete the particular planet they've initiated the delete action on:</p>
 
 <p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM-576x1024.png" alt="Delete Confirmation" width="576" height="1024" class="alignnone size-large wp-image-12098" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM-576x1024.png 576w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM-169x300.png 169w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM.png 750w" sizes="(max-width: 576px) 100vw, 576px" /></a></p>
 
-<p>How is this implemented? It all boils down to using iOS 8&#8217;s new <code>UIAlertController</code>:</p>
+<p>How is this implemented? It all boils down to using iOS 8's new <code>UIAlertController</code>:</p>
 
 <pre class="lang:swift decode:true " title="confirmDelete" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -323,7 +323,7 @@ MathJax.Hub.Config({
     // ...
 }</pre>
 
-<p>We&#8217;re asking the user if they&#8217;re sure they want to permanently delete the planet using the <code>.ActionSheet</code> style.</p>
+<p>We're asking the user if they're sure they want to permanently delete the planet using the <code>.ActionSheet</code> style.</p>
 
 <p>The next step of the function is to create a couple of <code>UIAlertAction</code> buttons: one for Delete and one for Cancel, with the appropriate style (<code>.Destructive</code> and <code>.Cancel</code>, respectively).</p>
 
@@ -375,7 +375,7 @@ MathJax.Hub.Config({
 <li>Call <code>endUpdates()</code> on the table view instance to complete the UI updates.</li>
 </ul>
 
-<p>There&#8217;s one gotcha, that I&#8217;ve tried to highlight by way of comment in the code snippet: Notice that within the call to <code>deleteRowsAtIndexPaths</code> (plural), I&#8217;ve wrapped the <code>indexPath</code> we&#8217;re removing in an array. It&#8217;s subtle, but this delegate method expects an array of <code>indexPath</code> instances, not a single index path instance. It&#8217;s simple enough, but it can catch you off guard if you&#8217;re in the mindset of removing a single row and come across this method, which is flexible enough to allow you to delete several at a time.</p>
+<p>There's one gotcha, that I've tried to highlight by way of comment in the code snippet: Notice that within the call to <code>deleteRowsAtIndexPaths</code> (plural), I've wrapped the <code>indexPath</code> we're removing in an array. It's subtle, but this delegate method expects an array of <code>indexPath</code> instances, not a single index path instance. It's simple enough, but it can catch you off guard if you're in the mindset of removing a single row and come across this method, which is flexible enough to allow you to delete several at a time.</p>
 
 <h3 id="wrapping-up">Wrapping up</h3>
 

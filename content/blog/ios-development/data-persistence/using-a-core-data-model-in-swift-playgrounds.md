@@ -15,92 +15,43 @@ tags:
   - Swift
 
 ---
+
 Did you know that you can tinker with Core Data inside of Swift playgrounds in Xcode? You can!
 
 [Jeremiah Jessel][1], author at <http://www.learncoredata.com>, wrote up an article in 2015 [detailing how you can use the Core Data framework inside a playground][2]. He shows how you can do everything from setting up the Core Data stack, to creating NSManagedObjects programmatically in code. Great stuff!
 
-After I read his guide, I got to thinking: _I wonder_ if you can take an .xcdatamodeld file created with Xcode&#8217;s Data Model designer and use _it_ in a Playground&#8230;.
+After I read his guide, I got to thinking: _I wonder_ if you can take an .xcdatamodeld file created with Xcode's Data Model designer and use _it_ in a Playground&#8230;.
 
-The short answer is, **kinda**. You can&#8217;t use the .xcdatamodeld file (at least, I couldn&#8217;t find a way), BUT, you _can_ use the _compiled_ &#8220;momd&#8221; file that gets created when you build your app.
+The short answer is, **kinda**. You can't use the .xcdatamodeld file (at least, I couldn't find a way), BUT, you _can_ use the _compiled_ &#8220;momd&#8221; file that gets created when you build your app.
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#limitations">Limitations</a>
-    </li>
-    <li>
-      <a href="#walkthrough">Walkthrough</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#add-data-model">Add Data Model file (unless you already have one)</a>
-      </li>
-      <li>
-        <a href="#add-entity">Add entity with attribute</a>
-      </li>
-      <li>
-        <a href="#add-playground">Add a playground</a>
-      </li>
-      <li>
-        <a href="#build-project">Build project; Locate &#8220;momd&#8221; file</a>
-      </li>
-      <li>
-        <a href="#show-app-contents">Show .app package contents</a>
-      </li>
-      <li>
-        <a href="#drag-to-resources">Drag &#8220;momd&#8221; file from Finder to playground Resources folder</a>
-      </li>
-      <li>
-        <a href="#write-code">Write Core Data code to use model</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#potential-usefulness">Potential usefulness</a>
-    </li>
-    <li>
-      <a href="#related">You might also enjoy&#8230;</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-    <li>
-      <a href="#course">Learning Core Data? Watch my course, Core Data Fundamentals with Swift!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="limitations" class="jump-target"></a>
 
 # Limitations
 
-There&#8217;s at least two limitations / caveats I&#8217;ve come across as I&#8217;ve been playing with this concept:
+There's at least two limitations / caveats I've come across as I've been playing with this concept:
 
 ## No NSManagedObject subclasses
 
-While you can create instances of the Entities in the model, if you&#8217;ve created `NSManagedObject` subclasses for your Entities, you won&#8217;t be able to use those in the playground. You&#8217;d have to resort back to setting properties on your `NSManagedObject` instances using `setValue(_: forKey:)`.
+While you can create instances of the Entities in the model, if you've created `NSManagedObject` subclasses for your Entities, you won't be able to use those in the playground. You'd have to resort back to setting properties on your `NSManagedObject` instances using `setValue(_: forKey:)`.
 
-But this is a minor drawback, especially if you&#8217;re just wanting to tinker.
+But this is a minor drawback, especially if you're just wanting to tinker.
 
 ## Model updates
 
-After you read the [walkthrough][3], you&#8217;ll know how to get the model into your playground.
+After you read the [walkthrough][3], you'll know how to get the model into your playground.
 
-Here&#8217;s the deal though: If you ever make _changes_ to your model, you&#8217;ll need to go through the steps necessary to _re_-add a freshly-compiled model to the playground&#8217;s Resources folder that includes the changes. This is because resources that are added to a playground are _copied_, not referenced.
+Here's the deal though: If you ever make _changes_ to your model, you'll need to go through the steps necessary to _re_-add a freshly-compiled model to the playground's Resources folder that includes the changes. This is because resources that are added to a playground are _copied_, not referenced.
 
-I don&#8217;t think that&#8217;s a terrible draw-back, especially once you know how to do it.
+I don't think that's a terrible draw-back, especially once you know how to do it.
 
-So how do you do it? Here&#8217;s how:
+So how do you do it? Here's how:
 
 <a name="walkthrough" class="jump-target"></a>
 
 # Walkthrough
 
-Get started by adding a Data Model to your project. If you&#8217;ve got a project already going that uses Core Data, you probably already have a .xcdatamodeld file in your project. If you don&#8217;t, though, one is easily add-able from the File menu:
+Get started by adding a Data Model to your project. If you've got a project already going that uses Core Data, you probably already have a .xcdatamodeld file in your project. If you don't, though, one is easily add-able from the File menu:
 
 <a name="add-data-model" class="jump-target"></a>
 
@@ -132,7 +83,7 @@ File -> New -> Playground&#8230;
 
 ## Build project; Locate &#8220;momd&#8221; file
 
-With a playground and a data model has some structure to it, I built the project (CMD + B) so that the .xcdatamodeld file would be compiled into an &#8220;momd&#8221; file. It&#8217;s the _momd_ file that needs to be added to the playground as a resource.
+With a playground and a data model has some structure to it, I built the project (CMD + B) so that the .xcdatamodeld file would be compiled into an &#8220;momd&#8221; file. It's the _momd_ file that needs to be added to the playground as a resource.
 
 To find the &#8220;momd&#8221; file, expand &#8220;Products&#8221; in your project navigator, right-click the .app file, and click &#8220;Show in Finder&#8221;:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/show-product-in-finder.png" alt="Show product in finder" width="620" height="515" class="alignnone size-full wp-image-13008" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/show-product-in-finder.png 620w, https://www.andrewcbancroft.com/wp-content/uploads/2016/07/show-product-in-finder-300x249.png 300w" sizes="(max-width: 620px) 100vw, 620px" />][7]
@@ -156,7 +107,7 @@ In the finder window, right-click the .app file, and click &#8220;Show package c
 
 ## Write Core Data code to use model
 
-That&#8217;s it! Now that the &#8220;momd&#8221; file is in the playground&#8217;s Resources folder, you&#8217;re set to write code against it. You can insert `NSManagedObject` instances, perform fetch requests, etc. Here&#8217;s an example that I wrote up:
+That's it! Now that the &#8220;momd&#8221; file is in the playground's Resources folder, you're set to write code against it. You can insert `NSManagedObject` instances, perform fetch requests, etc. Here's an example that I wrote up:
 
 <pre class="lang:swift decode:true " title="Core Data Playground" >import UIKit
 import CoreData
@@ -195,7 +146,7 @@ print(result)</pre>
 
 Woohoo! I thought this was pretty cool.
 
-**Don&#8217;t forget**: If you make updates to your model, you need to re-build your app, delete the &#8220;momd&#8221; folder from your playground&#8217;s resources, re-drag the freshly-compiled &#8220;momd&#8221; file to your playground again to work with the latest version of the model.
+**Don't forget**: If you make updates to your model, you need to re-build your app, delete the &#8220;momd&#8221; folder from your playground's resources, re-drag the freshly-compiled &#8220;momd&#8221; file to your playground again to work with the latest version of the model.
 
 <a name="potential-usefulness" class="jump-target"></a>
 
@@ -203,9 +154,9 @@ Woohoo! I thought this was pretty cool.
 
 The other important question to ask, besides &#8220;I wonder if this is possible?&#8221; is &#8220;How is this useful?&#8221;
 
-  * Learning. Playgrounds in and of themselves make sense as a learning tool. How cool is it to be able to build the model you&#8217;re thinking of in the Xcode designer, import that into a playground, and tinker with it as a learning exercise??
-  * This could also be useful when you need to try out your data model but don&#8217;t really want to wire it up to an actual user interface yet. Strip away all the UI complexity and just work with the data model&#8230; in a playground! It just seems like a more elegant solution to the &#8220;print it out to the console&#8221; method of experimenting with the model.
-  * There might be situations when you&#8217;re building semi-complicated `NSPredicate` instances for a fetch request &#8211; why not get it working in a playground first, then migrate it over to your app? Just an idea!
+  * Learning. Playgrounds in and of themselves make sense as a learning tool. How cool is it to be able to build the model you're thinking of in the Xcode designer, import that into a playground, and tinker with it as a learning exercise??
+  * This could also be useful when you need to try out your data model but don't really want to wire it up to an actual user interface yet. Strip away all the UI complexity and just work with the data model&#8230; in a playground! It just seems like a more elegant solution to the &#8220;print it out to the console&#8221; method of experimenting with the model.
+  * There might be situations when you're building semi-complicated `NSPredicate` instances for a fetch request – why not get it working in a playground first, then migrate it over to your app? Just an idea!
 
 <a name="related" class="jump-target"></a>
 

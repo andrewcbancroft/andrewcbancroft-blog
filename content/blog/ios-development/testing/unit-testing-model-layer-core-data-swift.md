@@ -17,7 +17,7 @@ tags:
   - Unit Testing
 
 ---
-<small>Updated on November 19, 2015 &#8211; Swift 2.0</small>
+<small>Updated on November 19, 2015 – Swift 2.0</small>
 
 As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.
 
@@ -31,7 +31,7 @@ To my surprise, unit testing my Core Data model layer has been… well… amazin
 
 ### Set up an in-memory NSManagedObjectContext
 
-A [Stack Overflow][2] question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I&#8217;ve written it in Swift. In my project, I created a new Swift file called &#8220;CoreDataHelpers.swift&#8221; in my tests target. Here&#8217;s a look at the helper function:
+A [Stack Overflow][2] question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I've written it in Swift. In my project, I created a new Swift file called &#8220;CoreDataHelpers.swift&#8221; in my tests target. Here's a look at the helper function:
 
 <pre class="lang:swift mark:9 decode:true " title="CoreDataHelpers.swift" >import CoreData
 
@@ -54,21 +54,21 @@ func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
 
 #### Observations
 
-I&#8217;ll be honest, I&#8217;m only starting to put together the pieces involved in setting up the Core Data stack. Working through these unit testing techniques has solidified a _lot_. Analyzing the helper method from the bottom up has made some sense out of how to configure everything:
+I'll be honest, I'm only starting to put together the pieces involved in setting up the Core Data stack. Working through these unit testing techniques has solidified a _lot_. Analyzing the helper method from the bottom up has made some sense out of how to configure everything:
 
   * I need an `NSManagedObjectContext` whose `NSPersistentStoreCoordinator` property uses an in-memory store.
-  * To get such an `NSManagedObjectContext`, I need to add a persistent store with a type of `NSInMemoryStoreType` to an `NSPersistentStoreCoordinator` instance. (note the line that&#8217;s highlighted)
-  * Of course, in order to do _that_, I need an `NSPersistentStoreCoordinator` _instance_, and I can&#8217;t get one of _those_ unless I initialize it with an `NSManagedObjectModel`.
+  * To get such an `NSManagedObjectContext`, I need to add a persistent store with a type of `NSInMemoryStoreType` to an `NSPersistentStoreCoordinator` instance. (note the line that's highlighted)
+  * Of course, in order to do _that_, I need an `NSPersistentStoreCoordinator` _instance_, and I can't get one of _those_ unless I initialize it with an `NSManagedObjectModel`.
   * To get an `NSManagedObjectModel`, I use the class method, `mergedModelFromBundles()` to grab it from my main bundle.
   * Fast-forwarding now: With a proper `NSManagedObjectModel` instance, I can create an `NSPersistentStoreCoordinator` instance with it and add an `NSInMemoryStoreType` to that `persistentStoreCoordinator`. Finally, I can initialize an `NSManagedObjectContext`, assign the configured `persistentStoreCoordinator` to the context, and return it.
 
-Whew! This whole process felt a lot like reading [If You Give a Mouse a Cookie][3], but that may be because I&#8217;ve read it a few hundred times to my 2 year old. :]
+Whew! This whole process felt a lot like reading [If You Give a Mouse a Cookie][3], but that may be because I've read it a few hundred times to my 2 year old. :]
 
 ### Writing the unit test(s)
 
-With the ability to get an `NSManagedObjectContext` instance that&#8217;s using an in-memory store, the unit tests using Entities from my Core Data model are quite easy.
+With the ability to get an `NSManagedObjectContext` instance that's using an in-memory store, the unit tests using Entities from my Core Data model are quite easy.
 
-Here&#8217;s a sample test:
+Here's a sample test:
 
 <pre class="lang:swift decode:true " title="XCTestCase &#038; CoreData" >import CoreData
 

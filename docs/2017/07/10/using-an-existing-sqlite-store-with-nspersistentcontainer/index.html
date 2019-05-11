@@ -25,10 +25,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Using an Existing SQLite Store with NSPersistentContainer" />
-<meta property="og:description" content="If you&#8217;ve been creating the Core Data Stack without NSPersistentContainer and you&#8217;re thinking about switching things up to use NSPersistentContainer, you need to think about your existing SQLite persistent store.
+<meta property="og:description" content="If you've been creating the Core Data Stack without NSPersistentContainer and you're thinking about switching things up to use NSPersistentContainer, you need to think about your existing SQLite persistent store.
 Creating the stack with NSPersistentContainer handles the creation of SQLite stores internally, so brand new setups using NSPersistentContainer are pretty easy.
 But how do you go about telling NSPersistentContainer about your existing SQLite store?
-Let&#8217;s take a look now at how you can configure the container to use your previously-created persistent store." />
+Let's take a look now at how you can configure the container to use your previously-created persistent store." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/" />
 <meta property="article:published_time" content="2017-07-10T18:02:05&#43;00:00"/>
@@ -36,10 +36,10 @@ Let&#8217;s take a look now at how you can configure the container to use your p
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Using an Existing SQLite Store with NSPersistentContainer"/>
-<meta name="twitter:description" content="If you&#8217;ve been creating the Core Data Stack without NSPersistentContainer and you&#8217;re thinking about switching things up to use NSPersistentContainer, you need to think about your existing SQLite persistent store.
+<meta name="twitter:description" content="If you've been creating the Core Data Stack without NSPersistentContainer and you're thinking about switching things up to use NSPersistentContainer, you need to think about your existing SQLite persistent store.
 Creating the stack with NSPersistentContainer handles the creation of SQLite stores internally, so brand new setups using NSPersistentContainer are pretty easy.
 But how do you go about telling NSPersistentContainer about your existing SQLite store?
-Let&#8217;s take a look now at how you can configure the container to use your previously-created persistent store."/>
+Let's take a look now at how you can configure the container to use your previously-created persistent store."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -170,13 +170,13 @@ MathJax.Hub.Config({
 
     
 
-<p>If you&#8217;ve been creating the Core Data Stack <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">without NSPersistentContainer</a> and you&#8217;re thinking about switching things up to <em>use</em> <code>NSPersistentContainer</code>, you need to think about your existing SQLite persistent store.</p>
+<p>If you've been creating the Core Data Stack <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">without NSPersistentContainer</a> and you're thinking about switching things up to <em>use</em> <code>NSPersistentContainer</code>, you need to think about your existing SQLite persistent store.</p>
 
 <p><a href="https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/">Creating the stack with NSPersistentContainer</a> handles the creation of SQLite stores internally, so brand new setups using <code>NSPersistentContainer</code> are pretty easy.</p>
 
 <p>But how do you go about telling <code>NSPersistentContainer</code> about your <em>existing</em> SQLite store?</p>
 
-<p>Let&#8217;s take a look now at how you can configure the container to use your previously-created persistent store.</p>
+<p>Let's take a look now at how you can configure the container to use your previously-created persistent store.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -215,7 +215,7 @@ MathJax.Hub.Config({
 
 <h1 id="before-nspersistentcontainer">Before NSPersistentContainer</h1>
 
-<p>Supposing that your <strong>previous</strong> Core Data stack creation step pointed to a .sqlite file somewhere in your user&#8217;s documents directory:</p>
+<p>Supposing that your <strong>previous</strong> Core Data stack creation step pointed to a .sqlite file somewhere in your user's documents directory:</p>
 
 <pre class="lang:swift decode:true " title="Configure Persistent Store Coordinator" >// Configure NSPersistentStoreCoordinator with an NSPersistentStore
 let psc = NSPersistentStoreCoordinator(managedObjectModel: model) // model instance creation not shown here...
@@ -231,7 +231,7 @@ try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, a
 
 <h1 id="after-nspersistentcontainer">After NSPersistentContainer</h1>
 
-<p>The key to migrating to <code>NSPersistentStore</code> with an existing SQLite persistent store is the <code>NSPersistentStoreDescription</code> class. Take a look at the following code to see how to configure an instance of <code>NSPersistentStoreDescription</code> and assign it to the <code>NSPersistentContainer</code> instance&#8217;s <code>persistentStoreDescriptions</code> property:</p>
+<p>The key to migrating to <code>NSPersistentStore</code> with an existing SQLite persistent store is the <code>NSPersistentStoreDescription</code> class. Take a look at the following code to see how to configure an instance of <code>NSPersistentStoreDescription</code> and assign it to the <code>NSPersistentContainer</code> instance's <code>persistentStoreDescriptions</code> property:</p>
 
 <pre class="lang:swift decode:true mark:8-9" title="Using NSPersistentStoreDescription" >let container = NSPersistentContainer(name: "NameOfDataModel")
 
@@ -252,16 +252,16 @@ container.persistentStoreDescriptions = [storeDescription]
 
 <p>The <code>let storeURL =</code> portion of the code is identical in both snippets.</p>
 
-<p>The difference is how you tell the Stack where the persistent store is located. In times past, you&#8217;d tell the NSPersistentStore<strong>Coordinator</strong> this information through its <code>addPersistentStore</code> method.</p>
+<p>The difference is how you tell the Stack where the persistent store is located. In times past, you'd tell the NSPersistentStore<strong>Coordinator</strong> this information through its <code>addPersistentStore</code> method.</p>
 
 <p>With NSPersistent<strong>Container</strong>, you need to do two things:<br />
 <strong>1</strong> &#8211; Initialize an <code>NSPersistentStoreDescription</code> instance with the <code>storeURL</code> (i.e. the URL to where your existing persistent store is located).</p>
 
 <p><strong>2</strong> &#8211; Assign the <code>NSPersistentStoreDescription</code> instance to the <code>NSPersistentContainer's</code> <code>persistentStoreDescriptions</code> property.</p>
 
-<p>One subtlety to note is that the property&#8217;s name is <em>plural</em>: persistentStoreDescription<strong>s</strong>.</p>
+<p>One subtlety to note is that the property's name is <em>plural</em>: persistentStoreDescription<strong>s</strong>.</p>
 
-<p>Even though may only a single persistent store description instance to assign, such as in the example code above, <strong>you still need to wrap it in an array</strong> before you assign it, since it&#8217;s possible to add more than one description to the container.</p>
+<p>Even though may only a single persistent store description instance to assign, such as in the example code above, <strong>you still need to wrap it in an array</strong> before you assign it, since it's possible to add more than one description to the container.</p>
 
 <p>With that adjustment to the <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/"><code>NSPersistentContainer</code> stack creation process</a>, your app will once again use the persistent store it used to use!</p>
 

@@ -29,7 +29,7 @@
  Quick! Tell me! What is the Type of the birdDetails constant in this code example:
 let birdDetails = birdDetailsFromStorage() With no additional context to glean information from, the correct answer to the question is, &#8220;I have absolutely no clue&#8230;&#8221;
  But is that concluding assertion true? Hmm&#8230;
-I&#8217;m learning, and as I&#8217;ve weighed a recent Twitter conversation and thought on a comment thread that Rob Napier made on the post quoted above, I&#8217;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift." />
+I'm learning, and as I've weighed a recent Twitter conversation and thought on a comment thread that Rob Napier made on the post quoted above, I'm compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/" />
 <meta property="article:published_time" content="2014-08-21T02:19:45&#43;00:00"/>
@@ -41,7 +41,7 @@ I&#8217;m learning, and as I&#8217;ve weighed a recent Twitter conversation and
  Quick! Tell me! What is the Type of the birdDetails constant in this code example:
 let birdDetails = birdDetailsFromStorage() With no additional context to glean information from, the correct answer to the question is, &#8220;I have absolutely no clue&#8230;&#8221;
  But is that concluding assertion true? Hmm&#8230;
-I&#8217;m learning, and as I&#8217;ve weighed a recent Twitter conversation and thought on a comment thread that Rob Napier made on the post quoted above, I&#8217;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift."/>
+I'm learning, and as I've weighed a recent Twitter conversation and thought on a comment thread that Rob Napier made on the post quoted above, I'm compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -182,9 +182,9 @@ MathJax.Hub.Config({
 
 <p><strong>But is that concluding assertion <em>true</em>?  Hmm&#8230;</strong></p>
 
-<p><em>I&#8217;m learning</em>, and as I&#8217;ve weighed a recent Twitter conversation and thought on a <a title="Rob Napier Comment" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721" target="_blank">comment thread that Rob Napier made</a> on the post quoted above, I&#8217;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift.</p>
+<p><em>I'm learning</em>, and as I've weighed a recent Twitter conversation and thought on a <a title="Rob Napier Comment" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721" target="_blank">comment thread that Rob Napier made</a> on the post quoted above, I'm compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift.</p>
 
-<p>Something struck me as I read <a title="Rob's Comment" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721" target="_blank">Rob&#8217;s comment</a>:  Why <em>wouldn&#8217;t</em> I know the Type that would be inferred from what is returned by <span class="lang:swift decode:true  crayon-inline">birdDetailsFromStorage()</span> and assigned to <span class="lang:swift decode:true  crayon-inline">birdDetails</span>?  Presumably, I named the function what I named it intentionally.  The part I missed, was that if I had <em>designed</em> well and created a Type called <span class="lang:swift decode:true  crayon-inline">BirdDetails</span> (say, a Struct as Rob proposed), then all of a sudden, an inference can be made by both the compiler <em>and</em> a human that the <span class="lang:swift decode:true  crayon-inline">birdDetails</span> constant is&#8230; well&#8230; an instance of <span class="lang:swift decode:true  crayon-inline">BirdDetails</span>.  Imagine that!</p>
+<p>Something struck me as I read <a title="Rob's Comment" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721" target="_blank">Rob's comment</a>:  Why <em>wouldn't</em> I know the Type that would be inferred from what is returned by <span class="lang:swift decode:true  crayon-inline">birdDetailsFromStorage()</span> and assigned to <span class="lang:swift decode:true  crayon-inline">birdDetails</span>?  Presumably, I named the function what I named it intentionally.  The part I missed, was that if I had <em>designed</em> well and created a Type called <span class="lang:swift decode:true  crayon-inline">BirdDetails</span> (say, a Struct as Rob proposed), then all of a sudden, an inference can be made by both the compiler <em>and</em> a human that the <span class="lang:swift decode:true  crayon-inline">birdDetails</span> constant is&#8230; well&#8230; an instance of <span class="lang:swift decode:true  crayon-inline">BirdDetails</span>.  Imagine that!</p>
 
 <p>To quote Rob (emphasis added):</p>
 
@@ -192,21 +192,21 @@ MathJax.Hub.Config({
 <p><span style="color: #3f4549;">Type inference should only be used when the result is unambiguous, but <strong>the best solution is to</strong> <strong>make the result unambiguous</strong>.</span></p>
 </blockquote>
 
-<p>Bingo.  The <em>best</em> solution is to <em>make</em> the result unambiguous.  You and I as code authors are in charge of the clarity or ambiguity of our code &#8211; it&#8217;s up to us to <em>make</em> the results of our function evaluations unambiguous.</p>
+<p>Bingo.  The <em>best</em> solution is to <em>make</em> the result unambiguous.  You and I as code authors are in charge of the clarity or ambiguity of our code – it's up to us to <em>make</em> the results of our function evaluations unambiguous.</p>
 
-<p>When I named the function <span class="lang:swift decode:true  crayon-inline">birdDetailsFromStorage()</span>, I heavily implied something about its return Type in the name.  I even implied it in the name of the <em>constant</em>.  I was expecting the return Type to be something that encapsulated whatever &#8220;bird details&#8221; are &#8211; I just didn&#8217;t realize it at the time (although it&#8217;s super obvious now)!</p>
+<p>When I named the function <span class="lang:swift decode:true  crayon-inline">birdDetailsFromStorage()</span>, I heavily implied something about its return Type in the name.  I even implied it in the name of the <em>constant</em>.  I was expecting the return Type to be something that encapsulated whatever &#8220;bird details&#8221; are – I just didn't realize it at the time (although it's super obvious now)!</p>
 
-<p>The very _name_ of a thing sets expectations for you and the readers of your code.  It&#8217;s our job to set ourselves up for that expectation to be <em>fulfilled</em>!  B<span style="color: #3f4549;">e predictable with the return Type of your functions for your own sake.  A function signature should be such that when you run across <span class="lang:swift decode:true  crayon-inline">birdDetailsFromStorage()</span> in some piece of code, you are able to legitimately expect it to return a <span class="lang:swift decode:true  crayon-inline">BirdDetails</span>.  </span></p>
+<p>The very _name_ of a thing sets expectations for you and the readers of your code.  It's our job to set ourselves up for that expectation to be <em>fulfilled</em>!  B<span style="color: #3f4549;">e predictable with the return Type of your functions for your own sake.  A function signature should be such that when you run across <span class="lang:swift decode:true  crayon-inline">birdDetailsFromStorage()</span> in some piece of code, you are able to legitimately expect it to return a <span class="lang:swift decode:true  crayon-inline">BirdDetails</span>.  </span></p>
 
-<p><span style="color: #3f4549;">Using this predictable, </span>convention-based approach to give humans the right clues about what the compiler is going to compute a Type to be makes Type Inference a totally legitimate language feature to embrace for the sake of your code&#8217;s clarity and simplicity.</p>
+<p><span style="color: #3f4549;">Using this predictable, </span>convention-based approach to give humans the right clues about what the compiler is going to compute a Type to be makes Type Inference a totally legitimate language feature to embrace for the sake of your code's clarity and simplicity.</p>
 
-<p>I&#8217;ll leave you with a final quote from Rob&#8217;s comments:</p>
+<p>I'll leave you with a final quote from Rob's comments:</p>
 
 <blockquote>
-<p><span style="color: #3f4549;">Don&#8217;t go implying that you&#8217;re returning one thing when you&#8217;re returning another. If you must, then yes, explicit types are your punishment. 😀</span></p>
+<p><span style="color: #3f4549;">Don't go implying that you're returning one thing when you're returning another. If you must, then yes, explicit types are your punishment. 😀</span></p>
 </blockquote>
 
-<p>Thank you Rob for your insight and feedback.  You can read more of Rob&#8217;s work at <a title="Rob Napier's Blog" href="http://robnapier.net" target="_blank"><a href="http://robnapier.net">http://robnapier.net</a></a>.</p>
+<p>Thank you Rob for your insight and feedback.  You can read more of Rob's work at <a title="Rob Napier's Blog" href="http://robnapier.net" target="_blank"><a href="http://robnapier.net">http://robnapier.net</a></a>.</p>
 
 <div class="related-posts">
   <p>

@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="FIX – Query in Parse Cloud Code Returns Unauthorized Error" />
-<meta property="og:description" content="The Parse migration process has begun &#8211; I&#8217;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
+<meta property="og:description" content="The Parse migration process has begun &#8211; I've got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
 The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!
 Jump to&#8230;   Problem Overview   Solution   Was this article helpful?" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@ Jump to&#8230;   Problem Overview   Solution   Was this article helpful?" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FIX – Query in Parse Cloud Code Returns Unauthorized Error"/>
-<meta name="twitter:description" content="The Parse migration process has begun &#8211; I&#8217;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
+<meta name="twitter:description" content="The Parse migration process has begun &#8211; I've got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
 The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!
 Jump to&#8230;   Problem Overview   Solution   Was this article helpful?"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
@@ -168,7 +168,7 @@ MathJax.Hub.Config({
 
     
 
-<p>The Parse migration process has begun &#8211; I&#8217;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.</p>
+<p>The Parse migration process has begun &#8211; I've got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.</p>
 
 <p>The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!</p>
 
@@ -195,7 +195,7 @@ MathJax.Hub.Config({
 
 <h1 id="problem-overview">Problem Overview</h1>
 
-<p>Any time I did a query in my Parse Cloud Code, the query would fail. Every time I&#8217;d make a request to my Cloud Code function, I&#8217;d get &#8220;500 Internal Server Error&#8221; as my response.</p>
+<p>Any time I did a query in my Parse Cloud Code, the query would fail. Every time I'd make a request to my Cloud Code function, I'd get &#8220;500 Internal Server Error&#8221; as my response.</p>
 
 <p>I finally wised up and adjusted my query so that I could see the specific &#8220;internal server error&#8221; that was occurring:</p>
 
@@ -219,15 +219,15 @@ query.find({
   }
 }</pre>
 
-<p>I got to searching and found an <a href="https://github.com/ParsePlatform/parse-server/issues/356">issue on GitHub</a> that pointed me in the right direction, but to spare you reading through the entire thread, here&#8217;s the gist:</p>
+<p>I got to searching and found an <a href="https://github.com/ParsePlatform/parse-server/issues/356">issue on GitHub</a> that pointed me in the right direction, but to spare you reading through the entire thread, here's the gist:</p>
 
 <p><a name="solution" class="jump-target"></a></p>
 
 <h1 id="solution">Solution</h1>
 
-<p>I happened to be using a version of the Parse Server Example that was missing a critical line of configuration in index.js. When you configure your Parse Server by calling <code>new ParseServer</code>, you need to make sure that there&#8217;s a <code>serverURL</code> property that&#8217;s set to the URL of your Parse Server&#8217;s API endpoint.</p>
+<p>I happened to be using a version of the Parse Server Example that was missing a critical line of configuration in index.js. When you configure your Parse Server by calling <code>new ParseServer</code>, you need to make sure that there's a <code>serverURL</code> property that's set to the URL of your Parse Server's API endpoint.</p>
 
-<p>My config didn&#8217;t have this, but the moment I added it, my Cloud Code queries worked perfectly as they did before. Here&#8217;s a look at my final index.js file with the relevant line highlighted:</p>
+<p>My config didn't have this, but the moment I added it, my Cloud Code queries worked perfectly as they did before. Here's a look at my final index.js file with the relevant line highlighted:</p>
 
 <pre class="lang:js mark:18 decode:true " title="index.js" >// Example express application adding the parse-server module to expose Parse
 // compatible API routes.

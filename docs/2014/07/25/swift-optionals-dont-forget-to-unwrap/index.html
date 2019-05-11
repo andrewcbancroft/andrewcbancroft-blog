@@ -26,8 +26,8 @@
 
 <meta property="og:title" content="Swift Optionals?  Don’t Forget to Unwrap!" />
 <meta property="og:description" content="There is a compiler error that throws me off every time I see it. It takes the form,
- &#8216;ClassName?&#8217; does not have a member named &#8216;memberName&#8217;
- This can happen when you&#8217;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
+ &#8216;ClassName?' does not have a member named &#8216;memberName'
+ This can happen when you've declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
 For example, given this class definition:
 class Bird { var family: String var color: String init(family: String, color: String) { self." />
 <meta property="og:type" content="article" />
@@ -38,8 +38,8 @@ class Bird { var family: String var color: String init(family: String, color: St
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Optionals?  Don’t Forget to Unwrap!"/>
 <meta name="twitter:description" content="There is a compiler error that throws me off every time I see it. It takes the form,
- &#8216;ClassName?&#8217; does not have a member named &#8216;memberName&#8217;
- This can happen when you&#8217;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
+ &#8216;ClassName?' does not have a member named &#8216;memberName'
+ This can happen when you've declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
 For example, given this class definition:
 class Bird { var family: String var color: String init(family: String, color: String) { self."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
@@ -175,10 +175,10 @@ MathJax.Hub.Config({
 <p>There is a compiler error that throws me off every time I see it.  It takes the form,</p>
 
 <blockquote>
-<p>&#8216;ClassName?&#8217; does not have a member named &#8216;memberName&#8217;</p>
+<p>&#8216;ClassName?' does not have a member named &#8216;memberName'</p>
 </blockquote>
 
-<p>This can happen when you&#8217;ve declared a variable as an optional, but forget to <em>unwrap</em> that optional when you attempt to call a method on it.</p>
+<p>This can happen when you've declared a variable as an optional, but forget to <em>unwrap</em> that optional when you attempt to call a method on it.</p>
 
 <p>For example, given this class definition:</p>
 
@@ -204,18 +204,18 @@ MathJax.Hub.Config({
 
 <pre class="lang:swift decode:true">birdInstance = Bird(family: "Apodidae", color: "Black")</pre>
 
-<p>If I attempt to invoke the <span class="lang:swift decode:true  crayon-inline">isSwift</span> method on the <span class="lang:swift decode:true  crayon-inline">birdInstance</span> later  on, I&#8217;ll get a compiler error:</p>
+<p>If I attempt to invoke the <span class="lang:swift decode:true  crayon-inline">isSwift</span> method on the <span class="lang:swift decode:true  crayon-inline">birdInstance</span> later  on, I'll get a compiler error:</p>
 
 <pre class="lang:swift decode:true">println(birdInstance.isSwift())
 </pre>
 
 <blockquote>
-<p>error: &#8216;Bird?&#8217; does not have a member named &#8216;isSwift&#8217;</p>
+<p>error: &#8216;Bird?' does not have a member named &#8216;isSwift'</p>
 </blockquote>
 
 <p>This may seem pretty basic &#8212; after all, I declared the <span class="lang:swift decode:true  crayon-inline ">birdInstance</span> as an optional and I know optionals need special treatment.  How could I make this mistake??  Perhaps this is just a consequence of my current stage in life, trying to code in 15-30 minute spurts with my 1 <sup>1</sup>&frasl;<sub>2</sub> year old running around, haha.</p>
 
-<p>We all deal with this though:  it&#8217;s fairly easy to write some code and come back to it later and not remember how you declared your variable in an earlier coding session.  Then when you&#8217;re presented a message saying that your class doesn&#8217;t have a member named &#8220;___&#8221;, you immediately go to the class definition and see the function there, plain as day.  It&#8217;s easy to spend 3-5 minutes scratching your head thinking, &#8220;What in the world??!&#8221; &#8230; And then you realize &#8211; it&#8217;s that <em>optional declaration</em> that you forgot to handle.</p>
+<p>We all deal with this though:  it's fairly easy to write some code and come back to it later and not remember how you declared your variable in an earlier coding session.  Then when you're presented a message saying that your class doesn't have a member named &#8220;___&#8221;, you immediately go to the class definition and see the function there, plain as day.  It's easy to spend 3-5 minutes scratching your head thinking, &#8220;What in the world??!&#8221; &#8230; And then you realize – it's that <em>optional declaration</em> that you forgot to handle.</p>
 
 <p>To fix this, of course, you can do any number of things, depending on your situation.</p>
 
@@ -236,7 +236,7 @@ birdInstance = Bird(family: "Apodidae", color: "Black")
 
 println(birdInstance.isSwift())</pre>
 
-<p><a title="CompileSwift - Optionals" href="http://www.compileswift.com/intermediate/optionals/?utm_content=bufferfba01&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer" target="_blank">A blog post by Peter Witham over at CompileSwift</a> was the article that caused me to think, &#8220;OH!  I haven&#8217;t done anything with my optional&#8230;<em>that&#8217;s</em> the problem&#8221;.  Credit to you, sir, for your post!</p>
+<p><a title="CompileSwift - Optionals" href="http://www.compileswift.com/intermediate/optionals/?utm_content=bufferfba01&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer" target="_blank">A blog post by Peter Witham over at CompileSwift</a> was the article that caused me to think, &#8220;OH!  I haven't done anything with my optional&#8230;<em>that's</em> the problem&#8221;.  Credit to you, sir, for your post!</p>
 
 
     <div id="disqus_thread"></div>

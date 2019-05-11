@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Get Social With Swift – Posting to Facebook and Twitter" />
-<meta property="og:description" content="Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple&#8217;s built-in support for two major social media platforms: Facebook, and Twitter.
-For your convenience, I&#8217;ve created a simple GitHub repository with an example Xcode project to help you see all of this code in action:" />
+<meta property="og:description" content="Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple's built-in support for two major social media platforms: Facebook, and Twitter.
+For your convenience, I've created a simple GitHub repository with an example Xcode project to help you see all of this code in action:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/11/23/get-social-with-swift-posting-to-facebook-and-twitter/" />
 <meta property="article:published_time" content="2015-11-23T19:17:38&#43;00:00"/>
@@ -34,8 +34,8 @@ For your convenience, I&#8217;ve created a simple GitHub repository with an exam
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Get Social With Swift – Posting to Facebook and Twitter"/>
-<meta name="twitter:description" content="Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple&#8217;s built-in support for two major social media platforms: Facebook, and Twitter.
-For your convenience, I&#8217;ve created a simple GitHub repository with an example Xcode project to help you see all of this code in action:"/>
+<meta name="twitter:description" content="Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple's built-in support for two major social media platforms: Facebook, and Twitter.
+For your convenience, I've created a simple GitHub repository with an example Xcode project to help you see all of this code in action:"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -166,9 +166,9 @@ MathJax.Hub.Config({
 
     
 
-<p>Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple&#8217;s built-in support for two major social media platforms: Facebook, and Twitter.</p>
+<p>Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple's built-in support for two major social media platforms: Facebook, and Twitter.</p>
 
-<p>For your convenience, I&#8217;ve created a simple GitHub repository with an example Xcode project to help you see all of this code in action:</p>
+<p>For your convenience, I've created a simple GitHub repository with an example Xcode project to help you see all of this code in action:</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -183,7 +183,7 @@ MathJax.Hub.Config({
   </ul>
 </div></p>
 
-<p><strong>Note</strong>: To try things out in this guide you need to run your app on a physical device, because the Social media features we&#8217;re looking at below are not available in the iOS Simulator.</p>
+<p><strong>Note</strong>: To try things out in this guide you need to run your app on a physical device, because the Social media features we're looking at below are not available in the iOS Simulator.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -225,7 +225,7 @@ MathJax.Hub.Config({
 
 <h3 id="importing-the-social-module">Importing the Social module</h3>
 
-<p>The first step is to import the Social module into your .swift file. It&#8217;s a simple declaration at the top of your file:</p>
+<p>The first step is to import the Social module into your .swift file. It's a simple declaration at the top of your file:</p>
 
 <pre class="lang:default mark:4 decode:true " title="Import Social" >// ...
 
@@ -240,7 +240,7 @@ import Social
 
 <p>Next up is to make sure that the user has Facebook, Twitter, or both set up on their device.</p>
 
-<p>In the <a href="https://github.com/andrewcbancroft/SocialSwift">example that&#8217;s included with this guide</a>, I will respond to a user&#8217;s tapping on a button in the UI to trigger the presentation of an <code>SLComposeViewController</code> instance (which we&#8217;ll configure shortly).</p>
+<p>In the <a href="https://github.com/andrewcbancroft/SocialSwift">example that's included with this guide</a>, I will respond to a user's tapping on a button in the UI to trigger the presentation of an <code>SLComposeViewController</code> instance (which we'll configure shortly).</p>
 
 <p>Within the body of the IBAction associated with the button, I will check whether or not the Facebook service is available:</p>
 
@@ -254,7 +254,7 @@ import Social
 
 <h4 id="service-types">Service types</h4>
 
-<p>Currently there are 4 service types that represented by String constants in Swift. Passing one of the following into <code>SLComposeViewController.isAvailableForServiceType(_:)</code> will check for that service&#8217;s availability on the user&#8217;s device:</p>
+<p>Currently there are 4 service types that represented by String constants in Swift. Passing one of the following into <code>SLComposeViewController.isAvailableForServiceType(_:)</code> will check for that service's availability on the user's device:</p>
 
 <ul>
 <li>SLServiceTypeFacebook</li>
@@ -263,7 +263,7 @@ import Social
 <li>SLServiceTypeTencentWeibo</li>
 </ul>
 
-<p>For the purposes of this guide, we&#8217;ll look at the first two, which map to Facebook and Twitter, respectively.</p>
+<p>For the purposes of this guide, we'll look at the first two, which map to Facebook and Twitter, respectively.</p>
 
 <p><strong>Note</strong>: Social media features in the Social module are not available for use/testing on the iOS Simulator, so you need to use a physical device to try things out.</p>
 
@@ -271,7 +271,7 @@ import Social
 
 <h3 id="creating-an-slcomposeviewcontroller">Creating an SLComposeViewController</h3>
 
-<p>The Social framework comes with a Type that allows us to present some Apple-built UI to post to any of the four service types. To get at this out-of-the-box user interface, we look to <code>SLComposeViewController's</code> initializer that takes an argument for the type of service we&#8217;d like to create a post for:</p>
+<p>The Social framework comes with a Type that allows us to present some Apple-built UI to post to any of the four service types. To get at this out-of-the-box user interface, we look to <code>SLComposeViewController's</code> initializer that takes an argument for the type of service we'd like to create a post for:</p>
 
 <pre class="lang:swift decode:true mark:3 " title="Create SLComposeViewController" >@IBAction func postToFacebookTapped(sender: UIButton) {
     if(SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)) {
@@ -281,13 +281,13 @@ import Social
     }
 }</pre>
 
-<p>In this code snippet, we&#8217;re creating an <code>SLComposeViewController</code> instance to post to Facebook, since I&#8217;ve specified the <code>SLServiceTypeFacebook</code> type to the initializer.</p>
+<p>In this code snippet, we're creating an <code>SLComposeViewController</code> instance to post to Facebook, since I've specified the <code>SLServiceTypeFacebook</code> type to the initializer.</p>
 
 <p><a name="configure" class="jump-target"></a></p>
 
 <h3 id="optional-configure-the-slcomposeviewcontroller">(optional) Configure the SLComposeViewController</h3>
 
-<p>Optionally, you can choose to pre-populate the &#8220;create post&#8221; UI with some initial text, an image, or a URL. Here&#8217;s a sample of what that might look like:</p>
+<p>Optionally, you can choose to pre-populate the &#8220;create post&#8221; UI with some initial text, an image, or a URL. Here's a sample of what that might look like:</p>
 
 <pre class="lang:swift decode:true mark:4-6 " title="Configure SLComposeViewController" >@IBAction func postToFacebookTapped(sender: UIButton) {
     if(SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)) {
@@ -321,7 +321,7 @@ import Social
 
 <h3 id="wrapping-up">Wrapping up</h3>
 
-<p>As you can see, integrating social media sharing capability into your app has never been easier. Now, in this guide, I didn&#8217;t explicitly go over how to create posts for Twitter, but it&#8217;s as simple as switching <code>SLServiceTypeFacebook</code> to <code>SLServiceTypeTwitter</code>. The example I&#8217;ve provided with this guide does include code for Twitter, so feel free to <a href="https://github.com/andrewcbancroft/SocialSwift">download the full project over at GitHub</a>!</p>
+<p>As you can see, integrating social media sharing capability into your app has never been easier. Now, in this guide, I didn't explicitly go over how to create posts for Twitter, but it's as simple as switching <code>SLServiceTypeFacebook</code> to <code>SLServiceTypeTwitter</code>. The example I've provided with this guide does include code for Twitter, so feel free to <a href="https://github.com/andrewcbancroft/SocialSwift">download the full project over at GitHub</a>!</p>
 
 <p><a name="share" class="jump-target"></a></p>
 

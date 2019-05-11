@@ -15,28 +15,7 @@ tags:
   - IIS
 
 ---
-I spent waaaaay way way way too long fighting this one, so I&#8217;m saving everything I found on the issue so that I never lose it.
-
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#setup">Setup</a>
-    </li>
-    <li>
-      <a href="#problem">Problem</a>
-    </li>
-    <li>
-      <a href="#solution">Solution (with original sources)</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
+I spent waaaaay way way way too long fighting this one, so I'm saving everything I found on the issue so that I never lose it.
 
 <a name="setup" class="jump-target"></a>
 
@@ -50,7 +29,7 @@ I spent waaaaay way way way too long fighting this one, so I&#8217;m saving ever
 ### Problem
 
   * Browsing the site locally continually prompts for my domain username and password.
-  * Credentials are never accepted / I&#8217;m never authenticated.
+  * Credentials are never accepted / I'm never authenticated.
   * Cancelling the login prompt ultimately responds with 401 Unauthorized.
 
 When accessing the site with Fiddler, IIS simply responds with 401 Unauthorized.

@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Converting Complex Objective-C Macros to Swift Functions" />
-<meta property="og:description" content="The question of how to convert #define macros from Objective-C to Swift is explained fairly simply in the Apple developer documentation on the subject. For simple macros, it&#8217;s a matter of rewriting them as global constants. In fact, if you&#8217;re using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the alternative to Objective-C macros a while back." />
+<meta property="og:description" content="The question of how to convert #define macros from Objective-C to Swift is explained fairly simply in the Apple developer documentation on the subject. For simple macros, it's a matter of rewriting them as global constants. In fact, if you're using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the alternative to Objective-C macros a while back." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/01/29/converting-complex-objective-c-macros-swift-functions/" />
 <meta property="article:published_time" content="2015-01-29T13:00:51&#43;00:00"/>
@@ -33,7 +33,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Converting Complex Objective-C Macros to Swift Functions"/>
-<meta name="twitter:description" content="The question of how to convert #define macros from Objective-C to Swift is explained fairly simply in the Apple developer documentation on the subject. For simple macros, it&#8217;s a matter of rewriting them as global constants. In fact, if you&#8217;re using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the alternative to Objective-C macros a while back."/>
+<meta name="twitter:description" content="The question of how to convert #define macros from Objective-C to Swift is explained fairly simply in the Apple developer documentation on the subject. For simple macros, it's a matter of rewriting them as global constants. In fact, if you're using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the alternative to Objective-C macros a while back."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -164,7 +164,7 @@ MathJax.Hub.Config({
 
     
 
-<p>The question of how to convert <code>#define</code> macros from Objective-C to Swift is explained fairly simply in the <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-XID_20">Apple developer documentation on the subject</a>. For <em>simple</em> macros, it&#8217;s a matter of rewriting them as global constants. In fact, if you&#8217;re using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the <a href="http://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/">alternative to Objective-C macros</a> a while back.</p>
+<p>The question of how to convert <code>#define</code> macros from Objective-C to Swift is explained fairly simply in the <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-XID_20">Apple developer documentation on the subject</a>. For <em>simple</em> macros, it's a matter of rewriting them as global constants. In fact, if you're using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the <a href="http://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/">alternative to Objective-C macros</a> a while back.</p>
 
 <p>Where we run into trouble is when we need to port <em>complex</em> Objective-C macros to Swift. According to the <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-XID_20">same documentation from Apple</a>,</p>
 
@@ -202,7 +202,7 @@ MathJax.Hub.Config({
 
 <p>An example situation that came to me on Twitter took the form of converting a macro that was a little more complicated than the simple example just presented. The input to the complex macro was a color, represented as a hexadecimal value, along with an alpha, represented as a float. The output? A <code>UIColor</code> instance based on some bitwise manipulations to that hex value.</p>
 
-<p>I&#8217;ve created a GitHub example if you&#8217;d like to play around with everything. The relevant code is reproduced below&#8230;</p>
+<p>I've created a GitHub example if you'd like to play around with everything. The relevant code is reproduced below&#8230;</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -237,12 +237,12 @@ alpha:alphaValue]
     return UIColor(red: red, green: green, blue: blue, alpha: alpha)
 }</pre>
 
-<p>The main thing to keep in mind is that the output of the macro/function is the focus. The internals could change to better-adapt to Swift&#8217;s features if you desire. If the macro was ugly inside, make it nice in Swift!</p>
+<p>The main thing to keep in mind is that the output of the macro/function is the focus. The internals could change to better-adapt to Swift's features if you desire. If the macro was ugly inside, make it nice in Swift!</p>
 
 <h3 id="where-should-the-function-go">Where should the function go?</h3>
 
 <ul>
-<li>For organization&#8217;s sake, you could create a new .swift file and place the function inside it at the global level. This would provide the most convenient transition for your Objective-C to Swift conversion, because <code>#defines</code> were available wherever you imported the Objective-C header file.</li>
+<li>For organization's sake, you could create a new .swift file and place the function inside it at the global level. This would provide the most convenient transition for your Objective-C to Swift conversion, because <code>#defines</code> were available wherever you imported the Objective-C header file.</li>
 <li>Alternatively, you could encapsulate the function in a class/struct/enum.</li>
 </ul>
 

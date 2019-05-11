@@ -14,60 +14,23 @@ tags:
   - Swift
 
 ---
-In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&#8217;ll be unable to take advantage of Core Data&#8217;s latest &#8220;stack creation&#8221; class called `NSPersistentContainer`. So what can you do?
+In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you'll be unable to take advantage of Core Data's latest &#8220;stack creation&#8221; class called `NSPersistentContainer`. So what can you do?
 
-While `NSPersistentContainer` _does_ aim to simplify the stack creation process, at the end of the day, it&#8217;s not terrible to have to mess with some of this Core Data plumbing.
+While `NSPersistentContainer` _does_ aim to simplify the stack creation process, at the end of the day, it's not terrible to have to mess with some of this Core Data plumbing.
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#end-goal">End goal of creating the Core Data stack</a>
-    </li>
-    <li>
-      <a href="#3-steps">3 steps to creating the Core Data stack</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#managed-object-model">Initialize an instance of NSManagedObjectModel</a>
-      </li>
-      <li>
-        <a href="#persistent-store-coordinator">Initialize and configure an instance of NSPersistentStoreCoordinator with the NSManagedObjectModel instance and an NSPersistentStoreType</a>
-      </li>
-      <li>
-        <a href="#managed-object-context">Initialize an instance of NSManagedObjectcontext and assign it the NSPersistentStoreCoordinator instance</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#code-example">Putting it all together &#8211; creating the Core Data stack in code</a>
-    </li>
-    <li>
-      <a href="#related">You might also enjoy&#8230;</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-    <li>
-      <a href="#course">Learning Core Data? Watch my course, Core Data Fundamentals with Swift!</a>
-    </li>
-  </ul>
-</div>
+
 
 <a name="end-goal" class="jump-target"></a>
 
 # End goal of creating the Core Data stack
 
-The end goal of Creating the Core Data stack is to get an instance of `NSManagedObjectContext`. That&#8217;s it.
+The end goal of Creating the Core Data stack is to get an instance of `NSManagedObjectContext`. That's it.
 
-Most apps that rely on Core Data will end up making fetch requests to obtain data, or wire up other classes like `NSFetchedResultsController`. To make these things work, you&#8217;ve got to provide an instance of `NSManagedObjectContext`.
+Most apps that rely on Core Data will end up making fetch requests to obtain data, or wire up other classes like `NSFetchedResultsController`. To make these things work, you've got to provide an instance of `NSManagedObjectContext`.
 
 `NSManagedObjectContext` is sort of that central gear in the whole system that makes the other gears turn.
 
-So. Bottom line: Once you have an instance of `NSManagedObjectContext`, you&#8217;re golden. That&#8217;s what creating the Core Data stack gives you in the end.
+So. Bottom line: Once you have an instance of `NSManagedObjectContext`, you're golden. That's what creating the Core Data stack gives you in the end.
 
 <a name="3-steps" class="jump-target"></a>
 
@@ -79,7 +42,7 @@ The Core Data stack can be created in about 3 steps:
 
 ## 1) Initialize an instance of NSManagedObjectModel
 
-This corresponds to your .xcdatamodeld file. You&#8217;ll want to glance over to the project navigator on the left and locate the .xcdatamodeld file to record its name for this step.
+This corresponds to your .xcdatamodeld file. You'll want to glance over to the project navigator on the left and locate the .xcdatamodeld file to record its name for this step.
 
 <pre class="lang:swift decode:true " title="Initialize NSManagedObjectModel" >// Initialize NSManagedObjectModel
 let modelURL = Bundle.main.url(forResource: "NameOfDataModel", withExtension: "momd")
@@ -115,7 +78,7 @@ context.persistentStoreCoordinator = psc</pre>
 
 <a name="code-example" class="jump-target"></a>
 
-# Putting it all together &#8211; creating the Core Data stack in code
+# Putting it all together – creating the Core Data stack in code
 
 When I create the Core Data stack, I like to encapsulate the code in a stand-alone function that returns an instance of `NSManagedObjectContext`.
 
@@ -144,11 +107,11 @@ Here are all three steps put together:
     return context
 }</pre>
 
-Once you&#8217;ve got a function like `createMainContext()`, you&#8217;ll be able to call it to obtain a fully-configured `NSManagedObjectContext` instance.
+Once you've got a function like `createMainContext()`, you'll be able to call it to obtain a fully-configured `NSManagedObjectContext` instance.
 
 I _highly_ recommend you avoid calling it inside any of your view controllers. Instead, my recommendation is to call it to obtain your `NSManagedObjectContext` instance inside of the `AppDelegate's` `application(_:didFinishLaunchingWithOptions:)` function. From there, you can pass it _to_ your first view controller, and from that first view controller on to _other_ view controllers that need it through `prepare(for segue:sender:)`.
 
-For more on this &#8220;dependency injection&#8221; strategy, or if you&#8217;re more of a visual learner, check out my Pluralsight course, [Core Data Fundamentals with Swift][1]!  
+For more on this &#8220;dependency injection&#8221; strategy, or if you're more of a visual learner, check out my Pluralsight course, [Core Data Fundamentals with Swift][1]!  
 <a name="course" class="jump-target"></a>
 
 <div class="resources">

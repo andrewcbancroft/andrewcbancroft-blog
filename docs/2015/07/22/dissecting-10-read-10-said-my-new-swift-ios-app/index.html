@@ -25,9 +25,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Dissecting 10 Read 10 Said – My New Swift iOS App" />
-<meta property="og:description" content="I&#8217;m very excited to announce that my new app, 10 Read 10 Said, is now available for iOS and Android!
+<meta property="og:description" content="I'm very excited to announce that my new app, 10 Read 10 Said, is now available for iOS and Android!
 While the goal of the app is to help you implement the &#8220;10 Read 10 Said&#8221; strategy for memorizing Bible verses, my goal in this article is to dissect the app, and share with you how some of the major features were implemented.
-As it turns out, most of the major features of the app are things that I&#8217;ve already written about over the past year of producing Swift content!" />
+As it turns out, most of the major features of the app are things that I've already written about over the past year of producing Swift content!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/07/22/dissecting-10-read-10-said-my-new-swift-ios-app/" />
 <meta property="article:published_time" content="2015-07-23T03:57:33&#43;00:00"/>
@@ -35,9 +35,9 @@ As it turns out, most of the major features of the app are things that I&#8217;v
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Dissecting 10 Read 10 Said – My New Swift iOS App"/>
-<meta name="twitter:description" content="I&#8217;m very excited to announce that my new app, 10 Read 10 Said, is now available for iOS and Android!
+<meta name="twitter:description" content="I'm very excited to announce that my new app, 10 Read 10 Said, is now available for iOS and Android!
 While the goal of the app is to help you implement the &#8220;10 Read 10 Said&#8221; strategy for memorizing Bible verses, my goal in this article is to dissect the app, and share with you how some of the major features were implemented.
-As it turns out, most of the major features of the app are things that I&#8217;ve already written about over the past year of producing Swift content!"/>
+As it turns out, most of the major features of the app are things that I've already written about over the past year of producing Swift content!"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -168,11 +168,11 @@ MathJax.Hub.Config({
 
     
 
-<p>I&#8217;m very excited to announce that my new app, 10 Read 10 Said, is now available for <a href="https://itunes.apple.com/us/app/10-read-10-said/id1018662429?mt=8" title="10 Read 10 Said iOS App Store">iOS</a> and <a href="https://play.google.com/store/apps/details?id=com.gibcroft.tenreadtensaid" title="10 Read 10 Said Google Play Store">Android</a>!</p>
+<p>I'm very excited to announce that my new app, 10 Read 10 Said, is now available for <a href="https://itunes.apple.com/us/app/10-read-10-said/id1018662429?mt=8" title="10 Read 10 Said iOS App Store">iOS</a> and <a href="https://play.google.com/store/apps/details?id=com.gibcroft.tenreadtensaid" title="10 Read 10 Said Google Play Store">Android</a>!</p>
 
 <p>While the goal of the app is to help you implement the <a href="http://10read10said.andrewcbancroft.com/" title="10 Read 10 Said Strategy">&#8220;10 Read 10 Said&#8221; strategy for memorizing Bible verses</a>, my goal in this <em>article</em> is to dissect the app, and share with you how some of the major features were implemented.</p>
 
-<p>As it turns out, <em>most</em> of the major features of the app are things that I&#8217;ve already written about over the <a href="http://www.andrewcbancroft.com/category/software-development/ios-mac/swift/" title="Swift Content at andrewcbancroft.com">past year of producing Swift content</a>! The approach I&#8217;ll take, then, is to walk through each screen and point out which articles I&#8217;ve written might pertain to the particular feature implementations that are visible from that screen.</p>
+<p>As it turns out, <em>most</em> of the major features of the app are things that I've already written about over the <a href="http://www.andrewcbancroft.com/category/software-development/ios-mac/swift/" title="Swift Content at andrewcbancroft.com">past year of producing Swift content</a>! The approach I'll take, then, is to walk through each screen and point out which articles I've written might pertain to the particular feature implementations that are visible from that screen.</p>
 
 <p>I hope this tour satisfies the curiosity of many like myself who ask, &#8220;I wonder how they did that!&#8221;</p>
 
@@ -233,7 +233,7 @@ MathJax.Hub.Config({
 
 <h3 id="app-demo">App Demo</h3>
 
-<p>To demonstrate the major functionality of the app, I&#8217;ve created a short (50 second) YouTube video. Take a look, and then I&#8217;ll break down each screen:</p>
+<p>To demonstrate the major functionality of the app, I've created a short (50 second) YouTube video. Take a look, and then I'll break down each screen:</p>
 
 <p><a name="verse-list" class="jump-target"></a></p>
 
@@ -247,13 +247,13 @@ MathJax.Hub.Config({
 
 <p>To begin, the Verse List scene has been embedded in a <code>UINavigationController</code>. This caused me to have to make a few changes in <code>AppDelegate</code> to properly dig in to access the verse list controller and set some properties on it.</p>
 
-<p>I&#8217;ve covered the details of how to &#8220;unpack&#8221; a <code>UINavigationController</code> and access its first <em>child</em> view controller in my article titled <a href="http://www.andrewcbancroft.com/2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/">&#8220;Access Sub-Controllers from a UINavigationController in Swift&#8221;</a>.</p>
+<p>I've covered the details of how to &#8220;unpack&#8221; a <code>UINavigationController</code> and access its first <em>child</em> view controller in my article titled <a href="http://www.andrewcbancroft.com/2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/">&#8220;Access Sub-Controllers from a UINavigationController in Swift&#8221;</a>.</p>
 
 <p><a name="table-view" class="jump-target"></a></p>
 
 <h4 id="table-view">Table View</h4>
 
-<p>The next most obvious thing to notice about the verse list is that it&#8217;s been implemented with a <code>UITableView</code>. Additionally, each cell is a &#8220;custom&#8221; cell, rather than one of the default cell styles that Xcode gives you out of the box. I&#8217;ve written an article or three on these:</p>
+<p>The next most obvious thing to notice about the verse list is that it's been implemented with a <code>UITableView</code>. Additionally, each cell is a &#8220;custom&#8221; cell, rather than one of the default cell styles that Xcode gives you out of the box. I've written an article or three on these:</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -278,7 +278,7 @@ MathJax.Hub.Config({
 
 <h4 id="data-soure">Data Soure</h4>
 
-<p>The verse list&#8217;s data source is an <code>NSFetchedResultsController</code>. This, of course, implies that my underlying data framework for the app is Core Data. Here are some of the articles I&#8217;ve written on these subjects:</p>
+<p>The verse list's data source is an <code>NSFetchedResultsController</code>. This, of course, implies that my underlying data framework for the app is Core Data. Here are some of the articles I've written on these subjects:</p>
 
 <p><a name="core-data" class="jump-target"></a></p>
 
@@ -334,13 +334,13 @@ MathJax.Hub.Config({
 
 <p>Adding a verse and synchronizing things to the table view (and the persistent data store) involves all-things Core Data and <code>NSFetchedResultsController</code>. Using the combination of these two made things super easy to keep up-to-date in the UI.</p>
 
-<p>When you press &#8216;Save&#8217;, your verse gets sent to the managed object context for the app. Once it&#8217;s saved using the context, the verse list gets automatically updated using its <code>NSFetchedResultsController</code> data source. I really liked the results!</p>
+<p>When you press &#8216;Save', your verse gets sent to the managed object context for the app. Once it's saved using the context, the verse list gets automatically updated using its <code>NSFetchedResultsController</code> data source. I really liked the results!</p>
 
 <p><a name="memorize" class="jump-target"></a></p>
 
 <h3 id="memorize">Memorize</h3>
 
-<p>The memorization screen brings into play a few UI elements that I&#8217;ve experimented with and written on in the past. First, let&#8217;s take a look at these two screen layouts to have the visual before us:</p>
+<p>The memorization screen brings into play a few UI elements that I've experimented with and written on in the past. First, let's take a look at these two screen layouts to have the visual before us:</p>
 
 <p><a name="read-it-said-it" class="jump-target"></a></p>
 
@@ -375,7 +375,7 @@ MathJax.Hub.Config({
 
 <h3 id="wrapping-up">Wrapping up</h3>
 
-<p>While this isn&#8217;t the first app I&#8217;ve worked on and published to the App Store, it <em>is</em> my first <em>personal</em> project idea that&#8217;s out there. I had a lot of fun building it as a utility for myself in my own Scripture memorization efforts. My hope is that the tool (and more importantly, <a href="http://10read10said.andrewcbancroft.com/">the strategy</a>) is helpful to others as well!</p>
+<p>While this isn't the first app I've worked on and published to the App Store, it <em>is</em> my first <em>personal</em> project idea that's out there. I had a lot of fun building it as a utility for myself in my own Scripture memorization efforts. My hope is that the tool (and more importantly, <a href="http://10read10said.andrewcbancroft.com/">the strategy</a>) is helpful to others as well!</p>
 
 <p>My goal in this article was to give you a &#8220;behind the scenes&#8221; look at 10 Read 10 Said. I hope your curiosity has been satisfied by some of these inside looks into the app!</p>
 

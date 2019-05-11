@@ -16,7 +16,7 @@ tags:
   - Swift
 
 ---
-Working with `NSDate`, `NSDateFormatter`, and `NSDateComponents` can be a little convoluted, so I&#8217;ve created myself a cheat sheet that will be updated as I discover new tips and tricks in this realm.
+Working with `NSDate`, `NSDateFormatter`, and `NSDateComponents` can be a little convoluted, so I've created myself a cheat sheet that will be updated as I discover new tips and tricks in this realm.
 
 The new cheat sheet can be found over at GitHub in the form of an Xcode Playground:
 
@@ -34,14 +34,14 @@ The new cheat sheet can be found over at GitHub in the form of an Xcode Playgrou
 
 Topics that are included in the Playground are as follows:
 
-  * Getting today&#8217;s date
+  * Getting today's date
   * Converting `NSDate` to `String`
   * Converting `String` to `NSDate`
   * Getting components of an `NSDate`
   * Setting components of an `NSDate`
   * Creating new `NSDate` instances from `NSDateComponent` instances
 
-The best way to view this cheat sheet is by <a href="https://github.com/andrewcbancroft/SwiftDatesCheatSheet" target="_blank">downloading the playground from GitHub</a>, but here&#8217;s a straight copy-paste from the repo in case you just want to copy and paste it into a playground of your own from here:
+The best way to view this cheat sheet is by <a href="https://github.com/andrewcbancroft/SwiftDatesCheatSheet" target="_blank">downloading the playground from GitHub</a>, but here's a straight copy-paste from the repo in case you just want to copy and paste it into a playground of your own from here:
 
 <pre class="lang:swift decode:true " title="SwiftDateCheatSheet.playground" >import UIKit
 

@@ -14,33 +14,16 @@ tags:
   - Swift
 
 ---
-The Parse migration process has begun &#8211; I&#8217;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
+The Parse migration process has begun – I've got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
 
 The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#problem-overview">Problem Overview</a>
-    </li>
-    <li>
-      <a href="#solution">Solution</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="problem-overview" class="jump-target"></a>
 
 # Problem Overview
 
-Any time I did a query in my Parse Cloud Code, the query would fail. Every time I&#8217;d make a request to my Cloud Code function, I&#8217;d get &#8220;500 Internal Server Error&#8221; as my response.
+Any time I did a query in my Parse Cloud Code, the query would fail. Every time I'd make a request to my Cloud Code function, I'd get &#8220;500 Internal Server Error&#8221; as my response.
 
 I finally wised up and adjusted my query so that I could see the specific &#8220;internal server error&#8221; that was occurring:
 
@@ -64,15 +47,15 @@ When the details came back as to what was failing, the JSON object in the respon
   }
 }</pre>
 
-I got to searching and found an [issue on GitHub][1] that pointed me in the right direction, but to spare you reading through the entire thread, here&#8217;s the gist:
+I got to searching and found an [issue on GitHub][1] that pointed me in the right direction, but to spare you reading through the entire thread, here's the gist:
 
 <a name="solution" class="jump-target"></a>
 
 # Solution
 
-I happened to be using a version of the Parse Server Example that was missing a critical line of configuration in index.js. When you configure your Parse Server by calling `new ParseServer`, you need to make sure that there&#8217;s a `serverURL` property that&#8217;s set to the URL of your Parse Server&#8217;s API endpoint.
+I happened to be using a version of the Parse Server Example that was missing a critical line of configuration in index.js. When you configure your Parse Server by calling `new ParseServer`, you need to make sure that there's a `serverURL` property that's set to the URL of your Parse Server's API endpoint.
 
-My config didn&#8217;t have this, but the moment I added it, my Cloud Code queries worked perfectly as they did before. Here&#8217;s a look at my final index.js file with the relevant line highlighted:
+My config didn't have this, but the moment I added it, my Cloud Code queries worked perfectly as they did before. Here's a look at my final index.js file with the relevant line highlighted:
 
 <pre class="lang:js mark:18 decode:true " title="index.js" >// Example express application adding the parse-server module to expose Parse
 // compatible API routes.

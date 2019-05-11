@@ -15,7 +15,7 @@ tags:
   - Swift
 
 ---
-The question of how to convert `#define` macros from Objective-C to Swift is explained fairly simply in the [Apple developer documentation on the subject][1]. For _simple_ macros, it&#8217;s a matter of rewriting them as global constants. In fact, if you&#8217;re using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the [alternative to Objective-C macros][2] a while back.
+The question of how to convert `#define` macros from Objective-C to Swift is explained fairly simply in the [Apple developer documentation on the subject][1]. For _simple_ macros, it's a matter of rewriting them as global constants. In fact, if you're using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the [alternative to Objective-C macros][2] a while back.
 
 Where we run into trouble is when we need to port _complex_ Objective-C macros to Swift. According to the [same documentation from Apple][1],
 
@@ -49,7 +49,7 @@ One thing we could do is write a function that produces the same thing:
 
 An example situation that came to me on Twitter took the form of converting a macro that was a little more complicated than the simple example just presented. The input to the complex macro was a color, represented as a hexadecimal value, along with an alpha, represented as a float. The output? A `UIColor` instance based on some bitwise manipulations to that hex value.
 
-I&#8217;ve created a GitHub example if you&#8217;d like to play around with everything. The relevant code is reproduced below&#8230;
+I've created a GitHub example if you'd like to play around with everything. The relevant code is reproduced below&#8230;
 
 <div class="resources">
   <div class="resources-header">
@@ -83,11 +83,11 @@ Rewriting it as a Swift function:
     return UIColor(red: red, green: green, blue: blue, alpha: alpha)
 }</pre>
 
-The main thing to keep in mind is that the output of the macro/function is the focus. The internals could change to better-adapt to Swift&#8217;s features if you desire. If the macro was ugly inside, make it nice in Swift!
+The main thing to keep in mind is that the output of the macro/function is the focus. The internals could change to better-adapt to Swift's features if you desire. If the macro was ugly inside, make it nice in Swift!
 
 ### Where should the function go?
 
-  * For organization&#8217;s sake, you could create a new .swift file and place the function inside it at the global level. This would provide the most convenient transition for your Objective-C to Swift conversion, because `#defines` were available wherever you imported the Objective-C header file.
+  * For organization's sake, you could create a new .swift file and place the function inside it at the global level. This would provide the most convenient transition for your Objective-C to Swift conversion, because `#defines` were available wherever you imported the Objective-C header file.
   * Alternatively, you could encapsulate the function in a class/struct/enum.
 
 ### Wrapping up

@@ -19,28 +19,28 @@ tags:
   - Unit Test
 
 ---
-Without 100% support for a mocking framework like <a title="OCMock" href="http://ocmock.org/" target="_blank">OCMock</a>, I found myself needing to get creative when building&nbsp;mock objects and method stubs in Swift unit tests. &nbsp;The great thing about testing is that you&#8217;re&#8230;well&#8230;&nbsp;_testing things out_ to see if they&#8217;ll work, and I found a solution that I&#8217;m pretty happy&nbsp;with for now. &nbsp;I&#8217;m open to better ways, so leave a comment if you&#8217;ve had good results using a different design!
+Without 100% support for a mocking framework like <a title="OCMock" href="http://ocmock.org/" target="_blank">OCMock</a>, I found myself needing to get creative when building&nbsp;mock objects and method stubs in Swift unit tests. &nbsp;The great thing about testing is that you're&#8230;well&#8230;&nbsp;_testing things out_ to see if they'll work, and I found a solution that I'm pretty happy&nbsp;with for now. &nbsp;I'm open to better ways, so leave a comment if you've had good results using a different design!
 
 The process&nbsp;is essentially this (example to follow):
 
-  1. Ensure that the&nbsp;class that you would like to test is designed so that you can substitute your mock for the real one that&#8217;s used in your class&#8217; implementation
+  1. Ensure that the&nbsp;class that you would like to test is designed so that you can substitute your mock for the real one that's used in your class' implementation
   2. Create an <span class="lang:swift decode:true  crayon-inline ">XCTestCase</span>&nbsp;&nbsp;class with a test function in your unit test project
   3. Within the function body create&nbsp;a _nested_ class
-  4. Make the nested class inherit from the real object you&#8217;re trying to mock / create a method stub for
+  4. Make the nested class inherit from the real object you're trying to mock / create a method stub for
   5. You can give the nested class a name such as Mock[ObjectName]
-  6. Configure the mock object however you need by setting its properties or overriding its function implementations with stubbed implementations &#8211; no need to override every function&#8230; only the one(s) that your class calls during the test at hand
-  7. Instantiate the class you&#8217;re testing and pass in an instance of the&nbsp;mock object you just nested in the test function to your&nbsp;class somehow (either through its initializer, by setting a property on the class, or by passing it into the method under test via parameter &#8212; however you intended to &#8216;inject&#8217; the mock from step 1 is what you should do)
+  6. Configure the mock object however you need by setting its properties or overriding its function implementations with stubbed implementations – no need to override every function&#8230; only the one(s) that your class calls during the test at hand
+  7. Instantiate the class you're testing and pass in an instance of the&nbsp;mock object you just nested in the test function to your&nbsp;class somehow (either through its initializer, by setting a property on the class, or by passing it into the method under test via parameter &#8212; however you intended to &#8216;inject' the mock from step 1 is what you should do)
   8. XCTAssert&#8230;
 
-Let&#8217;s see those 8 steps in action for those of us who are more visually inclined.
+Let's see those 8 steps in action for those of us who are more visually inclined.
 
-EDIT: &nbsp;July 22, 2014 &#8211; I&#8217;ve added a simple XCode Project to GitHub for those interested in seeing the setup directly in XCode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank">https://github.com/andrewcbancroft/MocksAndStubs</a>
+EDIT: &nbsp;July 22, 2014 – I've added a simple XCode Project to GitHub for those interested in seeing the setup directly in XCode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank">https://github.com/andrewcbancroft/MocksAndStubs</a>
 
-The scenario that I&#8217;d like to use a mock class in is this: &nbsp;I have a CoreData application and I&#8217;d like to be able to mock the <span class="lang:swift decode:true  crayon-inline ">NSManagedObjectContext</span>&nbsp;&nbsp;so that instead of making actual database fetch requests, I can just provide stubs of various sorts with the kinds of responses I&#8217;d expect from the real database calls to ensure my class will do the right thing based on predictable results. &nbsp;To do this I begin at step 1&#8230;
+The scenario that I'd like to use a mock class in is this: &nbsp;I have a CoreData application and I'd like to be able to mock the <span class="lang:swift decode:true  crayon-inline ">NSManagedObjectContext</span>&nbsp;&nbsp;so that instead of making actual database fetch requests, I can just provide stubs of various sorts with the kinds of responses I'd expect from the real database calls to ensure my class will do the right thing based on predictable results. &nbsp;To do this I begin at step 1&#8230;
 
-#### 1. &nbsp;Ensure that the&nbsp;class that you would like to test is designed so that you can substitute your mock for the real one that&#8217;s used in your class&#8217; implementation
+#### 1. &nbsp;Ensure that the&nbsp;class that you would like to test is designed so that you can substitute your mock for the real one that's used in your class' implementation
 
-In the&nbsp;example class below, I&nbsp;intend to provide the <span class="lang:swift decode:true  crayon-inline ">NSManagedObjectContext</span>&nbsp;&nbsp;dependency through&nbsp;the class&#8217; initializer which will set a property that is used by my class&#8217; methods later on, but you could easily use&nbsp;some other way of performing &#8220;dependency injection&#8221;. &nbsp;The initializer strategy just makes it super clear in _my_ mind what the class&#8217; dependencies are, so that&#8217;s what I&#8217;m going to do here. &nbsp;Have a look:
+In the&nbsp;example class below, I&nbsp;intend to provide the <span class="lang:swift decode:true  crayon-inline ">NSManagedObjectContext</span>&nbsp;&nbsp;dependency through&nbsp;the class' initializer which will set a property that is used by my class' methods later on, but you could easily use&nbsp;some other way of performing &#8220;dependency injection&#8221;. &nbsp;The initializer strategy just makes it super clear in _my_ mind what the class' dependencies are, so that's what I'm going to do here. &nbsp;Have a look:
 
 <pre class="lang:swift mark:5-9 decode:true">import Foundation
 import CoreData
@@ -53,7 +53,7 @@ class MyClass {
     }
 }</pre>
 
-Now, let&#8217;s say that my example class has a member function called&nbsp;<span class="lang:swift decode:true  crayon-inline">databaseHasRecordsForSomeEntity</span>&nbsp; that returns a <span class="lang:swift decode:true  crayon-inline ">Bool</span>&nbsp;&nbsp;value of **true** if the resulting array of a fetch request contains objects, and a <span class="lang:swift decode:true  crayon-inline ">Bool</span>&nbsp;&nbsp;value of **false** if the result array of a fetch request is empty. &nbsp;The completed class looks like this:
+Now, let's say that my example class has a member function called&nbsp;<span class="lang:swift decode:true  crayon-inline">databaseHasRecordsForSomeEntity</span>&nbsp; that returns a <span class="lang:swift decode:true  crayon-inline ">Bool</span>&nbsp;&nbsp;value of **true** if the resulting array of a fetch request contains objects, and a <span class="lang:swift decode:true  crayon-inline ">Bool</span>&nbsp;&nbsp;value of **false** if the result array of a fetch request is empty. &nbsp;The completed class looks like this:
 
 <pre class="lang:swift mark:12-16 decode:true">import Foundation
 import CoreData
@@ -83,7 +83,7 @@ Next comes the way to make the mock. &nbsp;Read steps 3-5 and then look below fo
 
 #### 3. &nbsp;Within the function body create&nbsp;a&nbsp;_nested_&nbsp;class
 
-#### 4. &nbsp;Make the nested class inherit from the real object you&#8217;re trying to mock / create a method stub for
+#### 4. &nbsp;Make the nested class inherit from the real object you're trying to mock / create a method stub for
 
 #### 5. &nbsp;You can give the nested class a name such as Mock[ObjectName]
 
@@ -111,9 +111,9 @@ class MyClassTests: XCTestCase {
     }
 }</pre>
 
-#### &nbsp;6. &nbsp;Configure the mock object however you need by setting its properties or overriding its function implementations with stubbed implementations &#8211; no need to override every function&#8230; only the one(s) that your class calls during the test at hand
+#### &nbsp;6. &nbsp;Configure the mock object however you need by setting its properties or overriding its function implementations with stubbed implementations – no need to override every function&#8230; only the one(s) that your class calls during the test at hand
 
-For my example, I&#8217;m going to stub out the <span class="lang:swift decode:true  crayon-inline">executeFetchRequest</span>&nbsp;&nbsp;method so that it returns an array with one object in it. &nbsp;This is really the part where you have to determine what you&#8217;re testing and what you expect the stubbed results to be. &nbsp;Whatever you decide, the way to stub a method is simply to override it in the mock you&#8217;re implementing. &nbsp;Here&#8217;s how I implemented the&nbsp;<span class="lang:swift decode:true  crayon-inline ">executeFetchRequest</span>&nbsp;&nbsp;stub for my example:
+For my example, I'm going to stub out the <span class="lang:swift decode:true  crayon-inline">executeFetchRequest</span>&nbsp;&nbsp;method so that it returns an array with one object in it. &nbsp;This is really the part where you have to determine what you're testing and what you expect the stubbed results to be. &nbsp;Whatever you decide, the way to stub a method is simply to override it in the mock you're implementing. &nbsp;Here's how I implemented the&nbsp;<span class="lang:swift decode:true  crayon-inline ">executeFetchRequest</span>&nbsp;&nbsp;stub for my example:
 
 <pre class="lang:swift mark:4-5 decode:true">// Yay for verbose test names!  :]
     func testDatabaseHasRecordsForSomeEntityReturnsTrueWhenFetchRequestReturnsNonEmptyArray() {
@@ -124,13 +124,13 @@ For my example, I&#8217;m going to stub out the <span class="lang:swift decode:t
         }
     }</pre>
 
-We&#8217;re ready to perform the test and assert the results. &nbsp;Read steps 7-8 and take a look at the code example below step 8:
+We're ready to perform the test and assert the results. &nbsp;Read steps 7-8 and take a look at the code example below step 8:
 
-#### 7. &nbsp;Instantiate the class you&#8217;re testing and pass in an instance of the&nbsp;mock object you just nested in the test function to your&nbsp;class somehow (either through its initializer, by setting a property on the class, or by passing it into the method under test via parameter &#8212; however you intended to &#8216;inject&#8217; the mock from step 1 is what you should do)
+#### 7. &nbsp;Instantiate the class you're testing and pass in an instance of the&nbsp;mock object you just nested in the test function to your&nbsp;class somehow (either through its initializer, by setting a property on the class, or by passing it into the method under test via parameter &#8212; however you intended to &#8216;inject' the mock from step 1 is what you should do)
 
 #### 8. &nbsp;XCTAssert&#8230;
 
-From step 1, I intended to pass an NSManagedObjectContext instance to the initializer of MyClass, so that&#8217;s what I&#8217;ll do in my test. &nbsp;I&#8217;ll then perform the XCTAssert on the return value of my method under test:
+From step 1, I intended to pass an NSManagedObjectContext instance to the initializer of MyClass, so that's what I'll do in my test. &nbsp;I'll then perform the XCTAssert on the return value of my method under test:
 
 &nbsp;
 
@@ -156,7 +156,7 @@ From step 1, I intended to pass an NSManagedObjectContext instance to the initia
 
 Running the tests at this point should produce a passing test using the mock object in place of a real NSManagedObjectContext that calls a database!
 
-Now, if I wanted to test the &#8220;false&#8221; branch of my class&#8217; method, I could simply create another test method following the same steps, only this time, I&#8217;d provide a new implementation for the overridden <span class="lang:swift decode:true  crayon-inline ">executeFetchRequest</span>&nbsp;&nbsp;method that&#8217;s appropriate:
+Now, if I wanted to test the &#8220;false&#8221; branch of my class' method, I could simply create another test method following the same steps, only this time, I'd provide a new implementation for the overridden <span class="lang:swift decode:true  crayon-inline ">executeFetchRequest</span>&nbsp;&nbsp;method that's appropriate:
 
 <pre class="lang:default mark:4,17 decode:true">func testDatabaseHasRecordsForSomeEntityReturnsFalseWhenFetchRequestReturnsEMPTYArray() {
         class MockNSManagedObjectContext: NSManagedObjectContext {
@@ -177,16 +177,16 @@ Now, if I wanted to test the &#8220;false&#8221; branch of my class&#8217; metho
         XCTAssertTrue(returnValue == false, "The return value should be been false")
     }</pre>
 
-And that&#8217;s a wrap &#8211; happy mocking and stubbing in Swift!
+And that's a wrap – happy mocking and stubbing in Swift!
 
-EDIT: &nbsp;July 22, 2014 &#8211; I&#8217;ve added a simple XCode Project to GitHub for those interested in seeing the setup directly in XCode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank">https://github.com/andrewcbancroft/MocksAndStubs</a>
+EDIT: &nbsp;July 22, 2014 – I've added a simple XCode Project to GitHub for those interested in seeing the setup directly in XCode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank">https://github.com/andrewcbancroft/MocksAndStubs</a>
 
 <div class="related-posts">
   You might also enjoy</p> 
   
   <ul>
     <li>
-      <a href="http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/" title="Don’t Write Legacy Swift">Don&#8217;t Write Legacy Swift</a>
+      <a href="http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/" title="Don’t Write Legacy Swift">Don't Write Legacy Swift</a>
     </li>
     <li>
       <a href="http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/" title="Swift Access Control – Implications for Unit Testing">Swift Access Control – Implications for Unit Testing</a>

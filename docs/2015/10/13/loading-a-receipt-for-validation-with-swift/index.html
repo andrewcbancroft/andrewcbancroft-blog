@@ -26,10 +26,10 @@
 
 <meta property="og:title" content="Loading a Receipt for Validation with Swift" />
 <meta property="og:description" content="Updated on July 15, 2017 &#8211; Swift 3 
-I&#8217;m working through a progression of entries on the process of validating receipts with OpenSSL for iOS in Swift.
+I'm working through a progression of entries on the process of validating receipts with OpenSSL for iOS in Swift.
 Just want the code? Here you go!
 Resources    Swifty Local Receipt Validator   
-To-date, I&#8217;ve explained how to get OpenSSL into your project (the easy way), and I&#8217;ve walked through how to prepare to test receipt validation, including how to set everything up in the Apple Developer member center, and in iTunes Connect." />
+To-date, I've explained how to get OpenSSL into your project (the easy way), and I've walked through how to prepare to test receipt validation, including how to set everything up in the Apple Developer member center, and in iTunes Connect." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" />
 <meta property="article:published_time" content="2015-10-14T03:24:02&#43;00:00"/>
@@ -38,10 +38,10 @@ To-date, I&#8217;ve explained how to get OpenSSL into your project (the easy way
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Loading a Receipt for Validation with Swift"/>
 <meta name="twitter:description" content="Updated on July 15, 2017 &#8211; Swift 3 
-I&#8217;m working through a progression of entries on the process of validating receipts with OpenSSL for iOS in Swift.
+I'm working through a progression of entries on the process of validating receipts with OpenSSL for iOS in Swift.
 Just want the code? Here you go!
 Resources    Swifty Local Receipt Validator   
-To-date, I&#8217;ve explained how to get OpenSSL into your project (the easy way), and I&#8217;ve walked through how to prepare to test receipt validation, including how to set everything up in the Apple Developer member center, and in iTunes Connect."/>
+To-date, I've explained how to get OpenSSL into your project (the easy way), and I've walked through how to prepare to test receipt validation, including how to set everything up in the Apple Developer member center, and in iTunes Connect."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -174,7 +174,7 @@ MathJax.Hub.Config({
 
 <p><small>Updated on July 15, 2017 &#8211; Swift 3 </small></p>
 
-<p>I&#8217;m working through a progression of entries on the process of validating receipts with OpenSSL for iOS in Swift.</p>
+<p>I'm working through a progression of entries on the process of validating receipts with OpenSSL for iOS in Swift.</p>
 
 <p>Just want the code? Here you go!</p>
 
@@ -191,7 +191,7 @@ MathJax.Hub.Config({
   </ul>
 </div></p>
 
-<p>To-date, I&#8217;ve explained how to <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &amp; Swift the Easy Way">get OpenSSL into your project (the easy way)</a>, and I&#8217;ve walked through how to <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">prepare to test receipt validation</a>, including how to set everything up in the Apple Developer member center, and in iTunes Connect.</p>
+<p>To-date, I've explained how to <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &amp; Swift the Easy Way">get OpenSSL into your project (the easy way)</a>, and I've walked through how to <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">prepare to test receipt validation</a>, including how to set everything up in the Apple Developer member center, and in iTunes Connect.</p>
 
 <p>There are at least 5 steps to validate a receipt, as the <a href="https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html#//apple_ref/doc/uid/TP40010573-CH1-SW2">Receipt Validation Programming Guide</a> outlines:</p>
 
@@ -261,19 +261,19 @@ If the result does not match the hash in the receipt, validation fails.</p>
 
 <h3 id="validation-organization-strategy-overview">Validation organization strategy overview</h3>
 
-<p>To help keep my head wrapped around this process, I&#8217;ve developed a strategy that has kept me sane so far. It incorporates 3 components:</p>
+<p>To help keep my head wrapped around this process, I've developed a strategy that has kept me sane so far. It incorporates 3 components:</p>
 
 <p><a name="receipt-validator" class="jump-target"></a></p>
 
 <h4 id="1-8211-receiptvalidator">1 &#8211; ReceiptValidator</h4>
 
-<p>First, I&#8217;ve created a top-level Type called <code>ReceiptValidator</code>. My idea is to have a single method, <code>validateReceipt()</code> that will either run and succeed, or start propagating errors.</p>
+<p>First, I've created a top-level Type called <code>ReceiptValidator</code>. My idea is to have a single method, <code>validateReceipt()</code> that will either run and succeed, or start propagating errors.</p>
 
 <p><a name="separate-types" class="jump-target"></a></p>
 
 <h4 id="2-8211-map-validation-steps-to-separate-types">2 &#8211; Map validation steps to separate Types</h4>
 
-<p>Second, I&#8217;ve tried to take each of the steps involved in validating the receipt and create a simple Swift Type to encapsulate the logic that needs to happen in that step.</p>
+<p>Second, I've tried to take each of the steps involved in validating the receipt and create a simple Swift Type to encapsulate the logic that needs to happen in that step.</p>
 
 <p>So when step 1 says to &#8220;locate and load the receipt&#8221;, I created a struct called <code>ReceiptLoader</code> that has two methods: <code>receiptFound()</code> and <code>loadReceipt()</code>.</p>
 
@@ -283,15 +283,15 @@ If the result does not match the hash in the receipt, validation fails.</p>
 
 <h4 id="3-8211-throw-errors-when-a-validation-step-fails">3 &#8211; Throw errors when a validation step fails</h4>
 
-<p>Third, whenever some step along the way fails, I&#8217;m utilizing Swift&#8217;s error handling features. I&#8217;ve created an enum called <code>ReceiptValidationError</code> with various descriptive values. Whenever a validation error occurs, one of the values in the <code>ReceiptValidationError</code> enum is thrown.</p>
+<p>Third, whenever some step along the way fails, I'm utilizing Swift's error handling features. I've created an enum called <code>ReceiptValidationError</code> with various descriptive values. Whenever a validation error occurs, one of the values in the <code>ReceiptValidationError</code> enum is thrown.</p>
 
-<p>The enum&#8217;s definition is simple right now, but it will grow as time goes on with various other error conditions related to receipt validation (and why validation might fail):</p>
+<p>The enum's definition is simple right now, but it will grow as time goes on with various other error conditions related to receipt validation (and why validation might fail):</p>
 
 <pre class="lang:default decode:true " title="ReceiptValidationError Enum" >enum ReceiptValidationError : Error {
     case couldNotFindReceipt
 }</pre>
 
-<p>This enum simply implements the <code>Error</code> &#8220;marker&#8221; protocol, which allows its values to be used in Swift&#8217;s error-throwing system. For this blog entry, we&#8217;ll stick with simply throwing the value <code>couldNotFindReceipt</code> whenever a receipt can&#8217;t be found and needs to be re-requested from the App Store.</p>
+<p>This enum simply implements the <code>Error</code> &#8220;marker&#8221; protocol, which allows its values to be used in Swift's error-throwing system. For this blog entry, we'll stick with simply throwing the value <code>couldNotFindReceipt</code> whenever a receipt can't be found and needs to be re-requested from the App Store.</p>
 
 <p><a name="receipt-validator-implementation" class="jump-target"></a></p>
 
@@ -299,11 +299,11 @@ If the result does not match the hash in the receipt, validation fails.</p>
 
 <p><code>ReceiptValidator</code> is where everything for validating receipts launches for me at this point. Calling a single method, <code>validateReceipt()</code> will kick off the 5+ step process that Apple describes.</p>
 
-<p>The first thing that needs to happen is to load a receipt that&#8217;ll be validated. If a receipt is not found on the device, a new receipt needs to be requested from the App Store.</p>
+<p>The first thing that needs to happen is to load a receipt that'll be validated. If a receipt is not found on the device, a new receipt needs to be requested from the App Store.</p>
 
-<p>I mentioned <code>ReceiptLoader</code> in the overview. An implementation will follow, but we&#8217;ll let this instance do the locating and loading of the receipt.</p>
+<p>I mentioned <code>ReceiptLoader</code> in the overview. An implementation will follow, but we'll let this instance do the locating and loading of the receipt.</p>
 
-<p>With that architecture in mind, here&#8217;s what <code>ReceiptValidator</code> looks like right now:</p>
+<p>With that architecture in mind, here's what <code>ReceiptValidator</code> looks like right now:</p>
 
 <pre class="lang:swift decode:true " title="ReceiptValidator.swift" >enum ReceiptValidationResult {
     case success
@@ -325,17 +325,17 @@ struct ReceiptValidator {
     }
 }</pre>
 
-<p>So the validator simply lets the <code>ReceiptLoader</code> instance do it&#8217;s loading job. If it doesn&#8217;t return any data containing a receipt to work with, the validator will catch the error and return the <code>.error</code> <code>ReceiptValidationResult</code> case with the error cast to a <code>ReceiptValidationError</code> as an associated value.</p>
+<p>So the validator simply lets the <code>ReceiptLoader</code> instance do it's loading job. If it doesn't return any data containing a receipt to work with, the validator will catch the error and return the <code>.error</code> <code>ReceiptValidationResult</code> case with the error cast to a <code>ReceiptValidationError</code> as an associated value.</p>
 
-<p>The View Controller is what calls <code>validateReceipt()</code>, so it will be waiting to deal with the <code>ReceiptValidationResult</code> that&#8217;s returned by the <code>ReceiptValidator</code>.</p>
+<p>The View Controller is what calls <code>validateReceipt()</code>, so it will be waiting to deal with the <code>ReceiptValidationResult</code> that's returned by the <code>ReceiptValidator</code>.</p>
 
 <p><a name="receipt-loader-implementation" class="jump-target"></a></p>
 
 <h3 id="receiptloader-implementation">ReceiptLoader implementation</h3>
 
-<p>The <code>ReceiptLoader</code> has the sole responsibility of going to receipt storage location on a user&#8217;s device and attempting to discover the receipt and pull out the contents of that file in the form of a <code>Data</code> instance if it&#8217;s there.</p>
+<p>The <code>ReceiptLoader</code> has the sole responsibility of going to receipt storage location on a user's device and attempting to discover the receipt and pull out the contents of that file in the form of a <code>Data</code> instance if it's there.</p>
 
-<p>Here&#8217;s the implementation with explanation to follow:</p>
+<p>Here's the implementation with explanation to follow:</p>
 
 <pre class="lang:swift decode:true " title="ReceiptLoader.swift" >struct ReceiptLoader {
     let receiptUrl = Bundle.main.appStoreReceiptURL
@@ -414,13 +414,13 @@ struct ReceiptValidator {
 
 <p>When the app starts and the controller has loaded, it will prepare itself in a couple of ways:</p>
 
-<p>First, it will initialize a <code>ReceiptValidator</code> and an <code>SKReceiptRefreshRequest</code> (in case a receipt isn&#8217;t present on the device).</p>
+<p>First, it will initialize a <code>ReceiptValidator</code> and an <code>SKReceiptRefreshRequest</code> (in case a receipt isn't present on the device).</p>
 
-<p>Subtle but important, the <code>SKReceiptRefreshRequest</code> instance&#8217;s delegate is set to the view controller itself in <code>viewDidLoad()</code>.</p>
+<p>Subtle but important, the <code>SKReceiptRefreshRequest</code> instance's delegate is set to the view controller itself in <code>viewDidLoad()</code>.</p>
 
-<p>Control is then handed over to the <code>ReceiptValidator</code> instance to begin its multi-step process (of which we&#8217;ve got step 1 down up to this point).</p>
+<p>Control is then handed over to the <code>ReceiptValidator</code> instance to begin its multi-step process (of which we've got step 1 down up to this point).</p>
 
-<p>The View Controller acts as the main error handler for now. If a receipt couldn&#8217;t be found, signaled by the throwing of <code>ReceiptValidationError.couldNotFindReceipt</code> by the validator, the receipt refresh request is started.</p>
+<p>The View Controller acts as the main error handler for now. If a receipt couldn't be found, signaled by the throwing of <code>ReceiptValidationError.couldNotFindReceipt</code> by the validator, the receipt refresh request is started.</p>
 
 <p>The View Controller also acts as the <code>SKRequestDelegate</code>, and thus gets called back whenever the request finishes (or fails with an error).</p>
 
@@ -432,7 +432,7 @@ struct ReceiptValidator {
 
 <h3 id="upcoming-hurdles">Upcoming hurdles</h3>
 
-<p>That about wraps up locating and loading the receipt. The <em>real</em> challenges of using OpenSSL to extract the receipt, verify its authenticity, parse it, and more are still ahead. I&#8217;ll be sure to chronicle my journey as I jump those hurdles. Stay tuned!</p>
+<p>That about wraps up locating and loading the receipt. The <em>real</em> challenges of using OpenSSL to extract the receipt, verify its authenticity, parse it, and more are still ahead. I'll be sure to chronicle my journey as I jump those hurdles. Stay tuned!</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

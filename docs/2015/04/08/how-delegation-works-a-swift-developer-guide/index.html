@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="How Delegation Works – A Swift Developer’s Guide" />
-<meta property="og:description" content="Updated on October 11, 2016 &#8211; Swift 3.0
-Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation is in &#8220;What is Delegation &#8211; A Swift Developer&#8217;s Guide&#8221;. If you&#8217;re looking for the &#8220;what is it?&#8221; behind the &#8220;how does it work?" />
+<meta property="og:description" content="Updated on October 11, 2016 – Swift 3.0
+Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation is in &#8220;What is Delegation – A Swift Developer's Guide&#8221;. If you're looking for the &#8220;what is it?&#8221; behind the &#8220;how does it work?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/" />
 <meta property="article:published_time" content="2015-04-09T01:43:55&#43;00:00"/>
@@ -34,8 +34,8 @@ Delegation can be a difficult topic to wrap your head around. I found it easiest
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="How Delegation Works – A Swift Developer’s Guide"/>
-<meta name="twitter:description" content="Updated on October 11, 2016 &#8211; Swift 3.0
-Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation is in &#8220;What is Delegation &#8211; A Swift Developer&#8217;s Guide&#8221;. If you&#8217;re looking for the &#8220;what is it?&#8221; behind the &#8220;how does it work?"/>
+<meta name="twitter:description" content="Updated on October 11, 2016 – Swift 3.0
+Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation is in &#8220;What is Delegation – A Swift Developer's Guide&#8221;. If you're looking for the &#8220;what is it?&#8221; behind the &#8220;how does it work?"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -166,9 +166,9 @@ MathJax.Hub.Config({
 
     
 
-<p><small>Updated on October 11, 2016 &#8211; Swift 3.0</small></p>
+<p><small>Updated on October 11, 2016 – Swift 3.0</small></p>
 
-<p>Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation <em>is</em> in <a href="http://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/">&#8220;What is Delegation &#8211; A Swift Developer&#8217;s Guide&#8221;</a>. If you&#8217;re looking for the &#8220;what is it?&#8221; <em>behind</em> the &#8220;how does it work?&#8221;, I recommend giving that first article a read.</p>
+<p>Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation <em>is</em> in <a href="http://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/">&#8220;What is Delegation – A Swift Developer's Guide&#8221;</a>. If you're looking for the &#8220;what is it?&#8221; <em>behind</em> the &#8220;how does it work?&#8221;, I recommend giving that first article a read.</p>
 
 <p>Once the terminology is unpacked and a high-level overview of delegation as a design pattern is understood, the next logical place to turn is to the question, &#8220;How does delegation work?&#8221;. That is the focus of this article.</p>
 
@@ -245,19 +245,19 @@ MathJax.Hub.Config({
 
 <h5 id="protocols-as-blueprints">Protocols as blueprints</h5>
 
-<p>With a single blueprint, there can be many homes constructed. The fine details of their construction may differ, but in the end, houses of some similarity that satisfy the blueprint&#8217;s specifications are built.</p>
+<p>With a single blueprint, there can be many homes constructed. The fine details of their construction may differ, but in the end, houses of some similarity that satisfy the blueprint's specifications are built.</p>
 
-<p>So, too with a protocol: Many classes can be built that follow the protocol&#8217;s specifications. At the end of the day, the fine details of each class&#8217; implementation (the stuff between the curly braces <code>{ ... }</code>) may differ, but if they adopt the protocol, they&#8217;ll be similar in at least the fact that they provide the named behavior it specified.</p>
+<p>So, too with a protocol: Many classes can be built that follow the protocol's specifications. At the end of the day, the fine details of each class' implementation (the stuff between the curly braces <code>{ ... }</code>) may differ, but if they adopt the protocol, they'll be similar in at least the fact that they provide the named behavior it specified.</p>
 
 <h5 id="protocols-as-contracts">Protocols as contracts</h5>
 
-<p>Another analogy from the legal world is popular for describing protocols: Protocols are similar to <em>contracts</em>. It&#8217;s this contractual idea that actually makes the most sense to me when it comes to delegation.</p>
+<p>Another analogy from the legal world is popular for describing protocols: Protocols are similar to <em>contracts</em>. It's this contractual idea that actually makes the most sense to me when it comes to delegation.</p>
 
 <p>A contract is the &#8220;thing&#8221; in the middle of two parties who are trying to negotiate a deal. To one party, the contract is a <em>guarantee</em> of some terms that will be satisfied. To the <em>other</em> party, the contract is a set of <em>obligations</em>.</p>
 
-<p>In the delegation design pattern, protocols serve the same kind middle-man role as a contract. To the delegat<em>or</em> class, the protocol is a guarantee that some behavior will be supplied by the other party (the delegate). To the delegate class, the protocol is a set of obligations &#8211; things it must implement when it &#8220;signs the contract&#8221;, or in Swift terms, &#8220;adopts the protocol&#8221;.</p>
+<p>In the delegation design pattern, protocols serve the same kind middle-man role as a contract. To the delegat<em>or</em> class, the protocol is a guarantee that some behavior will be supplied by the other party (the delegate). To the delegate class, the protocol is a set of obligations – things it must implement when it &#8220;signs the contract&#8221;, or in Swift terms, &#8220;adopts the protocol&#8221;.</p>
 
-<p>While the person signing the contract probably gets something out of the deal, the focus in the analogy we&#8217;re making to protocols and the delegation pattern is on the person on the guarantee end.</p>
+<p>While the person signing the contract probably gets something out of the deal, the focus in the analogy we're making to protocols and the delegation pattern is on the person on the guarantee end.</p>
 
 <p>That person, being guaranteed by the contract that certain terms will be executed by the person who signs the deal, is free to make decisions and take action based on that promise.</p>
 
@@ -292,7 +292,7 @@ MathJax.Hub.Config({
 
 <h4 id="setting-up-the-delegator">Setting up the delegator</h4>
 
-<p>A delegat<em>or</em> class typically defines a variable property with the word &#8220;delegate&#8221; somewhere in the name (oftentimes the property is simply named <code>delegate</code> if that&#8217;s explanatory enough). The Type of the variable property is the key to it all. The variable will be of Type <code>whatever-you-named-your-delegate-protocol</code>. So if I named my protocol <code>MySpecialDelegate</code>, I&#8217;d specify the Type of the delegate property to be <code>MySpecialDelegate</code>.</p>
+<p>A delegat<em>or</em> class typically defines a variable property with the word &#8220;delegate&#8221; somewhere in the name (oftentimes the property is simply named <code>delegate</code> if that's explanatory enough). The Type of the variable property is the key to it all. The variable will be of Type <code>whatever-you-named-your-delegate-protocol</code>. So if I named my protocol <code>MySpecialDelegate</code>, I'd specify the Type of the delegate property to be <code>MySpecialDelegate</code>.</p>
 
 <p><a name="set-up-delegate" class="jump-target"></a></p>
 
@@ -302,21 +302,21 @@ MathJax.Hub.Config({
 
 <p><code>class MyClass: SuperClass, Protocol1, Protocol2 { ... }</code></p>
 
-<p>When the delegat<em>or</em> class gets initialized, a second step is often to immediately assign an instance of the class that&#8217;s adopted the delegate protocol to its <code>delegate</code> property so that everything is &#8220;wired up&#8221;.</p>
+<p>When the delegat<em>or</em> class gets initialized, a second step is often to immediately assign an instance of the class that's adopted the delegate protocol to its <code>delegate</code> property so that everything is &#8220;wired up&#8221;.</p>
 
 <p><a name="in-practice" class="jump-target"></a></p>
 
 <h4 id="delegation-in-practice">Delegation in practice</h4>
 
-<p>Working with the delegation pattern in practice usually involves interacting with the protocol from the <em>delegate</em> end of things. Most of the time, we&#8217;re working with Apple&#8217;s APIs (such as a <code>UITableView</code> or just about any other UI control they provide). We typically only require knowledge of the protocol&#8217;s definition so that the class we choose as our delegate can implement the right functions.</p>
+<p>Working with the delegation pattern in practice usually involves interacting with the protocol from the <em>delegate</em> end of things. Most of the time, we're working with Apple's APIs (such as a <code>UITableView</code> or just about any other UI control they provide). We typically only require knowledge of the protocol's definition so that the class we choose as our delegate can implement the right functions.</p>
 
 <p><a name="complete-example" class="jump-target"></a></p>
 
 <h4 id="complete-example">Complete example</h4>
 
-<p>There may be some situations where you may decide to follow Apple&#8217;s lead and use the delegation design pattern for your own code. Maybe you&#8217;re making a special <code>UIView</code> subclass or a special picker control (much like <code>UIImagePickerController</code>). Or maybe you&#8217;re into game development and would like to communicate from your <code>SKScene</code> back to the View Controller. These are just a few that came to mind, but they all present possibilities for utilizing the delegation strategy.</p>
+<p>There may be some situations where you may decide to follow Apple's lead and use the delegation design pattern for your own code. Maybe you're making a special <code>UIView</code> subclass or a special picker control (much like <code>UIImagePickerController</code>). Or maybe you're into game development and would like to communicate from your <code>SKScene</code> back to the View Controller. These are just a few that came to mind, but they all present possibilities for utilizing the delegation strategy.</p>
 
-<p>To give a simple example, suppose that we&#8217;ve decided to create a class to encapsulate all of the logic for a special rating picker control. We&#8217;d like to offer the ability to customize the picker some by allowing the user of our control to specify a preferred rating symbol. We&#8217;d also like to provide a feedback loop to notify the user of our control when certain events have occurred. Delegation is a great tool to provide both customization options and communication between classes. What would this example look like in code?</p>
+<p>To give a simple example, suppose that we've decided to create a class to encapsulate all of the logic for a special rating picker control. We'd like to offer the ability to customize the picker some by allowing the user of our control to specify a preferred rating symbol. We'd also like to provide a feedback loop to notify the user of our control when certain events have occurred. Delegation is a great tool to provide both customization options and communication between classes. What would this example look like in code?</p>
 
 <h5 id="create-the-protocol">Create the protocol</h5>
 
@@ -328,7 +328,7 @@ MathJax.Hub.Config({
     func didCancel(picker: RatingPicker)
 }</pre>
 
-<p>Notice how this protocol definition allows both the customization point and the feedback loop we were hoping for. It&#8217;s always nice for the delegate to have access to the public API of the instance calling its methods, so the <code>RatingPicker</code> (or <code>UITableView</code> or <code>UIScrollView</code> or whatever) is often passed along as an argument.</p>
+<p>Notice how this protocol definition allows both the customization point and the feedback loop we were hoping for. It's always nice for the delegate to have access to the public API of the instance calling its methods, so the <code>RatingPicker</code> (or <code>UITableView</code> or <code>UIScrollView</code> or whatever) is often passed along as an argument.</p>
 
 <h5 id="create-the-delegator">Create the delegator</h5>
 
@@ -364,13 +364,13 @@ class RatingPicker {
 
 <p>The <code>delegate</code> property is strongly typed to be a <code>RatingPickerDelegate</code>.</p>
 
-<p>Since it&#8217;s <em>optional</em> here in this implementation, the <code>delegate</code> is not absolutely essential for the <code>RatingPicker</code> to work. If it were essential, we&#8217;d parameterize <code>init</code> and assign it during initialization.</p>
+<p>Since it's <em>optional</em> here in this implementation, the <code>delegate</code> is not absolutely essential for the <code>RatingPicker</code> to work. If it were essential, we'd parameterize <code>init</code> and assign it during initialization.</p>
 
-<p>I&#8217;ve used optional chaining to get at the <code>delegate's</code> methods if the <code>delegate</code> isn&#8217;t nil.</p>
+<p>I've used optional chaining to get at the <code>delegate's</code> methods if the <code>delegate</code> isn't nil.</p>
 
 <h5 id="choosing-the-delegate">Choosing the delegate</h5>
 
-<p>Choosing the delegate class is the final decision to make. It&#8217;s not uncommon for a View Controller to take up the responsibility of being a delegate. In <a href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/">&#8220;Pick a Delegate, Any Delegate&#8221;</a>, I attempted to show how it&#8217;s <em>not</em> necessary to use the View Controller as your one stop delegate shop. For this example, I&#8217;ll avoid giving the View Controller more responsibility than it needs and I&#8217;ll create a simple handler class to assume the delegated responsibilities:</p>
+<p>Choosing the delegate class is the final decision to make. It's not uncommon for a View Controller to take up the responsibility of being a delegate. In <a href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/">&#8220;Pick a Delegate, Any Delegate&#8221;</a>, I attempted to show how it's <em>not</em> necessary to use the View Controller as your one stop delegate shop. For this example, I'll avoid giving the View Controller more responsibility than it needs and I'll create a simple handler class to assume the delegated responsibilities:</p>
 
 <pre class="lang:swift decode:true " title="RatingPickerHandler" >class RatingPickerHandler: RatingPickerDelegate {
     func preferredRatingSymbol(picker: RatingPicker) -&gt; UIImage? {

@@ -26,8 +26,8 @@
 
 <meta property="og:title" content="Swift How-To:  Setting up a Table View" />
 <meta property="og:description" content="Think of this screencast as the &#8220;Hello World&#8221; of creating a view controller with a table view. I cover organizing things in the Storyboard, Auto Layout constraints, and the implementation of the data source protocol methods for a table view.
-Screencast Screencast Transcript [0:01] Hi, I&#8217;m Andrew from andrewcbancroft.com.
-I use table views fairly often in my examples, so I&#8217;ve decided to create a short walkthrough of how to set up a table view in Swift." />
+Screencast Screencast Transcript [0:01] Hi, I'm Andrew from andrewcbancroft.com.
+I use table views fairly often in my examples, so I've decided to create a short walkthrough of how to set up a table view in Swift." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/" />
 <meta property="article:published_time" content="2015-05-19T02:31:38&#43;00:00"/>
@@ -36,8 +36,8 @@ I use table views fairly often in my examples, so I&#8217;ve decided to create a
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift How-To:  Setting up a Table View"/>
 <meta name="twitter:description" content="Think of this screencast as the &#8220;Hello World&#8221; of creating a view controller with a table view. I cover organizing things in the Storyboard, Auto Layout constraints, and the implementation of the data source protocol methods for a table view.
-Screencast Screencast Transcript [0:01] Hi, I&#8217;m Andrew from andrewcbancroft.com.
-I use table views fairly often in my examples, so I&#8217;ve decided to create a short walkthrough of how to set up a table view in Swift."/>
+Screencast Screencast Transcript [0:01] Hi, I'm Andrew from andrewcbancroft.com.
+I use table views fairly often in my examples, so I've decided to create a short walkthrough of how to set up a table view in Swift."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -176,33 +176,33 @@ MathJax.Hub.Config({
 
 <h4 id="0-01">[0:01]</h4>
 
-<p>Hi, I&#8217;m Andrew from andrewcbancroft.com.</p>
+<p>Hi, I'm Andrew from andrewcbancroft.com.</p>
 
-<p>I use table views fairly often in my examples, so I&#8217;ve decided to create a short walkthrough of how to set up a table view in Swift.</p>
+<p>I use table views fairly often in my examples, so I've decided to create a short walkthrough of how to set up a table view in Swift.</p>
 
 <p>Think of this as the &#8220;Hello World&#8221; of creating a view controller with a table view.</p>
 
 <h4 id="0-16">[0:16]</h4>
 
-<p>In this walkthrough, I&#8217;m using XCode 6.3.1, which has me writing Swift 1.2 syntax in a couple of spots.</p>
+<p>In this walkthrough, I'm using XCode 6.3.1, which has me writing Swift 1.2 syntax in a couple of spots.</p>
 
 <h4 id="0-24">[0:24]</h4>
 
-<p>To get started, I&#8217;m going to drop into the search bar of the Object Library, which is in the Utilities Pane to hunt for a table view.</p>
+<p>To get started, I'm going to drop into the search bar of the Object Library, which is in the Utilities Pane to hunt for a table view.</p>
 
-<p>Once I&#8217;ve narrowed the results and located the Table View control, I&#8217;ll click and drag one onto my Storyboard scene.</p>
+<p>Once I've narrowed the results and located the Table View control, I'll click and drag one onto my Storyboard scene.</p>
 
 <h4 id="0-41">[0:41]</h4>
 
-<p>With the table view in place, filling the entire scene, I&#8217;ll control + click and drag up to the yellow View Controller icon to wire up my the table view&#8217;s dataSource&#8230; and delegate properties.</p>
+<p>With the table view in place, filling the entire scene, I'll control + click and drag up to the yellow View Controller icon to wire up my the table view's dataSource&#8230; and delegate properties.</p>
 
 <h4 id="0-56">[0:56]</h4>
 
-<p>Now I need to connect the table view to my View Controller source file. To bring up the assistant editor, I&#8217;ll option+click the ViewController.swift file in the Project Navigator.</p>
+<p>Now I need to connect the table view to my View Controller source file. To bring up the assistant editor, I'll option+click the ViewController.swift file in the Project Navigator.</p>
 
 <h4 id="1-06">[1:06]</h4>
 
-<p>With the table view and the source side by side, once again, I&#8217;ll control + click the table view, and drag over to the ViewController source file to create an IBOutlet property for my table view.</p>
+<p>With the table view and the source side by side, once again, I'll control + click the table view, and drag over to the ViewController source file to create an IBOutlet property for my table view.</p>
 
 <h4 id="1-21">[1:21]</h4>
 
@@ -210,13 +210,13 @@ MathJax.Hub.Config({
 
 <h4 id="1-31">[1:31]</h4>
 
-<p>Of course, at this point, I haven&#8217;t actually implemented any of the required protocol methods, so I get a compiler error saying so.</p>
+<p>Of course, at this point, I haven't actually implemented any of the required protocol methods, so I get a compiler error saying so.</p>
 
-<p>I&#8217;ve written up a handy UITableViewDataSource cheat sheet over at my website (andrewcbancroft.com). I&#8217;ll go grab that code and paste it into my View Controller.</p>
+<p>I've written up a handy UITableViewDataSource cheat sheet over at my website (andrewcbancroft.com). I'll go grab that code and paste it into my View Controller.</p>
 
 <h4 id="1-51">[1:51]</h4>
 
-<p>Here I am at andrewcbancroft.com &#8211; I&#8217;ve searched for &#8220;UITableViewDataSource&#8221; and located my cheet sheet.</p>
+<p>Here I am at andrewcbancroft.com – I've searched for &#8220;UITableViewDataSource&#8221; and located my cheet sheet.</p>
 
 <h4 id="2-02">[2:02]</h4>
 
@@ -228,59 +228,59 @@ MathJax.Hub.Config({
 
 <h4 id="2-16">[2:16]</h4>
 
-<p>As I mentioned in the beginning, this walkthrough can be thought of as the &#8220;Hello World&#8221; of table view setup. With that in mind, for now, I&#8217;ll create a dataSourceArray with some dummy data in it, just to get things compiling and displaying data.</p>
+<p>As I mentioned in the beginning, this walkthrough can be thought of as the &#8220;Hello World&#8221; of table view setup. With that in mind, for now, I'll create a dataSourceArray with some dummy data in it, just to get things compiling and displaying data.</p>
 
 <h4 id="2-31">[2:31]</h4>
 
-<p>Now that I&#8217;ve got the data source geared to go, I need some cells to display data in.</p>
+<p>Now that I've got the data source geared to go, I need some cells to display data in.</p>
 
-<p>For this task, I&#8217;ll close the assistant editor&#8230;</p>
+<p>For this task, I'll close the assistant editor&#8230;</p>
 
-<p>Next, I&#8217;ll click to open the document outline. I find that working with the view hierarchy is <em>much</em> easier to manipulate using this outline, rather than clicking to try and select the right thing in the Storyboard Scene.</p>
+<p>Next, I'll click to open the document outline. I find that working with the view hierarchy is <em>much</em> easier to manipulate using this outline, rather than clicking to try and select the right thing in the Storyboard Scene.</p>
 
 <h4 id="2-55">[2:55]</h4>
 
-<p>I&#8217;ll select the table view, and open the Utilities pane to get access to the Attributes inspector.</p>
+<p>I'll select the table view, and open the Utilities pane to get access to the Attributes inspector.</p>
 
 <h4 id="3-01">[3:01]</h4>
 
-<p>I&#8217;m going to configure this table view to have one kind of prototype cell.</p>
+<p>I'm going to configure this table view to have one kind of prototype cell.</p>
 
 <h4 id="3-06">[3:06]</h4>
 
-<p>Increasing the Prototype Cells count added a new node to the document outline&#8217;s view hierarchy.</p>
+<p>Increasing the Prototype Cells count added a new node to the document outline's view hierarchy.</p>
 
-<p>I&#8217;ll expand the Table View and click on the Table View Cell to do a bit more configuration.</p>
+<p>I'll expand the Table View and click on the Table View Cell to do a bit more configuration.</p>
 
 <h4 id="3-19">[3:19]</h4>
 
-<p>I&#8217;ll set the Style to Basic&#8230;</p>
+<p>I'll set the Style to Basic&#8230;</p>
 
-<p>Then I&#8217;ll give it an identitifer of &#8220;BasicCell&#8221;.</p>
+<p>Then I'll give it an identitifer of &#8220;BasicCell&#8221;.</p>
 
-<p>I need this &#8220;BasicCell&#8221; string for one of my other data source proocol methods, so I&#8217;ll select it, and copy it.</p>
+<p>I need this &#8220;BasicCell&#8221; string for one of my other data source proocol methods, so I'll select it, and copy it.</p>
 
 <h4 id="3-37">[3:37]</h4>
 
-<p>Back in my ViewController.swift source file, I&#8217;ll paste that &#8220;BasicCell&#8221; string as the argument to dequeReusableCellWithIdentifier.</p>
+<p>Back in my ViewController.swift source file, I'll paste that &#8220;BasicCell&#8221; string as the argument to dequeReusableCellWithIdentifier.</p>
 
 <h4 id="3-48">[3:48]</h4>
 
-<p>The last step to get things wired up is to set the cell&#8217;s textLabel.text property.</p>
+<p>The last step to get things wired up is to set the cell's textLabel.text property.</p>
 
-<p>I&#8217;ll use the dataSourceArray&#8217;s values here.</p>
+<p>I'll use the dataSourceArray's values here.</p>
 
-<p>Simply indexing into the array at the indexPath.row value that&#8217;s currently being rendered in the table view will grab the string out of the array and assign it to the textLabel.text property of the cell.</p>
+<p>Simply indexing into the array at the indexPath.row value that's currently being rendered in the table view will grab the string out of the array and assign it to the textLabel.text property of the cell.</p>
 
 <h4 id="4-13">[4:13]</h4>
 
-<p>When I run the app and observe the table view&#8217;s behavior, I&#8217;m not quite satisfied with it. The status bar overlaps the rows and makes the text hard to read.</p>
+<p>When I run the app and observe the table view's behavior, I'm not quite satisfied with it. The status bar overlaps the rows and makes the text hard to read.</p>
 
-<p>Additionally, the table view doesn&#8217;t extend all the way to the bottom when I run it in the iPhone 6 sized simulator.</p>
+<p>Additionally, the table view doesn't extend all the way to the bottom when I run it in the iPhone 6 sized simulator.</p>
 
 <h4 id="4-30">[4:30]</h4>
 
-<p>I&#8217;ll stop the app and make an adjustment in the Storyboard.</p>
+<p>I'll stop the app and make an adjustment in the Storyboard.</p>
 
 <h4 id="4-34">[4:34]</h4>
 
@@ -288,7 +288,7 @@ MathJax.Hub.Config({
 
 <h4 id="4-48">[4:48]</h4>
 
-<p>Next, I&#8217;ll set some constraints. Within the document outline, I&#8217;ll control + click from the Table View to the View and set constraints for &#8220;Top Space to Top Layout Guide&#8221;, Center Horizontally, Center Vertically, and Equal Widths.</p>
+<p>Next, I'll set some constraints. Within the document outline, I'll control + click from the Table View to the View and set constraints for &#8220;Top Space to Top Layout Guide&#8221;, Center Horizontally, Center Vertically, and Equal Widths.</p>
 
 <h4 id="5-17">[5:17]</h4>
 
@@ -296,7 +296,7 @@ MathJax.Hub.Config({
 
 <h4 id="5-31">[5:31]</h4>
 
-<p>Thanks for watching &#8211; I have other resources r elated to Swift and iOS development at andrewcbancroft.com, and you can find me on Twitter: <a href="https://twitter.com/andrewcbancroft">@andrewcbancroft</a></p>
+<p>Thanks for watching – I have other resources r elated to Swift and iOS development at andrewcbancroft.com, and you can find me on Twitter: <a href="https://twitter.com/andrewcbancroft">@andrewcbancroft</a></p>
 
 
     <div id="disqus_thread"></div>

@@ -13,36 +13,18 @@ tags:
   - React Native
 
 ---
-I hit the &#8220;No bundle url present.&#8221; roadblock today and had to dig a bit to find the solution. I&#8217;m going to describe how I encountered the problem, and provide the solution that&#8217;s worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.
-
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#problem">The Problem</a>
-    </li>
-    <li>
-      <a href="#solution">The Solution</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
+I hit the &#8220;No bundle url present.&#8221; roadblock today and had to dig a bit to find the solution. I'm going to describe how I encountered the problem, and provide the solution that's worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.
 
 <a name="problem" class="jump-target"></a>
 
 # The Problem
 
-  * You&#8217;ve got a React Native app.
+  * You've got a React Native app.
   * In the terminal, you run `react-native run-ios`.
 
 In the simulator, you hit a roadblock with the following error in a bright red screen:
 
-> No bundle url present. Make sure you&#8217;re running a packager server or have included a .jsbundle file in your application bundle. 
+> No bundle url present. Make sure you're running a packager server or have included a .jsbundle file in your application bundle. 
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/Glass.png" alt="No bundle URL present" width="370" height="666" class="alignnone size-full wp-image-13258" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/Glass.png 370w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/Glass-167x300.png 167w" sizes="(max-width: 370px) 100vw, 370px" />][1]
 
@@ -50,7 +32,7 @@ In the simulator, you hit a roadblock with the following error in a bright red s
 
 # The Solution
 
-Buried [in the comments][2] of one of the React Native repo&#8217;s issues on GitHub, I found a solution that worked for me&#8230;
+Buried [in the comments][2] of one of the React Native repo's issues on GitHub, I found a solution that worked for me&#8230;
 
   * Open a terminal window
   * `cd` into `YOUR_PROJECT/ios`
@@ -59,7 +41,7 @@ Buried [in the comments][2] of one of the React Native repo&#8217;s issues on Gi
 
 Alternatively, you could open Finder, navigate to `YOUR_PROJECT/ios` and delete the `build` folder. Then run `react-native run-ios` again.
 
-I&#8217;m not sure what causes this (that bothers me), but but at least I&#8217;ve found something to get me going again.
+I'm not sure what causes this (that bothers me), but but at least I've found something to get me going again.
 
 <a name="share" class="jump-target"></a>
 

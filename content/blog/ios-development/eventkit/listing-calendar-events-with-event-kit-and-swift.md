@@ -15,64 +15,25 @@ tags:
   - Swift
 
 ---
-This is the continuation of a series of articles I&#8217;ve writing for Swift developers working with Event Kit.
+This is the continuation of a series of articles I've writing for Swift developers working with Event Kit.
 
 Supposing that after [asking the user for permission][1] to use their calendars, and even allowing users to [create _new_ calendars][2] from within your iOS app, one possible next step could be to list out all of the events for a calendar that they tap on.
-
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#demo">Demo</a>
-    </li>
-    <li>
-      <a href="#example-project">Example project</a>
-    </li>
-    <li>
-      <a href="#querying-for-events">Querying for events</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#context-view-controller">Context: View controller</a>
-      </li>
-      <li>
-        <a href="#configure-start-end-dates">Configure start and end dates</a>
-      </li>
-      <li>
-        <a href="#generate-nspredicate">Use the event store to generate NSPredicate</a>
-      </li>
-      <li>
-        <a href="#query-with-nspredicate">Query the event store with generated NSPredicate</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#related">You might also enjoy&#8230;</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="demo" class="jump-target"></a>
 
 # Demo
 
-Here&#8217;s what we&#8217;re going for by the end of this:
+Here's what we're going for by the end of this:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/list-events-demo.gif" alt="List Events Demo" width="468" height="844" class="alignnone size-full wp-image-12819" />][3]
 
-In this walk-through, I&#8217;ll explore the Event Kit API that allows us to query the user&#8217;s device to find and list out events for a calendar that match a date range.
+In this walk-through, I'll explore the Event Kit API that allows us to query the user's device to find and list out events for a calendar that match a date range.
 
 <a name="example-project" class="jump-target"></a>
 
 # Example project
 
-I&#8217;ve got an example project up on GitHub that contains all the code necessary to list out events for a calendar inside of a table view. You can download that project here:
+I've got an example project up on GitHub that contains all the code necessary to list out events for a calendar inside of a table view. You can download that project here:
 
 <div class="resources">
   <div class="resources-header">
@@ -90,9 +51,9 @@ I&#8217;ve got an example project up on GitHub that contains all the code necess
 
 # Querying for events
 
-The primary thing you&#8217;ll need to do in order to display a list of events from a calendar is to query the event store for events matching a properly configured `NSPredicate`.
+The primary thing you'll need to do in order to display a list of events from a calendar is to query the event store for events matching a properly configured `NSPredicate`.
 
-Here&#8217;s a snippet of code, followed by an analysis of what&#8217;s going on:
+Here's a snippet of code, followed by an analysis of what's going on:
 
 <pre class="lang:swift decode:true mark:20,23" title="Query for events" >class EventsViewController: UIViewController, UITableViewDataSource {
     var calendar: EKCalendar! // Passed in from previous view controller
@@ -130,7 +91,7 @@ Here&#8217;s a snippet of code, followed by an analysis of what&#8217;s going on
 
 ## Context: View controller
 
-The context of the above snippet is a view controller. Inside the view controller class, there&#8217;s a calendar instance that is presumably set in the previous view controller&#8217;s `prepareForSegue` method. There&#8217;s also an optional array of `EKEvent` instances that acts as the data source for a table view, and a function called `loadEvents` in this view controller.
+The context of the above snippet is a view controller. Inside the view controller class, there's a calendar instance that is presumably set in the previous view controller's `prepareForSegue` method. There's also an optional array of `EKEvent` instances that acts as the data source for a table view, and a function called `loadEvents` in this view controller.
 
 <a name="configure-start-end-dates" class="jump-target"></a>
 
@@ -142,19 +103,19 @@ The first few lines of code within the `loadEvents` function are to facilitate c
 
 ## Use the event store to generate NSPredicate
 
-To actually query the store, you need to create an `NSPredicate` instance. However, rather than calling `NSPredicate's` initializer, you will use an `EKEventStore` instance to _generate_ a predicate. Apparently there&#8217;s some under-the-hood work that goes on to get a properly configured `NSPredicate` instance to use in your query.
+To actually query the store, you need to create an `NSPredicate` instance. However, rather than calling `NSPredicate's` initializer, you will use an `EKEventStore` instance to _generate_ a predicate. Apparently there's some under-the-hood work that goes on to get a properly configured `NSPredicate` instance to use in your query.
 
-So assuming you&#8217;ve got a valid start date, end date (both `NSDate` instances), and one or more calendars to search for events within, you&#8217;ll use the event store&#8217;s `predicateForEventsWithStartDate(_: endDate: calendars:)` method to get an `NSPredicate` instance.
+So assuming you've got a valid start date, end date (both `NSDate` instances), and one or more calendars to search for events within, you'll use the event store's `predicateForEventsWithStartDate(_: endDate: calendars:)` method to get an `NSPredicate` instance.
 
 <a name="query-with-nspredicate" class="jump-target"></a>
 
 ## Query the event store with generated NSPredicate
 
-The last step is to call `eventsMatchingPredicate(_:)` on the event store, and use the predicate you just generated. You can optionally sort them, as I&#8217;ve done in the snippet.
+The last step is to call `eventsMatchingPredicate(_:)` on the event store, and use the predicate you just generated. You can optionally sort them, as I've done in the snippet.
 
 # Wrapping up
 
-That&#8217;s the meat of querying the event store for a list of events. To learn how display them in a table view, I would recommend going ahead and [grabbing the example project that I&#8217;ve provided][4]. I&#8217;ve also got a couple of guides on working with table views if you need assistance with that part:
+That's the meat of querying the event store for a list of events. To learn how display them in a table view, I would recommend going ahead and [grabbing the example project that I've provided][4]. I've also got a couple of guides on working with table views if you need assistance with that part:
 
 <div class="resources">
   <div class="resources-header">

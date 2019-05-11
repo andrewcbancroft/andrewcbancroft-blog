@@ -17,55 +17,13 @@ tags:
 ---
 The need to collect data via text input is a common in many applications. This walk-through showcases how to create a custom `UITableViewCell` for accepting text input within a `UITableView`.
 
-<div class="resources">
-  <div class="resources-header">
-    Outline
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#tableview-data-entry">Table Views for Data Entry?</a>
-    </li>
-    <li>
-      <a href="#step-by-step">Step by Step Walkthrough</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#drag-tableview">Set up Storyboard with table view</a>
-      </li>
-      <li>
-        <a href="#drag-text-field">Set up table view prototype cell with text field</a>
-      </li>
-      <li>
-        <a href="#text-input-cell-class">Create new TextInputTableViewCell class</a>
-      </li>
-      <li>
-        <a href="#storyboard-setup">Change cell class in Storyboard to TextInputTableViewCell</a>
-      </li>
-      <li>
-        <a href="#reuse-identifier">Set reuse identifier</a>
-      </li>
-      <li>
-        <a href="#implement-datasource-delegate">Implement table view data source and delegate methods</a>
-      </li>
-      <li>
-        <a href="#run-in-simulator">Run in simulator</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
-
 <a name="tableview-data-entry" class="jump-target"></a>
 
 ### Table Views for Data Entry?
 
 Table views provide nice, built-in styles that present a form-like view for collecting data from your users. They also have inherent scrolling capabilities. Finally, there is some handy keyboard handling, such as auto-scrolling to avoid covering up a data entry cell, or hiding the keyboard when the user scrolls the Table View. Both of those are challenging to get right if you were to do implement a data entry form some other way.
 
-Many of Apple&#8217;s own UIs utilize table views to collect data from the user (think Settings, Calendar, Reminders).
+Many of Apple's own UIs utilize table views to collect data from the user (think Settings, Calendar, Reminders).
 
 For those reasons, I think a table view is a really convenient choice for collecting data from a user.
 
@@ -96,11 +54,11 @@ Assuming that you have a View Controller already on the Storyboard design surfac
 
 #### Wire up table view data source and delegate
 
-For this step it&#8217;s helpful to have the document outline pane visible. Selecting the Table View from the document outline and subsequently Control + Click + Dragging to the View Controller icon on the Storyboard scene will allow you to link the table view&#8217;s dataSource and delegate properties to the View Controller.  
+For this step it's helpful to have the document outline pane visible. Selecting the Table View from the document outline and subsequently Control + Click + Dragging to the View Controller icon on the Storyboard scene will allow you to link the table view's dataSource and delegate properties to the View Controller.  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Ctrl-Click-Drag-to-set-DataSource-and-Delegate-1024x507.png" alt="Ctrl+Click-Drag to set DataSource and Delegate" width="1024" height="507" class="alignnone size-large wp-image-11683" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Ctrl-Click-Drag-to-set-DataSource-and-Delegate-1024x507.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Ctrl-Click-Drag-to-set-DataSource-and-Delegate-300x148.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" />][2]
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-DataSource-and-Delegate-1024x508.png" alt="Set DataSource and Delegate" width="1024" height="508" class="alignnone size-large wp-image-11354" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-DataSource-and-Delegate-1024x508.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-DataSource-and-Delegate-300x149.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" />][3]  
-Note that you&#8217;ll need to perform the Control + Click + Drag maneuver twice to set both the dataSource and the delegate.
+Note that you'll need to perform the Control + Click + Drag maneuver twice to set both the dataSource and the delegate.
 
 <a name="dismiss-keyboard" class="jump-target"></a>
 
@@ -108,7 +66,7 @@ Note that you&#8217;ll need to perform the Control + Click + Drag maneuver twice
 
 With the attributes inspector selected in the utilities pane, scroll down to the Keyboard option and set it to &#8220;Dismiss on drag&#8221;.  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1-1024x509.png" alt="Configure Keyboard Dismissal" width="1024" height="509" class="alignnone size-large wp-image-11357" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1-1024x509.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1-300x149.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" />][4]  
-This can be helpful if you&#8217;d like the keyboard to automatically hide itself when the user scrolls the table view.
+This can be helpful if you'd like the keyboard to automatically hide itself when the user scrolls the table view.
 
 <a name="constraints" class="jump-target"></a>
 
@@ -118,15 +76,15 @@ Use the document outline to set constraints. With the attributes inspector selec
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1-1024x508.png" alt="Set Constraints and Prototype Cells" width="1024" height="508" class="alignnone size-large wp-image-11352" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1-1024x508.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1-300x149.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" />][5]  
 Configuring constraints on the table view will ensure that it displays properly on all device sizes and orientations.
 
-In this particular example, there&#8217;s only one kind of prototype cell that I want the table view to display. If I had multiple prototypes, I&#8217;d increase the prototype cells count to match the number of prototypes I had.
+In this particular example, there's only one kind of prototype cell that I want the table view to display. If I had multiple prototypes, I'd increase the prototype cells count to match the number of prototypes I had.
 
 <a name="drag-text-field" class="jump-target"></a>
 
 #### Drag text field to cell, increase text field width
 
-Drag a text field into the cell&#8217;s contents and use XCode&#8217;s blue guides to adjust the width so that it takes up the whole cell.  
+Drag a text field into the cell's contents and use XCode's blue guides to adjust the width so that it takes up the whole cell.  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1-1024x622.png" alt="Drag Text Field to Cell" width="1024" height="622" class="alignnone size-large wp-image-11325" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1-1024x622.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1-300x182.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1.png 1488w" sizes="(max-width: 1024px) 100vw, 1024px" />][6]  
-Now comes the customization of the prototype cell itself. Since we&#8217;re designing it for text input, we&#8217;ll use a text field as the contents of the table view cell prototype.
+Now comes the customization of the prototype cell itself. Since we're designing it for text input, we'll use a text field as the contents of the table view cell prototype.
 
 <a name="configure-text-field-constraints" class="jump-target"></a>
 
@@ -156,7 +114,7 @@ Use the document outline to Control + Click + Drag and IBOutlet to the `TextInpu
 
 #### Implement TextInputTableViewCell class
 
-An example implementation with a function for configuring the text field&#8217;s properties might look something like this:
+An example implementation with a function for configuring the text field's properties might look something like this:
 
 <pre class="lang:swift decode:true " title="TextInputTableViewCell.swift" >import UIKit
 
@@ -183,7 +141,7 @@ Use the document outline to select the Table View Cell. With the identity inspec
 
 #### Set reuse identifier
 
-With the Table View Cell still selected in the document outline, select the attribute inspector in the utilities pane and change the Identifier property to &#8220;TextInputCell&#8221; (or some other string that&#8217;s easily remembered).  
+With the Table View Cell still selected in the document outline, select the attribute inspector in the utilities pane and change the Identifier property to &#8220;TextInputCell&#8221; (or some other string that's easily remembered).  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_2-1024x511.png" alt="Set Reuse Identifier" width="1024" height="511" class="alignnone size-large wp-image-11323" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_2-1024x511.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_2-300x150.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" />][11]
 
 <a name="implement-datasource-delegate" class="jump-target"></a>
@@ -191,7 +149,7 @@ With the Table View Cell still selected in the document outline, select the attr
 #### Implement table view data source and delegate methods
 
 In the View Controller, specify that it adopts the `UITableViewDataSource` and `UITableViewDelegate` protocols. Implement the appropriate protocol methods.  
-I&#8217;ve written a [cheat sheet][12] for this, but I&#8217;ll also provide the following sample implementation of the mai `ViewController` class:
+I've written a [cheat sheet][12] for this, but I'll also provide the following sample implementation of the mai `ViewController` class:
 
 <pre class="lang:swift decode:true mark:9,11" title="ViewController.swift" >import UIKit
 
@@ -208,7 +166,7 @@ public class ViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 }</pre>
 
-Lines 9 and 11 are of most importance. Notice that I&#8217;m dequeueing a TextInputCell, which is what I set the reuse identifier of my cell to be. I&#8217;m also casting the dequeued cell as a TextInputTableViewCell so that it can be configured (line 11)
+Lines 9 and 11 are of most importance. Notice that I'm dequeueing a TextInputCell, which is what I set the reuse identifier of my cell to be. I'm also casting the dequeued cell as a TextInputTableViewCell so that it can be configured (line 11)
 
 <a name="run-in-simulator" class="jump-target"></a>
 
@@ -218,7 +176,7 @@ Lines 9 and 11 are of most importance. Notice that I&#8217;m dequeueing a TextIn
 
 ### Wrapping up
 
-In this walkthrough, my goal was to show how to take advantage of a table view&#8217;s inherent styles, scrolling capabilities, and keyboard handling to make form-like text input easier. We created a custom subclass of UITableViewCell to accomplish this task. Take a look at the [example published to GitHub][14] to dive in further and explore the walkthrough in more depth.
+In this walkthrough, my goal was to show how to take advantage of a table view's inherent styles, scrolling capabilities, and keyboard handling to make form-like text input easier. We created a custom subclass of UITableViewCell to accomplish this task. Take a look at the [example published to GitHub][14] to dive in further and explore the walkthrough in more depth.
 
 <a name="share" class="jump-target"></a>
 

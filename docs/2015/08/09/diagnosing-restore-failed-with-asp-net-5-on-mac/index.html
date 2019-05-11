@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Diagnosing “Restore failed” with ASP.NET 5 on Mac" />
-<meta property="og:description" content="Following along with Steve Smith&#8217;s &#8220;Your First ASP.NET 5 Application on a Mac&#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&#8217;t work due to a problem with restoring the project&#8217;s dependencies.
+<meta property="og:description" content="Following along with Steve Smith's &#8220;Your First ASP.NET 5 Application on a Mac&#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn't work due to a problem with restoring the project's dependencies.
 Jump to&#8230;   Retracing my steps   Mis-matched Mono versions   Resolved   Was this article helpful? Please share!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/" />
@@ -34,7 +34,7 @@ Jump to&#8230;   Retracing my steps   Mis-matched Mono versions   Resolved   Was
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Diagnosing “Restore failed” with ASP.NET 5 on Mac"/>
-<meta name="twitter:description" content="Following along with Steve Smith&#8217;s &#8220;Your First ASP.NET 5 Application on a Mac&#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&#8217;t work due to a problem with restoring the project&#8217;s dependencies.
+<meta name="twitter:description" content="Following along with Steve Smith's &#8220;Your First ASP.NET 5 Application on a Mac&#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn't work due to a problem with restoring the project's dependencies.
 Jump to&#8230;   Retracing my steps   Mis-matched Mono versions   Resolved   Was this article helpful? Please share!"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
@@ -166,7 +166,7 @@ MathJax.Hub.Config({
 
     
 
-<p>Following along with Steve Smith&#8217;s <a href="http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html">&#8220;Your First ASP.NET 5 Application on a Mac&#8221;</a>, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&#8217;t work due to a problem with restoring the project&#8217;s dependencies.</p>
+<p>Following along with Steve Smith's <a href="http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html">&#8220;Your First ASP.NET 5 Application on a Mac&#8221;</a>, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn't work due to a problem with restoring the project's dependencies.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -200,13 +200,13 @@ MathJax.Hub.Config({
 
 <p>&#8220;Restore failed Unknown header: 3208085783&#8221;.</p>
 
-<p>I found David Fowler&#8217;s <a href="http://davidfowl.com/diagnosing-dependency-issues-with-asp-net-5/">&#8220;Diagnosing Dependency Issues with ASP.NET 5&#8221;</a>, but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:</p>
+<p>I found David Fowler's <a href="http://davidfowl.com/diagnosing-dependency-issues-with-asp-net-5/">&#8220;Diagnosing Dependency Issues with ASP.NET 5&#8221;</a>, but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:</p>
 
 <blockquote>
 <p>Make sure your DNX and packages are on the same version &#8220;train&#8221;</p>
 </blockquote>
 
-<p>My issue wasn&#8217;t with DNX, but with <strong>Mono</strong>.</p>
+<p>My issue wasn't with DNX, but with <strong>Mono</strong>.</p>
 
 <p><a name="mis-matched-mono" class="jump-target"></a></p>
 
@@ -214,7 +214,7 @@ MathJax.Hub.Config({
 
 <p>When I followed the instructions for installing ASP.NET, I distinctly remember installing Mono using the installer package available at their website.</p>
 
-<p>What I <em>failed</em> to realize, however, was that a while back (long enough ago to where it didn&#8217;t hit me until just a few minutes ago), I installed Mono using Homebrew.</p>
+<p>What I <em>failed</em> to realize, however, was that a while back (long enough ago to where it didn't hit me until just a few minutes ago), I installed Mono using Homebrew.</p>
 
 <p>So despite my efforts to install Mono using the installer package, the Mono that everything in my system was using was the one installed by Homebrew, which was version 3.10.</p>
 

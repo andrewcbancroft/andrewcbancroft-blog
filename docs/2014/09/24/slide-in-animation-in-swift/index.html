@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Slide In Animation in Swift" />
-<meta property="og:description" content="In a previous post about fade animations in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call fadeIn() or fadeOut() on itself. This strategy was nice &#8211; the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them somewhere. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews." />
+<meta property="og:description" content="In a previous post about fade animations in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call fadeIn() or fadeOut() on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them somewhere. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/" />
 <meta property="article:published_time" content="2014-09-24T18:25:52&#43;00:00"/>
@@ -33,7 +33,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Slide In Animation in Swift"/>
-<meta name="twitter:description" content="In a previous post about fade animations in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call fadeIn() or fadeOut() on itself. This strategy was nice &#8211; the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them somewhere. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews."/>
+<meta name="twitter:description" content="In a previous post about fade animations in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call fadeIn() or fadeOut() on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them somewhere. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -164,9 +164,9 @@ MathJax.Hub.Config({
 
     
 
-<p>In a previous post about <a title="Fade In / Out Animations as Class Extensions in Swift" href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" target="_blank">fade animations</a> in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call <span class="lang:swift decode:true  crayon-inline ">fadeIn()</span> or <span class="lang:swift decode:true  crayon-inline ">fadeOut()</span> on itself. This strategy was nice &#8211; the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them <em>somewhere</em>. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews.</p>
+<p>In a previous post about <a title="Fade In / Out Animations as Class Extensions in Swift" href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" target="_blank">fade animations</a> in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call <span class="lang:swift decode:true  crayon-inline ">fadeIn()</span> or <span class="lang:swift decode:true  crayon-inline ">fadeOut()</span> on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them <em>somewhere</em>. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews.</p>
 
-<p>Well, I liked the idea so much that when it came time for me to implement a slide animation, I kept the same strategy, and I&#8217;d like to share my implementation with you today.</p>
+<p>Well, I liked the idea so much that when it came time for me to implement a slide animation, I kept the same strategy, and I'd like to share my implementation with you today.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -189,7 +189,7 @@ MathJax.Hub.Config({
         <a href="#overview-setup-storyboard">Set up the storyboard</a>
       </li>
       <li>
-        <a href="#overview-code-vc">Code the View Controller &#8211; initiate slide animation</a>
+        <a href="#overview-code-vc">Code the View Controller – initiate slide animation</a>
       </li>
     </ul></p>
 
@@ -223,23 +223,23 @@ MathJax.Hub.Config({
 
 <h3 id="animation-demo">Animation demo</h3>
 
-<p>To start off with, here&#8217;s a sample of what the animation does:</p>
+<p>To start off with, here's a sample of what the animation does:</p>
 
 <p style="text-align: center;">
   <a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/SlideAnimationSample2.gif"><img class="alignnone size-full wp-image-5171" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/SlideAnimationSample2.gif" alt="Slide Animation Example" width="285" height="509" /></a>
 </p>
 
-<p>The easiest way to get the gist of what I&#8217;ve done is to <a title="GitHub - SwiftSlideAnimation" href="https://github.com/andrewcbancroft/SwiftSlideAnimation" target="_blank">head over to GitHub and download the example XCode Project</a>. In real life, I&#8217;ve combined the fade animations and the slide animation into the same UIView extension, but for education&#8217;s sake, I&#8217;ve split them out so you can easily see the moving parts.</p>
+<p>The easiest way to get the gist of what I've done is to <a title="GitHub - SwiftSlideAnimation" href="https://github.com/andrewcbancroft/SwiftSlideAnimation" target="_blank">head over to GitHub and download the example XCode Project</a>. In real life, I've combined the fade animations and the slide animation into the same UIView extension, but for education's sake, I've split them out so you can easily see the moving parts.</p>
 
 <p><a name="overview" class="jump-target"></a></p>
 
 <h3 id="implementation-overview">Implementation overview</h3>
 
-<p>There are three major parts to this example implementation, which I&#8217;ll explain in detail shortly. Here&#8217;s the overview:</p>
+<p>There are three major parts to this example implementation, which I'll explain in detail shortly. Here's the overview:</p>
 
 <p><a name="overview-create-extension" class="jump-target"></a></p>
 
-<h4 id="1-8211-create-the-uiview-extension">1 &#8211; Create the UIView extension</h4>
+<h4 id="1-8211-create-the-uiview-extension">1 – Create the UIView extension</h4>
 
 <pre class="lang:swift decode:true " title="UIViewExtensions.swift">import UIKit
 
@@ -269,39 +269,39 @@ extension UIView {
 
 <p><a name="overview-setup-storyboard" class="jump-target"></a></p>
 
-<h4 id="2-8211-set-up-the-storyboard">2 &#8211; Set up the storyboard</h4>
+<h4 id="2-8211-set-up-the-storyboard">2 – Set up the storyboard</h4>
 
 <ul>
 <li>From the Utilities panel, drag over a regular View to act as a wrapper for the sliding text (use a <em>regular</em> View, not a Container View)</li>
 <li>From the Utilities panel, drag a Label into the wrapper view and create an IBOutlet to your View Controller for the Label</li>
 <li>Set up auto layout constraints for both the wrapper and the Label</li>
-<li>Set the wrapper view&#8217;s Clip Subviews property to <em>checked</em> in the Attributes Inspector</li>
+<li>Set the wrapper view's Clip Subviews property to <em>checked</em> in the Attributes Inspector</li>
 </ul>
 
 <p><a name="overview-code-vc" class="jump-target"></a></p>
 
-<h4 id="3-8211-code-the-view-controller-8211-initiate-slide-animation">3 &#8211; Code the View Controller &#8211; initiate slide animation.</h4>
+<h4 id="3-8211-code-the-view-controller-8211-initiate-slide-animation">3 – Code the View Controller – initiate slide animation.</h4>
 
-<p>In my example, I wired the trigger up to a button&#8217;s <span class="lang:swift decode:true  crayon-inline ">touchUpInside</span> action. For you, it may be something different that triggers the animation to begin. Whatever it may be, call <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> on your UIView instance (in my case, the UILabel).</p>
+<p>In my example, I wired the trigger up to a button's <span class="lang:swift decode:true  crayon-inline ">touchUpInside</span> action. For you, it may be something different that triggers the animation to begin. Whatever it may be, call <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> on your UIView instance (in my case, the UILabel).</p>
 
 <pre class="lang:swift decode:true" title="ViewController.swift">@IBAction func slideTextButtonTapped(sender: UIButton) {
         self.slidingTextLabel.slideInFromLeft()
         self.slidingTextLabel.text = "Sliding Text!"
     }</pre>
 
-<p>Notice that directly after the call to <span class="lang:swift decode:true  crayon-inline">slideInFromLeft()</span>, I change the label&#8217;s text property to contain the new text that I want to slide in.</p>
+<p>Notice that directly after the call to <span class="lang:swift decode:true  crayon-inline">slideInFromLeft()</span>, I change the label's text property to contain the new text that I want to slide in.</p>
 
 <p><a name="details" class="jump-target"></a></p>
 
 <h3 id="implementation-details">Implementation details</h3>
 
-<p>The real work all happens inside the UIViewExtensions.swift file where I add the <span class="lang:swift decode:true  crayon-inline">slideInFromLeft()</span> <span class="crayon-sy">function to a UIView&#8217;s arsenal.</span></p>
+<p>The real work all happens inside the UIViewExtensions.swift file where I add the <span class="lang:swift decode:true  crayon-inline">slideInFromLeft()</span> <span class="crayon-sy">function to a UIView's arsenal.</span></p>
 
 <p><a name="details-uiviewextensions-swift" class="jump-target"></a></p>
 
 <h4 id="uiviewextensions-swift">UIViewExtensions.swift</h4>
 
-<p>First to note is that I&#8217;ve provided a few default values in the function&#8217;s signature so that the animation can be initiated as simply as writing <span class="lang:swift decode:true  crayon-inline">viewInstance.slideInFromLeft()</span>, or as &#8220;complicated&#8221; as providing argument values to both duration and completionDelegate:</p>
+<p>First to note is that I've provided a few default values in the function's signature so that the animation can be initiated as simply as writing <span class="lang:swift decode:true  crayon-inline">viewInstance.slideInFromLeft()</span>, or as &#8220;complicated&#8221; as providing argument values to both duration and completionDelegate:</p>
 
 <pre class="lang:swift decode:true">extension UIView {
     func slideInFromLeft(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
@@ -320,7 +320,7 @@ extension UIView {
             // Remaining implementation...
 }</pre>
 
-<p>I then go about configuring the animation&#8217;s properties. To achieve the &#8220;slide in from left&#8221; animation, I set the <span class="lang:swift decode:true  crayon-inline ">type</span> and the <span class="lang:swift decode:true  crayon-inline ">subtype</span> properties to <span class="lang:swift decode:true  crayon-inline ">kCATransitionPush</span> and <span class="lang:swift decode:true  crayon-inline">kCATransitionFromLeft</span>, respectively. These two combined create the &#8220;slide in&#8221; effect. Other properties that I set are <span class="lang:swift decode:true  crayon-inline">duration</span>, <span class="lang:swift decode:true  crayon-inline">timingFunction</span>, and <span class="lang:swift decode:true  crayon-inline">fillMode</span>:</p>
+<p>I then go about configuring the animation's properties. To achieve the &#8220;slide in from left&#8221; animation, I set the <span class="lang:swift decode:true  crayon-inline ">type</span> and the <span class="lang:swift decode:true  crayon-inline ">subtype</span> properties to <span class="lang:swift decode:true  crayon-inline ">kCATransitionPush</span> and <span class="lang:swift decode:true  crayon-inline">kCATransitionFromLeft</span>, respectively. These two combined create the &#8220;slide in&#8221; effect. Other properties that I set are <span class="lang:swift decode:true  crayon-inline">duration</span>, <span class="lang:swift decode:true  crayon-inline">timingFunction</span>, and <span class="lang:swift decode:true  crayon-inline">fillMode</span>:</p>
 
 <pre class="lang:swift decode:true">extension UIView {
         // ...
@@ -334,9 +334,9 @@ extension UIView {
     }
 }</pre>
 
-<p>To keep things simple, I only allow myself to customize the <span class="lang:swift decode:true  crayon-inline ">duration</span> property, and optionally provide a <span class="lang:swift decode:true  crayon-inline ">completionDelegate</span> when I call the function&#8230; the other properties are more fundamental to how the animation should perform, so I encapsulate the implementation here so that it&#8217;s an abstraction when I actually call <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> later in my View Controller.</p>
+<p>To keep things simple, I only allow myself to customize the <span class="lang:swift decode:true  crayon-inline ">duration</span> property, and optionally provide a <span class="lang:swift decode:true  crayon-inline ">completionDelegate</span> when I call the function&#8230; the other properties are more fundamental to how the animation should perform, so I encapsulate the implementation here so that it's an abstraction when I actually call <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> later in my View Controller.</p>
 
-<p>The last thing I do is add the animation that I just created and configured to the view&#8217;s layer property. &#8220;The view&#8221; here would be the instance of UIView that has <em>calls</em> <span class="lang:swift decode:true  crayon-inline">slideInFromLeft()</span>:</p>
+<p>The last thing I do is add the animation that I just created and configured to the view's layer property. &#8220;The view&#8221; here would be the instance of UIView that has <em>calls</em> <span class="lang:swift decode:true  crayon-inline">slideInFromLeft()</span>:</p>
 
 <pre class="lang:swift decode:true ">extension UIView {
         // ...
@@ -352,8 +352,8 @@ extension UIView {
 
 <ul>
 <li>My general setup in this example is a Label wrapped inside a containing UIView. I made sure to simply drag over a regular View (not a Container View) from the utilities pane on the right. I then dragged a Label inside the &#8220;wrapper&#8221; view.</li>
-<li>I set wrapper view&#8217;s width to a value that was less than the entire screen&#8217;s width. This was so that the sliding view didn&#8217;t appear to slide in from off-screen and slide out off-screen. Instead it appears to slide in from underneath the wrapper view&#8230; You&#8217;re welcome to customize this how you want (or avoid the containing view altogether if you find it&#8217;s not needed for your specific implementation).</li>
-<li>For the wrapper view, I&#8217;ve set constraints for
+<li>I set wrapper view's width to a value that was less than the entire screen's width. This was so that the sliding view didn't appear to slide in from off-screen and slide out off-screen. Instead it appears to slide in from underneath the wrapper view&#8230; You're welcome to customize this how you want (or avoid the containing view altogether if you find it's not needed for your specific implementation).</li>
+<li>For the wrapper view, I've set constraints for
 
 <ul>
 <li>Center Horizontally in Container</li>
@@ -376,7 +376,7 @@ extension UIView {
 
 <p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints.png"><img class="alignnone size-large wp-image-5081" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints-1024x642.png" alt="Label Constraints" width="730" height="457" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints-1024x642.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints-300x188.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints-1200x752.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints.png 1471w" sizes="(max-width: 730px) 100vw, 730px" /></a></p>
 
-<p>The last thing I do in the storyboard before wiring things in the View Controller is to select the wrapper view and make sure it&#8217;s Clip Subviews property is <em>checked</em>. As an experiment, toggle this option and watch the effect it has on the animation&#8217;s appearance:</p>
+<p>The last thing I do in the storyboard before wiring things in the View Controller is to select the wrapper view and make sure it's Clip Subviews property is <em>checked</em>. As an experiment, toggle this option and watch the effect it has on the animation's appearance:</p>
 
 <p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked.png"><img class="alignnone size-large wp-image-5071" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked-1024x646.png" alt="Clib Subviews Checked" width="730" height="460" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked-1024x646.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked-300x189.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked-1200x757.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked.png 1475w" sizes="(max-width: 730px) 100vw, 730px" /></a></p>
 
@@ -386,14 +386,14 @@ extension UIView {
 
 <p>The final piece of the setup is to wire things up to the View Controller and animate the Label.</p>
 
-<p>Since I needed to reference the Label containing the text that I&#8217;d like to animate, I created an <span class="lang:swift decode:true  crayon-inline ">IBOutlet</span> from my storyboard to my View Controller:</p>
+<p>Since I needed to reference the Label containing the text that I'd like to animate, I created an <span class="lang:swift decode:true  crayon-inline ">IBOutlet</span> from my storyboard to my View Controller:</p>
 
 <pre class="lang:swift decode:true" title="ViewController.swift">class ViewController: UIViewController {
     @IBOutlet weak var slidingTextLabel: UILabel!
     // ...
 }</pre>
 
-<p>Next, I needed a way to initiate the slide in animation &#8211; I decided that wiring it to a button&#8217;s <span class="lang:swift decode:true  crayon-inline ">touchUpInside</span> action would be sufficient for the example, so I created an <span class="lang:swift decode:true  crayon-inline ">IBAction</span> from my Storyboard to my View Controller for that purpose.</p>
+<p>Next, I needed a way to initiate the slide in animation – I decided that wiring it to a button's <span class="lang:swift decode:true  crayon-inline ">touchUpInside</span> action would be sufficient for the example, so I created an <span class="lang:swift decode:true  crayon-inline ">IBAction</span> from my Storyboard to my View Controller for that purpose.</p>
 
 <p>Within the body of that <span class="lang:swift decode:true  crayon-inline">IBAction</span>, I wrote the call to <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> on my <span class="lang:swift decode:true  crayon-inline ">slidingTextLabel</span> instance:</p>
 
@@ -410,15 +410,15 @@ class ViewController: UIViewController {
     // ...
 }</pre>
 
-<p>If you have need to specify a <span class="lang:swift decode:true  crayon-inline ">duration</span> or a <span class="lang:swift decode:true  crayon-inline">completionDelegate</span>, there&#8217;s a commented out line of code there that shows an example of passing those arguments to the <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> function.</p>
+<p>If you have need to specify a <span class="lang:swift decode:true  crayon-inline ">duration</span> or a <span class="lang:swift decode:true  crayon-inline">completionDelegate</span>, there's a commented out line of code there that shows an example of passing those arguments to the <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> function.</p>
 
-<p>If you specify a <span class="lang:swift decode:true  crayon-inline ">completionDelegate</span> to the <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> function, a method called <span class="lang:swift decode:true  crayon-inline ">animationDidStop()</span> will be called when the animation finishes. Inside this callback function, you can write code to perform any action you&#8217;d like to have happen after the animation has finished. If you don&#8217;t set a completionDelegate, there&#8217;s no need to have this method override in your code:</p>
+<p>If you specify a <span class="lang:swift decode:true  crayon-inline ">completionDelegate</span> to the <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> function, a method called <span class="lang:swift decode:true  crayon-inline ">animationDidStop()</span> will be called when the animation finishes. Inside this callback function, you can write code to perform any action you'd like to have happen after the animation has finished. If you don't set a completionDelegate, there's no need to have this method override in your code:</p>
 
 <pre class="lang:swift decode:true " title="ViewController.swift">override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
         println("Animation stopped")
     }</pre>
 
-<p>That&#8217;s a wrap, folks! Hope this strategy is helpful for you as you think about where to place code for your UIView animations.</p>
+<p>That's a wrap, folks! Hope this strategy is helpful for you as you think about where to place code for your UIView animations.</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

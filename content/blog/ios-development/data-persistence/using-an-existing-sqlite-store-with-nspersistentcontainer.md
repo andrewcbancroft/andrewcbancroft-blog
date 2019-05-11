@@ -15,49 +15,20 @@ tags:
   - Swift
 
 ---
-If you&#8217;ve been creating the Core Data Stack [without NSPersistentContainer][1] and you&#8217;re thinking about switching things up to _use_ `NSPersistentContainer`, you need to think about your existing SQLite persistent store.
+
+If you've been creating the Core Data Stack [without NSPersistentContainer][1] and you're thinking about switching things up to _use_ `NSPersistentContainer`, you need to think about your existing SQLite persistent store.
 
 [Creating the stack with NSPersistentContainer][2] handles the creation of SQLite stores internally, so brand new setups using `NSPersistentContainer` are pretty easy.
 
 But how do you go about telling `NSPersistentContainer` about your _existing_ SQLite store?
 
-Let&#8217;s take a look now at how you can configure the container to use your previously-created persistent store.
-
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#before">Before NSPersistentContainer</a>
-    </li>
-    <li>
-      <a href="#after">After NSPersistentContainer</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#breakdown">Breaking it down</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#related">You might also enjoy&#8230;</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-    <li>
-      <a href="#course">Learning Core Data? Watch my course, Core Data Fundamentals with Swift!</a>
-    </li>
-  </ul>
-</div>
+Let's take a look now at how you can configure the container to use your previously-created persistent store.
 
 <a name="before" class="jump-target"></a>
 
 # Before NSPersistentContainer
 
-Supposing that your **previous** Core Data stack creation step pointed to a .sqlite file somewhere in your user&#8217;s documents directory:
+Supposing that your **previous** Core Data stack creation step pointed to a .sqlite file somewhere in your user's documents directory:
 
 <pre class="lang:swift decode:true " title="Configure Persistent Store Coordinator" >// Configure NSPersistentStoreCoordinator with an NSPersistentStore
 let psc = NSPersistentStoreCoordinator(managedObjectModel: model) // model instance creation not shown here...
@@ -73,7 +44,7 @@ try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, a
 
 # After NSPersistentContainer
 
-The key to migrating to `NSPersistentStore` with an existing SQLite persistent store is the `NSPersistentStoreDescription` class. Take a look at the following code to see how to configure an instance of `NSPersistentStoreDescription` and assign it to the `NSPersistentContainer` instance&#8217;s `persistentStoreDescriptions` property:
+The key to migrating to `NSPersistentStore` with an existing SQLite persistent store is the `NSPersistentStoreDescription` class. Take a look at the following code to see how to configure an instance of `NSPersistentStoreDescription` and assign it to the `NSPersistentContainer` instance's `persistentStoreDescriptions` property:
 
 <pre class="lang:swift decode:true mark:8-9" title="Using NSPersistentStoreDescription" >let container = NSPersistentContainer(name: "NameOfDataModel")
 
@@ -94,16 +65,16 @@ container.persistentStoreDescriptions = [storeDescription]
 
 The `let storeURL =` portion of the code is identical in both snippets.
 
-The difference is how you tell the Stack where the persistent store is located. In times past, you&#8217;d tell the NSPersistentStore**Coordinator** this information through its `addPersistentStore` method.
+The difference is how you tell the Stack where the persistent store is located. In times past, you'd tell the NSPersistentStore**Coordinator** this information through its `addPersistentStore` method.
 
 With NSPersistent**Container**, you need to do two things:  
-**1** &#8211; Initialize an `NSPersistentStoreDescription` instance with the `storeURL` (i.e. the URL to where your existing persistent store is located).
+**1** – Initialize an `NSPersistentStoreDescription` instance with the `storeURL` (i.e. the URL to where your existing persistent store is located).
 
-**2** &#8211; Assign the `NSPersistentStoreDescription` instance to the `NSPersistentContainer's` `persistentStoreDescriptions` property.
+**2** – Assign the `NSPersistentStoreDescription` instance to the `NSPersistentContainer's` `persistentStoreDescriptions` property.
 
-One subtlety to note is that the property&#8217;s name is _plural_: persistentStoreDescription**s**.
+One subtlety to note is that the property's name is _plural_: persistentStoreDescription**s**.
 
-Even though may only a single persistent store description instance to assign, such as in the example code above, **you still need to wrap it in an array** before you assign it, since it&#8217;s possible to add more than one description to the container.
+Even though may only a single persistent store description instance to assign, such as in the example code above, **you still need to wrap it in an array** before you assign it, since it's possible to add more than one description to the container.
 
 With that adjustment to the [`NSPersistentContainer` stack creation process][1], your app will once again use the persistent store it used to use!
 

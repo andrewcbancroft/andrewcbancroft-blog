@@ -15,59 +15,13 @@ tags:
   - Swift
 
 ---
-<small>Updated on October 11, 2016 &#8211; Swift 3.0</small>
+<small>Updated on October 11, 2016 – Swift 3.0</small>
 
-Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation _is_ in [&#8220;What is Delegation &#8211; A Swift Developer&#8217;s Guide&#8221;][1]. If you&#8217;re looking for the &#8220;what is it?&#8221; _behind_ the &#8220;how does it work?&#8221;, I recommend giving that first article a read.
+Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation _is_ in [&#8220;What is Delegation – A Swift Developer's Guide&#8221;][1]. If you're looking for the &#8220;what is it?&#8221; _behind_ the &#8220;how does it work?&#8221;, I recommend giving that first article a read.
 
 Once the terminology is unpacked and a high-level overview of delegation as a design pattern is understood, the next logical place to turn is to the question, &#8220;How does delegation work?&#8221;. That is the focus of this article.
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#intro">Introducing the players</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#abstractions">Protocols as abstractions</a>
-      </li>
-      <li>
-        <a href="#listing-the-players">Listing the players</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#visualize-players">Visualize the players</a>
-    </li>
-    <li>
-      <a href="#code">An example in code</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#set-up-delegator">Setting up the delegator</a>
-      </li>
-      <li>
-        <a href="#set-up-delegate">Setting up the delegate</a>
-      </li>
-      <li>
-        <a href="#in-practice">Delegation in practice</a>
-      </li>
-      <li>
-        <a href="#complete-example">Complete example</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#related">You might also enjoy…</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
+
 
 <a name="intro" class="jump-target"></a>
 
@@ -89,19 +43,19 @@ Protocols are an &#8220;abstraction&#8221;, because they do not provide implemen
 
 ##### Protocols as blueprints
 
-With a single blueprint, there can be many homes constructed. The fine details of their construction may differ, but in the end, houses of some similarity that satisfy the blueprint&#8217;s specifications are built.
+With a single blueprint, there can be many homes constructed. The fine details of their construction may differ, but in the end, houses of some similarity that satisfy the blueprint's specifications are built.
 
-So, too with a protocol: Many classes can be built that follow the protocol&#8217;s specifications. At the end of the day, the fine details of each class&#8217; implementation (the stuff between the curly braces `{ ... }`) may differ, but if they adopt the protocol, they&#8217;ll be similar in at least the fact that they provide the named behavior it specified.
+So, too with a protocol: Many classes can be built that follow the protocol's specifications. At the end of the day, the fine details of each class' implementation (the stuff between the curly braces `{ ... }`) may differ, but if they adopt the protocol, they'll be similar in at least the fact that they provide the named behavior it specified.
 
 ##### Protocols as contracts
 
-Another analogy from the legal world is popular for describing protocols: Protocols are similar to _contracts_. It&#8217;s this contractual idea that actually makes the most sense to me when it comes to delegation.
+Another analogy from the legal world is popular for describing protocols: Protocols are similar to _contracts_. It's this contractual idea that actually makes the most sense to me when it comes to delegation.
 
 A contract is the &#8220;thing&#8221; in the middle of two parties who are trying to negotiate a deal. To one party, the contract is a _guarantee_ of some terms that will be satisfied. To the _other_ party, the contract is a set of _obligations_.
 
-In the delegation design pattern, protocols serve the same kind middle-man role as a contract. To the delegat_or_ class, the protocol is a guarantee that some behavior will be supplied by the other party (the delegate). To the delegate class, the protocol is a set of obligations &#8211; things it must implement when it &#8220;signs the contract&#8221;, or in Swift terms, &#8220;adopts the protocol&#8221;.
+In the delegation design pattern, protocols serve the same kind middle-man role as a contract. To the delegat_or_ class, the protocol is a guarantee that some behavior will be supplied by the other party (the delegate). To the delegate class, the protocol is a set of obligations – things it must implement when it &#8220;signs the contract&#8221;, or in Swift terms, &#8220;adopts the protocol&#8221;.
 
-While the person signing the contract probably gets something out of the deal, the focus in the analogy we&#8217;re making to protocols and the delegation pattern is on the person on the guarantee end.
+While the person signing the contract probably gets something out of the deal, the focus in the analogy we're making to protocols and the delegation pattern is on the person on the guarantee end.
 
 That person, being guaranteed by the contract that certain terms will be executed by the person who signs the deal, is free to make decisions and take action based on that promise.
 
@@ -134,7 +88,7 @@ Hopefully the explanation so far has provided some good groundwork to sort out h
 
 #### Setting up the delegator
 
-A delegat_or_ class typically defines a variable property with the word &#8220;delegate&#8221; somewhere in the name (oftentimes the property is simply named `delegate` if that&#8217;s explanatory enough). The Type of the variable property is the key to it all. The variable will be of Type `whatever-you-named-your-delegate-protocol`. So if I named my protocol `MySpecialDelegate`, I&#8217;d specify the Type of the delegate property to be `MySpecialDelegate`.
+A delegat_or_ class typically defines a variable property with the word &#8220;delegate&#8221; somewhere in the name (oftentimes the property is simply named `delegate` if that's explanatory enough). The Type of the variable property is the key to it all. The variable will be of Type `whatever-you-named-your-delegate-protocol`. So if I named my protocol `MySpecialDelegate`, I'd specify the Type of the delegate property to be `MySpecialDelegate`.
 
 <a name="set-up-delegate" class="jump-target"></a>
 
@@ -144,21 +98,21 @@ The delegate class is what _adopts_ the protocol and implements its requirements
 
 `class MyClass: SuperClass, Protocol1, Protocol2 { ... }`
 
-When the delegat_or_ class gets initialized, a second step is often to immediately assign an instance of the class that&#8217;s adopted the delegate protocol to its `delegate` property so that everything is &#8220;wired up&#8221;.
+When the delegat_or_ class gets initialized, a second step is often to immediately assign an instance of the class that's adopted the delegate protocol to its `delegate` property so that everything is &#8220;wired up&#8221;.
 
 <a name="in-practice" class="jump-target"></a>
 
 #### Delegation in practice
 
-Working with the delegation pattern in practice usually involves interacting with the protocol from the _delegate_ end of things. Most of the time, we&#8217;re working with Apple&#8217;s APIs (such as a `UITableView` or just about any other UI control they provide). We typically only require knowledge of the protocol&#8217;s definition so that the class we choose as our delegate can implement the right functions.
+Working with the delegation pattern in practice usually involves interacting with the protocol from the _delegate_ end of things. Most of the time, we're working with Apple's APIs (such as a `UITableView` or just about any other UI control they provide). We typically only require knowledge of the protocol's definition so that the class we choose as our delegate can implement the right functions.
 
 <a name="complete-example" class="jump-target"></a>
 
 #### Complete example
 
-There may be some situations where you may decide to follow Apple&#8217;s lead and use the delegation design pattern for your own code. Maybe you&#8217;re making a special `UIView` subclass or a special picker control (much like `UIImagePickerController`). Or maybe you&#8217;re into game development and would like to communicate from your `SKScene` back to the View Controller. These are just a few that came to mind, but they all present possibilities for utilizing the delegation strategy.
+There may be some situations where you may decide to follow Apple's lead and use the delegation design pattern for your own code. Maybe you're making a special `UIView` subclass or a special picker control (much like `UIImagePickerController`). Or maybe you're into game development and would like to communicate from your `SKScene` back to the View Controller. These are just a few that came to mind, but they all present possibilities for utilizing the delegation strategy.
 
-To give a simple example, suppose that we&#8217;ve decided to create a class to encapsulate all of the logic for a special rating picker control. We&#8217;d like to offer the ability to customize the picker some by allowing the user of our control to specify a preferred rating symbol. We&#8217;d also like to provide a feedback loop to notify the user of our control when certain events have occurred. Delegation is a great tool to provide both customization options and communication between classes. What would this example look like in code?
+To give a simple example, suppose that we've decided to create a class to encapsulate all of the logic for a special rating picker control. We'd like to offer the ability to customize the picker some by allowing the user of our control to specify a preferred rating symbol. We'd also like to provide a feedback loop to notify the user of our control when certain events have occurred. Delegation is a great tool to provide both customization options and communication between classes. What would this example look like in code?
 
 ##### Create the protocol
 
@@ -170,7 +124,7 @@ First, the protocol:
     func didCancel(picker: RatingPicker)
 }</pre>
 
-Notice how this protocol definition allows both the customization point and the feedback loop we were hoping for. It&#8217;s always nice for the delegate to have access to the public API of the instance calling its methods, so the `RatingPicker` (or `UITableView` or `UIScrollView` or whatever) is often passed along as an argument.
+Notice how this protocol definition allows both the customization point and the feedback loop we were hoping for. It's always nice for the delegate to have access to the public API of the instance calling its methods, so the `RatingPicker` (or `UITableView` or `UIScrollView` or whatever) is often passed along as an argument.
 
 ##### Create the delegator
 
@@ -206,13 +160,13 @@ class RatingPicker {
 
 The `delegate` property is strongly typed to be a `RatingPickerDelegate`.
 
-Since it&#8217;s _optional_ here in this implementation, the `delegate` is not absolutely essential for the `RatingPicker` to work. If it were essential, we&#8217;d parameterize `init` and assign it during initialization.
+Since it's _optional_ here in this implementation, the `delegate` is not absolutely essential for the `RatingPicker` to work. If it were essential, we'd parameterize `init` and assign it during initialization.
 
-I&#8217;ve used optional chaining to get at the `delegate's` methods if the `delegate` isn&#8217;t nil.
+I've used optional chaining to get at the `delegate's` methods if the `delegate` isn't nil.
 
 ##### Choosing the delegate
 
-Choosing the delegate class is the final decision to make. It&#8217;s not uncommon for a View Controller to take up the responsibility of being a delegate. In [&#8220;Pick a Delegate, Any Delegate&#8221;][5], I attempted to show how it&#8217;s _not_ necessary to use the View Controller as your one stop delegate shop. For this example, I&#8217;ll avoid giving the View Controller more responsibility than it needs and I&#8217;ll create a simple handler class to assume the delegated responsibilities:
+Choosing the delegate class is the final decision to make. It's not uncommon for a View Controller to take up the responsibility of being a delegate. In [&#8220;Pick a Delegate, Any Delegate&#8221;][5], I attempted to show how it's _not_ necessary to use the View Controller as your one stop delegate shop. For this example, I'll avoid giving the View Controller more responsibility than it needs and I'll create a simple handler class to assume the delegated responsibilities:
 
 <pre class="lang:swift decode:true " title="RatingPickerHandler" >class RatingPickerHandler: RatingPickerDelegate {
     func preferredRatingSymbol(picker: RatingPicker) -&gt; UIImage? {

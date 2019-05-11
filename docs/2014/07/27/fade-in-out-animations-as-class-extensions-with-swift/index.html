@@ -25,9 +25,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Fade In / Out Animations as Class Extensions in Swift" />
-<meta property="og:description" content="Updated on December 6, 2016 &#8211; Xcode 8 &amp; Swift 3.0
+<meta property="og:description" content="Updated on December 6, 2016 – Xcode 8 &amp; Swift 3.0
 The question has been asked (and solved) on StackOverflow in Objective-C, but my aim in this post is to take the Objective-C implementation and leverage Swift extensions to make this job even easier to achieve and reuse.
-Jump to&#8230;   Fading without an extension   Refactoring using Swift extensions    Step 1 &#8211; Create UIViewExtensions." />
+Jump to&#8230;   Fading without an extension   Refactoring using Swift extensions    Step 1 – Create UIViewExtensions." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" />
 <meta property="article:published_time" content="2014-07-27T20:13:53&#43;00:00"/>
@@ -35,9 +35,9 @@ Jump to&#8230;   Fading without an extension   Refactoring using Swift extension
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Fade In / Out Animations as Class Extensions in Swift"/>
-<meta name="twitter:description" content="Updated on December 6, 2016 &#8211; Xcode 8 &amp; Swift 3.0
+<meta name="twitter:description" content="Updated on December 6, 2016 – Xcode 8 &amp; Swift 3.0
 The question has been asked (and solved) on StackOverflow in Objective-C, but my aim in this post is to take the Objective-C implementation and leverage Swift extensions to make this job even easier to achieve and reuse.
-Jump to&#8230;   Fading without an extension   Refactoring using Swift extensions    Step 1 &#8211; Create UIViewExtensions."/>
+Jump to&#8230;   Fading without an extension   Refactoring using Swift extensions    Step 1 – Create UIViewExtensions."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -168,7 +168,7 @@ MathJax.Hub.Config({
 
     
 
-<p><small>Updated on December 6, 2016 &#8211; Xcode 8 &amp; Swift 3.0</small></p>
+<p><small>Updated on December 6, 2016 – Xcode 8 &amp; Swift 3.0</small></p>
 
 <p>The question has been <a title="Fade In / Out - Stack Overflow" href="http://stackoverflow.com/questions/20891614/fade-in-fade-out-animation" target="_blank">asked (and solved) on StackOverflow in Objective-C</a>, but my aim in this post is to take the Objective-C implementation and leverage Swift <em>extensions</em> to make this job even easier to achieve and reuse.</p>
 
@@ -187,13 +187,13 @@ MathJax.Hub.Config({
     </li>
     <ul>
       <li>
-        <a href="#create-uiviewextensions">Step 1 &#8211; Create UIViewExtensions.swift</a>
+        <a href="#create-uiviewextensions">Step 1 – Create UIViewExtensions.swift</a>
       </li>
       <li>
-        <a href="#move-fadeout-fadein">Step 2 &#8211; Move fadeOut and fadeIn to UIViewExtensions.swift</a>
+        <a href="#move-fadeout-fadein">Step 2 – Move fadeOut and fadeIn to UIViewExtensions.swift</a>
       </li>
       <li>
-        <a href="#parameters-default-values">Step 3 &#8211; Provide parameters with default values</a>
+        <a href="#parameters-default-values">Step 3 – Provide parameters with default values</a>
       </li>
     </ul></p>
 
@@ -210,9 +210,9 @@ MathJax.Hub.Config({
 
 <p>Fade animations basically involve adjusting a <span class="lang:swift decode:true  crayon-inline">UIView</span>&#8216;s alpha value from 1.0 to 0.0 (fade out) or 0.0 to 1.0 (fade in) over a specified duration using some kind of easing option (like starting fast, then slowing down at the end of the animation, or starting slow and speeding up at the end of the animation).</p>
 
-<p>I&#8217;ve <a title="Swift Fade Animations - GitHub Project" href="https://github.com/andrewcbancroft/SwiftFadeAnimations" target="_blank">published an example XCode project to GitHub</a> with the final working version of the code below if you&#8217;d like to just see it. Read on for the full explanation.</p>
+<p>I've <a title="Swift Fade Animations - GitHub Project" href="https://github.com/andrewcbancroft/SwiftFadeAnimations" target="_blank">published an example XCode project to GitHub</a> with the final working version of the code below if you'd like to just see it. Read on for the full explanation.</p>
 
-<p><strong>Edit: 2/23/2016</strong> &#8211; A new idea flowing out of my <a href="https://www.pluralsight.com/courses/cocoapods-xcode-project-dependencies">Pluralsight Course</a> involves a similar implementation, but using protocol extensions instead. This article&#8217;s implementation still works though, so feel free to check out either the contents of this blog entry, or the new one!</p>
+<p><strong>Edit: 2/23/2016</strong> – A new idea flowing out of my <a href="https://www.pluralsight.com/courses/cocoapods-xcode-project-dependencies">Pluralsight Course</a> involves a similar implementation, but using protocol extensions instead. This article's implementation still works though, so feel free to check out either the contents of this blog entry, or the new one!</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -259,7 +259,7 @@ MathJax.Hub.Config({
     }
 }</pre>
 
-<p>What I don&#8217;t like about this implementation is that if I want to perform this same kind of animation again elsewhere in my app, I&#8217;ve got to write the bulk of that algorithm again each time I want to fade something in or out. I&#8217;d like it to be in one place for easier maintainability. I&#8217;d also like to be able to fade in / out simply by doing something like <code>self.birdTypeLabel.fadeIn()</code> or <code>self.birdTypeLabel.fadeOut()</code> <em>optionally</em> setting parameters for duration, delay, and completion. With these goals in mind, let&#8217;s see what Swift extensions provide us in terms of simplifying the process.</p>
+<p>What I don't like about this implementation is that if I want to perform this same kind of animation again elsewhere in my app, I've got to write the bulk of that algorithm again each time I want to fade something in or out. I'd like it to be in one place for easier maintainability. I'd also like to be able to fade in / out simply by doing something like <code>self.birdTypeLabel.fadeIn()</code> or <code>self.birdTypeLabel.fadeOut()</code> <em>optionally</em> setting parameters for duration, delay, and completion. With these goals in mind, let's see what Swift extensions provide us in terms of simplifying the process.</p>
 
 <p><a name="refactoring-using-swift-extensions" class="jump-target"></a></p>
 
@@ -267,17 +267,17 @@ MathJax.Hub.Config({
 
 <p><a name="create-uiviewextensions" class="jump-target"></a></p>
 
-<h4 id="step-1-8211-create-uiviewextensions-swift">Step 1 &#8211; Create UIViewExtensions.swift</h4>
+<h4 id="step-1-8211-create-uiviewextensions-swift">Step 1 – Create UIViewExtensions.swift</h4>
 
 <p>Create a new Swift file and name it something like UIViewExtensions.swift</p>
 
 <p><a name="move-fadeout-fadein" class="jump-target"></a></p>
 
-<h4 id="step-2-8211-move-fadeout-and-fadein-to-uiviewextensions-swift">Step 2 &#8211; Move fadeOut and fadeIn to UIViewExtensions.swift</h4>
+<h4 id="step-2-8211-move-fadeout-and-fadein-to-uiviewextensions-swift">Step 2 – Move fadeOut and fadeIn to UIViewExtensions.swift</h4>
 
 <p>Use the previously-written <code>fadeOut()</code> and `fadeIn() algorithms in the new UIViewExtensions.swift file.</p>
 
-<p>We can leverage what we wrote before with a few modifications. Take a look (I&#8217;ve written some comments to help identify some of the tweaks for the extension version):</p>
+<p>We can leverage what we wrote before with a few modifications. Take a look (I've written some comments to help identify some of the tweaks for the extension version):</p>
 
 <pre class="lang:swift mark:8,14 decode:true " title="UIViewExtensions.swift">import Foundation
 import UIKit
@@ -301,7 +301,7 @@ extension UIView {
 
 <p><a name="parameters-default-values" class="jump-target"></a></p>
 
-<h4 id="step-3-8211-provide-parameters-with-default-values">Step 3 &#8211; Provide parameters with default values</h4>
+<h4 id="step-3-8211-provide-parameters-with-default-values">Step 3 – Provide parameters with default values</h4>
 
 <p>In Step 2, we simply hard-coded values for duration, delay, and completion. Below is the final version of the extension that provides parameters for you to (optionally) pass arguments to.</p>
 
@@ -346,7 +346,7 @@ class ViewController: UIViewController {
 
 <ul>
 <li>Define the animation logic in one place for easy maintainability</li>
-<li>Make my view controller&#8217;s code simpler and clean</li>
+<li>Make my view controller's code simpler and clean</li>
 <li>Provide a more natural way to perform the animation on any UIView instance by simply calling fadeIn() or fadeOut()</li>
 <li>Give myself the option to specify a different duration, delay, or completion closure if I need extra control</li>
 </ul>

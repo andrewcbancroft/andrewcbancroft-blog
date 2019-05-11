@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="SQL Sever Synonyms, Entity Framework, &amp; Integrated Security" />
-<meta property="og:description" content="Jump to&#8230;   Scenario   Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&#8217;   Resolving the error    Creating the view   Granting permissions  
+<meta property="og:description" content="Jump to&#8230;   Scenario   Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON'   Resolving the error    Creating the view   Granting permissions  
 &lt;li&gt; &lt;a href=&quot;#share&quot;&gt;Was this article helpful? Please share!&lt;/a&gt; &lt;/li&gt;   
 
 Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet." />
@@ -36,7 +36,7 @@ Scenario This may be an edge case, but I spent enough time (a couple of days) sp
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="SQL Sever Synonyms, Entity Framework, &amp; Integrated Security"/>
-<meta name="twitter:description" content="Jump to&#8230;   Scenario   Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&#8217;   Resolving the error    Creating the view   Granting permissions  
+<meta name="twitter:description" content="Jump to&#8230;   Scenario   Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON'   Resolving the error    Creating the view   Granting permissions  
 &lt;li&gt; &lt;a href=&quot;#share&quot;&gt;Was this article helpful? Please share!&lt;/a&gt; &lt;/li&gt;   
 
 Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet."/>
@@ -181,7 +181,7 @@ MathJax.Hub.Config({
       <a href="#scenario">Scenario</a>
     </li>
     <li>
-      <a href="#login-failed">Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&#8217;</a>
+      <a href="#login-failed">Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON'</a>
     </li>
     <li>
       <a href="#reolving-error">Resolving the error</a>
@@ -214,7 +214,7 @@ MathJax.Hub.Config({
 <p><strong>Basics</strong></p>
 
 <ul>
-<li>We&#8217;re building an ASP.Net web application</li>
+<li>We're building an ASP.Net web application</li>
 <li>Entity Framework has been chosen as our ORM</li>
 <li>SQL Server (any version supporting <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonyms</a>) is our backend database server of choice</li>
 </ul>
@@ -222,19 +222,19 @@ MathJax.Hub.Config({
 <p><strong>Details</strong></p>
 
 <ul>
-<li>We&#8217;re using &#8220;Integrated Security=True&#8221; in our connection string to the database (in web.config)</li>
+<li>We're using &#8220;Integrated Security=True&#8221; in our connection string to the database (in web.config)</li>
 <li>The Application Pool in which our app resides is running under a domain service account (ie, not the default identity)</li>
 <li>Our application primarily talks to one database, but there is information in <em>another</em> database that we need to pull into our app</li>
-<li>To access the data in that other database, we&#8217;ve chosen to create a <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonym</a></li>
+<li>To access the data in that other database, we've chosen to create a <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonym</a></li>
 </ul>
 
 <p>Every bullet point in this scenario is normal and valid, until you get to the part about using &#8220;Integrated Security=True&#8221; in your connection string&#8230;</p>
 
 <p><a name="login-failed" class="jump-target"></a></p>
 
-<h3 id="login-failed-for-user-8216-nt-authority-anonymous-logon-8217">Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&#8217;</h3>
+<h3 id="login-failed-for-user-8216-nt-authority-anonymous-logon-8217">Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON'</h3>
 
-<p>If we had chosen to use SQL Server authentication in our conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&#8217;s what I had been doing in my own application. I started running into the &#8220;Login failed&#8230;&#8221; error message once I switched to Integrated Security.</p>
+<p>If we had chosen to use SQL Server authentication in our conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that's what I had been doing in my own application. I started running into the &#8220;Login failed&#8230;&#8221; error message once I switched to Integrated Security.</p>
 
 <p>For some reason &#8220;Integrated Security=True&#8221; that throws Entity Framework for a loop. It accesses the database used in the <code>DbContext</code> instance just fine, but the second a line of code needs to use the object mapped to the <em>Synonym</em>, <strong>boom</strong>&#8230; crash&#8230; error&#8230;</p>
 
@@ -242,29 +242,29 @@ MathJax.Hub.Config({
 
 <h3 id="resolving-the-error">Resolving the error</h3>
 
-<p>It turns out that the resolution is really, really simple. Instead of using a Synonym, use a View. You don&#8217;t have to change a single line of .Net code. Just make sure the view is named the same as the Synonym was (and drop the Synonym from the database, of course).</p>
+<p>It turns out that the resolution is really, really simple. Instead of using a Synonym, use a View. You don't have to change a single line of .Net code. Just make sure the view is named the same as the Synonym was (and drop the Synonym from the database, of course).</p>
 
 <p><a name="creating-view" class="jump-target"></a></p>
 
 <h4 id="creating-the-view">Creating the view</h4>
 
-<p>A Synonym essentially maps to an entire table, so the View&#8217;s structure could literally be a simple <code>select * from [fully.qualified.database.objectName]</code>. If your DBA hates <code>select *</code>, you&#8217;ll end up listing out every column that your Entity Framework object lists as one of its Properties.</p>
+<p>A Synonym essentially maps to an entire table, so the View's structure could literally be a simple <code>select * from [fully.qualified.database.objectName]</code>. If your DBA hates <code>select *</code>, you'll end up listing out every column that your Entity Framework object lists as one of its Properties.</p>
 
 <p><a name="granting-permissions" class="jump-target"></a></p>
 
 <h4 id="granting-permissions">Granting permissions</h4>
 
-<p>If the service account that&#8217;s running your Application Pool doesn&#8217;t already have permission to the database objects you created the View for, you need to go in and grant appropriate permissions to that account. Otherwise, you&#8217;re likely to get an error stating</p>
+<p>If the service account that's running your Application Pool doesn't already have permission to the database objects you created the View for, you need to go in and grant appropriate permissions to that account. Otherwise, you're likely to get an error stating</p>
 
 <blockquote>
 <p>The server principal &#8220;Domain\PrincipalName&#8221; is not able to access the database &#8220;DatabaseName&#8221; under the current security context.</p>
 </blockquote>
 
-<p>Be specific and granular with the permission you grant to the account. If you&#8217;re just pulling in data for your app to display, only give the account SELECT permission on the database object your View references.</p>
+<p>Be specific and granular with the permission you grant to the account. If you're just pulling in data for your app to display, only give the account SELECT permission on the database object your View references.</p>
 
 <h3 id="wrapping-up">Wrapping up</h3>
 
-<p>In essence, using a Synonym that references a database object in <em>another database</em> with Entity Framework and Integrated Security just doesn&#8217;t work out in the end. Somehow, the security context loses the identity of the account running the application pool, and the dreated Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&#8217; rears its ugly head. Thankfully, the solution is simple: Create a View instead of a Synonym, grant approprate permissions, and you&#8217;ll be off and running (and you&#8217;ll avoid usernames and passwords in your web.config)!</p>
+<p>In essence, using a Synonym that references a database object in <em>another database</em> with Entity Framework and Integrated Security just doesn't work out in the end. Somehow, the security context loses the identity of the account running the application pool, and the dreated Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON' rears its ugly head. Thankfully, the solution is simple: Create a View instead of a Synonym, grant approprate permissions, and you'll be off and running (and you'll avoid usernames and passwords in your web.config)!</p>
 
 <p><a name="share" class="jump-target"></a></p>
 

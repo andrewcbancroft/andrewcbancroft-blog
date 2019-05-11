@@ -25,9 +25,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="The 5 W’s of Swift Extensions" />
-<meta property="og:description" content="For newcomers to Swift, the concept of extending a Type may be new, so I thought I&#8217;d share a high-level overview of Swift extensions in the style of asking the 5 W&#8217;s: Who? What? When? Where? Why?
+<meta property="og:description" content="For newcomers to Swift, the concept of extending a Type may be new, so I thought I'd share a high-level overview of Swift extensions in the style of asking the 5 W's: Who? What? When? Where? Why?
 Who &#8220;Swift developers&#8221; is a pretty obvious answer, but here are a scenarios to ask yourself about to see if you could make use of Swift extensions:
- &#8220;I am relying on Types that are found in 3rd party frameworks or libraries and I wish I could add a little bit of functionality that isn&#8217;t there out of the box." />
+ &#8220;I am relying on Types that are found in 3rd party frameworks or libraries and I wish I could add a little bit of functionality that isn't there out of the box." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2014/11/03/the-5-ws-of-swift-extensions/" />
 <meta property="article:published_time" content="2014-11-03T19:04:19&#43;00:00"/>
@@ -35,9 +35,9 @@ Who &#8220;Swift developers&#8221; is a pretty obvious answer, but here are a sc
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="The 5 W’s of Swift Extensions"/>
-<meta name="twitter:description" content="For newcomers to Swift, the concept of extending a Type may be new, so I thought I&#8217;d share a high-level overview of Swift extensions in the style of asking the 5 W&#8217;s: Who? What? When? Where? Why?
+<meta name="twitter:description" content="For newcomers to Swift, the concept of extending a Type may be new, so I thought I'd share a high-level overview of Swift extensions in the style of asking the 5 W's: Who? What? When? Where? Why?
 Who &#8220;Swift developers&#8221; is a pretty obvious answer, but here are a scenarios to ask yourself about to see if you could make use of Swift extensions:
- &#8220;I am relying on Types that are found in 3rd party frameworks or libraries and I wish I could add a little bit of functionality that isn&#8217;t there out of the box."/>
+ &#8220;I am relying on Types that are found in 3rd party frameworks or libraries and I wish I could add a little bit of functionality that isn't there out of the box."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -168,16 +168,16 @@ MathJax.Hub.Config({
 
     
 
-<p>For newcomers to Swift, the concept of extending a Type may be new, so I thought I&#8217;d share a high-level overview of Swift extensions in the style of asking the 5 W&#8217;s: Who? What? When? Where? Why?</p>
+<p>For newcomers to Swift, the concept of extending a Type may be new, so I thought I'd share a high-level overview of Swift extensions in the style of asking the 5 W's: Who? What? When? Where? Why?</p>
 
 <h3 id="who">Who</h3>
 
 <p>&#8220;Swift developers&#8221; is a pretty obvious answer, but here are a scenarios to ask yourself about to see if you could make use of Swift extensions:</p>
 
 <ul>
-<li>&#8220;I am relying on Types that are found in 3rd party frameworks or libraries and I wish I could add a little bit of functionality that isn&#8217;t there out of the box. Can I do that easily?&#8221;</li>
-<li>&#8220;In utilizing Apple&#8217;s frameworks I find that a Type could be more powerful if it could <em>just do</em> [x]. Can I add that power to the Apple framework Type?&#8221;</li>
-<li>&#8220;I have written a framework for myself / my team that is used in multiple apps, but I desire to add behavior to one of the framework&#8217;s Types that is only relevant in a specific area of one particular app. Can I add that special functionality without changing the framework source?&#8221;</li>
+<li>&#8220;I am relying on Types that are found in 3rd party frameworks or libraries and I wish I could add a little bit of functionality that isn't there out of the box. Can I do that easily?&#8221;</li>
+<li>&#8220;In utilizing Apple's frameworks I find that a Type could be more powerful if it could <em>just do</em> [x]. Can I add that power to the Apple framework Type?&#8221;</li>
+<li>&#8220;I have written a framework for myself / my team that is used in multiple apps, but I desire to add behavior to one of the framework's Types that is only relevant in a specific area of one particular app. Can I add that special functionality without changing the framework source?&#8221;</li>
 </ul>
 
 <p>If you related to any or all of those scenarios, you could potentially make use of Swift extensions to speed your workflow and make your more organized and clean. Read on for more!</p>
@@ -186,34 +186,34 @@ MathJax.Hub.Config({
 
 <blockquote>
 <p>Extensions add new functionality to an <strong>existing</strong> class, structure, or enumeration type.<br />
-&#8211; <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html" title="Apple Swift Developer Referenc">Apple Swift Developer Reference</a></p>
+– <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html" title="Apple Swift Developer Referenc">Apple Swift Developer Reference</a></p>
 </blockquote>
 
 <p>The key word is <strong>existing</strong>. Hopefully the scenarios listed under &#8220;Who&#8221; make a little more sense with this information in mind. In all of those cases, you wish to add functionality to Types that have <em>already</em> been designed and implemented.</p>
 
-<p>What I have found to be amazing about Swift extensions is that the word &#8220;existing&#8221; <em>also</em> applies to Types for which you don&#8217;t have access to the original source code. <em>That</em> is powerful!</p>
+<p>What I have found to be amazing about Swift extensions is that the word &#8220;existing&#8221; <em>also</em> applies to Types for which you don't have access to the original source code. <em>That</em> is powerful!</p>
 
-<p>So extensions are especially useful if you want to add behavior to a Type found in any of the Cocoa / Cocoa Touch frameworks, or a 3rd party&#8217;s framework. Additionally, if you&#8217;ve created your own libraries and frameworks and you&#8217;d like to add behavior without modifying the original source, extensions are a good choice for adding that behavior, especially if what you&#8217;re adding doesn&#8217;t apply to every single usage of the Type you&#8217;re extending.</p>
+<p>So extensions are especially useful if you want to add behavior to a Type found in any of the Cocoa / Cocoa Touch frameworks, or a 3rd party's framework. Additionally, if you've created your own libraries and frameworks and you'd like to add behavior without modifying the original source, extensions are a good choice for adding that behavior, especially if what you're adding doesn't apply to every single usage of the Type you're extending.</p>
 
 <h3 id="when">When</h3>
 
-<p>The most logical time to use Swift extensions is when you have a piece of functionality that you want to be able to <em>reuse</em>, and the most reasonable place to put that code is within an already-existing Type. Ideally, the piece of functionality is <em>so closely related</em> to that Type that it just makes sense to extend that Type&#8217;s behavior to include your new functionality&#8230; &#8220;If <em>only</em> I could peek inside that Type&#8217;s implementation to inject my new code&#8221;, you think to yourself.</p>
+<p>The most logical time to use Swift extensions is when you have a piece of functionality that you want to be able to <em>reuse</em>, and the most reasonable place to put that code is within an already-existing Type. Ideally, the piece of functionality is <em>so closely related</em> to that Type that it just makes sense to extend that Type's behavior to include your new functionality&#8230; &#8220;If <em>only</em> I could peek inside that Type's implementation to inject my new code&#8221;, you think to yourself.</p>
 
-<p>If you&#8217;re pondering along those lines, then chances are, Swift extensions will aid you in your effort to create more reusable, clean, and organized code.</p>
+<p>If you're pondering along those lines, then chances are, Swift extensions will aid you in your effort to create more reusable, clean, and organized code.</p>
 
-<p>Perhaps a good question to ask here is, <strong>&#8220;When <em>not</em>?&#8221;</strong>. When I see phrases like, &#8220;most reasonable place to put that code&#8221;, it begs the question, &#8220;What does &#8216;most reasonable&#8217; mean?&#8221;. The answer isn&#8217;t black and white. I&#8217;ll offer what I&#8217;ve done in the past as general advice:</p>
+<p>Perhaps a good question to ask here is, <strong>&#8220;When <em>not</em>?&#8221;</strong>. When I see phrases like, &#8220;most reasonable place to put that code&#8221;, it begs the question, &#8220;What does &#8216;most reasonable' mean?&#8221;. The answer isn't black and white. I'll offer what I've done in the past as general advice:</p>
 
 <p>As a general rule of thumb, extensions are great for small, simple additions to a Type, rather than long, complex functionality.</p>
 
-<p>If you&#8217;re implementing a <em>set</em> of behavior (more than a handful of methods or computed properties), creating a new Type to encapsulate that behavior is most appropriate. After all, that&#8217;s what classes and structs <em>do</em>. When deciding on extension vs new Type, they key word that comes to my mind is <strong>relatedness</strong>. <em>How related</em> is this behavior to the Type I think I want to extend?</p>
+<p>If you're implementing a <em>set</em> of behavior (more than a handful of methods or computed properties), creating a new Type to encapsulate that behavior is most appropriate. After all, that's what classes and structs <em>do</em>. When deciding on extension vs new Type, they key word that comes to my mind is <strong>relatedness</strong>. <em>How related</em> is this behavior to the Type I think I want to extend?</p>
 
 <p>Additionally, extensions are limited in the area of maintaining state. Extensions cannot add new <a href="https://developer.apple.com/library/ios/documentation/swift/conceptual/Swift_Programming_Language/Properties.html#//apple_ref/doc/uid/TP40014097-CH14-XID_381">stored properties</a> (only <a href="https://developer.apple.com/library/ios/documentation/swift/conceptual/Swift_Programming_Language/Properties.html#//apple_ref/doc/uid/TP40014097-CH14-XID_386">computed ones</a>). Creating a new Type to encapsulate the stored properties and the behavior that utilizes them is your alternative solution in this case.</p>
 
 <h3 id="where">Where</h3>
 
-<p>So you&#8217;ve decided that you want to create an extension to some class, struct, or enumeration. Where do you put it? My thought on this has always been to create a new .swift file, give it a name that indicates which Type you&#8217;re extending, and create the extension inside that file.</p>
+<p>So you've decided that you want to create an extension to some class, struct, or enumeration. Where do you put it? My thought on this has always been to create a new .swift file, give it a name that indicates which Type you're extending, and create the extension inside that file.</p>
 
-<p>So if I want to extend, say, String to have a new method called &#8220;sayHello&#8221; which printed &#8220;Hello&#8221; when invoked, I would create a new .swift file called StringExtensions.swift. I&#8217;d then place my extension inside:</p>
+<p>So if I want to extend, say, String to have a new method called &#8220;sayHello&#8221; which printed &#8220;Hello&#8221; when invoked, I would create a new .swift file called StringExtensions.swift. I'd then place my extension inside:</p>
 
 <pre class="lang:swift decode:true " title="StringExtensions.swift" >extension String {
     func sayHello() {
@@ -221,22 +221,22 @@ MathJax.Hub.Config({
     }
 }</pre>
 
-<p>Hey, awesome &#8211; you got a bonus <em>How</em> with that quick example! Creating an extension in Swift is <em>that easy</em>.</p>
+<p>Hey, awesome – you got a bonus <em>How</em> with that quick example! Creating an extension in Swift is <em>that easy</em>.</p>
 
 <h3 id="why">Why</h3>
 
 <ul>
-<li>Swift extensions are powerful. They empower you to add behavior to <em>any</em> class, struct, or enumeration, even if you don&#8217;t have access to the original source code.</li>
+<li>Swift extensions are powerful. They empower you to add behavior to <em>any</em> class, struct, or enumeration, even if you don't have access to the original source code.</li>
 <li>They are simple and convenient to create.</li>
 <li>They encourage code re-use by encapsulating behavior that will be used more than once in your project in a single location.</li>
-<li>Additionally, they promote good code organization, leading to cleaner and more readable code when used to add behavior that&#8217;s closely related to the Type they&#8217;re extending.</li>
+<li>Additionally, they promote good code organization, leading to cleaner and more readable code when used to add behavior that's closely related to the Type they're extending.</li>
 </ul>
 
 <h3 id="summary">Summary</h3>
 
-<p>We&#8217;ve just explored Swift extensions by analyzing <em>who</em> should use them, <em>what</em> they are, <em>when</em> they&#8217;re appropriate, <em>where</em> to put them, and <em>why</em> they&#8217;re useful to your development efforts. As a bonus, <em>how</em> to program an extension was given as a simple example.</p>
+<p>We've just explored Swift extensions by analyzing <em>who</em> should use them, <em>what</em> they are, <em>when</em> they're appropriate, <em>where</em> to put them, and <em>why</em> they're useful to your development efforts. As a bonus, <em>how</em> to program an extension was given as a simple example.</p>
 
-<p>If you&#8217;ve found Swift extensions to be useful to your development efforts, sound off in the comments below! I&#8217;d love to hear how you&#8217;re utilizing this feature of Swift.</p>
+<p>If you've found Swift extensions to be useful to your development efforts, sound off in the comments below! I'd love to hear how you're utilizing this feature of Swift.</p>
 
 <div class="related-posts">
   You might also enjoy</p> 

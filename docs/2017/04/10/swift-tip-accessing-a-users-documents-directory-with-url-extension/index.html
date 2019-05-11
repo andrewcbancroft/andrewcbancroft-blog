@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Swift Tip – Accessing a User’s Documents Directory with URL Extension" />
-<meta property="og:description" content="When you need to access the documents directory on a user&#8217;s device, what do you do?
-In the past, I know I&#8217;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know &#8211; DRY &#8211; don&#8217;t repeat yourself.
+<meta property="og:description" content="When you need to access the documents directory on a user's device, what do you do?
+In the past, I know I've gotten used to typing out the same set of code over and over throughout my apps. I know, I know &#8211; DRY &#8211; don't repeat yourself.
 One way to simplify this is to use a Swift extension to URL. Doing this will help you centralize where this code is located in your app, and keep your code DRY." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/10/swift-tip-accessing-a-users-documents-directory-with-url-extension/" />
@@ -35,8 +35,8 @@ One way to simplify this is to use a Swift extension to URL. Doing this will hel
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Tip – Accessing a User’s Documents Directory with URL Extension"/>
-<meta name="twitter:description" content="When you need to access the documents directory on a user&#8217;s device, what do you do?
-In the past, I know I&#8217;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know &#8211; DRY &#8211; don&#8217;t repeat yourself.
+<meta name="twitter:description" content="When you need to access the documents directory on a user's device, what do you do?
+In the past, I know I've gotten used to typing out the same set of code over and over throughout my apps. I know, I know &#8211; DRY &#8211; don't repeat yourself.
 One way to simplify this is to use a Swift extension to URL. Doing this will help you centralize where this code is located in your app, and keep your code DRY."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
@@ -168,11 +168,11 @@ MathJax.Hub.Config({
 
     
 
-<p>When you need to access the documents directory on a user&#8217;s device, what do you do?</p>
+<p>When you need to access the documents directory on a user's device, what do you do?</p>
 
-<p>In the past, I know I&#8217;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know &#8211; DRY &#8211; <em>don&#8217;t repeat yourself</em>.</p>
+<p>In the past, I know I've gotten used to typing out the same set of code over and over throughout my apps. I know, I know &#8211; DRY &#8211; <em>don't repeat yourself</em>.</p>
 
-<p>One way to simplify this is to use a Swift extension to <code>URL</code>. Doing this will help you centralize where this code is located in your app, and keep your code DRY. If you need to access the documents directory in more than one spot, you&#8217;re just a <code>URL</code> property call away from it.</p>
+<p>One way to simplify this is to use a Swift extension to <code>URL</code>. Doing this will help you centralize where this code is located in your app, and keep your code DRY. If you need to access the documents directory in more than one spot, you're just a <code>URL</code> property call away from it.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -212,7 +212,7 @@ MathJax.Hub.Config({
 
 <h1 id="extension-usage">Extension usage</h1>
 
-<p>Here&#8217;s an example of using the extension during the routine to create the Core Data stack. For that process, you need to grab a URL to where your SQLite database file will be located. Take a look:</p>
+<p>Here's an example of using the extension during the routine to create the Core Data stack. For that process, you need to grab a URL to where your SQLite database file will be located. Take a look:</p>
 
 <pre class="lang:swift decode:true " >// ...
 
@@ -221,7 +221,7 @@ let storeURL = URL.documentsURL.appendingPathComponent("AppDatabase.sqlite")
 // use the URL
 </pre>
 
-<p>You could be needing to access the directory for saving files or retrieving files totally unrelated to Core Data. No matter what you&#8217;re doing, being able to write <code>URL.documentsURL</code> is pretty convenient!</p>
+<p>You could be needing to access the directory for saving files or retrieving files totally unrelated to Core Data. No matter what you're doing, being able to write <code>URL.documentsURL</code> is pretty convenient!</p>
 
 <p><a name="share" class="jump-target"></a></p>
 

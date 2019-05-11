@@ -200,9 +200,9 @@ MathJax.Hub.Config({
 
 <h3 id="inspiration">Inspiration</h3>
 
-<p>A simple idea came to mind: Create something that allows client developers of the pod to easily fade views in or out on any UIView instance. If you&#8217;ve read andrewcbancroft.com for a long time, you might remember that I <a href="https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/">wrote on this very subject already</a>, but there, I used an extension to UIView, because protocol extensions hadn&#8217;t been invented yet!</p>
+<p>A simple idea came to mind: Create something that allows client developers of the pod to easily fade views in or out on any UIView instance. If you've read andrewcbancroft.com for a long time, you might remember that I <a href="https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/">wrote on this very subject already</a>, but there, I used an extension to UIView, because protocol extensions hadn't been invented yet!</p>
 
-<p>For my course, I borrowed an idea that I first saw done by <a href="https://twitter.com/FlexMonkey">@NSFlexMonkey</a> when he built the <a href="http://flexmonkey.blogspot.co.uk/2015/10/rotatable-swift-protocol-extension-to.html">Rotateable protocol extension</a>. Only instead of rotating, I&#8217;m fading, so I named it &#8220;Fadeable&#8221;!</p>
+<p>For my course, I borrowed an idea that I first saw done by <a href="https://twitter.com/FlexMonkey">@NSFlexMonkey</a> when he built the <a href="http://flexmonkey.blogspot.co.uk/2015/10/rotatable-swift-protocol-extension-to.html">Rotateable protocol extension</a>. Only instead of rotating, I'm fading, so I named it &#8220;Fadeable&#8221;!</p>
 
 <p><a name="demo" class="jump-target"></a></p>
 
@@ -214,7 +214,7 @@ MathJax.Hub.Config({
 
 <h3 id="fadeable-code-sample">Fadeable code sample</h3>
 
-<p>The &#8220;library&#8217;s&#8221; source can be found over at GitHub:</p>
+<p>The &#8220;library's&#8221; source can be found over at GitHub:</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -229,7 +229,7 @@ MathJax.Hub.Config({
   </ul>
 </div></p>
 
-<p>Here&#8217;s a snippet from the repository so you can see what the extension&#8217;s doing:</p>
+<p>Here's a snippet from the repository so you can see what the extension's doing:</p>
 
 <pre class="lang:swift decode:true " title="Fadeable.swift" >import UIKit
 
@@ -259,7 +259,7 @@ extension UIView: Fadeable {}</pre>
 
 <p>Then I create an extension to the <code>Fadeable</code> protocol and provide a simple, default implementation which will animate the alpha to 0, or to 1, depending on whether or not the client developer is fading in or out.</p>
 
-<p>Finally, I extend <code>UIView</code> to conform to <code>Fadeable</code>. And that&#8217;s it! Any <code>UIView</code> instance can now fade in or out by simply calling the appropriate function:</p>
+<p>Finally, I extend <code>UIView</code> to conform to <code>Fadeable</code>. And that's it! Any <code>UIView</code> instance can now fade in or out by simply calling the appropriate function:</p>
 
 <pre class="lang:swift decode:true " >class ViewController: UIViewController {
     
@@ -281,7 +281,7 @@ extension UIView: Fadeable {}</pre>
 
 <h3 id="creating-cocoapod-libraries">Creating CocoaPod libraries</h3>
 
-<p>If you&#8217;re interested in seeing a full walk-through of how I created and published the Fadeable Library to the CocoaPods Trunk, I would love it if you gave Module 3 of my Pluralsight course, titled a watch! It&#8217;s titled <a href="https://www.pluralsight.com/courses/cocoapods-xcode-project-dependencies">Creating CocoaPod Libraries</a> and covers from beginning to end, the process of creating a library that&#8217;s compatible with CocoaPods.</p>
+<p>If you're interested in seeing a full walk-through of how I created and published the Fadeable Library to the CocoaPods Trunk, I would love it if you gave Module 3 of my Pluralsight course, titled a watch! It's titled <a href="https://www.pluralsight.com/courses/cocoapods-xcode-project-dependencies">Creating CocoaPod Libraries</a> and covers from beginning to end, the process of creating a library that's compatible with CocoaPods.</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

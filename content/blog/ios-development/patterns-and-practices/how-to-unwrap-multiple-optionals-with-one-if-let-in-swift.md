@@ -14,13 +14,13 @@ tags:
   - Swift Optionals
 
 ---
-What do you do when you&#8217;ve got two (or more) optionals that you need to safely unwrap and work with?
+What do you do when you've got two (or more) optionals that you need to safely unwrap and work with?
 
 # Code examples
 
-Suppose that you&#8217;ve got two arrays, both of which are optional. What I want to do right now is walk through a couple of scenarios where I unwrap them at the same time and print them to the console with a single `if-let` statement.
+Suppose that you've got two arrays, both of which are optional. What I want to do right now is walk through a couple of scenarios where I unwrap them at the same time and print them to the console with a single `if-let` statement.
 
-First, watch _how_ it&#8217;s done to accomplish the goal of this article&#8217;s title. :]
+First, watch _how_ it's done to accomplish the goal of this article's title. :]
 
 Then, compare what you expected to be the print output, to the _actual_ output to make sure your understanding of how the syntax works is complete.
 
@@ -42,9 +42,9 @@ var salutations: [String]? = ["Hi!", "Hey!"]</pre>
 
 ### Breaking it down
 
-The syntax for unwrapping multiple optionals with a single if-let block is straightforward. It&#8217;s `if` followed by a series of `let [constantName] = [optionalName]` statements, separated by commas.
+The syntax for unwrapping multiple optionals with a single if-let block is straightforward. It's `if` followed by a series of `let [constantName] = [optionalName]` statements, separated by commas.
 
-The output of this one is pretty much what you&#8217;d expect, too. The string form of the arrays is printed to the console window in Xcode or in your Playground.
+The output of this one is pretty much what you'd expect, too. The string form of the arrays is printed to the console window in Xcode or in your Playground.
 
 ## Scenario 2: One array is initialized (non-nil), and the other is nil
 
@@ -64,17 +64,17 @@ Question: What do you think will be printed?
 2) Just [&#8220;Howdy!&#8221;, &#8220;Hello!&#8221;]  
 3) Nothing will be printed
 
-If you chose door number **3**, you&#8217;d be correct.
+If you chose door number **3**, you'd be correct.
 
-The if-let block between the {}&#8217;s is only executed if **both** `greetings` and `salutations` are non-nil.
+The if-let block between the {}'s is only executed if **both** `greetings` and `salutations` are non-nil.
 
 # Takeaway
 
 Unwrapping multiple optionals with a single if-let statement is pretty easy: `if` followed by a series of `let [constantName] = [optionalName]` statements, separated by commas.
 
-The behavior is similar to using the `&&` operator in a normal `if` condition. It&#8217;s like saying &#8220;if this optional is non-nil AND this optional is non-nil, then do this&#8221;
+The behavior is similar to using the `&&` operator in a normal `if` condition. It's like saying &#8220;if this optional is non-nil AND this optional is non-nil, then do this&#8221;
 
-If you expect to work with one of the optionals in the list even if the other is nil, you&#8217;re going to need to split that up into multiple if-lets:
+If you expect to work with one of the optionals in the list even if the other is nil, you're going to need to split that up into multiple if-lets:
 
 <pre class="lang:swift decode:true " >if let g = greetings {
     print(g)

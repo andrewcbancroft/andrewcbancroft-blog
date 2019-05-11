@@ -17,74 +17,21 @@ tags:
   - Weak
 
 ---
-I&#8217;m willing to bet that a good number of Swift developers struggle with the particulars of how `strong`, `weak`, and `unowned` affect the run-time behavior of their code. I, myself, wouldn&#8217;t want to have to give an explanation of the finer points of Automatic Reference Counting (ARC) if my life depended on it.
+I'm willing to bet that a good number of Swift developers struggle with the particulars of how `strong`, `weak`, and `unowned` affect the run-time behavior of their code. I, myself, wouldn't want to have to give an explanation of the finer points of Automatic Reference Counting (ARC) if my life depended on it.
 
 I wanted to stop being unsure about the implications of typing one of those three words before variable / constant declarations, so I finally pulled up the [Apple Documentation on ARC][1] and began trying to digest the semantics. This article is an attempt to share what got sorted out in my brain as it regards ARC and Swift.
 
-This article is long enough that I thought, &#8220;Why don&#8217;t I summarize my conclusions up front and then let folks read about how I got there if they so-desire&#8221;. So here you go: Conclusions first!
+This article is long enough that I thought, &#8220;Why don't I summarize my conclusions up front and then let folks read about how I got there if they so-desire&#8221;. So here you go: Conclusions first!
 
 ### Conclusions
 
-  * To determine if you even need to worry about `strong`, `weak`, or `unowned`, ask, &#8220;Am I dealing with _reference_ types&#8221;. If you&#8217;re working with Structs or Enums, ARC isn&#8217;t managing the memory for those Types and you don&#8217;t even need to worry about specifying `weak` or `unowned` for those constants or variables.
+  * To determine if you even need to worry about `strong`, `weak`, or `unowned`, ask, &#8220;Am I dealing with _reference_ types&#8221;. If you're working with Structs or Enums, ARC isn't managing the memory for those Types and you don't even need to worry about specifying `weak` or `unowned` for those constants or variables.
   * `Strong` references are fine in hierarchical relationships where the parent references the child, but not vice-versa. In fact, `strong` references are the most appropraite kind of reference most of the time.
   * When two instances are _optionally_ related to one another, make sure that one of those instances holds a `weak` reference to the other.
-  * When two instances are related in such a way that one of the instances can&#8217;t exist without the other, the instance with the mandatory dependency needs to hold an `unowned` reference to the other instance.
+  * When two instances are related in such a way that one of the instances can't exist without the other, the instance with the mandatory dependency needs to hold an `unowned` reference to the other instance.
 
 To see how I arrived at this set of conclusions, read on or jump around!
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#conclusions-1">Conclusions</a>
-    </li>
-    <li>
-      <a href="#arc-and-memory-management">ARC and memory management</a>
-    </li>
-    <li>
-      <a href="#strong-references">Strong references</a>
-    </li>
-    <li>
-      <a href="#weak-unowned-references">Weak and unowned references</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#relationships-between-instances">Relationships between instances</a>
-      </li>
-      <li>
-        <a href="#hierarchical">Hierarchical relationships</a>
-      </li>
-      <li>
-        <a href="#optional-mutually-dependent">Optional, mutually dependent relationships</a>
-      </li>
-      <ul>
-        <li>
-          <a href="#memory-leak-warning">Memory leak warning</a>
-        </li>
-        <li>
-          <a href="#breaking-strong-reference-cycle">Breaking strong reference cycle</a>
-        </li>
-      </ul>
-      
-      <li>
-        <a href="#mandatory-one-way-dependent">Mandatory, one-way dependent relationships</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#conclusions-2">Conclusions</a>
-    </li>
-    <li>
-      <a href="#related">You might also enjoy…</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="arc-and-memory-management" class="jump-target"></a>
 
@@ -92,9 +39,9 @@ To see how I arrived at this set of conclusions, read on or jump around!
 
 For many, much of &#8220;memory management&#8221; feels like a huge black box.
 
-The mystical nature of memory management is exaggerated by the fact that many of the languages we&#8217;re familiar with abstract it away. For the most part, we can simply write code and not think too hard about the number of bytes our object instances are using or how they get cleaned up when they&#8217;re done being used. It just works.
+The mystical nature of memory management is exaggerated by the fact that many of the languages we're familiar with abstract it away. For the most part, we can simply write code and not think too hard about the number of bytes our object instances are using or how they get cleaned up when they're done being used. It just works.
 
-Automatic Reference Counting (ARC) is one of those abstractions over managing memory. It&#8217;s the methodology Apple employs to free up memory when class instances are finished using it.
+Automatic Reference Counting (ARC) is one of those abstractions over managing memory. It's the methodology Apple employs to free up memory when class instances are finished using it.
 
 ARC _only_ applies to classes (so not structs or enums), because Automatic _Reference_ Counting applies only to _reference Types_. Structs & enums are _value_ Types, so ARC does not manage the memory associated with instances of those Types.
 
@@ -106,19 +53,19 @@ The question that begins the discussion of our featured keywords is, &#8220;How 
 
 `Strong`, `weak`, and `unowned` are keywords that describe the nature of a reference in the ARC paradigm.
 
-All references are `strong` references by default unless otherwise specified. _Most_ of the time, this is the right thing to do. `Strong` is always implied when you declare a variable or constant. You don&#8217;t need to type `strong` in Swift.
+All references are `strong` references by default unless otherwise specified. _Most_ of the time, this is the right thing to do. `Strong` is always implied when you declare a variable or constant. You don't need to type `strong` in Swift.
 
 So what does the &#8220;strength&#8221; of a reference have to do with how ARC manages memory?
 
-ARC doesn&#8217;t free up the memory being used by a class instance until _all_ `strong` references to that instance are broken. How are `strong` references broken?
+ARC doesn't free up the memory being used by a class instance until _all_ `strong` references to that instance are broken. How are `strong` references broken?
 
 `Strong` references can be broken&#8230;
 
   * When a variable that references an instance of something is set to `nil`
   * When a parent variable that holds a reference to a child class instance is to `nil` it will break the reference to the parent _and_ the child
-  * When a variable or constant goes out of scope &#8211; for example, if something gets initialized inside a control-flow code segment like an `if`/`else` or inside a `for` loop, when execution moves past that code segment, the reference is broken and the memory is freed by ARC
+  * When a variable or constant goes out of scope – for example, if something gets initialized inside a control-flow code segment like an `if`/`else` or inside a `for` loop, when execution moves past that code segment, the reference is broken and the memory is freed by ARC
 
-Everything in ARC&#8217;s memory management model hinges on the number of `strong` references are connected to an instance. The moment that the number of `strong` references counts down to zero, the memory where that instance was stored is freed.
+Everything in ARC's memory management model hinges on the number of `strong` references are connected to an instance. The moment that the number of `strong` references counts down to zero, the memory where that instance was stored is freed.
 
 So where does `weak` and `unowned` come in?
 
@@ -150,11 +97,11 @@ In this arrangement, `strong` references are normal and fine. But what happens i
 
 By the end of this section, my goal is to demonstrate the role of `weak` references.
 
-When class instances depend on each other, that is, they both hold a reference to one another, it can be said that the instances are mutually dependent. Sometimes, the dependence isn&#8217;t required &#8211; in these cases, it makes sense for one instance to exist without a reference to the other, and vice-versa.
+When class instances depend on each other, that is, they both hold a reference to one another, it can be said that the instances are mutually dependent. Sometimes, the dependence isn't required – in these cases, it makes sense for one instance to exist without a reference to the other, and vice-versa.
 
 If we were talking database cardinality, we might say that the relationship is 0:1 both ways.
 
-An example is always nice to have before us &#8211; This past week, a tornado hit a zoo here in Oklahoma, and a few exotic animals escaped, so the theme is on my mind.
+An example is always nice to have before us – This past week, a tornado hit a zoo here in Oklahoma, and a few exotic animals escaped, so the theme is on my mind.
 
 In a zoo, an `Animal` lives in an `Exhibit`. Sometimes `Exhibits` may be vacant. They could be cleaning it, or the `Animal` that lived there is sick or being moved, or a tornado hits it, etc.
 
@@ -180,9 +127,9 @@ class Exhibit {
     var animal: Animal? // notice the optional nature of animal
 }</pre>
 
-Let&#8217;s consider the situation where an `Animal` _is_ living in an `Exhibit`. It might be nice to traverse a relationship between them to get information about one or the other. So as we instantiate an `Animal` and an `Exhibit`, the next immediate step would be to assign the instances to each other&#8217;s corresponding property.
+Let's consider the situation where an `Animal` _is_ living in an `Exhibit`. It might be nice to traverse a relationship between them to get information about one or the other. So as we instantiate an `Animal` and an `Exhibit`, the next immediate step would be to assign the instances to each other's corresponding property.
 
-Now consider the situation that happened this week &#8211; a tornado hits the zoo and the `Animal` escapes from its `Exhibit`. Say that _unlike_ this week, the `Animal` isn&#8217;t recovered (they actually got the animals that escaped back). Suppose that it roams the plains of Oklahoma in freedom. The zoo, in turn, has to close the `Exhibit`. To model this, we may simply set the `Animal` instance to nil and the `Exhibit` instance to nil.
+Now consider the situation that happened this week – a tornado hits the zoo and the `Animal` escapes from its `Exhibit`. Say that _unlike_ this week, the `Animal` isn't recovered (they actually got the animals that escaped back). Suppose that it roams the plains of Oklahoma in freedom. The zoo, in turn, has to close the `Exhibit`. To model this, we may simply set the `Animal` instance to nil and the `Exhibit` instance to nil.
 
 <a name="memory-leak-warning" class="jump-target"></a>
 
@@ -190,27 +137,27 @@ Now consider the situation that happened this week &#8211; a tornado hits the zo
 
 The example just given is one that shows how it is possible to create a memory leak in your application. How?
 
-It all has to do with ARC &#8211; remember that it _only_ frees up memory for a class instance when there are _zero_ references to it.
+It all has to do with ARC – remember that it _only_ frees up memory for a class instance when there are _zero_ references to it.
 
-In our `Animal` &#8211; `Exhibit` example, both instances referenced _each other_. When we set the `Animal` instance to nil, the `Exhibit` instance still held a reference to it through its `animal` property.
+In our `Animal` – `Exhibit` example, both instances referenced _each other_. When we set the `Animal` instance to nil, the `Exhibit` instance still held a reference to it through its `animal` property.
 
 In turn, since that `Animal` instance is still around, it holds a reference to the `Exhibit` instance through its `exhibit` property. So when we set the `Exhibit` instance to nil, the `Animal` still holds on to it.
 
-_Now_ we have a dilemma. While the `Animal` and the `Exhibit` continue to reference each other (so neither instance&#8217;s memory can be freed), _nothing else does_ &#8211; there&#8217;s no way to access either instance any more. Thus, a memory leak is created.
+_Now_ we have a dilemma. While the `Animal` and the `Exhibit` continue to reference each other (so neither instance's memory can be freed), _nothing else does_ – there's no way to access either instance any more. Thus, a memory leak is created.
 
-But there&#8217;s hope! In this &#8220;Optional, mutually dependent relationship&#8221; scenario, this is where the keyword `weak` comes into play.
+But there's hope! In this &#8220;Optional, mutually dependent relationship&#8221; scenario, this is where the keyword `weak` comes into play.
 
 <a name="breaking-strong-reference-cycle" class="jump-target"></a>
 
 ###### Breaking strong reference cycle
 
-The situation just described is what&#8217;s known as a &#8220;strong reference cycle&#8221;.
+The situation just described is what's known as a &#8220;strong reference cycle&#8221;.
 
-Thankfully, there&#8217;s a way to break those cycles and avoid memory leaks.
+Thankfully, there's a way to break those cycles and avoid memory leaks.
 
 In the situation where that optional mutually dependent relationship exists, such as between an `Animal` and an `Exhibit`, changing one of those instances reference to the other from `strong` to `weak` will break the cycle.
 
-It doesn&#8217;t really matter which class holds the weak reference, just as long as one of them does.
+It doesn't really matter which class holds the weak reference, just as long as one of them does.
 
 <pre class="lang:swift decode:true " title="Animal, Exhibit - Weak" >class Animal {
     let name: String
@@ -242,7 +189,7 @@ By the end of this section, my goal is to demonstrate the role of `unowned` refe
 
 There is one final category of relationship that pertains most immediately to the topic of ARC. There are times when two class instances are related to one another, but _one_ of those instance _cannot_ exist without the other.
 
-Let&#8217;s continue with the zoo theme. Suppose that our zoo issues `AnnualPasses` to `Visitors`. A `Visitor` can come to the zoo _without_ an `AnnualPass`, of course, and can thus exist on its own and happily enjoy the exhibits. An `AnnualPass`, however, is _always_ issued to a `Visitor` and cannot exist without being associated with one.
+Let's continue with the zoo theme. Suppose that our zoo issues `AnnualPasses` to `Visitors`. A `Visitor` can come to the zoo _without_ an `AnnualPass`, of course, and can thus exist on its own and happily enjoy the exhibits. An `AnnualPass`, however, is _always_ issued to a `Visitor` and cannot exist without being associated with one.
 
 To model this kind of relationship, we may define some classes as follows:
 
@@ -274,12 +221,12 @@ Modeling things this way also eliminates the possibility of a strong reference c
 
 ### Conclusions
 
-I know I stated these at the beginning, but I&#8217;ll restate them here just for completeness&#8230;
+I know I stated these at the beginning, but I'll restate them here just for completeness&#8230;
 
-  * To determine if you even need to worry about `strong`, `weak`, or `unowned`, ask, &#8220;Am I dealing with _reference_ types&#8221;. If you&#8217;re working with Structs or Enums, ARC isn&#8217;t managing the memory for those Types and you don&#8217;t even need to worry about specifying `weak` or `unowned` for those constants or variables.
+  * To determine if you even need to worry about `strong`, `weak`, or `unowned`, ask, &#8220;Am I dealing with _reference_ types&#8221;. If you're working with Structs or Enums, ARC isn't managing the memory for those Types and you don't even need to worry about specifying `weak` or `unowned` for those constants or variables.
   * `Strong` references are fine in hierarchical relationships where the parent references the child, but not vice-versa. In fact, `strong` references are the most appropraite kind of reference most of the time.
   * When two instances are _optionally_ related to one another, make sure that one of those instances holds a `weak` reference to the other.
-  * When two instances are related in such a way that one of the instances can&#8217;t exist without the other, the instance with the mandatory dependency needs to hold an `unowned` reference to the other instance.
+  * When two instances are related in such a way that one of the instances can't exist without the other, the instance with the mandatory dependency needs to hold an `unowned` reference to the other instance.
 
 <a name="share" class="jump-target"></a>
 

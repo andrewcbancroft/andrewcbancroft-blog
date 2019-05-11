@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Strong, Weak, and Unowned – Sorting out ARC and Swift" />
-<meta property="og:description" content="I&#8217;m willing to bet that a good number of Swift developers struggle with the particulars of how strong, weak, and unowned affect the run-time behavior of their code. I, myself, wouldn&#8217;t want to have to give an explanation of the finer points of Automatic Reference Counting (ARC) if my life depended on it.
+<meta property="og:description" content="I'm willing to bet that a good number of Swift developers struggle with the particulars of how strong, weak, and unowned affect the run-time behavior of their code. I, myself, wouldn't want to have to give an explanation of the finer points of Automatic Reference Counting (ARC) if my life depended on it.
 I wanted to stop being unsure about the implications of typing one of those three words before variable / constant declarations, so I finally pulled up the Apple Documentation on ARC and began trying to digest the semantics." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/05/08/strong-weak-and-unowned-sorting-out-arc-and-swift/" />
@@ -34,7 +34,7 @@ I wanted to stop being unsure about the implications of typing one of those thre
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Strong, Weak, and Unowned – Sorting out ARC and Swift"/>
-<meta name="twitter:description" content="I&#8217;m willing to bet that a good number of Swift developers struggle with the particulars of how strong, weak, and unowned affect the run-time behavior of their code. I, myself, wouldn&#8217;t want to have to give an explanation of the finer points of Automatic Reference Counting (ARC) if my life depended on it.
+<meta name="twitter:description" content="I'm willing to bet that a good number of Swift developers struggle with the particulars of how strong, weak, and unowned affect the run-time behavior of their code. I, myself, wouldn't want to have to give an explanation of the finer points of Automatic Reference Counting (ARC) if my life depended on it.
 I wanted to stop being unsure about the implications of typing one of those three words before variable / constant declarations, so I finally pulled up the Apple Documentation on ARC and began trying to digest the semantics."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
@@ -166,19 +166,19 @@ MathJax.Hub.Config({
 
     
 
-<p>I&#8217;m willing to bet that a good number of Swift developers struggle with the particulars of how <code>strong</code>, <code>weak</code>, and <code>unowned</code> affect the run-time behavior of their code. I, myself, wouldn&#8217;t want to have to give an explanation of the finer points of Automatic Reference Counting (ARC) if my life depended on it.</p>
+<p>I'm willing to bet that a good number of Swift developers struggle with the particulars of how <code>strong</code>, <code>weak</code>, and <code>unowned</code> affect the run-time behavior of their code. I, myself, wouldn't want to have to give an explanation of the finer points of Automatic Reference Counting (ARC) if my life depended on it.</p>
 
 <p>I wanted to stop being unsure about the implications of typing one of those three words before variable / constant declarations, so I finally pulled up the <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html">Apple Documentation on ARC</a> and began trying to digest the semantics. This article is an attempt to share what got sorted out in my brain as it regards ARC and Swift.</p>
 
-<p>This article is long enough that I thought, &#8220;Why don&#8217;t I summarize my conclusions up front and then let folks read about how I got there if they so-desire&#8221;. So here you go: Conclusions first!</p>
+<p>This article is long enough that I thought, &#8220;Why don't I summarize my conclusions up front and then let folks read about how I got there if they so-desire&#8221;. So here you go: Conclusions first!</p>
 
 <h3 id="conclusions">Conclusions</h3>
 
 <ul>
-<li>To determine if you even need to worry about <code>strong</code>, <code>weak</code>, or <code>unowned</code>, ask, &#8220;Am I dealing with <em>reference</em> types&#8221;. If you&#8217;re working with Structs or Enums, ARC isn&#8217;t managing the memory for those Types and you don&#8217;t even need to worry about specifying <code>weak</code> or <code>unowned</code> for those constants or variables.</li>
+<li>To determine if you even need to worry about <code>strong</code>, <code>weak</code>, or <code>unowned</code>, ask, &#8220;Am I dealing with <em>reference</em> types&#8221;. If you're working with Structs or Enums, ARC isn't managing the memory for those Types and you don't even need to worry about specifying <code>weak</code> or <code>unowned</code> for those constants or variables.</li>
 <li><code>Strong</code> references are fine in hierarchical relationships where the parent references the child, but not vice-versa. In fact, <code>strong</code> references are the most appropraite kind of reference most of the time.</li>
 <li>When two instances are <em>optionally</em> related to one another, make sure that one of those instances holds a <code>weak</code> reference to the other.</li>
-<li>When two instances are related in such a way that one of the instances can&#8217;t exist without the other, the instance with the mandatory dependency needs to hold an <code>unowned</code> reference to the other instance.</li>
+<li>When two instances are related in such a way that one of the instances can't exist without the other, the instance with the mandatory dependency needs to hold an <code>unowned</code> reference to the other instance.</li>
 </ul>
 
 <p>To see how I arrived at this set of conclusions, read on or jump around!</p>
@@ -246,9 +246,9 @@ MathJax.Hub.Config({
 
 <p>For many, much of &#8220;memory management&#8221; feels like a huge black box.</p>
 
-<p>The mystical nature of memory management is exaggerated by the fact that many of the languages we&#8217;re familiar with abstract it away. For the most part, we can simply write code and not think too hard about the number of bytes our object instances are using or how they get cleaned up when they&#8217;re done being used. It just works.</p>
+<p>The mystical nature of memory management is exaggerated by the fact that many of the languages we're familiar with abstract it away. For the most part, we can simply write code and not think too hard about the number of bytes our object instances are using or how they get cleaned up when they're done being used. It just works.</p>
 
-<p>Automatic Reference Counting (ARC) is one of those abstractions over managing memory. It&#8217;s the methodology Apple employs to free up memory when class instances are finished using it.</p>
+<p>Automatic Reference Counting (ARC) is one of those abstractions over managing memory. It's the methodology Apple employs to free up memory when class instances are finished using it.</p>
 
 <p>ARC <em>only</em> applies to classes (so not structs or enums), because Automatic <em>Reference</em> Counting applies only to <em>reference Types</em>. Structs &amp; enums are <em>value</em> Types, so ARC does not manage the memory associated with instances of those Types.</p>
 
@@ -260,21 +260,21 @@ MathJax.Hub.Config({
 
 <p><code>Strong</code>, <code>weak</code>, and <code>unowned</code> are keywords that describe the nature of a reference in the ARC paradigm.</p>
 
-<p>All references are <code>strong</code> references by default unless otherwise specified. <em>Most</em> of the time, this is the right thing to do. <code>Strong</code> is always implied when you declare a variable or constant. You don&#8217;t need to type <code>strong</code> in Swift.</p>
+<p>All references are <code>strong</code> references by default unless otherwise specified. <em>Most</em> of the time, this is the right thing to do. <code>Strong</code> is always implied when you declare a variable or constant. You don't need to type <code>strong</code> in Swift.</p>
 
 <p>So what does the &#8220;strength&#8221; of a reference have to do with how ARC manages memory?</p>
 
-<p>ARC doesn&#8217;t free up the memory being used by a class instance until <em>all</em> <code>strong</code> references to that instance are broken. How are <code>strong</code> references broken?</p>
+<p>ARC doesn't free up the memory being used by a class instance until <em>all</em> <code>strong</code> references to that instance are broken. How are <code>strong</code> references broken?</p>
 
 <p><code>Strong</code> references can be broken&#8230;</p>
 
 <ul>
 <li>When a variable that references an instance of something is set to <code>nil</code></li>
 <li>When a parent variable that holds a reference to a child class instance is to <code>nil</code> it will break the reference to the parent <em>and</em> the child</li>
-<li>When a variable or constant goes out of scope &#8211; for example, if something gets initialized inside a control-flow code segment like an <code>if</code>/<code>else</code> or inside a <code>for</code> loop, when execution moves past that code segment, the reference is broken and the memory is freed by ARC</li>
+<li>When a variable or constant goes out of scope – for example, if something gets initialized inside a control-flow code segment like an <code>if</code>/<code>else</code> or inside a <code>for</code> loop, when execution moves past that code segment, the reference is broken and the memory is freed by ARC</li>
 </ul>
 
-<p>Everything in ARC&#8217;s memory management model hinges on the number of <code>strong</code> references are connected to an instance. The moment that the number of <code>strong</code> references counts down to zero, the memory where that instance was stored is freed.</p>
+<p>Everything in ARC's memory management model hinges on the number of <code>strong</code> references are connected to an instance. The moment that the number of <code>strong</code> references counts down to zero, the memory where that instance was stored is freed.</p>
 
 <p>So where does <code>weak</code> and <code>unowned</code> come in?</p>
 
@@ -306,11 +306,11 @@ MathJax.Hub.Config({
 
 <p>By the end of this section, my goal is to demonstrate the role of <code>weak</code> references.</p>
 
-<p>When class instances depend on each other, that is, they both hold a reference to one another, it can be said that the instances are mutually dependent. Sometimes, the dependence isn&#8217;t required &#8211; in these cases, it makes sense for one instance to exist without a reference to the other, and vice-versa.</p>
+<p>When class instances depend on each other, that is, they both hold a reference to one another, it can be said that the instances are mutually dependent. Sometimes, the dependence isn't required – in these cases, it makes sense for one instance to exist without a reference to the other, and vice-versa.</p>
 
 <p>If we were talking database cardinality, we might say that the relationship is 0:1 both ways.</p>
 
-<p>An example is always nice to have before us &#8211; This past week, a tornado hit a zoo here in Oklahoma, and a few exotic animals escaped, so the theme is on my mind.</p>
+<p>An example is always nice to have before us – This past week, a tornado hit a zoo here in Oklahoma, and a few exotic animals escaped, so the theme is on my mind.</p>
 
 <p>In a zoo, an <code>Animal</code> lives in an <code>Exhibit</code>. Sometimes <code>Exhibits</code> may be vacant. They could be cleaning it, or the <code>Animal</code> that lived there is sick or being moved, or a tornado hits it, etc.</p>
 
@@ -336,9 +336,9 @@ class Exhibit {
     var animal: Animal? // notice the optional nature of animal
 }</pre>
 
-<p>Let&#8217;s consider the situation where an <code>Animal</code> <em>is</em> living in an <code>Exhibit</code>. It might be nice to traverse a relationship between them to get information about one or the other. So as we instantiate an <code>Animal</code> and an <code>Exhibit</code>, the next immediate step would be to assign the instances to each other&#8217;s corresponding property.</p>
+<p>Let's consider the situation where an <code>Animal</code> <em>is</em> living in an <code>Exhibit</code>. It might be nice to traverse a relationship between them to get information about one or the other. So as we instantiate an <code>Animal</code> and an <code>Exhibit</code>, the next immediate step would be to assign the instances to each other's corresponding property.</p>
 
-<p>Now consider the situation that happened this week &#8211; a tornado hits the zoo and the <code>Animal</code> escapes from its <code>Exhibit</code>. Say that <em>unlike</em> this week, the <code>Animal</code> isn&#8217;t recovered (they actually got the animals that escaped back). Suppose that it roams the plains of Oklahoma in freedom. The zoo, in turn, has to close the <code>Exhibit</code>. To model this, we may simply set the <code>Animal</code> instance to nil and the <code>Exhibit</code> instance to nil.</p>
+<p>Now consider the situation that happened this week – a tornado hits the zoo and the <code>Animal</code> escapes from its <code>Exhibit</code>. Say that <em>unlike</em> this week, the <code>Animal</code> isn't recovered (they actually got the animals that escaped back). Suppose that it roams the plains of Oklahoma in freedom. The zoo, in turn, has to close the <code>Exhibit</code>. To model this, we may simply set the <code>Animal</code> instance to nil and the <code>Exhibit</code> instance to nil.</p>
 
 <p><a name="memory-leak-warning" class="jump-target"></a></p>
 
@@ -346,27 +346,27 @@ class Exhibit {
 
 <p>The example just given is one that shows how it is possible to create a memory leak in your application. How?</p>
 
-<p>It all has to do with ARC &#8211; remember that it <em>only</em> frees up memory for a class instance when there are <em>zero</em> references to it.</p>
+<p>It all has to do with ARC – remember that it <em>only</em> frees up memory for a class instance when there are <em>zero</em> references to it.</p>
 
-<p>In our <code>Animal</code> &#8211; <code>Exhibit</code> example, both instances referenced <em>each other</em>. When we set the <code>Animal</code> instance to nil, the <code>Exhibit</code> instance still held a reference to it through its <code>animal</code> property.</p>
+<p>In our <code>Animal</code> – <code>Exhibit</code> example, both instances referenced <em>each other</em>. When we set the <code>Animal</code> instance to nil, the <code>Exhibit</code> instance still held a reference to it through its <code>animal</code> property.</p>
 
 <p>In turn, since that <code>Animal</code> instance is still around, it holds a reference to the <code>Exhibit</code> instance through its <code>exhibit</code> property. So when we set the <code>Exhibit</code> instance to nil, the <code>Animal</code> still holds on to it.</p>
 
-<p><em>Now</em> we have a dilemma. While the <code>Animal</code> and the <code>Exhibit</code> continue to reference each other (so neither instance&#8217;s memory can be freed), <em>nothing else does</em> &#8211; there&#8217;s no way to access either instance any more. Thus, a memory leak is created.</p>
+<p><em>Now</em> we have a dilemma. While the <code>Animal</code> and the <code>Exhibit</code> continue to reference each other (so neither instance's memory can be freed), <em>nothing else does</em> – there's no way to access either instance any more. Thus, a memory leak is created.</p>
 
-<p>But there&#8217;s hope! In this &#8220;Optional, mutually dependent relationship&#8221; scenario, this is where the keyword <code>weak</code> comes into play.</p>
+<p>But there's hope! In this &#8220;Optional, mutually dependent relationship&#8221; scenario, this is where the keyword <code>weak</code> comes into play.</p>
 
 <p><a name="breaking-strong-reference-cycle" class="jump-target"></a></p>
 
 <h6 id="breaking-strong-reference-cycle">Breaking strong reference cycle</h6>
 
-<p>The situation just described is what&#8217;s known as a &#8220;strong reference cycle&#8221;.</p>
+<p>The situation just described is what's known as a &#8220;strong reference cycle&#8221;.</p>
 
-<p>Thankfully, there&#8217;s a way to break those cycles and avoid memory leaks.</p>
+<p>Thankfully, there's a way to break those cycles and avoid memory leaks.</p>
 
 <p>In the situation where that optional mutually dependent relationship exists, such as between an <code>Animal</code> and an <code>Exhibit</code>, changing one of those instances reference to the other from <code>strong</code> to <code>weak</code> will break the cycle.</p>
 
-<p>It doesn&#8217;t really matter which class holds the weak reference, just as long as one of them does.</p>
+<p>It doesn't really matter which class holds the weak reference, just as long as one of them does.</p>
 
 <pre class="lang:swift decode:true " title="Animal, Exhibit - Weak" >class Animal {
     let name: String
@@ -398,7 +398,7 @@ class Exhibit {
 
 <p>There is one final category of relationship that pertains most immediately to the topic of ARC. There are times when two class instances are related to one another, but <em>one</em> of those instance <em>cannot</em> exist without the other.</p>
 
-<p>Let&#8217;s continue with the zoo theme. Suppose that our zoo issues <code>AnnualPasses</code> to <code>Visitors</code>. A <code>Visitor</code> can come to the zoo <em>without</em> an <code>AnnualPass</code>, of course, and can thus exist on its own and happily enjoy the exhibits. An <code>AnnualPass</code>, however, is <em>always</em> issued to a <code>Visitor</code> and cannot exist without being associated with one.</p>
+<p>Let's continue with the zoo theme. Suppose that our zoo issues <code>AnnualPasses</code> to <code>Visitors</code>. A <code>Visitor</code> can come to the zoo <em>without</em> an <code>AnnualPass</code>, of course, and can thus exist on its own and happily enjoy the exhibits. An <code>AnnualPass</code>, however, is <em>always</em> issued to a <code>Visitor</code> and cannot exist without being associated with one.</p>
 
 <p>To model this kind of relationship, we may define some classes as follows:</p>
 
@@ -432,13 +432,13 @@ class AnnualPass {
 
 <h3 id="conclusions-1">Conclusions</h3>
 
-<p>I know I stated these at the beginning, but I&#8217;ll restate them here just for completeness&#8230;</p>
+<p>I know I stated these at the beginning, but I'll restate them here just for completeness&#8230;</p>
 
 <ul>
-<li>To determine if you even need to worry about <code>strong</code>, <code>weak</code>, or <code>unowned</code>, ask, &#8220;Am I dealing with <em>reference</em> types&#8221;. If you&#8217;re working with Structs or Enums, ARC isn&#8217;t managing the memory for those Types and you don&#8217;t even need to worry about specifying <code>weak</code> or <code>unowned</code> for those constants or variables.</li>
+<li>To determine if you even need to worry about <code>strong</code>, <code>weak</code>, or <code>unowned</code>, ask, &#8220;Am I dealing with <em>reference</em> types&#8221;. If you're working with Structs or Enums, ARC isn't managing the memory for those Types and you don't even need to worry about specifying <code>weak</code> or <code>unowned</code> for those constants or variables.</li>
 <li><code>Strong</code> references are fine in hierarchical relationships where the parent references the child, but not vice-versa. In fact, <code>strong</code> references are the most appropraite kind of reference most of the time.</li>
 <li>When two instances are <em>optionally</em> related to one another, make sure that one of those instances holds a <code>weak</code> reference to the other.</li>
-<li>When two instances are related in such a way that one of the instances can&#8217;t exist without the other, the instance with the mandatory dependency needs to hold an <code>unowned</code> reference to the other instance.</li>
+<li>When two instances are related in such a way that one of the instances can't exist without the other, the instance with the mandatory dependency needs to hold an <code>unowned</code> reference to the other instance.</li>
 </ul>
 
 <p><a name="share" class="jump-target"></a></p>

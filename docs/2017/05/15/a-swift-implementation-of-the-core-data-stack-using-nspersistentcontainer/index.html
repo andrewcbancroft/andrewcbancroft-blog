@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="A Swift Implementation of the Core Data Stack Using NSPersistentContainer" />
-<meta property="og:description" content="If you&#8217;re targeting iOS 10 and above, you&#8217;ve got the opportunity to pick your poison when it comes to creating the Core Data stack.
+<meta property="og:description" content="If you're targeting iOS 10 and above, you've got the opportunity to pick your poison when it comes to creating the Core Data stack.
 You could opt for the process I described in Creating the Core Data Stack with Backwards Compatibility in Swift &#8212; that process still works perfectly fine in iOS 10&#43;.
 Alternatively, you could use the new NSPersistentContainer class if you want to write a few less lines of code and keep up-to-date with the latest framework enhancements!" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@ Alternatively, you could use the new NSPersistentContainer class if you want to 
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="A Swift Implementation of the Core Data Stack Using NSPersistentContainer"/>
-<meta name="twitter:description" content="If you&#8217;re targeting iOS 10 and above, you&#8217;ve got the opportunity to pick your poison when it comes to creating the Core Data stack.
+<meta name="twitter:description" content="If you're targeting iOS 10 and above, you've got the opportunity to pick your poison when it comes to creating the Core Data stack.
 You could opt for the process I described in Creating the Core Data Stack with Backwards Compatibility in Swift &#8212; that process still works perfectly fine in iOS 10&#43;.
 Alternatively, you could use the new NSPersistentContainer class if you want to write a few less lines of code and keep up-to-date with the latest framework enhancements!"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
@@ -168,7 +168,7 @@ MathJax.Hub.Config({
 
     
 
-<p>If you&#8217;re targeting <strong>iOS 10 and above</strong>, you&#8217;ve got the opportunity to pick your poison when it comes to creating the Core Data stack.</p>
+<p>If you're targeting <strong>iOS 10 and above</strong>, you've got the opportunity to pick your poison when it comes to creating the Core Data stack.</p>
 
 <p>You could opt for the process I described in <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">Creating the Core Data Stack with Backwards Compatibility in Swift</a> &#8212; that process still works perfectly fine in iOS 10+.</p>
 
@@ -182,7 +182,7 @@ MathJax.Hub.Config({
 
 <p><ul class="resources-content">
     <li>
-      <a href="#the-point">What&#8217;s the point of the &#8220;Core Data stack&#8221;</a>
+      <a href="#the-point">What's the point of the &#8220;Core Data stack&#8221;</a>
     </li>
     <li>
       <a href="#create">Creating the stack with NSPersistentContainer</a>
@@ -212,11 +212,11 @@ MathJax.Hub.Config({
 
 <p><a name="the-point" class="jump-target"></a></p>
 
-<h1 id="what-8217-s-the-point-of-the-8220-core-data-stack-8221">What&#8217;s the point of the &#8220;Core Data stack&#8221;</h1>
+<h1 id="what-8217-s-the-point-of-the-8220-core-data-stack-8221">What's the point of the &#8220;Core Data stack&#8221;</h1>
 
-<p>It&#8217;s important to keep in mind the fundamental goal with creating the &#8220;Core Data stack&#8221;. At the end of the day, we&#8217;re all just trying to get our hands on an instance of <code>NSManagedObjectContext</code>.</p>
+<p>It's important to keep in mind the fundamental goal with creating the &#8220;Core Data stack&#8221;. At the end of the day, we're all just trying to get our hands on an instance of <code>NSManagedObjectContext</code>.</p>
 
-<p>Nearly every Core Data framework Type that we interact with requires an instance of <code>NSManagedObjectContext</code> to do its work. Whether it&#8217;s <code>NSEntityDescription</code> to initialize new <code>NSManagedObject</code> instances, an <code>NSFetchRequest</code> to retrieve data, or an <code>NSFetchedResultsController</code> to keep our UIs in sync, we&#8217;re always depending on <code>NSManagedObjectContext</code>.</p>
+<p>Nearly every Core Data framework Type that we interact with requires an instance of <code>NSManagedObjectContext</code> to do its work. Whether it's <code>NSEntityDescription</code> to initialize new <code>NSManagedObject</code> instances, an <code>NSFetchRequest</code> to retrieve data, or an <code>NSFetchedResultsController</code> to keep our UIs in sync, we're always depending on <code>NSManagedObjectContext</code>.</p>
 
 <p>So the bottom-line goal of setting up the &#8220;stack&#8221; is to configure all the plumbing necessary for our apps to work with the &#8220;under the hood&#8221; stuff of Core Data. The [thing] we interact with constantly is that all-valuable <code>NSManagedObjectContext</code> instance.</p>
 
@@ -224,15 +224,15 @@ MathJax.Hub.Config({
 
 <h1 id="creating-the-stack-with-nspersistentcontainer">Creating the stack with NSPersistentContainer</h1>
 
-<p><code>NSPersistentContainer</code> saves a few keystrokes and abstracts away a few of the moving parts when it comes to setting up the Core Data stack. Compare my <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">Backwards Compatibility</a> post if you&#8217;re curious about what&#8217;s being simplified.</p>
+<p><code>NSPersistentContainer</code> saves a few keystrokes and abstracts away a few of the moving parts when it comes to setting up the Core Data stack. Compare my <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">Backwards Compatibility</a> post if you're curious about what's being simplified.</p>
 
-<p>So&#8230; how&#8217;s it done?</p>
+<p>So&#8230; how's it done?</p>
 
-<p><strong>First</strong>: Make sure you&#8217;re targeting <strong>iOS 10+, macOS Sierra (10.12)+, watchOS 3+, or tvOS 10+</strong></p>
+<p><strong>First</strong>: Make sure you're targeting <strong>iOS 10+, macOS Sierra (10.12)+, watchOS 3+, or tvOS 10+</strong></p>
 
-<p><code>NSPersistentContainer</code> is only available in Apple&#8217;s latest platform versions (latest as of May, 2017).</p>
+<p><code>NSPersistentContainer</code> is only available in Apple's latest platform versions (latest as of May, 2017).</p>
 
-<p>Once you&#8217;ve ticked the build target prerequisite above, check out this code example:</p>
+<p>Once you've ticked the build target prerequisite above, check out this code example:</p>
 
 <pre class="lang:swift decode:true " title="NSPersistentContainer" >//Step 1
 let container = NSPersistentContainer(name: "NameOfModel")
@@ -256,21 +256,21 @@ container.loadPersistentStores(completionHandler: {
 
 <p>1 &#8212; Initialize an <code>NSPersistentContainer</code> instance. Its only parameter is the <code>name</code> of the model (look at your .xcdatamodeld file for this)<br />
 2 &#8212; Call <code>loadPersistentStores</code> on the container instance. This function <em>executes asynchronously</em>, so to hook back in and continue doing things when the function is finished with its work, you supply a completionHandler.<br />
-3 &#8212; Guard against errors and use the container&#8217;s <code>viewContext</code> property, which is the <code>NSManagedObjectContext</code> instance you need. I haven&#8217;t written in detail about this (yet), but in my <a href="http://bit.ly/ps-core-data-swift">Pluralsight course on Core Data in Swift</a>, I go over how to take the managed object context and follow a dependency injection pattern so that you isolate where it&#8217;s created, and use the single instance throughout your app in a way that&#8217;s testable.</p>
+3 &#8212; Guard against errors and use the container's <code>viewContext</code> property, which is the <code>NSManagedObjectContext</code> instance you need. I haven't written in detail about this (yet), but in my <a href="http://bit.ly/ps-core-data-swift">Pluralsight course on Core Data in Swift</a>, I go over how to take the managed object context and follow a dependency injection pattern so that you isolate where it's created, and use the single instance throughout your app in a way that's testable.</p>
 
 <p>One consideration that I would encourage you to think about is the <code>guard</code> statement. Ask: &#8220;Is <code>fatalError</code> really the best thing for me to do?&#8221;</p>
 
-<p>A lot of apps that use Core Data really <em>can&#8217;t</em> continue past this point if the persistent store can&#8217;t be loaded. In that case, the <code>guard</code> may not be so bad. If you <em>can</em> fall back to an alternate screen that doesn&#8217;t rely on Core Data though, that might be a more pleasant experience for your users than simply crashing with a fatal error.</p>
+<p>A lot of apps that use Core Data really <em>can't</em> continue past this point if the persistent store can't be loaded. In that case, the <code>guard</code> may not be so bad. If you <em>can</em> fall back to an alternate screen that doesn't rely on Core Data though, that might be a more pleasant experience for your users than simply crashing with a fatal error.</p>
 
 <p><a name="wrap-up" class="jump-target"></a></p>
 
 <h1 id="wrap-up">Wrap up</h1>
 
-<p>This is the simplest way to use <code>NSPersistentContainer</code> to create your Core Data stack, and that&#8217;s where I want to leave it for today!</p>
+<p>This is the simplest way to use <code>NSPersistentContainer</code> to create your Core Data stack, and that's where I want to leave it for today!</p>
 
-<p>Thank you, as always, for your interest in the content I&#8217;m creating!</p>
+<p>Thank you, as always, for your interest in the content I'm creating!</p>
 
-<p>And yes, if you&#8217;re learning Core Data, I would love to contribute to your understanding of the framework. That&#8217;s why I built <a href="http://bit.ly/ps-core-data-swift">Core Data Fundamentals with Swift</a> for Pluralsight! If you&#8217;re a subscriber, I&#8217;d be thrilled to engage with you on the course!</p>
+<p>And yes, if you're learning Core Data, I would love to contribute to your understanding of the framework. That's why I built <a href="http://bit.ly/ps-core-data-swift">Core Data Fundamentals with Swift</a> for Pluralsight! If you're a subscriber, I'd be thrilled to engage with you on the course!</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

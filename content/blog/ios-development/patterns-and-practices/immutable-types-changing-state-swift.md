@@ -16,13 +16,13 @@ tags:
   - Swift
 
 ---
-Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&#8217;ve seen a lot in the functional programming arena as it relates to Swift.
+Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I've seen a lot in the functional programming arena as it relates to Swift.
 
-As I seek to improve my functional programming thought processes and to practice what I&#8217;m learning, I found myself struggling with a fundamental concept: **immutability**. _Especially_ when I&#8217;m designing something that, at the very least, _appears_ to require the ability to change state at some point in time.
+As I seek to improve my functional programming thought processes and to practice what I'm learning, I found myself struggling with a fundamental concept: **immutability**. _Especially_ when I'm designing something that, at the very least, _appears_ to require the ability to change state at some point in time.
 
-### Immutable changes &#8211; A contradiction in terms?
+### Immutable changes – A contradiction in terms?
 
-Immutability and changing state was a real struggle for me. The two seemed contradictory actually. How am I supposed to handle changes with things that _can&#8217;t change_??!
+Immutability and changing state was a real struggle for me. The two seemed contradictory actually. How am I supposed to handle changes with things that _can't change_??!
 
 And then, with the help of Stack Overflow, a lightbulb came on. As I was perusing FP topics, I ran across a question that expressed exactly what I was feeling. [&#8220;How can you do anything useful without mutable state?&#8221;][1], the questioner asked. The answer is what illuminated things for me. The key quote from the Stack Overflow answer:
 
@@ -32,11 +32,11 @@ So&#8230; instead of thinking about state changes as _mutations_, think of them 
 
 ### Getting practical with Swift
 
-If I&#8217;m going to get pragmatic with this, I have some design decisions to make if I&#8217;m going to try and avoid mutating the state of my objects. Rather than design my Types with the intent to update stored properties in-place, I should think about designing them so that the state-change process would actually produce a whole _new_ instance with the transformed (updated) value.
+If I'm going to get pragmatic with this, I have some design decisions to make if I'm going to try and avoid mutating the state of my objects. Rather than design my Types with the intent to update stored properties in-place, I should think about designing them so that the state-change process would actually produce a whole _new_ instance with the transformed (updated) value.
 
 ### See it in action
 
-I&#8217;m a visual person, so for those of you who need to see it in action like me, here&#8217;s a short example: Suppose that you&#8217;re designing a class that stores a counter (or a score or a total&#8230; something like that), and provides a function to let you increment that count.
+I'm a visual person, so for those of you who need to see it in action like me, here's a short example: Suppose that you're designing a class that stores a counter (or a score or a total&#8230; something like that), and provides a function to let you increment that count.
 
 ### The mutating way
 

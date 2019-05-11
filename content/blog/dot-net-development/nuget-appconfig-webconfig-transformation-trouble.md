@@ -18,13 +18,13 @@ tags:
   - web.config
 
 ---
-I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file.  Try as I may, I couldn&#8217;t get NuGet to apply the transforms to my project&#8217;s web.config file even though I was following <a title="NuGet Configuration File and Source Code Transformations Documentation" href="http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations" target="_blank">NuGet documentation&#8217;s</a> instructions to a tee.
+I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file.  Try as I may, I couldn't get NuGet to apply the transforms to my project's web.config file even though I was following <a title="NuGet Configuration File and Source Code Transformations Documentation" href="http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations" target="_blank">NuGet documentation's</a> instructions to a tee.
 
 It turns out that my problem was related to about 3 things all working together in tandem to defeat me:
 
-**First**, the project I was testing the installation of this NuGet package on was already checked into source control (TFS).  To test out the package, I would install it and when things didn&#8217;t work how I wanted, I&#8217;d just &#8220;undo pending changes&#8221; to get everything back to the last stable state.  Or so I thought (more on this in a moment)&#8230;
+**First**, the project I was testing the installation of this NuGet package on was already checked into source control (TFS).  To test out the package, I would install it and when things didn't work how I wanted, I'd just &#8220;undo pending changes&#8221; to get everything back to the last stable state.  Or so I thought (more on this in a moment)&#8230;
 
-**Second**, I had the idea to add app.config.transform and web.config.transform files to my NuGet package Content folder _after_ I&#8217;d already installed &#8220;version 1&#8221; of the package in my project, and rather than bump the version of the package with the transforms in it _up_, I left it the same because I was still technically editing and troubleshooting the first version of the package (in my mind anyways).
+**Second**, I had the idea to add app.config.transform and web.config.transform files to my NuGet package Content folder _after_ I'd already installed &#8220;version 1&#8221; of the package in my project, and rather than bump the version of the package with the transforms in it _up_, I left it the same because I was still technically editing and troubleshooting the first version of the package (in my mind anyways).
 
 **Third**, my solution was configured for &#8220;NuGet Package Restore&#8221;:
 
@@ -32,9 +32,9 @@ It turns out that my problem was related to about 3 things all working together 
 
 #### So what was going on?
 
-Choosing &#8220;Enable NuGet Package Restore&#8221; keeps your NuGet packages folder contents from being checked into source control by adding a NuGet config file with a setting disabling source control integration.  We&#8217;d rather just let NuGet restore them if they&#8217;re missing when we build, rather than check in the packages folder to source control.
+Choosing &#8220;Enable NuGet Package Restore&#8221; keeps your NuGet packages folder contents from being checked into source control by adding a NuGet config file with a setting disabling source control integration.  We'd rather just let NuGet restore them if they're missing when we build, rather than check in the packages folder to source control.
 
-What this meant for me, however, is that all my &#8220;undo pending changes&#8221; actions were doing absolutely nothing to undo the installation of the NuGet package I was developing and troubleshooting.  My troubleshooting workflow of [Install package -> Check web.config -> :[ _Still_ missing connection strings -> Undo pending changes -> Fiddle with NuGet Package -> Rinse and repeat] could have been infinite, because the &#8220;undo pending changes&#8221; step wasn&#8217;t undoing the NuGet package installation, because _the NuGet package files weren&#8217;t part of the pending change set _due to my &#8220;Enable NuGet Package Restore&#8221; setting.  The NuGet package was still in the packages folder on my hard disk, which had another hidden consequence: each subsequent &#8220;installation&#8221; of the NuGet package effectively did nothing because it was already there.  Remember, I didn&#8217;t bump the version number of the package, so I&#8217;m guessing NuGet already saw the files there and just updated the config file and called it good.  None of the updates I was making to the package were ever updated.
+What this meant for me, however, is that all my &#8220;undo pending changes&#8221; actions were doing absolutely nothing to undo the installation of the NuGet package I was developing and troubleshooting.  My troubleshooting workflow of [Install package -> Check web.config -> :[ _Still_ missing connection strings -> Undo pending changes -> Fiddle with NuGet Package -> Rinse and repeat] could have been infinite, because the &#8220;undo pending changes&#8221; step wasn't undoing the NuGet package installation, because _the NuGet package files weren't part of the pending change set _due to my &#8220;Enable NuGet Package Restore&#8221; setting.  The NuGet package was still in the packages folder on my hard disk, which had another hidden consequence: each subsequent &#8220;installation&#8221; of the NuGet package effectively did nothing because it was already there.  Remember, I didn't bump the version number of the package, so I'm guessing NuGet already saw the files there and just updated the config file and called it good.  None of the updates I was making to the package were ever updated.
 
 #### Solution?
 
@@ -49,7 +49,7 @@ I double-clicked on the packages folder:
 
 Finally, I deleted the folder for the package I was developing.
 
-After these steps were performed, installing the NuGet package again worked perfectly &#8211; the config transforms were applied and life was good.
+After these steps were performed, installing the NuGet package again worked perfectly – the config transforms were applied and life was good.
 
 Alternatively, I suppose I could have upped the version number of my package and things would have been fine as well.  But I always tend to make things more complicated than they need to be. :]
 

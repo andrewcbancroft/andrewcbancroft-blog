@@ -28,7 +28,7 @@
 <meta property="og:description" content="As I listened to the WWDC15 talk on Building Better Apps with Value Types in Swift I was struck by a sentence that I had never dawned on me before:
  Every Value Type should be Equatable.
  That is, every Value Type should conform to the Equatable protocol.
-Talk about a sweeping statement! Wow &#8211; every Value Type should be Equatable? Hmm&#8230; Let&#8217;s unpack the &#8220;why&#8217;s&#8221; and &#8220;how&#8217;s&#8221; of this statement." />
+Talk about a sweeping statement! Wow – every Value Type should be Equatable? Hmm&#8230; Let's unpack the &#8220;why's&#8221; and &#8220;how's&#8221; of this statement." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/07/01/every-swift-value-type-should-be-equatable/" />
 <meta property="article:published_time" content="2015-07-01T18:07:35&#43;00:00"/>
@@ -39,7 +39,7 @@ Talk about a sweeping statement! Wow &#8211; every Value Type should be Equatabl
 <meta name="twitter:description" content="As I listened to the WWDC15 talk on Building Better Apps with Value Types in Swift I was struck by a sentence that I had never dawned on me before:
  Every Value Type should be Equatable.
  That is, every Value Type should conform to the Equatable protocol.
-Talk about a sweeping statement! Wow &#8211; every Value Type should be Equatable? Hmm&#8230; Let&#8217;s unpack the &#8220;why&#8217;s&#8221; and &#8220;how&#8217;s&#8221; of this statement."/>
+Talk about a sweeping statement! Wow – every Value Type should be Equatable? Hmm&#8230; Let's unpack the &#8220;why's&#8221; and &#8220;how's&#8221; of this statement."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -178,7 +178,7 @@ MathJax.Hub.Config({
 
 <p>That is, every Value Type should conform to the <code>Equatable</code> protocol.</p>
 
-<p>Talk about a sweeping statement! Wow &#8211; <em>every</em> Value Type should be <code>Equatable</code>? Hmm&#8230; Let&#8217;s unpack the &#8220;why&#8217;s&#8221; and &#8220;how&#8217;s&#8221; of this statement.</p>
+<p>Talk about a sweeping statement! Wow – <em>every</em> Value Type should be <code>Equatable</code>? Hmm&#8230; Let's unpack the &#8220;why's&#8221; and &#8220;how's&#8221; of this statement.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -234,9 +234,9 @@ MathJax.Hub.Config({
 
 <h3 id="why">Why?</h3>
 
-<p>I&#8217;d never thought about why I might want my Value Types in Swift to be Equatable. Not that I thought it&#8217;d be a terrible idea to implement the <code>==</code> operator for a Type&#8230; I just never realized that this was actually <em>expected</em> behavior of Value Types!</p>
+<p>I'd never thought about why I might want my Value Types in Swift to be Equatable. Not that I thought it'd be a terrible idea to implement the <code>==</code> operator for a Type&#8230; I just never realized that this was actually <em>expected</em> behavior of Value Types!</p>
 
-<p>The reasoning in the talk was that Values are intuitively <em>meant</em> to be compared for equality. <em>Because</em> they&#8217;re <em>Values</em>, there is inherent expectation from clients of the Type to be able to ask and know if one Value is equal to another Value of the same Type.</p>
+<p>The reasoning in the talk was that Values are intuitively <em>meant</em> to be compared for equality. <em>Because</em> they're <em>Values</em>, there is inherent expectation from clients of the Type to be able to ask and know if one Value is equal to another Value of the same Type.</p>
 
 <p>We naturally expect to be able to ask two variables/constants, each holding <code>Int</code> Values (because in Swift, <code>Int</code> is a Value Type), if they equal each other. And we naturally expect the comparison to compare the actual <em>numbers</em>&#8230; the <em>Values themlselves</em>.</p>
 
@@ -248,7 +248,7 @@ let x = 1
 let y = 2
 x == y // false</pre>
 
-<p>Likewise, we naturally expect to ask two Strings if <em>they&#8217;re</em> equal:</p>
+<p>Likewise, we naturally expect to ask two Strings if <em>they're</em> equal:</p>
 
 <pre class="lang:swift decode:true " title="String comparison" >let str1 = "I love Swift!"
 let str2 = "I love Swift!"
@@ -258,7 +258,7 @@ str1 == str2 // true
 let str3 = "i love swift!"
 str1 == str3 // false - case-sensitive comparison</pre>
 
-<p>In fact, we naturally expect to ask these kinds of equality questions about <em>any</em> of the Swift standard library Value Types, don&#8217;t we?</p>
+<p>In fact, we naturally expect to ask these kinds of equality questions about <em>any</em> of the Swift standard library Value Types, don't we?</p>
 
 <p><a name="how" class="jump-target"></a></p>
 
@@ -268,13 +268,13 @@ str1 == str3 // false - case-sensitive comparison</pre>
 
 <p>So now the question is, &#8220;<em>How</em>?&#8221;</p>
 
-<p>The simple answer is that our Value Types need to implement an <code>==</code> operator. But there&#8217;s something really important to consider:</p>
+<p>The simple answer is that our Value Types need to implement an <code>==</code> operator. But there's something really important to consider:</p>
 
 <p><a name="equality-properties" class="jump-target"></a></p>
 
 <h4 id="properties-of-equality">Properties of equality</h4>
 
-<p>To be truly equal, the <code>==</code> operator not only needs to be implemented, but it needs to be implemented in such a way that it <em>behaves</em> as we&#8217;d expect when doing our comparisons. During the talk, Doug mentioned three important properties of equality that need to hold for our Value Types:</p>
+<p>To be truly equal, the <code>==</code> operator not only needs to be implemented, but it needs to be implemented in such a way that it <em>behaves</em> as we'd expect when doing our comparisons. During the talk, Doug mentioned three important properties of equality that need to hold for our Value Types:</p>
 
 <ol>
 <li>The comparison must be <strong>reflexive</strong></li>
@@ -282,13 +282,13 @@ str1 == str3 // false - case-sensitive comparison</pre>
 <li>The comparison must be <strong>transitive</strong></li>
 </ol>
 
-<p>That sounds awfully &#8220;math-y&#8221;. In fact, it&#8217;s the exact same terminology used in mathematics. But don&#8217;t worry, the terminology is simple and natural to understand.</p>
+<p>That sounds awfully &#8220;math-y&#8221;. In fact, it's the exact same terminology used in mathematics. But don't worry, the terminology is simple and natural to understand.</p>
 
 <p><a name="reflexive" class="jump-target"></a></p>
 
 <h5 id="reflexive">Reflexive</h5>
 
-<p>To be reflexive, the Type&#8217;s <code>==</code> operator needs to make sure that the expression <code>x == x</code> returns <code>true</code>.</p>
+<p>To be reflexive, the Type's <code>==</code> operator needs to make sure that the expression <code>x == x</code> returns <code>true</code>.</p>
 
 <p>So if I have <code>let x = 1</code> and I write the expression <code>x == x</code>, I do in fact get <code>true</code> because <code>Int</code>&#8216;s equality operator is reflexive (as expected).</p>
 
@@ -296,9 +296,9 @@ str1 == str3 // false - case-sensitive comparison</pre>
 
 <h5 id="symmetric">Symmetric</h5>
 
-<p>To be symmetric, the Type&#8217;s <code>==</code> operator needs to compute things in such a way that the expression <code>x == y</code> and <code>y == x</code> return the same value.</p>
+<p>To be symmetric, the Type's <code>==</code> operator needs to compute things in such a way that the expression <code>x == y</code> and <code>y == x</code> return the same value.</p>
 
-<p>Here&#8217;s an example of symmetry:</p>
+<p>Here's an example of symmetry:</p>
 
 <pre class="lang:swift decode:true " title="Symmetric" >let x = 1
 let y = 1
@@ -316,9 +316,9 @@ y == x // false</pre>
 
 <h5 id="transitive">Transitive</h5>
 
-<p>Finally, to be transitive, the Type&#8217;s <code>==</code> operator needs to compute things in such a way that when <code>x == y</code> is <code>true</code>, and <code>y == z</code> is <code>true</code>, then <code>x == z</code> is also <code>true</code>.</p>
+<p>Finally, to be transitive, the Type's <code>==</code> operator needs to compute things in such a way that when <code>x == y</code> is <code>true</code>, and <code>y == z</code> is <code>true</code>, then <code>x == z</code> is also <code>true</code>.</p>
 
-<p>Here&#8217;s an example of transitivity:</p>
+<p>Here's an example of transitivity:</p>
 
 <pre class="lang:swift decode:true " title="Transitive" >let x = 100
 let y = 50 + 50
@@ -332,9 +332,9 @@ x == z // true</pre>
 
 <h4 id="implementation">Implementation</h4>
 
-<p><em>Most</em> of the time, the implementation of <code>==</code> is very simple. If your Value Type is comprised of other Value Types that have an <code>==</code> operator that&#8217;s correctly implemented with the semantics I just described, then the implementation for your Type is straight-forward.</p>
+<p><em>Most</em> of the time, the implementation of <code>==</code> is very simple. If your Value Type is comprised of other Value Types that have an <code>==</code> operator that's correctly implemented with the semantics I just described, then the implementation for your Type is straight-forward.</p>
 
-<p>An example might help to set things up for understanding. Suppose that we&#8217;re building a sight-seeing app for a local tourism company. We&#8217;ve got a struct called <code>Place</code> to help us encapsulate the idea of&#8230; well&#8230; a &#8220;place&#8221; to visit. It looks something like this:</p>
+<p>An example might help to set things up for understanding. Suppose that we're building a sight-seeing app for a local tourism company. We've got a struct called <code>Place</code> to help us encapsulate the idea of&#8230; well&#8230; a &#8220;place&#8221; to visit. It looks something like this:</p>
 
 <pre class="lang:swift decode:true " title="Place.swift" >struct Place {
     let name: String
@@ -344,7 +344,7 @@ x == z // true</pre>
     // init is auto-generated by the compiler in this case
 }</pre>
 
-<p>Since <code>Place</code> is a Value Type (Struct) which is comprised of other Value Types, you&#8217;d simply need to do something like the following to make it <code>Equatable</code>:</p>
+<p>Since <code>Place</code> is a Value Type (Struct) which is comprised of other Value Types, you'd simply need to do something like the following to make it <code>Equatable</code>:</p>
 
 <pre class="lang:swift decode:true mark:1,4-6" title="Implement ==" >extension Place: Equatable {}
 
@@ -358,32 +358,32 @@ func ==(lhs: Place, rhs: Place) -> Bool {
 
 <p>One of the first things to notice is that the <code>==</code> operator has to be implemented as a stand-alone <em>global</em> function, rather than as part of the Type definition.</p>
 
-<p>Notice also that even though we have the source for the Type that we want to make <code>Equatable</code>, I chose to signal the <code>Equatable</code> protocol adoption through an <em>extension</em> on the Type, rather than at the Type declaration itself. Both are acceptable, but it&#8217;s become convention to use the extension strategy for this particular protocol.</p>
+<p>Notice also that even though we have the source for the Type that we want to make <code>Equatable</code>, I chose to signal the <code>Equatable</code> protocol adoption through an <em>extension</em> on the Type, rather than at the Type declaration itself. Both are acceptable, but it's become convention to use the extension strategy for this particular protocol.</p>
 
-<p>The implementation of <code>==</code> uses the intuitive semantics that one <code>Place</code> isn&#8217;t the same as another <code>Place</code> unless the <code>name</code>s, <code>latidude</code>s, and <code>longitude</code>s are all the same.</p>
+<p>The implementation of <code>==</code> uses the intuitive semantics that one <code>Place</code> isn't the same as another <code>Place</code> unless the <code>name</code>s, <code>latidude</code>s, and <code>longitude</code>s are all the same.</p>
 
-<p><code>lhs</code> and <code>rhs</code> simply mean &#8220;left-hand side&#8221; and &#8220;right-hand side&#8221;, respectively. Since there&#8217;s a <code>Place</code> instance on the left-hand side of the <code>==</code> operator, and a <code>Place</code> instance on the right-hand side of the <code>==</code> operator when we use it in practice, it makes sense to label these parameters according to that pattern.</p>
+<p><code>lhs</code> and <code>rhs</code> simply mean &#8220;left-hand side&#8221; and &#8220;right-hand side&#8221;, respectively. Since there's a <code>Place</code> instance on the left-hand side of the <code>==</code> operator, and a <code>Place</code> instance on the right-hand side of the <code>==</code> operator when we use it in practice, it makes sense to label these parameters according to that pattern.</p>
 
-<p>The implementation could literally be read as, &#8220;If the <code>Place</code> on the left-hand side&#8217;s <code>name</code> is equal to the <code>Place</code> on the right-hand side&#8217;s <code>name</code>, AND &#8230; the <code>latitude</code> &#8230; AND &#8230; the <code>longitude</code>, then the two <code>Place</code> instances are equal.&#8221;</p>
+<p>The implementation could literally be read as, &#8220;If the <code>Place</code> on the left-hand side's <code>name</code> is equal to the <code>Place</code> on the right-hand side's <code>name</code>, AND &#8230; the <code>latitude</code> &#8230; AND &#8230; the <code>longitude</code>, then the two <code>Place</code> instances are equal.&#8221;</p>
 
 <p><a name="reference-types" class="jump-target"></a></p>
 
 <h5 id="dealing-with-reference-types">Dealing with reference types</h5>
 
-<p>If Reference Types are involved with your Value Type implementation, things could get a little more complicated. &#8220;Complicated&#8221; probably isn&#8217;t the right word&#8230; but you do have to <em>think</em> a little more about your Type&#8217;s equality semantics.</p>
+<p>If Reference Types are involved with your Value Type implementation, things could get a little more complicated. &#8220;Complicated&#8221; probably isn't the right word&#8230; but you do have to <em>think</em> a little more about your Type's equality semantics.</p>
 
-<p>Let&#8217;s modify the example just a little bit:</p>
+<p>Let's modify the example just a little bit:</p>
 
-<p>Supposing that <code>Place</code> had an additional property called <code>featureImage</code> which held a reference to a <code>UIImage</code> instance (a Reference Type), we&#8217;d need to test for equality a little bit differently. And <em>how</em> we test for equality depends on the particulars of our Type&#8217;s equality semantics:</p>
+<p>Supposing that <code>Place</code> had an additional property called <code>featureImage</code> which held a reference to a <code>UIImage</code> instance (a Reference Type), we'd need to test for equality a little bit differently. And <em>how</em> we test for equality depends on the particulars of our Type's equality semantics:</p>
 
 <ul>
 <li>Are the two <code>Place</code>s equal if both of them point to the same <code>featureImage</code> (ie, should we just use <code>===</code> to check and see if the references are the same)?</li>
-<li>OR, are the two <code>Place</code>s equal if both of their <code>featureImage</code> instances contain the same underlying bitmap (ie, they&#8217;re the same picture in <em>essence</em>)?</li>
+<li>OR, are the two <code>Place</code>s equal if both of their <code>featureImage</code> instances contain the same underlying bitmap (ie, they're the same picture in <em>essence</em>)?</li>
 </ul>
 
 <p>As you can see, the phrase &#8220;it depends&#8221; applies here. Certainly we need to test for <em>some</em> kind of equality on the <code>featureImage</code> in order to have a complete <code>==</code> implementation. But how we go about it really comes down to the semantics that you and others would expect from asking the question, &#8220;Is this <code>Place</code> equivalent to that <code>Place</code>?&#8221;</p>
 
-<p>For this example, I&#8217;m going to go with the latter statement: that two <code>Places</code> are equal if both of their <code>featureImage</code> instances contain the same underlying bitmap.</p>
+<p>For this example, I'm going to go with the latter statement: that two <code>Places</code> are equal if both of their <code>featureImage</code> instances contain the same underlying bitmap.</p>
 
 <pre class="lang:swift decode:true mark:7" title="Implement ==" >extension Place: Equatable {}
 
@@ -398,7 +398,7 @@ func ==(lhs: Place, rhs: Place) -&gt; Bool {
 
 <h3 id="wrapping-up">Wrapping up</h3>
 
-<p>Every Value Type should conform to the <code>Equatable</code> protocol. In this article, we unpacked the &#8220;why&#8217;s&#8221; and the &#8220;how&#8217;s&#8221; of this fundamental characteristic of Value Types. From here, we&#8217;ve all got to jump on board and ensure that we meet this expectation in our code!</p>
+<p>Every Value Type should conform to the <code>Equatable</code> protocol. In this article, we unpacked the &#8220;why's&#8221; and the &#8220;how's&#8221; of this fundamental characteristic of Value Types. From here, we've all got to jump on board and ensure that we meet this expectation in our code!</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Why Do We Need to Annotate Escaping Closures in Swift?" />
-<meta property="og:description" content="My last entry on escaping closures ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that&#8217;s a different story&#8230; :]
+<meta property="og:description" content="My last entry on escaping closures ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that's a different story&#8230; :]
 Several readers commented here and on Medium with the question, &#8220;Why? Why do we need to mark escaping closures with @escaping?&#8221;
 Jump to&#8230;   Do it yourself, compiler!   Insight from the Swift gurus   I see what you did there&#8230; Let me help you out&#8230;   How helpful is it, really?" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@ Jump to&#8230;   Do it yourself, compiler!   Insight from the Swift gurus   I se
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Why Do We Need to Annotate Escaping Closures in Swift?"/>
-<meta name="twitter:description" content="My last entry on escaping closures ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that&#8217;s a different story&#8230; :]
+<meta name="twitter:description" content="My last entry on escaping closures ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that's a different story&#8230; :]
 Several readers commented here and on Medium with the question, &#8220;Why? Why do we need to mark escaping closures with @escaping?&#8221;
 Jump to&#8230;   Do it yourself, compiler!   Insight from the Swift gurus   I see what you did there&#8230; Let me help you out&#8230;   How helpful is it, really?"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
@@ -168,7 +168,7 @@ MathJax.Hub.Config({
 
     
 
-<p>My last entry on <a href="https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/">escaping closures</a> ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that&#8217;s a different story&#8230; :]</p>
+<p>My last entry on <a href="https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/">escaping closures</a> ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that's a different story&#8230; :]</p>
 
 <p>Several readers commented here and on Medium with the question, &#8220;Why? Why do we need to mark escaping closures with <code>@escaping</code>?&#8221;</p>
 
@@ -210,11 +210,11 @@ MathJax.Hub.Config({
 
 <h1 id="do-it-yourself-compiler">Do it yourself, compiler!</h1>
 
-<p>Observant minds looked at the compiler&#8217;s ability to say, &#8220;Hey! This closure can escape &#8211; Annotate it with <code>@escaping</code>!&#8221; and asked, &#8220;Well&#8230; <em>why</em>?? If you, compiler, are smart enough to figure out that I need to annotate it, why can&#8217;t you just deal with it automatically and let me go about my business?&#8221;</p>
+<p>Observant minds looked at the compiler's ability to say, &#8220;Hey! This closure can escape &#8211; Annotate it with <code>@escaping</code>!&#8221; and asked, &#8220;Well&#8230; <em>why</em>?? If you, compiler, are smart enough to figure out that I need to annotate it, why can't you just deal with it automatically and let me go about my business?&#8221;</p>
 
 <p>Good. Question.</p>
 
-<p>And one that I didn&#8217;t know the answer to. So I researched!</p>
+<p>And one that I didn't know the answer to. So I researched!</p>
 
 <p><a name="insight" class="jump-target"></a></p>
 
@@ -228,9 +228,9 @@ MathJax.Hub.Config({
 
 <p>Did you catch that?</p>
 
-<p>When the Swift compiler requires us to annotate our APIs with <code>@escaping</code>, that&#8217;s its way of doing &#8220;quality of implementation&#8221;.</p>
+<p>When the Swift compiler requires us to annotate our APIs with <code>@escaping</code>, that's its way of doing &#8220;quality of implementation&#8221;.</p>
 
-<p>Essentially, it&#8217;s a red flag saying, &#8220;You really ought to think about this whole escaping thing that you just introduced (whether you knew you were doing it or not)&#8230; it has significant impact on your implementation <em>and</em> on the caller of your function!&#8221;</p>
+<p>Essentially, it's a red flag saying, &#8220;You really ought to think about this whole escaping thing that you just introduced (whether you knew you were doing it or not)&#8230; it has significant impact on your implementation <em>and</em> on the caller of your function!&#8221;</p>
 
 <p><a name="help" class="jump-target"></a></p>
 
@@ -240,9 +240,9 @@ MathJax.Hub.Config({
 
 <p>Some people hate it. I love it.</p>
 
-<p>I <em>want</em> to be told, &#8220;Hey, Andrew&#8230; you&#8217;re about to break stuff &#8211; don&#8217;t do that.&#8221;</p>
+<p>I <em>want</em> to be told, &#8220;Hey, Andrew&#8230; you're about to break stuff &#8211; don't do that.&#8221;</p>
 
-<p>I&#8217;d rather head off issues during development than at run-time.</p>
+<p>I'd rather head off issues during development than at run-time.</p>
 
 <p><a name="how-helpful" class="jump-target"></a></p>
 
@@ -250,24 +250,24 @@ MathJax.Hub.Config({
 
 <p>But really&#8230; How helpful is this particular compiler error? What value does this fix-it option provide?</p>
 
-<p>Try this: Think about what would happen if the compiler <em>didn&#8217;t</em> tell you about the possibility of your function&#8217;s closure escaping.</p>
+<p>Try this: Think about what would happen if the compiler <em>didn't</em> tell you about the possibility of your function's closure escaping.</p>
 
-<p>I was working the other day, cruising along writing what I thought was perfectly normal code when I hit this &#8220;annotate your function&#8217;s closure parameter with <code>@escaping</code>&#8221; error, myself.</p>
+<p>I was working the other day, cruising along writing what I thought was perfectly normal code when I hit this &#8220;annotate your function's closure parameter with <code>@escaping</code>&#8221; error, myself.</p>
 
-<p>&#8220;<code>@escaping</code>, Huh? What&#8217;s that?!&#8221;</p>
+<p>&#8220;<code>@escaping</code>, Huh? What's that?!&#8221;</p>
 
-<p>1 &#8211; I wasn&#8217;t thinking about escaping closures because<br />
+<p>1 &#8211; I wasn't thinking about escaping closures because<br />
 2 &#8211; I had no idea that I <em>could</em> think about escaping closures!!</p>
 
 <p>It turns out that this could have been really bad, agreed? Asynchronous behavior in software requires a little more thought than your normal top-down procedural approach.</p>
 
-<p>If the compiler hadn&#8217;t stopped me, I could have inadvertently imposed the need to think in terms of dispatch queues or asynchronous callbacks on the users of my API.</p>
+<p>If the compiler hadn't stopped me, I could have inadvertently imposed the need to think in terms of dispatch queues or asynchronous callbacks on the users of my API.</p>
 
-<p>Is this only something that &#8220;newbies&#8221; need to have the compiler&#8217;s help with though?</p>
+<p>Is this only something that &#8220;newbies&#8221; need to have the compiler's help with though?</p>
 
-<p>One could argue that I probably should have been aware of this particular feature of Swift &#8212; had I been a better developer, maybe I wouldn&#8217;t need the compiler to hold my hand so much.</p>
+<p>One could argue that I probably should have been aware of this particular feature of Swift &#8212; had I been a better developer, maybe I wouldn't need the compiler to hold my hand so much.</p>
 
-<p>Okay &#8211; Fair point. That leads me to one last gleaning from Lattner&#8217;s Swift Evolution entry that I&#8217;ll comment on before wrapping up.</p>
+<p>Okay &#8211; Fair point. That leads me to one last gleaning from Lattner's Swift Evolution entry that I'll comment on before wrapping up.</p>
 
 <p><a name="resilience" class="jump-target"></a></p>
 
@@ -281,31 +281,31 @@ MathJax.Hub.Config({
 
 <p>Resilience is all about how clients are affected when you <em>change</em> the API or its implementation.</p>
 
-<p>Suppose that a team mate of mine writes a function&#8230; <a href="https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/">She&#8217;s just created an API</a>, true?</p>
+<p>Suppose that a team mate of mine writes a function&#8230; <a href="https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/">She's just created an API</a>, true?</p>
 
-<p>Suppose that the function asks for a closure, but for now it&#8217;s just a regular old closure. No escaping or anything.</p>
+<p>Suppose that the function asks for a closure, but for now it's just a regular old closure. No escaping or anything.</p>
 
-<p>Others on my team are going to start coding against that function&#8217;s signature. If the function is honest, it allows me and my team to have expectations about what it&#8217;ll do when it executes.</p>
+<p>Others on my team are going to start coding against that function's signature. If the function is honest, it allows me and my team to have expectations about what it'll do when it executes.</p>
 
-<p>Now suppose that I&#8217;m going to work on version 2 of that same API. Only <em>now</em>, I&#8217;m going to introduce the opportunity for that closure to <a href="https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/">escape</a> (maybe intentionally, or maybe accidentally out of ignorance).</p>
+<p>Now suppose that I'm going to work on version 2 of that same API. Only <em>now</em>, I'm going to introduce the opportunity for that closure to <a href="https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/">escape</a> (maybe intentionally, or maybe accidentally out of ignorance).</p>
 
-<p>Thaaaat&#8217;s gonna break my team. For sure.</p>
+<p>Thaaaat's gonna break my team. For sure.</p>
 
-<p>They&#8217;re using the API as it is expecting normal synchronous behavior from the function. Now <em>I&#8217;ve</em> gone in and fundamentally changed what their expectations should be.</p>
+<p>They're using the API as it is expecting normal synchronous behavior from the function. Now <em>I've</em> gone in and fundamentally changed what their expectations should be.</p>
 
-<p>In other words, I haven&#8217;t been very resilient.</p>
+<p>In other words, I haven't been very resilient.</p>
 
 <p>The default behavior of closures passed to functions is to be <code>@noescape</code>. If I introduce the possibility for that closure to escape, I need to be red-flag warned about that, because I need to come up with some way to communicate this breaking change to the clients of the API. And/or provide an alternative so that clients of API v1 can still use it as expected.</p>
 
-<p>Most of all, I need to <strong>think</strong> about the implications of what I&#8217;m doing, and sometimes (a lot of the times) that takes prompting.</p>
+<p>Most of all, I need to <strong>think</strong> about the implications of what I'm doing, and sometimes (a lot of the times) that takes prompting.</p>
 
 <p><a name="bottom-line" class="jump-target"></a></p>
 
 <h1 id="the-bottom-line-8211-the-compiler-is-making-you-think">The bottom line &#8211; The compiler is making you think</h1>
 
-<p>All of this to say: The compiler is making you think. Not only that, it&#8217;s forcing you to conform.</p>
+<p>All of this to say: The compiler is making you think. Not only that, it's forcing you to conform.</p>
 
-<p>From what I&#8217;ve found, that&#8217;s the idea behind &#8220;why&#8221; we need to mark escaping closures with <code>@escaping</code> in Swift.</p>
+<p>From what I've found, that's the idea behind &#8220;why&#8221; we need to mark escaping closures with <code>@escaping</code> in Swift.</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

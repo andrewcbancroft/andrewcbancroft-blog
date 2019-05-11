@@ -15,52 +15,21 @@ tags:
   - Swift
 
 ---
-My last entry on [escaping closures][1] ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that&#8217;s a different story&#8230; :]
+My last entry on [escaping closures][1] ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that's a different story&#8230; :]
 
 Several readers commented here and on Medium with the question, &#8220;Why? Why do we need to mark escaping closures with `@escaping`?&#8221;
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#do-it-self">Do it yourself, compiler!</a>
-    </li>
-    <li>
-      <a href="#insight">Insight from the Swift gurus</a>
-    </li>
-    <li>
-      <a href="#help">I see what you did there&#8230; Let me help you out&#8230;</a>
-    </li>
-    <li>
-      <a href="#how-helpful">How helpful is it, really?</a>
-    </li>
-    <li>
-      <a href="#resilience">Writing resilient code</a>
-    </li>
-    <li>
-      <a href="#bottom-line">The bottom line &#8211; The compiler is making you think</a>
-    </li>
-    <li>
-      <a href="#related">You might also enjoy&#8230;</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
+
 
 <a name="do-it-self" class="jump-target"></a>
 
 # Do it yourself, compiler!
 
-Observant minds looked at the compiler&#8217;s ability to say, &#8220;Hey! This closure can escape &#8211; Annotate it with `@escaping`!&#8221; and asked, &#8220;Well&#8230; _why_?? If you, compiler, are smart enough to figure out that I need to annotate it, why can&#8217;t you just deal with it automatically and let me go about my business?&#8221;
+Observant minds looked at the compiler's ability to say, &#8220;Hey! This closure can escape – Annotate it with `@escaping`!&#8221; and asked, &#8220;Well&#8230; _why_?? If you, compiler, are smart enough to figure out that I need to annotate it, why can't you just deal with it automatically and let me go about my business?&#8221;
 
 Good. Question.
 
-And one that I didn&#8217;t know the answer to. So I researched!
+And one that I didn't know the answer to. So I researched!
 
 <a name="insight" class="jump-target"></a>
 
@@ -68,13 +37,13 @@ And one that I didn&#8217;t know the answer to. So I researched!
 
 As I dug around in the [Swift GitHub repository][2] and the [Swift Evolution list][3] I found [a quote from Chris Lattner][4] that stuck out:
 
-> The compiler has enough logic in it to provide a great QoI (Quality of Implementation) experience when a developer doesn’t think about escaping, and tries to escape a closure &#8211; it can provide a fixit that suggests adding @escaping.&#8221; 
+> The compiler has enough logic in it to provide a great QoI (Quality of Implementation) experience when a developer doesn’t think about escaping, and tries to escape a closure – it can provide a fixit that suggests adding @escaping.&#8221; 
 
 Did you catch that?
 
-When the Swift compiler requires us to annotate our APIs with `@escaping`, that&#8217;s its way of doing &#8220;quality of implementation&#8221;.
+When the Swift compiler requires us to annotate our APIs with `@escaping`, that's its way of doing &#8220;quality of implementation&#8221;.
 
-Essentially, it&#8217;s a red flag saying, &#8220;You really ought to think about this whole escaping thing that you just introduced (whether you knew you were doing it or not)&#8230; it has significant impact on your implementation _and_ on the caller of your function!&#8221;
+Essentially, it's a red flag saying, &#8220;You really ought to think about this whole escaping thing that you just introduced (whether you knew you were doing it or not)&#8230; it has significant impact on your implementation _and_ on the caller of your function!&#8221;
 
 <a name="help" class="jump-target"></a>
 
@@ -84,9 +53,9 @@ The Swift compiler, for better or worse, wants to be very&#8230; &#8220;helpful&
 
 Some people hate it. I love it.
 
-I _want_ to be told, &#8220;Hey, Andrew&#8230; you&#8217;re about to break stuff &#8211; don&#8217;t do that.&#8221;
+I _want_ to be told, &#8220;Hey, Andrew&#8230; you're about to break stuff – don't do that.&#8221;
 
-I&#8217;d rather head off issues during development than at run-time.
+I'd rather head off issues during development than at run-time.
 
 <a name="how-helpful" class="jump-target"></a>
 
@@ -94,24 +63,24 @@ I&#8217;d rather head off issues during development than at run-time.
 
 But really&#8230; How helpful is this particular compiler error? What value does this fix-it option provide?
 
-Try this: Think about what would happen if the compiler _didn&#8217;t_ tell you about the possibility of your function&#8217;s closure escaping.
+Try this: Think about what would happen if the compiler _didn't_ tell you about the possibility of your function's closure escaping.
 
-I was working the other day, cruising along writing what I thought was perfectly normal code when I hit this &#8220;annotate your function&#8217;s closure parameter with `@escaping`&#8221; error, myself.
+I was working the other day, cruising along writing what I thought was perfectly normal code when I hit this &#8220;annotate your function's closure parameter with `@escaping`&#8221; error, myself.
 
-&#8220;`@escaping`, Huh? What&#8217;s that?!&#8221;
+&#8220;`@escaping`, Huh? What's that?!&#8221;
 
-1 &#8211; I wasn&#8217;t thinking about escaping closures because  
-2 &#8211; I had no idea that I _could_ think about escaping closures!!
+1 – I wasn't thinking about escaping closures because  
+2 – I had no idea that I _could_ think about escaping closures!!
 
 It turns out that this could have been really bad, agreed? Asynchronous behavior in software requires a little more thought than your normal top-down procedural approach.
 
-If the compiler hadn&#8217;t stopped me, I could have inadvertently imposed the need to think in terms of dispatch queues or asynchronous callbacks on the users of my API.
+If the compiler hadn't stopped me, I could have inadvertently imposed the need to think in terms of dispatch queues or asynchronous callbacks on the users of my API.
 
-Is this only something that &#8220;newbies&#8221; need to have the compiler&#8217;s help with though?
+Is this only something that &#8220;newbies&#8221; need to have the compiler's help with though?
 
-One could argue that I probably should have been aware of this particular feature of Swift &#8212; had I been a better developer, maybe I wouldn&#8217;t need the compiler to hold my hand so much.
+One could argue that I probably should have been aware of this particular feature of Swift &#8212; had I been a better developer, maybe I wouldn't need the compiler to hold my hand so much.
 
-Okay &#8211; Fair point. That leads me to one last gleaning from Lattner&#8217;s Swift Evolution entry that I&#8217;ll comment on before wrapping up.
+Okay – Fair point. That leads me to one last gleaning from Lattner's Swift Evolution entry that I'll comment on before wrapping up.
 
 <a name="resilience" class="jump-target"></a>
 
@@ -123,31 +92,31 @@ Let me reflect really quickly on one more quote from the [Swift Evolution entry]
 
 Resilience is all about how clients are affected when you _change_ the API or its implementation.
 
-Suppose that a team mate of mine writes a function&#8230; [She&#8217;s just created an API][5], true?
+Suppose that a team mate of mine writes a function&#8230; [She's just created an API][5], true?
 
-Suppose that the function asks for a closure, but for now it&#8217;s just a regular old closure. No escaping or anything.
+Suppose that the function asks for a closure, but for now it's just a regular old closure. No escaping or anything.
 
-Others on my team are going to start coding against that function&#8217;s signature. If the function is honest, it allows me and my team to have expectations about what it&#8217;ll do when it executes.
+Others on my team are going to start coding against that function's signature. If the function is honest, it allows me and my team to have expectations about what it'll do when it executes.
 
-Now suppose that I&#8217;m going to work on version 2 of that same API. Only _now_, I&#8217;m going to introduce the opportunity for that closure to [escape][1] (maybe intentionally, or maybe accidentally out of ignorance).
+Now suppose that I'm going to work on version 2 of that same API. Only _now_, I'm going to introduce the opportunity for that closure to [escape][1] (maybe intentionally, or maybe accidentally out of ignorance).
 
-Thaaaat&#8217;s gonna break my team. For sure.
+Thaaaat's gonna break my team. For sure.
 
-They&#8217;re using the API as it is expecting normal synchronous behavior from the function. Now _I&#8217;ve_ gone in and fundamentally changed what their expectations should be.
+They're using the API as it is expecting normal synchronous behavior from the function. Now _I've_ gone in and fundamentally changed what their expectations should be.
 
-In other words, I haven&#8217;t been very resilient.
+In other words, I haven't been very resilient.
 
 The default behavior of closures passed to functions is to be `@noescape`. If I introduce the possibility for that closure to escape, I need to be red-flag warned about that, because I need to come up with some way to communicate this breaking change to the clients of the API. And/or provide an alternative so that clients of API v1 can still use it as expected.
 
-Most of all, I need to **think** about the implications of what I&#8217;m doing, and sometimes (a lot of the times) that takes prompting.
+Most of all, I need to **think** about the implications of what I'm doing, and sometimes (a lot of the times) that takes prompting.
 
 <a name="bottom-line" class="jump-target"></a>
 
-# The bottom line &#8211; The compiler is making you think
+# The bottom line – The compiler is making you think
 
-All of this to say: The compiler is making you think. Not only that, it&#8217;s forcing you to conform.
+All of this to say: The compiler is making you think. Not only that, it's forcing you to conform.
 
-From what I&#8217;ve found, that&#8217;s the idea behind &#8220;why&#8221; we need to mark escaping closures with `@escaping` in Swift.
+From what I've found, that's the idea behind &#8220;why&#8221; we need to mark escaping closures with `@escaping` in Swift.
 
 <a name="related" class="jump-target"></a>
 

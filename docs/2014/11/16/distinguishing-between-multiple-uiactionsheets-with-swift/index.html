@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Distinguishing Between Multiple UIActionSheets with Swift" />
-<meta property="og:description" content="The challenge when dealing with the presentation and handling of more than one UIActionSheet in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I&#8217;m dealing with so that I can handle the user&#8217;s choice appropriately?&#8221;
-Presumably, the user&#8217;s interaction with one of the action sheets will be different than the other(s), so you&#8217;ll need to think through how to distinguish between them, in order to respond to that interaction appropriately." />
+<meta property="og:description" content="The challenge when dealing with the presentation and handling of more than one UIActionSheet in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I'm dealing with so that I can handle the user's choice appropriately?&#8221;
+Presumably, the user's interaction with one of the action sheets will be different than the other(s), so you'll need to think through how to distinguish between them, in order to respond to that interaction appropriately." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2014/11/16/distinguishing-between-multiple-uiactionsheets-with-swift/" />
 <meta property="article:published_time" content="2014-11-17T04:17:39&#43;00:00"/>
@@ -34,8 +34,8 @@ Presumably, the user&#8217;s interaction with one of the action sheets will be d
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Distinguishing Between Multiple UIActionSheets with Swift"/>
-<meta name="twitter:description" content="The challenge when dealing with the presentation and handling of more than one UIActionSheet in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I&#8217;m dealing with so that I can handle the user&#8217;s choice appropriately?&#8221;
-Presumably, the user&#8217;s interaction with one of the action sheets will be different than the other(s), so you&#8217;ll need to think through how to distinguish between them, in order to respond to that interaction appropriately."/>
+<meta name="twitter:description" content="The challenge when dealing with the presentation and handling of more than one UIActionSheet in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I'm dealing with so that I can handle the user's choice appropriately?&#8221;
+Presumably, the user's interaction with one of the action sheets will be different than the other(s), so you'll need to think through how to distinguish between them, in order to respond to that interaction appropriately."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -166,11 +166,11 @@ MathJax.Hub.Config({
 
     
 
-<p>The challenge when dealing with the presentation and handling of more than one <span class="lang:swift decode:true  crayon-inline " >UIActionSheet</span> in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I&#8217;m dealing with so that I can handle the user&#8217;s choice appropriately?&#8221;</p>
+<p>The challenge when dealing with the presentation and handling of more than one <span class="lang:swift decode:true  crayon-inline " >UIActionSheet</span> in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I'm dealing with so that I can handle the user's choice appropriately?&#8221;</p>
 
-<p>Presumably, the user&#8217;s interaction with one of the action sheets will be different than the other(s), so you&#8217;ll need to think through how to distinguish between them, in order to respond to that interaction appropriately.</p>
+<p>Presumably, the user's interaction with one of the action sheets will be different than the other(s), so you'll need to think through how to distinguish between them, in order to respond to that interaction appropriately.</p>
 
-<p>I faced such a scenario in a recent project, and I thought I&#8217;d share my solution. Check out my <a href="https://github.com/andrewcbancroft/DistinguishingActionSheetsExample" title="GitHub Example">GitHub example</a> to dive in if you prefer learning by exploration!</p>
+<p>I faced such a scenario in a recent project, and I thought I'd share my solution. Check out my <a href="https://github.com/andrewcbancroft/DistinguishingActionSheetsExample" title="GitHub Example">GitHub example</a> to dive in if you prefer learning by exploration!</p>
 
 <h3 id="using-uiview-tags">Using UIView Tags</h3>
 
@@ -182,7 +182,7 @@ MathJax.Hub.Config({
 
 <h3 id="example">Example</h3>
 
-<p>Here&#8217;s a quick example showing the setting of this property so that the action sheet can be differentiated when it comes time to handle the user&#8217;s choice:</p>
+<p>Here's a quick example showing the setting of this property so that the action sheet can be differentiated when it comes time to handle the user's choice:</p>
 
 <pre class="lang:swift decode:true " title="Set tag property" >let actionSheet1 = UIActionSheet()
         actionSheet1.tag = 0
@@ -194,9 +194,9 @@ MathJax.Hub.Config({
 
 <h3 id="better-solution-in-swift">Better Solution in Swift?</h3>
 
-<p>Simple enough, right? Here&#8217;s my only problem with the above implementation if I&#8217;m using Swift: We have language features available to us that allow us to avoid setting the tag property to the integer value in-line like I did in this code snippet.</p>
+<p>Simple enough, right? Here's my only problem with the above implementation if I'm using Swift: We have language features available to us that allow us to avoid setting the tag property to the integer value in-line like I did in this code snippet.</p>
 
-<p>Here, instead of assigning in-line, I&#8217;m going to refactor and employ a Swift enumeration to help <em>name</em> the tag. Underneath, there will still be integers involved, but my goal in using an enumeration is two-fold:</p>
+<p>Here, instead of assigning in-line, I'm going to refactor and employ a Swift enumeration to help <em>name</em> the tag. Underneath, there will still be integers involved, but my goal in using an enumeration is two-fold:</p>
 
 <ul>
 <li>Identify the action sheet in code with a name. This should help my code be more coherent and readable.</li>
@@ -223,9 +223,9 @@ MathJax.Hub.Config({
         actionSheet2.tag = ActionSheetTag.ActionSheet2.toRaw()
         // set other properties, such as delegate, as well as buttons...</pre>
 
-<p>It&#8217;s worth noting that rather than using an enumeration, I could have chosen to define a couple of constants at a scope visible to both my setting of the tag, and the conditional logic I&#8217;d use in my UIActionSheetDelegate callback. The end goal and result would be the same: Clarity, achieved by assigning <em>names</em> to the tags, and the avoidance of &#8220;magic integers&#8221; appearing in my code.</p>
+<p>It's worth noting that rather than using an enumeration, I could have chosen to define a couple of constants at a scope visible to both my setting of the tag, and the conditional logic I'd use in my UIActionSheetDelegate callback. The end goal and result would be the same: Clarity, achieved by assigning <em>names</em> to the tags, and the avoidance of &#8220;magic integers&#8221; appearing in my code.</p>
 
-<h3 id="wrapping-up-8211-uiactionsheetdelegate-implementation">Wrapping Up &#8211; UIActionSheetDelegate Implementation</h3>
+<h3 id="wrapping-up-8211-uiactionsheetdelegate-implementation">Wrapping Up – UIActionSheetDelegate Implementation</h3>
 
 <p>To see how to perform the conditional logic needed in the UIActionSheetDelegate callback method, take a look at this final code snippet:</p>
 
@@ -244,7 +244,7 @@ MathJax.Hub.Config({
 
 <h3 id="summary">Summary</h3>
 
-<p>I&#8217;ve done it before, but by using Swift enumerations again in a new context, I was able to provide better clarity to the intention of my code when I had multiple UIActionSheet instances that I needed to handle in a single view controller. In addition to this clarity, I also encapsulated a single source of truth for identifying my UIActionSheet instances, rather than placing &#8220;magic integers&#8221; throughout my code. Have a look at (and play with) <a href="https://github.com/andrewcbancroft/DistinguishingActionSheetsExample" title="GitHub Example">the example I&#8217;ve put up on GitHub</a> for further study and improvement!</p>
+<p>I've done it before, but by using Swift enumerations again in a new context, I was able to provide better clarity to the intention of my code when I had multiple UIActionSheet instances that I needed to handle in a single view controller. In addition to this clarity, I also encapsulated a single source of truth for identifying my UIActionSheet instances, rather than placing &#8220;magic integers&#8221; throughout my code. Have a look at (and play with) <a href="https://github.com/andrewcbancroft/DistinguishingActionSheetsExample" title="GitHub Example">the example I've put up on GitHub</a> for further study and improvement!</p>
 
 <div class="related-posts">
   You might also enjoy</p> 

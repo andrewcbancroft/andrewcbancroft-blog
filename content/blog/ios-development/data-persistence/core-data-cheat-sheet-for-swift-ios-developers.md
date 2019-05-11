@@ -19,57 +19,10 @@ tags:
 
 Having trouble recalling how to perform basic Core Data operations? This cheat sheet is a handy reference to keep you productive with Core Data and Swift!
 
-The code snippets below are here to help jog your memory when it&#8217;s been a while since you&#8217;ve worked in Core Data. They could also be helpful for newcomers to iOS development, Core Data, and Swift.
+The code snippets below are here to help jog your memory when it's been a while since you've worked in Core Data. They could also be helpful for newcomers to iOS development, Core Data, and Swift.
 
-One assumption I&#8217;m making in this post is that you&#8217;ve created NSManagedObject subclasses for your entities to make them easier to work with in a type-safe way. If you need help getting started with that, I&#8217;ve [written a walk-through][1] to guide you through that process.
+One assumption I'm making in this post is that you've created NSManagedObject subclasses for your entities to make them easier to work with in a type-safe way. If you need help getting started with that, I've [written a walk-through][1] to guide you through that process.
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#querying">Querying</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#fetch-all">Fetch all entities</a>
-      </li>
-      <li>
-        <a href="#fetch-max-n">Fetch maximum of N entities</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#insert">Insert a new entity</a>
-    </li>
-    <li>
-      <a href="#update-single-entity">Update a single entity</a>
-    </li>
-    <li>
-      <a href="#update-multiple-entities">Update multiple entities</a>
-    </li>
-    <li>
-      <a href="#delete-single-entity">Delete a single entity</a>
-    </li>
-    <li>
-      <a href="#delete-multiple-entities">Delete multiple entities</a>
-    </li>
-    <li>
-      <a href="#migrate-automatically">Migrate Core Data Model with Automatic Migrations</a>
-    </li>
-    <li>
-      <a href="#related">You might also enjoy…</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-    <li>
-      <a href="#course">Learning Core Data? Watch my course, Core Data Fundamentals with Swift!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="querying" class="jump-target"></a>
 

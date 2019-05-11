@@ -14,7 +14,7 @@ tags:
   - Swift
 
 ---
-As it turns out, Swift isn&#8217;t C# (or Java or VB.Net or&#8230;)! My day job keeps me busy writing C#, so I&#8217;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.
+As it turns out, Swift isn't C# (or Java or VB.Net or&#8230;)! My day job keeps me busy writing C#, so I'll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.
 
 I just spent the greater part of a week experimenting with Swift extensions. I was trying to figure out some seemingly strange behavior that they were exhibiting.
 
@@ -22,74 +22,43 @@ After publishing [&#8220;3 Nuances of Swift Extensions&#8221;][1], I quickly lea
 
 What was the hiccup? Read on to find out where I went wrong&#8230;
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#how-private-is-private">How private is private?</a>
-    </li>
-    <li>
-      <a href="#semantics-of-private">Semantics of private</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#private-and-c-sharp">Private and C#</a>
-      </li>
-      <li>
-        <a href="#private-and-swift">Private and Swift</a>
-      </li>
-      <li>
-        <a href="#proof-by-example">Proof by example</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#related">You might also enjoy…</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
+
 
 <a name="how-private-is-private" class="jump-target"></a>
 
 ### How private is private?
 
-One of the most surprising &#8220;nuances&#8221; from [&#8220;3 Nuances of Swift Extensions&#8221;][1] that I discovered was that if you define an extension within the same source file as another Type, the extension&#8217;s members can see the _other_ Type&#8217;s `private` properties and functions! &#8220;Whaaat?? How is this possible?!&#8221;, I reacted.
+One of the most surprising &#8220;nuances&#8221; from [&#8220;3 Nuances of Swift Extensions&#8221;][1] that I discovered was that if you define an extension within the same source file as another Type, the extension's members can see the _other_ Type's `private` properties and functions! &#8220;Whaaat?? How is this possible?!&#8221;, I reacted.
 
-Well&#8230; To restate the obvious, Swift isn&#8217;t C#&#8230; and it isn&#8217;t C# in more ways than just syntax.
+Well&#8230; To restate the obvious, Swift isn't C#&#8230; and it isn't C# in more ways than just syntax.
 
 Ever since access control modifiers were introduced in XCode 6 Beta 4, I had it in my mind that `public`, `private`, and `internal` worked just like they do in C#. Sure, I read [the blog article on access control published by the Swift team][2], but it was a mere cursory look. I basically saw the three key words and thought, &#8220;Ah, I got this&#8230; moving on!&#8221;
 
-This was a fundamental mistake for me to make, and it goes to show that just because there are _similarities_ between languages, it doesn&#8217;t mean the _semantics_ of those similarities carry over.
+This was a fundamental mistake for me to make, and it goes to show that just because there are _similarities_ between languages, it doesn't mean the _semantics_ of those similarities carry over.
 
 <a name="semantics-of-private" class="jump-target"></a>
 
 ### Semantics of private
 
-`Private` is the access modifier that got me all confused. The concept of `public` and `internal` carry over fairly nicely, but `private` is the one that&#8217;s fundamentally different between C# and Swift, so that&#8217;s where I&#8217;ll focus.
+`Private` is the access modifier that got me all confused. The concept of `public` and `internal` carry over fairly nicely, but `private` is the one that's fundamentally different between C# and Swift, so that's where I'll focus.
 
-In addition to this article, recommend giving [the Swift team&#8217;s original article on access control][2] a very close read, just to make sure all the semantics of `public` and `internal` in Swift are clear as well.
+In addition to this article, recommend giving [the Swift team's original article on access control][2] a very close read, just to make sure all the semantics of `public` and `internal` in Swift are clear as well.
 
 <a name="private-and-c-sharp" class="jump-target"></a>
 
 #### Private and C#
 
-In C#, `private` members of a Type are &#8220;truly&#8221; private. They are only visible _within that Type_. The member&#8217;s visibility is limited to the curly braces enclosing the Type&#8217;s implementation. That&#8217;s it. No subclass can see `private` members. No other Types can see those members, no matter which file those Types are defined in. `Private` is private.
+In C#, `private` members of a Type are &#8220;truly&#8221; private. They are only visible _within that Type_. The member's visibility is limited to the curly braces enclosing the Type's implementation. That's it. No subclass can see `private` members. No other Types can see those members, no matter which file those Types are defined in. `Private` is private.
 
 <a name="private-and-swift" class="jump-target"></a>
 
 #### Private and Swift
 
-And then there&#8217;s Swift. `Private` takes on _entirely different_ semantics in Swift, and herein lay my fundamental misunderstanding. It was obvious that I just didn&#8217;t &#8220;get it&#8221; if you read through the [Nuances Article][1]. [sigh]
+And then there's Swift. `Private` takes on _entirely different_ semantics in Swift, and herein lay my fundamental misunderstanding. It was obvious that I just didn't &#8220;get it&#8221; if you read through the [Nuances Article][1]. [sigh]
 
-In Swift, a `private` Type, or a `public`/`internal` Type&#8217;s `private` _members_ are visible to _anything else_ defined within the same **file**.
+In Swift, a `private` Type, or a `public`/`internal` Type's `private` _members_ are visible to _anything else_ defined within the same **file**.
 
-This isn&#8217;t a characteristic that&#8217;s limited to extensions. _Anything_ defined in the same source file as something else can see everything. This is a shocker if you&#8217;re coming from C# or a similar language where the semantics of access control are used for encapsulation purposes.
+This isn't a characteristic that's limited to extensions. _Anything_ defined in the same source file as something else can see everything. This is a shocker if you're coming from C# or a similar language where the semantics of access control are used for encapsulation purposes.
 
 <a name="proof-by-example" class="jump-target"></a>
 
@@ -107,11 +76,11 @@ private struct Greeter {
     }
 }</pre>
 
-If you&#8217;re a C# developer, you look at that code and immediately go, &#8220;Yeah, that&#8217;s not gonna work&#8230; `name` is `private` to `Person` and can&#8217;t be referenced outside that Type&#8221;.
+If you're a C# developer, you look at that code and immediately go, &#8220;Yeah, that's not gonna work&#8230; `name` is `private` to `Person` and can't be referenced outside that Type&#8221;.
 
 But in Swift, this is totally legitimate. Even though `Person` is `private`, `Greeter` can see `Person` and initialize one, _and_ it can see `Person`&#8216;s `private` property, `name`.
 
-`Private` in Swift simply limits visibility to Types and members within the same _source file_. Multiple Types defined in the same source file can see other `private` Types, as well as other Types&#8217; `private` properties and functions. In other words, &#8220;`private` isn&#8217;t `private`&#8220;, if you&#8217;re thinking of private like a C# developer (or a developer familiar with other languages with access control modifiers similar to C#).
+`Private` in Swift simply limits visibility to Types and members within the same _source file_. Multiple Types defined in the same source file can see other `private` Types, as well as other Types' `private` properties and functions. In other words, &#8220;`private` isn't `private`&#8220;, if you're thinking of private like a C# developer (or a developer familiar with other languages with access control modifiers similar to C#).
 
 ### Wrapping up
 

@@ -12,7 +12,7 @@ tags:
   - CloudKit
 
 ---
-I&#8217;ve been hard at work on a new course for Pluralsight called &#8220;[CloudKit Fundamentals][1]&#8220;, and I&#8217;m thrilled to announce that the course is now LIVE in the Pluralsight library!
+I've been hard at work on a new course for Pluralsight called &#8220;[CloudKit Fundamentals][1]&#8220;, and I'm thrilled to announce that the course is now LIVE in the Pluralsight library!
 
 At the core of developing a seamless and collaborative data sharing experience for Apple’s platforms is a thorough knowledge of CloudKit.
 
@@ -44,7 +44,7 @@ You can check out a trailer of the course over at Pluralsight completely free.
       </h1>
       
       <h2>
-        1 &#8211; Setting up CloudKit
+        1 – Setting up CloudKit
       </h2>
       
       <p>
@@ -60,7 +60,7 @@ You can check out a trailer of the course over at Pluralsight completely free.
       </p>
       
       <h2>
-        2 &#8211; Modeling and Saving Data
+        2 – Modeling and Saving Data
       </h2>
       
       <p>
@@ -68,11 +68,11 @@ You can check out a trailer of the course over at Pluralsight completely free.
       </p>
       
       <p>
-        You&#8217;ll learn about <code>CKRecords</code> and <code>CKAssets</code>, and save your first bits of data up to iCloud in this module.
+        You'll learn about <code>CKRecords</code> and <code>CKAssets</code>, and save your first bits of data up to iCloud in this module.
       </p>
       
       <h2>
-        3 &#8211; Querying, Displaying, Updating, and Deleting Data
+        3 – Querying, Displaying, Updating, and Deleting Data
       </h2>
       
       <p>
@@ -84,11 +84,11 @@ You can check out a trailer of the course over at Pluralsight completely free.
       </p>
       
       <p>
-        And of course, once data is retrieved and displayed, it&#8217;s fair game for updating and deleting.
+        And of course, once data is retrieved and displayed, it's fair game for updating and deleting.
       </p>
       
       <h2>
-        4 &#8211; Synchronizing Data Across Devices
+        4 – Synchronizing Data Across Devices
       </h2>
       
       <p>
@@ -100,15 +100,15 @@ You can check out a trailer of the course over at Pluralsight completely free.
       </p>
       
       <p>
-        In this module, I&#8217;ll teach you about how CloudKit uses subscriptions and push notifications to alert other users’ devices to changes that have occurred in the CloudKit database, so that appropriate action can be taken in code to respond to those changes.
+        In this module, I'll teach you about how CloudKit uses subscriptions and push notifications to alert other users’ devices to changes that have occurred in the CloudKit database, so that appropriate action can be taken in code to respond to those changes.
       </p>
       
       <p>
-        I&#8217;ll also simulate hazard reports coming in from another user by adding data through the CloudKit Dashboard and watching the screen update with the new data in the iOS app.
+        I'll also simulate hazard reports coming in from another user by adding data through the CloudKit Dashboard and watching the screen update with the new data in the iOS app.
       </p>
       
       <h2>
-        5 &#8211; Modeling Relationships Between Record Types
+        5 – Modeling Relationships Between Record Types
       </h2>
       
       <p>
@@ -116,7 +116,7 @@ You can check out a trailer of the course over at Pluralsight completely free.
       </p>
       
       <h2>
-        6 &#8211; Planning for Production
+        6 – Planning for Production
       </h2>
       
       <p>
@@ -132,7 +132,7 @@ You can check out a trailer of the course over at Pluralsight completely free.
       </h1>
       
       <p>
-        Demos of technology in action are <em>super</em> important to me. That being the case, I tried to pack as much demo content into the course as possible. You&#8217;ll get to see the full array of dev-time experiences, not just the final &#8220;it works perfectly&#8221; outcomes.
+        Demos of technology in action are <em>super</em> important to me. That being the case, I tried to pack as much demo content into the course as possible. You'll get to see the full array of dev-time experiences, not just the final &#8220;it works perfectly&#8221; outcomes.
       </p>
       
       <p>

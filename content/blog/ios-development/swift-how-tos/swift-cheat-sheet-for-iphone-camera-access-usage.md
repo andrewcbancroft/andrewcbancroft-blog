@@ -16,46 +16,7 @@ tags:
   - UIImagePickerControllerDelegate
 
 ---
-This is a cheat sheet of the code and workflow for iPhone camera access and usage, from requesting permission to using the photo taken with a user&#8217;s device.
-
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#framework-import">Framework Import</a>
-    </li>
-    <li>
-      <a href="#camera-usage-description">Set Camera Usage Description in Info.plist</a>
-    </li>
-    <li>
-      <a href="#check-authorization-status">Check and Respond to Camera Authorization Status</a>
-    </li>
-    <li>
-      <a href="#request-permission">Request Camera Permission</a>
-    </li>
-    <li>
-      <a href="#present-camera">Present Camera</a>
-    </li>
-    <li>
-      <a href="#alert-camera-access-needed">Alert Camera Access Needed</a>
-    </li>
-    <li>
-      <a href="#use-captured-image">Use the Captured Image</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#delegate">UIImagePickerControllerDelegate</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
+This is a cheat sheet of the code and workflow for iPhone camera access and usage, from requesting permission to using the photo taken with a user's device.
 
 <a name="framework-import" class="jump-target"></a>
 
@@ -67,11 +28,11 @@ This is a cheat sheet of the code and workflow for iPhone camera access and usag
 
 # Set Camera Usage Description in Info.plist
 
-When you request permission to use the device&#8217;s camera, a short message will appear in the default iOS system dialog. You customize this message by adding the `Privacy - Camera Usage Description` key to your Info.plist file.
+When you request permission to use the device's camera, a short message will appear in the default iOS system dialog. You customize this message by adding the `Privacy - Camera Usage Description` key to your Info.plist file.
 
-For the **value** of this plist property, type a short string describing what you&#8217;re using the camera for.
+For the **value** of this plist property, type a short string describing what you're using the camera for.
 
-If you **don&#8217;t** set this, your app will crash when you request access to the camera.
+If you **don't** set this, your app will crash when you request access to the camera.
 
 <a name="check-authorization-status" class="jump-target"></a>
 
@@ -99,7 +60,7 @@ If the user has never responded to a request to access his/her camera, you need 
     })
 }</pre>
 
-**Note**: You can test for this case by deleting the app on the device, if it&#8217;s already been installed or run on a device from the debugger.
+**Note**: You can test for this case by deleting the app on the device, if it's already been installed or run on a device from the debugger.
 
 <a name="present-camera" class="jump-target"></a>
 
@@ -136,7 +97,7 @@ If camera access has been denied or restricted, you can alert the user and direc
     present(alert, animated: true, completion: nil)
 }</pre>
 
-**Note**: You can test for this case by going to the Settings app and turning off camera access for your app, if it&#8217;s been previously granted.
+**Note**: You can test for this case by going to the Settings app and turning off camera access for your app, if it's been previously granted.
 
 <a name="use-captured-image" class="jump-target"></a>
 

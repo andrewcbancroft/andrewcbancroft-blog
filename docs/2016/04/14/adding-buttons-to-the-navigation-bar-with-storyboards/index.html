@@ -26,7 +26,7 @@
 
 <meta property="og:title" content="Adding Buttons to the Navigation Bar with Storyboards" />
 <meta property="og:description" content="Updated on March 20, 2017 &#8211; Xcode 8 &amp; Swift 3
-If you&#8217;re having trouble figuring out how to add buttons to the navigation bar in your Storyboard-based iOS app, my goal in this article is to help you through the process. Knowing what to click and where to drag to get things wired up isn&#8217;t entirely intuitive, so I want to be of help if I can.
+If you're having trouble figuring out how to add buttons to the navigation bar in your Storyboard-based iOS app, my goal in this article is to help you through the process. Knowing what to click and where to drag to get things wired up isn't entirely intuitive, so I want to be of help if I can.
 Lots of StackOverflow posts point us to just adding the buttons in code, but for those who lean toward trying to do as much in the Storyboard designer as possible, this approach feels out of place." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2016/04/14/adding-buttons-to-the-navigation-bar-with-storyboards/" />
@@ -36,7 +36,7 @@ Lots of StackOverflow posts point us to just adding the buttons in code, but for
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Adding Buttons to the Navigation Bar with Storyboards"/>
 <meta name="twitter:description" content="Updated on March 20, 2017 &#8211; Xcode 8 &amp; Swift 3
-If you&#8217;re having trouble figuring out how to add buttons to the navigation bar in your Storyboard-based iOS app, my goal in this article is to help you through the process. Knowing what to click and where to drag to get things wired up isn&#8217;t entirely intuitive, so I want to be of help if I can.
+If you're having trouble figuring out how to add buttons to the navigation bar in your Storyboard-based iOS app, my goal in this article is to help you through the process. Knowing what to click and where to drag to get things wired up isn't entirely intuitive, so I want to be of help if I can.
 Lots of StackOverflow posts point us to just adding the buttons in code, but for those who lean toward trying to do as much in the Storyboard designer as possible, this approach feels out of place."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
@@ -170,11 +170,11 @@ MathJax.Hub.Config({
 
 <p><small>Updated on March 20, 2017 &#8211; Xcode 8 &amp; Swift 3</small></p>
 
-<p>If you&#8217;re having trouble figuring out how to add buttons to the navigation bar in your Storyboard-based iOS app, my goal in this article is to help you through the process. Knowing what to click and where to drag to get things wired up isn&#8217;t entirely intuitive, so I want to be of help if I can.</p>
+<p>If you're having trouble figuring out how to add buttons to the navigation bar in your Storyboard-based iOS app, my goal in this article is to help you through the process. Knowing what to click and where to drag to get things wired up isn't entirely intuitive, so I want to be of help if I can.</p>
 
 <p>Lots of StackOverflow posts point us to just adding the buttons in code, but for those who lean toward trying to do as much in the Storyboard designer as possible, this approach feels out of place.</p>
 
-<p>The example I&#8217;m outlining here is done solely in the Storyboard.</p>
+<p>The example I'm outlining here is done solely in the Storyboard.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -209,7 +209,7 @@ MathJax.Hub.Config({
 <li>Pressing Add will display a modal screen with two buttons in the navigation bar: Cancel, and Save</li>
 </ul>
 
-<p><strong>The Goal</strong>: Use only the Storyboard to add the &#8216;Add&#8217; button, and the Cancel and Save buttons to the navigation bar. The end result will be something like this:</p>
+<p><strong>The Goal</strong>: Use only the Storyboard to add the &#8216;Add' button, and the Cancel and Save buttons to the navigation bar. The end result will be something like this:</p>
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/navigation-bar-buttons-demo.gif"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/navigation-bar-buttons-demo.gif" alt="Navigation bar buttons demo" width="470" height="849" class="alignnone size-full wp-image-12753" /></a></p>
 
@@ -240,47 +240,47 @@ MathJax.Hub.Config({
 <p>Next, you need to search for a Bar Button Item from the Object Library in the Utilities Pane. Once you find it in the list, drag one up to the upper-right of the navigation bar:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/BarButtonItemToNavBar1.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/BarButtonItemToNavBar1-1024x788.png" alt="Bar Button Item to Navigation Bar" width="1024" height="788" class="alignnone size-large wp-image-12760" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/BarButtonItemToNavBar1-1024x788.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/BarButtonItemToNavBar1-300x231.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/BarButtonItemToNavBar1.png 1064w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 
-<p>To turn it from an &#8220;Item&#8221; button into a &#8220;+&#8221; button, you need to adjust the Bar Button Item&#8217;s attributes. Click on the button, either in the navigation bar itself or on the document outline for the Storyboard, and choose the Attributes Inspector for the control.</p>
+<p>To turn it from an &#8220;Item&#8221; button into a &#8220;+&#8221; button, you need to adjust the Bar Button Item's attributes. Click on the button, either in the navigation bar itself or on the document outline for the Storyboard, and choose the Attributes Inspector for the control.</p>
 
 <p>Then change the System Item property from &#8220;Custom&#8221; to &#8220;Add&#8221;:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/ChangeBarButtonItemAttributes.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/ChangeBarButtonItemAttributes-1024x292.png" alt="Change Bar Button Item Attributes" width="1024" height="292" class="alignnone size-large wp-image-12763" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/ChangeBarButtonItemAttributes-1024x292.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/ChangeBarButtonItemAttributes-300x86.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/ChangeBarButtonItemAttributes.png 1463w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 
-<p>That&#8217;s all there is to setting up that first scene. You&#8217;ll wire up the add button to modally show the &#8220;Add&#8221; scene in the next section.</p>
+<p>That's all there is to setting up that first scene. You'll wire up the add button to modally show the &#8220;Add&#8221; scene in the next section.</p>
 
 <p><a name="add-scene-setup" class="jump-target"></a></p>
 
 <h1 id="add-storyboard-scene-setup">Add Storyboard scene setup</h1>
 
-<p>Next up, you need an &#8220;Add&#8221; scene. For that, another View Controller is required. Drag out a new View Controller onto the Storyboard design surface. While you&#8217;re at it, go ahead and create a new <code>AddScreenViewController</code> class:</p>
+<p>Next up, you need an &#8220;Add&#8221; scene. For that, another View Controller is required. Drag out a new View Controller onto the Storyboard design surface. While you're at it, go ahead and create a new <code>AddScreenViewController</code> class:</p>
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/NewVC.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/NewVC-1024x703.png" alt="New View Controller" width="1024" height="703" class="alignnone size-large wp-image-12765" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/NewVC-1024x703.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/NewVC-300x206.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/NewVC.png 1158w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 
-<p>Once you&#8217;ve created a new <code>AddScreenViewController</code> class from the File &gt; New &gt; File dialog, make sure you&#8217;ve wired it up appropriately:<br />
+<p>Once you've created a new <code>AddScreenViewController</code> class from the File &gt; New &gt; File dialog, make sure you've wired it up appropriately:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AddScreenVCMapped.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AddScreenVCMapped.png" alt="Add Screen View Controller Mapped" width="935" height="324" class="alignnone size-full wp-image-12767" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AddScreenVCMapped.png 935w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AddScreenVCMapped-300x104.png 300w" sizes="(max-width: 935px) 100vw, 935px" /></a></p>
 
 <p>Now, to get this &#8220;Add&#8221; screen to show modally, you need to control + drag from the &#8220;plus (+)&#8221; button on the first view controller, over to the new AddScreenViewController you just dragged onto the Storyboard. Select &#8220;Present Modally&#8221; from the popover:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/PresentModally.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/PresentModally.png" alt="Present Add Screen Modally" width="831" height="682" class="alignnone size-full wp-image-12768" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/PresentModally.png 831w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/PresentModally-300x246.png 300w" sizes="(max-width: 831px) 100vw, 831px" /></a></p>
 
-<p>Now, the problem you&#8217;ll run into at this point if you run the app is that, while tapping the &#8216;Add&#8217; (+) button does in fact present the Add screen modally, 1) There&#8217;s no way to dismiss the modal controller to go back to the main screen, and 2) There&#8217;s no navigation bar to add buttons to!</p>
+<p>Now, the problem you'll run into at this point if you run the app is that, while tapping the &#8216;Add' (+) button does in fact present the Add screen modally, 1) There's no way to dismiss the modal controller to go back to the main screen, and 2) There's no navigation bar to add buttons to!</p>
 
-<p>So, the trick to get a navigation bar in place so that you can add our &#8216;Cancel&#8217; and &#8216;Save&#8217; buttons is to <strong>embed the Add Screen View Controller in&#8230; you guessed it&#8230; a Navigation Controller</strong>:</p>
+<p>So, the trick to get a navigation bar in place so that you can add our &#8216;Cancel' and &#8216;Save' buttons is to <strong>embed the Add Screen View Controller in&#8230; you guessed it&#8230; a Navigation Controller</strong>:</p>
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/EmbedAddScreen.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/EmbedAddScreen-1024x774.png" alt="Embed Add View Controller in Navigation Controller" width="1024" height="774" class="alignnone size-large wp-image-12770" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/EmbedAddScreen-1024x774.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/EmbedAddScreen-300x227.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/EmbedAddScreen.png 1047w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 
 <p>Once this is done, your storyboard should look something like this:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/OverviewOfSetup.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/OverviewOfSetup-1024x312.png" alt="Storyboard Setup Overview" width="1024" height="312" class="alignnone size-large wp-image-12771" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/OverviewOfSetup-1024x312.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/OverviewOfSetup-300x91.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/OverviewOfSetup.png 1450w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 
-<p>Now all that&#8217;s left to do is to drag two Bar Button Items up to the navigation bar, just like we did for the &#8220;Plus&#8221; (+) button on the main screen:<br />
+<p>Now all that's left to do is to drag two Bar Button Items up to the navigation bar, just like we did for the &#8220;Plus&#8221; (+) button on the main screen:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/DragTwoBarButtonItems1.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/DragTwoBarButtonItems1-1024x847.png" alt="Drag Two Bar Button Items to Navigation Bar" width="1024" height="847" class="alignnone size-large wp-image-12774" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/DragTwoBarButtonItems1-1024x847.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/DragTwoBarButtonItems1-300x248.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/DragTwoBarButtonItems1.png 1113w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 
 <p>Changing each of their System Item properties in the Attribute Inspector, just like we did before, will give them their &#8220;Cancel&#8221; and &#8220;Save&#8221; appearance:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/ChangeSystemItemProperties.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/ChangeSystemItemProperties.png" alt="Change Bar Button Item System Item property to Cancel and Save" width="954" height="362" class="alignnone size-full wp-image-12775" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/ChangeSystemItemProperties.png 954w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/ChangeSystemItemProperties-300x114.png 300w" sizes="(max-width: 954px) 100vw, 954px" /></a></p>
 
-<p>If you control + drag the &#8216;Cancel&#8217; and &#8216;Save&#8217; buttons from the Storyboard scene to the .swift code file, you&#8217;ll be able to wire up IBActions to dismiss the view controller and return to the main screen. I won&#8217;t explain that step here, since the goal was to show you how to add the buttons themselves, but the <a href="https://github.com/andrewcbancroft/StoryboardNavigationControllerExamples">example project on GitHub</a> has the view controller dismissal implemented if you care to review it.</p>
+<p>If you control + drag the &#8216;Cancel' and &#8216;Save' buttons from the Storyboard scene to the .swift code file, you'll be able to wire up IBActions to dismiss the view controller and return to the main screen. I won't explain that step here, since the goal was to show you how to add the buttons themselves, but the <a href="https://github.com/andrewcbancroft/StoryboardNavigationControllerExamples">example project on GitHub</a> has the view controller dismissal implemented if you care to review it.</p>
 
 <h1 id="wrapping-up">Wrapping up</h1>
 
-<p>That&#8217;s it! Buttons in the navigation bar, all done inside the Storyboard.</p>
+<p>That's it! Buttons in the navigation bar, all done inside the Storyboard.</p>
 
 <p>Hopefully this quick walk-through removes any stumbling blocks you might have in designing your Storyboard-based app with navigation controllers.</p>
 

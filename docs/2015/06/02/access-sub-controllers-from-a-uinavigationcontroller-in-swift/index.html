@@ -201,11 +201,11 @@ MathJax.Hub.Config({
 
 <h3 id="appdelegate">AppDelegate</h3>
 
-<p>Every iOS application has one root view controller that&#8217;s presented when the app finishes its launch process. Suppose we&#8217;re building a navigation controller-based app&#8230; that is, we&#8217;re building an app where the first (root) view controller is a UINavigationController. In our Storyboard, we&#8217;ve set up a Scene with some UI controls with a view controller and some properties, and we&#8217;ve embedded that view controller in a navigation controller.</p>
+<p>Every iOS application has one root view controller that's presented when the app finishes its launch process. Suppose we're building a navigation controller-based app&#8230; that is, we're building an app where the first (root) view controller is a UINavigationController. In our Storyboard, we've set up a Scene with some UI controls with a view controller and some properties, and we've embedded that view controller in a navigation controller.</p>
 
-<p>What if we want to set some of the view controller&#8217;s properties after the app launches? How could we go about doing that?</p>
+<p>What if we want to set some of the view controller's properties after the app launches? How could we go about doing that?</p>
 
-<p>I tend to always think of the &#8220;first view controller&#8221; as the first Scene in the Storyboard where I&#8217;ve set up UI components. To iOS, however, the <em>navigation controller</em> is actually the first (or <em>root</em>) view controller.</p>
+<p>I tend to always think of the &#8220;first view controller&#8221; as the first Scene in the Storyboard where I've set up UI components. To iOS, however, the <em>navigation controller</em> is actually the first (or <em>root</em>) view controller.</p>
 
 <p>When an app incorporates a navigation controller as its first (root) view controller, we end up needing to do a little digging into the view controller hierarchy to get access what we might perceive as the true &#8220;first view controller&#8221;.</p>
 
@@ -237,14 +237,14 @@ MathJax.Hub.Config({
 <p>So the workflow goes like this:</p>
 
 <ul>
-<li>Get the window&#8217;s root view controller (which is the navigation controller in our case)</li>
-<li>Get the navigation controller&#8217;s first view controller from its array of view controllers (which is what I always think of as the &#8220;first&#8221; view controller)</li>
+<li>Get the window's root view controller (which is the navigation controller in our case)</li>
+<li>Get the navigation controller's first view controller from its array of view controllers (which is what I always think of as the &#8220;first&#8221; view controller)</li>
 <li>Set whatever properties you need to set</li>
 </ul>
 
 <p>You may be worried about the usage of implicitly unwrapped optionals in this snippet. I tend to avoid them wherever possible too, but I used them here because I reasoned that my navigation controller-based app <em>hinges</em> on the fact that the root view controller of the application is a <code>UINavigationController</code>. Something so fundamental to the app warranted my usage of the implicitly unwrapped optionals, since changing the navigation paradigm of the app would probably break things anyway.</p>
 
-<p>If you&#8217;re not convinced by that line of reasoning, no worries &#8211; you can switch out some of the <code>!</code> operators for <code>?</code> operators and add in some <code>if-let</code> syntax to protect against encountering nil. For example:</p>
+<p>If you're not convinced by that line of reasoning, no worries – you can switch out some of the <code>!</code> operators for <code>?</code> operators and add in some <code>if-let</code> syntax to protect against encountering nil. For example:</p>
 
 <pre class="lang:swift decode:true " title="AppDelegate.swift" >class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -265,7 +265,7 @@ MathJax.Hub.Config({
 
 <p>Well, suppose that we have an app which segues <em>into</em> a navigation controller. We may need to pass some data off the next view controller, but that &#8220;next view controller&#8221; is technically the navigation controller, not the controller where our properties are declared.</p>
 
-<p>In similar fashion to the <code>AppDelegate</code> situation, we want to dig into the navigation controller&#8217;s view controller hierarchy to access the first child so that we can pass the data along. Here&#8217;s an example implementation:</p>
+<p>In similar fashion to the <code>AppDelegate</code> situation, we want to dig into the navigation controller's view controller hierarchy to access the first child so that we can pass the data along. Here's an example implementation:</p>
 
 <pre class="lang:swift decode:true " title="ViewController.swift" >public class ViewController: UIViewController {
 
@@ -280,13 +280,13 @@ MathJax.Hub.Config({
     // ...
 }</pre>
 
-<p>The only thing that really changes between the <code>AppDelegate</code> example and the <code>prepareForSegue</code> example is where we obtain the <code>UINavigationController</code> from. In <code>AppDelegate</code>, the navigation controller comes from the window&#8217;s root view controller. In <code>prepareForSegue</code> it comes from the segue&#8217;s destination view controller.</p>
+<p>The only thing that really changes between the <code>AppDelegate</code> example and the <code>prepareForSegue</code> example is where we obtain the <code>UINavigationController</code> from. In <code>AppDelegate</code>, the navigation controller comes from the window's root view controller. In <code>prepareForSegue</code> it comes from the segue's destination view controller.</p>
 
 <p>After that, though, the process for grabbing the first child of the navigation controller is the same.</p>
 
 <h3 id="wrapping-up">Wrapping up</h3>
 
-<p>Accessing a navigation controller&#8217;s view controller hierarchy was just vague enough for me to write this little reference for myself, but I hope you benefited from it as well!</p>
+<p>Accessing a navigation controller's view controller hierarchy was just vague enough for me to write this little reference for myself, but I hope you benefited from it as well!</p>
 
 <p><a name="share" class="jump-target"></a></p>
 

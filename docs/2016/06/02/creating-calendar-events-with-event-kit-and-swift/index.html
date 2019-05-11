@@ -223,11 +223,11 @@ MathJax.Hub.Config({
 
 <h1 id="demo">Demo</h1>
 
-<p>Here&#8217;s what we&#8217;re going for by the end of this:</p>
+<p>Here's what we're going for by the end of this:</p>
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/05/create-events-demo.gif"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/05/create-events-demo.gif" alt="Create Events Demo" width="468" height="847" class="alignnone size-full wp-image-12890" /></a></p>
 
-<p>As with my other guides, I&#8217;ve included a working project on GitHub for you to peruse and tinker with:</p>
+<p>As with my other guides, I've included a working project on GitHub for you to peruse and tinker with:</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -246,7 +246,7 @@ MathJax.Hub.Config({
 
 <h1 id="code-example">Code Example</h1>
 
-<p>The majority of the work to create an event happens in the example project&#8217;s AddEventViewController.swift file, so that&#8217;s where I&#8217;ll spend my time in this guide. First, let&#8217;s put the relevant code before us:</p>
+<p>The majority of the work to create an event happens in the example project's AddEventViewController.swift file, so that's where I'll spend my time in this guide. First, let's put the relevant code before us:</p>
 
 <pre class="lang:swift decode:true " title="AddEventViewController.swift" >class AddEventViewController: UIViewController {
 
@@ -345,17 +345,17 @@ newEvent.endDate = self.eventEndDatePicker.date</pre>
 
 <h1 id="gotchas">Gotchas</h1>
 
-<p>As I was working through this example, I was initially running into trouble when associating my <code>newEvent</code> with the <code>calendar</code> that was passed into <code>AddEventViewController</code> from the parent controller&#8217;s <code>prepareForSegue</code> method.</p>
+<p>As I was working through this example, I was initially running into trouble when associating my <code>newEvent</code> with the <code>calendar</code> that was passed into <code>AddEventViewController</code> from the parent controller's <code>prepareForSegue</code> method.</p>
 
 <p>It turns out that if you retrieve a calendar from one <code>EKEventStore</code> instance, say, in the previous view controller, and attempt to assign it to an <code>EKEvent</code> that is associated with a <em>different</em> <code>EKEventStore</code> instance, things become really unhappy when it comes time to save the event.</p>
 
-<p>Specifically, you&#8217;ll get an error that says &#8220;Thread 1: signal SIGKILL&#8221; followed by &#8220;Thread 1: EXC_BAD_ACCESS&#8221;:</p>
+<p>Specifically, you'll get an error that says &#8220;Thread 1: signal SIGKILL&#8221; followed by &#8220;Thread 1: EXC_BAD_ACCESS&#8221;:</p>
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventSigKillError.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventSigKillError.png" alt="Save Event Sig Kill Error" width="753" height="177" class="alignnone size-full wp-image-12898" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventSigKillError.png 753w, https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventSigKillError-300x71.png 300w" sizes="(max-width: 753px) 100vw, 753px" /></a></p>
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventBadAccessError.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventBadAccessError.png" alt="Save Event Bad Access Error" width="755" height="343" class="alignnone size-full wp-image-12899" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventBadAccessError.png 755w, https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventBadAccessError-300x136.png 300w" sizes="(max-width: 755px) 100vw, 755px" /></a></p>
 
-<p>The fix for this was easy, once I figured out what was going on: Simply re-retrieve a calendar instance using an appropriate <code>calendarIdentifier</code> <em>from the <code>EKEventStore</code> instance you&#8217;re using to save the <code>EKEvent</code> with</em>:</p>
+<p>The fix for this was easy, once I figured out what was going on: Simply re-retrieve a calendar instance using an appropriate <code>calendarIdentifier</code> <em>from the <code>EKEventStore</code> instance you're using to save the <code>EKEvent</code> with</em>:</p>
 
 <pre class="lang:swift mark:1,5 decode:true " title="calendarForEvent Snippet" >if let calendarForEvent = eventStore.calendarWithIdentifier((self.calendar.calendarIdentifier))
 {
@@ -368,7 +368,7 @@ newEvent.endDate = self.eventEndDatePicker.date</pre>
 
 <h1 id="wrapping-up">Wrapping up</h1>
 
-<p>My focus in this guide was to demonstrate how to create and save and event to a user&#8217;s calendar. I intentionally left out a lot of the navigation aspects and <code>prepareForSegue</code> calls in order to highlight the event creation process itself. Be sure to check out the <a href="https://github.com/andrewcbancroft/EventTracker/tree/create-events">accompanying Xcode project on GitHub</a> for full details on the flow of the application.</p>
+<p>My focus in this guide was to demonstrate how to create and save and event to a user's calendar. I intentionally left out a lot of the navigation aspects and <code>prepareForSegue</code> calls in order to highlight the event creation process itself. Be sure to check out the <a href="https://github.com/andrewcbancroft/EventTracker/tree/create-events">accompanying Xcode project on GitHub</a> for full details on the flow of the application.</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

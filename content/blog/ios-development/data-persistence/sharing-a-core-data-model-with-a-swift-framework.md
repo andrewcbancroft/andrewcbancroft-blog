@@ -15,75 +15,17 @@ tags:
   - Swift
 
 ---
-<small>Updated on June 13, 2017 &#8211; Swift 3.0, Xcode 8</small>
 
-Code re-use is a powerful thing, but it&#8217;s not always easy to pull off. We strive for it though, because in the long run, it makes maintaining the code far, far easier than if we just settled for copying and pasting.
+<small>Updated on June 13, 2017 – Swift 3.0, Xcode 8</small>
 
-With the introduction of dynamic frameworks in iOS 8, a world of possibility opened up for iOS developers to achieve some pretty cool re-use scenarios, one of which we&#8217;re going to dive into today.
+Code re-use is a powerful thing, but it's not always easy to pull off. We strive for it though, because in the long run, it makes maintaining the code far, far easier than if we just settled for copying and pasting.
+
+With the introduction of dynamic frameworks in iOS 8, a world of possibility opened up for iOS developers to achieve some pretty cool re-use scenarios, one of which we're going to dive into today.
 
 Not only can we share _code_ between projects, we can also share Core Data _models_ between projects by utilizing frameworks!
 
-Perhaps you&#8217;re working on an iOS + Mac app combination and the data model for each is identical. Maybe you&#8217;re building several iOS apps that have different user interfaces but share some underlying persistence-layer models. Whatever the case may be, wouldn&#8217;t it be awesome to design the Core Data model once and share it between your projects?
+Perhaps you're working on an iOS + Mac app combination and the data model for each is identical. Maybe you're building several iOS apps that have different user interfaces but share some underlying persistence-layer models. Whatever the case may be, wouldn't it be awesome to design the Core Data model once and share it between your projects?
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#example-scenario">Example scenario</a>
-    </li>
-    <li>
-      <a href="#create-swift-framework-project">Creating a Swift framework project</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#add-data-model-file">Add a data model file</a>
-      </li>
-      <li>
-        <a href="#add-model-attributes">Add model attributes</a>
-      </li>
-      <li>
-        <a href="#create-nsmanagedobject-subclass">Create NSManagedObject subclass</a>
-      </li>
-      <li>
-        <a href="#build-inspect-outputs">Build and inspect outputs</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#create-framework-dependent-app">Creating the framework-dependent app</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#remove-xcode-generated-xcdatamodeld">Remove Xcode-generated .xcdatamodeld file</a>
-      </li>
-      <li>
-        <a href="#obtain-framework-bundle-identifier">Obtain framework Bundle Identifier</a>
-      </li>
-      <li>
-        <a href="#replace-managed-object-model-property">Replace managedObjectModel property initialization</a>
-      </li>
-      <li>
-        <a href="#add-carkit-framework">Add CarKit framework to project and embed binary</a>
-      </li>
-      <li>
-        <a href="#take-for-test-drive">Taking the model out for a test drive (pun intended)</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#related">You might also enjoy…</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-    <li>
-      <a href="#course">Learning Core Data? Watch my course, Core Data Fundamentals with Swift!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="example-scenario" class="jump-target"></a>
 
@@ -93,11 +35,11 @@ Our working example for this walkthrough will be the following:
 
 Our team is building an **iOS app** and a **Mac app** and the **underlying data model will be exactly the same** between them. The only difference between the apps will be the target platform.
 
-The app will target car enthusiasts everywhere &#8211; we will empower car fanatics to manage of a list of their favorite cars.
+The app will target car enthusiasts everywhere – we will empower car fanatics to manage of a list of their favorite cars.
 
-We&#8217;ll be creating two Xcode projects during this walkthrough: One will be the framework and will be called &#8220;CarKit&#8221;. The other will be a single view iOS application. We won&#8217;t actually dive into the Mac project, but one could imagine the process being very similar for importing CarKit into the Mac application when it came time to build that one.
+We'll be creating two Xcode projects during this walkthrough: One will be the framework and will be called &#8220;CarKit&#8221;. The other will be a single view iOS application. We won't actually dive into the Mac project, but one could imagine the process being very similar for importing CarKit into the Mac application when it came time to build that one.
 
-I&#8217;m providing a completed CarKit + Carz package for you to look at over at GitHub:
+I'm providing a completed CarKit + Carz package for you to look at over at GitHub:
 
 <div class="resources">
   <div class="resources-header">
@@ -111,45 +53,45 @@ I&#8217;m providing a completed CarKit + Carz package for you to look at over at
   </ul>
 </div>
 
-Let&#8217;s get started!
+Let's get started!
 
 <a name="create-swift-framework-project" class="jump-target"></a>
 
 ### Creating a Swift framework project
 
-To get started with creating a Swift framework, begin with Xcode&#8217;s New Project dialog (File -> New -> Project&#8230;). Typically we stay in the realm of the &#8220;iOS Application&#8221; project templates, but if you click &#8220;Framework & library&#8221;, you&#8217;ll see the option to create a new Cocoa Touch Framework:
+To get started with creating a Swift framework, begin with Xcode's New Project dialog (File -> New -> Project&#8230;). Typically we stay in the realm of the &#8220;iOS Application&#8221; project templates, but if you click &#8220;Framework & library&#8221;, you'll see the option to create a new Cocoa Touch Framework:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/01-New-Project-Framework.png" alt="01 - New Project - Framework" width="778" height="490" class="alignnone size-full wp-image-12239" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/01-New-Project-Framework.png 778w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/01-New-Project-Framework-300x189.png 300w" sizes="(max-width: 778px) 100vw, 778px" />][1]
 
-In keeping with Apple&#8217;s &#8220;\___Kit&#8221; theme, we&#8217;ll name our framework &#8220;CarKit&#8221;:  
+In keeping with Apple's &#8220;\___Kit&#8221; theme, we'll name our framework &#8220;CarKit&#8221;:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/02-Project-Name.png" alt="02 - Project Name" width="760" height="467" class="alignnone size-full wp-image-12240" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/02-Project-Name.png 760w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/02-Project-Name-300x184.png 300w" sizes="(max-width: 760px) 100vw, 760px" />][2]
 
 <a name="add-data-model-file" class="jump-target"></a>
 
 #### Add a data model file
 
-Once the framework project has been created, we&#8217;re set to drop in a new Data Model file from Xcode&#8217;s new file dialog (File -> New -> File&#8230;). Choose Core Data, and then Data Model:
+Once the framework project has been created, we're set to drop in a new Data Model file from Xcode's new file dialog (File -> New -> File&#8230;). Choose Core Data, and then Data Model:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/03-New-File-Core-Data-Data-Model.png" alt="03 - New File - Core Data - Data Model" width="750" height="444" class="alignnone size-full wp-image-12241" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/03-New-File-Core-Data-Data-Model.png 750w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/03-New-File-Core-Data-Data-Model-300x178.png 300w" sizes="(max-width: 750px) 100vw, 750px" />][3]
 
-Give the data model file a name that seems to fit your situation. For our example, let&#8217;s name it &#8220;CarModel&#8221;:  
+Give the data model file a name that seems to fit your situation. For our example, let's name it &#8220;CarModel&#8221;:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/04-Model-Name.png" alt="04 - Model Name" width="748" height="740" class="alignnone size-full wp-image-12242" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/04-Model-Name.png 748w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/04-Model-Name-300x297.png 300w" sizes="(max-width: 748px) 100vw, 748px" />][4]
 
 <a name="add-model-attributes" class="jump-target"></a>
 
 #### Add model attributes
 
-Next it&#8217;s time to actually add attributes to the model. Since our theme is cars here, we&#8217;ll stick with three simple attributes: `year`, `make`, and `model`:  
+Next it's time to actually add attributes to the model. Since our theme is cars here, we'll stick with three simple attributes: `year`, `make`, and `model`:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/05-Complete-Model-1024x656.png" alt="05 - Complete Model" width="1024" height="656" class="alignnone size-large wp-image-12243" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/05-Complete-Model-1024x656.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/05-Complete-Model-300x192.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/05-Complete-Model.png 1399w" sizes="(max-width: 1024px) 100vw, 1024px" />][5]
 
 <a name="create-nsmanagedobject-subclass" class="jump-target"></a>
 
 #### Create NSManagedObject subclass
 
-With the model attributes all configured, it&#8217;s time to create an `NSManagedObject` subclass. This will make consuming the model much easier in client applications. I&#8217;ve actually [written up a full walk through on creating an NSManagedObject subclass in Swift][6] as there are some nuances. Feel free to read up on that if you so desire!  
+With the model attributes all configured, it's time to create an `NSManagedObject` subclass. This will make consuming the model much easier in client applications. I've actually [written up a full walk through on creating an NSManagedObject subclass in Swift][6] as there are some nuances. Feel free to read up on that if you so desire!  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/06-NSManagedObject-Subclass.png" alt="06 - NSManagedObject Subclass" width="517" height="490" class="alignnone size-full wp-image-12244" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/06-NSManagedObject-Subclass.png 517w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/06-NSManagedObject-Subclass-300x284.png 300w" sizes="(max-width: 517px) 100vw, 517px" />][7]
 
-Be absolutely sure to mark your `NSManagedObject` subclass and its properties `public` &#8211; otherwise, the client app won&#8217;t be able to see the class or its properties:  
+Be absolutely sure to mark your `NSManagedObject` subclass and its properties `public` – otherwise, the client app won't be able to see the class or its properties:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/061-NSManagedObjectSubclass-Public.png" alt="061 - NSManagedObjectSubclass Public" width="671" height="351" class="alignnone size-full wp-image-12255" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/061-NSManagedObjectSubclass-Public.png 671w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/061-NSManagedObjectSubclass-Public-300x157.png 300w" sizes="(max-width: 671px) 100vw, 671px" />][8]
 
 As I point out in [Implement NSManagedObject Subclass in Swift][6], you need to set the Module property in the Data Model Inspector to be CarKit (which is the same as the &#8220;Current Project Module&#8221; option for this example):  
@@ -159,7 +101,7 @@ As I point out in [Implement NSManagedObject Subclass in Swift][6], you need to 
 
 #### Build and inspect outputs
 
-We&#8217;ve got a framework, and we&#8217;ve got a Data Model with attributes and an `NSManagedObject` subclass all appropriately implemented. Now it&#8217;s time to build the project and inspect the output of the build!
+We've got a framework, and we've got a Data Model with attributes and an `NSManagedObject` subclass all appropriately implemented. Now it's time to build the project and inspect the output of the build!
 
 Command + B to build, and then head up to the File menu and choose Project Settings:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/08-Window-Projects.png" alt="08 - Window - Projects" width="292" height="492" class="alignnone size-full wp-image-12246" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/08-Window-Projects.png 292w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/08-Window-Projects-178x300.png 178w" sizes="(max-width: 292px) 100vw, 292px" />][10]
@@ -169,30 +111,30 @@ In the Project Settings area that appears, click the small gray arrow under the 
 
 Next, find the derived data folder for your project. It should be named the same as your project with a set of random characters after. Sometimes there will be multiple folders that could be your project. You can look at the last modified date to help figure you figure out which one was most recently built and choose that one.
 
-Expand the Build folder down to Build -> Products -> Debug-iphonesimulator. There you should see the CarKit.framework artifact, and within it, everything that&#8217;s needed to be able to utilize the data model in a client application. Awesome!  
+Expand the Build folder down to Build -> Products -> Debug-iphonesimulator. There you should see the CarKit.framework artifact, and within it, everything that's needed to be able to utilize the data model in a client application. Awesome!  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd-1024x733.png" alt="10 - CarKit - Finder - Includes momd" width="1024" height="733" class="alignnone size-large wp-image-12248" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd-1024x733.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd-300x215.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd-768x550.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd.png 1064w" sizes="(max-width: 1024px) 100vw, 1024px" />][12]
 
-**Note:** This framework is not production-ready. It&#8217;s a little more involved to create a framework that one can run on a device / pass validation when submitting to the app store. The development of the framework remains the same, but the _build_ phases and procedures must be modified to make it &#8220;universal&#8221;. Rather than overly complicate this walkthrough, I recommend reviewing &#8220;[Universal Cocoa Touch Frameworks for iOS 8 &#8211; (Remix)][13] by [@kodmunki][14] to create a &#8220;universal&#8221; framework capable of being run in the simulator and on iOS devices.
+**Note:** This framework is not production-ready. It's a little more involved to create a framework that one can run on a device / pass validation when submitting to the app store. The development of the framework remains the same, but the _build_ phases and procedures must be modified to make it &#8220;universal&#8221;. Rather than overly complicate this walkthrough, I recommend reviewing &#8220;[Universal Cocoa Touch Frameworks for iOS 8 – (Remix)][13] by [@kodmunki][14] to create a &#8220;universal&#8221; framework capable of being run in the simulator and on iOS devices.
 
 <a name="create-framework-dependent-app" class="jump-target"></a>
 
 ### Creating the framework-dependent app
 
-With the framework built, it&#8217;s time to create the iOS app that will utilize that framework and its packaged assets! Begin a new project from File -> New -> Project and select &#8220;Single View Application&#8221;. I&#8217;ll name our example app &#8220;Carz&#8221;. **Ensure that &#8220;Use Core Data&#8221; is selected** so that you get the boilerplate Core Data code put into your project by Xcode:  
+With the framework built, it's time to create the iOS app that will utilize that framework and its packaged assets! Begin a new project from File -> New -> Project and select &#8220;Single View Application&#8221;. I'll name our example app &#8220;Carz&#8221;. **Ensure that &#8220;Use Core Data&#8221; is selected** so that you get the boilerplate Core Data code put into your project by Xcode:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/11-New-Single-View-App-Carz.png" alt="11 - New Single View App - Carz" width="755" height="492" class="alignnone size-full wp-image-12249" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/11-New-Single-View-App-Carz.png 755w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/11-New-Single-View-App-Carz-300x195.png 300w" sizes="(max-width: 755px) 100vw, 755px" />][15]
 
 <a name="remove-xcode-generated-xcdatamodeld" class="jump-target"></a>
 
 #### Remove Xcode-generated .xcdatamodeld file
 
-When you select &#8220;Use Core Data&#8221; in the project creation window, Xcode automatically generates some boilerplate code, which we want. But it also gives us a &#8220;Carz.xcdatamodeld&#8221; file, which we will not need because we&#8217;ll use the model that&#8217;s found in CarKit. Remove the &#8220;Carz.xcdatamodeld&#8221; file that Xcode provides for you:  
+When you select &#8220;Use Core Data&#8221; in the project creation window, Xcode automatically generates some boilerplate code, which we want. But it also gives us a &#8220;Carz.xcdatamodeld&#8221; file, which we will not need because we'll use the model that's found in CarKit. Remove the &#8220;Carz.xcdatamodeld&#8221; file that Xcode provides for you:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/12-Remove-default-data-model-from-new-project-1024x475.png" alt="12 - Remove default data model from new project" width="1024" height="475" class="alignnone size-large wp-image-12250" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/12-Remove-default-data-model-from-new-project-1024x475.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/12-Remove-default-data-model-from-new-project-300x139.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/12-Remove-default-data-model-from-new-project.png 1394w" sizes="(max-width: 1024px) 100vw, 1024px" />][16]
 
 <a name="obtain-framework-bundle-identifier" class="jump-target"></a>
 
 #### Obtain framework Bundle Identifier
 
-Speaking of using the CarKit Core Data model, we&#8217;re now ready to configure that piece of the app. To do this part, you will need to know the Bundle Identifier from your framework project. To find out what it is, jump back over to the framework project, click the top-level node in the project navigator, click on the framework target name, and look under the General tab of the project configuration. There you&#8217;ll find the Bundle Identifier, which you can copy to your clipboard:  
+Speaking of using the CarKit Core Data model, we're now ready to configure that piece of the app. To do this part, you will need to know the Bundle Identifier from your framework project. To find out what it is, jump back over to the framework project, click the top-level node in the project navigator, click on the framework target name, and look under the General tab of the project configuration. There you'll find the Bundle Identifier, which you can copy to your clipboard:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/13-CarKit-Bundle-Identifier-1024x301.png" alt="13 - CarKit Bundle Identifier" width="1024" height="301" class="alignnone size-large wp-image-12251" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/13-CarKit-Bundle-Identifier-1024x301.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/13-CarKit-Bundle-Identifier-300x88.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/13-CarKit-Bundle-Identifier.png 1137w" sizes="(max-width: 1024px) 100vw, 1024px" />][17]
 
 <a name="replace-managed-object-model-property" class="jump-target"></a>
@@ -207,7 +149,7 @@ Out of the box, Xcode generates some code to help locate your Core Data model fi
     return NSManagedObjectModel(contentsOfURL: modelURL)!
 }()</pre>
 
-However, this won&#8217;t work for us, because we&#8217;re going to use the data model from CarKit, and CarKit is not in the `mainBundle()`. This is why we jumped over and copied the Bundle Identifier for CarKit in the previous step. To locate the data model file in _that_ bundle, you&#8217;ll replace the `managedObjectModel` initialization step to the following (for CarKit):
+However, this won't work for us, because we're going to use the data model from CarKit, and CarKit is not in the `mainBundle()`. This is why we jumped over and copied the Bundle Identifier for CarKit in the previous step. To locate the data model file in _that_ bundle, you'll replace the `managedObjectModel` initialization step to the following (for CarKit):
 
 <pre class="lang:swift decode:true " title="managedObjectModel" >lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
@@ -225,16 +167,16 @@ Recall that &#8220;CarModel&#8221; is the name of the Core Data model we created
 
 #### Add CarKit framework to project and embed binary
 
-Now it&#8217;s time to actually bring in the framework for use within our app. I typically open up a Finder window and drag over a copy of the framework (in this case, the CarKit.framework file) into my project. Feel free to organize it into a &#8220;lib&#8221; folder.
+Now it's time to actually bring in the framework for use within our app. I typically open up a Finder window and drag over a copy of the framework (in this case, the CarKit.framework file) into my project. Feel free to organize it into a &#8220;lib&#8221; folder.
 
-Assuming that you go through all the necessary steps to make the framework production-ready, you&#8217;ll want to embed the binary and ensure that it&#8217;s referenced in the &#8220;Linked Frameworks and Libraries&#8221; portion of your project configuration:  
+Assuming that you go through all the necessary steps to make the framework production-ready, you'll want to embed the binary and ensure that it's referenced in the &#8220;Linked Frameworks and Libraries&#8221; portion of your project configuration:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/15-Embed-CarKit-and-Link-CarKit-1024x634.png" alt="15 - Embed CarKit and Link CarKit" width="1024" height="634" class="alignnone size-large wp-image-12252" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/15-Embed-CarKit-and-Link-CarKit-1024x634.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/15-Embed-CarKit-and-Link-CarKit-300x186.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/15-Embed-CarKit-and-Link-CarKit.png 1399w" sizes="(max-width: 1024px) 100vw, 1024px" />][19]
 
 <a name="take-for-test-drive" class="jump-target"></a>
 
 #### Taking the model out for a test drive (pun intended)
 
-It&#8217;s simple enough to try things out by writing a simple little snippet of code in the `AppDelegate`:
+It's simple enough to try things out by writing a simple little snippet of code in the `AppDelegate`:
 
 <pre class="lang:swift decode:true " title="Test Drive" >func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
@@ -257,14 +199,14 @@ It&#8217;s simple enough to try things out by writing a simple little snippet of
     return true
 }</pre>
 
-This code simply obtains a new Car object, sets some properties, and saves it all with the `managedObjectContext` instance that&#8217;s configured in the `AppDelegate`.
+This code simply obtains a new Car object, sets some properties, and saves it all with the `managedObjectContext` instance that's configured in the `AppDelegate`.
 
 Then it goes and performs a fetch request to grab all the `Car` objects and prints them. The results? See for yourself:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-1024x592.png" alt="17 - Final Result" width="1024" height="592" class="alignnone size-large wp-image-12254" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-1024x592.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-300x173.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-768x444.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result.png 1470w" sizes="(max-width: 1024px) 100vw, 1024px" />][20]
 
 ### Wrapping up
 
-This walkthrough guided you through the process of creating a framework for the purpose of sharing a Core Data model with multiple projects. My hope is that you&#8217;re now empowered to make use of _re_use by utilizing Swift frameworks to share even portions of your persistence layer!
+This walkthrough guided you through the process of creating a framework for the purpose of sharing a Core Data model with multiple projects. My hope is that you're now empowered to make use of _re_use by utilizing Swift frameworks to share even portions of your persistence layer!
 
 <a name="related" class="jump-target"></a>
 

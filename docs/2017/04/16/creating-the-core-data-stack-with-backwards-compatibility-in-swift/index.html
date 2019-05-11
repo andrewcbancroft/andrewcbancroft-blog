@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Creating the Core Data Stack with Backwards Compatibility in Swift" />
-<meta property="og:description" content="In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&#8217;ll be unable to take advantage of Core Data&#8217;s latest &#8220;stack creation&#8221; class called NSPersistentContainer. So what can you do?
-While NSPersistentContainer does aim to simplify the stack creation process, at the end of the day, it&#8217;s not terrible to have to mess with some of this Core Data plumbing." />
+<meta property="og:description" content="In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you'll be unable to take advantage of Core Data's latest &#8220;stack creation&#8221; class called NSPersistentContainer. So what can you do?
+While NSPersistentContainer does aim to simplify the stack creation process, at the end of the day, it's not terrible to have to mess with some of this Core Data plumbing." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/" />
 <meta property="article:published_time" content="2017-04-16T21:23:46&#43;00:00"/>
@@ -34,8 +34,8 @@ While NSPersistentContainer does aim to simplify the stack creation process, at 
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Creating the Core Data Stack with Backwards Compatibility in Swift"/>
-<meta name="twitter:description" content="In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&#8217;ll be unable to take advantage of Core Data&#8217;s latest &#8220;stack creation&#8221; class called NSPersistentContainer. So what can you do?
-While NSPersistentContainer does aim to simplify the stack creation process, at the end of the day, it&#8217;s not terrible to have to mess with some of this Core Data plumbing."/>
+<meta name="twitter:description" content="In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you'll be unable to take advantage of Core Data's latest &#8220;stack creation&#8221; class called NSPersistentContainer. So what can you do?
+While NSPersistentContainer does aim to simplify the stack creation process, at the end of the day, it's not terrible to have to mess with some of this Core Data plumbing."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -166,9 +166,9 @@ MathJax.Hub.Config({
 
     
 
-<p>In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&#8217;ll be unable to take advantage of Core Data&#8217;s latest &#8220;stack creation&#8221; class called <code>NSPersistentContainer</code>. So what can you do?</p>
+<p>In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you'll be unable to take advantage of Core Data's latest &#8220;stack creation&#8221; class called <code>NSPersistentContainer</code>. So what can you do?</p>
 
-<p>While <code>NSPersistentContainer</code> <em>does</em> aim to simplify the stack creation process, at the end of the day, it&#8217;s not terrible to have to mess with some of this Core Data plumbing.</p>
+<p>While <code>NSPersistentContainer</code> <em>does</em> aim to simplify the stack creation process, at the end of the day, it's not terrible to have to mess with some of this Core Data plumbing.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -216,13 +216,13 @@ MathJax.Hub.Config({
 
 <h1 id="end-goal-of-creating-the-core-data-stack">End goal of creating the Core Data stack</h1>
 
-<p>The end goal of Creating the Core Data stack is to get an instance of <code>NSManagedObjectContext</code>. That&#8217;s it.</p>
+<p>The end goal of Creating the Core Data stack is to get an instance of <code>NSManagedObjectContext</code>. That's it.</p>
 
-<p>Most apps that rely on Core Data will end up making fetch requests to obtain data, or wire up other classes like <code>NSFetchedResultsController</code>. To make these things work, you&#8217;ve got to provide an instance of <code>NSManagedObjectContext</code>.</p>
+<p>Most apps that rely on Core Data will end up making fetch requests to obtain data, or wire up other classes like <code>NSFetchedResultsController</code>. To make these things work, you've got to provide an instance of <code>NSManagedObjectContext</code>.</p>
 
 <p><code>NSManagedObjectContext</code> is sort of that central gear in the whole system that makes the other gears turn.</p>
 
-<p>So. Bottom line: Once you have an instance of <code>NSManagedObjectContext</code>, you&#8217;re golden. That&#8217;s what creating the Core Data stack gives you in the end.</p>
+<p>So. Bottom line: Once you have an instance of <code>NSManagedObjectContext</code>, you're golden. That's what creating the Core Data stack gives you in the end.</p>
 
 <p><a name="3-steps" class="jump-target"></a></p>
 
@@ -234,7 +234,7 @@ MathJax.Hub.Config({
 
 <h2 id="1-initialize-an-instance-of-nsmanagedobjectmodel">1) Initialize an instance of NSManagedObjectModel</h2>
 
-<p>This corresponds to your .xcdatamodeld file. You&#8217;ll want to glance over to the project navigator on the left and locate the .xcdatamodeld file to record its name for this step.</p>
+<p>This corresponds to your .xcdatamodeld file. You'll want to glance over to the project navigator on the left and locate the .xcdatamodeld file to record its name for this step.</p>
 
 <pre class="lang:swift decode:true " title="Initialize NSManagedObjectModel" >// Initialize NSManagedObjectModel
 let modelURL = Bundle.main.url(forResource: "NameOfDataModel", withExtension: "momd")
@@ -299,11 +299,11 @@ context.persistentStoreCoordinator = psc</pre>
     return context
 }</pre>
 
-<p>Once you&#8217;ve got a function like <code>createMainContext()</code>, you&#8217;ll be able to call it to obtain a fully-configured <code>NSManagedObjectContext</code> instance.</p>
+<p>Once you've got a function like <code>createMainContext()</code>, you'll be able to call it to obtain a fully-configured <code>NSManagedObjectContext</code> instance.</p>
 
 <p>I <em>highly</em> recommend you avoid calling it inside any of your view controllers. Instead, my recommendation is to call it to obtain your <code>NSManagedObjectContext</code> instance inside of the <code>AppDelegate's</code> <code>application(_:didFinishLaunchingWithOptions:)</code> function. From there, you can pass it <em>to</em> your first view controller, and from that first view controller on to <em>other</em> view controllers that need it through <code>prepare(for segue:sender:)</code>.</p>
 
-<p>For more on this &#8220;dependency injection&#8221; strategy, or if you&#8217;re more of a visual learner, check out my Pluralsight course, <a href="http://bit.ly/ps-core-data-swift">Core Data Fundamentals with Swift</a>!<br />
+<p>For more on this &#8220;dependency injection&#8221; strategy, or if you're more of a visual learner, check out my Pluralsight course, <a href="http://bit.ly/ps-core-data-swift">Core Data Fundamentals with Swift</a>!<br />
 <a name="course" class="jump-target"></a></p>
 
 <div class="resources">

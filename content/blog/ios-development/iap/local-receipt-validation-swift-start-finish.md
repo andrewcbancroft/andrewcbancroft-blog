@@ -15,13 +15,13 @@ tags:
   - Swift
 
 ---
-Local receipt validation in Swift doesn&#8217;t seem to be widely written about. I&#8217;ve been able to find snippets of code scattered across the Internet, but nothing that brought everything together in one spot so that I could wrap my head around the whole process.
+Local receipt validation in Swift doesn't seem to be widely written about. I've been able to find snippets of code scattered across the Internet, but nothing that brought everything together in one spot so that I could wrap my head around the whole process.
 
-I&#8217;ve been working on some code for a while, and this post is my attempt to bring it all together from start to finish.
+I've been working on some code for a while, and this post is my attempt to bring it all together from start to finish.
 
-I&#8217;ve written seven guides that will take you from preparing to test receipt validation, all the way through to working with the result of the receipt validation process to enable/disable features of your app.
+I've written seven guides that will take you from preparing to test receipt validation, all the way through to working with the result of the receipt validation process to enable/disable features of your app.
 
-Additionally, I&#8217;ve put all of my code into a new GitHub repository for you to use and learn from!
+Additionally, I've put all of my code into a new GitHub repository for you to use and learn from!
 
 Just want the code? Here you go!
 
@@ -39,7 +39,7 @@ Just want the code? Here you go!
 
 # Seven guides taking you from start to finish
 
-If you&#8217;re interested in learning about each step along the way, here are the seven guides I&#8217;ve written on the topic of local receipt validation in Swift:
+If you're interested in learning about each step along the way, here are the seven guides I've written on the topic of local receipt validation in Swift:
 
   * [Preparing to Test Receipt Validation for iOS][1]
   * [OpenSSL for iOS & Swift the Easy Way][2]
@@ -55,7 +55,7 @@ Preventing software piracy is hard. The code presented in these guides and share
 
 The guides and code are meant to be used for learning purposes, and _perhaps_ as a starting point for implementing local receipt validation on your own. If you use this code as-is in your app, you do it at your own risk.
 
-You must take additional efforts to obfuscate the code presented here to thwart an attacker&#8217;s attempt at circumventing the receipt validation logic contained within this repository.
+You must take additional efforts to obfuscate the code presented here to thwart an attacker's attempt at circumventing the receipt validation logic contained within this repository.
 
  [1]: https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/#build-run-on-device
  [2]: https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/

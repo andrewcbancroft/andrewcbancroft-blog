@@ -26,10 +26,10 @@
 
 <meta property="og:title" content="Extracting a PKCS7 Container for Receipt Validation with Swift" />
 <meta property="og:description" content="Updated on July 15, 2017 &#8211; Swift 3 
-So you&#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect.
-You&#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you&#8217;ve even done it the &#8220;easy way&#8221; with CocoaPods.
-You&#8217;ve located and loaded the receipt for validation.
-Now you&#8217;re ready to extract the PKCS #7 container and work with it." />
+So you've prepared to test receipt validation by setting up your app in iTunes Connect.
+You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it the &#8220;easy way&#8221; with CocoaPods.
+You've located and loaded the receipt for validation.
+Now you're ready to extract the PKCS #7 container and work with it." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" />
 <meta property="article:published_time" content="2016-06-10T03:44:58&#43;00:00"/>
@@ -38,10 +38,10 @@ Now you&#8217;re ready to extract the PKCS #7 container and work with it." />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Extracting a PKCS7 Container for Receipt Validation with Swift"/>
 <meta name="twitter:description" content="Updated on July 15, 2017 &#8211; Swift 3 
-So you&#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect.
-You&#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you&#8217;ve even done it the &#8220;easy way&#8221; with CocoaPods.
-You&#8217;ve located and loaded the receipt for validation.
-Now you&#8217;re ready to extract the PKCS #7 container and work with it."/>
+So you've prepared to test receipt validation by setting up your app in iTunes Connect.
+You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it the &#8220;easy way&#8221; with CocoaPods.
+You've located and loaded the receipt for validation.
+Now you're ready to extract the PKCS #7 container and work with it."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -174,13 +174,13 @@ MathJax.Hub.Config({
 
 <p><small>Updated on July 15, 2017 &#8211; Swift 3 </small></p>
 
-<p>So you&#8217;ve <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</p>
+<p>So you've <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</p>
 
-<p>You&#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you&#8217;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &#8220;easy way&#8221; with CocoaPods</a>.</p>
+<p>You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &#8220;easy way&#8221; with CocoaPods</a>.</p>
 
-<p>You&#8217;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</p>
+<p>You've <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</p>
 
-<p>Now you&#8217;re ready to extract the PKCS #7 container and work with it.</p>
+<p>Now you're ready to extract the PKCS #7 container and work with it.</p>
 
 <p>The aim of this guide is to get you started using the OpenSSL library in your Swift code by employing it to extract the receipt contents from its PKCS #7 container.</p>
 
@@ -253,23 +253,23 @@ MathJax.Hub.Config({
 
 <p>In <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">Loading a Receipt for Validation with Swift</a>, I began the process of breaking out the various steps of the receipt validation process into separate single-responsibility structs with clearly named functions to help clarify what each piece of code is doing.</p>
 
-<p>Recall that I&#8217;ve created a <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation">main Type called <code>ReceiptValidator</code></a>, with references to several smaller single-responsibility Types that it uses to accomplish the overall validation process. So accordingly, as of my last post in the series, I&#8217;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">created a <code>ReceiptLoader</code></a> that finds the receipt on the file system and loads it into memory.</p>
+<p>Recall that I've created a <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation">main Type called <code>ReceiptValidator</code></a>, with references to several smaller single-responsibility Types that it uses to accomplish the overall validation process. So accordingly, as of my last post in the series, I've <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">created a <code>ReceiptLoader</code></a> that finds the receipt on the file system and loads it into memory.</p>
 
-<p>If a validation step ever fails along the way, I&#8217;ve decided to take advantage of Swift&#8217;s error throwing features to clearly describe what failed. So far, there&#8217;s only one case:</p>
+<p>If a validation step ever fails along the way, I've decided to take advantage of Swift's error throwing features to clearly describe what failed. So far, there's only one case:</p>
 
 <pre class="lang:swift decode:true " title="ReceiptValidationError " >enum ReceiptValidationError : Error {
     case couldNotFindReceipt
 }</pre>
 
-<p>I&#8217;ll expand this enum Type to cover more failure conditions in this guide.</p>
+<p>I'll expand this enum Type to cover more failure conditions in this guide.</p>
 
 <p><a name="receipt-extractor-outline" class="jump-target"></a></p>
 
 <h1 id="receiptextractor-struct-outline">ReceiptExtractor struct outline</h1>
 
-<p>The OpenSSL library comes to us in the form of a C static library. It&#8217;s not a beautiful API to say the least. The names of the Types and functions are really cryptic at times, so I&#8217;ve decided it&#8217;s best for my own memory to wrap each step in small function routines that are named for what they do.</p>
+<p>The OpenSSL library comes to us in the form of a C static library. It's not a beautiful API to say the least. The names of the Types and functions are really cryptic at times, so I've decided it's best for my own memory to wrap each step in small function routines that are named for what they do.</p>
 
-<p>So supposing you&#8217;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt data, or used <a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/StoreKit_Collection/">Store Kit</a> to request a receipt from Apple&#8230; Take a look at this new <code>ReceiptExtractor</code> skeleton of a struct to get an idea of what&#8217;s going to be required to extract the PKCS7 container for the receipt:</p>
+<p>So supposing you've <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt data, or used <a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/StoreKit_Collection/">Store Kit</a> to request a receipt from Apple&#8230; Take a look at this new <code>ReceiptExtractor</code> skeleton of a struct to get an idea of what's going to be required to extract the PKCS7 container for the receipt:</p>
 
 <pre class="lang:swift decode:true " >struct ReceiptExtractor {
     func extractPKCS7Container(_ receiptData: Data) throws -> UnsafeMutablePointer&lt;PKCS7> {
@@ -282,9 +282,9 @@ MathJax.Hub.Config({
 
 <h1 id="new-receiptvalidationerror-cases">New ReceiptValidationError cases</h1>
 
-<p>When extracting the receipt information from the PKCS7 container, there are going to be things that would cause overall validation to fail. For example, if the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">receipt <code>Data</code> instance</a> ends up being empty, that&#8217;s a validation failure. The PKCS7 container needs to have information inside of it for validation to pass (obviously).</p>
+<p>When extracting the receipt information from the PKCS7 container, there are going to be things that would cause overall validation to fail. For example, if the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">receipt <code>Data</code> instance</a> ends up being empty, that's a validation failure. The PKCS7 container needs to have information inside of it for validation to pass (obviously).</p>
 
-<p>So in this guide, I&#8217;ll expand the <code>ReceiptValidationError</code> enum to have the following cases:</p>
+<p>So in this guide, I'll expand the <code>ReceiptValidationError</code> enum to have the following cases:</p>
 
 <pre class="lang:swift decode:true " title="ReceiptValidationError " >enum ReceiptValidationError : Error {
     case couldNotFindReceipt
@@ -295,11 +295,11 @@ MathJax.Hub.Config({
 
 <h1 id="preparation-step-pkcs7-union-accessors">Preparation step: PKCS7 union accessors</h1>
 
-<p>Before attempting to work with OpenSSL&#8217;s PKCS7 functions, you&#8217;ve got to do a little prep work to get the functions to play nicely with Swift.</p>
+<p>Before attempting to work with OpenSSL's PKCS7 functions, you've got to do a little prep work to get the functions to play nicely with Swift.</p>
 
-<p>Unfortunately, Swift doesn&#8217;t work well with <a href="https://en.wikipedia.org/wiki/Union_type#C.2FC.2B.2B">C union types</a>. It simply can&#8217;t see things defined with a C union.</p>
+<p>Unfortunately, Swift doesn't work well with <a href="https://en.wikipedia.org/wiki/Union_type#C.2FC.2B.2B">C union types</a>. It simply can't see things defined with a C union.</p>
 
-<p>Thankfully, we can work around the problem by creating some wrappers. If you&#8217;ll add two new files to your project and implement them, you&#8217;ll be on your way. They are:</p>
+<p>Thankfully, we can work around the problem by creating some wrappers. If you'll add two new files to your project and implement them, you'll be on your way. They are:</p>
 
 <ul>
 <li>pkcs7_union_accessors.h</li>
@@ -368,7 +368,7 @@ inline ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr) {
 
 <h2 id="bridging-header-updates">Bridging header updates</h2>
 
-<p>After you create the union accessor files, you need to update your project&#8217;s bridging header to import the new header file:</p>
+<p>After you create the union accessor files, you need to update your project's bridging header to import the new header file:</p>
 
 <pre class="lang:c decode:true " title="bridging header" >#import &lt;openssl/pkcs7.h&gt;
 #import &lt;openssl/objects.h&gt;
@@ -378,7 +378,7 @@ inline ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr) {
 
 <h1 id="receiptextractor-struct-implementation">ReceiptExtractor struct implementation</h1>
 
-<p>Now it&#8217;s time to dive into the actual implementation of what I&#8217;m calling a <code>ReceiptExtractor</code>. Have a look at the code with some explanatory comments following:</p>
+<p>Now it's time to dive into the actual implementation of what I'm calling a <code>ReceiptExtractor</code>. Have a look at the code with some explanatory comments following:</p>
 
 <pre class="lang:swift decode:true " >struct ReceiptExtractor {
     func extractPKCS7Container(_ receiptData: Data) throws -> UnsafeMutablePointer&lt;PKCS7> {
@@ -404,27 +404,27 @@ inline ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr) {
 
 <h1 id="receiptextractor-struct-explanation">ReceiptExtractor struct explanation</h1>
 
-<p>Most of the code above is a Swift translation of what&#8217;s found at <a href="https://www.objc.io/issues/17-security/receipt-validation/">Objc.io&#8217;s Receipt Validation guide</a>.</p>
+<p>Most of the code above is a Swift translation of what's found at <a href="https://www.objc.io/issues/17-security/receipt-validation/">Objc.io's Receipt Validation guide</a>.</p>
 
 <p>I did a little research over at the OpenSSL site though, and thought it might be helpful for the curious to know what some of these non-intuitive function names stand for and what they do.</p>
 
-<p><code>BIO_new</code> for example. &#8220;BIO&#8221; stands for &#8220;Basic I/O&#8221;. It&#8217;s an abstraction over the underlying basic input and output operations that your app uses for cryptographic operations.</p>
+<p><code>BIO_new</code> for example. &#8220;BIO&#8221; stands for &#8220;Basic I/O&#8221;. It's an abstraction over the underlying basic input and output operations that your app uses for cryptographic operations.</p>
 
-<p>What we&#8217;re doing with <code>BIO_new(BIO_s_mem())</code> is saying that we want a new Basic I/O mechanism that uses <em>memory</em> for its I/O operations.</p>
+<p>What we're doing with <code>BIO_new(BIO_s_mem())</code> is saying that we want a new Basic I/O mechanism that uses <em>memory</em> for its I/O operations.</p>
 
 <p><code>BIO_write</code> takes the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/"><code>receiptData</code> that was located and loaded</a>, and writes the entire length of its bytes to memory (the <code>receiptBIO</code> that was created first).</p>
 
 <p>To get the actual PKCS #7 container, the <code>d2i_PKCS7_bio</code> function is used.</p>
 
-<p>Once we have the container in hand, it&#8217;s a matter of making sure it has contents.</p>
+<p>Once we have the container in hand, it's a matter of making sure it has contents.</p>
 
-<p>I couldn&#8217;t find a lot of information about the call to <code>pkcs7_d_sign</code>, but the primary point of line 13 above is to get a &#8220;numerical identifier&#8221;, which is what &#8220;NID&#8221; stands for in <code>OBJ_obj2nid</code>.</p>
+<p>I couldn't find a lot of information about the call to <code>pkcs7_d_sign</code>, but the primary point of line 13 above is to get a &#8220;numerical identifier&#8221;, which is what &#8220;NID&#8221; stands for in <code>OBJ_obj2nid</code>.</p>
 
 <p>Digging into the PKCS #7 container, you can access the right property and convert it to a numerical identifier that you can check.</p>
 
-<p>As long as the NID returned is equal to the <code>NID_pkcs7_data</code> constant value, things are good. If they&#8217;re not, that means the receipt has no information and validation fails (thus, the guard and throw statement in lines 14-15).</p>
+<p>As long as the NID returned is equal to the <code>NID_pkcs7_data</code> constant value, things are good. If they're not, that means the receipt has no information and validation fails (thus, the guard and throw statement in lines 14-15).</p>
 
-<p>If everything passes the guard, though, the PKCS #7 container is returned, and we&#8217;re ready for the next step of the receipt validation process, which is to verify the signature on the receipt with Apple&#8217;s root certificate. <em>That</em>, however, will happen in another entry to this series.</p>
+<p>If everything passes the guard, though, the PKCS #7 container is returned, and we're ready for the next step of the receipt validation process, which is to verify the signature on the receipt with Apple's root certificate. <em>That</em>, however, will happen in another entry to this series.</p>
 
 <p>Until next time!</p>
 

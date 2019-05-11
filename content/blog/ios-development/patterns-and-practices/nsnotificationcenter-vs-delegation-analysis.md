@@ -16,15 +16,15 @@ tags:
   - Swift
 
 ---
-In [Fundamentals of NSNotificationCenter in Swift][1], a [commenter asked][2] me to elaborate on a response I&#8217;d given to a dialog going on below the blog post. I had stated:
+In [Fundamentals of NSNotificationCenter in Swift][1], a [commenter asked][2] me to elaborate on a response I'd given to a dialog going on below the blog post. I had stated:
 
 > If you need a more structured environment around your [instance]-to-[instance] communication, delegates &#8230; are probably a better choice [than NSNotificationCenter].
 
-I&#8217;ve been thinking for some time since I responded with that comment. What _do_ I mean when I say &#8220;if you need a more structured environment&#8221;&#8230; What does that even look like? Why are delegates a better choice when I need such &#8220;structure&#8221;?
+I've been thinking for some time since I responded with that comment. What _do_ I mean when I say &#8220;if you need a more structured environment&#8221;&#8230; What does that even look like? Why are delegates a better choice when I need such &#8220;structure&#8221;?
 
-### Structured environment? What&#8217;s that?
+### Structured environment? What's that?
 
-&#8220;Structured environment&#8221; may be a bit vague. Here&#8217;s what I was thinking when I wrote it: At the time of the comment, I was imagining what a solution implemented with NSNotificationCenter, and a solution implemented with a delegate look like&#8230;.
+&#8220;Structured environment&#8221; may be a bit vague. Here's what I was thinking when I wrote it: At the time of the comment, I was imagining what a solution implemented with NSNotificationCenter, and a solution implemented with a delegate look like&#8230;.
 
 ### Questions
 
@@ -41,7 +41,7 @@ And then shifting out of the role-playing mentality, stepping back and asking a 
 
 The measurement of a more or less &#8220;structured environment&#8221;, then, would be influenced by the answers to the questions of **expectations**, **perceived control**, **impact**, and **clarity**.
 
-Let&#8217;s explore some of those answers from the perspective of each communication strategy, starting with NSNotificationCenter.
+Let's explore some of those answers from the perspective of each communication strategy, starting with NSNotificationCenter.
 
 ### Answers from the NSNotificationCenter Perspective
 
@@ -52,21 +52,21 @@ Note that Listeners 1 to n may or may not exist. The graphic is assuming that 1+
 
 ##### Expectations
 
-What do I expect to happen? Well, the most reasonable thing I (as a &#8220;notifier instance&#8221;) can expect is for some other &#8220;listener instance&#8221; somewhere to tune in to the notification key I&#8217;m broadcasting. I have no way of knowing what would happen after that. It&#8217;s up to the listener to do something intelligent with the notification that [x event] occurred. I, as a notifier, can expect nothing more.
+What do I expect to happen? Well, the most reasonable thing I (as a &#8220;notifier instance&#8221;) can expect is for some other &#8220;listener instance&#8221; somewhere to tune in to the notification key I'm broadcasting. I have no way of knowing what would happen after that. It's up to the listener to do something intelligent with the notification that [x event] occurred. I, as a notifier, can expect nothing more.
 
 ##### Perceived Control
 
-It appears that I, as a notifier, have no control over the sequence of events that would occur as a result of my broadcast. That&#8217;s by design &#8211; the interaction between me and any listener is weak at best.
+It appears that I, as a notifier, have no control over the sequence of events that would occur as a result of my broadcast. That's by design – the interaction between me and any listener is weak at best.
 
-This can be a fantastic thing! There&#8217;s freedom in saying &#8220;Hey! This happened!&#8221; and then being done. But it&#8217;s also &#8220;less structured&#8221;, as I&#8217;m terming it.
+This can be a fantastic thing! There's freedom in saying &#8220;Hey! This happened!&#8221; and then being done. But it's also &#8220;less structured&#8221;, as I'm terming it.
 
 ##### Impact
 
-The impact on the system as a whole has the potential to be significant. With NSNotificationCenter, it depends on how many listener instances there are and what each of them does in response to the notification. One could design the system to localize the impacts to the context of the listening instance. I&#8217;ve heard of and seen ugly situations that trigger cascading effects that make deciphering the impact of a notification much harder.
+The impact on the system as a whole has the potential to be significant. With NSNotificationCenter, it depends on how many listener instances there are and what each of them does in response to the notification. One could design the system to localize the impacts to the context of the listening instance. I've heard of and seen ugly situations that trigger cascading effects that make deciphering the impact of a notification much harder.
 
 ##### Clarity
 
-We lose a good deal of clarity when heavy usage of NSNotificationCenter occurs in an application. There may be appropriate times to use NSNotificationCenter in your app. Keep in mind that it becomes much more difficult to sort out various interactions when more and more listener instances are responding a notification. Trying to reason about how the system as a whole arrived at its current state isn&#8217;t as easy when NSNotificationCenter enters the picture. Other developers with less knowledge of the app as a whole would suffer from this loss of clarity.
+We lose a good deal of clarity when heavy usage of NSNotificationCenter occurs in an application. There may be appropriate times to use NSNotificationCenter in your app. Keep in mind that it becomes much more difficult to sort out various interactions when more and more listener instances are responding a notification. Trying to reason about how the system as a whole arrived at its current state isn't as easy when NSNotificationCenter enters the picture. Other developers with less knowledge of the app as a whole would suffer from this loss of clarity.
 
 ### Answers from the Delegate Perspective
 
@@ -86,17 +86,17 @@ It would appear that as a delegator, I can control the sequence of events that n
 
 ##### Impact
 
-The impact on the system as a whole still has the potential to be significant. Since there&#8217;s one-to-one communication going on between a delegator and its delegate, the determining factor on how broad the impact is tends to lean on the design of the system as a whole. Design patterns that minimize or eliminate global state reduce this potentially broad impact.
+The impact on the system as a whole still has the potential to be significant. Since there's one-to-one communication going on between a delegator and its delegate, the determining factor on how broad the impact is tends to lean on the design of the system as a whole. Design patterns that minimize or eliminate global state reduce this potentially broad impact.
 
-One advantage that the delegation pattern has is that the delegate conforms to a protocol and a protocol, along with its specified methods, have _names_. However small that knowledge is, it could give us clues about what impact of executing the delegate&#8217;s methods might have on the system.
+One advantage that the delegation pattern has is that the delegate conforms to a protocol and a protocol, along with its specified methods, have _names_. However small that knowledge is, it could give us clues about what impact of executing the delegate's methods might have on the system.
 
 ##### Clarity
 
-With the advantage of dealing with intelligently named protocols and clearly outlined method names, the delegation strategy would win the battle of clarity in my opinion. I can look at the delegator instance and say, &#8220;When execution of this instance&#8217;s logic gets to this point, reliance on the delegate kicks in and [x, y, and z] happens. I can jump over to the delegate&#8217;s implementation and say, &#8220;[x] does this, [y] does that, and [z] does this other thing.&#8221; Other developers with less knowledge of the app as a whole would enjoy this added clarity quite readily.
+With the advantage of dealing with intelligently named protocols and clearly outlined method names, the delegation strategy would win the battle of clarity in my opinion. I can look at the delegator instance and say, &#8220;When execution of this instance's logic gets to this point, reliance on the delegate kicks in and [x, y, and z] happens. I can jump over to the delegate's implementation and say, &#8220;[x] does this, [y] does that, and [z] does this other thing.&#8221; Other developers with less knowledge of the app as a whole would enjoy this added clarity quite readily.
 
 ### In Summary
 
-Here, I&#8217;ve analyzed NSNotificationCenter, side by side with the delegation pattern, by imagining myself in the role of each instance (notifier, listener | delegator, delegate). I assessed each strategy in terms of expectations, perceived control, impact, and clarity, attempting to shed light on what it means for an environment to be &#8220;more structured&#8221; or &#8220;less structured&#8221;. My hope was to shed light on my use of the term &#8220;structured environment&#8221;, and to share my thoughts on some of the implications of using each strategy.
+Here, I've analyzed NSNotificationCenter, side by side with the delegation pattern, by imagining myself in the role of each instance (notifier, listener | delegator, delegate). I assessed each strategy in terms of expectations, perceived control, impact, and clarity, attempting to shed light on what it means for an environment to be &#8220;more structured&#8221; or &#8220;less structured&#8221;. My hope was to shed light on my use of the term &#8220;structured environment&#8221;, and to share my thoughts on some of the implications of using each strategy.
 
 <a name="related" class="jump-target"></a>
 

@@ -15,73 +15,22 @@ tags:
   - UIRefreshControl
 
 ---
-<small>Updated on September 21, 2016 &#8211; Swift 3.0</small>
+<small>Updated on September 21, 2016 – Swift 3.0</small>
 
 Implementing &#8220;pull to refresh&#8221; is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:
 
-  1. They&#8217;re working with a UITableViewController
-  2. They&#8217;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it
+  1. They're working with a UITableViewController
+  2. They're working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it
 
 This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app.
-
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#example-scenario">Example scenario</a>
-    </li>
-    <li>
-      <a href="#table-view-controller">Implementing with UITableViewController</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#tvc-example-setup">Finish example setup</a>
-      </li>
-      <li>
-        <a href="#enable-refresh-storyboard">Enable refreshing in Storyboard</a>
-      </li>
-      <li>
-        <a href="#override-viewdidload">Override viewDidLoad()</a>
-      </li>
-      <li>
-        <a href="#tvc-handle-refresh-function">Implement handleRefresh function</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#regular-view-controller">Implementing with regular view controller + UITableView</a>
-    </li>
-    <ul>
-      <li>
-        <a href="#reg-tv-example-setup">Finish example setup</a>
-      </li>
-      <li>
-        <a href="#setup-refresh-control">Set up UIRefreshControl</a>
-      </li>
-      <li>
-        <a href="#regvc-override-viewdidload">Override viewDidLoad()</a>
-      </li>
-      <li>
-        <a href="#regvc-handle-refresh-function">Implement handleRefresh function</a>
-      </li>
-    </ul>
-    
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
 
 <a name="example-scenario" class="jump-target"></a>
 
 ### Example scenario
 
-For this guide, suppose that we have a list of movies that we&#8217;d like to display in a table view. Pulling to refresh will fetch more movies and update the table view to show the new ones.
+For this guide, suppose that we have a list of movies that we'd like to display in a table view. Pulling to refresh will fetch more movies and update the table view to show the new ones.
 
-If you&#8217;re the type that likes to simply dive into a working example, both implementations are available to download from GitHub:
+If you're the type that likes to simply dive into a working example, both implementations are available to download from GitHub:
 
 <div class="resources">
   <div class="resources-header">
@@ -121,7 +70,7 @@ Initial data source values:
     Movie(title: "Star Wars", genre: "Sci-fi")
 ]</pre>
 
-Setting up the table view&#8217;s data source protocol methods depends on whether you&#8217;re using a [UITableViewController][1] or a [regular UIViewController][2] with a table view as one of its content views, so we&#8217;ll cover those in the individual examples.
+Setting up the table view's data source protocol methods depends on whether you're using a [UITableViewController][1] or a [regular UIViewController][2] with a table view as one of its content views, so we'll cover those in the individual examples.
 
 <a name="table-view-controller" class="jump-target"></a>
 
@@ -131,7 +80,7 @@ Setting up the table view&#8217;s data source protocol methods depends on whethe
 
 #### Finish example setup
 
-When working with a `UITableViewController`, we simply override the data source method implementations. The following is how I&#8217;ve chosen to do it for this example:
+When working with a `UITableViewController`, we simply override the data source method implementations. The following is how I've chosen to do it for this example:
 
 <pre class="lang:swift decode:true " title="UITableView data source methods" >override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return movies.count
@@ -150,7 +99,7 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
 
 #### Enable refreshing in Storyboard
 
-When you&#8217;re working with a `UITableViewController`, the solution is fairly simple: First, Select the table view controller in your storyboard, open the attributes inspector, and enable refreshing:
+When you're working with a `UITableViewController`, the solution is fairly simple: First, Select the table view controller in your storyboard, open the attributes inspector, and enable refreshing:
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-1024x740.png" alt="Table View Controller - Enable Refreshing" width="1024" height="740" class="alignnone size-large wp-image-11511" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-1024x740.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-300x217.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing.png 1083w" sizes="(max-width: 1024px) 100vw, 1024px" />][3]
 
@@ -171,8 +120,8 @@ In your override of `viewDidLoad()`, add a target to handle the refresh as follo
 
 Here are a couple of things to observe about the code above:
 
-  1. Swift&#8217;s new #selector feature helps with specifying which action will handle the refresh. Since I&#8217;ve specified `ViewController.handleRefresh(_:)` (note the underscore and the colon!) as the action argument, I need to define a function in this `UITableViewController` class with the same name. Additionally, the function should take one argument.
-  2. We&#8217;d like this action to be called for the `UIControlEvent` called `ValueChanged`.
+  1. Swift's new #selector feature helps with specifying which action will handle the refresh. Since I've specified `ViewController.handleRefresh(_:)` (note the underscore and the colon!) as the action argument, I need to define a function in this `UITableViewController` class with the same name. Additionally, the function should take one argument.
+  2. We'd like this action to be called for the `UIControlEvent` called `ValueChanged`.
 
 <a name="tvc-handle-refresh-function" class="jump-target"></a>
 
@@ -194,7 +143,7 @@ The `handleRefresh:` function may look something like the following:
     refreshControl.endRefreshing()
 }</pre>
 
-That should complete the pull to refresh implementation when you&#8217;re working with a `UITableViewController`!
+That should complete the pull to refresh implementation when you're working with a `UITableViewController`!
 
 <a name="regular-view-controller" class="jump-target"></a>
 
@@ -207,12 +156,12 @@ That should complete the pull to refresh implementation when you&#8217;re workin
 When working with a _regular_ `UIViewController`, there are a few extra steps involved in getting things set up:
 
   1. Create an IBOutlet from the storyboard to the view controller
-  2. Wire up the table view&#8217;s data source and delegate from the storyboard
+  2. Wire up the table view's data source and delegate from the storyboard
   3. Implement the [required table view data source methods][4]
 
 Creating the IBOutlet is a matter of control+clicking and dragging from the table view in the Storyboard to the view controller code to create the outlet.
 
-To wire up the table view&#8217;s data source and delegate in the Storyboard, control+click the table view and drag up to the yellow view controller icon:
+To wire up the table view's data source and delegate in the Storyboard, control+click the table view and drag up to the yellow view controller icon:
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png" alt="Wire up table view&#039;s data source and delegate" width="789" height="746" class="alignnone size-full wp-image-11681" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png 789w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource-300x284.png 300w" sizes="(max-width: 789px) 100vw, 789px" />][5]
 
@@ -235,7 +184,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 
 #### Set up UIRefreshControl
 
-Whereas a `UITableViewController` comes pre-fit with a `UIRefreshControl`, a regular `UIViewController` does not. It&#8217;s simple enough to set one up though. Here is a snippet defining a lazily instantiated variable which creates and configures a `UIRefreshControl`:
+Whereas a `UITableViewController` comes pre-fit with a `UIRefreshControl`, a regular `UIViewController` does not. It's simple enough to set one up though. Here is a snippet defining a lazily instantiated variable which creates and configures a `UIRefreshControl`:
 
 <pre class="lang:swift decode:true mark:3" title="Set up UIRefreshControl" >lazy var refreshControl: UIRefreshControl = {
     let refreshControl = UIRefreshControl()
@@ -246,11 +195,11 @@ Whereas a `UITableViewController` comes pre-fit with a `UIRefreshControl`, a reg
 
 The most complicated thing about the code I just proposed is how the `UIRefreshControl` instance is assigned lazily by means of the closure expression denoted by `= { // ...closure body with setup code... }()` in the above snippet. Using this approach allows me to complete the setup all in one spot without the use of optionals. You may prefer doing this another way. The bottom line goal is to have a `UIRefreshControl` instance that we can add to the table view (coming up).
 
-As for the body of the closure expression, we&#8217;re adding a target-action to the `UIRefreshControl` instance, [just like we did when we were dealing with a UITableViewController][6].
+As for the body of the closure expression, we're adding a target-action to the `UIRefreshControl` instance, [just like we did when we were dealing with a UITableViewController][6].
 
 As with the `UITableViewController` example, note:  
-1. Since I&#8217;ve specified &#8220;handleRefresh:&#8221; (note the colon!) as the action argument, I need to define a function in this `UITableViewController` class with the same name. Additionally, the function should take one argument.  
-2. We&#8217;d like this action to be called for the `UIControlEvent` called `ValueChanged`.
+1. Since I've specified &#8220;handleRefresh:&#8221; (note the colon!) as the action argument, I need to define a function in this `UITableViewController` class with the same name. Additionally, the function should take one argument.  
+2. We'd like this action to be called for the `UIControlEvent` called `ValueChanged`.
 
 <a name="regvc-override-viewdidload" class="jump-target"></a>
 
@@ -287,7 +236,7 @@ The `handleRefresh` function is implemented exactly as it was when we were deali
 
 ### Wrapping up
 
-Implementing &#8220;pull to refresh&#8221; is a common need that arises when working with table views. Here we&#8217;ve explored how to implement this feature using both a `UITableViewController` _and_ with a regular view controller and a table view.
+Implementing &#8220;pull to refresh&#8221; is a common need that arises when working with table views. Here we've explored how to implement this feature using both a `UITableViewController` _and_ with a regular view controller and a table view.
 
 <a name="share" class="jump-target"></a>
 

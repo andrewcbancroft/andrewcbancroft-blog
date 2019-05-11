@@ -15,7 +15,7 @@ tags:
   - Troubleshooting
 
 ---
-As part of a ASP.Net Web API service that I&#8217;m co-developing, I have gotten familiar with the <a title="DotNetZip Codeplex Page" href="http://dotnetzip.codeplex.com/" target="_blank">DotNetZip Library</a>.&nbsp; It&#8217;s fantastic.&nbsp; We&#8217;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.
+As part of a ASP.Net Web API service that I'm co-developing, I have gotten familiar with the <a title="DotNetZip Codeplex Page" href="http://dotnetzip.codeplex.com/" target="_blank">DotNetZip Library</a>.&nbsp; It's fantastic.&nbsp; We're using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.
 
 During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.
 
@@ -35,7 +35,7 @@ HttpContext.Current.Response.ContentType = &#8220;application/octet-stream&#8221
 
 A zip archive would download as normal, but as things were wrapping up, Safari would try to decompress the file and it would fail.
 
-Error from Safari&#8217;s download manager area:
+Error from Safari's download manager area:
 
 [<img class="alignnone size-medium wp-image-585" style="src=&quot;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed-300x43.png&quot;" width="300" height="43" />][1]
 
@@ -51,7 +51,7 @@ Creation of .cpgz file:
 
 Needless to say, the solution to this problem, though somewhat mysterious, was quite simple for me.
 
-In my ASP.Net code, I was writing the zip file to the Response OutputStream.&nbsp; I had added a content type of &#8220;application/zip&#8221; to the response.&nbsp; This is what was breaking the zip files on a Mac.&nbsp; Buried <a title="DotNetZip Library Forum" href="http://dotnetzip.codeplex.com/discussions/59740" target="_blank">in the DotNetZip Library&#8217;s forum was a post</a> recommending changing the content type to &#8220;application/octet-stream&#8221; instead.&nbsp; That single changed fixed the issue for standard zip files!
+In my ASP.Net code, I was writing the zip file to the Response OutputStream.&nbsp; I had added a content type of &#8220;application/zip&#8221; to the response.&nbsp; This is what was breaking the zip files on a Mac.&nbsp; Buried <a title="DotNetZip Library Forum" href="http://dotnetzip.codeplex.com/discussions/59740" target="_blank">in the DotNetZip Library's forum was a post</a> recommending changing the content type to &#8220;application/octet-stream&#8221; instead.&nbsp; That single changed fixed the issue for standard zip files!
 
 ## Solution Details:
 

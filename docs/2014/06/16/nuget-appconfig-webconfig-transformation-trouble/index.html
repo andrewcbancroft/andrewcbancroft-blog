@@ -25,7 +25,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="NuGet app.config / web.config Transformation Trouble" />
-<meta property="og:description" content="I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file. Try as I may, I couldn&#8217;t get NuGet to apply the transforms to my project&#8217;s web.config file even though I was following NuGet documentation&#8217;s instructions to a tee.
+<meta property="og:description" content="I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file. Try as I may, I couldn't get NuGet to apply the transforms to my project's web.config file even though I was following NuGet documentation's instructions to a tee.
 It turns out that my problem was related to about 3 things all working together in tandem to defeat me:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2014/06/16/nuget-appconfig-webconfig-transformation-trouble/" />
@@ -34,7 +34,7 @@ It turns out that my problem was related to about 3 things all working together 
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="NuGet app.config / web.config Transformation Trouble"/>
-<meta name="twitter:description" content="I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file. Try as I may, I couldn&#8217;t get NuGet to apply the transforms to my project&#8217;s web.config file even though I was following NuGet documentation&#8217;s instructions to a tee.
+<meta name="twitter:description" content="I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file. Try as I may, I couldn't get NuGet to apply the transforms to my project's web.config file even though I was following NuGet documentation's instructions to a tee.
 It turns out that my problem was related to about 3 things all working together in tandem to defeat me:"/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
@@ -166,13 +166,13 @@ MathJax.Hub.Config({
 
     
 
-<p>I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file.  Try as I may, I couldn&#8217;t get NuGet to apply the transforms to my project&#8217;s web.config file even though I was following <a title="NuGet Configuration File and Source Code Transformations Documentation" href="http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations" target="_blank">NuGet documentation&#8217;s</a> instructions to a tee.</p>
+<p>I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file.  Try as I may, I couldn't get NuGet to apply the transforms to my project's web.config file even though I was following <a title="NuGet Configuration File and Source Code Transformations Documentation" href="http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations" target="_blank">NuGet documentation's</a> instructions to a tee.</p>
 
 <p>It turns out that my problem was related to about 3 things all working together in tandem to defeat me:</p>
 
-<p><strong>First</strong>, the project I was testing the installation of this NuGet package on was already checked into source control (TFS).  To test out the package, I would install it and when things didn&#8217;t work how I wanted, I&#8217;d just &#8220;undo pending changes&#8221; to get everything back to the last stable state.  Or so I thought (more on this in a moment)&#8230;</p>
+<p><strong>First</strong>, the project I was testing the installation of this NuGet package on was already checked into source control (TFS).  To test out the package, I would install it and when things didn't work how I wanted, I'd just &#8220;undo pending changes&#8221; to get everything back to the last stable state.  Or so I thought (more on this in a moment)&#8230;</p>
 
-<p><strong>Second</strong>, I had the idea to add app.config.transform and web.config.transform files to my NuGet package Content folder <em>after</em> I&#8217;d already installed &#8220;version 1&#8221; of the package in my project, and rather than bump the version of the package with the transforms in it <em>up</em>, I left it the same because I was still technically editing and troubleshooting the first version of the package (in my mind anyways).</p>
+<p><strong>Second</strong>, I had the idea to add app.config.transform and web.config.transform files to my NuGet package Content folder <em>after</em> I'd already installed &#8220;version 1&#8221; of the package in my project, and rather than bump the version of the package with the transforms in it <em>up</em>, I left it the same because I was still technically editing and troubleshooting the first version of the package (in my mind anyways).</p>
 
 <p><strong>Third</strong>, my solution was configured for &#8220;NuGet Package Restore&#8221;:</p>
 
@@ -180,9 +180,9 @@ MathJax.Hub.Config({
 
 <h4 id="so-what-was-going-on">So what was going on?</h4>
 
-<p>Choosing &#8220;Enable NuGet Package Restore&#8221; keeps your NuGet packages folder contents from being checked into source control by adding a NuGet config file with a setting disabling source control integration.  We&#8217;d rather just let NuGet restore them if they&#8217;re missing when we build, rather than check in the packages folder to source control.</p>
+<p>Choosing &#8220;Enable NuGet Package Restore&#8221; keeps your NuGet packages folder contents from being checked into source control by adding a NuGet config file with a setting disabling source control integration.  We'd rather just let NuGet restore them if they're missing when we build, rather than check in the packages folder to source control.</p>
 
-<p>What this meant for me, however, is that all my &#8220;undo pending changes&#8221; actions were doing absolutely nothing to undo the installation of the NuGet package I was developing and troubleshooting.  My troubleshooting workflow of [Install package -&gt; Check web.config -&gt; :[ <em>Still</em> missing connection strings -&gt; Undo pending changes -&gt; Fiddle with NuGet Package -&gt; Rinse and repeat] could have been infinite, because the &#8220;undo pending changes&#8221; step wasn&#8217;t undoing the NuGet package installation, because _the NuGet package files weren&#8217;t part of the pending change set _due to my &#8220;Enable NuGet Package Restore&#8221; setting.  The NuGet package was still in the packages folder on my hard disk, which had another hidden consequence: each subsequent &#8220;installation&#8221; of the NuGet package effectively did nothing because it was already there.  Remember, I didn&#8217;t bump the version number of the package, so I&#8217;m guessing NuGet already saw the files there and just updated the config file and called it good.  None of the updates I was making to the package were ever updated.</p>
+<p>What this meant for me, however, is that all my &#8220;undo pending changes&#8221; actions were doing absolutely nothing to undo the installation of the NuGet package I was developing and troubleshooting.  My troubleshooting workflow of [Install package -&gt; Check web.config -&gt; :[ <em>Still</em> missing connection strings -&gt; Undo pending changes -&gt; Fiddle with NuGet Package -&gt; Rinse and repeat] could have been infinite, because the &#8220;undo pending changes&#8221; step wasn't undoing the NuGet package installation, because _the NuGet package files weren't part of the pending change set _due to my &#8220;Enable NuGet Package Restore&#8221; setting.  The NuGet package was still in the packages folder on my hard disk, which had another hidden consequence: each subsequent &#8220;installation&#8221; of the NuGet package effectively did nothing because it was already there.  Remember, I didn't bump the version number of the package, so I'm guessing NuGet already saw the files there and just updated the config file and called it good.  None of the updates I was making to the package were ever updated.</p>
 
 <h4 id="solution">Solution?</h4>
 
@@ -197,7 +197,7 @@ Next, I navigated to my solution folder by right-clicking my solution and choosi
 
 <p>Finally, I deleted the folder for the package I was developing.</p>
 
-<p>After these steps were performed, installing the NuGet package again worked perfectly &#8211; the config transforms were applied and life was good.</p>
+<p>After these steps were performed, installing the NuGet package again worked perfectly – the config transforms were applied and life was good.</p>
 
 <p>Alternatively, I suppose I could have upped the version number of my package and things would have been fine as well.  But I always tend to make things more complicated than they need to be. :]</p>
 

@@ -15,9 +15,9 @@ tags:
   - Swift
 
 ---
-It&#8217;s the simple things that get us, isn&#8217;t it?
+It's the simple things that get us, isn't it?
 
-I was working on a simple little framework the other day, and I&#8217;d gotten things just how I wanted&#8230; or so I thought.
+I was working on a simple little framework the other day, and I'd gotten things just how I wanted&#8230; or so I thought.
 
 I was ready to test things out and import the framework into my real app.
 
@@ -29,16 +29,16 @@ Sweet! No build errors!
 
 Not so sweet&#8230;
 
-> Use of unresolved identifier &#8216;&#8230;&#8217;
+> Use of unresolved identifier &#8216;&#8230;'
 > 
-> Value of type &#8216;&#8230;&#8217; has no member &#8216;&#8230;&#8217; 
+> Value of type &#8216;&#8230;' has no member &#8216;&#8230;' 
 
 I scrunched my forehead, puzzled, and immediately it came to me.
 
 `public` `public` `public` all the things! Or at least, the things that others need to use from the framework. :]
 
-_Of course_ a framework&#8217;s usable API needs to be public, but I write far more code that doesn&#8217;t require thought of access control modifiers than code that _does_, so there&#8217;s always that initial head-scratching that happens when you&#8217;re to the point of testing and go, &#8220;WHAT?? Why is this not working??!&#8221;
+_Of course_ a framework's usable API needs to be public, but I write far more code that doesn't require thought of access control modifiers than code that _does_, so there's always that initial head-scratching that happens when you're to the point of testing and go, &#8220;WHAT?? Why is this not working??!&#8221;
 
 #### Key Takeaway
 
-Whenever you&#8217;re developing code (such as a framework) that&#8217;s intended to be used from the perspective of another Swift module, you need to include `public` before Types and functions that are intended to be &#8220;seen&#8221; and called from that other module. Otherwise, you&#8217;ll get those same fun compiler errors and join me in saying to yourself, &#8220;Doh! Yep&#8230; public&#8230; _again_.&#8221;
+Whenever you're developing code (such as a framework) that's intended to be used from the perspective of another Swift module, you need to include `public` before Types and functions that are intended to be &#8220;seen&#8221; and called from that other module. Otherwise, you'll get those same fun compiler errors and join me in saying to yourself, &#8220;Doh! Yep&#8230; public&#8230; _again_.&#8221;

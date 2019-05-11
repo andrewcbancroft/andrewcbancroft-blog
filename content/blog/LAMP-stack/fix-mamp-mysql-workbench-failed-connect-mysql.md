@@ -18,7 +18,7 @@ tags:
 ---
 Installing [MAMP][1] was easy. I did, however, spend at least 45 minutes trying to get MySQL Workbench to connect to my local MySQL database server. The solution was simple, but getting there led me around the Internet and back with little help. Hopefully this signpost will help others having connection issues with MySQL Workbench to MAMP MySQL servers as well.
 
-Once MAMP is installed and the MySQL server has started, you&#8217;ll be taken to a start screen that looks something like this:  
+Once MAMP is installed and the MySQL server has started, you'll be taken to a start screen that looks something like this:  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen.png" alt="MAMP Start Screen Port Number" width="601" height="411" class="alignnone size-full wp-image-11187" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen.png 601w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen-300x205.png 300w" sizes="(max-width: 601px) 100vw, 601px" />][2]
 
 **The information presented there is misleading.** The start page instructs you to use port 3306. So I did:  

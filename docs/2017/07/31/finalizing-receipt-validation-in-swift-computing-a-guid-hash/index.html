@@ -25,9 +25,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Finalizing Receipt Validation in Swift – Computing a GUID Hash" />
-<meta property="og:description" content="The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that&#8217;s stored within your receipt itself.
-This is a continuation of my receipt validation series. I&#8217;m assuming that&#8230;
- You&#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect. You&#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt." />
+<meta property="og:description" content="The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that's stored within your receipt itself.
+This is a continuation of my receipt validation series. I'm assuming that&#8230;
+ You've prepared to test receipt validation by setting up your app in iTunes Connect. You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" />
 <meta property="article:published_time" content="2017-07-31T12:36:26&#43;00:00"/>
@@ -35,9 +35,9 @@ This is a continuation of my receipt validation series. I&#8217;m assuming that&
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Finalizing Receipt Validation in Swift – Computing a GUID Hash"/>
-<meta name="twitter:description" content="The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that&#8217;s stored within your receipt itself.
-This is a continuation of my receipt validation series. I&#8217;m assuming that&#8230;
- You&#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect. You&#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt."/>
+<meta name="twitter:description" content="The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that's stored within your receipt itself.
+This is a continuation of my receipt validation series. I'm assuming that&#8230;
+ You've prepared to test receipt validation by setting up your app in iTunes Connect. You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -168,20 +168,20 @@ MathJax.Hub.Config({
 
     
 
-<p>The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that&#8217;s stored within your receipt itself.</p>
+<p>The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that's stored within your receipt itself.</p>
 
-<p>This is a continuation of my receipt validation series. I&#8217;m assuming that&#8230;</p>
+<p>This is a continuation of my receipt validation series. I'm assuming that&#8230;</p>
 
 <ul>
-<li>You&#8217;ve <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</li>
-<li>You&#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you&#8217;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &#8220;easy way&#8221; with CocoaPods</a>.</li>
-<li>You&#8217;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</li>
-<li>You&#8217;ve <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/">extracted the PKCS #7 container</a>.</li>
-<li>You&#8217;ve <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/">verified the signature on the receipt</a></li>
-<li>You&#8217;ve <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/">parsed and decoded the receipt payload</a></li>
+<li>You've <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</li>
+<li>You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &#8220;easy way&#8221; with CocoaPods</a>.</li>
+<li>You've <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</li>
+<li>You've <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/">extracted the PKCS #7 container</a>.</li>
+<li>You've <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/">verified the signature on the receipt</a></li>
+<li>You've <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/">parsed and decoded the receipt payload</a></li>
 </ul>
 
-<p>After finishing this guide, you&#8217;ll simply need to use the parsed receipt data to perform any app-specific enabling/disabling of features based on the data within a valid receipt. If the receipt is <em>invalid</em>, you&#8217;ll need to handle that as well. But all of the relatively difficult work of working with the Open SSL crypto library will be DONE after this guide.</p>
+<p>After finishing this guide, you'll simply need to use the parsed receipt data to perform any app-specific enabling/disabling of features based on the data within a valid receipt. If the receipt is <em>invalid</em>, you'll need to handle that as well. But all of the relatively difficult work of working with the Open SSL crypto library will be DONE after this guide.</p>
 
 <p>Just want the code? Here you go!</p>
 
@@ -198,7 +198,7 @@ MathJax.Hub.Config({
   </ul>
 </div></p>
 
-<p>Ready? Let&#8217;s do this thing!</p>
+<p>Ready? Let's do this thing!</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -243,13 +243,13 @@ MathJax.Hub.Config({
 
 <h1 id="validating-the-device-guid-hash-with-receiptvalidator">Validating the device GUID hash with ReceiptValidator</h1>
 
-<p>For this final step, I&#8217;ve imagined a single additional function within the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation"><code>ReceiptValidator</code> struct</a> called <code>validateHash(receipt:)</code>.</p>
+<p>For this final step, I've imagined a single additional function within the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation"><code>ReceiptValidator</code> struct</a> called <code>validateHash(receipt:)</code>.</p>
 
-<p>It&#8217;ll take in a <code>ParsedReceipt</code> (<a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/#final-goal">review what it looks like</a>), and will to the computation and comparison necessary to verify that the computed hash matches the hash stored in the receipt.</p>
+<p>It'll take in a <code>ParsedReceipt</code> (<a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/#final-goal">review what it looks like</a>), and will to the computation and comparison necessary to verify that the computed hash matches the hash stored in the receipt.</p>
 
 <p>A <code>ReceiptValidationError</code> will be thrown if things go wrong within this function. No <code>ReceiptValidationError</code> being thrown indicates a successful hash computation and comparison.</p>
 
-<p>Here&#8217;s the skeleton of the function:</p>
+<p>Here's the skeleton of the function:</p>
 
 <pre class="lang:swift decode:true " title="validateHash Skeleton" >fileprivate func validateHash(receipt: ParsedReceipt) throws {
     // Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison
@@ -263,7 +263,7 @@ MathJax.Hub.Config({
 
 <h1 id="signaling-hash-validation-failure">Signaling hash validation failure</h1>
 
-<p>Before I get into the implementation of the <code>validateHash(receipt:)</code> function, let&#8217;s define one more <code>ReceiptValidationError</code> case to describe a bad hash comparison outcome:</p>
+<p>Before I get into the implementation of the <code>validateHash(receipt:)</code> function, let's define one more <code>ReceiptValidationError</code> case to describe a bad hash comparison outcome:</p>
 
 <pre class="lang:swift mark:9 decode:true " title="ReceiptValidationError" >enum ReceiptValidationError : Error {
     case couldNotFindReceipt
@@ -280,7 +280,7 @@ MathJax.Hub.Config({
 
 <h1 id="implementing-validatehash-function">Implementing validateHash function</h1>
 
-<p>I&#8217;ll put the code in front of you, and then do my best to explain my thought process.</p>
+<p>I'll put the code in front of you, and then do my best to explain my thought process.</p>
 
 <pre class="lang:swift decode:true " title="validateHash" >fileprivate func validateHash(receipt: ParsedReceipt) throws {
     // Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison
@@ -319,20 +319,20 @@ MathJax.Hub.Config({
 
 <h2 id="walking-through-validatehash">Walking through validateHash</h2>
 
-<p>First up, I&#8217;ve placed three guard statements:</p>
+<p>First up, I've placed three guard statements:</p>
 
 <pre class="lang:swift decode:true " title="Guards" >guard let receiptOpaqueValueData = receipt.opaqueValue else { throw ReceiptValidationError.incorrectHash }
 guard let receiptBundleIdData = receipt.bundleIdData else { throw ReceiptValidationError.incorrectHash }
 guard let receiptHashData = receipt.sha1Hash else { throw ReceiptValidationError.incorrectHash }</pre>
 
-<p>These help guarantee that the rest of the function will have all of the required pieces of data that it needs to fully compute a hash and compare it with what&#8217;s in the receipt.</p>
+<p>These help guarantee that the rest of the function will have all of the required pieces of data that it needs to fully compute a hash and compare it with what's in the receipt.</p>
 
 <p>The hash for your app is computed with the following three pieces of information:<br />
-1) The app purchaser&#8217;s device identifier<br />
+1) The app purchaser's device identifier<br />
 2) A piece of &#8220;opaque data&#8221; found within the receipt<br />
-3) Your app&#8217;s bundle identifier found within the receipt</p>
+3) Your app's bundle identifier found within the receipt</p>
 
-<p>The app purchaser&#8217;s device identifier is represented as a <code>uuid_t</code> from the Foundation library. However, to use it with the Open SSL library, we&#8217;ll need to be working with an <code>NSData</code> instance. The following code goes from the <code>uuid_t</code> instance, to a raw pointer, to an <code>NSData</code> instance:</p>
+<p>The app purchaser's device identifier is represented as a <code>uuid_t</code> from the Foundation library. However, to use it with the Open SSL library, we'll need to be working with an <code>NSData</code> instance. The following code goes from the <code>uuid_t</code> instance, to a raw pointer, to an <code>NSData</code> instance:</p>
 
 <pre class="lang:swift decode:true " title="Explaining device ID uuid_t to NSData conversion" >var deviceIdentifier = UIDevice.current.identifierForVendor?.uuid
 
@@ -347,13 +347,13 @@ let deviceIdentifierData = NSData(bytes: rawDeviceIdentifierPointer, length: 16)
 
 <p>The hash is a SHA1 hash, so what we do here is initialize a SHA1 context, and then update it with all of the ingredients (device identifier, opaque data, and bundle identifier). The hash is finalized, and converted to an instance of <code>NSData</code>.</p>
 
-<p>The final guard takes the <code>computedHashData</code> instance, and compares it to the receipt&#8217;s hash data. If it&#8217;s identical, validation passes! Otherwise, <code>ReceiptValidationError.incorrectHash</code> is thrown.</p>
+<p>The final guard takes the <code>computedHashData</code> instance, and compares it to the receipt's hash data. If it's identical, validation passes! Otherwise, <code>ReceiptValidationError.incorrectHash</code> is thrown.</p>
 
 <p><a name="final-receipt-validator" class="jump-target"></a></p>
 
 <h1 id="final-receiptvalidator">Final ReceiptValidator</h1>
 
-<p>Let&#8217;s put it all together into the final <code>ReceiptValidator</code> struct. Additions are highlighted below:</p>
+<p>Let's put it all together into the final <code>ReceiptValidator</code> struct. Additions are highlighted below:</p>
 
 <pre class="lang:swift decode:true mark:16,24-55" title="Final ReceiptValidator" >struct ReceiptValidator {
     let receiptLoader = ReceiptLoader()
@@ -418,24 +418,24 @@ let deviceIdentifierData = NSData(bytes: rawDeviceIdentifierPointer, length: 16)
 
 <p>So what now?</p>
 
-<p>Well, at this stage, if no errors have been thrown, you&#8217;ve got a valid receipt.</p>
+<p>Well, at this stage, if no errors have been thrown, you've got a valid receipt.</p>
 
 <p>The <code>validateReceipt</code> function returns an instance of <code>ParsedReceipt</code> so that you can inspect individual Swift-Typed values from the receipt payload to determine what features you should enable or disable, depending on what your needs are.</p>
 
-<p>If a <code>ReceiptValidationError</code> is thrown at any point along the way, you&#8217;ll need to handle them.<br />
+<p>If a <code>ReceiptValidationError</code> is thrown at any point along the way, you'll need to handle them.<br />
 Here are a few ideas:</p>
 
 <ul>
-<li>Implement a grace period, just in case the receipt validation failure occurred for a reason that the user can&#8217;t control (e.g. maybe we couldn&#8217;t locate the receipt, and requesting a new one failed because Apple was having issues&#8230;)</li>
+<li>Implement a grace period, just in case the receipt validation failure occurred for a reason that the user can't control (e.g. maybe we couldn't locate the receipt, and requesting a new one failed because Apple was having issues&#8230;)</li>
 <li>Disable a feature in your app because receipt validation failed too many times</li>
-<li>Maybe you just need to use the data within the <code>ParsedReceipt</code> because you&#8217;re changing the way you monetize your app. Now, instead of making users pay $0.99 for the app, you&#8217;re going to give it away for free, but let people buy an in-app purchase to enable &#8220;pro&#8221; features, or remove ads&#8230;whatever. In this case, you may check the <code>ParsedReceipt</code> to see the original version of the app that your user downloaded. Maybe you want to require users who download your app after version 2.0 to buy an in-app purchase for [Feature X], but you want to give it to everyone who already <em>has</em> the app since they may have already paid $0.99 for it, and it&#8217;d make them feel ripped off if they had to buy the in-app purchase.</li>
+<li>Maybe you just need to use the data within the <code>ParsedReceipt</code> because you're changing the way you monetize your app. Now, instead of making users pay $0.99 for the app, you're going to give it away for free, but let people buy an in-app purchase to enable &#8220;pro&#8221; features, or remove ads&#8230;whatever. In this case, you may check the <code>ParsedReceipt</code> to see the original version of the app that your user downloaded. Maybe you want to require users who download your app after version 2.0 to buy an in-app purchase for [Feature X], but you want to give it to everyone who already <em>has</em> the app since they may have already paid $0.99 for it, and it'd make them feel ripped off if they had to buy the in-app purchase.</li>
 </ul>
 
 <p>How you handle the parsed receipt data or a receipt validation error is really customizable and specific to your particular app.</p>
 
 <p>The bottom line is that from this point on, you no longer need Open SSL or any additional cryptic, low-level, unsafe pointer-type stuff to finish things out.</p>
 
-<p>I hope this series has been helpful in setting you up to validate receipts locally on a user&#8217;s device!</p>
+<p>I hope this series has been helpful in setting you up to validate receipts locally on a user's device!</p>
 
 <p><a name="related" class="jump-target"></a></p>
 

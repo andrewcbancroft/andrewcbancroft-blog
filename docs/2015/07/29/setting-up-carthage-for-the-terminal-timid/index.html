@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Setting Up Carthage for the Terminal-Timid" />
-<meta property="og:description" content="The old adage &#8220;Don&#8217;t go reinventing the wheel&#8221; comes into play often when developing software, doesn&#8217;t it? Why build this [thing] ourselves when someone else has invented it already?
-Fantastic libraries and frameworks exist out there to assist developers with common and sometimes even difficult problems. Whether it be an easier-to-use abstraction over the networking stack with AFNetworking or AlamoFire, or adding a popular behavior-driven development testing framework like Quick to our workflow, we find ourselves constantly wanting to be able to take advantage of the things that others are doing in the community so we don&#8217;t have to invent that wheel again ourselves." />
+<meta property="og:description" content="The old adage &#8220;Don't go reinventing the wheel&#8221; comes into play often when developing software, doesn't it? Why build this [thing] ourselves when someone else has invented it already?
+Fantastic libraries and frameworks exist out there to assist developers with common and sometimes even difficult problems. Whether it be an easier-to-use abstraction over the networking stack with AFNetworking or AlamoFire, or adding a popular behavior-driven development testing framework like Quick to our workflow, we find ourselves constantly wanting to be able to take advantage of the things that others are doing in the community so we don't have to invent that wheel again ourselves." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/07/29/setting-up-carthage-for-the-terminal-timid/" />
 <meta property="article:published_time" content="2015-07-30T04:05:05&#43;00:00"/>
@@ -34,8 +34,8 @@ Fantastic libraries and frameworks exist out there to assist developers with com
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Setting Up Carthage for the Terminal-Timid"/>
-<meta name="twitter:description" content="The old adage &#8220;Don&#8217;t go reinventing the wheel&#8221; comes into play often when developing software, doesn&#8217;t it? Why build this [thing] ourselves when someone else has invented it already?
-Fantastic libraries and frameworks exist out there to assist developers with common and sometimes even difficult problems. Whether it be an easier-to-use abstraction over the networking stack with AFNetworking or AlamoFire, or adding a popular behavior-driven development testing framework like Quick to our workflow, we find ourselves constantly wanting to be able to take advantage of the things that others are doing in the community so we don&#8217;t have to invent that wheel again ourselves."/>
+<meta name="twitter:description" content="The old adage &#8220;Don't go reinventing the wheel&#8221; comes into play often when developing software, doesn't it? Why build this [thing] ourselves when someone else has invented it already?
+Fantastic libraries and frameworks exist out there to assist developers with common and sometimes even difficult problems. Whether it be an easier-to-use abstraction over the networking stack with AFNetworking or AlamoFire, or adding a popular behavior-driven development testing framework like Quick to our workflow, we find ourselves constantly wanting to be able to take advantage of the things that others are doing in the community so we don't have to invent that wheel again ourselves."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -166,9 +166,9 @@ MathJax.Hub.Config({
 
     
 
-<p>The old adage &#8220;Don&#8217;t go reinventing the wheel&#8221; comes into play <em>often</em> when developing software, doesn&#8217;t it? Why build this [thing] ourselves when someone else has invented it already?</p>
+<p>The old adage &#8220;Don't go reinventing the wheel&#8221; comes into play <em>often</em> when developing software, doesn't it? Why build this [thing] ourselves when someone else has invented it already?</p>
 
-<p>Fantastic libraries and frameworks exist out there to assist developers with common and sometimes even difficult problems. Whether it be an easier-to-use abstraction over the networking stack with <a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> or <a href="https://github.com/Alamofire/Alamofire">AlamoFire</a>, or adding a popular behavior-driven development testing framework like <a href="https://github.com/Quick/Quick">Quick</a> to our workflow, we find ourselves constantly wanting to be able to take advantage of the things that others are doing in the community so we don&#8217;t have to invent that wheel again ourselves.</p>
+<p>Fantastic libraries and frameworks exist out there to assist developers with common and sometimes even difficult problems. Whether it be an easier-to-use abstraction over the networking stack with <a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> or <a href="https://github.com/Alamofire/Alamofire">AlamoFire</a>, or adding a popular behavior-driven development testing framework like <a href="https://github.com/Quick/Quick">Quick</a> to our workflow, we find ourselves constantly wanting to be able to take advantage of the things that others are doing in the community so we don't have to invent that wheel again ourselves.</p>
 
 <div class="resources">
   <div class="resources-header">
@@ -216,93 +216,93 @@ MathJax.Hub.Config({
 
 <h3 id="the-need-for-dependency-management">The need for dependency management</h3>
 
-<p>With that comes the need for an easy way to manage external dependencies in our projects. We find the need to make sure that our projects have the right versions of whatever libraries or frameworks we&#8217;re bringing in. We want to ensure that if we move to another machine or add folks to our teams that they can go and restore all those same external dependencies without a lot of hassle. Therein lies at least partial justification for the usage of dependency managers.</p>
+<p>With that comes the need for an easy way to manage external dependencies in our projects. We find the need to make sure that our projects have the right versions of whatever libraries or frameworks we're bringing in. We want to ensure that if we move to another machine or add folks to our teams that they can go and restore all those same external dependencies without a lot of hassle. Therein lies at least partial justification for the usage of dependency managers.</p>
 
-<p>The long-running &#8220;king of the hill&#8221; of dependency management for iOS developers has been the ever-popular <a href="https://cocoapods.org/">CocoaPods</a>. However, there&#8217;s a new kid on the block, and its picking up popularity. This &#8220;new&#8221; dependency manager is called <a href="https://github.com/Carthage/Carthage">Carthage</a>.</p>
+<p>The long-running &#8220;king of the hill&#8221; of dependency management for iOS developers has been the ever-popular <a href="https://cocoapods.org/">CocoaPods</a>. However, there's a new kid on the block, and its picking up popularity. This &#8220;new&#8221; dependency manager is called <a href="https://github.com/Carthage/Carthage">Carthage</a>.</p>
 
 <p><a name="what-is-carthage" class="jump-target"></a></p>
 
 <h3 id="what-is-carthage">What is Carthage?</h3>
 
-<p>From the GitHub repository&#8217;s main page for Carthage (emphasis mine):</p>
+<p>From the GitHub repository's main page for Carthage (emphasis mine):</p>
 
 <blockquote>
 <p>Carthage is intended to be the simplest way to add frameworks to your Cocoa application&#8230; Ultimately, we created Carthage because we wanted the <strong>simplest tool possible</strong>—a dependency manager that gets the job done <strong>without taking over the responsibility of Xcode</strong>, and <strong>without creating extra work for framework authors</strong>.</p>
 </blockquote>
 
-<p>I&#8217;ve used Carthage for simple tasks like bringing in Quick for unit testing. It delivers on the promise of being simple, but even in its simplicity, installing and using Carthage requires the use of the Terminal.</p>
+<p>I've used Carthage for simple tasks like bringing in Quick for unit testing. It delivers on the promise of being simple, but even in its simplicity, installing and using Carthage requires the use of the Terminal.</p>
 
 <p><a name="terminal-tension" class="jump-target"></a></p>
 
 <h3 id="terminal-tension">Terminal tension</h3>
 
-<p>If you&#8217;ll withhold judgement of this confession, I&#8217;ll openly share that I&#8217;m not a whiz on the command line. I <em>have</em> found that the more I spend time in the Terminal, the less timid I become. It&#8217;s been a gradual transition into spending intentional time on the command line, but I share this to simply relate to those of you who, like me, find themselves thinking, &#8220;Really? All of this involves running commands in the Terminal? Ugh&#8230;&#8221;</p>
+<p>If you'll withhold judgement of this confession, I'll openly share that I'm not a whiz on the command line. I <em>have</em> found that the more I spend time in the Terminal, the less timid I become. It's been a gradual transition into spending intentional time on the command line, but I share this to simply relate to those of you who, like me, find themselves thinking, &#8220;Really? All of this involves running commands in the Terminal? Ugh&#8230;&#8221;</p>
 
-<p>Hang in there. Becoming proficient at this will take practice, but it&#8217;s worth it. Carthage really does make your dependency management simpler and more shareable with your team. Even if you&#8217;re working alone, I recommend investing the time to overcoming any anxiety you may have around the Terminal.</p>
+<p>Hang in there. Becoming proficient at this will take practice, but it's worth it. Carthage really does make your dependency management simpler and more shareable with your team. Even if you're working alone, I recommend investing the time to overcoming any anxiety you may have around the Terminal.</p>
 
 <p><a name="installing-carthage" class="jump-target"></a></p>
 
 <h3 id="installing-carthage">Installing Carthage</h3>
 
-<p>So here&#8217;s the deal: The folks on the Carthage team have actually made it pretty easy to install Carthage <em>without</em> the Terminal. If you go to their <a href="https://github.com/Carthage/Carthage/releases">releases page on GitHub</a> and download + run the Carthage.pkg file for the latest release, you&#8217;ll be set up. BUT, <strong>Carthage is a command-line tool</strong>, so to use it, you&#8217;ll still need the Terminal.</p>
+<p>So here's the deal: The folks on the Carthage team have actually made it pretty easy to install Carthage <em>without</em> the Terminal. If you go to their <a href="https://github.com/Carthage/Carthage/releases">releases page on GitHub</a> and download + run the Carthage.pkg file for the latest release, you'll be set up. BUT, <strong>Carthage is a command-line tool</strong>, so to use it, you'll still need the Terminal.</p>
 
-<p>With that in mind, I&#8217;ve decided to get used to working with this tool <em>totally</em> from the command-line from the start, which means installing it from the Terminal window. There&#8217;s a couple more steps involved, but I&#8217;d argue that it&#8217;s good practice. If you&#8217;re wanting to overcome your anxiety around the Terminal, skip the .pkg installation method and continue on.</p>
+<p>With that in mind, I've decided to get used to working with this tool <em>totally</em> from the command-line from the start, which means installing it from the Terminal window. There's a couple more steps involved, but I'd argue that it's good practice. If you're wanting to overcome your anxiety around the Terminal, skip the .pkg installation method and continue on.</p>
 
 <p><a name="terminal-installation" class="jump-target"></a></p>
 
 <h3 id="terminal-installation">Terminal installation</h3>
 
-<p>Installing Carthage from the command line assumes that you have a package manager for OSX called <a href="http://brew.sh/">&#8220;Homebrew&#8221;</a> installed on your Mac. If you don&#8217;t, you need it. And yes, <em>it</em> involves the Terminal too, but don&#8217;t worry &#8211; I&#8217;ve got you covered in the steps to follow. We&#8217;ll use Homebrew to install Carthage which will be used to manage the external dependencies in our app.</p>
+<p>Installing Carthage from the command line assumes that you have a package manager for OSX called <a href="http://brew.sh/">&#8220;Homebrew&#8221;</a> installed on your Mac. If you don't, you need it. And yes, <em>it</em> involves the Terminal too, but don't worry &#8211; I've got you covered in the steps to follow. We'll use Homebrew to install Carthage which will be used to manage the external dependencies in our app.</p>
 
 <p><a name="installing-homebrew" class="jump-target"></a></p>
 
 <h4 id="first-things-first-8211-installing-homebrew">First things first &#8211; installing Homebrew</h4>
 
-<p>Installing Homebrew isn&#8217;t complicated. It just involves knowing the command to run in the Terminal to get it downloaded and registered in your machine.</p>
+<p>Installing Homebrew isn't complicated. It just involves knowing the command to run in the Terminal to get it downloaded and registered in your machine.</p>
 
 <p>From the <a href="http://brew.sh/">Homebrew homepage</a> we learn that the installation simply requires us to type in the following in the Terminal:</p>
 
 <p><code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></p>
 
-<p>Pasting in the command and pressing enter will immediately produce a <em>lot</em> of stuff in the terminal window. It&#8217;s okay. Don&#8217;t panic.</p>
+<p>Pasting in the command and pressing enter will immediately produce a <em>lot</em> of stuff in the terminal window. It's okay. Don't panic.</p>
 
-<p>It&#8217;s simply letting you know what&#8217;s about to happen if you agree to continue:<br />
+<p>It's simply letting you know what's about to happen if you agree to continue:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png" alt="Homebrew Install Command" width="580" height="364" class="alignnone size-full wp-image-12168" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png 580w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command-300x188.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
 
-<p>So it&#8217;s going to&#8230;</p>
+<p>So it's going to&#8230;</p>
 
 <ul>
 <li>Install some files into some directories on your computer.</li>
 <li>Change the read-write permissions on some directories to be <em>group</em> writable. This allows Homebrew to do its thing when you tell it to.</li>
-<li>Change those same directories&#8217; group to <strong>admin</strong>. So these last two bullet points go together.</li>
+<li>Change those same directories' group to <strong>admin</strong>. So these last two bullet points go together.</li>
 </ul>
 
-<p>You&#8217;re prompted to press &#8216;RETURN&#8217; to continue (or anything else to stop the installation). If you&#8217;re good with the changes it describes to you, press &#8216;RETURN&#8217;.</p>
+<p>You're prompted to press &#8216;RETURN' to continue (or anything else to stop the installation). If you're good with the changes it describes to you, press &#8216;RETURN'.</p>
 
-<p>Yikes! What&#8217;s all this now?<br />
+<p>Yikes! What's all this now?<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png" alt="Elevate permissions using sudo" width="580" height="365" class="alignnone size-full wp-image-12169" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png 580w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions-300x189.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
 
-<p>Well, for the installation to continue, Homebrew needs to elevate the level of permissions it has in order write all the files it needs to write and to set all the permissions it needs to set. Under the hood, it&#8217;s run a <code>sudo</code> command. It requires your password to authorize this elevation. Go ahead and type your password, and press &#8216;RETURN&#8217; to continue.</p>
+<p>Well, for the installation to continue, Homebrew needs to elevate the level of permissions it has in order write all the files it needs to write and to set all the permissions it needs to set. Under the hood, it's run a <code>sudo</code> command. It requires your password to authorize this elevation. Go ahead and type your password, and press &#8216;RETURN' to continue.</p>
 
-<p>The installation will continue by downloading all of the necessary files and performing all the changes it said it&#8217;d make. When it&#8217;s done, you&#8217;ll get an &#8220;Installation Successful&#8221; message:</p>
+<p>The installation will continue by downloading all of the necessary files and performing all the changes it said it'd make. When it's done, you'll get an &#8220;Installation Successful&#8221; message:</p>
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png" alt="Homebrew Installation Successful" width="586" height="367" class="alignnone size-full wp-image-12177" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png 586w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful-300x188.png 300w" sizes="(max-width: 586px) 100vw, 586px" /></a></p>
 
 <p>Sweet! To test it out, you can simply type <code>brew help</code> like it suggests in the line below the &#8220;Installation successful!&#8221; message. It should print out a bunch of stuff to the Terminal window, explaining how to use Homebrew:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png" alt="It works!" width="581" height="366" class="alignnone size-full wp-image-12172" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png 581w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works-300x189.png 300w" sizes="(max-width: 581px) 100vw, 581px" /></a></p>
 
-<p>Well done! We can now use Homebrew to install Carthage. You can use it to install all kinds of other fantastic utilities as well, but for now we&#8217;ll focus on the Carthage installation&#8230;</p>
+<p>Well done! We can now use Homebrew to install Carthage. You can use it to install all kinds of other fantastic utilities as well, but for now we'll focus on the Carthage installation&#8230;</p>
 
 <p><a name="now-install-carthage" class="jump-target"></a></p>
 
 <h4 id="now-to-install-carthage">Now to install Carthage</h4>
 
-<p>With Homebrew installed, we&#8217;re almost there. From the <a href="https://github.com/Carthage/Carthage">Carthage GitHub repository page</a>, we learn what commands to run on the command line to get Carthage installed.</p>
+<p>With Homebrew installed, we're almost there. From the <a href="https://github.com/Carthage/Carthage">Carthage GitHub repository page</a>, we learn what commands to run on the command line to get Carthage installed.</p>
 
-<p>First, we run <code>brew update</code> to make sure that Homebrew is totally up-to-date. If you just installed Homebrew for the first time, you&#8217;re probably good to go. Just to be safe though, go ahead and run it.<br />
+<p>First, we run <code>brew update</code> to make sure that Homebrew is totally up-to-date. If you just installed Homebrew for the first time, you're probably good to go. Just to be safe though, go ahead and run it.<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png" alt="Brew Update" width="582" height="363" class="alignnone size-full wp-image-12189" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png 582w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update-300x187.png 300w" sizes="(max-width: 582px) 100vw, 582px" /></a></p>
 
-<p>The last step is to run <code>brew install carthage</code>. Yes. It&#8217;s that simple. Homebrew will take care of everything else for you! Here&#8217;s the final result:</p>
+<p>The last step is to run <code>brew install carthage</code>. Yes. It's that simple. Homebrew will take care of everything else for you! Here's the final result:</p>
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png" alt="Brew Install Carthage" width="580" height="362" class="alignnone size-full wp-image-12188" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png 580w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage-300x187.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
 
@@ -310,13 +310,13 @@ MathJax.Hub.Config({
 
 <h3 id="cartfiles">Cartfiles</h3>
 
-<p>Once Carthage is installed, it&#8217;s time to create your Cartfile file. After I read <a href="https://github.com/Carthage/Carthage">the documentation</a> on how to set this up, I found myself doubting whether I&#8217;d done it right, so again, to alleviate any fears our there around the mystery of what&#8217;s going on I&#8217;ll share what I&#8217;ve discovered.</p>
+<p>Once Carthage is installed, it's time to create your Cartfile file. After I read <a href="https://github.com/Carthage/Carthage">the documentation</a> on how to set this up, I found myself doubting whether I'd done it right, so again, to alleviate any fears our there around the mystery of what's going on I'll share what I've discovered.</p>
 
 <p>First of all, the documentation merely says, &#8220;Create a Cartfile that lists the frameworks you’d like to use in your project.&#8221; I scratched my head and asked, &#8220;Okay &#8211; well, where? And should it have a file extension?&#8221;</p>
 
 <p>The answers that worked for me were, &#8220;Somewhere in your XCode project (I put it under Supporting Files)&#8221; and &#8220;No file extension&#8230;just the name Cartfile works&#8221;.</p>
 
-<p>To demonstrate, here&#8217;s a couple of screenshots depicting how to add a Cartfile to your Xcode project&#8230;</p>
+<p>To demonstrate, here's a couple of screenshots depicting how to add a Cartfile to your Xcode project&#8230;</p>
 
 <p>Simply add a new Empty file, found under iOS -&gt; Other:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-1024x409.png" alt="New empty file" width="1024" height="409" class="alignnone size-large wp-image-12191" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-1024x409.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-300x120.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file.png 1394w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
@@ -326,7 +326,7 @@ MathJax.Hub.Config({
 
 <h3 id="wrapping-up">Wrapping up</h3>
 
-<p>This is where I&#8217;m going to stop for now and defer to the <a href="https://github.com/Carthage/Carthage">Carthage GitHub documentation</a> to explain more about what exactly to put into the Cartfile and how to run the subsequent commands to grab the libraries and frameworks you list, and build them so that they can be added to your Xcode project. I may pick this back up again, but this guide was starting to get lengthy, and I felt that actually building the frameworks from a Cartfile could very well deserve isolated treatment for the sake of clarity. If you&#8217;re interested in reading more on Carthage, sound off in the comments or shoot me an e-mail! Thanks for reading.</p>
+<p>This is where I'm going to stop for now and defer to the <a href="https://github.com/Carthage/Carthage">Carthage GitHub documentation</a> to explain more about what exactly to put into the Cartfile and how to run the subsequent commands to grab the libraries and frameworks you list, and build them so that they can be added to your Xcode project. I may pick this back up again, but this guide was starting to get lengthy, and I felt that actually building the frameworks from a Cartfile could very well deserve isolated treatment for the sake of clarity. If you're interested in reading more on Carthage, sound off in the comments or shoot me an e-mail! Thanks for reading.</p>
 
 <p><a name="share" class="jump-target"></a></p>
 

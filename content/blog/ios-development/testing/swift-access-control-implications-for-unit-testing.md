@@ -20,7 +20,7 @@ tags:
   - XCode 6 Beta 4
 
 ---
-If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you&#8217;re not alone!
+If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you're not alone!
 
 ### Unit Tests and Swift Access Control
 
@@ -37,7 +37,7 @@ By default, most entities in a source file have internal access.
 So given the following&#8230;
 
   * Out of the box, your unit tests are part of a separate test target
-  * The default access control for a class is _internal_, (meaning that if you do not explicitly specify an access control on the class / properties / functions, they&#8217;re marked internal behind the scenes)
+  * The default access control for a class is _internal_, (meaning that if you do not explicitly specify an access control on the class / properties / functions, they're marked internal behind the scenes)
 
 &#8230; we now know why the unit tests break, unless we make a few tweaks:  classes marked internal are only seen _within a set of specified targets_ and our unit tests are in a separate target that our class is not a part of by default.
 
@@ -57,7 +57,7 @@ I found option #2 to be the easiest to implement at first. _However_, it turns o
   
   <ul>
     <li>
-      <a href="http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/" title="Don’t Write Legacy Swift">Don&#8217;t Write Legacy Swift</a>
+      <a href="http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/" title="Don’t Write Legacy Swift">Don't Write Legacy Swift</a>
     </li>
     <li>
       <a href="http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/" title="Getting Started with Unit Testing in Swift">Getting Started with Unit Testing in Swift</a>

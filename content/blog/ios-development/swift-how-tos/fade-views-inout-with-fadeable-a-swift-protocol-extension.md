@@ -17,40 +17,13 @@ tags:
 ---
 During the production of my [Pluralsight course on Managing Xcode Project Dependencies with CocoaPods][1], I wanted to provide viewers of the course the opportunity to see how to create and deploy a simple library out to the CocoaPods Trunk.
 
-<div class="resources">
-  <div class="resources-header">
-    Jump to&#8230;
-  </div>
-  
-  <ul class="resources-content">
-    <li>
-      <a href="#inspiration">Inspiration</a>
-    </li>
-    <li>
-      <a href="#demo">Demo</a>
-    </li>
-    <li>
-      <a href="#sample">Fadeable code sample</a>
-    </li>
-    <li>
-      <a href="#creating-cocoapod-libraries">Creating CocoaPod libraries</a>
-    </li>
-    <li>
-      <a href="#related">You might also enjoy&#8230;</a>
-    </li>
-    <li>
-      <a href="#share">Was this article helpful? Please share!</a>
-    </li>
-  </ul>
-</div>
-
 <a name="inspiration" class="jump-target"></a>
 
 ### Inspiration
 
-A simple idea came to mind: Create something that allows client developers of the pod to easily fade views in or out on any UIView instance. If you&#8217;ve read andrewcbancroft.com for a long time, you might remember that I [wrote on this very subject already][2], but there, I used an extension to UIView, because protocol extensions hadn&#8217;t been invented yet!
+A simple idea came to mind: Create something that allows client developers of the pod to easily fade views in or out on any UIView instance. If you've read andrewcbancroft.com for a long time, you might remember that I [wrote on this very subject already][2], but there, I used an extension to UIView, because protocol extensions hadn't been invented yet!
 
-For my course, I borrowed an idea that I first saw done by [@NSFlexMonkey][3] when he built the [Rotateable protocol extension][4]. Only instead of rotating, I&#8217;m fading, so I named it &#8220;Fadeable&#8221;!
+For my course, I borrowed an idea that I first saw done by [@NSFlexMonkey][3] when he built the [Rotateable protocol extension][4]. Only instead of rotating, I'm fading, so I named it &#8220;Fadeable&#8221;!
 
 <a name="demo" class="jump-target"></a>
 
@@ -62,7 +35,7 @@ For my course, I borrowed an idea that I first saw done by [@NSFlexMonkey][3] wh
 
 ### Fadeable code sample
 
-The &#8220;library&#8217;s&#8221; source can be found over at GitHub:
+The &#8220;library's&#8221; source can be found over at GitHub:
 
 <div class="resources">
   <div class="resources-header">
@@ -76,7 +49,7 @@ The &#8220;library&#8217;s&#8221; source can be found over at GitHub:
   </ul>
 </div>
 
-Here&#8217;s a snippet from the repository so you can see what the extension&#8217;s doing:
+Here's a snippet from the repository so you can see what the extension's doing:
 
 <pre class="lang:swift decode:true " title="Fadeable.swift" >import UIKit
 
@@ -106,7 +79,7 @@ In the code snippet above, I define the `Fadeable` protocol as [Some Type] that 
 
 Then I create an extension to the `Fadeable` protocol and provide a simple, default implementation which will animate the alpha to 0, or to 1, depending on whether or not the client developer is fading in or out.
 
-Finally, I extend `UIView` to conform to `Fadeable`. And that&#8217;s it! Any `UIView` instance can now fade in or out by simply calling the appropriate function:
+Finally, I extend `UIView` to conform to `Fadeable`. And that's it! Any `UIView` instance can now fade in or out by simply calling the appropriate function:
 
 <pre class="lang:swift decode:true " >class ViewController: UIViewController {
     
@@ -128,7 +101,7 @@ Finally, I extend `UIView` to conform to `Fadeable`. And that&#8217;s it! Any `U
 
 ### Creating CocoaPod libraries
 
-If you&#8217;re interested in seeing a full walk-through of how I created and published the Fadeable Library to the CocoaPods Trunk, I would love it if you gave Module 3 of my Pluralsight course, titled a watch! It&#8217;s titled [Creating CocoaPod Libraries][1] and covers from beginning to end, the process of creating a library that&#8217;s compatible with CocoaPods.
+If you're interested in seeing a full walk-through of how I created and published the Fadeable Library to the CocoaPods Trunk, I would love it if you gave Module 3 of my Pluralsight course, titled a watch! It's titled [Creating CocoaPod Libraries][1] and covers from beginning to end, the process of creating a library that's compatible with CocoaPods.
 
 <a name="related" class="jump-target"></a>
 

@@ -25,8 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Immutable Types with Changing State in Swift" />
-<meta property="og:description" content="Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&#8217;ve seen a lot in the functional programming arena as it relates to Swift.
-As I seek to improve my functional programming thought processes and to practice what I&#8217;m learning, I found myself struggling with a fundamental concept: immutability. Especially when I&#8217;m designing something that, at the very least, appears to require the ability to change state at some point in time." />
+<meta property="og:description" content="Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I've seen a lot in the functional programming arena as it relates to Swift.
+As I seek to improve my functional programming thought processes and to practice what I'm learning, I found myself struggling with a fundamental concept: immutability. Especially when I'm designing something that, at the very least, appears to require the ability to change state at some point in time." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/" />
 <meta property="article:published_time" content="2015-01-06T12:00:50&#43;00:00"/>
@@ -34,8 +34,8 @@ As I seek to improve my functional programming thought processes and to practice
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Immutable Types with Changing State in Swift"/>
-<meta name="twitter:description" content="Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&#8217;ve seen a lot in the functional programming arena as it relates to Swift.
-As I seek to improve my functional programming thought processes and to practice what I&#8217;m learning, I found myself struggling with a fundamental concept: immutability. Especially when I&#8217;m designing something that, at the very least, appears to require the ability to change state at some point in time."/>
+<meta name="twitter:description" content="Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I've seen a lot in the functional programming arena as it relates to Swift.
+As I seek to improve my functional programming thought processes and to practice what I'm learning, I found myself struggling with a fundamental concept: immutability. Especially when I'm designing something that, at the very least, appears to require the ability to change state at some point in time."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -166,13 +166,13 @@ MathJax.Hub.Config({
 
     
 
-<p>Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&#8217;ve seen a lot in the functional programming arena as it relates to Swift.</p>
+<p>Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I've seen a lot in the functional programming arena as it relates to Swift.</p>
 
-<p>As I seek to improve my functional programming thought processes and to practice what I&#8217;m learning, I found myself struggling with a fundamental concept: <strong>immutability</strong>. <em>Especially</em> when I&#8217;m designing something that, at the very least, <em>appears</em> to require the ability to change state at some point in time.</p>
+<p>As I seek to improve my functional programming thought processes and to practice what I'm learning, I found myself struggling with a fundamental concept: <strong>immutability</strong>. <em>Especially</em> when I'm designing something that, at the very least, <em>appears</em> to require the ability to change state at some point in time.</p>
 
-<h3 id="immutable-changes-8211-a-contradiction-in-terms">Immutable changes &#8211; A contradiction in terms?</h3>
+<h3 id="immutable-changes-8211-a-contradiction-in-terms">Immutable changes – A contradiction in terms?</h3>
 
-<p>Immutability and changing state was a real struggle for me. The two seemed contradictory actually. How am I supposed to handle changes with things that <em>can&#8217;t change</em>??!</p>
+<p>Immutability and changing state was a real struggle for me. The two seemed contradictory actually. How am I supposed to handle changes with things that <em>can't change</em>??!</p>
 
 <p>And then, with the help of Stack Overflow, a lightbulb came on. As I was perusing FP topics, I ran across a question that expressed exactly what I was feeling. <a href="http://stackoverflow.com/questions/1020653/how-can-you-do-anything-useful-without-mutable-state">&#8220;How can you do anything useful without mutable state?&#8221;</a>, the questioner asked. The answer is what illuminated things for me. The key quote from the Stack Overflow answer:</p>
 
@@ -184,11 +184,11 @@ MathJax.Hub.Config({
 
 <h3 id="getting-practical-with-swift">Getting practical with Swift</h3>
 
-<p>If I&#8217;m going to get pragmatic with this, I have some design decisions to make if I&#8217;m going to try and avoid mutating the state of my objects. Rather than design my Types with the intent to update stored properties in-place, I should think about designing them so that the state-change process would actually produce a whole <em>new</em> instance with the transformed (updated) value.</p>
+<p>If I'm going to get pragmatic with this, I have some design decisions to make if I'm going to try and avoid mutating the state of my objects. Rather than design my Types with the intent to update stored properties in-place, I should think about designing them so that the state-change process would actually produce a whole <em>new</em> instance with the transformed (updated) value.</p>
 
 <h3 id="see-it-in-action">See it in action</h3>
 
-<p>I&#8217;m a visual person, so for those of you who need to see it in action like me, here&#8217;s a short example: Suppose that you&#8217;re designing a class that stores a counter (or a score or a total&#8230; something like that), and provides a function to let you increment that count.</p>
+<p>I'm a visual person, so for those of you who need to see it in action like me, here's a short example: Suppose that you're designing a class that stores a counter (or a score or a total&#8230; something like that), and provides a function to let you increment that count.</p>
 
 <h3 id="the-mutating-way">The mutating way</h3>
 

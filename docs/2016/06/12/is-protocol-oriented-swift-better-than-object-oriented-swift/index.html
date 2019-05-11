@@ -27,8 +27,8 @@
 <meta property="og:title" content="Is Protocol Oriented Swift Better than Object Oriented Swift?" />
 <meta property="og:description" content="A question was asked on Reddit and showed up in my feed as I was browsing this weekend:
  What does protocol oriented programming mean, and why is it better than OOP?
- I really like a few things that were said in one of the top &#8220;Explain Like I&#8217;m 5&#8221; comments that was posted in response to the question by CodaFi.
-&#8220;Explain Like I&#8217;m Five&#8221; &#8211; A laundry service example First, the example provided was very understandable." />
+ I really like a few things that were said in one of the top &#8220;Explain Like I'm 5&#8221; comments that was posted in response to the question by CodaFi.
+&#8220;Explain Like I'm Five&#8221; &#8211; A laundry service example First, the example provided was very understandable." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2016/06/12/is-protocol-oriented-swift-better-than-object-oriented-swift/" />
 <meta property="article:published_time" content="2016-06-12T20:59:48&#43;00:00"/>
@@ -38,8 +38,8 @@
 <meta name="twitter:title" content="Is Protocol Oriented Swift Better than Object Oriented Swift?"/>
 <meta name="twitter:description" content="A question was asked on Reddit and showed up in my feed as I was browsing this weekend:
  What does protocol oriented programming mean, and why is it better than OOP?
- I really like a few things that were said in one of the top &#8220;Explain Like I&#8217;m 5&#8221; comments that was posted in response to the question by CodaFi.
-&#8220;Explain Like I&#8217;m Five&#8221; &#8211; A laundry service example First, the example provided was very understandable."/>
+ I really like a few things that were said in one of the top &#8220;Explain Like I'm 5&#8221; comments that was posted in response to the question by CodaFi.
+&#8220;Explain Like I'm Five&#8221; &#8211; A laundry service example First, the example provided was very understandable."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -176,25 +176,25 @@ MathJax.Hub.Config({
 <p>What does protocol oriented programming mean, and why is it better than OOP?</p>
 </blockquote>
 
-<p>I really like a few things that were said in <a href="https://www.reddit.com/r/swift/comments/4nme0c/eli5_what_does_protocol_oriented_programming_mean/d453ryv">one of the top &#8220;Explain Like I&#8217;m 5&#8221; comments</a> that was posted in response to the question by <a href="https://www.reddit.com/user/CodaFi">CodaFi</a>.</p>
+<p>I really like a few things that were said in <a href="https://www.reddit.com/r/swift/comments/4nme0c/eli5_what_does_protocol_oriented_programming_mean/d453ryv">one of the top &#8220;Explain Like I'm 5&#8221; comments</a> that was posted in response to the question by <a href="https://www.reddit.com/user/CodaFi">CodaFi</a>.</p>
 
-<h1 id="8220-explain-like-i-8217-m-five-8221-8211-a-laundry-service-example">&#8220;Explain Like I&#8217;m Five&#8221; &#8211; A laundry service example</h1>
+<h1 id="8220-explain-like-i-8217-m-five-8221-8211-a-laundry-service-example">&#8220;Explain Like I'm Five&#8221; &#8211; A laundry service example</h1>
 
 <p>First, the example provided was very understandable. I highly recommend you <a href="https://www.reddit.com/r/swift/comments/4nme0c/eli5_what_does_protocol_oriented_programming_mean/d453ryv">jump over</a> and just read through what the commenter wrote.</p>
 
-<p>The theme was &#8220;laundry service&#8221;. Supposing that there was a <code>Laundry</code> object that encapsulated certain laundry-related functions&#8230; &#8220;Launder my clothes, please&#8221; &#8212; &#8220;Okay, here&#8217;s your clothes!&#8221;. You as a client simply interact with <code>Laundry</code> by saying &#8220;Launder, please!&#8221;. The <code>Laundry</code> object goes off and does its thing, which could range from simple to incredibly complex &#8211; the beauty is that as a client, as a person needing laundry done, you don&#8217;t care. As long as the laundry gets done and you get your clothes back, life is great!</p>
+<p>The theme was &#8220;laundry service&#8221;. Supposing that there was a <code>Laundry</code> object that encapsulated certain laundry-related functions&#8230; &#8220;Launder my clothes, please&#8221; &#8212; &#8220;Okay, here's your clothes!&#8221;. You as a client simply interact with <code>Laundry</code> by saying &#8220;Launder, please!&#8221;. The <code>Laundry</code> object goes off and does its thing, which could range from simple to incredibly complex &#8211; the beauty is that as a client, as a person needing laundry done, you don't care. As long as the laundry gets done and you get your clothes back, life is great!</p>
 
 <h1 id="8220-problems-8221-with-object-orientation">&#8220;Problems&#8221; with Object Orientation</h1>
 
-<p>In my guide on <a href="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/">the Fundamentals of Callbacks for Swift Developers</a>, I describe the scenario that we&#8217;re all in as developers:</p>
+<p>In my guide on <a href="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/">the Fundamentals of Callbacks for Swift Developers</a>, I describe the scenario that we're all in as developers:</p>
 
 <p>When we’re building software, we’re either <em>using</em> code built by others, or <em>creating</em> code for others to use, are we not? We’re either using code that “hooks into” what other developers have designed and made available to us, or we’re creating code that other code will “hook into” and interact with, even if the “other code” is written by us in our own app.</p>
 
 <p>We wear two hats at once, when it comes to being clients and creators of code.</p>
 
-<p>But what if we&#8217;re working with a <code>Laundry</code> object as a <em>developer/creator</em>, and not as a <em>client</em> (ie, someone who needs laundry done). What if we, as developers, get handed a <code>Laundry</code> object in a library and we want to customize its behavior&#8230; maybe improve the performance of <code>launderClothes()</code>, or override the implementation it to use some amazing new laundry service.</p>
+<p>But what if we're working with a <code>Laundry</code> object as a <em>developer/creator</em>, and not as a <em>client</em> (ie, someone who needs laundry done). What if we, as developers, get handed a <code>Laundry</code> object in a library and we want to customize its behavior&#8230; maybe improve the performance of <code>launderClothes()</code>, or override the implementation it to use some amazing new laundry service.</p>
 
-<p>The way we&#8217;d do that is by crating a <em>subclass</em>. Here&#8217;s the beef with Object Orientation, according to the commenter:</p>
+<p>The way we'd do that is by crating a <em>subclass</em>. Here's the beef with Object Orientation, according to the commenter:</p>
 
 <blockquote>
 <p>[Object Orientation] encourages &#8220;encapsulating complexity&#8221; by exposing state and internals through inheritance.</p>
@@ -206,11 +206,11 @@ MathJax.Hub.Config({
 
 <p>&#8220;I may not want to know how my dry cleaning got done, but if I wanted to design a better route to go from dirty clothes to clean clothes, I would necessarily <em>have</em> to know every last detail of the steps that were performed so I can try to refine them in my subclass.&#8221;</p>
 
-<p>So the commenter is coming at it from the point of a developer/creator. It&#8217;s pointed out that to truly be able to improve performance or refine algorithms in a subclass, we necessarily have to know every detail of the steps that were performed in the superclass. And it&#8217;s not always the case that we can discover that superclass implementation to improve upon it.</p>
+<p>So the commenter is coming at it from the point of a developer/creator. It's pointed out that to truly be able to improve performance or refine algorithms in a subclass, we necessarily have to know every detail of the steps that were performed in the superclass. And it's not always the case that we can discover that superclass implementation to improve upon it.</p>
 
 <h1 id="shifting-to-protocol-orientation">Shifting to Protocol Orientation</h1>
 
-<p>So&#8230; Protocol Orientation? If it&#8217;s better, how is it better?</p>
+<p>So&#8230; Protocol Orientation? If it's better, how is it better?</p>
 
 <p>I love how the commenter takes the object oriented example of laundry service, and refines it with nuances that come out of thinking in terms of protocols rather than just objects. Really. <a href="https://www.reddit.com/r/swift/comments/4nme0c/eli5_what_does_protocol_oriented_programming_mean/d453ryv">Have a look</a>.</p>
 
@@ -230,7 +230,7 @@ MathJax.Hub.Config({
 
 <h1 id="takeaways">Takeaways</h1>
 
-<p>The take-away point for me in this thread on Protocol Orientation is this: Protocols are about <em>generalizing</em>. They&#8217;re about the <em>interface</em>. It&#8217;s about a mindset and a focus (an <em>orientation</em>) toward thinking of <em>ways</em> to do certain things, and describing them clearly in the form of a Type in Swift.</p>
+<p>The take-away point for me in this thread on Protocol Orientation is this: Protocols are about <em>generalizing</em>. They're about the <em>interface</em>. It's about a mindset and a focus (an <em>orientation</em>) toward thinking of <em>ways</em> to do certain things, and describing them clearly in the form of a Type in Swift.</p>
 
 <p>Once the <em>way to do</em> something is described, other things, concrete <em>Types</em>, can come along and implement those in an infinite variety of ways.</p>
 
