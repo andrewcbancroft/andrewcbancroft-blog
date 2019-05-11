@@ -49,7 +49,7 @@ To demonstrate the implementation of this workflow, suppose that we've got a tab
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwipeToDeleteExample" title="Swipe to Delete Example">Swipe to Delete Example</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwipeToDeleteExample" title="Swipe to Delete Example">Swipe to Delete Example</a>
     </li>
   </ul>
 </div>

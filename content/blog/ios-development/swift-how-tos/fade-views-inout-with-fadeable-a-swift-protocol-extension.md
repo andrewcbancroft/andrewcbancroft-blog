@@ -44,7 +44,7 @@ The &#8220;library's&#8221; source can be found over at GitHub:
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/Fadeable" title="Fadeable">Fadeable</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/Fadeable" title="Fadeable">Fadeable</a>
     </li>
   </ul>
 </div>

@@ -40,7 +40,7 @@ An example app called &#8220;Roasters on the Go&#8221; has been created for this
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> RoasterOnTheGo Example Project (<a href="https://github.com/andrewcbancroft/RoasterOnTheGo/tree/swift-2.3" title="RoasterOnTheGo - Swift 2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/RoasterOnTheGo/tree/master" title="RoasterOnTheGo - Swift 3.0">Swift 3.0</a>)
+      <i class="fab fa-github fa-lg"></i> RoasterOnTheGo Example Project (<a href="https://github.com/andrewcbancroft/RoasterOnTheGo/tree/swift-2.3" title="RoasterOnTheGo - Swift 2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/RoasterOnTheGo/tree/master" title="RoasterOnTheGo - Swift 3.0">Swift 3.0</a>)
     </li>
   </ul>
 </div>

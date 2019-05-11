@@ -34,7 +34,7 @@ If you'd like to tinker with the code for yourself, you can download the example
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/EventTracker/tree/create-calendar" title="Event Tracker - Create Calendar">Event Tracker – Create Calendar</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/EventTracker/tree/create-calendar" title="Event Tracker - Create Calendar">Event Tracker – Create Calendar</a>
     </li>
   </ul>
 </div>

@@ -39,13 +39,13 @@ If you're the type that likes to simply dive into a working example, both implem
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> Example implemented with UITableViewController <div>
+      <i class="fab fa-github fa-lg"></i> Example implemented with UITableViewController <div>
         (<a href="https://github.com/andrewcbancroft/PullToRefreshExample_UITableViewController/tree/swift-2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/PullToRefreshExample_UITableViewController/tree/master">Swift 3.0</a>)
       </div>
     </li>
     
     <li>
-      <i class="fa fa-github fa-lg"></i> Example implemented with regular view controller + UITableView <div>
+      <i class="fab fa-github fa-lg"></i> Example implemented with regular view controller + UITableView <div>
         (<a href="https://github.com/andrewcbancroft/PullToRefreshExample_RegularViewController/tree/swift-2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/PullToRefreshExample_RegularViewController/tree/master">Swift 3.0</a>)
       </div>
     </li>

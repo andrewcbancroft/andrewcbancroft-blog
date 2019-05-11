@@ -30,7 +30,7 @@ As with the previous posts, I'm providing an example XCode project over at GitHu
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa"></i> <a href="https://github.com/andrewcbancroft/Zootastic/tree/NSFetchedResultsController_SyncTableView" title="GitHub - Sync Table View Example Project" target="_blank">Sync Table View Example Project</a>
+      <i class="fab fa-github fa"></i> <a href="https://github.com/andrewcbancroft/Zootastic/tree/NSFetchedResultsController_SyncTableView" title="GitHub - Sync Table View Example Project" target="_blank">Sync Table View Example Project</a>
     </li>
   </ul>
 </div>

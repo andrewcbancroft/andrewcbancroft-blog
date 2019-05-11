@@ -37,7 +37,7 @@ Kaan's GitHub repository has an example project, but I've also gone ahead and ma
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/CircularProgressExample" title="Circular Progress Example">Circular Progress Example</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/CircularProgressExample" title="Circular Progress Example">Circular Progress Example</a>
     </li>
   </ul>
 </div>

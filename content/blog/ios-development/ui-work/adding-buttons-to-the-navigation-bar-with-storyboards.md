@@ -46,7 +46,7 @@ An example git repository has been created for this walk-through over at GitHub:
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/StoryboardNavigationControllerExamples" title="Storyboard Navigation Controller Examples">Storyboard Navigation Controller Example</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/StoryboardNavigationControllerExamples" title="Storyboard Navigation Controller Examples">Storyboard Navigation Controller Example</a>
     </li>
   </ul>
 </div>

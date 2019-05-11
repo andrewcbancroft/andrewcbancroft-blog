@@ -38,7 +38,7 @@ For those reasons, I think a table view is a really convenient choice for collec
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/CustomTextInputTableViewCell"title="Custom Text Input TableView Cell Example">Example XCode Project</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/CustomTextInputTableViewCell"title="Custom Text Input TableView Cell Example">Example XCode Project</a>
     </li>
   </ul>
 </div>

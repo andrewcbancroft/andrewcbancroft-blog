@@ -42,7 +42,7 @@ I've got an example project up on GitHub that contains all the code necessary to
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/EventTracker/tree/list-events-for-calendar" title="Event Tracker Example Project">Event Tracker Example Project</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/EventTracker/tree/list-events-for-calendar" title="Event Tracker Example Project">Event Tracker Example Project</a>
     </li>
   </ul>
 </div>
@@ -125,10 +125,10 @@ That's the meat of querying the event store for a list of events. To learn how d
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-link"></i> <a href="https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/" title="Swift How-To: Setting up a Table View">Swift How-To: Setting up a Table View</a>
+      <i class="fab fa-link"></i> <a href="https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/" title="Swift How-To: Setting up a Table View">Swift How-To: Setting up a Table View</a>
     </li>
     <li>
-      <i class="fa fa-link"></i> <a href="https://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/" title="Swift UITableViewDataSource Cheat Sheet">Swift UITableViewDataSource Cheat Sheet</a>
+      <i class="fab fa-link"></i> <a href="https://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/" title="Swift UITableViewDataSource Cheat Sheet">Swift UITableViewDataSource Cheat Sheet</a>
     </li>
   </ul>
 </div>

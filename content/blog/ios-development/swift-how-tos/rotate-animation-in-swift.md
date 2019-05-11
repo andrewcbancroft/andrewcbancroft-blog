@@ -32,7 +32,7 @@ As with the others, I've created a [GitHub project][1] for you to see the animat
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation">Rotate Animation Example Project</a>
+      <i class="fab fa-github fa-lg"></i> <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation">Rotate Animation Example Project</a>
     </li>
   </ul>
 </div>

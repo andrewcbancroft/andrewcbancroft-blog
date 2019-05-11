@@ -27,7 +27,7 @@ The new cheat sheet can be found over at GitHub in the form of an Xcode Playgrou
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftDatesCheatSheet" title="Swift Dates Cheat Sheet Playground" target="_blank">Swift Dates Cheat Sheet Playground</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftDatesCheatSheet" title="Swift Dates Cheat Sheet Playground" target="_blank">Swift Dates Cheat Sheet Playground</a>
     </li>
   </ul>
 </div>

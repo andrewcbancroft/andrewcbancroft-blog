@@ -27,7 +27,7 @@ For your convenience, I've created a simple GitHub repository with an example Xc
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SocialSwift" title="SocialSwift">SocialSwift Example Project</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SocialSwift" title="SocialSwift">SocialSwift Example Project</a>
     </li>
   </ul>
 </div>

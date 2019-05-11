@@ -38,7 +38,7 @@ I've created such an app as an example – [jump over to GitHub][2] to grab the 
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> Example Xcode Project (<a href="https://github.com/andrewcbancroft/EventTracker/tree/ask-for-permission-swift-2.3" title="EventTracker - Swift 2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/EventTracker/tree/ask-for-permission" title="EventTracker - Swift 3.0">Swift 3.0</a>)</a>
+      <i class="fab fa-github fa-lg"></i> Example Xcode Project (<a href="https://github.com/andrewcbancroft/EventTracker/tree/ask-for-permission-swift-2.3" title="EventTracker - Swift 2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/EventTracker/tree/ask-for-permission" title="EventTracker - Swift 3.0">Swift 3.0</a>)</a>
     </li>
   </ul>
 </div>
@@ -75,10 +75,10 @@ I've created a short screencast on setting up a table view if you'd like a compl
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-video-camera fa"></i> <a href="http://bit.ly/WatchSetUpTVFromACB" title="Setting Up a Table View" target="_blank">Screencast: Setting Up a Table View</a>
+      <i class="fas fa-video fa"></i> <a href="http://bit.ly/WatchSetUpTVFromACB" title="Setting Up a Table View" target="_blank">Screencast: Setting Up a Table View</a>
     </li>
     <li>
-      <i class="fa fa-file-text-o fa"></i> <a href="http://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/" title="Setting Up a Table View - Transcript">Full transcript</a>
+      <i class="fab fa-file-text-o fa"></i> <a href="http://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/" title="Setting Up a Table View - Transcript">Full transcript</a>
     </li>
   </ul>
 </div>

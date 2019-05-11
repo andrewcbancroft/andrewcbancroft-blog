@@ -27,13 +27,13 @@ Previous guides in the series include the following:
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-link"></i> <a href="https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/" title="Beginner’s Guide to Event Kit in Swift – Requesting Permission">Beginner’s Guide to Event Kit in Swift – Requesting Permission</a>
+      <i class="fab fa-link"></i> <a href="https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/" title="Beginner’s Guide to Event Kit in Swift – Requesting Permission">Beginner’s Guide to Event Kit in Swift – Requesting Permission</a>
     </li>
     <li>
-      <i class="fa fa-link"></i> <a href="https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/" title="Creating Calendars with Event Kit and Swift">Creating Calendars with Event Kit and Swift</a>
+      <i class="fab fa-link"></i> <a href="https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/" title="Creating Calendars with Event Kit and Swift">Creating Calendars with Event Kit and Swift</a>
     </li>
     <li>
-      <i class="fa fa-link"></i> <a href="https://www.andrewcbancroft.com/2016/04/28/listing-calendar-events-with-event-kit-and-swift/" title="Listing Calendar Events with Event Kit and Swift">Listing Calendar Events with Event Kit and Swift</a>
+      <i class="fab fa-link"></i> <a href="https://www.andrewcbancroft.com/2016/04/28/listing-calendar-events-with-event-kit-and-swift/" title="Listing Calendar Events with Event Kit and Swift">Listing Calendar Events with Event Kit and Swift</a>
     </li>
   </ul>
 </div>
@@ -55,7 +55,7 @@ As with my other guides, I've included a working project on GitHub for you to pe
   
   <ul class="resources-content">
     <li>
-      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/EventTracker/tree/create-events" title="Event Tracker - Create Events">Event Tracker – Create Events</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/EventTracker/tree/create-events" title="Event Tracker - Create Events">Event Tracker – Create Events</a>
     </li>
   </ul>
 </div>
