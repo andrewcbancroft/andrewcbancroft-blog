@@ -66,7 +66,8 @@ As with my other guides, I've included a working project on GitHub for you to pe
 
 The majority of the work to create an event happens in the example project's AddEventViewController.swift file, so that's where I'll spend my time in this guide. First, let's put the relevant code before us:
 
-<pre class="lang:swift decode:true " title="AddEventViewController.swift" >class AddEventViewController: UIViewController {
+```swift
+class AddEventViewController: UIViewController {
 
     var calendar: EKCalendar! // Intended to be set in parent controller's prepareForSegue event
 
@@ -108,7 +109,8 @@ The majority of the work to create an event happens in the example project's Add
      }
 
      // ...
-}</pre>
+}
+```
 
 <a name="code-walkthrough" class="jump-target"></a>
 
@@ -118,27 +120,33 @@ The general outline of the code is this:
 
   * Create an instance of `EKEventStore` – this will let you create `EKEvents` and save them.
 
-<pre class="lang:swift decode:true " title="AddEventViewController.swift" >let newEvent = EKEvent(eventStore: eventStore)</pre>
+```swift
+let newEvent = EKEvent(eventStore: eventStore)
+```
 
   * Pull an `EKCalendar` instance from the Event Store – this will let you associate an event with a calendar.
 
-<pre class="lang:swift decode:true " title="AddEventViewController.swift" >if let calendarForEvent = eventStore.calendarWithIdentifier(self.calendar.calendarIdentifier) { 
+```swift
+if let calendarForEvent = eventStore.calendarWithIdentifier(self.calendar.calendarIdentifier) { 
 // ... 
 }
-</pre>
+```
 
   * Create a new `EKEvent` instance and set its properties.
 
-<pre class="lang:swift decode:true " title="AddEventViewController.swift" >let newEvent = EKEvent(eventStore: eventStore)
+```swift
+let newEvent = EKEvent(eventStore: eventStore)
             
 newEvent.calendar = calendarForEvent
 newEvent.title = self.eventNameTextField.text ?? "Some Event Name"
 newEvent.startDate = self.eventStartDatePicker.date
-newEvent.endDate = self.eventEndDatePicker.date</pre>
+newEvent.endDate = self.eventEndDatePicker.date
+```
 
   * Attempt to save the event with the `EKEventStore` instance that was created first.
 
-<pre class="lang:swift decode:true " title="AddEventViewController.swift" >do {
+```swift
+do {
     try eventStore.saveEvent(newEvent, span: .ThisEvent, commit: true)
     delegate?.eventDidAdd()
     
@@ -149,7 +157,8 @@ newEvent.endDate = self.eventEndDatePicker.date</pre>
     alert.addAction(OKAction)
     
     self.presentViewController(alert, animated: true, completion: nil)
-}</pre>
+}
+```
 
 <a name="gotchas" class="jump-target"></a>
 
@@ -167,14 +176,16 @@ Specifically, you'll get an error that says &#8220;Thread 1: signal SIGKILL&#822
 
 The fix for this was easy, once I figured out what was going on: Simply re-retrieve a calendar instance using an appropriate `calendarIdentifier` _from the `EKEventStore` instance you're using to save the `EKEvent` with_:
 
-<pre class="lang:swift mark:1,5 decode:true " title="calendarForEvent Snippet" >if let calendarForEvent = eventStore.calendarWithIdentifier((self.calendar.calendarIdentifier))
+```swift
+if let calendarForEvent = eventStore.calendarWithIdentifier((self.calendar.calendarIdentifier))
 {
     let newEvent = EKEvent(eventStore: eventStore)
     
     newEvent.calendar = calendarForEvent
     
     // ...
-}</pre>
+}
+```
 
 # Wrapping up
 

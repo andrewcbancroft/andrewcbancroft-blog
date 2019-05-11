@@ -54,7 +54,8 @@ In its contents, you simply add a reference to the OpenSSL library:
 
 <pre class="lang:sh decode:true " title="Podfile" >target 'NameOfYourApp' do
     pod 'OpenSSL', '~> 1.0'
-end</pre>
+end
+```
 
 Note that there are several &#8216;OpenSSL' Cocoapod specs out there to choose from. I originally tried one that looked like it was for iOS (OpenSSL-iOS), but I was never able to get Swift code to recognize the C functions and types.
 
@@ -86,7 +87,8 @@ Within the bridging header, you can insert some `#import` statements to make the
 
 <pre class="lang:objc decode:true " title="Bridging header" >#import &lt;openssl/pkcs7.h&gt;
 #import &lt;openssl/objects.h&gt;
-// Others that you may need in your Swift project</pre>
+// Others that you may need in your Swift project
+```
 
 <a name="xcode-7-bitcode" class="jump-target"></a>
 

@@ -51,37 +51,45 @@ This is just general advice without respect to a specific language. A couple of 
 
   1.  Watch out for key words like &#8220;and&#8221; / &#8220;or&#8221; in your function names. These red-flag words often indicate that your function is doing more than one thing and can be further decomposed. Consider:
 
-<pre class="lang:swift decode:true">func washAndDryCar() {
+```swift
+func washAndDryCar() {
     // Logic to wash and dry a car
-}</pre>
+}
+```
 
 A preferred decomposition could look something like this:
 
-<pre class="lang:swift decode:true">func washCar() {
+```swift
+func washCar() {
     // Logic to wash a car
 }
 
 func dryCar() {
     // Logic to dry a car
-}</pre>
+}
+```
 
   1.  Doing one thing can still involve multiple steps. But if each step takes a few steps of its own, that group of steps can be extracted out into another function. Consider:
 
-<pre class="lang:swift decode:true">func washCar() {
+```swift
+func washCar() {
     // Pre-rinse code (example implementation - 4 lines)
     // Soap code (example implementation - 5 lines)
     // Rinse code (exmple implementation - 4 lines)
-}</pre>
+}
+```
 
 A preferred decomposition might look something like this:
 
-<pre class="lang:swift decode:true ">func washCar() {
+```swift
+func washCar() {
     rinse(durationInSeconds: 25.0)
     soapCar()
     rinse(durationInSeconds: 60.0)
-}</pre>
+}
+```
 
-What's neat about the final result of the decomposition is that not only is my <span class="lang:swift decode:true  crayon-inline">washCar</span> function shorter and more readable (from 13 lines to 3 lines), but I got code re-use by making the <span class="lang:swift decode:true  crayon-inline ">rinse</span> function take a duration argument.
+What's neat about the final result of the decomposition is that not only is my `washCar` function shorter and more readable (from 13 lines to 3 lines), but I got code re-use by making the `rinse<` function take a duration argument.
 
 Hopefully these thoughts spark a few ideas in you.  Constructive feedback is welcome!  How are _you_ thinking about writing clean code in Swift?
 

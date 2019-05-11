@@ -56,7 +56,8 @@ The two methods that are responsible for doing the actual updates to the table v
 
 So, the general structure of the `NSFetchedResultsControllerDelegate` section of your source file might look like this:
 
-<pre class="lang:swift decode:true mark:2-4,29-31" title="NSFetchedResultsControllerDelegate methods" >// MARK: NSFetchedResultsControllerDelegate methods
+```swift
+// MARK: NSFetchedResultsControllerDelegate methods
 public func controllerWillChangeContent(controller: NSFetchedResultsController) {
     self.tableView.beginUpdates()
 }
@@ -86,7 +87,8 @@ public func controller(controller: NSFetchedResultsController, sectionIndexTitle
 
 public func controllerDidChangeContent(controller: NSFetchedResultsController) {
     self.tableView.endUpdates()
-}</pre>
+}
+```
 
 <a name="did-change-object" class="jump-target"></a>
 
@@ -96,7 +98,8 @@ This is the method that governs how we want to handle the rows in a table view w
 
 I'll give you the implementation and then point out a couple of &#8220;gotchas&#8221; and expound a little more. Recall that we're working with a sample app named &#8220;Zootastic&#8221;, so if you see references to `Animals` in the example, you'll know why. :]
 
-<pre class="lang:swift decode:true " title="Insert, Update, Delete Rows" >public func controller(
+```swift
+public func controller(
         controller: NSFetchedResultsController,
         didChangeObject anObject: AnyObject,
         atIndexPath indexPath: NSIndexPath?,
@@ -134,7 +137,8 @@ I'll give you the implementation and then point out a couple of &#8220;gotchas&#
                     self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
                 }
             }
-}</pre>
+}
+```
 
 Right away you'll notice we enter a switch on the `type` parameter of the method. There are four options possible in the `NSFetchedResultsChangeType` enum: Insert, Delete, Update, and Move.
 
@@ -153,7 +157,8 @@ If your table view has multiple sections, you want to make sure and implement th
 
 Once again, I'll throw the code your way and follow up with commentary:
 
-<pre class="lang:swift decode:true " title="Insert, Update, Delete Sections" >public func controller(
+```swift
+public func controller(
     controller: NSFetchedResultsController,
     didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
     atIndex sectionIndex: Int,
@@ -174,7 +179,7 @@ Once again, I'll throw the code your way and follow up with commentary:
 public func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String?) -> String? {
     return sectionName
 }
-</pre>
+```
 
 For this one, we're only implementing code for Insert and Delete. The necessary information to insert a section or remove a section (ie, the `sectionIndex`) comes as a parameter to the method.
 

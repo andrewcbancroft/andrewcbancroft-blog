@@ -47,20 +47,22 @@ Depending on the type of app you're deploying, you need to perform different ste
 
 Open Global.asax.cs and add the following to the list of registrations in `Application_Start()`:
 
-<pre class="lang:c# decode:true " title="Global.asax.cs Application_Start()" >protected void Application_Start()
+```c#
+protected void Application_Start()
 {
     // Enables use of spatial data types
     SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
 
     // Other registrations...
 }
-</pre>
+```
 
 ### Asp.Net _Websites_
 
 Open Default.aspx.cs and add
 
-<pre class="lang:c# decode:true " title="Default.aspx.cs">public partial class _Default : System.Web.UI.Page
+```c#
+public partial class _Default : System.Web.UI.Page
 {
     static bool _isSqlTypesLoaded = false;
 
@@ -74,14 +76,15 @@ Open Default.aspx.cs and add
         
     }
 }
-</pre>
+```
 
 ### Desktop Applications
 
 Add the following before any spatial operations are performed.
 
-<pre class="lang:c# decode:true " title="Default.aspx.cs">SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
-</pre>
+```c#
+SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
+```
 
 ### 3 – Tell Entity Framework which version of the assembly to use
 
@@ -93,9 +96,10 @@ This is where that [second-most-popular answer][2] came into play. It gave me th
 
 Back in Global.asax.cs (or wherever you performed the steps for #2 above), add the following&#8221;
 
-<pre>SqlProviderServices.SqlServerTypesAssemblyName =
+```
+    SqlProviderServices.SqlServerTypesAssemblyName =
     "Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91";
-</pre>
+```
 
 **Note:** Depending on which version of the NuGet package you installed, you need to adjust the Version number from 14.0.0.0 to the correct version, as appropriate. I installed the latest, which at the time is version 14.x, so that's what I put in.
 

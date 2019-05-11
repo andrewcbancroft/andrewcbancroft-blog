@@ -67,7 +67,8 @@ Working back through the basic workflow with this example you can find the follo
 
 I've chosen my `FirstViewController` class to be the one that defines the global constant with a unique notification key and tells the default notification center to post that notification when the &#8220;Notify!&#8221; button is tapped:
 
-<pre class="lang:swift mark:2,13-15 decode:true" title="FirstViewController.swift">// 1. Globally define a "special notification key" constant that can be broadcast / tuned in to...
+```swift
+// 1. Globally define a "special notification key" constant that can be broadcast / tuned in to...
 let mySpecialNotificationKey = "com.andrewcbancroft.specialNotificationKey"
 
 class FirstViewController: UIViewController {
@@ -87,7 +88,7 @@ class FirstViewController: UIViewController {
         self.sentNotificationLabel.text = "Notification sent!"
     }
 }
-</pre>
+```
 
 <a name="steps3-4" class="jump-target"></a>
 
@@ -95,7 +96,8 @@ class FirstViewController: UIViewController {
 
 Both of these steps are implemented in very similar ways in my `SecondViewController` and `ThirdViewController` classes. The code should speak for itself:
 
-<pre class="lang:swift mark:8,13-15,24,27-29 decode:true" title="Observer View Controllers">class SecondViewController: UIViewController {
+```swift
+class SecondViewController: UIViewController {
     @IBOutlet weak var notificationLabel: UILabel!
     
     override func viewDidLoad() {
@@ -124,7 +126,8 @@ class ThirdViewController: UIViewController {
     func actOnSpecialNotification() {
         self.notificationLabel.text = "I heard the notification, too!"
     }
-}</pre>
+}
+```
 
 Finally, to reiterate the explanation in visual form and for easy reference, I've annotated a screen shot taken from the project's code:
 
@@ -141,9 +144,11 @@ One final requirement for working with `NSNotificationCenter` is to remove an ob
 
 The first situation is the most common, and is for sure the scenario that we want to protect against, so that the default notification center doesn't continue to manage observers that are no longer capable of actively listening. To satisfy the requirement of removing an observer when an instance is deallocated, we could provide something like the following `deinit` method:
 
-<pre class="lang:swift mark:2 decode:true " title="Removing an Observer" >deinit {
+```swift
+deinit {
     NSNotificationCenter.default.removeObserver(self)
-}</pre>
+}
+```
 
 For the second bullet point, you can simply write the same line of code that's highlighted in the above snippet, wherever it makes sense for you to tell the default notification center when it's appropriate to stop sending messages to the instance in question.
 

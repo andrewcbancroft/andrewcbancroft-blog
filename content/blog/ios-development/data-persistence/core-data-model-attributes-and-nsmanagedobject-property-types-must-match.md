@@ -51,7 +51,9 @@ So what happens if you specify that a certain Attribute named, say, `createdOn` 
 
 And over in the implementation of your `NSManagedObject` subclass, you have code that's written like this:
 
-<pre class="lang:swift decode:true " >@NSManaged var createdOn: Date //instead of Date? (ie, the ? is missing)</pre>
+```swift
+@NSManaged var createdOn: Date //instead of Date? (ie, the ? is missing)
+```
 
 What'll happen? Well, I can tell you what'll happen. :]
 

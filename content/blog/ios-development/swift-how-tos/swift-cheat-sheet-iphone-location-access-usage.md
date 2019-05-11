@@ -65,7 +65,8 @@ There's also a `currentLocation` variable that will get continually updated&#823
 
         self.startLocationServices() // This function is implemented below...
     }
-}</pre>
+}
+```
 
 Here is an example of how to implement the two `CLLocationManagerDelegate` methods:
 
@@ -88,7 +89,8 @@ func locationManager(_ manager: CLLocationManager,
                         didUpdateLocations locations: [CLLocation]) {
     self.currentLocation = locations.last
     }
-}</pre>
+}
+```
 
 <a name="start-location-services" class="jump-target"></a>
 
@@ -104,7 +106,8 @@ If, however, the user denies permission, you can alert them to the fact that you
 
 Here's a code snippet showing this in action:
 
-<pre class="lang:swift decode:true " title="Start Location Services and Check Location Authorization Status" >func startLocationServices() {
+```swift
+func startLocationServices() {
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     
     let locationAuthorizationStatus = CLLocationManager.authorizationStatus()
@@ -120,7 +123,7 @@ Here's a code snippet showing this in action:
         self.alertLocationAccessNeeded()
     }
 }
-</pre>
+```
 
 **Note**: You can test for the `.notDetermined` case by deleting the app on the device, if it's already been installed or run on a device from the debugger.
 
@@ -130,7 +133,8 @@ Here's a code snippet showing this in action:
 
 If location services access has been denied or restricted, you can alert the user and direct them to the Settings app to make the appropriate permissions adjustment:
 
-<pre class="lang:swift decode:true " title="Alert location access needed" >func alertLocationAccessNeeded() {
+```swift
+func alertLocationAccessNeeded() {
     let settingsAppURL = URL(string: UIApplicationOpenSettingsURLString)!
     
     let alert = UIAlertController(
@@ -149,7 +153,8 @@ If location services access has been denied or restricted, you can alert the use
     }))
     
     present(alert, animated: true, completion: nil)
-}</pre>
+}
+```
 
 **Note**: You can test for this case (`.restricted` and `.denied`) by going to the Settings app and turning off location services access for your app, if it's been previously granted.
 

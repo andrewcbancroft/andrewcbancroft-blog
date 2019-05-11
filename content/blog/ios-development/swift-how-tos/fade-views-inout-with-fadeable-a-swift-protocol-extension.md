@@ -51,7 +51,8 @@ The &#8220;library's&#8221; source can be found over at GitHub:
 
 Here's a snippet from the repository so you can see what the extension's doing:
 
-<pre class="lang:swift decode:true " title="Fadeable.swift" >import UIKit
+```swift
+import UIKit
 
 public protocol Fadeable {
     var alpha: CGFloat {get set}
@@ -73,7 +74,8 @@ public extension Fadeable {
     }
 }
 
-extension UIView: Fadeable {}</pre>
+extension UIView: Fadeable {}
+```
 
 In the code snippet above, I define the `Fadeable` protocol as [Some Type] that has an `alpha` property, and a `fadeIn()` and `fadeOut()` function.
 
@@ -81,7 +83,8 @@ Then I create an extension to the `Fadeable` protocol and provide a simple, defa
 
 Finally, I extend `UIView` to conform to `Fadeable`. And that's it! Any `UIView` instance can now fade in or out by simply calling the appropriate function:
 
-<pre class="lang:swift decode:true " >class ViewController: UIViewController {
+```swift
+class ViewController: UIViewController {
     
     @IBOutlet weak var box: UIView!
     
@@ -95,7 +98,8 @@ Finally, I extend `UIView` to conform to `Fadeable`. And that's it! Any `UIView`
             box.fadeOut()
         }
     }
-}</pre>
+}
+```
 
 <a name="creating-cocoapod-libraries" class="jump-target"></a>
 

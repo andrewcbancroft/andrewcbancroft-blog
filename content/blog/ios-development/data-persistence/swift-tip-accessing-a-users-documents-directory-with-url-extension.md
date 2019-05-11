@@ -25,7 +25,8 @@ One way to simplify this is to use a Swift extension to `URL`. Doing this will h
 
 # Extension implementation
 
-<pre class="lang:swift decode:true " title="Documents Directory Snippet" >extension URL {
+```swift
+extension URL {
     static var documentsURL: URL {
         return try! FileManager
             .default
@@ -34,7 +35,8 @@ One way to simplify this is to use a Swift extension to `URL`. Doing this will h
                  appropriateFor: nil, 
                  create: true)
     }
-}</pre>
+}
+```
 
 <a name="usage" class="jump-target"></a>
 
@@ -42,12 +44,13 @@ One way to simplify this is to use a Swift extension to `URL`. Doing this will h
 
 Here's an example of using the extension during the routine to create the Core Data stack. For that process, you need to grab a URL to where your SQLite database file will be located. Take a look:
 
-<pre class="lang:swift decode:true " >// ...
+```swift
+// ...
 
 let storeURL = URL.documentsURL.appendingPathComponent("AppDatabase.sqlite")
 
 // use the URL
-</pre>
+```
 
 You could be needing to access the directory for saving files or retrieving files totally unrelated to Core Data. No matter what you're doing, being able to write `URL.documentsURL` is pretty convenient!
 

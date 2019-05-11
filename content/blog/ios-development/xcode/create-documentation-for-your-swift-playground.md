@@ -49,7 +49,8 @@ Let's explore.
         &lt;documentation relative-path='doc-fragment-0.html'&gt;
         &lt;/documentation&gt;
         &lt;code source-file-name='section-2.swift'/&gt;
-&lt;/sections&gt;</pre>
+&lt;/sections&gt;
+```
 
   9.  Save, and open the playground in XCode 6.  Your Playground should now contain documentation!
 

@@ -84,7 +84,8 @@ MainViewController.swift is where the action is happening. Here's a quick outlin
     // create and configure an NSFetchedResultsController instance
 
     // Implement UITableViewDataSource methods
-}</pre>
+}
+```
 
 As you can see, `MainViewController` is a class concerned with being the table view's data source and delegate. Additionally, it will serve as the `NSFetchedResultsControllerDelegate`. For this post, we won't actually need the fetched results controller delegate functionality to display data. Those methods are particularly useful for synchronizing things when data _changes_.
 
@@ -99,7 +100,8 @@ With the class declaration out of the way, we'll investigate the class implement
     public var context: NSManagedObjectContext!
 
     // ...
-}</pre>
+}
+```
 
 You may be asking, &#8220;Where will you set this NSManagedObjectContext reference?&#8221;. I'm employing a pattern that I've found successful in the past: I assign it when the finishes launching through the AppDelegate's `application:didFinishLaunchingWithOptions` method. [More on this, shortly][7]&#8230;
 
@@ -111,7 +113,8 @@ For now, know that we're counting on that [later step][7] to take place, since `
 
 Next, we need to create and configure an `NSFetchedResultsController` instance. Here's a bit of code with comments to follow:
 
-<pre class="lang:swift decode:true mark:11-19" title="Create and Configure NSFetchedResultsController" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+```swift
+public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     // ...
     
@@ -134,7 +137,8 @@ Next, we need to create and configure an `NSFetchedResultsController` instance. 
     
     // ...
 
-}</pre>
+}
+```
 
 If you've not read [Colin Eberhardt's][8] [Swift Initialization and the Pain of Optionals][9] post, I highly recommend it. His post is a fantastic analysis, and the final option of using lazy stored properties initialized by a closure expression is what I've chosen to do here. I won't repeat his analysis here, so feel free to jump over to his post to figure out what's going on there.
 
@@ -146,7 +150,8 @@ Within the closure expression, I'm setting up a fetch request with some sorting 
 
 Once the view has loaded, the idea is to perform the `NSFetchedResultsController` instance's fetch request so that it has data to use in our `UITableViewDataSource` methods. This is how to do it:
 
-<pre class="lang:swift decode:true mark:9-13" title="viewDidLoad()" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+```swift
+public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     // ...
 
@@ -163,7 +168,8 @@ Once the view has loaded, the idea is to perform the `NSFetchedResultsController
 
     // ...
 
-}</pre>
+}
+```
 
 <a name="uitableviewdatasource-methods" class="jump-target"></a>
 
@@ -171,7 +177,8 @@ Once the view has loaded, the idea is to perform the `NSFetchedResultsController
 
 The final step in implementing `MainViewController` is to set up the table view so that it pulls data from `fetchedResultsController`. I'm implementing the [standard UITableViewDataSource methods][10] here, along with `tableView:titleForHeaderInSection`. Take a look:
 
-<pre class="lang:swift decode:true mark:7-9,15-18,25,34-37" title="UITableViewDataSource" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+```swift
+public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     // ...
 
@@ -214,7 +221,8 @@ The final step in implementing `MainViewController` is to set up the table view 
 
     // ...
 
-}</pre>
+}
+```
 
 Apart from a bit of `if let ___ = ___` syntax, there's not an awful lot of surprising code here if you're familiar with working with table views. I've highlighted the relevant code related to `fetchedResultsController`. Without using `NSFetchedResultsController`, you'd probably supply data to the table view from an array or a dictionary or both. The `fetchedResultsController` code simplifies the data display dilemma when you're using Core Data.
 
@@ -226,7 +234,8 @@ Once the `UITableViewDataSource` methods are implemented, the implementation of 
 
 There's one final thing we need to do in order to get things rolling. In the [&#8220;maintain NSManagedObjectContext instance reference&#8221;][11] section of this post, I mentioned the strategy for assigning the `NSManagedObjectContext` instance in the `MainViewController`. Here's how I do it:
 
-<pre class="lang:swift decode:true mark:16-17" title="AppDelegate.swift" >class AppDelegate: UIResponder, UIApplicationDelegate {
+```swift
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // ...
 
@@ -250,7 +259,7 @@ There's one final thing we need to do in order to get things rolling. In the [&#
     // ...
 
 }
-</pre>
+```
 
 The portion new to &#8220;injecting&#8221; the `managedObjectContext` into `MainViewController` is highlighted. I simply grab a reference to the `rootViewController` (which in our example is the `MainViewController`) and cast it to the appropriate type. Then I set the `context` property to the `managedObjectContext` that's created in the `AppDelegate` via XCode's auto-generated Core Data stack setup.
 

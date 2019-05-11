@@ -18,7 +18,7 @@ tags:
   - UIView Extension
 
 ---
-In a previous post about <a title="Fade In / Out Animations as Class Extensions in Swift" href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" target="_blank">fade animations</a> in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call <span class="lang:swift decode:true  crayon-inline ">fadeIn()</span> or <span class="lang:swift decode:true  crayon-inline ">fadeOut()</span> on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them _somewhere_. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews.
+In a previous post about <a title="Fade In / Out Animations as Class Extensions in Swift" href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" target="_blank">fade animations</a> in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call `fadeIn()` or `fadeOut()` on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them _somewhere_. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews.
 
 Well, I liked the idea so much that when it came time for me to implement a slide animation, I kept the same strategy, and I'd like to share my implementation with you today.
 
@@ -44,7 +44,8 @@ There are three major parts to this example implementation, which I'll explain i
 
 #### 1 – Create the UIView extension
 
-<pre class="lang:swift decode:true " title="UIViewExtensions.swift">import UIKit
+```swift
+import UIKit
 
 extension UIView {
     // Name this function in a way that makes sense to you... 
@@ -68,7 +69,8 @@ extension UIView {
         // Add the animation to the View's layer
         self.layer.addAnimation(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
     }
-}</pre>
+}
+```
 
 <a name="overview-setup-storyboard" class="jump-target"></a>
 
@@ -83,35 +85,40 @@ extension UIView {
 
 #### 3 – Code the View Controller – initiate slide animation.
 
-In my example, I wired the trigger up to a button's <span class="lang:swift decode:true  crayon-inline ">touchUpInside</span> action. For you, it may be something different that triggers the animation to begin. Whatever it may be, call <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> on your UIView instance (in my case, the UILabel).
+In my example, I wired the trigger up to a button's `touchUpInside` action. For you, it may be something different that triggers the animation to begin. Whatever it may be, call `slideInFromLeft()` on your UIView instance (in my case, the UILabel).
 
-<pre class="lang:swift decode:true" title="ViewController.swift">@IBAction func slideTextButtonTapped(sender: UIButton) {
+```swift
+@IBAction func slideTextButtonTapped(sender: UIButton) {
         self.slidingTextLabel.slideInFromLeft()
         self.slidingTextLabel.text = "Sliding Text!"
-    }</pre>
+    }
+```
 
-Notice that directly after the call to <span class="lang:swift decode:true  crayon-inline">slideInFromLeft()</span>, I change the label's text property to contain the new text that I want to slide in.
+Notice that directly after the call to `slideInFromLeft()`, I change the label's text property to contain the new text that I want to slide in.
 
 <a name="details" class="jump-target"></a>
 
 ### Implementation details
 
-The real work all happens inside the UIViewExtensions.swift file where I add the <span class="lang:swift decode:true  crayon-inline">slideInFromLeft()</span> <span class="crayon-sy">function to a UIView's arsenal.</span>
+The real work all happens inside the UIViewExtensions.swift file where I add the `slideInFromLeft()` <span class="crayon-sy">function to a UIView's arsenal.`
 
 <a name="details-uiviewextensions-swift" class="jump-target"></a>
 
 #### UIViewExtensions.swift
 
-First to note is that I've provided a few default values in the function's signature so that the animation can be initiated as simply as writing <span class="lang:swift decode:true  crayon-inline">viewInstance.slideInFromLeft()</span>, or as &#8220;complicated&#8221; as providing argument values to both duration and completionDelegate:
+First to note is that I've provided a few default values in the function's signature so that the animation can be initiated as simply as writing `viewInstance.slideInFromLeft()`, or as &#8220;complicated&#8221; as providing argument values to both duration and completionDelegate:
 
-<pre class="lang:swift decode:true">extension UIView {
+```swift
+extension UIView {
     func slideInFromLeft(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
     // Implementation...
-}</pre>
+}
+```
 
-Next, I create a <span class="lang:swift decode:true  crayon-inline ">CATransition</span> instance, and set its delegate property if a <span class="lang:swift decode:true  crayon-inline ">completionDelegate</span> is passed when the function is called:
+Next, I create a `CATransition` instance, and set its delegate property if a `completionDelegate` is passed when the function is called:
 
-<pre class="lang:swift decode:true">extension UIView {
+```swift
+extension UIView {
     func slideInFromLeft(duration: NSTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
         let slideInFromLeftTransition = CATransition()
         
@@ -119,11 +126,13 @@ Next, I create a <span class="lang:swift decode:true  crayon-inline ">CATransiti
             slideInFromLeftTransition.delegate = delegate
         }
             // Remaining implementation...
-}</pre>
+}
+```
 
-I then go about configuring the animation's properties. To achieve the &#8220;slide in from left&#8221; animation, I set the <span class="lang:swift decode:true  crayon-inline ">type</span> and the <span class="lang:swift decode:true  crayon-inline ">subtype</span> properties to <span class="lang:swift decode:true  crayon-inline ">kCATransitionPush</span> and <span class="lang:swift decode:true  crayon-inline">kCATransitionFromLeft</span>, respectively. These two combined create the &#8220;slide in&#8221; effect. Other properties that I set are <span class="lang:swift decode:true  crayon-inline">duration</span>, <span class="lang:swift decode:true  crayon-inline">timingFunction</span>, and <span class="lang:swift decode:true  crayon-inline">fillMode</span>:
+I then go about configuring the animation's properties. To achieve the &#8220;slide in from left&#8221; animation, I set the `type` and the `subtype` properties to `kCATransitionPush` and `kCATransitionFromLeft`, respectively. These two combined create the &#8220;slide in&#8221; effect. Other properties that I set are `duration`, `timingFunction`, and `fillMode`:
 
-<pre class="lang:swift decode:true">extension UIView {
+```swift
+extension UIView {
         // ...
         slideInFromLeftTransition.type = kCATransitionPush
         slideInFromLeftTransition.subtype = kCATransitionFromLeft
@@ -133,17 +142,20 @@ I then go about configuring the animation's properties. To achieve the &#8220;sl
         
         // ...
     }
-}</pre>
+}
+```
 
-To keep things simple, I only allow myself to customize the <span class="lang:swift decode:true  crayon-inline ">duration</span> property, and optionally provide a <span class="lang:swift decode:true  crayon-inline ">completionDelegate</span> when I call the function&#8230; the other properties are more fundamental to how the animation should perform, so I encapsulate the implementation here so that it's an abstraction when I actually call <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> later in my View Controller.
+To keep things simple, I only allow myself to customize the `duration` property, and optionally provide a `completionDelegate` when I call the function&#8230; the other properties are more fundamental to how the animation should perform, so I encapsulate the implementation here so that it's an abstraction when I actually call `slideInFromLeft()` later in my View Controller.
 
-The last thing I do is add the animation that I just created and configured to the view's layer property. &#8220;The view&#8221; here would be the instance of UIView that has _calls_ <span class="lang:swift decode:true  crayon-inline">slideInFromLeft()</span>:
+The last thing I do is add the animation that I just created and configured to the view's layer property. &#8220;The view&#8221; here would be the instance of UIView that has _calls_ `slideInFromLeft()`:
 
-<pre class="lang:swift decode:true ">extension UIView {
+```swift
+extension UIView {
         // ...
         self.layer.addAnimation(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
     }
-}</pre>
+}
+```
 
 <a name="details-storyboard-setup" class="jump-target"></a>
 
@@ -180,18 +192,21 @@ The last thing I do in the storyboard before wiring things in the View Controlle
 
 The final piece of the setup is to wire things up to the View Controller and animate the Label.
 
-Since I needed to reference the Label containing the text that I'd like to animate, I created an <span class="lang:swift decode:true  crayon-inline ">IBOutlet</span> from my storyboard to my View Controller:
+Since I needed to reference the Label containing the text that I'd like to animate, I created an `IBOutlet` from my storyboard to my View Controller:
 
-<pre class="lang:swift decode:true" title="ViewController.swift">class ViewController: UIViewController {
+```swift
+class ViewController: UIViewController {
     @IBOutlet weak var slidingTextLabel: UILabel!
     // ...
-}</pre>
+}
+```
 
-Next, I needed a way to initiate the slide in animation – I decided that wiring it to a button's <span class="lang:swift decode:true  crayon-inline ">touchUpInside</span> action would be sufficient for the example, so I created an <span class="lang:swift decode:true  crayon-inline ">IBAction</span> from my Storyboard to my View Controller for that purpose.
+Next, I needed a way to initiate the slide in animation – I decided that wiring it to a button's `touchUpInside` action would be sufficient for the example, so I created an `IBAction` from my Storyboard to my View Controller for that purpose.
 
-Within the body of that <span class="lang:swift decode:true  crayon-inline">IBAction</span>, I wrote the call to <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> on my <span class="lang:swift decode:true  crayon-inline ">slidingTextLabel</span> instance:
+Within the body of that `IBAction`, I wrote the call to `slideInFromLeft()` on my `slidingTextLabel` instance:
 
-<pre class="lang:swift decode:true " title="ViewController.swift">import UIKit
+```swift
+import UIKit
 
 class ViewController: UIViewController {
     // ...
@@ -202,15 +217,18 @@ class ViewController: UIViewController {
     }
     
     // ...
-}</pre>
+}
+```
 
-If you have need to specify a <span class="lang:swift decode:true  crayon-inline ">duration</span> or a <span class="lang:swift decode:true  crayon-inline">completionDelegate</span>, there's a commented out line of code there that shows an example of passing those arguments to the <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> function.
+If you have need to specify a `duration` or a `completionDelegate`, there's a commented out line of code there that shows an example of passing those arguments to the `slideInFromLeft()` function.
 
-If you specify a <span class="lang:swift decode:true  crayon-inline ">completionDelegate</span> to the <span class="lang:swift decode:true  crayon-inline ">slideInFromLeft()</span> function, a method called <span class="lang:swift decode:true  crayon-inline ">animationDidStop()</span> will be called when the animation finishes. Inside this callback function, you can write code to perform any action you'd like to have happen after the animation has finished. If you don't set a completionDelegate, there's no need to have this method override in your code:
+If you specify a `completionDelegate` to the `slideInFromLeft()` function, a method called `animationDidStop()` will be called when the animation finishes. Inside this callback function, you can write code to perform any action you'd like to have happen after the animation has finished. If you don't set a completionDelegate, there's no need to have this method override in your code:
 
-<pre class="lang:swift decode:true " title="ViewController.swift">override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+```swift
+override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
         println("Animation stopped")
-    }</pre>
+    }
+```
 
 That's a wrap, folks! Hope this strategy is helpful for you as you think about where to place code for your UIView animations.
 

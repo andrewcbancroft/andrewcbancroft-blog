@@ -60,7 +60,8 @@ At the end of the day, what we'd like back from the parsing process is a simple 
 
 How does the following look?
 
-<pre class="lang:swift decode:true " title="ParsedReceipt | ParsedInAppPurchaseReceipt" >struct ParsedReceipt {
+```swift
+struct ParsedReceipt {
     let bundleIdentifier: String?
     let bundleIdData: NSData?
     let appVersion: String?
@@ -82,7 +83,8 @@ struct ParsedInAppPurchaseReceipt {
     let subscriptionExpirationDate: Date?
     let cancellationDate: Date?
     let webOrderLineItemId: Int?
-}</pre>
+}
+```
 
 You may be wondering, &#8220;How'd he know what values are encoded within the extracted receipt payload?&#8221;. Apple has a very handy [list of all the values that are encoded][7], so I listed each property out in my struct according to their documentation.
 
@@ -178,7 +180,8 @@ If you saw the `ParsedReceipt` struct that I proposed earlier in the guide, you'
 
 Let me put the code before you and follow up with what I'm doing here:
 
-<pre class="lang:swift decode:true " title="Decoding Helpers" >func DecodeASN1Integer(startOfInt intPointer: inout UnsafePointer&lt;UInt8>?, length: Int) -> Int? {
+```swift
+func DecodeASN1Integer(startOfInt intPointer: inout UnsafePointer&lt;UInt8>?, length: Int) -> Int? {
     // These will be set by ASN1_get_object
     var type = Int32(0)
     var xclass = Int32(0)
@@ -230,7 +233,8 @@ func DecodeASN1Date(startOfDate datePointer: inout UnsafePointer&lt;UInt8>?, len
     }
     
     return nil
-}</pre>
+}
+```
 
 Each of these decoding functions are dealing with the receipt attribute _value_ portion of the ASN.1 Sequence that we're working on at the time. Recall the structure:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg" alt="ASN.1 Sequence" width="919" height="337" class="alignnone size-full wp-image-13514" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg 919w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-768x282.jpeg 768w" sizes="(max-width: 919px) 100vw, 919px" />][10]
@@ -257,7 +261,8 @@ In situations where the receipt payload or one of its in-app purchase receipt pa
 
 I've highlighted two new `ReceiptValidationError` cases here:
 
-<pre class="lang:swift decode:true mark:7-8" title="New ReceiptValidationError cases" >enum ReceiptValidationError : Error {
+```swift
+enum ReceiptValidationError : Error {
     case couldNotFindReceipt
     case emptyReceiptContents
     case receiptNotSigned
@@ -266,7 +271,7 @@ I've highlighted two new `ReceiptValidationError` cases here:
     case malformedReceipt
     case malformedInAppPurchaseReceipt
 }
-</pre>
+```
 
 <a name="implementing-receipt-parser" class="jump-target"></a>
 
@@ -276,7 +281,8 @@ OK! We've got a few helper functions to decode the receipt attributes, and we've
 
 At a very high level, the ReceiptParser will take the following skeletal structure:
 
-<pre class="lang:swift decode:true" title="ReceiptParser Skeleton" >struct ReceiptParser {
+```swift
+struct ReceiptParser {
     func parse(_ PKCS7Container: UnsafeMutablePointer&lt;PKCS7>) throws -> ParsedReceipt {
         var bundleIdentifier: String?
         var bundleIdData: NSData?
@@ -324,7 +330,7 @@ At a very high level, the ReceiptParser will take the following skeletal structu
                                           cancellationDate: cancellationDate,
                                           webOrderLineItemId: webOrderLineItemId)
     }
-</pre>
+```
 
 So a total of two functions: one to parse the overall receipt, and one to parse each in-app purchase receipt nested _within_ the overall receipt.
 
@@ -336,7 +342,8 @@ Now comes the hard part. Actually doing all the decoding. Don't forget the [stra
 
 First, the implementation of `parse(_:)` with comments throughout to help you find where each step of the [strategy][11] is being implemented:
 
-<pre class="lang:swift decode:true" title="Implementation of parse function" >func parse(_ PKCS7Container: UnsafeMutablePointer&lt;PKCS7>) throws -> ParsedReceipt {
+```swift
+func parse(_ PKCS7Container: UnsafeMutablePointer&lt;PKCS7>) throws -> ParsedReceipt {
     var bundleIdentifier: String?
     var bundleIdData: NSData?
     var appVersion: String?
@@ -446,7 +453,7 @@ First, the implementation of `parse(_:)` with comments throughout to help you fi
                             receiptCreationDate: receiptCreationDate,
                             expirationDate: expirationDate)
 }
-</pre>
+```
 
 Aside from the work with pointers and the Open SSL function names, the strategy is pretty straight-forward when you look it from a bird's-eye point of view.
 
@@ -458,7 +465,8 @@ Once again, if you're curious about how I knew to map each `case` within the `sw
 
 Now it's time to see how to parse an in-app purchase receipt payload. Take a look:
 
-<pre class="lang:swift decode:true" title="Implementation of parse function" >func parseInAppPurchaseReceipt(currentInAppPurchaseASN1PayloadLocation: inout UnsafePointer&lt;UInt8>?, payloadLength: Int) throws -> ParsedInAppPurchaseReceipt {
+```swift
+func parseInAppPurchaseReceipt(currentInAppPurchaseASN1PayloadLocation: inout UnsafePointer&lt;UInt8>?, payloadLength: Int) throws -> ParsedInAppPurchaseReceipt {
     var quantity: Int?
     var productIdentifier: String?
     var transactionIdentifier: String?
@@ -558,7 +566,7 @@ Now it's time to see how to parse an in-app purchase receipt payload. Take a loo
                                         cancellationDate: cancellationDate,
                                         webOrderLineItemId: webOrderLineItemId)
 }
-</pre>
+```
 
 As you can see, parsing an in-app purchase receipt uses the same strategy as parsing the overall receipt does.
 
@@ -578,7 +586,8 @@ I'll spare you having to scroll through _all_ that code again. If you'd like to 
 
 I initialize an instance of `ReceiptParser` in my [`ReceiptValidator` struct][13], and then call the `parse(_:)` function from `validateReceipt()`:
 
-<pre class="lang:swift decode:true mark:2,10,20" title="ReceiptValidator Updates" >enum ReceiptValidationResult {
+```swift
+enum ReceiptValidationResult {
     case success(ParsedReceipt) // Now has ParsedReceipt for an associated value
     case error(ReceiptValidationError)
 }
@@ -604,7 +613,7 @@ struct ReceiptValidator {
         }
     }
 }
-</pre>
+```
 
 <a name="preparing-to-finish-receipt-validation" class="jump-target"></a>
 

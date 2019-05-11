@@ -56,19 +56,23 @@ If you're the type that likes to simply dive into a working example, both implem
 
 `Movies` are represented by a simple struct:
 
-<pre class="lang:swift decode:true " title="Movie" >struct Movie {
+```swift
+struct Movie {
     let title: String
     let genre: String
-}</pre>
+}
+```
 
 The table view (regardless of whether we use a `UITableViewController` or a regular `UIViewController`) has the following setup&#8230;
 
 Initial data source values:
 
-<pre class="lang:swift decode:true " title="Initial data source" >var movies = [
+```swift
+var movies = [
     Movie(title: "Lion King", genre: "Animation"),
     Movie(title: "Star Wars", genre: "Sci-fi")
-]</pre>
+]
+```
 
 Setting up the table view's data source protocol methods depends on whether you're using a [UITableViewController][1] or a [regular UIViewController][2] with a table view as one of its content views, so we'll cover those in the individual examples.
 
@@ -82,7 +86,8 @@ Setting up the table view's data source protocol methods depends on whether you'
 
 When working with a `UITableViewController`, we simply override the data source method implementations. The following is how I've chosen to do it for this example:
 
-<pre class="lang:swift decode:true " title="UITableView data source methods" >override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+```swift
+override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return movies.count
 }
 
@@ -93,7 +98,8 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
     cell.detailTextLabel?.text = movies[(indexPath as NSIndexPath).row].genre
     
     return cell
-}</pre>
+}
+```
 
 <a name="enable-refreshing-storyboard" class="jump-target"></a>
 
@@ -111,12 +117,14 @@ A `UITableViewController` comes outfitted with a reference to a `UIRefreshContro
 
 In your override of `viewDidLoad()`, add a target to handle the refresh as follows:
 
-<pre class="lang:swift decode:true mark:5" title="viewDidLoad()" >override func viewDidLoad() {
+```swift
+override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
     self.refreshControl?.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
-}</pre>
+}
+```
 
 Here are a couple of things to observe about the code above:
 
@@ -129,7 +137,8 @@ Here are a couple of things to observe about the code above:
 
 The `handleRefresh:` function may look something like the following:
 
-<pre class="lang:swift decode:true mark:11,12" title="handleRefresh" >func handleRefresh(refreshControl: UIRefreshControl) {
+```swift
+func handleRefresh(refreshControl: UIRefreshControl) {
     // Do some reloading of data and update the table view's data source
     // Fetch more objects from a web service, for example...
     
@@ -141,7 +150,8 @@ The `handleRefresh:` function may look something like the following:
     
     self.tableView.reloadData()
     refreshControl.endRefreshing()
-}</pre>
+}
+```
 
 That should complete the pull to refresh implementation when you're working with a `UITableViewController`!
 
@@ -167,7 +177,8 @@ To wire up the table view's data source and delegate in the Storyboard, control+
 
 The data source protocol method implementations may look something like this:
 
-<pre class="lang:swift decode:true " title="UITableView data source methods">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+```swift
+ Int {
     return movies.count
 }
 
@@ -178,7 +189,8 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     cell.detailTextLabel?.text = movies[(indexPath as NSIndexPath).row].genre
     
     return cell
-}</pre>
+}
+```
 
 <a name="setup-refresh-control" class="jump-target"></a>
 
@@ -186,12 +198,14 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 
 Whereas a `UITableViewController` comes pre-fit with a `UIRefreshControl`, a regular `UIViewController` does not. It's simple enough to set one up though. Here is a snippet defining a lazily instantiated variable which creates and configures a `UIRefreshControl`:
 
-<pre class="lang:swift decode:true mark:3" title="Set up UIRefreshControl" >lazy var refreshControl: UIRefreshControl = {
+```swift
+lazy var refreshControl: UIRefreshControl = {
     let refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
     
     return refreshControl
-}()</pre>
+}()
+```
 
 The most complicated thing about the code I just proposed is how the `UIRefreshControl` instance is assigned lazily by means of the closure expression denoted by `= { // ...closure body with setup code... }()` in the above snippet. Using this approach allows me to complete the setup all in one spot without the use of optionals. You may prefer doing this another way. The bottom line goal is to have a `UIRefreshControl` instance that we can add to the table view (coming up).
 
@@ -207,12 +221,14 @@ As with the `UITableViewController` example, note:
 
 Assuming that [there is an outlet to the table view in the Storyboard][7], the next step is to add the `UIRefreshControl` as a subview to the table view:
 
-<pre class="lang:swift decode:true mark:5" title="viewDidLoad" >override func viewDidLoad() {
+```swift
+override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
     self.tableView.addSubview(self.refreshControl)
-}</pre>
+}
+```
 
 <a name="regvc-handle-refresh-function" class="jump-target"></a>
 
@@ -220,7 +236,8 @@ Assuming that [there is an outlet to the table view in the Storyboard][7], the n
 
 The `handleRefresh` function is implemented exactly as it was when we were dealing with a `UITableViewController`:
 
-<pre class="lang:swift decode:true mark:11,12" title="handleRefresh" >func handleRefresh(refreshControl: UIRefreshControl) {
+```swift
+func handleRefresh(refreshControl: UIRefreshControl) {
     // Do some reloading of data and update the table view's data source
     // Fetch more objects from a web service, for example...
     
@@ -232,7 +249,8 @@ The `handleRefresh` function is implemented exactly as it was when we were deali
     
     self.tableView.reloadData()
     refreshControl.endRefreshing()
-}</pre>
+}
+```
 
 ### Wrapping up
 

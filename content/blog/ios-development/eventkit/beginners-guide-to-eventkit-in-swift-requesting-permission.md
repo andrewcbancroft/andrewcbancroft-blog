@@ -112,12 +112,14 @@ At the heart of EventKit is the `EKEventStore`. `EKEventStore` is the central &#
 
 A View Controller that interacts with the calendar should hold a reference to an `EKEventStore` instance. It's easy to create one – here's an example:
 
-<pre class="lang:swift decode:true " title="ViewController.swift" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+```swift
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let eventStore = EKEventStore()
 
     // ...    
-}</pre>
+}
+```
 
 <a name="checking-calendar-authorization" class="jump-target"></a>
 
@@ -129,7 +131,8 @@ Where we check for calendar authorization is important. My recommendation is to 
 
 In the example project provided with this article, I've created a function named `checkCalendarAuthorizationStatus()`. Here a peek at what it does:
 
-<pre class="lang:swift decode:true mark:5-7,10" title="ViewController.swift" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+```swift
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // ...
     
@@ -155,7 +158,8 @@ In the example project provided with this article, I've created a function named
     }
 
     // ...
-}</pre>
+}
+```
 
 The key function here is `EKEventStore's` `authorizationStatus(for:)` function. Passing in `EKEntityType.event` is what corresponds to the user's _calendar_. If we wanted to check for access to their reminders, we'd use `EKEntityTypeReminder`.
 
@@ -182,7 +186,8 @@ As the title of this tutorial suggests, all things start here. Whenever our appl
 
 To do so, let's dissect the `requestAccessToCalendar` function:
 
-<pre class="lang:swift decode:true mark:6,10,16" title="requestAccessToCalendar()" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+```swift
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
    // ...
    
@@ -204,7 +209,8 @@ To do so, let's dissect the `requestAccessToCalendar` function:
     }
 
     // ...
-}</pre>
+}
+```
 
 Our `EKEventStore` instance provides a function called `requestAccess(to:)`. Once again, passing in `EKEntityType.event` is what signals that we're requesting access to the _calendar_. The rest of the interesting parts are found in the completion closure that we provide.
 
@@ -220,7 +226,8 @@ There are three main things to note with this portion of the implementation:
 
 When access is granted, we can call the `eventStore` instance's `calendarsForEntityType` function and pass it `EKEntityType.event` to grab an array of the user's calendars to display in our table view. Here's a look:
 
-<pre class="lang:swift decode:true " title="loadCalendars()" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+```swift
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // ...
 
@@ -238,7 +245,8 @@ When access is granted, we can call the `eventStore` instance's `calendarsForEnt
     }
 
     // ...
-}</pre>
+}
+```
 
 <a name="access-denied" class="jump-target"></a>
 
@@ -248,7 +256,8 @@ When access is _denied_, we need to unveil the &#8220;Needs Permission View&#822
 
 Recall that in that view, there's a button to direct the user to the Settings page for our app so that they can easily grant access to the calendar from there. That button is wired up to an IBAction. Here's an example implementation of that IBAction:
 
-<pre class="lang:swift decode:true mark:6-7" title="goToSettingsButtonTapped()" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+```swift
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // ...
 
@@ -258,7 +267,8 @@ Recall that in that view, there's a button to direct the user to the Settings pa
     }
 
     // ...
-}</pre>
+}
+```
 
 <a name="wrapping-up" class="jump-target"></a>
 

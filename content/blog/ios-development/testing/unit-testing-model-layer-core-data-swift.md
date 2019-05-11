@@ -33,7 +33,8 @@ To my surprise, unit testing my Core Data model layer has been… well… amazin
 
 A [Stack Overflow][2] question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I've written it in Swift. In my project, I created a new Swift file called &#8220;CoreDataHelpers.swift&#8221; in my tests target. Here's a look at the helper function:
 
-<pre class="lang:swift mark:9 decode:true " title="CoreDataHelpers.swift" >import CoreData
+```swift
+import CoreData
 
 func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
     let managedObjectModel = NSManagedObjectModel.mergedModelFromBundles([NSBundle.mainBundle()])!
@@ -50,7 +51,8 @@ func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
     managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
     
     return managedObjectContext
-}</pre>
+}
+```
 
 #### Observations
 
@@ -70,7 +72,8 @@ With the ability to get an `NSManagedObjectContext` instance that's using an in-
 
 Here's a sample test:
 
-<pre class="lang:swift decode:true " title="XCTestCase &#038; CoreData" >import CoreData
+```swift
+import CoreData
 
 class TestsUsingModelFromCoreData: XCTestCase {
     func testSomethingUsingCoreData() {
@@ -81,7 +84,8 @@ class TestsUsingModelFromCoreData: XCTestCase {
         
         // XCTAssert    
     }
-}</pre>
+}
+```
 
 ### Conclusion
 

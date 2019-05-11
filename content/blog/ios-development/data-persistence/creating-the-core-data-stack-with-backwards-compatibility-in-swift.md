@@ -44,9 +44,11 @@ The Core Data stack can be created in about 3 steps:
 
 This corresponds to your .xcdatamodeld file. You'll want to glance over to the project navigator on the left and locate the .xcdatamodeld file to record its name for this step.
 
-<pre class="lang:swift decode:true " title="Initialize NSManagedObjectModel" >// Initialize NSManagedObjectModel
+```swift
+// Initialize NSManagedObjectModel
 let modelURL = Bundle.main.url(forResource: "NameOfDataModel", withExtension: "momd")
-guard let model = NSManagedObjectModel(contentsOf: modelURL!) else { fatalError("model not found") }</pre>
+guard let model = NSManagedObjectModel(contentsOf: modelURL!) else { fatalError("model not found") }
+```
 
 <a name="persistent-store-coordinator" class="jump-target"></a>
 
@@ -64,7 +66,8 @@ let storeURL = try! FileManager
         .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         .appendingPathComponent("NameOfDataModel.sqlite")
 
-try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)</pre>
+try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+```
 
 <a name="managed-object-context" class="jump-target"></a>
 
@@ -72,9 +75,11 @@ try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, a
 
 The last step is to initialize an instance of `NSManagedObjectContext` and assign it the `NSPersistentStoreCoordinator` instance.
 
-<pre class="lang:swift decode:true " title="Initialize NSManagedObjectContext" >// Create and return NSManagedObjectContext
+```swift
+// Create and return NSManagedObjectContext
 let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-context.persistentStoreCoordinator = psc</pre>
+context.persistentStoreCoordinator = psc
+```
 
 <a name="code-example" class="jump-target"></a>
 
@@ -84,7 +89,8 @@ When I create the Core Data stack, I like to encapsulate the code in a stand-alo
 
 Here are all three steps put together:
 
-<pre class="lang:swift decode:true " title="Core Data Stack" >func createMainContext() -&gt; NSManagedObjectContext {
+```swift
+func createMainContext() -&gt; NSManagedObjectContext {
     
     // Initialize NSManagedObjectModel
     let modelURL = Bundle.main.url(forResource: "NameOfDataModel", withExtension: "momd")
@@ -105,7 +111,8 @@ Here are all three steps put together:
     context.persistentStoreCoordinator = psc
     
     return context
-}</pre>
+}
+```
 
 Once you've got a function like `createMainContext()`, you'll be able to call it to obtain a fully-configured `NSManagedObjectContext` instance.
 

@@ -38,14 +38,15 @@ If you **don't** set this, your app will crash when you request access to the ca
 
 # Check and Respond to Camera Authorization Status
 
-<pre class="lang:swift decode:true " title="Check camera authorization status" >let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+```swift
+let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
 
 switch cameraAuthorizationStatus {
 case .notDetermined: requestCameraPermission()
 case .authorized: presentCamera()
 case .restricted, .denied: alertCameraAccessNeeded()
 }
-</pre>
+```
 
 <a name="request-permission" class="jump-target"></a>
 
@@ -53,12 +54,14 @@ case .restricted, .denied: alertCameraAccessNeeded()
 
 If the user has never responded to a request to access his/her camera, you need to prompt with the iOS system alert to request permission:
 
-<pre class="lang:swift decode:true " title="Request camera permission" >func requestCameraPermission() {
+```swift
+func requestCameraPermission() {
     AVCaptureDevice.requestAccess(for: .video, completionHandler: {accessGranted in
         guard accessGranted == true else { return }
         self.presentCamera()
     })
-}</pre>
+}
+```
 
 **Note**: You can test for this case by deleting the app on the device, if it's already been installed or run on a device from the debugger.
 
@@ -66,13 +69,15 @@ If the user has never responded to a request to access his/her camera, you need 
 
 # Present Camera
 
-<pre class="lang:swift decode:true " title="Present camera" >func presentCamera() {
+```swift
+func presentCamera() {
     let photoPicker = UIImagePickerController()
     photoPicker.sourceType = .camera
     photoPicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
     
     self.present(photoPicker, animated: true, completion: nil)
-}</pre>
+}
+```
 
 <a name="alert-camera-access-needed" class="jump-target"></a>
 
@@ -80,7 +85,8 @@ If the user has never responded to a request to access his/her camera, you need 
 
 If camera access has been denied or restricted, you can alert the user and direct them to the Settings app to make the appropriate permissions adjustment:
 
-<pre class="lang:swift decode:true " title="Alert camera access needed" >func alertCameraAccessNeeded() {
+```swift
+func alertCameraAccessNeeded() {
     let settingsAppURL = URL(string: UIApplicationOpenSettingsURLString)!
     
     let alert = UIAlertController(
@@ -95,7 +101,8 @@ If camera access has been denied or restricted, you can alert the user and direc
     }))
 
     present(alert, animated: true, completion: nil)
-}</pre>
+}
+```
 
 **Note**: You can test for this case by going to the Settings app and turning off camera access for your app, if it's been previously granted.
 
@@ -107,7 +114,8 @@ To use the image that the camera captured, you need to set up your view controll
 
 <pre class="lang:default decode:true " title="Adhere to delegate protocols" >class NameOfViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 // ...
-}</pre>
+}
+```
 
 <a name="delegate" class="jump-target"></a>
 
@@ -118,6 +126,7 @@ To use the image that the camera captured, you need to set up your view controll
     // do something with the photo... set to UIImageView, save it, etc.
 
     dismiss(animated: true, completion: nil)
-}</pre>
+}
+```
 
 <a name="share" class="jump-target"></a>

@@ -50,17 +50,20 @@ It could be that I've chosen poor names for the properties, but if I wanted to m
 
 ### 2 – As the title of the blog entry signals, we could replace the booleans with an enumeration:
 
-<pre class="lang:swift decode:true " >public enum SubscriberStatus {
+```swift
+public enum SubscriberStatus {
     case CurrentSubscriber
     case ExpiredSubscriber
     case NonSubscriber
-}</pre>
+}
+```
 
 Immediately, this clarifies the mutually exclusive part. Enumerations, by definition, expose mutually exclusive values. By defining the `SubscriberStatus` enumeration, I've made clear that my intent is to have someone be _either_ a `CurrentSubscriber`, an `ExpiredSubscriber`, or a `NonSubscriber`, but not combinations of each.
 
 Not only that, but rather than including complicated branching logic when I need to determine someone's subscription status, I can simply switch-case over the enumeration possibilities and perform the appropriate behavior.
 
-<pre class="lang:swift decode:true " >func checkSubscriberStatusForRegistrant(registrant: Registrant) {
+```swift
+func checkSubscriberStatusForRegistrant(registrant: Registrant) {
     // We're coming to the definition of Registrant...
     // In fact, Registrant's implementation is the goal of this blog entry!
 
@@ -73,7 +76,8 @@ Not only that, but rather than including complicated branching logic when I need
         offerSubscription()
     }
     
-}</pre>
+}
+```
 
 <a name="produce-enum-values" class="jump-target"></a>
 
@@ -83,7 +87,8 @@ The one thing that left me scratching my head on at first was the part of the wh
 
 When I'm consuming the enumeration values, I'm riding on the fact that `registrant.subscriberStatus` has some way of producing a correct `SubscriberStatus` for the registrant. But what does that look like? Well&#8230; here's one possibility:
 
-<pre class="lang:swift decode:true " >public struct Registrant {
+```swift
+public struct Registrant {
     public var subscriberStatus: SubscriberStatus {
         get {
             if (noSubscriptionOnFile()) {
@@ -105,7 +110,8 @@ When I'm consuming the enumeration values, I'm riding on the fact that `registra
     private func subscriptionOverdueForPayment() -> Bool {
         // Do what needs to be done to check if the registrant's subscription is overdue for payment
     }
-}</pre>
+}
+```
 
 So as you can see, the thing that _produces_ the enumeration values _does_ have some `if`s and `Bool`s in it. I couldn't really think of another way to do this. To simplify the readability of the `subscriberStatus` property's implementation, I've abstracted the more complicated computational logic for figuring out whether or not a subscription is on file or if the registrant is overdue for payment into functions.
 

@@ -41,9 +41,10 @@ As with the others, I've created a [GitHub project][1] for you to see the animat
 
 ### The Extension
 
-The following code adds a method to any UIView instance called <span class="lang:swift decode:true  crayon-inline">rotate360Degrees</span>. The code can be placed in a Swift file called &#8220;UIViewExtensions.swift&#8221;:
+The following code adds a method to any UIView instance called `rotate360Degrees`. The code can be placed in a Swift file called &#8220;UIViewExtensions.swift&#8221;:
 
-<pre class="lang:swift decode:true " title="UIViewExtensions.swift">import UIKit
+```swift
+import UIKit
 
 extension UIView {
     func rotate360Degrees(duration: CFTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
@@ -57,13 +58,14 @@ extension UIView {
         }
         self.layer.addAnimation(rotateAnimation, forKey: nil)
     }
-}</pre>
+}
+```
 
-The only critical&nbsp;thing to notice in the above code snippet is the value passed to the <span class="lang:swift decode:true  crayon-inline ">CABasicAnimation</span>&nbsp;constructor. &nbsp;The <span class="lang:swift decode:true  crayon-inline">&#8220;transform.rotation&#8221;</span>&nbsp;string is what sets things up to go spinning, and the string&nbsp;_must_ be typed exactly as-is for the animation to work.
+The only critical&nbsp;thing to notice in the above code snippet is the value passed to the `CABasicAnimation`&nbsp;constructor. &nbsp;The `&#8220;transform.rotation&#8221;`&nbsp;string is what sets things up to go spinning, and the string&nbsp;_must_ be typed exactly as-is for the animation to work.
 
-As in my previous animation posts, I provide myself a couple of parameters to set for a little bit of customization if I want it.&nbsp;Since the parameters&nbsp;have default values, the method can be invoked by writing <span class="lang:swift decode:true  crayon-inline ">someUIViewInstance.rotate360Degrees()</span>&nbsp;for simple cases. &nbsp;For more &#8220;advanced&#8221; scenarios where you need to adjust how long the animation takes, or to perform some logic&nbsp;after the animation completes, you can pass in a duration value other than 1.0, assign a completionDelegate, or both, depending on your needs.
+As in my previous animation posts, I provide myself a couple of parameters to set for a little bit of customization if I want it.&nbsp;Since the parameters&nbsp;have default values, the method can be invoked by writing `someUIViewInstance.rotate360Degrees()`&nbsp;for simple cases. &nbsp;For more &#8220;advanced&#8221; scenarios where you need to adjust how long the animation takes, or to perform some logic&nbsp;after the animation completes, you can pass in a duration value other than 1.0, assign a completionDelegate, or both, depending on your needs.
 
-Check out the <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation" target="_blank">GitHub example</a> for details on how to configure things for the <span class="lang:swift decode:true  crayon-inline">completionDelegate</span>. &nbsp;I'll be walking through that more &#8220;advanced&#8221; case shortly as well.
+Check out the <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation" target="_blank">GitHub example</a> for details on how to configure things for the `completionDelegate`. &nbsp;I'll be walking through that more &#8220;advanced&#8221; case shortly as well.
 
 <a name="example" class="jump-target"></a>
 
@@ -85,29 +87,32 @@ In the &#8220;advanced&#8221; example, I want it to rotate continually until a p
 
 Once the UIView extension is in place, the simple use case is&#8230; well&#8230; pretty simple:
 
-<pre class="lang:swift decode:true" title="Simple Rotate Animation">class ViewController: UIViewController {
+```swift
+class ViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     
     @IBAction func refresh() {
         self.refreshButton.rotate360Degrees()
         // Perhaps start a process which will refresh the UI...
     }
-}</pre>
+}
+```
 
 <a name="advanced" class="jump-target"></a>
 
 ### &#8220;Advanced&#8221; Case – Rotate Until Process Finishes
 
-In my&nbsp;example, I decided to simulate a long-running process by using a custom-built <span class="lang:swift decode:true  crayon-inline">Timer</span>&nbsp;class, heavily inspired by <a title="Samuel Mullen - Using Swift Closures with NSTimer" href="http://www.samuelmullen.com/2014/07/using-swifts-closures-with-nstimer" target="_blank">Samuel Mullen's implementation</a> (with a few modifications to fit my needs). &nbsp;If you're looking through the <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation" target="_blank">GitHub example</a>, try not to&nbsp;get too bogged down in the details of the <span class="lang:swift decode:true  crayon-inline">Timer</span>, unless it just intrigues you. &nbsp;In real life, you may decide perform a web service call to refresh your data model, or refresh your UI (or both). &nbsp;Whatever the case may be, you'll likely end up with similar logic:
+In my&nbsp;example, I decided to simulate a long-running process by using a custom-built `Timer`&nbsp;class, heavily inspired by <a title="Samuel Mullen - Using Swift Closures with NSTimer" href="http://www.samuelmullen.com/2014/07/using-swifts-closures-with-nstimer" target="_blank">Samuel Mullen's implementation</a> (with a few modifications to fit my needs). &nbsp;If you're looking through the <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation" target="_blank">GitHub example</a>, try not to&nbsp;get too bogged down in the details of the `Timer`, unless it just intrigues you. &nbsp;In real life, you may decide perform a web service call to refresh your data model, or refresh your UI (or both). &nbsp;Whatever the case may be, you'll likely end up with similar logic:
 
   * Refresh button is tapped
   * If the button isn't already rotating, make it start
   * Kick off a process that may take some time
-  * The <span class="lang:swift decode:true  crayon-inline ">animationDidStop</span>&nbsp;callback is going to be invoked after the view has spun a full 360 degrees. &nbsp;If the longish-running process is finished, the button can stop spinning. &nbsp;Otherwise, it needs to spin around another time. &nbsp;This will be repeated until the longish-running process is complete.
+  * The `animationDidStop`&nbsp;callback is going to be invoked after the view has spun a full 360 degrees. &nbsp;If the longish-running process is finished, the button can stop spinning. &nbsp;Otherwise, it needs to spin around another time. &nbsp;This will be repeated until the longish-running process is complete.
 
 Confession: &nbsp;I'm not entirely thrilled with the rampant mutability in my implementation, but I couldn't figure out a way to do what I wanted in an immutable way. &nbsp;It does work, however. &nbsp;Just be aware that if you're really a stickler for immutability in your classes, you're going to hate this implementation (and I'd love to hear constructive feedback&nbsp;on how I could improve it!). &nbsp;Here's the code for the bullet-pointed process just outlined:
 
-<pre class="lang:swift mark:9,19-25 decode:true" title="Advanced Rotate Animation">class ViewController2: UIViewController {
+```swift
+class ViewController2: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     // var, var, var!  So much for immutability :/
     var isRotating = false
@@ -138,7 +143,8 @@ Confession: &nbsp;I'm not entirely thrilled with the rampant mutability in my im
         self.isRotating = false
         self.shouldStopRotating = false
     }
-}</pre>
+}
+```
 
 <a name="summary" class="jump-target"></a>
 

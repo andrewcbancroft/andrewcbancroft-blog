@@ -19,15 +19,17 @@ tags:
   - Type Inference
 
 ---
-Quick!  Tell me!  What is the Type of the <span class="lang:swift decode:true  crayon-inline">birdDetails</span> constant in this code example:
+Quick!  Tell me!  What is the Type of the `birdDetails`constant in this code example:
 
-<pre class="toolbar:2 lang:swift decode:true ">let birdDetails = birdDetailsFromStorage()</pre>
+```swift
+let birdDetails = birdDetailsFromStorage()
+```
 
 With no additional context to glean information from, the correct answer to the question is, &#8220;I have absolutely no clue&#8230;&#8221;  <a title="Expanded Thoughts on Swift’s Type Inference" href="http://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/" target="_blank"><em>Or is it?</em></a>
 
 &#8220;Not fair!&#8221;, you say.  &#8220;In the real world, I'd have the ability to option-click and learn the type from a pop-up tooltip, or learn this information by inspection from XCode's utilities panel.&#8221;
 
-Truth.  We would.  _But&#8230;_ should we _have_ to for an example like the one above?  Could we have helped ourselves out a bit by being explicit about the type of <span class="lang:swift decode:true  crayon-inline">birdDetails</span>?
+Truth.  We would.  _But&#8230;_ should we _have_ to for an example like the one above?  Could we have helped ourselves out a bit by being explicit about the type of `birdDetails`?
 
 This was the question I asked myself as I set out to determine how and when I prefer to explicitly specify the Types of my variables and constants at declaration-time, rather than letting the compiler _infer_ the Type for me.
 
@@ -49,17 +51,22 @@ Let's think for a moment about this so-called &#8220;simplest of situations&#82
 
 Compare the following two lines of code:
 
-<pre class="toolbar:2 lang:swift decode:true">let birdDetails = "Swift"</pre>
+```swift
+let birdDetails = "Swift"
+```
 
 and
 
-<pre class="toolbar:2 lang:swift decode:true ">let birdDetails: String = "Swift"</pre>
+```swift
+let birdDetails: String = "Swift"
+```
 
-In the example just presented, typing &#8220;<span class="lang:swift decode:true crayon-inline">: String</span> &#8221; to explicitly specify <span class="lang:swift decode:true crayon-inline">birdDetails</span>&#8216; type is superfluous in my opinion (and I prefer not to be repetitively redundant when I can).  It's crystal clear that <span class="lang:swift decode:true crayon-inline">birdDetails</span> in this example is a <span class="lang:swift decode:true crayon-inline">String</span>.
+In the example just presented, typing &#8220;`: String` &#8221; to explicitly specify `birdDetails`&#8216; type is superfluous in my opinion (and I prefer not to be repetitively redundant when I can).  It's crystal clear that `birdDetails` in this example is a `String`.
 
 _However_, in situations like the one at the beginning of the article where, by simply _looking,_ I would have to answer, &#8220;I have no clue what the Type of this is&#8221;, my preference / proposal for your consideration would be to go ahead and specify the Type at declaration time.  Consider:
 
-<pre class="lang:swift decode:true">let birdDetails: (genusSpecies: String, commonName: String) = birdDetailsFromStorage()
+```swift
+let birdDetails: (genusSpecies: String, commonName: String) = birdDetailsFromStorage()
 
 
 //... somewhere else in a Swift file far, far away ...
@@ -67,11 +74,12 @@ _However_, in situations like the one at the beginning of the article where, by
 
 func birdDetailsFromStorage() -&gt; (genusSpecies: String, commonName: String) {
     return ("Apus apus", "Swift")
-}</pre>
+}
+```
 
 When I'm writing this the first time, I can spend the time looking up the function's return Type and specify it when I declare my constant.  It will make my life so much easier down the road.
 
-Don't stumble over the fact that <span class="lang:swift decode:true crayon-inline ">birdDetails</span> is a <span class="lang:swift decode:true crayon-inline">tuple type (String, String)</span> .  The point is that the function could have returned _anything_, and it would still have been impossible for me to tell you what the Type of the constant was just by looking, had I not specified it upon its declaration.
+Don't stumble over the fact that `birdDetails` is a tuple type `(String, String)`.  The point is that the function could have returned _anything_, and it would still have been impossible for me to tell you what the Type of the constant was just by looking, had I not specified it upon its declaration.
 
 Being explicit about the type in the declaration has great potential to immediately help us get our bearings around a particular set of code when we return to it after any length of time.  And it seems to me that one of the principal goals of writing clean code is to help ourselves and our teams make sense of code quicker so that everyone's happier and more productive.
 

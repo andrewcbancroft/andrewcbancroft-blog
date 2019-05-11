@@ -143,21 +143,25 @@ Speaking of using the CarKit Core Data model, we're now ready to configure that 
 
 Out of the box, Xcode generates some code to help locate your Core Data model file. The boilerplate `managedObjectModel` property looks like this:
 
-<pre class="lang:swift decode:true " title="managedObjectModel" >lazy var managedObjectModel: NSManagedObjectModel = {
+```swift
+lazy var managedObjectModel: NSManagedObjectModel = {
     // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
     let modelURL = NSBundle.mainBundle().URLForResource("DataModelFileName", withExtension: "momd")!
     return NSManagedObjectModel(contentsOfURL: modelURL)!
-}()</pre>
+}()
+```
 
 However, this won't work for us, because we're going to use the data model from CarKit, and CarKit is not in the `mainBundle()`. This is why we jumped over and copied the Bundle Identifier for CarKit in the previous step. To locate the data model file in _that_ bundle, you'll replace the `managedObjectModel` initialization step to the following (for CarKit):
 
-<pre class="lang:swift decode:true " title="managedObjectModel" >lazy var managedObjectModel: NSManagedObjectModel = {
+```swift
+lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let carKitBundle = Bundle(identifier: "com.andrewcbancroft.CarKit")
         
         let modelURL = carKitBundle!.url(forResource: "CarModel", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
-}()</pre>
+}()
+```
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-1024x394.png" alt="16 - AppDelegate" width="1024" height="394" class="alignnone size-large wp-image-12253" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-1024x394.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-300x115.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-768x296.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate.png 1213w" sizes="(max-width: 1024px) 100vw, 1024px" />][18]
 
@@ -178,7 +182,8 @@ Assuming that you go through all the necessary steps to make the framework produ
 
 It's simple enough to try things out by writing a simple little snippet of code in the `AppDelegate`:
 
-<pre class="lang:swift decode:true " title="Test Drive" >func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+```swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     
     let newCar = NSEntityDescription.insertNewObject(forEntityName: "Car", into: self.managedObjectContext!) as! Car
@@ -197,7 +202,8 @@ It's simple enough to try things out by writing a simple little snippet of code 
     print(cars, terminator: "")
     
     return true
-}</pre>
+}
+```
 
 This code simply obtains a new Car object, sets some properties, and saves it all with the `managedObjectContext` instance that's configured in the `AppDelegate`.
 

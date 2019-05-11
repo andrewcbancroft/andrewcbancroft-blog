@@ -45,10 +45,12 @@ If you'd like to tinker with the code for yourself, you can download the example
 
 Step 1 in this whole process will be to import EventKit at the top of your Swift file:
 
-<pre class="lang:swift mark:2 decode:true " title="Import EventKit" >import UIKit
+```swift
+import UIKit
 import EventKit
 
-// ...</pre>
+// ...
+```
 
 Importing EventKit gives us access to everything we need to work with calendars.
 
@@ -76,7 +78,8 @@ Here's the general outline (and then some code):
 
 That's the general outline&#8230; Now for the code!
 
-<pre class="lang:swift decode:true " title="Create Calendar" >// Create an Event Store instance
+```swift
+// Create an Event Store instance
 let eventStore = EKEventStore();
 
 // Use Event Store to create a new calendar instance
@@ -108,7 +111,7 @@ do {
     
     self.presentViewController(alert, animated: true, completion: nil)
 }
-</pre>
+```
 
 The most confusing part of the code above for me was obtaining the right source to assign to the new calendar's `source` property. Let's unpack that for a second&#8230;
 
@@ -124,10 +127,12 @@ So that answers the question of why we query the event store for that list of so
 
 First let's isolate that code segment from the rest so it's clear what we're analyzing:
 
-<pre class="lang:swift decode:true " title="Filter Expression" >newCalendar.source = sourcesInEventStore.filter{
+```swift
+newCalendar.source = sourcesInEventStore.filter{
     (source: EKSource) -> Bool in
     source.sourceType.rawValue == EKSourceType.Local.rawValue
-}.first!</pre>
+}.first!
+```
 
 The goal of this code is to take the list of sources in the event store, and filter them so that only the one matching the value of `EKSourceTypeLocal` is returned. This is easily accomplished using the `filter` function on the array of `EKSources` that's returned by the event store.
 
@@ -143,7 +148,8 @@ One last thing to note is that if you're creating a calendar for your app to sto
 
 Using `NSUserDefaults.standardUserDefaults()` is a convenient way to store this calendar identifier value. The code to pay attention to is highlighted in this snippet:
 
-<pre class="lang:swift decode:true mark:15" title="Save Identifier to NSUserDefaults" >// ...
+```swift
+// ...
 
 // Save the calendar using the Event Store instance
 do {
@@ -155,7 +161,8 @@ do {
     alert.addAction(OKAction)
     
     self.presentViewController(alert, animated: true, completion: nil)
-}</pre>
+}
+```
 
 So assuming that the calendar was saved successfully without error, we'll simply access the standard user defaults, and insert a new object (our calendar's identifier) for a key that we'll use to retrieve the identifier again later.
 

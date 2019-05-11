@@ -74,7 +74,8 @@ In order to fully grasp how to go the &#8220;just depend on / pass the function&
 
 1 – Create a property on the Type you're implementing that is of some function Type. For example:
 
-<pre class="lang:swift decode:true " title="Function property" >struct Vehicle&lt;Fuel> {
+```swift
+struct Vehicle&lt;Fuel> {
     let move: (Fuel) -> Void
 }
 
@@ -88,18 +89,20 @@ let rocket = Vehicle&lt;RocketFuel>(move: { _ in print("use rocket fuel to move"
 
 car.move(Gas())
 rocket.move(RocketFuel())
-</pre>
+```
 
 A full explanation of indicating function Types can be found by reviewing my guide on [Swift Functions as Types][5]
 
 2 – Declare that such-and-such parameter on a function within your Type must be a function Type. For example:
 
-<pre class="lang:swift decode:true " title="Function parameter" >func getData(completion: (NSData) -&gt; Void) {
+```swift
+func getData(completion: (NSData) -&gt; Void) {
     let data: NSData = // do something to go get data
 
     // call completion handler when getting data is done
     completion(data)
-}</pre>
+}
+```
 
 The above is an example of a callback scenario, which I give full treatment in [Fundamentals of Callbacks for Swift Developers][4]
 

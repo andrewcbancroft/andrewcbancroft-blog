@@ -65,14 +65,16 @@ Supposing that you've got two view controller: The MenuViewController which list
 
 If we're wanting to go _from_ OrderViewController _to_ MenuViewController, we need to _create the IBAction in the **MenuViewController**_:
 
-<pre class="lang:swift decode:true mark:1,5" title="Unwind IBAction" >class MenuViewController: UITableViewController {
+```swift
+class MenuViewController: UITableViewController {
     
     // ...
     
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
     
     // ...
-}</pre>
+}
+```
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action-1024x534.png" alt="Create an Unwind Action" width="1024" height="534" class="alignnone size-large wp-image-12474" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action-1024x534.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action-300x156.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action.png 1218w" sizes="(max-width: 1024px) 100vw, 1024px" />][3]
 
@@ -111,7 +113,8 @@ The final step is to write a bit of code to trigger the unwind segue at the appr
 
 In our example, we want to trigger it when the user taps on the &#8216;OK' button of the alert. Here's a snippet of code that will accomplish that task:
 
-<pre class="lang:swift decode:true mark:5" title="Trigger unwind" >@IBAction func orderButtonTapped(_ sender: UIButton) {
+```swift
+@IBAction func orderButtonTapped(_ sender: UIButton) {
     let alert = UIAlertController(title: "Order Placed!", message: "Thank you for your order.\nWe'll ship it to you soon!", preferredStyle: .alert)
     let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {
         (_)in
@@ -120,7 +123,8 @@ In our example, we want to trigger it when the user taps on the &#8216;OK' butto
     
     alert.addAction(OKAction)
     self.present(alert, animated: true, completion: nil)
-}</pre>
+}
+```
 
 ### Wrapping up
 

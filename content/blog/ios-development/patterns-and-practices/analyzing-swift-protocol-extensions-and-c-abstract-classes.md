@@ -72,7 +72,8 @@ Using an interface may look something like this:
     public void Swim();
     public void Cycle();
     // Other things that an Athlete may be able to do
-}</pre>
+}
+```
 
 Using an abstract class may look very similar. The primary difference is in the declaration of each method, where we mark each of them `virtual`, so that they can be overridden in a subclass to provide that customization point I talked about earlier:
 
@@ -83,7 +84,7 @@ Using an abstract class may look very similar. The primary difference is in the 
     public abstract void Cycle();
     // Other things that an Athlete may be able to do
 }
-</pre>
+```
 
 Right off, you might be asking, &#8220;Should a marathon runner have to be able to swim and cycle??&#8221;. It's a great question, and I'll address it further down in the article when I discuss [&#8220;refactoring for enhanced composability with Swift protocol extensions&#8221;][3].
 
@@ -95,12 +96,14 @@ In Swift, we essentially have one possibility that compares with C# for a pure a
 
 The `Athlete` protocol might look something like this:
 
-<pre class="lang:swift decode:true " title="Swift" >protocol Athlete {
+```swift
+protocol Athlete {
     func run()
     func swim()
     func cycle()
     // Other things that an Athlete may be able to do
-}</pre>
+}
+```
 
 We still don't avoid the necessity of a marathon runner being required to be able to swim and cycle. And having read [David Owens' recent recommendations on Protocols][4], I'm even more uncomfortable with modeling an `Athlete` this way, because it feels like we're treating a protocol as a Type here, which he identifies as a less powerful usage of protocols.
 
@@ -141,7 +144,7 @@ In C#, abstract classes allow us to do just that. Here's how a default implement
         // cycle with average speed and endurance
     }
 }
-</pre>
+```
 
 So now, when we want to model a `MarathonRunner`, we can override his/her ability to run, swim, and cycle as appropriate:
 
@@ -152,7 +155,7 @@ So now, when we want to model a `MarathonRunner`, we can override his/her abilit
         // run with average speed and __insane__ endurance
     }
 }
-</pre>
+```
 
 It's not terrible – At least here we can rely on the default implementation if we just want to give a `MarathonRunner` &#8220;average&#8221; abilities in all areas but running.
 
@@ -164,7 +167,8 @@ We might prefer that a `MarathonRunner` not be required to have _any_ ability to
 
 The default implementation story with Swift was non-existent until Swift 2.0 entered the scene. The approach is similar, but as we'll see shortly, provides far more power in terms of composability. Take a look at the implementation that compares most closely with C# for now:
 
-<pre class="lang:swift decode:true " >extension Athlete {
+```swift
+extension Athlete {
     func run() { // run with average speed and endurance 
     }
 
@@ -173,16 +177,19 @@ The default implementation story with Swift was non-existent until Swift 2.0 ent
 
     func cycle() { // cycle with average speed and endurance 
     }
-}</pre>
+}
+```
 
 Now when we want to model a `MarathonRunner` in Swift, we can adopt the `Athlete` protocol, and provide &#8220;override&#8221; implementations for any of the protocol's requirements that we'd like. Anything we don't provide a custom implementation for falls back to the protocol extension's implementation, just like in C#:
 
-<pre class="lang:swift decode:true " >class MarathonRunner: Athlete
+```swift
+class MarathonRunner: Athlete
 {
     func run() {
         // run with average speed and __insane__ endurance
     }
-}</pre>
+}
+```
 
 <a name="similarities" class="jump-target"></a>
 
@@ -225,7 +232,8 @@ I think I might like to define 3 protocols instead of 1. Rather than modeling th
 
 So I'll ditch the `Athlete` protocol, and define these three instead:
 
-<pre class="lang:swift decode:true " >protocol Runnable {
+```swift
+protocol Runnable {
     func run()
 }
 
@@ -235,11 +243,13 @@ protocol Swimmable {
 
 protocol Cycleable {
     func cycle()
-}</pre>
+}
+```
 
 Alright&#8230; now&#8230; how about some default implementation?
 
-<pre class="lang:swift decode:true " >extension Runnable {
+```swift
+extension Runnable {
     func run() {
         // run with average speed and endurance
     }
@@ -255,11 +265,13 @@ extension Cycleable {
     func cycle() {
         // cycle with average speed and endurance
     }
-}</pre>
+}
+```
 
 Excellent. Now to cap things off, I'll define some Types that adopt _just the protocols that are needed_:
 
-<pre class="lang:swift decode:true " >struct MarathonRunner: Runnable {
+```swift
+struct MarathonRunner: Runnable {
     func run() {
         // run with average speed and __insane__ endurance
     }
@@ -276,7 +288,8 @@ struct Triathlete: Runnable, Swimmable, Cycleable {
 
 struct Andrew {
     // Let's not impose the re-definition of any of the athletic terms, shall we?
-}</pre>
+}
+```
 
 Notice how the different types of athletes only pick up the behavior that's relevant to their ability. Nothing more, and nothing less.
 

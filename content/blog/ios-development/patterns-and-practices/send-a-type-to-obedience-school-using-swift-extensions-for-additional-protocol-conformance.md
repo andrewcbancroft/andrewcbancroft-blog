@@ -24,35 +24,37 @@ Did you know that you can make _any_ Type (here meaning Class, Enumeration, or S
 
 Well, as the title of this article suggests, Swift extensions are the way to do it. To demonstrate this capability, consider the following scenario:
 
-  * You're using a library that lets you create instances of <span class="lang:swift decode:true  crayon-inline " >Bird</span> , and you don't have access to the source code for the library.
-  * <span class="lang:swift decode:true  crayon-inline " >Bird </span> has a property called <span class="lang:swift decode:true  crayon-inline " >species </span> and a property called <span class="lang:swift decode:true  crayon-inline " >commonName</span> .
-  * You'd like <span class="lang:swift decode:true  crayon-inline " >Bird </span> to conform to the [Printable protocol, defined in the Swift standard library][1], so that you can call <span class="lang:swift decode:true  crayon-inline " >println(_:)</span> on <span class="lang:swift decode:true  crayon-inline " >Bird </span> instances, and have it log something useful to the console.
-  * When <span class="lang:swift decode:true  crayon-inline " >println(_:)</span> is passed a <span class="lang:swift decode:true  crayon-inline " >Bird </span> instance, you'd like it to print out something like &#8220;\[species\] (ie, [commonName]).&#8221;, and have [species] and [commonName] be replaced by the <span class="lang:swift decode:true  crayon-inline " >Bird</span>&#8216;s real values.
+  * You're using a library that lets you create instances of `Bird` , and you don't have access to the source code for the library.
+  * `Bird ` has a property called `species ` and a property called `commonName` .
+  * You'd like `Bird ` to conform to the [Printable protocol, defined in the Swift standard library][1], so that you can call `println(_:)` on `Bird ` instances, and have it log something useful to the console.
+  * When `println(_:)` is passed a `Bird ` instance, you'd like it to print out something like &#8220;\[species\] (ie, [commonName]).&#8221;, and have [species] and [commonName] be replaced by the `Bird`&#8216;s real values.
 
-Remember that you don't have access to the original source code of <span class="lang:swift decode:true  crayon-inline " >Bird</span> . Without Swift extensions, there would be no way for you to tell the compiler that you'd like <span class="lang:swift decode:true  crayon-inline " >Bird </span> to adopt and conform to the <span class="lang:swift decode:true  crayon-inline " >Printable </span> protocol.
+Remember that you don't have access to the original source code of `Bird` . Without Swift extensions, there would be no way for you to tell the compiler that you'd like `Bird ` to adopt and conform to the `Printable ` protocol.
 
-Thankfully, extensions _do_ exist, and we can teach a <span class="lang:swift decode:true  crayon-inline " >Bird </span> new tricks, enabling its conformance to <span class="lang:swift decode:true  crayon-inline " >Printable</span> .
+Thankfully, extensions _do_ exist, and we can teach a `Bird ` new tricks, enabling its conformance to `Printable` .
 
 ### Protocol Conformance Extension
 
-As stated in the [Printable protocol documentation][1], a Type adopting the <span class="lang:swift decode:true  crayon-inline " >Printable </span> protocol must implement a single, read-only property named <span class="lang:swift decode:true  crayon-inline " >description</span> .
+As stated in the [Printable protocol documentation][1], a Type adopting the `Printable ` protocol must implement a single, read-only property named `description` .
 
 The extension, then would be implemented as follows:
 
-<pre class="lang:swift mark:2 decode:true " title="Printable Bird Extension" >// Explicitly specify protocol adoption
+```swift
+// Explicitly specify protocol adoption
 extension Bird: Printable {
 
     // Implement the required property to make Bird conform to the protocol
     var description: String {
         return "\(species) (ie, \(commonName))"
     }
-}</pre>
+}
+```
 
-The magic line in the code above is highlighted. This tells the compiler that <span class="lang:swift decode:true  crayon-inline " >Bird</span> will be extended to adopt the <span class="lang:swift decode:true  crayon-inline " >Printable</span> protocol.
+The magic line in the code above is highlighted. This tells the compiler that `Bird` will be extended to adopt the `Printable` protocol.
 
-Of course, the remaining requirement then, is to implement the specification of the protocol so that <span class="lang:swift decode:true  crayon-inline " >Bird</span> conforms to it, which is what the body of the extension contains.
+Of course, the remaining requirement then, is to implement the specification of the protocol so that `Bird` conforms to it, which is what the body of the extension contains.
 
-_Note that simply extending <span class="lang:swift decode:true  crayon-inline " >Bird</span> to have a read-only <span class="lang:swift decode:true  crayon-inline " >description</span> property will *not_ suffice for making the Type adopt the protocol. There is no &#8220;implicit&#8221; protocol adoption in Swift, so you must specify in the extension declaration that you intend for the Type to adopt the protocol.
+_Note that simply extending `Bird` to have a read-only `description` property will *not_ suffice for making the Type adopt the protocol. There is no &#8220;implicit&#8221; protocol adoption in Swift, so you must specify in the extension declaration that you intend for the Type to adopt the protocol.
 
 ### Conclusion
 

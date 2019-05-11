@@ -27,7 +27,7 @@ The question has been <a title="Fade In / Out - Stack Overflow" href="http://sta
 
 
 
-Fade animations basically involve adjusting a <span class="lang:swift decode:true  crayon-inline">UIView</span>&#8216;s alpha value from 1.0 to 0.0 (fade out) or 0.0 to 1.0 (fade in) over a specified duration using some kind of easing option (like starting fast, then slowing down at the end of the animation, or starting slow and speeding up at the end of the animation).
+Fade animations basically involve adjusting a `UIView`&#8216;s alpha value from 1.0 to 0.0 (fade out) or 0.0 to 1.0 (fade in) over a specified duration using some kind of easing option (like starting fast, then slowing down at the end of the animation, or starting slow and speeding up at the end of the animation).
 
 I've <a title="Swift Fade Animations - GitHub Project" href="https://github.com/andrewcbancroft/SwiftFadeAnimations" target="_blank">published an example XCode project to GitHub</a> with the final working version of the code below if you'd like to just see it. Read on for the full explanation.
 
@@ -51,7 +51,8 @@ I've <a title="Swift Fade Animations - GitHub Project" href="https://github.com/
 
 Below is an example of how my view controller may look if I want to click a button and have it fade out a label, set the text, and fade it back in again:
 
-<pre class="lang:swift decode:true" title="ViewController.swift">class ViewController: UIViewController {
+```swift
+class ViewController: UIViewController {
     @IBOutlet weak var birdTypeLabel: UILabel!
     
     override func viewDidLoad() {
@@ -75,7 +76,8 @@ Below is an example of how my view controller may look if I want to click a butt
                     }, completion: nil)
         })
     }
-}</pre>
+}
+```
 
 What I don't like about this implementation is that if I want to perform this same kind of animation again elsewhere in my app, I've got to write the bulk of that algorithm again each time I want to fade something in or out. I'd like it to be in one place for easier maintainability. I'd also like to be able to fade in / out simply by doing something like `self.birdTypeLabel.fadeIn()` or `self.birdTypeLabel.fadeOut()` _optionally_ setting parameters for duration, delay, and completion. With these goals in mind, let's see what Swift extensions provide us in terms of simplifying the process.
 
@@ -97,7 +99,8 @@ Use the previously-written `fadeOut()` and \`fadeIn() algorithms in the new UIVi
 
 We can leverage what we wrote before with a few modifications. Take a look (I've written some comments to help identify some of the tweaks for the extension version):
 
-<pre class="lang:swift mark:8,14 decode:true " title="UIViewExtensions.swift">import Foundation
+```swift
+import Foundation
 import UIKit
 
 extension UIView {
@@ -113,9 +116,10 @@ extension UIView {
             self.alpha = 0.0
             }, completion: nil)
     }
-}</pre>
+}
+```
 
-With this extension in place, we can now call <span class="lang:swift decode:true  crayon-inline">self.birdTypeLabel.fadeIn()</span> or <span class="lang:swift decode:true  crayon-inline">self.birdTypeLabel.fadeOut()</span> . To gain a little more control (if I so choose), I can outfit the `fadeIn` and `fadeOut` extension functions with parameters with default values defined so that I can call them with or without parameters as I need.
+With this extension in place, we can now call `self.birdTypeLabel.fadeIn()` or `self.birdTypeLabel.fadeOut()` . To gain a little more control (if I so choose), I can outfit the `fadeIn` and `fadeOut` extension functions with parameters with default values defined so that I can call them with or without parameters as I need.
 
 <a name="parameters-default-values" class="jump-target"></a>
 
@@ -123,7 +127,8 @@ With this extension in place, we can now call <span class="lang:swift decode:tru
 
 In Step 2, we simply hard-coded values for duration, delay, and completion. Below is the final version of the extension that provides parameters for you to (optionally) pass arguments to.
 
-<pre class="lang:swift decode:true" title="UIViewExtensions.swift - FINAL">import Foundation
+```swift
+import Foundation
 import UIKit
 
 extension UIView {
@@ -137,11 +142,13 @@ extension UIView {
             self.alpha = 0.0
             }, completion: completion)
     }
-}</pre>
+}
+```
 
 With this now in place, the final version of my view controller becomes much simpler and clean:
 
-<pre class="lang:swift decode:true" title="ViewController.swift - FINAL">import UIKit
+```swift
+import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var birdTypeLabel: UILabel!
@@ -158,7 +165,8 @@ class ViewController: UIViewController {
             self.birdTypeLabel.fadeIn()
             })
     }
-}</pre>
+}
+```
 
 By employing Swift extensions to encapsulate the fade in / out animation logic, I was able to
 

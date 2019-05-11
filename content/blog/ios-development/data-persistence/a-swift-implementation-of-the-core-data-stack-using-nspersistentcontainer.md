@@ -45,7 +45,8 @@ So&#8230; how's it done?
 
 Once you've ticked the build target prerequisite above, check out this code example:
 
-<pre class="lang:swift decode:true " title="NSPersistentContainer" >//Step 1
+```swift
+//Step 1
 let container = NSPersistentContainer(name: "NameOfModel")
 
 // Step 2
@@ -57,7 +58,8 @@ container.loadPersistentStores(completionHandler: {
 
     let mainContext = container.viewContext
     // Use the context to do Core Data stuff in your app
-})</pre>
+})
+```
 
 <a name="step-by-step" class="jump-target"></a>
 

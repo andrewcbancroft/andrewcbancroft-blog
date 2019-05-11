@@ -35,7 +35,8 @@ When an app incorporates a navigation controller as its first (root) view contro
 
 Here is a snippet of how to dig into the `UINavigationController's` view controller hierarchy to grab the first one and set some fictitious properties on it, all from within the `AppDelegate`:
 
-<pre class="lang:swift decode:true mark:9,10" title="AppDelegate.swift" >class AppDelegate: UIResponder, UIApplicationDelegate {
+```swift
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
@@ -52,7 +53,8 @@ Here is a snippet of how to dig into the `UINavigationController's` view control
     }
 
     // ...
-}</pre>
+}
+```
 
 So the workflow goes like this:
 
@@ -64,7 +66,8 @@ You may be worried about the usage of implicitly unwrapped optionals in this sni
 
 If you're not convinced by that line of reasoning, no worries – you can switch out some of the `!` operators for `?` operators and add in some `if-let` syntax to protect against encountering nil. For example:
 
-<pre class="lang:swift decode:true " title="AppDelegate.swift" >class AppDelegate: UIResponder, UIApplicationDelegate {
+```swift
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // ...
     if let navigationController = window?.rootViewController as? UINavigationController {
@@ -73,7 +76,8 @@ If you're not convinced by that line of reasoning, no worries – you can switch
         }
     }
     // ...
-}</pre>
+}
+```
 
 <a name="prepare-for-segue" class="jump-target"></a>
 
@@ -85,7 +89,8 @@ Well, suppose that we have an app which segues _into_ a navigation controller. W
 
 In similar fashion to the `AppDelegate` situation, we want to dig into the navigation controller's view controller hierarchy to access the first child so that we can pass the data along. Here's an example implementation:
 
-<pre class="lang:swift decode:true " title="ViewController.swift" >public class ViewController: UIViewController {
+```swift
+public class ViewController: UIViewController {
 
     // ...
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -96,7 +101,8 @@ In similar fashion to the `AppDelegate` situation, we want to dig into the navig
         nextViewController.someProperty = someValue
     }
     // ...
-}</pre>
+}
+```
 
 The only thing that really changes between the `AppDelegate` example and the `prepareForSegue` example is where we obtain the `UINavigationController` from. In `AppDelegate`, the navigation controller comes from the window's root view controller. In `prepareForSegue` it comes from the segue's destination view controller.
 

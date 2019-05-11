@@ -98,7 +98,8 @@ As a quick example, consider the following class that will act as a `ReceiptFetc
 
 You'll be looking to make sure you're prompted for iTunes Store credentials, and that you successfully receive a receipt (ie, `request(_:didFailWithError:)` did not get called, but instead `requestDidFinish(_:)` got called):
 
-<pre class="lang:swift decode:true mark:19,27-29,31-33" title="ReceiptFetcher.swift" >import Foundation
+```swift
+import Foundation
 import StoreKit
 
 class ReceiptFetcher : NSObject, SKRequestDelegate {
@@ -131,9 +132,11 @@ class ReceiptFetcher : NSObject, SKRequestDelegate {
     func request(_ request: SKRequest, didFailWithError error: Error) {
         print("Something went wrong: \(error.localizedDescription)")
     }
-}</pre>
+}
+```
 
-<pre class="lang:swift decode:true mark:4,10" title="Main View Controller" >public class ViewController: UIViewController {
+```swift
+public class ViewController: UIViewController {
 
     // Note that an instance of ReceiptFetcher is kept at the class-level
     let receiptFetcher = ReceiptFetcher()
@@ -144,7 +147,8 @@ class ReceiptFetcher : NSObject, SKRequestDelegate {
 
         receiptFetcher.fetchReceipt()
     }
-}</pre>
+}
+```
 
 **Note:** Once again, note that the instance of `ReceiptFetcher` is held at the view controller's class-level scope. This is necessary to allow the delegate callback functions to be invoked. If you initialize the `ReceiptFetcher` in `viewDidLoad` without holding a reference at the class level, the instance will be deallocated prior to the delegate callback functions being invoked.
 

@@ -35,7 +35,8 @@ Having a consistent strategy for organizing the body of a test function will sav
 
 Two of the most common organizational structures for unit tests are the &#8220;Arrange-Act-Assert (AAA)&#8221; and the &#8220;Given-When-Then&#8221; structures:
 
-<pre class="lang:swift decode:true " >func testAppFeatureBehavior() {
+```swift
+func testAppFeatureBehavior() {
     // Arrange
     let sut = SystemUnderTest()
     // configure properties as necessary to prepare the system for the next step
@@ -45,11 +46,13 @@ Two of the most common organizational structures for unit tests are the &#8220;A
 
     // Assert
     XCTAssert(...expectations are met...)
-}</pre>
+}
+```
 
 A similar pattern is the &#8220;Given-When-Then&#8221; structure:
 
-<pre class="lang:swift decode:true " >func testAppFeatureBehavior() {
+```swift
+func testAppFeatureBehavior() {
     // Given
     let sut = SystemUnderTest()
     // configure properties as necessary to prepare the system for the next step
@@ -59,7 +62,8 @@ A similar pattern is the &#8220;Given-When-Then&#8221; structure:
 
     // Then
     XCTAssert(...expectations are met...)
-}</pre>
+}
+```
 
 They're exactly the same structures with different descriptive comments outlining the three phases of the test.
 

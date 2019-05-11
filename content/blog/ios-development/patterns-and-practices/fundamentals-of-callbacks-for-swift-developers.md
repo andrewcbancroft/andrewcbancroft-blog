@@ -89,7 +89,8 @@ Callbacks are functions that often take the form of a [closure][3] (basically an
 
 Perhaps it's easiest to see in code itself. Here's a skeleton view of what that looks like:
 
-<pre class="lang:swift decode:true " title="Example ImageSketcher Skeleton" >// API Designer World
+```swift
+// API Designer World
 struct SketchAnimation {
     // represents some fully-generated animation that's ready to play by the end user
 }
@@ -125,7 +126,8 @@ class MainViewController: UIViewController {
     }
     
     // ...
-}</pre>
+}
+```
 
 You'll notice a couple of things&#8230;
 
@@ -153,7 +155,8 @@ So how about a few _real_ examples, say, from the iOS SDK. Where are callbacks u
 
 A really simple example of callbacks being used in the wild is when we work with [`UIAlertControllers`][4]. Take a look at this example:
 
-<pre class="lang:swift decode:true " title="UIAlertController Example" >let alertController = UIAlertController(title: "My Alert", message: "A Message", preferredStyle: UIAlertControllerStyle.alert)
+```swift
+let alertController = UIAlertController(title: "My Alert", message: "A Message", preferredStyle: UIAlertControllerStyle.alert)
 
 let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction) -> Void in
     // Do something based on the user tapping this action button
@@ -165,7 +168,8 @@ alertController.addAction(OKAction)
 
 self.present(alertController, animated: true, completion: nil)
 // We could have provided a completion callback here, too,
-// but we didn't need to respond to the view controller's presentation, so we passed nil</pre>
+// but we didn't need to respond to the view controller's presentation, so we passed nil
+```
 
 So the `UIAlertAction` is actually the thing that takes the callback (the `handler` parameter). There's also an example on a View Controller's `present()` function. Both are intended to communicate something back to the caller.
 
@@ -183,8 +187,10 @@ The world of HTTP is inherently asynchronous, so you'd expect to see some kind o
 
 Take a look at this function signature from the [Apple Developer Documentation on URLSession][5]:
 
-<pre class="lang:swift decode:true " title="URLSession Example" >func dataTask(with url: URL, 
-              completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask</pre>
+```swift
+func dataTask(with url: URL, 
+              completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+```
 
 The `completionHandler` parameter of this function is the interface that the API designers have created for delivering the resulting payload of the HTTP request when it's finished and ready to hand off for further processing.
 
@@ -198,13 +204,14 @@ You'll see _all kinds_ of `completion` callbacks sprinkled throughout some of th
 
 If you take a look at the following function signatures from the [Apple Developer Documentation on UIViews][6], you'll see the `completion` parameters to many of these functions:
 
-<pre class="lang:swift decode:true " title="Animation Function Signatures" >transition(with:duration:options:animations:completion:)
+```swift
+transition(with:duration:options:animations:completion:)
 transition(from:to:duration:options:completion:)
 animateKeyframes(withDuration:delay:options:animations:completion:)
 addKeyframe(withRelativeStartTime:relativeDuration:animations:)
 perform(_:on:options:animations:completion:)
 animate(withDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:)
-</pre>
+```
 
 ### Wrapping Up
 

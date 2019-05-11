@@ -17,7 +17,7 @@ tags:
   - UIView Tag Property
 
 ---
-The challenge when dealing with the presentation and handling of more than one <span class="lang:swift decode:true  crayon-inline " >UIActionSheet</span> in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I'm dealing with so that I can handle the user's choice appropriately?&#8221;
+The challenge when dealing with the presentation and handling of more than one `UIActionSheet` in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I'm dealing with so that I can handle the user's choice appropriately?&#8221;
 
 Presumably, the user's interaction with one of the action sheets will be different than the other(s), so you'll need to think through how to distinguish between them, in order to respond to that interaction appropriately.
 
@@ -25,7 +25,7 @@ I faced such a scenario in a recent project, and I thought I'd share my solution
 
 ### Using UIView Tags
 
-Essentially, I chose to make use of the <span class="lang:swift decode:true  crayon-inline " >tag</span> property, which all UIView subclasses inherit. The [UIView Class Reference documentation specifies][2] that the <span class="lang:swift decode:true  crayon-inline " >tag</span> property can be used to identify the view at runtime:
+Essentially, I chose to make use of the `tag` property, which all UIView subclasses inherit. The [UIView Class Reference documentation specifies][2] that the `tag` property can be used to identify the view at runtime:
 
 > You can set the value of this tag and use that value to identify the view later.
 
@@ -33,13 +33,15 @@ Essentially, I chose to make use of the <span class="lang:swift decode:true  cra
 
 Here's a quick example showing the setting of this property so that the action sheet can be differentiated when it comes time to handle the user's choice:
 
-<pre class="lang:swift decode:true " title="Set tag property" >let actionSheet1 = UIActionSheet()
+```swift
+let actionSheet1 = UIActionSheet()
         actionSheet1.tag = 0
         // set other properties, such as delegate, as well as buttons...
         
         let actionSheet2 = UIActionSheet()
         actionSheet2.tag = 1
-        // set other properties, such as delegate, as well as buttons...</pre>
+        // set other properties, such as delegate, as well as buttons...
+```
 
 ### Better Solution in Swift?
 
@@ -56,7 +58,8 @@ The arguments are fundamentally the same as those I made when I [wrote about rep
 
 The refactored version of the code snippet previously presented could look like this, then:
 
-<pre class="lang:swift decode:true " title="Set tag property with Enumeration Value" >enum ActionSheetTag: Int {
+```swift
+enum ActionSheetTag: Int {
             // Integer values will be implicitly supplied; you could optionally set your own values
             case ActionSheet1
             case ActionSheet2
@@ -68,7 +71,8 @@ The refactored version of the code snippet previously presented could look like 
         
         let actionSheet2 = UIActionSheet()
         actionSheet2.tag = ActionSheetTag.ActionSheet2.toRaw()
-        // set other properties, such as delegate, as well as buttons...</pre>
+        // set other properties, such as delegate, as well as buttons...
+```
 
 It's worth noting that rather than using an enumeration, I could have chosen to define a couple of constants at a scope visible to both my setting of the tag, and the conditional logic I'd use in my UIActionSheetDelegate callback. The end goal and result would be the same: Clarity, achieved by assigning _names_ to the tags, and the avoidance of &#8220;magic integers&#8221; appearing in my code.
 
@@ -76,7 +80,8 @@ It's worth noting that rather than using an enumeration, I could have chosen to 
 
 To see how to perform the conditional logic needed in the UIActionSheetDelegate callback method, take a look at this final code snippet:
 
-<pre class="lang:swift decode:true " title="UIActionSheetDelegate" >func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+```swift
+func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if let tag = ActionSheetTag.fromRaw(actionSheet.tag) {
             switch tag {
             case .ActionSheet1:
@@ -87,7 +92,8 @@ To see how to perform the conditional logic needed in the UIActionSheetDelegate 
                 println("Unknown action sheet.")
             }
         }
-    }</pre>
+    }
+```
 
 ### Summary
 

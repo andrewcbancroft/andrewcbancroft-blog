@@ -43,7 +43,8 @@ Topics that are included in the Playground are as follows:
 
 The best way to view this cheat sheet is by <a href="https://github.com/andrewcbancroft/SwiftDatesCheatSheet" target="_blank">downloading the playground from GitHub</a>, but here's a straight copy-paste from the repo in case you just want to copy and paste it into a playground of your own from here:
 
-<pre class="lang:swift decode:true " title="SwiftDateCheatSheet.playground" >import UIKit
+```swift
+import UIKit
 
 /*: 
 # Overview
@@ -125,4 +126,4 @@ dateComponents.second = 0
 let newDate = NSCalendar.currentCalendar().dateFromComponents(dateComponents)
 
 
-</pre>
+```

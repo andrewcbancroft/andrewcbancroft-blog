@@ -50,10 +50,12 @@ As of the last entry in this series of guides, I've also [got a `ReceiptExtracto
 
 If a validation step ever fails along the way, I’ve decided to take advantage of Swift’s error throwing features to clearly describe what failed. So far, there’s only two cases:
 
-<pre class="lang:swift decode:true " title="ReceiptValidationError" >enum ReceiptValidationError : Error {
+```swift
+enum ReceiptValidationError : Error {
     case couldNotFindReceipt
     case emptyReceiptContents
-}</pre>
+}
+```
 
 <a name="apple-root-cert" class="jump-target"></a>
 
@@ -84,13 +86,15 @@ Right off the bat, I can think of two or three things that could go awry at this
 
 I'll add those three new error states to the `ReceiptValidationError` enum now:
 
-<pre class="lang:swift decode:true mark:4-6" title="ReceiptValidationError" >enum ReceiptValidationError : Error {
+```swift
+enum ReceiptValidationError : Error {
     case couldNotFindReceipt
     case emptyReceiptContents
     case receiptNotSigned
     case appleRootCertificateNotFound
     case receiptSignatureInvalid
-}</pre>
+}
+```
 
 <a name="concept" class="jump-target"></a>
 
@@ -113,7 +117,8 @@ In `checkSignatureAuthenticity`, I'll look, and if the Apple root certificate is
 
 Here's the skeleton of the struct:
 
-<pre class="lang:swift decode:true " title="ReceiptSignatureValidator" >struct ReceiptSignatureValidator {
+```swift
+struct ReceiptSignatureValidator {
     func checkSignaturePresence(_ PKCS7Container: UnsafeMutablePointer&lt;PKCS7&gt;) throws {
         // Implementation coming
     }
@@ -121,7 +126,8 @@ Here's the skeleton of the struct:
     func checkSignatureAuthenticity(_ PKCS7Container: UnsafeMutablePointer&lt;PKCS7&gt;) throws {
         // Implementation coming
     }
-}</pre>
+}
+```
 
 Both `checkSignaturePresence` and `checkSignatureAuthenticity` need to peek into the PKCS #7 container that encapsulates the receipt data, so each function asks for a reference to an `UnsafeMutablePointer<PKCS7>` as one of its arguments.
 
@@ -139,7 +145,8 @@ Now to actually _implement_ `ReceiptSignatureValidator`&#8230;
 
 Checking for the presence of a signature is actually relatively simple. Take a look:
 
-<pre class="lang:swift decode:true mark:3,5-7" title="ReceiptSignatureValidator" >struct ReceiptSignatureValidator {
+```swift
+struct ReceiptSignatureValidator {
     func checkSignaturePresence(_ PKCS7Container: UnsafeMutablePointer&lt;PKCS7&gt;) throws {
         let pkcs7SignedTypeCode = OBJ_obj2nid(PKCS7Container.pointee.type)
         
@@ -152,7 +159,7 @@ Checking for the presence of a signature is actually relatively simple. Take a l
         // Implementation coming
     }
 }
-</pre>
+```
 
 The PKCS #7 container has a type code associated with it if it's _signed_. All we need to do is access that type code, and compare it against the `NID_pkcs7_signed` constant.
 
@@ -170,7 +177,8 @@ Now comes the part where we check whether the signature on the receipt is authen
 
 First, we've got to load up Apple's root certificate (assuming it exists in the app bundle). Here's a function that can be nested inside of `ReceiptSignatureValidator` to do the job:
 
-<pre class="lang:swift decode:true " title="loadAppleRootCertificate" >fileprivate func loadAppleRootCertificate() throws -> UnsafeMutablePointer&lt;X509> {
+```swift
+fileprivate func loadAppleRootCertificate() throws -> UnsafeMutablePointer&lt;X509> {
     guard
         let appleRootCertificateURL = Bundle.main.url(forResource: "AppleIncRootCertificate", withExtension: "cer"),
         let appleRootCertificateData = try? Data(contentsOf: appleRootCertificateURL)
@@ -188,7 +196,8 @@ First, we've got to load up Apple's root certificate (assuming it exists in the 
     let appleRootCertificateX509 = d2i_X509_bio(appleRootCertificateBIO, nil)
     
     return appleRootCertificateX509!
-}</pre>
+}
+```
 
 This function guards against the absence of Apple's root certificate. If it can't be found in the main bundle, the function throws `appleRootCertificateNotFound`. This error is obviously preventable, but hey – never hurts to protect yourself if you're using this code in multiple projects and forget to grab a copy of Apple's root certificate.
 
@@ -196,8 +205,9 @@ This function guards against the absence of Apple's root certificate. If it can'
 
 ② Next, we've got to write the contents of the certificate to memory so we can work with it:
 
-<pre class="lang:swift decode:true " title="BIO_write">BIO_write(appleRootCertificateBIO, (appleRootCertificateData as NSData).bytes, Int32(appleRootCertificateData.count))
-</pre>
+```swift
+BIO_write(appleRootCertificateBIO, (appleRootCertificateData as NSData).bytes, Int32(appleRootCertificateData.count))
+```
 
 `BIO_write` needs a location to write to, namely, our `appleRootCertificateBIO` pointer.
 
@@ -215,7 +225,8 @@ The final step is to take the `X509` pointer, and use it to verify the authentic
 
 Once again, here's a function that can take both items and do the work:
 
-<pre class="lang:swift decode:true " title="verifyAuthenticity" >fileprivate func verifyAuthenticity(_ x509Certificate: UnsafeMutablePointer&lt;X509&gt;, PKCS7Container: UnsafeMutablePointer&lt;PKCS7&gt;) throws {
+```swift
+fileprivate func verifyAuthenticity(_ x509Certificate: UnsafeMutablePointer&lt;X509&gt;, PKCS7Container: UnsafeMutablePointer&lt;PKCS7&gt;) throws {
     //①
     let x509CertificateStore = X509_STORE_new()
 
@@ -232,7 +243,8 @@ Once again, here's a function that can take both items and do the work:
     if result != 1 {
         throw ReceiptValidationError.receiptSignatureInvalid
     }
-}</pre>
+}
+```
 
 ① The X509 Store is what holds the information for verification, so we use `X509_STORE_new()` to create one.
 
@@ -254,7 +266,8 @@ Once again, here's a function that can take both items and do the work:
 
 The final version of the `ReceiptSignatureValidator` looks like this:
 
-<pre class="lang:swift decode:true " title="Final ReceiptSignatureValidator" >struct ReceiptSignatureValidator {
+```swift
+struct ReceiptSignatureValidator {
     func checkSignaturePresence(_ PKCS7Container: UnsafeMutablePointer&lt;PKCS7&gt;) throws {
         let pkcs7SignedTypeCode = OBJ_obj2nid(PKCS7Container.pointee.type)
         
@@ -296,7 +309,8 @@ The final version of the `ReceiptSignatureValidator` looks like this:
             throw ReceiptValidationError.receiptSignatureInvalid
         }
     }
-}</pre>
+}
+```
 
 <a name="additions-to-receipt-validator" class="jump-target"></a>
 
@@ -304,7 +318,8 @@ The final version of the `ReceiptSignatureValidator` looks like this:
 
 The `ReceiptValidator` struct that's been growing to accommodate each of the steps now looks like this (additions highlighted):
 
-<pre class="lang:swift decode:true mark:4,12-13" title="ReceiptValidator" >struct ReceiptValidator {
+```swift
+struct ReceiptValidator {
     let receiptLoader = ReceiptLoader()
     let receiptExtractor = ReceiptExtractor()
     let receiptSignatureValidator = ReceiptSignatureValidator()
@@ -322,7 +337,8 @@ The `ReceiptValidator` struct that's been growing to accommodate each of the ste
             return .error(error as! ReceiptValidationError)
         }
     }
-}</pre>
+}
+```
 
 <a name="handling-errors" class="jump-target"></a>
 
@@ -343,7 +359,7 @@ The final piece is to attempt to do something intelligent with any of the possib
         receiptRequest.start()
     }   
 }
-</pre>
+```
 
 In the case where the receipt signature is invalid, my only thought right now is to request a new receipt from the app store and attempt to re-validate it.
 

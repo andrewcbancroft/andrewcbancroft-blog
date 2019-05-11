@@ -25,7 +25,7 @@ I ran across this in the <a title="Apple Developer Documentation - Using Swift w
 
 [<img class="alignnone size-full wp-image-5231" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Macro-Alternatives-in-Swift.png" alt="Macro Alternatives in Swift" width="705" height="149" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Macro-Alternatives-in-Swift.png 705w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Macro-Alternatives-in-Swift-300x63.png 300w" sizes="(max-width: 705px) 100vw, 705px" />][1]
 
-So there you have it, folks!  One easy alternative to your former <span class="lang:objc decode:true  crayon-inline ">#define</span> habits when you're working in Swift is to simply declare a _constant_ (using the <span class="lang:swift decode:true  crayon-inline">let</span> keyword) instead.  The word &#8220;constant&#8221; is _key_ – the last thing you want to do is declare a _variable_ in some global scope (using the <span class="lang:swift decode:true  crayon-inline ">var</span> keyword) where the value of the identifier could be changed somehow, if even by accident.
+So there you have it, folks!  One easy alternative to your former `#define` habits when you're working in Swift is to simply declare a _constant_ (using the `let` keyword) instead.  The word &#8220;constant&#8221; is _key_ – the last thing you want to do is declare a _variable_ in some global scope (using the `var` keyword) where the value of the identifier could be changed somehow, if even by accident.
 
 ### Organizing #define Replacement Constants
 

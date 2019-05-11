@@ -24,7 +24,7 @@ Without 100% support for a mocking framework like <a title="OCMock" href="http:/
 The process&nbsp;is essentially this (example to follow):
 
   1. Ensure that the&nbsp;class that you would like to test is designed so that you can substitute your mock for the real one that's used in your class' implementation
-  2. Create an <span class="lang:swift decode:true  crayon-inline ">XCTestCase</span>&nbsp;&nbsp;class with a test function in your unit test project
+  2. Create an `XCTestCase`&nbsp;&nbsp;class with a test function in your unit test project
   3. Within the function body create&nbsp;a _nested_ class
   4. Make the nested class inherit from the real object you're trying to mock / create a method stub for
   5. You can give the nested class a name such as Mock[ObjectName]
@@ -36,13 +36,14 @@ Let's see those 8 steps in action for those of us who are more visually inclined
 
 EDIT: &nbsp;July 22, 2014 – I've added a simple XCode Project to GitHub for those interested in seeing the setup directly in XCode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank">https://github.com/andrewcbancroft/MocksAndStubs</a>
 
-The scenario that I'd like to use a mock class in is this: &nbsp;I have a CoreData application and I'd like to be able to mock the <span class="lang:swift decode:true  crayon-inline ">NSManagedObjectContext</span>&nbsp;&nbsp;so that instead of making actual database fetch requests, I can just provide stubs of various sorts with the kinds of responses I'd expect from the real database calls to ensure my class will do the right thing based on predictable results. &nbsp;To do this I begin at step 1&#8230;
+The scenario that I'd like to use a mock class in is this: &nbsp;I have a CoreData application and I'd like to be able to mock the `NSManagedObjectContext`&nbsp;&nbsp;so that instead of making actual database fetch requests, I can just provide stubs of various sorts with the kinds of responses I'd expect from the real database calls to ensure my class will do the right thing based on predictable results. &nbsp;To do this I begin at step 1&#8230;
 
 #### 1. &nbsp;Ensure that the&nbsp;class that you would like to test is designed so that you can substitute your mock for the real one that's used in your class' implementation
 
-In the&nbsp;example class below, I&nbsp;intend to provide the <span class="lang:swift decode:true  crayon-inline ">NSManagedObjectContext</span>&nbsp;&nbsp;dependency through&nbsp;the class' initializer which will set a property that is used by my class' methods later on, but you could easily use&nbsp;some other way of performing &#8220;dependency injection&#8221;. &nbsp;The initializer strategy just makes it super clear in _my_ mind what the class' dependencies are, so that's what I'm going to do here. &nbsp;Have a look:
+In the&nbsp;example class below, I&nbsp;intend to provide the `NSManagedObjectContext`&nbsp;&nbsp;dependency through&nbsp;the class' initializer which will set a property that is used by my class' methods later on, but you could easily use&nbsp;some other way of performing &#8220;dependency injection&#8221;. &nbsp;The initializer strategy just makes it super clear in _my_ mind what the class' dependencies are, so that's what I'm going to do here. &nbsp;Have a look:
 
-<pre class="lang:swift mark:5-9 decode:true">import Foundation
+```swift
+import Foundation
 import CoreData
 
 class MyClass {
@@ -51,11 +52,13 @@ class MyClass {
     init(managedObjectContext: NSManagedObjectContext) {
         self.context = managedObjectContext
     }
-}</pre>
+}
+```
 
-Now, let's say that my example class has a member function called&nbsp;<span class="lang:swift decode:true  crayon-inline">databaseHasRecordsForSomeEntity</span>&nbsp; that returns a <span class="lang:swift decode:true  crayon-inline ">Bool</span>&nbsp;&nbsp;value of **true** if the resulting array of a fetch request contains objects, and a <span class="lang:swift decode:true  crayon-inline ">Bool</span>&nbsp;&nbsp;value of **false** if the result array of a fetch request is empty. &nbsp;The completed class looks like this:
+Now, let's say that my example class has a member function called&nbsp;`databaseHasRecordsForSomeEntity`&nbsp; that returns a `Bool`&nbsp;&nbsp;value of **true** if the resulting array of a fetch request contains objects, and a `Bool`&nbsp;&nbsp;value of **false** if the result array of a fetch request is empty. &nbsp;The completed class looks like this:
 
-<pre class="lang:swift mark:12-16 decode:true">import Foundation
+```swift
+import Foundation
 import CoreData
 
 class MyClass {
@@ -71,11 +74,12 @@ class MyClass {
         let fetchRequestResults = self.context.executeFetchRequest(fetchRequest, error: nil) // May want to do something with the error in real life...
         return (fetchRequestResults?.count &gt; 0)
     }
-}</pre>
+}
+```
 
-I want to test if&nbsp;<span class="lang:swift decode:true  crayon-inline ">databaseHasRecordsForSomeEntity</span>&nbsp;&nbsp;does what I intend it to do. So&#8230;
+I want to test if&nbsp;`databaseHasRecordsForSomeEntity`&nbsp;&nbsp;does what I intend it to do. So&#8230;
 
-#### 2. &nbsp;Create an&nbsp;<span class="lang:swift decode:true  crayon-inline">XCTestCase</span>&nbsp;&nbsp;class with a test function in your unit test project
+#### 2. &nbsp;Create an&nbsp;`XCTestCase`&nbsp;&nbsp;class with a test function in your unit test project
 
 Just listing this for completeness
 
@@ -87,7 +91,8 @@ Next comes the way to make the mock. &nbsp;Read steps 3-5 and then look below fo
 
 #### 5. &nbsp;You can give the nested class a name such as Mock[ObjectName]
 
-<pre class="lang:swift mark:3,18-22 decode:true">import UIKit
+```swift
+import UIKit
 import XCTest
 import CoreData // &lt;-- Make sure to import CoreData or you will get errors when you try to use NSManagedObjectContext
 
@@ -109,20 +114,23 @@ class MyClassTests: XCTestCase {
             
         }
     }
-}</pre>
+}
+```
 
 #### &nbsp;6. &nbsp;Configure the mock object however you need by setting its properties or overriding its function implementations with stubbed implementations – no need to override every function&#8230; only the one(s) that your class calls during the test at hand
 
-For my example, I'm going to stub out the <span class="lang:swift decode:true  crayon-inline">executeFetchRequest</span>&nbsp;&nbsp;method so that it returns an array with one object in it. &nbsp;This is really the part where you have to determine what you're testing and what you expect the stubbed results to be. &nbsp;Whatever you decide, the way to stub a method is simply to override it in the mock you're implementing. &nbsp;Here's how I implemented the&nbsp;<span class="lang:swift decode:true  crayon-inline ">executeFetchRequest</span>&nbsp;&nbsp;stub for my example:
+For my example, I'm going to stub out the `executeFetchRequest`&nbsp;&nbsp;method so that it returns an array with one object in it. &nbsp;This is really the part where you have to determine what you're testing and what you expect the stubbed results to be. &nbsp;Whatever you decide, the way to stub a method is simply to override it in the mock you're implementing. &nbsp;Here's how I implemented the&nbsp;`executeFetchRequest`&nbsp;&nbsp;stub for my example:
 
-<pre class="lang:swift mark:4-5 decode:true">// Yay for verbose test names!  :]
+```swift
+// Yay for verbose test names!  :]
     func testDatabaseHasRecordsForSomeEntityReturnsTrueWhenFetchRequestReturnsNonEmptyArray() {
         class MockNSManagedObjectContext: NSManagedObjectContext {
             override func executeFetchRequest(request: NSFetchRequest, error: NSErrorPointer) -> [AnyObject]? {
                 return ["object 1"]
             }
         }
-    }</pre>
+    }
+```
 
 We're ready to perform the test and assert the results. &nbsp;Read steps 7-8 and take a look at the code example below step 8:
 
@@ -134,7 +142,8 @@ From step 1, I intended to pass an NSManagedObjectContext instance to the initia
 
 &nbsp;
 
-<pre class="lang:swift mark:9-18 decode:true">// Yay for verbose test names!  :]
+```swift
+// Yay for verbose test names!  :]
     func testDatabaseHasRecordsForSomeEntityReturnsTrueWhenFetchRequestReturnsNonEmptyArray() {
         class MockNSManagedObjectContext: NSManagedObjectContext {
             override func executeFetchRequest(request: NSFetchRequest, error: NSErrorPointer) -> [AnyObject]? {
@@ -152,11 +161,12 @@ From step 1, I intended to pass an NSManagedObjectContext instance to the initia
         let returnValue = myClassInstance.databaseHasRecordsForSomeEntity()
         
         XCTAssertTrue(returnValue == true, "The return value should be been true")
-    }</pre>
+    }
+```
 
 Running the tests at this point should produce a passing test using the mock object in place of a real NSManagedObjectContext that calls a database!
 
-Now, if I wanted to test the &#8220;false&#8221; branch of my class' method, I could simply create another test method following the same steps, only this time, I'd provide a new implementation for the overridden <span class="lang:swift decode:true  crayon-inline ">executeFetchRequest</span>&nbsp;&nbsp;method that's appropriate:
+Now, if I wanted to test the &#8220;false&#8221; branch of my class' method, I could simply create another test method following the same steps, only this time, I'd provide a new implementation for the overridden `executeFetchRequest`&nbsp;&nbsp;method that's appropriate:
 
 <pre class="lang:default mark:4,17 decode:true">func testDatabaseHasRecordsForSomeEntityReturnsFalseWhenFetchRequestReturnsEMPTYArray() {
         class MockNSManagedObjectContext: NSManagedObjectContext {
@@ -175,7 +185,8 @@ Now, if I wanted to test the &#8220;false&#8221; branch of my class' method, I c
         let returnValue = myClassInstance.databaseHasRecordsForSomeEntity()
         
         XCTAssertTrue(returnValue == false, "The return value should be been false")
-    }</pre>
+    }
+```
 
 And that's a wrap – happy mocking and stubbing in Swift!
 

@@ -46,7 +46,8 @@ The first step is to import the Social module into your .swift file. It's a simp
 import UIKit
 import Social
 
-// ...</pre>
+// ...
+```
 
 <a name="check-availability" class="jump-target"></a>
 
@@ -58,11 +59,13 @@ In the [example that's included with this guide][1], I will respond to a user's 
 
 Within the body of the IBAction associated with the button, I will check whether or not the Facebook service is available:
 
-<pre class="lang:swift decode:true mark:2 " title="Check availability" >@IBAction func postToFacebookTapped(sender: UIButton) {
+```swift
+@IBAction func postToFacebookTapped(sender: UIButton) {
     if(SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)) {
         //...
     }
-}</pre>
+}
+```
 
 <a name="service-types" class="jump-target"></a>
 
@@ -85,13 +88,15 @@ For the purposes of this guide, we'll look at the first two, which map to Facebo
 
 The Social framework comes with a Type that allows us to present some Apple-built UI to post to any of the four service types. To get at this out-of-the-box user interface, we look to `SLComposeViewController's` initializer that takes an argument for the type of service we'd like to create a post for:
 
-<pre class="lang:swift decode:true mark:3 " title="Create SLComposeViewController" >@IBAction func postToFacebookTapped(sender: UIButton) {
+```swift
+@IBAction func postToFacebookTapped(sender: UIButton) {
     if(SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)) {
         let socialController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
 
         // ...
     }
-}</pre>
+}
+```
 
 In this code snippet, we're creating an `SLComposeViewController` instance to post to Facebook, since I've specified the `SLServiceTypeFacebook` type to the initializer.
 
@@ -101,7 +106,8 @@ In this code snippet, we're creating an `SLComposeViewController` instance to po
 
 Optionally, you can choose to pre-populate the &#8220;create post&#8221; UI with some initial text, an image, or a URL. Here's a sample of what that might look like:
 
-<pre class="lang:swift decode:true mark:4-6 " title="Configure SLComposeViewController" >@IBAction func postToFacebookTapped(sender: UIButton) {
+```swift
+@IBAction func postToFacebookTapped(sender: UIButton) {
     if(SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)) {
         let socialController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
 //            socialController.setInitialText("Hello World!")
@@ -110,7 +116,8 @@ Optionally, you can choose to pre-populate the &#8220;create post&#8221; UI with
         
         // ...
     }
-}</pre>
+}
+```
 
 <a name="present-controller" class="jump-target"></a>
 
@@ -118,7 +125,8 @@ Optionally, you can choose to pre-populate the &#8220;create post&#8221; UI with
 
 The last step is to present the controller!
 
-<pre class="lang:swift decode:true mark:8" title="Present the SLComposeViewController" >@IBAction func postToFacebookTapped(sender: UIButton) {
+```swift
+@IBAction func postToFacebookTapped(sender: UIButton) {
     if(SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook)) {
         let socialController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
 //            socialController.setInitialText("Hello World!")
@@ -127,7 +135,8 @@ The last step is to present the controller!
         
         self.presentViewController(socialController, animated: true, completion: nil)
     }
-}</pre>
+}
+```
 
 If you need to perform an action when the user has finished their post (or cancelled the action), the completion closure is your opportunity to hook into that event and execute the code you need.
 

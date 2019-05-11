@@ -109,7 +109,8 @@ Likewise, an `Animal` may not live in an `Exhibit`. It could be held in a tempor
 
 We could model this example as follows:
 
-<pre class="lang:swift decode:true " title="Animal, Exhibit" >class Animal {
+```swift
+class Animal {
     let name: String
     let species: String
     init(name: String, species: String) { 
@@ -125,7 +126,8 @@ class Exhibit {
     init(title: String) { self.title = title }
 
     var animal: Animal? // notice the optional nature of animal
-}</pre>
+}
+```
 
 Let's consider the situation where an `Animal` _is_ living in an `Exhibit`. It might be nice to traverse a relationship between them to get information about one or the other. So as we instantiate an `Animal` and an `Exhibit`, the next immediate step would be to assign the instances to each other's corresponding property.
 
@@ -159,7 +161,8 @@ In the situation where that optional mutually dependent relationship exists, suc
 
 It doesn't really matter which class holds the weak reference, just as long as one of them does.
 
-<pre class="lang:swift decode:true " title="Animal, Exhibit - Weak" >class Animal {
+```swift
+class Animal {
     let name: String
     let species: String
     init(name: String, species: String) { 
@@ -175,7 +178,8 @@ class Exhibit {
     init(title: String) { self.title = title }
 
     weak var animal: Animal? // but notice - we're holding a _weak_ reference to the animal
-}</pre>
+}
+```
 
 Making the `Exhibit's` `animal` property hold a `weak` reference to an `Animal` instance eliminates the possibility of a strong reference cycle.
 
@@ -208,7 +212,8 @@ class AnnualPass {
         self.number = number
         self.passholder = passholder
     }
-}</pre>
+}
+```
 
 Notice a couple of things:
 

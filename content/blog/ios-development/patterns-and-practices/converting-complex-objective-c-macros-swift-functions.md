@@ -37,13 +37,16 @@ That makes sense, actually! Complex Objective-C macros tend to look a _lot_ like
 
 What could we do in Swift to convert an Objective-C macro that looks something like this?
 
-<pre class="lang:objc decode:true " >#define SQUARE_NUMBER(n) n * n</pre>
+<pre class="lang:objc decode:true " >#define SQUARE_NUMBER(n) n * n
+```
 
 One thing we could do is write a function that produces the same thing:
 
-<pre class="lang:swift decode:true " >func squareNumber(n: Int) -&gt; Int {
+```swift
+func squareNumber(n: Int) -&gt; Int {
     return n * n
-}</pre>
+}
+```
 
 ### A little more complicated
 
@@ -70,18 +73,20 @@ The macro form looked like this:
 green:((float)((rgbValue >> 8) & 0xFF))/255.0 \
 blue:((float)((rgbValue >> 0) & 0xFF))/255.0 \
 alpha:alphaValue]
-</pre>
+```
 
 Rewriting it as a Swift function:
 
-<pre class="lang:swift decode:true " >func UIColorFromRGB(rgb: Int, alpha: Float) -> UIColor {
+```swift
+func UIColorFromRGB(rgb: Int, alpha: Float) -> UIColor {
     let red = CGFloat(Float(((rgb>>16) & 0xFF)) / 255.0)
     let green = CGFloat(Float(((rgb>>8) & 0xFF)) / 255.0)
     let blue = CGFloat(Float(((rgb>>0) & 0xFF)) / 255.0)
     let alpha = CGFloat(alpha)
     
     return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-}</pre>
+}
+```
 
 The main thing to keep in mind is that the output of the macro/function is the focus. The internals could change to better-adapt to Swift's features if you desire. If the macro was ugly inside, make it nice in Swift!
 

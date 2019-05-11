@@ -18,9 +18,9 @@ tags:
   - View Controllers
 
 ---
-The delegation pattern is ubiquitous in iOS development – the pattern is&nbsp;a &#8220;<a title="Cocoa Core Competencies" href="https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/Delegation.html" target="_blank">core competency</a>&#8221; for developing in Cocoa, and if you program with the iOS SDK for any length of time and you'll end up writing some code that&nbsp;resembles&nbsp;<span class="lang:swift decode:true  crayon-inline">someInstance.delegate = someDelegate</span>.
+The delegation pattern is ubiquitous in iOS development – the pattern is&nbsp;a &#8220;<a title="Cocoa Core Competencies" href="https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/Delegation.html" target="_blank">core competency</a>&#8221; for developing in Cocoa, and if you program with the iOS SDK for any length of time and you'll end up writing some code that&nbsp;resembles&nbsp;`someInstance.delegate = someDelegate`.
 
-One of the toughest things that I've experienced is choosing what <span class="lang:swift decode:true  crayon-inline ">someDelegate</span>&nbsp;is. &nbsp;All too often, a&nbsp;View Controller ends up being assigned the responsibility of&nbsp;being the delegate for _everything_ in its hierarchy. &nbsp;My question is: &nbsp;Is there a cleaner way?
+One of the toughest things that I've experienced is choosing what `someDelegate`&nbsp;is. &nbsp;All too often, a&nbsp;View Controller ends up being assigned the responsibility of&nbsp;being the delegate for _everything_ in its hierarchy. &nbsp;My question is: &nbsp;Is there a cleaner way?
 
 Let's pick up on the example I proposed in my [recent post about sending e-mails in-app][1]. &nbsp;For &#8220;quick and dirty&#8221; pragmatism, I just crammed everything into the View Controller with the promise of coming back and (hopefully) showing a cleaner way. &nbsp;<a title="Send Email In-App – Using MFMailComposeViewController with Swift" href="http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample" target="_blank">Here is a quick link to&nbsp;example posed before</a>&nbsp;if you'd like to review it before proceeding.
 
@@ -36,9 +36,10 @@ So the question at hand: &nbsp;Is the class labeled &#8220;Clean Example&#8221;&
 
 ## EmailComposer
 
-In order to accomplish the self-declared Clean View Controller above, I placed all of the configuration processes and the delegate method for the <span class="lang:swift decode:true  crayon-inline ">MFMailComposeViewController</span>&nbsp;in a _new_ class called <span class="lang:swift decode:true  crayon-inline">EmailComposer</span>. &nbsp;It should look familiar if you recall&nbsp;the <a title="Send Email In-App – Using MFMailComposeViewController with Swift" href="http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample" target="_blank">previous example</a>:
+In order to accomplish the self-declared Clean View Controller above, I placed all of the configuration processes and the delegate method for the `MFMailComposeViewController`&nbsp;in a _new_ class called `EmailComposer`. &nbsp;It should look familiar if you recall&nbsp;the <a title="Send Email In-App – Using MFMailComposeViewController with Swift" href="http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample" target="_blank">previous example</a>:
 
-<pre class="lang:swift decode:true">import Foundation
+```swift
+import Foundation
 import MessageUI
 
 class EmailComposer: NSObject, MFMailComposeViewControllerDelegate {
@@ -62,23 +63,24 @@ class EmailComposer: NSObject, MFMailComposeViewControllerDelegate {
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-}</pre>
+}
+```
 
 So literally, the only thing I did is
 
-  * Cut the function definitions for <span class="lang:swift decode:true  crayon-inline">configuredMailComposeViewController</span>, and the <span class="lang:swift decode:true  crayon-inline ">MFMailComposeViewControllerDelegate</span>&nbsp;method.
-  * Paste them into the new <span class="lang:swift decode:true  crayon-inline ">EmailComposer</span>&nbsp;&nbsp;class, which inherits from <span class="lang:swift decode:true  crayon-inline ">NSObject</span>&nbsp;&nbsp;(a requirement for this particular delegate protocol's conformity), and conforms to the <span class="lang:swift decode:true  crayon-inline ">MFMailComposeViewControllerDelegate</span>&nbsp;&nbsp;protocol.
-  * Adjust my View Controller to create an instance of <span class="lang:swift decode:true  crayon-inline ">EmailComposer</span>&nbsp;, obtain a configured <span class="lang:swift decode:true crayon-inline">MFMailComposeViewController</span>, and present it&nbsp;whenever the user taps on a button in my UI.
+  * Cut the function definitions for `configuredMailComposeViewController`, and the `MFMailComposeViewControllerDelegate`&nbsp;method.
+  * Paste them into the new `EmailComposer`&nbsp;&nbsp;class, which inherits from `NSObject`&nbsp;&nbsp;(a requirement for this particular delegate protocol's conformity), and conforms to the `MFMailComposeViewControllerDelegate`&nbsp;&nbsp;protocol.
+  * Adjust my View Controller to create an instance of `EmailComposer`&nbsp;, obtain a configured `MFMailComposeViewController`, and present it&nbsp;whenever the user taps on a button in my UI.
 
 ## Conclusions
 
-  * The View Controller in its final version is&nbsp;_focused_. &nbsp;It's primary concern is presentation and handling of user interaction with the View itself, rather than needing to worry with configuring an&nbsp;<span class="lang:swift decode:true  crayon-inline">MFMailComposeViewController</span>&nbsp;and its delegate callback.
-  * <span class="lang:swift decode:true  crayon-inline ">EmailComposer</span>&nbsp;is less of a hassle to test, in the sense that&nbsp;<span style="line-height: 1.5;">I no longer need to instantiate a View Controller in my </span><span class="lang:swift decode:true  crayon-inline ">XCTestCase</span><span style="line-height: 1.5;">&nbsp;class just to test my </span><span class="lang:swift decode:true  crayon-inline">MFMailComposeViewController</span><span style="line-height: 1.5;">&nbsp;stuff</span><span style="line-height: 1.5;">. &nbsp;It's a real pain to test an actual&nbsp;View Controller instance, so I like that I can easily create an instance of <span class="lang:swift decode:true  crayon-inline ">EmailComposer</span>&nbsp;and test away without the bulk.</span>
+  * The View Controller in its final version is&nbsp;_focused_. &nbsp;It's primary concern is presentation and handling of user interaction with the View itself, rather than needing to worry with configuring an&nbsp;`MFMailComposeViewController`&nbsp;and its delegate callback.
+  * `EmailComposer`&nbsp;is less of a hassle to test, in the sense that&nbsp;<span style="line-height: 1.5;">I no longer need to instantiate a View Controller in my </span>`XCTestCase`<span style="line-height: 1.5;">&nbsp;class just to test my </span>`MFMailComposeViewController`<span style="line-height: 1.5;">&nbsp;stuff</span><span style="line-height: 1.5;">. &nbsp;It's a real pain to test an actual&nbsp;View Controller instance, so I like that I can easily create an instance of `EmailComposer`&nbsp;and test away without the bulk.</span>
   * No need to import MessageUI in my View Controller.
 
 All in all, this is the cleanest, simplest, most balanced solution (that&nbsp;I could think of) to factoring out some logic to another class, so as to&nbsp;make my View Controller as clean as possible.
 
-The goal was to&nbsp;make sure the appropriate responsibilities are assigned to the right classes. &nbsp;Presentation logic is all in the View Controller. &nbsp;Configuration and delegate callback implementation is done in <span class="lang:swift decode:true  crayon-inline">EmailComposer</span>.
+The goal was to&nbsp;make sure the appropriate responsibilities are assigned to the right classes. &nbsp;Presentation logic is all in the View Controller. &nbsp;Configuration and delegate callback implementation is done in `EmailComposer`.
 
 I'm thinking through applying this same idea to other more complicated examples (UITableViewDataSource and UITableViewDelegate come to mind), and I think it would do us a&nbsp;_lot_ of good to strategize on how to avoid making the View Controller the &#8220;catch-all&#8221; delegate / data source class for everything that's currently on the screen_._
 

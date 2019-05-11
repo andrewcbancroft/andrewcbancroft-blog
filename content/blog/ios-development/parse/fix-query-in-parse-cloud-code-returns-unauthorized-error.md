@@ -36,7 +36,8 @@ query.find({
     error: function(error) {
         response.error(error);
     }
-});</pre>
+});
+```
 
 When the details came back as to what was failing, the JSON object in the response looked like this:
 
@@ -45,7 +46,8 @@ When the details came back as to what was failing, the JSON object in the respon
   "error": {
     "message": "unauthorized"
   }
-}</pre>
+}
+```
 
 I got to searching and found an [issue on GitHub][1] that pointed me in the right direction, but to spare you reading through the entire thread, here's the gist:
 
@@ -95,7 +97,7 @@ var port = process.env.PORT || 1337;
 app.listen(port, function() {
     console.log('parse-server-example running on port ' + port + '.');
 });
-</pre>
+```
 
 I hope this little breadcrumb finds its way to someone before _they_ spend 3 hours on a silly configuration issue.
 

@@ -71,7 +71,8 @@ Adjust your Parse Dashboard's configuration file as follows with the values you'
       "pass":"password1"
     }
   ]
-}</pre>
+}
+```
 
 <a name="modify-git-ignore" class="jump-target"></a>
 
@@ -83,7 +84,8 @@ Edit the .gitignore file using a text editor and remove these three lines:
 
 <pre class="lang:vim decode:true " title=".gitignore" >bundles/
 Parse-Dashboard/public/bundles/
-Parse-Dashboard/parse-dashboard-config.json</pre>
+Parse-Dashboard/parse-dashboard-config.json
+```
 
 <a name="stage-commit-changes" class="jump-target"></a>
 
@@ -113,7 +115,7 @@ With the new private repository set up, you need to add it as a remote to your l
 In the Terminal, make sure you're in the directory of your local parse-dashboard git repository and run:
 
 <pre class="lang:sh decode:true " title="Add new remote" >git remote add privateorigin https://url-to-your-private-parse-dashboard-repo
-</pre>
+```
 
 <a name="push-changes" class="jump-target"></a>
 
@@ -124,7 +126,8 @@ With all the changes to your configuration committed and the new remote reposito
 In the Terminal, make sure you're in the directory of your local parse-dashboard git repository and run:
 
 <pre class="lang:sh decode:true " title="Push changes" >git push -u privateorigin --all # pushes up the repo and its refs for the first time
-git push privateorigin --tags # pushes up any tags</pre>
+git push privateorigin --tags # pushes up any tags
+```
 
 <a name="create-cloud-app" class="jump-target"></a>
 

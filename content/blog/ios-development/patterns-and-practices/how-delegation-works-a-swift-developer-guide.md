@@ -118,11 +118,13 @@ To give a simple example, suppose that we've decided to create a class to encaps
 
 First, the protocol:
 
-<pre class="lang:swift decode:true " title="RatingPickerDelegate" >protocol RatingPickerDelegate {
+```swift
+protocol RatingPickerDelegate {
     func preferredRatingSymbol(picker: RatingPicker) -&gt; UIImage?
     func didSelectRating(picker: RatingPicker, rating: Int)
     func didCancel(picker: RatingPicker)
-}</pre>
+}
+```
 
 Notice how this protocol definition allows both the customization point and the feedback loop we were hoping for. It's always nice for the delegate to have access to the public API of the instance calling its methods, so the `RatingPicker` (or `UITableView` or `UIScrollView` or whatever) is often passed along as an argument.
 
@@ -130,7 +132,8 @@ Notice how this protocol definition allows both the customization point and the 
 
 With the protocol defined, our `RatingPicker` (the delegat_or_ in this case) can now set itself up to use that protocol:
 
-<pre class="lang:swift decode:true " title="RatingPicker" >// Disclaimer:  There is much more logic that would go into a real UIView subclass or a picker control in real life
+```swift
+// Disclaimer:  There is much more logic that would go into a real UIView subclass or a picker control in real life
 // This example is contrived and is only meant to serve as a "shell" of what code could look like
 // that uses a delegate within its implementation
 
@@ -156,7 +159,8 @@ class RatingPicker {
         delegate?.didCancel(picker: self)
         // Other logic related to canceling
     }
-}</pre>
+}
+```
 
 The `delegate` property is strongly typed to be a `RatingPickerDelegate`.
 
@@ -168,7 +172,8 @@ I've used optional chaining to get at the `delegate's` methods if the `delegate`
 
 Choosing the delegate class is the final decision to make. It's not uncommon for a View Controller to take up the responsibility of being a delegate. In [&#8220;Pick a Delegate, Any Delegate&#8221;][5], I attempted to show how it's _not_ necessary to use the View Controller as your one stop delegate shop. For this example, I'll avoid giving the View Controller more responsibility than it needs and I'll create a simple handler class to assume the delegated responsibilities:
 
-<pre class="lang:swift decode:true " title="RatingPickerHandler" >class RatingPickerHandler: RatingPickerDelegate {
+```swift
+class RatingPickerHandler: RatingPickerDelegate {
     func preferredRatingSymbol(picker: RatingPicker) -&gt; UIImage? {
         return UIImage(contentsOfFile: "Star.png")
     }
@@ -180,7 +185,8 @@ Choosing the delegate class is the final decision to make. It's not uncommon for
     func didCancel(picker: RatingPicker) {
         // do something in response to the rating picker canceling
     }
-}</pre>
+}
+```
 
 ### Wrapping up
 

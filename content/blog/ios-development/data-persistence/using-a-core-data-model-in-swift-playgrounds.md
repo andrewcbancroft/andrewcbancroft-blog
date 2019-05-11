@@ -109,7 +109,8 @@ In the finder window, right-click the .app file, and click &#8220;Show package c
 
 That's it! Now that the &#8220;momd&#8221; file is in the playground's Resources folder, you're set to write code against it. You can insert `NSManagedObject` instances, perform fetch requests, etc. Here's an example that I wrote up:
 
-<pre class="lang:swift decode:true " title="Core Data Playground" >import UIKit
+```swift
+import UIKit
 import CoreData
 
 // Core Data Stack Setup for In-Memory Store
@@ -140,7 +141,8 @@ try! context.save()
 let fr = NSFetchRequest(entityName: "Entity")
 let result = try! context.executeFetchRequest(fr)
 
-print(result)</pre>
+print(result)
+```
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png" alt="Fetch request result" width="968" height="73" class="alignnone size-full wp-image-13018" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png 968w, https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result-300x23.png 300w" sizes="(max-width: 968px) 100vw, 968px" />][11]
 

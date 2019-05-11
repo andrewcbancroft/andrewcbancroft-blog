@@ -66,7 +66,8 @@ This isn't a characteristic that's limited to extensions. _Anything_ defined in 
 
 So suppose you have a file named Types.swift, and within you have the following:
 
-<pre class="lang:swift decode:true " title="Types.swift" >private struct Person {
+```swift
+private struct Person {
     private let name: String
 }
 
@@ -74,7 +75,8 @@ private struct Greeter {
     private func greet(person: Person) {
         println("Hi, I'm \(person.name)")
     }
-}</pre>
+}
+```
 
 If you're a C# developer, you look at that code and immediately go, &#8220;Yeah, that's not gonna work&#8230; `name` is `private` to `Person` and can't be referenced outside that Type&#8221;.
 

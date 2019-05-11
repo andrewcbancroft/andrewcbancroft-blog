@@ -26,13 +26,14 @@ Then take a look at your `OnModelCreating` override.
 
 If you haven't implemented an override yet, go ahead and create one. If you've already got some Code First stuff in your `OnModelCreating` override, add to it by following this example:
 
-<pre class="lang:c# decode:true ">protected override void OnModelCreating(DbModelBuilder modelBuilder)
+```c#
+protected override void OnModelCreating(DbModelBuilder modelBuilder)
 {
     modelBuilder.Entity&lt;NameOfEntity>()
                 .Property(p => p.NameOfProperty)
                 .HasPrecision(9, 4); // or whatever your schema specifies
 }
-</pre>
+```
 
 It's as simple as that! Once you make this update, your decimal values won't be truncated at the second decimal place anymore. They'll be as precise as you've specified in your call to `HasPrecision()`.
 

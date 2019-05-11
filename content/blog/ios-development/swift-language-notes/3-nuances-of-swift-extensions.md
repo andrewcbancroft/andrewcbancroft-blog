@@ -33,7 +33,8 @@ In particular, the following three nuances challenged what I thought I knew abou
 
 Before I begin, suppose that I have a public struct called `Person`. It has some private properties, `name`, `gender`, and `age`. An enum encapsulates the idea of `Gender`. The struct looks something like this:
 
-<pre class="lang:swift decode:true " >public struct Person {
+```swift
+public struct Person {
     private var name: String
     private var gender: Gender
     private var age: Int
@@ -62,7 +63,8 @@ Before I begin, suppose that I have a public struct called `Person`. It has some
         case Male
         case Female
     }
-}</pre>
+}
+```
 
 Now, suppose that I wanted to extend `Person` and inspect the three nuances about the extension's capabilities and behaviors that I introduced at the beginning of this article&#8230;
 
@@ -82,7 +84,8 @@ Extensions defined within the same file as the Type they're extending have acces
 
 For example, defining an extension to `Person` _within_ Person.swift allows the extension to access `private` properties and functions! Who knew?!
 
-<pre class="lang:swift decode:true " >extension Person {
+```swift
+extension Person {
     func getAge() -&gt; Int {
         return age // compiles, even though age is --private--
     }
@@ -90,7 +93,8 @@ For example, defining an extension to `Person` _within_ Person.swift allows the 
     func getFormattedAge() -&gt; String {
         return formattedAge() // compiles, even though formattedAge is --private--
     }
-}</pre>
+}
+```
 
 &#8220;What?? Why?&#8221;, I thought to myself&#8230;
 
@@ -131,7 +135,8 @@ In short, when you declare an extension but specify no explicit access modifiers
 
 Here's what the extension looks like if we analyze it from the perspective of using no explicitly declared access modifiers (note that to gain access to private properties and functions, I'm declaring the extension within Person.swift):
 
-<pre class="lang:swift decode:true " title="Person.swift" >public struct Person {
+```swift
+public struct Person {
     // ...
     
     // ...
@@ -145,7 +150,8 @@ extension Person {
     func getFormattedAge() -&gt; String {
         return formattedAge()
     }
-}</pre>
+}
+```
 
 Using the default access modifiers as shown in the code snippet above exposes access to the extension's new API to instances within the same module. However, it does _not_ expose additional public API for the Type it's extending to a client of that Type that's in another _module_ (for example, the unit test target, which is another Swift module).
 

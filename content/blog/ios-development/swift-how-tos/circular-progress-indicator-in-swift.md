@@ -86,20 +86,24 @@ The example I've contrived is a simple counter with an upper limit of 5. So as y
 
 There's a function I've built to calculate the new angle:
 
-<pre class="lang:swift decode:true " title="newAngle()" >func newAngle() -> Double {
+```swift
+func newAngle() -> Double {
     return 360 * (currentCount / maxCount)
-}</pre>
+}
+```
 
 The rest is simply a matter of updating the current count and animating to the new angle:
 
-<pre class="lang:swift decode:true " title="increaseProgressButtonTapped" >@IBAction func increaseProgressButtonTapped(sender: UIButton) {
+```swift
+@IBAction func increaseProgressButtonTapped(sender: UIButton) {
     if currentCount != maxCount {
         currentCount += 1
         let newAngleValue = newAngle()
         
         circularProgressView.animate(toAngle: newAngleValue, duration: 0.5, completion: nil)
     }
-}</pre>
+}
+```
 
 <a name="resetting" class="jump-target"></a>
 
@@ -109,10 +113,12 @@ To reset everything, we'd want to update the state of our current count back to 
 
 The change to the circular progress indicator's visualization of the progress state can be animated by calling the view's `animate(fromAngle:toAngle:duration:completion:)` method:
 
-<pre class="lang:swift decode:true " title="resetButtonTapped" >@IBAction func resetButtonTapped(sender: UIButton) {
+```swift
+@IBAction func resetButtonTapped(sender: UIButton) {
     currentCount = 0
     circularProgressView.animate(fromAngle: circularProgressView.angle, toAngle: 0, duration: 0.5, completion: nil)
-}</pre>
+}
+```
 
 ### Wrapping up
 

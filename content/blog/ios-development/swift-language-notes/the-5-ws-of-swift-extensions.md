@@ -58,11 +58,13 @@ So you've decided that you want to create an extension to some class, struct, or
 
 So if I want to extend, say, String to have a new method called &#8220;sayHello&#8221; which printed &#8220;Hello&#8221; when invoked, I would create a new .swift file called StringExtensions.swift. I'd then place my extension inside:
 
-<pre class="lang:swift decode:true " title="StringExtensions.swift" >extension String {
+```swift
+extension String {
     func sayHello() {
         println("Hello")
     }
-}</pre>
+}
+```
 
 Hey, awesome – you got a bonus _How_ with that quick example! Creating an extension in Swift is _that easy_.
 

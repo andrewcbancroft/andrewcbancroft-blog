@@ -76,7 +76,8 @@ The delegate method that causes the buttons to appear on swipe is called `tableV
 
 Its implementation for the example I'm working through looks like this:
 
-<pre class="lang:swift decode:true " title="commitEditingStyle" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+```swift
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // ...
 
@@ -93,7 +94,8 @@ Its implementation for the example I'm working through looks like this:
     }
 
     // ...
-}</pre>
+}
+```
 
 So what's happening here? The primary thing to notice is that we're evaluating the editingStyle from the method's parameter list. Comparing it to the `.Delete` `UITableViewCellEditingStyle` value is what allows us to know that the Delete button was tapped.
 
@@ -111,7 +113,8 @@ The next step is confirming that the user really wants to delete the particular 
 
 How is this implemented? It all boils down to using iOS 8's new `UIAlertController`:
 
-<pre class="lang:swift decode:true " title="confirmDelete" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+```swift
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // ...
 
@@ -132,7 +135,8 @@ How is this implemented? It all boils down to using iOS 8's new `UIAlertControll
     }
 
     // ...
-}</pre>
+}
+```
 
 We're asking the user if they're sure they want to permanently delete the planet using the `.ActionSheet` style.
 
@@ -146,7 +150,8 @@ Finally, we provide a function to each `UIAlertAction` instance. The handlers, o
 
 This is the final step! The following code snippet is an implementation of the two handlers specified for the initialization step of the `UIAlertAction` buttons, which were `handleDeletePlanet` and `cancelDeletePlanet`:
 
-<pre class="lang:swift decode:true " title="Delete or Cancel" >class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+```swift
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // ...
 
@@ -174,7 +179,8 @@ This is the final step! The following code snippet is an implementation of the t
     }
 
     // ...
-}</pre>
+}
+```
 
 Clearly, `handleDeletePlanet()` is the most involved. The essential process is this:
 

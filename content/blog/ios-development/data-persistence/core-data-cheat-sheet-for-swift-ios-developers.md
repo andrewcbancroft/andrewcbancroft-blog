@@ -32,7 +32,8 @@ One assumption I'm making in this post is that you've created NSManagedObject su
 
 #### Fetch all entities
 
-<pre class="lang:swift decode:true " title="Fetch all entities" >// Assuming type has a reference to managed object context
+```swift
+// Assuming type has a reference to managed object context
 
 let fetchRequest = NSFetchRequest(entityName: "MyEntity")
 do {
@@ -41,13 +42,14 @@ do {
 } catch {
     // Do something in response to error condition
 }
-</pre>
+```
 
 <a name="fetch-max-n" class="jump-target"></a>
 
 #### Fetch maximum of N entities
 
-<pre class="lang:swift decode:true " title="Fetch N entities" >// Assuming type has a reference to managed object context
+```swift
+// Assuming type has a reference to managed object context
 
 let fetchRequest = NSFetchRequest(entityName: "MyEntity")
 fetchRequest.fetchLimit = 10
@@ -57,13 +59,14 @@ do {
 } catch {
     // Do something in response to error condition
 }   
-</pre>
+```
 
 <a name="insert" class="jump-target"></a>
 
 ## Insert a new entity
 
-<pre class="lang:swift decode:true " title="Insert a new entity" >// Assuming encapsulating Type has a reference to managed object context
+```swift
+// Assuming encapsulating Type has a reference to managed object context
 
 let newEntity = NSEntityDescription.insertNewObjectForEntityForName("MyEntity", inManagedObjectContext: self.managedObjectContext) as! MyEntity
 // Set properties
@@ -72,13 +75,15 @@ do {
     try self.managedObjectContext.save()
 } catch {
     // Do something in response to error condition
-}</pre>
+}
+```
 
 <a name="update-single-entity" class="jump-target"></a>
 
 ## Update a single entity
 
-<pre class="lang:swift decode:true " title="Update a single entity" >// Assuming type has a reference to managed object context
+```swift
+// Assuming type has a reference to managed object context
 
 // Assuming that a specific NSManagedObject's objectID property is accessible
 // Alternatively, could supply a predicate expression that's precise enough
@@ -101,13 +106,15 @@ do {
     try self.managedObjectContext.save()
 } catch {
     // Do something in response to error condition
-}</pre>
+}
+```
 
 <a name="update-multiple-entities" class="jump-target"></a>
 
 ## Update multiple-entities
 
-<pre class="lang:swift decode:true " title="Update multiple entities" >// Assuming type has a reference to managed object context
+```swift
+// Assuming type has a reference to managed object context
 
 let predicate = NSPredicate(format: "MyEntityAttribute == %@", "Matching Value")
 
@@ -130,13 +137,15 @@ do {
     try self.managedObjectContext.save()
 } catch {
     // Do something in response to error condition
-}</pre>
+}
+```
 
 <a name="delete-single-entity" class="jump-target"></a>
 
 ## Delete a single entity
 
-<pre class="lang:swift decode:true " title="Delete a single entity" >// Assuming type has a reference to managed object context
+```swift
+// Assuming type has a reference to managed object context
 
 // Assuming that a specific NSManagedObject's objectID property is accessible
 // Alternatively, could supply a predicate expression that's precise enough
@@ -159,13 +168,15 @@ do {
     try self.managedObjectContext.save()
 } catch {
     // Do something in response to error condition
-}</pre>
+}
+```
 
 <a name="delete-multiple-entities" class="jump-target"></a>
 
 ## Delete multiple-entities
 
-<pre class="lang:swift decode:true " title="Delete multiple entities" >// Assuming type has a reference to managed object context
+```swift
+// Assuming type has a reference to managed object context
 
 let predicate = NSPredicate(format: "MyEntityAttribute == %@", "Matching Value")
 
@@ -186,18 +197,21 @@ do {
     try self.managedObjectContext.save()
 } catch {
     // Do something in response to error condition
-}</pre>
+}
+```
 
 <a name="migrate-automatically" class="jump-target"></a>
 
 ## Migrate Core Data Model with Automatic Migrations
 
-<pre class="lang:swift decode:true " title="Migrate Model" >let model = // set up model
+```swift
+let model = // set up model
 
 let pscOptions = [NSMigratePersistentStoresAutomaticallyOption : true, NSInferMappingModelAutomaticallyOption : true]
     
 let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
-try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: pscOptions)</pre>
+try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: pscOptions)
+```
 
 <a name="related" class="jump-target"></a>
 

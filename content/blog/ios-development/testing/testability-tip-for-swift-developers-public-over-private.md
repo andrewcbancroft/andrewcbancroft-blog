@@ -77,7 +77,8 @@ Obviously, properties and functions that are part of a Type's core purpose can b
 
 Note also that the Type itself needs to be marked public if it's going to be visible to your unit tests.
 
-<pre class="lang:swift decode:true " title="Public example" >// Instead of this (default --internal-- access)...
+```swift
+// Instead of this (default --internal-- access)...
 class MyClass {
     func myFunc() {
         // Performs something essential to why MyClass exists
@@ -89,7 +90,8 @@ public class MyClass {
     public func myFunc() {
         // Performs something essential to why MyClass exists
     }
-}</pre>
+}
+```
 
 <a name="new-type" class="jump-target"></a>
 

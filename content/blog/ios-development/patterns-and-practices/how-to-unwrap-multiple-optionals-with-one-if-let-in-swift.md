@@ -28,13 +28,17 @@ Ready?
 
 ## Scenario 1: Both arrays are initialized (non-nil)
 
-<pre class="lang:swift decode:true " title="Set up optional arrays" >var greetings: [String]? = ["Howdy!", "Hello!"]
-var salutations: [String]? = ["Hi!", "Hey!"]</pre>
+```swift
+var greetings: [String]? = ["Howdy!", "Hello!"]
+var salutations: [String]? = ["Hi!", "Hey!"]
+```
 
-<pre class="lang:swift decode:true " >if let g = greetings, let s = salutations {
+```swift
+if let g = greetings, let s = salutations {
     print(g)
     print(s)
-}</pre>
+}
+```
 
 **Output:**  
 [&#8220;Howdy!&#8221;, &#8220;Hello!&#8221;]  
@@ -50,13 +54,17 @@ The output of this one is pretty much what you'd expect, too. The string form of
 
 Now suppose that the arrays looked like this:
 
-<pre class="lang:swift decode:true " title="Set up optional arrays" >var greetings: [String]? = ["Howdy!", "Hello!"]
-var salutations: nil</pre>
+```swift
+var greetings: [String]? = ["Howdy!", "Hello!"]
+var salutations: nil
+```
 
-<pre class="lang:swift decode:true " >if let g = greetings, let s = salutations {
+```swift
+if let g = greetings, let s = salutations {
     print(g)
     print(s)
-}</pre>
+}
+```
 
 Question: What do you think will be printed?
 
@@ -76,10 +84,12 @@ The behavior is similar to using the `&&` operator in a normal `if` condition. I
 
 If you expect to work with one of the optionals in the list even if the other is nil, you're going to need to split that up into multiple if-lets:
 
-<pre class="lang:swift decode:true " >if let g = greetings {
+```swift
+if let g = greetings {
     print(g)
 }
 
 if let s = salutations {
     print(s)
-}</pre>
+}
+```

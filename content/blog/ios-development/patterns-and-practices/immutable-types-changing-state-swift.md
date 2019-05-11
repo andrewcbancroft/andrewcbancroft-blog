@@ -58,7 +58,8 @@ We could design this class in one of two ways: declare a variable stored propert
     scoreKeeper.incrementScoreBy(5)
     println(scoreKeeper.runningScore)
     // prints 5
-    </pre>
+    
+```
     <p></p>
     
     
@@ -84,7 +85,8 @@ We could design this class in one of two ways: declare a variable stored propert
         let scorekeeperWithIncreasedScore = scorekeeper.incrementScoreBy(5)
         println(scorekeeperWithIncreasedScore.runningScore)
         // prints 5
-        </pre>
+        
+```
         <p></p>
         
         

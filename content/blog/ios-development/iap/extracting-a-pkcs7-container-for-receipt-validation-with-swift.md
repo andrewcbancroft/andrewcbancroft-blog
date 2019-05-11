@@ -51,9 +51,11 @@ Recall that I've created a [main Type called `ReceiptValidator`][4], with refere
 
 If a validation step ever fails along the way, I've decided to take advantage of Swift's error throwing features to clearly describe what failed. So far, there's only one case:
 
-<pre class="lang:swift decode:true " title="ReceiptValidationError " >enum ReceiptValidationError : Error {
+```swift
+enum ReceiptValidationError : Error {
     case couldNotFindReceipt
-}</pre>
+}
+```
 
 I'll expand this enum Type to cover more failure conditions in this guide.
 
@@ -65,12 +67,14 @@ The OpenSSL library comes to us in the form of a C static library. It's not a be
 
 So supposing you've [located and loaded][3] the receipt data, or used [Store Kit][6] to request a receipt from Apple&#8230; Take a look at this new `ReceiptExtractor` skeleton of a struct to get an idea of what's going to be required to extract the PKCS7 container for the receipt:
 
-<pre class="lang:swift decode:true " >struct ReceiptExtractor {
+```swift
+struct ReceiptExtractor {
     func extractPKCS7Container(_ receiptData: Data) throws -> UnsafeMutablePointer&lt;PKCS7> {
         // use Open SSL to extract the PKCS7 container
         // throw a ReceiptValidationError if something goes wrong in this process
     }
-}</pre>
+}
+```
 
 <a name="new-receiptvalidationerror-cases" class="jump-target"></a>
 
@@ -80,10 +84,12 @@ When extracting the receipt information from the PKCS7 container, there are goin
 
 So in this guide, I'll expand the `ReceiptValidationError` enum to have the following cases:
 
-<pre class="lang:swift decode:true " title="ReceiptValidationError " >enum ReceiptValidationError : Error {
+```swift
+enum ReceiptValidationError : Error {
     case couldNotFindReceipt
     case emptyReceiptContents
-}</pre>
+}
+```
 
 <a name="prep-pkcs7-union-accessors" class="jump-target"></a>
 
@@ -116,7 +122,8 @@ PKCS7_DIGEST *pkcs7_d_digest(PKCS7 *ptr);
 PKCS7_ENCRYPT *pkcs7_d_encrypted(PKCS7 *ptr);
 ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr);
 
-#endif /* pkcs7_union_accessors_h */</pre>
+#endif /* pkcs7_union_accessors_h */
+```
 
 <a name="pkcs7-union-accessors-c-implementation" class="jump-target"></a>
 
@@ -154,7 +161,8 @@ inline PKCS7_ENCRYPT *pkcs7_d_encrypted(PKCS7 *ptr) {
 
 inline ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr) {
     return ptr-&gt;d.other;
-}</pre>
+}
+```
 
 <a name="bridging-header-updates" class="jump-target"></a>
 
@@ -164,7 +172,8 @@ After you create the union accessor files, you need to update your project's bri
 
 <pre class="lang:c decode:true " title="bridging header" >#import &lt;openssl/pkcs7.h&gt;
 #import &lt;openssl/objects.h&gt;
-#import "pkcs7_union_accessors.h"</pre>
+#import "pkcs7_union_accessors.h"
+```
 
 <a name="receiptextractor-implementation" class="jump-target"></a>
 
@@ -172,7 +181,8 @@ After you create the union accessor files, you need to update your project's bri
 
 Now it's time to dive into the actual implementation of what I'm calling a `ReceiptExtractor`. Have a look at the code with some explanatory comments following:
 
-<pre class="lang:swift decode:true " >struct ReceiptExtractor {
+```swift
+struct ReceiptExtractor {
     func extractPKCS7Container(_ receiptData: Data) throws -> UnsafeMutablePointer&lt;PKCS7> {
         let receiptBIO = BIO_new(BIO_s_mem())       
         BIO_write(receiptBIO, (receiptData as NSData).bytes, Int32(receiptData.count))
@@ -190,7 +200,8 @@ Now it's time to dive into the actual implementation of what I'm calling a `Rece
         
         return receiptPKCS7Container!
     }
-}</pre>
+}
+```
 
 <a name="receiptextractor-explanation" class="jump-target"></a>
 

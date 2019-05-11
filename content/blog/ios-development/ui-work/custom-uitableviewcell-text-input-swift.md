@@ -116,7 +116,8 @@ Use the document outline to Control + Click + Drag and IBOutlet to the `TextInpu
 
 An example implementation with a function for configuring the text field's properties might look something like this:
 
-<pre class="lang:swift decode:true " title="TextInputTableViewCell.swift" >import UIKit
+```swift
+import UIKit
 
 public class TextInputTableViewCell: UITableViewCell {
     @IBOutlet weak var textField: UITextField!
@@ -128,7 +129,8 @@ public class TextInputTableViewCell: UITableViewCell {
         textField.accessibilityValue = text
         textField.accessibilityLabel = placeholder
     }
-}</pre>
+}
+```
 
 <a name="storyboard-setup" class="jump-target"></a>
 
@@ -151,7 +153,8 @@ With the Table View Cell still selected in the document outline, select the attr
 In the View Controller, specify that it adopts the `UITableViewDataSource` and `UITableViewDelegate` protocols. Implement the appropriate protocol methods.  
 I've written a [cheat sheet][12] for this, but I'll also provide the following sample implementation of the mai `ViewController` class:
 
-<pre class="lang:swift decode:true mark:9,11" title="ViewController.swift" >import UIKit
+```swift
+import UIKit
 
 public class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {
@@ -164,7 +167,8 @@ public class ViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.configure(text: "", placeholder: "Enter some text!")
         return cell
     }
-}</pre>
+}
+```
 
 Lines 9 and 11 are of most importance. Notice that I'm dequeueing a TextInputCell, which is what I set the reuse identifier of my cell to be. I'm also casting the dequeued cell as a TextInputTableViewCell so that it can be configured (line 11)
 

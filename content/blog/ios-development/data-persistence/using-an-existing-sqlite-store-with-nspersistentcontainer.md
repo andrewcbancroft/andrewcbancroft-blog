@@ -30,7 +30,8 @@ Let's take a look now at how you can configure the container to use your previou
 
 Supposing that your **previous** Core Data stack creation step pointed to a .sqlite file somewhere in your user's documents directory:
 
-<pre class="lang:swift decode:true " title="Configure Persistent Store Coordinator" >// Configure NSPersistentStoreCoordinator with an NSPersistentStore
+```swift
+// Configure NSPersistentStoreCoordinator with an NSPersistentStore
 let psc = NSPersistentStoreCoordinator(managedObjectModel: model) // model instance creation not shown here...
 
 let storeURL = try! FileManager
@@ -38,7 +39,8 @@ let storeURL = try! FileManager
         .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         .appendingPathComponent("NameOfDataModel.sqlite")
 
-try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)</pre>
+try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+```
 
 <a name="after" class="jump-target"></a>
 
@@ -46,7 +48,8 @@ try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, a
 
 The key to migrating to `NSPersistentStore` with an existing SQLite persistent store is the `NSPersistentStoreDescription` class. Take a look at the following code to see how to configure an instance of `NSPersistentStoreDescription` and assign it to the `NSPersistentContainer` instance's `persistentStoreDescriptions` property:
 
-<pre class="lang:swift decode:true mark:8-9" title="Using NSPersistentStoreDescription" >let container = NSPersistentContainer(name: "NameOfDataModel")
+```swift
+let container = NSPersistentContainer(name: "NameOfDataModel")
 
 let storeURL = try! FileManager
         .default
@@ -57,7 +60,7 @@ let storeDescription = NSPersistentStoreDescription(url: storeURL)
 container.persistentStoreDescriptions = [storeDescription]
 
 // Remaining setup for NSPersistentContainer
-</pre>
+```
 
 <a name="breakdown" class="jump-target"></a>
 

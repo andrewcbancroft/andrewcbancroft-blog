@@ -37,13 +37,15 @@ Named Types are those which are defined and identified by the _name_ that they'r
 
 To define a Named Type, you'd do something like this:
 
-<pre class="lang:swift decode:true " title="Type declarations" >class SomeNewClassType {}
+```swift
+class SomeNewClassType {}
 
 struct SomeNewStructType {}
 
 enum SomeNewEnumType {}
 
-protocol SomeNewProtocolType {}</pre>
+protocol SomeNewProtocolType {}
+```
 
 Initializing instances of Types and using their properties and methods, passing them around to functions that require parameters of those Types, or setting them as values to properties of other Types are all pretty standard thoughts that come to mind when using named Types.
 
@@ -82,9 +84,11 @@ If you've lived long on the Internet, you're bound to have run across a Star War
 
 The function definition (minus the body) might look like this:
 
-<pre class="lang:swift decode:true " title="Function Type Example" >func generateStarWarsName(firstName: String, lastName: String, birthYear: Int) -&gt; String { 
+```swift
+func generateStarWarsName(firstName: String, lastName: String, birthYear: Int) -&gt; String { 
     // ... 
-}</pre>
+}
+```
 
 If someone were to ask you, &#8220;What is the `generateStarWarsName` function's Type?&#8221;, you could answer: &#8220;`generateStarWarsName` is a function Type that has three parameters, the first two of Type String, the last of Type Int, and that returns a value of Type String.&#8221;
 
@@ -132,9 +136,11 @@ is `() -> Void`, since it takes no parameters, _and_ returns nothing.
 
 Here are a few more examples for you to practice function Type identification. Can you write out the correct notation for each function's Type?
 
-<pre class="lang:swift decode:true " title="Function Type Example" >func complimentMe(name: String) -&gt; String { 
+```swift
+func complimentMe(name: String) -&gt; String { 
     // ... 
-}</pre>
+}
+```
 
 <a id="show-answer-1" style="cursor: pointer;">Show answer</a>
 
@@ -142,9 +148,11 @@ Here are a few more examples for you to practice function Type identification. C
   `(String) -> String`
 </div>
 
-<pre class="lang:swift decode:true " title="Function Type Example" >func countToTen() { 
+```swift
+func countToTen() { 
     // ... prints 1 to 10 to the console ...
-}</pre>
+}
+```
 
 <a id="show-answer-2" style="cursor: pointer;">Show answer</a>
 
@@ -160,9 +168,11 @@ Here are a few more examples for you to practice function Type identification. C
   </p>
 </div>
 
-<pre class="lang:swift decode:true " title="Function Type Example" >func addInts(first: Int, second: Int) -&gt; Int { 
+```swift
+func addInts(first: Int, second: Int) -&gt; Int { 
     // ... 
-}</pre>
+}
+```
 
 <a id="show-answer-3" style="cursor: pointer;">Show answer</a>
 
@@ -170,9 +180,11 @@ Here are a few more examples for you to practice function Type identification. C
   `(Int, Int) -> Int`
 </div>
 
-<pre class="lang:swift decode:true " title="Function Type Example" >func fadeIn(duration: NSTimeInterval, delay: NSTimeInterval, completion: (Bool) -> Void){ 
+```swift
+func fadeIn(duration: NSTimeInterval, delay: NSTimeInterval, completion: (Bool) -> Void){ 
     // ... 
-}</pre>
+}
+```
 
 <a id="show-answer-4" style="cursor: pointer;">Show answer</a>
 
@@ -185,7 +197,8 @@ Here are a few more examples for you to practice function Type identification. C
     <p>
     </p>
     
-    <pre class="lang:swift decode:true " title="Function Type Example">func increment(input: Int) -&gt; Int {
+    ```swift
+func increment(input: Int) -&gt; Int {
     return input + 1
 }
 
@@ -195,7 +208,8 @@ func decrement(input: Int) -&gt; Int {
 
 func chooseAdjustmentFunction(increase: Bool) -&gt; (Int) -&gt; Int {
     return increase ? increment : decrement
-}</pre>
+}
+```
     
     <p>
       <a id="show-answer-5" style="cursor: pointer;">Show answer</a>

@@ -33,7 +33,9 @@ What got me in the end is that it turns out I _didn't_ know what I was doing wi
 
 2.  Call <span class="theme:vs2012 lang:vbnet decode:true  crayon-inline ">ToString()</span> on the _converted_ value:
 
-<pre class="theme:vs2012 lang:vbnet decode:true">CType(someObject.dateInstance, Date).ToString("MMMM dd, yyyy")</pre>
+```
+CType(someObject.dateInstance, Date).ToString("MMMM dd, yyyy")
+```
 
 Sanity&#8230; _recovered._
 

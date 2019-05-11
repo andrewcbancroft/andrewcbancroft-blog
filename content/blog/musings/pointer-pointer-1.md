@@ -32,7 +32,8 @@ The * symbol is used as both a _type_ declaration _and_ as an _operator_ (the d
     intPointer = &i;
 
     // * used as the de-reference operator
-    printf("Value returned when intPointer is de-referenced: %dn", *intPointer);</pre>
+    printf("Value returned when intPointer is de-referenced: %dn", *intPointer);
+```
 
 On line 2 the variable intPointer is declared to be a variable of _type_ pointer to an integer.
 

@@ -73,7 +73,8 @@ Here are a few snippets from the class ([grab the full XCode project][2] over at
 
 #### Initialization
 
-<pre class="lang:swift decode:true " title="Initialization" >public class DataHelper {
+```swift
+public class DataHelper {
     let context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext) {
@@ -82,7 +83,8 @@ Here are a few snippets from the class ([grab the full XCode project][2] over at
     
 // ...
 
-}</pre>
+}
+```
 
 The primary thing to take away from the initialization routine is that instead of calling out to the AppDelegate to get an instance of the `NSManagedObjectContext`, I'm choosing to require it to be passed in during the initialization of `DataHelper`. It's a pattern I like to practice because it allows me to do unit tests in real-world applications that use Core Data.
 
@@ -90,7 +92,8 @@ The primary thing to take away from the initialization routine is that instead o
 
 #### seedZoos()
 
-<pre class="lang:swift decode:true " title="seedZoos() function" >public class DataHelper {
+```swift
+public class DataHelper {
 
 // ...
 
@@ -115,7 +118,8 @@ The primary thing to take away from the initialization routine is that instead o
 
 // ...
 
-}</pre>
+}
+```
 
 A few observations on the code above:
 
@@ -126,7 +130,8 @@ A few observations on the code above:
 
 #### printAllZoos()
 
-<pre class="lang:swift decode:true " title="printAllZoos() function" >public class DataHelper {
+```swift
+public class DataHelper {
 
 // ...
 
@@ -145,7 +150,8 @@ A few observations on the code above:
 
 // ...
 
-}</pre>
+}
+```
 
 `printAllZoos()` function utilizes a standard `NSFetchRequest`, along with an `NSSortDescriptor`. Check out my [cheat sheet][3] for more examples of common Core Data operations.
 
@@ -155,7 +161,8 @@ Once again, having the `NSManagedObject` subclass in place allows me to cast the
 
 #### seedAnimals()
 
-<pre class="lang:swift decode:true " title="seedAnimals() function" >public class DataHelper {
+```swift
+public class DataHelper {
 
 // ...
 
@@ -206,7 +213,8 @@ Once again, having the `NSManagedObject` subclass in place allows me to cast the
 
 // ...
 
-}</pre>
+}
+```
 
 `seedAnimals()` is the most complicated piece of the whole scenario because it depends on entities that have been previously inserted into the data store. An `Animal`, which is a member of some `Classification` lives in some habitat at a `Zoo`. So in order to get a complete `Animal` into the data store, we need to have a `Classification` and one or more `Zoo` to assign it.
 
@@ -220,7 +228,8 @@ The rest of the function follows the same patterns that have already been used i
 
 ### AppDelegate.swift
 
-<pre class="lang:swift decode:true " title="AppDelegate.swift" >func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         let dataHelper = DataHelper(context: self.managedObjectContext)
@@ -231,7 +240,8 @@ The rest of the function follows the same patterns that have already been used i
         dataHelper.printAllAnimals()
         
         return true
-    }</pre>
+    }
+```
 
 Above is a peek at what my AppDelegate.swift file's `application:didFinishLaunchingWithOptions:` function looks like. Nothing fancy going on here. I'm simply initializing a `DataHelper` instance with the `NSManagedObjectContext` instance that's created in this class, and calling the seed and print functions I defined earlier.
 
@@ -241,7 +251,8 @@ Above is a peek at what my AppDelegate.swift file's `application:didFinishLaunch
 
 I've found that sometimes it helps to have a freshly seeded data store every time I the app while I'm in development mode. When I'm testing the UI, I may create new entities during my manual testing, but one of the convenient things about seeding the data store is that I don't _have_ to. And even if I did, it's often quite nice to start fresh each run. To do this we'll dive into some of the boilerplate code that XCode generates for us when we choose to use Core Data when we create the project. Specifically, we'll target the `persistentStoreCoordinator` closure:
 
-<pre class="lang:swift decode:true mark:8 " title="persistentStoreCoordinator closure" >lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+```swift
+lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -271,7 +282,8 @@ I've found that sometimes it helps to have a freshly seeded data store every tim
         }
         
         return coordinator
-        }()</pre>
+        }()
+```
 
 I've highlighted the key line that I added (everything else was already in place, generated for me by XCode). Adding that line removes the sqlite database. The lines that follow add it back in a fresh state.
 

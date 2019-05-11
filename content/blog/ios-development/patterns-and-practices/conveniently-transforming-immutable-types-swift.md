@@ -33,7 +33,8 @@ I'm bringing in his example so that we have it before us with a few minor modifi
 
 The gist of Jarsen's solution was to create a second helper initializer which would help setting the values for all the properties easier. Take a look:
 
-<pre class="lang:swift mark:12-15 decode:true " >class Scorekeeper {
+```swift
+class Scorekeeper {
     let runningScore: Int
     let climbingScore: Int
     // potentially more properties
@@ -54,7 +55,8 @@ The gist of Jarsen's solution was to create a second helper initializer which wo
     }
     
     // other functions to transform Scorekeeper by incrementing other score properties
-}</pre>
+}
+```
 
 Note the use of optionals, and the corresponding nil-coalescing operator (`??`) in the helper initializer's implementation. It's simple, _and_ it's concise. I like it!
 

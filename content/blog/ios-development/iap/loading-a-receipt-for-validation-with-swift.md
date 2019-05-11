@@ -87,7 +87,8 @@ The enum's definition is simple right now, but it will grow as time goes on with
 
 <pre class="lang:default decode:true " title="ReceiptValidationError Enum" >enum ReceiptValidationError : Error {
     case couldNotFindReceipt
-}</pre>
+}
+```
 
 This enum simply implements the `Error` &#8220;marker&#8221; protocol, which allows its values to be used in Swift's error-throwing system. For this blog entry, we'll stick with simply throwing the value `couldNotFindReceipt` whenever a receipt can't be found and needs to be re-requested from the App Store.
 
@@ -103,7 +104,8 @@ I mentioned `ReceiptLoader` in the overview. An implementation will follow, but 
 
 With that architecture in mind, here's what `ReceiptValidator` looks like right now:
 
-<pre class="lang:swift decode:true " title="ReceiptValidator.swift" >enum ReceiptValidationResult {
+```swift
+enum ReceiptValidationResult {
     case success
     case error(ReceiptValidationError)
 }
@@ -121,7 +123,8 @@ struct ReceiptValidator {
             return .error(error as! ReceiptValidationError)
         }
     }
-}</pre>
+}
+```
 
 So the validator simply lets the `ReceiptLoader` instance do it's loading job. If it doesn't return any data containing a receipt to work with, the validator will catch the error and return the `.error` `ReceiptValidationResult` case with the error cast to a `ReceiptValidationError` as an associated value.
 
@@ -135,7 +138,8 @@ The `ReceiptLoader` has the sole responsibility of going to receipt storage loca
 
 Here's the implementation with explanation to follow:
 
-<pre class="lang:swift decode:true " title="ReceiptLoader.swift" >struct ReceiptLoader {
+```swift
+struct ReceiptLoader {
     let receiptUrl = Bundle.main.appStoreReceiptURL
     
     func loadReceipt() throws -> Data {
@@ -160,7 +164,8 @@ Here's the implementation with explanation to follow:
         
         return false
     }
-}</pre>
+}
+```
 
 The `loadReceipt()` method will do the job and either return a `Data` instance with the receipt contents that can be extracted and parsed in later steps, or it will throw the `ReceiptValidationError.couldNotFindReceipt` enum value.
 
@@ -172,7 +177,8 @@ The rest of the implementation is all around making sure the receipt is there an
 
 The View Controller is the kick-off point of all-things receipt validation. To have some code in front of us, take a look at this implementation. Explanatory details are below:
 
-<pre class="lang:swift decode:true " title="ViewController.swift" >public class ViewController: UIViewController, SKRequestDelegate {
+```swift
+public class ViewController: UIViewController, SKRequestDelegate {
     let receiptValidator = ReceiptValidator()
     let receiptRequest = SKReceiptRefreshRequest()
     
@@ -208,7 +214,8 @@ The View Controller is the kick-off point of all-things receipt validation. To h
         // Log unsuccessful attempt and optionally begin grace period
         // before disabling app functionality, or simply disable features
     }
-}</pre>
+}
+```
 
 When the app starts and the controller has loaded, it will prepare itself in a couple of ways:
 

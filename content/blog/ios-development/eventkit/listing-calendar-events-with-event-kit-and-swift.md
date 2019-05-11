@@ -55,7 +55,8 @@ The primary thing you'll need to do in order to display a list of events from a 
 
 Here's a snippet of code, followed by an analysis of what's going on:
 
-<pre class="lang:swift decode:true mark:20,23" title="Query for events" >class EventsViewController: UIViewController, UITableViewDataSource {
+```swift
+class EventsViewController: UIViewController, UITableViewDataSource {
     var calendar: EKCalendar! // Passed in from previous view controller
     var events: [EKEvent]?
 
@@ -85,7 +86,7 @@ Here's a snippet of code, followed by an analysis of what's going on:
     }
     // ...
 }
-</pre>
+```
 
 <a name="context-view-controller" class="jump-target"></a>
 

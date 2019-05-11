@@ -44,7 +44,8 @@ Note that you may have trouble in the iOS 8 Simulator, with symptoms of the comp
 
 <a name="//acbref-MFMailComposeViewControllerExample"></a>An example View Controller class that implements the three steps above is proposed here. All that would be left for you to do is to design a user interface and wire up the `@IBAction`. Lines of code that are of special importance, such as module imports, protocol conformance and assignment, checking for the ability to send e-mail, and the protocol method implementation are highlighted. Take a look:
 
-<pre class="lang:swift mark:3,5,13,22,37-39 decode:true">import Foundation
+```swift
+import Foundation
 import UIKit
 import MessageUI
 
@@ -83,7 +84,8 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
-}</pre>
+}
+```
 
 <a name="step-by-step-implementation" class="jump-target"></a>
 

@@ -57,7 +57,8 @@ Using an initializer, or a `public` variable property, or by adding parameters t
 
 Setting up your instance definitions to use a set of inputs from the very start through initialization gives you the ability to provide real &#8220;production-ready&#8221; values in your app, but fake &#8220;test-customized&#8221; values for testing. [Creating fake objects][3] for testing is outside the scope of this article, but providing public initializers with parameters is a really great way to set yourself up for being able to test that particular instance.
 
-<pre class="lang:swift decode:true " >// Prefer
+```swift
+// Prefer
 public class DatabaseCommunicator {
     let database: Database
     
@@ -72,11 +73,13 @@ public class DatabaseCommunicator {
 public class DatabaseCommunicator {
     let database = Database()
     // stuck with talking to a real database...
-}</pre>
+}
+```
 
 Another viable option is to provide public variable properties that can be set after the instance is initialized. This is a little more round-about, but I would still call it a form of &#8220;parameterization&#8221; because the strategy still provides you with the same control point that an initializer with parameters does.
 
-<pre class="lang:swift decode:true " >// prefer
+```swift
+// prefer
 public class DatabaseCommunicator {
     public var database: Database
     // able to supply a controlled input via property setter, such as supplying a 
@@ -88,11 +91,13 @@ public class DatabaseCommunicator {
 public class DatabaseCommunicator {
     let database = Database()
     // stuck with talking to a real database
-}</pre>
+}
+```
 
 At the function level, the usefulness of parameters is that you can supply inputs and examine outputs with ease. If you pull in data from the encapsulating instance inside the function body, say by referencing `self.somePropertyValue`, you've got a bit more setup to do to be able to accurately verify results. `somePropertyValue` needs to actually have a value before the function will produce accurate results. If you'd opted to simply define parameters for everything the function needs in order to produce its output, you can test that function in isolation far more easily and be guaranteed that your results are correct and accurate.
 
-<pre class="lang:swift decode:true " >// prefer
+```swift
+// prefer
 func getNameFromDatabase(database: Database) -&gt; String {
     return database.getName()
     // able to supply a controlled input via parameter, such as supplying a 
@@ -113,7 +118,7 @@ func getNameFromDatabase() -&gt; String {
     // requires additional setting of the database property on 'self'
     // before you're able to get results from this function
 }
-</pre>
+```
 
 <a name="di" class="jump-target"></a>
 

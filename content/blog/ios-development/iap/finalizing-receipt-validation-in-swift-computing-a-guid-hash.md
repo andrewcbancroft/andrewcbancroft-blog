@@ -55,13 +55,15 @@ A `ReceiptValidationError` will be thrown if things go wrong within this functio
 
 Here's the skeleton of the function:
 
-<pre class="lang:swift decode:true " title="validateHash Skeleton" >fileprivate func validateHash(receipt: ParsedReceipt) throws {
+```swift
+fileprivate func validateHash(receipt: ParsedReceipt) throws {
     // Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison
 
     // Compute the hash for your app & device
 
     // Compare the computed hash with the receipt's hash
-}</pre>
+}
+```
 
 <a name="signaling-validation-failure" class="jump-target"></a>
 
@@ -69,7 +71,8 @@ Here's the skeleton of the function:
 
 Before I get into the implementation of the `validateHash(receipt:)` function, let's define one more `ReceiptValidationError` case to describe a bad hash comparison outcome:
 
-<pre class="lang:swift mark:9 decode:true " title="ReceiptValidationError" >enum ReceiptValidationError : Error {
+```swift
+enum ReceiptValidationError : Error {
     case couldNotFindReceipt
     case emptyReceiptContents
     case receiptNotSigned
@@ -78,7 +81,8 @@ Before I get into the implementation of the `validateHash(receipt:)` function, l
     case malformedReceipt
     case malformedInAppPurchaseReceipt
     case incorrectHash
-}</pre>
+}
+```
 
 <a name="implementing-validate-hash" class="jump-target"></a>
 
@@ -86,7 +90,8 @@ Before I get into the implementation of the `validateHash(receipt:)` function, l
 
 I'll put the code in front of you, and then do my best to explain my thought process.
 
-<pre class="lang:swift decode:true " title="validateHash" >fileprivate func validateHash(receipt: ParsedReceipt) throws {
+```swift
+fileprivate func validateHash(receipt: ParsedReceipt) throws {
     // Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison
     guard let receiptOpaqueValueData = receipt.opaqueValue else { throw ReceiptValidationError.incorrectHash }
     guard let receiptBundleIdData = receipt.bundleIdData else { throw ReceiptValidationError.incorrectHash }
@@ -117,7 +122,8 @@ I'll put the code in front of you, and then do my best to explain my thought pro
     
     // Compare the computed hash with the receipt's hash
     guard computedHashData.isEqual(to: receiptHashData as Data) else { throw ReceiptValidationError.incorrectHash }
-}</pre>
+}
+```
 
 <a name="walkthrough" class="jump-target"></a>
 
@@ -125,9 +131,11 @@ I'll put the code in front of you, and then do my best to explain my thought pro
 
 First up, I've placed three guard statements:
 
-<pre class="lang:swift decode:true " title="Guards" >guard let receiptOpaqueValueData = receipt.opaqueValue else { throw ReceiptValidationError.incorrectHash }
+```swift
+guard let receiptOpaqueValueData = receipt.opaqueValue else { throw ReceiptValidationError.incorrectHash }
 guard let receiptBundleIdData = receipt.bundleIdData else { throw ReceiptValidationError.incorrectHash }
-guard let receiptHashData = receipt.sha1Hash else { throw ReceiptValidationError.incorrectHash }</pre>
+guard let receiptHashData = receipt.sha1Hash else { throw ReceiptValidationError.incorrectHash }
+```
 
 These help guarantee that the rest of the function will have all of the required pieces of data that it needs to fully compute a hash and compare it with what's in the receipt.
 
@@ -138,14 +146,16 @@ The hash for your app is computed with the following three pieces of information
 
 The app purchaser's device identifier is represented as a `uuid_t` from the Foundation library. However, to use it with the Open SSL library, we'll need to be working with an `NSData` instance. The following code goes from the `uuid_t` instance, to a raw pointer, to an `NSData` instance:
 
-<pre class="lang:swift decode:true " title="Explaining device ID uuid_t to NSData conversion" >var deviceIdentifier = UIDevice.current.identifierForVendor?.uuid
+```swift
+var deviceIdentifier = UIDevice.current.identifierForVendor?.uuid
 
 let rawDeviceIdentifierPointer = withUnsafePointer(to: &deviceIdentifier, {
     (unsafeDeviceIdentifierPointer: UnsafePointer&lt;uuid_t?&gt;) -&gt; UnsafeRawPointer in
     return UnsafeRawPointer(unsafeDeviceIdentifierPointer)
 })
 
-let deviceIdentifierData = NSData(bytes: rawDeviceIdentifierPointer, length: 16)</pre>
+let deviceIdentifierData = NSData(bytes: rawDeviceIdentifierPointer, length: 16)
+```
 
 The last chunk of code within the function actually computes the hash data.
 
@@ -159,7 +169,8 @@ The final guard takes the `computedHashData` instance, and compares it to the re
 
 Let's put it all together into the final `ReceiptValidator` struct. Additions are highlighted below:
 
-<pre class="lang:swift decode:true mark:16,24-55" title="Final ReceiptValidator" >struct ReceiptValidator {
+```swift
+struct ReceiptValidator {
     let receiptLoader = ReceiptLoader()
     let receiptExtractor = ReceiptExtractor()
     let receiptSignatureValidator = ReceiptSignatureValidator()
@@ -214,7 +225,8 @@ Let's put it all together into the final `ReceiptValidator` struct. Additions ar
         // Compare the computed hash with the receipt's hash
         guard computedHashData.isEqual(to: receiptHashData as Data) else { throw ReceiptValidationError.incorrectHash }
     }
-}</pre>
+}
+```
 
 <a name="what-to-do-from-here" class="jump-target"></a>
 
