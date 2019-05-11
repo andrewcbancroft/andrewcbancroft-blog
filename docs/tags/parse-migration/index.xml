@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Parse Migration on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/parse-migration/</link>
+    <description>Recent content in Parse Migration on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 May 2016 03:33:03 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/parse-migration/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Parse PFCloud – “JSON text did not start with array or object”</title>
+      <link>https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/</link>
+      <pubDate>Fri, 20 May 2016 03:33:03 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/</guid>
+      <description>It&amp;#8217;s always the little things that lead to flatter foreheads (or at least it is for me).
+Banging my head against the desk this evening working on a Parse migration, I finally figured out what was causing an error condition in a PFCloud function call.
+The request to the server succeeded, but the response was malformed somehow:
+ Error Domain=NSCocoaErrorDomain Code=3840 &amp;#8220;JSON text did not start with array or object and option to allow fragments not set.</description>
+    </item>
+    
+    <item>
+      <title>Deploying Parse Dashboard</title>
+      <link>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</link>
+      <pubDate>Sun, 17 Apr 2016 21:56:45 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</guid>
+      <description>Below are steps that I&amp;#8217;ve taken, myself, to deploy the Parse Dashboard to a cloud host, such as Azure, or Heroku.
+Jump to&amp;#8230;   Clone parse-dashboard git repository   Run npm install   Edit parse-dashboard-config.json   Modify local .gitignore   Stage and commit all changes   Set up private git repository   Add new remote to your local parse-dashboard git repository   Push to your private git repository   Create app on the cloud host   Configure cloud host for git deployment   Enable SSL (or run as insecure app)   You might also enjoy&amp;#8230;   Was this article helpful?</description>
+    </item>
+    
+    <item>
+      <title>FIX – Query in Parse Cloud Code Returns Unauthorized Error</title>
+      <link>https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/</link>
+      <pubDate>Wed, 06 Apr 2016 04:27:49 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/</guid>
+      <description>The Parse migration process has begun &amp;#8211; I&amp;#8217;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
+The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!
+Jump to&amp;#8230;   Problem Overview   Solution   Was this article helpful?</description>
+    </item>
+    
+  </channel>
+</rss>

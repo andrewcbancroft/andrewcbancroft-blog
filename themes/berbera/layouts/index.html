@@ -1,32 +1,48 @@
+{{ define "header" }}
+<header class="header header-index content-wrapper">
+    <div class="site-intro">
+        <div class="grav-inner">
+            <div class="grav-grav">
+                <img alt="Andrew Bancroft"
+                    src="https://secure.gravatar.com/avatar/693d6ce36672340c22f55dd4f44f9f69?s=256&amp;d=mm&amp;r=g"
+                    srcset="https://secure.gravatar.com/avatar/693d6ce36672340c22f55dd4f44f9f69?s=512&amp;d=mm&amp;r=g 2x"
+                    class="avatar avatar-256 photo grav-hashed" height="256" width="256"
+                    id="grav-693d6ce36672340c22f55dd4f44f9f69-0">
+            </div>
+        </div>
+        <h1 class="site-title">Andrew Bancroft</h1>
+        <br>
+        <h2 class="site-description">Sharing bits of what I'm learning, one byte at a time.</h2>
+    </div>
+</header>
+{{ end }}
+
+{{ define "about-me-blurb" }}
+<div class="col-sm-12 about-me-blurb">
+    <div class="">
+        <h5>Hi – I’m Andrew.</h5>
+        I’m a relentless learner, passionate about discovery and about sharing new insights that come my way.
+        Here, I write about technology and software development with a primary emphasis on <a href="#ios-development">iOS development in Swift</a>.
+    </div>
+</div>
+{{ end }}
+
 {{ define "main" }}
 <main>
     <div class="homepage">
+        <span id="pluralsight-courses" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <h3 class="category_header">Pluralsight Courses</h3>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-sm-12">
-                <h1>
-                    <div class="author-avatar">
-                            <img src="https://0.gravatar.com/avatar/693d6ce36672340c22f55dd4f44f9f69" alt="Andrew Bancroft" itemprop="image">
-                    </div>
-                    <span class="major_line">Data-Day Life</span>
-                    <br>
-                    <span class="minor_line">Describing Data Discoveries from Day to Day</span>
-                </h1>
-            </div>
-        </div>
-
-        <div class="row" id="notes">
-            <div class="col-sm-12">
-                <h3 class="category_header">Notes</h3>
-            </div>
-        </div>
-
-        <div class="row" id="sql-server-notes">
-            <div class="col-sm-12">
                 <div class="card">
-                    <h4 class="card-header">SQL Server</h4>
-                    <div class="card-body">
+                    <div class="article_list card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/notes/sql-server/").ByTitle }}
+                            {{ range (where .Pages "File.Dir" "in" "/pluralsight/") }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -37,124 +53,276 @@
             </div>
         </div>
 
-        <div class="row" id="blog-articles">
+        <span id="ios-development" class="jump-target"></span>
+        <div class="row" id="">
             <div class="col-sm-12">
-                <h3 class="category_header">Blog Articles</h3>
+                <h3 class="category_header">iOS Development</h3>
             </div>
         </div>
 
-        <div class="row" id="azure">
+        <span id="data-persistence" class="jump-target"></span>
+        <div class="row" id="">
             <div class="col-sm-12">
                 <div class="card">
-                    <h4 class="card-header">Azure</h4>
-                    <div class="article_list card-body">
+                    <h4 class="card-header">Data Persistence</h4>
+                    <div class="card-body">
                         <ul>
-                                {{ range (where .Pages "File.Dir" "in" "/blog/azure/").ByTitle }}
-                                <li><a href="{{.Permalink}}">{{.Title}}</a></li>
-                                <div class="excerpt">{{.Description}}</div>
-                                {{ end }}
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/data-persistence/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row" id="dimensional-modeling">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <h4 class="card-header">Dimensional Modeling</h4>
-                        <div class="article_list card-body">
-                            <ul>
-                                    {{ range (where .Pages "File.Dir" "in" "/blog/dimensional-modeling/").ByTitle }}
-                                    <li><a href="{{.Permalink}}">{{.Title}}</a></li>
-                                    <div class="excerpt">{{.Description}}</div>
-                                    {{ end }}
-                            </ul>
-                        </div>
+        <span id="dependency-management" class="jump-target"></span>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Dependency Management</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/dependency-management/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
                     </div>
                 </div>
+            </div>
         </div>
 
-        <div class="row" id="general-data-concepts">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <h4 class="card-header">General Data Concepts</h4>
-                        <div class="article_list card-body">
-                            <ul>
-                                    {{ range (where .Pages "File.Dir" "in" "/blog/general-data-concepts/").ByTitle }}
-                                    <li><a href="{{.Permalink}}">{{.Title}}</a></li>
-                                    <div class="excerpt">{{.Description}}</div>
-                                    {{ end }}
-                            </ul>
-                        </div>
+        <span id="eventkit" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Event Kit</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/eventkit/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
                     </div>
                 </div>
+            </div>
         </div>
 
-        <div class="row" id="machine-learning">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <h4 class="card-header">Machine Learning</h4>
-                        <div class="article_list card-body">
-                            <ul>
-                                    {{ range (where .Pages "File.Dir" "in" "/blog/machine-learning/").ByTitle }}
-                                    <li><a href="{{.Permalink}}">{{.Title}}</a></li>
-                                    <div class="excerpt">{{.Description}}</div>
-                                    {{ end }}
-                            </ul>
-                        </div>
+        <span id="iap" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">In-App Purchases</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/iap/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
                     </div>
                 </div>
+            </div>
         </div>
 
-        <div class="row" id="r">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <h4 class="card-header">R</h4>
-                        <div class="article_list card-body">
-                            <ul>
-                                    {{ range (where .Pages "File.Dir" "in" "/blog/r/").ByTitle }}
-                                    <li><a href="{{.Permalink}}">{{.Title}}</a></li>
-                                    <div class="excerpt">{{.Description}}</div>
-                                    {{ end }}
-                            </ul>
-                        </div>
+        <span id="parse" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Parse</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/parse/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
                     </div>
                 </div>
+            </div>
         </div>
 
-        <div class="row" id="sql-server">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <h4 class="card-header">SQL Server</h4>
-                        <div class="article_list card-body">
-                            <ul>
-                                    {{ range (where .Pages "File.Dir" "in" "/blog/sql-server/").ByTitle }}
-                                    <li><a href="{{.Permalink}}">{{.Title}}</a></li>
-                                    <div class="excerpt">{{.Description}}</div>
-                                    {{ end }}
-                            </ul>
-                        </div>
+        <span id="patterns-and-practices" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Patterns and Practices</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/patterns-and-practices/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
                     </div>
                 </div>
+            </div>
         </div>
 
-        <div class="row" id="statistics">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <h4 class="card-header">Statistics</h4>
-                        <div class="article_list card-body">
-                            <ul>
-                                    {{ range (where .Pages "File.Dir" "in" "/blog/statistics/").ByTitle }}
-                                    <li><a href="{{.Permalink}}">{{.Title}}</a></li>
-                                    <div class="excerpt">{{.Description}}</div>
-                                    {{ end }}
-                            </ul>
-                        </div>
+        <span id="react-native" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">React Native</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/react-native/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <span id="swift-how-tos" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Swift How-To's</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/swift-how-tos/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span id="swift-language-notes" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Swift Language Notes</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/swift-language-notes/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span id="testing" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Testing</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/testing/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span id="ui-work" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">User Interface Work</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/ui-work/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span id="xcode" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Xcode</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/xcode/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span id="dot-net-development" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <h3 class="category_header">.Net Development</h3>
+            </div>
+        </div>
+
+        <div class="row" id="dot-net-general">
+            <div class="col-sm-12">
+                <div class="card">
+                    <!-- <h4 class="card-header">SQL Server</h4> -->
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/dot-net-development/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span id="musings" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <h3 class="category_header">Things I Wrote That Didn't Fit Anywhere Else ¯\_(ツ)_/¯</h3>
+            </div>
+        </div>
+
+        <div class="row" id="dot-net-general">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Musings</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/musings/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </main>
 {{ end }}

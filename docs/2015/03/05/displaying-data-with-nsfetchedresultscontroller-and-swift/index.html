@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111087893-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111087893-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Displaying Data With NSFetchedResultsController and Swift" />
+<meta property="og:description" content="Updated on September 23, 2015 &#8211; Swift 2.0
+The combination of an NSFetchedResultsController and a UITableView provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using NSFetchedResultsController come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;
+With a Core Data data store seeded with data, the next logical step is to display that data somewhere other than the console." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/" />
+<meta property="article:published_time" content="2015-03-05T15:14:53&#43;00:00"/>
+<meta property="article:modified_time" content="2015-03-05T15:14:53&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Displaying Data With NSFetchedResultsController and Swift"/>
+<meta name="twitter:description" content="Updated on September 23, 2015 &#8211; Swift 2.0
+The combination of an NSFetchedResultsController and a UITableView provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using NSFetchedResultsController come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;
+With a Core Data data store seeded with data, the next logical step is to display that data somewhere other than the console."/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Displaying Data With NSFetchedResultsController and Swift",
+  "url": "https:\/\/www.andrewcbancroft.com\/2015\/03\/05\/displaying-data-with-nsfetchedresultscontroller-and-swift\/",
+  "wordCount": "1284",
+  "datePublished": "2015-03-05T15:14:53\x2b00:00",
+  "dateModified": "2015-03-05T15:14:53\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, Core Data, NSFetchedResultsController, UITableView"
+}
+</script>
+
+
+
+    <title>Displaying Data With NSFetchedResultsController and Swift</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Notes
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server-notes">SQL Server</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Blog Articles
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#azure">Azure</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dimensional-modeling">Dimensional Modeling</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#general-data-concepts">General Data Concepts</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#machine-learning">Machine Learning</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#r">R</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server">SQL Server</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#statistics">Statistics</a>
+                            </div>
+                        </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            About
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.comabout/andrew_bancroft/">About Andrew</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com">www.andrewcbancroft.com</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Displaying Data With NSFetchedResultsController and Swift</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p><small>Updated on September 23, 2015 &#8211; Swift 2.0</small></p>
+
+<p>The combination of an <code>NSFetchedResultsController</code> and a <code>UITableView</code> provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using <code>NSFetchedResultsController</code> come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;</p>
+
+<p><a href="http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/">With a Core Data data store seeded with data</a>, the next logical step is to <em>display</em> that data somewhere other than the console. This post will be devoted to figuring out how to set up an <code>NSFetchedResultsController</code> to display data inside a <code>UITableView</code>.</p>
+
+<p>A follow-up post has been published to help you <a href="http://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/">keep the table view in sync</a> with the data as it changes in your persistent store, so once you&#8217;re finished here, you might check out that next step!</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Jump to&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <a href="#final-goal">Final goal</a>
+    </li>
+    <li>
+      <a href="#scenario-setup">Setup and resources</a>
+    </li>
+    <li>
+      <a href="#storyboard">Storyboard</a>
+    </li>
+    <li>
+      <a href="#main-view-controller">MainViewController.swift</a>
+    </li>
+    <ul>
+      <li>
+        <a href="#nsmanagedobjectcontext-reference">Maintain NSManagedObjectContext instance reference</a>
+      </li>
+      <li>
+        <a href="#create-nsfetchedresultscontroller">Create and configure NSFetchedResultsController instance</a>
+      </li>
+      <li>
+        <a href="#view-did-load">viewDidLoad()</a>
+      </li>
+      <li>
+        <a href="#uitableviewdatasource-methods">UITableViewDataSource methods</a>
+      </li>
+    </ul></p>
+
+<pre><code>&lt;li&gt;
+  &lt;a href=&quot;#app-delegate&quot;&gt;AppDelegate.swift&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+  &lt;a href=&quot;#related&quot;&gt;You might also enjoy&amp;#8230;&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+  &lt;a href=&quot;#share&quot;&gt;Was this article helpful? Please share!&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+  &lt;a href=&quot;#course&quot;&gt;Learning Core Data? Watch my course, Core Data Fundamentals with Swift!&lt;/a&gt;
+&lt;/li&gt;
+</code></pre>
+
+<p></ul>
+</div></p>
+
+<p><a name="final-goal" class="jump-target"></a></p>
+
+<h3 id="final-goal">Final goal</h3>
+
+<p><code>NSFetchedResultsController</code> will help us accomplish two things:<br />
+1) It will fetch data from the Core Data data store<br />
+2) It will use some of the data we fetch to populate various pieces of the UI (table view section headers, cell &#8220;title&#8221; and &#8220;subtitle&#8221; text. Here&#8217;s what we&#8217;re going for:</p>
+
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_TableView_FinalDisplay.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_TableView_FinalDisplay.png" alt="Zootastic TableView FinalDisplay" width="479" height="871" class="alignnone size-full wp-image-11450" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_TableView_FinalDisplay.png 479w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_TableView_FinalDisplay-165x300.png 165w" sizes="(max-width: 479px) 100vw, 479px" /></a></p>
+
+<p><a name="scenario-setup" class="jump-target"></a></p>
+
+<h3 id="setup-and-resources">Setup and resources</h3>
+
+<p>I&#8217;m continuing my &#8220;Zootastic&#8221; example that I used to write about <a href="http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/">using Swift to seed a Core Data database</a>. In fact, I&#8217;ve simply branched the project on GibHub and added the things we&#8217;re exploring in this post.</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/Zootastic/tree/NSFetchedResultsController_DisplayInTableView" title="Zootastic">Example XCode Project</a>
+    </li>
+  </ul>
+</div></p>
+
+<p>For this entry, we&#8217;ll still be dealing with our three primary <code>NSManagedObject</code> subclasses: Zoo, Animal, And Classification:</p>
+
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_xcdatamodel.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_xcdatamodel.png" alt="Zootastic XCdatamodel" width="361" height="310" class="alignnone size-full wp-image-11463" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_xcdatamodel.png 361w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_xcdatamodel-300x258.png 300w" sizes="(max-width: 361px) 100vw, 361px" /></a></p>
+
+<p><a name="storyboard" class="jump-target"></a></p>
+
+<h3 id="storyboard">Storyboard</h3>
+
+<p>Zootastic is a single view application. The Storyboard contains one view controller with a table view filling the Scene.</p>
+
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableView.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableView-1024x773.png" alt="Zootastic Storyboard TableView" width="1024" height="773" class="alignnone size-large wp-image-11445" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableView-1024x773.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableView-300x226.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableView.png 1379w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+
+<p>The table view is using one prototype cell with an <strong>Identifier</strong> of <strong>&#8220;Cell&#8221;</strong> (for simplicity). The <strong>Style</strong> of the prototype cell is set to <strong>Subtitle</strong>.</p>
+
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableViewCell.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableViewCell-1024x770.png" alt="Zootastic Storyboard TableViewCell" width="1024" height="770" class="alignnone size-large wp-image-11446" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableViewCell-1024x770.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableViewCell-300x225.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableViewCell.png 1381w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+
+<p><a name="main-view-controller" class="jump-target"></a></p>
+
+<h3 id="mainviewcontroller-swift">MainViewController.swift</h3>
+
+<p>MainViewController.swift is where the action is happening. Here&#8217;s a quick outline of what we need to accomplish in this class:</p>
+
+<pre class="lang:default decode:true " title="MainViewController.swift" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+
+    // maintain a reference to NSManagedObjectContext instance
+
+    // create and configure an NSFetchedResultsController instance
+
+    // Implement UITableViewDataSource methods
+}</pre>
+
+<p>As you can see, <code>MainViewController</code> is a class concerned with being the table view&#8217;s data source and delegate. Additionally, it will serve as the <code>NSFetchedResultsControllerDelegate</code>. For this post, we won&#8217;t actually need the fetched results controller delegate functionality to display data. Those methods are particularly useful for synchronizing things when data <em>changes</em>.</p>
+
+<p>With the class declaration out of the way, we&#8217;ll investigate the class implementation one section at a time.</p>
+
+<p><a name="nsmanagedobjectcontext-reference" class="jump-target"></a></p>
+
+<h4 id="maintain-nsmanagedobjectcontext-instance-reference">Maintain NSManagedObjectContext instance reference</h4>
+
+<pre class="lang:default decode:true " title="NSManagedObjectContext reference" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+    
+    public var context: NSManagedObjectContext!
+
+    // ...
+}</pre>
+
+<p>You may be asking, &#8220;Where will you set this NSManagedObjectContext reference?&#8221;. I&#8217;m employing a pattern that I&#8217;ve found successful in the past: I assign it when the finishes launching through the AppDelegate&#8217;s <code>application:didFinishLaunchingWithOptions</code> method. <a href="#app-delegate">More on this, shortly</a>&#8230;</p>
+
+<p>For now, know that we&#8217;re counting on that <a href="#app-delegate">later step</a> to take place, since <code>context</code> is defined as an implicitly unwrapped optional.</p>
+
+<p><a name="create-nsfetchedresultscontroller" class="jump-target"></a></p>
+
+<h4 id="create-and-configure-nsfetchedresultscontroller-instance">Create and configure NSFetchedResultsController instance</h4>
+
+<p>Next, we need to create and configure an <code>NSFetchedResultsController</code> instance. Here&#8217;s a bit of code with comments to follow:</p>
+
+<pre class="lang:swift decode:true mark:11-19" title="Create and Configure NSFetchedResultsController" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+    
+    // ...
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        let animalsFetchRequest = NSFetchRequest(entityName: "Animal")
+        let primarySortDescriptor = NSSortDescriptor(key: "classification.order", ascending: true)
+        let secondarySortDescriptor = NSSortDescriptor(key: "commonName", ascending: true)
+        animalsFetchRequest.sortDescriptors = [primarySortDescriptor, secondarySortDescriptor]
+        
+        let frc = NSFetchedResultsController(
+            fetchRequest: animalsFetchRequest,
+            managedObjectContext: self.context,
+            sectionNameKeyPath: "classification.order",
+            cacheName: nil)
+        
+        frc.delegate = self
+        
+        return frc
+        }()
+    
+    // ...
+
+}</pre>
+
+<p>If you&#8217;ve not read <a href="https://twitter.com/ColinEberhardt">Colin Eberhardt&#8217;s</a> <a href="http://blog.scottlogic.com/2014/11/20/swift-initialisation.html">Swift Initialization and the Pain of Optionals</a> post, I highly recommend it. His post is a fantastic analysis, and the final option of using lazy stored properties initialized by a closure expression is what I&#8217;ve chosen to do here. I won&#8217;t repeat his analysis here, so feel free to jump over to his post to figure out what&#8217;s going on there.</p>
+
+<p>Within the closure expression, I&#8217;m setting up a fetch request with some sorting applied. All that&#8217;s left is to initialize the <code>NSFetchedResultsController</code>, set its delegate and return it.</p>
+
+<p><a name="view-did-load" class="jump-target"></a></p>
+
+<h4 id="viewdidload">viewDidLoad()</h4>
+
+<p>Once the view has loaded, the idea is to perform the <code>NSFetchedResultsController</code> instance&#8217;s fetch request so that it has data to use in our <code>UITableViewDataSource</code> methods. This is how to do it:</p>
+
+<pre class="lang:swift decode:true mark:9-13" title="viewDidLoad()" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+
+    // ...
+
+    override public func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+
+            do {
+                try fetchedResultsController.performFetch()
+            } catch {
+                print("An error occurred")
+            }
+    }
+
+    // ...
+
+}</pre>
+
+<p><a name="uitableviewdatasource-methods" class="jump-target"></a></p>
+
+<h4 id="uitableviewdatasource-methods">UITableViewDataSource methods</h4>
+
+<p>The final step in implementing <code>MainViewController</code> is to set up the table view so that it pulls data from <code>fetchedResultsController</code>. I&#8217;m implementing the <a href="http://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/">standard UITableViewDataSource methods</a> here, along with <code>tableView:titleForHeaderInSection</code>. Take a look:</p>
+
+<pre class="lang:swift decode:true mark:7-9,15-18,25,34-37" title="UITableViewDataSource" >public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+
+    // ...
+
+    // MARK: TableView Data Source
+    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if let sections = fetchedResultsController.sections {
+            return sections.count
+        }
+        
+        return 0
+    }
+    
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let sections = fetchedResultsController.sections {
+            let currentSection = sections[section] 
+            return currentSection.numberOfObjects
+        }
+        
+        return 0
+    }
+    
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+        let animal = fetchedResultsController.objectAtIndexPath(indexPath) as! Animal
+        
+        cell.textLabel?.text = animal.commonName
+        cell.detailTextLabel?.text = animal.habitat
+        
+        return cell
+    }
+    
+    public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let sections = fetchedResultsController.sections {
+            let currentSection = sections[section] 
+            return currentSection.name
+        }
+        
+        return nil
+    }
+
+    // ...
+
+}</pre>
+
+<p>Apart from a bit of <code>if let ___ = ___</code> syntax, there&#8217;s not an awful lot of surprising code here if you&#8217;re familiar with working with table views. I&#8217;ve highlighted the relevant code related to <code>fetchedResultsController</code>. Without using <code>NSFetchedResultsController</code>, you&#8217;d probably supply data to the table view from an array or a dictionary or both. The <code>fetchedResultsController</code> code simplifies the data display dilemma when you&#8217;re using Core Data.</p>
+
+<p>Once the <code>UITableViewDataSource</code> methods are implemented, the implementation of <code>MainViewController</code> is complete for this example.</p>
+
+<p><a name="app-delegate" class="jump-target"></a></p>
+
+<h3 id="appdelegate-swift">AppDelegate.swift</h3>
+
+<p>There&#8217;s one final thing we need to do in order to get things rolling. In the <a href="#nsmanagedobjectcontext-reference">&#8220;maintain NSManagedObjectContext instance reference&#8221;</a> section of this post, I mentioned the strategy for assigning the <code>NSManagedObjectContext</code> instance in the <code>MainViewController</code>. Here&#8217;s how I do it:</p>
+
+<pre class="lang:swift decode:true mark:16-17" title="AppDelegate.swift" >class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    // ...
+
+
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Override point for customization after application launch.
+        
+        let dataHelper = DataHelper(context: self.managedObjectContext)
+        dataHelper.seedDataStore()
+        
+        dataHelper.printAllZoos()
+        dataHelper.printAllClassifications()
+        dataHelper.printAllAnimals()
+        
+        let rootViewController = self.window!.rootViewController as! MainViewController
+        rootViewController.context = self.managedObjectContext;
+        
+        return true
+    }
+
+    // ...
+
+}
+</pre>
+
+<p>The portion new to &#8220;injecting&#8221; the <code>managedObjectContext</code> into <code>MainViewController</code> is highlighted. I simply grab a reference to the <code>rootViewController</code> (which in our example is the <code>MainViewController</code>) and cast it to the appropriate type. Then I set the <code>context</code> property to the <code>managedObjectContext</code> that&#8217;s created in the <code>AppDelegate</code> via XCode&#8217;s auto-generated Core Data stack setup.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>If you&#8217;re using Core Data in your iOS application, the combination of an <code>NSFetchedResultsController</code> and a <code>UITableView</code> provides a powerful way to integrate data from your data store into your UI. We&#8217;ve explored how to display data in a table view using <code>NSFetchedResultsController</code>. Feel free to <a href="https://github.com/andrewcbancroft/Zootastic/tree/NSFetchedResultsController_DisplayInTableView">grab the GibHub project</a> for further investigation and to see Zootastic in action.</p>
+
+<p><a name="related" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/" title="Using a Core Data Model in Swift Playgrounds">Using a Core Data Model in Swift Playgrounds</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/" title="Using Swift to Seed a Core Data Database">Using Swift to Seed a Core Data Database</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/" title="Sync Table View Data: NSFetchedResultsController and Swift">Sync Table View Data: NSFetchedResultsController and Swift</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="course" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-video-camera"></i> <a href="http://bit.ly/ps-core-data-swift" target="_blank">Core Data Fundamentals with Swift</a><br /> <a href="http://bit.ly/ps-core-data-swift" target="_blank"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png" alt="Core Data Fundamentals with Swift" width="1024" height="576" class="alignnone size-large wp-image-13163" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w" sizes="(max-width: 1024px) 100vw, 1024px" /></a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

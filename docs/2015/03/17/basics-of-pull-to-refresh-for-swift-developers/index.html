@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111087893-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111087893-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Basics of Pull to Refresh for Swift Developers" />
+<meta property="og:description" content="Updated on September 21, 2016 &#8211; Swift 3.0
+Implementing &#8220;pull to refresh&#8221; is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:
+ They&#8217;re working with a UITableViewController They&#8217;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it  This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/" />
+<meta property="article:published_time" content="2015-03-17T17:55:52&#43;00:00"/>
+<meta property="article:modified_time" content="2015-03-17T17:55:52&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Basics of Pull to Refresh for Swift Developers"/>
+<meta name="twitter:description" content="Updated on September 21, 2016 &#8211; Swift 3.0
+Implementing &#8220;pull to refresh&#8221; is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:
+ They&#8217;re working with a UITableViewController They&#8217;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it  This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app."/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Basics of Pull to Refresh for Swift Developers",
+  "url": "https:\/\/www.andrewcbancroft.com\/2015\/03\/17\/basics-of-pull-to-refresh-for-swift-developers\/",
+  "wordCount": "1245",
+  "datePublished": "2015-03-17T17:55:52\x2b00:00",
+  "dateModified": "2015-03-17T17:55:52\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, Pull to Refresh, UIRefreshControl"
+}
+</script>
+
+
+
+    <title>Basics of Pull to Refresh for Swift Developers</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Notes
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server-notes">SQL Server</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Blog Articles
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#azure">Azure</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dimensional-modeling">Dimensional Modeling</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#general-data-concepts">General Data Concepts</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#machine-learning">Machine Learning</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#r">R</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server">SQL Server</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#statistics">Statistics</a>
+                            </div>
+                        </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            About
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.comabout/andrew_bancroft/">About Andrew</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com">www.andrewcbancroft.com</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Basics of Pull to Refresh for Swift Developers</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p><small>Updated on September 21, 2016 &#8211; Swift 3.0</small></p>
+
+<p>Implementing &#8220;pull to refresh&#8221; is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:</p>
+
+<ol>
+<li>They&#8217;re working with a UITableViewController</li>
+<li>They&#8217;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it</li>
+</ol>
+
+<p>This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app.</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Jump to&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <a href="#example-scenario">Example scenario</a>
+    </li>
+    <li>
+      <a href="#table-view-controller">Implementing with UITableViewController</a>
+    </li>
+    <ul>
+      <li>
+        <a href="#tvc-example-setup">Finish example setup</a>
+      </li>
+      <li>
+        <a href="#enable-refresh-storyboard">Enable refreshing in Storyboard</a>
+      </li>
+      <li>
+        <a href="#override-viewdidload">Override viewDidLoad()</a>
+      </li>
+      <li>
+        <a href="#tvc-handle-refresh-function">Implement handleRefresh function</a>
+      </li>
+    </ul></p>
+
+<pre><code>&lt;li&gt;
+  &lt;a href=&quot;#regular-view-controller&quot;&gt;Implementing with regular view controller + UITableView&lt;/a&gt;
+&lt;/li&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;#reg-tv-example-setup&quot;&gt;Finish example setup&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;#setup-refresh-control&quot;&gt;Set up UIRefreshControl&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;#regvc-override-viewdidload&quot;&gt;Override viewDidLoad()&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;#regvc-handle-refresh-function&quot;&gt;Implement handleRefresh function&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;li&gt;
+  &lt;a href=&quot;#share&quot;&gt;Was this article helpful? Please share!&lt;/a&gt;
+&lt;/li&gt;
+</code></pre>
+
+<p></ul>
+</div></p>
+
+<p><a name="example-scenario" class="jump-target"></a></p>
+
+<h3 id="example-scenario">Example scenario</h3>
+
+<p>For this guide, suppose that we have a list of movies that we&#8217;d like to display in a table view. Pulling to refresh will fetch more movies and update the table view to show the new ones.</p>
+
+<p>If you&#8217;re the type that likes to simply dive into a working example, both implementations are available to download from GitHub:</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Example projects
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-github fa-lg"></i> Example implemented with UITableViewController <div>
+        (<a href="https://github.com/andrewcbancroft/PullToRefreshExample_UITableViewController/tree/swift-2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/PullToRefreshExample_UITableViewController/tree/master">Swift 3.0</a>)
+      </div>
+    </li></p>
+
+<pre><code>&lt;li&gt;
+  &lt;i class=&quot;fa fa-github fa-lg&quot;&gt;&lt;/i&gt; Example implemented with regular view controller + UITableView &lt;div&gt;
+    (&lt;a href=&quot;https://github.com/andrewcbancroft/PullToRefreshExample_RegularViewController/tree/swift-2.3&quot;&gt;Swift 2.3&lt;/a&gt; | &lt;a href=&quot;https://github.com/andrewcbancroft/PullToRefreshExample_RegularViewController/tree/master&quot;&gt;Swift 3.0&lt;/a&gt;)
+  &lt;/div&gt;
+&lt;/li&gt;
+</code></pre>
+
+<p></ul>
+</div></p>
+
+<p><strong>Note:</strong> Code in the main article below is written in Swift 3.0, but code examples for Swift 2.3 are found in the example projects above.</p>
+
+<p><code>Movies</code> are represented by a simple struct:</p>
+
+<pre class="lang:swift decode:true " title="Movie" >struct Movie {
+    let title: String
+    let genre: String
+}</pre>
+
+<p>The table view (regardless of whether we use a <code>UITableViewController</code> or a regular <code>UIViewController</code>) has the following setup&#8230;</p>
+
+<p>Initial data source values:</p>
+
+<pre class="lang:swift decode:true " title="Initial data source" >var movies = [
+    Movie(title: "Lion King", genre: "Animation"),
+    Movie(title: "Star Wars", genre: "Sci-fi")
+]</pre>
+
+<p>Setting up the table view&#8217;s data source protocol methods depends on whether you&#8217;re using a <a href="#table-view-controller">UITableViewController</a> or a <a href="#regular-view-controller">regular UIViewController</a> with a table view as one of its content views, so we&#8217;ll cover those in the individual examples.</p>
+
+<p><a name="table-view-controller" class="jump-target"></a></p>
+
+<h3 id="implementing-with-uitableviewcontroller">Implementing with UITableViewController</h3>
+
+<p><a name="tvc-example-setup" class="jump-target"></a></p>
+
+<h4 id="finish-example-setup">Finish example setup</h4>
+
+<p>When working with a <code>UITableViewController</code>, we simply override the data source method implementations. The following is how I&#8217;ve chosen to do it for this example:</p>
+
+<pre class="lang:swift decode:true " title="UITableView data source methods" >override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return movies.count
+}
+
+override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+    
+    cell.textLabel?.text = movies[(indexPath as NSIndexPath).row].title
+    cell.detailTextLabel?.text = movies[(indexPath as NSIndexPath).row].genre
+    
+    return cell
+}</pre>
+
+<p><a name="enable-refreshing-storyboard" class="jump-target"></a></p>
+
+<h4 id="enable-refreshing-in-storyboard">Enable refreshing in Storyboard</h4>
+
+<p>When you&#8217;re working with a <code>UITableViewController</code>, the solution is fairly simple: First, Select the table view controller in your storyboard, open the attributes inspector, and enable refreshing:</p>
+
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-1024x740.png" alt="Table View Controller - Enable Refreshing" width="1024" height="740" class="alignnone size-large wp-image-11511" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-1024x740.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-300x217.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing.png 1083w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+
+<p>A <code>UITableViewController</code> comes outfitted with a reference to a <code>UIRefreshControl</code> out of the box. You simply need to wire up a few things to initiate and complete the refresh when the user pulls down.</p>
+
+<p><a name="override-viewdidload" class="jump-target"></a></p>
+
+<h4 id="override-viewdidload">Override viewDidLoad()</h4>
+
+<p>In your override of <code>viewDidLoad()</code>, add a target to handle the refresh as follows:</p>
+
+<pre class="lang:swift decode:true mark:5" title="viewDidLoad()" >override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.refreshControl?.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
+}</pre>
+
+<p>Here are a couple of things to observe about the code above:</p>
+
+<ol>
+<li>Swift&#8217;s new #selector feature helps with specifying which action will handle the refresh. Since I&#8217;ve specified <code>ViewController.handleRefresh(_:)</code> (note the underscore and the colon!) as the action argument, I need to define a function in this <code>UITableViewController</code> class with the same name. Additionally, the function should take one argument.</li>
+<li>We&#8217;d like this action to be called for the <code>UIControlEvent</code> called <code>ValueChanged</code>.</li>
+</ol>
+
+<p><a name="tvc-handle-refresh-function" class="jump-target"></a></p>
+
+<h4 id="implement-handlerefresh-function">Implement handleRefresh function</h4>
+
+<p>The <code>handleRefresh:</code> function may look something like the following:</p>
+
+<pre class="lang:swift decode:true mark:11,12" title="handleRefresh" >func handleRefresh(refreshControl: UIRefreshControl) {
+    // Do some reloading of data and update the table view's data source
+    // Fetch more objects from a web service, for example...
+    
+    // Simply adding an object to the data source for this example
+    let newMovie = Movie(title: "Serenity", genre: "Sci-fi")
+    movies.append(newMovie)
+    
+    movies.sort() { $0.title &lt; $1.title }
+    
+    self.tableView.reloadData()
+    refreshControl.endRefreshing()
+}</pre>
+
+<p>That should complete the pull to refresh implementation when you&#8217;re working with a <code>UITableViewController</code>!</p>
+
+<p><a name="regular-view-controller" class="jump-target"></a></p>
+
+<h3 id="implementing-with-regular-view-controller-uitableview">Implementing with regular view controller + UITableView</h3>
+
+<p><a name="reg-tv-example-setup" class="jump-target"></a></p>
+
+<h4 id="finish-example-setup-1">Finish example setup</h4>
+
+<p>When working with a <em>regular</em> <code>UIViewController</code>, there are a few extra steps involved in getting things set up:</p>
+
+<ol>
+<li>Create an IBOutlet from the storyboard to the view controller</li>
+<li>Wire up the table view&#8217;s data source and delegate from the storyboard</li>
+<li>Implement the <a href="http://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/">required table view data source methods</a></li>
+</ol>
+
+<p>Creating the IBOutlet is a matter of control+clicking and dragging from the table view in the Storyboard to the view controller code to create the outlet.</p>
+
+<p>To wire up the table view&#8217;s data source and delegate in the Storyboard, control+click the table view and drag up to the yellow view controller icon:</p>
+
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png" alt="Wire up table view&#039;s data source and delegate" width="789" height="746" class="alignnone size-full wp-image-11681" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png 789w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource-300x284.png 300w" sizes="(max-width: 789px) 100vw, 789px" /></a></p>
+
+<p>The data source protocol method implementations may look something like this:</p>
+
+<pre class="lang:swift decode:true " title="UITableView data source methods">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return movies.count
+}
+
+func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+    
+    cell.textLabel?.text = movies[(indexPath as NSIndexPath).row].title
+    cell.detailTextLabel?.text = movies[(indexPath as NSIndexPath).row].genre
+    
+    return cell
+}</pre>
+
+<p><a name="setup-refresh-control" class="jump-target"></a></p>
+
+<h4 id="set-up-uirefreshcontrol">Set up UIRefreshControl</h4>
+
+<p>Whereas a <code>UITableViewController</code> comes pre-fit with a <code>UIRefreshControl</code>, a regular <code>UIViewController</code> does not. It&#8217;s simple enough to set one up though. Here is a snippet defining a lazily instantiated variable which creates and configures a <code>UIRefreshControl</code>:</p>
+
+<pre class="lang:swift decode:true mark:3" title="Set up UIRefreshControl" >lazy var refreshControl: UIRefreshControl = {
+    let refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
+    
+    return refreshControl
+}()</pre>
+
+<p>The most complicated thing about the code I just proposed is how the <code>UIRefreshControl</code> instance is assigned lazily by means of the closure expression denoted by <code>= { // ...closure body with setup code... }()</code> in the above snippet. Using this approach allows me to complete the setup all in one spot without the use of optionals. You may prefer doing this another way. The bottom line goal is to have a <code>UIRefreshControl</code> instance that we can add to the table view (coming up).</p>
+
+<p>As for the body of the closure expression, we&#8217;re adding a target-action to the <code>UIRefreshControl</code> instance, <a href="#override-viewdidload">just like we did when we were dealing with a UITableViewController</a>.</p>
+
+<p>As with the <code>UITableViewController</code> example, note:<br />
+1. Since I&#8217;ve specified &#8220;handleRefresh:&#8221; (note the colon!) as the action argument, I need to define a function in this <code>UITableViewController</code> class with the same name. Additionally, the function should take one argument.<br />
+2. We&#8217;d like this action to be called for the <code>UIControlEvent</code> called <code>ValueChanged</code>.</p>
+
+<p><a name="regvc-override-viewdidload" class="jump-target"></a></p>
+
+<h4 id="override-viewdidload-1">Override viewDidLoad</h4>
+
+<p>Assuming that <a href="#reg-tv-example-setup">there is an outlet to the table view in the Storyboard</a>, the next step is to add the <code>UIRefreshControl</code> as a subview to the table view:</p>
+
+<pre class="lang:swift decode:true mark:5" title="viewDidLoad" >override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.tableView.addSubview(self.refreshControl)
+}</pre>
+
+<p><a name="regvc-handle-refresh-function" class="jump-target"></a></p>
+
+<h4 id="implement-handlerefresh-function-1">Implement handleRefresh function</h4>
+
+<p>The <code>handleRefresh</code> function is implemented exactly as it was when we were dealing with a <code>UITableViewController</code>:</p>
+
+<pre class="lang:swift decode:true mark:11,12" title="handleRefresh" >func handleRefresh(refreshControl: UIRefreshControl) {
+    // Do some reloading of data and update the table view's data source
+    // Fetch more objects from a web service, for example...
+    
+    // Simply adding an object to the data source for this example
+    let newMovie = Movie(title: "Serenity", genre: "Sci-fi")
+    movies.append(newMovie)
+    
+    movies.sort() { $0.title &lt; $1.title }
+    
+    self.tableView.reloadData()
+    refreshControl.endRefreshing()
+}</pre>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>Implementing &#8220;pull to refresh&#8221; is a common need that arises when working with table views. Here we&#8217;ve explored how to implement this feature using both a <code>UITableViewController</code> <em>and</em> with a regular view controller and a table view.</p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

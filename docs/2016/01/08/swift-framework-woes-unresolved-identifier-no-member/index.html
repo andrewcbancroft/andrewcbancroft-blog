@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111087893-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111087893-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Swift Framework Woes – Unresolved Identifier? No Member?" />
+<meta property="og:description" content="It&#8217;s the simple things that get us, isn&#8217;t it?
+I was working on a simple little framework the other day, and I&#8217;d gotten things just how I wanted&#8230; or so I thought.
+I was ready to test things out and import the framework into my real app.
+import MyShinyNewFramework
+Sweet! No build errors!
+// attempt to use things defined in the framework
+Not so sweet&#8230;
+ Use of unresolved identifier &#8216;&#8230;&#8217;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/" />
+<meta property="article:published_time" content="2016-01-08T18:40:55&#43;00:00"/>
+<meta property="article:modified_time" content="2016-01-08T18:40:55&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Swift Framework Woes – Unresolved Identifier? No Member?"/>
+<meta name="twitter:description" content="It&#8217;s the simple things that get us, isn&#8217;t it?
+I was working on a simple little framework the other day, and I&#8217;d gotten things just how I wanted&#8230; or so I thought.
+I was ready to test things out and import the framework into my real app.
+import MyShinyNewFramework
+Sweet! No build errors!
+// attempt to use things defined in the framework
+Not so sweet&#8230;
+ Use of unresolved identifier &#8216;&#8230;&#8217;"/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Swift Framework Woes – Unresolved Identifier? No Member?",
+  "url": "https:\/\/www.andrewcbancroft.com\/2016\/01\/08\/swift-framework-woes-unresolved-identifier-no-member\/",
+  "wordCount": "222",
+  "datePublished": "2016-01-08T18:40:55\x2b00:00",
+  "dateModified": "2016-01-08T18:40:55\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, Access Control, Framework"
+}
+</script>
+
+
+
+    <title>Swift Framework Woes – Unresolved Identifier? No Member?</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Notes
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server-notes">SQL Server</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Blog Articles
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#azure">Azure</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dimensional-modeling">Dimensional Modeling</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#general-data-concepts">General Data Concepts</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#machine-learning">Machine Learning</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#r">R</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server">SQL Server</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#statistics">Statistics</a>
+                            </div>
+                        </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            About
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.comabout/andrew_bancroft/">About Andrew</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com">www.andrewcbancroft.com</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Swift Framework Woes – Unresolved Identifier? No Member?</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>It&#8217;s the simple things that get us, isn&#8217;t it?</p>
+
+<p>I was working on a simple little framework the other day, and I&#8217;d gotten things just how I wanted&#8230; or so I thought.</p>
+
+<p>I was ready to test things out and import the framework into my real app.</p>
+
+<p><code>import MyShinyNewFramework</code></p>
+
+<p>Sweet! No build errors!</p>
+
+<p><code>// attempt to use things defined in the framework</code></p>
+
+<p>Not so sweet&#8230;</p>
+
+<blockquote>
+<p>Use of unresolved identifier &#8216;&#8230;&#8217;</p>
+
+<p>Value of type &#8216;&#8230;&#8217; has no member &#8216;&#8230;&#8217;</p>
+</blockquote>
+
+<p>I scrunched my forehead, puzzled, and immediately it came to me.</p>
+
+<p><code>public</code> <code>public</code> <code>public</code> all the things! Or at least, the things that others need to use from the framework. :]</p>
+
+<p><em>Of course</em> a framework&#8217;s usable API needs to be public, but I write far more code that doesn&#8217;t require thought of access control modifiers than code that <em>does</em>, so there&#8217;s always that initial head-scratching that happens when you&#8217;re to the point of testing and go, &#8220;WHAT?? Why is this not working??!&#8221;</p>
+
+<h4 id="key-takeaway">Key Takeaway</h4>
+
+<p>Whenever you&#8217;re developing code (such as a framework) that&#8217;s intended to be used from the perspective of another Swift module, you need to include <code>public</code> before Types and functions that are intended to be &#8220;seen&#8221; and called from that other module. Otherwise, you&#8217;ll get those same fun compiler errors and join me in saying to yourself, &#8220;Doh! Yep&#8230; public&#8230; <em>again</em>.&#8221;</p>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NuGet on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/nuget/</link>
+    <description>Recent content in NuGet on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 Jun 2014 17:57:20 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/nuget/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>NuGet app.config / web.config Transformation Trouble</title>
+      <link>https://www.andrewcbancroft.com/2014/06/16/nuget-appconfig-webconfig-transformation-trouble/</link>
+      <pubDate>Mon, 16 Jun 2014 17:57:20 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/06/16/nuget-appconfig-webconfig-transformation-trouble/</guid>
+      <description>I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file. Try as I may, I couldn&amp;#8217;t get NuGet to apply the transforms to my project&amp;#8217;s web.config file even though I was following NuGet documentation&amp;#8217;s instructions to a tee.
+It turns out that my problem was related to about 3 things all working together in tandem to defeat me:</description>
+    </item>
+    
+  </channel>
+</rss>

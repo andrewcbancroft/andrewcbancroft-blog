@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NSPersistentContainer on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/nspersistentcontainer/</link>
+    <description>Recent content in NSPersistentContainer on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Jul 2017 18:02:05 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/nspersistentcontainer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using an Existing SQLite Store with NSPersistentContainer</title>
+      <link>https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/</link>
+      <pubDate>Mon, 10 Jul 2017 18:02:05 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/</guid>
+      <description>If you&amp;#8217;ve been creating the Core Data Stack without NSPersistentContainer and you&amp;#8217;re thinking about switching things up to use NSPersistentContainer, you need to think about your existing SQLite persistent store.
+Creating the stack with NSPersistentContainer handles the creation of SQLite stores internally, so brand new setups using NSPersistentContainer are pretty easy.
+But how do you go about telling NSPersistentContainer about your existing SQLite store?
+Let&amp;#8217;s take a look now at how you can configure the container to use your previously-created persistent store.</description>
+    </item>
+    
+    <item>
+      <title>A Swift Implementation of the Core Data Stack Using NSPersistentContainer</title>
+      <link>https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/</link>
+      <pubDate>Mon, 15 May 2017 18:19:46 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/</guid>
+      <description>If you&amp;#8217;re targeting iOS 10 and above, you&amp;#8217;ve got the opportunity to pick your poison when it comes to creating the Core Data stack.
+You could opt for the process I described in Creating the Core Data Stack with Backwards Compatibility in Swift &amp;#8212; that process still works perfectly fine in iOS 10+.
+Alternatively, you could use the new NSPersistentContainer class if you want to write a few less lines of code and keep up-to-date with the latest framework enhancements!</description>
+    </item>
+    
+  </channel>
+</rss>

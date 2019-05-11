@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111087893-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111087893-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="OpenSSL for iOS &amp; Swift the Easy Way" />
+<meta property="og:description" content="I&#8217;m currently working on outfitting an app I&#8217;m working on to be able to validate receipts to verify purchases of the app.
+Little did I know, this adventure would introduce the need to understand how to use cryptography in order to work with the receipt.
+Jump to&#8230;   Cryptography library needed   OpenSSL for iOS with Cocoapods   Bridging header   Xcode 7 &amp; Bitcode   You might also enjoy&#8230;   Was this article helpful?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" />
+<meta property="article:published_time" content="2015-09-22T04:39:28&#43;00:00"/>
+<meta property="article:modified_time" content="2015-09-22T04:39:28&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OpenSSL for iOS &amp; Swift the Easy Way"/>
+<meta name="twitter:description" content="I&#8217;m currently working on outfitting an app I&#8217;m working on to be able to validate receipts to verify purchases of the app.
+Little did I know, this adventure would introduce the need to understand how to use cryptography in order to work with the receipt.
+Jump to&#8230;   Cryptography library needed   OpenSSL for iOS with Cocoapods   Bridging header   Xcode 7 &amp; Bitcode   You might also enjoy&#8230;   Was this article helpful?"/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OpenSSL for iOS \x26 Swift the Easy Way",
+  "url": "https:\/\/www.andrewcbancroft.com\/2015\/09\/21\/openssl-for-ios-swift-the-easy-way\/",
+  "wordCount": "1004",
+  "datePublished": "2015-09-22T04:39:28\x2b00:00",
+  "dateModified": "2015-09-22T04:39:28\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, Cocoapods, OpenSSL"
+}
+</script>
+
+
+
+    <title>OpenSSL for iOS &amp; Swift the Easy Way</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Notes
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server-notes">SQL Server</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Blog Articles
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#azure">Azure</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dimensional-modeling">Dimensional Modeling</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#general-data-concepts">General Data Concepts</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#machine-learning">Machine Learning</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#r">R</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server">SQL Server</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#statistics">Statistics</a>
+                            </div>
+                        </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            About
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.comabout/andrew_bancroft/">About Andrew</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com">www.andrewcbancroft.com</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">OpenSSL for iOS &amp; Swift the Easy Way</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>I&#8217;m currently working on outfitting an app I&#8217;m working on to be able to <a href="https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html#//apple_ref/doc/uid/TP40010573-CH1-SW2">validate receipts</a> to verify purchases of the app.</p>
+
+<p>Little did I know, this adventure would introduce the need to understand how to use cryptography in order to work with the receipt.</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Jump to&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <a href="#cryptography-library-needed">Cryptography library needed</a>
+    </li>
+    <li>
+      <a href="#cocoapods">OpenSSL for iOS with Cocoapods</a>
+    </li>
+    <li>
+      <a href="#bridging-header">Bridging header</a>
+    </li>
+    <li>
+      <a href="#xcode-7-bitcode">Xcode 7 &amp; Bitcode</a>
+    </li>
+    <li>
+      <a href="#related">You might also enjoy&#8230;</a>
+    </li>
+    <li>
+      <a href="#share">Was this article helpful? Please share!</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="cryptography-library-needed" class="jump-target"></a></p>
+
+<h3 id="cryptography-library-needed">Cryptography library needed</h3>
+
+<p>In order to even &#8220;open&#8221; the receipt itself, we&#8217;ve got to work with something called a &#8220;PKCS #7 container&#8221;. Once we get the container open, we need to be able to validate Apple&#8217;s certificate that they use to sign every purchase of every app.</p>
+
+<p>All of this requires the use of a cryptography library, and OpenSSL seems to be the common choice, due to its being open source.</p>
+
+<p>I found that figuring out what to do to get OpenSSL into my project was harder than I wanted it to be. It turns out that there are a few to do this, but I wanted the easiest to implement (and the easiest to maintain). The options I was able to identify are:</p>
+
+<ul>
+<li>Build the binaries for each platform yourself. To do this you&#8217;ve got to make sure you build for both the simulator and the device by running special config routines and using makefiles and what-not. It seemed error-prone, and I&#8217;m not confident enough in my ability to know whether or not I&#8217;ve done it right.</li>
+<li>Download a pre-built static library &#8211; however, this introduces a risk that I wasn&#8217;t really willing to take. How do I trust that pre-built library? If there&#8217;s a vulnerability there, how do I easily upgrade the library to the patched version? Every recommendation I&#8217;ve seen thus far says, &#8220;Always build your own static library, rather than download it already-built from somewhere&#8221;.</li>
+<li>Cocoapods. Simply put, this was the easiest route for me.</li>
+</ul>
+
+<p><a name="cocoapods" class="jump-target"></a></p>
+
+<h3 id="openssl-for-ios-with-cocoapods">OpenSSL for iOS with Cocoapods</h3>
+
+<p>How easy is it to get started with OpenSSL for iOS with Cocoapods?</p>
+
+<p>Pretty easy.</p>
+
+<p>If you don&#8217;t have Cocoapods yet, you can head over to <a href="http://cocoapods.org">Cocoapods.org</a> and follow their instructions for installing. It&#8217;s literally one command at the terminal:</p>
+
+<p><code>sudo gem install cocoapods</code></p>
+
+<p>Once Cocoapods is installed, open your project in Xcode and add a new empty file (File -&gt; New File -&gt; Other -&gt; Empty) called Podfile.</p>
+
+<p>In its contents, you simply add a reference to the OpenSSL library:</p>
+
+<pre class="lang:sh decode:true " title="Podfile" >target 'NameOfYourApp' do
+    pod 'OpenSSL', '~> 1.0'
+end</pre>
+
+<p>Note that there are several &#8216;OpenSSL&#8217; Cocoapod specs out there to choose from. I originally tried one that looked like it was for iOS (OpenSSL-iOS), but I was never able to get Swift code to recognize the C functions and types.</p>
+
+<p>The one that seemed to still pull the source from openssl.org and build it when the pod is installed was simply named &#8216;OpenSSL&#8217; and I&#8217;ve verified that my Swift code can &#8216;see&#8217; the C code without running into &#8216;unresolved identifier&#8217; compiler errors.</p>
+
+<p>Once the Podfile is created and configured, save it and close Xcode. Then head to the Terminal.</p>
+
+<p>Navigate to your Xcode project folder where the Podfile is located and run <code>pod install</code>.</p>
+
+<p>Once it&#8217;s finished doing its thing (be patient&#8230; it took several minutes for me), you can open the new .xcworkspace file that Cocoapods created for you. You&#8217;ll have everything in your project configured to depend on the OpenSSL library through the new Pods project that&#8217;s been added to your Workspace.</p>
+
+<p><a name="bridging-header" class="jump-target"></a></p>
+
+<h3 id="bridging-header">Bridging header</h3>
+
+<p>In order to use OpenSSL with Swift, you&#8217;re going to need to create an Objective-C bridging header to access the functionality provided in the OpenSSL libraries.</p>
+
+<p>If you don&#8217;t already have an Objective-C bridging header, it&#8217;s simple to get one added automatically by Xcode for you:</p>
+
+<ul>
+<li>Choose File -&gt; New -&gt; File</li>
+<li>Choose Source under iOS (on the left</li>
+<li>Choose Objective-C File</li>
+<li>Name it &#8220;bridge&#8221; (or anything, really &#8211; it&#8217;s a dummy file that you&#8217;ll delete after Xcode generates the bridging header)</li>
+<li>Choose Next, and then Create</li>
+</ul>
+
+<p>Xcode will prompt you to create the bridging header &#8211; you should let it. Once it&#8217;s created, you can delete &#8220;bridge.m&#8221; (the Objective-C .m file that you just created in the steps above).</p>
+
+<p>Within the bridging header, you can insert some <code>#import</code> statements to make the OpenSSL library components visible to your Swift project. For example, to start off, you could flesh out the bridging header with a couple of OpenSSL header files:</p>
+
+<pre class="lang:objc decode:true " title="Bridging header" >#import &lt;openssl/pkcs7.h&gt;
+#import &lt;openssl/objects.h&gt;
+// Others that you may need in your Swift project</pre>
+
+<p><a name="xcode-7-bitcode" class="jump-target"></a></p>
+
+<h3 id="xcode-7-bitcode">Xcode 7 &amp; Bitcode</h3>
+
+<p>When you build and run your newly configured project in the Simulator, things are going to work fine.</p>
+
+<p>When you build it for your device, however, it will fail.</p>
+
+<blockquote>
+<p>&#8230;Pods/OpenSSL/lib/libcrypto.a(bio_lib.o)&#8217; does not contain bitcode. You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target. for architecture arm64</p>
+</blockquote>
+
+<p>At the time of this writing, there is somthing in OpenSSL that doesn&#8217;t support Xcode 7&#8217;s Bitcode feature. Eventually (hopefully) they&#8217;ll fix it, but for now, if you want to use OpenSSL in a Swift project using Xcode 7, you&#8217;ll have to turn off Bitcode.</p>
+
+<p>Click on your project, and then click on your app target under &#8216;Targets&#8217; in the project settings window.</p>
+
+<p>Find Build Options and set Enable Bitcode to &#8216;No&#8217;</p>
+
+<p>If you try re-building against the device with this setting set to &#8216;No&#8217;, it should build and run without issue.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>That&#8217;s all there is to getting OpenSSL built and added as a reference in your app. <em>Now</em> will come the fun part of using it with Swift, but I will save that for another entry.</p>
+
+<p><a name="related" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" title="Extracting a PKCS7 Container for Receipt Validation with Swift">Extracting a PKCS7 Container for Receipt Validation with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" title="Receipt Validation – Verifying a Receipt Signature in Swift">Receipt Validation – Verifying a Receipt Signature in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/" title="Receipt Validation – Parse and Decode a Receipt with Swift">Receipt Validation – Parse and Decode a Receipt with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

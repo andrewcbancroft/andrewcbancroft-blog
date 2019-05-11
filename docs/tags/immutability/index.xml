@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Immutability on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/immutability/</link>
+    <description>Recent content in Immutability on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 20 Jan 2015 12:30:51 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/immutability/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Conveniently Transforming Immutable Types in Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/</link>
+      <pubDate>Tue, 20 Jan 2015 12:30:51 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/</guid>
+      <description>A few weeks ago I wrote about Immutable Types and Changing State in Swift, where I hoped to convey an &amp;#8220;aha!-moment&amp;#8221; that happened for me.
+Since then, I&amp;#8217;ve learned a bit more. For example, the technique I presented for transforming instances of a Type immutably actually come for free when you use a value Type, such as a Struct! Check out @NatashaTheRobot&amp;#8217;s writeup on the subject, titled &amp;#8220;Mutating Functions in Swift Structs&amp;#8221;, for more information.</description>
+    </item>
+    
+    <item>
+      <title>Immutable Types with Changing State in Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</link>
+      <pubDate>Tue, 06 Jan 2015 12:00:50 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</guid>
+      <description>Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&amp;#8217;ve seen a lot in the functional programming arena as it relates to Swift.
+As I seek to improve my functional programming thought processes and to practice what I&amp;#8217;m learning, I found myself struggling with a fundamental concept: immutability. Especially when I&amp;#8217;m designing something that, at the very least, appears to require the ability to change state at some point in time.</description>
+    </item>
+    
+  </channel>
+</rss>

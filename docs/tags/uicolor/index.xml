@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UIColor on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/uicolor/</link>
+    <description>Recent content in UIColor on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Jan 2018 12:35:04 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/uicolor/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift 4 Upgrade Error: ‘init(colorLiteralRed:green:blue:alpha:)’ is unavailable</title>
+      <link>https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/</link>
+      <pubDate>Wed, 24 Jan 2018 12:35:04 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/</guid>
+      <description>I upgraded a project to Swift 4 today and hit a compiler error:
+ &amp;#8216;init(colorLiteralRed:green:blue:alpha:)&amp;#8217; is unavailable: This initializer is only meant to be used by color literals.
+ The fix is pretty simple: Don&amp;#8217;t use that initializer! (thank you, Captain Obvious!)
+The correct initializer to use for specifying a red, green, blue, and alpha to get a UIColor instance in Swift 4 is:
+UIColor(red:green:blue:alpha:)
+So essentially, just replace colorLiteralRed:, and replace it with just red:, and the compiler error will go away.</description>
+    </item>
+    
+    <item>
+      <title>Swift UIColor Extension – Create using RGB Values (Not %)</title>
+      <link>https://www.andrewcbancroft.com/2015/06/25/swift-uicolor-extension-create-using-rgb-values-not/</link>
+      <pubDate>Fri, 26 Jun 2015 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/06/25/swift-uicolor-extension-create-using-rgb-values-not/</guid>
+      <description>I&amp;#8217;ll say it up front &amp;#8211; I&amp;#8217;m not a great designer. What tends to happen with me and projects is that I end up saving all-things color until the end of a project. You know&amp;#8230; the old procrastinator&amp;#8217;s motto: &amp;#8220;If you don&amp;#8217;t get it done today and tomorrow doesn&amp;#8217;t come, then you ain&amp;#8217;t gotta do it!&amp;#8221;
+So the other day came and I had to &amp;#8220;do color&amp;#8221;&amp;#8230;
+Thankfully, a buddy of mine has good skills in the area, and gave me a color palette to use.</description>
+    </item>
+    
+  </channel>
+</rss>

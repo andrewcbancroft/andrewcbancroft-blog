@@ -1,11 +1,12 @@
-baseURL = "https://www.dataday.life"
+baseURL = "https://www.andrewcbancroft.com"
 languageCode = "en-us"
-title = "Data-Day Life"
+title = "Andrew Bancroft"
+description = 'Sharing bits of what I&#039;m learning one byte at a time.'
 theme = "berbera"
 
 pygmentsCodeFences=true
 pygmentsUseClasses=true
 canonifyURLs=true
 publishDir="docs"
-disableKinds = ["section", "taxonomy", "taxonomyTerm"]
-disqusShortname="https://datadaylife.disqus.com"
+disableKinds = []
+disqusShortname="andrewcbancroft"

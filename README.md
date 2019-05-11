@@ -1,5 +1,5 @@
 # notes
-Dataday.life is Andrew Bancroft's journal-style outlet for describing data discoveries from day to day.
+andrewcbancroft.com is Andrew Bancroft's outlet for sharing bits of what he's learning, one byte at a time. Content emphasizes iOS development in Swift.
 
 ## To Deploy
 

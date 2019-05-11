@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL Server on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/sql-server/</link>
+    <description>Recent content in SQL Server on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Mar 2017 16:38:33 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/sql-server/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Solving ‘Spatial types and functions are not available’ with Entity Framework</title>
+      <link>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</link>
+      <pubDate>Mon, 27 Mar 2017 16:38:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</guid>
+      <description>Using SQL Server&amp;#8217;s Geospatial features with Entity Framework is awesome. I was crusing along just fine with using DbGeography for an ASP.Net application I&amp;#8217;m working on&amp;#8230; Right up until I deployed to the server. Yep. It worked on my machine, but alas, I was hitting a runtime exception on my test server.
+This was the exception:
+ Spatial types and functions are not available for this provider because the assembly &amp;#8216;Microsoft.</description>
+    </item>
+    
+    <item>
+      <title>SQL Sever Synonyms, Entity Framework, &amp; Integrated Security</title>
+      <link>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</link>
+      <pubDate>Fri, 01 May 2015 17:44:31 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</guid>
+      <description>Jump to&amp;#8230;   Scenario   Login failed for user &amp;#8216;NT AUTHORITY\ANONYMOUS LOGON&amp;#8217;   Resolving the error    Creating the view   Granting permissions  
+&amp;lt;li&amp;gt; &amp;lt;a href=&amp;quot;#share&amp;quot;&amp;gt;Was this article helpful? Please share!&amp;lt;/a&amp;gt; &amp;lt;/li&amp;gt;   
+
+Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.</description>
+    </item>
+    
+  </channel>
+</rss>

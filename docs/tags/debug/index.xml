@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Debug on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/debug/</link>
+    <description>Recent content in Debug on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 28 Oct 2016 05:06:19 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/debug/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Disabling Xcode’s OS-Level Debug Logging</title>
+      <link>https://www.andrewcbancroft.com/2016/10/28/disabling-xcode-os-level-debug-logging/</link>
+      <pubDate>Fri, 28 Oct 2016 05:06:19 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/10/28/disabling-xcode-os-level-debug-logging/</guid>
+      <description>Full credit to Russell Ivanovic for his tweet for figuring out how to disable Xcode 8&amp;#8217;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&amp;#8217;s helpful to you as well.
+If you&amp;#8217;re tired of sifting through operating system-level logging to the debug console while you&amp;#8217;re debugging your app, it&amp;#8217;s actually fairly easy to silence.
+Jump to&amp;#8230;   Edit the scheme for your app   Add a new environment variable for OS_ACTIVITY_MODE   Was this article helpful?</description>
+    </item>
+    
+  </channel>
+</rss>

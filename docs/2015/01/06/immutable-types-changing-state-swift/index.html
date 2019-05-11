@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111087893-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111087893-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Immutable Types with Changing State in Swift" />
+<meta property="og:description" content="Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&#8217;ve seen a lot in the functional programming arena as it relates to Swift.
+As I seek to improve my functional programming thought processes and to practice what I&#8217;m learning, I found myself struggling with a fundamental concept: immutability. Especially when I&#8217;m designing something that, at the very least, appears to require the ability to change state at some point in time." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/" />
+<meta property="article:published_time" content="2015-01-06T12:00:50&#43;00:00"/>
+<meta property="article:modified_time" content="2015-01-06T12:00:50&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Immutable Types with Changing State in Swift"/>
+<meta name="twitter:description" content="Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&#8217;ve seen a lot in the functional programming arena as it relates to Swift.
+As I seek to improve my functional programming thought processes and to practice what I&#8217;m learning, I found myself struggling with a fundamental concept: immutability. Especially when I&#8217;m designing something that, at the very least, appears to require the ability to change state at some point in time."/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Immutable Types with Changing State in Swift",
+  "url": "https:\/\/www.andrewcbancroft.com\/2015\/01\/06\/immutable-types-changing-state-swift\/",
+  "wordCount": "908",
+  "datePublished": "2015-01-06T12:00:50\x2b00:00",
+  "dateModified": "2015-01-06T12:00:50\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "iOS \/ Mac, Swift, Functional Programming, Immutability"
+}
+</script>
+
+
+
+    <title>Immutable Types with Changing State in Swift</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Notes
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server-notes">SQL Server</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Blog Articles
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#azure">Azure</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dimensional-modeling">Dimensional Modeling</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#general-data-concepts">General Data Concepts</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#machine-learning">Machine Learning</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#r">R</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server">SQL Server</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#statistics">Statistics</a>
+                            </div>
+                        </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            About
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.comabout/andrew_bancroft/">About Andrew</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com">www.andrewcbancroft.com</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Immutable Types with Changing State in Swift</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&#8217;ve seen a lot in the functional programming arena as it relates to Swift.</p>
+
+<p>As I seek to improve my functional programming thought processes and to practice what I&#8217;m learning, I found myself struggling with a fundamental concept: <strong>immutability</strong>. <em>Especially</em> when I&#8217;m designing something that, at the very least, <em>appears</em> to require the ability to change state at some point in time.</p>
+
+<h3 id="immutable-changes-8211-a-contradiction-in-terms">Immutable changes &#8211; A contradiction in terms?</h3>
+
+<p>Immutability and changing state was a real struggle for me. The two seemed contradictory actually. How am I supposed to handle changes with things that <em>can&#8217;t change</em>??!</p>
+
+<p>And then, with the help of Stack Overflow, a lightbulb came on. As I was perusing FP topics, I ran across a question that expressed exactly what I was feeling. <a href="http://stackoverflow.com/questions/1020653/how-can-you-do-anything-useful-without-mutable-state">&#8220;How can you do anything useful without mutable state?&#8221;</a>, the questioner asked. The answer is what illuminated things for me. The key quote from the Stack Overflow answer:</p>
+
+<blockquote>
+<p>In functional languages, rather than mutating the state of objects, we simply return a new object with the changes we want.</p>
+</blockquote>
+
+<p>So&#8230; instead of thinking about state changes as <em>mutations</em>, think of them as reasons to create something <em>new</em>.</p>
+
+<h3 id="getting-practical-with-swift">Getting practical with Swift</h3>
+
+<p>If I&#8217;m going to get pragmatic with this, I have some design decisions to make if I&#8217;m going to try and avoid mutating the state of my objects. Rather than design my Types with the intent to update stored properties in-place, I should think about designing them so that the state-change process would actually produce a whole <em>new</em> instance with the transformed (updated) value.</p>
+
+<h3 id="see-it-in-action">See it in action</h3>
+
+<p>I&#8217;m a visual person, so for those of you who need to see it in action like me, here&#8217;s a short example: Suppose that you&#8217;re designing a class that stores a counter (or a score or a total&#8230; something like that), and provides a function to let you increment that count.</p>
+
+<h3 id="the-mutating-way">The mutating way</h3>
+
+<p>We could design this class in one of two ways: declare a variable stored property to hold the count. The method would then reassign incremented values to it. This is the <em>opposite</em> of immutable changes:</p>
+
+<pre><code>class Scorekeeper {
+    var runningScore: Int
+
+    init (score: Int = 0) {
+        self.runningScore = score
+    }
+
+    func incrementScoreBy(points: Int) {
+        runningScore += points
+    }
+}
+
+let scoreKeeper = Scorekeeper()
+scoreKeeper.incrementScoreBy(5)
+println(scoreKeeper.runningScore)
+// prints 5
+&lt;/pre&gt;
+&lt;p&gt;&lt;/p&gt;
+
+
+### The immutable way
+
+
+OR, rather than mutating the existing variable, we could go an alternate route:  The second way to design the class is to declare a constant stored property.  The method would then produce _new_ instance that stored the new state:
+
+
+    class Scorekeeper {
+        let runningScore: Int
+
+        init (score: Int = 0) {
+            self.runningScore = score
+        }
+
+        func incrementScoreBy(points: Int) -&gt; Scorekeeper {
+            return Scorekeeper(score: self.runningScore + points)
+        }
+    }
+
+    let scorekeeper = Scorekeeper()
+    let scorekeeperWithIncreasedScore = scorekeeper.incrementScoreBy(5)
+    println(scorekeeperWithIncreasedScore.runningScore)
+    // prints 5
+    &lt;/pre&gt;
+    &lt;p&gt;&lt;/p&gt;
+
+
+    ### Observations
+
+
+    As I look at the code I've just presented, I notice a few things as I contrast the two examples:
+
+
+
+
+
+      * The first example uses var to declare the stored property of my Scorekeeper class.  It _has_ to be var so that the value of the property can be changed (mutated).
+
+
+      * The second example uses let exclusively.  No in-place mutations occur, so constants are perfectly reasonable to use.
+
+
+
+    * * *
+
+
+
+
+
+      * The first example's design lends itself to produce interesting and unpredictable side-effects.  If multiple clients hold a reference to my scorekeeper instance, there are two ways for the runningScore to change out from underneath any of those clients:  First, I could simply reassign a value to the runningScore directly.  Second, I could call incrementScoreBy().  Either way, unintended consequences may arise because of the mutation.
+
+
+      * In the second example, it's _impossible_ to cause those unintended consequences.  runningScore can't be changed directly (it's a constant), and incrementScoreBy() returns a whole _new_ instance, so all clients would be dealing with the instance that they expect to be dealing with.  No values can be changed out from underneath them.
+
+
+
+    * * *
+
+
+
+
+
+      * The first example's incrementScoreBy method has no return value.  While I can envision writing a unit test for this, it's not obvious at first glance what I should do.  The method produces a side-effect in my existing instance that I need to know about in order to get the XCTAssert right.
+
+
+      * The second example's incrementScoreBy method returns a new Scorekeeper instance.  The unit test for this (to me) is a little more clear.  I simply inspect the value of runningScore of the new instance, and assert that it is [x] points higher than the old instance.  I still have both the old scorekeeper instance _and_ the new scorekeeperWithIncreasedScore, so everything I'd need to ensure the correct point increase occurred is at my disposal.
+
+
+
+    ### Conclusion
+
+
+    I hear so much benefit that comes from avoiding mutable state, so it was satisfying to finally let my mind reconcile how to manage the state of my own Types immutably.  With the iOS frameworks we have to work with, immutability is a challenge, and _total_ immutable state is not possible (think of the user interface layer where state is stored and updated out of necessity because of how _Apple's_ frameworks and tools are designed). Nonetheless, I found this discovery to be really exciting all the same.
+</code></pre>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

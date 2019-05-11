@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Experiment on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/experiment/</link>
+    <description>Recent content in Experiment on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Oct 2014 13:50:52 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/experiment/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Resolving “Variable used within its own initial value” Error in Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</link>
+      <pubDate>Mon, 20 Oct 2014 13:50:52 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</guid>
+      <description>While experimenting with a few things today, I experienced this compiler error:
+ Variable used within its own initial value
+ Let me describe the situation I was in&amp;#8230;
+I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&amp;#8217;ve recently learned about in Scala. Essentially, I was trying to implement a factorial function as a closure, and I was trying to do it recursively (that is, without using a for/while loop).</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111087893-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111087893-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Pointer Pointer #1" />
+<meta property="og:description" content="Part of my confusion with the C family of languages has been how the * symbol worked in the various places it&#8217;s used in relation to pointers. A key insight helped de-mystify a lot for me:
+The * symbol is used as both a type declaration _and_ as an operator (the de-reference operator).
+ Example:  // * used as a type declaration int *intPointer; // declare a regular integer variable named i int i = 10; // set where intPointer points to by assigning it the address of i intPointer = &i; // * used as the de-reference operator printf(&#34;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2012/06/17/pointer-pointer-1/" />
+<meta property="article:published_time" content="2012-06-17T19:45:05&#43;00:00"/>
+<meta property="article:modified_time" content="2012-06-17T19:45:05&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pointer Pointer #1"/>
+<meta name="twitter:description" content="Part of my confusion with the C family of languages has been how the * symbol worked in the various places it&#8217;s used in relation to pointers. A key insight helped de-mystify a lot for me:
+The * symbol is used as both a type declaration _and_ as an operator (the de-reference operator).
+ Example:  // * used as a type declaration int *intPointer; // declare a regular integer variable named i int i = 10; // set where intPointer points to by assigning it the address of i intPointer = &i; // * used as the de-reference operator printf(&#34;"/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Pointer Pointer #1",
+  "url": "https:\/\/www.andrewcbancroft.com\/2012\/06\/17\/pointer-pointer-1\/",
+  "wordCount": "424",
+  "datePublished": "2012-06-17T19:45:05\x2b00:00",
+  "dateModified": "2012-06-17T19:45:05\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "C, Pointers"
+}
+</script>
+
+
+
+    <title>Pointer Pointer #1</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Notes
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server-notes">SQL Server</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Blog Articles
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#azure">Azure</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dimensional-modeling">Dimensional Modeling</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#general-data-concepts">General Data Concepts</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#machine-learning">Machine Learning</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#r">R</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#sql-server">SQL Server</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#statistics">Statistics</a>
+                            </div>
+                        </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            About
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.comabout/andrew_bancroft/">About Andrew</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com">www.andrewcbancroft.com</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Pointer Pointer #1</h1>
+    </header>
+    <div class="content">
+
+    <p>Part of my confusion with the C family of languages has been how the * symbol worked in the various places it&#8217;s used in relation to pointers. A key insight helped de-mystify a lot for me:</p>
+
+<p>The * symbol is used as both a <em>type</em> declaration _and_ as an <em>operator</em> (the de-reference operator).</p>
+
+<div>
+  Example:
+</div>
+
+<pre class="brush: c">// * used as a type declaration
+    int *intPointer;
+
+    // declare a regular integer variable named i
+    int i = 10;
+
+    // set where intPointer points to by assigning it the address of i
+    intPointer = &i;
+
+    // * used as the de-reference operator
+    printf("Value returned when intPointer is de-referenced: %dn", *intPointer);</pre>
+
+<p>On line 2 the variable intPointer is declared to be a variable of <em>type</em> pointer to an integer.</p>
+
+<p>On line 8 I tell intPointer where to point to, namely the address of i in memory.  It&#8217;s like intPointer is asking, &#8220;Which integer do I point to?&#8221; and the answer comes, &#8220;This one&#8230;the one at the address of i&#8221;, which is expressed in C as &amp;i.</p>
+
+<p>After intPointer is set to point to some spot (address) in memory, the <em>value</em> of whatever it points to can be accessed by applying the de-reference operator, which just so happens to use the same * that was used to declare the variable intPointer on line 2. And that&#8217;s precisely where my brain went cross-eyed.</p>
+
+<p>Since * is used to declare a variable of type pointer to <span style="text-decoration: underline;">[some type of data]</span> <em>and</em> as the de-reference operator which gets at the value that a pointer variable points to, my mind had a hard time separating what was happening.</p>
+
+<p>Line 11 is where intPointer is &#8220;de-referenced&#8221; to get the value stored at the location in memory where intPointer points to. It says, &#8220;Follow intPointer to where it&#8217;s pointing to in memory (which in this case is the address of the variable i), open the box there, and let me see the value that&#8217;s at that spot.&#8221;  When I run this code, the number 10 is printed to the console as expected.</p>
+
+<p>In summary:  Pointer pointer #1 attempts to make clear that the * symbol&#8217;s meaning is overloaded.  Not only is it used for multiplication, but when dealing with pointers it&#8217;s used to declare a variable of type pointer to <span style="text-decoration: underline;">[some type of data]</span> _and_ as the de-reference operator which gets at the value that a pointer variable points to.</p>
+
+<p><a href="http://andrewcbancroft.com/2012/06/24/pointer-pointer-2/" title="Pointer Pointer #2">A second pointer pointer can be found here.</a>  It deals with the difference between the address the pointer holds and the address that holds the pointer.</p>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

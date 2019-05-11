@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Framework on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/framework/</link>
+    <description>Recent content in Framework on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Jan 2016 18:40:55 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/framework/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift Framework Woes – Unresolved Identifier? No Member?</title>
+      <link>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</link>
+      <pubDate>Fri, 08 Jan 2016 18:40:55 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</guid>
+      <description>It&amp;#8217;s the simple things that get us, isn&amp;#8217;t it?
+I was working on a simple little framework the other day, and I&amp;#8217;d gotten things just how I wanted&amp;#8230; or so I thought.
+I was ready to test things out and import the framework into my real app.
+import MyShinyNewFramework
+Sweet! No build errors!
+// attempt to use things defined in the framework
+Not so sweet&amp;#8230;
+ Use of unresolved identifier &amp;#8216;&amp;#8230;&amp;#8217;</description>
+    </item>
+    
+    <item>
+      <title>Sharing a Core Data Model with a Swift Framework</title>
+      <link>https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/</link>
+      <pubDate>Wed, 26 Aug 2015 04:04:05 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/</guid>
+      <description>Updated on June 13, 2017 &amp;#8211; Swift 3.0, Xcode 8
+Code re-use is a powerful thing, but it&amp;#8217;s not always easy to pull off. We strive for it though, because in the long run, it makes maintaining the code far, far easier than if we just settled for copying and pasting.
+With the introduction of dynamic frameworks in iOS 8, a world of possibility opened up for iOS developers to achieve some pretty cool re-use scenarios, one of which we&amp;#8217;re going to dive into today.</description>
+    </item>
+    
+  </channel>
+</rss>

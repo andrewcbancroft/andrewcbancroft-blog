@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NSNotificationCenter on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/nsnotificationcenter/</link>
+    <description>Recent content in NSNotificationCenter on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Feb 2015 13:00:26 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/nsnotificationcenter/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>NSNotificationCenter vs Delegation – An Analysis</title>
+      <link>https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/</link>
+      <pubDate>Thu, 05 Feb 2015 13:00:26 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/</guid>
+      <description>In Fundamentals of NSNotificationCenter in Swift, a commenter asked me to elaborate on a response I&amp;#8217;d given to a dialog going on below the blog post. I had stated:
+ If you need a more structured environment around your [instance]-to-[instance] communication, delegates &amp;#8230; are probably a better choice [than NSNotificationCenter].
+ I&amp;#8217;ve been thinking for some time since I responded with that comment. What do I mean when I say &amp;#8220;if you need a more structured environment&amp;#8221;&amp;#8230; What does that even look like?</description>
+    </item>
+    
+    <item>
+      <title>Fundamentals of NSNotificationCenter in Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/</link>
+      <pubDate>Wed, 08 Oct 2014 18:27:47 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/</guid>
+      <description>Updated on September 19, 2016 &amp;#8211; Xcode 8 &amp;amp; Swift 3.0
+The goal of this post is to help you grasp the fundamentals of using NSNotificationCenter in your Swift iOS app. The topic isn&amp;#8217;t necessarily new, and there&amp;#8217;s no difference except syntax between Objective-C and Swift implementations involving NSNotificationCenter. Even still, I&amp;#8217;m hoping to add to the understanding of this useful tool by giving a fully-working example on GitHub (Swift 2.</description>
+    </item>
+    
+  </channel>
+</rss>

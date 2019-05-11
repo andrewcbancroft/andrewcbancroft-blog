@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataStage on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/categories/datastage/</link>
+    <description>Recent content in DataStage on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 16 Apr 2013 14:15:54 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/categories/datastage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>“Unexpected System Error” in DataStage Sequence Job</title>
+      <link>https://www.andrewcbancroft.com/2013/04/16/unexpected-system-error-in-datastage-sequence-job/</link>
+      <pubDate>Tue, 16 Apr 2013 14:15:54 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/04/16/unexpected-system-error-in-datastage-sequence-job/</guid>
+      <description>Today I was running into a mysterious error in DataStage as I was running a sequence job.&amp;nbsp; Things seemed to be going well until one of my Fact jobs at the end of the sequence reported “Aborted” in DataStage Director.&amp;nbsp; Looking into the log for this job revealed a rather vague error message:
+[StageName] DB2 function SQLFetch failed:&amp;nbsp; SQLSTATE = HY000: Native Error Code = -1,042: Msg = [IBM][CLI Driver][DB2/LINUXX8664] SQL1042C&amp;nbsp; An unexpected system error occurred.</description>
+    </item>
+    
+    <item>
+      <title>DataStage Range Lookup Failure – What Gives?</title>
+      <link>https://www.andrewcbancroft.com/2013/03/25/datastage-range-lookup-failure-what-gives/</link>
+      <pubDate>Mon, 25 Mar 2013 17:52:13 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/03/25/datastage-range-lookup-failure-what-gives/</guid>
+      <description>I just spent the majority of my morning trying to figure out why in the world my range lookup kept failing.&amp;nbsp; Hopefully this will save you some time in troubleshooting your range lookup failures.&amp;nbsp; To cut right to the chase, my resolution involved sorting my reference source prior to doing the lookup.&amp;nbsp; Adding a sort stage with the appropriate sort keys prior to doing the lookup solved my problem.&amp;nbsp; I probably learned this in a training at some point, but I just didn’t retain it.</description>
+    </item>
+    
+  </channel>
+</rss>

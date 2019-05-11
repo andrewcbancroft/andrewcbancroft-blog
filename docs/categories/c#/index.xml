@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C# on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/categories/c#/</link>
+    <description>Recent content in C# on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Mar 2017 20:57:27 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/categories/c#/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Entity Framework Tip – Specifying Decimal Precision</title>
+      <link>https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/</link>
+      <pubDate>Wed, 29 Mar 2017 20:57:27 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/</guid>
+      <description>By default, Entity Framework takes the .Net decimal Type and maps it to SQL Server&amp;#8217;s decimal(18,2) data type.
+If you&amp;#8217;ve got a property on an Entity that is of Type decimal, but down in your database, you&amp;#8217;re allowing for greater precision than 2 decimal places (scale is actually the proper term for the number of places after the decimal), you need to tell Entity Framework this information. Otherwise, decimal values that you save to your database will be truncated at the default 2 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Solving ‘Spatial types and functions are not available’ with Entity Framework</title>
+      <link>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</link>
+      <pubDate>Mon, 27 Mar 2017 16:38:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</guid>
+      <description>Using SQL Server&amp;#8217;s Geospatial features with Entity Framework is awesome. I was crusing along just fine with using DbGeography for an ASP.Net application I&amp;#8217;m working on&amp;#8230; Right up until I deployed to the server. Yep. It worked on my machine, but alas, I was hitting a runtime exception on my test server.
+This was the exception:
+ Spatial types and functions are not available for this provider because the assembly &amp;#8216;Microsoft.</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Swift Protocol Extensions and C# Abstract Classes</title>
+      <link>https://www.andrewcbancroft.com/2015/08/06/analyzing-swift-protocol-extensions-and-c-abstract-classes/</link>
+      <pubDate>Fri, 07 Aug 2015 03:52:25 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/08/06/analyzing-swift-protocol-extensions-and-c-abstract-classes/</guid>
+      <description>Being a C# developer by day and a Swift developer by night has me constantly thinking about the similarities and differences between these two languages. I genuinely enjoy programming with each, and I love it when I can take a strategy that works well in one language, and see where that might cross over to the other. One of the areas I&amp;#8217;ve been pondering as of late is the idea of how Swift and C# compare in terms of protocol extensions and abstract classes.</description>
+    </item>
+    
+    <item>
+      <title>Up and Running with Unity IOC Container for ASP.Net MVC</title>
+      <link>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</link>
+      <pubDate>Mon, 27 Oct 2014 18:07:21 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</guid>
+      <description>The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.&amp;nbsp; However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running.&amp;nbsp;
+The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP.</description>
+    </item>
+    
+  </channel>
+</rss>

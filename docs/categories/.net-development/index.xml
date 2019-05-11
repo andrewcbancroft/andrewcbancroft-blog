@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>.Net Development on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/categories/.net-development/</link>
+    <description>Recent content in .Net Development on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Apr 2017 13:35:04 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/categories/.net-development/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Every Developer is an API Designer</title>
+      <link>https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/</link>
+      <pubDate>Tue, 25 Apr 2017 13:35:04 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/</guid>
+      <description>Every function; every class; every struct and enum and protocol is an API.
+YOU &amp;#8212; are an API designer As developers, we move into and out of the role of &amp;#8220;API Designer&amp;#8221; constantly.
+Have you ever thought about that? You are an API designer! You create Application Programming Interfaces all the time.
+I believe that everything we create has design built in, whether we&amp;#8217;ve thought much about it or not.</description>
+    </item>
+    
+    <item>
+      <title>TypeScript Build Errors When Publishing ASP.Net Web Project</title>
+      <link>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</link>
+      <pubDate>Wed, 29 Jun 2016 18:41:59 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</guid>
+      <description>I had TypeScript files building and running perfectly when I&amp;#8217;d debug locally, but when I changed over to publish the project, I got build errors galore:
+ Cannot find module ___
+TS6053 &amp;#8211; File ___ not found
+ I had forgotten that I set up my TypeScript Build configuration for Debug, but I hadn&amp;#8217;t changed anything for the Release configuration in Visual Studio.
+Obviously, that would produce different build results, right?</description>
+    </item>
+    
+    <item>
+      <title>401 Unauthorized Browsing Site From Local IIS Instance</title>
+      <link>https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/</link>
+      <pubDate>Thu, 21 Jan 2016 17:16:23 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/</guid>
+      <description>I spent waaaaay way way way too long fighting this one, so I&amp;#8217;m saving everything I found on the issue so that I never lose it.
+Jump to&amp;#8230;   Setup   Problem   Solution (with original sources)   Was this article helpful? Please share!   
+
+Setup  Running Internet Information Services (IIS) 8.5 on my laptop. Set up a site with an ASP.</description>
+    </item>
+    
+    <item>
+      <title>Using PowerShell to Install a DLL into the GAC</title>
+      <link>https://www.andrewcbancroft.com/2015/12/16/using-powershell-to-install-a-dll-into-the-gac/</link>
+      <pubDate>Wed, 16 Dec 2015 17:45:55 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/12/16/using-powershell-to-install-a-dll-into-the-gac/</guid>
+      <description>A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.
+An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs.</description>
+    </item>
+    
+    <item>
+      <title>Diagnosing “Restore failed” with ASP.NET 5 on Mac</title>
+      <link>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
+      <pubDate>Sun, 09 Aug 2015 20:57:02 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
+      <description>Following along with Steve Smith&amp;#8217;s &amp;#8220;Your First ASP.NET 5 Application on a Mac&amp;#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;#8217;t work due to a problem with restoring the project&amp;#8217;s dependencies.
+Jump to&amp;#8230;   Retracing my steps   Mis-matched Mono versions   Resolved   Was this article helpful? Please share!</description>
+    </item>
+    
+    <item>
+      <title>SQL Sever Synonyms, Entity Framework, &amp; Integrated Security</title>
+      <link>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</link>
+      <pubDate>Fri, 01 May 2015 17:44:31 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</guid>
+      <description>Jump to&amp;#8230;   Scenario   Login failed for user &amp;#8216;NT AUTHORITY\ANONYMOUS LOGON&amp;#8217;   Resolving the error    Creating the view   Granting permissions  
+&amp;lt;li&amp;gt; &amp;lt;a href=&amp;quot;#share&amp;quot;&amp;gt;Was this article helpful? Please share!&amp;lt;/a&amp;gt; &amp;lt;/li&amp;gt;   
+
+Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.</description>
+    </item>
+    
+    <item>
+      <title>Testing is to Software as Experiment is to Science</title>
+      <link>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</link>
+      <pubDate>Thu, 30 Apr 2015 04:01:24 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</guid>
+      <description>The principle of science, the definition, almost, is the following: The test of all knowledge is experiment.
+The sole test of the validity of any idea is experiment.
+ These quote came from Chapter 1 and Chapter 2 of the Feynman Lectures on Physics.
+I&amp;#8217;m not a physicist, but the software developer in me resonated with the connection between experimentation and validation of what we know about the world around us.</description>
+    </item>
+    
+    <item>
+      <title>Up and Running with Unity IOC Container for ASP.Net MVC</title>
+      <link>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</link>
+      <pubDate>Mon, 27 Oct 2014 18:07:21 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</guid>
+      <description>The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.&amp;nbsp; However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running.&amp;nbsp;
+The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP.</description>
+    </item>
+    
+    <item>
+      <title>Date, Date?, and the ToString Method in VB.Net</title>
+      <link>https://www.andrewcbancroft.com/2014/10/03/dates-and-the-tostring-method-in-vb-net/</link>
+      <pubDate>Fri, 03 Oct 2014 17:28:05 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/03/dates-and-the-tostring-method-in-vb-net/</guid>
+      <description>I just spent the last 45 minutes frustrated as to why I was getting the following exception
+
+&amp;#8220;Input string was not in a correct format.&amp;#8221; and &amp;#8220;[InvalidCastException: Conversion from string &amp;#8220;MMMM dd, yyyy&amp;#8221; to type &amp;#8216;Integer&amp;#8217; is not valid.]
+I kept thinking to myself, &amp;#8220;How hard can this possibly be?!! I&amp;#8217;ve done this a thousand times &amp;#8212; Why is it wanting to convert my format string into an Integer?</description>
+    </item>
+    
+    <item>
+      <title>NuGet app.config / web.config Transformation Trouble</title>
+      <link>https://www.andrewcbancroft.com/2014/06/16/nuget-appconfig-webconfig-transformation-trouble/</link>
+      <pubDate>Mon, 16 Jun 2014 17:57:20 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/06/16/nuget-appconfig-webconfig-transformation-trouble/</guid>
+      <description>I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file. Try as I may, I couldn&amp;#8217;t get NuGet to apply the transforms to my project&amp;#8217;s web.config file even though I was following NuGet documentation&amp;#8217;s instructions to a tee.
+It turns out that my problem was related to about 3 things all working together in tandem to defeat me:</description>
+    </item>
+    
+    <item>
+      <title>DotNetZip – Solving Mac Decompression Issues</title>
+      <link>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</link>
+      <pubDate>Sat, 28 Dec 2013 20:55:27 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</guid>
+      <description>As part of a ASP.Net Web API service that I&amp;#8217;m co-developing, I have gotten familiar with the DotNetZip Library.&amp;nbsp; It&amp;#8217;s fantastic.&amp;nbsp; We&amp;#8217;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.
+During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.</description>
+    </item>
+    
+  </channel>
+</rss>

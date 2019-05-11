@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Delegation on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/delegation/</link>
+    <description>Recent content in Delegation on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Apr 2015 01:43:55 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/delegation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How Delegation Works – A Swift Developer’s Guide</title>
+      <link>https://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/</link>
+      <pubDate>Thu, 09 Apr 2015 01:43:55 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/</guid>
+      <description>Updated on October 11, 2016 &amp;#8211; Swift 3.0
+Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation is in &amp;#8220;What is Delegation &amp;#8211; A Swift Developer&amp;#8217;s Guide&amp;#8221;. If you&amp;#8217;re looking for the &amp;#8220;what is it?&amp;#8221; behind the &amp;#8220;how does it work?</description>
+    </item>
+    
+    <item>
+      <title>What is Delegation? – A Swift Developer’s Guide</title>
+      <link>https://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/</link>
+      <pubDate>Fri, 27 Mar 2015 03:29:01 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/</guid>
+      <description>Of the major design patterns that are prevalent in iOS development, delegation is one that appears quite often. For many developers entering app development for the iOS platform, dealing with delegates is a new concept. It certainly was for me.
+In my analysis of NSNotificationCenter vs Delegation, I wrote some about delegation, but only in comparison to how NSNotificationCenter works. I haven&amp;#8217;t yet given delegation dedicated time and analysis, but I intend to do so now.</description>
+    </item>
+    
+    <item>
+      <title>Pick a Delegate… Any Delegate… On Clean View Controllers in Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/</link>
+      <pubDate>Wed, 27 Aug 2014 04:43:29 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/</guid>
+      <description>The delegation pattern is ubiquitous in iOS development &amp;#8211; the pattern is&amp;nbsp;a &amp;#8220;core competency&amp;#8221; for developing in Cocoa, and if you program with the iOS SDK for any length of time and you&amp;#8217;ll end up writing some code that&amp;nbsp;resembles&amp;nbsp;someInstance.delegate = someDelegate.
+One of the toughest things that I&amp;#8217;ve experienced is choosing what someDelegate&amp;nbsp;is. &amp;nbsp;All too often, a&amp;nbsp;View Controller ends up being assigned the responsibility of&amp;nbsp;being the delegate for everything in its hierarchy.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Swift Optionals on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/swift-optionals/</link>
+    <description>Recent content in Swift Optionals on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 23 Apr 2017 20:03:34 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/swift-optionals/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Core Data Model Attributes and NSManagedObject Property Types Must Match!</title>
+      <link>https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</link>
+      <pubDate>Sun, 23 Apr 2017 20:03:34 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</guid>
+      <description>Jump to&amp;#8230;   Data model Attributes and NSManagedObject property types &amp;#8211; Match &amp;#8217;em!   Optionals are Types   Lessons learned   Was this article helpful? Please share!   Learning Core Data? Watch my course, Core Data Fundamentals with Swift!   
+I admit &amp;#8211; it might have taken me less time to figure out my runtime exception if I hadn&amp;#8217;t just migrated my project to Swift 3 when I encountered the bug.</description>
+    </item>
+    
+    <item>
+      <title>How to Unwrap Multiple Optionals with One If-Let in Swift</title>
+      <link>https://www.andrewcbancroft.com/2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/</link>
+      <pubDate>Wed, 19 Apr 2017 17:25:41 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/</guid>
+      <description>What do you do when you&amp;#8217;ve got two (or more) optionals that you need to safely unwrap and work with?
+Code examples Suppose that you&amp;#8217;ve got two arrays, both of which are optional. What I want to do right now is walk through a couple of scenarios where I unwrap them at the same time and print them to the console with a single if-let statement.
+First, watch how it&amp;#8217;s done to accomplish the goal of this article&amp;#8217;s title.</description>
+    </item>
+    
+    <item>
+      <title>Force Unwrapping Swift Optionals:  Code Smell!</title>
+      <link>https://www.andrewcbancroft.com/2016/06/13/force-unwrapping-swift-optionals-code-smell/</link>
+      <pubDate>Tue, 14 Jun 2016 03:54:57 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/06/13/force-unwrapping-swift-optionals-code-smell/</guid>
+      <description>Do you find your Swift code riddled with !&amp;#8216;s?
+I&amp;#8217;m becoming more and more uncomfortable with seeing ! throughout my Swift code. It&amp;#8217;s just a matter of time before it&amp;#8217;s going to bite me.
+Often, I do it because it&amp;#8217;s the &amp;#8220;easy thing&amp;#8221; to do at the time. But it&amp;#8217;s dangerous.
+Swift optionals are trying to help us. They force us to deal with the possibility of something not having a value.</description>
+    </item>
+    
+    <item>
+      <title>Swift Optionals?  Don’t Forget to Unwrap!</title>
+      <link>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</link>
+      <pubDate>Sat, 26 Jul 2014 02:23:53 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</guid>
+      <description>There is a compiler error that throws me off every time I see it. It takes the form,
+ &amp;#8216;ClassName?&amp;#8217; does not have a member named &amp;#8216;memberName&amp;#8217;
+ This can happen when you&amp;#8217;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
+For example, given this class definition:
+class Bird { var family: String var color: String init(family: String, color: String) { self.</description>
+    </item>
+    
+  </channel>
+</rss>

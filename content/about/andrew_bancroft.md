@@ -24,13 +24,21 @@ outputs:
     </div>
 </div>
 
-Hey - I'm Andrew Bancroft.
+---
+title: About Andrew
+author: Andrew
+type: page
+date: 2014-05-18T18:33:52+00:00
+spacious_page_layout:
+  - default_layout
+dsq_thread_id:
+  - "2695070275"
 
-I'm a born learner, passionate about discovery and about sharing new insights that come my way.
+---
+Hey I'm Andrew Bancroft.
 
-[Dataday.life](https://www.dataday.life) is my outlet for writing about all things data.
+I'm a born learner, passionate about discovery and about sharing new insights that come my way. I blog here about all things software development with a primary emphasis on [iOS development in Swift][1], and [.Net development in C#][2]. [Dataday.life][3] is my outlet for writing about all things data.
 
-At [andrewcbancroft.com](https://www.andrewcbancroft.com) I nerd out about iOS App development in Swift. 
 
 Teaching is also one of my passions. As an [Author for Pluralsight](https://www.pluralsight.com/authors/andrew-bancroft), I've published a few courses to their library:
 
@@ -42,3 +50,12 @@ Teaching is also one of my passions. As an [Author for Pluralsight](https://www.
 Please keep in mind that <strong>this website, its content, and opinions are my own</strong>.
 
 I'd love it if you connect with me on <a title="twitter.com/andrewcbancroft" href="https://twitter.com/andrewcbancroft">Twitter</a>, <a title="GitHub - andrewcbancroft" href="https://github.com/andrewcbancroft" target="_blank">GitHub</a>, or <a title="Youtube - andrewcbancroft" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>!
+
+ [1]: http://www.andrewcbancroft.com/category/software-development/ios-mac/swift/
+ [2]: http://www.andrewcbancroft.com/category/software-development/net/cs/
+ [3]: https://www.dataday.life
+ [4]: https://www.pluralsight.com/authors/andrew-bancroft
+ [5]: http://bit.ly/cloudkit-fundamentals
+ [6]: http://bit.ly/ps-core-data-swift
+ [7]: https://www.pluralsight.com/courses/cocoapods-xcode-project-dependencies
+ [8]: https://twitter.com/andrewcbancroft "twitter.com/andrewcbancroft"

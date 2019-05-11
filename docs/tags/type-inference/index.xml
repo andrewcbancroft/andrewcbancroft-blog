@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Type Inference on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/type-inference/</link>
+    <description>Recent content in Type Inference on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 21 Aug 2014 02:19:45 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/type-inference/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Expanded Thoughts on Swift’s Type Inference</title>
+      <link>https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/</link>
+      <pubDate>Thu, 21 Aug 2014 02:19:45 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/</guid>
+      <description>In my recent op-ed on clean coding in Swift focused on Type Inference, I began by saying,
+ Quick! Tell me! What is the Type of the birdDetails constant in this code example:
+let birdDetails = birdDetailsFromStorage() With no additional context to glean information from, the correct answer to the question is, &amp;#8220;I have absolutely no clue&amp;#8230;&amp;#8221;
+ But is that concluding assertion true? Hmm&amp;#8230;
+I&amp;#8217;m learning, and as I&amp;#8217;ve weighed a recent Twitter conversation and thought on a comment thread that Rob Napier made on the post quoted above, I&amp;#8217;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift.</description>
+    </item>
+    
+    <item>
+      <title>Clean Coding in Swift – Type Inference</title>
+      <link>https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/</link>
+      <pubDate>Wed, 13 Aug 2014 04:22:25 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/</guid>
+      <description>Quick! Tell me! What is the Type of the birdDetails constant in this code example:
+let birdDetails = birdDetailsFromStorage() With no additional context to glean information from, the correct answer to the question is, &amp;#8220;I have absolutely no clue&amp;#8230;&amp;#8221; Or is it?
+&amp;#8220;Not fair!&amp;#8221;, you say. &amp;#8220;In the real world, I&amp;#8217;d have the ability to option-click and learn the type from a pop-up tooltip, or learn this information by inspection from XCode&amp;#8217;s utilities panel.</description>
+    </item>
+    
+  </channel>
+</rss>

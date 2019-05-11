@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Receipt Validation on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/receipt-validation/</link>
+    <description>Recent content in Receipt Validation on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Aug 2017 17:55:09 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/receipt-validation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Local Receipt Validation for iOS in Swift From Start to Finish</title>
+      <link>https://www.andrewcbancroft.com/2017/08/01/local-receipt-validation-swift-start-finish/</link>
+      <pubDate>Tue, 01 Aug 2017 17:55:09 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/08/01/local-receipt-validation-swift-start-finish/</guid>
+      <description>Local receipt validation in Swift doesn&amp;#8217;t seem to be widely written about. I&amp;#8217;ve been able to find snippets of code scattered across the Internet, but nothing that brought everything together in one spot so that I could wrap my head around the whole process.
+I&amp;#8217;ve been working on some code for a while, and this post is my attempt to bring it all together from start to finish.
+I&amp;#8217;ve written seven guides that will take you from preparing to test receipt validation, all the way through to working with the result of the receipt validation process to enable/disable features of your app.</description>
+    </item>
+    
+    <item>
+      <title>Finalizing Receipt Validation in Swift – Computing a GUID Hash</title>
+      <link>https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/</link>
+      <pubDate>Mon, 31 Jul 2017 12:36:26 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/</guid>
+      <description>The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that&amp;#8217;s stored within your receipt itself.
+This is a continuation of my receipt validation series. I&amp;#8217;m assuming that&amp;#8230;
+ You&amp;#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect. You&amp;#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &amp;#8220;envelope&amp;#8221; for the receipt.</description>
+    </item>
+    
+    <item>
+      <title>Receipt Validation –  Parse and Decode a Receipt with Swift</title>
+      <link>https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/</link>
+      <pubDate>Fri, 28 Jul 2017 03:41:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/</guid>
+      <description>The aim of this guide is to help you parse a receipt and decode it so that you have readable pieces of metadata to inspect and finalize all of the receipt validation steps.
+This is a continuation of my receipt validation series. I&amp;#8217;m assuming that&amp;#8230;
+ You&amp;#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect. You&amp;#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &amp;#8220;envelope&amp;#8221; for the receipt.</description>
+    </item>
+    
+    <item>
+      <title>Receipt Validation – Verifying a Receipt Signature in Swift</title>
+      <link>https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/</link>
+      <pubDate>Sun, 16 Jul 2017 21:43:21 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/</guid>
+      <description>You&amp;#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect. You&amp;#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &amp;#8220;envelope&amp;#8221; for the receipt. Perhaps you&amp;#8217;ve even done it the &amp;#8220;easy way&amp;#8221; with CocoaPods. You&amp;#8217;ve located and loaded the receipt for validation. You&amp;#8217;ve extracted the PKCS #7 container.  The aim of this guide is to help you take a look inside the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt.</description>
+    </item>
+    
+    <item>
+      <title>Extracting a PKCS7 Container for Receipt Validation with Swift</title>
+      <link>https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/</link>
+      <pubDate>Fri, 10 Jun 2016 03:44:58 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/</guid>
+      <description>Updated on July 15, 2017 &amp;#8211; Swift 3 
+So you&amp;#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect.
+You&amp;#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &amp;#8220;envelope&amp;#8221; for the receipt. Perhaps you&amp;#8217;ve even done it the &amp;#8220;easy way&amp;#8221; with CocoaPods.
+You&amp;#8217;ve located and loaded the receipt for validation.
+Now you&amp;#8217;re ready to extract the PKCS #7 container and work with it.</description>
+    </item>
+    
+    <item>
+      <title>Loading a Receipt for Validation with Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/</link>
+      <pubDate>Wed, 14 Oct 2015 03:24:02 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/</guid>
+      <description>Updated on July 15, 2017 &amp;#8211; Swift 3 
+I&amp;#8217;m working through a progression of entries on the process of validating receipts with OpenSSL for iOS in Swift.
+Just want the code? Here you go!
+Resources    Swifty Local Receipt Validator   
+To-date, I&amp;#8217;ve explained how to get OpenSSL into your project (the easy way), and I&amp;#8217;ve walked through how to prepare to test receipt validation, including how to set everything up in the Apple Developer member center, and in iTunes Connect.</description>
+    </item>
+    
+    <item>
+      <title>Preparing to Test Receipt Validation for iOS</title>
+      <link>https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/</link>
+      <pubDate>Mon, 05 Oct 2015 18:25:09 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/</guid>
+      <description>Updated on July 15, 2017 &amp;#8211; Swift 3 
+After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I&amp;#8217;ve decided to combine everything into the following guide. Whether you&amp;#8217;re working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application.</description>
+    </item>
+    
+  </channel>
+</rss>

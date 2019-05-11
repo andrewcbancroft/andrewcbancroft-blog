@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mac on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/mac/</link>
+    <description>Recent content in Mac on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Aug 2015 20:57:02 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Diagnosing “Restore failed” with ASP.NET 5 on Mac</title>
+      <link>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
+      <pubDate>Sun, 09 Aug 2015 20:57:02 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
+      <description>Following along with Steve Smith&amp;#8217;s &amp;#8220;Your First ASP.NET 5 Application on a Mac&amp;#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;#8217;t work due to a problem with restoring the project&amp;#8217;s dependencies.
+Jump to&amp;#8230;   Retracing my steps   Mis-matched Mono versions   Resolved   Was this article helpful? Please share!</description>
+    </item>
+    
+    <item>
+      <title>DotNetZip – Solving Mac Decompression Issues</title>
+      <link>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</link>
+      <pubDate>Sat, 28 Dec 2013 20:55:27 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</guid>
+      <description>As part of a ASP.Net Web API service that I&amp;#8217;m co-developing, I have gotten familiar with the DotNetZip Library.&amp;nbsp; It&amp;#8217;s fantastic.&amp;nbsp; We&amp;#8217;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.
+During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.</description>
+    </item>
+    
+  </channel>
+</rss>

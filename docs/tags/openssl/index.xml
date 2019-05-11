@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenSSL on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/openssl/</link>
+    <description>Recent content in OpenSSL on Andrew Bancroft</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Jun 2016 03:44:58 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.andrewcbancroft.com/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Extracting a PKCS7 Container for Receipt Validation with Swift</title>
+      <link>https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/</link>
+      <pubDate>Fri, 10 Jun 2016 03:44:58 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/</guid>
+      <description>Updated on July 15, 2017 &amp;#8211; Swift 3 
+So you&amp;#8217;ve prepared to test receipt validation by setting up your app in iTunes Connect.
+You&amp;#8217;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &amp;#8220;envelope&amp;#8221; for the receipt. Perhaps you&amp;#8217;ve even done it the &amp;#8220;easy way&amp;#8221; with CocoaPods.
+You&amp;#8217;ve located and loaded the receipt for validation.
+Now you&amp;#8217;re ready to extract the PKCS #7 container and work with it.</description>
+    </item>
+    
+    <item>
+      <title>OpenSSL for iOS &amp; Swift the Easy Way</title>
+      <link>https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/</link>
+      <pubDate>Tue, 22 Sep 2015 04:39:28 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/</guid>
+      <description>I&amp;#8217;m currently working on outfitting an app I&amp;#8217;m working on to be able to validate receipts to verify purchases of the app.
+Little did I know, this adventure would introduce the need to understand how to use cryptography in order to work with the receipt.
+Jump to&amp;#8230;   Cryptography library needed   OpenSSL for iOS with Cocoapods   Bridging header   Xcode 7 &amp;amp; Bitcode   You might also enjoy&amp;#8230;   Was this article helpful?</description>
+    </item>
+    
+  </channel>
+</rss>
