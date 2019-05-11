@@ -3,7 +3,8 @@ title: Agile Blogging
 author: Andrew
 type: blog
 date: 2014-11-21T01:58:04+00:00
-url: /2014/11/20/agile-blogging/
+aliases:
+  - /2014/11/20/agile-blogging/
 dsq_thread_id:
   - "3247752689"
   - "3247752689"

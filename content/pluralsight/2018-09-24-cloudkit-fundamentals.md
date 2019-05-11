@@ -3,7 +3,8 @@ title: CloudKit Fundamentals
 author: Andrew
 type: blog
 date: 2018-09-24T17:58:49+00:00
-url: /2018/09/24/cloudkit-fundamentals/
+aliases:
+  - /2018/09/24/cloudkit-fundamentals/
 categories:
   - Pluralsight
   - Swift

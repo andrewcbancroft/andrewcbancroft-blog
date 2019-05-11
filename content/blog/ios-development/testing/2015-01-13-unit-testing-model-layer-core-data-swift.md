@@ -3,7 +3,8 @@ title: Unit Testing Model Layer with Core Data and Swift
 author: Andrew
 type: blog
 date: 2015-01-13T13:00:37+00:00
-url: /2015/01/13/unit-testing-model-layer-core-data-swift/
+aliases:
+  - /2015/01/13/unit-testing-model-layer-core-data-swift/
 dsq_thread_id:
   - "3415489454"
 categories:
@@ -40,7 +41,7 @@ func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
     let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
 
     do {
-        try persistentStoreCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+        try persistentStoreCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, url: nil, options: nil)
     } catch {
         print("Adding in-memory persistent store failed")
     }

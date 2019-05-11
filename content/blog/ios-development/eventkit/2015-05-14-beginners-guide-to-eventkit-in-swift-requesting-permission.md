@@ -3,7 +3,8 @@ title: Beginner’s Guide to Event Kit in Swift – Requesting Permission
 author: Andrew
 type: blog
 date: 2015-05-14T20:37:52+00:00
-url: /2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/
+aliases:
+  - /2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/
 dsq_thread_id:
   - "3764410960"
 categories:

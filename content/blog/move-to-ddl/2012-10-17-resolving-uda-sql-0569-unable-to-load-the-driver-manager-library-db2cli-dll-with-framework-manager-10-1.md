@@ -3,7 +3,8 @@ title: Resolving “UDA-SQL-0569 Unable to load the driver manager library ( db2
 author: Andrew
 type: blog
 date: 2012-10-17T15:29:23+00:00
-url: /2012/10/17/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/
+aliases:
+  - /2012/10/17/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/
 dsq_thread_id:
   - "2683748153"
 categories:

@@ -3,7 +3,8 @@ title: 'Swift Cheat Sheet for Dates, Formatters, & Date Components'
 author: Andrew
 type: blog
 date: 2016-05-26T18:04:01+00:00
-url: /2016/05/26/swift-cheat-sheet-for-dates-formatters-date-components/
+aliases:
+  - /2016/05/26/swift-cheat-sheet-for-dates-formatters-date-components/
 dsq_thread_id:
   - "4860023591"
 categories:

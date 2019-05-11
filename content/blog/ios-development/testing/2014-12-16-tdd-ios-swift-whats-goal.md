@@ -3,7 +3,8 @@ title: TDD for iOS in Swift – What’s the Goal?
 author: Andrew
 type: blog
 date: 2014-12-16T12:00:10+00:00
-url: /2014/12/16/tdd-ios-swift-whats-goal/
+aliases:
+  - /2014/12/16/tdd-ios-swift-whats-goal/
 dsq_thread_id:
   - "3329630156"
 categories:

@@ -3,7 +3,8 @@ title: 3 Nuances of Swift Extensions
 author: Andrew
 type: blog
 date: 2015-04-22T17:52:36+00:00
-url: /2015/04/22/3-nuances-of-swift-extensions/
+aliases:
+  - /2015/04/22/3-nuances-of-swift-extensions/
 dsq_thread_id:
   - "3703791006"
 categories:

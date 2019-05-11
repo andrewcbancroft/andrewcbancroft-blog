@@ -3,7 +3,8 @@ title: Testability Tip for Swift Developers – Parameterize and Push
 author: Andrew
 type: blog
 date: 2015-09-04T18:36:52+00:00
-url: /2015/09/04/testability-tip-for-swift-developers-parameterize-and-push/
+aliases:
+  - /2015/09/04/testability-tip-for-swift-developers-parameterize-and-push/
 dsq_thread_id:
   - "4097946261"
 categories:

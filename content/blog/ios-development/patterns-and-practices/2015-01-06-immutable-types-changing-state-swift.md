@@ -3,7 +3,8 @@ title: Immutable Types with Changing State in Swift
 author: Andrew
 type: blog
 date: 2015-01-06T12:00:50+00:00
-url: /2015/01/06/immutable-types-changing-state-swift/
+aliases:
+  - /2015/01/06/immutable-types-changing-state-swift/
 dsq_thread_id:
   - "3395120634"
 categories:

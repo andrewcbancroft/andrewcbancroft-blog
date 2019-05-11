@@ -3,7 +3,8 @@ title: Setting Up Carthage for the Terminal-Timid
 author: Andrew
 type: blog
 date: 2015-07-30T04:05:05+00:00
-url: /2015/07/29/setting-up-carthage-for-the-terminal-timid/
+aliases:
+  - /2015/07/29/setting-up-carthage-for-the-terminal-timid/
 dsq_thread_id:
   - "3985208106"
 categories:

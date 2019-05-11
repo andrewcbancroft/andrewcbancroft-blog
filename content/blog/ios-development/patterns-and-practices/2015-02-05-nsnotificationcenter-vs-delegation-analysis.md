@@ -3,7 +3,8 @@ title: NSNotificationCenter vs Delegation – An Analysis
 author: Andrew
 type: blog
 date: 2015-02-05T13:00:26+00:00
-url: /2015/02/05/nsnotificationcenter-vs-delegation-analysis/
+aliases:
+  - /2015/02/05/nsnotificationcenter-vs-delegation-analysis/
 dsq_thread_id:
   - "3487883394"
 categories:

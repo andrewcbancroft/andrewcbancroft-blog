@@ -3,7 +3,8 @@ title: Core Data Cheat Sheet for Swift iOS Developers
 author: Andrew
 type: blog
 date: 2015-02-18T18:20:59+00:00
-url: /2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/
+aliases:
+  - /2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/
 dsq_thread_id:
   - "3527252048"
 categories:

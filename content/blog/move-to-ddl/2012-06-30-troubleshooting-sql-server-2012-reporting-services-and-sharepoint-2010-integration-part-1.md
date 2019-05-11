@@ -3,7 +3,8 @@ title: Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 In
 author: Andrew
 type: blog
 date: 2012-06-30T19:06:39+00:00
-url: /2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/
+aliases:
+  - /2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/
 suf_meta_description:
   - Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration
 suf_meta_keywords:

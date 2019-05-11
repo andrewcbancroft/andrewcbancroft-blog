@@ -3,7 +3,8 @@ title: 'iOS Data Persistence: The Big Picture'
 author: Andrew
 type: blog
 date: 2019-04-30T10:03:33+00:00
-url: /2019/04/30/ios-data-persistence-the-big-picture/
+aliases:
+  - /2019/04/30/ios-data-persistence-the-big-picture/
 categories:
   - Pluralsight
   - Swift

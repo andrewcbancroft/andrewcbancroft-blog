@@ -3,7 +3,8 @@ title: 'Core Data: Solving Ambiguous Type / Redeclaration of Type'
 author: Andrew
 type: blog
 date: 2017-03-29T02:57:05+00:00
-url: /2017/03/28/core-data-solving-ambiguous-type-redeclaration-of-type/
+aliases:
+  - /2017/03/28/core-data-solving-ambiguous-type-redeclaration-of-type/
 dsq_thread_id:
   - "5675799604"
 categories:

@@ -3,7 +3,8 @@ title: Fundamentals of NSNotificationCenter in Swift
 author: Andrew
 type: blog
 date: 2014-10-08T18:27:47+00:00
-url: /2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/
+aliases:
+  - /2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/
 dsq_thread_id:
   - "3096832645"
 categories:

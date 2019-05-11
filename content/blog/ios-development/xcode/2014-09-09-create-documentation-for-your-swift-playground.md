@@ -3,7 +3,8 @@ title: Create Documentation for your Swift Playground
 author: Andrew
 type: blog
 date: 2014-09-10T03:44:16+00:00
-url: /2014/09/09/create-documentation-for-your-swift-playground/
+aliases:
+  - /2014/09/09/create-documentation-for-your-swift-playground/
 dsq_thread_id:
   - "3003965697"
 categories:

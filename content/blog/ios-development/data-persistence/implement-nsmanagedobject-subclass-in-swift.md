@@ -3,7 +3,8 @@ title: Implement NSManagedObject Subclass in Swift
 author: Andrew
 type: blog
 date: 2014-07-18T04:08:12+00:00
-url: /2014/07/17/implement-nsmanagedobject-subclass-in-swift/
+aliases:
+  - /2014/07/17/implement-nsmanagedobject-subclass-in-swift/
 spacious_page_layout:
   - default_layout
 dsq_thread_id:

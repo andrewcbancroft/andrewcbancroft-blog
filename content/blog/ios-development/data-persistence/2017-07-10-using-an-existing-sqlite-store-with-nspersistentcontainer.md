@@ -3,7 +3,8 @@ title: Using an Existing SQLite Store with NSPersistentContainer
 author: Andrew
 type: blog
 date: 2017-07-10T18:02:05+00:00
-url: /2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/
+aliases:
+  - /2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/
 dsq_thread_id:
   - "5978624063"
 categories:

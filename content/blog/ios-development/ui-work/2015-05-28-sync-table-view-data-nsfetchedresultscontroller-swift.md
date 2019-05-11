@@ -3,7 +3,8 @@ title: 'Sync Table View Data: NSFetchedResultsController and Swift'
 author: Andrew
 type: blog
 date: 2015-05-29T03:20:54+00:00
-url: /2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/
+aliases:
+  - /2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/
 dsq_thread_id:
   - "3802811324"
 categories:

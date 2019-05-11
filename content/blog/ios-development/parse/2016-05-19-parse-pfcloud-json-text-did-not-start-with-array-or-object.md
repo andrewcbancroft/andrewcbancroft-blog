@@ -3,7 +3,8 @@ title: Parse PFCloud – “JSON text did not start with array or object”
 author: Andrew
 type: blog
 date: 2016-05-20T03:33:03+00:00
-url: /2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/
+aliases:
+  - /2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/
 dsq_thread_id:
   - "4842254669"
 categories:

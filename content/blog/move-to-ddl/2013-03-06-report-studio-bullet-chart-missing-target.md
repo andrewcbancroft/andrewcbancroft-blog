@@ -3,7 +3,8 @@ title: Report Studio Bullet Chart – Missing Target
 author: Andrew
 type: blog
 date: 2013-03-06T16:34:36+00:00
-url: /2013/03/06/report-studio-bullet-chart-missing-target/
+aliases:
+  - /2013/03/06/report-studio-bullet-chart-missing-target/
 dsq_thread_id:
   - "2706422548"
 categories:

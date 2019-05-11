@@ -3,7 +3,8 @@ title: FIX – Query in Parse Cloud Code Returns Unauthorized Error
 author: Andrew
 type: blog
 date: 2016-04-06T04:27:49+00:00
-url: /2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/
+aliases:
+  - /2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/
 dsq_thread_id:
   - "4723786776"
 categories:
@@ -90,7 +91,7 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'myAppId',
   masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
-  serverURL: 'http://url-to-your-parse-api-endpoint/parse'
+  serverurl: 'http://url-to-your-parse-api-endpoint/parse'
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:

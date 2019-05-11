@@ -3,7 +3,8 @@ title: Extracting a PKCS7 Container for Receipt Validation with Swift
 author: Andrew
 type: blog
 date: 2016-06-10T03:44:58+00:00
-url: /2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/
+aliases:
+  - /2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/
 dsq_thread_id:
   - "4898612593"
 categories:

@@ -3,7 +3,8 @@ title: Swift UITableViewDataSource Cheat Sheet
 author: Andrew
 type: blog
 date: 2014-11-24T22:04:28+00:00
-url: /2014/11/24/swift-uitableviewdatasource-cheat-sheet/
+aliases:
+  - /2014/11/24/swift-uitableviewdatasource-cheat-sheet/
 dsq_thread_id:
   - "3259408694"
 categories:

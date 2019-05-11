@@ -3,7 +3,8 @@ title: 'SSRS: Which server sent my e-mail subscription?'
 author: Andrew
 type: blog
 date: 2012-07-25T13:56:24+00:00
-url: /2012/07/25/ssrs-which-server-sent-my-e-mail-subscription/
+aliases:
+  - /2012/07/25/ssrs-which-server-sent-my-e-mail-subscription/
 suf_meta_description:
   - 'SSRS: Which server sent my e-mail subscription?'
 suf_meta_keywords:

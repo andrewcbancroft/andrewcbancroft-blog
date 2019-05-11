@@ -3,7 +3,8 @@ title: 'Swift 4 Upgrade Error: ‘init(colorLiteralRed:green:blue:alpha:)’ is 
 author: Andrew
 type: blog
 date: 2018-01-24T12:35:04+00:00
-url: /2018/01/24/swift-4-upgrade-uicolor-init-unavailable/
+aliases:
+  - /2018/01/24/swift-4-upgrade-uicolor-init-unavailable/
 dsq_thread_id:
   - "6435046260"
 categories:

@@ -3,7 +3,8 @@ title: Core Data Model Attributes and NSManagedObject Property Types Must Match!
 author: Andrew
 type: blog
 date: 2017-04-23T20:03:34+00:00
-url: /2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/
+aliases:
+  - /2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/
 dsq_thread_id:
   - "5753148229"
 categories:

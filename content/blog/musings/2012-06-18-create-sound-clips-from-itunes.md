@@ -3,7 +3,8 @@ title: Create Sound Clips from iTunes
 author: Andrew
 type: blog
 date: 2012-06-19T00:48:38+00:00
-url: /2012/06/18/create-sound-clips-from-itunes/
+aliases:
+  - /2012/06/18/create-sound-clips-from-itunes/
 dsq_thread_id:
   - "2685222863"
 dsq_needs_sync:

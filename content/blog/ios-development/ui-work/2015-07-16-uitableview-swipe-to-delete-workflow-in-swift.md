@@ -3,7 +3,8 @@ title: UITableView Swipe to Delete Workflow in Swift
 author: Andrew
 type: blog
 date: 2015-07-17T04:00:18+00:00
-url: /2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/
+aliases:
+  - /2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/
 dsq_thread_id:
   - "3942084245"
 categories:

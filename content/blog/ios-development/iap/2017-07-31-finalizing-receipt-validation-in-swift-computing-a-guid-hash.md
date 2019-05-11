@@ -3,7 +3,8 @@ title: Finalizing Receipt Validation in Swift – Computing a GUID Hash
 author: Andrew
 type: blog
 date: 2017-07-31T12:36:26+00:00
-url: /2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/
+aliases:
+  - /2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/
 dsq_thread_id:
   - "6030242278"
 categories:

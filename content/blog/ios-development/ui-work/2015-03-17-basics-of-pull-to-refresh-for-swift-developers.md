@@ -3,7 +3,8 @@ title: Basics of Pull to Refresh for Swift Developers
 author: Andrew
 type: blog
 date: 2015-03-17T17:55:52+00:00
-url: /2015/03/17/basics-of-pull-to-refresh-for-swift-developers/
+aliases:
+  - /2015/03/17/basics-of-pull-to-refresh-for-swift-developers/
 dsq_thread_id:
   - "3603461764"
 categories:

@@ -3,7 +3,8 @@ title: The Case for CloudKit
 author: Andrew
 type: blog
 date: 2018-08-06T11:58:32+00:00
-url: /2018/08/06/case-for-cloudkit/
+aliases:
+  - /2018/08/06/case-for-cloudkit/
 categories:
   - Swift
 tags:

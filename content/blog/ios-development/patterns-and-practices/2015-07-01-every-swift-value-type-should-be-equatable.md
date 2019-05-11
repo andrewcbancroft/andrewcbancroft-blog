@@ -3,7 +3,8 @@ title: Every Swift Value Type Should Be Equatable
 author: Andrew
 type: blog
 date: 2015-07-01T18:07:35+00:00
-url: /2015/07/01/every-swift-value-type-should-be-equatable/
+aliases:
+  - /2015/07/01/every-swift-value-type-should-be-equatable/
 dsq_thread_id:
   - "3895788341"
 categories:

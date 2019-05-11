@@ -3,7 +3,8 @@ title: An (Almost) TDD Workflow in Swift
 author: Andrew
 type: blog
 date: 2015-03-11T01:46:59+00:00
-url: /2015/03/10/an-almost-tdd-workflow-in-swift/
+aliases:
+  - /2015/03/10/an-almost-tdd-workflow-in-swift/
 dsq_thread_id:
   - "3585019292"
 categories:

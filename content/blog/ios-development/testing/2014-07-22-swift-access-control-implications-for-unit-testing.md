@@ -3,7 +3,8 @@ title: Swift Access Control – Implications for Unit Testing
 author: Andrew
 type: blog
 date: 2014-07-23T04:04:43+00:00
-url: /2014/07/22/swift-access-control-implications-for-unit-testing/
+aliases:
+  - /2014/07/22/swift-access-control-implications-for-unit-testing/
 spacious_page_layout:
   - default_layout
 dsq_thread_id:

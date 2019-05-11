@@ -3,7 +3,8 @@ title: Preparing to Test Receipt Validation for iOS
 author: Andrew
 type: blog
 date: 2015-10-05T18:25:09+00:00
-url: /2015/10/05/preparing-to-test-receipt-validation-for-ios/
+aliases:
+  - /2015/10/05/preparing-to-test-receipt-validation-for-ios/
 dsq_thread_id:
   - "4196824551"
 categories:

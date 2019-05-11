@@ -3,7 +3,8 @@ title: Swift Alternative to Objective-C Macros
 author: Andrew
 type: blog
 date: 2014-10-01T17:58:46+00:00
-url: /2014/10/01/swift-alternative-to-objective-c-macros/
+aliases:
+  - /2014/10/01/swift-alternative-to-objective-c-macros/
 dsq_thread_id:
   - "3073143179"
 categories:

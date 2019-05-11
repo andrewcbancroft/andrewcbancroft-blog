@@ -3,7 +3,8 @@ title: Clean Coding in Swift – Functions
 author: Andrew
 type: blog
 date: 2014-08-07T18:16:23+00:00
-url: /2014/08/07/clean-coding-in-swift-functions/
+aliases:
+  - /2014/08/07/clean-coding-in-swift-functions/
 spacious_page_layout:
   - default_layout
 dsq_thread_id:

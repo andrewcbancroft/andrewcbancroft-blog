@@ -3,7 +3,8 @@ title: 401 Unauthorized Browsing Site From Local IIS Instance
 author: Andrew
 type: blog
 date: 2016-01-21T17:16:23+00:00
-url: /2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/
+aliases:
+  - /2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/
 dsq_thread_id:
   - "4511186774"
 categories:

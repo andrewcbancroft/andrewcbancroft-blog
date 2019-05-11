@@ -3,7 +3,8 @@ title: Listing Calendar Events with Event Kit and Swift
 author: Andrew
 type: blog
 date: 2016-04-28T17:50:22+00:00
-url: /2016/04/28/listing-calendar-events-with-event-kit-and-swift/
+aliases:
+  - /2016/04/28/listing-calendar-events-with-event-kit-and-swift/
 dsq_thread_id:
   - "4784680501"
 categories:

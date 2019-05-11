@@ -3,7 +3,8 @@ title: NuGet app.config / web.config Transformation Trouble
 author: Andrew
 type: blog
 date: 2014-06-16T17:57:20+00:00
-url: /2014/06/16/nuget-appconfig-webconfig-transformation-trouble/
+aliases:
+  - /2014/06/16/nuget-appconfig-webconfig-transformation-trouble/
 spacious_page_layout:
   - default_layout
 dsq_thread_id:

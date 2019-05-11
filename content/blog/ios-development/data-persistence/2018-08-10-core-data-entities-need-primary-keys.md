@@ -3,7 +3,8 @@ title: Do Core Data Entities Need Primary Keys?
 author: Andrew
 type: blog
 date: 2018-08-10T22:31:47+00:00
-url: /2018/08/10/core-data-entities-need-primary-keys/
+aliases:
+  - /2018/08/10/core-data-entities-need-primary-keys/
 categories:
   - Swift
 tags:

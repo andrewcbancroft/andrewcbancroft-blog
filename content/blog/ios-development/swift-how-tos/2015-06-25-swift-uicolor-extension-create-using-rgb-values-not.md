@@ -3,7 +3,8 @@ title: 'Swift UIColor Extension – Create using RGB Values (Not %)'
 author: Andrew
 type: blog
 date: 2015-06-26T03:11:48+00:00
-url: /2015/06/25/swift-uicolor-extension-create-using-rgb-values-not/
+aliases:
+  - /2015/06/25/swift-uicolor-extension-create-using-rgb-values-not/
 dsq_thread_id:
   - "3880288358"
 categories:

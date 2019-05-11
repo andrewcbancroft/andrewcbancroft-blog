@@ -3,7 +3,8 @@ title: Access Sub-Controllers from a UINavigationController in Swift
 author: Andrew
 type: blog
 date: 2015-06-02T17:37:44+00:00
-url: /2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/
+aliases:
+  - /2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/
 dsq_thread_id:
   - "3815502904"
 categories:

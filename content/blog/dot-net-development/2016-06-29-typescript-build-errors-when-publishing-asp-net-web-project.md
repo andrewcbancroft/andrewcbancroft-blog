@@ -3,7 +3,8 @@ title: TypeScript Build Errors When Publishing ASP.Net Web Project
 author: Andrew
 type: blog
 date: 2016-06-29T18:41:59+00:00
-url: /2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/
+aliases:
+  - /2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/
 dsq_thread_id:
   - "4948701286"
 categories:

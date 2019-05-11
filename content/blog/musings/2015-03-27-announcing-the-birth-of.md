@@ -3,7 +3,8 @@ title: Announcing the Birth of……
 author: Andrew
 type: blog
 date: 2015-03-27T13:00:27+00:00
-url: /2015/03/27/announcing-the-birth-of/
+aliases:
+  - /2015/03/27/announcing-the-birth-of/
 dsq_thread_id:
   - "3631396577"
 categories:

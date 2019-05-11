@@ -3,7 +3,8 @@ title: Entity Framework Tip – Specifying Decimal Precision
 author: Andrew
 type: blog
 date: 2017-03-29T20:57:27+00:00
-url: /2017/03/29/entity-framework-tip-specifying-decimal-precision/
+aliases:
+  - /2017/03/29/entity-framework-tip-specifying-decimal-precision/
 dsq_thread_id:
   - "5678313316"
 categories:

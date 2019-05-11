@@ -3,7 +3,8 @@ title: 3 Effective Ways to Keep You Focused as a Creator
 author: Andrew
 type: blog
 date: 2017-04-20T18:04:08+00:00
-url: /2017/04/20/3-effective-ways-to-keep-you-focused-as-a-creator/
+aliases:
+  - /2017/04/20/3-effective-ways-to-keep-you-focused-as-a-creator/
 featured_image: /wp-content/uploads/2017/04/3-Effective-Ways-to-Keep-You-Focused-as-a-Creator.jpg
 dsq_thread_id:
   - "5744300797"

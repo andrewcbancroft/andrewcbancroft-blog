@@ -3,7 +3,8 @@ title: Fade In / Out Animations as Class Extensions in Swift
 author: Andrew
 type: blog
 date: 2014-07-27T20:13:53+00:00
-url: /2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/
+aliases:
+  - /2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/
 spacious_page_layout:
   - default_layout
 dsq_thread_id:

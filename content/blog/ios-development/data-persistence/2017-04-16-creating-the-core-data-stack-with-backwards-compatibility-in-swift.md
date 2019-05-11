@@ -3,7 +3,8 @@ title: Creating the Core Data Stack with Backwards Compatibility in Swift
 author: Andrew
 type: blog
 date: 2017-04-16T21:23:46+00:00
-url: /2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/
+aliases:
+  - /2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/
 dsq_thread_id:
   - "5732120089"
 categories:

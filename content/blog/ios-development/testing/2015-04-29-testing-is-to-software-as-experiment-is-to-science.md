@@ -3,7 +3,8 @@ title: Testing is to Software as Experiment is to Science
 author: Andrew
 type: blog
 date: 2015-04-30T04:01:24+00:00
-url: /2015/04/29/testing-is-to-software-as-experiment-is-to-science/
+aliases:
+  - /2015/04/29/testing-is-to-software-as-experiment-is-to-science/
 dsq_thread_id:
   - "3724284911"
 categories:

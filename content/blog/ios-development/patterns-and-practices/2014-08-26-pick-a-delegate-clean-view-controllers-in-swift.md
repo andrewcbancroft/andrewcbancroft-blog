@@ -3,7 +3,8 @@ title: Pick a Delegate… Any Delegate… On Clean View Controllers in Swift
 author: Andrew
 type: blog
 date: 2014-08-27T04:43:29+00:00
-url: /2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/
+aliases:
+  - /2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/
 dsq_thread_id:
   - "2962653146"
 categories:

@@ -3,7 +3,8 @@ title: 'Swift Cheat Sheet for iPhone Location Services Access & Usage'
 author: Andrew
 type: blog
 date: 2018-07-17T00:43:03+00:00
-url: /2018/07/16/swift-cheat-sheet-iphone-location-access-usage/
+aliases:
+  - /2018/07/16/swift-cheat-sheet-iphone-location-access-usage/
 categories:
   - Swift
 tags:

@@ -3,7 +3,8 @@ title: How to Create Mocks and Stubs in Swift
 author: Andrew
 type: blog
 date: 2014-07-15T05:12:16+00:00
-url: /2014/07/15/how-to-create-mocks-and-stubs-in-swift/
+aliases:
+  - /2014/07/15/how-to-create-mocks-and-stubs-in-swift/
 spacious_page_layout:
   - default_layout
 dsq_thread_id:

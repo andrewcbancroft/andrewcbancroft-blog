@@ -3,7 +3,8 @@ title: Sharing a Core Data Model with a Swift Framework
 author: Andrew
 type: blog
 date: 2015-08-26T04:04:05+00:00
-url: /2015/08/25/sharing-a-core-data-model-with-a-swift-framework/
+aliases:
+  - /2015/08/25/sharing-a-core-data-model-with-a-swift-framework/
 dsq_thread_id:
   - "4067462005"
 categories:

@@ -3,7 +3,8 @@ title: Displaying Data With NSFetchedResultsController and Swift
 author: Andrew
 type: blog
 date: 2015-03-05T15:14:53+00:00
-url: /2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/
+aliases:
+  - /2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/
 dsq_thread_id:
   - "3569834766"
 dsq_needs_sync:

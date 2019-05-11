@@ -3,7 +3,8 @@ title: Sort It Out – Sorting an Array in Swift
 author: Andrew
 type: blog
 date: 2014-08-16T18:06:26+00:00
-url: /2014/08/16/sort-yourself-out-sorting-an-array-in-swift/
+aliases:
+  - /2014/08/16/sort-yourself-out-sorting-an-array-in-swift/
 dsq_thread_id:
   - "2932793065"
 categories:

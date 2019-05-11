@@ -3,7 +3,8 @@ title: Is Protocol Oriented Swift Better than Object Oriented Swift?
 author: Andrew
 type: blog
 date: 2016-06-12T20:59:48+00:00
-url: /2016/06/12/is-protocol-oriented-swift-better-than-object-oriented-swift/
+aliases:
+  - /2016/06/12/is-protocol-oriented-swift-better-than-object-oriented-swift/
 dsq_thread_id:
   - "4905232005"
 categories:

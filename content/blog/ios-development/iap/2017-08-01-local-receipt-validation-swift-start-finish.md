@@ -3,7 +3,8 @@ title: Local Receipt Validation for iOS in Swift From Start to Finish
 author: Andrew
 type: blog
 date: 2017-08-01T17:55:09+00:00
-url: /2017/08/01/local-receipt-validation-swift-start-finish/
+aliases:
+  - /2017/08/01/local-receipt-validation-swift-start-finish/
 featured_image: /wp-content/uploads/2017/08/Graphic-Only-Local-Receipt-Validation-for-iOS-in-Swift-From-Start-to-Finish.png
 dsq_thread_id:
   - "6033658886"

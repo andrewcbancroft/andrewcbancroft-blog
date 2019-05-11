@@ -3,7 +3,8 @@ title: Up and Running with Unity IOC Container for ASP.Net MVC
 author: Andrew
 type: blog
 date: 2014-10-27T18:07:21+00:00
-url: /2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/
+aliases:
+  - /2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/
 dsq_thread_id:
   - "3162390625"
 categories:

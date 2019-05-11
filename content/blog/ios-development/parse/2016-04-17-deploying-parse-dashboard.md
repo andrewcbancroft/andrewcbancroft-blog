@@ -3,7 +3,8 @@ title: Deploying Parse Dashboard
 author: Andrew
 type: blog
 date: 2016-04-17T21:56:45+00:00
-url: /2016/04/17/deploying-parse-dashboard/
+aliases:
+  - /2016/04/17/deploying-parse-dashboard/
 dsq_thread_id:
   - "4755139149"
 categories:

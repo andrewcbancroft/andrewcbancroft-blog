@@ -3,7 +3,8 @@ title: Expanded Thoughts on Swift’s Type Inference
 author: Andrew
 type: blog
 date: 2014-08-21T02:19:45+00:00
-url: /2014/08/20/expanded-thoughts-on-swifts-type-inference/
+aliases:
+  - /2014/08/20/expanded-thoughts-on-swifts-type-inference/
 dsq_thread_id:
   - "2945282682"
 categories:

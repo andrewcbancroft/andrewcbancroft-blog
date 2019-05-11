@@ -3,7 +3,8 @@ title: Loading a Receipt for Validation with Swift
 author: Andrew
 type: blog
 date: 2015-10-14T03:24:02+00:00
-url: /2015/10/13/loading-a-receipt-for-validation-with-swift/
+aliases:
+  - /2015/10/13/loading-a-receipt-for-validation-with-swift/
 dsq_thread_id:
   - "4223016914"
 categories:
