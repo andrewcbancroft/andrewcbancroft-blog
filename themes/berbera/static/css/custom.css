@@ -177,12 +177,16 @@ a:hover {
   top: -70px;
 }
 
-resources .resources-header {
+.resources {
+  border: solid 1px #ccc;
+}
+
+.resources .resources-header {
   padding: .1em .5em .1em .5em;
-  background-color: #e2e2e6;
+  background-color: #eaeaed;
+  font-size: 1.25em;
 }
 .resources .resources-content {
-  background-color: #eaeaed;
   padding: .5em;
   margin-bottom: 1em;
 }
