@@ -18,15 +18,15 @@ Do you find your Swift code riddled with `!`&#8216;s?
 
 I'm becoming more and more uncomfortable with seeing `!` throughout my Swift code. It's just a matter of time before it's going to bite me.
 
-Often, I do it because it's the &#8220;easy thing&#8221; to do at the time. But it's _dangerous_.
+Often, I do it because it's the "easy thing&#8221; to do at the time. But it's _dangerous_.
 
 Swift optionals are trying to _help_ us. They force us to deal with the possibility of something not having a value.
 
-By force unwrapping an optional with the `!` operator, we're declaring, &#8220;This will _never_ be without a value&#8221;. Really? Never? Are you sure? Only a Sith deals in those kinds of absolutes.
+By force unwrapping an optional with the `!` operator, we're declaring, "This will _never_ be without a value&#8221;. Really? Never? Are you sure? Only a Sith deals in those kinds of absolutes.
 
 When a function returns an optional, or a property is declared as optional, we are, _at the very least_, meant to assume that there is a _possibility_ of `nil` lying underneath.
 
-Therefore, I'm considering it a sort of &#8220;code smell&#8221; when I see it in my own code. It's not too much to throw an `if let` or a `guard let` in there to handle the possibility of `nil`.
+Therefore, I'm considering it a sort of "code smell&#8221; when I see it in my own code. It's not too much to throw an `if let` or a `guard let` in there to handle the possibility of `nil`.
 
 # Two exceptions
 

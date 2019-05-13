@@ -19,7 +19,7 @@ The aim of this guide is to help you parse a receipt and decode it so that you h
 This is a continuation of my receipt validation series. I'm assuming that&#8230;
 
   * You've [prepared to test receipt validation][1] by setting up your app in iTunes Connect.
-  * You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it [the &#8220;easy way&#8221; with CocoaPods][2].
+  * You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the "envelope&#8221; for the receipt. Perhaps you've even done it [the "easy way&#8221; with CocoaPods][2].
   * You've [located and loaded][3] the receipt for validation.
   * You've [extracted the PKCS #7 container][4].
   * You've [verified the signature on the receipt][5]
@@ -86,7 +86,7 @@ struct ParsedInAppPurchaseReceipt {
 }
 ```
 
-You may be wondering, &#8220;How'd he know what values are encoded within the extracted receipt payload?&#8221;. Apple has a very handy [list of all the values that are encoded][7], so I listed each property out in my struct according to their documentation.
+You may be wondering, "How'd he know what values are encoded within the extracted receipt payload?&#8221;. Apple has a very handy [list of all the values that are encoded][7], so I listed each property out in my struct according to their documentation.
 
 Parsing the receipt produces the most valuable piece of the whole process. Sure, it's necessary to go through all of the other validation steps, but having a **decoded receipt** with actual **human-readable values** is, to me, a huge step.
 
@@ -104,12 +104,12 @@ Up to now, we've been working only with the PKCS #7 _container_ for the receipt.
 
 If you crack open the container, what you find is a long series of bytes that encode the actual structure of the receipt.
 
-From beginning to end, the bytes _should_ encode what's called an &#8220;ASN.1 Set&#8221;. In fact, if you open the PKCS #7 container and it _doesn't_ encode an ASN.1 Set, that'd warrant a receipt validation failure&#8230;[more about handling that in a minute][8].
+From beginning to end, the bytes _should_ encode what's called an "ASN.1 Set&#8221;. In fact, if you open the PKCS #7 container and it _doesn't_ encode an ASN.1 Set, that'd warrant a receipt validation failure&#8230;[more about handling that in a minute][8].
 
 Here's a visual representation of an ASN.1 Set:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set.jpeg" alt="ASN.1 Set" width="923" height="338" class="alignnone size-full wp-image-13513" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set.jpeg 923w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set-768x281.jpeg 768w" sizes="(max-width: 923px) 100vw, 923px" />][9]
 
-Since we've just got a bunch of bytes encoding things, there's got to be some way to say, &#8220;This byte, or these series of bytes, represent [this human understandable thing]&#8221;.
+Since we've just got a bunch of bytes encoding things, there's got to be some way to say, "This byte, or these series of bytes, represent [this human understandable thing]&#8221;.
 
 That's exactly what we've got, as you can see by the visual representation.
 
@@ -123,7 +123,7 @@ So what does an ASN.1 Sequence look like? Here's a visual:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg" alt="ASN.1 Sequence" width="919" height="337" class="alignnone size-full wp-image-13514" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg 919w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-768x282.jpeg 768w" sizes="(max-width: 919px) 100vw, 919px" />][10]
 
-When it comes to app receipts, ASN.1 _Sequences_ are used to say, &#8220;Hey, this series of bytes encodes [the bundle identifier] or [the original app version] or [some other receipt attribute].&#8221;
+When it comes to app receipts, ASN.1 _Sequences_ are used to say, "Hey, this series of bytes encodes [the bundle identifier] or [the original app version] or [some other receipt attribute].&#8221;
 
 Each ASN.1 Sequence has a flag (the pink box in the visualization) to signal that the bytes that follow do, in fact, encode an ASN.1 Sequence.
 
@@ -131,9 +131,9 @@ Then, just like an ASN.1 Set, the next bytes in line (the blue box) encode how l
 
 The _type_ of attribute (bundle identifier, for example) is encoded next in the series of bytes as an ASN.1 Integer (note that this isn't a Swift Int&#8230;yet&#8230;we'll decode it soon). Each attribute type has a unique ASN.1 Integer value, kind of like an ID. [Apple's documentation][7] is helpful in figuring out which ASN.1 Integer value maps to which receipt attribute.
 
-After the attribute type comes some bytes that encode an &#8220;attribute version&#8221;, also as an ASN.1 Integer. At the time of this guide's publication, &#8220;attribute version&#8221; isn't used for anything. Nonetheless, the series of bytes right after the attribute type within the ASN.1 Sequence is reserved and will always represent the &#8220;attribute version&#8221;.
+After the attribute type comes some bytes that encode an "attribute version&#8221;, also as an ASN.1 Integer. At the time of this guide's publication, "attribute version&#8221; isn't used for anything. Nonetheless, the series of bytes right after the attribute type within the ASN.1 Sequence is reserved and will always represent the "attribute version&#8221;.
 
-The remaining bytes in the ASN.1 Sequence encode the actual _value_ of the attribute as an ASN.1 Octet String (don't let the word &#8220;Octet String&#8221; trick you into thinking that it's actually a String&#8230; they're _bytes_ that we'll have to decode shortly&#8230;)
+The remaining bytes in the ASN.1 Sequence encode the actual _value_ of the attribute as an ASN.1 Octet String (don't let the word "Octet String&#8221; trick you into thinking that it's actually a String&#8230; they're _bytes_ that we'll have to decode shortly&#8230;)
 
 Knowing how the receipt payload is structured will help us formulate a strategy around parsing it. Let's imagine a simple algorithm to do it now.
 
@@ -239,7 +239,7 @@ func DecodeASN1Date(startOfDate datePointer: inout UnsafePointer&lt;UInt8>?, len
 Each of these decoding functions are dealing with the receipt attribute _value_ portion of the ASN.1 Sequence that we're working on at the time. Recall the structure:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg" alt="ASN.1 Sequence" width="919" height="337" class="alignnone size-full wp-image-13514" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg 919w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-768x282.jpeg 768w" sizes="(max-width: 919px) 100vw, 919px" />][10]
 
-So we take in a pointer that's pointing _to_ the start of one of the attribute _values_ (a yellow box). The yellow box's ASN.1 Octet String encodes either an integer, a string, or a date. (Okay, technically I guess you could include NSData, but this doesn't need to be &#8220;decoded&#8221; really. And the in-app purchase receipts will be parsed and decoded into the stated Types as well, so it all boils down to the three I just mentioned&#8230;thus the reason for only three helper functions).
+So we take in a pointer that's pointing _to_ the start of one of the attribute _values_ (a yellow box). The yellow box's ASN.1 Octet String encodes either an integer, a string, or a date. (Okay, technically I guess you could include NSData, but this doesn't need to be "decoded&#8221; really. And the in-app purchase receipts will be parsed and decoded into the stated Types as well, so it all boils down to the three I just mentioned&#8230;thus the reason for only three helper functions).
 
 The strategy for the first two functions is basically to take what we're pointing to, and call `ASN1_get_object`.
 
@@ -257,7 +257,7 @@ The kinds of errors that can occur when parsing the receipt payload all have to 
 
 For example, if we're expecting to be stepping through an ASN.1 Payload or an ASN.1 Sequence but instead find that it's not what we expect, this is a situation where reeipt validation should fail, because there's no way to decode the receipt attributes if the bytes of the payload don't conform to the expected structure.
 
-In situations where the receipt payload or one of its in-app purchase receipt payloads is &#8220;malformed&#8221; in some way, we can throw an `Error`.
+In situations where the receipt payload or one of its in-app purchase receipt payloads is "malformed&#8221; in some way, we can throw an `Error`.
 
 I've highlighted two new `ReceiptValidationError` cases here:
 

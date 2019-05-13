@@ -40,7 +40,7 @@ The scenario that I'd like to use a mock class in is this: &nbsp;I have a CoreDa
 
 #### 1. &nbsp;Ensure that the&nbsp;class that you would like to test is designed so that you can substitute your mock for the real one that's used in your class' implementation
 
-In the&nbsp;example class below, I&nbsp;intend to provide the `NSManagedObjectContext`&nbsp;&nbsp;dependency through&nbsp;the class' initializer which will set a property that is used by my class' methods later on, but you could easily use&nbsp;some other way of performing &#8220;dependency injection&#8221;. &nbsp;The initializer strategy just makes it super clear in _my_ mind what the class' dependencies are, so that's what I'm going to do here. &nbsp;Have a look:
+In the&nbsp;example class below, I&nbsp;intend to provide the `NSManagedObjectContext`&nbsp;&nbsp;dependency through&nbsp;the class' initializer which will set a property that is used by my class' methods later on, but you could easily use&nbsp;some other way of performing "dependency injection&#8221;. &nbsp;The initializer strategy just makes it super clear in _my_ mind what the class' dependencies are, so that's what I'm going to do here. &nbsp;Have a look:
 
 ```swift
 import Foundation
@@ -166,7 +166,7 @@ From step 1, I intended to pass an NSManagedObjectContext instance to the initia
 
 Running the tests at this point should produce a passing test using the mock object in place of a real NSManagedObjectContext that calls a database!
 
-Now, if I wanted to test the &#8220;false&#8221; branch of my class' method, I could simply create another test method following the same steps, only this time, I'd provide a new implementation for the overridden `executeFetchRequest`&nbsp;&nbsp;method that's appropriate:
+Now, if I wanted to test the "false&#8221; branch of my class' method, I could simply create another test method following the same steps, only this time, I'd provide a new implementation for the overridden `executeFetchRequest`&nbsp;&nbsp;method that's appropriate:
 
 ```swift
 func testDatabaseHasRecordsForSomeEntityReturnsFalseWhenFetchRequestReturnsEMPTYArray() {

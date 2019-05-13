@@ -19,7 +19,7 @@ tags:
 
 So you've [prepared to test receipt validation][1] by setting up your app in iTunes Connect.
 
-You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it [the &#8220;easy way&#8221; with CocoaPods][2].
+You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the "envelope&#8221; for the receipt. Perhaps you've even done it [the "easy way&#8221; with CocoaPods][2].
 
 You've [located and loaded][3] the receipt for validation.
 
@@ -211,7 +211,7 @@ Most of the code above is a Swift translation of what's found at [Objc.io's Rece
 
 I did a little research over at the OpenSSL site though, and thought it might be helpful for the curious to know what some of these non-intuitive function names stand for and what they do.
 
-`BIO_new` for example. &#8220;BIO&#8221; stands for &#8220;Basic I/O&#8221;. It's an abstraction over the underlying basic input and output operations that your app uses for cryptographic operations.
+`BIO_new` for example. "BIO&#8221; stands for "Basic I/O&#8221;. It's an abstraction over the underlying basic input and output operations that your app uses for cryptographic operations.
 
 What we're doing with `BIO_new(BIO_s_mem())` is saying that we want a new Basic I/O mechanism that uses _memory_ for its I/O operations.
 
@@ -221,7 +221,7 @@ To get the actual PKCS #7 container, the `d2i_PKCS7_bio` function is used.
 
 Once we have the container in hand, it's a matter of making sure it has contents.
 
-I couldn't find a lot of information about the call to `pkcs7_d_sign`, but the primary point of line 13 above is to get a &#8220;numerical identifier&#8221;, which is what &#8220;NID&#8221; stands for in `OBJ_obj2nid`.
+I couldn't find a lot of information about the call to `pkcs7_d_sign`, but the primary point of line 13 above is to get a "numerical identifier&#8221;, which is what "NID&#8221; stands for in `OBJ_obj2nid`.
 
 Digging into the PKCS #7 container, you can access the right property and convert it to a numerical identifier that you can check.
 

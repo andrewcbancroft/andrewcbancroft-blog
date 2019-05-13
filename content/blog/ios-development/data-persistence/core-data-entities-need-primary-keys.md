@@ -12,7 +12,7 @@ tags:
   - Primary Key
 
 ---
-In this video I pop the hood on Core Data's SQLite persistent store to discover the details about whether or not you need to add a property representing a &#8220;primary key&#8221; for your Core Data Entities. Take a look and be sure to subscribe for to stay connected to future screen casts!
+In this video I pop the hood on Core Data's SQLite persistent store to discover the details about whether or not you need to add a property representing a "primary key&#8221; for your Core Data Entities. Take a look and be sure to subscribe for to stay connected to future screen casts!
 
 <div style="position:relative;height:0;padding-bottom:56.25%">
 </div>

@@ -22,7 +22,7 @@ For the well-versed functional programmer, the fact that [functions in Swift are
 
 # Swift Types (in general)
 
-In order to understand _functions_ as Types, it's probably a good idea to know what folks are talking about when they use the term &#8220;Type&#8221; in a general sense.
+In order to understand _functions_ as Types, it's probably a good idea to know what folks are talking about when they use the term "Type&#8221; in a general sense.
 
 In Swift, we've got two kinds of Types when we talk about them generally:
 
@@ -53,34 +53,34 @@ Initializing instances of Types and using their properties and methods, passing 
 
 ## Compound Types
 
-_Compound_ Types, on the other hand, don't have names. Rather, they have &#8220;signatures&#8221; that define and identify them as Types. Swift has two compound Types: functions and tuples.
+_Compound_ Types, on the other hand, don't have names. Rather, they have "signatures&#8221; that define and identify them as Types. Swift has two compound Types: functions and tuples.
 
-Now I know what you might be thinking: &#8220;Functions have names!&#8221;
+Now I know what you might be thinking: "Functions have names!&#8221;
 
-Indeed many do. But when we're thinking about them in terms of their _Type-ness_, we've got to go beyond the name to the function's &#8220;signature&#8221; characteristics.
+Indeed many do. But when we're thinking about them in terms of their _Type-ness_, we've got to go beyond the name to the function's "signature&#8221; characteristics.
 
 The _name_ of a function (or tuple, since they can be type-aliased) is simply how we _refer_ to the function in code to execute it or pass it around as an argument.
 
-The &#8220;signature&#8221; of the function, however, is the part that characterizes the function as a _Type_.
+The "signature&#8221; of the function, however, is the part that characterizes the function as a _Type_.
 
-I want to analyze what I'm talking about when I refer to a function's &#8220;signature&#8221;, because that really is as the heart of my goal for this blog entry&#8230;
+I want to analyze what I'm talking about when I refer to a function's "signature&#8221;, because that really is as the heart of my goal for this blog entry&#8230;
 
 <a name="function-types" class="jump-target"></a>
 
 # Function Types
 
-What exactly makes up a function's _Type-ness_ or &#8220;signature&#8221; as I've been calling it? Two things:
+What exactly makes up a function's _Type-ness_ or "signature&#8221; as I've been calling it? Two things:
 
   * The Type(s) of its **parameters**
   * The Type that the function **returns**
 
-Combining the Type(s) that the function receives as inputs, and the Type that it returns composes to give the function _its_ Type / &#8220;signature&#8221;.
+Combining the Type(s) that the function receives as inputs, and the Type that it returns composes to give the function _its_ Type / "signature&#8221;.
 
 # Reading a function's Type
 
 It always helps me to visualize, so take apart an example.
 
-If you've lived long on the Internet, you're bound to have run across a Star Wars name generator&#8230; Plug in your name, and maybe a birth year, and out comes some crazy &#8220;Star Wars name&#8221; for you.
+If you've lived long on the Internet, you're bound to have run across a Star Wars name generator&#8230; Plug in your name, and maybe a birth year, and out comes some crazy "Star Wars name&#8221; for you.
 
 The function definition (minus the body) might look like this:
 
@@ -90,7 +90,7 @@ func generateStarWarsName(firstName: String, lastName: String, birthYear: Int) -
 }
 ```
 
-If someone were to ask you, &#8220;What is the `generateStarWarsName` function's Type?&#8221;, you could answer: &#8220;`generateStarWarsName` is a function Type that has three parameters, the first two of Type String, the last of Type Int, and that returns a value of Type String.&#8221;
+If someone were to ask you, "What is the `generateStarWarsName` function's Type?&#8221;, you could answer: "`generateStarWarsName` is a function Type that has three parameters, the first two of Type String, the last of Type Int, and that returns a value of Type String.&#8221;
 
 Wordy? Yes. But it does explain in precise terms what the function's Type is.
 
@@ -108,9 +108,9 @@ Given the above `generateStarWarsName` function, we could notate its Type as fol
 
 See how that works?
 
-Remove &#8220;generateStarWarsName&#8221;, &#8220;firstName: &#8220;, &#8220;lastName: &#8220;, and &#8220;birthYear: &#8221; and you're left with that raw Type information. What remains is the function's Type notation.
+Remove "generateStarWarsName&#8221;, "firstName: ", "lastName: ", and "birthYear: &#8221; and you're left with that raw Type information. What remains is the function's Type notation.
 
-It tells you (and the Swift compiler) everything you need to know to be able identify the Type of that function&#8230; it's &#8220;signature&#8221;, if you will.
+It tells you (and the Swift compiler) everything you need to know to be able identify the Type of that function&#8230; it's "signature&#8221;, if you will.
 
 <a name="gotchas" class="jump-target"></a>
 
@@ -118,13 +118,13 @@ It tells you (and the Swift compiler) everything you need to know to be able ide
 
 A couple of gotchas when it comes to notating a function's Type:
 
-1 – If a function takes no parameters, the &#8220;parameter portion&#8221; of the Type notation will simply be `()` with nothing between the parentheses.
+1 – If a function takes no parameters, the "parameter portion&#8221; of the Type notation will simply be `()` with nothing between the parentheses.
 
 So for example, the Type notation of  
 `func returnHelloString() -> String {}`  
 is `() -> String`.
 
-2 – If a function has no return type (ie, it doesn't return anything), the &#8220;return type portion&#8221; of the Type notation will be `-> Void`.
+2 – If a function has no return type (ie, it doesn't return anything), the "return type portion&#8221; of the Type notation will be `-> Void`.
 
 So for example, the Type notation of  
 `func sayHello() {}`  
@@ -160,11 +160,11 @@ func countToTen() {
   `() -> Void`</p> 
   
   <p>
-    Notice that while `countToTen` doesn't have the &#8220;-> Void&#8221; in its definition, it <em>is</em> listed in the function's Type notation for clarity.
+    Notice that while `countToTen` doesn't have the "-> Void&#8221; in its definition, it <em>is</em> listed in the function's Type notation for clarity.
   </p>
   
   <p>
-    When you read this function's Type, you'd say, &#8220;This is a function Type which takes no parameters and returns Void.&#8221;
+    When you read this function's Type, you'd say, "This is a function Type which takes no parameters and returns Void.&#8221;
   </p>
 </div>
 
@@ -192,7 +192,7 @@ func fadeIn(duration: NSTimeInterval, delay: NSTimeInterval, completion: (Bool) 
   `(NSTimeInterval, NSTimeInterval, (Bool) -> Void)) -> Void`</p> 
   
   <p>
-    This one's actually a more complicated &#8220;compound Type&#8221; – note the third parameter which indicates that `fadeIn` receives a function Type <em>as one of its inputs</em>. Remember that since functions are Types, they carry the characteristic of being able to be passed around to other functions as parameters, or stored in variables/constants! </div> 
+    This one's actually a more complicated "compound Type&#8221; – note the third parameter which indicates that `fadeIn` receives a function Type <em>as one of its inputs</em>. Remember that since functions are Types, they carry the characteristic of being able to be passed around to other functions as parameters, or stored in variables/constants! </div> 
     
     <p>
     </p>
@@ -227,7 +227,7 @@ func chooseAdjustmentFunction(increase: Bool) -&gt; (Int) -&gt; Int {
       </p>
       
       <p>
-        Read this as, &#8220;A function Type which takes as Bool as a parameter and returns a function Type which takes an Int as a parameter and returns an Int.&#8221;
+        Read this as, "A function Type which takes as Bool as a parameter and returns a function Type which takes an Int as a parameter and returns an Int.&#8221;
       </p>
       
       <p>

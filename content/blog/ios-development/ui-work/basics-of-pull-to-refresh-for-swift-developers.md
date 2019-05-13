@@ -17,7 +17,7 @@ tags:
 ---
 <small>Updated on September 21, 2016 – Swift 3.0</small>
 
-Implementing &#8220;pull to refresh&#8221; is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:
+Implementing "pull to refresh&#8221; is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:
 
   1. They're working with a UITableViewController
   2. They're working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it
@@ -212,7 +212,7 @@ The most complicated thing about the code I just proposed is how the `UIRefreshC
 As for the body of the closure expression, we're adding a target-action to the `UIRefreshControl` instance, [just like we did when we were dealing with a UITableViewController][6].
 
 As with the `UITableViewController` example, note:  
-1. Since I've specified &#8220;handleRefresh:&#8221; (note the colon!) as the action argument, I need to define a function in this `UITableViewController` class with the same name. Additionally, the function should take one argument.  
+1. Since I've specified "handleRefresh:&#8221; (note the colon!) as the action argument, I need to define a function in this `UITableViewController` class with the same name. Additionally, the function should take one argument.  
 2. We'd like this action to be called for the `UIControlEvent` called `ValueChanged`.
 
 <a name="regvc-override-viewdidload" class="jump-target"></a>
@@ -254,7 +254,7 @@ func handleRefresh(refreshControl: UIRefreshControl) {
 
 ### Wrapping up
 
-Implementing &#8220;pull to refresh&#8221; is a common need that arises when working with table views. Here we've explored how to implement this feature using both a `UITableViewController` _and_ with a regular view controller and a table view.
+Implementing "pull to refresh&#8221; is a common need that arises when working with table views. Here we've explored how to implement this feature using both a `UITableViewController` _and_ with a regular view controller and a table view.
 
 <a name="share" class="jump-target"></a>
 

@@ -31,7 +31,7 @@ To my surprise, unit testing my Core Data model layer has been… well… amazin
 
 ### Set up an in-memory NSManagedObjectContext
 
-A [Stack Overflow][2] question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I've written it in Swift. In my project, I created a new Swift file called &#8220;CoreDataHelpers.swift&#8221; in my tests target. Here's a look at the helper function:
+A [Stack Overflow][2] question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I've written it in Swift. In my project, I created a new Swift file called "CoreDataHelpers.swift&#8221; in my tests target. Here's a look at the helper function:
 
 ```swift
 import CoreData

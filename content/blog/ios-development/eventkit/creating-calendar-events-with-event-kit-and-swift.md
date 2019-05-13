@@ -168,7 +168,7 @@ As I was working through this example, I was initially running into trouble when
 
 It turns out that if you retrieve a calendar from one `EKEventStore` instance, say, in the previous view controller, and attempt to assign it to an `EKEvent` that is associated with a _different_ `EKEventStore` instance, things become really unhappy when it comes time to save the event.
 
-Specifically, you'll get an error that says &#8220;Thread 1: signal SIGKILL&#8221; followed by &#8220;Thread 1: EXC\_BAD\_ACCESS&#8221;:
+Specifically, you'll get an error that says "Thread 1: signal SIGKILL&#8221; followed by "Thread 1: EXC\_BAD\_ACCESS&#8221;:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventSigKillError.png" alt="Save Event Sig Kill Error" width="753" height="177" class="alignnone size-full wp-image-12898" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventSigKillError.png 753w, https://www.andrewcbancroft.com/wp-content/uploads/2016/06/SaveEventSigKillError-300x71.png 300w" sizes="(max-width: 753px) 100vw, 753px" />][2]
 

@@ -46,16 +46,16 @@ I'll begin in Xcode 6.1.1 with a side-by-side view of my TestCase class, and my 
 
 #### [0:38]
 
-Imagine a scenario with me: Suppose that as part of your application's requirements, you mush show an Alert View after your primary view loads. How would we go about using Test Driven Development to implement this &#8220;feature&#8221;?
+Imagine a scenario with me: Suppose that as part of your application's requirements, you mush show an Alert View after your primary view loads. How would we go about using Test Driven Development to implement this "feature&#8221;?
 
 #### [0:53]
 
-Well, we'd write a test, of course – I'll name it something appropriate like &#8220;testUIAlertViewShowsAfterViewLoads&#8221;
+Well, we'd write a test, of course – I'll name it something appropriate like "testUIAlertViewShowsAfterViewLoads&#8221;
 
 #### [1:04]
 
 Next, I need to create an instance of my ViewController class so that I can test it.  
-But immediately, I run into trouble. It seems that my TestCase class can't &#8220;see&#8221; my View Controller class.
+But immediately, I run into trouble. It seems that my TestCase class can't "see&#8221; my View Controller class.
 
 #### [1:17]
 
@@ -67,15 +67,15 @@ With everything compiling now, we can move to the next line of test code.
 
 #### [1:32]
 
-First off, in order to test my View Controller's Alert View functionality, the Alert View has got to be visible to my test. The easiest thing for me to do at this point is to assume that there will be a property on my View Controller that I can set. This allows me to perform a kind of dependency injection known as &#8220;setter injection&#8221;. All it really means is that the property is dual-purpose. When the app runs on my iPhone, it'll use a real UIAlertView. But when I run it in my tests, I can plug in a UIAlertView that I control the behavior of, so that I can verify what I need to in my tests.
+First off, in order to test my View Controller's Alert View functionality, the Alert View has got to be visible to my test. The easiest thing for me to do at this point is to assume that there will be a property on my View Controller that I can set. This allows me to perform a kind of dependency injection known as "setter injection&#8221;. All it really means is that the property is dual-purpose. When the app runs on my iPhone, it'll use a real UIAlertView. But when I run it in my tests, I can plug in a UIAlertView that I control the behavior of, so that I can verify what I need to in my tests.
 
 #### [2:16]
 
-The ability to swap in a kind of Alert View that I control really is the &#8220;magic sauce&#8221; to this whole test-driven operation. In order to know whether or not a UI element was &#8220;shown&#8221; in a unit test without actually showing something on the screen in a simulator or device, I need to invent something known as a test-double. A fake object, if you will.
+The ability to swap in a kind of Alert View that I control really is the "magic sauce&#8221; to this whole test-driven operation. In order to know whether or not a UI element was "shown&#8221; in a unit test without actually showing something on the screen in a simulator or device, I need to invent something known as a test-double. A fake object, if you will.
 
 #### [2:44]
 
-My Fake Alert View will have some special capabilities that allow me to know whether the &#8220;show()&#8221; method was called on it. At the same time, it needs to be able to be substituted in my View Controller for a real UIAlertView.
+My Fake Alert View will have some special capabilities that allow me to know whether the "show()&#8221; method was called on it. At the same time, it needs to be able to be substituted in my View Controller for a real UIAlertView.
 
 #### [3:00]
 

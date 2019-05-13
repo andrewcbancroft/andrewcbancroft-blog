@@ -61,7 +61,7 @@ When you run the app and attempt to load objects from your persistent store that
 
 Xcode isn't entirely unhelpful. While the `EXC_BAD_INSTRUCTION` message in the text editor isn't very illuminating, the Debug Navigator on the left ([<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/debug-nav.png" alt="Debug navigator - 6th icon from left in the left sidebar" width="251" height="30" class="alignnone size-full wp-image-13279" style="display:inline-block;" />][3]) provides some clues.
 
-For me, it displayed just the breadcrumb that made me go, &#8220;Oh! Let me go check and see if I've got a Type mis-match between my data model and my `NSManagedObject` subclass&#8221;:
+For me, it displayed just the breadcrumb that made me go, "Oh! Let me go check and see if I've got a Type mis-match between my data model and my `NSManagedObject` subclass&#8221;:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch.png" alt="Unconditionally bridge from Objective C NSDate? to Date" width="452" height="88" class="alignnone size-full wp-image-13271" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch.png 452w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch-300x58.png 300w" sizes="(max-width: 452px) 100vw, 452px" />][4]
 

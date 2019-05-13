@@ -15,7 +15,7 @@ tags:
   - Swift
 
 ---
-The old adage &#8220;Don't go reinventing the wheel&#8221; comes into play _often_ when developing software, doesn't it? Why build this [thing] ourselves when someone else has invented it already?
+The old adage "Don't go reinventing the wheel&#8221; comes into play _often_ when developing software, doesn't it? Why build this [thing] ourselves when someone else has invented it already?
 
 Fantastic libraries and frameworks exist out there to assist developers with common and sometimes even difficult problems. Whether it be an easier-to-use abstraction over the networking stack with [AFNetworking][1] or [AlamoFire][2], or adding a popular behavior-driven development testing framework like [Quick][3] to our workflow, we find ourselves constantly wanting to be able to take advantage of the things that others are doing in the community so we don't have to invent that wheel again ourselves.
 
@@ -26,7 +26,7 @@ Fantastic libraries and frameworks exist out there to assist developers with com
 
 With that comes the need for an easy way to manage external dependencies in our projects. We find the need to make sure that our projects have the right versions of whatever libraries or frameworks we're bringing in. We want to ensure that if we move to another machine or add folks to our teams that they can go and restore all those same external dependencies without a lot of hassle. Therein lies at least partial justification for the usage of dependency managers.
 
-The long-running &#8220;king of the hill&#8221; of dependency management for iOS developers has been the ever-popular [CocoaPods][4]. However, there's a new kid on the block, and its picking up popularity. This &#8220;new&#8221; dependency manager is called [Carthage][5].
+The long-running "king of the hill&#8221; of dependency management for iOS developers has been the ever-popular [CocoaPods][4]. However, there's a new kid on the block, and its picking up popularity. This "new&#8221; dependency manager is called [Carthage][5].
 
 <a name="what-is-carthage" class="jump-target"></a>
 
@@ -42,7 +42,7 @@ I've used Carthage for simple tasks like bringing in Quick for unit testing. It 
 
 ### Terminal tension
 
-If you'll withhold judgement of this confession, I'll openly share that I'm not a whiz on the command line. I _have_ found that the more I spend time in the Terminal, the less timid I become. It's been a gradual transition into spending intentional time on the command line, but I share this to simply relate to those of you who, like me, find themselves thinking, &#8220;Really? All of this involves running commands in the Terminal? Ugh&#8230;&#8221;
+If you'll withhold judgement of this confession, I'll openly share that I'm not a whiz on the command line. I _have_ found that the more I spend time in the Terminal, the less timid I become. It's been a gradual transition into spending intentional time on the command line, but I share this to simply relate to those of you who, like me, find themselves thinking, "Really? All of this involves running commands in the Terminal? Ugh&#8230;&#8221;
 
 Hang in there. Becoming proficient at this will take practice, but it's worth it. Carthage really does make your dependency management simpler and more shareable with your team. Even if you're working alone, I recommend investing the time to overcoming any anxiety you may have around the Terminal.
 
@@ -58,7 +58,7 @@ With that in mind, I've decided to get used to working with this tool _totally_ 
 
 ### Terminal installation
 
-Installing Carthage from the command line assumes that you have a package manager for OSX called [&#8220;Homebrew&#8221;][7] installed on your Mac. If you don't, you need it. And yes, _it_ involves the Terminal too, but don't worry – I've got you covered in the steps to follow. We'll use Homebrew to install Carthage which will be used to manage the external dependencies in our app.
+Installing Carthage from the command line assumes that you have a package manager for OSX called ["Homebrew&#8221;][7] installed on your Mac. If you don't, you need it. And yes, _it_ involves the Terminal too, but don't worry – I've got you covered in the steps to follow. We'll use Homebrew to install Carthage which will be used to manage the external dependencies in our app.
 
 <a name="installing-homebrew" class="jump-target"></a>
 
@@ -88,11 +88,11 @@ Yikes! What's all this now?
 
 Well, for the installation to continue, Homebrew needs to elevate the level of permissions it has in order write all the files it needs to write and to set all the permissions it needs to set. Under the hood, it's run a `sudo` command. It requires your password to authorize this elevation. Go ahead and type your password, and press &#8216;RETURN' to continue.
 
-The installation will continue by downloading all of the necessary files and performing all the changes it said it'd make. When it's done, you'll get an &#8220;Installation Successful&#8221; message:
+The installation will continue by downloading all of the necessary files and performing all the changes it said it'd make. When it's done, you'll get an "Installation Successful&#8221; message:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png" alt="Homebrew Installation Successful" width="586" height="367" class="alignnone size-full wp-image-12177" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png 586w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful-300x188.png 300w" sizes="(max-width: 586px) 100vw, 586px" />][10]
 
-Sweet! To test it out, you can simply type `brew help` like it suggests in the line below the &#8220;Installation successful!&#8221; message. It should print out a bunch of stuff to the Terminal window, explaining how to use Homebrew:  
+Sweet! To test it out, you can simply type `brew help` like it suggests in the line below the "Installation successful!&#8221; message. It should print out a bunch of stuff to the Terminal window, explaining how to use Homebrew:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png" alt="It works!" width="581" height="366" class="alignnone size-full wp-image-12172" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png 581w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works-300x189.png 300w" sizes="(max-width: 581px) 100vw, 581px" />][11]
 
 Well done! We can now use Homebrew to install Carthage. You can use it to install all kinds of other fantastic utilities as well, but for now we'll focus on the Carthage installation&#8230;
@@ -116,16 +116,16 @@ The last step is to run `brew install carthage`. Yes. It's that simple. Homebrew
 
 Once Carthage is installed, it's time to create your Cartfile file. After I read [the documentation][5] on how to set this up, I found myself doubting whether I'd done it right, so again, to alleviate any fears our there around the mystery of what's going on I'll share what I've discovered.
 
-First of all, the documentation merely says, &#8220;Create a Cartfile that lists the frameworks you’d like to use in your project.&#8221; I scratched my head and asked, &#8220;Okay – well, where? And should it have a file extension?&#8221;
+First of all, the documentation merely says, "Create a Cartfile that lists the frameworks you’d like to use in your project.&#8221; I scratched my head and asked, "Okay – well, where? And should it have a file extension?&#8221;
 
-The answers that worked for me were, &#8220;Somewhere in your Xcode project (I put it under Supporting Files)&#8221; and &#8220;No file extension&#8230;just the name Cartfile works&#8221;.
+The answers that worked for me were, "Somewhere in your Xcode project (I put it under Supporting Files)&#8221; and "No file extension&#8230;just the name Cartfile works&#8221;.
 
 To demonstrate, here's a couple of screenshots depicting how to add a Cartfile to your Xcode project&#8230;
 
 Simply add a new Empty file, found under iOS -> Other:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-1024x409.png" alt="New empty file" width="1024" height="409" class="alignnone size-large wp-image-12191" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-1024x409.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-300x120.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file.png 1394w" sizes="(max-width: 1024px) 100vw, 1024px" />][14]
 
-In the new file dialog, simply type in &#8220;Cartfile&#8221;, and press Create:  
+In the new file dialog, simply type in "Cartfile&#8221;, and press Create:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create.png" alt="Cartfile -> Create" width="783" height="298" class="alignnone size-full wp-image-12192" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create.png 783w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create-300x114.png 300w" sizes="(max-width: 783px) 100vw, 783px" />][15]
 
 ### Wrapping up

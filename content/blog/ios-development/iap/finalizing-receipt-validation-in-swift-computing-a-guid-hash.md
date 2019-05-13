@@ -19,7 +19,7 @@ The aim of this guide is to help you finalize the receipt validation process by 
 This is a continuation of my receipt validation series. I'm assuming that&#8230;
 
   * You've [prepared to test receipt validation][1] by setting up your app in iTunes Connect.
-  * You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it [the &#8220;easy way&#8221; with CocoaPods][2].
+  * You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the "envelope&#8221; for the receipt. Perhaps you've even done it [the "easy way&#8221; with CocoaPods][2].
   * You've [located and loaded][3] the receipt for validation.
   * You've [extracted the PKCS #7 container][4].
   * You've [verified the signature on the receipt][5]
@@ -141,7 +141,7 @@ These help guarantee that the rest of the function will have all of the required
 
 The hash for your app is computed with the following three pieces of information:  
 1) The app purchaser's device identifier  
-2) A piece of &#8220;opaque data&#8221; found within the receipt  
+2) A piece of "opaque data&#8221; found within the receipt  
 3) Your app's bundle identifier found within the receipt
 
 The app purchaser's device identifier is represented as a `uuid_t` from the Foundation library. However, to use it with the Open SSL library, we'll need to be working with an `NSData` instance. The following code goes from the `uuid_t` instance, to a raw pointer, to an `NSData` instance:
@@ -243,7 +243,7 @@ Here are a few ideas:
 
   * Implement a grace period, just in case the receipt validation failure occurred for a reason that the user can't control (e.g. maybe we couldn't locate the receipt, and requesting a new one failed because Apple was having issues&#8230;)
   * Disable a feature in your app because receipt validation failed too many times
-  * Maybe you just need to use the data within the `ParsedReceipt` because you're changing the way you monetize your app. Now, instead of making users pay $0.99 for the app, you're going to give it away for free, but let people buy an in-app purchase to enable &#8220;pro&#8221; features, or remove ads&#8230;whatever. In this case, you may check the `ParsedReceipt` to see the original version of the app that your user downloaded. Maybe you want to require users who download your app after version 2.0 to buy an in-app purchase for [Feature X], but you want to give it to everyone who already _has_ the app since they may have already paid $0.99 for it, and it'd make them feel ripped off if they had to buy the in-app purchase.
+  * Maybe you just need to use the data within the `ParsedReceipt` because you're changing the way you monetize your app. Now, instead of making users pay $0.99 for the app, you're going to give it away for free, but let people buy an in-app purchase to enable "pro&#8221; features, or remove ads&#8230;whatever. In this case, you may check the `ParsedReceipt` to see the original version of the app that your user downloaded. Maybe you want to require users who download your app after version 2.0 to buy an in-app purchase for [Feature X], but you want to give it to everyone who already _has_ the app since they may have already paid $0.99 for it, and it'd make them feel ripped off if they had to buy the in-app purchase.
 
 How you handle the parsed receipt data or a receipt validation error is really customizable and specific to your particular app.
 

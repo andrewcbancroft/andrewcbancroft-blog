@@ -25,7 +25,7 @@ In Objective-C, I've seen this accomplished by using pre-processor directives, 
 
 As it turns out, <a title="Apple Developer Documentation - Conditionally Load Resources" href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/TransitionGuide/SupportingEarlieriOS.html#//apple_ref/doc/uid/TP40013174-CH14-SW1" target="_blank">Apple has guidance</a> that would actually work for both Objective-C _and_ Swift – It involves simply checking the `NSFoundationVersionNumber` of the device against one of the pre-defined values defined in NSObjCRuntime.h.
 
-To accomplish this in Swift, you can create a new Swift file (I called mine &#8220;iOSVersions.swift&#8221;) to hold the following code:
+To accomplish this in Swift, you can create a new Swift file (I called mine "iOSVersions.swift&#8221;) to hold the following code:
 
 ```swift
 let iOS7 = floor(NSFoundationVersionNumber) &lt;= floor(NSFoundationVersionNumber_iOS_7_1)

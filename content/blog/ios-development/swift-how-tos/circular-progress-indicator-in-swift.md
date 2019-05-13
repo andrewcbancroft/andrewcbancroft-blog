@@ -82,7 +82,7 @@ To accomplish this, you'd simply make sure there's an outlet between your progre
 
 We're dealing with a progress indicator here, so this implies that there's a beginning, some incremental steps taken toward a completion goal, and of course, the fully completed _whatever it was you were doing_.
 
-The example I've contrived is a simple counter with an upper limit of 5. So as you tap &#8220;Increase Progress&#8221;, the circular progress view should update to be some fraction of the way around the 360 degree circle based upon how close we are to completing the count to 5.
+The example I've contrived is a simple counter with an upper limit of 5. So as you tap "Increase Progress&#8221;, the circular progress view should update to be some fraction of the way around the 360 degree circle based upon how close we are to completing the count to 5.
 
 There's a function I've built to calculate the new angle:
 

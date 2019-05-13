@@ -23,9 +23,9 @@ The migration has gone fairly smooth so far, but I hit a wall and have been stru
 
 # Problem Overview
 
-Any time I did a query in my Parse Cloud Code, the query would fail. Every time I'd make a request to my Cloud Code function, I'd get &#8220;500 Internal Server Error&#8221; as my response.
+Any time I did a query in my Parse Cloud Code, the query would fail. Every time I'd make a request to my Cloud Code function, I'd get "500 Internal Server Error&#8221; as my response.
 
-I finally wised up and adjusted my query so that I could see the specific &#8220;internal server error&#8221; that was occurring:
+I finally wised up and adjusted my query so that I could see the specific "internal server error&#8221; that was occurring:
 
 <pre class="lang:js mark:8 decode:true " title="Parse Query" >var query = new Parse.Query("NameOfParseClassImFetching");
 

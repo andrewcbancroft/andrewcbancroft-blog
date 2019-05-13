@@ -41,7 +41,7 @@ As with the others, I've created a [GitHub project][1] for you to see the animat
 
 ### The Extension
 
-The following code adds a method to any UIView instance called `rotate360Degrees`. The code can be placed in a Swift file called &#8220;UIViewExtensions.swift&#8221;:
+The following code adds a method to any UIView instance called `rotate360Degrees`. The code can be placed in a Swift file called "UIViewExtensions.swift&#8221;:
 
 ```swift
 import UIKit
@@ -61,21 +61,21 @@ extension UIView {
 }
 ```
 
-The only critical&nbsp;thing to notice in the above code snippet is the value passed to the `CABasicAnimation`&nbsp;constructor. &nbsp;The `&#8220;transform.rotation&#8221;`&nbsp;string is what sets things up to go spinning, and the string&nbsp;_must_ be typed exactly as-is for the animation to work.
+The only critical&nbsp;thing to notice in the above code snippet is the value passed to the `CABasicAnimation`&nbsp;constructor. &nbsp;The `"transform.rotation&#8221;`&nbsp;string is what sets things up to go spinning, and the string&nbsp;_must_ be typed exactly as-is for the animation to work.
 
-As in my previous animation posts, I provide myself a couple of parameters to set for a little bit of customization if I want it.&nbsp;Since the parameters&nbsp;have default values, the method can be invoked by writing `someUIViewInstance.rotate360Degrees()`&nbsp;for simple cases. &nbsp;For more &#8220;advanced&#8221; scenarios where you need to adjust how long the animation takes, or to perform some logic&nbsp;after the animation completes, you can pass in a duration value other than 1.0, assign a completionDelegate, or both, depending on your needs.
+As in my previous animation posts, I provide myself a couple of parameters to set for a little bit of customization if I want it.&nbsp;Since the parameters&nbsp;have default values, the method can be invoked by writing `someUIViewInstance.rotate360Degrees()`&nbsp;for simple cases. &nbsp;For more "advanced&#8221; scenarios where you need to adjust how long the animation takes, or to perform some logic&nbsp;after the animation completes, you can pass in a duration value other than 1.0, assign a completionDelegate, or both, depending on your needs.
 
-Check out the <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation" target="_blank">GitHub example</a> for details on how to configure things for the `completionDelegate`. &nbsp;I'll be walking through that more &#8220;advanced&#8221; case shortly as well.
+Check out the <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation" target="_blank">GitHub example</a> for details on how to configure things for the `completionDelegate`. &nbsp;I'll be walking through that more "advanced&#8221; case shortly as well.
 
 <a name="example" class="jump-target"></a>
 
 ### Example
 
-Perhaps you're asking, &#8220;Why spinning UIViews?&#8221;&#8230;
+Perhaps you're asking, "Why spinning UIViews?&#8221;&#8230;
 
 In my example, I've proposed&nbsp;a simple button that would be used to refresh the view / data in a real-world scenario. &nbsp;When the button is tapped, I want the button to rotate 360 degrees.
 
-In the &#8220;advanced&#8221; example, I want it to rotate continually until a process of some sort finishes, at which point the animation stops until initiated again. &nbsp;Take a look:
+In the "advanced&#8221; example, I want it to rotate continually until a process of some sort finishes, at which point the animation stops until initiated again. &nbsp;Take a look:
 
 [<img class="size-full wp-image-5661 aligncenter" src="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/RotateAnimationExample.gif" alt="Rotate Animation Example" width="357" height="636" />][2]
 
@@ -100,7 +100,7 @@ class ViewController: UIViewController {
 
 <a name="advanced" class="jump-target"></a>
 
-### &#8220;Advanced&#8221; Case – Rotate Until Process Finishes
+### "Advanced&#8221; Case – Rotate Until Process Finishes
 
 In my&nbsp;example, I decided to simulate a long-running process by using a custom-built `Timer`&nbsp;class, heavily inspired by <a title="Samuel Mullen - Using Swift Closures with NSTimer" href="http://www.samuelmullen.com/2014/07/using-swifts-closures-with-nstimer" target="_blank">Samuel Mullen's implementation</a> (with a few modifications to fit my needs). &nbsp;If you're looking through the <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation" target="_blank">GitHub example</a>, try not to&nbsp;get too bogged down in the details of the `Timer`, unless it just intrigues you. &nbsp;In real life, you may decide perform a web service call to refresh your data model, or refresh your UI (or both). &nbsp;Whatever the case may be, you'll likely end up with similar logic:
 

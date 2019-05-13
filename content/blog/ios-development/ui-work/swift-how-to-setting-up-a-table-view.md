@@ -15,7 +15,7 @@ tags:
   - UITableView
 
 ---
-Think of this screencast as the &#8220;Hello World&#8221; of creating a view controller with a table view. I cover organizing things in the Storyboard, Auto Layout constraints, and the implementation of the data source protocol methods for a table view.
+Think of this screencast as the "Hello World&#8221; of creating a view controller with a table view. I cover organizing things in the Storyboard, Auto Layout constraints, and the implementation of the data source protocol methods for a table view.
 
 ### Screencast
 
@@ -29,7 +29,7 @@ Hi, I'm Andrew from andrewcbancroft.com.
 
 I use table views fairly often in my examples, so I've decided to create a short walkthrough of how to set up a table view in Swift.
 
-Think of this as the &#8220;Hello World&#8221; of creating a view controller with a table view.
+Think of this as the "Hello World&#8221; of creating a view controller with a table view.
 
 #### [0:16]
 
@@ -65,11 +65,11 @@ I've written up a handy UITableViewDataSource cheat sheet over at my website (an
 
 #### [1:51]
 
-Here I am at andrewcbancroft.com – I've searched for &#8220;UITableViewDataSource&#8221; and located my cheet sheet.
+Here I am at andrewcbancroft.com – I've searched for "UITableViewDataSource&#8221; and located my cheet sheet.
 
 #### [2:02]
 
-Scrolling down, I find the code I need, switch the code snippet plugin to &#8220;raw&#8221; mode, select everything, and copy.
+Scrolling down, I find the code I need, switch the code snippet plugin to "raw&#8221; mode, select everything, and copy.
 
 #### [2:12]
 
@@ -77,7 +77,7 @@ Switching back over to my Xcode window, I paste the code snippet in.
 
 #### [2:16]
 
-As I mentioned in the beginning, this walkthrough can be thought of as the &#8220;Hello World&#8221; of table view setup. With that in mind, for now, I'll create a dataSourceArray with some dummy data in it, just to get things compiling and displaying data.
+As I mentioned in the beginning, this walkthrough can be thought of as the "Hello World&#8221; of table view setup. With that in mind, for now, I'll create a dataSourceArray with some dummy data in it, just to get things compiling and displaying data.
 
 #### [2:31]
 
@@ -105,13 +105,13 @@ I'll expand the Table View and click on the Table View Cell to do a bit more con
 
 I'll set the Style to Basic&#8230;
 
-Then I'll give it an identitifer of &#8220;BasicCell&#8221;.
+Then I'll give it an identitifer of "BasicCell&#8221;.
 
-I need this &#8220;BasicCell&#8221; string for one of my other data source proocol methods, so I'll select it, and copy it.
+I need this "BasicCell&#8221; string for one of my other data source proocol methods, so I'll select it, and copy it.
 
 #### [3:37]
 
-Back in my ViewController.swift source file, I'll paste that &#8220;BasicCell&#8221; string as the argument to dequeReusableCellWithIdentifier.
+Back in my ViewController.swift source file, I'll paste that "BasicCell&#8221; string as the argument to dequeReusableCellWithIdentifier.
 
 #### [3:48]
 
@@ -133,11 +133,11 @@ I'll stop the app and make an adjustment in the Storyboard.
 
 #### [4:34]
 
-Selecting the table view from the document outline will allow me to grab the top edge and drag the hight downward slowly until it &#8220;snaps&#8221; into place where the bottom of the status bar would appear to be.
+Selecting the table view from the document outline will allow me to grab the top edge and drag the hight downward slowly until it "snaps&#8221; into place where the bottom of the status bar would appear to be.
 
 #### [4:48]
 
-Next, I'll set some constraints. Within the document outline, I'll control + click from the Table View to the View and set constraints for &#8220;Top Space to Top Layout Guide&#8221;, Center Horizontally, Center Vertically, and Equal Widths.
+Next, I'll set some constraints. Within the document outline, I'll control + click from the Table View to the View and set constraints for "Top Space to Top Layout Guide&#8221;, Center Horizontally, Center Vertically, and Equal Widths.
 
 #### [5:17]
 

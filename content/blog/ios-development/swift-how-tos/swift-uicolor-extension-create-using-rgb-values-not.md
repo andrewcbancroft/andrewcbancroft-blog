@@ -15,9 +15,9 @@ tags:
   - UIColor
 
 ---
-I'll say it up front – I'm not a great designer. What tends to happen with me and projects is that I end up saving all-things color until the _end_ of a project. You know&#8230; the old procrastinator's motto: &#8220;If you don't get it done today and tomorrow doesn't come, then you ain't gotta do it!&#8221;
+I'll say it up front – I'm not a great designer. What tends to happen with me and projects is that I end up saving all-things color until the _end_ of a project. You know&#8230; the old procrastinator's motto: "If you don't get it done today and tomorrow doesn't come, then you ain't gotta do it!&#8221;
 
-So the other day came and I had to &#8220;do color&#8221;&#8230;
+So the other day came and I had to "do color&#8221;&#8230;
 
 Thankfully, a buddy of mine has good skills in the area, and gave me a color palette to use. Score!
 
@@ -36,7 +36,7 @@ Inevitably, I'd need to create myself some `UIColor` instances.
 
 ### Baffled
 
-For those of us who spend a lot of time designing in the Storyboard, as opposed to creating views and layouts directly in code, coming up against the `UIColor` API when you haven't in a while can be&#8230;well&#8230;baffling. Not because it's &#8220;hard&#8221; but because it's not as intuitive as it looks on first-sight. Here's what I mean&#8230;
+For those of us who spend a lot of time designing in the Storyboard, as opposed to creating views and layouts directly in code, coming up against the `UIColor` API when you haven't in a while can be&#8230;well&#8230;baffling. Not because it's "hard&#8221; but because it's not as intuitive as it looks on first-sight. Here's what I mean&#8230;
 
 My color-adept friend had given me some hex color values. Looking at `UIColor` of course, there's no initializer or class function to create a color with such a value. No worries, though – there are plenty of converters out there!
 
@@ -44,7 +44,7 @@ So I got my red, green, and blue values all in order and did the thing that seem
 
 `let primaryColor = UIColor(red: 39.0, green: 44.0, blue: 79.0, alpha: 1.0)`
 
-And then I realized that I hit the same &#8220;gotcha&#8221; that I had before. `UIColor` takes a _percentage_ of red, green, and blue, not the _value_ of red, green, and blue. I needed to divide the values by 255.0 each in order to obtain a value between 0 and 1 as the initializer requires. Sure, this is in [the documentation][1]:
+And then I realized that I hit the same "gotcha&#8221; that I had before. `UIColor` takes a _percentage_ of red, green, and blue, not the _value_ of red, green, and blue. I needed to divide the values by 255.0 each in order to obtain a value between 0 and 1 as the initializer requires. Sure, this is in [the documentation][1]:
 
 > The red component of the color object, specified as a value from 0.0 to 1.0. 
 

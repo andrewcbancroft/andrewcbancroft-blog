@@ -29,9 +29,9 @@ Let's take them one at a time&#8230;
 
 ### A place for everything, and everything in its place
 
-Believe it or not, Test Driven Development is an extremely powerful tool for ensuring that code is written in the right place. But what do I mean by &#8220;the right place&#8221;?
+Believe it or not, Test Driven Development is an extremely powerful tool for ensuring that code is written in the right place. But what do I mean by "the right place&#8221;?
 
-In the object-oriented world, &#8220;places&#8221; are data structures, such as classes and structs, and their publicly accessible methods.
+In the object-oriented world, "places&#8221; are data structures, such as classes and structs, and their publicly accessible methods.
 
 When I employ TDD in a project, I will tend to be driven to making sure my code ends up in the right place. I'll give you an example:
 
@@ -45,7 +45,7 @@ It's like I'm lead to the ever-common temptation to put _all_ my code for a give
 
 #### TDD Tension
 
-While I may be led there, and while it may seem convenient, it would seem that TDD wants to start me off in a different &#8220;place&#8221; altogether. Since TDD asserts that I should not write any code unless there's a test requiring it to be written, I'd be driven away from my main project into my Test project. My canvas at that point is a fresh XCTestCase class.
+While I may be led there, and while it may seem convenient, it would seem that TDD wants to start me off in a different "place&#8221; altogether. Since TDD asserts that I should not write any code unless there's a test requiring it to be written, I'd be driven away from my main project into my Test project. My canvas at that point is a fresh XCTestCase class.
 
 UI at this point is not on my mind. Here, I care more about the _foundations_ of the app itself. I begin to consider the application's domain, and its behavior _apart_ from its user interface. This is very important if I want to truly write decoupled, modular, maintainable code.
 
@@ -55,13 +55,13 @@ This is just one small example of how TDD can get you off on the right track to 
 
 ### Your logic was impeccable, Captain
 
-The second goal of TDD in iOS is making sure my logic is correct, or, as Spock would say, &#8220;impeccable&#8221;.
+The second goal of TDD in iOS is making sure my logic is correct, or, as Spock would say, "impeccable&#8221;.
 
 Does my application's code do what it _should_ do? Can I write my code in such a way that I can easily verify it? TDD, by nature, pushes me in the direction of being able to verify the accuracy of my code's logical outcomes&#8230; that is, how it behaves.
 
 #### Fascinating is a word I use for the unexpected
 
-Testing has this way of setting expectations. One thing I've really enjoyed about TDD's notorious red-green-refactor cycle is that I know certainly and immediately when I've messed up (ie, run across a &#8220;fascinating&#8221; situation in Spock terms).
+Testing has this way of setting expectations. One thing I've really enjoyed about TDD's notorious red-green-refactor cycle is that I know certainly and immediately when I've messed up (ie, run across a "fascinating&#8221; situation in Spock terms).
 
   * When I write the test, it should fail the first time. If it doesn't, I've messed up.
   * When I write the code to pass the test and the test fails, I _also_ know I've messed up.

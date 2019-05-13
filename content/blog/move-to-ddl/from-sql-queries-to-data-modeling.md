@@ -16,7 +16,7 @@ tags:
 ---
 This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I'm pretty stoked about some of the amazing features of SQL Server 2012's BI stack.
 
-During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model. I walked away from session after session thinking, &#8220;Man, this is so doable now!!&#8221;. This was the single most impressive and perspective altering concept that flooded into my brain this week.
+During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model. I walked away from session after session thinking, "Man, this is so doable now!!&#8221;. This was the single most impressive and perspective altering concept that flooded into my brain this week.
 
 There comes a time in every organization that necessitates a paradigm shift: One that involves a move _toward_ data _modeling_ and a _away_ from SQL query writing for the purpose of supplying data sets to reports. By no means am I suggesting that writing SQL will disappear for database / BI Developers – but as a means to serving as the backbone of an organization's reporting infrastructure, there will inevitably come a time that employing more and more people capable of writing SQL will be unsustainable.
 

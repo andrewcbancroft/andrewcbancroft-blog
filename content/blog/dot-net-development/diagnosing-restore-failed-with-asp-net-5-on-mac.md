@@ -15,7 +15,7 @@ tags:
   - Mono
 
 ---
-Following along with Steve Smith's [&#8220;Your First ASP.NET 5 Application on a Mac&#8221;][1], I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn't work due to a problem with restoring the project's dependencies.
+Following along with Steve Smith's ["Your First ASP.NET 5 Application on a Mac&#8221;][1], I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn't work due to a problem with restoring the project's dependencies.
 
 <a name="retracing-steps" class="jump-target"></a>
 
@@ -25,11 +25,11 @@ I [got ASP.NET installed on my Mac][2], and I even got a cool little template go
 
 I opened up my scaffolded project using Visual Studio Code, and began the dependency restore process. But it failed. So I troubleshooted (troubleshot?), and it failed some more.
 
-&#8220;Restore failed Unknown header: 3208085783&#8221;.
+"Restore failed Unknown header: 3208085783&#8221;.
 
-I found David Fowler's [&#8220;Diagnosing Dependency Issues with ASP.NET 5&#8221;][4], but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:
+I found David Fowler's ["Diagnosing Dependency Issues with ASP.NET 5&#8221;][4], but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:
 
-> Make sure your DNX and packages are on the same version &#8220;train&#8221; 
+> Make sure your DNX and packages are on the same version "train&#8221; 
 
 My issue wasn't with DNX, but with **Mono**.
 
@@ -53,7 +53,7 @@ Verifying that Mono was successfully upgraded via a `mono --version` command, I 
 
 The result?
 
-`dnu restore` produced a wonderfully green, &#8220;Restore complete&#8221;!
+`dnu restore` produced a wonderfully green, "Restore complete&#8221;!
 
 <a name="share" class="jump-target"></a>
 

@@ -17,7 +17,7 @@ tags:
   - Swift
 
 ---
-&#8220;What can I do to avoid these &#8216;magic strings' in my code?&#8221; – This was the question I asked myself recently as I found myself in `prepareForSegue` comparing `segue.segueIdentifier` to in-line hard-coded Strings.  This kind of in-line hard-coding of a String for comparison purposes is what I mean by &#8220;magic strings&#8221; in this article.  I knew this felt like a bad idea, but the solution to a cleaner option wasn't readily apparent to me.
+"What can I do to avoid these &#8216;magic strings' in my code?&#8221; – This was the question I asked myself recently as I found myself in `prepareForSegue` comparing `segue.segueIdentifier` to in-line hard-coded Strings.  This kind of in-line hard-coding of a String for comparison purposes is what I mean by "magic strings&#8221; in this article.  I knew this felt like a bad idea, but the solution to a cleaner option wasn't readily apparent to me.
 
 I _used_ to do things like create static string constants, or `#define` expressions so that I could easily change these values if I ever needed to update them for some reason.  You know&#8230; back in a former Objective-C developer life when these tactics were available to me.  But these options don't exist in Swift.  What to do??
 
@@ -25,13 +25,13 @@ I _used_ to do things like create static string constants, or `#define` expres
 
 Specifically, <a title="Apple Developer Documentation - Enumerations with Raw Values" href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html#//apple_ref/doc/uid/TP40014097-CH12-XID_228" target="_blank">Enumerations with pre-populated default values (called <em>raw values</em>)</a>.
 
-By creating an Enumeration that stores raw String values, I was able to encapsulate what would otherwise be &#8220;magic strings&#8221; in a type-safe construct for easier, cleaner use in my code.
+By creating an Enumeration that stores raw String values, I was able to encapsulate what would otherwise be "magic strings&#8221; in a type-safe construct for easier, cleaner use in my code.
 
 ## The Gist
 
 Consider this fabricated example:
 
-I have a storyboard with one main View Controller that connects to three other View Controllers through three segues:  &#8220;otherScreenSegue1&#8221;, &#8220;otherScreenSegue2&#8221;, and &#8220;otherScreenSegue3&#8221; as defined in the utilities panel in Xcode.
+I have a storyboard with one main View Controller that connects to three other View Controllers through three segues:  "otherScreenSegue1&#8221;, "otherScreenSegue2&#8221;, and "otherScreenSegue3&#8221; as defined in the utilities panel in Xcode.
 
 An Enumeration encapsulating those segue identifiers might look something like this:
 
@@ -43,7 +43,7 @@ enum SegueIdentifier: String {
 }
 ```
 
-With this Enumeration defined (perhaps in its own .swift file – wherever you deem would be strategic and findable again), the `prepareForSegue` override can become &#8220;magic string&#8221;-free:
+With this Enumeration defined (perhaps in its own .swift file – wherever you deem would be strategic and findable again), the `prepareForSegue` override can become "magic string&#8221;-free:
 
 ```swift
 override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
@@ -99,6 +99,6 @@ SegueIdentifier.fromRaw("otherScreenSegue1")! // Unwrapped Enum value of type Se
 
 In addition to segue identifiers, I'm considering using raw value Enumerations to wrap `NSNotificationCenter` keys as well.  Share if you find other nice uses of raw value Enumerations!
 
-So far, this solution has provided me a nice, straight-forward, type-safe way to encapsulate groups of Strings where the urge to fall back to &#8220;magic strings&#8221; would otherwise be high.
+So far, this solution has provided me a nice, straight-forward, type-safe way to encapsulate groups of Strings where the urge to fall back to "magic strings&#8221; would otherwise be high.
 
 &nbsp;

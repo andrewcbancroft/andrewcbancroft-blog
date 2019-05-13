@@ -14,7 +14,7 @@ tags:
   - NSManagedObject Subclass
 
 ---
-I just finished roasting some coffee from Peru. I've never had it before, but it got me thinking about my [Roaster On the Go][1] &#8220;app&#8221; as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate [Working with Unwind Segues Programmatically in Swift][2], but now I'm going to use it to show you how to resolve these errors that can crop up when you're implementing `NSManagedObject` subclasses for your Core Data Entities.
+I just finished roasting some coffee from Peru. I've never had it before, but it got me thinking about my [Roaster On the Go][1] "app&#8221; as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate [Working with Unwind Segues Programmatically in Swift][2], but now I'm going to use it to show you how to resolve these errors that can crop up when you're implementing `NSManagedObject` subclasses for your Core Data Entities.
 
 
 
@@ -22,7 +22,7 @@ I just finished roasting some coffee from Peru. I've never had it before, but it
 
 # Scenario – Adding a data model
 
-The &#8220;app&#8221; doesn't currently use Core Data, but for this article, I've created a rudimentary data model that includes a single Entity called `Product`:  
+The "app&#8221; doesn't currently use Core Data, but for this article, I've created a rudimentary data model that includes a single Entity called `Product`:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/RoasterOnTheGo_xcdatamodel.png" alt="RoasterOnTheGo_xcdatamodel" width="529" height="148" class="alignnone size-full wp-image-13091" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/RoasterOnTheGo_xcdatamodel.png 529w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/RoasterOnTheGo_xcdatamodel-300x84.png 300w" sizes="(max-width: 529px) 100vw, 529px" />][3]
 
 Now suppose that I'm ready to [implement a subclass of NSManagedObject][4] for the `Product` Entity.
@@ -41,7 +41,7 @@ or
 
 or in the compiler output
 
-> filename &#8220;Product+CoreDataClass.swift&#8221; used twice 
+> filename "Product+CoreDataClass.swift&#8221; used twice 
 
 What's happening??
 
@@ -61,7 +61,7 @@ Take a look at the steps below to get your project building again:
 
 Open your data model (the .xcdatamodeld file in your project).
 
-Click on each Entity in your data model and in the Data Model Inspector of the Utilities Pane, change the Codegen property from &#8220;Class Definition&#8221; or &#8220;Category/Extension&#8221; to **&#8220;Manual/None&#8221;**:
+Click on each Entity in your data model and in the Data Model Inspector of the Utilities Pane, change the Codegen property from "Class Definition&#8221; or "Category/Extension&#8221; to **"Manual/None&#8221;**:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff-1024x297.png" alt="Turn code generation off" width="1024" height="297" class="alignnone size-large wp-image-13107" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff-1024x297.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff-300x87.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff.png 1284w" sizes="(max-width: 1024px) 100vw, 1024px" />][5]
 
@@ -69,7 +69,7 @@ Click on each Entity in your data model and in the Data Model Inspector of the U
 
 ## 2 – Choose module
 
-You also need to tell Xcode where it can look to find a definition for the `NSManagedObject` subclass that you will implement for this Entity by choosing &#8220;Current Product Module&#8221; for the Module value:  
+You also need to tell Xcode where it can look to find a definition for the `NSManagedObject` subclass that you will implement for this Entity by choosing "Current Product Module&#8221; for the Module value:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject-1024x312.png" alt="Choose &quot;Current Product Module&quot; as module value" width="1024" height="312" class="alignnone size-large wp-image-13109" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject-1024x312.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject-300x91.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject.png 1284w" sizes="(max-width: 1024px) 100vw, 1024px" />][6]
 
 **Save** your .xcdatamodeld file.
@@ -80,7 +80,7 @@ You also need to tell Xcode where it can look to find a definition for the `NSMa
 
 Behind the scenes, Xcode creates files and implements Types for the Entities in your data model. It puts them in your derived data folder and automatically traverses this folder to look for Type definitions for Core Data Entities. So in order to get your project building again, you need to get rid of those files that Xcode created automatically.
 
-The &#8220;big hammer&#8221; for this is to simply clear all of your project's derived data. To do this, click on the Products menu, hold down the Option key, and click &#8220;Clean build folder&#8230;&#8221;:
+The "big hammer&#8221; for this is to simply clear all of your project's derived data. To do this, click on the Products menu, hold down the Option key, and click "Clean build folder&#8230;&#8221;:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CleanBuildFolder.png" alt="Product -> Press Option Key -> Clean Build Folder..." width="224" height="321" class="alignnone size-full wp-image-13118" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CleanBuildFolder.png 224w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CleanBuildFolder-209x300.png 209w" sizes="(max-width: 224px) 100vw, 224px" />][7]
 
@@ -103,7 +103,7 @@ Click Build -> Intermediates -> ProjectName.build -> Debug-iphonesimulator -> Pr
 
 ## 4 – Rebuild
 
-After you rebuild, any compiler errors you previously had, related to &#8220;ambiguous Type&#8221; or &#8220;redeclaration of Type&#8221; should be resolved!
+After you rebuild, any compiler errors you previously had, related to "ambiguous Type&#8221; or "redeclaration of Type&#8221; should be resolved!
 
 <a name="course" class="jump-target"></a>
 

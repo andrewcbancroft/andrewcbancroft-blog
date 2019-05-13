@@ -23,13 +23,13 @@ Alternatively, you could use the new `NSPersistentContainer` class if you want t
 
 <a name="the-point" class="jump-target"></a>
 
-# What's the point of the &#8220;Core Data stack&#8221;
+# What's the point of the "Core Data stack&#8221;
 
-It's important to keep in mind the fundamental goal with creating the &#8220;Core Data stack&#8221;. At the end of the day, we're all just trying to get our hands on an instance of `NSManagedObjectContext`.
+It's important to keep in mind the fundamental goal with creating the "Core Data stack&#8221;. At the end of the day, we're all just trying to get our hands on an instance of `NSManagedObjectContext`.
 
 Nearly every Core Data framework Type that we interact with requires an instance of `NSManagedObjectContext` to do its work. Whether it's `NSEntityDescription` to initialize new `NSManagedObject` instances, an `NSFetchRequest` to retrieve data, or an `NSFetchedResultsController` to keep our UIs in sync, we're always depending on `NSManagedObjectContext`.
 
-So the bottom-line goal of setting up the &#8220;stack&#8221; is to configure all the plumbing necessary for our apps to work with the &#8220;under the hood&#8221; stuff of Core Data. The [thing] we interact with constantly is that all-valuable `NSManagedObjectContext` instance.
+So the bottom-line goal of setting up the "stack&#8221; is to configure all the plumbing necessary for our apps to work with the "under the hood&#8221; stuff of Core Data. The [thing] we interact with constantly is that all-valuable `NSManagedObjectContext` instance.
 
 <a name="create" class="jump-target"></a>
 
@@ -71,7 +71,7 @@ Using `NSPersistentContainer` can be seen as a 3 step process.
 2 &#8212; Call `loadPersistentStores` on the container instance. This function _executes asynchronously_, so to hook back in and continue doing things when the function is finished with its work, you supply a completionHandler.  
 3 &#8212; Guard against errors and use the container's `viewContext` property, which is the `NSManagedObjectContext` instance you need. I haven't written in detail about this (yet), but in my [Pluralsight course on Core Data in Swift][2], I go over how to take the managed object context and follow a dependency injection pattern so that you isolate where it's created, and use the single instance throughout your app in a way that's testable.
 
-One consideration that I would encourage you to think about is the `guard` statement. Ask: &#8220;Is `fatalError` really the best thing for me to do?&#8221;
+One consideration that I would encourage you to think about is the `guard` statement. Ask: "Is `fatalError` really the best thing for me to do?&#8221;
 
 A lot of apps that use Core Data really _can't_ continue past this point if the persistent store can't be loaded. In that case, the `guard` may not be so bad. If you _can_ fall back to an alternate screen that doesn't rely on Core Data though, that might be a more pleasant experience for your users than simply crashing with a fatal error.
 

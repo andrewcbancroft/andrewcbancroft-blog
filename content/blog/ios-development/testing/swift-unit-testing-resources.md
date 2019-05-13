@@ -53,7 +53,7 @@ As I've researched Test Driven Development practices in general, and for iOS / M
   * [Unit Testing Model Layer with Core Data and Swift][15] – Exploration of testing when your project uses Core Data. This post provides a walk-through of setting up an in-memory data store to test with NSManagedObjects.
   * [Swift Unit Testing – Verifying Method Calls][16] – Screencast showing how to verify method calls in Swift unit tests.
   * [Swift Access Control – Implications for Unit Testing][17] – Pointer on how to make code from your main project visible in your Test project.
-  * [Creating &#8220;Mocks&#8221; and &#8220;Stubs&#8221; in Swift][18] – Essentially a discovery I made about how to create fake objects and override those objects' methods. You'd do this to isolate and control the object's behavior in order to enable or ease the testing process.
+  * [Creating "Mocks&#8221; and "Stubs&#8221; in Swift][18] – Essentially a discovery I made about how to create fake objects and override those objects' methods. You'd do this to isolate and control the object's behavior in order to enable or ease the testing process.
 
 <a name="share" class="jump-target"></a>
 

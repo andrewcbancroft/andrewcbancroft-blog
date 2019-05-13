@@ -17,7 +17,7 @@ tags:
   - UIView Tag Property
 
 ---
-The challenge when dealing with the presentation and handling of more than one `UIActionSheet` in a single View Controller is made clear by asking, &#8220;How am I going to tell which action sheet I'm dealing with so that I can handle the user's choice appropriately?&#8221;
+The challenge when dealing with the presentation and handling of more than one `UIActionSheet` in a single View Controller is made clear by asking, "How am I going to tell which action sheet I'm dealing with so that I can handle the user's choice appropriately?&#8221;
 
 Presumably, the user's interaction with one of the action sheets will be different than the other(s), so you'll need to think through how to distinguish between them, in order to respond to that interaction appropriately.
 
@@ -50,7 +50,7 @@ Simple enough, right? Here's my only problem with the above implementation if I'
 Here, instead of assigning in-line, I'm going to refactor and employ a Swift enumeration to help _name_ the tag. Underneath, there will still be integers involved, but my goal in using an enumeration is two-fold:
 
   * Identify the action sheet in code with a name. This should help my code be more coherent and readable.
-  * Encapsulate a single source of truth for the tag values and avoid &#8220;magic integers&#8221; in my code. While the integers assigned to the tags can be arbitrary, if they ever _do_ need to be changed, I change the enumeration, rather than changing each place where the tag is set or checked to perform branching logic.
+  * Encapsulate a single source of truth for the tag values and avoid "magic integers&#8221; in my code. While the integers assigned to the tags can be arbitrary, if they ever _do_ need to be changed, I change the enumeration, rather than changing each place where the tag is set or checked to perform branching logic.
 
 The arguments are fundamentally the same as those I made when I [wrote about replacing magic strings in Swift][3] and implement precisely the same strategy.
 
@@ -74,7 +74,7 @@ enum ActionSheetTag: Int {
         // set other properties, such as delegate, as well as buttons...
 ```
 
-It's worth noting that rather than using an enumeration, I could have chosen to define a couple of constants at a scope visible to both my setting of the tag, and the conditional logic I'd use in my UIActionSheetDelegate callback. The end goal and result would be the same: Clarity, achieved by assigning _names_ to the tags, and the avoidance of &#8220;magic integers&#8221; appearing in my code.
+It's worth noting that rather than using an enumeration, I could have chosen to define a couple of constants at a scope visible to both my setting of the tag, and the conditional logic I'd use in my UIActionSheetDelegate callback. The end goal and result would be the same: Clarity, achieved by assigning _names_ to the tags, and the avoidance of "magic integers&#8221; appearing in my code.
 
 ### Wrapping Up – UIActionSheetDelegate Implementation
 
@@ -97,7 +97,7 @@ func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: I
 
 ### Summary
 
-I've done it before, but by using Swift enumerations again in a new context, I was able to provide better clarity to the intention of my code when I had multiple UIActionSheet instances that I needed to handle in a single view controller. In addition to this clarity, I also encapsulated a single source of truth for identifying my UIActionSheet instances, rather than placing &#8220;magic integers&#8221; throughout my code. Have a look at (and play with) [the example I've put up on GitHub][1] for further study and improvement!
+I've done it before, but by using Swift enumerations again in a new context, I was able to provide better clarity to the intention of my code when I had multiple UIActionSheet instances that I needed to handle in a single view controller. In addition to this clarity, I also encapsulated a single source of truth for identifying my UIActionSheet instances, rather than placing "magic integers&#8221; throughout my code. Have a look at (and play with) [the example I've put up on GitHub][1] for further study and improvement!
 
 <div class="related-posts">
   You might also enjoy</p> 

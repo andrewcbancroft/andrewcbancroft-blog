@@ -16,11 +16,11 @@ tags:
   - Unit Testing
 
 ---
-Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a `private` function, however, I often scratch my head and ask, &#8220;How am I supposed to test this??&#8221;.
+Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a `private` function, however, I often scratch my head and ask, "How am I supposed to test this??&#8221;.
 
-Most experienced testers will tell you, &#8220;Don't test private implementation – only public API&#8221;.
+Most experienced testers will tell you, "Don't test private implementation – only public API&#8221;.
 
-&#8220;Okay&#8230; But how, does that private function get tested?&#8221;, I always asked.
+"Okay&#8230; But how, does that private function get tested?&#8221;, I always asked.
 
 In this article, I intend to share a testability tip catered to the Swift developer community that helps alleviate this issue with testing private functions.
 
@@ -33,7 +33,7 @@ In this article, I intend to share a testability tip catered to the Swift develo
 
 #### Developers as clients of APIs
 
-As developers, we are &#8220;clients&#8221; of APIs on a daily basis. We interact with other developers' frameworks and libraries through the visible, observable, Application Programming Interface that they've exposed to us. It's the way they've designed for us to interact with their code.
+As developers, we are "clients&#8221; of APIs on a daily basis. We interact with other developers' frameworks and libraries through the visible, observable, Application Programming Interface that they've exposed to us. It's the way they've designed for us to interact with their code.
 
 Notice three words that I chose in that introductory paragraph:
 
@@ -41,17 +41,17 @@ Notice three words that I chose in that introductory paragraph:
   * Observable
   * Exposed
 
-If we are going to use another developer's library, _all we have_ as developers is the public interface that they've made visible to us&#8230; It's the only observable thing we can look at and go, &#8220;Oh! Okay, to do this, I call _that_ function&#8221;. The only thing exposed are the functions and properties that the developer intends for us to see.
+If we are going to use another developer's library, _all we have_ as developers is the public interface that they've made visible to us&#8230; It's the only observable thing we can look at and go, "Oh! Okay, to do this, I call _that_ function&#8221;. The only thing exposed are the functions and properties that the developer intends for us to see.
 
 <a name="tests-as-clients-of-apis" class="jump-target"></a>
 
 #### Tests as clients of APIs
 
-Have you ever viewed your unit test suite as a &#8220;client&#8221; of your code? It is!
+Have you ever viewed your unit test suite as a "client&#8221; of your code? It is!
 
 And just like a developer, the unit tests in your test target interacts with _your_ app's API through the same visible, observable, interface that you've exposed to them.
 
-If you start to personify your test target and think of it in terms of &#8220;just another client of your code&#8221;, you begin to see that it really doesn't have any more visibility of your code than another developer would if he or she were consuming it.
+If you start to personify your test target and think of it in terms of "just another client of your code&#8221;, you begin to see that it really doesn't have any more visibility of your code than another developer would if he or she were consuming it.
 
 All of this boils down to say, if it's observable, it's testable. Which means, the easiest and most natural code to test is `public` code.
 
@@ -67,13 +67,13 @@ Additionally, there are [certain Swift compiler optimizations][1] (which lead to
 
 Whenever possible, I prefer `public` over the other access modifiers to help enable testing for my apps.
 
-So when is &#8220;whenever possible&#8221;?
+So when is "whenever possible&#8221;?
 
 <a name="reason-for-existence" class="jump-target"></a>
 
 #### Public when part of a Type's reason for existence
 
-Obviously, properties and functions that are part of a Type's core purpose can be marked `public`. My practice is to decide, &#8220;Is this function why this Type exists?&#8221;. If so, I mark it as `public`.
+Obviously, properties and functions that are part of a Type's core purpose can be marked `public`. My practice is to decide, "Is this function why this Type exists?&#8221;. If so, I mark it as `public`.
 
 Note also that the Type itself needs to be marked public if it's going to be visible to your unit tests.
 
@@ -97,7 +97,7 @@ public class MyClass {
 
 #### Transition many private components to new Type
 
-Having _many_ `private` properties and functions can be an indication that there needs to be a new Type created to encapsulate those components. I've heard developers talk about this situation as one that &#8220;screams, &#8216;New Type!'&#8221;.
+Having _many_ `private` properties and functions can be an indication that there needs to be a new Type created to encapsulate those components. I've heard developers talk about this situation as one that "screams, &#8216;New Type!'&#8221;.
 
 If we extract out sets of related `private` properties and functions into a new Type, those pieces of code _are the reason that Type exists_, and thus should be marked `public`. Testing, then, becomes a matter of writing unit tests for the new Type and its public API!
 
@@ -109,7 +109,7 @@ If I'm really uncomfortable marking functions `public` in the Type where they cu
 
 ### Testing non-public code
 
-As I mentioned in the beginning, it's not good to just haphazardly go through your code and &#8220;`public` all the things!!&#8221;. After _appropriately_ marking fundamental functions `public` and transitioning sets of `private` functions to new Types where they can happily live as part of _that_ Type's public API, there will likely be a few `private` or `internal` things left over.
+As I mentioned in the beginning, it's not good to just haphazardly go through your code and "`public` all the things!!&#8221;. After _appropriately_ marking fundamental functions `public` and transitioning sets of `private` functions to new Types where they can happily live as part of _that_ Type's public API, there will likely be a few `private` or `internal` things left over.
 
 How do these get tested?
 
@@ -117,7 +117,7 @@ Well, ideally, these are small, simple, helper functions that are only useful wh
 
 If these functions produce observable results in the places where they're called, you end up testing these non-public components _implicitly_, that is, by testing the things that _are_ `public`.
 
-During the course of testing some `public` function which calls another non-public function, that non-public function's logic will be executed. If the outcome of that function's execution affects the Type's state, or the output of its `public` parent function, those are the things that you'd be able to write unit tests for, because those are the &#8220;observation points&#8221;, so to speak.
+During the course of testing some `public` function which calls another non-public function, that non-public function's logic will be executed. If the outcome of that function's execution affects the Type's state, or the output of its `public` parent function, those are the things that you'd be able to write unit tests for, because those are the "observation points&#8221;, so to speak.
 
 ### Wrapping up
 

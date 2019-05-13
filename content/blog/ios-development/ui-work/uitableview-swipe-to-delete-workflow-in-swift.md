@@ -17,24 +17,24 @@ tags:
 ---
 Data management applications, by which I mean an app where you're allowing users to add, edit, and delete bits of data as part of your app's core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.
 
-Making _changes_ to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps. How do we allow users to add or remove &#8220;records&#8221; to the system? Furthermore, how do we signal that those changes were effective and refresh the view of the data in the UI?
+Making _changes_ to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps. How do we allow users to add or remove "records&#8221; to the system? Furthermore, how do we signal that those changes were effective and refresh the view of the data in the UI?
 
-The primary concern I want to focus in on in this article is the ever-common paradigm of &#8220;swipe to delete&#8221; when using a table view. What could the workflow of deleting a row from the table view (and its data source) look like? How could it be implemented in Swift? Let's explore&#8230;
+The primary concern I want to focus in on in this article is the ever-common paradigm of "swipe to delete&#8221; when using a table view. What could the workflow of deleting a row from the table view (and its data source) look like? How could it be implemented in Swift? Let's explore&#8230;
 
 
 <a name="workflow" class="jump-target"></a>
 
 ### Workflow
 
-The workflow of &#8220;swipe to delete&#8221; that I typically use in my own applications is this:
+The workflow of "swipe to delete&#8221; that I typically use in my own applications is this:
 
   * **Swipe** a table view row and have the Delete button appear.
-  * Press the delete button, which triggers a **confirmation**: &#8220;Do you really want to delete this?&#8221;
+  * Press the delete button, which triggers a **confirmation**: "Do you really want to delete this?&#8221;
   * Based on the user's response to the confirmation, **delete the object** from the data source and remove it from the table view, **or cancel**.
 
 The confirmation step is atypical for iOS it seems. Swiping to delete an e-mail or a reminder or just about anything else in Apple's own apps simply deletes the item right away.
 
-There may be a good reason for this, but I like to give folks an out if they didn't mean to do it. It's fair enough to say, &#8220;Well, they went to the effort of swiping the row _and_ pressing the button&#8230; surely they mean to do it!&#8221;. I still feel more comfortable if I get the opportunity to cancel something like a delete operation. Feel free to disagree there – for this article, I'll assume you want to include that into your delete workflow, and will demonstrate a simple way to implement all three steps of the strategy.
+There may be a good reason for this, but I like to give folks an out if they didn't mean to do it. It's fair enough to say, "Well, they went to the effort of swiping the row _and_ pressing the button&#8230; surely they mean to do it!&#8221;. I still feel more comfortable if I get the opportunity to cancel something like a delete operation. Feel free to disagree there – for this article, I'll assume you want to include that into your delete workflow, and will demonstrate a simple way to implement all three steps of the strategy.
 
 <a name="implementation" class="jump-target"></a>
 

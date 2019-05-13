@@ -15,11 +15,11 @@ tags:
   - Swift
 
 ---
-If you're mostly in the business of coding up closures to pass off to other functions as [callbacks][1], you may not have run into the concept of an &#8220;escaping closure&#8221; yet.
+If you're mostly in the business of coding up closures to pass off to other functions as [callbacks][1], you may not have run into the concept of an "escaping closure&#8221; yet.
 
-When you step out of the role of consuming other peoples' APIs in to the realm of creating your own (and [you do this all the time][2]!), _this_ is where you'll likely run into the concept of an &#8220;escaping closure&#8221; in certain scenarios.
+When you step out of the role of consuming other peoples' APIs in to the realm of creating your own (and [you do this all the time][2]!), _this_ is where you'll likely run into the concept of an "escaping closure&#8221; in certain scenarios.
 
-I want to start off by defining the term. Then I'll throw out a couple of usage scenarios that cause us to need to think in terms of a closure &#8220;escaping&#8221;.
+I want to start off by defining the term. Then I'll throw out a couple of usage scenarios that cause us to need to think in terms of a closure "escaping&#8221;.
 
 <a name="definition" class="jump-target"></a>
 
@@ -42,13 +42,13 @@ Furthermore, it appears that it's possible to find yourself in a situation where
 
 Weird, huh? How in the world can that happen? [I'll talk about that in a second][5].
 
-The point for now is this: whenever you're in a situation like this where the closure that you pass to a function gets executed _after_ the function you passed it _to_ returns, you've got an &#8220;escaping closure&#8221; on your hands.
+The point for now is this: whenever you're in a situation like this where the closure that you pass to a function gets executed _after_ the function you passed it _to_ returns, you've got an "escaping closure&#8221; on your hands.
 
 As an API _consumer_, you might not know or care about the escap-y-ness of the closure.
 
 As an API _designer_ (which again, [could be _yourself_][2], if you're the one writing the definition of `doSomething(completion:)`), you _have_ to care, because the Swift compiler will be angry with errors if you don't.
 
-So how do &#8220;escaping closure&#8221; scenarios happen?
+So how do "escaping closure&#8221; scenarios happen?
 
 <a name="usage" class="jump-target"></a>
 
@@ -76,7 +76,7 @@ As you can see, this follows the 1. Pass closure, 2. `doSomething` returns, 3. C
 
 So this is one scenario that could give rise to an escaping closure, IF you designed your system this way.
 
-**Whenever you take the closure, store it as state, and then execute it at a later time, the closure is &#8220;escaping&#8221; the function it got passed into.**
+**Whenever you take the closure, store it as state, and then execute it at a later time, the closure is "escaping&#8221; the function it got passed into.**
 
 <a name="async-callbacks" class="jump-target"></a>
 
@@ -102,11 +102,11 @@ func doSomething(completion: () -&gt; Void) {
 
 Here, you've got this nested asynchronous behavior going on, don't you? Asynchronous asynchrony is happening.
 
-**Whenever you _defer the execution of a closure_ to a time that's _after_ the &#8220;parent&#8221; function returns, you've got an &#8220;escaping closure&#8221; on your hands.**
+**Whenever you _defer the execution of a closure_ to a time that's _after_ the "parent&#8221; function returns, you've got an "escaping closure&#8221; on your hands.**
 
 <a name="declaring-escaping" class="jump-target"></a>
 
-# Declaring &#8220;this is an escaping closure!&#8221; in code
+# Declaring "this is an escaping closure!&#8221; in code
 
 Whenever you're implementing a function that introduces the possibility for a closure passed to it to escape, you'll know it.
 
@@ -121,7 +121,7 @@ It's pretty simple. In the declaration line of your function, you need to add th
 
 # Wrapping up
 
-My goal was to shed some light on the concept of &#8220;escaping closures&#8221;. With the definition and the example scenarios that give rise to escaping closures, my hope is that things are a little more clear for you. Sound off in the comments if you're still struggling, or if you've run across other scenarios requiring you to use the `@escaping` attribute!
+My goal was to shed some light on the concept of "escaping closures&#8221;. With the definition and the example scenarios that give rise to escaping closures, my hope is that things are a little more clear for you. Sound off in the comments if you're still struggling, or if you've run across other scenarios requiring you to use the `@escaping` attribute!
 
 <a name="share" class="jump-target"></a>
 

@@ -11,7 +11,7 @@ categories:
   - iOS / Mac
 
 ---
-&#8220;Ooooohh, now&#8230; how old is he??&#8221;  I love this question.  Really!  I do!  Every time I'm asked I get to talk about my kid, and that's always fun.  But today, things just got even _more_ fun.  Now, instead of just telling people his approximate age, I can **show** them his _precise_ age down to the second!
+"Ooooohh, now&#8230; how old is he??&#8221;  I love this question.  Really!  I do!  Every time I'm asked I get to talk about my kid, and that's always fun.  But today, things just got even _more_ fun.  Now, instead of just telling people his approximate age, I can **show** them his _precise_ age down to the second!
 
 As some of you know, I've been nerding out on learning to build iOS apps for iPhone and iPad.  Well, to celebrate Silas turning another month old, I built a little app that tells me how many years, months, weeks, days, hours, minutes, and seconds he is old.  I also built in functionality so that I can see how much longer it will be until his birthday (actually, I think I just thought of a bug with that part, but it won't show itself until 2014 so I have time&#8230;it shouldn't be nearly as bad as the Y2K panic – but date math is non-trivial, just so you know). _  
 _ 

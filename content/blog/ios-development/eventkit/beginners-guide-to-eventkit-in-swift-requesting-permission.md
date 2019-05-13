@@ -47,7 +47,7 @@ I've created such an app as an example – [jump over to GitHub][2] to grab the 
 
 ### Storyboard setup
 
-One of the first things you'll deal with in EventKit is the need to set yourself up with a UI to handle the different responses that the user can give you on that first application launch when you ask, &#8220;Can we access your calendar?&#8221;. We'll get to the particulars of [how request that permission][3] shortly. But first, let's dissect how we might arrange a Storyboard with some views that do the right thing for a given response to that permission prompt.
+One of the first things you'll deal with in EventKit is the need to set yourself up with a UI to handle the different responses that the user can give you on that first application launch when you ask, "Can we access your calendar?&#8221;. We'll get to the particulars of [how request that permission][3] shortly. But first, let's dissect how we might arrange a Storyboard with some views that do the right thing for a given response to that permission prompt.
 
 The user can either grant permission, or deny permission to interact with their calendar or reminders. We need to be prepared for either scenario.
 
@@ -59,7 +59,7 @@ I'm feeling optimistic today, so let's begin with the case where the user grants
 
 When the user grants us permission, we'd like to list out their calendars inside a table view. We'll worry with setting up the data source later in the tutorial. For now, we'll drag over a table view from the Utilities pane.
 
-To get the table view to fill the whole screen, I do a couple of things. Usually, when you drag one out from the Utilities pane, the table view will fill the whole scene in the Storyboard. From that layout, I drag the top edge down until it &#8220;snaps&#8221; to the line where I'd expect the bottom of the status bar to be positioned. Then I set the following constraints:
+To get the table view to fill the whole screen, I do a couple of things. Usually, when you drag one out from the Utilities pane, the table view will fill the whole scene in the Storyboard. From that layout, I drag the top edge down until it "snaps&#8221; to the line where I'd expect the bottom of the status bar to be positioned. Then I set the following constraints:
 
   * Center X
   * Center Y
@@ -92,7 +92,7 @@ As a final note, I've set the `hidden` property of the table view to `true` in t
 
 <a name="needs-permission-view-setup" class="jump-target"></a>
 
-#### &#8220;Need permission&#8221; view for when access is denied
+#### "Need permission&#8221; view for when access is denied
 
 There _will_ be times when a user denies access to the calendar before realizing that doing so essentially stops all the functionality provided by your app. If your entire app, or even just a portion of it requires access to function, you need a way to inform the user of this, and provide them a way to navigate to settings and grant access manually if possible.
 
@@ -100,7 +100,7 @@ The way I did this in the sample project was to organize a new View onto the Sto
 
 Once again, some constraints are involved in getting things to appear correctly at run-time. I won't go into the details of this here, since it's likely that every implementation of this will be slightly different.
 
-One thing I _will_ point out though, is that the View's alpha has been set to 0 so that I can perform a nice [fade in transition][6] if the user denies access. Here's a look at the Scene with the invisible &#8220;NeedPermissionsView&#8221; installed:
+One thing I _will_ point out though, is that the View's alpha has been set to 0 so that I can perform a nice [fade in transition][6] if the user denies access. Here's a look at the Scene with the invisible "NeedPermissionsView&#8221; installed:
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/05/NeedPermissionView-1024x625.png" alt="Need permission view" width="1024" height="625" class="alignnone size-large wp-image-11874" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/05/NeedPermissionView-1024x625.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/05/NeedPermissionView-300x183.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/05/NeedPermissionView.png 1465w" sizes="(max-width: 1024px) 100vw, 1024px" />][7]
 
@@ -108,7 +108,7 @@ One thing I _will_ point out though, is that the View's alpha has been set to 0 
 
 ### The role of the Event Store
 
-At the heart of EventKit is the `EKEventStore`. `EKEventStore` is the central &#8220;thing&#8221;. Creating an instance of `EKEventStore` provides developers with an API for performing various read/write operations on the user's calendars and reminder lists.
+At the heart of EventKit is the `EKEventStore`. `EKEventStore` is the central "thing&#8221;. Creating an instance of `EKEventStore` provides developers with an API for performing various read/write operations on the user's calendars and reminder lists.
 
 A View Controller that interacts with the calendar should hold a reference to an `EKEventStore` instance. It's easy to create one – here's an example:
 
@@ -173,7 +173,7 @@ Let's step through each of those functions one by one&#8230;
 
 Apple now requires us to have a key/value pair in Info.plist that provides a description to the user as to why our apps need access to their calendar.
 
-To set this value, open your Info.plist file, and add a new key for &#8220;Privacy – Calendars Usage Description&#8221;:  
+To set this value, open your Info.plist file, and add a new key for "Privacy – Calendars Usage Description&#8221;:  
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/05/info-plist-calendar-usage-description-1024x346.png" alt="Info.plist Calendar Usage Description" width="1024" height="346" class="alignnone size-large wp-image-13055" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/05/info-plist-calendar-usage-description-1024x346.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/05/info-plist-calendar-usage-description-300x101.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/05/info-plist-calendar-usage-description.png 1100w" sizes="(max-width: 1024px) 100vw, 1024px" />][8]
 
 The value that you provide for this plist key ends up being displayed in the alert that's displayed when you request access.
@@ -252,7 +252,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 ##### Access denied – Show needs permission view
 
-When access is _denied_, we need to unveil the &#8220;Needs Permission View&#8221; we created in our Storyboard Scene.
+When access is _denied_, we need to unveil the "Needs Permission View&#8221; we created in our Storyboard Scene.
 
 Recall that in that view, there's a button to direct the user to the Settings page for our app so that they can easily grant access to the calendar from there. That button is wired up to an IBAction. Here's an example implementation of that IBAction:
 

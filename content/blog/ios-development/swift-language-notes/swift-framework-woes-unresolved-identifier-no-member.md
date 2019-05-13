@@ -37,8 +37,8 @@ I scrunched my forehead, puzzled, and immediately it came to me.
 
 `public` `public` `public` all the things! Or at least, the things that others need to use from the framework. :]
 
-_Of course_ a framework's usable API needs to be public, but I write far more code that doesn't require thought of access control modifiers than code that _does_, so there's always that initial head-scratching that happens when you're to the point of testing and go, &#8220;WHAT?? Why is this not working??!&#8221;
+_Of course_ a framework's usable API needs to be public, but I write far more code that doesn't require thought of access control modifiers than code that _does_, so there's always that initial head-scratching that happens when you're to the point of testing and go, "WHAT?? Why is this not working??!&#8221;
 
 #### Key Takeaway
 
-Whenever you're developing code (such as a framework) that's intended to be used from the perspective of another Swift module, you need to include `public` before Types and functions that are intended to be &#8220;seen&#8221; and called from that other module. Otherwise, you'll get those same fun compiler errors and join me in saying to yourself, &#8220;Doh! Yep&#8230; public&#8230; _again_.&#8221;
+Whenever you're developing code (such as a framework) that's intended to be used from the perspective of another Swift module, you need to include `public` before Types and functions that are intended to be "seen&#8221; and called from that other module. Otherwise, you'll get those same fun compiler errors and join me in saying to yourself, "Doh! Yep&#8230; public&#8230; _again_.&#8221;

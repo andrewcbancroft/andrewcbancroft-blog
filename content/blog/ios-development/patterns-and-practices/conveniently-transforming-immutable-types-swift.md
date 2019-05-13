@@ -15,9 +15,9 @@ tags:
   - Swift
 
 ---
-A few weeks ago I wrote about [Immutable Types and Changing State in Swift][1], where I hoped to convey an &#8220;aha!-moment&#8221; that happened for me.
+A few weeks ago I wrote about [Immutable Types and Changing State in Swift][1], where I hoped to convey an "aha!-moment&#8221; that happened for me.
 
-Since then, I've learned a bit more. For example, the technique I presented for transforming instances of a Type immutably actually come for free when you use a value Type, such as a Struct! Check out [@NatashaTheRobot's][2] writeup on the subject, titled [&#8220;Mutating Functions in Swift Structs&#8221;][3], for more information.
+Since then, I've learned a bit more. For example, the technique I presented for transforming instances of a Type immutably actually come for free when you use a value Type, such as a Struct! Check out [@NatashaTheRobot's][2] writeup on the subject, titled ["Mutating Functions in Swift Structs&#8221;][3], for more information.
 
 But let's say, for whatever reason, you'd like to use a _reference_ Type, such as a Class. In that case, the technique I presented in the aforementioned blog entry works out quite nicely. _Until&#8230;._
 

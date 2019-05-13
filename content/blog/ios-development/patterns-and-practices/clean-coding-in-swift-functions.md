@@ -19,9 +19,9 @@ tags:
   - Swift
 
 ---
-I've been thinking a lot about how the principles of clean coding (Bob Martin's &#8220;<a title="Amazon - Clean Code" href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882" target="_blank">Clean Code</a>&#8220;) apply in Swift. How do I express clean code in this language? Conversely, how do I _avoid_ writing _cryptic_ code in Swift? What language features help me write clear and self-explanatory code and what language features present the potential for tempting me to write obscure code in Swift?
+I've been thinking a lot about how the principles of clean coding (Bob Martin's "<a title="Amazon - Clean Code" href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882" target="_blank">Clean Code</a>") apply in Swift. How do I express clean code in this language? Conversely, how do I _avoid_ writing _cryptic_ code in Swift? What language features help me write clear and self-explanatory code and what language features present the potential for tempting me to write obscure code in Swift?
 
-I am beginning a commentary series that I hope will encourage clean coding practice in myself and in the Swift developer community. Dialog on these topics is welcomed – I have not &#8220;arrived&#8221;, so please – help me help the Swift community for the better!
+I am beginning a commentary series that I hope will encourage clean coding practice in myself and in the Swift developer community. Dialog on these topics is welcomed – I have not "arrived&#8221;, so please – help me help the Swift community for the better!
 
 The first in the series is on writing clean functions in Swift. As it turns out, Swift provides some really great mechanisms for defining self-explanatory, clear-purposed functions. We'll start by analyzing the features around naming functions and their parameters, and will conclude on thinking through function decomposition.
 
@@ -29,7 +29,7 @@ The first in the series is on writing clean functions in Swift. As it turns out,
 
 Something that I really enjoyed about Objective-C was that while method names were often long and verbose, they were extremely descriptive. My code often read like a narrative, and I enjoyed that. Some may have hated it, but I found it extremely helpful in facilitating my recollection of a method's intended purpose and the expectations around its argument requirements.
 
-I do my best to think hard about the names that I give my functions, ascribing to them a name that is specific, targeted, and focused on the single &#8220;thing&#8221; that each one does. Nothing in Swift mandates that we leave the verbosity of Objective-C naming conventions behind. In fact, the exact opposite is true!  One example is that swift intentionally provides us with the ability to add external parameter names _so that_ we can be as descriptive as we need to be about the names of our functions.
+I do my best to think hard about the names that I give my functions, ascribing to them a name that is specific, targeted, and focused on the single "thing&#8221; that each one does. Nothing in Swift mandates that we leave the verbosity of Objective-C naming conventions behind. In fact, the exact opposite is true!  One example is that swift intentionally provides us with the ability to add external parameter names _so that_ we can be as descriptive as we need to be about the names of our functions.
 
 ##### Parameter Names
 
@@ -39,17 +39,17 @@ Apple recommends the following:
 
 > <span style="color: #414141;">Consider using external parameter names whenever the purpose of a function’s arguments would be unclear to someone reading your code for the first time.</span>
 
-I would only add that sometimes, that _someone_ &#8220;reading your code for the first time&#8221; is _you_. Not technically, of course, but think about this: Write some code, leave it, and come back to it some time later. Will it make sense? Will you immediately go, &#8220;Ah, I know what I meant there&#8221;, or will you do like I've often done and say, &#8220;_WHAT_ in the _WORLD_ was I _THINKING_??!?&#8221;.
+I would only add that sometimes, that _someone_ "reading your code for the first time&#8221; is _you_. Not technically, of course, but think about this: Write some code, leave it, and come back to it some time later. Will it make sense? Will you immediately go, "Ah, I know what I meant there&#8221;, or will you do like I've often done and say, "_WHAT_ in the _WORLD_ was I _THINKING_??!?&#8221;.
 
 Spending a few seconds on typing a few more words to save brain power and potentially _more_ seconds/minutes some time later is a worthy investment. And if you work on a team, your teammates will appreciate the extra care you put in to providing as many hints as possible through inventing good names. Good naming includes parameter names. Why _not_ take advantage of the fact that Swift provides you this opportunity to write self-documenting code?
 
 ##### Function Decomposition
 
-> In order to make sure our functions are doing &#8220;one thing&#8221;, we need to make sure that the statements within our function are all at the same level of abstraction. -Bob Martin, Clean Code pg. 36
+> In order to make sure our functions are doing "one thing&#8221;, we need to make sure that the statements within our function are all at the same level of abstraction. -Bob Martin, Clean Code pg. 36
 
 This is just general advice without respect to a specific language. A couple of things to think about:
 
-  1.  Watch out for key words like &#8220;and&#8221; / &#8220;or&#8221; in your function names. These red-flag words often indicate that your function is doing more than one thing and can be further decomposed. Consider:
+  1.  Watch out for key words like "and&#8221; / "or&#8221; in your function names. These red-flag words often indicate that your function is doing more than one thing and can be further decomposed. Consider:
 
 ```swift
 func washAndDryCar() {

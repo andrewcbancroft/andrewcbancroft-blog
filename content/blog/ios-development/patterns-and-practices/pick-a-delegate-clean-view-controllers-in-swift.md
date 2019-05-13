@@ -18,11 +18,11 @@ tags:
   - View Controllers
 
 ---
-The delegation pattern is ubiquitous in iOS development – the pattern is&nbsp;a &#8220;<a title="Cocoa Core Competencies" href="https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/Delegation.html" target="_blank">core competency</a>&#8221; for developing in Cocoa, and if you program with the iOS SDK for any length of time and you'll end up writing some code that&nbsp;resembles&nbsp;`someInstance.delegate = someDelegate`.
+The delegation pattern is ubiquitous in iOS development – the pattern is&nbsp;a "<a title="Cocoa Core Competencies" href="https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/Delegation.html" target="_blank">core competency</a>&#8221; for developing in Cocoa, and if you program with the iOS SDK for any length of time and you'll end up writing some code that&nbsp;resembles&nbsp;`someInstance.delegate = someDelegate`.
 
 One of the toughest things that I've experienced is choosing what `someDelegate`&nbsp;is. &nbsp;All too often, a&nbsp;View Controller ends up being assigned the responsibility of&nbsp;being the delegate for _everything_ in its hierarchy. &nbsp;My question is: &nbsp;Is there a cleaner way?
 
-Let's pick up on the example I proposed in my [recent post about sending e-mails in-app][1]. &nbsp;For &#8220;quick and dirty&#8221; pragmatism, I just crammed everything into the View Controller with the promise of coming back and (hopefully) showing a cleaner way. &nbsp;<a title="Send Email In-App – Using MFMailComposeViewController with Swift" href="http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample" target="_blank">Here is a quick link to&nbsp;example posed before</a>&nbsp;if you'd like to review it before proceeding.
+Let's pick up on the example I proposed in my [recent post about sending e-mails in-app][1]. &nbsp;For "quick and dirty&#8221; pragmatism, I just crammed everything into the View Controller with the promise of coming back and (hopefully) showing a cleaner way. &nbsp;<a title="Send Email In-App – Using MFMailComposeViewController with Swift" href="http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample" target="_blank">Here is a quick link to&nbsp;example posed before</a>&nbsp;if you'd like to review it before proceeding.
 
 ## _What if&#8230;_
 
@@ -32,7 +32,7 @@ What if we could make some adjustments so that the View Controller was trimmed d
 
 I've created a <a title="Swift Email Composer - GitHub" href="https://github.com/andrewcbancroft/SwiftEmailComposer" target="_blank">fully-working example on GitHub</a> if you'd like to download it and play.
 
-So the question at hand: &nbsp;Is the class labeled &#8220;Clean Example&#8221;&nbsp;_preferable (_ie_, better)_? &nbsp;First, let's explore how I accomplished the &#8220;clean&#8221; View Controller. &nbsp;Then I'll tip my hand on&nbsp;and share what I like about this approach&#8230;
+So the question at hand: &nbsp;Is the class labeled "Clean Example&#8221;&nbsp;_preferable (_ie_, better)_? &nbsp;First, let's explore how I accomplished the "clean&#8221; View Controller. &nbsp;Then I'll tip my hand on&nbsp;and share what I like about this approach&#8230;
 
 ## EmailComposer
 
@@ -82,7 +82,7 @@ All in all, this is the cleanest, simplest, most balanced solution (that&nbsp;I 
 
 The goal was to&nbsp;make sure the appropriate responsibilities are assigned to the right classes. &nbsp;Presentation logic is all in the View Controller. &nbsp;Configuration and delegate callback implementation is done in `EmailComposer`.
 
-I'm thinking through applying this same idea to other more complicated examples (UITableViewDataSource and UITableViewDelegate come to mind), and I think it would do us a&nbsp;_lot_ of good to strategize on how to avoid making the View Controller the &#8220;catch-all&#8221; delegate / data source class for everything that's currently on the screen_._
+I'm thinking through applying this same idea to other more complicated examples (UITableViewDataSource and UITableViewDelegate come to mind), and I think it would do us a&nbsp;_lot_ of good to strategize on how to avoid making the View Controller the "catch-all&#8221; delegate / data source class for everything that's currently on the screen_._
 
 Hopefully these thoughts spark some ideas in the Swift community. &nbsp;This post has already been revised slightly based on feedback that I've received from folks on Twitter. &nbsp;If you have additional ideas in regards to choosing the right delegate, holler my way! &nbsp;I'd love to hear from you.
 

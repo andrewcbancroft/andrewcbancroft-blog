@@ -133,7 +133,7 @@ git push privateorigin --tags # pushes up any tags
 
 # 9 – Create app on the cloud host
 
-Now you need to create a new app in your hosting provider of choice. I typically go with [Azure][3], because I'm most familiar with it. I also like that they offer a completely free option, though if you want to really run this stuff for a larger-scale &#8220;production&#8221; or &#8220;enterprise&#8221; app, it's going to cost no matter where you choose to host it.
+Now you need to create a new app in your hosting provider of choice. I typically go with [Azure][3], because I'm most familiar with it. I also like that they offer a completely free option, though if you want to really run this stuff for a larger-scale "production&#8221; or "enterprise&#8221; app, it's going to cost no matter where you choose to host it.
 
 The cloud host may want to know what flavor of app you want to create. In the case of parse-dashboard, it's a Node.JS app.
 
@@ -157,13 +157,13 @@ Note that instead of doing the git deployment option, you could always FTP your 
 
 # 11 – Enable SSL (or run as insecure app)
 
-If you access your app after you've deployed it to your chosen cloud host, you'll likely run into an error page stating that &#8220;Parse Dashboard can only be remotely accessed via HTTPS&#8221;.
+If you access your app after you've deployed it to your chosen cloud host, you'll likely run into an error page stating that "Parse Dashboard can only be remotely accessed via HTTPS&#8221;.
 
-Configuring SSL is beyond the scope of this walk-through, but that would be the next step if you chose to do it for your production app. Note that on Azure, your App Service Plan needs to be at &#8220;Basic&#8221; or above. Heroku charges a monthly fee to set up an SSL endpoint as well.
+Configuring SSL is beyond the scope of this walk-through, but that would be the next step if you chose to do it for your production app. Note that on Azure, your App Service Plan needs to be at "Basic&#8221; or above. Heroku charges a monthly fee to set up an SSL endpoint as well.
 
 If you choose not to afford it or if you just want to test things out in the deployed environment to see if it's working or not, you can set up an environment variable in your app's settings on the cloud host.
 
-In Azure, you need to choose your app, then go to &#8220;Application Settings&#8221; in the Azure Portal. Then add a new key-value pair under App settings: PARSE\_DASHBOARD\_ALLOW\_INSECURE\_HTTP is the key, and 1 (the number 1) is the value:
+In Azure, you need to choose your app, then go to "Application Settings&#8221; in the Azure Portal. Then add a new key-value pair under App settings: PARSE\_DASHBOARD\_ALLOW\_INSECURE\_HTTP is the key, and 1 (the number 1) is the value:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureAppSettings1-1024x639.png" alt="Azure App Settings for PARSE_DASHBOARD_ALLOW_INSECURE_HTTP" width="1024" height="639" class="alignnone size-large wp-image-12803" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureAppSettings1-1024x639.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureAppSettings1-300x187.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureAppSettings1.png 1488w" sizes="(max-width: 1024px) 100vw, 1024px" />][6]
 

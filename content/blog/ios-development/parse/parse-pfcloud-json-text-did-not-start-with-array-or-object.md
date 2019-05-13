@@ -21,13 +21,13 @@ Banging my head against the desk this evening working on a Parse migration, I fi
 
 The request to the server succeeded, but the response was malformed somehow:
 
-> Error Domain=NSCocoaErrorDomain Code=3840 &#8220;JSON text did not start with array or object and option to allow fragments not set.&#8221; UserInfo={NSDebugDescription=JSON text did not start with array or object and option to allow fragments not set.} 
+> Error Domain=NSCocoaErrorDomain Code=3840 "JSON text did not start with array or object and option to allow fragments not set.&#8221; UserInfo={NSDebugDescription=JSON text did not start with array or object and option to allow fragments not set.} 
 
-&#8220;What?? I _know_ the response is supposed to be JSON – I can even test it out and it works great in [Postman][1].&#8221;
+"What?? I _know_ the response is supposed to be JSON – I can even test it out and it works great in [Postman][1].&#8221;
 
 Weeeelll, it turns out that if you don't get the URL to your self-hosted Parse Server correct, you're going to get a response that's not JSON. Doh!
 
-I had left off the &#8220;/parse&#8221; portion of the URL to my self-hosted parse server:
+I had left off the "/parse&#8221; portion of the URL to my self-hosted parse server:
 
 ```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -&gt; Bool {
@@ -43,7 +43,7 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 }
 ```
 
-So, the bottom-line take-away? Make sure you get the _full_ URL to your self-hosted Parse Server set to the `server` property of your `ParseClientConfiguration` instance. That endpoint could vary based on how you deployed the server to your cloud host of choice. For me, it was my goofy mistake of leaving off &#8220;/parse&#8221;.
+So, the bottom-line take-away? Make sure you get the _full_ URL to your self-hosted Parse Server set to the `server` property of your `ParseClientConfiguration` instance. That endpoint could vary based on how you deployed the server to your cloud host of choice. For me, it was my goofy mistake of leaving off "/parse&#8221;.
 
 Go forth and may your forehead be ever-more round than mine.
 

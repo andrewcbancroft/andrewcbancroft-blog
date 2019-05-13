@@ -33,7 +33,7 @@ A follow-up post has been published to help you [keep the table view in sync][2]
 
 `NSFetchedResultsController` will help us accomplish two things:  
 1) It will fetch data from the Core Data data store  
-2) It will use some of the data we fetch to populate various pieces of the UI (table view section headers, cell &#8220;title&#8221; and &#8220;subtitle&#8221; text. Here's what we're going for:
+2) It will use some of the data we fetch to populate various pieces of the UI (table view section headers, cell "title&#8221; and "subtitle&#8221; text. Here's what we're going for:
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_TableView_FinalDisplay.png" alt="Zootastic TableView FinalDisplay" width="479" height="871" class="alignnone size-full wp-image-11450" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_TableView_FinalDisplay.png 479w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_TableView_FinalDisplay-165x300.png 165w" sizes="(max-width: 479px) 100vw, 479px" />][3]
 
@@ -41,7 +41,7 @@ A follow-up post has been published to help you [keep the table view in sync][2]
 
 ### Setup and resources
 
-I'm continuing my &#8220;Zootastic&#8221; example that I used to write about [using Swift to seed a Core Data database][1]. In fact, I've simply branched the project on GibHub and added the things we're exploring in this post.
+I'm continuing my "Zootastic&#8221; example that I used to write about [using Swift to seed a Core Data database][1]. In fact, I've simply branched the project on GibHub and added the things we're exploring in this post.
 
 <div class="resources">
   <div class="resources-header">
@@ -67,7 +67,7 @@ Zootastic is a single view application. The Storyboard contains one view control
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableView-1024x773.png" alt="Zootastic Storyboard TableView" width="1024" height="773" class="alignnone size-large wp-image-11445" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableView-1024x773.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableView-300x226.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableView.png 1379w" sizes="(max-width: 1024px) 100vw, 1024px" />][5]
 
-The table view is using one prototype cell with an **Identifier** of **&#8220;Cell&#8221;** (for simplicity). The **Style** of the prototype cell is set to **Subtitle**.
+The table view is using one prototype cell with an **Identifier** of **"Cell&#8221;** (for simplicity). The **Style** of the prototype cell is set to **Subtitle**.
 
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableViewCell-1024x770.png" alt="Zootastic Storyboard TableViewCell" width="1024" height="770" class="alignnone size-large wp-image-11446" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableViewCell-1024x770.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableViewCell-300x225.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/Zootastic_Storyboard_TableViewCell.png 1381w" sizes="(max-width: 1024px) 100vw, 1024px" />][6]
 
@@ -105,7 +105,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 }
 ```
 
-You may be asking, &#8220;Where will you set this NSManagedObjectContext reference?&#8221;. I'm employing a pattern that I've found successful in the past: I assign it when the finishes launching through the AppDelegate's `application:didFinishLaunchingWithOptions` method. [More on this, shortly][7]&#8230;
+You may be asking, "Where will you set this NSManagedObjectContext reference?&#8221;. I'm employing a pattern that I've found successful in the past: I assign it when the finishes launching through the AppDelegate's `application:didFinishLaunchingWithOptions` method. [More on this, shortly][7]&#8230;
 
 For now, know that we're counting on that [later step][7] to take place, since `context` is defined as an implicitly unwrapped optional.
 
@@ -234,7 +234,7 @@ Once the `UITableViewDataSource` methods are implemented, the implementation of 
 
 ### AppDelegate.swift
 
-There's one final thing we need to do in order to get things rolling. In the [&#8220;maintain NSManagedObjectContext instance reference&#8221;][11] section of this post, I mentioned the strategy for assigning the `NSManagedObjectContext` instance in the `MainViewController`. Here's how I do it:
+There's one final thing we need to do in order to get things rolling. In the ["maintain NSManagedObjectContext instance reference&#8221;][11] section of this post, I mentioned the strategy for assigning the `NSManagedObjectContext` instance in the `MainViewController`. Here's how I do it:
 
 ```swift
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -263,7 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-The portion new to &#8220;injecting&#8221; the `managedObjectContext` into `MainViewController` is highlighted. I simply grab a reference to the `rootViewController` (which in our example is the `MainViewController`) and cast it to the appropriate type. Then I set the `context` property to the `managedObjectContext` that's created in the `AppDelegate` via Xcode's auto-generated Core Data stack setup.
+The portion new to "injecting&#8221; the `managedObjectContext` into `MainViewController` is highlighted. I simply grab a reference to the `rootViewController` (which in our example is the `MainViewController`) and cast it to the appropriate type. Then I set the `context` property to the `managedObjectContext` that's created in the `AppDelegate` via Xcode's auto-generated Core Data stack setup.
 
 ### Wrapping up
 

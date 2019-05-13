@@ -51,9 +51,9 @@ Swift has brought me several great opportunities in terms of building business a
 
 Objective-C isn't going anywhere, but neither is Swift! Employers, while not yet able to legitimately request Swift devs with 5+ years of experience (though some will undoubtedly try), will inevitably desire Swift developers. The sooner you embrace Swift, the more experience you'll be able to report.
 
-But how amazing would it be to say to a future potential employer, &#8220;I've been writing Swift since June of 2014, but I've also been writing _about_ Swift at www.myBlog.com for nearly as long.&#8221;?
+But how amazing would it be to say to a future potential employer, "I've been writing Swift since June of 2014, but I've also been writing _about_ Swift at www.myBlog.com for nearly as long.&#8221;?
 
-In my experience, Swift has also brought me new friendships and an expanded network. I &#8220;know&#8221; more Swift developers than I do developers of all other languages combined. I follow more Swift bloggers than any other language's bloggers. I'd love to follow _your_ blog and engage with / share thoughts about what you're learning.
+In my experience, Swift has also brought me new friendships and an expanded network. I "know&#8221; more Swift developers than I do developers of all other languages combined. I follow more Swift bloggers than any other language's bloggers. I'd love to follow _your_ blog and engage with / share thoughts about what you're learning.
 
 Who knows what else awaits? The potential for great opportunities are ripe right now. Join in!
 
@@ -67,7 +67,7 @@ But don't forget to write, too!
 
 ### 7. Your written words will outlast you
 
-Not a shocker, obviously. This is the &#8220;leave a legacy&#8221; argument. One way to make a lasting impact is to write what you're thinking and learning about this language that you're intrigued by or maybe even passionate about.
+Not a shocker, obviously. This is the "leave a legacy&#8221; argument. One way to make a lasting impact is to write what you're thinking and learning about this language that you're intrigued by or maybe even passionate about.
 
 <a title="Scott Hanselman" href="http://www.hanselman.com" target="_blank">Scott Hanselman</a> is one of my favorite people in the developer / educator world. <a title="Scott Hanselman - Do They Deserve The Gift Of Your Keystrokes" href="http://www.hanselman.com/blog/DoTheyDeserveTheGiftOfYourKeystrokes.aspx" target="_blank">He's written about writing and impact, and he's said it way better than I can</a>. Essentially, his argument is that you've only got a finite number of keystrokes left in your life before you die. And <a title="KeysLeft" href="http://www.keysleft.com" target="_blank">he's right</a>. The point of the linked-to article is that if you desire your precious, remaining keystrokes to have the furthest reach and the highest potential impact, you should write&#8230; and not just write, but write on the web.
 

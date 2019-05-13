@@ -41,8 +41,8 @@ if let g = greetings, let s = salutations {
 ```
 
 **Output:**  
-[&#8220;Howdy!&#8221;, &#8220;Hello!&#8221;]  
-[&#8220;Hi!&#8221;, &#8220;Hey!&#8221;]
+["Howdy!&#8221;, "Hello!&#8221;]  
+["Hi!&#8221;, "Hey!&#8221;]
 
 ### Breaking it down
 
@@ -68,8 +68,8 @@ if let g = greetings, let s = salutations {
 
 Question: What do you think will be printed?
 
-1) [&#8220;Howdy!&#8221;, &#8220;Hello!&#8221;] and &#8220;nil&#8221;  
-2) Just [&#8220;Howdy!&#8221;, &#8220;Hello!&#8221;]  
+1) ["Howdy!&#8221;, "Hello!&#8221;] and "nil&#8221;  
+2) Just ["Howdy!&#8221;, "Hello!&#8221;]  
 3) Nothing will be printed
 
 If you chose door number **3**, you'd be correct.
@@ -80,7 +80,7 @@ The if-let block between the {}'s is only executed if **both** `greetings` and `
 
 Unwrapping multiple optionals with a single if-let statement is pretty easy: `if` followed by a series of `let [constantName] = [optionalName]` statements, separated by commas.
 
-The behavior is similar to using the `&&` operator in a normal `if` condition. It's like saying &#8220;if this optional is non-nil AND this optional is non-nil, then do this&#8221;
+The behavior is similar to using the `&&` operator in a normal `if` condition. It's like saying "if this optional is non-nil AND this optional is non-nil, then do this&#8221;
 
 If you expect to work with one of the optionals in the list even if the other is nil, you're going to need to split that up into multiple if-lets:
 

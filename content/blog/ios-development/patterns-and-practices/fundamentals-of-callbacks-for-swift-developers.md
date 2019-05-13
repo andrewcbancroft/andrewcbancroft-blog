@@ -26,27 +26,27 @@ My goal in this article is to provide answers to these questions so that you hav
 
 ### What are callbacks?
 
-Let's approach the definition from a &#8220;big picture&#8221; scenario:
+Let's approach the definition from a "big picture&#8221; scenario:
 
-When we're building software, we're either _using_ APIs, or _building_ APIs, are we not? We're either _using_ code that &#8220;hooks into&#8221; what other developers have designed and made available to us, or we're _creating_ code that other code will &#8220;hook into&#8221; and interact with, even if the &#8220;other code&#8221; is written by us in our own app.
+When we're building software, we're either _using_ APIs, or _building_ APIs, are we not? We're either _using_ code that "hooks into&#8221; what other developers have designed and made available to us, or we're _creating_ code that other code will "hook into&#8221; and interact with, even if the "other code&#8221; is written by us in our own app.
 
 <a name="design-api-callbacks" class="jump-target"></a>
 
 #### Learn by example: Designing an API for callbacks
 
-Since this is the case, let's put on the &#8220;API Designer&#8221; hat for a moment and suppose that we're working to create a hypothetical Type called an `ImageSketcher`. One of the functions of `ImageSketcher` is called `sketch()` (parameters omitted for the moment). It will allow developers to pass it an image resource, such as a JPEG or a PNG, as one of its arguments. The function will then proceed to generate an animated sketch of that PNG for the user to view.
+Since this is the case, let's put on the "API Designer&#8221; hat for a moment and suppose that we're working to create a hypothetical Type called an `ImageSketcher`. One of the functions of `ImageSketcher` is called `sketch()` (parameters omitted for the moment). It will allow developers to pass it an image resource, such as a JPEG or a PNG, as one of its arguments. The function will then proceed to generate an animated sketch of that PNG for the user to view.
 
 In order to do the work of generating the animated sketch, `sketch()` needs to do a lot of crunching. I have no idea what it'd take to do this in real life, honestly – let's just work on the premise that it'll take a few seconds to generate the animation so the end-user can watch it when it's finished.
 
 In situations like this, it'd be nice to design `ImageSketcher` where the start and end of the process are decoupled:
 
-Pass off the image. Let it do its thing to generate the animation. When it's finished, &#8220;hook back in&#8221; and respond to the knowledge that the animation generation is complete. At that point, we could ask the end-user, &#8220;Hey, your sketch is done! Want to watch it now?&#8221;
+Pass off the image. Let it do its thing to generate the animation. When it's finished, "hook back in&#8221; and respond to the knowledge that the animation generation is complete. At that point, we could ask the end-user, "Hey, your sketch is done! Want to watch it now?&#8221;
 
-This particular example centers on a strategy that uses &#8220;asynchronous programming&#8221; techniques. It's often done to boost app performance and/or responsiveness.
+This particular example centers on a strategy that uses "asynchronous programming&#8221; techniques. It's often done to boost app performance and/or responsiveness.
 
-During that middle part where we're &#8220;disconnected&#8221; from the `ImageSketcher's` `sketch()` function, control of the app wouldn't be tied up. Folks could continue to interact with the app.
+During that middle part where we're "disconnected&#8221; from the `ImageSketcher's` `sketch()` function, control of the app wouldn't be tied up. Folks could continue to interact with the app.
 
-From a developer's point of view, he/she can program against the API by calling the function, knowing that at [some unknown point in the future], it will finish, **and that he/she will have the opportunity at that time to &#8220;hook back in&#8221; and respond to that completion event**.
+From a developer's point of view, he/she can program against the API by calling the function, knowing that at [some unknown point in the future], it will finish, **and that he/she will have the opportunity at that time to "hook back in&#8221; and respond to that completion event**.
 
 That last bit is critical. Giving other developers the opportunity to re-insert themselves with custom application logic when the asynchronous task ends is very important as an API designer.
 
@@ -54,15 +54,15 @@ Exactly what you as an API designer communicate back to the caller of your API i
 
 Wouldn't it be nice to know if something went wrong, or if data (the completed animation, for example) came out of that `sketch()'s` work? That's exactly the kind of information that we'd expect an API designer would provide us with this completion event.
 
-So&#8230; just what are the options could we give callers of this method to &#8220;hook-in&#8221; and know that the work is done?
+So&#8230; just what are the options could we give callers of this method to "hook-in&#8221; and know that the work is done?
 
 <a name="hook-in-options" class="jump-target"></a>
 
-##### &#8220;Hook-in&#8221; options
+##### "Hook-in&#8221; options
 
 In scenarios like this, Swift developers have about 3 options to choose from:
 
-  * Use [NSNotificationCenter][1] to alert &#8220;subscribers&#8221; that the `sketch()` function has completed its job. I wrote about this option in [Fundamentals of NSNotificationCenter in Swift][1]</p> 
+  * Use [NSNotificationCenter][1] to alert "subscribers&#8221; that the `sketch()` function has completed its job. I wrote about this option in [Fundamentals of NSNotificationCenter in Swift][1]</p> 
   * Use the [delegate pattern][2] to create a contract between the `ImageSketcher` and the caller of the `sketch()` function. When `sketch()` has completed its task, the appropriate _delegate_ method will be called. I wrote about this works in [How Delegation Works – A Swift Developer’s Guide][2]
 
   * **Use a callback**
@@ -75,7 +75,7 @@ So callbacks are used as another way for one piece of code to communicate with a
 
 Here is a brief overview of the communication interaction using our hypothetical `ImageSketcher` as a working example:
 
-1) An API designer has created the `sketch(image:completion:)` function, and has chosen to accept a completion &#8220;callback&#8221; as the means of communicating the fact that the animation has been generated and is ready to show the end-user.
+1) An API designer has created the `sketch(image:completion:)` function, and has chosen to accept a completion "callback&#8221; as the means of communicating the fact that the animation has been generated and is ready to show the end-user.
 
 2) **Data**, such as the completed sketch animation instance will be delivered through the completion callback's parameter(s). The `completion` parameter of our `sketch()` function will have a signature that client developers must adhere to in order to facilitate the delivery of that data.
 
@@ -131,17 +131,17 @@ class MainViewController: UIViewController {
 
 You'll notice a couple of things&#8230;
 
-**First**, I've separated the two &#8220;worlds&#8221; that exist: &#8220;API Designer World&#8221; and &#8220;Client Developer World&#8221;. Hopefully seeing both in action can give you the most complete picture of what's going on with callbacks.
+**First**, I've separated the two "worlds&#8221; that exist: "API Designer World&#8221; and "Client Developer World&#8221;. Hopefully seeing both in action can give you the most complete picture of what's going on with callbacks.
 
-In &#8220;API Designer World&#8221;, we've got the `ImageSketcher` and its implementation.
+In "API Designer World&#8221;, we've got the `ImageSketcher` and its implementation.
 
-In &#8220;Client Developer World&#8221;, we've got someone _using_ an instance of `ImageSketcher`.
+In "Client Developer World&#8221;, we've got someone _using_ an instance of `ImageSketcher`.
 
-**Second**, notice the interaction. As an API designer, I was thinking, &#8220;Hey, when my sketching process is complete, I want to let the caller know that it's finished and hand them the completed `SketchAnimation` instance. To do that, I'll need them to pass me a function that I can hand it off to via a parameter&#8221;.
+**Second**, notice the interaction. As an API designer, I was thinking, "Hey, when my sketching process is complete, I want to let the caller know that it's finished and hand them the completed `SketchAnimation` instance. To do that, I'll need them to pass me a function that I can hand it off to via a parameter&#8221;.
 
-As a client developer, I'm thinking, &#8220;Okay, I'm going to call `sketch()`, but how am I going to know when it's done and how will I get the animation? Oh! I see – I need to give it a completion closure (a callback), and they'll hand me the completed `SketchAnimation` instance through my closure's parameter. Sweet!&#8221;
+As a client developer, I'm thinking, "Okay, I'm going to call `sketch()`, but how am I going to know when it's done and how will I get the animation? Oh! I see – I need to give it a completion closure (a callback), and they'll hand me the completed `SketchAnimation` instance through my closure's parameter. Sweet!&#8221;
 
-I'm hoping the &#8220;thinking out loud&#8221; here helps you piece it together.
+I'm hoping the "thinking out loud&#8221; here helps you piece it together.
 
 <a name="examples-ios-sdk" class="jump-target"></a>
 
@@ -175,13 +175,13 @@ So the `UIAlertAction` is actually the thing that takes the callback (the `handl
 
 In the case of the `UIAlertAction`, the `handler` will be the logic to handle the user's tapping on that specific alert button.
 
-In the case of the `present` call, Apple has given us the opportunity to &#8220;hook in&#8221; to the presentation event and know when it's complete, in case we need to perform additional logic at that moment.
+In the case of the `present` call, Apple has given us the opportunity to "hook in&#8221; to the presentation event and know when it's complete, in case we need to perform additional logic at that moment.
 
 <a name="urlsession" class="jump-target"></a>
 
 #### URLSession
 
-The world of HTTP is inherently asynchronous, so you'd expect to see some kind of pattern employed to deal with the &#8220;disconnectedness&#8221; of the start and finish of a process, such as making an HTTP request.
+The world of HTTP is inherently asynchronous, so you'd expect to see some kind of pattern employed to deal with the "disconnectedness&#8221; of the start and finish of a process, such as making an HTTP request.
 
 `URLSession` encapsulates certain HTTP actions, such as retrieving the contents of a URL, in instances called `URLSessionDataTask`. How does it communicate the fact that the HTTP request is complete, along with the data contained in the response? You guessed it: A callback.
 

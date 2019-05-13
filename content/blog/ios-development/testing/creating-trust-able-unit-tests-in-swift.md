@@ -33,7 +33,7 @@ How you organize the code within a single unit test can make all the difference 
 
 Having a consistent strategy for organizing the body of a test function will save you time and effort in trying to understand what's happening. Keeping things consistent across a team of developers will make everyone more productive as well.
 
-Two of the most common organizational structures for unit tests are the &#8220;Arrange-Act-Assert (AAA)&#8221; and the &#8220;Given-When-Then&#8221; structures:
+Two of the most common organizational structures for unit tests are the "Arrange-Act-Assert (AAA)&#8221; and the "Given-When-Then&#8221; structures:
 
 ```swift
 func testAppFeatureBehavior() {
@@ -49,7 +49,7 @@ func testAppFeatureBehavior() {
 }
 ```
 
-A similar pattern is the &#8220;Given-When-Then&#8221; structure:
+A similar pattern is the "Given-When-Then&#8221; structure:
 
 ```swift
 func testAppFeatureBehavior() {
@@ -83,7 +83,7 @@ Small (**<20ish** lines of code) tests are more-trusted than large tests.
 
 20 lines of code is sort of arbitrary, but can help alert you to when you might need to re-look at the test and apply DRY (Don't Repeat Yourself) principles. Large test bodies may be a sign that there's a possible opportunity to factor out common, repeated test code.
 
-Extracting out larger portions of code into smaller named functions may also help with the clarity of your unit test code, leading you to say with greater confidence, &#8220;I trust that this test is correct&#8221;.
+Extracting out larger portions of code into smaller named functions may also help with the clarity of your unit test code, leading you to say with greater confidence, "I trust that this test is correct&#8221;.
 
 <a name="complexity" class="jump-target"></a>
 

@@ -15,7 +15,7 @@ tags:
 
 ---
   * You've [prepared to test receipt validation][1] by setting up your app in iTunes Connect.
-  * You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &#8220;envelope&#8221; for the receipt. Perhaps you've even done it [the &#8220;easy way&#8221; with CocoaPods][2].
+  * You've brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the "envelope&#8221; for the receipt. Perhaps you've even done it [the "easy way&#8221; with CocoaPods][2].
   * You've [located and loaded][3] the receipt for validation.
   * You've [extracted the PKCS #7 container][4].
 
@@ -65,7 +65,7 @@ You need a copy of Apple's root certificate in order to fully complete this phas
 
 How do you get a copy of it? Great question (with an answer)!
 
-If you go to <https://www.apple.com/certificateauthority/>, you can get your hands on a copy by downloading the &#8220;Apple Inc. Root Certificate&#8221; file:
+If you go to <https://www.apple.com/certificateauthority/>, you can get your hands on a copy by downloading the "Apple Inc. Root Certificate&#8221; file:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI.png" alt="Apple Certificate Page" width="798" height="688" class="alignnone size-full wp-image-12375" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI.png 798w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI-300x259.png 300w" sizes="(max-width: 798px) 100vw, 798px" />][8]
 
@@ -76,7 +76,7 @@ Once you have it, you need to add the certificate to your Xcode project, and add
 
 # What can go wrong with receipt signature verification?
 
-I'll start off the code piece of this guide by asking, &#8220;What could go wrong?&#8221;. That'll help define a few more `ReceiptValidationError` cases, and might point us in a direction when it comes to implementing a new Type to use within the `ReceiptValidator`.
+I'll start off the code piece of this guide by asking, "What could go wrong?&#8221;. That'll help define a few more `ReceiptValidationError` cases, and might point us in a direction when it comes to implementing a new Type to use within the `ReceiptValidator`.
 
 Right off the bat, I can think of two or three things that could go awry at this stage of the receipt validation process:
 

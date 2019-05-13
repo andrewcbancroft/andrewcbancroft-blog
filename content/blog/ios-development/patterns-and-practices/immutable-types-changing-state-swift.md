@@ -24,7 +24,7 @@ As I seek to improve my functional programming thought processes and to practice
 
 Immutability and changing state was a real struggle for me. The two seemed contradictory actually. How am I supposed to handle changes with things that _can't change_??!
 
-And then, with the help of Stack Overflow, a lightbulb came on. As I was perusing FP topics, I ran across a question that expressed exactly what I was feeling. [&#8220;How can you do anything useful without mutable state?&#8221;][1], the questioner asked. The answer is what illuminated things for me. The key quote from the Stack Overflow answer:
+And then, with the help of Stack Overflow, a lightbulb came on. As I was perusing FP topics, I ran across a question that expressed exactly what I was feeling. ["How can you do anything useful without mutable state?&#8221;][1], the questioner asked. The answer is what illuminated things for me. The key quote from the Stack Overflow answer:
 
 > In functional languages, rather than mutating the state of objects, we simply return a new object with the changes we want. 
 

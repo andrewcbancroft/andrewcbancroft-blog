@@ -18,15 +18,15 @@ A [question was asked on Reddit][1] and showed up in my feed as I was browsing t
 
 > What does protocol oriented programming mean, and why is it better than OOP? 
 
-I really like a few things that were said in [one of the top &#8220;Explain Like I'm 5&#8221; comments][2] that was posted in response to the question by [CodaFi][3].
+I really like a few things that were said in [one of the top "Explain Like I'm 5&#8221; comments][2] that was posted in response to the question by [CodaFi][3].
 
-# &#8220;Explain Like I'm Five&#8221; – A laundry service example
+# "Explain Like I'm Five&#8221; – A laundry service example
 
 First, the example provided was very understandable. I highly recommend you [jump over][2] and just read through what the commenter wrote.
 
-The theme was &#8220;laundry service&#8221;. Supposing that there was a `Laundry` object that encapsulated certain laundry-related functions&#8230; &#8220;Launder my clothes, please&#8221; &#8212; &#8220;Okay, here's your clothes!&#8221;. You as a client simply interact with `Laundry` by saying &#8220;Launder, please!&#8221;. The `Laundry` object goes off and does its thing, which could range from simple to incredibly complex – the beauty is that as a client, as a person needing laundry done, you don't care. As long as the laundry gets done and you get your clothes back, life is great!
+The theme was "laundry service&#8221;. Supposing that there was a `Laundry` object that encapsulated certain laundry-related functions&#8230; "Launder my clothes, please&#8221; &#8212; "Okay, here's your clothes!&#8221;. You as a client simply interact with `Laundry` by saying "Launder, please!&#8221;. The `Laundry` object goes off and does its thing, which could range from simple to incredibly complex – the beauty is that as a client, as a person needing laundry done, you don't care. As long as the laundry gets done and you get your clothes back, life is great!
 
-# &#8220;Problems&#8221; with Object Orientation
+# "Problems&#8221; with Object Orientation
 
 In my guide on [the Fundamentals of Callbacks for Swift Developers][4], I describe the scenario that we're all in as developers:
 
@@ -38,13 +38,13 @@ But what if we're working with a `Laundry` object as a _developer/creator_, and 
 
 The way we'd do that is by crating a _subclass_. Here's the beef with Object Orientation, according to the commenter:
 
-> [Object Orientation] encourages &#8220;encapsulating complexity&#8221; by exposing state and internals through inheritance. 
+> [Object Orientation] encourages "encapsulating complexity&#8221; by exposing state and internals through inheritance. 
 
-Unpacking that: Software has innate complexity. Objects are &#8220;things&#8221; that encapsulate that complexity. They do it in a certain _way_ though: They expose certain pieces of state and pieces of functionality. The way those abstractions over complexity get propagated and customized through the system is through this mechanism called inheritance.
+Unpacking that: Software has innate complexity. Objects are "things&#8221; that encapsulate that complexity. They do it in a certain _way_ though: They expose certain pieces of state and pieces of functionality. The way those abstractions over complexity get propagated and customized through the system is through this mechanism called inheritance.
 
-But the commenter cites this methodology as &#8220;trouble&#8221; though. Why? Well&#8230;
+But the commenter cites this methodology as "trouble&#8221; though. Why? Well&#8230;
 
-&#8220;I may not want to know how my dry cleaning got done, but if I wanted to design a better route to go from dirty clothes to clean clothes, I would necessarily _have_ to know every last detail of the steps that were performed so I can try to refine them in my subclass.&#8221;
+"I may not want to know how my dry cleaning got done, but if I wanted to design a better route to go from dirty clothes to clean clothes, I would necessarily _have_ to know every last detail of the steps that were performed so I can try to refine them in my subclass.&#8221;
 
 So the commenter is coming at it from the point of a developer/creator. It's pointed out that to truly be able to improve performance or refine algorithms in a subclass, we necessarily have to know every detail of the steps that were performed in the superclass. And it's not always the case that we can discover that superclass implementation to improve upon it.
 

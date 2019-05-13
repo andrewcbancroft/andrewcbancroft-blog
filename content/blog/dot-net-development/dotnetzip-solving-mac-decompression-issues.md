@@ -25,11 +25,11 @@ Problem:&nbsp; On a Mac, a zip file would be downloaded, but it could not be ext
 
 Solution:&nbsp; In ASP.Net code, change
 
-HttpContext.Current.Response.ContentType = &#8220;application/zip&#8221;
+HttpContext.Current.Response.ContentType = "application/zip&#8221;
 
 to
 
-HttpContext.Current.Response.ContentType = &#8220;application/octet-stream&#8221;
+HttpContext.Current.Response.ContentType = "application/octet-stream&#8221;
 
 ## Problem Details:
 
@@ -51,17 +51,17 @@ Creation of .cpgz file:
 
 Needless to say, the solution to this problem, though somewhat mysterious, was quite simple for me.
 
-In my ASP.Net code, I was writing the zip file to the Response OutputStream.&nbsp; I had added a content type of &#8220;application/zip&#8221; to the response.&nbsp; This is what was breaking the zip files on a Mac.&nbsp; Buried <a title="DotNetZip Library Forum" href="http://dotnetzip.codeplex.com/discussions/59740" target="_blank">in the DotNetZip Library's forum was a post</a> recommending changing the content type to &#8220;application/octet-stream&#8221; instead.&nbsp; That single changed fixed the issue for standard zip files!
+In my ASP.Net code, I was writing the zip file to the Response OutputStream.&nbsp; I had added a content type of "application/zip&#8221; to the response.&nbsp; This is what was breaking the zip files on a Mac.&nbsp; Buried <a title="DotNetZip Library Forum" href="http://dotnetzip.codeplex.com/discussions/59740" target="_blank">in the DotNetZip Library's forum was a post</a> recommending changing the content type to "application/octet-stream&#8221; instead.&nbsp; That single changed fixed the issue for standard zip files!
 
 ## Solution Details:
 
 Change
 
-HttpContext.Current.Response.ContentType = &#8220;application/zip&#8221;
+HttpContext.Current.Response.ContentType = "application/zip&#8221;
 
 to
 
-HttpContext.Current.Response.ContentType = &#8220;application/octet-stream&#8221;
+HttpContext.Current.Response.ContentType = "application/octet-stream&#8221;
 
  [1]: http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed.png
  [2]: http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM.png

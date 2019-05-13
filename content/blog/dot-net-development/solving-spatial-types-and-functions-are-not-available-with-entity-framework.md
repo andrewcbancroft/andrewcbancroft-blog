@@ -88,7 +88,7 @@ SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirect
 
 ### 3 – Tell Entity Framework which version of the assembly to use
 
-Most of the explanations of how to solve the &#8220;&#8216;Microsoft.SqlServer.Types' version 10 or higher&#8221; error stopped at step 2.
+Most of the explanations of how to solve the "&#8216;Microsoft.SqlServer.Types' version 10 or higher&#8221; error stopped at step 2.
 
 After performing the steps that readme.htm outlined, I re-deployed the app, and things were still broken. Same exception. What gives??
 

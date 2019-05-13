@@ -106,7 +106,7 @@ The real work all happens inside the UIViewExtensions.swift file where I add the
 
 #### UIViewExtensions.swift
 
-First to note is that I've provided a few default values in the function's signature so that the animation can be initiated as simply as writing `viewInstance.slideInFromLeft()`, or as &#8220;complicated&#8221; as providing argument values to both duration and completionDelegate:
+First to note is that I've provided a few default values in the function's signature so that the animation can be initiated as simply as writing `viewInstance.slideInFromLeft()`, or as "complicated&#8221; as providing argument values to both duration and completionDelegate:
 
 ```swift
 extension UIView {
@@ -129,7 +129,7 @@ extension UIView {
 }
 ```
 
-I then go about configuring the animation's properties. To achieve the &#8220;slide in from left&#8221; animation, I set the `type` and the `subtype` properties to `kCATransitionPush` and `kCATransitionFromLeft`, respectively. These two combined create the &#8220;slide in&#8221; effect. Other properties that I set are `duration`, `timingFunction`, and `fillMode`:
+I then go about configuring the animation's properties. To achieve the "slide in from left&#8221; animation, I set the `type` and the `subtype` properties to `kCATransitionPush` and `kCATransitionFromLeft`, respectively. These two combined create the "slide in&#8221; effect. Other properties that I set are `duration`, `timingFunction`, and `fillMode`:
 
 ```swift
 extension UIView {
@@ -147,7 +147,7 @@ extension UIView {
 
 To keep things simple, I only allow myself to customize the `duration` property, and optionally provide a `completionDelegate` when I call the function&#8230; the other properties are more fundamental to how the animation should perform, so I encapsulate the implementation here so that it's an abstraction when I actually call `slideInFromLeft()` later in my View Controller.
 
-The last thing I do is add the animation that I just created and configured to the view's layer property. &#8220;The view&#8221; here would be the instance of UIView that has _calls_ `slideInFromLeft()`:
+The last thing I do is add the animation that I just created and configured to the view's layer property. "The view&#8221; here would be the instance of UIView that has _calls_ `slideInFromLeft()`:
 
 ```swift
 extension UIView {
@@ -163,7 +163,7 @@ extension UIView {
 
 This is probably the more challenging piece, just because it takes some tweaking to get the auto layout constraints just right.
 
-  * My general setup in this example is a Label wrapped inside a containing UIView. I made sure to simply drag over a regular View (not a Container View) from the utilities pane on the right. I then dragged a Label inside the &#8220;wrapper&#8221; view.
+  * My general setup in this example is a Label wrapped inside a containing UIView. I made sure to simply drag over a regular View (not a Container View) from the utilities pane on the right. I then dragged a Label inside the "wrapper&#8221; view.
   * I set wrapper view's width to a value that was less than the entire screen's width. This was so that the sliding view didn't appear to slide in from off-screen and slide out off-screen. Instead it appears to slide in from underneath the wrapper view&#8230; You're welcome to customize this how you want (or avoid the containing view altogether if you find it's not needed for your specific implementation).
   * For the wrapper view, I've set constraints for 
       * Center Horizontally in Container

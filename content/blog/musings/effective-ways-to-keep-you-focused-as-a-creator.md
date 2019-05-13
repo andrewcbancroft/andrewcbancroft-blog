@@ -51,7 +51,7 @@ The problem I always have with music when it comes to productivity is that&#8230
   * The music is too mellow and causes me to want to sleep.
   * The music is too up-beat or interesting&#8230; interesting enough to distract me.
 
-[Music to Code By][2] is literally the Goldilocks of music for concentration purposes. No words. Not too slow. Not too fast or &#8220;interesting&#8221;. **Just right**.
+[Music to Code By][2] is literally the Goldilocks of music for concentration purposes. No words. Not too slow. Not too fast or "interesting&#8221;. **Just right**.
 
 I bought the [original 3 tracks][3], and it's been the best $18 I've spent to improve my focus.
 
@@ -61,7 +61,7 @@ Well, you'd spend money to buy a hammer or a saw if you needed to build somethin
 
 You'd drop a few dollars on an app if you knew it'd be worth it for the job you needed it to do, right?
 
-Think of Music to Code By as a tool for your brain's focus&#8230; a &#8220;clamp&#8221; if you will, to keep you riveted on what you need to accomplish.
+Think of Music to Code By as a tool for your brain's focus&#8230; a "clamp&#8221; if you will, to keep you riveted on what you need to accomplish.
 
 If you can't afford $20 right now, can you afford $10? Save for two months and _then_ buy it!
 
@@ -73,21 +73,21 @@ Full disclosure: No one paid me to say all that. I've really just been _that imp
 
 Whenever a distracting thought comes to mind, open the text editor and jot down the thought.
 
-&#8220;Oh! I've got to remember to call \___&#8221;&#8230;
+"Oh! I've got to remember to call \___&#8221;&#8230;
 
   * Open Text editor window –> 
-  * Type &#8220;I've got to call \___&#8221; –> 
+  * Type "I've got to call \___&#8221; –> 
   * Minimize –> 
   * Back to making great things!
 
-&#8220;Blog post idea!&#8221;&#8230;
+"Blog post idea!&#8221;&#8230;
 
   * Open Text editor window –> 
-  * Type &#8220;[Blog post idea]&#8221; –> 
+  * Type "[Blog post idea]&#8221; –> 
   * Minimize –> 
   * Continue that awesome project!
 
-Always have a text editor window open and ready to record _whatever_ your random ramblings may be. Your mind can effectively &#8220;let go&#8221; because you just preserved what it alerted you to in the text file.
+Always have a text editor window open and ready to record _whatever_ your random ramblings may be. Your mind can effectively "let go&#8221; because you just preserved what it alerted you to in the text file.
 
 Don't keep the window on the screen all the time though. You'll be tempted to glance over at it too often. Jot down the thought and then minimize it.
 

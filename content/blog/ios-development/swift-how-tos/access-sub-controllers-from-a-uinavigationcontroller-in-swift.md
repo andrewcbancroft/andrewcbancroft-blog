@@ -25,9 +25,9 @@ Every iOS application has one root view controller that's presented when the app
 
 What if we want to set some of the view controller's properties after the app launches? How could we go about doing that?
 
-I tend to always think of the &#8220;first view controller&#8221; as the first Scene in the Storyboard where I've set up UI components. To iOS, however, the _navigation controller_ is actually the first (or _root_) view controller.
+I tend to always think of the "first view controller&#8221; as the first Scene in the Storyboard where I've set up UI components. To iOS, however, the _navigation controller_ is actually the first (or _root_) view controller.
 
-When an app incorporates a navigation controller as its first (root) view controller, we end up needing to do a little digging into the view controller hierarchy to get access what we might perceive as the true &#8220;first view controller&#8221;.
+When an app incorporates a navigation controller as its first (root) view controller, we end up needing to do a little digging into the view controller hierarchy to get access what we might perceive as the true "first view controller&#8221;.
 
 <a name="dig-first-view-controller" class="jump-target"></a>
 
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 So the workflow goes like this:
 
   * Get the window's root view controller (which is the navigation controller in our case)
-  * Get the navigation controller's first view controller from its array of view controllers (which is what I always think of as the &#8220;first&#8221; view controller)
+  * Get the navigation controller's first view controller from its array of view controllers (which is what I always think of as the "first&#8221; view controller)
   * Set whatever properties you need to set
 
 You may be worried about the usage of implicitly unwrapped optionals in this snippet. I tend to avoid them wherever possible too, but I used them here because I reasoned that my navigation controller-based app _hinges_ on the fact that the root view controller of the application is a `UINavigationController`. Something so fundamental to the app warranted my usage of the implicitly unwrapped optionals, since changing the navigation paradigm of the app would probably break things anyway.
@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 What about in `prepareForSegue(_:sender:)`? When would this even be necessary?
 
-Well, suppose that we have an app which segues _into_ a navigation controller. We may need to pass some data off the next view controller, but that &#8220;next view controller&#8221; is technically the navigation controller, not the controller where our properties are declared.
+Well, suppose that we have an app which segues _into_ a navigation controller. We may need to pass some data off the next view controller, but that "next view controller&#8221; is technically the navigation controller, not the controller where our properties are declared.
 
 In similar fashion to the `AppDelegate` situation, we want to dig into the navigation controller's view controller hierarchy to access the first child so that we can pass the data along. Here's an example implementation:
 

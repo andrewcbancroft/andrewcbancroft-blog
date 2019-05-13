@@ -14,9 +14,9 @@ tags:
   - Unit Testing
 
 ---
-In a previous &#8220;Testability Tip for Swift Developers&#8221;, [I discussed the principle of observability][1]. &#8220;If it's observable, it's testable&#8221; was the primary conclusion of the article, and I pointed toward using the `public` access control modifier for parts of your app that you intend to test.
+In a previous "Testability Tip for Swift Developers&#8221;, [I discussed the principle of observability][1]. "If it's observable, it's testable&#8221; was the primary conclusion of the article, and I pointed toward using the `public` access control modifier for parts of your app that you intend to test.
 
-In this edition, I'd like to introduce a new principle that I try to adhere to when I'm unit testing, namely, &#8220;If it's controllable, it's testable&#8221;. Here's what I mean by &#8220;controllable&#8221;&#8230;
+In this edition, I'd like to introduce a new principle that I try to adhere to when I'm unit testing, namely, "If it's controllable, it's testable&#8221;. Here's what I mean by "controllable&#8221;&#8230;
 
 
 <a name="controllability" class="jump-target"></a>
@@ -27,17 +27,17 @@ In [Testing is to Software as Experiment is to Science][2], I analyzed how testi
 
 Changing multiple things at a time in an experiment clouds the ability to verify that [tweak x] produced [y outcome]. So a scientist will do his/her best to _control_ the environment by holding as many variables constant as possible, so that he/she can make accurate conclusions about the outcome.
 
-The same goes for testing software. If I'm going to automate a test, I want to set up my &#8220;experiment&#8221; such that I control as much of the system as possible so that I can set up valid expectations and verify results coming from the system under test. Note that I'm using the term &#8220;system&#8221; in a very broad sense – it could be referring to an entire app, a single &#8220;object&#8221;, or a function.
+The same goes for testing software. If I'm going to automate a test, I want to set up my "experiment&#8221; such that I control as much of the system as possible so that I can set up valid expectations and verify results coming from the system under test. Note that I'm using the term "system&#8221; in a very broad sense – it could be referring to an entire app, a single "object&#8221;, or a function.
 
 <a name="parameterize-push" class="jump-target"></a>
 
 ### Parameterize and push
 
-So where does &#8220;parameterize and push&#8221; come into play?
+So where does "parameterize and push&#8221; come into play?
 
 Parameterizing sets us up with the ability to provide _inputs_ into the system we're testing. Anytime you have an input, you have the ability to supply a value of your choosing.
 
-Serving as inputs to the system, you can view parameters as entry points for _controls_. They're &#8220;controls&#8221; because _we_ decide what those values should be before we pass them off as arguments _to_ those parameters. So long as the system we're testing only gets the data it uses from its inputs (its parameters), we can be guaranteed predictable, controlled outputs on the other end.
+Serving as inputs to the system, you can view parameters as entry points for _controls_. They're "controls&#8221; because _we_ decide what those values should be before we pass them off as arguments _to_ those parameters. So long as the system we're testing only gets the data it uses from its inputs (its parameters), we can be guaranteed predictable, controlled outputs on the other end.
 
 <a name="forms" class="jump-target"></a>
 
@@ -55,7 +55,7 @@ Using an initializer, or a `public` variable property, or by adding parameters t
 
 ### Usefulness and examples of parameterization
 
-Setting up your instance definitions to use a set of inputs from the very start through initialization gives you the ability to provide real &#8220;production-ready&#8221; values in your app, but fake &#8220;test-customized&#8221; values for testing. [Creating fake objects][3] for testing is outside the scope of this article, but providing public initializers with parameters is a really great way to set yourself up for being able to test that particular instance.
+Setting up your instance definitions to use a set of inputs from the very start through initialization gives you the ability to provide real "production-ready&#8221; values in your app, but fake "test-customized&#8221; values for testing. [Creating fake objects][3] for testing is outside the scope of this article, but providing public initializers with parameters is a really great way to set yourself up for being able to test that particular instance.
 
 ```swift
 // Prefer
@@ -76,7 +76,7 @@ public class DatabaseCommunicator {
 }
 ```
 
-Another viable option is to provide public variable properties that can be set after the instance is initialized. This is a little more round-about, but I would still call it a form of &#8220;parameterization&#8221; because the strategy still provides you with the same control point that an initializer with parameters does.
+Another viable option is to provide public variable properties that can be set after the instance is initialized. This is a little more round-about, but I would still call it a form of "parameterization&#8221; because the strategy still provides you with the same control point that an initializer with parameters does.
 
 ```swift
 // prefer
@@ -122,15 +122,15 @@ func getNameFromDatabase() -&gt; String {
 
 <a name="di" class="jump-target"></a>
 
-### Parameterization or &#8220;Dependency Injection&#8221;?
+### Parameterization or "Dependency Injection&#8221;?
 
 Yes.
 
-What I'm calling &#8220;parameterization&#8221; is really just &#8220;dependency injection&#8221;. But the term &#8220;dependency injection&#8221; can sound really daunting, while we're used to working with parameters. I intend for the meaning of each term for the purpose of this article to be equivalent.
+What I'm calling "parameterization&#8221; is really just "dependency injection&#8221;. But the term "dependency injection&#8221; can sound really daunting, while we're used to working with parameters. I intend for the meaning of each term for the purpose of this article to be equivalent.
 
 ### Wrapping up
 
-Parameterizing, your instance definitions and functions provides you an immense amount of leverage when it comes to controlling your system under test. I encourage you to try this out and do your best to shift to a more parameterized approach to writing your code for improved testability. Remember, &#8220;Controllable is testable&#8221;!
+Parameterizing, your instance definitions and functions provides you an immense amount of leverage when it comes to controlling your system under test. I encourage you to try this out and do your best to shift to a more parameterized approach to writing your code for improved testability. Remember, "Controllable is testable&#8221;!
 
 <a name="related" class="jump-target"></a>
 

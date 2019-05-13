@@ -35,7 +35,7 @@ As with the previous posts, I'm providing an example Xcode project over at GitHu
   </ul>
 </div>
 
-In this installment to the series, I want to answer the question, &#8220;How do I update the rows in a table view when I add or remove objects from the Core Data database?&#8221; I will show how to implement the `NSFetchedResultsControllerDelegate` protocol, which is the key to automatically synchronizing changes made to your Core Data persistent store with a table view.
+In this installment to the series, I want to answer the question, "How do I update the rows in a table view when I add or remove objects from the Core Data database?&#8221; I will show how to implement the `NSFetchedResultsControllerDelegate` protocol, which is the key to automatically synchronizing changes made to your Core Data persistent store with a table view.
 
 
 <a name="examine-delegate-protocol" class="jump-target"></a>
@@ -52,7 +52,7 @@ The `NSFetchedResultsControllerDelegate` protocol is the piece of the puzzle tha
 
 The two methods that are responsible for doing the actual updates to the table view's structure are `controller(_:didChangeSection:atIndex:forChangeType:)` and `controller(_:didChangeObject:atIndexPath:forChangeType:newIndexPath:)`. If some of the changes to the table view result in new sections being created, `controller(_:sectionIndexTitleForSectionName:)` will help give it an appropriate title (and make sure the _other_ sections keep their appropriate titles as well).
 
-`controllerWillChangeContent(_:)` and `controllerDidChangeContent(_:)` help inform the table view that changes are about to happen / just finished happening. Sandwiching the primary &#8220;didChangeObject&#8221; and &#8220;didChangeSection&#8221; protocol methods with these two methods allows the table view to animate in all of the changes to its structure in one batch.
+`controllerWillChangeContent(_:)` and `controllerDidChangeContent(_:)` help inform the table view that changes are about to happen / just finished happening. Sandwiching the primary "didChangeObject&#8221; and "didChangeSection&#8221; protocol methods with these two methods allows the table view to animate in all of the changes to its structure in one batch.
 
 So, the general structure of the `NSFetchedResultsControllerDelegate` section of your source file might look like this:
 
@@ -96,7 +96,7 @@ public func controllerDidChangeContent(controller: NSFetchedResultsController) {
 
 This is the method that governs how we want to handle the rows in a table view when the synchronization would require inserting rows, updating existing ones, removing them, or reordering them.
 
-I'll give you the implementation and then point out a couple of &#8220;gotchas&#8221; and expound a little more. Recall that we're working with a sample app named &#8220;Zootastic&#8221;, so if you see references to `Animals` in the example, you'll know why. :]
+I'll give you the implementation and then point out a couple of "gotchas&#8221; and expound a little more. Recall that we're working with a sample app named "Zootastic&#8221;, so if you see references to `Animals` in the example, you'll know why. :]
 
 ```swift
 public func controller(

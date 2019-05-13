@@ -24,7 +24,7 @@ Quick!  Tell me!  What is the Type of the `birdDetails` constant in this cod
 
 `let birdDetails = birdDetailsFromStorage()`
 
-With no additional context to glean information from, the correct answer to the question is, &#8220;I have absolutely no clue&#8230;&#8221;
+With no additional context to glean information from, the correct answer to the question is, "I have absolutely no clue&#8230;&#8221;
 
 **But is that concluding assertion _true_?  Hmm&#8230;**
 
@@ -38,7 +38,7 @@ To quote Rob (emphasis added):
 
 Bingo.  The _best_ solution is to _make_ the result unambiguous.  You and I as code authors are in charge of the clarity or ambiguity of our code – it's up to us to _make_ the results of our function evaluations unambiguous.
 
-When I named the function `birdDetailsFromStorage()`, I heavily implied something about its return Type in the name.  I even implied it in the name of the _constant_.  I was expecting the return Type to be something that encapsulated whatever &#8220;bird details&#8221; are – I just didn't realize it at the time (although it's super obvious now)!
+When I named the function `birdDetailsFromStorage()`, I heavily implied something about its return Type in the name.  I even implied it in the name of the _constant_.  I was expecting the return Type to be something that encapsulated whatever "bird details&#8221; are – I just didn't realize it at the time (although it's super obvious now)!
 
 The very _name_ of a thing sets expectations for you and the readers of your code.  It's our job to set ourselves up for that expectation to be _fulfilled_!  B<span style="color: #3f4549;">e predictable with the return Type of your functions for your own sake.  A function signature should be such that when you run across `birdDetailsFromStorage()`in some piece of code, you are able to legitimately expect it to return a `BirdDetails`.  </span>
 

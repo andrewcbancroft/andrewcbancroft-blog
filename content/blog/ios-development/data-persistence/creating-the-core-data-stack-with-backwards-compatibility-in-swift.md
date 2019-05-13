@@ -14,7 +14,7 @@ tags:
   - Swift
 
 ---
-In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you'll be unable to take advantage of Core Data's latest &#8220;stack creation&#8221; class called `NSPersistentContainer`. So what can you do?
+In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you'll be unable to take advantage of Core Data's latest "stack creation&#8221; class called `NSPersistentContainer`. So what can you do?
 
 While `NSPersistentContainer` _does_ aim to simplify the stack creation process, at the end of the day, it's not terrible to have to mess with some of this Core Data plumbing.
 
@@ -119,7 +119,7 @@ Once you've got a function like `createMainContext()`, you'll be able to call it
 
 I _highly_ recommend you avoid calling it inside any of your view controllers. Instead, my recommendation is to call it to obtain your `NSManagedObjectContext` instance inside of the `AppDelegate's` `application(_:didFinishLaunchingWithOptions:)` function. From there, you can pass it _to_ your first view controller, and from that first view controller on to _other_ view controllers that need it through `prepare(for segue:sender:)`.
 
-For more on this &#8220;dependency injection&#8221; strategy, or if you're more of a visual learner, check out my Pluralsight course, [Core Data Fundamentals with Swift][1]!  
+For more on this "dependency injection&#8221; strategy, or if you're more of a visual learner, check out my Pluralsight course, [Core Data Fundamentals with Swift][1]!  
 <a name="course" class="jump-target"></a>
 
 <div class="resources">

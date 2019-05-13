@@ -17,11 +17,11 @@ tags:
 ---
 I'm very excited to announce that my new app, 10 Read 10 Said, is now available for [iOS][1] and [Android][2]!
 
-While the goal of the app is to help you implement the [&#8220;10 Read 10 Said&#8221; strategy for memorizing Bible verses][3], my goal in this _article_ is to dissect the app, and share with you how some of the major features were implemented.
+While the goal of the app is to help you implement the ["10 Read 10 Said&#8221; strategy for memorizing Bible verses][3], my goal in this _article_ is to dissect the app, and share with you how some of the major features were implemented.
 
 As it turns out, _most_ of the major features of the app are things that I've already written about over the [past year of producing Swift content][4]! The approach I'll take, then, is to walk through each screen and point out which articles I've written might pertain to the particular feature implementations that are visible from that screen.
 
-I hope this tour satisfies the curiosity of many like myself who ask, &#8220;I wonder how they did that!&#8221;
+I hope this tour satisfies the curiosity of many like myself who ask, "I wonder how they did that!&#8221;
 
 
 <a name="demo" class="jump-target"></a>
@@ -44,13 +44,13 @@ To demonstrate the major functionality of the app, I've created a short (50 seco
 
 To begin, the Verse List scene has been embedded in a `UINavigationController`. This caused me to have to make a few changes in `AppDelegate` to properly dig in to access the verse list controller and set some properties on it.
 
-I've covered the details of how to &#8220;unpack&#8221; a `UINavigationController` and access its first _child_ view controller in my article titled [&#8220;Access Sub-Controllers from a UINavigationController in Swift&#8221;][6].
+I've covered the details of how to "unpack&#8221; a `UINavigationController` and access its first _child_ view controller in my article titled ["Access Sub-Controllers from a UINavigationController in Swift&#8221;][6].
 
 <a name="table-view" class="jump-target"></a>
 
 #### Table View
 
-The next most obvious thing to notice about the verse list is that it's been implemented with a `UITableView`. Additionally, each cell is a &#8220;custom&#8221; cell, rather than one of the default cell styles that Xcode gives you out of the box. I've written an article or three on these:
+The next most obvious thing to notice about the verse list is that it's been implemented with a `UITableView`. Additionally, each cell is a "custom&#8221; cell, rather than one of the default cell styles that Xcode gives you out of the box. I've written an article or three on these:
 
 <div class="resources">
   <div class="resources-header">
@@ -170,7 +170,7 @@ A few other subtle notes are the fade in/out animations that happen when you com
 
 While this isn't the first app I've worked on and published to the App Store, it _is_ my first _personal_ project idea that's out there. I had a lot of fun building it as a utility for myself in my own Scripture memorization efforts. My hope is that the tool (and more importantly, [the strategy][10]) is helpful to others as well!
 
-My goal in this article was to give you a &#8220;behind the scenes&#8221; look at 10 Read 10 Said. I hope your curiosity has been satisfied by some of these inside looks into the app!
+My goal in this article was to give you a "behind the scenes&#8221; look at 10 Read 10 Said. I hope your curiosity has been satisfied by some of these inside looks into the app!
 
 <a name="share" class="jump-target"></a>
 

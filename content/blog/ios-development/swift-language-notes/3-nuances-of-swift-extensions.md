@@ -14,11 +14,11 @@ tags:
   - Swift
 
 ---
-How often do we take an initial cursory look at some documentation, shake our heads and say, &#8220;Ok, sure! Got it!&#8221;, and then some time later get to the actual usage of that perceived understanding only to find out, &#8220;Woah – this is behaving differently than I expected! I wonder if the documentation says anything about this?!&#8221;
+How often do we take an initial cursory look at some documentation, shake our heads and say, "Ok, sure! Got it!&#8221;, and then some time later get to the actual usage of that perceived understanding only to find out, "Woah – this is behaving differently than I expected! I wonder if the documentation says anything about this?!&#8221;
 
 A few discussions I've had recently have prompted me to question what I thought I knew about Swift extensions. I have read documentation about extensions and I _thought_ I understood them pretty thoroughly. However, these conversations, along with some experimentation done on my own revealed a few nuances that I didn't pick up on before.
 
-**Update:** Almost immediately after publishing this article, the Swift community chimed in and helped me figure out my fundamental hiccup which prompted the aforementioned experimentation in the first place. I've written a follow-up article called [&#8220;Clarifying Swift Access Control&#8221;][1], describing that misunderstanding. I recommend giving that one a read to avoid making the same mistake I did!
+**Update:** Almost immediately after publishing this article, the Swift community chimed in and helped me figure out my fundamental hiccup which prompted the aforementioned experimentation in the first place. I've written a follow-up article called ["Clarifying Swift Access Control&#8221;][1], describing that misunderstanding. I recommend giving that one a read to avoid making the same mistake I did!
 
 
 <a name="3-nuances" class="jump-target"></a>
@@ -28,8 +28,8 @@ A few discussions I've had recently have prompted me to question what I thought 
 In particular, the following three nuances challenged what I thought I knew about Swift extensions:
 
   1. The visibility Swift extensions have into the Type they're extending. Can they see things marked `private`, for example?
-  2. How that visibility is affected by where the extension is defined. If I have the source for a Type that I'm writing an extension for, does defining it within that same source file vs defining it in a separate file affect what it can &#8220;see&#8221;?
-  3. The default access modifiers of the extension's &#8220;members&#8221; and how specifying them or _not_ specifying them affect what an extension exposes as public API for the Type it's extending.
+  2. How that visibility is affected by where the extension is defined. If I have the source for a Type that I'm writing an extension for, does defining it within that same source file vs defining it in a separate file affect what it can "see&#8221;?
+  3. The default access modifiers of the extension's "members&#8221; and how specifying them or _not_ specifying them affect what an extension exposes as public API for the Type it's extending.
 
 Before I begin, suppose that I have a public struct called `Person`. It has some private properties, `name`, `gender`, and `age`. An enum encapsulates the idea of `Gender`. The struct looks something like this:
 
@@ -72,7 +72,7 @@ Now, suppose that I wanted to extend `Person` and inspect the three nuances abou
 
 ### Extensions and visibility into extended Type
 
-When I introduced that first nuance about visibility into the extended Type, I asked the question, &#8220;Can they see things marked `private`?&#8221; The answer surprised me at first: _Yes_&#8230;they _can_.
+When I introduced that first nuance about visibility into the extended Type, I asked the question, "Can they see things marked `private`?&#8221; The answer surprised me at first: _Yes_&#8230;they _can_.
 
 However, here's where the second nuance comes in: It absolutely does matter _where_ the extension is defined.
 
@@ -96,15 +96,15 @@ extension Person {
 }
 ```
 
-&#8220;What?? Why?&#8221;, I thought to myself&#8230;
+"What?? Why?&#8221;, I thought to myself&#8230;
 
 My reasoning as to why extensions defined within the same file behave this way is because when it comes down to it, I could have just written the extension's implementation as part of the Type itself and it would have had the same effect.
 
-I'm _in the source file_ of the Type I'm &#8220;extending&#8221;. So whether I write the additional functionality as an extension for the Type, or just define what would have been in the extension _inside the Type, itself_, the net effect is the same.
+I'm _in the source file_ of the Type I'm "extending&#8221;. So whether I write the additional functionality as an extension for the Type, or just define what would have been in the extension _inside the Type, itself_, the net effect is the same.
 
-Therefore, the compiler essentially says, &#8220;I see this extension being defined, but there's really no point. It's in the same file that the Type is defined in&#8230; so the developer _could have_ just written all this code within the Type itself&#8230; so I'll let him/her refer to `private` code blocks.&#8221;
+Therefore, the compiler essentially says, "I see this extension being defined, but there's really no point. It's in the same file that the Type is defined in&#8230; so the developer _could have_ just written all this code within the Type itself&#8230; so I'll let him/her refer to `private` code blocks.&#8221;
 
-**Update:** My reasoning above reveals that I truly didn't have an understanding of Swift access control. I recommend giving my followup article titled [&#8220;Clarifying Swift Access Control&#8221;][1] a read for more details!
+**Update:** My reasoning above reveals that I truly didn't have an understanding of Swift access control. I recommend giving my followup article titled ["Clarifying Swift Access Control&#8221;][1] a read for more details!
 
 <a name="defined-separate-file" class="jump-target"></a>
 
@@ -130,8 +130,8 @@ The final nuance also yielded some semi-surprising results for me. [Apple's docu
 
 In short, when you declare an extension but specify no explicit access modifiers (ie, you just use the default), the extension's default access level depends on the access level of the Type it's extending.
 
-  * If the Type is `public` or `internal`, the extension's implementation &#8220;members&#8221; will be `internal` by default. The &#8220;surprise&#8221; for me I think is that extensions for `public` Types have `internal` members by default, unless you specify otherwise.
-  * If the Type is `private`, the extension's implementation &#8220;members&#8221; will be `private` by default.
+  * If the Type is `public` or `internal`, the extension's implementation "members&#8221; will be `internal` by default. The "surprise&#8221; for me I think is that extensions for `public` Types have `internal` members by default, unless you specify otherwise.
+  * If the Type is `private`, the extension's implementation "members&#8221; will be `private` by default.
 
 Here's what the extension looks like if we analyze it from the perspective of using no explicitly declared access modifiers (note that to gain access to private properties and functions, I'm declaring the extension within Person.swift):
 
@@ -183,7 +183,7 @@ In other words, there's no need to write `public extension Person { ... }`. Sinc
 
 ### Wrapping up
 
-The three nuances about Swift extensions that were analyzed here were &#8220;surprising&#8221; enough to me to warrant some experimentation. My hope is that the analysis that was done will help clear up these subtleties for others who are struggling with understanding how Swift extensions behave!
+The three nuances about Swift extensions that were analyzed here were "surprising&#8221; enough to me to warrant some experimentation. My hope is that the analysis that was done will help clear up these subtleties for others who are struggling with understanding how Swift extensions behave!
 
 <a name="related" class="jump-target"></a>
 

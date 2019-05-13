@@ -16,7 +16,7 @@ tags:
   - Swift
 
 ---
-This blog entry was inspired by [Objc.io's snippet titled &#8220;Enums instead of Booleans&#8221;][1]. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven't seen it, check it out before continuing on!
+This blog entry was inspired by [Objc.io's snippet titled "Enums instead of Booleans&#8221;][1]. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven't seen it, check it out before continuing on!
 
 Objc.io's snippet focused primarily on the definition and _consumption_ of the enumeration values. What I'd like to focus on here is the implementation of the thing that _produces_ those values for the switch-case that will consume them later on.
 

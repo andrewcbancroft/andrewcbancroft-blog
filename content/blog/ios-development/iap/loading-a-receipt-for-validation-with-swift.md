@@ -51,7 +51,7 @@ If they do not match, validation fails.
 5 – Compute the hash of the GUID as described in Compute the Hash of the GUID.  
 If the result does not match the hash in the receipt, validation fails.
 
-The thought I had when I saw 5 steps is, &#8220;This is going to become too much responsibility for a single Type to handle&#8221;. I easily got overwhelmed when I analyzed the [most extensive write-up on the subject, found at Objc.io][4].
+The thought I had when I saw 5 steps is, "This is going to become too much responsibility for a single Type to handle&#8221;. I easily got overwhelmed when I analyzed the [most extensive write-up on the subject, found at Objc.io][4].
 
 
 
@@ -73,7 +73,7 @@ First, I've created a top-level Type called `ReceiptValidator`. My idea is to ha
 
 Second, I've tried to take each of the steps involved in validating the receipt and create a simple Swift Type to encapsulate the logic that needs to happen in that step.
 
-So when step 1 says to &#8220;locate and load the receipt&#8221;, I created a struct called `ReceiptLoader` that has two methods: `receiptFound()` and `loadReceipt()`.
+So when step 1 says to "locate and load the receipt&#8221;, I created a struct called `ReceiptLoader` that has two methods: `receiptFound()` and `loadReceipt()`.
 
 `ReceiptValidator` currently holds references to instances of each of these little helper Types, and the validator class itself calls methods on those instances to get the overall job of validating the receipt done.
 
@@ -91,7 +91,7 @@ enum ReceiptValidationError : Error {
 }
 ```
 
-This enum simply implements the `Error` &#8220;marker&#8221; protocol, which allows its values to be used in Swift's error-throwing system. For this blog entry, we'll stick with simply throwing the value `couldNotFindReceipt` whenever a receipt can't be found and needs to be re-requested from the App Store.
+This enum simply implements the `Error` "marker&#8221; protocol, which allows its values to be used in Swift's error-throwing system. For this blog entry, we'll stick with simply throwing the value `couldNotFindReceipt` whenever a receipt can't be found and needs to be re-requested from the App Store.
 
 <a name="receipt-validator-implementation" class="jump-target"></a>
 

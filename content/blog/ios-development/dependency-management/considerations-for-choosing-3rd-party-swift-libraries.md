@@ -63,7 +63,7 @@ How can you avoid depending on bad Swift libraries? What are some markers of goo
 
 So there you have it – a few broad categories to think in terms of when trying to get direction on whether or not you should bring a given 3rd party library into your own Swift project.
 
-Do you have other &#8220;box-like&#8221; categories that you use to guide your dependency decisions? Feel free to sound off in the comments with your thoughts!
+Do you have other "box-like&#8221; categories that you use to guide your dependency decisions? Feel free to sound off in the comments with your thoughts!
 
 <a name="share" class="jump-target"></a>
 

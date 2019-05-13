@@ -26,7 +26,7 @@ Given an array like this&#8230;
 let arrayOfIntsAsStrings = ["103", "2", "1", "50", "55", "98"]
 ```
 
-&#8230; the question arises: &nbsp;&#8220;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this&nbsp;`[&#8220;1&#8221;, &#8220;2&#8221;, &#8220;50&#8221;, &#8220;55&#8221;, &#8220;98&#8221;, &#8220;103&#8221;, &#8220;1000&#8221;]` (integer comparison), not this `[&#8220;1&#8221;, &#8220;1000&#8221;, &#8220;103&#8221;, &#8220;2&#8221;, &#8220;50&#8221;, &#8220;55&#8221;, &#8220;98&#8221;]`&nbsp;&nbsp;(string comparison)?&#8221; Enter Swift's `sorted`&nbsp;function:
+&#8230; the question arises: &nbsp;"How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this&nbsp;`["1&#8221;, "2&#8221;, "50&#8221;, "55&#8221;, "98&#8221;, "103&#8221;, "1000&#8221;]` (integer comparison), not this `["1&#8221;, "1000&#8221;, "103&#8221;, "2&#8221;, "50&#8221;, "55&#8221;, "98&#8221;]`&nbsp;&nbsp;(string comparison)?&#8221; Enter Swift's `sorted`&nbsp;function:
 
 > “Swift’s standard library provides a function called sorted, which sorts an array of values of a known type, based on the output of a sorting closure that you provide. Once it completes the sorting process, the sorted function returns a new array of the same type and size as the old one, with its elements in the correct sorted order. The original array is not modified by the sorted function.” Excerpt From: Apple Inc. “The Swift Programming Language.” iBooks. <a title="Swift iBook" href="https://itun.es/us/jEUH0.l" target="_blank">https://itun.es/us/jEUH0.l</a>
 
@@ -43,7 +43,7 @@ let sortedArray = sorted(arrayOfIntsAsStrings, {
 })
 ```
 
-This code produces our desired output: &nbsp;`[&#8220;1&#8221;, &#8220;2&#8221;, &#8220;50&#8221;, &#8220;55&#8221;, &#8220;98&#8221;, &#8220;103&#8221;, &#8220;1000&#8221;]`
+This code produces our desired output: &nbsp;`["1&#8221;, "2&#8221;, "50&#8221;, "55&#8221;, "98&#8221;, "103&#8221;, "1000&#8221;]`
 
 ## The&nbsp;Details
 

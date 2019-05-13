@@ -14,11 +14,11 @@ tags:
   - Pointers
 
 ---
-[Pointer Pointer #1 can be found here][1] – it deals with how the &#8220;*&#8221; symbol is used in different places when dealing with pointers.
+[Pointer Pointer #1 can be found here][1] – it deals with how the "*&#8221; symbol is used in different places when dealing with pointers.
 
 A second pointer I have on pointers that helped me is this:
 
-A pointer stores an address of where some piece of data &#8220;lives&#8221; (begins its bit pattern) in memory.  What recently became clear to me is that a pointer, itself,_ _is _also_ stored as a bit pattern in memory.
+A pointer stores an address of where some piece of data "lives&#8221; (begins its bit pattern) in memory.  What recently became clear to me is that a pointer, itself,_ _is _also_ stored as a bit pattern in memory.
 
 Here some example code and its output to help visualize what I'm saying:
 

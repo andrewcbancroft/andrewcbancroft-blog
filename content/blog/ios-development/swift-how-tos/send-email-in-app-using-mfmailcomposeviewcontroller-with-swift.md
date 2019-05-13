@@ -17,7 +17,7 @@ tags:
 ---
 <small>Updated on October 11, 2016 – Swift 3.0</small>
 
-In this writing, I want explore how to use `MFMailComposeViewController` with Swift to send e-mails within your app as a walkthrough. My focus here is &#8220;quick and dirty&#8221; pragmatism, so that we can easily see what the inter-working components of `MFMailComposeViewController` are. That being said, here's an important _disclaimer_ – I'm going to overload the View Controller's responsibilities in the examples to follow.
+In this writing, I want explore how to use `MFMailComposeViewController` with Swift to send e-mails within your app as a walkthrough. My focus here is "quick and dirty&#8221; pragmatism, so that we can easily see what the inter-working components of `MFMailComposeViewController` are. That being said, here's an important _disclaimer_ – I'm going to overload the View Controller's responsibilities in the examples to follow.
 
 <a title="Pick a Delegate… Any Delegate… On Clean View Controllers in Swift" href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/" target="_blank">An op-ed with my thoughts and experimentation on how to keep the View Controller clean</a> by factoring out some of the configuration and delegate methods to another class is now live as well.
 
@@ -26,7 +26,7 @@ In this writing, I want explore how to use `MFMailComposeViewController` with Sw
 
 ## Defining the requirements
 
-As part of your app requirements, you need to be able to send an e-mail _within_ your app without leaving it. Additionally, you need to pre-populate some standard e-mail fields such as &#8220;To&#8221;, &#8220;Subject&#8221;, and &#8220;Body&#8221;.
+As part of your app requirements, you need to be able to send an e-mail _within_ your app without leaving it. Additionally, you need to pre-populate some standard e-mail fields such as "To&#8221;, "Subject&#8221;, and "Body&#8221;.
 
 Not only is this possible, the API for accomplishing it is pretty straight forward.
 
@@ -118,9 +118,9 @@ This is the method that responds to the user tapping on a button. Assuming this 
 
 I decided to encapsulate the configuration of an `MFMailComposeViewController` instance inside a function. I found that it made things a little more readable, perhaps more testable, and kept the spirit of [decomposing sub-steps of a process into individual, single-responsibility functions][1].
 
-One vital property to set is the `mailComposeDelegate` property (otherwise, you can never get rid of the e-mail composer screen after it's presented). Now, there's a &#8220;gotcha&#8221; here – `MFMailComposeViewController` instances _also_ have a property named `delegate` . **The _delegate_** **property is _not_ the one to set** (I did this at first and wondered why my implemented delegate &#8220;callback&#8221; method never got called). Set the `mailComposeDelegate` property to the instance of whatever you want to handle dismissing the email composer screen once the user is finished sending an e-mail or cancels. In the example, I set it to `self`, since the View Controller itself will implement the appropriate delegate method (<a title="Pick a Delegate… Any Delegate… On Clean View Controllers in Swift" href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/" target="_blank">Read my thoughts on cleaning this up a bit</a>).
+One vital property to set is the `mailComposeDelegate` property (otherwise, you can never get rid of the e-mail composer screen after it's presented). Now, there's a "gotcha&#8221; here – `MFMailComposeViewController` instances _also_ have a property named `delegate` . **The _delegate_** **property is _not_ the one to set** (I did this at first and wondered why my implemented delegate "callback&#8221; method never got called). Set the `mailComposeDelegate` property to the instance of whatever you want to handle dismissing the email composer screen once the user is finished sending an e-mail or cancels. In the example, I set it to `self`, since the View Controller itself will implement the appropriate delegate method (<a title="Pick a Delegate… Any Delegate… On Clean View Controllers in Swift" href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/" target="_blank">Read my thoughts on cleaning this up a bit</a>).
 
-As you can see, setting up the &#8220;To&#8221;, &#8220;Subject&#8221;, and &#8220;Body&#8221; are simply a matter of setting properties of an `MFMailComposeViewController` instance. Notice that `setToRecipients()` accepts an _array_ of e-mail address strings, so don't forget to wrap that argument in an array, even for a single recipient. The same would work for Cc, and Bcc recipients, had I configured those.
+As you can see, setting up the "To&#8221;, "Subject&#8221;, and "Body&#8221; are simply a matter of setting properties of an `MFMailComposeViewController` instance. Notice that `setToRecipients()` accepts an _array_ of e-mail address strings, so don't forget to wrap that argument in an array, even for a single recipient. The same would work for Cc, and Bcc recipients, had I configured those.
 
 <a name="show-send-mail-error" class="jump-target"></a>
 

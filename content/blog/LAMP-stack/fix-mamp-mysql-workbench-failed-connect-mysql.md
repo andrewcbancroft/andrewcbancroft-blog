@@ -24,7 +24,7 @@ Once MAMP is installed and the MySQL server has started, you'll be taken to a st
 **The information presented there is misleading.** The start page instructs you to use port 3306. So I did:  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen.png" alt="Settings based on MAMP Start Screen" width="897" height="515" class="alignnone size-full wp-image-11185" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen.png 897w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen-300x172.png 300w" sizes="(max-width: 897px) 100vw, 897px" />][3]
 
-When testing the connection, however, I got the dreaded &#8220;Failed to Connect to MySQL at localhost&#8221;:  
+When testing the connection, however, I got the dreaded "Failed to Connect to MySQL at localhost&#8221;:  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection.png" alt="Error on Test Connection" width="412" height="146" class="alignnone size-full wp-image-11184" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection.png 412w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection-300x106.png 300w" sizes="(max-width: 412px) 100vw, 412px" />][4]
 
 It turns out that MAMP has a preferences panel wherein you can configure the ports for your Apache and MySQL servers. And of course, MySQL was _not_ set to use port 3306, as the start page led me to believe. Rather, it was set to use port 8889:  

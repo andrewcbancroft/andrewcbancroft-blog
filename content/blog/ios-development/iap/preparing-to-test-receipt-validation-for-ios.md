@@ -42,7 +42,7 @@ If this is an existing app you're wanting to add receipt validation to, you're a
 
 ##### 3 – Log into iTunes Connect.
 
-##### 4 – Click &#8220;My Apps&#8221; from the main iTunes Connect dashboard page.
+##### 4 – Click "My Apps&#8221; from the main iTunes Connect dashboard page.
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps-1024x495.png" alt="iTunes Connect - My Apps" width="1024" height="495" class="alignnone size-large wp-image-12331" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps-1024x495.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps-300x145.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps.png 1040w" sizes="(max-width: 1024px) 100vw, 1024px" />][4]
 
@@ -80,7 +80,7 @@ Your sandbox user account is actually going to be a separate Apple ID. Since it'
 
 ### iOS Device Setup
 
-##### 1 – On your physical device (not in the Simulator), open Settings and navigate to &#8220;App and iTunes Stores&#8221;.
+##### 1 – On your physical device (not in the Simulator), open Settings and navigate to "App and iTunes Stores&#8221;.
 
 ##### 2 – Sign out of your regular Apple ID, but _do not_ re-sign in using your new Sandbox Tester Apple ID that you just set up. Doing this will pose the risk of invalidating your Sandbox User test account. This is explained over in the [Apple Developer documentation][8]:
 
@@ -90,7 +90,7 @@ Later on, when you run your app on your device from Xcode, you'll get a prompt t
 
 **Note:** Ideally, this step is done on an iOS _test_ device, not on your own personal device. That being said, there are times (like in my own situation) where you might not have a test device and you're forced to switch between Apple IDs to test.
 
-##### 3 – Go through the necessary steps to set up a new iTunes Store account. You'll receive a &#8220;Welcome&#8221; e-mail from the iTunes Store once everything is completely set up.
+##### 3 – Go through the necessary steps to set up a new iTunes Store account. You'll receive a "Welcome&#8221; e-mail from the iTunes Store once everything is completely set up.
 
 ### Write Some Receipt Verification Code
 

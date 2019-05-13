@@ -23,7 +23,7 @@ During the production of my [Pluralsight course on Managing Xcode Project Depend
 
 A simple idea came to mind: Create something that allows client developers of the pod to easily fade views in or out on any UIView instance. If you've read andrewcbancroft.com for a long time, you might remember that I [wrote on this very subject already][2], but there, I used an extension to UIView, because protocol extensions hadn't been invented yet!
 
-For my course, I borrowed an idea that I first saw done by [@NSFlexMonkey][3] when he built the [Rotateable protocol extension][4]. Only instead of rotating, I'm fading, so I named it &#8220;Fadeable&#8221;!
+For my course, I borrowed an idea that I first saw done by [@NSFlexMonkey][3] when he built the [Rotateable protocol extension][4]. Only instead of rotating, I'm fading, so I named it "Fadeable&#8221;!
 
 <a name="demo" class="jump-target"></a>
 
@@ -35,7 +35,7 @@ For my course, I borrowed an idea that I first saw done by [@NSFlexMonkey][3] wh
 
 ### Fadeable code sample
 
-The &#8220;library's&#8221; source can be found over at GitHub:
+The "library's&#8221; source can be found over at GitHub:
 
 <div class="resources">
   <div class="resources-header">

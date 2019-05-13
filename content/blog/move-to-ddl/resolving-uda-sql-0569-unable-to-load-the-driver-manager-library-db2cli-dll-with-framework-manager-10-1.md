@@ -19,7 +19,7 @@ When installing Framework Manager 10.1 and attempting to use it for the first ti
 
 For those who need to install a DB2 client, IBM provides those downloads [here][1] for DB2 10.1.  For other versions, you can go [here][2].  [Added 3/19/2013]
 
-A good explanation of what each DB2 client &#8220;package&#8221; includes and what they're used for can be found [here][3].
+A good explanation of what each DB2 client "package&#8221; includes and what they're used for can be found [here][3].
 
 **Steps that I was taking:**
 

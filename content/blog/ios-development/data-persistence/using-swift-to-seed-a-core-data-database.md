@@ -38,7 +38,7 @@ During development, I've found that it's often convenient to seed a Core Data da
   </ul>
 </div>
 
-I've created a fictitious Core Data app called &#8220;Zootastic&#8221;, which is intended to model zoos, and the animals that each zoo cares for. (I'll give you one guess as to what kinds of shows and activities my two year old and I have been in to lately). :]
+I've created a fictitious Core Data app called "Zootastic&#8221;, which is intended to model zoos, and the animals that each zoo cares for. (I'll give you one guess as to what kinds of shows and activities my two year old and I have been in to lately). :]
 
 Specifically, I have the following Entities:
 
@@ -65,7 +65,7 @@ I've [created NSManagedObject subclasses][1] for each of my entities, to make it
 
 Once a Core Data data model is set up, we're ready to create what I called `DataHelper`. It serves the purpose of seeding the data store, and logging the data store's contents back out to the console. It violates the single-responsibility principle, but wait! Don't lynch me!
 
-Knowing that this class is intended to be used _solely_ for development, I didn't put a lot of effort into separating concerns. I opted for a &#8220;here's where I go to do all my seeding for manual testing purposes&#8221; approach.
+Knowing that this class is intended to be used _solely_ for development, I didn't put a lot of effort into separating concerns. I opted for a "here's where I go to do all my seeding for manual testing purposes&#8221; approach.
 
 Here are a few snippets from the class ([grab the full Xcode project][2] over at GitHub):
 
@@ -220,7 +220,7 @@ public class DataHelper {
 
 I've chosen to go ahead and execute fetch requests for the entities I made in previous `seed___()` functions. Additionally, rather than deal with `NSPredicate`, I just grab _all_ `Classifications` and _all_ `Zoos`, and use array's `filter` function to get the exact Entity I want.
 
-The last thing I'll mention / warn against, is that I _am_ using explicitly unwrapped optionals in this function. I've gone ahead and &#8220;risked it&#8221;, trusting that I'm only using this technique during development time to help me see how things will look in my UI. In other words, this isn't code that will end up in Production. It's simply meant to help me while I'm developing, so I've gone ahead and done things the quick way here.
+The last thing I'll mention / warn against, is that I _am_ using explicitly unwrapped optionals in this function. I've gone ahead and "risked it&#8221;, trusting that I'm only using this technique during development time to help me see how things will look in my UI. In other words, this isn't code that will end up in Production. It's simply meant to help me while I'm developing, so I've gone ahead and done things the quick way here.
 
 The rest of the function follows the same patterns that have already been used in this example.
 

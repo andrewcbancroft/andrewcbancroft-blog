@@ -17,32 +17,25 @@ tags:
   - Swift
 
 ---
-# Announcing – New Pluralsight Course!
 
-I'm excited to announce the publication of my new course for Pluralsight titled [&#8220;Managing Xcode Project Dependencies with CocoaPods&#8221;][1]!
+# Course Outline
 
-Not a Pluralsight subscriber? I would wholeheartedly recommend checking out their plans. They've even got a [free trial][2]! Being a Pluralsight subscriber has literally been **the single most impactful influence** on my growth as a developer apart from at-the-keyboard experience.
+I try to get as practical as possible in the course. As you're watching you'll be "embedded&#8221; into a team of iOS developers, and you'll explore the problems that CocoaPods can solve for you by watching the team struggle through _not_ having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.
 
-Our team at work uses Pluralsight as a major portion of our developer training efforts, so there's an idea to pitch to your boss if you don't want to purchase an individual subscription!
-
-# Course Topics
-
-I try to get as practical as possible in the course. As you're watching you'll be &#8220;embedded&#8221; into a team of iOS developers, and you'll explore the problems that CocoaPods can solve for you by watching the team struggle through _not_ having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.
-
-The course is a progressive journey. First, the team has problems managing dependencies without a dependency manager. Then, they bring in CocoaPods to help them find and organize 3rd party libraries. _Then_, they start to think, &#8220;Hey, what if we could create our _own_ CocoaPod libraries?&#8221;. Finally, they use that knowledge of how to create a CocoaPod library to set up a private repository to share code internally between projects with their team.
+The course is a progressive journey. First, the team has problems managing dependencies without a dependency manager. Then, they bring in CocoaPods to help them find and organize 3rd party libraries. _Then_, they start to think, "Hey, what if we could create our _own_ CocoaPod libraries?&#8221;. Finally, they use that knowledge of how to create a CocoaPod library to set up a private repository to share code internally between projects with their team.
 
 I've got four modules that cover the following topics:
 
-**1. Introducing Project Dependency Management**  
-I teach the basic concepts and definitions associated with &#8220;project dependency management&#8221;. What is it all about? Why does it matter? And most importantly, how is it done in the Apple Ecosystem?
+## 1 - Introducing Project Dependency Management
+I teach the basic concepts and definitions associated with "project dependency management&#8221;. What is it all about? Why does it matter? And most importantly, how is it done in the Apple Ecosystem?
 
-**2. Managing Dependencies with CocoaPods**  
+## 2 - Managing Dependencies with CocoaPods 
 I guide you through installing CocoaPods, configuring your Xcode project to use CocoaPods, and working with the CocoaPods command line utility.
 
-**3. Creating CocoaPod Libraries**  
+## 3 - Creating CocoaPod Libraries 
 This is where things turned really fun for me. :] In this module of the course, I teach you how to create a CocoaPod library, host its source code on GitHub, and publish the library to the CocoaPods Trunk.
 
-**4. Hosting a Private CocoaPods Repository**  
+## 4 - Hosting a Private CocoaPods Repository
 As the capstone to the course, I teach you how to set up a private spec repository and how to configure CocoaPods to utilize it. It really is the culmination of everything learned in the prior modules, but it's also one of the most practical strategies for sharing code between your various Xcode projects that I've found to-date.
 
 In addition to the four modules of content, the course comes with an example Swift iOS app if you're a Pluralsight Plus subscriber!

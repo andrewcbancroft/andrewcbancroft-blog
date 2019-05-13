@@ -19,14 +19,14 @@ Of the major design patterns that are prevalent in iOS development, delegation i
 
 In my analysis of [NSNotificationCenter vs Delegation][1], I wrote some about delegation, but only in comparison to how `NSNotificationCenter` works. I haven't yet given delegation dedicated time and analysis, but I intend to do so now.
 
-My aim in this blog entry is to try and make some sense out of the question, &#8220;What is delegation?&#8221;. Explore with me&#8230;
+My aim in this blog entry is to try and make some sense out of the question, "What is delegation?&#8221;. Explore with me&#8230;
 
 
 <a name="what-is-delegation" class="jump-target"></a>
 
 ### What is the delegation design pattern?
 
-To read that &#8220;delegation is a design pattern that [insert explanation here]&#8221; never really clicked with me. Many who are new to programming have not dealt extensively with &#8220;design patterns&#8221;, so it doesn't always suffice to define delegation in those terms.
+To read that "delegation is a design pattern that [insert explanation here]&#8221; never really clicked with me. Many who are new to programming have not dealt extensively with "design patterns&#8221;, so it doesn't always suffice to define delegation in those terms.
 
 I suspect that since Swift has lowered the barrier to entry for iOS development, many who are new to the platform are also new to coding in general, so here's my attempt to explain what clicked for me regarding what delegation _is_:
 
@@ -34,11 +34,11 @@ I suspect that since Swift has lowered the barrier to entry for iOS development,
 
 #### Design pattern
 
-First, take the phrase &#8220;design pattern&#8221;.
+First, take the phrase "design pattern&#8221;.
 
 **Design** implies architecture. It connotes a strategy for organizing something. Design conveys the method by which components will work together to accomplish an end.
 
-**Pattern** implies that there is some repeatable process that has honed in around a common thread&#8230; a common practice&#8230; a predictable method for doing something. &#8220;Pattern&#8221; gives the impression that such a practice has converged over time into something that is now well-known, well-understood, and commonly used. I imagine a sort of &#8220;survival of the fittest&#8221; approach to process and practice. Things that didn't converge or that were weaker in the real world fell away and the strongest survived into this thing we call &#8220;pattern&#8221;.
+**Pattern** implies that there is some repeatable process that has honed in around a common thread&#8230; a common practice&#8230; a predictable method for doing something. "Pattern&#8221; gives the impression that such a practice has converged over time into something that is now well-known, well-understood, and commonly used. I imagine a sort of "survival of the fittest&#8221; approach to process and practice. Things that didn't converge or that were weaker in the real world fell away and the strongest survived into this thing we call "pattern&#8221;.
 
 A **design pattern** in software terms, then, is a method for architecting, strategizing about, and organizing an application's code in such a way that has been found to be commonplace, repeatable, and practically sound over time.
 
@@ -48,15 +48,15 @@ A **design pattern** in software terms, then, is a method for architecting, stra
 
 Now take the word delegation. Three things come to my mind:
 
-  1. The verb, &#8220;to delegate&#8221;, meaning &#8220;to give control&#8221;
-  2. The noun, &#8220;a delegate&#8221;, meaning &#8220;a person acting for another&#8221;
-  3. The made-up noun, &#8220;a delegat_or_&#8220;, or more properly, a _principal_, meaning &#8220;a person who delegates to another&#8221;
+  1. The verb, "to delegate&#8221;, meaning "to give control&#8221;
+  2. The noun, "a delegate&#8221;, meaning "a person acting for another&#8221;
+  3. The made-up noun, "a delegat_or_", or more properly, a _principal_, meaning "a person who delegates to another&#8221;
 
 In the real world, the word delegation encapsulates relationship and responsibility. A delegator/principal (noun) would delegate (verb) control or responsibility to another person called a delegate.
 
 How could we map this to software? Well, it actually falls in line quite nicely.
 
-Rather than _people_, we're dealing with instances of _classes_ (or other data structures like structs, but I'm just going to keep it simple and say &#8220;class&#8221; to encapsulate the idea). For delegation to occur in software, you'd have a situation where one class (a delegator/principal class) would delegate control or responsibility, here meaning behavioral logic, to another class called a delegate.
+Rather than _people_, we're dealing with instances of _classes_ (or other data structures like structs, but I'm just going to keep it simple and say "class&#8221; to encapsulate the idea). For delegation to occur in software, you'd have a situation where one class (a delegator/principal class) would delegate control or responsibility, here meaning behavioral logic, to another class called a delegate.
 
 <a name="how-used" class="jump-target"></a>
 
@@ -100,7 +100,7 @@ These are all customization-points that a `UITableView` allows its delegate to h
 
 ### Wrapping up
 
-With delegation being such a heavily utilized strategy for organizing an iOS application's logic, understanding what it is becomes key concern. In this article we unpacked the terms &#8220;design pattern&#8221; and &#8220;delegation&#8221; to get a grasp of why those words were chosen to describe the strategy. Finally, we looked at how the delegation pattern is used in practice, observing that two common use-cases for delegation: class-to-class communication and customization.
+With delegation being such a heavily utilized strategy for organizing an iOS application's logic, understanding what it is becomes key concern. In this article we unpacked the terms "design pattern&#8221; and "delegation&#8221; to get a grasp of why those words were chosen to describe the strategy. Finally, we looked at how the delegation pattern is used in practice, observing that two common use-cases for delegation: class-to-class communication and customization.
 
 <a name="related" class="jump-target"></a>
 

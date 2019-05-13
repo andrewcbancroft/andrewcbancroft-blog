@@ -46,17 +46,17 @@ After installation, I created a Business Intelligence Center site without any tr
   </ul>
 </div>
 
-Other times, I would receive a little bit more of a generic message saying something to the effect of &#8220;This SQL Server Reporting Services (SSRS) functionality is not supported&#8221; or &#8220;Unsupported Reporting Services Functionality&#8221;.
+Other times, I would receive a little bit more of a generic message saying something to the effect of "This SQL Server Reporting Services (SSRS) functionality is not supported&#8221; or "Unsupported Reporting Services Functionality&#8221;.
 
 As it turns out, our specific problem was unrelated to any three of those bullet points.
 
 Our solution?
 
 <div class="note">
-  Make sure to install the &#8220;Reporting Services Add-in for SharePoint Products&#8221; to all Web Front-End (WFE) nodes of your SharePoint farm.
+  Make sure to install the "Reporting Services Add-in for SharePoint Products&#8221; to all Web Front-End (WFE) nodes of your SharePoint farm.
 </div>
 
-On the Feature Selection screen of SQL Server setup, you can simply choose &#8220;Reporting Services Add-in for SharePoint Products&#8221; on your other WFE nodes.  You don't need to install the Database Engine Services or Reporting Services – SharePoint all over again&#8230;just the Add-in.
+On the Feature Selection screen of SQL Server setup, you can simply choose "Reporting Services Add-in for SharePoint Products&#8221; on your other WFE nodes.  You don't need to install the Database Engine Services or Reporting Services – SharePoint all over again&#8230;just the Add-in.
 
 We began to suspect it was something related to missing components on the other nodes because as I was troubleshooting, I noticed that if I attempted to create a Report Data Source enough times, I would be able to proceed to different stages of the creation process.  Sometimes I would hit the error right away.  Sometimes I would get to the page where I could fill out the connection details but when I would attempt to save the data source I would get one of the error pages described above.
 

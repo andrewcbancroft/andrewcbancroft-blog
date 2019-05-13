@@ -28,13 +28,13 @@ The goal of this post is to help you grasp the fundamentals of using `NSNotifica
 
 ### First things first: What _is_ this thing?
 
-When I first heard `NSNotificationCenter`, I thought &#8220;push notifications&#8221;. However, `NSNotificationCenter` has nothing to do with sending or receiving push notifications in iOS. Rather, it is a communication tool internal to your app. It provides a way for one instance of a class/struct to notify one or more _other_ class/struct instances about something. The goal in doing this is to enable those 1+ other class or struct instances to take appropriate action based the communication they receive. An common analogy comes to mind: think &#8220;radio tower&#8221;. `NSNotificationCenter` is the central hub that acts as a _broadcaster_ of notifications. If that still seems vague, hang tight – seeing the example below should help it all come together for you.
+When I first heard `NSNotificationCenter`, I thought "push notifications&#8221;. However, `NSNotificationCenter` has nothing to do with sending or receiving push notifications in iOS. Rather, it is a communication tool internal to your app. It provides a way for one instance of a class/struct to notify one or more _other_ class/struct instances about something. The goal in doing this is to enable those 1+ other class or struct instances to take appropriate action based the communication they receive. An common analogy comes to mind: think "radio tower&#8221;. `NSNotificationCenter` is the central hub that acts as a _broadcaster_ of notifications. If that still seems vague, hang tight – seeing the example below should help it all come together for you.
 
 <a name="should-i-use-it" class="jump-target"></a>
 
 ### Should I use it?
 
-Before diving into the basic workflow, it's worth asking, &#8220;Should I use `NSNotificationCenter`, or is there some other option that's more appropriate for my app's internal communication needs?&#8221;
+Before diving into the basic workflow, it's worth asking, "Should I use `NSNotificationCenter`, or is there some other option that's more appropriate for my app's internal communication needs?&#8221;
 
 It is often the case that there is more than one way to solve a problem in software development, and it's no different with `NSNotificationCenter`. There is more than one way to accomplish instance-to-instance communication at run-time. I've written about two such forms of communication in my post titled [NSNotificationCenter vs Delegation – An Analysis][2]. It may be worth reading up on, just to make sure you're using the right tool for the right kind of communication.
 
@@ -46,9 +46,9 @@ It is often the case that there is more than one way to solve a problem in softw
 
 The basic workflow of using `NSNotificationCenter` goes something like this:
 
-  1. Since \`NSNotificationCenter\` is in the business of broadcasting notifications, the first thing to do is to specify a way to uniquely identify a notification. This is most easily accomplished by defining a constant string value (using \`let\` syntax in Swift) at a globally-visible scope. The string constant you define here will serve as a &#8220;notification key&#8221;. If you have several notification keys that you need to define, perhaps creating a new .swift file called &#8220;NSNotificationCenterKeys.swift&#8221; is a clean way to do this.
+  1. Since \`NSNotificationCenter\` is in the business of broadcasting notifications, the first thing to do is to specify a way to uniquely identify a notification. This is most easily accomplished by defining a constant string value (using \`let\` syntax in Swift) at a globally-visible scope. The string constant you define here will serve as a "notification key&#8221;. If you have several notification keys that you need to define, perhaps creating a new .swift file called "NSNotificationCenterKeys.swift&#8221; is a clean way to do this.
   2. Steps 2 and 3 of the workflow go hand-in-hand. Without implementing the one, implementing the other doesn't make much sense&#8230; Step 2 is to _post_ a notification to \`NSNotificationCenter.default\` identified by the key that was created in step 1. In radio terms, the class or struct instance desiring to post a notification asks the default notification center to broadcast the notification key defined in step 1&#8230; this class or struct instance chooses the right situations to request that the notification key be sent out based on business logic specific to the project's requirements.
-  3. Step 3 is to set up 1+ class or struct instances to be _listeners_, or more properly, _observers_ of a particular notification. Such an observer will be able to tell that it's &#8220;heard&#8221; the notification, because it will be &#8220;listening for&#8221; a notification that uses the same key that was created in step 1, which is the key used in step 2 to _post_ the notification. In radio terms, the listener is tuned in to the default notification center's station that's identified by that special key defined in step 1 and posted in step 2. So you see now why steps 2 and 3 go hand-in-hand. With no posts to the notification center on that station, tuning in will do no good. Likewise, posting a notification but having no listeners accomplishes nothing.
+  3. Step 3 is to set up 1+ class or struct instances to be _listeners_, or more properly, _observers_ of a particular notification. Such an observer will be able to tell that it's "heard&#8221; the notification, because it will be "listening for&#8221; a notification that uses the same key that was created in step 1, which is the key used in step 2 to _post_ the notification. In radio terms, the listener is tuned in to the default notification center's station that's identified by that special key defined in step 1 and posted in step 2. So you see now why steps 2 and 3 go hand-in-hand. With no posts to the notification center on that station, tuning in will do no good. Likewise, posting a notification but having no listeners accomplishes nothing.
   4. Finally, what should the observing instance _do_ once it's detected the notification? Well, when signing up to be an observer, the instance must also specify the name of a function that will be called upon receipt of the notification it's listening for. Whatever action or routine is appropriate to perform at that time is what that function's implementation should contain.
 
 <a name="visualize" class="jump-target"></a>
@@ -65,7 +65,7 @@ Working back through the basic workflow with this example you can find the follo
 
 #### Steps 1 and 2:
 
-I've chosen my `FirstViewController` class to be the one that defines the global constant with a unique notification key and tells the default notification center to post that notification when the &#8220;Notify!&#8221; button is tapped:
+I've chosen my `FirstViewController` class to be the one that defines the global constant with a unique notification key and tells the default notification center to post that notification when the "Notify!&#8221; button is tapped:
 
 ```swift
 // 1. Globally define a "special notification key" constant that can be broadcast / tuned in to...

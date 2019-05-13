@@ -64,7 +64,7 @@ Note that you'll need to perform the Control + Click + Drag maneuver twice to se
 
 #### Configure keyboard dismissal for table view
 
-With the attributes inspector selected in the utilities pane, scroll down to the Keyboard option and set it to &#8220;Dismiss on drag&#8221;.  
+With the attributes inspector selected in the utilities pane, scroll down to the Keyboard option and set it to "Dismiss on drag&#8221;.  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1-1024x509.png" alt="Configure Keyboard Dismissal" width="1024" height="509" class="alignnone size-large wp-image-11357" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1-1024x509.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1-300x149.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" />][4]  
 This can be helpful if you'd like the keyboard to automatically hide itself when the user scrolls the table view.
 
@@ -72,7 +72,7 @@ This can be helpful if you'd like the keyboard to automatically hide itself when
 
 #### Set constraints, increase prototype cells count
 
-Use the document outline to set constraints. With the attributes inspector selected in the utilities pane, select &#8220;Dynamic Prototypes&#8221; for the Content property, and set the Prototype Count property to 1 (or more, depending on your needs).  
+Use the document outline to set constraints. With the attributes inspector selected in the utilities pane, select "Dynamic Prototypes&#8221; for the Content property, and set the Prototype Count property to 1 (or more, depending on your needs).  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1-1024x508.png" alt="Set Constraints and Prototype Cells" width="1024" height="508" class="alignnone size-large wp-image-11352" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1-1024x508.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1-300x149.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" />][5]  
 Configuring constraints on the table view will ensure that it displays properly on all device sizes and orientations.
 
@@ -143,7 +143,7 @@ Use the document outline to select the Table View Cell. With the identity inspec
 
 #### Set reuse identifier
 
-With the Table View Cell still selected in the document outline, select the attribute inspector in the utilities pane and change the Identifier property to &#8220;TextInputCell&#8221; (or some other string that's easily remembered).  
+With the Table View Cell still selected in the document outline, select the attribute inspector in the utilities pane and change the Identifier property to "TextInputCell&#8221; (or some other string that's easily remembered).  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_2-1024x511.png" alt="Set Reuse Identifier" width="1024" height="511" class="alignnone size-large wp-image-11323" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_2-1024x511.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_2-300x150.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" />][11]
 
 <a name="implement-datasource-delegate" class="jump-target"></a>

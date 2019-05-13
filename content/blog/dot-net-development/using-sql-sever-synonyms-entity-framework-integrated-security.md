@@ -35,20 +35,20 @@ Suppose we have the following scenario before us:
 
 **Details**
 
-  * We're using &#8220;Integrated Security=True&#8221; in our connection string to the database (in web.config)
+  * We're using "Integrated Security=True&#8221; in our connection string to the database (in web.config)
   * The Application Pool in which our app resides is running under a domain service account (ie, not the default identity)
   * Our application primarily talks to one database, but there is information in _another_ database that we need to pull into our app
   * To access the data in that other database, we've chosen to create a [Synonym][1]
 
-Every bullet point in this scenario is normal and valid, until you get to the part about using &#8220;Integrated Security=True&#8221; in your connection string&#8230;
+Every bullet point in this scenario is normal and valid, until you get to the part about using "Integrated Security=True&#8221; in your connection string&#8230;
 
 <a name="login-failed" class="jump-target"></a>
 
 ### Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON'
 
-If we had chosen to use SQL Server authentication in our conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that's what I had been doing in my own application. I started running into the &#8220;Login failed&#8230;&#8221; error message once I switched to Integrated Security.
+If we had chosen to use SQL Server authentication in our conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that's what I had been doing in my own application. I started running into the "Login failed&#8230;&#8221; error message once I switched to Integrated Security.
 
-For some reason &#8220;Integrated Security=True&#8221; that throws Entity Framework for a loop. It accesses the database used in the `DbContext` instance just fine, but the second a line of code needs to use the object mapped to the _Synonym_, **boom**&#8230; crash&#8230; error&#8230;
+For some reason "Integrated Security=True&#8221; that throws Entity Framework for a loop. It accesses the database used in the `DbContext` instance just fine, but the second a line of code needs to use the object mapped to the _Synonym_, **boom**&#8230; crash&#8230; error&#8230;
 
 <a name="reolving-error" class="jump-target"></a>
 
@@ -68,7 +68,7 @@ A Synonym essentially maps to an entire table, so the View's structure could lit
 
 If the service account that's running your Application Pool doesn't already have permission to the database objects you created the View for, you need to go in and grant appropriate permissions to that account. Otherwise, you're likely to get an error stating
 
-> The server principal &#8220;Domain\PrincipalName&#8221; is not able to access the database &#8220;DatabaseName&#8221; under the current security context.
+> The server principal "Domain\PrincipalName&#8221; is not able to access the database "DatabaseName&#8221; under the current security context.
 
 Be specific and granular with the permission you grant to the account. If you're just pulling in data for your app to display, only give the account SELECT permission on the database object your View references.
 

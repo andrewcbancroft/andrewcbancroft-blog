@@ -78,7 +78,7 @@ Kiss the sign up/login screens goodbye!
 
 # CloudKit is Free for Longer
 
-All of the backend as a service providers offer a free tier or a free trial, and while I don't have personal experience with these services' payment threshholds, it's my observation that CloudKit's free tier might &#8220;last longer&#8221;. What do I mean by that?
+All of the backend as a service providers offer a free tier or a free trial, and while I don't have personal experience with these services' payment threshholds, it's my observation that CloudKit's free tier might "last longer&#8221;. What do I mean by that?
 
   1. Data of any kind stored in a user's _private_ database doesn't count against your app's storage alotment&#8230; it counts against the _user's_ iCloud storage plan. This extends the mileage of your _app's_ storage alotment.
   2. CloudKit distinguishes between storage for _non-binary data_ and storage for _media_ (binary data like images, videos, audio, etc). You [start off with][2] 100 MB of non-binary data storage, but **10 GB** of image/video/audio/etc. storage. In contrast&#8230; 
@@ -136,11 +136,11 @@ What does Apple depend on for their own apps' remote data storage and sharing ne
 
 Answer: CloudKit.
 
-Clearly, Apple is in a unique situation: Apple neither needs nor cares to develop any of its apps for Android. Naturally, they'd depend on the very framework they created. Otherwise, we could argue, &#8220;What a bunch of hypocrites!&#8221;, right?
+Clearly, Apple is in a unique situation: Apple neither needs nor cares to develop any of its apps for Android. Naturally, they'd depend on the very framework they created. Otherwise, we could argue, "What a bunch of hypocrites!&#8221;, right?
 
 CloudKit serves the needs of apps like Photos, iCloud Drive, Notes, News, and more.
 
-It's almost as if Apple developed CloudKit for Apple, and decided, &#8220;Hey, let's open this up to our developers and let them tap in to what works awesome for us!&#8221;
+It's almost as if Apple developed CloudKit for Apple, and decided, "Hey, let's open this up to our developers and let them tap in to what works awesome for us!&#8221;
 
 I like that. I like the security of knowing that Apple depends on the framework they're delivering to us.
 
@@ -154,7 +154,7 @@ In fairness, I would point out a few trade-offs if you were to go with CloudKit.
 
 ## No Native Android support
 
-This tradeoff is qualified with the words &#8220;no _native_ Android support&#8221; for a reason. CloudKit JS may actually open the door for folks developing cross platform apps, though it may take some hacking.
+This tradeoff is qualified with the words "no _native_ Android support&#8221; for a reason. CloudKit JS may actually open the door for folks developing cross platform apps, though it may take some hacking.
 
 Expect some challenges on the Android side of things, but don't completely count CloudKit out.
 
@@ -162,7 +162,7 @@ Expect some challenges on the Android side of things, but don't completely count
 
 ## Data storage and sharing _only_ with CloudKit
 
-With CloudKit, you get a fully-functional remote data storage and sharing service. If you're wanting to leverage some advanced functionality like &#8220;cloud functions&#8221;, analytics for your app, non-Apple ID authentication, remote machine learning services, and the like, you won't find those features in CloudKit.
+With CloudKit, you get a fully-functional remote data storage and sharing service. If you're wanting to leverage some advanced functionality like "cloud functions&#8221;, analytics for your app, non-Apple ID authentication, remote machine learning services, and the like, you won't find those features in CloudKit.
 
 This doesn't mean that Apple leaves you nanging when it comes to authentication, analytics, machine learning, etc.
 
@@ -174,7 +174,7 @@ If, after considering Apple's component solutions, you're looking for alternativ
 
 As I mentioned above though&#8230; if all you really _need_ is a remote data store for cross-device data syncing, don't over-complicate things. CloudKit can still serve you well.
 
-Another alternative is to use a public cloud provider like Azure or AWS for &#8220;cloud functions&#8221; or remote machine learning. If you prefer to component-ize these kinds of services, this is a viable alternative to Firebase, or Apple's own solutions to these kinds of problems.
+Another alternative is to use a public cloud provider like Azure or AWS for "cloud functions&#8221; or remote machine learning. If you prefer to component-ize these kinds of services, this is a viable alternative to Firebase, or Apple's own solutions to these kinds of problems.
 
 <a class="jump-target" name="feedback"></a>
 

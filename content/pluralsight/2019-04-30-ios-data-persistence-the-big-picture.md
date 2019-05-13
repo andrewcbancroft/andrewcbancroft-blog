@@ -20,11 +20,11 @@ tags:
   - UserDefaults
 
 ---
-We've all been there. Do a search on the topic of &#8220;saving data in iOS&#8221; and you'll get _dozens_ of search results mentioning at least six different frameworks and platforms, and a month’s worth of reading.
+We've all been there. Do a search on the topic of "saving data in iOS&#8221; and you'll get _dozens_ of search results mentioning at least six different frameworks and platforms, and a month’s worth of reading.
 
 Wouldn't it be nice to distill the possibilities down into _just what you need_ in order to start down a path for persisting data in your app?
 
-&#8220;[iOS Data Persistence: The Big Picture][1]&#8221; will be worth the hour of your time.
+"[iOS Data Persistence: The Big Picture][1]&#8221; will be worth the hour of your time.
 
 <div class="resources">
   <div class="resources-header">
@@ -105,7 +105,7 @@ What if you need to encapsulate chunks of content together and save it all as a 
 
 For that, you need to know about saving data as documents and files.
 
-  * You will explore the use-case for building a &#8220;document-based application&#8221;
+  * You will explore the use-case for building a "document-based application&#8221;
   * Next you will walk through designing a document as a subclass of `UIDocument`
   * You will learn to create and load documents from a Document Browser
   * Customizing your app's file extension is a key step that you will work through

@@ -18,9 +18,7 @@ tags:
 ---
 Core Data is an extremely powerful framework for managing and persisting data on your users' devices. And let's face it: saving data to your users' devices is inevitable. The question is, which data management and persistence technology you use when the time comes for _you_ to tackle this challenge?
 
-I've been hard at work on a new course for Pluralsight called &#8220;[Core Data Fundamentals with Swift][1]&#8220;, and the best news is that it's now LIVE in the Pluralsight library!
-
-The course will give you the essential skills you need to architect an app to use Core Data.
+"[Core Data Fundamentals with Swift][1]" will give you the essential skills you need to architect an app to use Core Data.
 
 # Course Trailer
 
@@ -80,7 +78,7 @@ Change is constant. Be prepared for the latest enhancements to the Core Data fra
 
 # Course Resources
 
-Demos of technology in action are _super_ important to me. That being the case, I tried to pack as much demo content into the course as possible. You'll get to see the full array of dev-time experiences, not just the final &#8220;it works perfectly&#8221; outcomes.
+Demos of technology in action are _super_ important to me. That being the case, I tried to pack as much demo content into the course as possible. You'll get to see the full array of dev-time experiences, not just the final "it works perfectly&#8221; outcomes.
 
 The course also comes complete with working Xcode projects that gradually build you up to the final version of the app, one step at a time through each module.
 

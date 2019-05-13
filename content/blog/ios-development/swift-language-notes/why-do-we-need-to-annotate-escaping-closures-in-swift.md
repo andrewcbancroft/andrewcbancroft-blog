@@ -17,7 +17,7 @@ tags:
 ---
 My last entry on [escaping closures][1] ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that's a different story&#8230; :]
 
-Several readers commented here and on Medium with the question, &#8220;Why? Why do we need to mark escaping closures with `@escaping`?&#8221;
+Several readers commented here and on Medium with the question, "Why? Why do we need to mark escaping closures with `@escaping`?&#8221;
 
 
 
@@ -25,7 +25,7 @@ Several readers commented here and on Medium with the question, &#8220;Why? Why 
 
 # Do it yourself, compiler!
 
-Observant minds looked at the compiler's ability to say, &#8220;Hey! This closure can escape – Annotate it with `@escaping`!&#8221; and asked, &#8220;Well&#8230; _why_?? If you, compiler, are smart enough to figure out that I need to annotate it, why can't you just deal with it automatically and let me go about my business?&#8221;
+Observant minds looked at the compiler's ability to say, "Hey! This closure can escape – Annotate it with `@escaping`!&#8221; and asked, "Well&#8230; _why_?? If you, compiler, are smart enough to figure out that I need to annotate it, why can't you just deal with it automatically and let me go about my business?&#8221;
 
 Good. Question.
 
@@ -41,19 +41,19 @@ As I dug around in the [Swift GitHub repository][2] and the [Swift Evolution lis
 
 Did you catch that?
 
-When the Swift compiler requires us to annotate our APIs with `@escaping`, that's its way of doing &#8220;quality of implementation&#8221;.
+When the Swift compiler requires us to annotate our APIs with `@escaping`, that's its way of doing "quality of implementation&#8221;.
 
-Essentially, it's a red flag saying, &#8220;You really ought to think about this whole escaping thing that you just introduced (whether you knew you were doing it or not)&#8230; it has significant impact on your implementation _and_ on the caller of your function!&#8221;
+Essentially, it's a red flag saying, "You really ought to think about this whole escaping thing that you just introduced (whether you knew you were doing it or not)&#8230; it has significant impact on your implementation _and_ on the caller of your function!&#8221;
 
 <a name="help" class="jump-target"></a>
 
 # I see what you did there&#8230; Let me help you out&#8230;
 
-The Swift compiler, for better or worse, wants to be very&#8230; &#8220;helpful&#8221;&#8230;
+The Swift compiler, for better or worse, wants to be very&#8230; "helpful&#8221;&#8230;
 
 Some people hate it. I love it.
 
-I _want_ to be told, &#8220;Hey, Andrew&#8230; you're about to break stuff – don't do that.&#8221;
+I _want_ to be told, "Hey, Andrew&#8230; you're about to break stuff – don't do that.&#8221;
 
 I'd rather head off issues during development than at run-time.
 
@@ -65,9 +65,9 @@ But really&#8230; How helpful is this particular compiler error? What value does
 
 Try this: Think about what would happen if the compiler _didn't_ tell you about the possibility of your function's closure escaping.
 
-I was working the other day, cruising along writing what I thought was perfectly normal code when I hit this &#8220;annotate your function's closure parameter with `@escaping`&#8221; error, myself.
+I was working the other day, cruising along writing what I thought was perfectly normal code when I hit this "annotate your function's closure parameter with `@escaping`&#8221; error, myself.
 
-&#8220;`@escaping`, Huh? What's that?!&#8221;
+"`@escaping`, Huh? What's that?!&#8221;
 
 1 – I wasn't thinking about escaping closures because  
 2 – I had no idea that I _could_ think about escaping closures!!
@@ -76,7 +76,7 @@ It turns out that this could have been really bad, agreed? Asynchronous behavior
 
 If the compiler hadn't stopped me, I could have inadvertently imposed the need to think in terms of dispatch queues or asynchronous callbacks on the users of my API.
 
-Is this only something that &#8220;newbies&#8221; need to have the compiler's help with though?
+Is this only something that "newbies&#8221; need to have the compiler's help with though?
 
 One could argue that I probably should have been aware of this particular feature of Swift &#8212; had I been a better developer, maybe I wouldn't need the compiler to hold my hand so much.
 
@@ -116,7 +116,7 @@ Most of all, I need to **think** about the implications of what I'm doing, and s
 
 All of this to say: The compiler is making you think. Not only that, it's forcing you to conform.
 
-From what I've found, that's the idea behind &#8220;why&#8221; we need to mark escaping closures with `@escaping` in Swift.
+From what I've found, that's the idea behind "why&#8221; we need to mark escaping closures with `@escaping` in Swift.
 
 <a name="related" class="jump-target"></a>
 

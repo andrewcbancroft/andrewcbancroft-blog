@@ -27,9 +27,9 @@ My goal with this blog entry is to help get you set up to create NSManagedObject
 
 # Example
 
-Let's look at a fabricated example: Say that you've got a Core Data project and you're creating Entities.  For my simple project, I'll create an Entity called &#8220;MyEntity&#8221; with an attribute called &#8220;myAttribute&#8221;.
+Let's look at a fabricated example: Say that you've got a Core Data project and you're creating Entities.  For my simple project, I'll create an Entity called "MyEntity&#8221; with an attribute called "myAttribute&#8221;.
 
-After you create an NSManagedObject subclass for the Entity and come back to the data model screen to specify the &#8220;Class&#8221; in the inspector area, you _must_ prefix the name of the class with &#8220;YourProjectName.&#8221; (don't forget the dot).  Forgetting to do this will lead to run-time errors when you start interacting with instances of your NSManagedObject subclass.
+After you create an NSManagedObject subclass for the Entity and come back to the data model screen to specify the "Class&#8221; in the inspector area, you _must_ prefix the name of the class with "YourProjectName.&#8221; (don't forget the dot).  Forgetting to do this will lead to run-time errors when you start interacting with instances of your NSManagedObject subclass.
 
 <a title="Documentation specifying module name prefix requirement" href="https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/BuildingCocoaApps/WritingSwiftClassesWithObjective-CBehavior.html" target="_blank">Apple specifies this in their documentation page</a>, but it was a subtle mention at the end of the document and I just happened upon it as I was troubleshooting this:
 
@@ -43,17 +43,17 @@ After you create an NSManagedObject subclass for the Entity and come back to th
 
 ## Create an Entity
 
-In your .xcdatamodeld file, create an Entity to your liking.  In my example, I named the Entity &#8220;MyEntity&#8221; and I gave it an attribute called &#8220;myAttribute&#8221; with a data type of String.  
+In your .xcdatamodeld file, create an Entity to your liking.  In my example, I named the Entity "MyEntity&#8221; and I gave it an attribute called "myAttribute&#8221; with a data type of String.  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManagedObjectSubclassExample-1024x783.png" alt="Create Entity and Attribute" width="730" height="558" class="alignnone size-large wp-image-1901" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManagedObjectSubclassExample-1024x783.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManagedObjectSubclassExample-300x229.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManagedObjectSubclassExample.png 1202w" sizes="(max-width: 730px) 100vw, 730px" />][1]
 
 <a name="create-nsmanagedobject-subclass" class="jump-target"></a>
 
 ## Create an NSManagedObject Subclass for that Entity
 
-On the Menu, click Editor, then &#8220;Create NSManagedObject Subclass&#8230;&#8221;  
+On the Menu, click Editor, then "Create NSManagedObject Subclass&#8230;&#8221;  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM-1024x700.png" alt="Create NSManagedObject Subclass" width="730" height="499" class="alignnone size-large wp-image-1961" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM-1024x700.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM-300x205.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM.png 1524w" sizes="(max-width: 730px) 100vw, 730px" />][2]
 
-Make sure you choose &#8220;Swift&#8221; as your language of choice as you click Next through the wizard and Xcode will generate you a file that is appropriate for your Entity.  The files it created for me (Xcode 7.1.1) look like this:
+Make sure you choose "Swift&#8221; as your language of choice as you click Next through the wizard and Xcode will generate you a file that is appropriate for your Entity.  The files it created for me (Xcode 7.1.1) look like this:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1-1024x298.png" alt="NSManagedObject Class file" width="1024" height="298" class="alignnone size-large wp-image-12993" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1-1024x298.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1-300x87.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1.png 1390w" sizes="(max-width: 1024px) 100vw, 1024px" />][3]
 
@@ -61,11 +61,11 @@ Make sure you choose &#8220;Swift&#8221; as your language of choice as you click
 
 <a name="verify-class-module" class="jump-target"></a>
 
-## Verify NSManagedObject class in the &#8220;Data Model Inspector&#8221;
+## Verify NSManagedObject class in the "Data Model Inspector&#8221;
 
 Make sure that you have your .xcdatamodeld file selected in the Navigator panel.  Then make sure your Utilities panel is visible.
 
-Click the &#8220;Data Model Inspector&#8221; icon.  This will be the last icon in the inspector of Xcode.  You should see a section for &#8220;Entity&#8221; and within this section, two textboxes:  one for Name and one for Class. You should also see a drop-down for the Module that the NSManagedObject subclass is found in.
+Click the "Data Model Inspector&#8221; icon.  This will be the last icon in the inspector of Xcode.  You should see a section for "Entity&#8221; and within this section, two textboxes:  one for Name and one for Class. You should also see a drop-down for the Module that the NSManagedObject subclass is found in.
 
 You'll be verifying the _Class_ and the _Module_ values:
 
@@ -73,7 +73,7 @@ You'll be verifying the _Class_ and the _Module_ values:
 
 According to the <a title="Documentation specifying module name prefix requirement" href="https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/BuildingCocoaApps/WritingSwiftClassesWithObjective-CBehavior.html" target="_blank">Swift documentation</a>, Swift class namespaces are scoped to the module they're compiled in (usually the project you're working in).  
 
-To use the NSManagedObject subclass in your project, you just need to verify that the Module setting is set to &#8220;Current Product Module&#8221;, assuming that the NSManagedObject subclass you're wiring this Entity to is found in that module. If it's in _another_ module, you'll need to adjust the Module value in the inspector appropriately.
+To use the NSManagedObject subclass in your project, you just need to verify that the Module setting is set to "Current Product Module&#8221;, assuming that the NSManagedObject subclass you're wiring this Entity to is found in that module. If it's in _another_ module, you'll need to adjust the Module value in the inspector appropriately.
 
 Once the Class and Module values are verified (or set), you'll be able to use this NSManagedObject subclass anywhere in your project.
 

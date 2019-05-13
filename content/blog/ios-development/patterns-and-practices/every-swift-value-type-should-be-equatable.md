@@ -21,7 +21,7 @@ As I listened to the WWDC15 talk on [Building Better Apps with Value Types in Sw
 
 That is, every Value Type should conform to the `Equatable` protocol.
 
-Talk about a sweeping statement! Wow – _every_ Value Type should be `Equatable`? Hmm&#8230; Let's unpack the &#8220;why's&#8221; and &#8220;how's&#8221; of this statement.
+Talk about a sweeping statement! Wow – _every_ Value Type should be `Equatable`? Hmm&#8230; Let's unpack the "why's&#8221; and "how's&#8221; of this statement.
 
 
 
@@ -65,7 +65,7 @@ In fact, we naturally expect to ask these kinds of equality questions about _any
 
 We _do_ expect to test for equality between two Value Types. It just makes sense.
 
-So now the question is, &#8220;_How_?&#8221;
+So now the question is, "_How_?&#8221;
 
 The simple answer is that our Value Types need to implement an `==` operator. But there's something really important to consider:
 
@@ -79,7 +79,7 @@ To be truly equal, the `==` operator not only needs to be implemented, but it ne
   2. The comparison must be **symmetric**
   3. The comparison must be **transitive**
 
-That sounds awfully &#8220;math-y&#8221;. In fact, it's the exact same terminology used in mathematics. But don't worry, the terminology is simple and natural to understand.
+That sounds awfully "math-y&#8221;. In fact, it's the exact same terminology used in mathematics. But don't worry, the terminology is simple and natural to understand.
 
 <a name="reflexive" class="jump-target"></a>
 
@@ -135,7 +135,7 @@ x == z // true
 
 _Most_ of the time, the implementation of `==` is very simple. If your Value Type is comprised of other Value Types that have an `==` operator that's correctly implemented with the semantics I just described, then the implementation for your Type is straight-forward.
 
-An example might help to set things up for understanding. Suppose that we're building a sight-seeing app for a local tourism company. We've got a struct called `Place` to help us encapsulate the idea of&#8230; well&#8230; a &#8220;place&#8221; to visit. It looks something like this:
+An example might help to set things up for understanding. Suppose that we're building a sight-seeing app for a local tourism company. We've got a struct called `Place` to help us encapsulate the idea of&#8230; well&#8230; a "place&#8221; to visit. It looks something like this:
 
 ```swift
 struct Place {
@@ -167,15 +167,15 @@ Notice also that even though we have the source for the Type that we want to mak
 
 The implementation of `==` uses the intuitive semantics that one `Place` isn't the same as another `Place` unless the `name`s, `latidude`s, and `longitude`s are all the same.
 
-`lhs` and `rhs` simply mean &#8220;left-hand side&#8221; and &#8220;right-hand side&#8221;, respectively. Since there's a `Place` instance on the left-hand side of the `==` operator, and a `Place` instance on the right-hand side of the `==` operator when we use it in practice, it makes sense to label these parameters according to that pattern.
+`lhs` and `rhs` simply mean "left-hand side&#8221; and "right-hand side&#8221;, respectively. Since there's a `Place` instance on the left-hand side of the `==` operator, and a `Place` instance on the right-hand side of the `==` operator when we use it in practice, it makes sense to label these parameters according to that pattern.
 
-The implementation could literally be read as, &#8220;If the `Place` on the left-hand side's `name` is equal to the `Place` on the right-hand side's `name`, AND &#8230; the `latitude` &#8230; AND &#8230; the `longitude`, then the two `Place` instances are equal.&#8221;
+The implementation could literally be read as, "If the `Place` on the left-hand side's `name` is equal to the `Place` on the right-hand side's `name`, AND &#8230; the `latitude` &#8230; AND &#8230; the `longitude`, then the two `Place` instances are equal.&#8221;
 
 <a name="reference-types" class="jump-target"></a>
 
 ##### Dealing with reference types
 
-If Reference Types are involved with your Value Type implementation, things could get a little more complicated. &#8220;Complicated&#8221; probably isn't the right word&#8230; but you do have to _think_ a little more about your Type's equality semantics.
+If Reference Types are involved with your Value Type implementation, things could get a little more complicated. "Complicated&#8221; probably isn't the right word&#8230; but you do have to _think_ a little more about your Type's equality semantics.
 
 Let's modify the example just a little bit:
 
@@ -184,7 +184,7 @@ Supposing that `Place` had an additional property called `featureImage` which he
   * Are the two `Place`s equal if both of them point to the same `featureImage` (ie, should we just use `===` to check and see if the references are the same)?
   * OR, are the two `Place`s equal if both of their `featureImage` instances contain the same underlying bitmap (ie, they're the same picture in _essence_)?
 
-As you can see, the phrase &#8220;it depends&#8221; applies here. Certainly we need to test for _some_ kind of equality on the `featureImage` in order to have a complete `==` implementation. But how we go about it really comes down to the semantics that you and others would expect from asking the question, &#8220;Is this `Place` equivalent to that `Place`?&#8221;
+As you can see, the phrase "it depends&#8221; applies here. Certainly we need to test for _some_ kind of equality on the `featureImage` in order to have a complete `==` implementation. But how we go about it really comes down to the semantics that you and others would expect from asking the question, "Is this `Place` equivalent to that `Place`?&#8221;
 
 For this example, I'm going to go with the latter statement: that two `Places` are equal if both of their `featureImage` instances contain the same underlying bitmap.
 
@@ -203,7 +203,7 @@ func ==(lhs: Place, rhs: Place) -&gt; Bool {
 
 ### Wrapping up
 
-Every Value Type should conform to the `Equatable` protocol. In this article, we unpacked the &#8220;why's&#8221; and the &#8220;how's&#8221; of this fundamental characteristic of Value Types. From here, we've all got to jump on board and ensure that we meet this expectation in our code!
+Every Value Type should conform to the `Equatable` protocol. In this article, we unpacked the "why's&#8221; and the "how's&#8221; of this fundamental characteristic of Value Types. From here, we've all got to jump on board and ensure that we meet this expectation in our code!
 
 <a name="related" class="jump-target"></a>
 

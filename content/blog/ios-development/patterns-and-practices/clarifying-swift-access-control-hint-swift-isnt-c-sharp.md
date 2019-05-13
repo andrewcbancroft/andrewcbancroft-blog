@@ -18,7 +18,7 @@ As it turns out, Swift isn't C# (or Java or VB.Net or&#8230;)! My day job keeps 
 
 I just spent the greater part of a week experimenting with Swift extensions. I was trying to figure out some seemingly strange behavior that they were exhibiting.
 
-After publishing [&#8220;3 Nuances of Swift Extensions&#8221;][1], I quickly learned that I had a fundamental misunderstanding of Swift access control, thanks to some observant folks in the Swift community.
+After publishing ["3 Nuances of Swift Extensions&#8221;][1], I quickly learned that I had a fundamental misunderstanding of Swift access control, thanks to some observant folks in the Swift community.
 
 What was the hiccup? Read on to find out where I went wrong&#8230;
 
@@ -28,11 +28,11 @@ What was the hiccup? Read on to find out where I went wrong&#8230;
 
 ### How private is private?
 
-One of the most surprising &#8220;nuances&#8221; from [&#8220;3 Nuances of Swift Extensions&#8221;][1] that I discovered was that if you define an extension within the same source file as another Type, the extension's members can see the _other_ Type's `private` properties and functions! &#8220;Whaaat?? How is this possible?!&#8221;, I reacted.
+One of the most surprising "nuances&#8221; from ["3 Nuances of Swift Extensions&#8221;][1] that I discovered was that if you define an extension within the same source file as another Type, the extension's members can see the _other_ Type's `private` properties and functions! "Whaaat?? How is this possible?!&#8221;, I reacted.
 
 Well&#8230; To restate the obvious, Swift isn't C#&#8230; and it isn't C# in more ways than just syntax.
 
-Ever since access control modifiers were introduced in Xcode 6 Beta 4, I had it in my mind that `public`, `private`, and `internal` worked just like they do in C#. Sure, I read [the blog article on access control published by the Swift team][2], but it was a mere cursory look. I basically saw the three key words and thought, &#8220;Ah, I got this&#8230; moving on!&#8221;
+Ever since access control modifiers were introduced in Xcode 6 Beta 4, I had it in my mind that `public`, `private`, and `internal` worked just like they do in C#. Sure, I read [the blog article on access control published by the Swift team][2], but it was a mere cursory look. I basically saw the three key words and thought, "Ah, I got this&#8230; moving on!&#8221;
 
 This was a fundamental mistake for me to make, and it goes to show that just because there are _similarities_ between languages, it doesn't mean the _semantics_ of those similarities carry over.
 
@@ -48,13 +48,13 @@ In addition to this article, recommend giving [the Swift team's original article
 
 #### Private and C#
 
-In C#, `private` members of a Type are &#8220;truly&#8221; private. They are only visible _within that Type_. The member's visibility is limited to the curly braces enclosing the Type's implementation. That's it. No subclass can see `private` members. No other Types can see those members, no matter which file those Types are defined in. `Private` is private.
+In C#, `private` members of a Type are "truly&#8221; private. They are only visible _within that Type_. The member's visibility is limited to the curly braces enclosing the Type's implementation. That's it. No subclass can see `private` members. No other Types can see those members, no matter which file those Types are defined in. `Private` is private.
 
 <a name="private-and-swift" class="jump-target"></a>
 
 #### Private and Swift
 
-And then there's Swift. `Private` takes on _entirely different_ semantics in Swift, and herein lay my fundamental misunderstanding. It was obvious that I just didn't &#8220;get it&#8221; if you read through the [Nuances Article][1]. [sigh]
+And then there's Swift. `Private` takes on _entirely different_ semantics in Swift, and herein lay my fundamental misunderstanding. It was obvious that I just didn't "get it&#8221; if you read through the [Nuances Article][1]. [sigh]
 
 In Swift, a `private` Type, or a `public`/`internal` Type's `private` _members_ are visible to _anything else_ defined within the same **file**.
 
@@ -78,11 +78,11 @@ private struct Greeter {
 }
 ```
 
-If you're a C# developer, you look at that code and immediately go, &#8220;Yeah, that's not gonna work&#8230; `name` is `private` to `Person` and can't be referenced outside that Type&#8221;.
+If you're a C# developer, you look at that code and immediately go, "Yeah, that's not gonna work&#8230; `name` is `private` to `Person` and can't be referenced outside that Type&#8221;.
 
 But in Swift, this is totally legitimate. Even though `Person` is `private`, `Greeter` can see `Person` and initialize one, _and_ it can see `Person`&#8216;s `private` property, `name`.
 
-`Private` in Swift simply limits visibility to Types and members within the same _source file_. Multiple Types defined in the same source file can see other `private` Types, as well as other Types' `private` properties and functions. In other words, &#8220;`private` isn't `private`&#8220;, if you're thinking of private like a C# developer (or a developer familiar with other languages with access control modifiers similar to C#).
+`Private` in Swift simply limits visibility to Types and members within the same _source file_. Multiple Types defined in the same source file can see other `private` Types, as well as other Types' `private` properties and functions. In other words, "`private` isn't `private`", if you're thinking of private like a C# developer (or a developer familiar with other languages with access control modifiers similar to C#).
 
 ### Wrapping up
 

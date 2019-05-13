@@ -64,7 +64,7 @@ println(birdInstance.isSwift())
 
 This may seem pretty basic &#8212; after all, I declared the `birdInstance` as an optional and I know optionals need special treatment.  How could I make this mistake??  Perhaps this is just a consequence of my current stage in life, trying to code in 15-30 minute spurts with my 1 1/2 year old running around, haha.
 
-We all deal with this though:  it's fairly easy to write some code and come back to it later and not remember how you declared your variable in an earlier coding session.  Then when you're presented a message saying that your class doesn't have a member named &#8220;\___&#8221;, you immediately go to the class definition and see the function there, plain as day.  It's easy to spend 3-5 minutes scratching your head thinking, &#8220;What in the world??!&#8221; &#8230; And then you realize – it's that _optional declaration_ that you forgot to handle.
+We all deal with this though:  it's fairly easy to write some code and come back to it later and not remember how you declared your variable in an earlier coding session.  Then when you're presented a message saying that your class doesn't have a member named "\___&#8221;, you immediately go to the class definition and see the function there, plain as day.  It's easy to spend 3-5 minutes scratching your head thinking, "What in the world??!&#8221; &#8230; And then you realize – it's that _optional declaration_ that you forgot to handle.
 
 To fix this, of course, you can do any number of things, depending on your situation.
 
@@ -91,4 +91,4 @@ birdInstance = Bird(family: "Apodidae", color: "Black")
 println(birdInstance.isSwift())
 ```
 
-<a title="CompileSwift - Optionals" href="http://www.compileswift.com/intermediate/optionals/?utm_content=bufferfba01&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer" target="_blank">A blog post by Peter Witham over at CompileSwift</a> was the article that caused me to think, &#8220;OH!  I haven't done anything with my optional&#8230;_that's_ the problem&#8221;.  Credit to you, sir, for your post!
+<a title="CompileSwift - Optionals" href="http://www.compileswift.com/intermediate/optionals/?utm_content=bufferfba01&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer" target="_blank">A blog post by Peter Witham over at CompileSwift</a> was the article that caused me to think, "OH!  I haven't done anything with my optional&#8230;_that's_ the problem&#8221;.  Credit to you, sir, for your post!

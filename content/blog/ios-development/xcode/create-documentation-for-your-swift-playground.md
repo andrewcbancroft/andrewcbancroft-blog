@@ -16,15 +16,15 @@ tags:
   - Swift
 
 ---
-As I opened Apple's latest <a title="Apple Swift Developer Blog - Patterns Playground" href="https://developer.apple.com/swift/blog/?id=13" target="_blank">&#8220;Patterns Playground&#8221; blog post</a>, I was impressed with the look and feel.  Rather than create the documentation as comment blocks, they managed to put in sharp-looking notes and explanations before each code example / experiment.  It's like an interactive book, reminiscent of the Swift Programming Language iBook!  Here's a snippet of what their Playground looks like:
+As I opened Apple's latest <a title="Apple Swift Developer Blog - Patterns Playground" href="https://developer.apple.com/swift/blog/?id=13" target="_blank">"Patterns Playground&#8221; blog post</a>, I was impressed with the look and feel.  Rather than create the documentation as comment blocks, they managed to put in sharp-looking notes and explanations before each code example / experiment.  It's like an interactive book, reminiscent of the Swift Programming Language iBook!  Here's a snippet of what their Playground looks like:
 
 [<img class="alignnone size-large wp-image-4771" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground-1024x511.png" alt="Apple's Patterns Playground" width="730" height="364" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground-1024x511.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground-300x149.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground.png 1080w" sizes="(max-width: 730px) 100vw, 730px" />][1]
 
-Of course, my immediate question / thought was, &#8220;How'd they _do_ that?!  Can _I_ do that?  I want to do that!&#8221;.  I didn't know it at the time of this publication, but apparently Apple has some <a title="Apple Developer Documentation - Interactive Learning Playgrounds" href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Reference/Playground_Ref/Chapters/InteractiveLearning.html" target="_blank">pre-release documentation out on developer.apple.com</a>, detailing how all this is done.  I (as usual) did it the hard way and hacked my way through it.  I figured I'd go ahead and share my discoveries alongside the official documentation from Apple.
+Of course, my immediate question / thought was, "How'd they _do_ that?!  Can _I_ do that?  I want to do that!&#8221;.  I didn't know it at the time of this publication, but apparently Apple has some <a title="Apple Developer Documentation - Interactive Learning Playgrounds" href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Reference/Playground_Ref/Chapters/InteractiveLearning.html" target="_blank">pre-release documentation out on developer.apple.com</a>, detailing how all this is done.  I (as usual) did it the hard way and hacked my way through it.  I figured I'd go ahead and share my discoveries alongside the official documentation from Apple.
 
 I'm already a believer in using Playgrounds for teaching.  The read-example-experiment loop is so easy in the Playground environment.  I think using this documentation technique has the potential to enhance the Playground experience _even more_ to create professional, sharp-looking educational material_.  _
 
-For this post, I wanted to take a simple example (the File -> New Playground playground) and convert the comment-style documentation into &#8220;fancy&#8221; documentation.
+For this post, I wanted to take a simple example (the File -> New Playground playground) and convert the comment-style documentation into "fancy&#8221; documentation.
 
 ### Before:
 
@@ -40,12 +40,12 @@ Let's explore.
 
   1. Create yourself a playground (and note where you save it).
   2. Navigate to where the .playground file is saved in Finder.
-  3. Right-click the .playground file, and choose &#8220;Show Package Contents&#8221;.
-  4. Add a new folder named &#8220;Documentation&#8221;.
+  3. Right-click the .playground file, and choose "Show Package Contents&#8221;.
+  4. Add a new folder named "Documentation&#8221;.
   5. Create a new HTML file in the Documentation folder.  It should contain the HTML markup and the text explanation that you'd like to enhance your playground with.  Make sure it is a well-formed HTML document by the time you're finished creating it. I describe a quick way to jumpstart your documentation process at the end of this article&#8230;
   6. Although optional, I'd recommend styling your HTML file with appropriate CSS.  Adding a CSS file and referencing it within the HTML file you created is probably a good idea (and this is allowed for Playground documentation).
-  7. Open contents.xcplayground with the text editor of your choice by right-clicking and choosing &#8220;Open With&#8221;.
-  8. Modify the XML so that the <sections> element contains a <span class="lang:default decode:true  crayon-inline "><documentation></span> node as shown in the highlighted code lines in the example below.  Be sure to replace the relative-path value with the name of the HTML file you created in step 5 (I named mine &#8220;doc-fragment-0.html&#8221;): <pre class="lang:xhtml mark:2-3 decode:true " title="contents.xcplayground Snippet">&lt;sections&gt;
+  7. Open contents.xcplayground with the text editor of your choice by right-clicking and choosing "Open With&#8221;.
+  8. Modify the XML so that the <sections> element contains a <span class="lang:default decode:true  crayon-inline "><documentation></span> node as shown in the highlighted code lines in the example below.  Be sure to replace the relative-path value with the name of the HTML file you created in step 5 (I named mine "doc-fragment-0.html&#8221;): <pre class="lang:xhtml mark:2-3 decode:true " title="contents.xcplayground Snippet">&lt;sections&gt;
         &lt;documentation relative-path='doc-fragment-0.html'&gt;
         &lt;/documentation&gt;
         &lt;code source-file-name='section-2.swift'/&gt;

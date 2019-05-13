@@ -13,7 +13,7 @@ tags:
   - React Native
 
 ---
-I hit the &#8220;No bundle url present.&#8221; roadblock today and had to dig a bit to find the solution. I'm going to describe how I encountered the problem, and provide the solution that's worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.
+I hit the "No bundle url present.&#8221; roadblock today and had to dig a bit to find the solution. I'm going to describe how I encountered the problem, and provide the solution that's worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.
 
 <a name="problem" class="jump-target"></a>
 

@@ -27,7 +27,7 @@ Well, as the title of this article suggests, Swift extensions are the way to do 
   * You're using a library that lets you create instances of `Bird` , and you don't have access to the source code for the library.
   * `Bird ` has a property called `species ` and a property called `commonName` .
   * You'd like `Bird ` to conform to the [Printable protocol, defined in the Swift standard library][1], so that you can call `println(_:)` on `Bird ` instances, and have it log something useful to the console.
-  * When `println(_:)` is passed a `Bird ` instance, you'd like it to print out something like &#8220;\[species\] (ie, [commonName]).&#8221;, and have [species] and [commonName] be replaced by the `Bird`&#8216;s real values.
+  * When `println(_:)` is passed a `Bird ` instance, you'd like it to print out something like "\[species\] (ie, [commonName]).&#8221;, and have [species] and [commonName] be replaced by the `Bird`&#8216;s real values.
 
 Remember that you don't have access to the original source code of `Bird` . Without Swift extensions, there would be no way for you to tell the compiler that you'd like `Bird ` to adopt and conform to the `Printable ` protocol.
 
@@ -54,7 +54,7 @@ The magic line in the code above is highlighted. This tells the compiler that `B
 
 Of course, the remaining requirement then, is to implement the specification of the protocol so that `Bird` conforms to it, which is what the body of the extension contains.
 
-_Note that simply extending `Bird` to have a read-only `description` property will *not_ suffice for making the Type adopt the protocol. There is no &#8220;implicit&#8221; protocol adoption in Swift, so you must specify in the extension declaration that you intend for the Type to adopt the protocol.
+_Note that simply extending `Bird` to have a read-only `description` property will *not_ suffice for making the Type adopt the protocol. There is no "implicit&#8221; protocol adoption in Swift, so you must specify in the extension declaration that you intend for the Type to adopt the protocol.
 
 ### Conclusion
 

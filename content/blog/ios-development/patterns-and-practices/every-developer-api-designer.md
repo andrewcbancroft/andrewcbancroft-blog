@@ -19,7 +19,7 @@ Every function; every class; every struct and enum and protocol is an API.
 
 # YOU &#8212; are an API designer
 
-As developers, we move into and out of the role of &#8220;API Designer&#8221; _constantly_.
+As developers, we move into and out of the role of "API Designer&#8221; _constantly_.
 
 Have you ever thought about that? _You_ are an API designer! You create Application Programming Interfaces _all the time_.
 
@@ -27,7 +27,7 @@ I believe that everything we create has design built in, whether we've thought m
 
 I don't know why that thought changed my mindset so much, but it did. Maybe it's because I always associated APIs with massive frameworks, standard libraries, and 3rd party code modules. It's as if I thought there was a special class of developer that did that work, and all my job entailed was putting the jigsaw puzzle together.
 
-But when you and I design and create Types of any kind, be they data structures or functions, we ourselves, as &#8220;regular developers&#8221;, are in the business of creating APIs. We're building ways for ourselves and others to &#8220;connect&#8221; to and interact with our code&#8230; to interface with it and _use_ it in order to perform work.
+But when you and I design and create Types of any kind, be they data structures or functions, we ourselves, as "regular developers&#8221;, are in the business of creating APIs. We're building ways for ourselves and others to "connect&#8221; to and interact with our code&#8230; to interface with it and _use_ it in order to perform work.
 
 You may be building these things for your team to use, or you may be building them for the future [you] to use. The fact is, we slip in and out of consuming _and creating_ APIs all the time.
 
@@ -41,10 +41,10 @@ Because other people (or you!) will have to deal with what you create in a direc
 
 When we drop out of the mode of designing and creating APIs into API _consumer_ mode, we experience the ramifications of our API designs directly.
 
-  * &#8220;Why is this property named _that_??&#8221;
-  * &#8220;Does this function really need _all these parameters_?&#8221;
-  * &#8220;This function returns _what_?&#8221;
-  * &#8220;I wish this concept was represented as a \___ instead of a \___&#8230;&#8221;
+  * "Why is this property named _that_??&#8221;
+  * "Does this function really need _all these parameters_?&#8221;
+  * "This function returns _what_?&#8221;
+  * "I wish this concept was represented as a \___ instead of a \___&#8230;&#8221;
 
 When you're cognizant of what you're doing with respect to creating and consuming APIs, it's a huge help to your team and to [future you].
 
@@ -52,7 +52,7 @@ When you're cognizant of what you're doing with respect to creating and consumin
 
 I was working with a teammate, and we were having a discussion about the Type of a property in a class we were building together.
 
-The original API was a property of Type `String`, and the name of the property was `FieldNames`. I thought to myself, &#8220;Huh&#8230; FieldName**s**&#8230; plural&#8230; Why is this Typed as a `String`? Either the name should be singular, or the Type should be switched out.&#8221;
+The original API was a property of Type `String`, and the name of the property was `FieldNames`. I thought to myself, "Huh&#8230; FieldName**s**&#8230; plural&#8230; Why is this Typed as a `String`? Either the name should be singular, or the Type should be switched out.&#8221;
 
 We ended up switching that out to a Type that conveyed the idea of being able to store multiple things in that property.
 

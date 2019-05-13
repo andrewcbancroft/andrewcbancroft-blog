@@ -26,7 +26,7 @@ Swift doesn't have the notion of [abstract classes][1] like C# does. However, it
 
 What got me thinking about this? Well, I was re-watching [Protocol Oriented Programming][2] the other day and was digesting some of the arguments for why protocols often serve as better abstractions than classes. When classes are used to model a generalized abstraction, the only way they do it is through inheritance. Subclasses of some other, more generalized, base class will automatically be able to behave the same and store the same state as that base class by virtue of inheritance.
 
-Protocols on the other hand, model abstraction through composable template-like descriptions: &#8220;Adopters of this protocol will do [x, y, and z] by implementing [function x, function y, and function z] and will have [property a, and property b]&#8221;, etc&#8230; But they define a template only – no implementations are defined within a protocol.
+Protocols on the other hand, model abstraction through composable template-like descriptions: "Adopters of this protocol will do [x, y, and z] by implementing [function x, function y, and function z] and will have [property a, and property b]&#8221;, etc&#8230; But they define a template only – no implementations are defined within a protocol.
 
 In C#, we have a similar mechanism to protocols called interfaces. The same paradigm of defining a template with no implementations exists in C# when we use an interface to model some abstraction. C#, of course, also has classes and can pass along behavior and state to subclasses through inheritance.
 
@@ -87,7 +87,7 @@ Using an abstract class may look very similar. The primary difference is in the 
 }
 ```
 
-Right off, you might be asking, &#8220;Should a marathon runner have to be able to swim and cycle??&#8221;. It's a great question, and I'll address it further down in the article when I discuss [&#8220;refactoring for enhanced composability with Swift protocol extensions&#8221;][3].
+Right off, you might be asking, "Should a marathon runner have to be able to swim and cycle??&#8221;. It's a great question, and I'll address it further down in the article when I discuss ["refactoring for enhanced composability with Swift protocol extensions&#8221;][3].
 
 <a name="model-with-swift" class="jump-target"></a>
 
@@ -116,9 +116,9 @@ I want to refactor this, but for this moment in time, we'll stick with the code 
 
 As the example stands right now in both C# and Swift, we've got a situation where any Type wishing to be an `Athlete`, whether it be by implementing the C# interface, subclassing the C# abstract class, or adopting the Swift protocol, _must_ provide implementations of each of those athletic abilities (run, swim, and cycle). The Type can't _not_ implement one of those requirements and have the code still compile. They're requirements of what it means to be an `Athlete`, so the Type must conform.
 
-Suppose that in our scenario, any given `Athlete` has one _primary_ ability which he/she is amazing at, but when it comes to his/her non-primary abilities, the `Athlete` is only able to perform at &#8220;average&#8221; skill.
+Suppose that in our scenario, any given `Athlete` has one _primary_ ability which he/she is amazing at, but when it comes to his/her non-primary abilities, the `Athlete` is only able to perform at "average&#8221; skill.
 
-This sounds like a case where it might be nice to have overridable default implementation provided. Any _specific_ type of `Athlete` could override that default implementation to perform the ability better or worse, depending on what kind of `Athlete` he/she is. But if the specific `Athlete` Type didn't provide an customized override, the Type would get the &#8220;average&#8221; behavior for free.
+This sounds like a case where it might be nice to have overridable default implementation provided. Any _specific_ type of `Athlete` could override that default implementation to perform the ability better or worse, depending on what kind of `Athlete` he/she is. But if the specific `Athlete` Type didn't provide an customized override, the Type would get the "average&#8221; behavior for free.
 
 How could we make this happen?
 
@@ -158,7 +158,7 @@ So now, when we want to model a `MarathonRunner`, we can override his/her abilit
 }
 ```
 
-It's not terrible – At least here we can rely on the default implementation if we just want to give a `MarathonRunner` &#8220;average&#8221; abilities in all areas but running.
+It's not terrible – At least here we can rely on the default implementation if we just want to give a `MarathonRunner` "average&#8221; abilities in all areas but running.
 
 We might prefer that a `MarathonRunner` not be required to have _any_ ability to swim or cycle, but that's always the struggle with inheritance-based modeling. You only get to choose one base class to inherit from, and you're bound to get some behavior that you don't need, simply because it's hard to model abstractions using inheritance that avoid giving you more than you need.
 
@@ -181,7 +181,7 @@ extension Athlete {
 }
 ```
 
-Now when we want to model a `MarathonRunner` in Swift, we can adopt the `Athlete` protocol, and provide &#8220;override&#8221; implementations for any of the protocol's requirements that we'd like. Anything we don't provide a custom implementation for falls back to the protocol extension's implementation, just like in C#:
+Now when we want to model a `MarathonRunner` in Swift, we can adopt the `Athlete` protocol, and provide "override&#8221; implementations for any of the protocol's requirements that we'd like. Anything we don't provide a custom implementation for falls back to the protocol extension's implementation, just like in C#:
 
 ```swift
 class MarathonRunner: Athlete
@@ -209,7 +209,7 @@ Here's a list of the similarities I see between C# abstract classes and Swift pr
 
 So there are some similarities that I hope you can see and appreciate between C# abstract classes and Swift protocol extensions. But there are some major differences that should also be recognized:
 
-  * Fundamentally, C# abstract classes are a &#8220;behavior by inheritance&#8221; tool, while Swift protocol extension are a &#8220;behavior by composition&#8221; tool.
+  * Fundamentally, C# abstract classes are a "behavior by inheritance&#8221; tool, while Swift protocol extension are a "behavior by composition&#8221; tool.
   * Consequently, C# abstract classes impose a significant limitation: subclasses can inherit from one and only one base class. Swift protocols, on the other hand, can be decomposed into fine-grained, specific requirements that can later be re-combined and composed into more robust and dynamic Type specifications. While C# interfaces provide this same composability, they _don't_ have the ability to provide default implementation, which is a significant difference between the Swift counterpart.
   * As a consequence of _that_, subclasses of a C# abstract class get _all_ of the behavior, whether they need (or want) it or not. Swift protocols, being composable, allow a Type to conform to _just_ the pieces it needs. The protocol extension can still exist to provide default behavior when it's appropriate. But if a certain Type needs no ability to [do some thing], it simply drops conforming to that protocol and no superfluous behavior is imposed upon the Type.
 
@@ -217,11 +217,11 @@ So there are some similarities that I hope you can see and appreciate between C#
 
 ### Preferring one over the other
 
-Needless to say, I prefer Swift protocol extensions over C# abstract classes (shocker). I love the composability they offer, while at the same time allowing me to provide default implementations where it's appropriate. In my opinion, Swift protocol extensions are the perfect blend of interface and abstract class in C#. If only C# had &#8220;interface extensions&#8221;. :]
+Needless to say, I prefer Swift protocol extensions over C# abstract classes (shocker). I love the composability they offer, while at the same time allowing me to provide default implementations where it's appropriate. In my opinion, Swift protocol extensions are the perfect blend of interface and abstract class in C#. If only C# had "interface extensions&#8221;. :]
 
 Since we can apply multiple protocols to a Type to signify what the Type can do, and essentially compose its behavior, how might we diverge from the constraints we had previously when we tried to stick closely with the C# abstract class paradigm?
 
-Recall that I was uncomfortable with making a `MarathonRunner` have ability to swim and cycle, however &#8220;average&#8221; that ability may be. What I really want is to break things out a bit more, but still be able to provide that default implementation when I want it.
+Recall that I was uncomfortable with making a `MarathonRunner` have ability to swim and cycle, however "average&#8221; that ability may be. What I really want is to break things out a bit more, but still be able to provide that default implementation when I want it.
 
 How might I refactor this by leveraging even more of the power of Swift protocol extensions?
 

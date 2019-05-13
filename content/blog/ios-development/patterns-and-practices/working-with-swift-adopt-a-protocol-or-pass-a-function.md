@@ -17,7 +17,7 @@ tags:
 ---
 Without fail, any time [Rob Napier][1] ([@cocoaphony][2]) speaks or writes, I gain insight into new and deeper ways to solve problems with Swift.
 
-In January 2016, he [gave a talk at dotSwift][3], and I wanted to record my thoughts on something he said that made a lot of sense when it comes to the topic of, &#8220;Should I create and adopt a protocol for this Type I'm creating, or should I just pass it a function instead?&#8221;
+In January 2016, he [gave a talk at dotSwift][3], and I wanted to record my thoughts on something he said that made a lot of sense when it comes to the topic of, "Should I create and adopt a protocol for this Type I'm creating, or should I just pass it a function instead?&#8221;
 
 
 
@@ -40,7 +40,7 @@ and
 So in other words, there are times when, rather than going through the formality of&#8230;
 
   * Creating a protocol defining one or more functions that should be implemented
-  * Creating a Type that _adopts_ that protocol to promise that &#8220;I (as a class/struct/enum) will implement this/these function(s)&#8221;
+  * Creating a Type that _adopts_ that protocol to promise that "I (as a class/struct/enum) will implement this/these function(s)&#8221;
   * Creating an instance of that Type
   * Passing off the instance to _another_ Type that needs to _call_ that promised function
 
@@ -50,12 +50,12 @@ So in other words, there are times when, rather than going through the formality
 
 # When to pass a function
 
-Rob gave us a couple or three **rules of thumb**. Not hard-and-fast, &#8220;It should always be this way&#8221;, but just some guiding thoughts to filter our decision-making about our architecture.
+Rob gave us a couple or three **rules of thumb**. Not hard-and-fast, "It should always be this way&#8221;, but just some guiding thoughts to filter our decision-making about our architecture.
 
-When it comes to finding opportunities that lend themselves to going the &#8220;just pass the function&#8221; route, consider the following:
+When it comes to finding opportunities that lend themselves to going the "just pass the function&#8221; route, consider the following:
 
   * If you're creating a Type that depends on a single piece of functionality (a single function), maybe try depending on / passing just the function, rather than creating a protocol.
-  * If you're creating a Type that depends on more than a single function, but the nature of the dependent relationship is short-lived, maybe try depending on / passing just the function. How do you know if it's short-lived? Ask, &#8220;How many times am I going to call the function(s) that I depend on? Once, and then I'm done? Or multiple times throughout the application life-cycle?&#8221; If it's a once and done kind of relationship, much like a [callback][4], then perhaps just depending on and passing the function, rather than creating a protocol, is the simpler route.
+  * If you're creating a Type that depends on more than a single function, but the nature of the dependent relationship is short-lived, maybe try depending on / passing just the function. How do you know if it's short-lived? Ask, "How many times am I going to call the function(s) that I depend on? Once, and then I'm done? Or multiple times throughout the application life-cycle?&#8221; If it's a once and done kind of relationship, much like a [callback][4], then perhaps just depending on and passing the function, rather than creating a protocol, is the simpler route.
 
 <a name="when-to-use-a-protocol" class="jump-target"></a>
 
@@ -70,7 +70,7 @@ For some rules of thumb when it comes to choosing a protocol over just passing a
 
 # How to depend on a function
 
-In order to fully grasp how to go the &#8220;just depend on / pass the function&#8221; route, you need to have an understanding of how [function Types are described in Swift][5]. With this knowledge, you're set to do a couple of things:
+In order to fully grasp how to go the "just depend on / pass the function&#8221; route, you need to have an understanding of how [function Types are described in Swift][5]. With this knowledge, you're set to do a couple of things:
 
 1 – Create a property on the Type you're implementing that is of some function Type. For example:
 

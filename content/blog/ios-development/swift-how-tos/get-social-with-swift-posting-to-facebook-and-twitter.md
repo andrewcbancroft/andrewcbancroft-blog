@@ -105,7 +105,7 @@ In this code snippet, we're creating an `SLComposeViewController` instance to po
 
 ### (optional) Configure the SLComposeViewController
 
-Optionally, you can choose to pre-populate the &#8220;create post&#8221; UI with some initial text, an image, or a URL. Here's a sample of what that might look like:
+Optionally, you can choose to pre-populate the "create post&#8221; UI with some initial text, an image, or a URL. Here's a sample of what that might look like:
 
 ```swift
 @IBAction func postToFacebookTapped(sender: UIButton) {
