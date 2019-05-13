@@ -9,5 +9,5 @@ pygmentsUseClasses=true
 pygmentsOptions="linenos=inline"
 canonifyURLs=true
 publishDir="docs"
-disableKinds = []
+disableKinds = ["section", "taxonomy", "taxonomyTerm"]
 disqusShortname="andrewcbancroft"
