@@ -13,13 +13,14 @@
     
     <item>
       <title>Implement NSManagedObject Subclass in Swift</title>
-      <link>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/implement-nsmanagedobject-subclass-in-swift/</link>
       <pubDate>Fri, 18 Jul 2014 04:08:12 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/implement-nsmanagedobject-subclass-in-swift/</guid>
       <description>Updated on July 8, 2016 – Xcode 7
 My goal with this blog entry is to help get you set up to create NSManagedObject subclasses in Swift for the Entities in your Core Data model.
-Jump to&amp;#8230;   Example   Walkthrough    Create an Entity   Create an NSManagedObject Subclass for that Entity   Verify NSManagedObject class in the &amp;#8220;Data Model Inspector&amp;#8221;</description>
+
+Example Let&amp;rsquo;s look at a fabricated example: Say that you&amp;rsquo;ve got a Core Data project and you&amp;rsquo;re creating Entities. For my simple project, I&amp;rsquo;ll create an Entity called &amp;ldquo;MyEntity&amp;#8221; with an attribute called &amp;ldquo;myAttribute&amp;#8221;.</description>
     </item>
     
   </channel>

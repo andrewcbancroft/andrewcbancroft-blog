@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>XCode Compiler Error on Andrew Bancroft</title>
+    <title>Xcode Compiler Error on Andrew Bancroft</title>
     <link>https://www.andrewcbancroft.com/tags/xcode-compiler-error/</link>
-    <description>Recent content in XCode Compiler Error on Andrew Bancroft</description>
+    <description>Recent content in Xcode Compiler Error on Andrew Bancroft</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 26 Jul 2014 02:23:53 +0000</lastBuildDate>
@@ -13,15 +13,15 @@
     
     <item>
       <title>Swift Optionals?  Don’t Forget to Unwrap!</title>
-      <link>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/swift-optionals-dont-forget-to-unwrap/</link>
       <pubDate>Sat, 26 Jul 2014 02:23:53 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/swift-optionals-dont-forget-to-unwrap/</guid>
       <description>There is a compiler error that throws me off every time I see it. It takes the form,
- &amp;#8216;ClassName?&amp;#8217; does not have a member named &amp;#8216;memberName&amp;#8217;
- This can happen when you&amp;#8217;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
+ &amp;#8216;ClassName?&amp;rsquo; does not have a member named &amp;#8216;memberName&amp;rsquo;
+ This can happen when you&amp;rsquo;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
 For example, given this class definition:
-class Bird { var family: String var color: String init(family: String, color: String) { self.</description>
+1class Bird { 2	var family: String 3	var color: String 4 5	init(family: String, color: String) { 6	self.</description>
     </item>
     
   </channel>

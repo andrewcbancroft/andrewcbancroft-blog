@@ -13,13 +13,13 @@
     
     <item>
       <title>Swift 4 Upgrade Error: ‘init(colorLiteralRed:green:blue:alpha:)’ is unavailable</title>
-      <link>https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/swift-4-upgrade-uicolor-init-unavailable/</link>
       <pubDate>Wed, 24 Jan 2018 12:35:04 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/swift-4-upgrade-uicolor-init-unavailable/</guid>
       <description>I upgraded a project to Swift 4 today and hit a compiler error:
- &amp;#8216;init(colorLiteralRed:green:blue:alpha:)&amp;#8217; is unavailable: This initializer is only meant to be used by color literals.
- The fix is pretty simple: Don&amp;#8217;t use that initializer! (thank you, Captain Obvious!)
+ &amp;#8216;init(colorLiteralRed:green:blue:alpha:)&amp;rsquo; is unavailable: This initializer is only meant to be used by color literals.
+ The fix is pretty simple: Don&amp;rsquo;t use that initializer! (thank you, Captain Obvious!)
 The correct initializer to use for specifying a red, green, blue, and alpha to get a UIColor instance in Swift 4 is:
 UIColor(red:green:blue:alpha:)
 So essentially, just replace colorLiteralRed:, and replace it with just red:, and the compiler error will go away.</description>

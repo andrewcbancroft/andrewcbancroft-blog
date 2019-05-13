@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-33022655-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="SQL Sever Synonyms, Entity Framework, &amp; Integrated Security" />
+<meta property="og:description" content="Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.
+Suppose we have the following scenario before us:
+Basics
+ We&rsquo;re building an ASP.Net web application Entity Framework has been chosen as our ORM SQL Server (any version supporting Synonyms) is our backend database server of choice  Details" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/dot-net-development/using-sql-sever-synonyms-entity-framework-integrated-security/" />
+<meta property="article:published_time" content="2015-05-01T17:44:31&#43;00:00"/>
+<meta property="article:modified_time" content="2015-05-01T17:44:31&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SQL Sever Synonyms, Entity Framework, &amp; Integrated Security"/>
+<meta name="twitter:description" content="Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.
+Suppose we have the following scenario before us:
+Basics
+ We&rsquo;re building an ASP.Net web application Entity Framework has been chosen as our ORM SQL Server (any version supporting Synonyms) is our backend database server of choice  Details"/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SQL Sever Synonyms, Entity Framework, \x26 Integrated Security",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/dot-net-development\/using-sql-sever-synonyms-entity-framework-integrated-security\/",
+  "wordCount": "559",
+  "datePublished": "2015-05-01T17:44:31\x2b00:00",
+  "dateModified": "2015-05-01T17:44:31\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": ".Net Development, .Net, Entity Framework, Security, SQL Server"
+}
+</script>
+
+
+
+    <title>SQL Sever Synonyms, Entity Framework, &amp; Integrated Security</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">SQL Sever Synonyms, Entity Framework, &amp; Integrated Security</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p><a name="scenario" class="jump-target"></a></p>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>This may be an edge case, but I spent enough time (a couple of <em>days</em>) spinning on this that I thought it warranted a signpost on the Internet.</p>
+
+<p>Suppose we have the following scenario before us:</p>
+
+<p><strong>Basics</strong></p>
+
+<ul>
+<li>We&rsquo;re building an ASP.Net web application</li>
+<li>Entity Framework has been chosen as our ORM</li>
+<li>SQL Server (any version supporting <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonyms</a>) is our backend database server of choice</li>
+</ul>
+
+<p><strong>Details</strong></p>
+
+<ul>
+<li>We&rsquo;re using &ldquo;Integrated Security=True&#8221; in our connection string to the database (in web.config)</li>
+<li>The Application Pool in which our app resides is running under a domain service account (ie, not the default identity)</li>
+<li>Our application primarily talks to one database, but there is information in <em>another</em> database that we need to pull into our app</li>
+<li>To access the data in that other database, we&rsquo;ve chosen to create a <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonym</a></li>
+</ul>
+
+<p>Every bullet point in this scenario is normal and valid, until you get to the part about using &ldquo;Integrated Security=True&#8221; in your connection string&#8230;</p>
+
+<p><a name="login-failed" class="jump-target"></a></p>
+
+<h3 id="login-failed-for-user-8216-nt-authority-anonymous-logon">Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&rsquo;</h3>
+
+<p>If we had chosen to use SQL Server authentication in our conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&rsquo;s what I had been doing in my own application. I started running into the &ldquo;Login failed&#8230;&#8221; error message once I switched to Integrated Security.</p>
+
+<p>For some reason &ldquo;Integrated Security=True&#8221; that throws Entity Framework for a loop. It accesses the database used in the <code>DbContext</code> instance just fine, but the second a line of code needs to use the object mapped to the <em>Synonym</em>, <strong>boom</strong>&#8230; crash&#8230; error&#8230;</p>
+
+<p><a name="reolving-error" class="jump-target"></a></p>
+
+<h3 id="resolving-the-error">Resolving the error</h3>
+
+<p>It turns out that the resolution is really, really simple. Instead of using a Synonym, use a View. You don&rsquo;t have to change a single line of .Net code. Just make sure the view is named the same as the Synonym was (and drop the Synonym from the database, of course).</p>
+
+<p><a name="creating-view" class="jump-target"></a></p>
+
+<h4 id="creating-the-view">Creating the view</h4>
+
+<p>A Synonym essentially maps to an entire table, so the View&rsquo;s structure could literally be a simple <code>select * from [fully.qualified.database.objectName]</code>. If your DBA hates <code>select *</code>, you&rsquo;ll end up listing out every column that your Entity Framework object lists as one of its Properties.</p>
+
+<p><a name="granting-permissions" class="jump-target"></a></p>
+
+<h4 id="granting-permissions">Granting permissions</h4>
+
+<p>If the service account that&rsquo;s running your Application Pool doesn&rsquo;t already have permission to the database objects you created the View for, you need to go in and grant appropriate permissions to that account. Otherwise, you&rsquo;re likely to get an error stating</p>
+
+<blockquote>
+<p>The server principal &ldquo;Domain\PrincipalName&#8221; is not able to access the database &ldquo;DatabaseName&#8221; under the current security context.</p>
+</blockquote>
+
+<p>Be specific and granular with the permission you grant to the account. If you&rsquo;re just pulling in data for your app to display, only give the account SELECT permission on the database object your View references.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>In essence, using a Synonym that references a database object in <em>another database</em> with Entity Framework and Integrated Security just doesn&rsquo;t work out in the end. Somehow, the security context loses the identity of the account running the application pool, and the dreated Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&rsquo; rears its ugly head. Thankfully, the solution is simple: Create a View instead of a Synonym, grant approprate permissions, and you&rsquo;ll be off and running (and you&rsquo;ll avoid usernames and passwords in your web.config)!</p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

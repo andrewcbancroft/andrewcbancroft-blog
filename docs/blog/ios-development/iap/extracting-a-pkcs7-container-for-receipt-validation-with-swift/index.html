@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-33022655-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Extracting a PKCS7 Container for Receipt Validation with Swift" />
+<meta property="og:description" content="Updated on July 15, 2017 – Swift 3 
+So you&rsquo;ve prepared to test receipt validation by setting up your app in iTunes Connect.
+You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt. Perhaps you&rsquo;ve even done it the &ldquo;easy way&#8221; with CocoaPods.
+You&rsquo;ve located and loaded the receipt for validation.
+Now you&rsquo;re ready to extract the PKCS #7 container and work with it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/iap/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" />
+<meta property="article:published_time" content="2016-06-10T03:44:58&#43;00:00"/>
+<meta property="article:modified_time" content="2016-06-10T03:44:58&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Extracting a PKCS7 Container for Receipt Validation with Swift"/>
+<meta name="twitter:description" content="Updated on July 15, 2017 – Swift 3 
+So you&rsquo;ve prepared to test receipt validation by setting up your app in iTunes Connect.
+You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt. Perhaps you&rsquo;ve even done it the &ldquo;easy way&#8221; with CocoaPods.
+You&rsquo;ve located and loaded the receipt for validation.
+Now you&rsquo;re ready to extract the PKCS #7 container and work with it."/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Extracting a PKCS7 Container for Receipt Validation with Swift",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/iap\/extracting-a-pkcs7-container-for-receipt-validation-with-swift\/",
+  "wordCount": "1166",
+  "datePublished": "2016-06-10T03:44:58\x2b00:00",
+  "dateModified": "2016-06-10T03:44:58\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, OpenSSL, Receipt Validation"
+}
+</script>
+
+
+
+    <title>Extracting a PKCS7 Container for Receipt Validation with Swift</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Extracting a PKCS7 Container for Receipt Validation with Swift</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p><small>Updated on July 15, 2017 – Swift 3 </small></p>
+
+<p>So you&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</p>
+
+<p>You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt. Perhaps you&rsquo;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &ldquo;easy way&#8221; with CocoaPods</a>.</p>
+
+<p>You&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</p>
+
+<p>Now you&rsquo;re ready to extract the PKCS #7 container and work with it.</p>
+
+<p>The aim of this guide is to get you started using the OpenSSL library in your Swift code by employing it to extract the receipt contents from its PKCS #7 container.</p>
+
+<p>Just want the code? Here you go!</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="recap" class="jump-target"></a></p>
+
+<h1 id="recap-from-the-previous-guide">Recap from the previous guide</h1>
+
+<p>In <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">Loading a Receipt for Validation with Swift</a>, I began the process of breaking out the various steps of the receipt validation process into separate single-responsibility structs with clearly named functions to help clarify what each piece of code is doing.</p>
+
+<p>Recall that I&rsquo;ve created a <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation">main Type called <code>ReceiptValidator</code></a>, with references to several smaller single-responsibility Types that it uses to accomplish the overall validation process. So accordingly, as of my last post in the series, I&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">created a <code>ReceiptLoader</code></a> that finds the receipt on the file system and loads it into memory.</p>
+
+<p>If a validation step ever fails along the way, I&rsquo;ve decided to take advantage of Swift&rsquo;s error throwing features to clearly describe what failed. So far, there&rsquo;s only one case:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
+<span class="ln">3</span><span class="p">}</span></code></pre></div>
+<p>I&rsquo;ll expand this enum Type to cover more failure conditions in this guide.</p>
+
+<p><a name="receipt-extractor-outline" class="jump-target"></a></p>
+
+<h1 id="receiptextractor-struct-outline">ReceiptExtractor struct outline</h1>
+
+<p>The OpenSSL library comes to us in the form of a C static library. It&rsquo;s not a beautiful API to say the least. The names of the Types and functions are really cryptic at times, so I&rsquo;ve decided it&rsquo;s best for my own memory to wrap each step in small function routines that are named for what they do.</p>
+
+<p>So supposing you&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt data, or used <a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/StoreKit_Collection/">Store Kit</a> to request a receipt from Apple&#8230; Take a look at this new <code>ReceiptExtractor</code> skeleton of a struct to get an idea of what&rsquo;s going to be required to extract the PKCS7 container for the receipt:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">struct</span> <span class="nc">ReceiptExtractor</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="kd">func</span> <span class="nf">extractPKCS7Container</span><span class="p">(</span><span class="kc">_</span> <span class="n">receiptData</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">PKCS7</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="ln">3</span>        <span class="c1">// use Open SSL to extract the PKCS7 container</span>
+<span class="ln">4</span>        <span class="c1">// throw a ReceiptValidationError if something goes wrong in this process</span>
+<span class="ln">5</span>    <span class="p">}</span>
+<span class="ln">6</span><span class="p">}</span></code></pre></div>
+<p><a name="new-receiptvalidationerror-cases" class="jump-target"></a></p>
+
+<h1 id="new-receiptvalidationerror-cases">New ReceiptValidationError cases</h1>
+
+<p>When extracting the receipt information from the PKCS7 container, there are going to be things that would cause overall validation to fail. For example, if the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">receipt <code>Data</code> instance</a> ends up being empty, that&rsquo;s a validation failure. The PKCS7 container needs to have information inside of it for validation to pass (obviously).</p>
+
+<p>So in this guide, I&rsquo;ll expand the <code>ReceiptValidationError</code> enum to have the following cases:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
+<span class="ln">3</span>    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
+<span class="ln">4</span><span class="p">}</span></code></pre></div>
+<p><a name="prep-pkcs7-union-accessors" class="jump-target"></a></p>
+
+<h1 id="preparation-step-pkcs7-union-accessors">Preparation step: PKCS7 union accessors</h1>
+
+<p>Before attempting to work with OpenSSL&rsquo;s PKCS7 functions, you&rsquo;ve got to do a little prep work to get the functions to play nicely with Swift.</p>
+
+<p>Unfortunately, Swift doesn&rsquo;t work well with <a href="https://en.wikipedia.org/wiki/Union_type#C.2FC.2B.2B">C union types</a>. It simply can&rsquo;t see things defined with a C union.</p>
+
+<p>Thankfully, we can work around the problem by creating some wrappers. If you&rsquo;ll add two new files to your project and implement them, you&rsquo;ll be on your way. They are:</p>
+
+<ul>
+<li>pkcs7_union_accessors.h</li>
+<li>pkcs7_union_accessors.c</li>
+</ul>
+
+<p><a name="pkcs7-union-accessors-h-implementation" class="jump-target"></a></p>
+
+<h2 id="pkcs7-union-accessors-h-implementation">pkcs7_union_accessors.h implementation</h2>
+
+<p><pre class="lang:c decode:true " title="pkcs7_union_accessors.h" >#ifndef pkcs7_union_accessors_h
+#define pkcs7_union_accessors_h</p>
+
+<p>#include &lt;openssl/pkcs7.h&gt;</p>
+
+<p>char *pkcs7_d_char(PKCS7 *ptr);
+ASN1_OCTET_STRING *pkcs7_d_data(PKCS7 *ptr);
+PKCS7_SIGNED *pkcs7_d_sign(PKCS7 *ptr);
+PKCS7_ENVELOPE *pkcs7_d_enveloped(PKCS7 *ptr);
+PKCS7_SIGN_ENVELOPE *pkcs7_d_signed_and_enveloped(PKCS7 *ptr);
+PKCS7_DIGEST *pkcs7_d_digest(PKCS7 *ptr);
+PKCS7_ENCRYPT *pkcs7_d_encrypted(PKCS7 *ptr);
+ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr);</p>
+
+<p>#endif /* pkcs7_union_accessors_h */</p>
+
+<pre><code>
+&lt;a name=&quot;pkcs7-union-accessors-c-implementation&quot; class=&quot;jump-target&quot;&gt;&lt;/a&gt;
+
+## pkcs7\_union\_accessors.c implementation
+
+&lt;pre class=&quot;lang:c decode:true &quot; title=&quot;pkcs_union_accessors.c&quot; &gt;#include &quot;pkcs7_union_accessors.h&quot;
+
+inline char *pkcs7_d_char(PKCS7 *ptr) {
+    return ptr-&amp;gt;d.ptr;
+}
+
+inline ASN1_OCTET_STRING *pkcs7_d_data(PKCS7 *ptr) {
+    return ptr-&amp;gt;d.data;
+}
+
+inline PKCS7_SIGNED *pkcs7_d_sign(PKCS7 *ptr) {
+    return ptr-&amp;gt;d.sign;
+}
+
+inline PKCS7_ENVELOPE *pkcs7_d_enveloped(PKCS7 *ptr) {
+    return ptr-&amp;gt;d.enveloped;
+}
+
+inline PKCS7_SIGN_ENVELOPE *pkcs7_d_signed_and_enveloped(PKCS7 *ptr) {
+    return ptr-&amp;gt;d.signed_and_enveloped;
+}
+
+inline PKCS7_DIGEST *pkcs7_d_digest(PKCS7 *ptr) {
+    return ptr-&amp;gt;d.digest;
+}
+
+inline PKCS7_ENCRYPT *pkcs7_d_encrypted(PKCS7 *ptr) {
+    return ptr-&amp;gt;d.encrypted;
+}
+
+inline ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr) {
+    return ptr-&amp;gt;d.other;
+}
+</code></pre>
+
+<p><a name="bridging-header-updates" class="jump-target"></a></p>
+
+<h2 id="bridging-header-updates">Bridging header updates</h2>
+
+<p>After you create the union accessor files, you need to update your project&rsquo;s bridging header to import the new header file:</p>
+
+<p><pre class="lang:c decode:true " title="bridging header" >#import &lt;openssl/pkcs7.h&gt;
+#import &lt;openssl/objects.h&gt;
+#import &ldquo;pkcs7_union_accessors.h&rdquo;</p>
+
+<pre><code>
+&lt;a name=&quot;receiptextractor-implementation&quot; class=&quot;jump-target&quot;&gt;&lt;/a&gt;
+
+# ReceiptExtractor struct implementation
+
+Now it's time to dive into the actual implementation of what I'm calling a `ReceiptExtractor`. Have a look at the code with some explanatory comments following:
+
+```swift
+struct ReceiptExtractor {
+    func extractPKCS7Container(_ receiptData: Data) throws -&gt; UnsafeMutablePointer&amp;lt;PKCS7&gt; {
+        let receiptBIO = BIO_new(BIO_s_mem())       
+        BIO_write(receiptBIO, (receiptData as NSData).bytes, Int32(receiptData.count))
+        let receiptPKCS7Container = d2i_PKCS7_bio(receiptBIO, nil)
+        
+        guard receiptPKCS7Container != nil else {
+            throw ReceiptValidationError.emptyReceiptContents
+        }
+        
+        let pkcs7DataTypeCode = OBJ_obj2nid(pkcs7_d_sign(receiptPKCS7Container).pointee.contents.pointee.type)
+        
+        guard pkcs7DataTypeCode == NID_pkcs7_data else {
+            throw ReceiptValidationError.emptyReceiptContents
+        }
+        
+        return receiptPKCS7Container!
+    }
+}
+</code></pre>
+
+<p><a name="receiptextractor-explanation" class="jump-target"></a></p>
+
+<h1 id="receiptextractor-struct-explanation">ReceiptExtractor struct explanation</h1>
+
+<p>Most of the code above is a Swift translation of what&rsquo;s found at <a href="https://www.objc.io/issues/17-security/receipt-validation/">Objc.io&rsquo;s Receipt Validation guide</a>.</p>
+
+<p>I did a little research over at the OpenSSL site though, and thought it might be helpful for the curious to know what some of these non-intuitive function names stand for and what they do.</p>
+
+<p><code>BIO_new</code> for example. &ldquo;BIO&#8221; stands for &ldquo;Basic I/O&#8221;. It&rsquo;s an abstraction over the underlying basic input and output operations that your app uses for cryptographic operations.</p>
+
+<p>What we&rsquo;re doing with <code>BIO_new(BIO_s_mem())</code> is saying that we want a new Basic I/O mechanism that uses <em>memory</em> for its I/O operations.</p>
+
+<p><code>BIO_write</code> takes the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/"><code>receiptData</code> that was located and loaded</a>, and writes the entire length of its bytes to memory (the <code>receiptBIO</code> that was created first).</p>
+
+<p>To get the actual PKCS #7 container, the <code>d2i_PKCS7_bio</code> function is used.</p>
+
+<p>Once we have the container in hand, it&rsquo;s a matter of making sure it has contents.</p>
+
+<p>I couldn&rsquo;t find a lot of information about the call to <code>pkcs7_d_sign</code>, but the primary point of line 13 above is to get a &ldquo;numerical identifier&#8221;, which is what &ldquo;NID&#8221; stands for in <code>OBJ_obj2nid</code>.</p>
+
+<p>Digging into the PKCS #7 container, you can access the right property and convert it to a numerical identifier that you can check.</p>
+
+<p>As long as the NID returned is equal to the <code>NID_pkcs7_data</code> constant value, things are good. If they&rsquo;re not, that means the receipt has no information and validation fails (thus, the guard and throw statement in lines 14-15).</p>
+
+<p>If everything passes the guard, though, the PKCS #7 container is returned, and we&rsquo;re ready for the next step of the receipt validation process, which is to verify the signature on the receipt with Apple&rsquo;s root certificate. <em>That</em>, however, will happen in another entry to this series.</p>
+
+<p>Until next time!</p>
+
+<p><a name="related" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS &amp; Swift the Easy Way</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" title="Receipt Validation – Verifying a Receipt Signature in Swift">Receipt Validation – Verifying a Receipt Signature in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/" title="Receipt Validation – Parse and Decode a Receipt with Swift">Receipt Validation – Parse and Decode a Receipt with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

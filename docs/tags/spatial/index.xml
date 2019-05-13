@@ -13,11 +13,11 @@
     
     <item>
       <title>Solving ‘Spatial types and functions are not available’ with Entity Framework</title>
-      <link>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</link>
+      <link>https://www.andrewcbancroft.com/blog/dot-net-development/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</link>
       <pubDate>Mon, 27 Mar 2017 16:38:33 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</guid>
-      <description>Using SQL Server&amp;#8217;s Geospatial features with Entity Framework is awesome. I was crusing along just fine with using DbGeography for an ASP.Net application I&amp;#8217;m working on&amp;#8230; Right up until I deployed to the server. Yep. It worked on my machine, but alas, I was hitting a runtime exception on my test server.
+      <guid>https://www.andrewcbancroft.com/blog/dot-net-development/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</guid>
+      <description>Using SQL Server&amp;rsquo;s Geospatial features with Entity Framework is awesome. I was crusing along just fine with using DbGeography for an ASP.Net application I&amp;rsquo;m working on&amp;#8230; Right up until I deployed to the server. Yep. It worked on my machine, but alas, I was hitting a runtime exception on my test server.
 This was the exception:
  Spatial types and functions are not available for this provider because the assembly &amp;#8216;Microsoft.</description>
     </item>

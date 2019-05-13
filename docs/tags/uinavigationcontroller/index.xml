@@ -13,24 +13,24 @@
     
     <item>
       <title>Adding Buttons to the Navigation Bar with Storyboards</title>
-      <link>https://www.andrewcbancroft.com/2016/04/14/adding-buttons-to-the-navigation-bar-with-storyboards/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/adding-buttons-to-the-navigation-bar-with-storyboards/</link>
       <pubDate>Thu, 14 Apr 2016 18:20:41 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2016/04/14/adding-buttons-to-the-navigation-bar-with-storyboards/</guid>
-      <description>Updated on March 20, 2017 &amp;#8211; Xcode 8 &amp;amp; Swift 3
-If you&amp;#8217;re having trouble figuring out how to add buttons to the navigation bar in your Storyboard-based iOS app, my goal in this article is to help you through the process. Knowing what to click and where to drag to get things wired up isn&amp;#8217;t entirely intuitive, so I want to be of help if I can.
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/adding-buttons-to-the-navigation-bar-with-storyboards/</guid>
+      <description>Updated on March 20, 2017 – Xcode 8 &amp;amp; Swift 3
+If you&amp;rsquo;re having trouble figuring out how to add buttons to the navigation bar in your Storyboard-based iOS app, my goal in this article is to help you through the process. Knowing what to click and where to drag to get things wired up isn&amp;rsquo;t entirely intuitive, so I want to be of help if I can.
 Lots of StackOverflow posts point us to just adding the buttons in code, but for those who lean toward trying to do as much in the Storyboard designer as possible, this approach feels out of place.</description>
     </item>
     
     <item>
       <title>Access Sub-Controllers from a UINavigationController in Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/access-sub-controllers-from-a-uinavigationcontroller-in-swift/</link>
       <pubDate>Tue, 02 Jun 2015 17:37:44 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/access-sub-controllers-from-a-uinavigationcontroller-in-swift/</guid>
       <description>The sequence of accessing a UINavigationController&#39;s first child from within the AppDelegate or within prepareForSegue(_:sender:) always gets me. Here are a few quick snippets to help you and I quickly get up and running when working with navigation controllers in our Swift applications:
-Jump to&amp;#8230;   AppDelegate    Digging for the first view controller  
-&amp;lt;li&amp;gt; &amp;lt;a href=&amp;quot;#prepare-for-segue&amp;quot;&amp;gt;Prepare for segue&amp;lt;/a&amp;gt; &amp;lt;/li&amp;gt; &amp;lt;li&amp;gt; &amp;lt;a href=&amp;quot;#share&amp;quot;&amp;gt;Was this article helpful?</description>
+
+AppDelegate Every iOS application has one root view controller that&amp;rsquo;s presented when the app finishes its launch process. Suppose we&amp;rsquo;re building a navigation controller-based app&amp;#8230; that is, we&amp;rsquo;re building an app where the first (root) view controller is a UINavigationController.</description>
     </item>
     
   </channel>

@@ -13,44 +13,45 @@
     
     <item>
       <title>Swift Functions as Types</title>
-      <link>https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/swift-functions-as-types/</link>
       <pubDate>Fri, 18 Mar 2016 18:11:02 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/</guid>
-      <description>For the well-versed functional programmer, the fact that functions in Swift are Types is no surprise. But I&amp;#8217;m relatively new to the game on that front, so when I first encountered the idea of thinking of a function as a Type back when Swift was announced in 2014, it was a real eye-opener for me.
-Jump to&amp;#8230;   Swift Types (in general)    Named Types   Compound Types</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/swift-functions-as-types/</guid>
+      <description>For the well-versed functional programmer, the fact that functions in Swift are Types is no surprise. But I&amp;rsquo;m relatively new to the game on that front, so when I first encountered the idea of thinking of a function as a Type back when Swift was announced in 2014, it was a real eye-opener for me.
+
+Swift Types (in general) In order to understand functions as Types, it&amp;rsquo;s probably a good idea to know what folks are talking about when they use the term &amp;ldquo;Type&amp;#8221; in a general sense.</description>
     </item>
     
     <item>
       <title>Conveniently Transforming Immutable Types in Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/conveniently-transforming-immutable-types-swift/</link>
       <pubDate>Tue, 20 Jan 2015 12:30:51 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/</guid>
-      <description>A few weeks ago I wrote about Immutable Types and Changing State in Swift, where I hoped to convey an &amp;#8220;aha!-moment&amp;#8221; that happened for me.
-Since then, I&amp;#8217;ve learned a bit more. For example, the technique I presented for transforming instances of a Type immutably actually come for free when you use a value Type, such as a Struct! Check out @NatashaTheRobot&amp;#8217;s writeup on the subject, titled &amp;#8220;Mutating Functions in Swift Structs&amp;#8221;, for more information.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/conveniently-transforming-immutable-types-swift/</guid>
+      <description>A few weeks ago I wrote about Immutable Types and Changing State in Swift, where I hoped to convey an &amp;ldquo;aha!-moment&amp;#8221; that happened for me.
+Since then, I&amp;rsquo;ve learned a bit more. For example, the technique I presented for transforming instances of a Type immutably actually come for free when you use a value Type, such as a Struct! Check out @NatashaTheRobot&amp;rsquo;s writeup on the subject, titled &amp;ldquo;Mutating Functions in Swift Structs&amp;#8221;, for more information.</description>
     </item>
     
     <item>
       <title>Immutable Types with Changing State in Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/immutable-types-changing-state-swift/</link>
       <pubDate>Tue, 06 Jan 2015 12:00:50 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</guid>
-      <description>Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&amp;#8217;ve seen a lot in the functional programming arena as it relates to Swift.
-As I seek to improve my functional programming thought processes and to practice what I&amp;#8217;m learning, I found myself struggling with a fundamental concept: immutability. Especially when I&amp;#8217;m designing something that, at the very least, appears to require the ability to change state at some point in time.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/immutable-types-changing-state-swift/</guid>
+      <description>Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&amp;rsquo;ve seen a lot in the functional programming arena as it relates to Swift.
+As I seek to improve my functional programming thought processes and to practice what I&amp;rsquo;m learning, I found myself struggling with a fundamental concept: immutability. Especially when I&amp;rsquo;m designing something that, at the very least, appears to require the ability to change state at some point in time.</description>
     </item>
     
     <item>
       <title>Resolving “Variable used within its own initial value” Error in Swift</title>
-      <link>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</link>
       <pubDate>Mon, 20 Oct 2014 13:50:52 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</guid>
       <description>While experimenting with a few things today, I experienced this compiler error:
  Variable used within its own initial value
  Let me describe the situation I was in&amp;#8230;
-I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&amp;#8217;ve recently learned about in Scala. Essentially, I was trying to implement a factorial function as a closure, and I was trying to do it recursively (that is, without using a for/while loop).</description>
+I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&amp;rsquo;ve recently learned about in Scala. Essentially, I was trying to implement a factorial function as a closure, and I was trying to do it recursively (that is, without using a for/while loop).</description>
     </item>
     
   </channel>

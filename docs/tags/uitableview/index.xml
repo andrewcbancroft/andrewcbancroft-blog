@@ -13,64 +13,65 @@
     
     <item>
       <title>UITableView Swipe to Delete Workflow in Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/uitableview-swipe-to-delete-workflow-in-swift/</link>
       <pubDate>Fri, 17 Jul 2015 04:00:18 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/</guid>
-      <description>Data management applications, by which I mean an app where you&amp;#8217;re allowing users to add, edit, and delete bits of data as part of your app&amp;#8217;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/uitableview-swipe-to-delete-workflow-in-swift/</guid>
+      <description>Data management applications, by which I mean an app where you&amp;rsquo;re allowing users to add, edit, and delete bits of data as part of your app&amp;rsquo;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.
 Making changes to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps.</description>
     </item>
     
     <item>
       <title>Sync Table View Data: NSFetchedResultsController and Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/sync-table-view-data-nsfetchedresultscontroller-swift/</link>
       <pubDate>Fri, 29 May 2015 03:20:54 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/</guid>
-      <description>Updated on September 23, 2015 &amp;#8211; Swift 2.0
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/sync-table-view-data-nsfetchedresultscontroller-swift/</guid>
+      <description>Updated on September 23, 2015 – Swift 2.0
 My goal with this article is to help you utilize the full power of NSFetchedResultsController.
-This is a continuation on a series of articles I&amp;#8217;ve written on Core Data and NSFetchedResultsController, so you may want to check out those previous posts to get an idea of where I&amp;#8217;m picking up in this walk-through. Previously I touched on how to seed a Core Data database, and how to take that data and display it in a table view with an NSFetchedResultsController.</description>
+This is a continuation on a series of articles I&amp;rsquo;ve written on Core Data and NSFetchedResultsController, so you may want to check out those previous posts to get an idea of where I&amp;rsquo;m picking up in this walk-through. Previously I touched on how to seed a Core Data database, and how to take that data and display it in a table view with an NSFetchedResultsController.</description>
     </item>
     
     <item>
       <title>Swift How-To:  Setting up a Table View</title>
-      <link>https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swift-how-to-setting-up-a-table-view/</link>
       <pubDate>Tue, 19 May 2015 02:31:38 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/</guid>
-      <description>Think of this screencast as the &amp;#8220;Hello World&amp;#8221; of creating a view controller with a table view. I cover organizing things in the Storyboard, Auto Layout constraints, and the implementation of the data source protocol methods for a table view.
-Screencast Screencast Transcript [0:01] Hi, I&amp;#8217;m Andrew from andrewcbancroft.com.
-I use table views fairly often in my examples, so I&amp;#8217;ve decided to create a short walkthrough of how to set up a table view in Swift.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swift-how-to-setting-up-a-table-view/</guid>
+      <description>Think of this screencast as the &amp;ldquo;Hello World&amp;#8221; of creating a view controller with a table view. I cover organizing things in the Storyboard, Auto Layout constraints, and the implementation of the data source protocol methods for a table view.
+Screencast Screencast Transcript [0:01] Hi, I&amp;rsquo;m Andrew from andrewcbancroft.com.
+I use table views fairly often in my examples, so I&amp;rsquo;ve decided to create a short walkthrough of how to set up a table view in Swift.</description>
     </item>
     
     <item>
       <title>Displaying Data With NSFetchedResultsController and Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/displaying-data-with-nsfetchedresultscontroller-and-swift/</link>
       <pubDate>Thu, 05 Mar 2015 15:14:53 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/</guid>
-      <description>Updated on September 23, 2015 &amp;#8211; Swift 2.0
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/displaying-data-with-nsfetchedresultscontroller-and-swift/</guid>
+      <description>Updated on September 23, 2015 – Swift 2.0
 The combination of an NSFetchedResultsController and a UITableView provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using NSFetchedResultsController come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&amp;#8230;
 With a Core Data data store seeded with data, the next logical step is to display that data somewhere other than the console.</description>
     </item>
     
     <item>
       <title>Custom UITableViewCell for Text Input in Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/02/12/custom-uitableviewcell-text-input-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/custom-uitableviewcell-text-input-swift/</link>
       <pubDate>Thu, 12 Feb 2015 13:00:50 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/02/12/custom-uitableviewcell-text-input-swift/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/custom-uitableviewcell-text-input-swift/</guid>
       <description>The need to collect data via text input is a common in many applications. This walk-through showcases how to create a custom UITableViewCell for accepting text input within a UITableView.
-Outline   Table Views for Data Entry?   Step by Step Walkthrough    Set up Storyboard with table view   Set up table view prototype cell with text field   Create new TextInputTableViewCell class   Change cell class in Storyboard to TextInputTableViewCell   Set reuse identifier   Implement table view data source and delegate methods   Run in simulator</description>
+
+Table Views for Data Entry? Table views provide nice, built-in styles that present a form-like view for collecting data from your users. They also have inherent scrolling capabilities. Finally, there is some handy keyboard handling, such as auto-scrolling to avoid covering up a data entry cell, or hiding the keyboard when the user scrolls the Table View.</description>
     </item>
     
     <item>
       <title>Swift UITableViewDataSource Cheat Sheet</title>
-      <link>https://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swift-uitableviewdatasource-cheat-sheet/</link>
       <pubDate>Mon, 24 Nov 2014 22:04:28 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/</guid>
-      <description>iOS developers will quickly recognize that there are a set of methods that always tend to get implemented when dealing with UITableViews . The problem I consistently face is remembering that set of methods that belong to the UITableViewDataSource (and UITableViewDelegate ) protocols. I find myself option-clicking the protocol name to remember the method signatures I need, since XCode doesn&amp;#8217;t have a way to stub out the methods involved with a protocol (C# developers working in Visual Studio like myself are spoiled!</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swift-uitableviewdatasource-cheat-sheet/</guid>
+      <description>iOS developers will quickly recognize that there are a set of methods that always tend to get implemented when dealing with UITableViews . The problem I consistently face is remembering that set of methods that belong to the UITableViewDataSource (and UITableViewDelegate ) protocols. I find myself option-clicking the protocol name to remember the method signatures I need, since Xcode doesn&amp;rsquo;t have a way to stub out the methods involved with a protocol (C# developers working in Visual Studio like myself are spoiled!</description>
     </item>
     
   </channel>

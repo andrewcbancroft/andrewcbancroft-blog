@@ -13,118 +13,119 @@
     
     <item>
       <title>Creating Trust-able Unit Tests in Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/11/03/creating-trust-able-unit-tests-in-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/creating-trust-able-unit-tests-in-swift/</link>
       <pubDate>Wed, 04 Nov 2015 02:42:08 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/11/03/creating-trust-able-unit-tests-in-swift/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/creating-trust-able-unit-tests-in-swift/</guid>
       <description>It may come as a surprise to you, but a green-lit passing unit test is not always a sign that all is well with our software. Our apps and their corresponding unit test suites always start off clean and basic and simple.
-But they don&amp;#8217;t stay that way for long.
+But they don&amp;rsquo;t stay that way for long.
 Cycles of code changes and additions and re-writes take place throughout the days, weeks, and months of the application development cycle.</description>
     </item>
     
     <item>
       <title>Testability Tip for Swift Developers – Parameterize and Push</title>
-      <link>https://www.andrewcbancroft.com/2015/09/04/testability-tip-for-swift-developers-parameterize-and-push/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/testability-tip-for-swift-developers-parameterize-and-push/</link>
       <pubDate>Fri, 04 Sep 2015 18:36:52 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/09/04/testability-tip-for-swift-developers-parameterize-and-push/</guid>
-      <description>In a previous &amp;#8220;Testability Tip for Swift Developers&amp;#8221;, I discussed the principle of observability. &amp;#8220;If it&amp;#8217;s observable, it&amp;#8217;s testable&amp;#8221; was the primary conclusion of the article, and I pointed toward using the public access control modifier for parts of your app that you intend to test.
-In this edition, I&amp;#8217;d like to introduce a new principle that I try to adhere to when I&amp;#8217;m unit testing, namely, &amp;#8220;If it&amp;#8217;s controllable, it&amp;#8217;s testable&amp;#8221;.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/testability-tip-for-swift-developers-parameterize-and-push/</guid>
+      <description>In a previous &amp;ldquo;Testability Tip for Swift Developers&amp;#8221;, I discussed the principle of observability. &amp;ldquo;If it&amp;rsquo;s observable, it&amp;rsquo;s testable&amp;#8221; was the primary conclusion of the article, and I pointed toward using the public access control modifier for parts of your app that you intend to test.
+In this edition, I&amp;rsquo;d like to introduce a new principle that I try to adhere to when I&amp;rsquo;m unit testing, namely, &amp;ldquo;If it&amp;rsquo;s controllable, it&amp;rsquo;s testable&amp;#8221;.</description>
     </item>
     
     <item>
       <title>Improvements to Unit Testing in Swift with Xcode 7</title>
-      <link>https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/improvements-to-unit-testing-in-swift-with-xcode-7/</link>
       <pubDate>Wed, 10 Jun 2015 17:43:09 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/</guid>
-      <description>One of the most exciting things that&amp;#8217;s come out of WWDC 2015 is the fact that unit testing in Swift has been greatly simplified. The latest announcements have actually rendered a few of my articles on the subject obsolete, once Xcode 7 is in full circulation among the Swift developer community.
-If you&amp;#8217;re using Xcode 6.x, you may still find use in a couple of my previous articles:
- Swift Access Control – Implications for Unit Testing Testability Tip for Swift Developers – Public Over Private  If you&amp;#8217;re jumping headlong into Xcode 7 world, setting yourself up for unit testing is incredibly simple.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/improvements-to-unit-testing-in-swift-with-xcode-7/</guid>
+      <description>One of the most exciting things that&amp;rsquo;s come out of WWDC 2015 is the fact that unit testing in Swift has been greatly simplified. The latest announcements have actually rendered a few of my articles on the subject obsolete, once Xcode 7 is in full circulation among the Swift developer community.
+If you&amp;rsquo;re using Xcode 6.x, you may still find use in a couple of my previous articles:
+ Swift Access Control – Implications for Unit Testing Testability Tip for Swift Developers – Public Over Private  If you&amp;rsquo;re jumping headlong into Xcode 7 world, setting yourself up for unit testing is incredibly simple.</description>
     </item>
     
     <item>
       <title>Testing is to Software as Experiment is to Science</title>
-      <link>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/testing-is-to-software-as-experiment-is-to-science/</link>
       <pubDate>Thu, 30 Apr 2015 04:01:24 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/testing-is-to-software-as-experiment-is-to-science/</guid>
       <description>The principle of science, the definition, almost, is the following: The test of all knowledge is experiment.
 The sole test of the validity of any idea is experiment.
  These quote came from Chapter 1 and Chapter 2 of the Feynman Lectures on Physics.
-I&amp;#8217;m not a physicist, but the software developer in me resonated with the connection between experimentation and validation of what we know about the world around us.</description>
+I&amp;rsquo;m not a physicist, but the software developer in me resonated with the connection between experimentation and validation of what we know about the world around us.</description>
     </item>
     
     <item>
       <title>Testability Tip for Swift Developers – Public Over Private</title>
-      <link>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/testability-tip-for-swift-developers-public-over-private/</link>
       <pubDate>Wed, 15 Apr 2015 18:52:11 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</guid>
-      <description>Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a private function, however, I often scratch my head and ask, &amp;#8220;How am I supposed to test this??&amp;#8221;.
-Most experienced testers will tell you, &amp;#8220;Don&amp;#8217;t test private implementation &amp;#8211; only public API&amp;#8221;.
-&amp;#8220;Okay&amp;#8230; But how, does that private function get tested?&amp;#8221;, I always asked.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/testability-tip-for-swift-developers-public-over-private/</guid>
+      <description>Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a private function, however, I often scratch my head and ask, &amp;ldquo;How am I supposed to test this??&amp;#8221;.
+Most experienced testers will tell you, &amp;ldquo;Don&amp;rsquo;t test private implementation – only public API&amp;#8221;.
+&amp;ldquo;Okay&amp;#8230; But how, does that private function get tested?&amp;#8221;, I always asked.</description>
     </item>
     
     <item>
       <title>Unit Testing Model Layer with Core Data and Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/unit-testing-model-layer-core-data-swift/</link>
       <pubDate>Tue, 13 Jan 2015 13:00:37 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</guid>
-      <description>Updated on November 19, 2015 &amp;#8211; Swift 2.0
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/unit-testing-model-layer-core-data-swift/</guid>
+      <description>Updated on November 19, 2015 – Swift 2.0
 As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.
 To my surprise, unit testing my Core Data model layer has been… well… amazing.</description>
     </item>
     
     <item>
       <title>Getting Started with Unit Testing in Swift</title>
-      <link>https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/getting-started-unit-testing-swift/</link>
       <pubDate>Mon, 29 Dec 2014 12:00:50 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/</guid>
-      <description>Getting set up to write unit tests in Swift, while not difficult, isn&amp;#8217;t exactly intuitive. I&amp;#8217;ve written several posts and gathered a few resources on unit testing in Swift, but I haven&amp;#8217;t yet published a &amp;#8220;getting started&amp;#8221; guide until now.
-Where does one get started with unit testing in Swift when they&amp;#8217;ve never gotten started before? Here are 5 steps to help you successfully begin unit testing in Swift:</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/getting-started-unit-testing-swift/</guid>
+      <description>Getting set up to write unit tests in Swift, while not difficult, isn&amp;rsquo;t exactly intuitive. I&amp;rsquo;ve written several posts and gathered a few resources on unit testing in Swift, but I haven&amp;rsquo;t yet published a &amp;ldquo;getting started&amp;#8221; guide until now.
+Where does one get started with unit testing in Swift when they&amp;rsquo;ve never gotten started before? Here are 5 steps to help you successfully begin unit testing in Swift:</description>
     </item>
     
     <item>
       <title>Swift Unit Testing – Verifying Method Calls</title>
-      <link>https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/swift-unit-testing-verifying-method-calls/</link>
       <pubDate>Mon, 22 Dec 2014 13:09:28 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/swift-unit-testing-verifying-method-calls/</guid>
       <description>In this unit testing screencast for Swift developers, we explore how to use Test Driven Development to verify method calls.
-Getting Started Guide If you&amp;#8217;re new to unit testing or are trying to get set up with unit testing in a Swift project, you might check out my getting started guide before jumping into the screencast.
+Getting Started Guide If you&amp;rsquo;re new to unit testing or are trying to get set up with unit testing in a Swift project, you might check out my getting started guide before jumping into the screencast.
 Screencast Large / Full-Screen Viewing
 GitHub Example GitHub repo of the example developed in the screencast.</description>
     </item>
     
     <item>
       <title>Swift Unit Testing Resources</title>
-      <link>https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/swift-unit-testing-resources/</link>
       <pubDate>Fri, 19 Dec 2014 12:00:33 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/</guid>
-      <description>As I&amp;#8217;ve researched Test Driven Development practices in general, and for iOS / Mac applications, I&amp;#8217;ve been helped by several sources. I&amp;#8217;ve also discovered a few things the hard way, so I&amp;#8217;m combining and maintaining this list of resources to help point you in some helpful directions as you adventure in unit testing your iOS apps.
-Jump to&amp;#8230;   Pluralsight courses   Blogs   User group talks   At andrewcbancroft.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/swift-unit-testing-resources/</guid>
+      <description>As I&amp;rsquo;ve researched Test Driven Development practices in general, and for iOS / Mac applications, I&amp;rsquo;ve been helped by several sources. I&amp;rsquo;ve also discovered a few things the hard way, so I&amp;rsquo;m combining and maintaining this list of resources to help point you in some helpful directions as you adventure in unit testing your iOS apps.
+
+Pluralsight Courses  Play by Play: TDD with Brad Wilson – Awesome, awesome course.</description>
     </item>
     
     <item>
       <title>TDD for iOS in Swift – What’s the Goal?</title>
-      <link>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/tdd-ios-swift-whats-goal/</link>
       <pubDate>Tue, 16 Dec 2014 12:00:10 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</guid>
-      <description>Before actually doing Test Driven Development (TDD) for your iOS / Mac app, it&amp;#8217;s really important to ask a very fundamental question: What&amp;#8217;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/tdd-ios-swift-whats-goal/</guid>
+      <description>Before actually doing Test Driven Development (TDD) for your iOS / Mac app, it&amp;rsquo;s really important to ask a very fundamental question: What&amp;rsquo;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?
 2 Goals of TDD in iOS A recent course I watched on Pluralsight called TDD as a Design Tool gave me some insight on two goals for doing Test Driven Development:</description>
     </item>
     
     <item>
       <title>Don’t Write Legacy Swift</title>
-      <link>https://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/dont-write-legacy-swift/</link>
       <pubDate>Wed, 10 Dec 2014 12:00:51 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/dont-write-legacy-swift/</guid>
       <description>“Legacy Swift”.&amp;nbsp; Is that an odd phrase to you, too?
 “Legacy” has connotations such as “old”, “difficult-to-change”, “outdated”, etc. Juxtaposing “legacy” and “Swift” would never have crossed my mind until I read Michael Feathers’, Working Effectively With Legacy Code, where he asserts,
  Legacy code is simply code without tests.

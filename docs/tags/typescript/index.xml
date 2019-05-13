@@ -13,14 +13,14 @@
     
     <item>
       <title>TypeScript Build Errors When Publishing ASP.Net Web Project</title>
-      <link>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</link>
+      <link>https://www.andrewcbancroft.com/blog/dot-net-development/ypescript-build-errors-when-publishing-asp-net-web-project/</link>
       <pubDate>Wed, 29 Jun 2016 18:41:59 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</guid>
-      <description>I had TypeScript files building and running perfectly when I&amp;#8217;d debug locally, but when I changed over to publish the project, I got build errors galore:
+      <guid>https://www.andrewcbancroft.com/blog/dot-net-development/ypescript-build-errors-when-publishing-asp-net-web-project/</guid>
+      <description>I had TypeScript files building and running perfectly when I&amp;rsquo;d debug locally, but when I changed over to publish the project, I got build errors galore:
  Cannot find module ___
-TS6053 &amp;#8211; File ___ not found
- I had forgotten that I set up my TypeScript Build configuration for Debug, but I hadn&amp;#8217;t changed anything for the Release configuration in Visual Studio.
+TS6053 – File ___ not found
+ I had forgotten that I set up my TypeScript Build configuration for Debug, but I hadn&amp;rsquo;t changed anything for the Release configuration in Visual Studio.
 Obviously, that would produce different build results, right?</description>
     </item>
     

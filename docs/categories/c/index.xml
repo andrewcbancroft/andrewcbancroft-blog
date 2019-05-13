@@ -13,24 +13,25 @@
     
     <item>
       <title>Pointer Pointer #2</title>
-      <link>https://www.andrewcbancroft.com/2012/06/24/pointer-pointer-2/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/pointer-pointer-2/</link>
       <pubDate>Sun, 24 Jun 2012 14:23:33 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2012/06/24/pointer-pointer-2/</guid>
-      <description>Pointer Pointer #1 can be found here &amp;#8211; it deals with how the &amp;#8220;*&amp;#8221; symbol is used in different places when dealing with pointers.
+      <guid>https://www.andrewcbancroft.com/blog/musings/pointer-pointer-2/</guid>
+      <description>Pointer Pointer #1 can be found here – it deals with how the &amp;ldquo;*&amp;#8221; symbol is used in different places when dealing with pointers.
 A second pointer I have on pointers that helped me is this:
-A pointer stores an address of where some piece of data &amp;#8220;lives&amp;#8221; (begins its bit pattern) in memory. What recently became clear to me is that a pointer, itself,_ _is also stored as a bit pattern in memory.</description>
+A pointer stores an address of where some piece of data &amp;ldquo;lives&amp;#8221; (begins its bit pattern) in memory. What recently became clear to me is that a pointer, itself,_ _is also stored as a bit pattern in memory.</description>
     </item>
     
     <item>
       <title>Pointer Pointer #1</title>
-      <link>https://www.andrewcbancroft.com/2012/06/17/pointer-pointer-1/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/pointer-pointer-1/</link>
       <pubDate>Sun, 17 Jun 2012 19:45:05 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2012/06/17/pointer-pointer-1/</guid>
-      <description>Part of my confusion with the C family of languages has been how the * symbol worked in the various places it&amp;#8217;s used in relation to pointers. A key insight helped de-mystify a lot for me:
+      <guid>https://www.andrewcbancroft.com/blog/musings/pointer-pointer-1/</guid>
+      <description>Part of my confusion with the C family of languages has been how the * symbol worked in the various places it&amp;rsquo;s used in relation to pointers. A key insight helped de-mystify a lot for me:
 The * symbol is used as both a type declaration _and_ as an operator (the de-reference operator).
- Example:  // * used as a type declaration int *intPointer; // declare a regular integer variable named i int i = 10; // set where intPointer points to by assigning it the address of i intPointer = &amp;i; // * used as the de-reference operator printf(&#34;</description>
+ Example:  // * used as a type declaration int *intPointer;
+// declare a regular integer variable named i int i = 10; // set where intPointer points to by assigning it the address of i intPointer = &amp;amp;i; // * used as the de-reference operator printf(&amp;quot;Value returned when intPointer is de-referenced: %dn&amp;quot;, *intPointer);  ```</description>
     </item>
     
   </channel>

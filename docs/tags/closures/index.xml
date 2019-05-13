@@ -13,45 +13,47 @@
     
     <item>
       <title>Why is it called a “Closure” anyway? A Swift Conceptual Look.</title>
-      <link>https://www.andrewcbancroft.com/2017/06/05/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/</link>
       <pubDate>Tue, 06 Jun 2017 04:00:41 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/06/05/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/</guid>
-      <description>What&amp;#8217;s in a name? If a programming language comes with a named feature, you can be pretty sure it was named that way for a reason. It&amp;#8217;s a safe bet that the language designers were purposeful in their naming, so if you can figure out that essential &amp;#8220;Why&amp;#8217;d they name it that?&amp;#8221; question, you might be that much closer to understanding the feature or concept.
-Jump to&amp;#8230;   What&amp;#8217;s in a name?</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/</guid>
+      <description>What&amp;rsquo;s in a name? If a programming language comes with a named feature, you can be pretty sure it was named that way for a reason. It&amp;rsquo;s a safe bet that the language designers were purposeful in their naming, so if you can figure out that essential &amp;ldquo;Why&amp;rsquo;d they name it that?&amp;#8221; question, you might be that much closer to understanding the feature or concept.
+
+Why &amp;ldquo;closure&amp;#8221;? Now the challenge: Actually figuring out the answer to that &amp;ldquo;Why?</description>
     </item>
     
     <item>
       <title>Why Do We Need to Annotate Escaping Closures in Swift?</title>
-      <link>https://www.andrewcbancroft.com/2017/05/11/why-do-we-need-to-annotate-escaping-closures-in-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/why-do-we-need-to-annotate-escaping-closures-in-swift/</link>
       <pubDate>Thu, 11 May 2017 17:58:46 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/05/11/why-do-we-need-to-annotate-escaping-closures-in-swift/</guid>
-      <description>My last entry on escaping closures ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that&amp;#8217;s a different story&amp;#8230; :]
-Several readers commented here and on Medium with the question, &amp;#8220;Why? Why do we need to mark escaping closures with @escaping?&amp;#8221;
-Jump to&amp;#8230;   Do it yourself, compiler!   Insight from the Swift gurus   I see what you did there&amp;#8230; Let me help you out&amp;#8230;   How helpful is it, really?</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/why-do-we-need-to-annotate-escaping-closures-in-swift/</guid>
+      <description>My last entry on escaping closures ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that&amp;rsquo;s a different story&amp;#8230; :]
+Several readers commented here and on Medium with the question, &amp;ldquo;Why? Why do we need to mark escaping closures with @escaping?&amp;#8221;
+
+Do it yourself, compiler! Observant minds looked at the compiler&amp;rsquo;s ability to say, &amp;ldquo;Hey!</description>
     </item>
     
     <item>
       <title>What in the World is an “Escaping Closure” in Swift?</title>
-      <link>https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/what-in-the-world-is-an-escaping-closure-in-swift/</link>
       <pubDate>Wed, 26 Apr 2017 14:41:07 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/</guid>
-      <description>If you&amp;#8217;re mostly in the business of coding up closures to pass off to other functions as callbacks, you may not have run into the concept of an &amp;#8220;escaping closure&amp;#8221; yet.
-When you step out of the role of consuming other peoples&amp;#8217; APIs in to the realm of creating your own (and you do this all the time!), this is where you&amp;#8217;ll likely run into the concept of an &amp;#8220;escaping closure&amp;#8221; in certain scenarios.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/what-in-the-world-is-an-escaping-closure-in-swift/</guid>
+      <description>If you&amp;rsquo;re mostly in the business of coding up closures to pass off to other functions as callbacks, you may not have run into the concept of an &amp;ldquo;escaping closure&amp;#8221; yet.
+When you step out of the role of consuming other peoples&amp;rsquo; APIs in to the realm of creating your own (and you do this all the time!), this is where you&amp;rsquo;ll likely run into the concept of an &amp;ldquo;escaping closure&amp;#8221; in certain scenarios.</description>
     </item>
     
     <item>
       <title>Resolving “Variable used within its own initial value” Error in Swift</title>
-      <link>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</link>
       <pubDate>Mon, 20 Oct 2014 13:50:52 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</guid>
       <description>While experimenting with a few things today, I experienced this compiler error:
  Variable used within its own initial value
  Let me describe the situation I was in&amp;#8230;
-I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&amp;#8217;ve recently learned about in Scala. Essentially, I was trying to implement a factorial function as a closure, and I was trying to do it recursively (that is, without using a for/while loop).</description>
+I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&amp;rsquo;ve recently learned about in Scala. Essentially, I was trying to implement a factorial function as a closure, and I was trying to do it recursively (that is, without using a for/while loop).</description>
     </item>
     
   </channel>

@@ -13,12 +13,16 @@
     
     <item>
       <title>Swift Cheat Sheet for iPhone Location Services Access &amp; Usage</title>
-      <link>https://www.andrewcbancroft.com/2018/07/16/swift-cheat-sheet-iphone-location-access-usage/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/swift-cheat-sheet-iphone-location-access-usage/</link>
       <pubDate>Tue, 17 Jul 2018 00:43:03 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2018/07/16/swift-cheat-sheet-iphone-location-access-usage/</guid>
-      <description>This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&amp;#8217;s device.
-Jump to&amp;#8230;   Framework Import   Set Location Usage Description in Info.plist   Initialize CLLocationManager and Implement CLLocationManagerDelegate   Start Location Services, Check Location Authorization Status, Request Permission   Alert Location Access Needed   Use the User&amp;#8217;s Location   Was this article helpful?</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/swift-cheat-sheet-iphone-location-access-usage/</guid>
+      <description>This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&amp;rsquo;s device.
+
+Framework Import import CoreLocation
+
+Set Location Usage Description in Info.plist This is a required first step
+If you don&amp;rsquo;t set this, your app simply won&amp;rsquo;t present the user with the system alert to request access to the location (and, of course, you won&amp;rsquo;t be getting any location data for your app either).</description>
     </item>
     
   </channel>

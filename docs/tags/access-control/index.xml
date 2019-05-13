@@ -13,48 +13,48 @@
     
     <item>
       <title>Swift Framework Woes – Unresolved Identifier? No Member?</title>
-      <link>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/swift-framework-woes-unresolved-identifier-no-member/</link>
       <pubDate>Fri, 08 Jan 2016 18:40:55 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</guid>
-      <description>It&amp;#8217;s the simple things that get us, isn&amp;#8217;t it?
-I was working on a simple little framework the other day, and I&amp;#8217;d gotten things just how I wanted&amp;#8230; or so I thought.
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/swift-framework-woes-unresolved-identifier-no-member/</guid>
+      <description>It&amp;rsquo;s the simple things that get us, isn&amp;rsquo;t it?
+I was working on a simple little framework the other day, and I&amp;rsquo;d gotten things just how I wanted&amp;#8230; or so I thought.
 I was ready to test things out and import the framework into my real app.
 import MyShinyNewFramework
 Sweet! No build errors!
 // attempt to use things defined in the framework
 Not so sweet&amp;#8230;
- Use of unresolved identifier &amp;#8216;&amp;#8230;&amp;#8217;</description>
+ Use of unresolved identifier &amp;#8216;&amp;#8230;&amp;lsquo;</description>
     </item>
     
     <item>
       <title>Clarifying Swift Access Control (Hint:  Swift Isn’t C#)</title>
-      <link>https://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/clarifying-swift-access-control-hint-swift-isnt-c-sharp/</link>
       <pubDate>Fri, 24 Apr 2015 18:02:34 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/</guid>
-      <description>As it turns out, Swift isn&amp;#8217;t C# (or Java or VB.Net or&amp;#8230;)! My day job keeps me busy writing C#, so I&amp;#8217;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/clarifying-swift-access-control-hint-swift-isnt-c-sharp/</guid>
+      <description>As it turns out, Swift isn&amp;rsquo;t C# (or Java or VB.Net or&amp;#8230;)! My day job keeps me busy writing C#, so I&amp;rsquo;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.
 I just spent the greater part of a week experimenting with Swift extensions. I was trying to figure out some seemingly strange behavior that they were exhibiting.</description>
     </item>
     
     <item>
       <title>Testability Tip for Swift Developers – Public Over Private</title>
-      <link>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/testability-tip-for-swift-developers-public-over-private/</link>
       <pubDate>Wed, 15 Apr 2015 18:52:11 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</guid>
-      <description>Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a private function, however, I often scratch my head and ask, &amp;#8220;How am I supposed to test this??&amp;#8221;.
-Most experienced testers will tell you, &amp;#8220;Don&amp;#8217;t test private implementation &amp;#8211; only public API&amp;#8221;.
-&amp;#8220;Okay&amp;#8230; But how, does that private function get tested?&amp;#8221;, I always asked.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/testability-tip-for-swift-developers-public-over-private/</guid>
+      <description>Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a private function, however, I often scratch my head and ask, &amp;ldquo;How am I supposed to test this??&amp;#8221;.
+Most experienced testers will tell you, &amp;ldquo;Don&amp;rsquo;t test private implementation – only public API&amp;#8221;.
+&amp;ldquo;Okay&amp;#8230; But how, does that private function get tested?&amp;#8221;, I always asked.</description>
     </item>
     
     <item>
       <title>Swift Access Control – Implications for Unit Testing</title>
-      <link>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/swift-access-control-implications-for-unit-testing/</link>
       <pubDate>Wed, 23 Jul 2014 04:04:43 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</guid>
-      <description>If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&amp;#8230;”, you&amp;#8217;re not alone!
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/swift-access-control-implications-for-unit-testing/</guid>
+      <description>If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&amp;#8230;”, you&amp;rsquo;re not alone!
 Unit Tests and Swift Access Control When Swift access control came into the picture, we suddenly had a little more to consider. From the Apple docs:
 Swift access control has three access levels:
  private entities can only be accessed from within the source file where they are defined.</description>

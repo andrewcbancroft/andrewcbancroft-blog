@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-33022655-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="How to Create Mocks and Stubs in Swift" />
+<meta property="og:description" content="Without 100% support for a mocking framework like OCMock, I found myself needing to get creative when building&nbsp;mock objects and method stubs in Swift unit tests. &nbsp;The great thing about testing is that you&rsquo;re&#8230;well&#8230;&nbsp;testing things out to see if they&rsquo;ll work, and I found a solution that I&rsquo;m pretty happy&nbsp;with for now. &nbsp;I&rsquo;m open to better ways, so leave a comment if you&rsquo;ve had good results using a different design!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/testing/how-to-create-mocks-and-stubs-in-swift/" />
+<meta property="article:published_time" content="2014-07-15T05:12:16&#43;00:00"/>
+<meta property="article:modified_time" content="2014-07-15T05:12:16&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How to Create Mocks and Stubs in Swift"/>
+<meta name="twitter:description" content="Without 100% support for a mocking framework like OCMock, I found myself needing to get creative when building&nbsp;mock objects and method stubs in Swift unit tests. &nbsp;The great thing about testing is that you&rsquo;re&#8230;well&#8230;&nbsp;testing things out to see if they&rsquo;ll work, and I found a solution that I&rsquo;m pretty happy&nbsp;with for now. &nbsp;I&rsquo;m open to better ways, so leave a comment if you&rsquo;ve had good results using a different design!"/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Create Mocks and Stubs in Swift",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/testing\/how-to-create-mocks-and-stubs-in-swift\/",
+  "wordCount": "1407",
+  "datePublished": "2014-07-15T05:12:16\x2b00:00",
+  "dateModified": "2014-07-15T05:12:16\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "iOS \/ Mac, Swift, Mock, Stub, Unit Test"
+}
+</script>
+
+
+
+    <title>How to Create Mocks and Stubs in Swift</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">How to Create Mocks and Stubs in Swift</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>Without 100% support for a mocking framework like <a title="OCMock" href="http://ocmock.org/" target="_blank">OCMock</a>, I found myself needing to get creative when building&nbsp;mock objects and method stubs in Swift unit tests. &nbsp;The great thing about testing is that you&rsquo;re&#8230;well&#8230;&nbsp;<em>testing things out</em> to see if they&rsquo;ll work, and I found a solution that I&rsquo;m pretty happy&nbsp;with for now. &nbsp;I&rsquo;m open to better ways, so leave a comment if you&rsquo;ve had good results using a different design!</p>
+
+<p>The process&nbsp;is essentially this (example to follow):</p>
+
+<ol>
+<li>Ensure that the&nbsp;class that you would like to test is designed so that you can substitute your mock for the real one that&rsquo;s used in your class&rsquo; implementation</li>
+<li>Create an <code>XCTestCase</code>&nbsp;&nbsp;class with a test function in your unit test project</li>
+<li>Within the function body create&nbsp;a <em>nested</em> class</li>
+<li>Make the nested class inherit from the real object you&rsquo;re trying to mock / create a method stub for</li>
+<li>You can give the nested class a name such as Mock[ObjectName]</li>
+<li>Configure the mock object however you need by setting its properties or overriding its function implementations with stubbed implementations – no need to override every function&#8230; only the one(s) that your class calls during the test at hand</li>
+<li>Instantiate the class you&rsquo;re testing and pass in an instance of the&nbsp;mock object you just nested in the test function to your&nbsp;class somehow (either through its initializer, by setting a property on the class, or by passing it into the method under test via parameter &#8212; however you intended to &#8216;inject&rsquo; the mock from step 1 is what you should do)</li>
+<li>XCTAssert&#8230;</li>
+</ol>
+
+<p>Let&rsquo;s see those 8 steps in action for those of us who are more visually inclined.</p>
+
+<p>EDIT: &nbsp;July 22, 2014 – I&rsquo;ve added a simple Xcode Project to GitHub for those interested in seeing the setup directly in Xcode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank"><a href="https://github.com/andrewcbancroft/MocksAndStubs">https://github.com/andrewcbancroft/MocksAndStubs</a></a></p>
+
+<p>The scenario that I&rsquo;d like to use a mock class in is this: &nbsp;I have a CoreData application and I&rsquo;d like to be able to mock the <code>NSManagedObjectContext</code>&nbsp;&nbsp;so that instead of making actual database fetch requests, I can just provide stubs of various sorts with the kinds of responses I&rsquo;d expect from the real database calls to ensure my class will do the right thing based on predictable results. &nbsp;To do this I begin at step 1&#8230;</p>
+
+<h4 id="1-nbsp-ensure-that-the-nbsp-class-that-you-would-like-to-test-is-designed-so-that-you-can-substitute-your-mock-for-the-real-one-that-s-used-in-your-class-implementation">1. &nbsp;Ensure that the&nbsp;class that you would like to test is designed so that you can substitute your mock for the real one that&rsquo;s used in your class&rsquo; implementation</h4>
+
+<p>In the&nbsp;example class below, I&nbsp;intend to provide the <code>NSManagedObjectContext</code>&nbsp;&nbsp;dependency through&nbsp;the class&rsquo; initializer which will set a property that is used by my class&rsquo; methods later on, but you could easily use&nbsp;some other way of performing &ldquo;dependency injection&#8221;. &nbsp;The initializer strategy just makes it super clear in <em>my</em> mind what the class&rsquo; dependencies are, so that&rsquo;s what I&rsquo;m going to do here. &nbsp;Have a look:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">Foundation</span>
+<span class="ln"> 2</span><span class="kd">import</span> <span class="nc">CoreData</span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span><span class="kd">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+<span class="ln"> 5</span>    <span class="kd">let</span> <span class="nv">context</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span>
+<span class="ln"> 6</span>    
+<span class="ln"> 7</span>    <span class="kd">init</span><span class="p">(</span><span class="n">managedObjectContext</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln"> 8</span>        <span class="kc">self</span><span class="p">.</span><span class="n">context</span> <span class="p">=</span> <span class="n">managedObjectContext</span>
+<span class="ln"> 9</span>    <span class="p">}</span>
+<span class="ln">10</span><span class="p">}</span></code></pre></div>
+<p>Now, let&rsquo;s say that my example class has a member function called&nbsp;<code>databaseHasRecordsForSomeEntity</code>&nbsp; that returns a <code>Bool</code>&nbsp;&nbsp;value of <strong>true</strong> if the resulting array of a fetch request contains objects, and a <code>Bool</code>&nbsp;&nbsp;value of <strong>false</strong> if the result array of a fetch request is empty. &nbsp;The completed class looks like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">Foundation</span>
+<span class="ln"> 2</span><span class="kd">import</span> <span class="nc">CoreData</span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span><span class="kd">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+<span class="ln"> 5</span>    <span class="kd">let</span> <span class="nv">context</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span>
+<span class="ln"> 6</span>    
+<span class="ln"> 7</span>    <span class="kd">init</span><span class="p">(</span><span class="n">managedObjectContext</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln"> 8</span>        <span class="kc">self</span><span class="p">.</span><span class="n">context</span> <span class="p">=</span> <span class="n">managedObjectContext</span>
+<span class="ln"> 9</span>    <span class="p">}</span>
+<span class="ln">10</span>    
+<span class="ln">11</span>    <span class="c1">// If the array returned from executing a fetch request contains objects, return true; if empty, return false</span>
+<span class="ln">12</span>    <span class="kd">func</span> <span class="nf">databaseHasRecordsForSomeEntity</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Bool</span> <span class="p">{</span>
+<span class="ln">13</span>        <span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;SomeEntity&#34;</span><span class="p">)</span>
+<span class="ln">14</span>        <span class="kd">let</span> <span class="nv">fetchRequestResults</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span> <span class="c1">// May want to do something with the error in real life...</span>
+<span class="ln">15</span>        <span class="k">return</span> <span class="p">(</span><span class="n">fetchRequestResults</span><span class="p">?.</span><span class="bp">count</span> <span class="p">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="ln">16</span>    <span class="p">}</span>
+<span class="ln">17</span><span class="p">}</span></code></pre></div>
+<p>I want to test if&nbsp;<code>databaseHasRecordsForSomeEntity</code>&nbsp;&nbsp;does what I intend it to do. So&#8230;</p>
+
+<h4 id="2-nbsp-create-an-nbsp-xctestcase-nbsp-nbsp-class-with-a-test-function-in-your-unit-test-project">2. &nbsp;Create an&nbsp;<code>XCTestCase</code>&nbsp;&nbsp;class with a test function in your unit test project</h4>
+
+<p>Just listing this for completeness</p>
+
+<p>Next comes the way to make the mock. &nbsp;Read steps 3-5 and then look below for a code example of what the skeleton will look like.</p>
+
+<h4 id="3-nbsp-within-the-function-body-create-nbsp-a-nbsp-nested-nbsp-class">3. &nbsp;Within the function body create&nbsp;a&nbsp;<em>nested</em>&nbsp;class</h4>
+
+<h4 id="4-nbsp-make-the-nested-class-inherit-from-the-real-object-you-re-trying-to-mock-create-a-method-stub-for">4. &nbsp;Make the nested class inherit from the real object you&rsquo;re trying to mock / create a method stub for</h4>
+
+<h4 id="5-nbsp-you-can-give-the-nested-class-a-name-such-as-mock-objectname">5. &nbsp;You can give the nested class a name such as Mock[ObjectName]</h4>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">UIKit</span>
+<span class="ln"> 2</span><span class="kd">import</span> <span class="nc">XCTest</span>
+<span class="ln"> 3</span><span class="kd">import</span> <span class="nc">CoreData</span> <span class="c1">// &amp;lt;-- Make sure to import CoreData or you will get errors when you try to use NSManagedObjectContext</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span><span class="kd">class</span> <span class="nc">MyClassTests</span><span class="p">:</span> <span class="n">XCTestCase</span> <span class="p">{</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span>    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln"> 8</span>        <span class="kc">super</span><span class="p">.</span><span class="n">setUp</span><span class="p">()</span>
+<span class="ln"> 9</span>        <span class="c1">// Put setup code here. This method is called before the invocation of each test method in the class.</span>
+<span class="ln">10</span>    <span class="p">}</span>
+<span class="ln">11</span>    
+<span class="ln">12</span>    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">tearDown</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln">13</span>        <span class="c1">// Put teardown code here. This method is called after the invocation of each test method in the class.</span>
+<span class="ln">14</span>        <span class="kc">super</span><span class="p">.</span><span class="n">tearDown</span><span class="p">()</span>
+<span class="ln">15</span>    <span class="p">}</span>
+<span class="ln">16</span>
+<span class="ln">17</span>    <span class="c1">// Yay for verbose test names!  :]</span>
+<span class="ln">18</span>    <span class="kd">func</span> <span class="nf">testDatabaseHasRecordsForSomeEntityReturnsTrueWhenFetchRequestReturnsNonEmptyArray</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln">19</span>        <span class="kd">class</span> <span class="nc">MockNSManagedObjectContext</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
+<span class="ln">20</span>            
+<span class="ln">21</span>        <span class="p">}</span>
+<span class="ln">22</span>    <span class="p">}</span>
+<span class="ln">23</span><span class="p">}</span></code></pre></div>
+<h4 id="nbsp-6-nbsp-configure-the-mock-object-however-you-need-by-setting-its-properties-or-overriding-its-function-implementations-with-stubbed-implementations-no-need-to-override-every-function-8230-only-the-one-s-that-your-class-calls-during-the-test-at-hand">&nbsp;6. &nbsp;Configure the mock object however you need by setting its properties or overriding its function implementations with stubbed implementations – no need to override every function&#8230; only the one(s) that your class calls during the test at hand</h4>
+
+<p>For my example, I&rsquo;m going to stub out the <code>executeFetchRequest</code>&nbsp;&nbsp;method so that it returns an array with one object in it. &nbsp;This is really the part where you have to determine what you&rsquo;re testing and what you expect the stubbed results to be. &nbsp;Whatever you decide, the way to stub a method is simply to override it in the mock you&rsquo;re implementing. &nbsp;Here&rsquo;s how I implemented the&nbsp;<code>executeFetchRequest</code>&nbsp;&nbsp;stub for my example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// Yay for verbose test names!  :]</span>
+<span class="ln">2</span>    <span class="kd">func</span> <span class="nf">testDatabaseHasRecordsForSomeEntityReturnsTrueWhenFetchRequestReturnsNonEmptyArray</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln">3</span>        <span class="kd">class</span> <span class="nc">MockNSManagedObjectContext</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
+<span class="ln">4</span>            <span class="kr">override</span> <span class="kd">func</span> <span class="nf">executeFetchRequest</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">NSFetchRequest</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">NSErrorPointer</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">AnyObject</span><span class="p">]?</span> <span class="p">{</span>
+<span class="ln">5</span>                <span class="k">return</span> <span class="p">[</span><span class="s">&#34;object 1&#34;</span><span class="p">]</span>
+<span class="ln">6</span>            <span class="p">}</span>
+<span class="ln">7</span>        <span class="p">}</span>
+<span class="ln">8</span>    <span class="p">}</span></code></pre></div>
+<p>We&rsquo;re ready to perform the test and assert the results. &nbsp;Read steps 7-8 and take a look at the code example below step 8:</p>
+
+<h4 id="7-nbsp-instantiate-the-class-you-re-testing-and-pass-in-an-instance-of-the-nbsp-mock-object-you-just-nested-in-the-test-function-to-your-nbsp-class-somehow-either-through-its-initializer-by-setting-a-property-on-the-class-or-by-passing-it-into-the-method-under-test-via-parameter-8212-however-you-intended-to-8216-inject-the-mock-from-step-1-is-what-you-should-do">7. &nbsp;Instantiate the class you&rsquo;re testing and pass in an instance of the&nbsp;mock object you just nested in the test function to your&nbsp;class somehow (either through its initializer, by setting a property on the class, or by passing it into the method under test via parameter &#8212; however you intended to &#8216;inject&rsquo; the mock from step 1 is what you should do)</h4>
+
+<h4 id="8-nbsp-xctassert-8230">8. &nbsp;XCTAssert&#8230;</h4>
+
+<p>From step 1, I intended to pass an NSManagedObjectContext instance to the initializer of MyClass, so that&rsquo;s what I&rsquo;ll do in my test. &nbsp;I&rsquo;ll then perform the XCTAssert on the return value of my method under test:</p>
+
+<p>&nbsp;</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Yay for verbose test names!  :]</span>
+<span class="ln"> 2</span>    <span class="kd">func</span> <span class="nf">testDatabaseHasRecordsForSomeEntityReturnsTrueWhenFetchRequestReturnsNonEmptyArray</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln"> 3</span>        <span class="kd">class</span> <span class="nc">MockNSManagedObjectContext</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
+<span class="ln"> 4</span>            <span class="kr">override</span> <span class="kd">func</span> <span class="nf">executeFetchRequest</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">NSFetchRequest</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">NSErrorPointer</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">AnyObject</span><span class="p">]?</span> <span class="p">{</span>
+<span class="ln"> 5</span>                <span class="k">return</span> <span class="p">[</span><span class="s">&#34;object 1&#34;</span><span class="p">]</span>
+<span class="ln"> 6</span>            <span class="p">}</span>
+<span class="ln"> 7</span>        <span class="p">}</span>
+<span class="ln"> 8</span>        
+<span class="ln"> 9</span>        <span class="c1">// Instantiate mock</span>
+<span class="ln">10</span>        <span class="kd">let</span> <span class="nv">mockContext</span> <span class="p">=</span> <span class="n">MockNSManagedObjectContext</span><span class="p">()</span>
+<span class="ln">11</span>        
+<span class="ln">12</span>        <span class="c1">// Instantiate class under test and pass it the mockContext object</span>
+<span class="ln">13</span>        <span class="kd">let</span> <span class="nv">myClassInstance</span> <span class="p">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="n">managedObjectContext</span><span class="p">:</span> <span class="n">mockContext</span><span class="p">)</span>
+<span class="ln">14</span>        
+<span class="ln">15</span>        <span class="c1">// Call the method under test and store its return value for XCTAssert</span>
+<span class="ln">16</span>        <span class="kd">let</span> <span class="nv">returnValue</span> <span class="p">=</span> <span class="n">myClassInstance</span><span class="p">.</span><span class="n">databaseHasRecordsForSomeEntity</span><span class="p">()</span>
+<span class="ln">17</span>        
+<span class="ln">18</span>        <span class="n">XCTAssertTrue</span><span class="p">(</span><span class="n">returnValue</span> <span class="p">==</span> <span class="kc">true</span><span class="p">,</span> <span class="s">&#34;The return value should be been true&#34;</span><span class="p">)</span>
+<span class="ln">19</span>    <span class="p">}</span></code></pre></div>
+<p>Running the tests at this point should produce a passing test using the mock object in place of a real NSManagedObjectContext that calls a database!</p>
+
+<p>Now, if I wanted to test the &ldquo;false&#8221; branch of my class&rsquo; method, I could simply create another test method following the same steps, only this time, I&rsquo;d provide a new implementation for the overridden <code>executeFetchRequest</code>&nbsp;&nbsp;method that&rsquo;s appropriate:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">testDatabaseHasRecordsForSomeEntityReturnsFalseWhenFetchRequestReturnsEMPTYArray</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln"> 2</span>        <span class="kd">class</span> <span class="nc">MockNSManagedObjectContext</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
+<span class="ln"> 3</span>            <span class="kr">override</span> <span class="kd">func</span> <span class="nf">executeFetchRequest</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">NSFetchRequest</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">NSErrorPointer</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">AnyObject</span><span class="p">]?</span> <span class="p">{</span>
+<span class="ln"> 4</span>                <span class="k">return</span> <span class="p">[]</span> <span class="c1">// Provided a different stub implementation to test the &#34;false&#34; branch of my method under test</span>
+<span class="ln"> 5</span>            <span class="p">}</span>
+<span class="ln"> 6</span>        <span class="p">}</span>
+<span class="ln"> 7</span>        
+<span class="ln"> 8</span>        <span class="c1">// Instantiate mock</span>
+<span class="ln"> 9</span>        <span class="kd">let</span> <span class="nv">mockContext</span> <span class="p">=</span> <span class="n">MockNSManagedObjectContext</span><span class="p">()</span>
+<span class="ln">10</span>        
+<span class="ln">11</span>        <span class="c1">// Instantiate class under test</span>
+<span class="ln">12</span>        <span class="kd">let</span> <span class="nv">myClassInstance</span> <span class="p">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="n">managedObjectContext</span><span class="p">:</span> <span class="n">mockContext</span><span class="p">)</span>
+<span class="ln">13</span>        
+<span class="ln">14</span>        <span class="c1">// Call the method under test and store its return value for XCTAssert</span>
+<span class="ln">15</span>        <span class="kd">let</span> <span class="nv">returnValue</span> <span class="p">=</span> <span class="n">myClassInstance</span><span class="p">.</span><span class="n">databaseHasRecordsForSomeEntity</span><span class="p">()</span>
+<span class="ln">16</span>        
+<span class="ln">17</span>        <span class="n">XCTAssertTrue</span><span class="p">(</span><span class="n">returnValue</span> <span class="p">==</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;The return value should be been false&#34;</span><span class="p">)</span>
+<span class="ln">18</span>    <span class="p">}</span></code></pre></div>
+<p>And that&rsquo;s a wrap – happy mocking and stubbing in Swift!</p>
+
+<p>EDIT: &nbsp;July 22, 2014 – I&rsquo;ve added a simple Xcode Project to GitHub for those interested in seeing the setup directly in Xcode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank"><a href="https://github.com/andrewcbancroft/MocksAndStubs">https://github.com/andrewcbancroft/MocksAndStubs</a></a></p>
+
+<div class="related-posts">
+  You might also enjoy</p> 
+  
+  <ul>
+    <li>
+      <a href="http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/" title="Don’t Write Legacy Swift">Don't Write Legacy Swift</a>
+    </li>
+    <li>
+      <a href="http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/" title="Swift Access Control – Implications for Unit Testing">Swift Access Control – Implications for Unit Testing</a>
+    </li>
+  </ul>
+</div>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

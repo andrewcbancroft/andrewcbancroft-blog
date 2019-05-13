@@ -13,12 +13,13 @@
     
     <item>
       <title>Custom UITableViewCell for Text Input in Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/02/12/custom-uitableviewcell-text-input-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/custom-uitableviewcell-text-input-swift/</link>
       <pubDate>Thu, 12 Feb 2015 13:00:50 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/02/12/custom-uitableviewcell-text-input-swift/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/custom-uitableviewcell-text-input-swift/</guid>
       <description>The need to collect data via text input is a common in many applications. This walk-through showcases how to create a custom UITableViewCell for accepting text input within a UITableView.
-Outline   Table Views for Data Entry?   Step by Step Walkthrough    Set up Storyboard with table view   Set up table view prototype cell with text field   Create new TextInputTableViewCell class   Change cell class in Storyboard to TextInputTableViewCell   Set reuse identifier   Implement table view data source and delegate methods   Run in simulator</description>
+
+Table Views for Data Entry? Table views provide nice, built-in styles that present a form-like view for collecting data from your users. They also have inherent scrolling capabilities. Finally, there is some handy keyboard handling, such as auto-scrolling to avoid covering up a data entry cell, or hiding the keyboard when the user scrolls the Table View.</description>
     </item>
     
   </channel>

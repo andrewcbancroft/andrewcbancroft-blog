@@ -13,24 +13,27 @@
     
     <item>
       <title>Parse PFCloud – “JSON text did not start with array or object”</title>
-      <link>https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/parse/parse-pfcloud-json-text-did-not-start-with-array-or-object/</link>
       <pubDate>Fri, 20 May 2016 03:33:03 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/</guid>
-      <description>It&amp;#8217;s always the little things that lead to flatter foreheads (or at least it is for me).
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/parse/parse-pfcloud-json-text-did-not-start-with-array-or-object/</guid>
+      <description>It&amp;rsquo;s always the little things that lead to flatter foreheads (or at least it is for me).
 Banging my head against the desk this evening working on a Parse migration, I finally figured out what was causing an error condition in a PFCloud function call.
 The request to the server succeeded, but the response was malformed somehow:
- Error Domain=NSCocoaErrorDomain Code=3840 &amp;#8220;JSON text did not start with array or object and option to allow fragments not set.</description>
+ Error Domain=NSCocoaErrorDomain Code=3840 &amp;ldquo;JSON text did not start with array or object and option to allow fragments not set.</description>
     </item>
     
     <item>
       <title>Deploying Parse Dashboard</title>
-      <link>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/parse/deploying-parse-dashboard/</link>
       <pubDate>Sun, 17 Apr 2016 21:56:45 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</guid>
-      <description>Below are steps that I&amp;#8217;ve taken, myself, to deploy the Parse Dashboard to a cloud host, such as Azure, or Heroku.
-Jump to&amp;#8230;   Clone parse-dashboard git repository   Run npm install   Edit parse-dashboard-config.json   Modify local .gitignore   Stage and commit all changes   Set up private git repository   Add new remote to your local parse-dashboard git repository   Push to your private git repository   Create app on the cloud host   Configure cloud host for git deployment   Enable SSL (or run as insecure app)   You might also enjoy&amp;#8230;   Was this article helpful?</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/parse/deploying-parse-dashboard/</guid>
+      <description>Below are steps that I&amp;rsquo;ve taken, myself, to deploy the Parse Dashboard to a cloud host, such as Azure, or Heroku.
+Before you worry with a cloud host, you need a copy of the parse-dashboard to prepare for deployment&amp;#8230;
+
+1 – Clone parse-dashboard git repository First, you&amp;rsquo;ll want to clone (or fork, then clone) the parse-dashboard git repository from GitHub.
+I typically make folders in my ~/Developer directory for projects that I&amp;rsquo;m working on.</description>
     </item>
     
   </channel>

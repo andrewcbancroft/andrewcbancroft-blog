@@ -13,12 +13,14 @@
     
     <item>
       <title>Diagnosing “Restore failed” with ASP.NET 5 on Mac</title>
-      <link>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
+      <link>https://www.andrewcbancroft.com/blog/dot-net-development/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
       <pubDate>Sun, 09 Aug 2015 20:57:02 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
-      <description>Following along with Steve Smith&amp;#8217;s &amp;#8220;Your First ASP.NET 5 Application on a Mac&amp;#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;#8217;t work due to a problem with restoring the project&amp;#8217;s dependencies.
-Jump to&amp;#8230;   Retracing my steps   Mis-matched Mono versions   Resolved   Was this article helpful? Please share!</description>
+      <guid>https://www.andrewcbancroft.com/blog/dot-net-development/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
+      <description>Following along with Steve Smith&amp;rsquo;s &amp;ldquo;Your First ASP.NET 5 Application on a Mac&amp;#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;rsquo;t work due to a problem with restoring the project&amp;rsquo;s dependencies.
+
+Retracing my steps I got ASP.NET installed on my Mac, and I even got a cool little template going using Yeoman.
+I opened up my scaffolded project using Visual Studio Code, and began the dependency restore process.</description>
     </item>
     
   </channel>

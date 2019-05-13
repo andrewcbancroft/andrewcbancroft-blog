@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-33022655-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="UITableView Swipe to Delete Workflow in Swift" />
+<meta property="og:description" content="Data management applications, by which I mean an app where you&rsquo;re allowing users to add, edit, and delete bits of data as part of your app&rsquo;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.
+Making changes to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/uitableview-swipe-to-delete-workflow-in-swift/" />
+<meta property="article:published_time" content="2015-07-17T04:00:18&#43;00:00"/>
+<meta property="article:modified_time" content="2015-07-17T04:00:18&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="UITableView Swipe to Delete Workflow in Swift"/>
+<meta name="twitter:description" content="Data management applications, by which I mean an app where you&rsquo;re allowing users to add, edit, and delete bits of data as part of your app&rsquo;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.
+Making changes to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps."/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "UITableView Swipe to Delete Workflow in Swift",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/ui-work\/uitableview-swipe-to-delete-workflow-in-swift\/",
+  "wordCount": "1286",
+  "datePublished": "2015-07-17T04:00:18\x2b00:00",
+  "dateModified": "2015-07-17T04:00:18\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, Swipe to Delete, UITableView"
+}
+</script>
+
+
+
+    <title>UITableView Swipe to Delete Workflow in Swift</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">UITableView Swipe to Delete Workflow in Swift</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>Data management applications, by which I mean an app where you&rsquo;re allowing users to add, edit, and delete bits of data as part of your app&rsquo;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.</p>
+
+<p>Making <em>changes</em> to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps. How do we allow users to add or remove &ldquo;records&#8221; to the system? Furthermore, how do we signal that those changes were effective and refresh the view of the data in the UI?</p>
+
+<p>The primary concern I want to focus in on in this article is the ever-common paradigm of &ldquo;swipe to delete&#8221; when using a table view. What could the workflow of deleting a row from the table view (and its data source) look like? How could it be implemented in Swift? Let&rsquo;s explore&#8230;</p>
+
+<p><a name="workflow" class="jump-target"></a></p>
+
+<h3 id="workflow">Workflow</h3>
+
+<p>The workflow of &ldquo;swipe to delete&#8221; that I typically use in my own applications is this:</p>
+
+<ul>
+<li><strong>Swipe</strong> a table view row and have the Delete button appear.</li>
+<li>Press the delete button, which triggers a <strong>confirmation</strong>: &ldquo;Do you really want to delete this?&#8221;</li>
+<li>Based on the user&rsquo;s response to the confirmation, <strong>delete the object</strong> from the data source and remove it from the table view, <strong>or cancel</strong>.</li>
+</ul>
+
+<p>The confirmation step is atypical for iOS it seems. Swiping to delete an e-mail or a reminder or just about anything else in Apple&rsquo;s own apps simply deletes the item right away.</p>
+
+<p>There may be a good reason for this, but I like to give folks an out if they didn&rsquo;t mean to do it. It&rsquo;s fair enough to say, &ldquo;Well, they went to the effort of swiping the row <em>and</em> pressing the button&#8230; surely they mean to do it!&#8221;. I still feel more comfortable if I get the opportunity to cancel something like a delete operation. Feel free to disagree there – for this article, I&rsquo;ll assume you want to include that into your delete workflow, and will demonstrate a simple way to implement all three steps of the strategy.</p>
+
+<p><a name="implementation" class="jump-target"></a></p>
+
+<h3 id="implementation">Implementation</h3>
+
+<p>To demonstrate the implementation of this workflow, suppose that we&rsquo;ve got a table view listing out all of the planets in our solar system (all of the news on Pluto this week has me thinking in this direction, so I just went with it). Feel free to grab the example project over at GitHub:</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwipeToDeleteExample" title="Swipe to Delete Example">Swipe to Delete Example</a>
+    </li>
+  </ul>
+</div></p>
+
+<p>The table view looks like this once its data source is all configured:</p>
+
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM-576x1024.png" alt="Table View with Planets" width="576" height="1024" class="alignnone size-large wp-image-12096" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM-576x1024.png 576w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM-169x300.png 169w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM.png 750w" sizes="(max-width: 576px) 100vw, 576px" /></a></p>
+
+<p><a name="swipe" class="jump-target"></a></p>
+
+<h4 id="swipe">Swipe</h4>
+
+<p>What we want is to be able to swipe one of the rows and delete the planet from the data source and, consequently, remove it from the table view in a nice, fluid way:</p>
+
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM-576x1024.png" alt="Table View - Delete Button Revealed" width="576" height="1024" class="alignnone size-large wp-image-12097" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM-576x1024.png 576w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM-169x300.png 169w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM.png 750w" sizes="(max-width: 576px) 100vw, 576px" /></a></p>
+
+<p>To accomplish this, we need to do a couple of things.</p>
+
+<p>First, your view controller needs to conform to the <code>UITableViewDelegate</code> protocol, because the swipe to delete functionality is encapsulated by one of the table view delegate methods. It&rsquo;s a simple change at the class declaration:</p>
+
+<p><code>class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate { ... }</code></p>
+
+<p>The delegate method that causes the buttons to appear on swipe is called <code>tableView(_:commitEditingStyle:forRowAtIndexPath</code></p>
+
+<p>Its implementation for the example I&rsquo;m working through looks like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span> <span class="p">{</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span>    <span class="c1">// ...</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span>    <span class="kd">var</span> <span class="nv">deletePlanetIndexPath</span><span class="p">:</span> <span class="n">NSIndexPath</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span>    <span class="c1">// ...</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>    <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">commitEditingStyle</span> <span class="n">editingStyle</span><span class="p">:</span> <span class="n">UITableViewCellEditingStyle</span><span class="p">,</span> <span class="n">forRowAtIndexPath</span> <span class="n">indexPath</span><span class="p">:</span> <span class="n">NSIndexPath</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">10</span>        <span class="k">if</span> <span class="n">editingStyle</span> <span class="p">==</span> <span class="p">.</span><span class="n">Delete</span> <span class="p">{</span>
+<span class="ln">11</span>            <span class="n">deletePlanetIndexPath</span> <span class="p">=</span> <span class="n">indexPath</span>
+<span class="ln">12</span>            <span class="kd">let</span> <span class="nv">planetToDelete</span> <span class="p">=</span> <span class="n">planets</span><span class="p">[</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">]</span>
+<span class="ln">13</span>            <span class="n">confirmDelete</span><span class="p">(</span><span class="n">planetToDelete</span><span class="p">)</span>
+<span class="ln">14</span>        <span class="p">}</span>
+<span class="ln">15</span>    <span class="p">}</span>
+<span class="ln">16</span>
+<span class="ln">17</span>    <span class="c1">// ...</span>
+<span class="ln">18</span><span class="p">}</span></code></pre></div>
+<p>So what&rsquo;s happening here? The primary thing to notice is that we&rsquo;re evaluating the editingStyle from the method&rsquo;s parameter list. Comparing it to the <code>.Delete</code> <code>UITableViewCellEditingStyle</code> value is what allows us to know that the Delete button was tapped.</p>
+
+<p>Since I have a confirmation step to take care of, I&rsquo;ve chosen to store the <code>indexPath</code> of the row we&rsquo;re wanting to delete in a class-viewable variable so that I can use it later on when we handle the deletion (if the user confirms it).</p>
+
+<p>The final step of this function is to call <code>confirmDelete()</code>, which has its own explanation coming up&#8230;</p>
+
+<p><a name="confirm" class="jump-target"></a></p>
+
+<h4 id="confirm">Confirm</h4>
+
+<p>The next step is confirming that the user really wants to delete the particular planet they&rsquo;ve initiated the delete action on:</p>
+
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM-576x1024.png" alt="Delete Confirmation" width="576" height="1024" class="alignnone size-large wp-image-12098" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM-576x1024.png 576w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM-169x300.png 169w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM.png 750w" sizes="(max-width: 576px) 100vw, 576px" /></a></p>
+
+<p>How is this implemented? It all boils down to using iOS 8&rsquo;s new <code>UIAlertController</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span> <span class="p">{</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span>    <span class="c1">// ...</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span>    <span class="kd">func</span> <span class="nf">confirmDelete</span><span class="p">(</span><span class="n">planet</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln"> 6</span>        <span class="kd">let</span> <span class="nv">alert</span> <span class="p">=</span> <span class="n">UIAlertController</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Delete Planet&#34;</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="s">&#34;Are you sure you want to permanently delete </span><span class="si">\(</span><span class="n">planet</span><span class="si">)</span><span class="s">?&#34;</span><span class="p">,</span> <span class="n">preferredStyle</span><span class="p">:</span> <span class="p">.</span><span class="n">ActionSheet</span><span class="p">)</span>
+<span class="ln"> 7</span>        
+<span class="ln"> 8</span>        <span class="kd">let</span> <span class="nv">DeleteAction</span> <span class="p">=</span> <span class="n">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Delete&#34;</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="p">.</span><span class="n">Destructive</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">handleDeletePlanet</span><span class="p">)</span>
+<span class="ln"> 9</span>        <span class="kd">let</span> <span class="nv">CancelAction</span> <span class="p">=</span> <span class="n">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Cancel&#34;</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="p">.</span><span class="n">Cancel</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">cancelDeletePlanet</span><span class="p">)</span>
+<span class="ln">10</span>        
+<span class="ln">11</span>        <span class="n">alert</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">DeleteAction</span><span class="p">)</span>
+<span class="ln">12</span>        <span class="n">alert</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">CancelAction</span><span class="p">)</span>
+<span class="ln">13</span>        
+<span class="ln">14</span>        <span class="c1">// Support display in iPad</span>
+<span class="ln">15</span>        <span class="n">alert</span><span class="p">.</span><span class="n">popoverPresentationController</span><span class="p">?.</span><span class="n">sourceView</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">view</span>
+<span class="ln">16</span>        <span class="n">alert</span><span class="p">.</span><span class="n">popoverPresentationController</span><span class="p">?.</span><span class="n">sourceRect</span> <span class="p">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="kc">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="ln">17</span>        
+<span class="ln">18</span>        <span class="kc">self</span><span class="p">.</span><span class="n">presentViewController</span><span class="p">(</span><span class="n">alert</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="ln">19</span>    <span class="p">}</span>
+<span class="ln">20</span>
+<span class="ln">21</span>    <span class="c1">// ...</span>
+<span class="ln">22</span><span class="p">}</span></code></pre></div>
+<p>We&rsquo;re asking the user if they&rsquo;re sure they want to permanently delete the planet using the <code>.ActionSheet</code> style.</p>
+
+<p>The next step of the function is to create a couple of <code>UIAlertAction</code> buttons: one for Delete and one for Cancel, with the appropriate style (<code>.Destructive</code> and <code>.Cancel</code>, respectively).</p>
+
+<p>Finally, we provide a function to each <code>UIAlertAction</code> instance. The handlers, of course, could have been implemented with closures, but I chose to built out a couple of named functions, just to be able to step through it with you, and to separate out the logic of the steps a little more. Feel free to do whichever seems most natural to you.</p>
+
+<p><a name="delete-cancel" class="jump-target"></a></p>
+
+<h4 id="delete-or-cancel">Delete or cancel</h4>
+
+<p>This is the final step! The following code snippet is an implementation of the two handlers specified for the initialization step of the <code>UIAlertAction</code> buttons, which were <code>handleDeletePlanet</code> and <code>cancelDeletePlanet</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span> <span class="p">{</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span>    <span class="c1">// ...</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span>    <span class="kd">var</span> <span class="nv">deletePlanetIndexPath</span><span class="p">:</span> <span class="n">NSIndexPath</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span>    <span class="c1">// ...</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span>    <span class="kd">func</span> <span class="nf">handleDeletePlanet</span><span class="p">(</span><span class="n">alertAction</span><span class="p">:</span> <span class="n">UIAlertAction</span><span class="o">!</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Void</span> <span class="p">{</span>
+<span class="ln">10</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">indexPath</span> <span class="p">=</span> <span class="n">deletePlanetIndexPath</span> <span class="p">{</span>
+<span class="ln">11</span>            <span class="n">tableView</span><span class="p">.</span><span class="n">beginUpdates</span><span class="p">()</span>
+<span class="ln">12</span>            
+<span class="ln">13</span>            <span class="n">planets</span><span class="p">.</span><span class="bp">removeAtIndex</span><span class="p">(</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">)</span>
+<span class="ln">14</span>            
+<span class="ln">15</span>            <span class="c1">// Note that indexPath is wrapped in an array:  [indexPath]</span>
+<span class="ln">16</span>            <span class="n">tableView</span><span class="p">.</span><span class="n">deleteRowsAtIndexPaths</span><span class="p">([</span><span class="n">indexPath</span><span class="p">],</span> <span class="n">withRowAnimation</span><span class="p">:</span> <span class="p">.</span><span class="n">Automatic</span><span class="p">)</span>
+<span class="ln">17</span>            
+<span class="ln">18</span>            <span class="n">deletePlanetIndexPath</span> <span class="p">=</span> <span class="kc">nil</span>
+<span class="ln">19</span>            
+<span class="ln">20</span>            <span class="n">tableView</span><span class="p">.</span><span class="n">endUpdates</span><span class="p">()</span>
+<span class="ln">21</span>        <span class="p">}</span>
+<span class="ln">22</span>    <span class="p">}</span>
+<span class="ln">23</span>    
+<span class="ln">24</span>    <span class="kd">func</span> <span class="nf">cancelDeletePlanet</span><span class="p">(</span><span class="n">alertAction</span><span class="p">:</span> <span class="n">UIAlertAction</span><span class="o">!</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">25</span>        <span class="n">deletePlanetIndexPath</span> <span class="p">=</span> <span class="kc">nil</span>
+<span class="ln">26</span>    <span class="p">}</span>
+<span class="ln">27</span>
+<span class="ln">28</span>    <span class="c1">// ...</span>
+<span class="ln">29</span><span class="p">}</span></code></pre></div>
+<p>Clearly, <code>handleDeletePlanet()</code> is the most involved. The essential process is this:</p>
+
+<ul>
+<li>Call <code>beginUpdates()</code> on the table view instance to signal the start of UI updates to the table view.</li>
+<li>Remove the planet from the data source using the <code>deletePlanetIndexPath</code> we set in the alert controller step.</li>
+<li>Call <code>deleteRowsAtIndexPaths()</code> on the table view to remove the planet from the UI.</li>
+<li>Reset the class-viewable <code>deletePlanetIndexPath</code> to nil.</li>
+<li>Call <code>endUpdates()</code> on the table view instance to complete the UI updates.</li>
+</ul>
+
+<p>There&rsquo;s one gotcha, that I&rsquo;ve tried to highlight by way of comment in the code snippet: Notice that within the call to <code>deleteRowsAtIndexPaths</code> (plural), I&rsquo;ve wrapped the <code>indexPath</code> we&rsquo;re removing in an array. It&rsquo;s subtle, but this delegate method expects an array of <code>indexPath</code> instances, not a single index path instance. It&rsquo;s simple enough, but it can catch you off guard if you&rsquo;re in the mindset of removing a single row and come across this method, which is flexible enough to allow you to delete several at a time.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>Swipe -&gt; confirm -&gt; delete or cancel. Those are the steps we analyzed in this commonly needed workflow in data management applications.</p>
+
+<p><a name="related" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/" title="Swift How-To: Setting up a Table View">Swift How-To: Setting up a Table View</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/" title="Swift UITableViewDataSource Cheat Sheet">Swift UITableViewDataSource Cheat Sheet</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/" title="Sync Table View Data: NSFetchedResultsController and Swift">Sync Table View Data: NSFetchedResultsController and Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/02/12/custom-uitableviewcell-text-input-swift/" title="Custom UITableViewCell for Text Input in Swift">Custom UITableViewCell for Text Input in Swift</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

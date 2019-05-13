@@ -13,93 +13,94 @@
     
     <item>
       <title>iOS Data Persistence: The Big Picture</title>
-      <link>https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/</link>
+      <link>https://www.andrewcbancroft.com/pluralsight/2019-04-30-ios-data-persistence-the-big-picture/</link>
       <pubDate>Tue, 30 Apr 2019 10:03:33 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/</guid>
-      <description>We&amp;#8217;ve all been there. Do a search on the topic of &amp;#8220;saving data in iOS&amp;#8221; and you&amp;#8217;ll get dozens of search results mentioning at least six different frameworks and platforms, and a month’s worth of reading.
-Wouldn&amp;#8217;t it be nice to distill the possibilities down into just what you need in order to start down a path for persisting data in your app?
-&amp;#8220;iOS Data Persistence: The Big Picture&amp;#8221; will be worth the hour of your time.</description>
+      <guid>https://www.andrewcbancroft.com/pluralsight/2019-04-30-ios-data-persistence-the-big-picture/</guid>
+      <description>We&amp;rsquo;ve all been there. Do a search on the topic of &amp;ldquo;saving data in iOS&amp;#8221; and you&amp;rsquo;ll get dozens of search results mentioning at least six different frameworks and platforms, and a month’s worth of reading.
+Wouldn&amp;rsquo;t it be nice to distill the possibilities down into just what you need in order to start down a path for persisting data in your app?
+&amp;ldquo;iOS Data Persistence: The Big Picture&amp;#8221; will be worth the hour of your time.</description>
     </item>
     
     <item>
       <title>Do Core Data Entities Need Primary Keys?</title>
-      <link>https://www.andrewcbancroft.com/2018/08/10/core-data-entities-need-primary-keys/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/core-data-entities-need-primary-keys/</link>
       <pubDate>Fri, 10 Aug 2018 22:31:47 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2018/08/10/core-data-entities-need-primary-keys/</guid>
-      <description>In this video I pop the hood on Core Data&amp;#8217;s SQLite persistent store to discover the details about whether or not you need to add a property representing a &amp;#8220;primary key&amp;#8221; for your Core Data Entities. Take a look and be sure to subscribe for to stay connected to future screen casts!
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/core-data-entities-need-primary-keys/</guid>
+      <description>In this video I pop the hood on Core Data&amp;rsquo;s SQLite persistent store to discover the details about whether or not you need to add a property representing a &amp;ldquo;primary key&amp;#8221; for your Core Data Entities. Take a look and be sure to subscribe for to stay connected to future screen casts!
  Transcript I had a question asked to me recently to the effect of… “Do I need to create a Primary Key property when I model my Core Data Entities?</description>
     </item>
     
     <item>
       <title>Using an Existing SQLite Store with NSPersistentContainer</title>
-      <link>https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-an-existing-sqlite-store-with-nspersistentcontainer/</link>
       <pubDate>Mon, 10 Jul 2017 18:02:05 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/</guid>
-      <description>If you&amp;#8217;ve been creating the Core Data Stack without NSPersistentContainer and you&amp;#8217;re thinking about switching things up to use NSPersistentContainer, you need to think about your existing SQLite persistent store.
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-an-existing-sqlite-store-with-nspersistentcontainer/</guid>
+      <description>If you&amp;rsquo;ve been creating the Core Data Stack without NSPersistentContainer and you&amp;rsquo;re thinking about switching things up to use NSPersistentContainer, you need to think about your existing SQLite persistent store.
 Creating the stack with NSPersistentContainer handles the creation of SQLite stores internally, so brand new setups using NSPersistentContainer are pretty easy.
 But how do you go about telling NSPersistentContainer about your existing SQLite store?
-Let&amp;#8217;s take a look now at how you can configure the container to use your previously-created persistent store.</description>
+Let&amp;rsquo;s take a look now at how you can configure the container to use your previously-created persistent store.</description>
     </item>
     
     <item>
       <title>A Swift Implementation of the Core Data Stack Using NSPersistentContainer</title>
-      <link>https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/</link>
       <pubDate>Mon, 15 May 2017 18:19:46 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/</guid>
-      <description>If you&amp;#8217;re targeting iOS 10 and above, you&amp;#8217;ve got the opportunity to pick your poison when it comes to creating the Core Data stack.
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/</guid>
+      <description>If you&amp;rsquo;re targeting iOS 10 and above, you&amp;rsquo;ve got the opportunity to pick your poison when it comes to creating the Core Data stack.
 You could opt for the process I described in Creating the Core Data Stack with Backwards Compatibility in Swift &amp;#8212; that process still works perfectly fine in iOS 10+.
 Alternatively, you could use the new NSPersistentContainer class if you want to write a few less lines of code and keep up-to-date with the latest framework enhancements!</description>
     </item>
     
     <item>
       <title>Core Data Model Attributes and NSManagedObject Property Types Must Match!</title>
-      <link>https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</link>
       <pubDate>Sun, 23 Apr 2017 20:03:34 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</guid>
-      <description>Jump to&amp;#8230;   Data model Attributes and NSManagedObject property types &amp;#8211; Match &amp;#8217;em!   Optionals are Types   Lessons learned   Was this article helpful? Please share!   Learning Core Data? Watch my course, Core Data Fundamentals with Swift!   
-I admit &amp;#8211; it might have taken me less time to figure out my runtime exception if I hadn&amp;#8217;t just migrated my project to Swift 3 when I encountered the bug.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</guid>
+      <description>I admit – it might have taken me less time to figure out my runtime exception if I hadn&amp;rsquo;t just migrated my project to Swift 3 when I encountered the bug.
+That&amp;rsquo;s the problem isn&amp;rsquo;t it? You go in&amp;#8230; you intend to do one thing. Before long, you&amp;rsquo;ve got 15 files with an M out to the right. The project builds (finally), but ah – then there&amp;rsquo;s runtime.
+When the crash occurs, you&amp;rsquo;re never sure if it was an existing problem, or if it was caused by the code conversion.</description>
     </item>
     
     <item>
       <title>Creating the Core Data Stack with Backwards Compatibility in Swift</title>
-      <link>https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/creating-the-core-data-stack-with-backwards-compatibility-in-swift/</link>
       <pubDate>Sun, 16 Apr 2017 21:23:46 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/</guid>
-      <description>In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&amp;#8217;ll be unable to take advantage of Core Data&amp;#8217;s latest &amp;#8220;stack creation&amp;#8221; class called NSPersistentContainer. So what can you do?
-While NSPersistentContainer does aim to simplify the stack creation process, at the end of the day, it&amp;#8217;s not terrible to have to mess with some of this Core Data plumbing.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/creating-the-core-data-stack-with-backwards-compatibility-in-swift/</guid>
+      <description>In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&amp;rsquo;ll be unable to take advantage of Core Data&amp;rsquo;s latest &amp;ldquo;stack creation&amp;#8221; class called NSPersistentContainer. So what can you do?
+While NSPersistentContainer does aim to simplify the stack creation process, at the end of the day, it&amp;rsquo;s not terrible to have to mess with some of this Core Data plumbing.</description>
     </item>
     
     <item>
       <title>Core Data Fundamentals with Swift</title>
-      <link>https://www.andrewcbancroft.com/2017/04/02/core-data-fundamentals-swift/</link>
+      <link>https://www.andrewcbancroft.com/pluralsight/2017-04-02-core-data-fundamentals-swift/</link>
       <pubDate>Sun, 02 Apr 2017 22:04:02 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/04/02/core-data-fundamentals-swift/</guid>
-      <description>Core Data is an extremely powerful framework for managing and persisting data on your users&amp;#8217; devices. And let&amp;#8217;s face it: saving data to your users&amp;#8217; devices is inevitable. The question is, which data management and persistence technology you use when the time comes for you to tackle this challenge?
-I&amp;#8217;ve been hard at work on a new course for Pluralsight called &amp;#8220;Core Data Fundamentals with Swift&amp;#8220;, and the best news is that it&amp;#8217;s now LIVE in the Pluralsight library!</description>
+      <guid>https://www.andrewcbancroft.com/pluralsight/2017-04-02-core-data-fundamentals-swift/</guid>
+      <description>Core Data is an extremely powerful framework for managing and persisting data on your users&amp;rsquo; devices. And let&amp;rsquo;s face it: saving data to your users&amp;rsquo; devices is inevitable. The question is, which data management and persistence technology you use when the time comes for you to tackle this challenge?
+&amp;ldquo;Core Data Fundamentals with Swift&amp;rdquo; will give you the essential skills you need to architect an app to use Core Data.</description>
     </item>
     
     <item>
       <title>Core Data: Solving Ambiguous Type / Redeclaration of Type</title>
-      <link>https://www.andrewcbancroft.com/2017/03/28/core-data-solving-ambiguous-type-redeclaration-of-type/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/core-data-solving-ambiguous-type-redeclaration-of-type/</link>
       <pubDate>Wed, 29 Mar 2017 02:57:05 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2017/03/28/core-data-solving-ambiguous-type-redeclaration-of-type/</guid>
-      <description>I just finished roasting some coffee from Peru. I&amp;#8217;ve never had it before, but it got me thinking about my Roaster On the Go &amp;#8220;app&amp;#8221; as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate Working with Unwind Segues Programmatically in Swift, but now I&amp;#8217;m going to use it to show you how to resolve these errors that can crop up when you&amp;#8217;re implementing NSManagedObject subclasses for your Core Data Entities.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/core-data-solving-ambiguous-type-redeclaration-of-type/</guid>
+      <description>I just finished roasting some coffee from Peru. I&amp;rsquo;ve never had it before, but it got me thinking about my Roaster On the Go &amp;ldquo;app&amp;#8221; as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate Working with Unwind Segues Programmatically in Swift, but now I&amp;rsquo;m going to use it to show you how to resolve these errors that can crop up when you&amp;rsquo;re implementing NSManagedObject subclasses for your Core Data Entities.</description>
     </item>
     
     <item>
       <title>Using a Core Data Model in Swift Playgrounds</title>
-      <link>https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-a-core-data-model-in-swift-playgrounds/</link>
       <pubDate>Sun, 10 Jul 2016 20:48:54 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-a-core-data-model-in-swift-playgrounds/</guid>
       <description>Did you know that you can tinker with Core Data inside of Swift playgrounds in Xcode? You can!
 Jeremiah Jessel, author at http://www.learncoredata.com, wrote up an article in 2015 detailing how you can use the Core Data framework inside a playground. He shows how you can do everything from setting up the Core Data stack, to creating NSManagedObjects programmatically in code. Great stuff!
 After I read his guide, I got to thinking: I wonder if you can take an .</description>
@@ -107,68 +108,69 @@ After I read his guide, I got to thinking: I wonder if you can take an .</descri
     
     <item>
       <title>Sharing a Core Data Model with a Swift Framework</title>
-      <link>https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/sharing-a-core-data-model-with-a-swift-framework/</link>
       <pubDate>Wed, 26 Aug 2015 04:04:05 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/</guid>
-      <description>Updated on June 13, 2017 &amp;#8211; Swift 3.0, Xcode 8
-Code re-use is a powerful thing, but it&amp;#8217;s not always easy to pull off. We strive for it though, because in the long run, it makes maintaining the code far, far easier than if we just settled for copying and pasting.
-With the introduction of dynamic frameworks in iOS 8, a world of possibility opened up for iOS developers to achieve some pretty cool re-use scenarios, one of which we&amp;#8217;re going to dive into today.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/sharing-a-core-data-model-with-a-swift-framework/</guid>
+      <description>Updated on June 13, 2017 – Swift 3.0, Xcode 8
+Code re-use is a powerful thing, but it&amp;rsquo;s not always easy to pull off. We strive for it though, because in the long run, it makes maintaining the code far, far easier than if we just settled for copying and pasting.
+With the introduction of dynamic frameworks in iOS 8, a world of possibility opened up for iOS developers to achieve some pretty cool re-use scenarios, one of which we&amp;rsquo;re going to dive into today.</description>
     </item>
     
     <item>
       <title>Displaying Data With NSFetchedResultsController and Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/displaying-data-with-nsfetchedresultscontroller-and-swift/</link>
       <pubDate>Thu, 05 Mar 2015 15:14:53 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/</guid>
-      <description>Updated on September 23, 2015 &amp;#8211; Swift 2.0
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/displaying-data-with-nsfetchedresultscontroller-and-swift/</guid>
+      <description>Updated on September 23, 2015 – Swift 2.0
 The combination of an NSFetchedResultsController and a UITableView provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using NSFetchedResultsController come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&amp;#8230;
 With a Core Data data store seeded with data, the next logical step is to display that data somewhere other than the console.</description>
     </item>
     
     <item>
       <title>Using Swift to Seed a Core Data Database</title>
-      <link>https://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-swift-to-seed-a-core-data-database/</link>
       <pubDate>Thu, 26 Feb 2015 03:44:53 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/</guid>
-      <description>Updated on September 23, 2015 &amp;#8211; Swift 2.0
-Designing an application&amp;#8217;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
-During development, I&amp;#8217;ve found that it&amp;#8217;s often convenient to seed a Core Data database with sample data so that I can preview how it&amp;#8217;ll look in my application.</description>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-swift-to-seed-a-core-data-database/</guid>
+      <description>Updated on September 23, 2015 – Swift 2.0
+Designing an application&amp;rsquo;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
+During development, I&amp;rsquo;ve found that it&amp;rsquo;s often convenient to seed a Core Data database with sample data so that I can preview how it&amp;rsquo;ll look in my application.</description>
     </item>
     
     <item>
       <title>Core Data Cheat Sheet for Swift iOS Developers</title>
-      <link>https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/core-data-cheat-sheet-for-swift-ios-developers/</link>
       <pubDate>Wed, 18 Feb 2015 18:20:59 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/core-data-cheat-sheet-for-swift-ios-developers/</guid>
       <description>Updated on July 27, 2016 &amp;#8211; Additional Cheats
 Having trouble recalling how to perform basic Core Data operations? This cheat sheet is a handy reference to keep you productive with Core Data and Swift!
-The code snippets below are here to help jog your memory when it&amp;#8217;s been a while since you&amp;#8217;ve worked in Core Data. They could also be helpful for newcomers to iOS development, Core Data, and Swift.</description>
+The code snippets below are here to help jog your memory when it&amp;rsquo;s been a while since you&amp;rsquo;ve worked in Core Data. They could also be helpful for newcomers to iOS development, Core Data, and Swift.</description>
     </item>
     
     <item>
       <title>Unit Testing Model Layer with Core Data and Swift</title>
-      <link>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/testing/unit-testing-model-layer-core-data-swift/</link>
       <pubDate>Tue, 13 Jan 2015 13:00:37 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</guid>
-      <description>Updated on November 19, 2015 &amp;#8211; Swift 2.0
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/testing/unit-testing-model-layer-core-data-swift/</guid>
+      <description>Updated on November 19, 2015 – Swift 2.0
 As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.
 To my surprise, unit testing my Core Data model layer has been… well… amazing.</description>
     </item>
     
     <item>
       <title>Implement NSManagedObject Subclass in Swift</title>
-      <link>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/implement-nsmanagedobject-subclass-in-swift/</link>
       <pubDate>Fri, 18 Jul 2014 04:08:12 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/implement-nsmanagedobject-subclass-in-swift/</guid>
       <description>Updated on July 8, 2016 – Xcode 7
 My goal with this blog entry is to help get you set up to create NSManagedObject subclasses in Swift for the Entities in your Core Data model.
-Jump to&amp;#8230;   Example   Walkthrough    Create an Entity   Create an NSManagedObject Subclass for that Entity   Verify NSManagedObject class in the &amp;#8220;Data Model Inspector&amp;#8221;</description>
+
+Example Let&amp;rsquo;s look at a fabricated example: Say that you&amp;rsquo;ve got a Core Data project and you&amp;rsquo;re creating Entities. For my simple project, I&amp;rsquo;ll create an Entity called &amp;ldquo;MyEntity&amp;#8221; with an attribute called &amp;ldquo;myAttribute&amp;#8221;.</description>
     </item>
     
   </channel>

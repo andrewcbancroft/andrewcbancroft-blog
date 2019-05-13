@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-33022655-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Unit Testing Model Layer with Core Data and Swift" />
+<meta property="og:description" content="Updated on November 19, 2015 – Swift 2.0
+As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.
+To my surprise, unit testing my Core Data model layer has been… well… amazing." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/testing/unit-testing-model-layer-core-data-swift/" />
+<meta property="article:published_time" content="2015-01-13T13:00:37&#43;00:00"/>
+<meta property="article:modified_time" content="2015-01-13T13:00:37&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unit Testing Model Layer with Core Data and Swift"/>
+<meta name="twitter:description" content="Updated on November 19, 2015 – Swift 2.0
+As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.
+To my surprise, unit testing my Core Data model layer has been… well… amazing."/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Unit Testing Model Layer with Core Data and Swift",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/testing\/unit-testing-model-layer-core-data-swift\/",
+  "wordCount": "637",
+  "datePublished": "2015-01-13T13:00:37\x2b00:00",
+  "dateModified": "2015-01-13T13:00:37\x2b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "iOS \/ Mac, Swift, Core Data, Model, Unit Testing"
+}
+</script>
+
+
+
+    <title>Unit Testing Model Layer with Core Data and Swift</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com">Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Unit Testing Model Layer with Core Data and Swift</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p><small>Updated on November 19, 2015 – Swift 2.0</small></p>
+
+<p>As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.</p>
+
+<p>To my surprise, unit testing my Core Data model layer has been… well… amazing. With little effort, I’ve been able to write the unit tests I’ve wanted. The process went something like this for me:</p>
+
+<ol>
+<li><a href="http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">Create an <code>NSManagedObject</code> subclass</a> of the Core Data entity that I need in my unit test. (This just makes things easier from an Xcode code-completion standpoint)</li>
+<li>Write a helper function to set up an in-memory <code>NSManagedObjectContext</code>. Avoiding the need to use an actual sqlite database is pretty handy. It allows for quick-running tests and easy iterations over the data model itself.</li>
+<li>Write unit tests using the in-memory <code>NSManagedObjectContext</code>.</li>
+</ol>
+
+<p><a href="http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">I’ve already written about creating an <code>NSManagedObject</code> subclass</a>, so I will unpack steps 2 and 3 in this blog entry.</p>
+
+<h3 id="set-up-an-in-memory-nsmanagedobjectcontext">Set up an in-memory NSManagedObjectContext</h3>
+
+<p>A <a href="http://stackoverflow.com/questions/1849802/how-to-unit-test-my-models-now-that-i-am-using-core-data">Stack Overflow</a> question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I&rsquo;ve written it in Swift. In my project, I created a new Swift file called &ldquo;CoreDataHelpers.swift&#8221; in my tests target. Here&rsquo;s a look at the helper function:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">CoreData</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">func</span> <span class="nf">setUpInMemoryManagedObjectContext</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
+<span class="ln"> 4</span>    <span class="kd">let</span> <span class="nv">managedObjectModel</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">.</span><span class="n">mergedModelFromBundles</span><span class="p">([</span><span class="n">NSBundle</span><span class="p">.</span><span class="n">mainBundle</span><span class="p">()])</span><span class="o">!</span>
+<span class="ln"> 5</span>    
+<span class="ln"> 6</span>    <span class="kd">let</span> <span class="nv">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">managedObjectModel</span><span class="p">)</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span>    <span class="k">do</span> <span class="p">{</span>
+<span class="ln"> 9</span>        <span class="k">try</span> <span class="n">persistentStoreCoordinator</span><span class="p">.</span><span class="n">addPersistentStoreWithType</span><span class="p">(</span><span class="n">NSInMemoryStoreType</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="ln">10</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+<span class="ln">11</span>        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Adding in-memory persistent store failed&#34;</span><span class="p">)</span>
+<span class="ln">12</span>    <span class="p">}</span>
+<span class="ln">13</span>    
+<span class="ln">14</span>    <span class="kd">let</span> <span class="nv">managedObjectContext</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">()</span>
+<span class="ln">15</span>    <span class="n">managedObjectContext</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">persistentStoreCoordinator</span>
+<span class="ln">16</span>    
+<span class="ln">17</span>    <span class="k">return</span> <span class="n">managedObjectContext</span>
+<span class="ln">18</span><span class="p">}</span></code></pre></div>
+<h4 id="observations">Observations</h4>
+
+<p>I&rsquo;ll be honest, I&rsquo;m only starting to put together the pieces involved in setting up the Core Data stack. Working through these unit testing techniques has solidified a <em>lot</em>. Analyzing the helper method from the bottom up has made some sense out of how to configure everything:</p>
+
+<ul>
+<li>I need an <code>NSManagedObjectContext</code> whose <code>NSPersistentStoreCoordinator</code> property uses an in-memory store.</li>
+<li>To get such an <code>NSManagedObjectContext</code>, I need to add a persistent store with a type of <code>NSInMemoryStoreType</code> to an <code>NSPersistentStoreCoordinator</code> instance. (note the line that&rsquo;s highlighted)</li>
+<li>Of course, in order to do <em>that</em>, I need an <code>NSPersistentStoreCoordinator</code> <em>instance</em>, and I can&rsquo;t get one of <em>those</em> unless I initialize it with an <code>NSManagedObjectModel</code>.</li>
+<li>To get an <code>NSManagedObjectModel</code>, I use the class method, <code>mergedModelFromBundles()</code> to grab it from my main bundle.</li>
+<li>Fast-forwarding now: With a proper <code>NSManagedObjectModel</code> instance, I can create an <code>NSPersistentStoreCoordinator</code> instance with it and add an <code>NSInMemoryStoreType</code> to that <code>persistentStoreCoordinator</code>. Finally, I can initialize an <code>NSManagedObjectContext</code>, assign the configured <code>persistentStoreCoordinator</code> to the context, and return it.</li>
+</ul>
+
+<p>Whew! This whole process felt a lot like reading <a href="http://en.wikipedia.org/wiki/If_You_Give_a_Mouse_a_Cookie">If You Give a Mouse a Cookie</a>, but that may be because I&rsquo;ve read it a few hundred times to my 2 year old. :]</p>
+
+<h3 id="writing-the-unit-test-s">Writing the unit test(s)</h3>
+
+<p>With the ability to get an <code>NSManagedObjectContext</code> instance that&rsquo;s using an in-memory store, the unit tests using Entities from my Core Data model are quite easy.</p>
+
+<p>Here&rsquo;s a sample test:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">CoreData</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">class</span> <span class="nc">TestsUsingModelFromCoreData</span><span class="p">:</span> <span class="n">XCTestCase</span> <span class="p">{</span>
+<span class="ln"> 4</span>    <span class="kd">func</span> <span class="nf">testSomethingUsingCoreData</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln"> 5</span>        <span class="kd">let</span> <span class="nv">managedObjectContext</span> <span class="p">=</span> <span class="n">setUpInMemoryManagedObjectContext</span><span class="p">()</span>
+<span class="ln"> 6</span>        <span class="kd">let</span> <span class="nv">entity</span> <span class="p">=</span> <span class="n">NSEntityDescription</span><span class="p">.</span><span class="n">insertNewObjectForEntityForName</span><span class="p">(</span><span class="s">&#34;EntityName&#34;</span><span class="p">,</span> <span class="n">inManagedObjectContext</span><span class="p">:</span> <span class="n">managedObjectContext</span><span class="p">)</span>
+<span class="ln"> 7</span>        
+<span class="ln"> 8</span>        <span class="c1">// model setup</span>
+<span class="ln"> 9</span>        
+<span class="ln">10</span>        <span class="c1">// XCTAssert    </span>
+<span class="ln">11</span>    <span class="p">}</span>
+<span class="ln">12</span><span class="p">}</span></code></pre></div>
+<h3 id="conclusion">Conclusion</h3>
+
+<p>I was so surprised at how straightforward the test was. The helper function makes a world of difference for me. I hope it does for you, too!</p>
+
+<div class="resources-header">
+  You might also enjoy&#8230;
+</div>
+
+<p><ul class="resources-content">
+  <li>
+    <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/" title="Using a Core Data Model in Swift Playgrounds">Using a Core Data Model in Swift Playgrounds</a>
+  </li>
+  <li>
+    <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/" title="Sharing a Core Data Model with a Swift Framework">Sharing a Core Data Model with a Swift Framework</a>
+  </li>
+  <li>
+    <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/" title="Core Data Cheat Sheet for Swift iOS Developers">Core Data Cheat Sheet for Swift iOS Developers</a>
+  </li>
+</ul></div></p>
+
+<p><a name="course" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fas fa-video"></i> <a href="http://bit.ly/ps-core-data-swift" target="_blank">Core Data Fundamentals with Swift</a><br /> <a href="http://bit.ly/ps-core-data-swift" target="_blank"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png" alt="Core Data Fundamentals with Swift" width="1024" height="576" class="alignnone size-large wp-image-13163" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w" sizes="(max-width: 1024px) 100vw, 1024px" /></a>
+    </li>
+  </ul>
+</div></p>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/datadaylife-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
