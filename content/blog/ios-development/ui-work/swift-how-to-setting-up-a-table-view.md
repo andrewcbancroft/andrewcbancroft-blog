@@ -33,7 +33,7 @@ Think of this as the &#8220;Hello World&#8221; of creating a view controller wit
 
 #### [0:16]
 
-In this walkthrough, I'm using XCode 6.3.1, which has me writing Swift 1.2 syntax in a couple of spots.
+In this walkthrough, I'm using Xcode 6.3.1, which has me writing Swift 1.2 syntax in a couple of spots.
 
 #### [0:24]
 
@@ -73,7 +73,7 @@ Scrolling down, I find the code I need, switch the code snippet plugin to &#8220
 
 #### [2:12]
 
-Switching back over to my XCode window, I paste the code snippet in.
+Switching back over to my Xcode window, I paste the code snippet in.
 
 #### [2:16]
 

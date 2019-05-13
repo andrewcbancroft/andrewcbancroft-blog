@@ -21,7 +21,7 @@ Where does one get started with unit testing in Swift when they've never gotten 
 
 ### 1 – Create your project
 
-The obvious first step. If you don't already have a project going, create a new one to organize the code for your app idea. XCode 6 will automatically generate two &#8220;targets&#8221; for you. One will be your app's main module and contains all the code which, when compiled, is meant to be run in the iOS simulator / on an iOS device.
+The obvious first step. If you don't already have a project going, create a new one to organize the code for your app idea. Xcode 6 will automatically generate two &#8220;targets&#8221; for you. One will be your app's main module and contains all the code which, when compiled, is meant to be run in the iOS simulator / on an iOS device.
 
 The other will be your test target, which, as the name implies, is where you write your unit test code.
 
@@ -33,12 +33,12 @@ This step becomes especially critical if you're using or plan to use a [unit tes
 
 When you’re working with frameworks, [Apple recommends][3] that you make sure the &#8220;Defines Module&#8221; build setting, found under Packaging, is set to Yes.
 
-If you are relying on, or _could_ be relying on &#8220;non-standard&#8221; .framework files for your app, make sure you toggle this flag in your XCode build settings:  
+If you are relying on, or _could_ be relying on &#8220;non-standard&#8221; .framework files for your app, make sure you toggle this flag in your Xcode build settings:  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-1024x679.png" alt="Build Settings - Defines Module" width="730" height="484" class="alignnone size-large wp-image-10371" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-1024x679.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-300x199.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-1200x796.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj.png 1387w" sizes="(max-width: 730px) 100vw, 730px" />][4]
 
 ### 3 – Import your main project (module) into your test file(s)
 
-In your test target, at the top of each of your .swift files that contain your XCTestCase classes, write an import statement to bring in your main project's module. In normal scenarios, your app's module is named the same as your XCode project file.  
+In your test target, at the top of each of your .swift files that contain your XCTestCase classes, write an import statement to bring in your main project's module. In normal scenarios, your app's module is named the same as your Xcode project file.  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-1024x671.png" alt="Import Module for Testing" width="730" height="478" class="alignnone size-large wp-image-10381" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-1024x671.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-300x196.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-1200x786.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift.png 1393w" sizes="(max-width: 730px) 100vw, 730px" />][5]
 
 <a id="public-testable"></a>

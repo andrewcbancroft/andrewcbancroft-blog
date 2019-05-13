@@ -33,7 +33,7 @@ I do my best to think hard about the names that I give my functions, ascribing 
 
 ##### Parameter Names
 
-<a title="Apple Developer Documentation - External Parameter Names" href="https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html#//apple_ref/doc/uid/TP40014097-CH10-XID_255" target="_blank">Swift's external parameter names</a>, in my opinion, are wonderful for helping write self-documenting code. They simply help guide my mind back to what a given function does and needs in order to do its job. Anything to help me get back in the zone is worth spending a few extra keystrokes on, especially since XCode's auto-completion assists me so well when calling functions with long signatures.
+<a title="Apple Developer Documentation - External Parameter Names" href="https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html#//apple_ref/doc/uid/TP40014097-CH10-XID_255" target="_blank">Swift's external parameter names</a>, in my opinion, are wonderful for helping write self-documenting code. They simply help guide my mind back to what a given function does and needs in order to do its job. Anything to help me get back in the zone is worth spending a few extra keystrokes on, especially since Xcode's auto-completion assists me so well when calling functions with long signatures.
 
 Apple recommends the following:
 

@@ -31,7 +31,7 @@ By creating an Enumeration that stores raw String values, I was able to encapsu
 
 Consider this fabricated example:
 
-I have a storyboard with one main View Controller that connects to three other View Controllers through three segues:  &#8220;otherScreenSegue1&#8221;, &#8220;otherScreenSegue2&#8221;, and &#8220;otherScreenSegue3&#8221; as defined in the utilities panel in XCode.
+I have a storyboard with one main View Controller that connects to three other View Controllers through three segues:  &#8220;otherScreenSegue1&#8221;, &#8220;otherScreenSegue2&#8221;, and &#8220;otherScreenSegue3&#8221; as defined in the utilities panel in Xcode.
 
 An Enumeration encapsulating those segue identifiers might look something like this:
 

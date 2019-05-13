@@ -27,7 +27,7 @@ let birdDetails = birdDetailsFromStorage()
 
 With no additional context to glean information from, the correct answer to the question is, &#8220;I have absolutely no clue&#8230;&#8221;  <a title="Expanded Thoughts on Swift’s Type Inference" href="http://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/" target="_blank"><em>Or is it?</em></a>
 
-&#8220;Not fair!&#8221;, you say.  &#8220;In the real world, I'd have the ability to option-click and learn the type from a pop-up tooltip, or learn this information by inspection from XCode's utilities panel.&#8221;
+&#8220;Not fair!&#8221;, you say.  &#8220;In the real world, I'd have the ability to option-click and learn the type from a pop-up tooltip, or learn this information by inspection from Xcode's utilities panel.&#8221;
 
 Truth.  We would.  _But&#8230;_ should we _have_ to for an example like the one above?  Could we have helped ourselves out a bit by being explicit about the type of `birdDetails`?
 

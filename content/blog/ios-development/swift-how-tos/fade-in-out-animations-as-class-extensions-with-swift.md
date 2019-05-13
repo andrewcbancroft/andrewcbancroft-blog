@@ -29,7 +29,7 @@ The question has been <a title="Fade In / Out - Stack Overflow" href="http://sta
 
 Fade animations basically involve adjusting a `UIView`&#8216;s alpha value from 1.0 to 0.0 (fade out) or 0.0 to 1.0 (fade in) over a specified duration using some kind of easing option (like starting fast, then slowing down at the end of the animation, or starting slow and speeding up at the end of the animation).
 
-I've <a title="Swift Fade Animations - GitHub Project" href="https://github.com/andrewcbancroft/SwiftFadeAnimations" target="_blank">published an example XCode project to GitHub</a> with the final working version of the code below if you'd like to just see it. Read on for the full explanation.
+I've <a title="Swift Fade Animations - GitHub Project" href="https://github.com/andrewcbancroft/SwiftFadeAnimations" target="_blank">published an example Xcode project to GitHub</a> with the final working version of the code below if you'd like to just see it. Read on for the full explanation.
 
 **Edit: 2/23/2016** – A new idea flowing out of my [Pluralsight Course][1] involves a similar implementation, but using protocol extensions instead. This article's implementation still works though, so feel free to check out either the contents of this blog entry, or the new one!
 

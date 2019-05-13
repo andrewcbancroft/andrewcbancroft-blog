@@ -32,7 +32,7 @@ To start off with, here's a sample of what the animation does:
   <a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/SlideAnimationSample2.gif"><img class="alignnone size-full wp-image-5171" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/SlideAnimationSample2.gif" alt="Slide Animation Example" width="285" height="509" /></a>
 </p>
 
-The easiest way to get the gist of what I've done is to <a title="GitHub - SwiftSlideAnimation" href="https://github.com/andrewcbancroft/SwiftSlideAnimation" target="_blank">head over to GitHub and download the example XCode Project</a>. In real life, I've combined the fade animations and the slide animation into the same UIView extension, but for education's sake, I've split them out so you can easily see the moving parts.
+The easiest way to get the gist of what I've done is to <a title="GitHub - SwiftSlideAnimation" href="https://github.com/andrewcbancroft/SwiftSlideAnimation" target="_blank">head over to GitHub and download the example Xcode Project</a>. In real life, I've combined the fade animations and the slide animation into the same UIView extension, but for education's sake, I've split them out so you can easily see the moving parts.
 
 <a name="overview" class="jump-target"></a>
 

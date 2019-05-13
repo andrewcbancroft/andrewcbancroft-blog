@@ -55,7 +55,7 @@ The basic workflow of using `NSNotificationCenter` goes something like this:
 
 ### Visualizing NSNotificationCenter by Example
 
-If you're like me, you need less talk and more example, so I've created a simple XCode project that you can grab over at GitHub (<a title="GitHub - Swift NSNotificationCenter Example" href="https://github.com/andrewcbancroft/SwiftNSNotificationCenter" target="_blank">Swift 2.3</a> and <a title="GitHub - Swift NSNotificationCenter Example" href="https://github.com/andrewcbancroft/SwiftNSNotificationCenter/tree/swift-3.0" target="_blank">Swift 3.0</a>). Running the project will allow you to click through a series of tabs in a tab view controller, post a notification, and see the results. It looks much like this:
+If you're like me, you need less talk and more example, so I've created a simple Xcode project that you can grab over at GitHub (<a title="GitHub - Swift NSNotificationCenter Example" href="https://github.com/andrewcbancroft/SwiftNSNotificationCenter" target="_blank">Swift 2.3</a> and <a title="GitHub - Swift NSNotificationCenter Example" href="https://github.com/andrewcbancroft/SwiftNSNotificationCenter/tree/swift-3.0" target="_blank">Swift 3.0</a>). Running the project will allow you to click through a series of tabs in a tab view controller, post a notification, and see the results. It looks much like this:
 
 [<img class="size-full wp-image-5461 aligncenter" src="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExample.gif" alt="NS Notification Center Example" width="356" height="636" />][3]
 

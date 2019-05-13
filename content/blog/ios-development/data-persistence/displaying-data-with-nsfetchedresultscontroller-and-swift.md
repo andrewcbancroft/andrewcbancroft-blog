@@ -50,7 +50,7 @@ I'm continuing my &#8220;Zootastic&#8221; example that I used to write about [us
   
   <ul class="resources-content">
     <li>
-      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/Zootastic/tree/NSFetchedResultsController_DisplayInTableView" title="Zootastic">Example XCode Project</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/Zootastic/tree/NSFetchedResultsController_DisplayInTableView" title="Zootastic">Example Xcode Project</a>
     </li>
   </ul>
 </div>
@@ -263,7 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-The portion new to &#8220;injecting&#8221; the `managedObjectContext` into `MainViewController` is highlighted. I simply grab a reference to the `rootViewController` (which in our example is the `MainViewController`) and cast it to the appropriate type. Then I set the `context` property to the `managedObjectContext` that's created in the `AppDelegate` via XCode's auto-generated Core Data stack setup.
+The portion new to &#8220;injecting&#8221; the `managedObjectContext` into `MainViewController` is highlighted. I simply grab a reference to the `rootViewController` (which in our example is the `MainViewController`) and cast it to the appropriate type. Then I set the `context` property to the `managedObjectContext` that's created in the `AppDelegate` via Xcode's auto-generated Core Data stack setup.
 
 ### Wrapping up
 

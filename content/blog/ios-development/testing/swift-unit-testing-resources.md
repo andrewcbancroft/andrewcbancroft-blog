@@ -30,7 +30,7 @@ As I've researched Test Driven Development practices in general, and for iOS / M
 
 ### Blogs
 
-  * [How to write unit tests in Swift with XCTest][3] – Josh Brown gives a nice overview of the unit testing capabilities offered in XCode and how Swift can be used as the testing language of choice.
+  * [How to write unit tests in Swift with XCTest][3] – Josh Brown gives a nice overview of the unit testing capabilities offered in Xcode and how Swift can be used as the testing language of choice.
   * [Swift: Unit Testing Tips and Tricks][4] – [@NatashaTheRobot][5] offers some practical advice in a tips and tricks style blog post.
   * [iOS Unit Testing][6] – Some good introductory articles to browse. Offers a few things in Swift, but much of his content is in Objective-C.
   * [Write your first Unit Test in Swift][7] – Learn how to write the most basic, but still useful, Unit Tests in Swift with XCTest.

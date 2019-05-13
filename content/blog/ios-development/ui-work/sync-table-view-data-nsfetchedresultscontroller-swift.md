@@ -21,7 +21,7 @@ My goal with this article is to help you utilize the full power of `NSFetchedRes
 
 This is a continuation on a series of articles I've written on Core Data and `NSFetchedResultsController`, so you may want to check out those previous posts to get an idea of where I'm picking up in this walk-through. Previously I touched on [how to seed a Core Data database][1], and [how to take that data and display it in a table view with an NSFetchedResultsController][2].
 
-As with the previous posts, I'm providing an example XCode project over at GitHub, so feel free to follow along with the live working example:
+As with the previous posts, I'm providing an example Xcode project over at GitHub, so feel free to follow along with the live working example:
 
 <div class="resources">
   <div class="resources-header">

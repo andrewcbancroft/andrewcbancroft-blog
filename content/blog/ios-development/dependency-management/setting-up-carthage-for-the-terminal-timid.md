@@ -118,7 +118,7 @@ Once Carthage is installed, it's time to create your Cartfile file. After I read
 
 First of all, the documentation merely says, &#8220;Create a Cartfile that lists the frameworks you’d like to use in your project.&#8221; I scratched my head and asked, &#8220;Okay – well, where? And should it have a file extension?&#8221;
 
-The answers that worked for me were, &#8220;Somewhere in your XCode project (I put it under Supporting Files)&#8221; and &#8220;No file extension&#8230;just the name Cartfile works&#8221;.
+The answers that worked for me were, &#8220;Somewhere in your Xcode project (I put it under Supporting Files)&#8221; and &#8220;No file extension&#8230;just the name Cartfile works&#8221;.
 
 To demonstrate, here's a couple of screenshots depicting how to add a Cartfile to your Xcode project&#8230;
 

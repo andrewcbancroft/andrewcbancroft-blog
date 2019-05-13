@@ -38,7 +38,7 @@ For those reasons, I think a table view is a really convenient choice for collec
   
   <ul class="resources-content">
     <li>
-      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/CustomTextInputTableViewCell"title="Custom Text Input TableView Cell Example">Example XCode Project</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/CustomTextInputTableViewCell"title="Custom Text Input TableView Cell Example">Example Xcode Project</a>
     </li>
   </ul>
 </div>
@@ -82,7 +82,7 @@ In this particular example, there's only one kind of prototype cell that I want 
 
 #### Drag text field to cell, increase text field width
 
-Drag a text field into the cell's contents and use XCode's blue guides to adjust the width so that it takes up the whole cell.  
+Drag a text field into the cell's contents and use Xcode's blue guides to adjust the width so that it takes up the whole cell.  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1-1024x622.png" alt="Drag Text Field to Cell" width="1024" height="622" class="alignnone size-large wp-image-11325" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1-1024x622.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1-300x182.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1.png 1488w" sizes="(max-width: 1024px) 100vw, 1024px" />][6]  
 Now comes the customization of the prototype cell itself. Since we're designing it for text input, we'll use a text field as the contents of the table view cell prototype.
 

@@ -52,7 +52,7 @@ Let's explore.
 &lt;/sections&gt;
 ```
 
-  9.  Save, and open the playground in XCode 6.  Your Playground should now contain documentation!
+  9.  Save, and open the playground in Xcode 6.  Your Playground should now contain documentation!
 
 As a way to jump-start my own Playground documentation, I simply borrowed one of the HTML files and the CSS file from Apple's Patterns Playground.  Then I modified the markup to contain the educational material I wanted for _my_ playground, customized the styles to what I wanted, added the <span class="lang:default decode:true  crayon-inline "><documentation></span> node to the contents.xcplayground file, saved, and voila:  Fancy documentation!
 

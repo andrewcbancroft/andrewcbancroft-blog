@@ -37,7 +37,7 @@ When I employ TDD in a project, I will tend to be driven to making sure my code 
 
 #### Starting Places
 
-When I create a new iOS project, XCode sets me up with a Storyboard, a blank Scene, and a View Controller. XCode also generates a Test target for me&#8230; BUT a what am I most aware of right from the onset? The Storyboard and the View Controller.
+When I create a new iOS project, Xcode sets me up with a Storyboard, a blank Scene, and a View Controller. Xcode also generates a Test target for me&#8230; BUT a what am I most aware of right from the onset? The Storyboard and the View Controller.
 
 The natural inclination, then is to start dragging things onto the design surface and wiring them up to the controller as Outlets and Actions, and off I go!
 
@@ -70,7 +70,7 @@ Testing has this way of setting expectations. One thing I've really enjoyed abou
 
 With the fundamental goals of TDD in place, I feel more prepared from a foundational standpoint to venture into actuall test-driven practices for iOS.
 
-I am learning so much in the area of testing – it's a technique I'm practicing regularly, both in Swift and in C# (for fun and for work, respectively), so as I grow and discover ways to optimize the TDD experience in XCode / Swift, I'll be sharing them. Stay tuned!
+I am learning so much in the area of testing – it's a technique I'm practicing regularly, both in Swift and in C# (for fun and for work, respectively), so as I grow and discover ways to optimize the TDD experience in Xcode / Swift, I'll be sharing them. Stay tuned!
 
 <div class="related-posts">
   You might also enjoy</p> 

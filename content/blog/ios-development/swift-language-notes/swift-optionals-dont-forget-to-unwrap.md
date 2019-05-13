@@ -15,7 +15,7 @@ categories:
 tags:
   - Swift
   - Swift Optionals
-  - XCode Compiler Error
+  - Xcode Compiler Error
 
 ---
 There is a compiler error that throws me off every time I see it.  It takes the form,

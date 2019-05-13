@@ -33,7 +33,7 @@ During development, I've found that it's often convenient to seed a Core Data da
   
   <ul class="resources-content">
     <li>
-      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/Zootastic/tree/BaseProject_SeedDataStore" title="Zootastic">Example XCode Project</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/Zootastic/tree/BaseProject_SeedDataStore" title="Zootastic">Example Xcode Project</a>
     </li>
   </ul>
 </div>
@@ -67,7 +67,7 @@ Once a Core Data data model is set up, we're ready to create what I called `Data
 
 Knowing that this class is intended to be used _solely_ for development, I didn't put a lot of effort into separating concerns. I opted for a &#8220;here's where I go to do all my seeding for manual testing purposes&#8221; approach.
 
-Here are a few snippets from the class ([grab the full XCode project][2] over at GitHub):
+Here are a few snippets from the class ([grab the full Xcode project][2] over at GitHub):
 
 <a name="data-helper-initialization" class="jump-target"></a>
 
@@ -249,7 +249,7 @@ Above is a peek at what my AppDelegate.swift file's `application:didFinishLaunch
 
 ### Starting fresh every time
 
-I've found that sometimes it helps to have a freshly seeded data store every time I the app while I'm in development mode. When I'm testing the UI, I may create new entities during my manual testing, but one of the convenient things about seeding the data store is that I don't _have_ to. And even if I did, it's often quite nice to start fresh each run. To do this we'll dive into some of the boilerplate code that XCode generates for us when we choose to use Core Data when we create the project. Specifically, we'll target the `persistentStoreCoordinator` closure:
+I've found that sometimes it helps to have a freshly seeded data store every time I the app while I'm in development mode. When I'm testing the UI, I may create new entities during my manual testing, but one of the convenient things about seeding the data store is that I don't _have_ to. And even if I did, it's often quite nice to start fresh each run. To do this we'll dive into some of the boilerplate code that Xcode generates for us when we choose to use Core Data when we create the project. Specifically, we'll target the `persistentStoreCoordinator` closure:
 
 ```swift
 lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
@@ -285,7 +285,7 @@ lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         }()
 ```
 
-I've highlighted the key line that I added (everything else was already in place, generated for me by XCode). Adding that line removes the sqlite database. The lines that follow add it back in a fresh state.
+I've highlighted the key line that I added (everything else was already in place, generated for me by Xcode). Adding that line removes the sqlite database. The lines that follow add it back in a fresh state.
 
 ### Wrapping up
 

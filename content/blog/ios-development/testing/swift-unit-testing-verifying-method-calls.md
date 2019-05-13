@@ -42,7 +42,7 @@ The goal of this video is to teach you how to write a unit test to verify that a
 
 #### [0:21]
 
-I'll begin in XCode 6.1.1 with a side-by-side view of my TestCase class, and my primary View Controller class. This is what XCode generated for me when I chose to create a new Single View Application.
+I'll begin in Xcode 6.1.1 with a side-by-side view of my TestCase class, and my primary View Controller class. This is what Xcode generated for me when I chose to create a new Single View Application.
 
 #### [0:38]
 
@@ -87,7 +87,7 @@ I'll create a nested class inside my test function called FakeAlertView. Notice 
 
 #### [3:28]
 
-I'll finish fleshing out this fake object in a minute. Now that XCode isn't complaining about not knowing what a FakeAlertView is, I'll turn my attention to a new compiler complaint: I don't have an alertView property on my View Controller yet, so I'll add one.
+I'll finish fleshing out this fake object in a minute. Now that Xcode isn't complaining about not knowing what a FakeAlertView is, I'll turn my attention to a new compiler complaint: I don't have an alertView property on my View Controller yet, so I'll add one.
 
 #### [3:50]
 

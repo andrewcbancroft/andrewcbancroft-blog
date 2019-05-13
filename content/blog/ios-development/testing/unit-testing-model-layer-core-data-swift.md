@@ -23,7 +23,7 @@ As I approached testing my Core Data model, I have to admit I was apprehensive. 
 
 To my surprise, unit testing my Core Data model layer has been… well… amazing. With little effort, I’ve been able to write the unit tests I’ve wanted. The process went something like this for me:
 
-  1. [Create an `NSManagedObject` subclass][1] of the Core Data entity that I need in my unit test. (This just makes things easier from an XCode code-completion standpoint)
+  1. [Create an `NSManagedObject` subclass][1] of the Core Data entity that I need in my unit test. (This just makes things easier from an Xcode code-completion standpoint)
   2. Write a helper function to set up an in-memory `NSManagedObjectContext`. Avoiding the need to use an actual sqlite database is pretty handy. It allows for quick-running tests and easy iterations over the data model itself.
   3. Write unit tests using the in-memory `NSManagedObjectContext`.
 

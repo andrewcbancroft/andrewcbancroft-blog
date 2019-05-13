@@ -34,7 +34,7 @@ The process&nbsp;is essentially this (example to follow):
 
 Let's see those 8 steps in action for those of us who are more visually inclined.
 
-EDIT: &nbsp;July 22, 2014 – I've added a simple XCode Project to GitHub for those interested in seeing the setup directly in XCode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank">https://github.com/andrewcbancroft/MocksAndStubs</a>
+EDIT: &nbsp;July 22, 2014 – I've added a simple Xcode Project to GitHub for those interested in seeing the setup directly in Xcode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank">https://github.com/andrewcbancroft/MocksAndStubs</a>
 
 The scenario that I'd like to use a mock class in is this: &nbsp;I have a CoreData application and I'd like to be able to mock the `NSManagedObjectContext`&nbsp;&nbsp;so that instead of making actual database fetch requests, I can just provide stubs of various sorts with the kinds of responses I'd expect from the real database calls to ensure my class will do the right thing based on predictable results. &nbsp;To do this I begin at step 1&#8230;
 
@@ -191,7 +191,7 @@ func testDatabaseHasRecordsForSomeEntityReturnsFalseWhenFetchRequestReturnsEMPTY
 
 And that's a wrap – happy mocking and stubbing in Swift!
 
-EDIT: &nbsp;July 22, 2014 – I've added a simple XCode Project to GitHub for those interested in seeing the setup directly in XCode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank">https://github.com/andrewcbancroft/MocksAndStubs</a>
+EDIT: &nbsp;July 22, 2014 – I've added a simple Xcode Project to GitHub for those interested in seeing the setup directly in Xcode at &nbsp;<a title="GitHub - MocksAndStubs" href="https://github.com/andrewcbancroft/MocksAndStubs" target="_blank">https://github.com/andrewcbancroft/MocksAndStubs</a>
 
 <div class="related-posts">
   You might also enjoy</p> 

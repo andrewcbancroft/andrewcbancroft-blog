@@ -53,7 +53,7 @@ In your .xcdatamodeld file, create an Entity to your liking.  In my example, I 
 On the Menu, click Editor, then &#8220;Create NSManagedObject Subclass&#8230;&#8221;  
 [<img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM-1024x700.png" alt="Create NSManagedObject Subclass" width="730" height="499" class="alignnone size-large wp-image-1961" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM-1024x700.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM-300x205.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM.png 1524w" sizes="(max-width: 730px) 100vw, 730px" />][2]
 
-Make sure you choose &#8220;Swift&#8221; as your language of choice as you click Next through the wizard and XCode will generate you a file that is appropriate for your Entity.  The files it created for me (Xcode 7.1.1) look like this:
+Make sure you choose &#8220;Swift&#8221; as your language of choice as you click Next through the wizard and Xcode will generate you a file that is appropriate for your Entity.  The files it created for me (Xcode 7.1.1) look like this:
 
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1-1024x298.png" alt="NSManagedObject Class file" width="1024" height="298" class="alignnone size-large wp-image-12993" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1-1024x298.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1-300x87.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1.png 1390w" sizes="(max-width: 1024px) 100vw, 1024px" />][3]
 

@@ -61,7 +61,7 @@ I've created a GitHub example if you'd like to play around with everything. The 
   
   <ul class="resources-content">
     <li>
-      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/ConvertComplexMacroExample" onclick="_gaq.push(['_trackEvent', 'outbound-article', 'https://github.com/andrewcbancroft/ConvertComplexMacroExample', 'Example XCode Project']);" title="Convert Complex Macro Example Project">Example XCode Project</a>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/ConvertComplexMacroExample" onclick="_gaq.push(['_trackEvent', 'outbound-article', 'https://github.com/andrewcbancroft/ConvertComplexMacroExample', 'Example Xcode Project']);" title="Convert Complex Macro Example Project">Example Xcode Project</a>
     </li>
   </ul>
 </div>

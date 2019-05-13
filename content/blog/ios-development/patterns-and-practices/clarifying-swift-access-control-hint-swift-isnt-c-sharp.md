@@ -32,7 +32,7 @@ One of the most surprising &#8220;nuances&#8221; from [&#8220;3 Nuances of Swift
 
 Well&#8230; To restate the obvious, Swift isn't C#&#8230; and it isn't C# in more ways than just syntax.
 
-Ever since access control modifiers were introduced in XCode 6 Beta 4, I had it in my mind that `public`, `private`, and `internal` worked just like they do in C#. Sure, I read [the blog article on access control published by the Swift team][2], but it was a mere cursory look. I basically saw the three key words and thought, &#8220;Ah, I got this&#8230; moving on!&#8221;
+Ever since access control modifiers were introduced in Xcode 6 Beta 4, I had it in my mind that `public`, `private`, and `internal` worked just like they do in C#. Sure, I read [the blog article on access control published by the Swift team][2], but it was a mere cursory look. I basically saw the three key words and thought, &#8220;Ah, I got this&#8230; moving on!&#8221;
 
 This was a fundamental mistake for me to make, and it goes to show that just because there are _similarities_ between languages, it doesn't mean the _semantics_ of those similarities carry over.
 
