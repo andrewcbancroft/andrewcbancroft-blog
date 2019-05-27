@@ -40,18 +40,22 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="“Unexpected System Error” in DataStage Sequence Job" />
-<meta property="og:description" content="Today I was running into a mysterious error in DataStage as I was running a sequence job.&nbsp; Things seemed to be going well until one of my Fact jobs at the end of the sequence reported “Aborted” in DataStage Director.&nbsp; Looking into the log for this job revealed a rather vague error message:
-[StageName] DB2 function SQLFetch failed:&nbsp; SQLSTATE = HY000: Native Error Code = -1,042: Msg = [IBM][CLI Driver][DB2/LINUXX8664] SQL1042C&nbsp; An unexpected system error occurred." />
+<meta property="og:title" content="Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)" />
+<meta property="og:description" content="You can visit Part 1 of this troubleshooting series by clicking here.
+During our configuration of Reporting Services for SharePoint I ran into another common issue.
+I consulted MSDN once again and followed the directions given at this MSDN article. Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:
+Cannot connect to the server or database." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/move-to-ddl/unexpected-system-error-in-datastage-sequence-job/" />
-<meta property="article:published_time" content="2013-04-16T14:15:54&#43;00:00"/>
-<meta property="article:modified_time" content="2013-04-16T14:15:54&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/musings/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/" />
+<meta property="article:published_time" content="2012-06-30T19:44:36&#43;00:00"/>
+<meta property="article:modified_time" content="2012-06-30T19:44:36&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="“Unexpected System Error” in DataStage Sequence Job"/>
-<meta name="twitter:description" content="Today I was running into a mysterious error in DataStage as I was running a sequence job.&nbsp; Things seemed to be going well until one of my Fact jobs at the end of the sequence reported “Aborted” in DataStage Director.&nbsp; Looking into the log for this job revealed a rather vague error message:
-[StageName] DB2 function SQLFetch failed:&nbsp; SQLSTATE = HY000: Native Error Code = -1,042: Msg = [IBM][CLI Driver][DB2/LINUXX8664] SQL1042C&nbsp; An unexpected system error occurred."/>
+<meta name="twitter:title" content="Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)"/>
+<meta name="twitter:description" content="You can visit Part 1 of this troubleshooting series by clicking here.
+During our configuration of Reporting Services for SharePoint I ran into another common issue.
+I consulted MSDN once again and followed the directions given at this MSDN article. Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:
+Cannot connect to the server or database."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -59,22 +63,22 @@
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "“Unexpected System Error” in DataStage Sequence Job",
-  "url": "https:\/\/www.andrewcbancroft.com\/blog\/move-to-ddl\/unexpected-system-error-in-datastage-sequence-job\/",
-  "wordCount": "212",
-  "datePublished": "2013-04-16T14:15:54Z",
-  "dateModified": "2013-04-16T14:15:54Z",
+  "headline": "Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/musings\/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2\/",
+  "wordCount": "193",
+  "datePublished": "2012-06-30T19:44:36Z",
+  "dateModified": "2012-06-30T19:44:36Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "DataStage, An unexpected system error occurred, DataStage Sequence Job, SQL1042C, SQLSTATE=58004"
+  "keywords": "Business Intelligence, Microsoft, Reporting Services, BI, BI Semantic Model, SharePoint, SSAS, SSRS, Troubleshooting"
 }
 </script>
 
 
 
-    <title>“Unexpected System Error” in DataStage Sequence Job</title>
+    <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -185,33 +189,44 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">“Unexpected System Error” in DataStage Sequence Job</h1>
+      <h1 class="article-title">Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)</h1>
     </header>
     <div class="content">
 
-    
+    <p>You can visit Part 1 of this troubleshooting series by <a href="http://andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/" title="Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)">clicking here</a>.</p>
 
-<p>Today I was running into a mysterious error in DataStage as I was running a sequence job.&nbsp; Things seemed to be going well until one of my Fact jobs at the end of the sequence reported “Aborted” in DataStage Director.&nbsp; Looking into the log for this job revealed a rather vague error message:</p>
+<p>During our configuration of Reporting Services for SharePoint I ran into another common issue.</p>
 
-<p>[StageName] DB2 function SQLFetch failed:&nbsp; SQLSTATE = HY000: Native Error Code = -1,042: Msg = [IBM][CLI Driver][DB2/LINUXX8664] SQL1042C&nbsp; An unexpected system error occurred.&nbsp; SQLSTATE=58004 (CC_DB2Connection::queryServerHostName, file CC_DB2Connection.cpp, line 3,256)</p>
+<p>I consulted MSDN once again and followed the directions <a title="PowerPivot BI Semantic Model Connection (.bism) " href="http://msdn.microsoft.com/en-us/library/gg471575.aspx" target="_blank">given at this MSDN article</a>.  Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:</p>
 
-<p>What’s strange is that the job, when re-compiled and run on its own, executes without error.&nbsp; So it only fails when its run in the context of the sequence job.</p>
+<div class="note">
+  Cannot connect to the server or database.
+</div>
 
-<p>To fix the issue, I simply rearranged the order of the sequence at the end.&nbsp; Here is a before and after look at the sequence:</p>
+<p>Even after adding the Reporting Services service account to the SSAS Tabular instance as a server administrator, we still hit this error.</p>
 
-<h3 id="before">Before:</h3>
+<p>Once again I found little documentation out there as I was troubleshooting, presumably because SQL Server 2012 is still quite new.  Here&rsquo;s what we did to fix our problem:</p>
 
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/04/image.png"><img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2013/04/image_thumb.png" width="515" height="496" /></a></p>
+<div class="note">
+  <strong>The Analysis Services service must be running under a domain account.</strong>  When I installed SSAS, I took all the defaults for the server installation.  The SSAS service was running under some default built-in account which ended up being the problem.
+</div>
 
-<h3 id="after">After:</h3>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/04/image1.png"><img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2013/04/image_thumb1.png" width="609" height="208" /></a></p>
-
-<p>The sequence job runs every job now without error.&nbsp; Now I only wish I knew <em>why</em> this works – perhaps it’s an issue with server resources getting tied up if both Fact jobs are running at the same time?&nbsp; I’ve decided to go with the above as my solution and move on, since neither Fact job takes an enormous amount of time to run.&nbsp; Hopefully this solution will work for others as well!</p>
+<p>Once we switched this to run under a domain account, I was able to create BI Semantic Model Connections using this library document type with no issues.</p>
 
 
     <aside>
       
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/musings/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/">Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)</a></li>
+            
+        <ul>
       
     </aside>
 

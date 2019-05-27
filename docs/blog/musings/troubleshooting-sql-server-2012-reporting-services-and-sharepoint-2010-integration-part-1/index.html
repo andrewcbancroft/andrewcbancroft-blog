@@ -40,18 +40,18 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="From SQL Queries to Data Modeling" />
-<meta property="og:description" content="This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I&rsquo;m pretty stoked about some of the amazing features of SQL Server 2012&rsquo;s BI stack.
-During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model." />
+<meta property="og:title" content="Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)" />
+<meta property="og:description" content="I recently worked with our SharePoint administrator to install SQL Server 2012 Reporting Services in SharePoint Integrated Mode to take advantage of PowerView. By following the installation instructions found at this MSDN article, we were able to painlessly install both Reporting Services and the Reporting Services Add-in from the SQL Server installation media.
+Then began the configuration process. Since everyone&rsquo;s environment is different, I found it difficult to troubleshoot some of the odd behavior that we were running in to." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/move-to-ddl/from-sql-queries-to-data-modeling/" />
-<meta property="article:published_time" content="2012-06-16T19:25:15&#43;00:00"/>
-<meta property="article:modified_time" content="2012-06-16T19:25:15&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/musings/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/" />
+<meta property="article:published_time" content="2012-06-30T19:06:39&#43;00:00"/>
+<meta property="article:modified_time" content="2012-06-30T19:06:39&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="From SQL Queries to Data Modeling"/>
-<meta name="twitter:description" content="This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I&rsquo;m pretty stoked about some of the amazing features of SQL Server 2012&rsquo;s BI stack.
-During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model."/>
+<meta name="twitter:title" content="Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)"/>
+<meta name="twitter:description" content="I recently worked with our SharePoint administrator to install SQL Server 2012 Reporting Services in SharePoint Integrated Mode to take advantage of PowerView. By following the installation instructions found at this MSDN article, we were able to painlessly install both Reporting Services and the Reporting Services Add-in from the SQL Server installation media.
+Then began the configuration process. Since everyone&rsquo;s environment is different, I found it difficult to troubleshoot some of the odd behavior that we were running in to."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -59,22 +59,22 @@ During the course of the week I discovered something that has been emerging in m
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "From SQL Queries to Data Modeling",
-  "url": "https:\/\/www.andrewcbancroft.com\/blog\/move-to-ddl\/from-sql-queries-to-data-modeling\/",
-  "wordCount": "420",
-  "datePublished": "2012-06-16T19:25:15Z",
-  "dateModified": "2012-06-16T19:25:15Z",
+  "headline": "Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/musings\/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1\/",
+  "wordCount": "450",
+  "datePublished": "2012-06-30T19:06:39Z",
+  "dateModified": "2012-06-30T19:06:39Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "Business Intelligence, Data Modeling, SQL"
+  "keywords": "Business Intelligence, Reporting Services, BI, SharePoint, SSRS, Troubleshooting"
 }
 </script>
 
 
 
-    <title>From SQL Queries to Data Modeling</title>
+    <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -185,21 +185,49 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">From SQL Queries to Data Modeling</h1>
+      <h1 class="article-title">Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)</h1>
     </header>
     <div class="content">
 
-    <p>This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I&rsquo;m pretty stoked about some of the amazing features of SQL Server 2012&rsquo;s BI stack.</p>
+    <p>I recently worked with our SharePoint administrator to install SQL Server 2012 Reporting Services in SharePoint Integrated Mode to take advantage of PowerView.  By following the installation instructions <a title="Install Reporting Services SharePoint Mode as a Single Server Farm" href="http://msdn.microsoft.com/en-us/library/gg492276.aspx" target="_blank">found at this MSDN article</a>, we were able to painlessly install both Reporting Services and the Reporting Services Add-in from the SQL Server installation media.</p>
 
-<p>During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model. I walked away from session after session thinking, &ldquo;Man, this is so doable now!!&#8221;. This was the single most impressive and perspective altering concept that flooded into my brain this week.</p>
+<p>Then began the configuration process.  Since everyone&rsquo;s environment is different, I found it difficult to troubleshoot some of the odd behavior that we were running in to.  In Part 1 of this post I want to focus on what we did to overcome a specific error we were receiving:</p>
 
-<p>There comes a time in every organization that necessitates a paradigm shift: One that involves a move <em>toward</em> data <em>modeling</em> and a <em>away</em> from SQL query writing for the purpose of supplying data sets to reports. By no means am I suggesting that writing SQL will disappear for database / BI Developers – but as a means to serving as the backbone of an organization&rsquo;s reporting infrastructure, there will inevitably come a time that employing more and more people capable of writing SQL will be unsustainable.</p>
+<p>After installation, I created a Business Intelligence Center site without any trouble.  In the Connections library, I would attempt to add a Report Data Source and receive a SharePoint page that detailed the following error:</p>
 
-<p>The reasons for this are clear: As an enterprise continuously builds or purchases data collection systems, the users of those systems expect to be able to get <em>information</em> back out. So they ask questions. Unpredictable combinations of questions. They are too numerous and too diverse for even a dedicated team of reporting people to write SQL to a database every time a business person has a question they want to ask of their data. For a while, parameterized reports suffice for most questions. But still the organization grows and evolves, and decision makers expect that they should be able to analyze information at their convenience, not at the mercy of the IT Department&rsquo;s work schedule.</p>
+<div class="note">
+  <p>
+    This SQL Server Reporting Services (SSRS) functionality is not supported.  Use Central Administration to verify and fix one or more of the following issues:
+  </p>
+  
+  <ul>
+    <li>
+      A report server URL is not configured.  Use the SSRS Integration page to set it.
+    </li>
+    <li>
+      The SSRS service application proxy is not configured.  Use the SSRS service application pages to configure the proxy.
+    </li>
+    <li>
+      The SSRS service application is not mapped to this web application.  Use the SSRS service application pages to associate the SSRS service application proxy to the web application.
+    </li>
+  </ul>
+</div>
 
-<p>Microsoft has worked hard to give BI developers effective ways to build models so as to enable us to write less SQL (at least when it comes to supplying answers to the multitude of questions that come our way) and empower our business folks to create their own reports that are based on the model we build. In my view, this is the direction that we must inevitably go. Without this, IT becomes a significant bottleneck to the progress that could be made from timely data analysis.</p>
+<p>Other times, I would receive a little bit more of a generic message saying something to the effect of &ldquo;This SQL Server Reporting Services (SSRS) functionality is not supported&#8221; or &ldquo;Unsupported Reporting Services Functionality&#8221;.</p>
 
-<p>I&rsquo;m personally looking forward to using SQL Server 2012 to promote better query-ability and visibility of the information my customers are dying to get their hands on!</p>
+<p>As it turns out, our specific problem was unrelated to any three of those bullet points.</p>
+
+<p>Our solution?</p>
+
+<div class="note">
+  Make sure to install the "Reporting Services Add-in for SharePoint Products&#8221; to all Web Front-End (WFE) nodes of your SharePoint farm.
+</div>
+
+<p>On the Feature Selection screen of SQL Server setup, you can simply choose &ldquo;Reporting Services Add-in for SharePoint Products&#8221; on your other WFE nodes.  You don&rsquo;t need to install the Database Engine Services or Reporting Services – SharePoint all over again&#8230;just the Add-in.</p>
+
+<p>We began to suspect it was something related to missing components on the other nodes because as I was troubleshooting, I noticed that if I attempted to create a Report Data Source enough times, I would be able to proceed to different stages of the creation process.  Sometimes I would hit the error right away.  Sometimes I would get to the page where I could fill out the connection details but when I would attempt to save the data source I would get one of the error pages described above.</p>
+
+<p>After we installed the Reporting Services Add-in on all WFE nodes, the problem stopped and we have not experienced any difficulty since.</p>
 
 
     <aside>

@@ -1452,10 +1452,10 @@ During testing, things worked great on Windows machines, but the moment we teste
     
     <item>
       <title>“Unexpected System Error” in DataStage Sequence Job</title>
-      <link>https://www.andrewcbancroft.com/blog/move-to-ddl/unexpected-system-error-in-datastage-sequence-job/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/unexpected-system-error-in-datastage-sequence-job/</link>
       <pubDate>Tue, 16 Apr 2013 14:15:54 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/move-to-ddl/unexpected-system-error-in-datastage-sequence-job/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/musings/unexpected-system-error-in-datastage-sequence-job/</guid>
       <description>Today I was running into a mysterious error in DataStage as I was running a sequence job.&amp;nbsp; Things seemed to be going well until one of my Fact jobs at the end of the sequence reported “Aborted” in DataStage Director.&amp;nbsp; Looking into the log for this job revealed a rather vague error message:
 [StageName] DB2 function SQLFetch failed:&amp;nbsp; SQLSTATE = HY000: Native Error Code = -1,042: Msg = [IBM][CLI Driver][DB2/LINUXX8664] SQL1042C&amp;nbsp; An unexpected system error occurred.</description>
     </item>
@@ -1472,10 +1472,10 @@ As some of you know, I&amp;rsquo;ve been nerding out on learning to build iOS ap
     
     <item>
       <title>DataStage Range Lookup Failure – What Gives?</title>
-      <link>https://www.andrewcbancroft.com/blog/move-to-ddl/datastage-range-lookup-failure-what-gives/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/datastage-range-lookup-failure-what-gives/</link>
       <pubDate>Mon, 25 Mar 2013 17:52:13 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/move-to-ddl/datastage-range-lookup-failure-what-gives/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/musings/datastage-range-lookup-failure-what-gives/</guid>
       <description>I just spent the majority of my morning trying to figure out why in the world my range lookup kept failing.&amp;nbsp; Hopefully this will save you some time in troubleshooting your range lookup failures.&amp;nbsp; To cut right to the chase, my resolution involved sorting my reference source prior to doing the lookup.&amp;nbsp; Adding a sort stage with the appropriate sort keys prior to doing the lookup solved my problem.&amp;nbsp; I probably learned this in a training at some point, but I just didn’t retain it.</description>
     </item>
     
@@ -1491,10 +1491,10 @@ These first few blogs will be somewhat autobiographical, so hopefully I don&amp;
     
     <item>
       <title>Report Studio Bullet Chart – Missing Target</title>
-      <link>https://www.andrewcbancroft.com/blog/move-to-ddl/report-studio-bullet-chart-missing-target/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/report-studio-bullet-chart-missing-target/</link>
       <pubDate>Wed, 06 Mar 2013 16:34:36 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/move-to-ddl/report-studio-bullet-chart-missing-target/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/musings/report-studio-bullet-chart-missing-target/</guid>
       <description>Today I was working on a bullet chart in Cognos Report Studio. The chart was rendering, but the target bar would never appear. Here’s the scenario I was in and how I resolved my issue:
 My Goal: My goal was to show the average time to process an application against a target processing time for the current fiscal year.
 My Situation: My “actual” value was being returned in my query to the data warehouse – It is an average of the days to process an application (defined in Framework Manager).</description>
@@ -1502,38 +1502,38 @@ My Situation: My “actual” value was being returned in my query to the data w
     
     <item>
       <title>Removing Chart Gridlines &amp; Plot Area Background in Report Studio</title>
-      <link>https://www.andrewcbancroft.com/blog/move-to-ddl/removing-chart-gridlines-plot-area-background-in-report-studio/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/removing-chart-gridlines-plot-area-background-in-report-studio/</link>
       <pubDate>Tue, 05 Mar 2013 16:48:20 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/move-to-ddl/removing-chart-gridlines-plot-area-background-in-report-studio/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/musings/removing-chart-gridlines-plot-area-background-in-report-studio/</guid>
       <description>The steps from IBM’s official documentation, while they attempt to lead you in the direction of changing these properties of a chart, did not register with my brain for about an hour or so of clicking around, frustrated that I could not find the properties they were describing in the articl.&amp;nbsp; Just in case I could spare anyone else the frustration of trying to remove gridlines in Report Studio’s current default charts, I thought I’d post this quick article on how I solved my problem.</description>
     </item>
     
     <item>
       <title>Resolving “UDA-SQL-0569 Unable to load the driver manager library ( db2cli.dll )” with Framework Manager 10.1</title>
-      <link>https://www.andrewcbancroft.com/blog/move-to-ddl/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/</link>
       <pubDate>Wed, 17 Oct 2012 15:29:23 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/move-to-ddl/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/musings/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/</guid>
       <description>When installing Framework Manager 10.1 and attempting to use it for the first time, things went down hill nearly immediately. I made sure to install a copy of the DB2 client on my development machine, but I still ran into issues connecting to data sources in Framework Manager.
 For those who need to install a DB2 client, IBM provides those downloads here for DB2 10.1. For other versions, you can go here.</description>
     </item>
     
     <item>
       <title>SSRS: Which server sent my e-mail subscription?</title>
-      <link>https://www.andrewcbancroft.com/blog/move-to-ddl/ssrs-which-server-sent-my-e-mail-subscription/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/ssrs-which-server-sent-my-e-mail-subscription/</link>
       <pubDate>Wed, 25 Jul 2012 13:56:24 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/move-to-ddl/ssrs-which-server-sent-my-e-mail-subscription/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/musings/ssrs-which-server-sent-my-e-mail-subscription/</guid>
       <description>I was recently troubleshooting a seemingly bizarre issue I was having with one of our report subscriptions – the production version was running normally, but our customer suddenly began receiving a very old version of the same report subscription. After disabling the subscription from all non-production servers that I knew about, the customer continued to receive the rogue e-mail. I needed to figure out which “mystery” report server was sending the e-mail subscription.</description>
     </item>
     
     <item>
       <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)</title>
-      <link>https://www.andrewcbancroft.com/blog/move-to-ddl/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</link>
       <pubDate>Sat, 30 Jun 2012 19:44:36 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/move-to-ddl/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/musings/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</guid>
       <description>You can visit Part 1 of this troubleshooting series by clicking here.
 During our configuration of Reporting Services for SharePoint I ran into another common issue.
 I consulted MSDN once again and followed the directions given at this MSDN article. Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:
@@ -1542,10 +1542,10 @@ Cannot connect to the server or database.</description>
     
     <item>
       <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)</title>
-      <link>https://www.andrewcbancroft.com/blog/move-to-ddl/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/</link>
       <pubDate>Sat, 30 Jun 2012 19:06:39 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/move-to-ddl/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/musings/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/</guid>
       <description>I recently worked with our SharePoint administrator to install SQL Server 2012 Reporting Services in SharePoint Integrated Mode to take advantage of PowerView. By following the installation instructions found at this MSDN article, we were able to painlessly install both Reporting Services and the Reporting Services Add-in from the SQL Server installation media.
 Then began the configuration process. Since everyone&amp;rsquo;s environment is different, I found it difficult to troubleshoot some of the odd behavior that we were running in to.</description>
     </item>
@@ -1584,10 +1584,10 @@ The * symbol is used as both a type declaration _and_ as an operator (the de-re
     
     <item>
       <title>From SQL Queries to Data Modeling</title>
-      <link>https://www.andrewcbancroft.com/blog/move-to-ddl/from-sql-queries-to-data-modeling/</link>
+      <link>https://www.andrewcbancroft.com/blog/musings/from-sql-queries-to-data-modeling/</link>
       <pubDate>Sat, 16 Jun 2012 19:25:15 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/move-to-ddl/from-sql-queries-to-data-modeling/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/musings/from-sql-queries-to-data-modeling/</guid>
       <description>This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I&amp;rsquo;m pretty stoked about some of the amazing features of SQL Server 2012&amp;rsquo;s BI stack.
 During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model.</description>
     </item>

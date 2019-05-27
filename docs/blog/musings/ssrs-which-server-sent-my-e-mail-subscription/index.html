@@ -40,22 +40,16 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)" />
-<meta property="og:description" content="You can visit Part 1 of this troubleshooting series by clicking here.
-During our configuration of Reporting Services for SharePoint I ran into another common issue.
-I consulted MSDN once again and followed the directions given at this MSDN article. Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:
-Cannot connect to the server or database." />
+<meta property="og:title" content="SSRS: Which server sent my e-mail subscription?" />
+<meta property="og:description" content="I was recently troubleshooting a seemingly bizarre issue I was having with one of our report subscriptions – the production version was running normally, but our customer suddenly began receiving a very old version of the same report subscription. After disabling the subscription from all non-production servers that I knew about, the customer continued to receive the rogue e-mail. I needed to figure out which “mystery” report server was sending the e-mail subscription." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/move-to-ddl/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/" />
-<meta property="article:published_time" content="2012-06-30T19:44:36&#43;00:00"/>
-<meta property="article:modified_time" content="2012-06-30T19:44:36&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/musings/ssrs-which-server-sent-my-e-mail-subscription/" />
+<meta property="article:published_time" content="2012-07-25T13:56:24&#43;00:00"/>
+<meta property="article:modified_time" content="2012-07-25T13:56:24&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)"/>
-<meta name="twitter:description" content="You can visit Part 1 of this troubleshooting series by clicking here.
-During our configuration of Reporting Services for SharePoint I ran into another common issue.
-I consulted MSDN once again and followed the directions given at this MSDN article. Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:
-Cannot connect to the server or database."/>
+<meta name="twitter:title" content="SSRS: Which server sent my e-mail subscription?"/>
+<meta name="twitter:description" content="I was recently troubleshooting a seemingly bizarre issue I was having with one of our report subscriptions – the production version was running normally, but our customer suddenly began receiving a very old version of the same report subscription. After disabling the subscription from all non-production servers that I knew about, the customer continued to receive the rogue e-mail. I needed to figure out which “mystery” report server was sending the e-mail subscription."/>
 <meta name="generator" content="Hugo 0.55.4" /> 
     
     
@@ -63,22 +57,22 @@ Cannot connect to the server or database."/>
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)",
-  "url": "https:\/\/www.andrewcbancroft.com\/blog\/move-to-ddl\/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2\/",
-  "wordCount": "193",
-  "datePublished": "2012-06-30T19:44:36Z",
-  "dateModified": "2012-06-30T19:44:36Z",
+  "headline": "SSRS: Which server sent my e-mail subscription?",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/musings\/ssrs-which-server-sent-my-e-mail-subscription\/",
+  "wordCount": "180",
+  "datePublished": "2012-07-25T13:56:24Z",
+  "dateModified": "2012-07-25T13:56:24Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "Business Intelligence, Microsoft, Reporting Services, BI, BI Semantic Model, SharePoint, SSAS, SSRS, Troubleshooting"
+  "keywords": "Reporting Services, SSRS"
 }
 </script>
 
 
 
-    <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)</title>
+    <title>SSRS: Which server sent my e-mail subscription?</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -189,29 +183,23 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)</h1>
+      <h1 class="article-title">SSRS: Which server sent my e-mail subscription?</h1>
     </header>
     <div class="content">
 
-    <p>You can visit Part 1 of this troubleshooting series by <a href="http://andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/" title="Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)">clicking here</a>.</p>
+    <p>I was recently troubleshooting a seemingly bizarre issue I was having with one of our report subscriptions – the production version was running normally, but our customer suddenly began receiving a very old version of the same report subscription.  After disabling the subscription from all non-production servers that I knew about, the customer continued to receive the rogue e-mail.  I needed to figure out which “mystery” report server was sending the e-mail subscription.</p>
 
-<p>During our configuration of Reporting Services for SharePoint I ran into another common issue.</p>
+<p>The answer was simple once I stepped back from the problem and remembered that there’s such a thing as a header to an e-mail that gives details about where the e-mail is coming from.</p>
 
-<p>I consulted MSDN once again and followed the directions <a title="PowerPivot BI Semantic Model Connection (.bism) " href="http://msdn.microsoft.com/en-us/library/gg471575.aspx" target="_blank">given at this MSDN article</a>.  Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:</p>
+<p>Outlook 2010 provides a way for you to view an e-mail’s header by clicking File –&gt; Info –&gt; Properties:</p>
 
-<div class="note">
-  Cannot connect to the server or database.
-</div>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/image.png"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border-width: 0px;" title="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/image_thumb.png" alt="image" width="576" height="566" border="0" /></a></p>
 
-<p>Even after adding the Reporting Services service account to the SSAS Tabular instance as a server administrator, we still hit this error.</p>
+<p>The Internet headers section is where to look – it’ll tell you which server was involved at the very beginning.</p>
 
-<p>Once again I found little documentation out there as I was troubleshooting, presumably because SQL Server 2012 is still quite new.  Here&rsquo;s what we did to fix our problem:</p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/SNAGHTML1d27d81.png"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border-width: 0px;" title="SNAGHTML1d27d81" src="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/SNAGHTML1d27d81_thumb.png" alt="SNAGHTML1d27d81" width="577" height="518" border="0" /></a></p>
 
-<div class="note">
-  <strong>The Analysis Services service must be running under a domain account.</strong>  When I installed SSAS, I took all the defaults for the server installation.  The SSAS service was running under some default built-in account which ended up being the problem.
-</div>
-
-<p>Once we switched this to run under a domain account, I was able to create BI Semantic Model Connections using this library document type with no issues.</p>
+<p>This turned out to be the key – after identifying the report server that was sending the e-mail to Exchange for delivery, I was able to disable the report subscription once and for all.</p>
 
 
     <aside>
@@ -224,7 +212,9 @@ MathJax.Hub.Config({
         
         <ul class="resources-content">
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/move-to-ddl/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/">Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/musings/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/">Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/musings/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/">Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)</a></li>
             
         <ul>
       
