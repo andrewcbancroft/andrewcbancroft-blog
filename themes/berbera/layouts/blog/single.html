@@ -79,6 +79,22 @@
 
     {{ .Content }}
 
+    <aside>
+      {{ $related := .Site.Pages.Related . | first 5 }}
+      {{ with $related }}
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            {{ range . }}
+            <li><i class="fa fa-angle-right"></i> <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{ end }}
+        <ul>
+      {{ end }}
+    </aside>
+
     {{ template "_internal/disqus.html" . }}
   </article>
 
