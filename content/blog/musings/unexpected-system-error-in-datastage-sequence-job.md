@@ -3,8 +3,7 @@ title: “Unexpected System Error” in DataStage Sequence Job
 author: Andrew
 type: blog
 date: 2013-04-16T14:15:54+00:00
-aliases:
-  - /2013/04/16/unexpected-system-error-in-datastage-sequence-job/
+url: /2013/04/16/unexpected-system-error-in-datastage-sequence-job/
 dsq_thread_id:
   - "2696877773"
 categories:

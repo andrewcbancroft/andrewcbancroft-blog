@@ -3,8 +3,7 @@ title: 'OpenSSL for iOS & Swift the Easy Way'
 author: Andrew
 type: blog
 date: 2015-09-22T04:39:28+00:00
-aliases:
-  - /2015/09/21/openssl-for-ios-swift-the-easy-way/
+url: /2015/09/21/openssl-for-ios-swift-the-easy-way/
 dsq_thread_id:
   - "4153083561"
 categories:

@@ -3,8 +3,7 @@ title: A Swift Implementation of the Core Data Stack Using NSPersistentContainer
 author: Andrew
 type: blog
 date: 2017-05-15T18:19:46+00:00
-aliases:
-  - /2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/
+url: /2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/
 dsq_thread_id:
   - "5820192783"
 categories:

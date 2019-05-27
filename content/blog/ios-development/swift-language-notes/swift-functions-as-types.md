@@ -3,8 +3,7 @@ title: Swift Functions as Types
 author: Andrew
 type: blog
 date: 2016-03-18T18:11:02+00:00
-aliases:
-  - /2016/03/18/swift-functions-as-types/
+url: /2016/03/18/swift-functions-as-types/
 dsq_thread_id:
   - "4673938189"
 categories:

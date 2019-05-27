@@ -3,8 +3,7 @@ title: Journey in iOS Development Series – In the Beginning…
 author: Andrew
 type: blog
 date: 2013-03-16T19:51:59+00:00
-aliases:
-  - /2013/03/16/learning-ios-development/
+url: /2013/03/16/learning-ios-development/
 dsq_thread_id:
   - "2695413141"
 categories:

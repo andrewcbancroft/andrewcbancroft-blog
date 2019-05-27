@@ -3,8 +3,7 @@ title: 'Clarifying Swift Access Control (Hint:  Swift Isn’t C#)'
 author: Andrew
 type: blog
 date: 2015-04-24T18:02:34+00:00
-aliases:
-  - /2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/
+url: /2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/
 dsq_thread_id:
   - "3709614701"
 categories:

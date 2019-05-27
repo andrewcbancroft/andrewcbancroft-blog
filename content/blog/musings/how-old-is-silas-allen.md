@@ -3,8 +3,7 @@ title: How Old is Silas Allen?
 author: Andrew
 type: blog
 date: 2013-03-31T14:36:07+00:00
-aliases:
-  - /2013/03/31/how-old-is-silas-allen/
+url: /2013/03/31/how-old-is-silas-allen/
 dsq_thread_id:
   - "2913643324"
 categories:

@@ -3,8 +3,7 @@ title: Working with Unwind Segues Programmatically in Swift
 author: Andrew
 type: blog
 date: 2015-12-18T18:22:55+00:00
-aliases:
-  - /2015/12/18/working-with-unwind-segues-programmatically-in-swift/
+url: /2015/12/18/working-with-unwind-segues-programmatically-in-swift/
 dsq_thread_id:
   - "4415335596"
 categories:

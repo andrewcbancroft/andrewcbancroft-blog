@@ -3,8 +3,7 @@ title: Why is it called a “Closure” anyway? A Swift Conceptual Look.
 author: Andrew
 type: blog
 date: 2017-06-06T04:00:41+00:00
-aliases:
-  - /2017/06/05/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/
+url: /2017/06/05/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/
 featured_image: /wp-content/uploads/2017/06/closure-cork-feature.jpg
 dsq_thread_id:
   - "5884094444"

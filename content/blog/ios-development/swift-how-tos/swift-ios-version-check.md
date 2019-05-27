@@ -3,8 +3,7 @@ title: Swift iOS Version Checking
 author: Andrew
 type: blog
 date: 2014-09-18T04:44:36+00:00
-aliases:
-  - /2014/09/17/swift-ios-version-check/
+url: /2014/09/17/swift-ios-version-check/
 dsq_thread_id:
   - "3028778485"
 categories:

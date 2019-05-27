@@ -3,8 +3,7 @@ title: Clean Coding in Swift – Type Inference
 author: Andrew
 type: blog
 date: 2014-08-13T04:22:25+00:00
-aliases:
-  - /2014/08/12/clean-coding-in-swift-type-inference/
+url: /2014/08/12/clean-coding-in-swift-type-inference/
 spacious_page_layout:
   - default_layout
 dsq_thread_id:

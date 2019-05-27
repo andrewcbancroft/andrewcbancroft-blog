@@ -3,8 +3,7 @@ title: Diagnosing “Restore failed” with ASP.NET 5 on Mac
 author: Andrew
 type: blog
 date: 2015-08-09T20:57:02+00:00
-aliases:
-  - /2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/
+url: /2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/
 dsq_thread_id:
   - "4017913045"
 categories:

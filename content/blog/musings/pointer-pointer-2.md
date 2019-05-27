@@ -3,8 +3,7 @@ title: 'Pointer Pointer #2'
 author: Andrew
 type: blog
 date: 2012-06-24T14:23:33+00:00
-aliases:
-  - /2012/06/24/pointer-pointer-2/
+url: /2012/06/24/pointer-pointer-2/
 dsq_thread_id:
   - "2683480102"
 categories:

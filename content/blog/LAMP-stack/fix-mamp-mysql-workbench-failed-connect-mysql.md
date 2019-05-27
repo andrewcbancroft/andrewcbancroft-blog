@@ -3,8 +3,7 @@ title: Fix MAMP, MySQL Workbench “Failed to Connect to MySQL”
 author: Andrew
 type: blog
 date: 2015-01-19T18:40:12+00:00
-aliases:
-  - /2015/01/19/fix-mamp-mysql-workbench-failed-connect-mysql/
+url: /2015/01/19/fix-mamp-mysql-workbench-failed-connect-mysql/
 dsq_thread_id:
   - "3435786395"
 categories:

@@ -3,8 +3,7 @@ title: Resolving “Variable used within its own initial value” Error in Swift
 author: Andrew
 type: blog
 date: 2014-10-20T13:50:52+00:00
-aliases:
-  - /2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/
+url: /2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/
 dsq_thread_id:
   - "3138185634"
 categories:

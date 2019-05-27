@@ -3,8 +3,7 @@ title: How Delegation Works – A Swift Developer’s Guide
 author: Andrew
 type: blog
 date: 2015-04-09T01:43:55+00:00
-aliases:
-  - /2015/04/08/how-delegation-works-a-swift-developer-guide/
+url: /2015/04/08/how-delegation-works-a-swift-developer-guide/
 dsq_thread_id:
   - "3666497203"
 categories:

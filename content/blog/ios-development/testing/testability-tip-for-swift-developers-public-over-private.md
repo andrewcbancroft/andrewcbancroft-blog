@@ -3,8 +3,7 @@ title: Testability Tip for Swift Developers – Public Over Private
 author: Andrew
 type: blog
 date: 2015-04-15T18:52:11+00:00
-aliases:
-  - /2015/04/15/testability-tip-for-swift-developers-public-over-private/
+url: /2015/04/15/testability-tip-for-swift-developers-public-over-private/
 dsq_thread_id:
   - "3684435104"
 categories:

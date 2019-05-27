@@ -3,8 +3,7 @@ title: 'Swift Cheat Sheet for iPhone Camera Access & Usage'
 author: Andrew
 type: blog
 date: 2018-02-24T12:23:02+00:00
-aliases:
-  - /2018/02/24/swift-cheat-sheet-for-iphone-camera-access-usage/
+url: /2018/02/24/swift-cheat-sheet-for-iphone-camera-access-usage/
 dsq_thread_id:
   - "6501934219"
 categories:

@@ -3,8 +3,7 @@ title: Slide In Animation in Swift
 author: Andrew
 type: blog
 date: 2014-09-24T18:25:52+00:00
-aliases:
-  - /2014/09/24/slide-in-animation-in-swift/
+url: /2014/09/24/slide-in-animation-in-swift/
 dsq_thread_id:
   - "3050287045"
 categories:

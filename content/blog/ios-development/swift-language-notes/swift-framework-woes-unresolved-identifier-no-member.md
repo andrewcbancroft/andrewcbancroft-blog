@@ -3,8 +3,7 @@ title: Swift Framework Woes – Unresolved Identifier? No Member?
 author: Andrew
 type: blog
 date: 2016-01-08T18:40:55+00:00
-aliases:
-  - /2016/01/08/swift-framework-woes-unresolved-identifier-no-member/
+url: /2016/01/08/swift-framework-woes-unresolved-identifier-no-member/
 dsq_thread_id:
   - "4474007861"
 categories:

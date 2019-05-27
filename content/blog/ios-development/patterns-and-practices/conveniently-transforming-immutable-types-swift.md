@@ -3,8 +3,7 @@ title: Conveniently Transforming Immutable Types in Swift
 author: Andrew
 type: blog
 date: 2015-01-20T12:30:51+00:00
-aliases:
-  - /2015/01/20/conveniently-transforming-immutable-types-swift/
+url: /2015/01/20/conveniently-transforming-immutable-types-swift/
 dsq_thread_id:
   - "3436977855"
 categories:

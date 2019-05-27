@@ -3,8 +3,7 @@ title: Receipt Validation – Verifying a Receipt Signature in Swift
 author: Andrew
 type: blog
 date: 2017-07-16T21:43:21+00:00
-aliases:
-  - /2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/
+url: /2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/
 dsq_thread_id:
   - "5993480377"
 categories:

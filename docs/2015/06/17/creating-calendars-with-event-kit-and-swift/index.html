@@ -1,1 +1,436 @@
-<!DOCTYPE html><html><head><title>https://www.andrewcbancroft.com/blog/ios-development/eventkit/creating-calendars-with-event-kit-and-swift/</title><link rel="canonical" href="https://www.andrewcbancroft.com/blog/ios-development/eventkit/creating-calendars-with-event-kit-and-swift/"/><meta name="robots" content="noindex"><meta charset="utf-8" /><meta http-equiv="refresh" content="0; url=https://www.andrewcbancroft.com/blog/ios-development/eventkit/creating-calendars-with-event-kit-and-swift/" /></head></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-33022655-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Creating Calendars with Event Kit and Swift" />
+<meta property="og:description" content="Updated on April 19, 2016 – Swift 2.1 | Added example project
+Apple’s Event Kit framework empowers developers to interact with an iOS device’s calendar database. Not only can we read calendars and events from the database, we can also create calendars.
+In a previous article, we looked at how to handle asking the user for permission to access their calendars. Now my goal is to show you how to create local calendars on the user&rsquo;s device programmatically with Swift using the Event Kit framework." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/" />
+<meta property="article:published_time" content="2015-06-17T17:46:29&#43;00:00"/>
+<meta property="article:modified_time" content="2015-06-17T17:46:29&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Creating Calendars with Event Kit and Swift"/>
+<meta name="twitter:description" content="Updated on April 19, 2016 – Swift 2.1 | Added example project
+Apple’s Event Kit framework empowers developers to interact with an iOS device’s calendar database. Not only can we read calendars and events from the database, we can also create calendars.
+In a previous article, we looked at how to handle asking the user for permission to access their calendars. Now my goal is to show you how to create local calendars on the user&rsquo;s device programmatically with Swift using the Event Kit framework."/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Creating Calendars with Event Kit and Swift",
+  "url": "https:\/\/www.andrewcbancroft.com\/2015\/06\/17\/creating-calendars-with-event-kit-and-swift\/",
+  "wordCount": "1136",
+  "datePublished": "2015-06-17T17:46:29Z",
+  "dateModified": "2015-06-17T17:46:29Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, Calendars, Event Kit"
+}
+</script>
+
+
+
+    <title>Creating Calendars with Event Kit and Swift</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Creating Calendars with Event Kit and Swift</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p><small>Updated on April 19, 2016 – Swift 2.1 | Added example project</small></p>
+
+<p>Apple’s Event Kit framework empowers developers to interact with an iOS device’s calendar database. Not only can we read calendars and events from the database, we can also <em>create</em> calendars.</p>
+
+<p>In a previous article, we looked at <a href="http://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/" title="Beginner’s Guide to EventKit in Swift – Requesting Permission">how to handle asking the user for permission to access their calendars</a>. Now my goal is to show you how to create local calendars on the user&rsquo;s device programmatically with Swift using the Event Kit framework.</p>
+
+<p>Here&rsquo;s a demo of what we&rsquo;re going for by the time I&rsquo;m finished with this article:<br />
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/06/CreateCalendarDemo.gif"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/06/CreateCalendarDemo.gif" alt="Create Calendar Demo" width="473" height="845" class="alignnone size-full wp-image-12814" /></a></p>
+
+<p>If you&rsquo;d like to tinker with the code for yourself, you can download the example project:</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/EventTracker/tree/create-calendar" title="Event Tracker - Create Calendar">Event Tracker – Create Calendar</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="import-eventkit" class="jump-target"></a></p>
+
+<h3 id="import-eventkit">Import EventKit</h3>
+
+<p>Step 1 in this whole process will be to import EventKit at the top of your Swift file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">import</span> <span class="nc">UIKit</span>
+<span class="ln">2</span><span class="kd">import</span> <span class="nc">EventKit</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="c1">// ...</span></code></pre></div>
+<p>Importing EventKit gives us access to everything we need to work with calendars.</p>
+
+<p><a name="general-outline" class="jump-target"></a></p>
+
+<h3 id="general-outline-for-creating-a-local-calendar">General outline for creating a local calendar</h3>
+
+<p>Now, we&rsquo;ll proceed with creating a local calendar on the user&rsquo;s device. It&rsquo;s important to note that there are other kinds of calendars that you can create. For example, you can create calendars that sync with iCloud. For now though, we&rsquo;re going to narrow the focus down to just creating the calendar on the user&rsquo;s local device.</p>
+
+<p>Here&rsquo;s the general outline (and then some code):</p>
+
+<ul>
+<li>Create an <code>EKEventStore</code> instance</li>
+<li>Create a new <code>EKCalendar</code> instance using that event store instance</li>
+<li>Configure the new calendar&rsquo;s <code>title</code></li>
+<li>Wire up the new calendar&rsquo;s source
+
+<ul>
+<li>Obtain a list of the available sources from the event store instance</li>
+<li>Filter that list down to the <code>EKSourceTypeLocal</code> source type</li>
+<li>Assign it to the calendar&rsquo;s <code>source</code> property</li>
+</ul></li>
+<li>Save the calendar using the event store instance</li>
+<li>Handle any problems that might have occurred</li>
+</ul>
+
+<p><a name="code-example" class="jump-target"></a></p>
+
+<h3 id="code-example">Code example</h3>
+
+<p>That&rsquo;s the general outline&#8230; Now for the code!</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Create an Event Store instance</span>
+<span class="ln"> 2</span><span class="kd">let</span> <span class="nv">eventStore</span> <span class="p">=</span> <span class="n">EKEventStore</span><span class="p">();</span>
+<span class="ln"> 3</span>
+<span class="ln"> 4</span><span class="c1">// Use Event Store to create a new calendar instance</span>
+<span class="ln"> 5</span><span class="c1">// Configure its title</span>
+<span class="ln"> 6</span><span class="kd">let</span> <span class="nv">newCalendar</span> <span class="p">=</span> <span class="n">EKCalendar</span><span class="p">(</span><span class="n">forEntityType</span><span class="p">:</span> <span class="p">.</span><span class="n">Event</span><span class="p">,</span> <span class="n">eventStore</span><span class="p">:</span> <span class="n">eventStore</span><span class="p">)</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span><span class="c1">// Probably want to prevent someone from saving a calendar</span>
+<span class="ln"> 9</span><span class="c1">// if they don&#39;t type in a name...</span>
+<span class="ln">10</span><span class="n">newCalendar</span><span class="p">.</span><span class="n">title</span> <span class="p">=</span> <span class="s">&#34;Some Calendar Name&#34;</span>
+<span class="ln">11</span>
+<span class="ln">12</span><span class="c1">// Access list of available sources from the Event Store</span>
+<span class="ln">13</span><span class="kd">let</span> <span class="nv">sourcesInEventStore</span> <span class="p">=</span> <span class="n">eventStore</span><span class="p">.</span><span class="n">sources</span> 
+<span class="ln">14</span>
+<span class="ln">15</span><span class="c1">// Filter the available sources and select the &#34;Local&#34; source to assign to the new calendar&#39;s</span>
+<span class="ln">16</span><span class="c1">// source property</span>
+<span class="ln">17</span><span class="n">newCalendar</span><span class="p">.</span><span class="n">source</span> <span class="p">=</span> <span class="n">sourcesInEventStore</span><span class="p">.</span><span class="bp">filter</span><span class="p">{</span>
+<span class="ln">18</span>    <span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="n">EKSource</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="k">in</span>
+<span class="ln">19</span>    <span class="n">source</span><span class="p">.</span><span class="n">sourceType</span><span class="p">.</span><span class="n">rawValue</span> <span class="p">==</span> <span class="n">EKSourceType</span><span class="p">.</span><span class="n">Local</span><span class="p">.</span><span class="n">rawValue</span>
+<span class="ln">20</span><span class="p">}.</span><span class="bp">first</span><span class="o">!</span>
+<span class="ln">21</span>
+<span class="ln">22</span><span class="c1">// Save the calendar using the Event Store instance</span>
+<span class="ln">23</span><span class="k">do</span> <span class="p">{</span>
+<span class="ln">24</span>    <span class="k">try</span> <span class="n">eventStore</span><span class="p">.</span><span class="n">saveCalendar</span><span class="p">(</span><span class="n">newCalendar</span><span class="p">,</span> <span class="n">commit</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<span class="ln">25</span>    <span class="n">NSUserDefaults</span><span class="p">.</span><span class="n">standardUserDefaults</span><span class="p">().</span><span class="n">setObject</span><span class="p">(</span><span class="n">newCalendar</span><span class="p">.</span><span class="n">calendarIdentifier</span><span class="p">,</span> <span class="n">forKey</span><span class="p">:</span> <span class="s">&#34;EventTrackerPrimaryCalendar&#34;</span><span class="p">)</span>
+<span class="ln">26</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+<span class="ln">27</span>    <span class="kd">let</span> <span class="nv">alert</span> <span class="p">=</span> <span class="n">UIAlertController</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Calendar could not save&#34;</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="p">(</span><span class="n">error</span> <span class="k">as</span> <span class="n">NSError</span><span class="p">).</span><span class="n">localizedDescription</span><span class="p">,</span> <span class="n">preferredStyle</span><span class="p">:</span> <span class="p">.</span><span class="n">Alert</span><span class="p">)</span>
+<span class="ln">28</span>    <span class="kd">let</span> <span class="nv">OKAction</span> <span class="p">=</span> <span class="n">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;OK&#34;</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="p">.</span><span class="n">Default</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="ln">29</span>    <span class="n">alert</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">OKAction</span><span class="p">)</span>
+<span class="ln">30</span>    
+<span class="ln">31</span>    <span class="kc">self</span><span class="p">.</span><span class="n">presentViewController</span><span class="p">(</span><span class="n">alert</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="ln">32</span><span class="p">}</span></code></pre></div>
+<p>The most confusing part of the code above for me was obtaining the right source to assign to the new calendar&rsquo;s <code>source</code> property. Let&rsquo;s unpack that for a second&#8230;</p>
+
+<p><a name="assign-source" class="jump-target"></a></p>
+
+<h4 id="obtaining-and-assigning-the-calendar-s-source">Obtaining and assigning the calendar&rsquo;s source</h4>
+
+<p>The <code>eventStore</code> instance gives us the ability to query for a listing of its relevant calendar source types. But why are we going to the event store just to get a list of all the sources so that we can filter it down to just the one we want? Well, because this is the only way to get <code>EKSource</code> instances! Take a look at this quote from the <a href="https://developer.apple.com/library/prerelease/mac/documentation/EventKit/Reference/EKSourceClassRef/index.html">Apple Documentation</a>:</p>
+
+<blockquote>
+<p><strong>You do not create instances of <code>EKSource</code></strong>. You <em>retrieve</em> EKSource objects from an <code>EKEventStore</code> object. Use the sources property to get all the <code>EKSource</code> objects for an event store, and use the methods in this class to access properties of the source object. (emphasis added)</p>
+</blockquote>
+
+<p>So that answers the question of why we query the event store for that list of source types. But now, how do we narrow that list down to the one we want? That&rsquo;s where the call to <code>filter</code> comes in&#8230;</p>
+
+<p>First let&rsquo;s isolate that code segment from the rest so it&rsquo;s clear what we&rsquo;re analyzing:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">newCalendar</span><span class="p">.</span><span class="n">source</span> <span class="p">=</span> <span class="n">sourcesInEventStore</span><span class="p">.</span><span class="bp">filter</span><span class="p">{</span>
+<span class="ln">2</span>    <span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="n">EKSource</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="k">in</span>
+<span class="ln">3</span>    <span class="n">source</span><span class="p">.</span><span class="n">sourceType</span><span class="p">.</span><span class="n">rawValue</span> <span class="p">==</span> <span class="n">EKSourceType</span><span class="p">.</span><span class="n">Local</span><span class="p">.</span><span class="n">rawValue</span>
+<span class="ln">4</span><span class="p">}.</span><span class="bp">first</span><span class="o">!</span></code></pre></div>
+<p>The goal of this code is to take the list of sources in the event store, and filter them so that only the one matching the value of <code>EKSourceTypeLocal</code> is returned. This is easily accomplished using the <code>filter</code> function on the array of <code>EKSources</code> that&rsquo;s returned by the event store.</p>
+
+<p>But <code>filter</code> <em>also</em> returns an array, so to get the single source we&rsquo;re looking for, we&rsquo;ll simply grab the <code>first</code> element out of the array <code>filter</code> returns, and assign it to the new calendar&rsquo;s <code>source</code> property. There are no duplicated <code>EKSourceTypes</code> in the list returned by the event store, so our filter expression should only return one match wrapped in an array.</p>
+
+<p>That&rsquo;s it for configuring the calendar. The remainder of the code uses the event store instance to save the calendar, and handle any errors that might occur with the save process.</p>
+
+<p><a name="save-identifier" class="jump-target"></a></p>
+
+<h3 id="saving-the-calendar-identifier">Saving the calendar identifier</h3>
+
+<p>One last thing to note is that if you&rsquo;re creating a calendar for your app to store events in, you probably want to stash the calendar&rsquo;s identifier value somewhere, so that you can query the event store for the calendar directly, at a later point in time.</p>
+
+<p>Using <code>NSUserDefaults.standardUserDefaults()</code> is a convenient way to store this calendar identifier value. The code to pay attention to is highlighted in this snippet:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// ...</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="c1">// Save the calendar using the Event Store instance</span>
+<span class="ln"> 4</span><span class="k">do</span> <span class="p">{</span>
+<span class="ln"> 5</span>    <span class="k">try</span> <span class="n">eventStore</span><span class="p">.</span><span class="n">saveCalendar</span><span class="p">(</span><span class="n">newCalendar</span><span class="p">,</span> <span class="n">commit</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<span class="ln"> 6</span>    <span class="n">NSUserDefaults</span><span class="p">.</span><span class="n">standardUserDefaults</span><span class="p">().</span><span class="n">setObject</span><span class="p">(</span><span class="n">newCalendar</span><span class="p">.</span><span class="n">calendarIdentifier</span><span class="p">,</span> <span class="n">forKey</span><span class="p">:</span> <span class="s">&#34;EventTrackerPrimaryCalendar&#34;</span><span class="p">)</span>
+<span class="ln"> 7</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+<span class="ln"> 8</span>    <span class="kd">let</span> <span class="nv">alert</span> <span class="p">=</span> <span class="n">UIAlertController</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Calendar could not save&#34;</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="p">(</span><span class="n">error</span> <span class="k">as</span> <span class="n">NSError</span><span class="p">).</span><span class="n">localizedDescription</span><span class="p">,</span> <span class="n">preferredStyle</span><span class="p">:</span> <span class="p">.</span><span class="n">Alert</span><span class="p">)</span>
+<span class="ln"> 9</span>    <span class="kd">let</span> <span class="nv">OKAction</span> <span class="p">=</span> <span class="n">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;OK&#34;</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="p">.</span><span class="n">Default</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="ln">10</span>    <span class="n">alert</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">OKAction</span><span class="p">)</span>
+<span class="ln">11</span>    
+<span class="ln">12</span>    <span class="kc">self</span><span class="p">.</span><span class="n">presentViewController</span><span class="p">(</span><span class="n">alert</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="ln">13</span><span class="p">}</span></code></pre></div>
+<p>So assuming that the calendar was saved successfully without error, we&rsquo;ll simply access the standard user defaults, and insert a new object (our calendar&rsquo;s identifier) for a key that we&rsquo;ll use to retrieve the identifier again later.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>Having the ability to create a calendar for an iOS application using Event Kit is a powerful thing if you&rsquo;re wanting to take advantage of some of the built-in event-related features of the iOS platform. In this article we saw how to create a calendar using Event Kit and Swift. Additionally we analyzed some of the less-than-intuitive pieces of accessing the event store for a list of sources. We concluded by saving the new calendar&rsquo;s identifier to <code>NSUserDefaults</code> so that we could easily retrieve the calendar from the event store at a later time.</p>
+
+<p><a name="related" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/" title="Beginner’s Guide to EventKit in Swift – Requesting Permission">Beginner’s Guide to EventKit in Swift – Requesting Permission</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/04/28/listing-calendar-events-with-event-kit-and-swift/" title="Listing Calendar Events with Event Kit and Swift">Listing Calendar Events with Event Kit and Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/02/creating-calendar-events-with-event-kit-and-swift/" title="Creating Calendar Events with Event Kit and Swift">Creating Calendar Events with Event Kit and Swift</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/">Beginner’s Guide to Event Kit in Swift – Requesting Permission</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/">Improvements to Unit Testing in Swift with Xcode 7</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/">Access Sub-Controllers from a UINavigationController in Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/">Sync Table View Data: NSFetchedResultsController and Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/">Swift How-To:  Setting up a Table View</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

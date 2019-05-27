@@ -3,8 +3,7 @@ title: From SQL Queries to Data Modeling
 author: Andrew
 type: blog
 date: 2012-06-16T19:25:15+00:00
-aliases:
-  - /2012/06/16/from-sql-queries-to-data-modeling/
+url: /2012/06/16/from-sql-queries-to-data-modeling/
 dsq_thread_id:
   - "2705391121"
 categories:

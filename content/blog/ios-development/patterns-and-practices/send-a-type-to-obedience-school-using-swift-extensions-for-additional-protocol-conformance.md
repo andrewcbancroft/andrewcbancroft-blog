@@ -3,8 +3,7 @@ title: Send a Type to Obedience School – Using Swift Extensions for Additional
 author: Andrew
 type: blog
 date: 2014-12-02T19:15:33+00:00
-aliases:
-  - /2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/
+url: /2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/
 dsq_thread_id:
   - "3153770842"
 categories:

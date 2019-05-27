@@ -3,8 +3,7 @@ title: Using Swift to Seed a Core Data Database
 author: Andrew
 type: blog
 date: 2015-02-26T03:44:53+00:00
-aliases:
-  - /2015/02/25/using-swift-to-seed-a-core-data-database/
+url: /2015/02/25/using-swift-to-seed-a-core-data-database/
 dsq_thread_id:
   - "3549029163"
 categories:

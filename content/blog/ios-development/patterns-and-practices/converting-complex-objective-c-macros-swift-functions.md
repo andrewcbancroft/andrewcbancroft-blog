@@ -3,8 +3,7 @@ title: Converting Complex Objective-C Macros to Swift Functions
 author: Andrew
 type: blog
 date: 2015-01-29T13:00:51+00:00
-aliases:
-  - /2015/01/29/converting-complex-objective-c-macros-swift-functions/
+url: /2015/01/29/converting-complex-objective-c-macros-swift-functions/
 dsq_thread_id:
   - "3463928351"
 categories:

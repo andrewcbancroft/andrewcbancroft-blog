@@ -3,8 +3,7 @@ title: iOS KeychainItemWrapper – Obstacles Overcome, Inconsistencies Resolved
 author: Andrew
 type: blog
 date: 2014-05-21T18:20:56+00:00
-aliases:
-  - /2014/05/21/ios-keychainitemwrapper-obstacles-overcome-inconsistencies-resolved/
+url: /2014/05/21/ios-keychainitemwrapper-obstacles-overcome-inconsistencies-resolved/
 spacious_page_layout:
   - default_layout
 dsq_thread_id:

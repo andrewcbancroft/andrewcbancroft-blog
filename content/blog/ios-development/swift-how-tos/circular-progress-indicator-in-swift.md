@@ -3,8 +3,7 @@ title: Circular Progress Indicator in Swift
 author: Andrew
 type: blog
 date: 2015-07-10T04:31:49+00:00
-aliases:
-  - /2015/07/09/circular-progress-indicator-in-swift/
+url: /2015/07/09/circular-progress-indicator-in-swift/
 dsq_thread_id:
   - "3920502960"
 categories:

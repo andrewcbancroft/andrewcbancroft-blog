@@ -3,8 +3,7 @@ title: Get Social With Swift – Posting to Facebook and Twitter
 author: Andrew
 type: blog
 date: 2015-11-23T19:17:38+00:00
-aliases:
-  - /2015/11/23/get-social-with-swift-posting-to-facebook-and-twitter/
+url: /2015/11/23/get-social-with-swift-posting-to-facebook-and-twitter/
 dsq_thread_id:
   - "4344730341"
 categories:

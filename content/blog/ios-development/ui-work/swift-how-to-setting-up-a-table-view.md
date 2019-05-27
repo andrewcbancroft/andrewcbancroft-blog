@@ -3,8 +3,7 @@ title: 'Swift How-To:  Setting up a Table View'
 author: Andrew
 type: blog
 date: 2015-05-19T02:31:38+00:00
-aliases:
-  - /2015/05/18/swift-how-to-setting-up-a-table-view/
+url: /2015/05/18/swift-how-to-setting-up-a-table-view/
 dsq_thread_id:
   - "3775546504"
 categories:

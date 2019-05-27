@@ -1,1 +1,356 @@
-<!DOCTYPE html><html><head><title>https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/access-sub-controllers-from-a-uinavigationcontroller-in-swift/</title><link rel="canonical" href="https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/access-sub-controllers-from-a-uinavigationcontroller-in-swift/"/><meta name="robots" content="noindex"><meta charset="utf-8" /><meta http-equiv="refresh" content="0; url=https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/access-sub-controllers-from-a-uinavigationcontroller-in-swift/" /></head></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-33022655-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Access Sub-Controllers from a UINavigationController in Swift" />
+<meta property="og:description" content="The sequence of accessing a UINavigationController&#39;s first child from within the AppDelegate or within prepareForSegue(_:sender:) always gets me. Here are a few quick snippets to help you and I quickly get up and running when working with navigation controllers in our Swift applications:
+
+AppDelegate Every iOS application has one root view controller that&rsquo;s presented when the app finishes its launch process. Suppose we&rsquo;re building a navigation controller-based app&#8230; that is, we&rsquo;re building an app where the first (root) view controller is a UINavigationController." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/" />
+<meta property="article:published_time" content="2015-06-02T17:37:44&#43;00:00"/>
+<meta property="article:modified_time" content="2015-06-02T17:37:44&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Access Sub-Controllers from a UINavigationController in Swift"/>
+<meta name="twitter:description" content="The sequence of accessing a UINavigationController&#39;s first child from within the AppDelegate or within prepareForSegue(_:sender:) always gets me. Here are a few quick snippets to help you and I quickly get up and running when working with navigation controllers in our Swift applications:
+
+AppDelegate Every iOS application has one root view controller that&rsquo;s presented when the app finishes its launch process. Suppose we&rsquo;re building a navigation controller-based app&#8230; that is, we&rsquo;re building an app where the first (root) view controller is a UINavigationController."/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Access Sub-Controllers from a UINavigationController in Swift",
+  "url": "https:\/\/www.andrewcbancroft.com\/2015\/06\/02\/access-sub-controllers-from-a-uinavigationcontroller-in-swift\/",
+  "wordCount": "755",
+  "datePublished": "2015-06-02T17:37:44Z",
+  "dateModified": "2015-06-02T17:37:44Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, AppDelegate, UINavigationController"
+}
+</script>
+
+
+
+    <title>Access Sub-Controllers from a UINavigationController in Swift</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Access Sub-Controllers from a UINavigationController in Swift</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>The sequence of accessing a <code>UINavigationController's</code> first child from within the <code>AppDelegate</code> or within <code>prepareForSegue(_:sender:)</code> always gets me. Here are a few quick snippets to help you and I quickly get up and running when working with navigation controllers in our Swift applications:</p>
+
+<p><a name="app-delegate" class="jump-target"></a></p>
+
+<h3 id="appdelegate">AppDelegate</h3>
+
+<p>Every iOS application has one root view controller that&rsquo;s presented when the app finishes its launch process. Suppose we&rsquo;re building a navigation controller-based app&#8230; that is, we&rsquo;re building an app where the first (root) view controller is a UINavigationController. In our Storyboard, we&rsquo;ve set up a Scene with some UI controls with a view controller and some properties, and we&rsquo;ve embedded that view controller in a navigation controller.</p>
+
+<p>What if we want to set some of the view controller&rsquo;s properties after the app launches? How could we go about doing that?</p>
+
+<p>I tend to always think of the &ldquo;first view controller&#8221; as the first Scene in the Storyboard where I&rsquo;ve set up UI components. To iOS, however, the <em>navigation controller</em> is actually the first (or <em>root</em>) view controller.</p>
+
+<p>When an app incorporates a navigation controller as its first (root) view controller, we end up needing to do a little digging into the view controller hierarchy to get access what we might perceive as the true &ldquo;first view controller&#8221;.</p>
+
+<p><a name="dig-first-view-controller" class="jump-target"></a></p>
+
+<h4 id="digging-for-the-first-view-controller">Digging for the first view controller</h4>
+
+<p>Here is a snippet of how to dig into the <code>UINavigationController's</code> view controller hierarchy to grab the first one and set some fictitious properties on it, all from within the <code>AppDelegate</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">AppDelegate</span><span class="p">:</span> <span class="n">UIResponder</span><span class="p">,</span> <span class="n">UIApplicationDelegate</span> <span class="p">{</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span>    <span class="kd">var</span> <span class="nv">window</span><span class="p">:</span> <span class="n">UIWindow</span><span class="p">?</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span>
+<span class="ln"> 6</span>    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="n">NSObject</span><span class="p">:</span> <span class="nb">AnyObject</span><span class="p">]?)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Bool</span> <span class="p">{</span>
+<span class="ln"> 7</span>        <span class="c1">// Override point for customization after application launch.</span>
+<span class="ln"> 8</span>        
+<span class="ln"> 9</span>        <span class="kd">let</span> <span class="nv">navigationController</span> <span class="p">=</span> <span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="o">!</span> <span class="n">UINavigationController</span>
+<span class="ln">10</span>        <span class="kd">let</span> <span class="nv">firstVC</span> <span class="p">=</span> <span class="n">navigationController</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="o">!</span> <span class="n">NameOfFirstViewController</span>
+<span class="ln">11</span>        <span class="c1">// set whatever properties you might want to set</span>
+<span class="ln">12</span>        <span class="c1">// such as an NSmanagedObjectContext reference</span>
+<span class="ln">13</span>
+<span class="ln">14</span>        <span class="k">return</span> <span class="kc">true</span>
+<span class="ln">15</span>    <span class="p">}</span>
+<span class="ln">16</span>
+<span class="ln">17</span>    <span class="c1">// ...</span>
+<span class="ln">18</span><span class="p">}</span></code></pre></div>
+<p>So the workflow goes like this:</p>
+
+<ul>
+<li>Get the window&rsquo;s root view controller (which is the navigation controller in our case)</li>
+<li>Get the navigation controller&rsquo;s first view controller from its array of view controllers (which is what I always think of as the &ldquo;first&#8221; view controller)</li>
+<li>Set whatever properties you need to set</li>
+</ul>
+
+<p>You may be worried about the usage of implicitly unwrapped optionals in this snippet. I tend to avoid them wherever possible too, but I used them here because I reasoned that my navigation controller-based app <em>hinges</em> on the fact that the root view controller of the application is a <code>UINavigationController</code>. Something so fundamental to the app warranted my usage of the implicitly unwrapped optionals, since changing the navigation paradigm of the app would probably break things anyway.</p>
+
+<p>If you&rsquo;re not convinced by that line of reasoning, no worries – you can switch out some of the <code>!</code> operators for <code>?</code> operators and add in some <code>if-let</code> syntax to protect against encountering nil. For example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">AppDelegate</span><span class="p">:</span> <span class="n">UIResponder</span><span class="p">,</span> <span class="n">UIApplicationDelegate</span> <span class="p">{</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span>    <span class="c1">// ...</span>
+<span class="ln"> 4</span>    <span class="k">if</span> <span class="kd">let</span> <span class="nv">navigationController</span> <span class="p">=</span> <span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="p">?</span> <span class="n">UINavigationController</span> <span class="p">{</span>
+<span class="ln"> 5</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">firstVC</span> <span class="p">=</span> <span class="n">navigationController</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="p">?</span> <span class="n">NameOfFirstViewController</span> <span class="p">{</span>
+<span class="ln"> 6</span>            <span class="n">firstVC</span><span class="p">.</span><span class="n">someProperty</span> <span class="p">=</span> <span class="n">someValue</span>
+<span class="ln"> 7</span>        <span class="p">}</span>
+<span class="ln"> 8</span>    <span class="p">}</span>
+<span class="ln"> 9</span>    <span class="c1">// ...</span>
+<span class="ln">10</span><span class="p">}</span></code></pre></div>
+<p><a name="prepare-for-segue" class="jump-target"></a></p>
+
+<h3 id="prepare-for-segue">Prepare for segue</h3>
+
+<p>What about in <code>prepareForSegue(_:sender:)</code>? When would this even be necessary?</p>
+
+<p>Well, suppose that we have an app which segues <em>into</em> a navigation controller. We may need to pass some data off the next view controller, but that &ldquo;next view controller&#8221; is technically the navigation controller, not the controller where our properties are declared.</p>
+
+<p>In similar fashion to the <code>AppDelegate</code> situation, we want to dig into the navigation controller&rsquo;s view controller hierarchy to access the first child so that we can pass the data along. Here&rsquo;s an example implementation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span>    <span class="c1">// ...</span>
+<span class="ln"> 4</span>    <span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">prepareForSegue</span><span class="p">(</span><span class="n">segue</span><span class="p">:</span> <span class="n">UIStoryboardSegue</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="nb">AnyObject</span><span class="p">?)</span> <span class="p">{</span>
+<span class="ln"> 5</span>        
+<span class="ln"> 6</span>        <span class="kd">let</span> <span class="nv">destinationVC</span> <span class="p">=</span> <span class="n">segue</span><span class="p">.</span><span class="n">destinationViewController</span> <span class="k">as</span><span class="o">!</span> <span class="n">UINavigationController</span>
+<span class="ln"> 7</span>        <span class="kd">let</span> <span class="nv">nextViewController</span> <span class="p">=</span> <span class="n">destinationVC</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="o">!</span> <span class="n">SecondViewController</span>
+<span class="ln"> 8</span>        
+<span class="ln"> 9</span>        <span class="n">nextViewController</span><span class="p">.</span><span class="n">someProperty</span> <span class="p">=</span> <span class="n">someValue</span>
+<span class="ln">10</span>    <span class="p">}</span>
+<span class="ln">11</span>    <span class="c1">// ...</span>
+<span class="ln">12</span><span class="p">}</span></code></pre></div>
+<p>The only thing that really changes between the <code>AppDelegate</code> example and the <code>prepareForSegue</code> example is where we obtain the <code>UINavigationController</code> from. In <code>AppDelegate</code>, the navigation controller comes from the window&rsquo;s root view controller. In <code>prepareForSegue</code> it comes from the segue&rsquo;s destination view controller.</p>
+
+<p>After that, though, the process for grabbing the first child of the navigation controller is the same.</p>
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>Accessing a navigation controller&rsquo;s view controller hierarchy was just vague enough for me to write this little reference for myself, but I hope you benefited from it as well!</p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/">Sync Table View Data: NSFetchedResultsController and Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/">Swift How-To:  Setting up a Table View</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/">Beginner’s Guide to Event Kit in Swift – Requesting Permission</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/05/08/strong-weak-and-unowned-sorting-out-arc-and-swift/">Strong, Weak, and Unowned – Sorting out ARC and Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/">Clarifying Swift Access Control (Hint:  Swift Isn’t C#)</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

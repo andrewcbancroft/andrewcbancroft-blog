@@ -3,8 +3,7 @@ title: Creating Calendar Events with Event Kit and Swift
 author: Andrew
 type: blog
 date: 2016-06-02T17:37:15+00:00
-aliases:
-  - /2016/06/02/creating-calendar-events-with-event-kit-and-swift/
+url: /2016/06/02/creating-calendar-events-with-event-kit-and-swift/
 dsq_thread_id:
   - "4878515902"
 dsq_needs_sync:

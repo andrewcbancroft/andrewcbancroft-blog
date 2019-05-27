@@ -3,8 +3,7 @@ title: Fundamentals of Callbacks for Swift Developers
 author: Andrew
 type: blog
 date: 2016-02-15T18:21:33+00:00
-aliases:
-  - /2016/02/15/fundamentals-of-callbacks-for-swift-developers/
+url: /2016/02/15/fundamentals-of-callbacks-for-swift-developers/
 dsq_thread_id:
   - "4581936498"
 categories:

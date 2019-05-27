@@ -1,1 +1,488 @@
-<!DOCTYPE html><html><head><title>https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/fundamentals-of-callbacks-for-swift-developers/</title><link rel="canonical" href="https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/fundamentals-of-callbacks-for-swift-developers/"/><meta name="robots" content="noindex"><meta charset="utf-8" /><meta http-equiv="refresh" content="0; url=https://www.andrewcbancroft.com/blog/ios-development/patterns-and-practices/fundamentals-of-callbacks-for-swift-developers/" /></head></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-33022655-1');
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Fundamentals of Callbacks for Swift Developers" />
+<meta property="og:description" content="Updated on October 12, 2016 – Swift 3.0
+Callbacks: What are they? How do they work? What are they used for in practice?
+My goal in this article is to provide answers to these questions so that you have a foundational understanding of this common programming pattern in iOS development.
+
+What are callbacks? Let&rsquo;s approach the definition from a &ldquo;big picture&#8221; scenario:
+When we&rsquo;re building software, we&rsquo;re either using APIs, or building APIs, are we not?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/" />
+<meta property="article:published_time" content="2016-02-15T18:21:33&#43;00:00"/>
+<meta property="article:modified_time" content="2016-02-15T18:21:33&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Fundamentals of Callbacks for Swift Developers"/>
+<meta name="twitter:description" content="Updated on October 12, 2016 – Swift 3.0
+Callbacks: What are they? How do they work? What are they used for in practice?
+My goal in this article is to provide answers to these questions so that you have a foundational understanding of this common programming pattern in iOS development.
+
+What are callbacks? Let&rsquo;s approach the definition from a &ldquo;big picture&#8221; scenario:
+When we&rsquo;re building software, we&rsquo;re either using APIs, or building APIs, are we not?"/>
+<meta name="generator" content="Hugo 0.55.4" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Fundamentals of Callbacks for Swift Developers",
+  "url": "https:\/\/www.andrewcbancroft.com\/2016\/02\/15\/fundamentals-of-callbacks-for-swift-developers\/",
+  "wordCount": "1841",
+  "datePublished": "2016-02-15T18:21:33Z",
+  "dateModified": "2016-02-15T18:21:33Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, Callbacks"
+}
+</script>
+
+
+
+    <title>Fundamentals of Callbacks for Swift Developers</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Fundamentals of Callbacks for Swift Developers</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p><small>Updated on October 12, 2016 – Swift 3.0</small></p>
+
+<p>Callbacks: What are they? How do they work? What are they used for in practice?</p>
+
+<p>My goal in this article is to provide answers to these questions so that you have a foundational understanding of this common programming pattern in iOS development.</p>
+
+<p><a name="what-are-callbacks" class="jump-target"></a></p>
+
+<h3 id="what-are-callbacks">What are callbacks?</h3>
+
+<p>Let&rsquo;s approach the definition from a &ldquo;big picture&#8221; scenario:</p>
+
+<p>When we&rsquo;re building software, we&rsquo;re either <em>using</em> APIs, or <em>building</em> APIs, are we not? We&rsquo;re either <em>using</em> code that &ldquo;hooks into&#8221; what other developers have designed and made available to us, or we&rsquo;re <em>creating</em> code that other code will &ldquo;hook into&#8221; and interact with, even if the &ldquo;other code&#8221; is written by us in our own app.</p>
+
+<p><a name="design-api-callbacks" class="jump-target"></a></p>
+
+<h4 id="learn-by-example-designing-an-api-for-callbacks">Learn by example: Designing an API for callbacks</h4>
+
+<p>Since this is the case, let&rsquo;s put on the &ldquo;API Designer&#8221; hat for a moment and suppose that we&rsquo;re working to create a hypothetical Type called an <code>ImageSketcher</code>. One of the functions of <code>ImageSketcher</code> is called <code>sketch()</code> (parameters omitted for the moment). It will allow developers to pass it an image resource, such as a JPEG or a PNG, as one of its arguments. The function will then proceed to generate an animated sketch of that PNG for the user to view.</p>
+
+<p>In order to do the work of generating the animated sketch, <code>sketch()</code> needs to do a lot of crunching. I have no idea what it&rsquo;d take to do this in real life, honestly – let&rsquo;s just work on the premise that it&rsquo;ll take a few seconds to generate the animation so the end-user can watch it when it&rsquo;s finished.</p>
+
+<p>In situations like this, it&rsquo;d be nice to design <code>ImageSketcher</code> where the start and end of the process are decoupled:</p>
+
+<p>Pass off the image. Let it do its thing to generate the animation. When it&rsquo;s finished, &ldquo;hook back in&#8221; and respond to the knowledge that the animation generation is complete. At that point, we could ask the end-user, &ldquo;Hey, your sketch is done! Want to watch it now?&#8221;</p>
+
+<p>This particular example centers on a strategy that uses &ldquo;asynchronous programming&#8221; techniques. It&rsquo;s often done to boost app performance and/or responsiveness.</p>
+
+<p>During that middle part where we&rsquo;re &ldquo;disconnected&#8221; from the <code>ImageSketcher's</code> <code>sketch()</code> function, control of the app wouldn&rsquo;t be tied up. Folks could continue to interact with the app.</p>
+
+<p>From a developer&rsquo;s point of view, he/she can program against the API by calling the function, knowing that at [some unknown point in the future], it will finish, <strong>and that he/she will have the opportunity at that time to &ldquo;hook back in&#8221; and respond to that completion event</strong>.</p>
+
+<p>That last bit is critical. Giving other developers the opportunity to re-insert themselves with custom application logic when the asynchronous task ends is very important as an API designer.</p>
+
+<p>Exactly what you as an API designer communicate back to the caller of your API is up to you, but put yourself in the <em>client</em> developer&rsquo;s shoes for a moment:</p>
+
+<p>Wouldn&rsquo;t it be nice to know if something went wrong, or if data (the completed animation, for example) came out of that <code>sketch()'s</code> work? That&rsquo;s exactly the kind of information that we&rsquo;d expect an API designer would provide us with this completion event.</p>
+
+<p>So&#8230; just what are the options could we give callers of this method to &ldquo;hook-in&#8221; and know that the work is done?</p>
+
+<p><a name="hook-in-options" class="jump-target"></a></p>
+
+<h5 id="hook-in-8221-options">&ldquo;Hook-in&#8221; options</h5>
+
+<p>In scenarios like this, Swift developers have about 3 options to choose from:</p>
+
+<ul>
+<li>Use <a href="https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/">NSNotificationCenter</a> to alert &ldquo;subscribers&#8221; that the <code>sketch()</code> function has completed its job. I wrote about this option in <a href="https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/">Fundamentals of NSNotificationCenter in Swift</a></p></li>
+
+<li><p>Use the <a href="https://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/">delegate pattern</a> to create a contract between the <code>ImageSketcher</code> and the caller of the <code>sketch()</code> function. When <code>sketch()</code> has completed its task, the appropriate <em>delegate</em> method will be called. I wrote about this works in <a href="https://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/">How Delegation Works – A Swift Developer’s Guide</a></p></li>
+
+<li><p><strong>Use a callback</strong></p></li>
+</ul>
+
+<p>So callbacks are used as another way for one piece of code to communicate with another piece of code somewhere else in the app.</p>
+
+<p><a name="how-callbacks-work" class="jump-target"></a></p>
+
+<h3 id="how-do-callbacks-work">How do callbacks work?</h3>
+
+<p>Here is a brief overview of the communication interaction using our hypothetical <code>ImageSketcher</code> as a working example:</p>
+
+<p>1) An API designer has created the <code>sketch(image:completion:)</code> function, and has chosen to accept a completion &ldquo;callback&#8221; as the means of communicating the fact that the animation has been generated and is ready to show the end-user.</p>
+
+<p>2) <strong>Data</strong>, such as the completed sketch animation instance will be delivered through the completion callback&rsquo;s parameter(s). The <code>completion</code> parameter of our <code>sketch()</code> function will have a signature that client developers must adhere to in order to facilitate the delivery of that data.</p>
+
+<p>3) A client developer writes up a routine (a function or closure) and passes it as the completion parameter&rsquo;s argument. The function/closure that he/she writes will have a list of parameters that matches up to what the API designer required.</p>
+
+<p>4) When <code>sketch()</code> is finished generating the sketch, the designer of the API has programmed <em>his/her function</em> to call the callback that <em>you pass in</em>. The API designer will pass along any data that was generated as arguments to the callback function&rsquo;s parameters.</p>
+
+<p>5) The client developer&rsquo;s callback logic executes.</p>
+
+<p>Callbacks are functions that often take the form of a <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID94">closure</a> (basically an in-line function with no name that&rsquo;s passed as a parameter to <em>another</em> function), but they could technically be a named function.</p>
+
+<p>Perhaps it&rsquo;s easiest to see in code itself. Here&rsquo;s a skeleton view of what that looks like:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// API Designer World</span>
+<span class="ln"> 2</span><span class="kd">struct</span> <span class="nc">SketchAnimation</span> <span class="p">{</span>
+<span class="ln"> 3</span>    <span class="c1">// represents some fully-generated animation that&#39;s ready to play by the end user</span>
+<span class="ln"> 4</span><span class="p">}</span>
+<span class="ln"> 5</span>
+<span class="ln"> 6</span><span class="kd">struct</span> <span class="nc">ImageSketcher</span> <span class="p">{</span>
+<span class="ln"> 7</span>    <span class="kd">func</span> <span class="nf">sketch</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">UIImage</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="p">(</span><span class="kc">_</span> <span class="n">sketchAnimation</span><span class="p">:</span> <span class="n">SketchAnimation</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln"> 8</span>        <span class="c1">// do some crunching to create the SketchAnimation instance...</span>
+<span class="ln"> 9</span>        <span class="kd">let</span> <span class="nv">animation</span> <span class="p">=</span> <span class="n">SketchAnimation</span><span class="p">()</span>
+<span class="ln">10</span>        
+<span class="ln">11</span>        <span class="c1">// invoke the completion callback</span>
+<span class="ln">12</span>        <span class="c1">// pass along the completed sketch animation instance</span>
+<span class="ln">13</span>        <span class="n">completion</span><span class="p">(</span><span class="n">animation</span><span class="p">)</span>
+<span class="ln">14</span>    <span class="p">}</span>
+<span class="ln">15</span><span class="p">}</span>
+<span class="ln">16</span>
+<span class="ln">17</span><span class="c1">// ---------------------------------------------------------------------</span>
+<span class="ln">18</span>
+<span class="ln">19</span><span class="c1">// Client Developer World</span>
+<span class="ln">20</span><span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+<span class="ln">21</span>    <span class="c1">// ...</span>
+<span class="ln">22</span>    
+<span class="ln">23</span>    <span class="c1">// end-user interacts with the app somehow to create an image sketch animation</span>
+<span class="ln">24</span>    <span class="c1">// when they do, this function is called...</span>
+<span class="ln">25</span>    <span class="kd">func</span> <span class="nf">createSketchAnimation</span><span class="p">(</span><span class="n">imageToSketch</span><span class="p">:</span> <span class="n">UIImage</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">26</span>        <span class="kd">let</span> <span class="nv">sketcher</span> <span class="p">=</span> <span class="n">ImageSketcher</span><span class="p">()</span>
+<span class="ln">27</span>        
+<span class="ln">28</span>        <span class="n">sketcher</span><span class="p">.</span><span class="n">sketch</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">imageToSketch</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="p">{(</span><span class="n">animation</span><span class="p">:</span> <span class="n">SketchAnimation</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span> <span class="k">in</span>
+<span class="ln">29</span>            <span class="c1">// This is the callback.  It&#39;s a closure, passed as the argument to the sketch function&#39;s completion parameter</span>
+<span class="ln">30</span>            
+<span class="ln">31</span>            <span class="c1">// Ask the end-user if they&#39;d like to view the completed animation now...</span>
+<span class="ln">32</span>            <span class="c1">// You as a develoepr have access to the completed animation through the animation parameter to this closure</span>
+<span class="ln">33</span>        <span class="p">})</span>
+<span class="ln">34</span>    <span class="p">}</span>
+<span class="ln">35</span>    
+<span class="ln">36</span>    <span class="c1">// ...</span>
+<span class="ln">37</span><span class="p">}</span></code></pre></div>
+<p>You&rsquo;ll notice a couple of things&#8230;</p>
+
+<p><strong>First</strong>, I&rsquo;ve separated the two &ldquo;worlds&#8221; that exist: &ldquo;API Designer World&#8221; and &ldquo;Client Developer World&#8221;. Hopefully seeing both in action can give you the most complete picture of what&rsquo;s going on with callbacks.</p>
+
+<p>In &ldquo;API Designer World&#8221;, we&rsquo;ve got the <code>ImageSketcher</code> and its implementation.</p>
+
+<p>In &ldquo;Client Developer World&#8221;, we&rsquo;ve got someone <em>using</em> an instance of <code>ImageSketcher</code>.</p>
+
+<p><strong>Second</strong>, notice the interaction. As an API designer, I was thinking, &ldquo;Hey, when my sketching process is complete, I want to let the caller know that it&rsquo;s finished and hand them the completed <code>SketchAnimation</code> instance. To do that, I&rsquo;ll need them to pass me a function that I can hand it off to via a parameter&#8221;.</p>
+
+<p>As a client developer, I&rsquo;m thinking, &ldquo;Okay, I&rsquo;m going to call <code>sketch()</code>, but how am I going to know when it&rsquo;s done and how will I get the animation? Oh! I see – I need to give it a completion closure (a callback), and they&rsquo;ll hand me the completed <code>SketchAnimation</code> instance through my closure&rsquo;s parameter. Sweet!&#8221;</p>
+
+<p>I&rsquo;m hoping the &ldquo;thinking out loud&#8221; here helps you piece it together.</p>
+
+<p><a name="examples-ios-sdk" class="jump-target"></a></p>
+
+<h3 id="examples-from-the-ios-sdk">Examples from the iOS SDK</h3>
+
+<p>So how about a few <em>real</em> examples, say, from the iOS SDK. Where are callbacks used there?</p>
+
+<p><a name="uialertcontroller" class="jump-target"></a></p>
+
+<h4 id="uialertcontroller">UIAlertController</h4>
+
+<p>A really simple example of callbacks being used in the wild is when we work with <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAlertController_class/"><code>UIAlertControllers</code></a>. Take a look at this example:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">let</span> <span class="nv">alertController</span> <span class="p">=</span> <span class="n">UIAlertController</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;My Alert&#34;</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="s">&#34;A Message&#34;</span><span class="p">,</span> <span class="n">preferredStyle</span><span class="p">:</span> <span class="n">UIAlertControllerStyle</span><span class="p">.</span><span class="n">alert</span><span class="p">)</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">let</span> <span class="nv">OKAction</span> <span class="p">=</span> <span class="n">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;OK&#34;</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">UIAlertActionStyle</span><span class="p">.</span><span class="k">default</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="p">{(</span><span class="n">action</span><span class="p">:</span> <span class="n">UIAlertAction</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span> <span class="k">in</span>
+<span class="ln"> 4</span>    <span class="c1">// Do something based on the user tapping this action button</span>
+<span class="ln"> 5</span>    
+<span class="ln"> 6</span>    <span class="c1">// Notice that we get an instance of the UIAlertAction that was tapped if we need it</span>
+<span class="ln"> 7</span><span class="p">})</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span><span class="n">alertController</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">OKAction</span><span class="p">)</span>
+<span class="ln">10</span>
+<span class="ln">11</span><span class="kc">self</span><span class="p">.</span><span class="n">present</span><span class="p">(</span><span class="n">alertController</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="ln">12</span><span class="c1">// We could have provided a completion callback here, too,</span>
+<span class="ln">13</span><span class="c1">// but we didn&#39;t need to respond to the view controller&#39;s presentation, so we passed nil</span></code></pre></div>
+<p>So the <code>UIAlertAction</code> is actually the thing that takes the callback (the <code>handler</code> parameter). There&rsquo;s also an example on a View Controller&rsquo;s <code>present()</code> function. Both are intended to communicate something back to the caller.</p>
+
+<p>In the case of the <code>UIAlertAction</code>, the <code>handler</code> will be the logic to handle the user&rsquo;s tapping on that specific alert button.</p>
+
+<p>In the case of the <code>present</code> call, Apple has given us the opportunity to &ldquo;hook in&#8221; to the presentation event and know when it&rsquo;s complete, in case we need to perform additional logic at that moment.</p>
+
+<p><a name="urlsession" class="jump-target"></a></p>
+
+<h4 id="urlsession">URLSession</h4>
+
+<p>The world of HTTP is inherently asynchronous, so you&rsquo;d expect to see some kind of pattern employed to deal with the &ldquo;disconnectedness&#8221; of the start and finish of a process, such as making an HTTP request.</p>
+
+<p><code>URLSession</code> encapsulates certain HTTP actions, such as retrieving the contents of a URL, in instances called <code>URLSessionDataTask</code>. How does it communicate the fact that the HTTP request is complete, along with the data contained in the response? You guessed it: A callback.</p>
+
+<p>Take a look at this function signature from the <a href="https://developer.apple.com/reference/foundation/urlsession/1410330-datatask">Apple Developer Documentation on URLSession</a>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">func</span> <span class="nf">dataTask</span><span class="p">(</span><span class="n">with</span> <span class="n">url</span><span class="p">:</span> <span class="n">URL</span><span class="p">,</span> 
+<span class="ln">2</span>              <span class="n">completionHandler</span><span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="n">Data</span><span class="p">?,</span> <span class="n">URLResponse</span><span class="p">?,</span> <span class="n">Error</span><span class="p">?)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">URLSessionDataTask</span></code></pre></div>
+<p>The <code>completionHandler</code> parameter of this function is the interface that the API designers have created for delivering the resulting payload of the HTTP request when it&rsquo;s finished and ready to hand off for further processing.</p>
+
+<p>Client developers of this API will be expected to make the call to <code>dataTask(with:completionHandler:)</code> and supply it a completion callback to know when things are complete.</p>
+
+<p><a name="animations" class="jump-target"></a></p>
+
+<h4 id="animations">Animations</h4>
+
+<p>You&rsquo;ll see <em>all kinds</em> of <code>completion</code> callbacks sprinkled throughout some of the simpler iOS animation APIs.</p>
+
+<p>If you take a look at the following function signatures from the <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/#//apple_ref/occ/clm/UIView/animateWithDuration:animations:">Apple Developer Documentation on UIViews</a>, you&rsquo;ll see the <code>completion</code> parameters to many of these functions:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">transition</span><span class="p">(</span><span class="n">with</span><span class="p">:</span><span class="n">duration</span><span class="p">:</span><span class="n">options</span><span class="p">:</span><span class="n">animations</span><span class="p">:</span><span class="n">completion</span><span class="p">:)</span>
+<span class="ln">2</span><span class="n">transition</span><span class="p">(</span><span class="n">from</span><span class="p">:</span><span class="n">to</span><span class="p">:</span><span class="n">duration</span><span class="p">:</span><span class="n">options</span><span class="p">:</span><span class="n">completion</span><span class="p">:)</span>
+<span class="ln">3</span><span class="n">animateKeyframes</span><span class="p">(</span><span class="n">withDuration</span><span class="p">:</span><span class="n">delay</span><span class="p">:</span><span class="n">options</span><span class="p">:</span><span class="n">animations</span><span class="p">:</span><span class="n">completion</span><span class="p">:)</span>
+<span class="ln">4</span><span class="n">addKeyframe</span><span class="p">(</span><span class="n">withRelativeStartTime</span><span class="p">:</span><span class="n">relativeDuration</span><span class="p">:</span><span class="n">animations</span><span class="p">:)</span>
+<span class="ln">5</span><span class="n">perform</span><span class="p">(</span><span class="kc">_</span><span class="p">:</span><span class="n">on</span><span class="p">:</span><span class="n">options</span><span class="p">:</span><span class="n">animations</span><span class="p">:</span><span class="n">completion</span><span class="p">:)</span>
+<span class="ln">6</span><span class="n">animate</span><span class="p">(</span><span class="n">withDuration</span><span class="p">:</span><span class="n">delay</span><span class="p">:</span><span class="n">usingSpringWithDamping</span><span class="p">:</span><span class="n">initialSpringVelocity</span><span class="p">:</span><span class="n">options</span><span class="p">:</span><span class="n">animations</span><span class="p">:</span><span class="n">completion</span><span class="p">:)</span></code></pre></div>
+<h3 id="wrapping-up">Wrapping Up</h3>
+
+<p>Believe it or not, the usage of callbacks is one of the less-complicated ways of communicating between parts of code.</p>
+
+<p>My goal in this article was to show all of the sides and perspectives and players to give you insight into how this communication takes place.</p>
+
+<p>Now that the foundations are laid, it is my hope that you&rsquo;ll be able to more confidently use callbacks and know what&rsquo;s happening as you encounter them in your Swift code!</p>
+
+<p><a name="related" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/" title="What is Delegation? – A Swift Developer’s Guide">What is Delegation? – A Swift Developer’s Guide</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/" title="How Delegation Works – A Swift Developer’s Guide">How Delegation Works – A Swift Developer’s Guide</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/" title="Fundamentals of NSNotificationCenter in Swift">Fundamentals of NSNotificationCenter in Swift</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/">Managing Xcode Project Dependencies with CocoaPods</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/">Swift Framework Woes – Unresolved Identifier? No Member?</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/">Working with Unwind Segues Programmatically in Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/11/23/get-social-with-swift-posting-to-facebook-and-twitter/">Get Social With Swift – Posting to Facebook and Twitter</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/11/03/creating-trust-able-unit-tests-in-swift/">Creating Trust-able Unit Tests in Swift</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 146 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

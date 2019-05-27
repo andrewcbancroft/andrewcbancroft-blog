@@ -3,8 +3,7 @@ title: Distinguishing Between Multiple UIActionSheets with Swift
 author: Andrew
 type: blog
 date: 2014-11-17T04:17:39+00:00
-aliases:
-  - /2014/11/16/distinguishing-between-multiple-uiactionsheets-with-swift/
+url: /2014/11/16/distinguishing-between-multiple-uiactionsheets-with-swift/
 dsq_thread_id:
   - "3232665050"
 categories:

@@ -3,8 +3,7 @@ title: Solving React Native’s “No bundle url present” Error
 author: Andrew
 type: blog
 date: 2017-04-22T17:49:11+00:00
-aliases:
-  - /2017/04/22/solving-react-natives-no-bundle-url-present-error/
+url: /2017/04/22/solving-react-natives-no-bundle-url-present-error/
 dsq_thread_id:
   - "5750304253"
 categories:

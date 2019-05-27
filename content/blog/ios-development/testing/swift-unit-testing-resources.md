@@ -3,8 +3,7 @@ title: Swift Unit Testing Resources
 author: Andrew
 type: blog
 date: 2014-12-19T12:00:33+00:00
-aliases:
-  - /2014/12/19/swift-unit-testing-resources/
+url: /2014/12/19/swift-unit-testing-resources/
 dsq_thread_id:
   - "3339968447"
 categories:

@@ -3,8 +3,7 @@ title: DataStage Range Lookup Failure – What Gives?
 author: Andrew
 type: blog
 date: 2013-03-25T17:52:13+00:00
-aliases:
-  - /2013/03/25/datastage-range-lookup-failure-what-gives/
+url: /2013/03/25/datastage-range-lookup-failure-what-gives/
 dsq_thread_id:
   - "2683953782"
 categories:

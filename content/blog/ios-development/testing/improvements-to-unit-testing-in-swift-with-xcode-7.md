@@ -3,8 +3,7 @@ title: Improvements to Unit Testing in Swift with Xcode 7
 author: Andrew
 type: blog
 date: 2015-06-10T17:43:09+00:00
-aliases:
-  - /2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/
+url: /2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/
 dsq_thread_id:
   - "3837810473"
 categories:

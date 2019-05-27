@@ -3,8 +3,7 @@ title: Adding Buttons to the Navigation Bar with Storyboards
 author: Andrew
 type: blog
 date: 2016-04-14T18:20:41+00:00
-aliases:
-  - /2016/04/14/adding-buttons-to-the-navigation-bar-with-storyboards/
+url: /2016/04/14/adding-buttons-to-the-navigation-bar-with-storyboards/
 dsq_thread_id:
   - "4747275624"
 categories:

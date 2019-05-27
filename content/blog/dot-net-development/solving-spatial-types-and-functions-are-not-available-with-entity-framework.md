@@ -3,8 +3,7 @@ title: Solving ‘Spatial types and functions are not available’ with Entity F
 author: Andrew
 type: blog
 date: 2017-03-27T16:38:33+00:00
-aliases:
-  - /2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/
+url: /2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/
 dsq_thread_id:
   - "5670890129"
 categories:

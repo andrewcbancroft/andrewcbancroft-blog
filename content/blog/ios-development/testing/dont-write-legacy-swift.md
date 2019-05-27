@@ -3,8 +3,7 @@ title: Don’t Write Legacy Swift
 author: Andrew
 type: blog
 date: 2014-12-10T12:00:51+00:00
-aliases:
-  - /2014/12/10/dont-write-legacy-swift/
+url: /2014/12/10/dont-write-legacy-swift/
 dsq_thread_id:
   - "3309389611"
 categories:

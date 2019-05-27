@@ -3,8 +3,7 @@ title: 7 Reasons You Should Write About Swift
 author: Andrew
 type: blog
 date: 2014-10-23T12:00:13+00:00
-aliases:
-  - /2014/10/23/7-reasons-you-should-write-about-swift/
+url: /2014/10/23/7-reasons-you-should-write-about-swift/
 dsq_thread_id:
   - "3142436727"
 categories:

@@ -3,8 +3,7 @@ title: Dissecting 10 Read 10 Said – My New Swift iOS App
 author: Andrew
 type: blog
 date: 2015-07-23T03:57:33+00:00
-aliases:
-  - /2015/07/22/dissecting-10-read-10-said-my-new-swift-ios-app/
+url: /2015/07/22/dissecting-10-read-10-said-my-new-swift-ios-app/
 dsq_thread_id:
   - "3961573890"
 categories:

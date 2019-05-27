@@ -3,8 +3,7 @@ title: Creating Trust-able Unit Tests in Swift
 author: Andrew
 type: blog
 date: 2015-11-04T02:42:08+00:00
-aliases:
-  - /2015/11/03/creating-trust-able-unit-tests-in-swift/
+url: /2015/11/03/creating-trust-able-unit-tests-in-swift/
 dsq_thread_id:
   - "4287714074"
 categories:

@@ -3,8 +3,7 @@ title: DotNetZip – Solving Mac Decompression Issues
 author: Andrew
 type: blog
 date: 2013-12-28T20:55:27+00:00
-aliases:
-  - /2013/12/28/dotnetzip-solving-mac-decompression-issues/
+url: /2013/12/28/dotnetzip-solving-mac-decompression-issues/
 dsq_thread_id:
   - "2698608455"
 categories:

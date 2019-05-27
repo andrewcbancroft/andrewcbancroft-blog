@@ -3,8 +3,7 @@ title: Replace Magic Strings with Enumerations in Swift
 author: Andrew
 type: blog
 date: 2014-09-03T01:55:54+00:00
-aliases:
-  - /2014/09/02/replace-magic-strings-with-enumerations-in-swift/
+url: /2014/09/02/replace-magic-strings-with-enumerations-in-swift/
 dsq_thread_id:
   - "2982987981"
 categories:

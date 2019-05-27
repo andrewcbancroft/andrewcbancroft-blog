@@ -3,8 +3,7 @@ title: What is Delegation? – A Swift Developer’s Guide
 author: Andrew
 type: blog
 date: 2015-03-27T03:29:01+00:00
-aliases:
-  - /2015/03/26/what-is-delegation-a-swift-developers-guide/
+url: /2015/03/26/what-is-delegation-a-swift-developers-guide/
 dsq_thread_id:
   - "3630506788"
 categories:

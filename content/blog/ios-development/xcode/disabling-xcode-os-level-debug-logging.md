@@ -3,8 +3,7 @@ title: Disabling Xcode’s OS-Level Debug Logging
 author: Andrew
 type: blog
 date: 2016-10-28T05:06:19+00:00
-aliases:
-  - /2016/10/28/disabling-xcode-os-level-debug-logging/
+url: /2016/10/28/disabling-xcode-os-level-debug-logging/
 dsq_thread_id:
   - "5259438419"
 categories:

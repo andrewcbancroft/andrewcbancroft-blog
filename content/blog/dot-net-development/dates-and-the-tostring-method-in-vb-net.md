@@ -3,8 +3,7 @@ title: Date, Date?, and the ToString Method in VB.Net
 author: Andrew
 type: blog
 date: 2014-10-03T17:28:05+00:00
-aliases:
-  - /2014/10/03/dates-and-the-tostring-method-in-vb-net/
+url: /2014/10/03/dates-and-the-tostring-method-in-vb-net/
 dsq_thread_id:
   - "3079867169"
 categories:

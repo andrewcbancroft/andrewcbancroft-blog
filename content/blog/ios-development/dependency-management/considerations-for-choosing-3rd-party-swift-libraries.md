@@ -3,8 +3,7 @@ title: Considerations for Choosing 3rd Party Swift Libraries
 author: Andrew
 type: blog
 date: 2015-10-27T18:04:09+00:00
-aliases:
-  - /2015/10/27/considerations-for-choosing-3rd-party-swift-libraries/
+url: /2015/10/27/considerations-for-choosing-3rd-party-swift-libraries/
 dsq_thread_id:
   - "4265154671"
 categories:

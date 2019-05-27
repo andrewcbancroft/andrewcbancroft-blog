@@ -3,8 +3,7 @@ title: The 5 W’s of Swift Extensions
 author: Andrew
 type: blog
 date: 2014-11-03T19:04:19+00:00
-aliases:
-  - /2014/11/03/the-5-ws-of-swift-extensions/
+url: /2014/11/03/the-5-ws-of-swift-extensions/
 dsq_thread_id:
   - "3187869051"
 categories:

@@ -3,8 +3,7 @@ title: What in the World is an “Escaping Closure” in Swift?
 author: Andrew
 type: blog
 date: 2017-04-26T14:41:07+00:00
-aliases:
-  - /2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/
+url: /2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/
 featured_image: /wp-content/uploads/2017/04/Escape.jpg
 dsq_thread_id:
   - "5761561384"

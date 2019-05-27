@@ -3,8 +3,7 @@ title: 'Force Unwrapping Swift Optionals:  Code Smell!'
 author: Andrew
 type: blog
 date: 2016-06-14T03:54:57+00:00
-aliases:
-  - /2016/06/13/force-unwrapping-swift-optionals-code-smell/
+url: /2016/06/13/force-unwrapping-swift-optionals-code-smell/
 dsq_thread_id:
   - "4908529277"
 categories:

@@ -3,8 +3,7 @@ title: 'SQL Sever Synonyms, Entity Framework, & Integrated Security'
 author: Andrew
 type: blog
 date: 2015-05-01T17:44:31+00:00
-aliases:
-  - /2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/
+url: /2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/
 dsq_thread_id:
   - "3728582714"
 categories:

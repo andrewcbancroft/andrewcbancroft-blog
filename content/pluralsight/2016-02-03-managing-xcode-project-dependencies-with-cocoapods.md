@@ -3,8 +3,7 @@ title: Managing Xcode Project Dependencies with CocoaPods
 author: Andrew
 type: blog
 date: 2016-02-03T18:23:49+00:00
-aliases:
-  - /2016/02/03/managing-xcode-project-dependencies-with-cocoapods/
+url: /2016/02/03/managing-xcode-project-dependencies-with-cocoapods/
 dsq_thread_id:
   - "4548814678"
 categories:

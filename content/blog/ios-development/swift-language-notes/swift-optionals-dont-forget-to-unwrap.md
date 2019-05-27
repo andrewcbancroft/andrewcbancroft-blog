@@ -3,8 +3,7 @@ title: 'Swift Optionals?  Don’t Forget to Unwrap!'
 author: Andrew
 type: blog
 date: 2014-07-26T02:23:53+00:00
-aliases:
-  - /2014/07/25/swift-optionals-dont-forget-to-unwrap/
+url: /2014/07/25/swift-optionals-dont-forget-to-unwrap/
 spacious_page_layout:
   - default_layout
 dsq_thread_id:

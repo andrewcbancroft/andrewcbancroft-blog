@@ -3,8 +3,7 @@ title: Send Text Message In-App – Using MFMessageComposeViewController with Sw
 author: Andrew
 type: blog
 date: 2014-10-28T11:00:37+00:00
-aliases:
-  - /2014/10/28/send-text-message-in-app-using-mfmessagecomposeviewcontroller-with-swift/
+url: /2014/10/28/send-text-message-in-app-using-mfmessagecomposeviewcontroller-with-swift/
 dsq_thread_id:
   - "3163852894"
 categories:

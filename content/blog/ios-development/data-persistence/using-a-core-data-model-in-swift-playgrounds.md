@@ -3,8 +3,7 @@ title: Using a Core Data Model in Swift Playgrounds
 author: Andrew
 type: blog
 date: 2016-07-10T20:48:54+00:00
-aliases:
-  - /2016/07/10/using-a-core-data-model-in-swift-playgrounds/
+url: /2016/07/10/using-a-core-data-model-in-swift-playgrounds/
 dsq_thread_id:
   - "4975351771"
 categories:

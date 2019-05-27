@@ -3,8 +3,7 @@ title: Rotate Animation in Swift
 author: Andrew
 type: blog
 date: 2014-10-16T02:57:24+00:00
-aliases:
-  - /2014/10/15/rotate-animation-in-swift/
+url: /2014/10/15/rotate-animation-in-swift/
 dsq_thread_id:
   - "3121520029"
 categories:

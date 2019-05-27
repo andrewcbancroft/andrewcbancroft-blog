@@ -3,8 +3,7 @@ title: 'Analyzing Swift Protocol Extensions and C# Abstract Classes'
 author: Andrew
 type: blog
 date: 2015-08-07T03:52:25+00:00
-aliases:
-  - /2015/08/06/analyzing-swift-protocol-extensions-and-c-abstract-classes/
+url: /2015/08/06/analyzing-swift-protocol-extensions-and-c-abstract-classes/
 dsq_thread_id:
   - "4010525374"
 categories:

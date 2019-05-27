@@ -3,8 +3,7 @@ title: Getting Started with Unit Testing in Swift
 author: Andrew
 type: blog
 date: 2014-12-29T12:00:50+00:00
-aliases:
-  - /2014/12/29/getting-started-unit-testing-swift/
+url: /2014/12/29/getting-started-unit-testing-swift/
 dsq_thread_id:
   - "3369835519"
 categories:

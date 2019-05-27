@@ -3,8 +3,7 @@ title: Contributing My Share of Bytes
 author: Andrew
 type: blog
 date: 2012-06-04T03:16:33+00:00
-aliases:
-  - /2012/06/03/contributing-my-share-of-bytes/
+url: /2012/06/03/contributing-my-share-of-bytes/
 dsq_thread_id:
   - "2695410993"
 categories:

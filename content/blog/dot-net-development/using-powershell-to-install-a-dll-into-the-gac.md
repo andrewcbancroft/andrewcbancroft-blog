@@ -3,8 +3,7 @@ title: Using PowerShell to Install a DLL into the GAC
 author: Andrew
 type: blog
 date: 2015-12-16T17:45:55+00:00
-aliases:
-  - /2015/12/16/using-powershell-to-install-a-dll-into-the-gac/
+url: /2015/12/16/using-powershell-to-install-a-dll-into-the-gac/
 dsq_thread_id:
   - "4409443667"
 categories:

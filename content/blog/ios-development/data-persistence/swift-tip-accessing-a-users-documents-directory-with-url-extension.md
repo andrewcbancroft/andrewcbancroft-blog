@@ -3,8 +3,7 @@ title: Swift Tip – Accessing a User’s Documents Directory with URL Extension
 author: Andrew
 type: blog
 date: 2017-04-10T18:01:23+00:00
-aliases:
-  - /2017/04/10/swift-tip-accessing-a-users-documents-directory-with-url-extension/
+url: /2017/04/10/swift-tip-accessing-a-users-documents-directory-with-url-extension/
 dsq_thread_id:
   - "5713730623"
 categories:

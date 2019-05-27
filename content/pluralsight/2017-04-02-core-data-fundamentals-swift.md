@@ -3,8 +3,7 @@ title: Core Data Fundamentals with Swift
 author: Andrew
 type: blog
 date: 2017-04-02T22:04:02+00:00
-aliases:
-  - /2017/04/02/core-data-fundamentals-swift/
+url: /2017/04/02/core-data-fundamentals-swift/
 dsq_thread_id:
   - "5690365764"
 categories:

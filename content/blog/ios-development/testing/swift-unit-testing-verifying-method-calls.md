@@ -3,8 +3,7 @@ title: Swift Unit Testing – Verifying Method Calls
 author: Andrew
 type: blog
 date: 2014-12-22T13:09:28+00:00
-aliases:
-  - /2014/12/22/swift-unit-testing-verifying-method-calls/
+url: /2014/12/22/swift-unit-testing-verifying-method-calls/
 dsq_thread_id:
   - "3348967866"
 categories:

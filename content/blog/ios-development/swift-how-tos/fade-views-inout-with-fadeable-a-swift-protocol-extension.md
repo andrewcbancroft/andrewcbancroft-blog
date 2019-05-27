@@ -3,8 +3,7 @@ title: Fade Views In/Out with Fadeable – A Swift Protocol Extension
 author: Andrew
 type: blog
 date: 2016-02-22T19:07:27+00:00
-aliases:
-  - /2016/02/22/fade-views-inout-with-fadeable-a-swift-protocol-extension/
+url: /2016/02/22/fade-views-inout-with-fadeable-a-swift-protocol-extension/
 dsq_thread_id:
   - "4602239888"
 categories:

@@ -3,8 +3,7 @@ title: 'Receipt Validation –  Parse and Decode a Receipt with Swift'
 author: Andrew
 type: blog
 date: 2017-07-28T03:41:33+00:00
-aliases:
-  - /2017/07/27/receipt-validation-parsing-a-receipt-with-swift/
+url: /2017/07/27/receipt-validation-parsing-a-receipt-with-swift/
 dsq_thread_id:
   - "6021747553"
 categories:

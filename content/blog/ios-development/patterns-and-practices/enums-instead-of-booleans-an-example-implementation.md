@@ -3,8 +3,7 @@ title: Enums Instead of Booleans – An Example Implementation
 author: Andrew
 type: blog
 date: 2015-04-01T12:00:52+00:00
-aliases:
-  - /2015/04/01/enums-instead-of-booleans-an-example-implementation/
+url: /2015/04/01/enums-instead-of-booleans-an-example-implementation/
 dsq_thread_id:
   - "3645855326"
 categories:

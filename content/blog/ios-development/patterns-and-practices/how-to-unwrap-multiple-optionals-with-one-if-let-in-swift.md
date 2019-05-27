@@ -3,8 +3,7 @@ title: How to Unwrap Multiple Optionals with One If-Let in Swift
 author: Andrew
 type: blog
 date: 2017-04-19T17:25:41+00:00
-aliases:
-  - /2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/
+url: /2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/
 dsq_thread_id:
   - "5741025689"
 categories:

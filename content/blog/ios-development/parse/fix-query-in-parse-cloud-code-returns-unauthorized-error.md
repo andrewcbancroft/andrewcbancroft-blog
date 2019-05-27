@@ -3,8 +3,7 @@ title: FIX – Query in Parse Cloud Code Returns Unauthorized Error
 author: Andrew
 type: blog
 date: 2016-04-06T04:27:49+00:00
-aliases:
-  - /2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/
+url: /2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/
 dsq_thread_id:
   - "4723786776"
 categories:

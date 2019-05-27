@@ -3,8 +3,7 @@ title: 'Working with Swift:  Adopt a Protocol or Pass a Function?'
 author: Andrew
 type: blog
 date: 2016-05-05T17:59:16+00:00
-aliases:
-  - /2016/05/05/working-with-swift-adopt-a-protocol-or-pass-a-function/
+url: /2016/05/05/working-with-swift-adopt-a-protocol-or-pass-a-function/
 dsq_thread_id:
   - "4802920353"
 categories:

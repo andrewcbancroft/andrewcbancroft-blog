@@ -3,8 +3,7 @@ title: Unit Testing Model Layer with Core Data and Swift
 author: Andrew
 type: blog
 date: 2015-01-13T13:00:37+00:00
-aliases:
-  - /2015/01/13/unit-testing-model-layer-core-data-swift/
+url: /2015/01/13/unit-testing-model-layer-core-data-swift/
 dsq_thread_id:
   - "3415489454"
 categories:

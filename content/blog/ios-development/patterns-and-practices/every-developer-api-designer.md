@@ -3,8 +3,7 @@ title: Every Developer is an API Designer
 author: Andrew
 type: blog
 date: 2017-04-25T13:35:04+00:00
-aliases:
-  - /2017/04/25/every-developer-api-designer/
+url: /2017/04/25/every-developer-api-designer/
 dsq_thread_id:
   - "5758158260"
 categories:

@@ -3,8 +3,7 @@ title: Send Email In-App – Using MFMailComposeViewController with Swift
 author: Andrew
 type: blog
 date: 2014-08-26T03:48:30+00:00
-aliases:
-  - /2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/
+url: /2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/
 dsq_thread_id:
   - "2959440040"
 categories:

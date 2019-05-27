@@ -3,8 +3,7 @@ title: Why Do We Need to Annotate Escaping Closures in Swift?
 author: Andrew
 type: blog
 date: 2017-05-11T17:58:46+00:00
-aliases:
-  - /2017/05/11/why-do-we-need-to-annotate-escaping-closures-in-swift/
+url: /2017/05/11/why-do-we-need-to-annotate-escaping-closures-in-swift/
 featured_image: /wp-content/uploads/2017/05/WhyAnnotateEscapingClosures.jpg
 dsq_thread_id:
   - "5808061893"

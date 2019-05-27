@@ -3,8 +3,7 @@ title: Custom UITableViewCell for Text Input in Swift
 author: Andrew
 type: blog
 date: 2015-02-12T13:00:50+00:00
-aliases:
-  - /2015/02/12/custom-uitableviewcell-text-input-swift/
+url: /2015/02/12/custom-uitableviewcell-text-input-swift/
 dsq_thread_id:
   - "3509273318"
 categories:
