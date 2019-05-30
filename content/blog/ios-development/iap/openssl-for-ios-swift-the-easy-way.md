@@ -1,5 +1,5 @@
 ---
-title: 'OpenSSL for iOS & Swift the Easy Way'
+title: 'OpenSSL for iOS and Swift the Easy Way'
 author: Andrew
 type: blog
 date: 2015-09-22T04:39:28+00:00

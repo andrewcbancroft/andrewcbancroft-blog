@@ -1,5 +1,5 @@
 ---
-title: 'Removing Chart Gridlines & Plot Area Background in Report Studio'
+title: 'Removing Chart Gridlines and Plot Area Background in Report Studio'
 author: Andrew
 type: blog
 date: 2013-03-05T16:48:20+00:00

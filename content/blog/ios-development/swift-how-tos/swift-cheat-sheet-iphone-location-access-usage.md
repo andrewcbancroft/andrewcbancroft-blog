@@ -1,5 +1,5 @@
 ---
-title: 'Swift Cheat Sheet for iPhone Location Services Access & Usage'
+title: 'Swift Cheat Sheet for iPhone Location Services Access and Usage'
 author: Andrew
 type: blog
 date: 2018-07-17T00:43:03+00:00

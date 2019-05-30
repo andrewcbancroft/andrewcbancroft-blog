@@ -1,5 +1,5 @@
 ---
-title: 'Swift Cheat Sheet for iPhone Camera Access & Usage'
+title: 'Swift Cheat Sheet for iPhone Camera Access and Usage'
 author: Andrew
 type: blog
 date: 2018-02-24T12:23:02+00:00

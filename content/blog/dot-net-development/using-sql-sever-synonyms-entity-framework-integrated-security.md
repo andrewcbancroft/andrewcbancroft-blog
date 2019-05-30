@@ -1,5 +1,5 @@
 ---
-title: 'SQL Sever Synonyms, Entity Framework, & Integrated Security'
+title: 'SQL Sever Synonyms, Entity Framework, and Integrated Security'
 author: Andrew
 type: blog
 date: 2015-05-01T17:44:31+00:00

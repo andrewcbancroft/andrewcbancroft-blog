@@ -1,5 +1,5 @@
 ---
-title: 'Swift Cheat Sheet for Dates, Formatters, & Date Components'
+title: 'Swift Cheat Sheet for Dates, Formatters, and Date Components'
 author: Andrew
 type: blog
 date: 2016-05-26T18:04:01+00:00
