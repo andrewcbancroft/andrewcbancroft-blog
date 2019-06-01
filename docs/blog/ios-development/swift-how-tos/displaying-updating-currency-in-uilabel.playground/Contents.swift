@@ -17,7 +17,7 @@
 //: </div>
 //: <ul class="resources-content">
 //: <li>
-//: <i class="fas fa-file"></i> <a href="https://github.com/andrewcbancroft/datadaylife-blog/raw/master/datasets/Car%20Sales.csv" download>Swift Playground</a>
+//: <i class="fas fa-file"></i> <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog/ios-development/swift-how-tos/displaying-updating-currench-in-uilabel.playground" download>Swift Playground</a>
 //: </li>
 //: </ul>
 //: </div>
