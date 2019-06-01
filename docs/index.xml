@@ -13,16 +13,6 @@
     
     <item>
       <title>Displaying and Updating Currency in a UILabel</title>
-      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/displaying-updating-currench-in-uilabel/</link>
-      <pubDate>Sat, 01 Jun 2019 04:31:49 +0000</pubDate>
-      
-      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/displaying-updating-currench-in-uilabel/</guid>
-      <description>Resources  Right-click -&amp;gt; Save as&amp;hellip;    Swift Playground   
-Setup 1import UIKit 2import PlaygroundSupport 3 4class MyViewController : UIViewController { 5 6 var currencyLabel = UILabel() 7 override func loadView() { 8 let view = UIView() 9 view.backgroundColor = .white 10 11 currencyLabel.frame = CGRect(x: 150, y: 200, width: 200, height: 20) 12 currencyLabel.text = &amp;#34;$0.00&amp;#34; 13 currencyLabel.textColor = .black 14 15 view.addSubview(currencyLabel) 16 self.</description>
-    </item>
-    
-    <item>
-      <title>Displaying and Updating Currency in a UILabel</title>
       <link>https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/displaying-updating-currency-in-uilabel/</link>
       <pubDate>Sat, 01 Jun 2019 04:31:49 +0000</pubDate>
       
