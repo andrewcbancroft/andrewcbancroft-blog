@@ -62,6 +62,8 @@ Open it by clicking `Editor > Editor and Canvas`
 ## Wait, Where's the Canvas?
 If you don't have the option to view the canvas in Xcode, it's because this feature requires you to be running macOS Catalina.
 
+Don't feel left out of the SwiftUI fun, though!  Just press `command` + `R` to see everything load up in the iOS 13 Simulator.
+
 ## Syncing Changes Between SwiftUI Code and Xcode's Canvas
 Changing and saving your SwiftUI view code automatically updates the canvas preview.
 
