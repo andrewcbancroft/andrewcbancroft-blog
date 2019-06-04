@@ -75,3 +75,33 @@ A view's content, layout, and behavior get described in the `body` property.
 `body` only returns a single view, though.
 
 To combine multiple views together, you use a **stack**.
+
+Stacks can be vertical (`VStack`), horizontal (`HStack`), or "back-to-front" (`ZStack`).
+
+## Spacing Things Out
+
+Use a `Spacer` to make a containing view expand out to use all of its parent view
+
+```swift
+struct ContentView : View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: nil) {
+            Text("Turtle Rock")
+                .font(.title)
+            
+            HStack{
+                Text("Joshua Tree National Park")
+                    .font(.subheadline)
+                
+                Spacer() // Make the horizontal stack use up all the horizontal space of the parent VStack
+                
+                Text("California")
+                    .font(.subheadline)
+            }
+        }
+    }
+}
+```
+
+## Giving Views Some Breathing Room
+Use the `padding()` modifier to give a view some breathing room.

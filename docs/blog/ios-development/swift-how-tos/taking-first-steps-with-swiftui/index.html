@@ -59,7 +59,7 @@
   "@type": "BlogPosting",
   "headline": "Taking First Steps With SwiftUI",
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/swift-how-tos\/taking-first-steps-with-swiftui\/",
-  "wordCount": "292",
+  "wordCount": "400",
   "datePublished": "2019-06-03T03:11:48Z",
   "dateModified": "2019-06-03T03:11:48Z",
   "author": {
@@ -261,6 +261,33 @@ MathJax.Hub.Config({
 <p><code>body</code> only returns a single view, though.</p>
 
 <p>To combine multiple views together, you use a <strong>stack</strong>.</p>
+
+<p>Stacks can be vertical (<code>VStack</code>), horizontal (<code>HStack</code>), or &ldquo;back-to-front&rdquo; (<code>ZStack</code>).</p>
+
+<h2 id="spacing-things-out">Spacing Things Out</h2>
+
+<p>Use a <code>Spacer</code> to make a containing view expand out to use all of its parent view</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">struct</span> <span class="nc">ContentView</span> <span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+<span class="ln"> 2</span>    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+<span class="ln"> 3</span>        <span class="n">VStack</span><span class="p">(</span><span class="n">alignment</span><span class="p">:</span> <span class="p">.</span><span class="n">leading</span><span class="p">,</span> <span class="n">spacing</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln"> 4</span>            <span class="n">Text</span><span class="p">(</span><span class="s">&#34;Turtle Rock&#34;</span><span class="p">)</span>
+<span class="ln"> 5</span>                <span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">title</span><span class="p">)</span>
+<span class="ln"> 6</span>            
+<span class="ln"> 7</span>            <span class="n">HStack</span><span class="p">{</span>
+<span class="ln"> 8</span>                <span class="n">Text</span><span class="p">(</span><span class="s">&#34;Joshua Tree National Park&#34;</span><span class="p">)</span>
+<span class="ln"> 9</span>                    <span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">subheadline</span><span class="p">)</span>
+<span class="ln">10</span>                
+<span class="ln">11</span>                <span class="n">Spacer</span><span class="p">()</span> <span class="c1">// Make the horizontal stack use up all the horizontal space of the parent VStack</span>
+<span class="ln">12</span>                
+<span class="ln">13</span>                <span class="n">Text</span><span class="p">(</span><span class="s">&#34;California&#34;</span><span class="p">)</span>
+<span class="ln">14</span>                    <span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">subheadline</span><span class="p">)</span>
+<span class="ln">15</span>            <span class="p">}</span>
+<span class="ln">16</span>        <span class="p">}</span>
+<span class="ln">17</span>    <span class="p">}</span>
+<span class="ln">18</span><span class="p">}</span></code></pre></div>
+<h2 id="giving-views-some-breathing-room">Giving Views Some Breathing Room</h2>
+
+<p>Use the <code>padding()</code> modifier to give a view some breathing room.</p>
 
 
     <aside>
