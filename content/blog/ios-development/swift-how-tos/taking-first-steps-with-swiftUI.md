@@ -3,7 +3,7 @@ title: 'Taking First Steps With SwiftUI'
 description: "A listing of learnings from the Apple SwiftUI Creating and Combining Views tutorial"
 author: Andrew
 type: blog
-date: 2019-06-03T03:11:48+00:00
+date: 2019-06-04T03:11:48+00:00
 wip: true
 tags:
   - SwiftUI
