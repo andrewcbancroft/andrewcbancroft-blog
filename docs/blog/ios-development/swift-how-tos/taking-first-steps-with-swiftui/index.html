@@ -59,7 +59,7 @@
   "@type": "BlogPosting",
   "headline": "Taking First Steps With SwiftUI",
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/swift-how-tos\/taking-first-steps-with-swiftui\/",
-  "wordCount": "175",
+  "wordCount": "292",
   "datePublished": "2019-06-03T03:11:48Z",
   "dateModified": "2019-06-03T03:11:48Z",
   "author": {
@@ -212,6 +212,20 @@ MathJax.Hub.Config({
 <li>One that declares a preview for that <code>View</code></li>
 </ul>
 
+<p><strong>View</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">struct</span> <span class="nc">ContentView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+<span class="ln">3</span>        <span class="c1">// This is where you describe the view&#39;s content, layout, and behavior</span>
+<span class="ln">4</span>    <span class="p">}</span>
+<span class="ln">5</span><span class="p">}</span></code></pre></div>
+<p>A view&rsquo;s content, layout, and behavior get described in the <code>body</code> property.</p>
+
+<p><strong>Preview</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">struct</span> <span class="nc">ContentView_Previews</span> <span class="p">:</span> <span class="n">PreviewProvider</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">previews</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+<span class="ln">3</span>        <span class="n">ContentView</span><span class="p">()</span>
+<span class="ln">4</span>    <span class="p">}</span>
+<span class="ln">5</span><span class="p">}</span></code></pre></div>
 <h2 id="seeing-what-you-re-doing">Seeing What You&rsquo;re Doing</h2>
 
 <p>Xcode gives you a canvas so that you can visually see what your SwiftUI code is doing.</p>
@@ -235,6 +249,18 @@ MathJax.Hub.Config({
 </blockquote>
 
 <p>Tutorial: <a href="https://developer.apple.com/tutorials/swiftui/creating-and-combining-views">https://developer.apple.com/tutorials/swiftui/creating-and-combining-views</a></p>
+
+<h2 id="combining-views-the-key-is-stacks">Combining Views:  The Key is Stacks</h2>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">struct</span> <span class="nc">ContentView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+<span class="ln">3</span>        <span class="c1">// This is where you describe the view&#39;s content, layout, and behavior</span>
+<span class="ln">4</span>    <span class="p">}</span>
+<span class="ln">5</span><span class="p">}</span></code></pre></div>
+<p>A view&rsquo;s content, layout, and behavior get described in the <code>body</code> property.</p>
+
+<p><code>body</code> only returns a single view, though.</p>
+
+<p>To combine multiple views together, you use a <strong>stack</strong>.</p>
 
 
     <aside>

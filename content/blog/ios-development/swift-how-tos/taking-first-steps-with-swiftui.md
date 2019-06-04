@@ -20,6 +20,28 @@ Xcode will give you two structs to start with:
 * One that describes the `View`'s content and layout
 * One that declares a preview for that `View`
 
+**View**
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        // This is where you describe the view's content, layout, and behavior
+    }
+}
+```
+
+A view's content, layout, and behavior get described in the `body` property.
+
+**Preview**
+
+```swift
+struct ContentView_Previews : PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
 ## Seeing What You're Doing
 Xcode gives you a canvas so that you can visually see what your SwiftUI code is doing.
 
@@ -38,3 +60,18 @@ I love this quote:
 > Your code is always the source of truth for the view. When you use the inspector to change or remove a modifier, Xcode updates your code immediately to match.
 
 Tutorial: [https://developer.apple.com/tutorials/swiftui/creating-and-combining-views](https://developer.apple.com/tutorials/swiftui/creating-and-combining-views)
+
+## Combining Views:  The Key is Stacks
+```swift
+struct ContentView: View {
+    var body: some View {
+        // This is where you describe the view's content, layout, and behavior
+    }
+}
+```
+
+A view's content, layout, and behavior get described in the `body` property.
+
+`body` only returns a single view, though.
+
+To combine multiple views together, you use a **stack**.
