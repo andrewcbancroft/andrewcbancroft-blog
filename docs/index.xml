@@ -17,7 +17,8 @@
       <pubDate>Mon, 03 Jun 2019 03:11:48 +0000</pubDate>
       
       <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/taking-first-steps-with-swiftui/</guid>
-      <description>Enabling SwiftUI Opting in to using SwiftUI is as easy as creating a new project with Xcode 11 and clicking the &amp;ldquo;Use SwiftUI&amp;rdquo; checkbox.
+      <description>Resources    Tutorial Reference   
+Enabling SwiftUI Opting in to using SwiftUI is as easy as creating a new project with Xcode 11 and clicking the &amp;ldquo;Use SwiftUI&amp;rdquo; checkbox.
 Starting Point Xcode will give you two structs to start with:
  One that describes the View&amp;rsquo;s content and layout One that declares a preview for that View  View
 1struct ContentView: View { 2 var body: some View { 3 // This is where you describe the view&amp;#39;s content, layout, and behavior 4 } 5} A view&amp;rsquo;s content, layout, and behavior get described in the body property.</description>

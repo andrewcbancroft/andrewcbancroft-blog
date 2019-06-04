@@ -9,6 +9,18 @@ tags:
   - SwiftUI
 ---
 
+<a name="resources" class="jump-target"></a>
+<div class="resources">
+<div class="resources-header">
+Resources
+</div>
+<ul class="resources-content">
+<li>
+<i class="fas fa-book"></i> <a href="https://developer.apple.com/tutorials/swiftui/creating-and-combining-views" download>Tutorial Reference</a>
+</li>
+</ul>
+</div>
+
 ## Enabling SwiftUI
 Opting in to using SwiftUI is as easy as creating a new project with Xcode 11 and clicking the "Use SwiftUI" checkbox.
 
@@ -58,8 +70,6 @@ Changing the view using Xcode's view inspector automatically updates your SwiftU
 I love this quote:
 
 > Your code is always the source of truth for the view. When you use the inspector to change or remove a modifier, Xcode updates your code immediately to match.
-
-Tutorial: [https://developer.apple.com/tutorials/swiftui/creating-and-combining-views](https://developer.apple.com/tutorials/swiftui/creating-and-combining-views)
 
 ## Combining Views:  The Key is Stacks
 ```swift
