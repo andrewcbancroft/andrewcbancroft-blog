@@ -16,7 +16,7 @@ Resources
 </div>
 <ul class="resources-content">
 <li>
-<i class="fas fa-book"></i> <a href="https://developer.apple.com/tutorials/swiftui/creating-and-combining-views" download>Tutorial Reference</a>
+<i class="fas fa-book"></i> <a href="https://developer.apple.com/tutorials/swiftui/creating-and-combining-views" rel="nofollow">Tutorial Reference</a>
 </li>
 </ul>
 </div>
