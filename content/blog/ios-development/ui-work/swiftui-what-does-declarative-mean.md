@@ -8,6 +8,9 @@ wip: false
 showrecent: true
 tags:
   - SwiftUI
+images:
+  - Twitter - SwiftUI is Declarative. What Does That Mean_.png
+  - FB - SwiftUI is Declarative. What Does That Mean_.png
 ---
 
 "Declarative" is one of Swift UI's four core principles.
