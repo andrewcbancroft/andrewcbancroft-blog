@@ -4,7 +4,7 @@ description: "A listing of learnings from the Apple SwiftUI Creating and Combini
 author: Andrew
 type: blog
 date: 2019-06-03T03:11:48+00:00
-wip: true
+wip: false
 showrecent: true
 tags:
   - SwiftUI
