@@ -8,6 +8,7 @@ categories:
   - Core Data
   - CloudKit
 wip: false
+showrecent: true
 ---
 
 <a name="resources" class="jump-target"></a>

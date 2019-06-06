@@ -1,5 +1,6 @@
 ---
 title: 'iOS Data Persistence: The Big Picture'
+description: "My latest course at Pluralsight has launched! During this one hour course, you will learn the reasons for saving data to help ground you as you begin to traverse the data persistence landscape."
 author: Andrew
 type: blog
 date: 2019-04-30T10:03:33+00:00
@@ -17,7 +18,7 @@ tags:
   - Realm
   - UIDocument
   - UserDefaults
-
+showrecent: true
 ---
 We've all been there. Do a search on the topic of "saving data in iOS&#8221; and you'll get _dozens_ of search results mentioning at least six different frameworks and platforms, and a month’s worth of reading.
 

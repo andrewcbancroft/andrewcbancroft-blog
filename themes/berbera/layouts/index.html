@@ -22,14 +22,39 @@
     <div class="">
         <h5>Hi – I’m Andrew.</h5>
         I’m a relentless learner, passionate about discovery and about sharing new insights that come my way.
-        Here, I write about technology and software development with a primary emphasis on <a href="#ios-development">iOS development in Swift</a>.
+        Here, I write about technology and software development with a primary emphasis on <a
+            href="#ios-development">iOS development in Swift</a>.
     </div>
 </div>
 {{ end }}
 
 {{ define "main" }}
+{{ $dateFormat := default " January 2, 2006" (index .Site.Params "date_format") }}
 <main>
     <div class="homepage">
+        <span id="recent-work" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <h3 class="category_header">Recent Work</h3>
+            </div>
+        </div>
+
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="article_list card-body recent-work-body">
+                        <ul>
+                                {{ range first 5 (where .Pages "Params.showrecent" true).ByDate.Reverse }}
+                                <li><a href="{{.Permalink}}">{{.Title}}</a></li>
+                                <i class="fas fa-calendar-day"></i> <time datetime="{{ .Date.Format " 2006-01-02T15:04:05Z07:00 " }}">{{ .Date.Format $dateFormat }}</time>
+                                <div class="excerpt">{{.Description}}</div>
+                                {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <span id="pluralsight-courses" class="jump-target"></span>
         <div class="row" id="">
             <div class="col-sm-12">
