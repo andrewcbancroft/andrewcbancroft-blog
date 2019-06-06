@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+            (function () {
+                if (window.location.hostname === "localhost") {
+                    console.log("Analytics not running on local dev.");
+                    return;
+                } else {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-33022655-1');
+                }
+            })();
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Sort It Out – Sorting an Array in Swift" />
+<meta property="og:description" content="I had a question come to me today&nbsp;regarding sorting an array of integers that are actually&nbsp;encoded as strings in the array. &nbsp;Data comes to is in a variety of encodings/types, so it&rsquo;s quite common to need to adjust things to the right state for working with. &nbsp;Let&rsquo;s take a look at how to solve this one.
+The Dilemma Given an array like this&#8230;
+1let arrayOfIntsAsStrings = [&#34;103&#34;, &#34;2&#34;, &#34;1&#34;, &#34;50&#34;, &#34;55&#34;, &#34;98&#34;] &#8230; the question arises: &nbsp;&ldquo;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this&nbsp;[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;] (integer comparison), not this [&quot;1&amp;#8221;, &quot;1000&amp;#8221;, &quot;103&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;]&nbsp;&nbsp;(string comparison)?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/08/16/sort-yourself-out-sorting-an-array-in-swift/" />
+<meta property="article:published_time" content="2014-08-16T18:06:26&#43;00:00"/>
+<meta property="article:modified_time" content="2014-08-16T18:06:26&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sort It Out – Sorting an Array in Swift"/>
+<meta name="twitter:description" content="I had a question come to me today&nbsp;regarding sorting an array of integers that are actually&nbsp;encoded as strings in the array. &nbsp;Data comes to is in a variety of encodings/types, so it&rsquo;s quite common to need to adjust things to the right state for working with. &nbsp;Let&rsquo;s take a look at how to solve this one.
+The Dilemma Given an array like this&#8230;
+1let arrayOfIntsAsStrings = [&#34;103&#34;, &#34;2&#34;, &#34;1&#34;, &#34;50&#34;, &#34;55&#34;, &#34;98&#34;] &#8230; the question arises: &nbsp;&ldquo;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this&nbsp;[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;] (integer comparison), not this [&quot;1&amp;#8221;, &quot;1000&amp;#8221;, &quot;103&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;]&nbsp;&nbsp;(string comparison)?"/>
+<meta name="generator" content="Hugo 0.55.6" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Sort It Out – Sorting an Array in Swift",
+  "url": "https:\/\/www.andrewcbancroft.com\/2014\/08\/16\/sort-yourself-out-sorting-an-array-in-swift\/",
+  "wordCount": "541",
+  "datePublished": "2014-08-16T18:06:26Z",
+  "dateModified": "2014-08-16T18:06:26Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "iOS \/ Mac, Swift, Sort Array, Sorted Function"
+}
+</script>
+
+
+
+    <title>Sort It Out – Sorting an Array in Swift</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Sort It Out – Sorting an Array in Swift</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>I had a question come to me today&nbsp;regarding sorting an array of integers that are actually&nbsp;<em>encoded</em> as strings in the array. &nbsp;Data comes to is in a variety of encodings/types, so it&rsquo;s quite common to need to adjust things to the right state for working with. &nbsp;Let&rsquo;s take a look at how to solve this one.</p>
+
+<h2 id="the-dilemma">The Dilemma</h2>
+
+<p>Given an array like this&#8230;</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">arrayOfIntsAsStrings</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;103&#34;</span><span class="p">,</span> <span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;50&#34;</span><span class="p">,</span> <span class="s">&#34;55&#34;</span><span class="p">,</span> <span class="s">&#34;98&#34;</span><span class="p">]</span></code></pre></div>
+<p>&#8230; the question arises: &nbsp;&ldquo;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this&nbsp;<code>[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;]</code> (integer comparison), not this <code>[&quot;1&amp;#8221;, &quot;1000&amp;#8221;, &quot;103&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;]</code>&nbsp;&nbsp;(string comparison)?&#8221; Enter Swift&rsquo;s <code>sorted</code>&nbsp;function:</p>
+
+<blockquote>
+<p>“Swift’s standard library provides a function called sorted, which sorts an array of values of a known type, based on the output of a sorting closure that you provide. Once it completes the sorting process, the sorted function returns a new array of the same type and size as the old one, with its elements in the correct sorted order. The original array is not modified by the sorted function.” Excerpt From: Apple Inc. “The Swift Programming Language.” iBooks. <a title="Swift iBook" href="https://itun.es/us/jEUH0.l" target="_blank"><a href="https://itun.es/us/jEUH0.l">https://itun.es/us/jEUH0.l</a></a></p>
+</blockquote>
+
+<p>This is exactly what we need to do the job here.</p>
+
+<h2 id="the-gist">The Gist</h2>
+
+<p>Given the original array outlined above, we can create a new<em>&nbsp;sorted</em> array like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">sortedArray</span> <span class="p">=</span> <span class="bp">sorted</span><span class="p">(</span><span class="n">arrayOfIntsAsStrings</span><span class="p">,</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="p">(</span><span class="n">str1</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">str2</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Bool</span> <span class="k">in</span>
+<span class="ln">3</span>    <span class="k">return</span> <span class="n">str1</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">str2</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span>
+<span class="ln">4</span><span class="p">})</span></code></pre></div>
+<p>This code produces our desired output: &nbsp;<code>[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;]</code></p>
+
+<h2 id="the-nbsp-details">The&nbsp;Details</h2>
+
+<p>Swift&rsquo;s&nbsp;sorted function takes two arguments: &nbsp;an Array, and a Closure. &nbsp;The part that may be confusing is the closure argument. &nbsp;Isolated it looks like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="p">{</span>
+<span class="ln">2</span>    <span class="p">(</span><span class="n">str1</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">str2</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Bool</span> <span class="k">in</span>
+<span class="ln">3</span>    <span class="k">return</span> <span class="n">str1</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">str2</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span>
+<span class="ln">4</span><span class="p">}</span></code></pre></div>
+<p>Swift&nbsp;provides several <a title="Apple Developer Documentation - Swift Closures" href="https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html" target="_blank">shorthand forms of the closure syntax</a>, but I&rsquo;ve chosen the longest-form here just for full exposure and clarity. &nbsp;The closure I&rsquo;ve written simply needs to compute a&nbsp;Bool value representing the result of a comparison between two values&nbsp;– in this case, I&rsquo;m wanting to do <em>integer</em> comparison, so I write this: &nbsp;<code>str1.toInt()</code>&nbsp;and <code>str2.toInt()</code>.</p>
+
+<p>You can choose whatever parameter names you&rsquo;d like, and you can actually&nbsp;rely on Type Inference in the parameter section&nbsp;&#8212; the compiler can work out what Types your parameters are. &nbsp;But if it helps clue you in to what the code is doing, you can <a title="Clean Coding in Swift – Type Inference" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/" target="_blank"><em>specify</em> the Types in the closure&rsquo;s parameter section, as I wrote about recently</a>, and as I did in my example when I wrote <code>str1: String, str2: String</code>&nbsp;(I could have left off the <code>: String</code>).</p>
+
+<p>Within the closure&rsquo;s body, you can put in as many lines of logic as are necessary in order to produce an appropriate comparison result to get your Array in the right order. &nbsp;If it gets <em>too</em> complicated to do it in-line, think about encapsulating that logic inside one or more functions in the spirit of writing <a title="Clean Coding in Swift – Functions" href="http://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/" target="_blank">clean code</a>.</p>
+
+<p>To produce an appropriate comparison result, you&rsquo;ll have to consider the Types of the data you&rsquo;re working with within the closure and consider any casting or manipulation you&rsquo;ll need to do to produce the correct result like we did in our example. Other than that, it&rsquo;s pretty straightforward to sort it&nbsp;out!</p>
+
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/">Clean Coding in Swift – Type Inference</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/">Clean Coding in Swift – Functions</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/">Fade In / Out Animations as Class Extensions in Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/">Swift Optionals?  Don’t Forget to Unwrap!</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/">Swift Access Control – Implications for Unit Testing</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 151 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+            (function () {
+                if (window.location.hostname === "localhost") {
+                    console.log("Analytics not running on local dev.");
+                    return;
+                } else {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-33022655-1');
+                }
+            })();
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Using an Existing SQLite Store with NSPersistentContainer" />
+<meta property="og:description" content="If you&rsquo;ve been creating the Core Data Stack without NSPersistentContainer and you&rsquo;re thinking about switching things up to use NSPersistentContainer, you need to think about your existing SQLite persistent store.
+Creating the stack with NSPersistentContainer handles the creation of SQLite stores internally, so brand new setups using NSPersistentContainer are pretty easy.
+But how do you go about telling NSPersistentContainer about your existing SQLite store?
+Let&rsquo;s take a look now at how you can configure the container to use your previously-created persistent store." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/" />
+<meta property="article:published_time" content="2017-07-10T18:02:05&#43;00:00"/>
+<meta property="article:modified_time" content="2017-07-10T18:02:05&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Using an Existing SQLite Store with NSPersistentContainer"/>
+<meta name="twitter:description" content="If you&rsquo;ve been creating the Core Data Stack without NSPersistentContainer and you&rsquo;re thinking about switching things up to use NSPersistentContainer, you need to think about your existing SQLite persistent store.
+Creating the stack with NSPersistentContainer handles the creation of SQLite stores internally, so brand new setups using NSPersistentContainer are pretty easy.
+But how do you go about telling NSPersistentContainer about your existing SQLite store?
+Let&rsquo;s take a look now at how you can configure the container to use your previously-created persistent store."/>
+<meta name="generator" content="Hugo 0.55.6" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Using an Existing SQLite Store with NSPersistentContainer",
+  "url": "https:\/\/www.andrewcbancroft.com\/2017\/07\/10\/using-an-existing-sqlite-store-with-nspersistentcontainer\/",
+  "wordCount": "421",
+  "datePublished": "2017-07-10T18:02:05Z",
+  "dateModified": "2017-07-10T18:02:05Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, Core Data, NSPersistentContainer"
+}
+</script>
+
+
+
+    <title>Using an Existing SQLite Store with NSPersistentContainer</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Using an Existing SQLite Store with NSPersistentContainer</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>If you&rsquo;ve been creating the Core Data Stack <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">without NSPersistentContainer</a> and you&rsquo;re thinking about switching things up to <em>use</em> <code>NSPersistentContainer</code>, you need to think about your existing SQLite persistent store.</p>
+
+<p><a href="https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/">Creating the stack with NSPersistentContainer</a> handles the creation of SQLite stores internally, so brand new setups using <code>NSPersistentContainer</code> are pretty easy.</p>
+
+<p>But how do you go about telling <code>NSPersistentContainer</code> about your <em>existing</em> SQLite store?</p>
+
+<p>Let&rsquo;s take a look now at how you can configure the container to use your previously-created persistent store.</p>
+
+<p><a name="before" class="jump-target"></a></p>
+
+<h1 id="before-nspersistentcontainer">Before NSPersistentContainer</h1>
+
+<p>Supposing that your <strong>previous</strong> Core Data stack creation step pointed to a .sqlite file somewhere in your user&rsquo;s documents directory:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
+<span class="ln">2</span><span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span> <span class="c1">// model instance creation not shown here...</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
+<span class="ln">5</span>        <span class="p">.</span><span class="k">default</span>
+<span class="ln">6</span>        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<span class="ln">7</span>        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
+<span class="ln">8</span>
+<span class="ln">9</span><span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span></code></pre></div>
+<p><a name="after" class="jump-target"></a></p>
+
+<h1 id="after-nspersistentcontainer">After NSPersistentContainer</h1>
+
+<p>The key to migrating to <code>NSPersistentStore</code> with an existing SQLite persistent store is the <code>NSPersistentStoreDescription</code> class. Take a look at the following code to see how to configure an instance of <code>NSPersistentStoreDescription</code> and assign it to the <code>NSPersistentContainer</code> instance&rsquo;s <code>persistentStoreDescriptions</code> property:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="n">NSPersistentContainer</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">)</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
+<span class="ln"> 4</span>        <span class="p">.</span><span class="k">default</span>
+<span class="ln"> 5</span>        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<span class="ln"> 6</span>        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span><span class="kd">let</span> <span class="nv">storeDescription</span> <span class="p">=</span> <span class="n">NSPersistentStoreDescription</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">)</span>
+<span class="ln"> 9</span><span class="n">container</span><span class="p">.</span><span class="n">persistentStoreDescriptions</span> <span class="p">=</span> <span class="p">[</span><span class="n">storeDescription</span><span class="p">]</span>
+<span class="ln">10</span>
+<span class="ln">11</span><span class="c1">// Remaining setup for NSPersistentContainer</span></code></pre></div>
+<p><a name="breakdown" class="jump-target"></a></p>
+
+<h2 id="breaking-it-down">Breaking it down</h2>
+
+<p>The <code>let storeURL =</code> portion of the code is identical in both snippets.</p>
+
+<p>The difference is how you tell the Stack where the persistent store is located. In times past, you&rsquo;d tell the NSPersistentStore<strong>Coordinator</strong> this information through its <code>addPersistentStore</code> method.</p>
+
+<p>With NSPersistent<strong>Container</strong>, you need to do two things:<br />
+<strong>1</strong> – Initialize an <code>NSPersistentStoreDescription</code> instance with the <code>storeURL</code> (i.e. the URL to where your existing persistent store is located).</p>
+
+<p><strong>2</strong> – Assign the <code>NSPersistentStoreDescription</code> instance to the <code>NSPersistentContainer's</code> <code>persistentStoreDescriptions</code> property.</p>
+
+<p>One subtlety to note is that the property&rsquo;s name is <em>plural</em>: persistentStoreDescription<strong>s</strong>.</p>
+
+<p>Even though may only a single persistent store description instance to assign, such as in the example code above, <strong>you still need to wrap it in an array</strong> before you assign it, since it&rsquo;s possible to add more than one description to the container.</p>
+
+<p>With that adjustment to the <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/"><code>NSPersistentContainer</code> stack creation process</a>, your app will once again use the persistent store it used to use!</p>
+
+<p><a name="related" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/" title="Creating the Core Data Stack with Backwards Compatibility in Swift"</a>Creating the Core Data Stack with Backwards Compatibility in Swift
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/" title="Core Data Cheat Sheet for Swift iOS Developers"</a>Core Data Cheat Sheet for Swift iOS Developers
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="course" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fas fa-video"></i> <a href="http://bit.ly/ps-core-data-swift" target="_blank">Core Data Fundamentals with Swift</a><br /> <a href="http://bit.ly/ps-core-data-swift" target="_blank"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png" alt="Core Data Fundamentals with Swift" width="1024" height="576" class="alignnone size-large wp-image-13163" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w" sizes="(max-width: 1024px) 100vw, 1024px" /></a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/">A Swift Implementation of the Core Data Stack Using NSPersistentContainer</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/">Core Data Model Attributes and NSManagedObject Property Types Must Match!</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">Creating the Core Data Stack with Backwards Compatibility in Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/04/02/core-data-fundamentals-swift/">Core Data Fundamentals with Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/">Using a Core Data Model in Swift Playgrounds</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 151 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

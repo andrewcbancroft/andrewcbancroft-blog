@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+            (function () {
+                if (window.location.hostname === "localhost") {
+                    console.log("Analytics not running on local dev.");
+                    return;
+                } else {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-33022655-1');
+                }
+            })();
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Swift Optionals?  Don’t Forget to Unwrap!" />
+<meta property="og:description" content="There is a compiler error that throws me off every time I see it. It takes the form,
+ &#8216;ClassName?&rsquo; does not have a member named &#8216;memberName&rsquo;
+ This can happen when you&rsquo;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
+For example, given this class definition:
+1class Bird { 2	var family: String 3	var color: String 4 5	init(family: String, color: String) { 6	self." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/" />
+<meta property="article:published_time" content="2014-07-26T02:23:53&#43;00:00"/>
+<meta property="article:modified_time" content="2014-07-26T02:23:53&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Swift Optionals?  Don’t Forget to Unwrap!"/>
+<meta name="twitter:description" content="There is a compiler error that throws me off every time I see it. It takes the form,
+ &#8216;ClassName?&rsquo; does not have a member named &#8216;memberName&rsquo;
+ This can happen when you&rsquo;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
+For example, given this class definition:
+1class Bird { 2	var family: String 3	var color: String 4 5	init(family: String, color: String) { 6	self."/>
+<meta name="generator" content="Hugo 0.55.6" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Swift Optionals?  Don’t Forget to Unwrap!",
+  "url": "https:\/\/www.andrewcbancroft.com\/2014\/07\/25\/swift-optionals-dont-forget-to-unwrap\/",
+  "wordCount": "469",
+  "datePublished": "2014-07-26T02:23:53Z",
+  "dateModified": "2014-07-26T02:23:53Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "iOS \/ Mac, Swift, Swift Optionals, Xcode Compiler Error"
+}
+</script>
+
+
+
+    <title>Swift Optionals?  Don’t Forget to Unwrap!</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Swift Optionals?  Don’t Forget to Unwrap!</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>There is a compiler error that throws me off every time I see it.  It takes the form,</p>
+
+<blockquote>
+<p>&#8216;ClassName?&rsquo; does not have a member named &#8216;memberName&rsquo;</p>
+</blockquote>
+
+<p>This can happen when you&rsquo;ve declared a variable as an optional, but forget to <em>unwrap</em> that optional when you attempt to call a method on it.</p>
+
+<p>For example, given this class definition:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">Bird</span> <span class="p">{</span>
+<span class="ln"> 2</span>	<span class="kd">var</span> <span class="nv">family</span><span class="p">:</span> <span class="nb">String</span>
+<span class="ln"> 3</span>	<span class="kd">var</span> <span class="nv">color</span><span class="p">:</span> <span class="nb">String</span>
+<span class="ln"> 4</span> 
+<span class="ln"> 5</span>	<span class="kd">init</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln"> 6</span>		<span class="kc">self</span><span class="p">.</span><span class="n">family</span> <span class="p">=</span> <span class="n">family</span>
+<span class="ln"> 7</span>		<span class="kc">self</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">color</span>
+<span class="ln"> 8</span>	<span class="p">}</span>
+<span class="ln"> 9</span> 
+<span class="ln">10</span>	<span class="kd">func</span> <span class="nf">isSwift</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Bool</span> <span class="p">{</span>
+<span class="ln">11</span>		<span class="k">return</span> <span class="kc">self</span><span class="p">.</span><span class="n">family</span> <span class="p">==</span> <span class="s">&#34;Apodidae&#34;</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span>
+<span class="ln">12</span>	<span class="p">}</span>
+<span class="ln">13</span><span class="p">}</span></code></pre></div>
+<p>If, say in a ViewController, I declare a variable that I intend to reference an _optional_ <code>Bird</code> instance like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">birdInstance</span><span class="p">:</span> <span class="n">Bird</span><span class="p">?</span></code></pre></div>
+<p>And then I later initialize this variable with a <code>Bird</code> instance, perhaps in <code>viewDidLoad()</code> :</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">birdInstance</span> <span class="p">=</span> <span class="n">Bird</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="s">&#34;Apodidae&#34;</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="s">&#34;Black&#34;</span><span class="p">)</span></code></pre></div>
+<p>If I attempt to invoke the <code>isSwift</code> method on the <code>birdInstance</code> later  on, I&rsquo;ll get a compiler error:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="bp">println</span><span class="p">(</span><span class="n">birdInstance</span><span class="p">.</span><span class="n">isSwift</span><span class="p">())</span></code></pre></div>
+<blockquote>
+<p>error: &#8216;Bird?&rsquo; does not have a member named &#8216;isSwift&rsquo;</p>
+</blockquote>
+
+<p>This may seem pretty basic &#8212; after all, I declared the <code>birdInstance</code> as an optional and I know optionals need special treatment.  How could I make this mistake??  Perhaps this is just a consequence of my current stage in life, trying to code in 15-30 minute spurts with my 1 <sup>1</sup>&frasl;<sub>2</sub> year old running around, haha.</p>
+
+<p>We all deal with this though:  it&rsquo;s fairly easy to write some code and come back to it later and not remember how you declared your variable in an earlier coding session.  Then when you&rsquo;re presented a message saying that your class doesn&rsquo;t have a member named &ldquo;___&#8221;, you immediately go to the class definition and see the function there, plain as day.  It&rsquo;s easy to spend 3-5 minutes scratching your head thinking, &ldquo;What in the world??!&#8221; &#8230; And then you realize – it&rsquo;s that <em>optional declaration</em> that you forgot to handle.</p>
+
+<p>To fix this, of course, you can do any number of things, depending on your situation.</p>
+
+<h5 id="force-unwrap-the-optional-and-invoke-the-method">Force unwrap the optional and invoke the method:</h5>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">birdInstance</span><span class="o">!</span><span class="p">.</span><span class="n">isSwift</span><span class="p">()</span> <span class="c1">// Force unwrapped -- **CAUTION** make sure that birdInstance gets instantiated before you do this,&amp;nbsp;or you&#39;ll get a runtime error</span></code></pre></div>
+<h5 id="employ-optional-chaining-and-invoke-the-method">Employ optional chaining and invoke the method:</h5>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">birdInstance</span><span class="p">?.</span><span class="n">isSwift</span><span class="p">()</span></code></pre></div>
+<h5 id="declare-the-variable-as-implicitly-unwrapped-optional-then-invoke-the-method-later-without-extra-exclamation-or-question-marks">Declare the variable as implicitly unwrapped optional, then invoke the method later without extra exclamation or question marks:</h5>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">birdInstance</span><span class="p">:</span> <span class="n">Bird</span><span class="o">!</span> <span class="c1">// Implicitly unwrapped -- **CAUTION** make sure that birdInstance gets instantiated before you use it, or you&#39;ll get a runtime error</span>
+<span class="ln">2</span><span class="n">birdInstance</span> <span class="p">=</span> <span class="n">Bird</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="s">&#34;Apodidae&#34;</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="s">&#34;Black&#34;</span><span class="p">)</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="c1">// Some time later, invoke isSwift</span>
+<span class="ln">5</span>
+<span class="ln">6</span><span class="bp">println</span><span class="p">(</span><span class="n">birdInstance</span><span class="p">.</span><span class="n">isSwift</span><span class="p">())</span></code></pre></div>
+<p><a title="CompileSwift - Optionals" href="http://www.compileswift.com/intermediate/optionals/?utm_content=bufferfba01&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer" target="_blank">A blog post by Peter Witham over at CompileSwift</a> was the article that caused me to think, &ldquo;OH!  I haven&rsquo;t done anything with my optional&#8230;<em>that&rsquo;s</em> the problem&#8221;.  Credit to you, sir, for your post!</p>
+
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/">Swift Access Control – Implications for Unit Testing</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">Implement NSManagedObject Subclass in Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/">How to Create Mocks and Stubs in Swift</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 151 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

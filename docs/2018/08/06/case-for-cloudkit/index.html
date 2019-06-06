@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+            (function () {
+                if (window.location.hostname === "localhost") {
+                    console.log("Analytics not running on local dev.");
+                    return;
+                } else {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-33022655-1');
+                }
+            })();
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="The Case for CloudKit" />
+<meta property="og:description" content="When it comes to remote backend services for mobile apps, you’ve got options. What&rsquo;s the case for CloudKit? Where does Apple&rsquo;s remote data storage and sharing solution fit into the Apple Developer&rsquo;s toolbox?
+I recently put out a survey on Twitter, just to get a feel for what folks are using.#iosdev folks: When your app needs a backend (ie, a remote server / remote database), what do you use?  I’m also interested in the “why” – reply with a tweet if you care to share!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2018/08/06/case-for-cloudkit/" />
+<meta property="article:published_time" content="2018-08-06T11:58:32&#43;00:00"/>
+<meta property="article:modified_time" content="2018-08-06T11:58:32&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Case for CloudKit"/>
+<meta name="twitter:description" content="When it comes to remote backend services for mobile apps, you’ve got options. What&rsquo;s the case for CloudKit? Where does Apple&rsquo;s remote data storage and sharing solution fit into the Apple Developer&rsquo;s toolbox?
+I recently put out a survey on Twitter, just to get a feel for what folks are using.#iosdev folks: When your app needs a backend (ie, a remote server / remote database), what do you use?  I’m also interested in the “why” – reply with a tweet if you care to share!"/>
+<meta name="generator" content="Hugo 0.55.6" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The Case for CloudKit",
+  "url": "https:\/\/www.andrewcbancroft.com\/2018\/08\/06\/case-for-cloudkit\/",
+  "wordCount": "1505",
+  "datePublished": "2018-08-06T11:58:32Z",
+  "dateModified": "2018-08-06T11:58:32Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, CloudKit"
+}
+</script>
+
+
+
+    <title>The Case for CloudKit</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">The Case for CloudKit</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>When it comes to remote backend services for mobile apps, you’ve got options. What&rsquo;s the case for CloudKit? Where does Apple&rsquo;s remote data storage and sharing solution fit into the Apple Developer&rsquo;s toolbox?</p>
+
+<p>I recently put out a survey on Twitter, just to get a feel for what folks are using.<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"></p>
+
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true">
+  <p lang="en" dir="ltr">
+    <a href="https://twitter.com/hashtag/iosdev?src=hash&ref_src=twsrc%5Etfw">#iosdev</a> folks: When your app needs a backend (ie, a remote server / remote database), what do you use?
+  </p>
+  
+  <p>
+    I’m also interested in the “why” – reply with a tweet if you care to share! Thanks! 🙌🏻
+  </p>
+  
+  <p>
+    &mdash; Andrew Bancroft (@andrewcbancroft) <a href="https://twitter.com/andrewcbancroft/status/1020265988561022976?ref_src=twsrc%5Etfw">July 20, 2018</a>
+  </p>
+</blockquote>
+  
+
+<p></figure></p>
+
+<p>The clear winer was Firebase, followed by folks implementing their own backend server architecture. Dead last? A tie between Realm and CloudKit.</p>
+
+<p>”Hmm&#8230;”, I thought, “What’s up? Why no love for CloudKit?&#8221;</p>
+
+<p>Of the options on my own survey, I’ve had experience building apps using three of the four: CloudKit, Firebase, and “rolling my own backend” with an app built for my employer.</p>
+
+<p>So I asked myself, “When would <em>you</em> use CloudKit, Andrew?”</p>
+
+<p>Here’s how I tend break it down. The more of these that apply to you and your app development experience, the stronger the case for using CloudKit (in my opinion):</p>
+
+<p><a class="jump-target" name="apple-platforms-only"></a></p>
+
+<h1 id="apple-platforms-only-cloudkit">Apple Platforms Only? CloudKit.</h1>
+
+<p>If you&rsquo;re developing <em>solely</em> for Apple&rsquo;s platforms, CloudKit is the natural choice.</p>
+
+<p>One of the other CloudKit alternatives mentioned in the survey might have the upper hand if you&rsquo;re developing for Android as well, but if you&rsquo;re sticking to the Apple ecosystem, it makes sense to use their remote data storage and sharing service (ie, CloudKit).</p>
+
+<p><a class="jump-target" name="cloudkit-js"></a></p>
+
+<h1 id="expand-beyond-apple-platforms-with-cloudkit-js">Expand Beyond Apple Platforms with CloudKit JS</h1>
+
+<p>Even if you&rsquo;re <em>not</em> developing solely for Apple&rsquo;s platforms, CloudKit might still be a viable choice for you!</p>
+
+<p>Apple designed <a href="https://developer.apple.com/documentation/cloudkitjs">CloudKit JS</a> to create companion web apps to your iOS and macOS apps. You must have an existing CloudKit app and enable web services to use CloudKit JS, but once you&rsquo;ve got an Apple app configured, you can leverage CloudKit in the web version of your app if you have one.</p>
+
+<p>As I engaged with folks on Twitter about this, I learned that some were even leveraging CloudKit in an Android app using CloudKit JS as a bridge into the Apple ecosystem.</p>
+
+<p>This opens up the audience for your app tremendously!</p>
+
+<p><a class="jump-target" name="authentication"></a></p>
+
+<h1 id="built-in-authentication-cloudkit">Built-in Authentication: CloudKit.</h1>
+
+<p>If you&rsquo;re tired of creating sign up and login screens, look no further than CloudKit.</p>
+
+<p>This is especially true if you&rsquo;re only worrying with developing for Apple&rsquo;s Platforms.</p>
+
+<p>Users signed in with an Apple ID are automatically authenticated when your app uses CloudKit.</p>
+
+<p>Kiss the sign up/login screens goodbye!</p>
+
+<p><a class="jump-target" name="free-longer"></a></p>
+
+<h1 id="cloudkit-is-free-for-longer">CloudKit is Free for Longer</h1>
+
+<p>All of the backend as a service providers offer a free tier or a free trial, and while I don&rsquo;t have personal experience with these services&rsquo; payment threshholds, it&rsquo;s my observation that CloudKit&rsquo;s free tier might &ldquo;last longer&#8221;. What do I mean by that?</p>
+
+<ol>
+<li>Data of any kind stored in a user&rsquo;s <em>private</em> database doesn&rsquo;t count against your app&rsquo;s storage alotment&#8230; it counts against the <em>user&rsquo;s</em> iCloud storage plan. This extends the mileage of your <em>app&rsquo;s</em> storage alotment.</li>
+<li>CloudKit distinguishes between storage for <em>non-binary data</em> and storage for <em>media</em> (binary data like images, videos, audio, etc). You <a href="https://developer.apple.com/icloud/cloudkit/">start off with</a> 100 MB of non-binary data storage, but <strong>10 GB</strong> of image/video/audio/etc. storage. In contrast&#8230;
+
+<ul>
+<li>Firebase <a href="https://firebase.google.com/pricing/">starts to charge you</a> $25/mo after <strong>5 GB</strong> of media storage</li>
+<li>Realm Platform <a href="https://realm.io/pricing">offers a 30 day free trial</a>, but is $30/month after that, and acts primarily as a remote data store for non-binary data.</li>
+</ul></li>
+<li>As the number of users for your app grows, your storage and transfer limits scale with your app&rsquo;s user base. I don&rsquo;t have personal experience here, but I wonder&#8230; by the time your app grows to 100,000 users (the tipping point for Apple to scale your app&rsquo;s alotments up), how probable is it that you&rsquo;d already be paying to use Firebase?</li>
+</ol>
+
+<p><a class="jump-target" name="own-backend"></a></p>
+
+<h1 id="rolling-your-own-backend-consider-cloudkit">Rolling Your Own Backend? Consider CloudKit.</h1>
+
+<p>Folks already invested in Realm or Firebase are already leveraging a backend as a service platform. It&rsquo;s those that are maintaining backend server infrastructure <em>themselves</em> that I might suggest consider CloudKit.</p>
+
+<p>I&rsquo;ve been in the shoes of those who have to roll their own backend server and maintain those VMs, databases, web servers&#8230; the works.</p>
+
+<p>Many times this is because there&rsquo;s a need to connect a mobile app to an organization&rsquo;s on-premise/public cloud ecosystem, and for that, I can totally empathize.</p>
+
+<p>CloudKit offers a reliable alternative that organizations developing for Apple&rsquo;s platforms should consider. It&rsquo;s a huge weight off the shoulders to abstract the backend and let Apple maintain those servers and storage components. Data stored in the <strong>public</strong> cloud database <em>is</em> accessible programmatically, so your organization <em>can</em> get at data stored there for incorporation into its internal ecosystem.</p>
+
+<p><a class="jump-target" name="first-party-only"></a></p>
+
+<h1 id="company-requirement-1st-party-frameworks-and-services-only-cloudkit">Company Requirement: 1st Party Frameworks and Services Only? CloudKit.</h1>
+
+<p>This requirement is most likely to be seen within companies and organizations that have an aversion to bringing in a lot of 3rd party dependencies.</p>
+
+<p>Those of us who have an employer or who work for clients that have a say in what our app development toolkit can consist of may need to consider options within the Apple ecosystem.</p>
+
+<p>CloudKit is a dependable choice for risk-averse companies.</p>
+
+<p>Speaking of risk aversion&#8230;</p>
+
+<p><a class="jump-target" name="third-party-risk-aversion"></a></p>
+
+<h1 id="personal-3rd-party-risk-aversion-8230-cloudkit">Personal 3rd Party Risk Aversion&#8230; CloudKit.</h1>
+
+<p>This one hits close to home for me, because I&rsquo;ve experienced the pain of having a 3rd party service I depended on for <em>multiple apps</em> be discontinued. &#42;Cough&#42; <strong><a href="https://blog.parseplatform.org/announcements/moving-on/">Parse</a></strong> &#42;Cough&#42;</p>
+
+<p>I&rsquo;m usually okay with 3rd party libraries, but 3rd party <em>services</em> are another story altogether for me.</p>
+
+<p>When you&rsquo;re using a library that ends up fading away, it may take a little reworking to get your code to compile with an alternative.</p>
+
+<p>But when you&rsquo;ve got data that your app depends on living on a remote server hosted by a 3rd party, and that service goes away&#8230; Oy! Talk about the pain, frustration, and hassle of having to do a <em>migration</em> <strong>on top of</strong> rewriting code.</p>
+
+<p><a class="jump-target" name="only-need-data-store"></a></p>
+
+<h1 id="only-need-a-remote-data-store-keep-it-simple-cloudkit">Only Need a Remote Data Store? Keep it Simple. CloudKit.</h1>
+
+<p>There is a <em>ton</em> that can be done on-device these days. If all you&rsquo;re in the market for is a remote data store to facilitate data sharing across devices or with other users and have no need of remote cloud functions or analytics or remote machine learning services, etc., you might opt to keep it simple and leverage CloudKit.</p>
+
+<p><a class="jump-target" name="apple-uses"></a></p>
+
+<h1 id="depend-on-what-apple-depends-on-cloudkit">Depend On What Apple Depends On: CloudKit.</h1>
+
+<p>What does Apple depend on for their own apps&rsquo; remote data storage and sharing needs?</p>
+
+<p>Answer: CloudKit.</p>
+
+<p>Clearly, Apple is in a unique situation: Apple neither needs nor cares to develop any of its apps for Android. Naturally, they&rsquo;d depend on the very framework they created. Otherwise, we could argue, &ldquo;What a bunch of hypocrites!&#8221;, right?</p>
+
+<p>CloudKit serves the needs of apps like Photos, iCloud Drive, Notes, News, and more.</p>
+
+<p>It&rsquo;s almost as if Apple developed CloudKit for Apple, and decided, &ldquo;Hey, let&rsquo;s open this up to our developers and let them tap in to what works awesome for us!&#8221;</p>
+
+<p>I like that. I like the security of knowing that Apple depends on the framework they&rsquo;re delivering to us.</p>
+
+<p><a class="jump-target" name="tradeoffs"></a></p>
+
+<h1 id="tradeoffs">Tradeoffs</h1>
+
+<p>In fairness, I would point out a few trade-offs if you were to go with CloudKit.</p>
+
+<p><a class="jump-target" name="no-android-support"></a></p>
+
+<h2 id="no-native-android-support">No Native Android support</h2>
+
+<p>This tradeoff is qualified with the words &ldquo;no <em>native</em> Android support&#8221; for a reason. CloudKit JS may actually open the door for folks developing cross platform apps, though it may take some hacking.</p>
+
+<p>Expect some challenges on the Android side of things, but don&rsquo;t completely count CloudKit out.</p>
+
+<p><a class="jump-target" name="data-storage-only"></a></p>
+
+<h2 id="data-storage-and-sharing-only-with-cloudkit">Data storage and sharing <em>only</em> with CloudKit</h2>
+
+<p>With CloudKit, you get a fully-functional remote data storage and sharing service. If you&rsquo;re wanting to leverage some advanced functionality like &ldquo;cloud functions&#8221;, analytics for your app, non-Apple ID authentication, remote machine learning services, and the like, you won&rsquo;t find those features in CloudKit.</p>
+
+<p>This doesn&rsquo;t mean that Apple leaves you nanging when it comes to authentication, analytics, machine learning, etc.</p>
+
+<p>Don&rsquo;t forget that you&rsquo;ll have built-in Apple ID authentication as I mentioned above, and analytics are provided through iTunes Connect.</p>
+
+<p>On-device machine learning with CoreML might also alleviate the need to seek remote ML services.</p>
+
+<p>If, after considering Apple&rsquo;s component solutions, you&rsquo;re looking for alternatives, Firebase offers all of the above as sort of an all-in-one package.</p>
+
+<p>As I mentioned above though&#8230; if all you really <em>need</em> is a remote data store for cross-device data syncing, don&rsquo;t over-complicate things. CloudKit can still serve you well.</p>
+
+<p>Another alternative is to use a public cloud provider like Azure or AWS for &ldquo;cloud functions&#8221; or remote machine learning. If you prefer to component-ize these kinds of services, this is a viable alternative to Firebase, or Apple&rsquo;s own solutions to these kinds of problems.</p>
+
+<p><a class="jump-target" name="feedback"></a></p>
+
+<h1 id="what-do-you-use-why">What do you use? Why?</h1>
+
+<p>I&rsquo;m a pragmatist. I don&rsquo;t always use CloudKit. But I do like CloudKit when I can use it.</p>
+
+<p>What do <em>you</em> use? Why? What&rsquo;s your experience with backend as a service providers? What else would you consider in the case for CloudKit? What other tradeoffs do you recognize?</p>
+
+<p><a class="jump-target" name="share"></a></p>
+
+
+    <aside>
+      
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 151 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

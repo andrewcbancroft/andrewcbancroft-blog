@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+            (function () {
+                if (window.location.hostname === "localhost") {
+                    console.log("Analytics not running on local dev.");
+                    return;
+                } else {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-33022655-1');
+                }
+            })();
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="NSNotificationCenter vs Delegation – An Analysis" />
+<meta property="og:description" content="In Fundamentals of NSNotificationCenter in Swift, a commenter asked me to elaborate on a response I&rsquo;d given to a dialog going on below the blog post. I had stated:
+ If you need a more structured environment around your [instance]-to-[instance] communication, delegates &#8230; are probably a better choice [than NSNotificationCenter].
+ I&rsquo;ve been thinking for some time since I responded with that comment. What do I mean when I say &ldquo;if you need a more structured environment&#8221;&#8230; What does that even look like?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/" />
+<meta property="article:published_time" content="2015-02-05T13:00:26&#43;00:00"/>
+<meta property="article:modified_time" content="2015-02-05T13:00:26&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="NSNotificationCenter vs Delegation – An Analysis"/>
+<meta name="twitter:description" content="In Fundamentals of NSNotificationCenter in Swift, a commenter asked me to elaborate on a response I&rsquo;d given to a dialog going on below the blog post. I had stated:
+ If you need a more structured environment around your [instance]-to-[instance] communication, delegates &#8230; are probably a better choice [than NSNotificationCenter].
+ I&rsquo;ve been thinking for some time since I responded with that comment. What do I mean when I say &ldquo;if you need a more structured environment&#8221;&#8230; What does that even look like?"/>
+<meta name="generator" content="Hugo 0.55.6" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "NSNotificationCenter vs Delegation – An Analysis",
+  "url": "https:\/\/www.andrewcbancroft.com\/2015\/02\/05\/nsnotificationcenter-vs-delegation-analysis\/",
+  "wordCount": "1179",
+  "datePublished": "2015-02-05T13:00:26Z",
+  "dateModified": "2015-02-05T13:00:26Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "iOS \/ Mac, Swift, Delegate, NSNotificationCenter"
+}
+</script>
+
+
+
+    <title>NSNotificationCenter vs Delegation – An Analysis</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">NSNotificationCenter vs Delegation – An Analysis</h1>
+    </header>
+    <div class="content">
+
+    
+
+<p>In <a href="http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/">Fundamentals of NSNotificationCenter in Swift</a>, a <a href="http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/#comment-1762533966">commenter asked</a> me to elaborate on a response I&rsquo;d given to a dialog going on below the blog post. I had stated:</p>
+
+<blockquote>
+<p>If you need a more structured environment around your [instance]-to-[instance] communication, delegates &#8230; are probably a better choice [than NSNotificationCenter].</p>
+</blockquote>
+
+<p>I&rsquo;ve been thinking for some time since I responded with that comment. What <em>do</em> I mean when I say &ldquo;if you need a more structured environment&#8221;&#8230; What does that even look like? Why are delegates a better choice when I need such &ldquo;structure&#8221;?</p>
+
+<h3 id="structured-environment-what-s-that">Structured environment? What&rsquo;s that?</h3>
+
+<p>&ldquo;Structured environment&#8221; may be a bit vague. Here&rsquo;s what I was thinking when I wrote it: At the time of the comment, I was imagining what a solution implemented with NSNotificationCenter, and a solution implemented with a delegate look like&#8230;.</p>
+
+<h3 id="questions">Questions</h3>
+
+<p>First, I tried to step into the role of each instance, and in a role-playing sort of way, ask:</p>
+
+<ul>
+<li>As a <strong>notifier</strong> / <strong>delegator</strong> instance: &ldquo;What do I expect to happen as I send this notification or invoke this method on my delegate? What clues from my execution context inform that expectation?&#8221;</li>
+<li>As a <strong>notifier</strong> / <strong>delegator</strong> instance: &ldquo;What control do I appear to have over the sequence of events that happen as a result of sending this notification or invoking this method on my delegate?&#8221;</li>
+<li>As a <strong>listener</strong> / <strong>delegate</strong> instance: &ldquo;What impact does acting on this notification or executing this delegate method have on the system as a whole?&#8221;</li>
+</ul>
+
+<p>And then shifting out of the role-playing mentality, stepping back and asking a question of clarity:</p>
+
+<ul>
+<li>&ldquo;Which strategy seems to provide greater clarity and structure to the <em>entire application environment</em>?&#8221;</li>
+<li>&ldquo;Which strategy would most help another developer who might see this code and try to trace the logic and impact of the code?&#8221;</li>
+</ul>
+
+<p>The measurement of a more or less &ldquo;structured environment&#8221;, then, would be influenced by the answers to the questions of <strong>expectations</strong>, <strong>perceived control</strong>, <strong>impact</strong>, and <strong>clarity</strong>.</p>
+
+<p>Let&rsquo;s explore some of those answers from the perspective of each communication strategy, starting with NSNotificationCenter.</p>
+
+<h3 id="answers-from-the-nsnotificationcenter-perspective">Answers from the NSNotificationCenter Perspective</h3>
+
+<p>With NSNotificationCenter as an instance-to-instance communication strategy, we have the following environment:<br />
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png" alt="Notification Center Environment" width="945" height="374" class="alignnone size-full wp-image-11252" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png 945w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment-300x119.png 300w" sizes="(max-width: 945px) 100vw, 945px" /></a></p>
+
+<p>Note that Listeners 1 to n may or may not exist. The graphic is assuming that 1+ Listener instances have &ldquo;tuned in&#8221; to a particular notification key.</p>
+
+<h5 id="expectations">Expectations</h5>
+
+<p>What do I expect to happen? Well, the most reasonable thing I (as a &ldquo;notifier instance&#8221;) can expect is for some other &ldquo;listener instance&#8221; somewhere to tune in to the notification key I&rsquo;m broadcasting. I have no way of knowing what would happen after that. It&rsquo;s up to the listener to do something intelligent with the notification that [x event] occurred. I, as a notifier, can expect nothing more.</p>
+
+<h5 id="perceived-control">Perceived Control</h5>
+
+<p>It appears that I, as a notifier, have no control over the sequence of events that would occur as a result of my broadcast. That&rsquo;s by design – the interaction between me and any listener is weak at best.</p>
+
+<p>This can be a fantastic thing! There&rsquo;s freedom in saying &ldquo;Hey! This happened!&#8221; and then being done. But it&rsquo;s also &ldquo;less structured&#8221;, as I&rsquo;m terming it.</p>
+
+<h5 id="impact">Impact</h5>
+
+<p>The impact on the system as a whole has the potential to be significant. With NSNotificationCenter, it depends on how many listener instances there are and what each of them does in response to the notification. One could design the system to localize the impacts to the context of the listening instance. I&rsquo;ve heard of and seen ugly situations that trigger cascading effects that make deciphering the impact of a notification much harder.</p>
+
+<h5 id="clarity">Clarity</h5>
+
+<p>We lose a good deal of clarity when heavy usage of NSNotificationCenter occurs in an application. There may be appropriate times to use NSNotificationCenter in your app. Keep in mind that it becomes much more difficult to sort out various interactions when more and more listener instances are responding a notification. Trying to reason about how the system as a whole arrived at its current state isn&rsquo;t as easy when NSNotificationCenter enters the picture. Other developers with less knowledge of the app as a whole would suffer from this loss of clarity.</p>
+
+<h3 id="answers-from-the-delegate-perspective">Answers from the Delegate Perspective</h3>
+
+<p>With a delegate, we have a significantly different strategy at hand. To put it before us:<br />
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png" alt="Delegate Environment" width="948" height="497" class="alignnone size-full wp-image-11251" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png 948w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment-300x157.png 300w" sizes="(max-width: 948px) 100vw, 948px" /></a></p>
+
+<h5 id="expectations-1">Expectations</h5>
+
+<p>The delegation strategy deals with protocols. Protocols by nature give us reliable a way to&#8230;</p>
+
+<p>1) Count on the implementation of needed/expected behavior, and<br />
+2) Predict what the behavior of the adopter of that protocol will be. By practicing good naming conventions, I, as a delegator, find it reasonable to expect that invoking a method on my delegate will do whatever the name of that method implies.</p>
+
+<h5 id="perceived-control-1">Perceived Control</h5>
+
+<p>It would appear that as a delegator, I can control the sequence of events that need to take place by choosing when to invoke methods on my delegate. A strategy using NSNotificationCenter can only send out a notification into the ether, and hope that something acts on it. A strategy using delegation has a <em>delegate</em> which adopts a protocol. Every method is at my disposal to call in whatever order makes sense.</p>
+
+<h5 id="impact-1">Impact</h5>
+
+<p>The impact on the system as a whole still has the potential to be significant. Since there&rsquo;s one-to-one communication going on between a delegator and its delegate, the determining factor on how broad the impact is tends to lean on the design of the system as a whole. Design patterns that minimize or eliminate global state reduce this potentially broad impact.</p>
+
+<p>One advantage that the delegation pattern has is that the delegate conforms to a protocol and a protocol, along with its specified methods, have <em>names</em>. However small that knowledge is, it could give us clues about what impact of executing the delegate&rsquo;s methods might have on the system.</p>
+
+<h5 id="clarity-1">Clarity</h5>
+
+<p>With the advantage of dealing with intelligently named protocols and clearly outlined method names, the delegation strategy would win the battle of clarity in my opinion. I can look at the delegator instance and say, &ldquo;When execution of this instance&rsquo;s logic gets to this point, reliance on the delegate kicks in and [x, y, and z] happens. I can jump over to the delegate&rsquo;s implementation and say, &ldquo;[x] does this, [y] does that, and [z] does this other thing.&#8221; Other developers with less knowledge of the app as a whole would enjoy this added clarity quite readily.</p>
+
+<h3 id="in-summary">In Summary</h3>
+
+<p>Here, I&rsquo;ve analyzed NSNotificationCenter, side by side with the delegation pattern, by imagining myself in the role of each instance (notifier, listener | delegator, delegate). I assessed each strategy in terms of expectations, perceived control, impact, and clarity, attempting to shed light on what it means for an environment to be &ldquo;more structured&#8221; or &ldquo;less structured&#8221;. My hope was to shed light on my use of the term &ldquo;structured environment&#8221;, and to share my thoughts on some of the implications of using each strategy.</p>
+
+<p><a name="related" class="jump-target"></a></p>
+
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/" title="What is Delegation? – A Swift Developer’s Guide">What is Delegation? – A Swift Developer’s Guide</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/" title="How Delegation Works – A Swift Developer’s Guide">How Delegation Works – A Swift Developer’s Guide</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/" title="Fundamentals of NSNotificationCenter in Swift">Fundamentals of NSNotificationCenter in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/" title="Fundamentals of Callbacks for Swift Developers">Fundamentals of Callbacks for Swift Developers</a>
+    </li>
+  </ul>
+</div></p>
+
+<p><a name="share" class="jump-target"></a></p>
+
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/">Fundamentals of NSNotificationCenter in Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/01/29/converting-complex-objective-c-macros-swift-functions/">Converting Complex Objective-C Macros to Swift Functions</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/">Conveniently Transforming Immutable Types in Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/">Unit Testing Model Layer with Core Data and Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/">Immutable Types with Changing State in Swift</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 151 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

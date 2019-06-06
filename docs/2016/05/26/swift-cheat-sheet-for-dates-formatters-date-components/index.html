@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+            (function () {
+                if (window.location.hostname === "localhost") {
+                    console.log("Analytics not running on local dev.");
+                    return;
+                } else {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-33022655-1');
+                }
+            })();
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Swift Cheat Sheet for Dates, Formatters, and Date Components" />
+<meta property="og:description" content="Working with NSDate, NSDateFormatter, and NSDateComponents can be a little convoluted, so I&rsquo;ve created myself a cheat sheet that will be updated as I discover new tips and tricks in this realm.
+The new cheat sheet can be found over at GitHub in the form of an Xcode Playground:
+Resources    Swift Dates Cheat Sheet Playground   
+Topics that are included in the Playground are as follows:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/05/26/swift-cheat-sheet-for-dates-formatters-date-components/" />
+<meta property="article:published_time" content="2016-05-26T18:04:01&#43;00:00"/>
+<meta property="article:modified_time" content="2016-05-26T18:04:01&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Swift Cheat Sheet for Dates, Formatters, and Date Components"/>
+<meta name="twitter:description" content="Working with NSDate, NSDateFormatter, and NSDateComponents can be a little convoluted, so I&rsquo;ve created myself a cheat sheet that will be updated as I discover new tips and tricks in this realm.
+The new cheat sheet can be found over at GitHub in the form of an Xcode Playground:
+Resources    Swift Dates Cheat Sheet Playground   
+Topics that are included in the Playground are as follows:"/>
+<meta name="generator" content="Hugo 0.55.6" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Swift Cheat Sheet for Dates, Formatters, and Date Components",
+  "url": "https:\/\/www.andrewcbancroft.com\/2016\/05\/26\/swift-cheat-sheet-for-dates-formatters-date-components\/",
+  "wordCount": "416",
+  "datePublished": "2016-05-26T18:04:01Z",
+  "dateModified": "2016-05-26T18:04:01Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Swift, Date, DateComponent, DateFormat"
+}
+</script>
+
+
+
+    <title>Swift Cheat Sheet for Dates, Formatters, and Date Components</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Swift Cheat Sheet for Dates, Formatters, and Date Components</h1>
+    </header>
+    <div class="content">
+
+    <p>Working with <code>NSDate</code>, <code>NSDateFormatter</code>, and <code>NSDateComponents</code> can be a little convoluted, so I&rsquo;ve created myself a cheat sheet that will be updated as I discover new tips and tricks in this realm.</p>
+
+<p>The new cheat sheet can be found over at GitHub in the form of an Xcode Playground:</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftDatesCheatSheet" title="Swift Dates Cheat Sheet Playground" target="_blank">Swift Dates Cheat Sheet Playground</a>
+    </li>
+  </ul>
+</div></p>
+
+<p>Topics that are included in the Playground are as follows:</p>
+
+<ul>
+<li>Getting today&rsquo;s date</li>
+<li>Converting <code>NSDate</code> to <code>String</code></li>
+<li>Converting <code>String</code> to <code>NSDate</code></li>
+<li>Getting components of an <code>NSDate</code></li>
+<li>Setting components of an <code>NSDate</code></li>
+<li>Creating new <code>NSDate</code> instances from <code>NSDateComponent</code> instances</li>
+</ul>
+
+<p>The best way to view this cheat sheet is by <a href="https://github.com/andrewcbancroft/SwiftDatesCheatSheet" target="_blank">downloading the playground from GitHub</a>, but here&rsquo;s a straight copy-paste from the repo in case you just want to copy and paste it into a playground of your own from here:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">UIKit</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="cm">/*: 
+</span><span class="ln"> 4</span><span class="cm"># Overview
+</span><span class="ln"> 5</span><span class="cm">This is a cheat sheet for working with dates, date formatters, and date components.
+</span><span class="ln"> 6</span><span class="cm">
+</span><span class="ln"> 7</span><span class="cm">*/</span>
+<span class="ln"> 8</span>
+<span class="ln"> 9</span><span class="c1">//: # Today&#39;s Date</span>
+<span class="ln">10</span>
+<span class="ln">11</span><span class="kd">let</span> <span class="nv">today</span> <span class="p">=</span> <span class="n">NSDate</span><span class="p">()</span>
+<span class="ln">12</span><span class="kd">let</span> <span class="nv">thisTimeTomrrow</span> <span class="p">=</span> <span class="n">NSDate</span><span class="p">(</span><span class="n">timeIntervalSinceNow</span><span class="p">:</span> <span class="mi">86400</span><span class="p">)</span>
+<span class="ln">13</span><span class="kd">let</span> <span class="nv">thisTimeYesterday</span> <span class="p">=</span> <span class="n">NSDate</span><span class="p">(</span><span class="n">timeIntervalSinceNow</span><span class="p">:</span> <span class="o">-</span><span class="mi">86400</span><span class="p">)</span>
+<span class="ln">14</span>
+<span class="ln">15</span><span class="cm">/*: 
+</span><span class="ln">16</span><span class="cm"># Date Formatting
+</span><span class="ln">17</span><span class="cm">Working with NSDateFormatter to convert dates to stings and vice-versa
+</span><span class="ln">18</span><span class="cm">*/</span>
+<span class="ln">19</span>
+<span class="ln">20</span><span class="c1">//: ## Converting dates to strings</span>
+<span class="ln">21</span><span class="kd">let</span> <span class="nv">dateFormatter</span> <span class="p">=</span> <span class="n">NSDateFormatter</span><span class="p">()</span>
+<span class="ln">22</span><span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFormat</span> <span class="p">=</span> <span class="s">&#34;yyyy-MM-dd&#34;</span>
+<span class="ln">23</span>
+<span class="ln">24</span><span class="bp">print</span><span class="p">(</span><span class="n">dateFormatter</span><span class="p">.</span><span class="n">stringFromDate</span><span class="p">(</span><span class="n">today</span><span class="p">))</span>
+<span class="ln">25</span>
+<span class="ln">26</span><span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFormat</span> <span class="p">=</span> <span class="s">&#34;MMM dd, yyyy&#34;</span>
+<span class="ln">27</span>
+<span class="ln">28</span><span class="bp">print</span><span class="p">(</span><span class="n">dateFormatter</span><span class="p">.</span><span class="n">stringFromDate</span><span class="p">(</span><span class="n">today</span><span class="p">))</span>
+<span class="ln">29</span>
+<span class="ln">30</span>
+<span class="ln">31</span><span class="c1">//: ## Converting strings to dates</span>
+<span class="ln">32</span>
+<span class="ln">33</span><span class="c1">// Consider what might potentially come back from an API of some sort and set a dateFormatter&#39;s dateFormat property appropriately...</span>
+<span class="ln">34</span>
+<span class="ln">35</span><span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFormat</span> <span class="p">=</span> <span class="s">&#34;yyyy-MM-dd&#34;</span>
+<span class="ln">36</span><span class="kd">var</span> <span class="nv">stringFromApi</span> <span class="p">=</span> <span class="s">&#34;2016-01-01&#34;</span>
+<span class="ln">37</span><span class="kd">var</span> <span class="nv">date</span> <span class="p">=</span> <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFromString</span><span class="p">(</span><span class="n">stringFromApi</span><span class="p">)</span>
+<span class="ln">38</span>
+<span class="ln">39</span><span class="n">stringFromApi</span> <span class="p">=</span> <span class="s">&#34;May 26, 2016&#34;</span>
+<span class="ln">40</span><span class="n">date</span> <span class="p">=</span> <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFromString</span><span class="p">(</span><span class="n">stringFromApi</span><span class="p">)</span>
+<span class="ln">41</span>
+<span class="ln">42</span><span class="cm">/* Notice how the format set to the date formatter (yyyy-MM-dd) differs from the format that came back from the API (MMM dd, yyyy), which resulted in `date` being nil.
+</span><span class="ln">43</span><span class="cm">*/</span>
+<span class="ln">44</span>
+<span class="ln">45</span><span class="cm">/*:
+</span><span class="ln">46</span><span class="cm"># Date Components
+</span><span class="ln">47</span><span class="cm">Working with NSCalendar and NSCalendarUnit to work with components of dates.
+</span><span class="ln">48</span><span class="cm">*/</span>
+<span class="ln">49</span>
+<span class="ln">50</span><span class="c1">//: ## Getting date components</span>
+<span class="ln">51</span><span class="kd">var</span> <span class="nv">calendarUnitFlags</span><span class="p">:</span> <span class="n">NSCalendarUnit</span> <span class="p">=</span> <span class="p">[.</span><span class="n">Year</span><span class="p">,</span> <span class="p">.</span><span class="n">Month</span><span class="p">,</span> <span class="p">.</span><span class="n">Day</span><span class="p">,</span> <span class="p">.</span><span class="n">Hour</span><span class="p">,</span> <span class="p">.</span><span class="n">Minute</span><span class="p">,</span> <span class="p">.</span><span class="n">Second</span><span class="p">]</span>
+<span class="ln">52</span><span class="kd">var</span> <span class="nv">dateComponents</span> <span class="p">=</span> <span class="n">NSCalendar</span><span class="p">.</span><span class="n">currentCalendar</span><span class="p">().</span><span class="n">components</span><span class="p">(</span><span class="n">calendarUnitFlags</span><span class="p">,</span> <span class="n">fromDate</span><span class="p">:</span> <span class="n">NSDate</span><span class="p">())</span>
+<span class="ln">53</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">year</span>
+<span class="ln">54</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">month</span>
+<span class="ln">55</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">day</span>
+<span class="ln">56</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">hour</span>
+<span class="ln">57</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">minute</span>
+<span class="ln">58</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">second</span>
+<span class="ln">59</span>
+<span class="ln">60</span><span class="c1">// Observe how leaving out .Hour, .Minute, and .Second affects the values of those components of a date:</span>
+<span class="ln">61</span><span class="n">calendarUnitFlags</span> <span class="p">=</span> <span class="p">[.</span><span class="n">Year</span><span class="p">,</span> <span class="p">.</span><span class="n">Month</span><span class="p">,</span> <span class="p">.</span><span class="n">Day</span><span class="p">]</span>
+<span class="ln">62</span><span class="n">dateComponents</span> <span class="p">=</span> <span class="n">NSCalendar</span><span class="p">.</span><span class="n">currentCalendar</span><span class="p">().</span><span class="n">components</span><span class="p">(</span><span class="n">calendarUnitFlags</span><span class="p">,</span> <span class="n">fromDate</span><span class="p">:</span> <span class="n">NSDate</span><span class="p">())</span>
+<span class="ln">63</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">year</span>
+<span class="ln">64</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">month</span>
+<span class="ln">65</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">day</span>
+<span class="ln">66</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">hour</span>
+<span class="ln">67</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">minute</span>
+<span class="ln">68</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">second</span>
+<span class="ln">69</span>
+<span class="ln">70</span><span class="c1">//: ## Setting date component values</span>
+<span class="ln">71</span>
+<span class="ln">72</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">year</span> <span class="p">=</span> <span class="n">dateComponents</span><span class="p">.</span><span class="n">year</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="ln">73</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">month</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="ln">74</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">day</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="ln">75</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">hour</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="ln">76</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">minute</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="ln">77</span><span class="n">dateComponents</span><span class="p">.</span><span class="n">second</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="ln">78</span>
+<span class="ln">79</span><span class="c1">//: ## Creating dates from components</span>
+<span class="ln">80</span><span class="kd">let</span> <span class="nv">newDate</span> <span class="p">=</span> <span class="n">NSCalendar</span><span class="p">.</span><span class="n">currentCalendar</span><span class="p">().</span><span class="n">dateFromComponents</span><span class="p">(</span><span class="n">dateComponents</span><span class="p">)</span></code></pre></div>
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/">Parse PFCloud – “JSON text did not start with array or object”</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/05/05/working-with-swift-adopt-a-protocol-or-pass-a-function/">Working with Swift:  Adopt a Protocol or Pass a Function?</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/04/28/listing-calendar-events-with-event-kit-and-swift/">Listing Calendar Events with Event Kit and Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/04/14/adding-buttons-to-the-navigation-bar-with-storyboards/">Adding Buttons to the Navigation Bar with Storyboards</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/">FIX – Query in Parse Cloud Code Returns Unauthorized Error</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 151 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
