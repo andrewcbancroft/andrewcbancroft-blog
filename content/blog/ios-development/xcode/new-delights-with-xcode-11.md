@@ -26,7 +26,7 @@ Have you noticed that `// Mark:` produces "header"-like text in the minimap?
 
 ![Marks Line Break](marks-linebreak.png)
 
-## Source Control in Inspectors Pane
+## History Inspector (source control history)
 There's a little source control icon in the Inspectors pane that lets you quickly see commit history and perform quick actions.
 
 ![Show History Inspector](show-history-inspector.png)
