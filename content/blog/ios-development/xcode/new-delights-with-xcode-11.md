@@ -25,3 +25,8 @@ Have you noticed that `// Mark:` produces "header"-like text in the minimap?
 `// Mark:` also produces a thin line break in your code - I think it definitely helps spot divisions in your code and could help find what you want a little quicker.
 
 ![Marks Line Break](marks-linebreak.png)
+
+## Source Control in Inspectors Pane
+There's a little source control icon in the Inspectors pane that lets you quickly see commit history and perform quick actions.
+
+![Show History Inspector](show-history-inspector.png)
