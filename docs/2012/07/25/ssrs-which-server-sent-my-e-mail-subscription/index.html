@@ -194,6 +194,8 @@ MathJax.Hub.Config({
     </header>
     <div class="content">
 
+    <p></p>
+
     <p>I was recently troubleshooting a seemingly bizarre issue I was having with one of our report subscriptions – the production version was running normally, but our customer suddenly began receiving a very old version of the same report subscription.  After disabling the subscription from all non-production servers that I knew about, the customer continued to receive the rogue e-mail.  I needed to figure out which “mystery” report server was sending the e-mail subscription.</p>
 
 <p>The answer was simple once I stepped back from the problem and remembered that there’s such a thing as a header to an e-mail that gives details about where the e-mail is coming from.</p>
