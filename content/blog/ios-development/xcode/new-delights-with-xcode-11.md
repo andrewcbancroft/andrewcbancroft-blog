@@ -10,6 +10,9 @@ showrecent: true
 toc: true
 categories:
   - Xcode
+images:
+  - images/social-assets/Twitter - New Delights With Xcode 11.png
+  - images/social-assets/Facebook - New Delights With Xcode 11.png
 ---
 
 ## Capabilities Search
