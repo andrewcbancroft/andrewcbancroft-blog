@@ -17,6 +17,11 @@ In your project settings, you can search for capabilities you want to add (inste
 
 ![Capabilities Search](capabilities-search.gif)
 
+## Editor Quick Actions
+Holding the `command` key down while mousing over and clicking on various levels of your code presents a quick action pop-out.  Handy!
+
+![Editor Quick Actions](editor-quick-actions)
+
 ## Marks
 Have you noticed that `// Mark:` produces "header"-like text in the minimap?
 
