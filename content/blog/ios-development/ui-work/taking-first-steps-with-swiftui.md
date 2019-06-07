@@ -9,8 +9,8 @@ showrecent: true
 tags:
   - SwiftUI
 images:
-  - Twitter - Taking First Steps With SwiftUI.png
-  - FB - Taking First Steps With SwiftUI.png
+  - images/social-assets/Twitter - Taking First Steps With SwiftUI.png
+  - images/social-assets/FB - Taking First Steps With SwiftUI.png
 ---
 
 <a name="resources" class="jump-target"></a>

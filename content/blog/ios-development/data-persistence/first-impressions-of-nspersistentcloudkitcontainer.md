@@ -10,8 +10,8 @@ categories:
 wip: false
 showrecent: true
 images:
-  - Twitter - First Impressions of NSPersistentCloudKitContainer.png
-  - FB - First Impressions of NSPersistentCloudKitContainer.png
+  - images/social-assets/Twitter - First Impressions of NSPersistentCloudKitContainer.png
+  - images/social-assets/FB - First Impressions of NSPersistentCloudKitContainer.png
 ---
 
 <a name="resources" class="jump-target"></a>
