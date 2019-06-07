@@ -22,7 +22,7 @@ Holding the `command` key down while mousing over and clicking on various levels
 
 ![Editor Quick Actions](editor-quick-actions.gif)
 
-## Marks
+## Marks in the Minimap
 Have you noticed that `// Mark:` produces "header"-like text in the minimap?
 
 ![Marks in the Minimap](marks-minimap.png)
@@ -30,6 +30,11 @@ Have you noticed that `// Mark:` produces "header"-like text in the minimap?
 `// Mark:` also produces a thin line break in your code - I think it definitely helps spot divisions in your code and could help find what you want a little quicker.
 
 ![Marks Line Break](marks-linebreak.png)
+
+## Jump to Code from Minimap
+The minimap in and of itself is nice, but I found the "jump to code" features smart and convenient.
+
+![Jump to Code](jump-to-code.gif)
 
 ## History Inspector (source control history)
 There's a little source control icon in the Inspectors pane that lets you quickly see commit history and perform quick actions.
