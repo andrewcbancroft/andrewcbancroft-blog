@@ -1,16 +1,16 @@
 ---
 title: "New Delights With Xcode 11"
 description: "A compilation of new Xcode features that are delightful to me."
+introtext: "Xcode 11 has a few new shinies that are delightful (to me).  This running list is here for you to notice and (hopefully) enjoy as well."
 author: Andrew
 type: blog
 date: 2019-06-07T04:21:19+00:00
-wip: true
+wip: false
 showrecent: true
+toc: true
 categories:
   - Xcode
 ---
-
-Xcode 11 has a few new shinies that are delightful (to me).  This running list is here for you to notice and (hopefully) enjoy as well.
 
 ## Capabilities Search
 In your project settings, you can search for capabilities you want to add (instead of scrolling down the list and turning things "on" or "off").

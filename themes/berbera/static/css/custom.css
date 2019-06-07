@@ -188,13 +188,12 @@ a:hover {
 }
 
 .resources .resources-download-instructions {
-  padding: .5em;  
+  padding: .75em .5em 0 .5em;  
   font-size: 1.00em;
 }
 
 .resources .resources-content {
-  padding: .5em;
-  margin-bottom: 1em;
+  padding: .75em .5em 0 .5em;
 }
 .resources .resources-content li {
   list-style: none;
@@ -316,6 +315,34 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #f7f6f6;
 }
 
+/* ---------------------------------------------------------
+Table of Contents
+---------------------------------------------------------*/
+nav#TableOfContents {
+  margin-top: 0.75em;
+}
+nav#TableOfContents ul {
+   padding-inline-start: 0.5em;
+}
+
+nav#TableOfContents li {
+  list-style: none;
+  font-size: 22px;
+}
+
+
+nav#TableOfContents li a::before {
+  content: "‣ ";
+}
+
+.toc-header {
+  padding: .1em .5em .1em .5em;
+  background-color: #eaeaed;
+  font-size: 1.25em;
+}
+.toc {
+  border: solid 1px #ccc;
+}
 
 /* ---------------------------------------------------------
 Navbar

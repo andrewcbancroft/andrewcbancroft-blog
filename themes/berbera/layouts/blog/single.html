@@ -77,6 +77,15 @@
     </aside>
     {{- end}}
 
+    <p>{{ .Params.introtext }}</p>
+
+    {{- if .Params.toc }}
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      {{ .TableOfContents }}
+    </aside>
+    {{- end }}
+
     {{ .Content }}
 
     <aside>
