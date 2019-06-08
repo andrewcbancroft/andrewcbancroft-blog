@@ -43,3 +43,8 @@ Have you noticed that `// Mark:` produces "header"-like text in the minimap?
 There's a little source control icon in the Inspectors pane that lets you quickly see commit history and perform quick actions.
 
 ![Show History Inspector](show-history-inspector.gif)
+
+## Tooltip From Minimap
+If you move your mouse over the minimap, Xcode will display little tooltips out to the left that correspond to major sections of your code, such as the class/struct declaration, properties, and functions.
+
+![Tooltip From Minimap](tooltip-from-minimap.gif)
