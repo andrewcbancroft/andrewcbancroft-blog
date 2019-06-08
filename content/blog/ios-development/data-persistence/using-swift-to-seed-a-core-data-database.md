@@ -15,8 +15,6 @@ tags:
 
 ---
 
-<small>Updated on September 23, 2015 – Swift 2.0</small>
-
 Designing an application's UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
 
 During development, I've found that it's often convenient to seed a Core Data database with sample data so that I can preview how it'll look in my application. Along with that, it's nice to start with a fresh copy of the data each time I run the app. Let's explore how to accomplish this task in Swift!
@@ -250,7 +248,7 @@ Above is a peek at what my AppDelegate.swift file's `application:didFinishLaunch
 
 I've found that sometimes it helps to have a freshly seeded data store every time I the app while I'm in development mode. When I'm testing the UI, I may create new entities during my manual testing, but one of the convenient things about seeding the data store is that I don't _have_ to. And even if I did, it's often quite nice to start fresh each run. To do this we'll dive into some of the boilerplate code that Xcode generates for us when we choose to use Core Data when we create the project. Specifically, we'll target the `persistentStoreCoordinator` closure:
 
-```swift
+{{< highlight swift "hl_lines=5-10" >}}
 lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
@@ -282,7 +280,7 @@ lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         
         return coordinator
         }()
-```
+{{< /highlight >}}
 
 I've highlighted the key line that I added (everything else was already in place, generated for me by Xcode). Adding that line removes the sqlite database. The lines that follow add it back in a fresh state.
 

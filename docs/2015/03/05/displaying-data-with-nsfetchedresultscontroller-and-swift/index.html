@@ -197,6 +197,31 @@ MathJax.Hub.Config({
     <div class="content">
 
     <p></p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#final-goal">Final goal</a></li>
+<li><a href="#setup-and-resources">Setup and resources</a></li>
+<li><a href="#storyboard">Storyboard</a></li>
+<li><a href="#mainviewcontroller-swift">MainViewController.swift</a>
+<ul>
+<li><a href="#maintain-nsmanagedobjectcontext-instance-reference">Maintain NSManagedObjectContext instance reference</a></li>
+<li><a href="#create-and-configure-nsfetchedresultscontroller-instance">Create and configure NSFetchedResultsController instance</a></li>
+<li><a href="#viewdidload">viewDidLoad()</a></li>
+<li><a href="#uitableviewdatasource-methods">UITableViewDataSource methods</a></li>
+</ul></li>
+<li><a href="#appdelegate-swift">AppDelegate.swift</a></li>
+<li><a href="#wrapping-up">Wrapping up</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
 
     
 
@@ -342,22 +367,23 @@ MathJax.Hub.Config({
 <h4 id="uitableviewdatasource-methods">UITableViewDataSource methods</h4>
 
 <p>The final step in implementing <code>MainViewController</code> is to set up the table view so that it pulls data from <code>fetchedResultsController</code>. I&rsquo;m implementing the <a href="http://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/">standard UITableViewDataSource methods</a> here, along with <code>tableView:titleForHeaderInSection</code>. Take a look:</p>
+
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
 <span class="ln"> 2</span>
 <span class="ln"> 3</span>    <span class="c1">// ...</span>
 <span class="ln"> 4</span>
 <span class="ln"> 5</span>    <span class="c1">// </span><span class="cs">MARK:</span><span class="c1"> TableView Data Source</span>
 <span class="ln"> 6</span>    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">numberOfSectionsInTableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-<span class="ln"> 7</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">sections</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">sections</span> <span class="p">{</span>
-<span class="ln"> 8</span>            <span class="k">return</span> <span class="n">sections</span><span class="p">.</span><span class="bp">count</span>
+<span class="hl"><span class="ln"> 7</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">sections</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">sections</span> <span class="p">{</span>
+</span><span class="ln"> 8</span>            <span class="k">return</span> <span class="n">sections</span><span class="p">.</span><span class="bp">count</span>
 <span class="ln"> 9</span>        <span class="p">}</span>
 <span class="ln">10</span>        
 <span class="ln">11</span>        <span class="k">return</span> <span class="mi">0</span>
 <span class="ln">12</span>    <span class="p">}</span>
 <span class="ln">13</span>    
 <span class="ln">14</span>    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-<span class="ln">15</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">sections</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">sections</span> <span class="p">{</span>
-<span class="ln">16</span>            <span class="kd">let</span> <span class="nv">currentSection</span> <span class="p">=</span> <span class="n">sections</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> 
+<span class="hl"><span class="ln">15</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">sections</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">sections</span> <span class="p">{</span>
+</span><span class="ln">16</span>            <span class="kd">let</span> <span class="nv">currentSection</span> <span class="p">=</span> <span class="n">sections</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> 
 <span class="ln">17</span>            <span class="k">return</span> <span class="n">currentSection</span><span class="p">.</span><span class="n">numberOfObjects</span>
 <span class="ln">18</span>        <span class="p">}</span>
 <span class="ln">19</span>        
@@ -375,8 +401,8 @@ MathJax.Hub.Config({
 <span class="ln">31</span>    <span class="p">}</span>
 <span class="ln">32</span>    
 <span class="ln">33</span>    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">titleForHeaderInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span><span class="p">?</span> <span class="p">{</span>
-<span class="ln">34</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">sections</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">sections</span> <span class="p">{</span>
-<span class="ln">35</span>            <span class="kd">let</span> <span class="nv">currentSection</span> <span class="p">=</span> <span class="n">sections</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> 
+<span class="hl"><span class="ln">34</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">sections</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">sections</span> <span class="p">{</span>
+</span><span class="ln">35</span>            <span class="kd">let</span> <span class="nv">currentSection</span> <span class="p">=</span> <span class="n">sections</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> 
 <span class="ln">36</span>            <span class="k">return</span> <span class="n">currentSection</span><span class="p">.</span><span class="n">name</span>
 <span class="ln">37</span>        <span class="p">}</span>
 <span class="ln">38</span>        
@@ -386,6 +412,7 @@ MathJax.Hub.Config({
 <span class="ln">42</span>    <span class="c1">// ...</span>
 <span class="ln">43</span>
 <span class="ln">44</span><span class="p">}</span></code></pre></div>
+
 <p>Apart from a bit of <code>if let ___ = ___</code> syntax, there&rsquo;s not an awful lot of surprising code here if you&rsquo;re familiar with working with table views. I&rsquo;ve highlighted the relevant code related to <code>fetchedResultsController</code>. Without using <code>NSFetchedResultsController</code>, you&rsquo;d probably supply data to the table view from an array or a dictionary or both. The <code>fetchedResultsController</code> code simplifies the data display dilemma when you&rsquo;re using Core Data.</p>
 
 <p>Once the <code>UITableViewDataSource</code> methods are implemented, the implementation of <code>MainViewController</code> is complete for this example.</p>
@@ -395,6 +422,7 @@ MathJax.Hub.Config({
 <h3 id="appdelegate-swift">AppDelegate.swift</h3>
 
 <p>There&rsquo;s one final thing we need to do in order to get things rolling. In the <a href="#nsmanagedobjectcontext-reference">&ldquo;maintain NSManagedObjectContext instance reference&#8221;</a> section of this post, I mentioned the strategy for assigning the <code>NSManagedObjectContext</code> instance in the <code>MainViewController</code>. Here&rsquo;s how I do it:</p>
+
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">AppDelegate</span><span class="p">:</span> <span class="n">UIResponder</span><span class="p">,</span> <span class="n">UIApplicationDelegate</span> <span class="p">{</span>
 <span class="ln"> 2</span>
 <span class="ln"> 3</span>    <span class="c1">// ...</span>
@@ -410,15 +438,16 @@ MathJax.Hub.Config({
 <span class="ln">13</span>        <span class="n">dataHelper</span><span class="p">.</span><span class="n">printAllClassifications</span><span class="p">()</span>
 <span class="ln">14</span>        <span class="n">dataHelper</span><span class="p">.</span><span class="n">printAllAnimals</span><span class="p">()</span>
 <span class="ln">15</span>        
-<span class="ln">16</span>        <span class="kd">let</span> <span class="nv">rootViewController</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="o">!</span><span class="p">.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="o">!</span> <span class="n">MainViewController</span>
-<span class="ln">17</span>        <span class="n">rootViewController</span><span class="p">.</span><span class="n">context</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">;</span>
-<span class="ln">18</span>        
+<span class="hl"><span class="ln">16</span>        <span class="kd">let</span> <span class="nv">rootViewController</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="o">!</span><span class="p">.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="o">!</span> <span class="n">MainViewController</span>
+</span><span class="hl"><span class="ln">17</span>        <span class="n">rootViewController</span><span class="p">.</span><span class="n">context</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">;</span>
+</span><span class="ln">18</span>        
 <span class="ln">19</span>        <span class="k">return</span> <span class="kc">true</span>
 <span class="ln">20</span>    <span class="p">}</span>
 <span class="ln">21</span>
 <span class="ln">22</span>    <span class="c1">// ...</span>
 <span class="ln">23</span>
 <span class="ln">24</span><span class="p">}</span></code></pre></div>
+
 <p><strong>Note:</strong> With iOS 13, the code to assign the <code>managedObjectContext</code> to the root view controller needs to go <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/">in your app&rsquo;s SceneDelegate</a>.</p>
 
 <p>The portion new to &ldquo;injecting&#8221; the <code>managedObjectContext</code> into <code>MainViewController</code> is highlighted. I simply grab a reference to the <code>rootViewController</code> (which in our example is the <code>MainViewController</code>) and cast it to the appropriate type. Then I set the <code>context</code> property to the <code>managedObjectContext</code> that&rsquo;s created in the <code>AppDelegate</code> via Xcode&rsquo;s auto-generated Core Data stack setup.</p>

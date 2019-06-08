@@ -48,8 +48,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Using Swift to Seed a Core Data Database" />
-<meta property="og:description" content="Updated on September 23, 2015 – Swift 2.0
-Designing an application&rsquo;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
+<meta property="og:description" content="Designing an application&rsquo;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
 During development, I&rsquo;ve found that it&rsquo;s often convenient to seed a Core Data database with sample data so that I can preview how it&rsquo;ll look in my application." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/" />
@@ -58,8 +57,7 @@ During development, I&rsquo;ve found that it&rsquo;s often convenient to seed a 
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Using Swift to Seed a Core Data Database"/>
-<meta name="twitter:description" content="Updated on September 23, 2015 – Swift 2.0
-Designing an application&rsquo;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
+<meta name="twitter:description" content="Designing an application&rsquo;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.
 During development, I&rsquo;ve found that it&rsquo;s often convenient to seed a Core Data database with sample data so that I can preview how it&rsquo;ll look in my application."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
@@ -70,7 +68,7 @@ During development, I&rsquo;ve found that it&rsquo;s often convenient to seed a 
   "@type": "BlogPosting",
   "headline": "Using Swift to Seed a Core Data Database",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/02\/25\/using-swift-to-seed-a-core-data-database\/",
-  "wordCount": "1736",
+  "wordCount": "1728",
   "datePublished": "2015-02-26T03:44:53Z",
   "dateModified": "2015-02-26T03:44:53Z",
   "author": {
@@ -201,8 +199,6 @@ MathJax.Hub.Config({
     <p></p>
 
     
-
-<p><small>Updated on September 23, 2015 – Swift 2.0</small></p>
 
 <p>Designing an application&rsquo;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.</p>
 
@@ -430,17 +426,18 @@ MathJax.Hub.Config({
 <h3 id="starting-fresh-every-time">Starting fresh every time</h3>
 
 <p>I&rsquo;ve found that sometimes it helps to have a freshly seeded data store every time I the app while I&rsquo;m in development mode. When I&rsquo;m testing the UI, I may create new entities during my manual testing, but one of the convenient things about seeding the data store is that I don&rsquo;t <em>have</em> to. And even if I did, it&rsquo;s often quite nice to start fresh each run. To do this we&rsquo;ll dive into some of the boilerplate code that Xcode generates for us when we choose to use Core Data when we create the project. Specifically, we&rsquo;ll target the <code>persistentStoreCoordinator</code> closure:</p>
+
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">persistentStoreCoordinator</span><span class="p">:</span> <span class="n">NSPersistentStoreCoordinator</span> <span class="p">=</span> <span class="p">{</span>
 <span class="ln"> 2</span>        <span class="c1">// The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.</span>
 <span class="ln"> 3</span>        <span class="c1">// Create the coordinator and store</span>
 <span class="ln"> 4</span>        <span class="kd">let</span> <span class="nv">coordinator</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectModel</span><span class="p">)</span>
-<span class="ln"> 5</span>        <span class="kd">let</span> <span class="nv">url</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">applicationDocumentsDirectory</span><span class="p">.</span><span class="n">URLByAppendingPathComponent</span><span class="p">(</span><span class="s">&#34;Zootastic.sqlite&#34;</span><span class="p">)</span>
-<span class="ln"> 6</span>        
-<span class="ln"> 7</span>        <span class="k">do</span> <span class="p">{</span>
-<span class="ln"> 8</span>            <span class="k">try</span> <span class="n">NSFileManager</span><span class="p">.</span><span class="n">defaultManager</span><span class="p">().</span><span class="n">removeItemAtURL</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="ln"> 9</span>        <span class="p">}</span> <span class="k">catch</span> <span class="kc">_</span> <span class="p">{</span>
-<span class="ln">10</span>        <span class="p">}</span>
-<span class="ln">11</span>
+<span class="hl"><span class="ln"> 5</span>        <span class="kd">let</span> <span class="nv">url</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">applicationDocumentsDirectory</span><span class="p">.</span><span class="n">URLByAppendingPathComponent</span><span class="p">(</span><span class="s">&#34;Zootastic.sqlite&#34;</span><span class="p">)</span>
+</span><span class="hl"><span class="ln"> 6</span>        
+</span><span class="hl"><span class="ln"> 7</span>        <span class="k">do</span> <span class="p">{</span>
+</span><span class="hl"><span class="ln"> 8</span>            <span class="k">try</span> <span class="n">NSFileManager</span><span class="p">.</span><span class="n">defaultManager</span><span class="p">().</span><span class="n">removeItemAtURL</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span><span class="hl"><span class="ln"> 9</span>        <span class="p">}</span> <span class="k">catch</span> <span class="kc">_</span> <span class="p">{</span>
+</span><span class="hl"><span class="ln">10</span>        <span class="p">}</span>
+</span><span class="ln">11</span>
 <span class="ln">12</span>        
 <span class="ln">13</span>        <span class="kd">var</span> <span class="nv">failureReason</span> <span class="p">=</span> <span class="s">&#34;There was an error creating or loading the application&#39;s saved data.&#34;</span>
 <span class="ln">14</span>        <span class="k">do</span> <span class="p">{</span>
@@ -461,6 +458,7 @@ MathJax.Hub.Config({
 <span class="ln">29</span>        
 <span class="ln">30</span>        <span class="k">return</span> <span class="n">coordinator</span>
 <span class="ln">31</span>        <span class="p">}()</span></code></pre></div>
+
 <p>I&rsquo;ve highlighted the key line that I added (everything else was already in place, generated for me by Xcode). Adding that line removes the sqlite database. The lines that follow add it back in a fresh state.</p>
 
 <h3 id="wrapping-up">Wrapping up</h3>

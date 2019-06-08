@@ -15,7 +15,7 @@ tags:
   - NSFetchedResultsController
   - Swift
   - UITableView
-
+toc: true
 ---
 
 The combination of an `NSFetchedResultsController` and a `UITableView` provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using `NSFetchedResultsController` come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;
@@ -176,7 +176,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 
 The final step in implementing `MainViewController` is to set up the table view so that it pulls data from `fetchedResultsController`. I'm implementing the [standard UITableViewDataSource methods][10] here, along with `tableView:titleForHeaderInSection`. Take a look:
 
-```swift
+{{< highlight swift "hl_lines=7 15 34" >}}
 public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     // ...
@@ -221,7 +221,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
     // ...
 
 }
-```
+{{< /highlight >}}
 
 Apart from a bit of `if let ___ = ___` syntax, there's not an awful lot of surprising code here if you're familiar with working with table views. I've highlighted the relevant code related to `fetchedResultsController`. Without using `NSFetchedResultsController`, you'd probably supply data to the table view from an array or a dictionary or both. The `fetchedResultsController` code simplifies the data display dilemma when you're using Core Data.
 
@@ -233,7 +233,7 @@ Once the `UITableViewDataSource` methods are implemented, the implementation of 
 
 There's one final thing we need to do in order to get things rolling. In the ["maintain NSManagedObjectContext instance reference&#8221;][11] section of this post, I mentioned the strategy for assigning the `NSManagedObjectContext` instance in the `MainViewController`. Here's how I do it:
 
-```swift
+{{< highlight swift "hl_lines=16-17" >}}
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // ...
@@ -258,7 +258,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // ...
 
 }
-```
+{{< /highlight >}}
 
 **Note:** With iOS 13, the code to assign the `managedObjectContext` to the root view controller needs to go [in your app's SceneDelegate](https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/).
 
