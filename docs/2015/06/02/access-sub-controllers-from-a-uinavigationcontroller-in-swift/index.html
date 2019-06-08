@@ -70,7 +70,7 @@ AppDelegate Every iOS application has one root view controller that&rsquo;s pres
   "@type": "BlogPosting",
   "headline": "Access Sub-Controllers from a UINavigationController in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/06\/02\/access-sub-controllers-from-a-uinavigationcontroller-in-swift\/",
-  "wordCount": "755",
+  "wordCount": "777",
   "datePublished": "2015-06-02T17:37:44Z",
   "dateModified": "2015-06-02T17:37:44Z",
   "author": {
@@ -246,6 +246,8 @@ MathJax.Hub.Config({
 <li>Get the navigation controller&rsquo;s first view controller from its array of view controllers (which is what I always think of as the &ldquo;first&#8221; view controller)</li>
 <li>Set whatever properties you need to set</li>
 </ul>
+
+<p><strong>Note:</strong> With iOS 13, the code to assign the <code>managedObjectContext</code> to the root view controller needs to go <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/">in your app&rsquo;s SceneDelegate</a>.</p>
 
 <p>You may be worried about the usage of implicitly unwrapped optionals in this snippet. I tend to avoid them wherever possible too, but I used them here because I reasoned that my navigation controller-based app <em>hinges</em> on the fact that the root view controller of the application is a <code>UINavigationController</code>. Something so fundamental to the app warranted my usage of the implicitly unwrapped optionals, since changing the navigation paradigm of the app would probably break things anyway.</p>
 

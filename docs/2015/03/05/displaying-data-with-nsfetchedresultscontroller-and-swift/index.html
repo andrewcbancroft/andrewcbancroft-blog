@@ -48,8 +48,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Displaying Data With NSFetchedResultsController and Swift" />
-<meta property="og:description" content="Updated on September 23, 2015 – Swift 2.0
-The combination of an NSFetchedResultsController and a UITableView provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using NSFetchedResultsController come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;
+<meta property="og:description" content="The combination of an NSFetchedResultsController and a UITableView provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using NSFetchedResultsController come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;
 With a Core Data data store seeded with data, the next logical step is to display that data somewhere other than the console." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/" />
@@ -58,8 +57,7 @@ With a Core Data data store seeded with data, the next logical step is to displa
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Displaying Data With NSFetchedResultsController and Swift"/>
-<meta name="twitter:description" content="Updated on September 23, 2015 – Swift 2.0
-The combination of an NSFetchedResultsController and a UITableView provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using NSFetchedResultsController come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;
+<meta name="twitter:description" content="The combination of an NSFetchedResultsController and a UITableView provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using NSFetchedResultsController come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;
 With a Core Data data store seeded with data, the next logical step is to display that data somewhere other than the console."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
@@ -70,7 +68,7 @@ With a Core Data data store seeded with data, the next logical step is to displa
   "@type": "BlogPosting",
   "headline": "Displaying Data With NSFetchedResultsController and Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/03\/05\/displaying-data-with-nsfetchedresultscontroller-and-swift\/",
-  "wordCount": "1340",
+  "wordCount": "1354",
   "datePublished": "2015-03-05T15:14:53Z",
   "dateModified": "2015-03-05T15:14:53Z",
   "author": {
@@ -201,8 +199,6 @@ MathJax.Hub.Config({
     <p></p>
 
     
-
-<p><small>Updated on September 23, 2015 – Swift 2.0</small></p>
 
 <p>The combination of an <code>NSFetchedResultsController</code> and a <code>UITableView</code> provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using <code>NSFetchedResultsController</code> come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;</p>
 
@@ -423,6 +419,8 @@ MathJax.Hub.Config({
 <span class="ln">22</span>    <span class="c1">// ...</span>
 <span class="ln">23</span>
 <span class="ln">24</span><span class="p">}</span></code></pre></div>
+<p><strong>Note:</strong> With iOS 13, the code to assign the <code>managedObjectContext</code> to the root view controller needs to go <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/">in your app&rsquo;s SceneDelegate</a>.</p>
+
 <p>The portion new to &ldquo;injecting&#8221; the <code>managedObjectContext</code> into <code>MainViewController</code> is highlighted. I simply grab a reference to the <code>rootViewController</code> (which in our example is the <code>MainViewController</code>) and cast it to the appropriate type. Then I set the <code>context</code> property to the <code>managedObjectContext</code> that&rsquo;s created in the <code>AppDelegate</code> via Xcode&rsquo;s auto-generated Core Data stack setup.</p>
 
 <h3 id="wrapping-up">Wrapping up</h3>

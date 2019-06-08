@@ -18,8 +18,6 @@ tags:
 
 ---
 
-<small>Updated on September 23, 2015 – Swift 2.0</small>
-
 The combination of an `NSFetchedResultsController` and a `UITableView` provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using `NSFetchedResultsController` come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;
 
 [With a Core Data data store seeded with data][1], the next logical step is to _display_ that data somewhere other than the console. This post will be devoted to figuring out how to set up an `NSFetchedResultsController` to display data inside a `UITableView`.
@@ -261,6 +259,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 ```
+
+**Note:** With iOS 13, the code to assign the `managedObjectContext` to the root view controller needs to go [in your app's SceneDelegate](https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/).
+
 
 The portion new to "injecting&#8221; the `managedObjectContext` into `MainViewController` is highlighted. I simply grab a reference to the `rootViewController` (which in our example is the `MainViewController`) and cast it to the appropriate type. Then I set the `context` property to the `managedObjectContext` that's created in the `AppDelegate` via Xcode's auto-generated Core Data stack setup.
 
