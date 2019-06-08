@@ -6,10 +6,21 @@
     <description>Recent content on Andrew Bancroft</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Jun 2019 04:21:19 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Jun 2019 18:20:41 +0000</lastBuildDate>
     
 	<atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Accessing the Root View Controller at Launch on iOS 13 with SceneDelegate</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/</link>
+      <pubDate>Fri, 07 Jun 2019 18:20:41 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/</guid>
+      <description>A new SceneDelegate was introduced for Storyboard-based apps in iOS 13, and with it came some changes in how you&amp;rsquo;re able to access your app&amp;rsquo;s root view controller at app launch.
+The Old Way AppDelegate Swift file used to be where code landed for accessing your app&amp;rsquo;s rootViewController:
+1 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -&amp;gt; Bool { 2 // Override point for customization after application launch. 3 let rootVC = window?</description>
+    </item>
     
     <item>
       <title>New Delights With Xcode 11</title>
