@@ -61,7 +61,7 @@ So the workflow goes like this:
   * Get the navigation controller's first view controller from its array of view controllers (which is what I always think of as the "first&#8221; view controller)
   * Set whatever properties you need to set
 
-**Note:** With iOS 13, the code to assign the `managedObjectContext` to the root view controller needs to go [in your app's SceneDelegate](https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/).
+**Note:** With iOS 13, the code to access the root view controller needs to go [in your app's SceneDelegate](https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/).
 
 You may be worried about the usage of implicitly unwrapped optionals in this snippet. I tend to avoid them wherever possible too, but I used them here because I reasoned that my navigation controller-based app _hinges_ on the fact that the root view controller of the application is a `UINavigationController`. Something so fundamental to the app warranted my usage of the implicitly unwrapped optionals, since changing the navigation paradigm of the app would probably break things anyway.
 
