@@ -6,10 +6,19 @@
     <description>Recent content on Andrew Bancroft</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Jun 2019 18:20:41 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 11 Jun 2019 04:40:54 +0000</lastBuildDate>
     
 	<atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Getting Started With NSPersistentCloudKitContainer</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/</link>
+      <pubDate>Tue, 11 Jun 2019 04:40:54 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/</guid>
+      <description>First Things First  In order to use NSPersistentCloudKitContainer in your app, you need to be targeting iOS 13+. The CloudKit syncing portion only works on physical devices (not in the simulator). That being the case, you&amp;rsquo;ll need two devices running the app to fully test things out and make sure syncing and data merging behavior works as you&amp;rsquo;d expect it to.  The goal of this walkthrough is to provide you with a fully-working example of performing and synchronizing create, read, update, and delete operations using NSPersistentCloudKitContainer.</description>
+    </item>
     
     <item>
       <title>Accessing the Root View Controller at Launch on iOS 13 with SceneDelegate</title>

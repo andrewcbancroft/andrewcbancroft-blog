@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+            (function () {
+                if (window.location.hostname === "localhost") {
+                    console.log("Analytics not running on local dev.");
+                    return;
+                } else {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-33022655-1');
+                }
+            })();
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Getting Started With NSPersistentCloudKitContainer" />
+<meta property="og:description" content="Provides a walkthrough and example project for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/" />
+
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png" />
+
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png" />
+<meta property="article:published_time" content="2019-06-11T04:40:54&#43;00:00"/>
+<meta property="article:modified_time" content="2019-06-11T04:40:54&#43;00:00"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png"/>
+
+<meta name="twitter:title" content="Getting Started With NSPersistentCloudKitContainer"/>
+<meta name="twitter:description" content="Provides a walkthrough and example project for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer"/>
+<meta name="generator" content="Hugo 0.55.6" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Getting Started With NSPersistentCloudKitContainer",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/www.andrewcbancroft.com\/images\/social-assets\/Twitter%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png",
+    "height": "512",
+    "width": "1024"
+  },
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/getting-started-with-nspersistentcloudkitcontainer\/",
+  "wordCount": "390",
+  "datePublished": "2019-06-11T04:40:54Z",
+  "dateModified": "2019-06-11T04:40:54Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Core Data, CloudKit, NSPersistentCloudKitContainer",
+  "description": "Provides a walkthrough and example project for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer"
+}
+</script>
+
+
+
+    <title>Getting Started With NSPersistentCloudKitContainer</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft">GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/">LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft">Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft">Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life">www.dataday.life</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Getting Started With NSPersistentCloudKitContainer</h1>
+    </header>
+    <div class="content">
+    <aside class="wip">
+        <div>
+            <h4>Thanks for stopping by!</h4>
+            <p>You're reading an <a href="https://www.andrewcbancroft.com/work-in-progress">active work in progress</a>, which means things could be a little cluttered. But I'm glad you're here, and I hope you enjoy the discoveries below!</p>
+              <p>Everything on this site is available on GitHub if you'd like to <a href='https://github.com/andrewcbancroft/andrewcbancroft-blog/'>contribute</a>.</p>
+        </div>
+    </aside>
+
+    <p>What is it like to sync data from Core Cata to iCloud using Apple&#39;s new NSPersistentCloudKitContainer?  Here I provide a walkthrough and example project for saving and syncing a single Core Data Entity with CloudKit using this new class.</p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#first-things-first">First Things First</a></li>
+<li><a href="#setup">Setup</a>
+<ul>
+<li><a href="#the-core-data-cloudkit-stack">The Core Data + CloudKit Stack</a></li>
+<li><a href="#adding-capabilities">Adding Capabilities</a>
+<ul>
+<li><a href="#add-icloud-cloudkit">Add iCloud + CloudKit</a></li>
+<li><a href="#add-background-modes-remote-notifications">Add Background Modes + Remote Notifications</a></li>
+</ul></li>
+<li><a href="#what-about-registering-for-remote-notifications">What About Registering for Remote Notifications?</a></li>
+</ul></li>
+<li><a href="#reviewing-the-data-model">Reviewing the Data Model</a></li>
+<li><a href="#reviewing-the-user-interface">Reviewing the User Interface</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
+
+    
+
+<h2 id="first-things-first">First Things First</h2>
+
+<ul>
+<li>In order to use <code>NSPersistentCloudKitContainer</code> in your app, you need to be targeting iOS 13+.</li>
+<li>The CloudKit syncing portion only works on physical devices (not in the simulator).  That being the case, you&rsquo;ll need two devices running the app to fully test things out and make sure syncing and data merging behavior works as you&rsquo;d expect it to.</li>
+</ul>
+
+<p>The goal of this walkthrough is to provide you with a fully-working example of performing and synchronizing create, read, update, and delete operations using <code>NSPersistentCloudKitContainer</code>.</p>
+
+<p>I want you to have something between what was demonstrated in <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">WWDC 2019 Session 202 - Using Core Data With CloudKit</a>&hellip; something beyond saving a list of timestamps, but something less complicated than <a href="https://developer.apple.com/documentation/coredata/synchronizing_a_local_store_to_the_cloud" rel="nofollow">Apple&rsquo;s example project</a> which ends up having you work with multiple managed object contexts.</p>
+
+<p><a name="resources" class="jump-target"></a>
+<div class="resources">
+<div class="resources-header">
+Resources
+</div>
+<ul class="resources-content">
+<li>
+<i class="fas fa-file-code"></i> <a href="" rel="nofollow">Blog Idea List Example Xcode Project</a>
+</li>
+<li>
+<i class="fas fa-link"></i> <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">Using Core Data With CloudKit - WWDC 2019 Session 202</a>
+</li>
+</ul>
+</div></p>
+
+<h2 id="setup">Setup</h2>
+
+<p>The easiest way to get stareted with <code>NSPersistentCloudKitContainer</code> is to enable Core Data and CloudKit when you start your new project.</p>
+
+<p><img src="enable-core-data-cloudkit.png" alt="Enable Core Data and CloudKit" /></p>
+
+<h3 id="the-core-data-cloudkit-stack">The Core Data + CloudKit Stack</h3>
+
+<p>Xcode provides the Core Data Stack code you need in the usual location: in the AppDelegate.swift file.</p>
+
+<p>There&rsquo;s one notable difference though.  Instead of initializing a normal <code>NSPersistentContainer</code>, Xcode uses the new <code>NSPersistentCloudKitContainer</code> (this is why it&rsquo;s important to check the CloudKit box when you create your app).</p>
+
+<p><img src="nspersistentcloudkitcontainer-code.png" alt="NSPersistentCloudKitContainer" /></p>
+
+<h3 id="adding-capabilities">Adding Capabilities</h3>
+
+<p>While Xcode auto-generates the Core Data + CloudKit stack for you, it does <em>not</em> enable iCloud for you.</p>
+
+<p>To enable full functionality, you need to go to your <strong>Xcode project settings</strong>.</p>
+
+<p>Then click on the <strong>Signing &amp; Capabilities</strong> section and add the <strong>iCloud</strong> and <strong>Background Modes</strong> capabilities.</p>
+
+<p>Check the <strong>CloudKit checkbox</strong>, and the <strong>Remote Notifications checkbox</strong>.</p>
+
+<h4 id="add-icloud-cloudkit">Add iCloud + CloudKit</h4>
+
+<p><img src="add-icloud.gif" alt="Add iCloud with CloudKit" /></p>
+
+<h4 id="add-background-modes-remote-notifications">Add Background Modes + Remote Notifications</h4>
+
+<p><img src="add-background-modes.gif" alt="Add Background Modes with Remote Notifications" /></p>
+
+<h3 id="what-about-registering-for-remote-notifications">What About Registering for Remote Notifications?</h3>
+
+<p>The beauty of <code>NSPersistentCloudKitContainer</code> is that it handles all the work required to listen for and respond to remote notifications.</p>
+
+<p>This means that data saved locally on <em>one</em> device gets pushed up to iCloud synced back down to <em>another</em> device automatically.</p>
+
+<h2 id="reviewing-the-data-model">Reviewing the Data Model</h2>
+
+<p>The data model for this is basic:  a single <code>BlogIdea</code> Entity with two properties:</p>
+
+<p><img src="data-model.png" alt="BlogIdea Data Model" /></p>
+
+<h2 id="reviewing-the-user-interface">Reviewing the User Interface</h2>
+
+<p>The example project comes with a pre-set user interface to allow you to perform the essential operations of a data-driven app:  create, read, update, and delete objects.</p>
+
+<p><img src="user-interface.png" alt="User Interface" /></p>
+
+
+    <aside>
+      
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 154 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
