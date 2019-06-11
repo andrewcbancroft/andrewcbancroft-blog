@@ -86,3 +86,5 @@ The data model for this is basic:  a single `BlogIdea` Entity with two propertie
 The example project comes with a pre-set user interface to allow you to perform the essential operations of a data-driven app:  create, read, update, and delete objects.
 
 ![User Interface](user-interface.png)
+
+## More to come...
