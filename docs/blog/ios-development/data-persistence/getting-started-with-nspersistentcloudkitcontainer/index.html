@@ -48,7 +48,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Getting Started With NSPersistentCloudKitContainer" />
-<meta property="og:description" content="Provides a walkthrough and example project for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer" />
+<meta property="og:description" content="Provides an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/" />
 
@@ -62,7 +62,7 @@
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png"/>
 
 <meta name="twitter:title" content="Getting Started With NSPersistentCloudKitContainer"/>
-<meta name="twitter:description" content="Provides a walkthrough and example project for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer"/>
+<meta name="twitter:description" content="Provides an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer"/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/getting-started-with-nspersistentcloudkitcontainer\/",
-  "wordCount": "393",
+  "wordCount": "814",
   "datePublished": "2019-06-11T04:40:54Z",
   "dateModified": "2019-06-11T04:40:54Z",
   "author": {
@@ -86,7 +86,7 @@
     "name": "Andrew"
   },
   "keywords": "Core Data, CloudKit, NSPersistentCloudKitContainer",
-  "description": "Provides a walkthrough and example project for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer"
+  "description": "Provides an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer"
 }
 </script>
 
@@ -214,7 +214,7 @@ MathJax.Hub.Config({
         </div>
     </aside>
 
-    <p>What is it like to sync data from Core Cata to iCloud using Apple&#39;s new NSPersistentCloudKitContainer?  Here I provide a walkthrough and example project for saving and syncing a single Core Data Entity with CloudKit using this new class.</p>
+    <p>What is it like to sync data from Core Cata to iCloud using Apple&#39;s new NSPersistentCloudKitContainer?  Here I provide an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using this new class.</p>
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
@@ -231,9 +231,15 @@ MathJax.Hub.Config({
 <li><a href="#add-background-modes-remote-notifications">Add Background Modes + Remote Notifications</a></li>
 </ul></li>
 <li><a href="#what-about-registering-for-remote-notifications">What About Registering for Remote Notifications?</a></li>
+<li><a href="#what-about-my-data-model-in-icloud">What About My Data Model in iCloud?</a></li>
 </ul></li>
-<li><a href="#reviewing-the-data-model">Reviewing the Data Model</a></li>
-<li><a href="#reviewing-the-user-interface">Reviewing the User Interface</a></li>
+<li><a href="#walking-through-the-example-project">Walking Through the Example Project</a>
+<ul>
+<li><a href="#user-interface">User Interface</a></li>
+<li><a href="#data-model">Data Model</a></li>
+</ul></li>
+<li><a href="#view-controllers">View Controllers</a></li>
+<li><a href="#understanding-the-default-sync-behavior">Understanding the Default Sync Behavior</a></li>
 <li><a href="#more-to-come">More to come&hellip;</a></li>
 </ul></li>
 </ul>
@@ -246,12 +252,14 @@ MathJax.Hub.Config({
 
 <ul>
 <li>In order to use <code>NSPersistentCloudKitContainer</code> in your app, you need to be targeting iOS 13+.</li>
-<li>The CloudKit syncing portion only works on physical devices (not in the simulator).  That being the case, you&rsquo;ll need two devices running the app to fully test things out and make sure syncing and data merging behavior works as you&rsquo;d expect it to.</li>
+<li>The CloudKit syncing portion only works on physical devices (not in the simulator).  That being the case, you&rsquo;ll need two or more devices running the app and using the same iCloud account to fully test things out and make sure syncing and data merging behavior works as you&rsquo;d expect it to.</li>
 </ul>
 
 <p>The goal of this walkthrough is to provide you with a fully-working example of performing and synchronizing create, read, update, and delete operations using <code>NSPersistentCloudKitContainer</code>.</p>
 
-<p>I want you to have something between what was demonstrated in <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">WWDC 2019 Session 202 - Using Core Data With CloudKit</a>&hellip; something beyond saving a list of timestamps, but something less complicated than <a href="https://developer.apple.com/documentation/coredata/synchronizing_a_local_store_to_the_cloud" rel="nofollow">Apple&rsquo;s example project</a> which ends up having you work with multiple managed object contexts.</p>
+<p>It&rsquo;s the project I wish I had for referencing the basics&hellip;something <strong>beyond</strong> the out-of-the-box, saving a list of timestamps that comes pre-implemented with a Master-Detail app, but something <strong>less complicated</strong> than <a href="https://developer.apple.com/documentation/coredata/synchronizing_a_local_store_to_the_cloud" rel="nofollow">Apple&rsquo;s example project</a> which ends up having several relationships involved in the data model, extra features configured on the persistent container, etc.</p>
+
+<p>I offer it to you as reference as well &ndash; I hope it helps!</p>
 
 <p><a name="resources" class="jump-target"></a>
 <div class="resources">
@@ -306,17 +314,85 @@ Resources
 
 <p>This means that data saved locally on <em>one</em> device gets pushed up to iCloud synced back down to <em>another</em> device automatically.</p>
 
-<h2 id="reviewing-the-data-model">Reviewing the Data Model</h2>
+<h3 id="what-about-my-data-model-in-icloud">What About My Data Model in iCloud?</h3>
 
-<p>The data model for this is basic:  a single <code>BlogIdea</code> Entity with two properties:</p>
+<p>When you enable the iCloud capability for your app, Xcode automatically creates a container for your app in the CloudKit Dashboard.</p>
+
+<p>It does <em>not</em>, however, create a schema that matches your Core Data model&hellip;yet.  This is a setting you can toggle, but the default behavior is to &ldquo;lazily&rdquo; create the schema as people create objects and save them to your persistent store.</p>
+
+<p><img src="empty-schema.gif" alt="Empty Schema" /></p>
+
+<h2 id="walking-through-the-example-project">Walking Through the Example Project</h2>
+
+<p>WWDC always gets the blog ideas flowing through my brain, so this little app&rsquo;s theme is &ldquo;saving a list of blog ideas&rdquo;, both locally, and <em>across</em> my devices using <code>NSPersistentCloudKitContainer</code>.</p>
+
+<h3 id="user-interface">User Interface</h3>
+
+<p>The user interfacde allows you to perform the essential operations of a data-driven app:  create, read, update, and delete objects.</p>
+
+<p><img src="user-interface.png" alt="User Interface" /></p>
+
+<h3 id="data-model">Data Model</h3>
+
+<p>The data model for this is basic:  a single <code>BlogIdea</code> Entity with two <code>String</code> properties: <code>ideaTitle</code> and <code>ideaDescription</code>.</p>
 
 <p><img src="data-model.png" alt="BlogIdea Data Model" /></p>
 
-<h2 id="reviewing-the-user-interface">Reviewing the User Interface</h2>
+<p>No relationships or extra configuration options&hellip; just one Entity to keep it simple for reference.</p>
 
-<p>The example project comes with a pre-set user interface to allow you to perform the essential operations of a data-driven app:  create, read, update, and delete objects.</p>
+<p>The <code>BlogIdea</code> NSManagedObject subclass is implemented like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
+<span class="ln">2</span>
+<span class="ln">3</span>    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+<span class="ln">4</span>    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+<span class="ln">5</span>
+<span class="ln">6</span>    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">entityName</span><span class="p">:</span> <span class="nb">String</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;BlogIdea&#34;</span> <span class="p">}</span>
+<span class="ln">7</span><span class="p">}</span></code></pre></div>
+<h2 id="view-controllers">View Controllers</h2>
 
-<p><img src="user-interface.png" alt="User Interface" /></p>
+<p>There are two view controllers that come with this example:</p>
+
+<p><strong>MainViewController</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span>   <span class="n">UIViewController</span><span class="p">,</span> 
+<span class="ln"> 2</span>                            <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">,</span> 
+<span class="ln"> 3</span>                            <span class="n">UITableViewDataSource</span><span class="p">,</span> 
+<span class="ln"> 4</span>                            <span class="n">UITableViewDelegate</span> <span class="p">{</span>
+<span class="ln"> 5</span>    <span class="c1">// Responsible for listing out BlogIdeas in a table view</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span>    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
+<span class="ln"> 8</span>    <span class="c1">// which gets initialized in the SceneDelegate.swift file</span>
+<span class="ln"> 9</span>    <span class="c1">// and passed to this view controller when the scene gets &#34;connected&#34;</span>
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="c1">// Uses NSFetchedResultsController to keep the table view in sync</span>
+<span class="ln">12</span>    <span class="c1">// with the Core Data managed object context</span>
+<span class="ln">13</span>
+<span class="ln">14</span>    <span class="c1">// Implements swipe-to-delete with delete confirmation</span>
+<span class="ln">15</span>
+<span class="ln">16</span>    <span class="c1">// Navigates to editor when someone taps on a table view row</span>
+<span class="ln">17</span>    <span class="c1">// and passes its NSManagedObjectContext instance along</span>
+<span class="ln">18</span><span class="p">}</span></code></pre></div>
+<p><strong>BlogIdeaEditorViewController</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">class</span> <span class="nc">BlogIdeaEditorViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="c1">// Responsible for creating new BlogIdeas</span>
+<span class="ln">3</span>
+<span class="ln">4</span>    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
+<span class="ln">5</span>    <span class="c1">// which gets passed along in MainViewController&#39;s prepare for segue method</span>
+<span class="ln">6</span>
+<span class="ln">7</span>    <span class="c1">// Able to edit existing BlogIdeas</span>
+<span class="ln">8</span><span class="p">}</span></code></pre></div>
+<h2 id="understanding-the-default-sync-behavior">Understanding the Default Sync Behavior</h2>
+
+<p>At this point no additional configuration has happened. The Core Data stack is the unmodified Xcode generated code, and the fetched results controller is hooked up to the managed object context for your app, ready to fetch Blog Ideas and help get them into the table view.</p>
+
+<p>If you open the project, build and run on two devices, and begin adding Blog Ideas, updating them, deleting them, etc. what happens?</p>
+
+<p>The first observation is that&hellip;things&hellip;don&rsquo;t&hellip;seem to be working&hellip;</p>
+
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="//www.youtube.com/embed/DLAwrSCl3Cc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 
 <h2 id="more-to-come">More to come&hellip;</h2>
 
@@ -359,7 +435,7 @@ Resources
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 154 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+            <span class="text-muted">This project contains 156 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
         </div>
     </footer>
 

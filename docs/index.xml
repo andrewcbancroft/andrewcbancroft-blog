@@ -17,7 +17,7 @@
       <pubDate>Tue, 11 Jun 2019 04:40:54 +0000</pubDate>
       
       <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/</guid>
-      <description>First Things First  In order to use NSPersistentCloudKitContainer in your app, you need to be targeting iOS 13+. The CloudKit syncing portion only works on physical devices (not in the simulator). That being the case, you&amp;rsquo;ll need two devices running the app to fully test things out and make sure syncing and data merging behavior works as you&amp;rsquo;d expect it to.  The goal of this walkthrough is to provide you with a fully-working example of performing and synchronizing create, read, update, and delete operations using NSPersistentCloudKitContainer.</description>
+      <description>First Things First  In order to use NSPersistentCloudKitContainer in your app, you need to be targeting iOS 13+. The CloudKit syncing portion only works on physical devices (not in the simulator). That being the case, you&amp;rsquo;ll need two or more devices running the app and using the same iCloud account to fully test things out and make sure syncing and data merging behavior works as you&amp;rsquo;d expect it to.</description>
     </item>
     
     <item>
@@ -1693,6 +1693,24 @@ During the course of the week I discovered something that has been emerging in m
       <description>There is a lot to know. A lot.
 I happen to be one of those individuals who gets geeked out very, very often over very, very nerdy things.
 As of late I&amp;rsquo;ve been really wanting an outlet to share what I&amp;rsquo;ve learned / am learning. The world doesn&amp;rsquo;t need another blog detailing the same things that are already out there – at least not a verbatim copy of information that&amp;rsquo;s available already.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.andrewcbancroft.com/blog/drafts/extensions-over-membership/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/drafts/extensions-over-membership/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.andrewcbancroft.com/blog/drafts/the-perils-of-global-state/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/drafts/the-perils-of-global-state/</guid>
+      <description></description>
     </item>
     
   </channel>
