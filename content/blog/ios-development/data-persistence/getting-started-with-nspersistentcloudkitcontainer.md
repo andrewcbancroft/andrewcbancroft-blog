@@ -113,7 +113,7 @@ public class BlogIdea: NSManagedObject {
 }
 ```
 
-## View Controllers
+### View Controllers
 There are two view controllers that come with this example:
 
 **MainViewController**
