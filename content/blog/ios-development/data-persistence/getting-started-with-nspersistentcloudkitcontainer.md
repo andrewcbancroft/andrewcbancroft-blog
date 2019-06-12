@@ -9,7 +9,7 @@ categories:
   - CloudKit
 tags:
   - NSPersistentCloudKitContainer
-wip: true
+wip: false
 showrecent: true
 images:
   - images/social-assets/Twitter - Getting Started With NSPersistentCloudKitContainer.png
@@ -36,7 +36,7 @@ Resources
 </div>
 <ul class="resources-content">
 <li>
-<i class="fas fa-file-code"></i> <a href="" rel="nofollow">Blog Idea List Example Xcode Project</a>
+<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/BlogIdeaList">Blog Idea List Example Xcode Project</a>
 </li>
 <li>
 <i class="fas fa-link"></i> <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">Using Core Data With CloudKit - WWDC 2019 Session 202</a>
@@ -160,4 +160,52 @@ The first observation is that...things...don't...seem to be working...
 {{< youtube DLAwrSCl3Cc >}}
 
 ...At least not how I thought they would.
-## More to come...
+
+I *expected* my Blog List view to automatically update in response to changes made on my other device, buuut... nope.  Thankfully it's an "easy" fix.
+
+## Reflecting Changes in the UI
+Wherever you access your app's persistent CloudKit container to grab the `viewContext`, you need to set the `automaticallyMergesChangesFromParent` property to `true`.
+
+I initialize the container in the `SceneDelegate`, so check out the code exerpt below to see where that gets set.
+
+**SceneDelegate.swift**
+{{< highlight swift "hl_lines=11" >}}
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+    // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+    // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    guard let _ = (scene as? UIWindowScene) else { return }
+    
+    let navigationController = self.window?.rootViewController as! UINavigationController
+    let mainVC = navigationController.viewControllers[0] as! MainViewController
+    
+    let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    viewContext.automaticallyMergesChangesFromParent = true
+
+    mainVC.managedObjectContext = viewContext
+}
+{{< /highlight >}}
+
+Making this one-line change will enable the app (which is supported by `NSFetchedResultsController`) to update the UI in response to remote data changes...
+
+**eventually**
+
+It can be slow (anywhere from 5 to 15 seconds).  But it will eventually update.
+
+## Revisiting the iCloud Schema
+Once you save an object, the schema within the iCloud Dashboard will update to reflect the properties you designed in your Core Data Model.
+
+![Revisiting the Schema](revisit-schema.png)
+
+## Where's My Data?
+If you attempt to query for BlogIdea records in any of the iCloud databases provisioned for your app, you won't find any.
+
+
+Why?
+
+That's because Apple fully manages a hidden Zone for your Core Data + CloudKit data. It was veeeery briefly mentioned in the <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">WWDC 2019 presentation</a> (right about 10:50 if you're watching).
+
+## Wrapping Up
+My hope was to provide you with a fully-working example of performing and synchronizing create, read, update, and delete operations using `NSPersistentCloudKitContainer`.
+
+Check out the [GitHub repo](https://github.com/andrewcbancroft/BlogIdeaList), leave a comment, or [@ me on Twitter](https://twitter.com/andrewcbancroft) to continue the conversation from here!

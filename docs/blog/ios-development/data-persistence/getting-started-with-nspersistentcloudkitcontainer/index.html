@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/getting-started-with-nspersistentcloudkitcontainer\/",
-  "wordCount": "822",
+  "wordCount": "1167",
   "datePublished": "2019-06-11T04:40:54Z",
   "dateModified": "2019-06-11T04:40:54Z",
   "author": {
@@ -206,13 +206,6 @@ MathJax.Hub.Config({
       <h1 class="article-title">Getting Started With NSPersistentCloudKitContainer</h1>
     </header>
     <div class="content">
-    <aside class="wip">
-        <div>
-            <h4>Thanks for stopping by!</h4>
-            <p>You're reading an <a href="https://www.andrewcbancroft.com/work-in-progress">active work in progress</a>, which means things could be a little cluttered. But I'm glad you're here, and I hope you enjoy the discoveries below!</p>
-              <p>Everything on this site is available on GitHub if you'd like to <a href='https://github.com/andrewcbancroft/andrewcbancroft-blog/'>contribute</a>.</p>
-        </div>
-    </aside>
 
     <p>What is it like to sync data from Core Cata to iCloud using Apple&#39;s new NSPersistentCloudKitContainer?  Here I provide an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using this new class.</p>
     <aside class="toc">
@@ -240,7 +233,10 @@ MathJax.Hub.Config({
 <li><a href="#view-controllers">View Controllers</a></li>
 </ul></li>
 <li><a href="#understanding-the-default-sync-behavior">Understanding the Default Sync Behavior</a></li>
-<li><a href="#more-to-come">More to come&hellip;</a></li>
+<li><a href="#reflecting-changes-in-the-ui">Reflecting Changes in the UI</a></li>
+<li><a href="#revisiting-the-icloud-schema">Revisiting the iCloud Schema</a></li>
+<li><a href="#where-s-my-data">Where&rsquo;s My Data?</a></li>
+<li><a href="#wrapping-up">Wrapping Up</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -268,7 +264,7 @@ Resources
 </div>
 <ul class="resources-content">
 <li>
-<i class="fas fa-file-code"></i> <a href="" rel="nofollow">Blog Idea List Example Xcode Project</a>
+<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/BlogIdeaList">Blog Idea List Example Xcode Project</a>
 </li>
 <li>
 <i class="fas fa-link"></i> <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">Using Core Data With CloudKit - WWDC 2019 Session 202</a>
@@ -396,7 +392,55 @@ Resources
 
 <p>&hellip;At least not how I thought they would.</p>
 
-<h2 id="more-to-come">More to come&hellip;</h2>
+<p>I <em>expected</em> my Blog List view to automatically update in response to changes made on my other device, buuut&hellip; nope.  Thankfully it&rsquo;s an &ldquo;easy&rdquo; fix.</p>
+
+<h2 id="reflecting-changes-in-the-ui">Reflecting Changes in the UI</h2>
+
+<p>Wherever you access your app&rsquo;s persistent CloudKit container to grab the <code>viewContext</code>, you need to set the <code>automaticallyMergesChangesFromParent</code> property to <code>true</code>.</p>
+
+<p>I initialize the container in the <code>SceneDelegate</code>, so check out the code exerpt below to see where that gets set.</p>
+
+<p><strong>SceneDelegate.swift</strong>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln"> 2</span>    <span class="c1">// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.</span>
+<span class="ln"> 3</span>    <span class="c1">// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.</span>
+<span class="ln"> 4</span>    <span class="c1">// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).</span>
+<span class="ln"> 5</span>    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">_</span> <span class="p">=</span> <span class="p">(</span><span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+<span class="ln"> 6</span>    
+<span class="ln"> 7</span>    <span class="kd">let</span> <span class="nv">navigationController</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="o">!</span> <span class="n">UINavigationController</span>
+<span class="ln"> 8</span>    <span class="kd">let</span> <span class="nv">mainVC</span> <span class="p">=</span> <span class="n">navigationController</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="o">!</span> <span class="n">MainViewController</span>
+<span class="ln"> 9</span>    
+<span class="ln">10</span>    <span class="kd">let</span> <span class="nv">viewContext</span> <span class="p">=</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">delegate</span> <span class="k">as</span><span class="o">!</span> <span class="n">AppDelegate</span><span class="p">).</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span>
+<span class="hl"><span class="ln">11</span>    <span class="n">viewContext</span><span class="p">.</span><span class="n">automaticallyMergesChangesFromParent</span> <span class="p">=</span> <span class="kc">true</span>
+</span><span class="ln">12</span>
+<span class="ln">13</span>    <span class="n">mainVC</span><span class="p">.</span><span class="n">managedObjectContext</span> <span class="p">=</span> <span class="n">viewContext</span>
+<span class="ln">14</span><span class="p">}</span></code></pre></div></p>
+
+<p>Making this one-line change will enable the app (which is supported by <code>NSFetchedResultsController</code>) to update the UI in response to remote data changes&hellip;</p>
+
+<p><strong>eventually</strong></p>
+
+<p>It can be slow (anywhere from 5 to 15 seconds).  But it will eventually update.</p>
+
+<h2 id="revisiting-the-icloud-schema">Revisiting the iCloud Schema</h2>
+
+<p>Once you save an object, the schema within the iCloud Dashboard will update to reflect the properties you designed in your Core Data Model.</p>
+
+<p><img src="revisit-schema.png" alt="Revisiting the Schema" /></p>
+
+<h2 id="where-s-my-data">Where&rsquo;s My Data?</h2>
+
+<p>If you attempt to query for BlogIdea records in any of the iCloud databases provisioned for your app, you won&rsquo;t find any.</p>
+
+<p>Why?</p>
+
+<p>That&rsquo;s because Apple fully manages a hidden Zone for your Core Data + CloudKit data. It was veeeery briefly mentioned in the <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">WWDC 2019 presentation</a> (right about 10:50 if you&rsquo;re watching).</p>
+
+<h2 id="wrapping-up">Wrapping Up</h2>
+
+<p>My hope was to provide you with a fully-working example of performing and synchronizing create, read, update, and delete operations using <code>NSPersistentCloudKitContainer</code>.</p>
+
+<p>Check out the <a href="https://github.com/andrewcbancroft/BlogIdeaList">GitHub repo</a>, leave a comment, or <a href="https://twitter.com/andrewcbancroft">@ me on Twitter</a> to continue the conversation from here!</p>
 
 
     <aside>
