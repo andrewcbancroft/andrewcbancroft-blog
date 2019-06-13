@@ -68,6 +68,8 @@ If you don't have the option to view the canvas in Xcode, it's because this feat
 
 Don't feel left out of the SwiftUI fun, though!  Just press `command` + `R` to see everything load up in the iOS 13 Simulator.
 
+If you're learning, you might opt to use [SwiftUI in a Playground](/blog/ios-development/ui-work/using-swiftui-in-playground/) for a more convenient workflow!
+
 ## Syncing Changes Between SwiftUI Code and Xcode's Canvas
 Changing and saving your SwiftUI view code automatically updates the canvas preview.
 
