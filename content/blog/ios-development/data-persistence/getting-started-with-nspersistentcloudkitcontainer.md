@@ -57,6 +57,11 @@ There's one notable difference though.  Instead of initializing a normal `NSPers
 
 ![NSPersistentCloudKitContainer](nspersistentcloudkitcontainer-code.png)
 
+### What About Existing Apps?
+If you've got an existing app that's using a "regular" `NSPersistentContainer`, you can change it to `NSPersistentCloudKitContainer` and continue on from there!
+
+If you're not using `NSPersistentContainer` with your app yet, [my guide on how to migrate](/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/) may be of help!
+
 ### Adding Capabilities
 While Xcode auto-generates the Core Data + CloudKit stack for you, it does *not* enable iCloud for you.
 
@@ -80,7 +85,7 @@ This means that data saved locally on *one* device gets pushed up to iCloud sync
 ### What About My Data Model in iCloud?
 When you enable the iCloud capability for your app, Xcode automatically creates a container for your app in the CloudKit Dashboard.
 
-It does *not*, however, create a schema that matches your Core Data model...yet.  This is a setting you can toggle, but the default behavior is to "lazily" create the schema as people create objects and save them to your persistent store.
+It does *not*, however, create a schema that matches your Core Data model...yet.  This is a setting you can toggle, but the default behavior is to ["lazily" create the schema](#revisiting-the-icloud-schema) as people create objects and save them to your persistent store.
 
 ![Empty Schema](empty-schema.gif)
 
@@ -99,7 +104,7 @@ The data model for this is basic:  a single `BlogIdea` Entity with two `String` 
 
 ![BlogIdea Data Model](data-model.png)
 
-No relationships or extra configuration options... just one Entity to keep it simple for reference.
+No relationships or extra configuration options... just one Entity to keep it a basic reference-able project.
 
 The `BlogIdea` NSManagedObject subclass is implemented like this:
 

@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/getting-started-with-nspersistentcloudkitcontainer\/",
-  "wordCount": "1167",
+  "wordCount": "1213",
   "datePublished": "2019-06-11T04:40:54Z",
   "dateModified": "2019-06-11T04:40:54Z",
   "author": {
@@ -218,6 +218,7 @@ MathJax.Hub.Config({
 <li><a href="#setup">Setup</a>
 <ul>
 <li><a href="#the-core-data-cloudkit-stack">The Core Data + CloudKit Stack</a></li>
+<li><a href="#what-about-existing-apps">What About Existing Apps?</a></li>
 <li><a href="#adding-capabilities">Adding Capabilities</a>
 <ul>
 <li><a href="#add-icloud-cloudkit">Add iCloud + CloudKit</a></li>
@@ -286,6 +287,12 @@ Resources
 
 <p><img src="nspersistentcloudkitcontainer-code.png" alt="NSPersistentCloudKitContainer" /></p>
 
+<h3 id="what-about-existing-apps">What About Existing Apps?</h3>
+
+<p>If you&rsquo;ve got an existing app that&rsquo;s using a &ldquo;regular&rdquo; <code>NSPersistentContainer</code>, you can change it to <code>NSPersistentCloudKitContainer</code> and continue on from there!</p>
+
+<p>If you&rsquo;re not using <code>NSPersistentContainer</code> with your app yet, <a href="https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/">my guide on how to migrate</a> may be of help!</p>
+
 <h3 id="adding-capabilities">Adding Capabilities</h3>
 
 <p>While Xcode auto-generates the Core Data + CloudKit stack for you, it does <em>not</em> enable iCloud for you.</p>
@@ -314,7 +321,7 @@ Resources
 
 <p>When you enable the iCloud capability for your app, Xcode automatically creates a container for your app in the CloudKit Dashboard.</p>
 
-<p>It does <em>not</em>, however, create a schema that matches your Core Data model&hellip;yet.  This is a setting you can toggle, but the default behavior is to &ldquo;lazily&rdquo; create the schema as people create objects and save them to your persistent store.</p>
+<p>It does <em>not</em>, however, create a schema that matches your Core Data model&hellip;yet.  This is a setting you can toggle, but the default behavior is to <a href="#revisiting-the-icloud-schema">&ldquo;lazily&rdquo; create the schema</a> as people create objects and save them to your persistent store.</p>
 
 <p><img src="empty-schema.gif" alt="Empty Schema" /></p>
 
@@ -334,7 +341,7 @@ Resources
 
 <p><img src="data-model.png" alt="BlogIdea Data Model" /></p>
 
-<p>No relationships or extra configuration options&hellip; just one Entity to keep it simple for reference.</p>
+<p>No relationships or extra configuration options&hellip; just one Entity to keep it a basic reference-able project.</p>
 
 <p>The <code>BlogIdea</code> NSManagedObject subclass is implemented like this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
