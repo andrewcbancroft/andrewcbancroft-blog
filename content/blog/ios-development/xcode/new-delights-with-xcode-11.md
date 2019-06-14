@@ -21,7 +21,7 @@ In your project settings, you can search for capabilities you want to add (inste
 ![Capabilities Search](capabilities-search.gif)
 
 ## Editor Quick Actions
-Holding the `command` key down while mousing over and clicking on various levels of your code presents a quick action pop-out.  Handy!
+Holding the `command` key down while mousing over and clicking on various levels of your code presents a quick action pop-out.  Handy!  Xcode 10 had some of these as well, but Xcode 11 adds additional actions in additional areas.
 
 ![Editor Quick Actions](editor-quick-actions.gif)
 
