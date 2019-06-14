@@ -47,26 +47,16 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Expanded Thoughts on Swift’s Type Inference" />
-<meta property="og:description" content="In my recent op-ed on clean coding in Swift focused on Type Inference, I began by saying,
-Quick! Tell me! What is the Type of the birdDetails constant in this code example:
-let birdDetails = birdDetailsFromStorage()
-With no additional context to glean information from, the correct answer to the question is, &ldquo;I have absolutely no clue&#8230;&#8221;
-But is that concluding assertion true? Hmm&#8230;
-I&rsquo;m learning, and as I&rsquo;ve weighed a recent Twitter conversation and thought on a comment thread that Rob Napier made on the post quoted above, I&rsquo;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift." />
+<meta property="og:title" content="On Core Data Object Fetching and Display Strategies" />
+<meta property="og:description" content="Offers thoughts on a strategy question from my inbox for fetching Core Data objects and displaying them in a table view." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/" />
-<meta property="article:published_time" content="2014-08-21T02:19:45&#43;00:00"/>
-<meta property="article:modified_time" content="2014-08-21T02:19:45&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/swifting-out-loud/on-core-data-object-fetching-and-display-strategies/" />
+<meta property="article:published_time" content="2019-06-14T04:40:54&#43;00:00"/>
+<meta property="article:modified_time" content="2019-06-14T04:40:54&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Expanded Thoughts on Swift’s Type Inference"/>
-<meta name="twitter:description" content="In my recent op-ed on clean coding in Swift focused on Type Inference, I began by saying,
-Quick! Tell me! What is the Type of the birdDetails constant in this code example:
-let birdDetails = birdDetailsFromStorage()
-With no additional context to glean information from, the correct answer to the question is, &ldquo;I have absolutely no clue&#8230;&#8221;
-But is that concluding assertion true? Hmm&#8230;
-I&rsquo;m learning, and as I&rsquo;ve weighed a recent Twitter conversation and thought on a comment thread that Rob Napier made on the post quoted above, I&rsquo;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift."/>
+<meta name="twitter:title" content="On Core Data Object Fetching and Display Strategies"/>
+<meta name="twitter:description" content="Offers thoughts on a strategy question from my inbox for fetching Core Data objects and displaying them in a table view."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -74,22 +64,23 @@ I&rsquo;m learning, and as I&rsquo;ve weighed a recent Twitter conversation and
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Expanded Thoughts on Swift’s Type Inference",
-  "url": "https:\/\/www.andrewcbancroft.com\/2014\/08\/20\/expanded-thoughts-on-swifts-type-inference\/",
-  "wordCount": "511",
-  "datePublished": "2014-08-21T02:19:45Z",
-  "dateModified": "2014-08-21T02:19:45Z",
+  "headline": "On Core Data Object Fetching and Display Strategies",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/swifting-out-loud\/on-core-data-object-fetching-and-display-strategies\/",
+  "wordCount": "231",
+  "datePublished": "2019-06-14T04:40:54Z",
+  "dateModified": "2019-06-14T04:40:54Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "iOS \/ Mac, Op-Ed, Swift, Clean Code, Type Inference"
+  "keywords": "Core Data",
+  "description": "Offers thoughts on a strategy question from my inbox for fetching Core Data objects and displaying them in a table view."
 }
 </script>
 
 
 
-    <title>Expanded Thoughts on Swift’s Type Inference</title>
+    <title>On Core Data Object Fetching and Display Strategies</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -201,88 +192,70 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">Expanded Thoughts on Swift’s Type Inference</h1>
+      <h1 class="article-title">On Core Data Object Fetching and Display Strategies</h1>
     </header>
     <div class="content">
+    <aside class="wip">
+        <div>
+            <h4>Thanks for stopping by!</h4>
+            <p>You're reading an <a href="https://www.andrewcbancroft.com/work-in-progress">active work in progress</a>, which means things could be a little cluttered. But I'm glad you're here, and I hope you enjoy the discoveries below!</p>
+              <p>Everything on this site is available on GitHub if you'd like to <a href='https://github.com/andrewcbancroft/andrewcbancroft-blog/'>contribute</a>.</p>
+        </div>
+    </aside>
+    <aside class="wip">
+        <div>
+            <h4>Swifting...Out Loud?</h4>
+            <p>Every now and then, I get questions in my indox from readers and friends. This section offers my "out loud" thoughts and offerings on one of those questions.</p>
+              <p>Everything on this site is available on GitHub if you'd like to <a href='https://github.com/andrewcbancroft/andrewcbancroft-blog/'>contribute</a>. You can also leave a comment to continue the dialog and offer thoughts of your own!</p>
+        </div>
+    </aside>
 
     <p></p>
 
-    <p>In my recent <a title="Clean Coding in Swift – Type Inference" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/" target="_blank">op-ed on clean coding in Swift focused on Type Inference</a>, I began by saying,</p>
+    
 
-<p>Quick!  Tell me!  What is the Type of the <code>birdDetails</code> constant in this code example:</p>
+<h2 id="setting-the-stage">Setting the Stage</h2>
 
-<p><code>let birdDetails = birdDetailsFromStorage()</code></p>
+<p>Suppose one of the <code>NSManagedObject</code> subclasses from your Core Data data model looked like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
+<span class="ln">2</span>
+<span class="ln">3</span>    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+<span class="ln">4</span>    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+<span class="ln">5</span>
+<span class="ln">6</span><span class="p">}</span></code></pre></div>
+<p>Suppose that you also have a class that will provide <code>BlogIdeas</code> to your view controller:</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="c1">// fetches BlogIdea instances to use in your view controller</span>
+<span class="ln">3</span><span class="p">}</span></code></pre></div>
+<p><strong>Requirement:</strong> Say that you need to list all of the <code>ideaTitle</code>s you have inside of a table view (note that you <em>don&rsquo;t</em> need to display the <code>ideaDescription</code> at this time).</p>
 
-<p>With no additional context to glean information from, the correct answer to the question is, &ldquo;I have absolutely no clue&#8230;&#8221;</p>
+<p><strong>Question:</strong>  Which of the following strategies would you recommend for this requirement?</p>
 
-<p><strong>But is that concluding assertion <em>true</em>?  Hmm&#8230;</strong></p>
+<p>1) Fetch all the <code>BlogIdea</code> objects, return them, and then use those returned <code>NSManagedObject</code> instances to display the <code>ideaTitle</code> in the table view.</p>
 
-<p><em>I&rsquo;m learning</em>, and as I&rsquo;ve weighed a recent Twitter conversation and thought on a <a title="Rob Napier Comment" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721" target="_blank">comment thread that Rob Napier made</a> on the post quoted above, I&rsquo;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift.</p>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
+<span class="hl"><span class="ln">2</span>    <span class="kd">func</span> <span class="nf">fetchBlogIdeas</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">BlogIdea</span> <span class="p">{</span>
+</span><span class="ln">3</span>        <span class="c1">// fetch BlogIdea instances</span>
+<span class="ln">4</span>
+<span class="ln">5</span>        <span class="c1">// return the BlogIdea NSManagedObject subclass for the view controller to use</span>
+<span class="ln">6</span>    <span class="p">}</span>
+<span class="ln">7</span><span class="p">}</span></code></pre></div>
 
-<p>Something struck me as I read <a title="Rob's Comment" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721" target="_blank">Rob&rsquo;s comment</a>:  Why <em>wouldn&rsquo;t</em> I know the Type that would be inferred from what is returned by <code>birdDetailsFromStorage()</code> and assigned to <code>birdDetails</code>?  Presumably, I named the function what I named it intentionally.  The part I missed, was that if I had <em>designed</em> well and created a Type called <code>BirdDetails</code> (say, a Struct as Rob proposed), then all of a sudden, an inference can be made by both the compiler <em>and</em> a human that the <code>birdDetails</code> constant is&#8230; well&#8230; an instance of <code>BirdDetails</code>.  Imagine that!</p>
+<p>2) Fetch all of the <code>BlogIdea</code> objects, but make a <code>fetchBlogIdeaTitles</code> function instead. Just return the <code>ideaTitle</code>s, say, in an array of strings to display in the table view.</p>
 
-<p>To quote Rob (emphasis added):</p>
-
-<blockquote>
-<p><span style="color: #3f4549;">Type inference should only be used when the result is unambiguous, but <strong>the best solution is to</strong> <strong>make the result unambiguous</strong>.</span></p>
-</blockquote>
-
-<p>Bingo.  The <em>best</em> solution is to <em>make</em> the result unambiguous.  You and I as code authors are in charge of the clarity or ambiguity of our code – it&rsquo;s up to us to <em>make</em> the results of our function evaluations unambiguous.</p>
-
-<p>When I named the function <code>birdDetailsFromStorage()</code>, I heavily implied something about its return Type in the name.  I even implied it in the name of the <em>constant</em>.  I was expecting the return Type to be something that encapsulated whatever &ldquo;bird details&#8221; are – I just didn&rsquo;t realize it at the time (although it&rsquo;s super obvious now)!</p>
-
-<p>The very _name_ of a thing sets expectations for you and the readers of your code.  It&rsquo;s our job to set ourselves up for that expectation to be <em>fulfilled</em>!  B<span style="color: #3f4549;">e predictable with the return Type of your functions for your own sake.  A function signature should be such that when you run across <code>birdDetailsFromStorage()</code>in some piece of code, you are able to legitimately expect it to return a <code>BirdDetails</code>.  </span></p>
-
-<p><span style="color: #3f4549;">Using this predictable, </span>convention-based approach to give humans the right clues about what the compiler is going to compute a Type to be makes Type Inference a totally legitimate language feature to embrace for the sake of your code&rsquo;s clarity and simplicity.</p>
-
-<p>I&rsquo;ll leave you with a final quote from Rob&rsquo;s comments:</p>
-
-<blockquote>
-<p><span style="color: #3f4549;">Don&rsquo;t go implying that you&rsquo;re returning one thing when you&rsquo;re returning another. If you must, then yes, explicit types are your punishment. 😀</span></p>
-</blockquote>
-
-<p>Thank you Rob for your insight and feedback.  You can read more of Rob&rsquo;s work at <a title="Rob Napier's Blog" href="http://robnapier.net" target="_blank"><a href="http://robnapier.net">http://robnapier.net</a></a>.</p>
-
-<div class="related-posts">
-  <p>
-    You might also enjoy
-  </p>
-  
-  <ul>
-    <li>
-      <a title="Clean Coding in Swift – Functions" href="http://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/" target="_blank">Clean Coding in Swift – Functions</a>
-    </li>
-    <li>
-      <a title="Clean Coding in Swift – Type Inference" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/" target="_blank">Clean Coding in Swift – Type Inference</a>
-    </li>
-    <li>
-      <a title="Pick a Delegate… Any Delegate… On Clean View Controllers in Swift" href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/" target="_blank">Pick a Delegate… Any Delegate… On Clean View Controllers in Swift</a>
-    </li>
-  </ul>
-</div>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
+<span class="hl"><span class="ln">2</span>    <span class="kd">func</span> <span class="nf">fetchBlogIdeaTitles</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">{</span>
+</span><span class="ln">3</span>        <span class="c1">// fetch BlogIdea instances</span>
+<span class="ln">4</span>
+<span class="ln">5</span>        <span class="c1">// pull out ONLY the ideaTitle, </span>
+<span class="ln">6</span>        <span class="c1">// assenble an array for the titles, </span>
+<span class="ln">7</span>        <span class="c1">// return the array</span>
+<span class="ln">8</span>    <span class="p">}</span>
+<span class="ln">9</span><span class="p">}</span></code></pre></div>
 
 
     <aside>
       
-      
-      <div class="resources">
-        <div class="resources-header">
-            You might also enjoy...
-        </div>
-        
-        <ul class="resources-content">
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/">Clean Coding in Swift – Type Inference</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/">Clean Coding in Swift – Functions</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/08/16/sort-yourself-out-sorting-an-array-in-swift/">Sort It Out – Sorting an Array in Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/">Fade In / Out Animations as Class Extensions in Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/">Swift Optionals?  Don’t Forget to Unwrap!</a></li>
-            
-        <ul>
       
     </aside>
 

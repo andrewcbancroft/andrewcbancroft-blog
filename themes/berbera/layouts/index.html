@@ -247,6 +247,24 @@
             </div>
         </div>
 
+        <span id="swifting-out-loud" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Swifting Out Loud</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/swifting-out-loud/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <span id="testing" class="jump-target"></span>
         <div class="row" id="">
             <div class="col-sm-12">

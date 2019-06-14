@@ -77,6 +77,16 @@
     </aside>
     {{- end}}
 
+    {{- if .Params.sol }}
+    <aside class="wip">
+        <div>
+            <h4>Swifting...Out Loud?</h4>
+            <p>Every now and then, I get questions in my indox from readers and friends. This section offers my "out loud" thoughts and offerings on one of those questions.</p>
+              <p>Everything on this site is available on GitHub if you'd like to <a href='https://github.com/andrewcbancroft/andrewcbancroft-blog/'>contribute</a>. You can also leave a comment to continue the dialog and offer thoughts of your own!</p>
+        </div>
+    </aside>
+    {{- end}}
+
     <p>{{ .Params.introtext }}</p>
 
     {{- if .Params.toc }}
