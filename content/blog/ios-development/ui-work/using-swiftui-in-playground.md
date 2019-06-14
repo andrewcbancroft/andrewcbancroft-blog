@@ -1,6 +1,6 @@
 ---
 title: Using SwiftUI in a Playground
-description: What if you could iterate on SwiftUI views more quickly, even if you lack macOS Cataline? Try it out in a Swift Playground!
+description: What if you could iterate on SwiftUI views more quickly, even if you lack macOS Catalina? Try it out in a Swift Playground!
 author: Andrew
 type: blog
 date: 2019-06-13T04:00:18+00:00
