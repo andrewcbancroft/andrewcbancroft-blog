@@ -93,7 +93,7 @@
 
 &lt;p&gt;When you say &amp;ldquo;Core Data&amp;rdquo; and &amp;ldquo;table view&amp;rdquo; in the same sentence, it should also trigger the word &lt;code&gt;NSFetchedResultsController&lt;/code&gt;.  This class is a huuuuge help in displaying &lt;code&gt;NSManagedObject&lt;/code&gt;s in table and collection views.  If you&amp;rsquo;ve only got &lt;code&gt;String&lt;/code&gt;s to work with, you&amp;rsquo;re missing out on saving yourself a lot of boiler plate code that&amp;rsquo;s required to make a table view stay in sync with your persistent store.&lt;/p&gt;
 
-&lt;p&gt;Using &lt;code&gt;NSFetchedResultsController&lt;/code&gt; would change the code a bit.  Instead of returining an array of blog ideas (&lt;code&gt;[BlogIdea]&lt;/code&gt;), you could hold a reference to a &lt;code&gt;NSFetchedResultsController&amp;lt;BlogIdea&amp;gt;&lt;/code&gt; and configure it to fetch:&lt;/p&gt;
+&lt;p&gt;Using &lt;code&gt;NSFetchedResultsController&lt;/code&gt; would change the code a bit.  Instead of returning an array of blog ideas (&lt;code&gt;[BlogIdea]&lt;/code&gt;), you could hold a reference to a &lt;code&gt;NSFetchedResultsController&amp;lt;BlogIdea&amp;gt;&lt;/code&gt; and configure it to fetch:&lt;/p&gt;
 
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// &lt;/span&gt;&lt;span class=&#34;cs&#34;&gt;MARK:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt; - Concept&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// If you give a `Provider` a persistent container, and a fetched results controller delegate to talk back to,&lt;/span&gt;

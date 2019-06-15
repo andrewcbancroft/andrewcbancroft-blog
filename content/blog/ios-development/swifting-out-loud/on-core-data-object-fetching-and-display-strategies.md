@@ -91,7 +91,7 @@ If you're trying to stay memory-efficient, perhaps another idea is to fetch only
 ### Code Efficiency
 When you say "Core Data" and "table view" in the same sentence, it should also trigger the word `NSFetchedResultsController`.  This class is a huuuuge help in displaying `NSManagedObject`s in table and collection views.  If you've only got `String`s to work with, you're missing out on saving yourself a lot of boiler plate code that's required to make a table view stay in sync with your persistent store.
 
-Using `NSFetchedResultsController` would change the code a bit.  Instead of returining an array of blog ideas (`[BlogIdea]`), you could hold a reference to a `NSFetchedResultsController<BlogIdea>` and configure it to fetch:
+Using `NSFetchedResultsController` would change the code a bit.  Instead of returning an array of blog ideas (`[BlogIdea]`), you could hold a reference to a `NSFetchedResultsController<BlogIdea>` and configure it to fetch:
 
 {{< highlight swift "hl_lines=21" >}}
 // MARK: - Concept

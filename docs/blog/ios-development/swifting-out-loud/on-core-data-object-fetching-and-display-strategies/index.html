@@ -282,7 +282,7 @@ MathJax.Hub.Config({
 
 <p>When you say &ldquo;Core Data&rdquo; and &ldquo;table view&rdquo; in the same sentence, it should also trigger the word <code>NSFetchedResultsController</code>.  This class is a huuuuge help in displaying <code>NSManagedObject</code>s in table and collection views.  If you&rsquo;ve only got <code>String</code>s to work with, you&rsquo;re missing out on saving yourself a lot of boiler plate code that&rsquo;s required to make a table view stay in sync with your persistent store.</p>
 
-<p>Using <code>NSFetchedResultsController</code> would change the code a bit.  Instead of returining an array of blog ideas (<code>[BlogIdea]</code>), you could hold a reference to a <code>NSFetchedResultsController&lt;BlogIdea&gt;</code> and configure it to fetch:</p>
+<p>Using <code>NSFetchedResultsController</code> would change the code a bit.  Instead of returning an array of blog ideas (<code>[BlogIdea]</code>), you could hold a reference to a <code>NSFetchedResultsController&lt;BlogIdea&gt;</code> and configure it to fetch:</p>
 
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// </span><span class="cs">MARK:</span><span class="c1"> - Concept</span>
 <span class="ln"> 2</span><span class="c1">// If you give a `Provider` a persistent container, and a fetched results controller delegate to talk back to,</span>
