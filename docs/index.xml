@@ -588,6 +588,49 @@ Resources
     </item>
     
     <item>
+      <title>Resolving Failed to Load Model Named... with Core Data</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/resolving-core-data-failed-to-load-model-named/</link>
+      <pubDate>Thu, 06 Jun 2019 04:40:54 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/resolving-core-data-failed-to-load-model-named/</guid>
+      <description>
+
+&lt;p&gt;You&amp;rsquo;ve done the work to get your Core Data model ready, but right when you hit run, &lt;em&gt;wham&lt;/em&gt;.  Your debug output log shows:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Failed to load model named &lt;strong&gt;ModelName&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You you may experience one of these when you attempt to access your persistent container:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;What in the world is going on?&lt;/p&gt;
+
+&lt;h2 id=&#34;double-check-target-membership&#34;&gt;Double-check Target Membership&lt;/h2&gt;
+
+&lt;p&gt;This is particularly important if you happend to have copied and pasted and &lt;code&gt;.xcdatamodeld&lt;/code&gt; file between projects.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;target-membership.png&#34; alt=&#34;Check Target Membership&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;double-check-model-name&#34;&gt;Double-check Model Name&lt;/h2&gt;
+
+&lt;p&gt;Your model name needs to match throughout the various places you refer to it.  Things can get out of sync if you ever rename your model.&lt;/p&gt;
+
+&lt;p&gt;Check to make sure that the following all match:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;YourModelName&lt;/strong&gt;.xcdatamodeld&lt;/li&gt;
+&lt;li&gt;let container = NSPersistentContainer(name: &amp;ldquo;&lt;strong&gt;YourModelName&lt;/strong&gt;&amp;rdquo;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;match-model-names.png&#34; alt=&#34;Model Names Must Match&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>SwiftUI is Declarative.  What Does That Mean?</title>
       <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-does-declarative-mean/</link>
       <pubDate>Tue, 04 Jun 2019 03:11:48 +0000</pubDate>
