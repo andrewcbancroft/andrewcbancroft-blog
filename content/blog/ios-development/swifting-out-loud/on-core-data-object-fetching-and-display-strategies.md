@@ -6,7 +6,7 @@ type: blog
 date: 2019-06-14T04:40:54+00:00
 categories:
   - Core Data
-wip: true
+wip: false
 showrecent: false
 sol: true
 images:
