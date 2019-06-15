@@ -9,6 +9,8 @@ categories:
 wip: false
 showrecent: false
 images:
+  - /images/social-assets/Twitter - Resolving Failed to Load Model Named... with Core Data.png
+  - /images/social-assets/Facebook - Resolving Failed to Load Model Named... with Core Data.png
 ---
 
 You've done the work to get your Core Data model ready, but right when you hit run, *wham*.  Your debug output log shows:
