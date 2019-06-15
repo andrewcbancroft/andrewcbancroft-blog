@@ -38,7 +38,7 @@
 &lt;p&gt;1) Fetch all the &lt;code&gt;BlogIdea&lt;/code&gt; objects, return them, and then use those returned &lt;code&gt;NSManagedObject&lt;/code&gt; instances to display the &lt;code&gt;ideaTitle&lt;/code&gt; in the table view.&lt;/p&gt;
 
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;BlogIdeaProvider&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;fetchBlogIdeas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;fetchBlogIdeas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// fetch BlogIdea instances&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// return the BlogIdea NSManagedObject subclass for the view controller to use&lt;/span&gt;
@@ -56,6 +56,73 @@
 &lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// return the array&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;swifting-out-loud&#34;&gt;Swifting Out Loud&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ll give my recommendation and then walk through my reasoning.&lt;/p&gt;
+
+&lt;p&gt;In nearly all situations, I would go with option number 1: fetch the &lt;code&gt;NSManagedObject&lt;/code&gt; instances that I need to display, and work with those fully-featured objects, rather than go through the effort to return only the &lt;code&gt;String&lt;/code&gt;s that I need for display.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Why?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To that, I&amp;rsquo;d ask the question:  &amp;ldquo;What are you planning to do &lt;em&gt;next&lt;/em&gt;, once the &lt;code&gt;ideaTitle&lt;/code&gt;s are displayed in the table view?&lt;/p&gt;
+
+&lt;p&gt;Presumably, you&amp;rsquo;re displaying them &lt;em&gt;so that&lt;/em&gt; a user can tap on a cell and&amp;hellip;do something with them.  And that &amp;ldquo;do something with them&amp;rdquo; part almost always means&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Show &lt;em&gt;more&lt;/em&gt; details (in which case, you need the &lt;code&gt;ideaDescription&lt;/code&gt; property as well now)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Edit&lt;/em&gt; the object (in which case you get all your saving features only &lt;strong&gt;if&lt;/strong&gt; it&amp;rsquo;s in &lt;code&gt;NSManagedObject&lt;/code&gt; form)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Delete&lt;/em&gt; the object (again&amp;hellip;needs to be a full &lt;code&gt;NSManagedObject&lt;/code&gt; to easily delete)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;efficiency-trade-offs&#34;&gt;Efficiency Trade-offs&lt;/h2&gt;
+
+&lt;p&gt;One might be concerned about efficiency &amp;ndash; &amp;ldquo;Why return a full object when you only need one of its properties?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s true. You only need one property&amp;hellip;&lt;em&gt;for now&lt;/em&gt;.  Again, I think it goes back to &amp;ldquo;what happens next?&amp;rdquo;&lt;/p&gt;
+
+&lt;h3 id=&#34;fetching-efficiency&#34;&gt;Fetching Efficiency&lt;/h3&gt;
+
+&lt;p&gt;Will you display the &lt;code&gt;ideaTitle&lt;/code&gt; and then have to go fetch &lt;em&gt;again&lt;/em&gt; to get the rest of what you need from your persistent store?  That&amp;rsquo;s almost guaranteed to be less efficient than holding the full &lt;code&gt;NSManagedObject&lt;/code&gt; in memory from the start.&lt;/p&gt;
+
+&lt;h3 id=&#34;memory-efficiency&#34;&gt;Memory Efficiency&lt;/h3&gt;
+
+&lt;p&gt;If you&amp;rsquo;re trying to stay memory-efficient, perhaps another idea is to fetch only a subset of the &lt;code&gt;BlogIdea&lt;/code&gt;s&amp;hellip; You could limit the number of results that come back (after all, only so many can be shown in a table view at a time, anyway, right?).&lt;/p&gt;
+
+&lt;h3 id=&#34;code-efficiency&#34;&gt;Code Efficiency&lt;/h3&gt;
+
+&lt;p&gt;When you say &amp;ldquo;Core Data&amp;rdquo; and &amp;ldquo;table view&amp;rdquo; in the same sentence, it should also trigger the word &lt;code&gt;NSFetchedResultsController&lt;/code&gt;.  This class is a huuuuge help in displaying &lt;code&gt;NSManagedObject&lt;/code&gt;s in table and collection views.  If you&amp;rsquo;ve only got &lt;code&gt;String&lt;/code&gt;s to work with, you&amp;rsquo;re missing out on saving yourself a lot of boiler plate code that&amp;rsquo;s required to make a table view stay in sync with your persistent store.&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code&gt;NSFetchedResultsController&lt;/code&gt; would change the code a bit.  Instead of returining an array of blog ideas (&lt;code&gt;[BlogIdea]&lt;/code&gt;), you could hold a reference to a &lt;code&gt;NSFetchedResultsController&amp;lt;BlogIdea&amp;gt;&lt;/code&gt; and configure it to fetch:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;lazy&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;fetchedResultsController&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchedResultsController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;blogIdeasFetchRequest&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;entityName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;BlogIdea&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;        
+&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;controller&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchedResultsController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;fetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;blogIdeasFetchRetquest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;                                                                &lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSManagedObjectContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;instance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;                                                                &lt;span class=&#34;n&#34;&gt;sectionNameKeyPath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;                                                                &lt;span class=&#34;n&#34;&gt;cacheName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;        
+&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;controller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;delegate&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSFetchedResultsControllerDelegate&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;istance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;        
+&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;            &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;controller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;performFetch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;            &lt;span class=&#34;bp&#34;&gt;fatalError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;\(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;#function&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;: Failed to performFetch: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;\(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;        
+&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;controller&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;concluding-thoughts&#34;&gt;Concluding Thoughts&lt;/h2&gt;
+
+&lt;p&gt;I know I keep going back to it, but I think it&amp;rsquo;s what will help make the decision.&lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s the next thing you&amp;rsquo;re expecting to happen after you fetch the objects and display them?&lt;/p&gt;
+
+&lt;p&gt;Let that be your guiding principle for your fetching and displaying strategy.&lt;/p&gt;
+
+&lt;p&gt;With Core Data, it&amp;rsquo;s almost always going to be more convenient to be working with &lt;code&gt;NSManagedObject&lt;/code&gt;s.  Start there, and handle efficiency problems as they arise. 🙌🏻&lt;/p&gt;
 </description>
     </item>
     

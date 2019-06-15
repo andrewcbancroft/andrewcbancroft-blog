@@ -40,7 +40,7 @@ class BlogIdeaProvider {
 
 {{< highlight swift "hl_lines=2" >}}
 class BlogIdeaProvider {
-    func fetchBlogIdeas() -> BlogIdea {
+    func fetchBlogIdeas() -> [BlogIdea] {
         // fetch BlogIdea instances
 
         // return the BlogIdea NSManagedObject subclass for the view controller to use
@@ -61,3 +61,66 @@ class BlogIdeaProvider {
     }
 }
 {{< /highlight >}}
+
+## Swifting Out Loud
+I'll give my recommendation and then walk through my reasoning.
+
+In nearly all situations, I would go with option number 1: fetch the `NSManagedObject` instances that I need to display, and work with those fully-featured objects, rather than go through the effort to return only the `String`s that I need for display.
+
+**Why?**
+
+To that, I'd ask the question:  "What are you planning to do *next*, once the `ideaTitle`s are displayed in the table view?
+
+Presumably, you're displaying them *so that* a user can tap on a cell and...do something with them.  And that "do something with them" part almost always means
+
+* Show *more* details (in which case, you need the `ideaDescription` property as well now)
+* *Edit* the object (in which case you get all your saving features only **if** it's in `NSManagedObject` form)
+* *Delete* the object (again...needs to be a full `NSManagedObject` to easily delete)
+
+## Efficiency Trade-offs
+One might be concerned about efficiency -- "Why return a full object when you only need one of its properties?"
+
+That's true. You only need one property...*for now*.  Again, I think it goes back to "what happens next?"  
+
+### Fetching Efficiency
+Will you display the `ideaTitle` and then have to go fetch *again* to get the rest of what you need from your persistent store?  That's almost guaranteed to be less efficient than holding the full `NSManagedObject` in memory from the start.
+
+### Memory Efficiency
+If you're trying to stay memory-efficient, perhaps another idea is to fetch only a subset of the `BlogIdea`s... You could limit the number of results that come back (after all, only so many can be shown in a table view at a time, anyway, right?).
+
+### Code Efficiency
+When you say "Core Data" and "table view" in the same sentence, it should also trigger the word `NSFetchedResultsController`.  This class is a huuuuge help in displaying `NSManagedObject`s in table and collection views.  If you've only got `String`s to work with, you're missing out on saving yourself a lot of boiler plate code that's required to make a table view stay in sync with your persistent store.
+
+Using `NSFetchedResultsController` would change the code a bit.  Instead of returining an array of blog ideas (`[BlogIdea]`), you could hold a reference to a `NSFetchedResultsController<BlogIdea>` and configure it to fetch:
+
+{{< highlight swift >}}
+lazy var fetchedResultsController : NSFetchedResultsController<BlogIdea> = {
+        let blogIdeasFetchRequest = NSFetchRequest<BlogIdea>(entityName: "BlogIdea")
+        
+        let controller = NSFetchedResultsController<BlogIdea>(  fetchRequest: blogIdeasFetchRetquest,
+                                                                managedObjectContext: <<<NSManagedObjectContext instance>>>,
+                                                                sectionNameKeyPath: nil,
+                                                                cacheName: nil)
+        
+        controller.delegate = <<<NSFetchedResultsControllerDelegate istance>>>
+        
+        do {
+            try controller.performFetch()
+        } catch {
+            fatalError("\(#function): Failed to performFetch: \(error)")
+        }
+        
+        return controller
+    }()
+{{< /highlight >}}
+
+## Concluding Thoughts
+I know I keep going back to it, but I think it's what will help make the decision.  
+
+What's the next thing you're expecting to happen after you fetch the objects and display them?  
+
+Let that be your guiding principle for your fetching and displaying strategy.
+
+With Core Data, it's almost always going to be more convenient to be working with `NSManagedObject`s.  Start there, and handle efficiency problems as they arise. 🙌🏻
+
+
