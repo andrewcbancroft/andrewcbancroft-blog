@@ -93,16 +93,37 @@ When you say "Core Data" and "table view" in the same sentence, it should also t
 
 Using `NSFetchedResultsController` would change the code a bit.  Instead of returining an array of blog ideas (`[BlogIdea]`), you could hold a reference to a `NSFetchedResultsController<BlogIdea>` and configure it to fetch:
 
-{{< highlight swift >}}
-lazy var fetchedResultsController : NSFetchedResultsController<BlogIdea> = {
+{{< highlight swift "hl_lines=21" >}}
+// MARK: - Concept
+// If you give a `Provider` a persistent container, and a fetched results controller delegate to talk back to,
+// a `Provider` Type can act as a liaison between the view controller and the pieces of Core Data that are needed
+// to initialize a fetched results controller, perform fetches, and other Core Data related actions on behalf of your
+// view controller (instead of you putting all this code in the view controller itself)...
+
+class BlogIdeaProvider {
+    private var persistentContainer: NSPersistentContainer
+    private weak var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?
+    
+    // MARK: - Initializers
+    init(with persistentContainer: NSPersistentContainer, 
+              fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?) {
+
+        self.persistentContainer = persistentContainer
+        self.fetchedResultsControllerDelegate = fetchedResultsControllerDelegate
+
+    }
+    
+    // use this in your view controller to display BlogIdea instances
+    lazy var fetchedResultsController : NSFetchedResultsController<BlogIdea> = {
+        // Configure a fetched results controller and perform an initial fetch
         let blogIdeasFetchRequest = NSFetchRequest<BlogIdea>(entityName: "BlogIdea")
         
-        let controller = NSFetchedResultsController<BlogIdea>(  fetchRequest: blogIdeasFetchRetquest,
-                                                                managedObjectContext: <<<NSManagedObjectContext instance>>>,
+        let controller = NSFetchedResultsController<BlogIdea>(  fetchRequest: blogIdeasFetchRequest,
+                                                                managedObjectContext: self.persistentContainer.viewContext,
                                                                 sectionNameKeyPath: nil,
                                                                 cacheName: nil)
         
-        controller.delegate = <<<NSFetchedResultsControllerDelegate istance>>>
+        controller.delegate = self.fetchedResultsControllerDelegate
         
         do {
             try controller.performFetch()
@@ -112,6 +133,7 @@ lazy var fetchedResultsController : NSFetchedResultsController<BlogIdea> = {
         
         return controller
     }()
+}
 {{< /highlight >}}
 
 ## Concluding Thoughts

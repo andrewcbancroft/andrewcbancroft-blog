@@ -66,7 +66,7 @@
   "@type": "BlogPosting",
   "headline": "On Core Data Object Fetching and Display Strategies",
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/swifting-out-loud\/on-core-data-object-fetching-and-display-strategies\/",
-  "wordCount": "745",
+  "wordCount": "888",
   "datePublished": "2019-06-14T04:40:54Z",
   "dateModified": "2019-06-14T04:40:54Z",
   "author": {
@@ -284,24 +284,46 @@ MathJax.Hub.Config({
 
 <p>Using <code>NSFetchedResultsController</code> would change the code a bit.  Instead of returining an array of blog ideas (<code>[BlogIdea]</code>), you could hold a reference to a <code>NSFetchedResultsController&lt;BlogIdea&gt;</code> and configure it to fetch:</p>
 
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">fetchedResultsController</span> <span class="p">:</span> <span class="n">NSFetchedResultsController</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span> <span class="p">=</span> <span class="p">{</span>
-<span class="ln"> 2</span>        <span class="kd">let</span> <span class="nv">blogIdeasFetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;BlogIdea&#34;</span><span class="p">)</span>
-<span class="ln"> 3</span>        
-<span class="ln"> 4</span>        <span class="kd">let</span> <span class="nv">controller</span> <span class="p">=</span> <span class="n">NSFetchedResultsController</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span><span class="p">(</span>  <span class="n">fetchRequest</span><span class="p">:</span> <span class="n">blogIdeasFetchRetquest</span><span class="p">,</span>
-<span class="ln"> 5</span>                                                                <span class="n">managedObjectContext</span><span class="p">:</span> <span class="o">&lt;&lt;&lt;</span><span class="n">NSManagedObjectContext</span> <span class="n">instance</span><span class="o">&gt;&gt;&gt;</span><span class="p">,</span>
-<span class="ln"> 6</span>                                                                <span class="n">sectionNameKeyPath</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
-<span class="ln"> 7</span>                                                                <span class="n">cacheName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln"> 8</span>        
-<span class="ln"> 9</span>        <span class="n">controller</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="o">&lt;&lt;&lt;</span><span class="n">NSFetchedResultsControllerDelegate</span> <span class="n">istance</span><span class="o">&gt;&gt;&gt;</span>
-<span class="ln">10</span>        
-<span class="ln">11</span>        <span class="k">do</span> <span class="p">{</span>
-<span class="ln">12</span>            <span class="k">try</span> <span class="n">controller</span><span class="p">.</span><span class="n">performFetch</span><span class="p">()</span>
-<span class="ln">13</span>        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">14</span>            <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;</span><span class="si">\(</span><span class="kc">#function</span><span class="si">)</span><span class="s">: Failed to performFetch: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
-<span class="ln">15</span>        <span class="p">}</span>
-<span class="ln">16</span>        
-<span class="ln">17</span>        <span class="k">return</span> <span class="n">controller</span>
-<span class="ln">18</span>    <span class="p">}()</span></code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// </span><span class="cs">MARK:</span><span class="c1"> - Concept</span>
+<span class="ln"> 2</span><span class="c1">// If you give a `Provider` a persistent container, and a fetched results controller delegate to talk back to,</span>
+<span class="ln"> 3</span><span class="c1">// a `Provider` Type can act as a liaison between the view controller and the pieces of Core Data that are needed</span>
+<span class="ln"> 4</span><span class="c1">// to initialize a fetched results controller, perform fetches, and other Core Data related actions on behalf of your</span>
+<span class="ln"> 5</span><span class="c1">// view controller (instead of you putting all this code in the view controller itself)...</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
+<span class="ln"> 8</span>    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">persistentContainer</span><span class="p">:</span> <span class="n">NSPersistentContainer</span>
+<span class="ln"> 9</span>    <span class="kd">private</span> <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">fetchedResultsControllerDelegate</span><span class="p">:</span> <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">?</span>
+<span class="ln">10</span>    
+<span class="ln">11</span>    <span class="c1">// </span><span class="cs">MARK:</span><span class="c1"> - Initializers</span>
+<span class="ln">12</span>    <span class="kd">init</span><span class="p">(</span><span class="n">with</span> <span class="n">persistentContainer</span><span class="p">:</span> <span class="n">NSPersistentContainer</span><span class="p">,</span> 
+<span class="ln">13</span>              <span class="n">fetchedResultsControllerDelegate</span><span class="p">:</span> <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">?)</span> <span class="p">{</span>
+<span class="ln">14</span>
+<span class="ln">15</span>        <span class="kc">self</span><span class="p">.</span><span class="n">persistentContainer</span> <span class="p">=</span> <span class="n">persistentContainer</span>
+<span class="ln">16</span>        <span class="kc">self</span><span class="p">.</span><span class="n">fetchedResultsControllerDelegate</span> <span class="p">=</span> <span class="n">fetchedResultsControllerDelegate</span>
+<span class="ln">17</span>
+<span class="ln">18</span>    <span class="p">}</span>
+<span class="ln">19</span>    
+<span class="ln">20</span>    <span class="c1">// use this in your view controller to display BlogIdea instances</span>
+<span class="hl"><span class="ln">21</span>    <span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">fetchedResultsController</span> <span class="p">:</span> <span class="n">NSFetchedResultsController</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span> <span class="p">=</span> <span class="p">{</span>
+</span><span class="ln">22</span>        <span class="c1">// Configure a fetched results controller and perform an initial fetch</span>
+<span class="ln">23</span>        <span class="kd">let</span> <span class="nv">blogIdeasFetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;BlogIdea&#34;</span><span class="p">)</span>
+<span class="ln">24</span>        
+<span class="ln">25</span>        <span class="kd">let</span> <span class="nv">controller</span> <span class="p">=</span> <span class="n">NSFetchedResultsController</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span><span class="p">(</span>  <span class="n">fetchRequest</span><span class="p">:</span> <span class="n">blogIdeasFetchRequest</span><span class="p">,</span>
+<span class="ln">26</span>                                                                <span class="n">managedObjectContext</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span><span class="p">,</span>
+<span class="ln">27</span>                                                                <span class="n">sectionNameKeyPath</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+<span class="ln">28</span>                                                                <span class="n">cacheName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="ln">29</span>        
+<span class="ln">30</span>        <span class="n">controller</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">fetchedResultsControllerDelegate</span>
+<span class="ln">31</span>        
+<span class="ln">32</span>        <span class="k">do</span> <span class="p">{</span>
+<span class="ln">33</span>            <span class="k">try</span> <span class="n">controller</span><span class="p">.</span><span class="n">performFetch</span><span class="p">()</span>
+<span class="ln">34</span>        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+<span class="ln">35</span>            <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;</span><span class="si">\(</span><span class="kc">#function</span><span class="si">)</span><span class="s">: Failed to performFetch: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
+<span class="ln">36</span>        <span class="p">}</span>
+<span class="ln">37</span>        
+<span class="ln">38</span>        <span class="k">return</span> <span class="n">controller</span>
+<span class="ln">39</span>    <span class="p">}()</span>
+<span class="ln">40</span><span class="p">}</span></code></pre></div>
 
 <h2 id="concluding-thoughts">Concluding Thoughts</h2>
 
