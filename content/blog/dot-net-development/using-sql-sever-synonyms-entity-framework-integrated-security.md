@@ -24,20 +24,20 @@ tags:
 
 This may be an edge case, but I spent enough time (a couple of _days_) spinning on this that I thought it warranted a signpost on the Internet.
 
-Suppose we have the following scenario before us:
+Suppose you have the following scenario before you:
 
 **Basics**
 
-  * We're building an ASP.Net web application
-  * Entity Framework has been chosen as our ORM
-  * SQL Server (any version supporting [Synonyms][1]) is our backend database server of choice
+  * You're building an ASP.Net web application
+  * Entity Framework has been chosen as your ORM
+  * SQL Server (any version supporting [Synonyms][1]) is your backend database server of choice
 
 **Details**
 
-  * We're using "Integrated Security=True&#8221; in our connection string to the database (in web.config)
-  * The Application Pool in which our app resides is running under a domain service account (ie, not the default identity)
-  * Our application primarily talks to one database, but there is information in _another_ database that we need to pull into our app
-  * To access the data in that other database, we've chosen to create a [Synonym][1]
+  * You're using "Integrated Security=True&#8221; in your connection string to the database (in web.config)
+  * The Application Pool in which your app resides is running under a domain service account (ie, not the default identity)
+  * Your application primarily talks to one database, but there is information in _another_ database that you need to pull into your app
+  * To access the data in that other database, you've chosen to create a [Synonym][1]
 
 Every bullet point in this scenario is normal and valid, until you get to the part about using "Integrated Security=True&#8221; in your connection string&#8230;
 
@@ -45,7 +45,7 @@ Every bullet point in this scenario is normal and valid, until you get to the pa
 
 ### Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON'
 
-If we had chosen to use SQL Server authentication in our conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that's what I had been doing in my own application. I started running into the "Login failed&#8230;&#8221; error message once I switched to Integrated Security.
+If you had chosen to use SQL Server authentication in your conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that's what I had been doing in my own application. I started running into the "Login failed&#8230;&#8221; error message once I switched to Integrated Security.
 
 For some reason "Integrated Security=True&#8221; that throws Entity Framework for a loop. It accesses the database used in the `DbContext` instance just fine, but the second a line of code needs to use the object mapped to the _Synonym_, **boom**&#8230; crash&#8230; error&#8230;
 

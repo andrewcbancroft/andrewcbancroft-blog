@@ -10619,23 +10619,23 @@ So now, when we want to model a `MarathonRunner`, we can override his/her abilit
 
 &lt;p&gt;This may be an edge case, but I spent enough time (a couple of &lt;em&gt;days&lt;/em&gt;) spinning on this that I thought it warranted a signpost on the Internet.&lt;/p&gt;
 
-&lt;p&gt;Suppose we have the following scenario before us:&lt;/p&gt;
+&lt;p&gt;Suppose you have the following scenario before you:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Basics&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;We&amp;rsquo;re building an ASP.Net web application&lt;/li&gt;
-&lt;li&gt;Entity Framework has been chosen as our ORM&lt;/li&gt;
-&lt;li&gt;SQL Server (any version supporting &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonyms&lt;/a&gt;) is our backend database server of choice&lt;/li&gt;
+&lt;li&gt;You&amp;rsquo;re building an ASP.Net web application&lt;/li&gt;
+&lt;li&gt;Entity Framework has been chosen as your ORM&lt;/li&gt;
+&lt;li&gt;SQL Server (any version supporting &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonyms&lt;/a&gt;) is your backend database server of choice&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;Details&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;We&amp;rsquo;re using &amp;ldquo;Integrated Security=True&amp;#8221; in our connection string to the database (in web.config)&lt;/li&gt;
-&lt;li&gt;The Application Pool in which our app resides is running under a domain service account (ie, not the default identity)&lt;/li&gt;
-&lt;li&gt;Our application primarily talks to one database, but there is information in &lt;em&gt;another&lt;/em&gt; database that we need to pull into our app&lt;/li&gt;
-&lt;li&gt;To access the data in that other database, we&amp;rsquo;ve chosen to create a &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonym&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;You&amp;rsquo;re using &amp;ldquo;Integrated Security=True&amp;#8221; in your connection string to the database (in web.config)&lt;/li&gt;
+&lt;li&gt;The Application Pool in which your app resides is running under a domain service account (ie, not the default identity)&lt;/li&gt;
+&lt;li&gt;Your application primarily talks to one database, but there is information in &lt;em&gt;another&lt;/em&gt; database that you need to pull into your app&lt;/li&gt;
+&lt;li&gt;To access the data in that other database, you&amp;rsquo;ve chosen to create a &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonym&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Every bullet point in this scenario is normal and valid, until you get to the part about using &amp;ldquo;Integrated Security=True&amp;#8221; in your connection string&amp;#8230;&lt;/p&gt;
@@ -10644,7 +10644,7 @@ So now, when we want to model a `MarathonRunner`, we can override his/her abilit
 
 &lt;h3 id=&#34;login-failed-for-user-8216-nt-authority-anonymous-logon&#34;&gt;Login failed for user &amp;#8216;NT AUTHORITY\ANONYMOUS LOGON&amp;rsquo;&lt;/h3&gt;
 
-&lt;p&gt;If we had chosen to use SQL Server authentication in our conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&amp;rsquo;s what I had been doing in my own application. I started running into the &amp;ldquo;Login failed&amp;#8230;&amp;#8221; error message once I switched to Integrated Security.&lt;/p&gt;
+&lt;p&gt;If you had chosen to use SQL Server authentication in your conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&amp;rsquo;s what I had been doing in my own application. I started running into the &amp;ldquo;Login failed&amp;#8230;&amp;#8221; error message once I switched to Integrated Security.&lt;/p&gt;
 
 &lt;p&gt;For some reason &amp;ldquo;Integrated Security=True&amp;#8221; that throws Entity Framework for a loop. It accesses the database used in the &lt;code&gt;DbContext&lt;/code&gt; instance just fine, but the second a line of code needs to use the object mapped to the &lt;em&gt;Synonym&lt;/em&gt;, &lt;strong&gt;boom&lt;/strong&gt;&amp;#8230; crash&amp;#8230; error&amp;#8230;&lt;/p&gt;
 

@@ -49,9 +49,9 @@
 
 <meta property="og:title" content="SQL Sever Synonyms, Entity Framework, and Integrated Security" />
 <meta property="og:description" content="Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.
-Suppose we have the following scenario before us:
+Suppose you have the following scenario before you:
 Basics
- We&rsquo;re building an ASP.Net web application Entity Framework has been chosen as our ORM SQL Server (any version supporting Synonyms) is our backend database server of choice  Details" />
+ You&rsquo;re building an ASP.Net web application Entity Framework has been chosen as your ORM SQL Server (any version supporting Synonyms) is your backend database server of choice  Details" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/" />
 <meta property="article:published_time" content="2015-05-01T17:44:31&#43;00:00"/>
@@ -60,9 +60,9 @@ Basics
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="SQL Sever Synonyms, Entity Framework, and Integrated Security"/>
 <meta name="twitter:description" content="Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.
-Suppose we have the following scenario before us:
+Suppose you have the following scenario before you:
 Basics
- We&rsquo;re building an ASP.Net web application Entity Framework has been chosen as our ORM SQL Server (any version supporting Synonyms) is our backend database server of choice  Details"/>
+ You&rsquo;re building an ASP.Net web application Entity Framework has been chosen as your ORM SQL Server (any version supporting Synonyms) is your backend database server of choice  Details"/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -211,23 +211,23 @@ MathJax.Hub.Config({
 
 <p>This may be an edge case, but I spent enough time (a couple of <em>days</em>) spinning on this that I thought it warranted a signpost on the Internet.</p>
 
-<p>Suppose we have the following scenario before us:</p>
+<p>Suppose you have the following scenario before you:</p>
 
 <p><strong>Basics</strong></p>
 
 <ul>
-<li>We&rsquo;re building an ASP.Net web application</li>
-<li>Entity Framework has been chosen as our ORM</li>
-<li>SQL Server (any version supporting <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonyms</a>) is our backend database server of choice</li>
+<li>You&rsquo;re building an ASP.Net web application</li>
+<li>Entity Framework has been chosen as your ORM</li>
+<li>SQL Server (any version supporting <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonyms</a>) is your backend database server of choice</li>
 </ul>
 
 <p><strong>Details</strong></p>
 
 <ul>
-<li>We&rsquo;re using &ldquo;Integrated Security=True&#8221; in our connection string to the database (in web.config)</li>
-<li>The Application Pool in which our app resides is running under a domain service account (ie, not the default identity)</li>
-<li>Our application primarily talks to one database, but there is information in <em>another</em> database that we need to pull into our app</li>
-<li>To access the data in that other database, we&rsquo;ve chosen to create a <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonym</a></li>
+<li>You&rsquo;re using &ldquo;Integrated Security=True&#8221; in your connection string to the database (in web.config)</li>
+<li>The Application Pool in which your app resides is running under a domain service account (ie, not the default identity)</li>
+<li>Your application primarily talks to one database, but there is information in <em>another</em> database that you need to pull into your app</li>
+<li>To access the data in that other database, you&rsquo;ve chosen to create a <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonym</a></li>
 </ul>
 
 <p>Every bullet point in this scenario is normal and valid, until you get to the part about using &ldquo;Integrated Security=True&#8221; in your connection string&#8230;</p>
@@ -236,7 +236,7 @@ MathJax.Hub.Config({
 
 <h3 id="login-failed-for-user-8216-nt-authority-anonymous-logon">Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&rsquo;</h3>
 
-<p>If we had chosen to use SQL Server authentication in our conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&rsquo;s what I had been doing in my own application. I started running into the &ldquo;Login failed&#8230;&#8221; error message once I switched to Integrated Security.</p>
+<p>If you had chosen to use SQL Server authentication in your conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&rsquo;s what I had been doing in my own application. I started running into the &ldquo;Login failed&#8230;&#8221; error message once I switched to Integrated Security.</p>
 
 <p>For some reason &ldquo;Integrated Security=True&#8221; that throws Entity Framework for a loop. It accesses the database used in the <code>DbContext</code> instance just fine, but the second a line of code needs to use the object mapped to the <em>Synonym</em>, <strong>boom</strong>&#8230; crash&#8230; error&#8230;</p>
 
