@@ -8,8 +8,10 @@ categories:
   - Core Data
 wip: false
 showrecent: false
-sol: true
+sol: false
 images:
+aliases:
+  - /blog/ios-development/swifting-out-loud/on-core-data-object-fetching-and-display-strategies/
 ---
 
 ## Setting the Stage
@@ -56,7 +58,7 @@ class BlogIdeaProvider {
         // fetch BlogIdea instances
 
         // pull out ONLY the ideaTitle, 
-        // assenble an array for the titles, 
+        // assemble an array for the titles, 
         // return the array
     }
 }

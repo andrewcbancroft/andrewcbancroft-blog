@@ -12,10 +12,10 @@
     
     <item>
       <title>On Core Data Object Fetching and Display Strategies</title>
-      <link>https://www.andrewcbancroft.com/blog/ios-development/swifting-out-loud/on-core-data-object-fetching-and-display-strategies/</link>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/on-core-data-object-fetching-and-display-strategies/</link>
       <pubDate>Fri, 14 Jun 2019 04:40:54 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/ios-development/swifting-out-loud/on-core-data-object-fetching-and-display-strategies/</guid>
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/on-core-data-object-fetching-and-display-strategies/</guid>
       <description>
 
 &lt;h2 id=&#34;setting-the-stage&#34;&gt;Setting the Stage&lt;/h2&gt;
@@ -52,7 +52,7 @@
 &lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// fetch BlogIdea instances&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// pull out ONLY the ideaTitle, &lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// assenble an array for the titles, &lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// assemble an array for the titles, &lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// return the array&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
