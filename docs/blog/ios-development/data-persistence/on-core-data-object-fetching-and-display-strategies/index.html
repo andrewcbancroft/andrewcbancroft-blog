@@ -66,7 +66,7 @@
   "@type": "BlogPosting",
   "headline": "On Core Data Object Fetching and Display Strategies",
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/on-core-data-object-fetching-and-display-strategies\/",
-  "wordCount": "888",
+  "wordCount": "901",
   "datePublished": "2019-06-14T04:40:54Z",
   "dateModified": "2019-06-14T04:40:54Z",
   "author": {
@@ -273,7 +273,7 @@ MathJax.Hub.Config({
 
 <h3 id="code-efficiency">Code Efficiency</h3>
 
-<p>When you say &ldquo;Core Data&rdquo; and &ldquo;table view&rdquo; in the same sentence, it should also trigger the word <code>NSFetchedResultsController</code>.  This class is a huuuuge help in displaying <code>NSManagedObject</code>s in table and collection views.  If you&rsquo;ve only got <code>String</code>s to work with, you&rsquo;re missing out on saving yourself a lot of boiler plate code that&rsquo;s required to make a table view stay in sync with your persistent store.</p>
+<p>When you say &ldquo;Core Data&rdquo; and &ldquo;table view&rdquo; in the same sentence, it should also trigger the word <code>NSFetchedResultsController</code>.  This class is a huuuuge help because it was designed specifically for displaying data from <code>NSManagedObject</code>s in table or collection views.  If you only return an array of <code>String</code>s, you&rsquo;ll have to write a bunch of boiler plate code yourself to keep your table view in sync with your persistent store, but you get all of that for free with <code>NSFetchedResultsController</code>.</p>
 
 <p>Using <code>NSFetchedResultsController</code> would change the code a bit.  Instead of returning an array of blog ideas (<code>[BlogIdea]</code>), you could hold a reference to a <code>NSFetchedResultsController&lt;BlogIdea&gt;</code> and configure it to fetch:</p>
 

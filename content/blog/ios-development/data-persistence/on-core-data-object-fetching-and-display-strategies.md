@@ -91,7 +91,7 @@ Will you display the `ideaTitle` and then have to go fetch *again* to get the re
 If you're trying to stay memory-efficient, perhaps another idea is to fetch only a subset of the `BlogIdea`s... You could limit the number of results that come back (after all, only so many can be shown in a table view at a time, anyway, right?).
 
 ### Code Efficiency
-When you say "Core Data" and "table view" in the same sentence, it should also trigger the word `NSFetchedResultsController`.  This class is a huuuuge help in displaying `NSManagedObject`s in table and collection views.  If you've only got `String`s to work with, you're missing out on saving yourself a lot of boiler plate code that's required to make a table view stay in sync with your persistent store.
+When you say "Core Data" and "table view" in the same sentence, it should also trigger the word `NSFetchedResultsController`.  This class is a huuuuge help because it was designed specifically for displaying data from `NSManagedObject`s in table or collection views.  If you only return an array of `String`s, you'll have to write a bunch of boiler plate code yourself to keep your table view in sync with your persistent store, but you get all of that for free with `NSFetchedResultsController`.
 
 Using `NSFetchedResultsController` would change the code a bit.  Instead of returning an array of blog ideas (`[BlogIdea]`), you could hold a reference to a `NSFetchedResultsController<BlogIdea>` and configure it to fetch:
 

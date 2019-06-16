@@ -91,7 +91,7 @@
 
 &lt;h3 id=&#34;code-efficiency&#34;&gt;Code Efficiency&lt;/h3&gt;
 
-&lt;p&gt;When you say &amp;ldquo;Core Data&amp;rdquo; and &amp;ldquo;table view&amp;rdquo; in the same sentence, it should also trigger the word &lt;code&gt;NSFetchedResultsController&lt;/code&gt;.  This class is a huuuuge help in displaying &lt;code&gt;NSManagedObject&lt;/code&gt;s in table and collection views.  If you&amp;rsquo;ve only got &lt;code&gt;String&lt;/code&gt;s to work with, you&amp;rsquo;re missing out on saving yourself a lot of boiler plate code that&amp;rsquo;s required to make a table view stay in sync with your persistent store.&lt;/p&gt;
+&lt;p&gt;When you say &amp;ldquo;Core Data&amp;rdquo; and &amp;ldquo;table view&amp;rdquo; in the same sentence, it should also trigger the word &lt;code&gt;NSFetchedResultsController&lt;/code&gt;.  This class is a huuuuge help because it was designed specifically for displaying data from &lt;code&gt;NSManagedObject&lt;/code&gt;s in table or collection views.  If you only return an array of &lt;code&gt;String&lt;/code&gt;s, you&amp;rsquo;ll have to write a bunch of boiler plate code yourself to keep your table view in sync with your persistent store, but you get all of that for free with &lt;code&gt;NSFetchedResultsController&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Using &lt;code&gt;NSFetchedResultsController&lt;/code&gt; would change the code a bit.  Instead of returning an array of blog ideas (&lt;code&gt;[BlogIdea]&lt;/code&gt;), you could hold a reference to a &lt;code&gt;NSFetchedResultsController&amp;lt;BlogIdea&amp;gt;&lt;/code&gt; and configure it to fetch:&lt;/p&gt;
 
