@@ -5,10 +5,125 @@
     <description>Recent content about iOS development with Swift  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Jun 2019 04:40:54 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jun 2019 04:40:54 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How Smart (Or Dumb?) Should NSManagedObjects Be?</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-smart-dumb-should-nsmanagedobjects-be/</link>
+      <pubDate>Wed, 19 Jun 2019 04:40:54 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-smart-dumb-should-nsmanagedobjects-be/</guid>
+      <description>
+
+&lt;p&gt;Apps aren&amp;rsquo;t &amp;ldquo;dumb&amp;rdquo;.  Apps do things.  &lt;em&gt;Smart&lt;/em&gt; things.  The question is:  Where do the &amp;ldquo;smart parts&amp;rdquo; go?&lt;/p&gt;
+
+&lt;p&gt;So how you smart or how dumb should &lt;code&gt;NSManagedObject&lt;/code&gt; subclasses be?&lt;/p&gt;
+
+&lt;p&gt;What code should you write in one of these? What should you &lt;em&gt;not&lt;/em&gt;?&lt;/p&gt;
+
+&lt;h2 id=&#34;tldr&#34;&gt;TLDR;&lt;/h2&gt;
+
+&lt;p&gt;Keep &lt;code&gt;NSManagedObject&lt;/code&gt;s about Core Data-y things.&lt;/p&gt;
+
+&lt;p&gt;Ask, &amp;ldquo;Does this help my app work with Core Data-related functionality?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Let the answer to that question guide your decision about whether to extend your &lt;code&gt;NSManagedObject&lt;/code&gt; subclass with additional features.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-safe-zone&#34;&gt;The Safe Zone&lt;/h2&gt;
+
+&lt;p&gt;Here is a listing of what I offer as &amp;ldquo;safe to implmenent&amp;rdquo; inside of an &lt;code&gt;NSManagedObject&lt;/code&gt; subclass:&lt;/p&gt;
+
+&lt;h3 id=&#34;managed-object-life-cycle-events&#34;&gt;Managed Object &amp;ldquo;Life Cycle&amp;rdquo; Events&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;NSManagedObject&lt;/code&gt; comes with several overridable methods that you can implement in order to &amp;ldquo;hook in&amp;rdquo; to the life cycle of the object.  What do I mean?  Check out this sampling of overrideable methods:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;awakeFromFetch()&lt;/code&gt;: Provides an opportunity to add code into the life cycle of the managed object when it is being fulfilled from a fault.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;awakeFromInsert()&lt;/code&gt;: Provides an opportunity to add code into the life cycle of the managed object when it is initially created.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;willSave()&lt;/code&gt;: Provides an opportunity to add code into the life cycle of the managed object when it is about to be saved.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;didSave()&lt;/code&gt;: Provides an opportunity to add code into the life cycle of the managed object after the managed object’s context completes a save operation.&lt;/p&gt;
+
+&lt;p&gt;These methods can be overwritten to add code that should be strategically executed at these pre-determined-by-Apple points in time.&lt;/p&gt;
+
+&lt;h3 id=&#34;validation-code&#34;&gt;Validation Code&lt;/h3&gt;
+
+&lt;p&gt;You an implement custom validation logic in an &lt;code&gt;NSManagedSubclass&lt;/code&gt;.  Don&amp;rsquo;t override &lt;code&gt;validateValue(_:forKey:)&lt;/code&gt; though.&lt;/p&gt;
+
+&lt;p&gt;Instead, implement a custom method with a signature that matches the signature of &lt;code&gt;validatePropertyName:error:&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, if your &lt;code&gt;NSManagedObject&lt;/code&gt; subclass has an &lt;code&gt;age&lt;/code&gt; property and you wanted to implement special validation logic, you could do this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;validateAge&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;AutoreleasingUnsafeMutablePointer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;AnyObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;guard&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;valueNumber&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pointee&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSNumber&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;    
+&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;valueNumber&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;floatValue&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;    
+&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;errorStr&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSLocalizedString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Age must be greater than zero&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tableName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Employee&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;comment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;validation: zero age error&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;userInfoDict&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSLocalizedDescriptionKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;errorStr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;error&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;domain&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;EMPLOYEE_ERROR_DOMAIN&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1123&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;userInfo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;userInfoDict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;throw&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You could also override one of these methods:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;validateForInsert()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;validateForUpdate()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;validateForDelete()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;key-value-observing&#34;&gt;Key-Value Observing&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;NSManagedObject&lt;/code&gt; subclasses inherit methods related to key-value observing that would be appropriate to override.&lt;/p&gt;
+
+&lt;h3 id=&#34;summarizing-the-safe-zone&#34;&gt;Summarizing the Safe Zone&lt;/h3&gt;
+
+&lt;p&gt;Have you noticed a pattern in each of these &amp;ldquo;safe zone&amp;rdquo; sections?&lt;/p&gt;
+
+&lt;p&gt;Key word:  &lt;strong&gt;override&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Apple designed &lt;code&gt;NSManagedObject&lt;/code&gt; with intentional, overrideable methods.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Should I implement &lt;code&gt;this code&lt;/code&gt; here?&amp;rdquo;  Take a look at the method names and let that be a guiding factor in your decision-making.&lt;/p&gt;
+
+&lt;h2 id=&#34;on-fetching-behavior&#34;&gt;On Fetching Behavior&lt;/h2&gt;
+
+&lt;p&gt;Xcode adds a &lt;code&gt;fetchRequest&lt;/code&gt; method when it auto-generates code for you.  So&amp;hellip;I&amp;rsquo;d say it&amp;rsquo;s probably okay to put some &lt;em&gt;basic&lt;/em&gt; fetching behavior with an &lt;code&gt;NSManagedObject&lt;/code&gt; subclass.  Keep it simple though:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nonobjc&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EntityName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;      &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EntityName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;entityName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;EntityName&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My personal preference is to put object fetching behavior in a separate Type.&lt;/p&gt;
+
+&lt;p&gt;You might make a &lt;code&gt;DataProvider&lt;/code&gt; Type and let &lt;em&gt;it&lt;/em&gt; handle setting up &lt;code&gt;NSFetchRequest&lt;/code&gt;(s) with appropriate predicates and sort descriptors.&lt;/p&gt;
+
+&lt;p&gt;Avoid putting &lt;em&gt;all&lt;/em&gt; data-providing code in a catch-all &lt;code&gt;DataProvider&lt;/code&gt;.  If you&amp;rsquo;re fetching &lt;code&gt;Note&lt;/code&gt;s, make a &lt;code&gt;NoteProvider&lt;/code&gt;.  If you&amp;rsquo;re fetching &lt;code&gt;Tag&lt;/code&gt;s, make a &lt;code&gt;TagProvider&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;on-convenience-properties-functions&#34;&gt;On Convenience Properties &amp;amp; Functions&lt;/h2&gt;
+
+&lt;p&gt;One piece of convenience code that I extend my &lt;code&gt;NSManagedObject&lt;/code&gt; subclasses with is an &lt;code&gt;entityName&lt;/code&gt; property.&lt;/p&gt;
+
+&lt;p&gt;This helps me avoid sprinkling the name of an Entity in &lt;code&gt;String&lt;/code&gt; form throughout my code.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;extension&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;EntityName&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;entityName&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;EntityName&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When it comes to other types of functionality, my recommendation is to put that code elsewhere.&lt;/p&gt;
+
+&lt;p&gt;Keep &lt;code&gt;NSManagedObject&lt;/code&gt;s about Core Data-y things.&lt;/p&gt;
+
+&lt;p&gt;Ask, &amp;ldquo;Does this help my app work with Core Data-related functionality?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Let the answer to that question guide your decision about whether to extend your &lt;code&gt;NSManagedObject&lt;/code&gt; subclass with additional features.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Additional features&amp;rdquo; often translates to &amp;ldquo;additional responsibility&amp;rdquo;. Single responsibility is the name of the game if you can achieve it.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://developer.apple.com/documentation/coredata/nsmanagedobject&#34;&gt;https://developer.apple.com/documentation/coredata/nsmanagedobject&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>On Core Data Object Fetching and Display Strategies</title>
