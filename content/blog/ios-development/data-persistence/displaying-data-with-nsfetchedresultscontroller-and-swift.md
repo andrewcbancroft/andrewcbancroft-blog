@@ -16,6 +16,7 @@ tags:
   - Swift
   - UITableView
 toc: true
+disppsbadge: true
 ---
 
 The combination of an `NSFetchedResultsController` and a `UITableView` provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using `NSFetchedResultsController` come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though&#8230;

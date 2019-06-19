@@ -12,7 +12,7 @@ tags:
   - Core Data
   - Playground
   - Swift
-
+disppsbadge: true
 ---
 
 Did you know that you can tinker with Core Data inside of Swift playgrounds in Xcode? You can!

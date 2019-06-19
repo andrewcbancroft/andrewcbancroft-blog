@@ -13,6 +13,7 @@ images:
   - images/social-assets/Twitter - How Smart Or Dumb Should NSManagedObjects Be.png
   - images/social-assets/Facebook - How Smart Or Dumb Should NSManagedObjects Be.png
 toc: true
+disppsbadge: true
 ---
 
 Apps aren't "dumb".  Apps do things.  *Smart* things.  The question is:  Where do the "smart parts" go?

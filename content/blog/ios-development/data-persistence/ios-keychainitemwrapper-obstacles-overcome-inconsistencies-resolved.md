@@ -18,7 +18,7 @@ tags:
   - KeychainItemWrapper
   - Reset iOS Simulator
   - result code -25299
-
+disppsbadge: true
 ---
 
 I had a major case of "struggleface&#8221; when trying to work with the <span class="lang:default decode:true  crayon-inline">KeychainItemWrapper</span>  for iOS.  I wanted it to be simple – just take a username and password and put it in the iOS Keychain for secure retrieval later.  Turns out that I had to spend an entire work day and do a lot of Googling to get it working so I'm posting this to try and bring all the pieces together.

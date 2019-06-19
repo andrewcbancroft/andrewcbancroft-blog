@@ -13,6 +13,7 @@ tags:
   - NSPersistentContainer
   - Swift
 toc: true
+disppsbadge: true
 ---
 If you're targeting **iOS 10 and above**, you've got the opportunity to pick your poison when it comes to creating the Core Data stack.
 

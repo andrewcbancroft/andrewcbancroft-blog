@@ -12,6 +12,7 @@ showrecent: true
 images:
   - images/social-assets/Twitter - First Impressions of NSPersistentCloudKitContainer.png
   - images/social-assets/FB - First Impressions of NSPersistentCloudKitContainer.png
+disppsbadge: true
 ---
 
 <a name="resources" class="jump-target"></a>

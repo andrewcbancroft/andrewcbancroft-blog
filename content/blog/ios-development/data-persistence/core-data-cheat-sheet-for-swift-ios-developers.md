@@ -12,7 +12,7 @@ tags:
   - Cheat Sheet
   - Core Data
   - Swift
-
+disppsbadge: true
 ---
 <small>Updated on July 27, 2016 &#8211; Additional Cheats</small>
 

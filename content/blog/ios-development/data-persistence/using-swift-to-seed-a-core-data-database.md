@@ -12,7 +12,7 @@ tags:
   - Core Data
   - Seed Database
   - Swift
-
+disppsbadge: true
 ---
 
 Designing an application's UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.

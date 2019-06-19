@@ -11,7 +11,7 @@ categories:
 tags:
   - Core Data
   - NSManagedObject Subclass
-
+disppsbadge: true
 ---
 I just finished roasting some coffee from Peru. I've never had it before, but it got me thinking about my [Roaster On the Go][1] "app&#8221; as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate [Working with Unwind Segues Programmatically in Swift][2], but now I'm going to use it to show you how to resolve these errors that can crop up when you're implementing `NSManagedObject` subclasses for your Core Data Entities.
 
