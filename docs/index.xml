@@ -5,10 +5,54 @@
     <description>Recent content about iOS development with Swift  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Jun 2019 04:40:54 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Jun 2019 04:40:54 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>What is an ABI and Why is Swift ABI Stability a Big Deal?</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/notes-on-swift-5/</link>
+      <pubDate>Thu, 20 Jun 2019 04:40:54 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/notes-on-swift-5/</guid>
+      <description>
+
+&lt;h2 id=&#34;what-is-an-abi&#34;&gt;What is an ABI?&lt;/h2&gt;
+
+&lt;p&gt;&amp;ldquo;ABI&amp;rdquo; stands for &amp;ldquo;Application Binary Interface&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The word &amp;ldquo;interface&amp;rdquo; means the same as it does in other places where you hear the word.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s the point where two things can interact.&lt;/p&gt;
+
+&lt;p&gt;A &lt;strong&gt;user&lt;/strong&gt; interface is the point where humans and apps can interact.&lt;/p&gt;
+
+&lt;p&gt;An &lt;strong&gt;Application Programming&lt;/strong&gt; Interface is the point where code interacts with other code.  And since the code doesn&amp;rsquo;t write itself (yet!), it&amp;rsquo;s the point where developers like you and I stitch together pieces of code so that they can interact without us.&lt;/p&gt;
+
+&lt;p&gt;So what&amp;rsquo;s an &lt;strong&gt;Application Binary&lt;/strong&gt; Interface?&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s the point where &lt;em&gt;compiled code&lt;/em&gt; interacts with &lt;em&gt;other compiled code&lt;/em&gt; while your app is running.&lt;/p&gt;
+
+&lt;p&gt;ABI&amp;rsquo;s are one level deeper than &lt;strong&gt;AP&lt;/strong&gt;I&amp;rsquo;s.  They&amp;rsquo;re &lt;em&gt;two&lt;/em&gt; levels deeper than &lt;strong&gt;U&lt;/strong&gt;I&amp;rsquo;s.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-is-abi-stability-a-big-deal&#34;&gt;Why is ABI Stability a Big Deal?&lt;/h2&gt;
+
+&lt;p&gt;Imagine writing some Swift code.  You want to share it across multiple apps, so you put it in a framework.  You compile it with the Swift 4.0 compiler.&lt;/p&gt;
+
+&lt;p&gt;Now imagine Apple announces Swift 4.1.  Sweet!  You decide to build a new app and compile it with the Swift 4.1 compiler.&lt;/p&gt;
+
+&lt;p&gt;Ah, but your apps needs some of that &amp;ldquo;shared feature&amp;rdquo; code from your framework.&lt;/p&gt;
+
+&lt;p&gt;Will it work?  I&amp;rsquo;ll give you one guess. (the answer&amp;rsquo;s &amp;ldquo;nope&amp;rdquo;)&lt;/p&gt;
+
+&lt;p&gt;Prior to &amp;ldquo;ABI stability&amp;rdquo; being a feature of Swift, the only guarantee we had that two pieces of compiled code could talk to one another is if the two pieces of code were compiled with the &lt;strong&gt;same compiler&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;A framework could be compiled with the Swift 4.0 compiler. &lt;em&gt;You&lt;/em&gt; can build an app with the Swift 4.1 compiler.  &lt;strong&gt;BUT. The two cannot communicate.&lt;/strong&gt;  Either the framework or your app needed to be &lt;strong&gt;re&lt;/strong&gt;compiled using the same version of the compiler for it to work.&lt;/p&gt;
+
+&lt;p&gt;Now, &amp;ldquo;ABI stability&amp;rdquo; &lt;em&gt;is&lt;/em&gt; a feature of Swift Proper.  A framework could be compiled with the Swift 5.0 compiler. &lt;em&gt;You&lt;/em&gt; can build an app with the Swift 5.1 compiler.  &lt;strong&gt;The two can communicate!&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>How Smart (Or Dumb?) Should NSManagedObjects Be?</title>
