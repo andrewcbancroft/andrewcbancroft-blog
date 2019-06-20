@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/how-smart-dumb-should-nsmanagedobjects-be\/",
-  "wordCount": "663",
+  "wordCount": "662",
   "datePublished": "2019-06-19T04:40:54Z",
   "dateModified": "2019-06-19T04:40:54Z",
   "author": {
@@ -271,7 +271,7 @@ MathJax.Hub.Config({
 
 <h3 id="validation-code">Validation Code</h3>
 
-<p>You an implement custom validation logic in an <code>NSManagedSubclass</code>.  Don&rsquo;t override <code>validateValue(_:forKey:)</code> though.</p>
+<p>You can implement custom validation logic in an <code>NSManagedSubclass</code>.  Don&rsquo;t override <code>validateValue(_:forKey:)</code> though.</p>
 
 <p>Instead, implement a custom method with a signature that matches the signature of <code>validatePropertyName:error:</code>.</p>
 
@@ -341,8 +341,6 @@ MathJax.Hub.Config({
 <p>Let the answer to that question guide your decision about whether to extend your <code>NSManagedObject</code> subclass with additional features.</p>
 
 <p>&ldquo;Additional features&rdquo; often translates to &ldquo;additional responsibility&rdquo;. Single responsibility is the name of the game if you can achieve it.</p>
-
-<p><a href="https://developer.apple.com/documentation/coredata/nsmanagedobject">https://developer.apple.com/documentation/coredata/nsmanagedobject</a></p>
 
 
     <aside>

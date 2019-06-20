@@ -52,7 +52,7 @@
 
 &lt;h3 id=&#34;validation-code&#34;&gt;Validation Code&lt;/h3&gt;
 
-&lt;p&gt;You an implement custom validation logic in an &lt;code&gt;NSManagedSubclass&lt;/code&gt;.  Don&amp;rsquo;t override &lt;code&gt;validateValue(_:forKey:)&lt;/code&gt; though.&lt;/p&gt;
+&lt;p&gt;You can implement custom validation logic in an &lt;code&gt;NSManagedSubclass&lt;/code&gt;.  Don&amp;rsquo;t override &lt;code&gt;validateValue(_:forKey:)&lt;/code&gt; though.&lt;/p&gt;
 
 &lt;p&gt;Instead, implement a custom method with a signature that matches the signature of &lt;code&gt;validatePropertyName:error:&lt;/code&gt;.&lt;/p&gt;
 
@@ -122,8 +122,6 @@
 &lt;p&gt;Let the answer to that question guide your decision about whether to extend your &lt;code&gt;NSManagedObject&lt;/code&gt; subclass with additional features.&lt;/p&gt;
 
 &lt;p&gt;&amp;ldquo;Additional features&amp;rdquo; often translates to &amp;ldquo;additional responsibility&amp;rdquo;. Single responsibility is the name of the game if you can achieve it.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://developer.apple.com/documentation/coredata/nsmanagedobject&#34;&gt;https://developer.apple.com/documentation/coredata/nsmanagedobject&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

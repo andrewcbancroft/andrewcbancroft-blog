@@ -46,7 +46,7 @@ Apple has designed some spots for you to customize an `NSManagedObject`'s defaul
 These methods can be overwritten to add code that should be strategically executed at these pre-determined-by-Apple points in time.
 
 ### Validation Code
-You an implement custom validation logic in an `NSManagedSubclass`.  Don't override `validateValue(_:forKey:)` though.
+You can implement custom validation logic in an `NSManagedSubclass`.  Don't override `validateValue(_:forKey:)` though.
 
 Instead, implement a custom method with a signature that matches the signature of `validatePropertyName:error:`.
 
@@ -125,4 +125,3 @@ Let the answer to that question guide your decision about whether to extend your
 
 "Additional features" often translates to "additional responsibility". Single responsibility is the name of the game if you can achieve it.
 
-https://developer.apple.com/documentation/coredata/nsmanagedobject
