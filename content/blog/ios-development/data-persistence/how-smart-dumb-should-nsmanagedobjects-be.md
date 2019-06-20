@@ -25,17 +25,17 @@ What code should you write in one of these? What should you *not*?
 ## TLDR;
 Keep `NSManagedObject`s about Core Data-y things.  
 
-Ask, "Does this help my app work with Core Data-related functionality?"  
+Ask, "Does this help my `NSManagedObject` subclass work with Core Data-related functionality?"  
 
 Let the answer to that question guide your decision about whether to extend your `NSManagedObject` subclass with additional features.
 
-## The Safe Zone
-Here is a listing of what I offer as "safe to implmenent" inside of an `NSManagedObject` subclass:
+## Designed Overrides
+Apple has designed some spots for you to customize an `NSManagedObject`'s default behavior.
 
 ### Managed Object "Life Cycle" Events
 `NSManagedObject` comes with several overridable methods that you can implement in order to "hook in" to the life cycle of the object.  What do I mean?  Check out this sampling of overrideable methods:
 
-`awakeFromFetch()`: Provides an opportunity to add code into the life cycle of the managed object when it is being fulfilled from a fault.
+`awakeFromFetch()`: Provides an opportunity to add code into the life cycle of the managed object when Core Data is bringing the object from the persistent store into memory.
 
 `awakeFromInsert()`: Provides an opportunity to add code into the life cycle of the managed object when it is initially created.
 
@@ -67,23 +67,25 @@ func validateAge(value: AutoreleasingUnsafeMutablePointer<AnyObject?>) throws {
 }
 ```
 
-You could also override one of these methods:
+You could also override one of these methods to add advanced validation:
 
 * `validateForInsert()`
 * `validateForUpdate()`
 * `validateForDelete()`
 
 ### Key-Value Observing
-`NSManagedObject` subclasses inherit methods related to key-value observing that would be appropriate to override.
+`NSManagedObject` subclasses inherit methods related to key-value observing that could be appropriate to override.
 
-### Summarizing the Safe Zone
-Have you noticed a pattern in each of these "safe zone" sections?
+### Summarizing Designed Overrides
+Have you noticed a pattern in each of these sections?
 
 Key word:  **override**
 
 Apple designed `NSManagedObject` with intentional, overrideable methods.  
 
-"Should I implement `this code` here?"  Take a look at the method names and let that be a guiding factor in your decision-making.  
+"Should I implement `this code` here?"  
+
+Take a look at the method names and let that be a guiding factor in your decision-making.  
 
 ## On Fetching Behavior
 
@@ -117,7 +119,7 @@ When it comes to other types of functionality, my recommendation is to put that 
 
 Keep `NSManagedObject`s about Core Data-y things.  
 
-Ask, "Does this help my app work with Core Data-related functionality?"  
+Ask, "Does this help my `NSManagedObject` subclass work with Core Data-related functionality?"  
 
 Let the answer to that question guide your decision about whether to extend your `NSManagedObject` subclass with additional features.
 

@@ -28,19 +28,19 @@
 
 &lt;p&gt;Keep &lt;code&gt;NSManagedObject&lt;/code&gt;s about Core Data-y things.&lt;/p&gt;
 
-&lt;p&gt;Ask, &amp;ldquo;Does this help my app work with Core Data-related functionality?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Ask, &amp;ldquo;Does this help my &lt;code&gt;NSManagedObject&lt;/code&gt; subclass work with Core Data-related functionality?&amp;rdquo;&lt;/p&gt;
 
 &lt;p&gt;Let the answer to that question guide your decision about whether to extend your &lt;code&gt;NSManagedObject&lt;/code&gt; subclass with additional features.&lt;/p&gt;
 
-&lt;h2 id=&#34;the-safe-zone&#34;&gt;The Safe Zone&lt;/h2&gt;
+&lt;h2 id=&#34;designed-overrides&#34;&gt;Designed Overrides&lt;/h2&gt;
 
-&lt;p&gt;Here is a listing of what I offer as &amp;ldquo;safe to implmenent&amp;rdquo; inside of an &lt;code&gt;NSManagedObject&lt;/code&gt; subclass:&lt;/p&gt;
+&lt;p&gt;Apple has designed some spots for you to customize an &lt;code&gt;NSManagedObject&lt;/code&gt;&amp;rsquo;s default behavior.&lt;/p&gt;
 
 &lt;h3 id=&#34;managed-object-life-cycle-events&#34;&gt;Managed Object &amp;ldquo;Life Cycle&amp;rdquo; Events&lt;/h3&gt;
 
 &lt;p&gt;&lt;code&gt;NSManagedObject&lt;/code&gt; comes with several overridable methods that you can implement in order to &amp;ldquo;hook in&amp;rdquo; to the life cycle of the object.  What do I mean?  Check out this sampling of overrideable methods:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;awakeFromFetch()&lt;/code&gt;: Provides an opportunity to add code into the life cycle of the managed object when it is being fulfilled from a fault.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;awakeFromFetch()&lt;/code&gt;: Provides an opportunity to add code into the life cycle of the managed object when Core Data is bringing the object from the persistent store into memory.&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;awakeFromInsert()&lt;/code&gt;: Provides an opportunity to add code into the life cycle of the managed object when it is initially created.&lt;/p&gt;
 
@@ -69,7 +69,7 @@
 &lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;error&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;domain&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;EMPLOYEE_ERROR_DOMAIN&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1123&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;userInfo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;userInfoDict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;throw&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;You could also override one of these methods:&lt;/p&gt;
+&lt;p&gt;You could also override one of these methods to add advanced validation:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;validateForInsert()&lt;/code&gt;&lt;/li&gt;
@@ -79,17 +79,19 @@
 
 &lt;h3 id=&#34;key-value-observing&#34;&gt;Key-Value Observing&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;NSManagedObject&lt;/code&gt; subclasses inherit methods related to key-value observing that would be appropriate to override.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;NSManagedObject&lt;/code&gt; subclasses inherit methods related to key-value observing that could be appropriate to override.&lt;/p&gt;
 
-&lt;h3 id=&#34;summarizing-the-safe-zone&#34;&gt;Summarizing the Safe Zone&lt;/h3&gt;
+&lt;h3 id=&#34;summarizing-designed-overrides&#34;&gt;Summarizing Designed Overrides&lt;/h3&gt;
 
-&lt;p&gt;Have you noticed a pattern in each of these &amp;ldquo;safe zone&amp;rdquo; sections?&lt;/p&gt;
+&lt;p&gt;Have you noticed a pattern in each of these sections?&lt;/p&gt;
 
 &lt;p&gt;Key word:  &lt;strong&gt;override&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Apple designed &lt;code&gt;NSManagedObject&lt;/code&gt; with intentional, overrideable methods.&lt;/p&gt;
 
-&lt;p&gt;&amp;ldquo;Should I implement &lt;code&gt;this code&lt;/code&gt; here?&amp;rdquo;  Take a look at the method names and let that be a guiding factor in your decision-making.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Should I implement &lt;code&gt;this code&lt;/code&gt; here?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Take a look at the method names and let that be a guiding factor in your decision-making.&lt;/p&gt;
 
 &lt;h2 id=&#34;on-fetching-behavior&#34;&gt;On Fetching Behavior&lt;/h2&gt;
 
@@ -115,7 +117,7 @@
 
 &lt;p&gt;Keep &lt;code&gt;NSManagedObject&lt;/code&gt;s about Core Data-y things.&lt;/p&gt;
 
-&lt;p&gt;Ask, &amp;ldquo;Does this help my app work with Core Data-related functionality?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Ask, &amp;ldquo;Does this help my &lt;code&gt;NSManagedObject&lt;/code&gt; subclass work with Core Data-related functionality?&amp;rdquo;&lt;/p&gt;
 
 &lt;p&gt;Let the answer to that question guide your decision about whether to extend your &lt;code&gt;NSManagedObject&lt;/code&gt; subclass with additional features.&lt;/p&gt;
 

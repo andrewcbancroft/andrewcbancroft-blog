@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/how-smart-dumb-should-nsmanagedobjects-be\/",
-  "wordCount": "660",
+  "wordCount": "663",
   "datePublished": "2019-06-19T04:40:54Z",
   "dateModified": "2019-06-19T04:40:54Z",
   "author": {
@@ -221,12 +221,12 @@ MathJax.Hub.Config({
 <li>
 <ul>
 <li><a href="#tldr">TLDR;</a></li>
-<li><a href="#the-safe-zone">The Safe Zone</a>
+<li><a href="#designed-overrides">Designed Overrides</a>
 <ul>
 <li><a href="#managed-object-life-cycle-events">Managed Object &ldquo;Life Cycle&rdquo; Events</a></li>
 <li><a href="#validation-code">Validation Code</a></li>
 <li><a href="#key-value-observing">Key-Value Observing</a></li>
-<li><a href="#summarizing-the-safe-zone">Summarizing the Safe Zone</a></li>
+<li><a href="#summarizing-designed-overrides">Summarizing Designed Overrides</a></li>
 </ul></li>
 <li><a href="#on-fetching-behavior">On Fetching Behavior</a></li>
 <li><a href="#on-convenience-properties-functions">On Convenience Properties &amp; Functions</a></li>
@@ -247,19 +247,19 @@ MathJax.Hub.Config({
 
 <p>Keep <code>NSManagedObject</code>s about Core Data-y things.</p>
 
-<p>Ask, &ldquo;Does this help my app work with Core Data-related functionality?&rdquo;</p>
+<p>Ask, &ldquo;Does this help my <code>NSManagedObject</code> subclass work with Core Data-related functionality?&rdquo;</p>
 
 <p>Let the answer to that question guide your decision about whether to extend your <code>NSManagedObject</code> subclass with additional features.</p>
 
-<h2 id="the-safe-zone">The Safe Zone</h2>
+<h2 id="designed-overrides">Designed Overrides</h2>
 
-<p>Here is a listing of what I offer as &ldquo;safe to implmenent&rdquo; inside of an <code>NSManagedObject</code> subclass:</p>
+<p>Apple has designed some spots for you to customize an <code>NSManagedObject</code>&rsquo;s default behavior.</p>
 
 <h3 id="managed-object-life-cycle-events">Managed Object &ldquo;Life Cycle&rdquo; Events</h3>
 
 <p><code>NSManagedObject</code> comes with several overridable methods that you can implement in order to &ldquo;hook in&rdquo; to the life cycle of the object.  What do I mean?  Check out this sampling of overrideable methods:</p>
 
-<p><code>awakeFromFetch()</code>: Provides an opportunity to add code into the life cycle of the managed object when it is being fulfilled from a fault.</p>
+<p><code>awakeFromFetch()</code>: Provides an opportunity to add code into the life cycle of the managed object when Core Data is bringing the object from the persistent store into memory.</p>
 
 <p><code>awakeFromInsert()</code>: Provides an opportunity to add code into the life cycle of the managed object when it is initially created.</p>
 
@@ -288,7 +288,7 @@ MathJax.Hub.Config({
 <span class="ln">10</span>    <span class="kd">let</span> <span class="nv">error</span> <span class="p">=</span> <span class="n">NSError</span><span class="p">(</span><span class="n">domain</span><span class="p">:</span> <span class="s">&#34;EMPLOYEE_ERROR_DOMAIN&#34;</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="mi">1123</span><span class="p">,</span> <span class="n">userInfo</span><span class="p">:</span> <span class="n">userInfoDict</span><span class="p">)</span>
 <span class="ln">11</span>    <span class="k">throw</span> <span class="n">error</span>
 <span class="ln">12</span><span class="p">}</span></code></pre></div>
-<p>You could also override one of these methods:</p>
+<p>You could also override one of these methods to add advanced validation:</p>
 
 <ul>
 <li><code>validateForInsert()</code></li>
@@ -298,17 +298,19 @@ MathJax.Hub.Config({
 
 <h3 id="key-value-observing">Key-Value Observing</h3>
 
-<p><code>NSManagedObject</code> subclasses inherit methods related to key-value observing that would be appropriate to override.</p>
+<p><code>NSManagedObject</code> subclasses inherit methods related to key-value observing that could be appropriate to override.</p>
 
-<h3 id="summarizing-the-safe-zone">Summarizing the Safe Zone</h3>
+<h3 id="summarizing-designed-overrides">Summarizing Designed Overrides</h3>
 
-<p>Have you noticed a pattern in each of these &ldquo;safe zone&rdquo; sections?</p>
+<p>Have you noticed a pattern in each of these sections?</p>
 
 <p>Key word:  <strong>override</strong></p>
 
 <p>Apple designed <code>NSManagedObject</code> with intentional, overrideable methods.</p>
 
-<p>&ldquo;Should I implement <code>this code</code> here?&rdquo;  Take a look at the method names and let that be a guiding factor in your decision-making.</p>
+<p>&ldquo;Should I implement <code>this code</code> here?&rdquo;</p>
+
+<p>Take a look at the method names and let that be a guiding factor in your decision-making.</p>
 
 <h2 id="on-fetching-behavior">On Fetching Behavior</h2>
 
@@ -334,7 +336,7 @@ MathJax.Hub.Config({
 
 <p>Keep <code>NSManagedObject</code>s about Core Data-y things.</p>
 
-<p>Ask, &ldquo;Does this help my app work with Core Data-related functionality?&rdquo;</p>
+<p>Ask, &ldquo;Does this help my <code>NSManagedObject</code> subclass work with Core Data-related functionality?&rdquo;</p>
 
 <p>Let the answer to that question guide your decision about whether to extend your <code>NSManagedObject</code> subclass with additional features.</p>
 
