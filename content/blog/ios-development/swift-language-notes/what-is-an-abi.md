@@ -11,7 +11,7 @@ wip: true
 showrecent: false
 sol: false
 images:
-toc: true
+toc: false
 disppsbadge: false
 ---
 
