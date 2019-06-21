@@ -47,18 +47,16 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Do Core Data Entities Need Primary Keys?" />
-<meta property="og:description" content="In this video I pop the hood on Core Data&rsquo;s SQLite persistent store to discover the details about whether or not you need to add a property representing a &ldquo;primary key&#8221; for your Core Data Entities. Take a look and be sure to subscribe for to stay connected to future screen casts!
- Transcript I had a question asked to me recently to the effect of… “Do I need to create a Primary Key property when I model my Core Data Entities?" />
+<meta property="og:title" content="Make a Bash Script Executable" />
+<meta property="og:description" content="Explains how to make a bash script, enable execution, and run it at the command line." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2018/08/10/core-data-entities-need-primary-keys/" />
-<meta property="article:published_time" content="2018-08-10T22:31:47&#43;00:00"/>
-<meta property="article:modified_time" content="2018-08-10T22:31:47&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/musings/make-bash-script-executable/" />
+<meta property="article:published_time" content="2019-06-21T04:40:54&#43;00:00"/>
+<meta property="article:modified_time" content="2019-06-21T04:40:54&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Do Core Data Entities Need Primary Keys?"/>
-<meta name="twitter:description" content="In this video I pop the hood on Core Data&rsquo;s SQLite persistent store to discover the details about whether or not you need to add a property representing a &ldquo;primary key&#8221; for your Core Data Entities. Take a look and be sure to subscribe for to stay connected to future screen casts!
- Transcript I had a question asked to me recently to the effect of… “Do I need to create a Primary Key property when I model my Core Data Entities?"/>
+<meta name="twitter:title" content="Make a Bash Script Executable"/>
+<meta name="twitter:description" content="Explains how to make a bash script, enable execution, and run it at the command line."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -66,22 +64,22 @@
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Do Core Data Entities Need Primary Keys?",
-  "url": "https:\/\/www.andrewcbancroft.com\/2018\/08\/10\/core-data-entities-need-primary-keys\/",
-  "wordCount": "875",
-  "datePublished": "2018-08-10T22:31:47Z",
-  "dateModified": "2018-08-10T22:31:47Z",
+  "headline": "Make a Bash Script Executable",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/musings\/make-bash-script-executable\/",
+  "wordCount": "166",
+  "datePublished": "2019-06-21T04:40:54Z",
+  "dateModified": "2019-06-21T04:40:54Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "Swift, Core Data, Primary Key"
+  "description": "Explains how to make a bash script, enable execution, and run it at the command line."
 }
 </script>
 
 
 
-    <title>Do Core Data Entities Need Primary Keys?</title>
+    <title>Make a Bash Script Executable</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -194,11 +192,7 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-        <div class="alert alert-primary" role="alert">
-            Learning about data technologies on iOS? <br/><br/>
-            I've created courses on <a href="http://bit.ly/core-data-swift" class="alert-link">Core Data</a>, <a href="http://bit.ly/cloudkit-fundamentals" class="alert-link">CloudKit</a>, and <a href="http://bit.ly/core-data-primary-keys" class="alert-link">the Big Picture of Data Persistence on iOS</a> for <a href="http://bit.ly/ps-author-page" class="alert-link">Pluralsight</a>.  <br/><br/>Deepen your understanding by checking them out!
-          </div>
-      <h1 class="article-title">Do Core Data Entities Need Primary Keys?</h1>
+      <h1 class="article-title">Make a Bash Script Executable</h1>
     </header>
     <div class="content">
 
@@ -206,101 +200,41 @@ MathJax.Hub.Config({
 
     
 
-<p>In this video I pop the hood on Core Data&rsquo;s SQLite persistent store to discover the details about whether or not you need to add a property representing a &ldquo;primary key&#8221; for your Core Data Entities. Take a look and be sure to subscribe for to stay connected to future screen casts!</p>
+<p>If you constantly run the same set of commands at the command line, why not automate that?</p>
 
-<div style="position:relative;height:0;padding-bottom:56.25%">
-</div>
+<p>I found myself typing the same things over and over to deploy this website.  Here&rsquo;s how I encapsulated it into a script that saves me keystrokes at the command line.</p>
 
-<h1 id="transcript">Transcript</h1>
+<h3 id="1-create-a-new-text-file-with-a-sh-extension">1) Create a new text file with a <code>.sh</code> extension.</h3>
 
-<p>I had a question asked to me recently to the effect of… “Do I need to create a Primary Key property when I model my Core Data Entities?”</p>
+<p>I created a new file called <code>deploy.sh</code> for my website.</p>
 
-<p>I’m going to tackle answering this one with an Xcode sample project I built a while back and put out on GitHub…</p>
+<h3 id="2-add-bin-bash-to-the-top-of-it">2) Add <code>#!/bin/bash</code> to the top of it.</h3>
 
-<p>If you go to <a href="https://github.com/andrewcbancroft/Zootastic">https://github.com/andrewcbancroft/Zootastic</a>, you’ll be able to clone the repository and follow along with me if you’d like.</p>
+<p>This is necessary for the &ldquo;make it executable&rdquo; part.</p>
 
-<p>This repo is Zoo-themed … don’t judge -haha My kids love animals so I couldn’t help myself…</p>
+<h3 id="3-add-lines-that-you-d-normally-type-at-the-command-line">3) Add lines that you&rsquo;d normally type at the command line.</h3>
 
-<p>The Core Data model for this project looks like this. I’m going to focus in on just <em>one</em> of those entities in this video…namely, the Zoo entity.</p>
+<p>As an example, here&rsquo;s the full contents of the file I use to deploy general updates to <a href="https://www.andrewcbancroft.com">andrewcbancroft.com</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="cp">#!/bin/bash
+</span><span class="ln">2</span><span class="cp"></span>
+<span class="ln">3</span>hugo
+<span class="ln">4</span>
+<span class="ln">5</span>git add .
+<span class="ln">6</span>
+<span class="ln">7</span>git commit -m <span class="s2">&#34;Updates&#34;</span>
+<span class="ln">8</span>
+<span class="ln">9</span>git push</code></pre></div>
+<h3 id="4-at-the-command-line-run-chmod-u-x-yourscriptfilenamer-sh">4) At the command line, run <code>chmod u+x YourScriptFileNamer.sh</code></h3>
 
-<p>With that context in mind, let’s think about primary keys… Do you need them when you’re modeling Entities in a Core Data project?</p>
+<p>I ran <code>chmod u+x deploy.sh</code> to make mine executable.</p>
 
-<p>Let’s consider what primary keys are <em>for</em>, first of all. Essentially what you’re after when you specify a Primary Key in a relational database is a guarantee of the uniqueness of a row in a table…</p>
+<h3 id="5-run-it-whenever-you-need">5) Run it whenever you need!</h3>
 
-<p>You want to make sure that a given representation…a given instance…one row of an Entity can be uniquely identified, and that’s typically done by adding an ID column with a sequential, unrepeated integer value called a Primary Key.</p>
-
-<p>That way even though two rows may have similar information, such as these two zoos with the same name, you can always represent the City Zoo in Denver Colorado with the unique ID of 1, and the City Zoo in Oklahoma City, OK with the ID of 3.</p>
-
-<p>Suppose our data model has this Zoo entity with two properties: Location and Name…</p>
-
-<p>The question at hand is… Do you add this ZooID property? Or not?</p>
-
-<p>By far the most common use-case with apps using Core Data is to use the NSSQLiteStoreType as the underlying persistent store.</p>
-
-<p>What this means is that Core Data acts as an abstraction layer over the underlying persistent store, which happens to be a SQLite relational database under the hood.</p>
-
-<p>When you create Entities with Attributes in your core data model, those turn into Tables with Columns in the SQLite database.</p>
-
-<p>What I want to do right now is show you what happens when your data model is initialized in an app using Core Data with a SQLite persistent store, and what you’re going to discover is that Core Data’s got your back when it comes to Primary Keys.</p>
-
-<p>Watch this…</p>
-
-<p>I’m going to edit the scheme of the Zootastic app to show you how to get a little bit of extra debug information related to the SQL queries that are being run under the hood as Core Data interacts with your persistent store.</p>
-
-<p>Under Run, you can add an argument that’s passed when the app is launched to get this extra debug information. Use the -com.apple.CoreData.SQLDebug switch and pass 1 as the argument.</p>
-
-<p>Running the app loads a ton of text into the debug console’s output, but what I’m interested in showing you is right up here at the top.</p>
-
-<p>Do you see this right here? Core Data sends a CREATE TABLE statement to the SQLite database engine, and within the columns it creates is this Z_PK integer column as a… Primary Key.</p>
-
-<p>But I haven’t listed a PK property in my Entity!</p>
-
-<p>Seeing the fact that even though I don’t put in a special primary key property, Core Data still creates that column in the SQLite database, I think you can answer the question on your own.</p>
-
-<p>My answer would be, “No… you don’t need to specify a special ID property to serve as your entity’s Primary Key because Core Data knows this internally and creates one automatically.”</p>
-
-<p>Now just in case you’re skeptical and don’t believe that the column is actually IN the database, I want to show you explicitly.</p>
-
-<p>At the top of this debug output, do you see this? it’s a path to the sqlite database file that the app is using. I’m going to copy it and jump over to a terminal session.</p>
-
-<p>cd to that directory and list its contents.</p>
-
-<p>Zootastic.sqlite is what I want to peek into, so I’ll run sqlite3 with that file specified.</p>
-
-<p>If you run .table, sqlite will list out all the tables in this database file.</p>
-
-<p>Running .schema on ZZOO shows you that yes indeed the primary key column is present in the database table that holds the Zoos for the app.</p>
-
-<p>Selecting all columns from the ZZOO table shows that it’s populated with integer values as you’d expect.</p>
-
-<p>Bottom line? You don’t need to explicitly create an ID column to serve as a primary key. Core Data takes care of that for you.</p>
-
-<p>If you’re learning Core Data, you might enjoy my Core Data Fundamentals with Swift course on Pluralsight. I cover the essentials to get you up and running with Core Data in your apps developed for Apple’s platforms.</p>
-
-<p>Thank you for watching!</p>
+<p>Now, whenever I deploy changes to my website, I run <code>./deploy.sh</code> and <strong>boom</strong>.  Done.</p>
 
 
     <aside>
       
-      
-      <div class="resources">
-        <div class="resources-header">
-            You might also enjoy...
-        </div>
-        
-        <ul class="resources-content">
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/">Using an Existing SQLite Store with NSPersistentContainer</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/">A Swift Implementation of the Core Data Stack Using NSPersistentContainer</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/">Core Data Model Attributes and NSManagedObject Property Types Must Match!</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">Creating the Core Data Stack with Backwards Compatibility in Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/04/02/core-data-fundamentals-swift/">Core Data Fundamentals with Swift</a></li>
-            
-        <ul>
       
     </aside>
 
