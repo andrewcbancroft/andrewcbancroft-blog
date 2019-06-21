@@ -5,40 +5,18 @@
     <description>Recent content about iOS development with Swift  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Jun 2019 04:40:54 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Jun 2019 04:40:54 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>What is an ABI and Why is Swift ABI Stability a Big Deal?</title>
-      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/notes-on-swift-5/</link>
-      <pubDate>Thu, 20 Jun 2019 04:40:54 +0000</pubDate>
+      <title>Why is Swift ABI Stability a Big Deal?</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/why-is-abi-stability-a-big-deal/</link>
+      <pubDate>Fri, 21 Jun 2019 04:40:54 +0000</pubDate>
       
-      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/notes-on-swift-5/</guid>
-      <description>
-
-&lt;h2 id=&#34;what-is-an-abi&#34;&gt;What is an ABI?&lt;/h2&gt;
-
-&lt;p&gt;&amp;ldquo;ABI&amp;rdquo; stands for &amp;ldquo;Application Binary Interface&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;The word &amp;ldquo;interface&amp;rdquo; means the same as it does in other places where you hear the word.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s the point where two things can interact.&lt;/p&gt;
-
-&lt;p&gt;A &lt;strong&gt;user&lt;/strong&gt; interface is the point where humans and apps can interact.&lt;/p&gt;
-
-&lt;p&gt;An &lt;strong&gt;Application Programming&lt;/strong&gt; Interface is the point where code interacts with other code.  And since the code doesn&amp;rsquo;t write itself (yet!), it&amp;rsquo;s the point where developers like you and I stitch together pieces of code so that they can interact without us.&lt;/p&gt;
-
-&lt;p&gt;So what&amp;rsquo;s an &lt;strong&gt;Application Binary&lt;/strong&gt; Interface?&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s the point where &lt;em&gt;compiled code&lt;/em&gt; interacts with &lt;em&gt;other compiled code&lt;/em&gt; while your app is running.&lt;/p&gt;
-
-&lt;p&gt;ABI&amp;rsquo;s are one level deeper than &lt;strong&gt;AP&lt;/strong&gt;I&amp;rsquo;s.  They&amp;rsquo;re &lt;em&gt;two&lt;/em&gt; levels deeper than &lt;strong&gt;U&lt;/strong&gt;I&amp;rsquo;s.&lt;/p&gt;
-
-&lt;h2 id=&#34;why-is-abi-stability-a-big-deal&#34;&gt;Why is ABI Stability a Big Deal?&lt;/h2&gt;
-
-&lt;p&gt;Imagine writing some Swift code.  You want to share it across multiple apps, so you put it in a framework.  You compile it with the Swift 4.0 compiler.&lt;/p&gt;
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/why-is-abi-stability-a-big-deal/</guid>
+      <description>&lt;p&gt;Imagine writing some Swift code.  You want to share it across multiple apps, so you build a framework.  You compile it with the Swift 4.0 compiler.&lt;/p&gt;
 
 &lt;p&gt;Now imagine Apple announces Swift 4.1.  Sweet!  You decide to build a new app and compile it with the Swift 4.1 compiler.&lt;/p&gt;
 
@@ -51,6 +29,40 @@
 &lt;p&gt;A framework could be compiled with the Swift 4.0 compiler. &lt;em&gt;You&lt;/em&gt; can build an app with the Swift 4.1 compiler.  &lt;strong&gt;BUT. The two cannot communicate.&lt;/strong&gt;  Either the framework or your app needed to be &lt;strong&gt;re&lt;/strong&gt;compiled using the same version of the compiler for it to work.&lt;/p&gt;
 
 &lt;p&gt;Now, &amp;ldquo;ABI stability&amp;rdquo; &lt;em&gt;is&lt;/em&gt; a feature of Swift Proper.  A framework could be compiled with the Swift 5.0 compiler. &lt;em&gt;You&lt;/em&gt; can build an app with the Swift 5.1 compiler.  &lt;strong&gt;The two can communicate!&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What is an ABI</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/what-is-an-abi/</link>
+      <pubDate>Thu, 20 Jun 2019 04:40:54 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/what-is-an-abi/</guid>
+      <description>&lt;p&gt;&amp;ldquo;ABI&amp;rdquo; stands for &amp;ldquo;&lt;strong&gt;A&lt;/strong&gt;pplication &lt;strong&gt;B&lt;/strong&gt;inary &lt;strong&gt;I&lt;/strong&gt;nterface&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The word &amp;ldquo;interface&amp;rdquo; means the same as it does in other places where you hear the word.&lt;/p&gt;
+
+&lt;p&gt;If a &lt;em&gt;human&lt;/em&gt; wants to interact with a computer, s/he needs a way to engage with it.  A &lt;strong&gt;user&lt;/strong&gt; interface is the point where humans and computers communicate with one another.&lt;/p&gt;
+
+&lt;p&gt;If a &lt;em&gt;computer&lt;/em&gt; wants to interact with a computer, it needs a way to engage as well.  An API&amp;hellip;an &lt;strong&gt;Application Programming&lt;/strong&gt; Interface is the point where computers interact with other computers.  It&amp;rsquo;s also the point where a computer communicates with itself!  Computers are just instruction performers.  Developers plan out and write sets of instructions for computers to perform with code. Since the code doesn&amp;rsquo;t write itself (yet!), APIs are &lt;em&gt;also&lt;/em&gt; the point where developers like you and I stitch together chunks of code.  Every class, struct, property, function&amp;hellip;all of them are some form of API.&lt;/p&gt;
+
+&lt;p&gt;So what&amp;rsquo;s an &lt;strong&gt;Application Binary&lt;/strong&gt; Interface?&lt;/p&gt;
+
+&lt;p&gt;If you stack all of these interfaces, one on top of the other, a &lt;strong&gt;U&lt;/strong&gt;I would be on the top.  Underneath the UI are APIs.  And then&amp;hellip; ABIs.&lt;/p&gt;
+
+&lt;p&gt;ABI&amp;rsquo;s are one level deeper than &lt;strong&gt;AP&lt;/strong&gt;Is. They&amp;rsquo;re one step down from code that developers write.&lt;/p&gt;
+
+&lt;p&gt;Developers write instructions for computers to perform in a language. Say&amp;hellip;Swift!&lt;/p&gt;
+
+&lt;p&gt;Computers perform instructions, but iPhones and Macs don&amp;rsquo;t &amp;ldquo;speak&amp;rdquo; Swift.  They &amp;ldquo;speak&amp;rdquo; &lt;strong&gt;binary&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;For a computer to &lt;em&gt;understand&lt;/em&gt;, much less &lt;em&gt;perform&lt;/em&gt; instructions that developers have written in Swift, those instructions have to be translated and packaged. Translating Swift code and packaging it up is called &lt;em&gt;compiling&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;When you launch an app, iOS begins to perform the instructions that a developer compiled.  A message is received by one piece of compiled code and performed by another piece of compiled code.  The result is sent over to another piece of compiled code.  And so on and so on&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;If &lt;em&gt;compiled code&lt;/em&gt; wants to interact with other &lt;em&gt;compiled code&lt;/em&gt;, guess what?  It needs a way to do that.  It needs an interface.  A &lt;strong&gt;binary&lt;/strong&gt; interface.&lt;/p&gt;
+
+&lt;p&gt;An ABI is the point where &lt;em&gt;compiled code&lt;/em&gt; interacts with &lt;em&gt;other compiled code&lt;/em&gt; while an app is running.&lt;/p&gt;
 </description>
     </item>
     
