@@ -41,7 +41,7 @@ git commit -m "Updates"
 git push
 ```
 
-### 4) At the command line, run `chmod u+x YourScriptFileNamer.sh`
+### 4) At the command line, run `chmod u+x YourScriptFileName.sh`
 
 I ran `chmod u+x deploy.sh` to make mine executable.
 
