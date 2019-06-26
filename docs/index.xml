@@ -3564,21 +3564,21 @@ case .error(let error):
 
 &lt;p&gt;&lt;a name=&#34;the-point&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;what-s-the-point-of-the-core-data-stack-8221&#34;&gt;What&amp;rsquo;s the point of the &amp;ldquo;Core Data stack&amp;#8221;&lt;/h1&gt;
+&lt;h2 id=&#34;what-s-the-point-of-the-core-data-stack&#34;&gt;What&amp;rsquo;s the point of the &amp;ldquo;Core Data stack&amp;rdquo;?&lt;/h2&gt;
 
-&lt;p&gt;It&amp;rsquo;s important to keep in mind the fundamental goal with creating the &amp;ldquo;Core Data stack&amp;#8221;. At the end of the day, we&amp;rsquo;re all just trying to get our hands on an instance of &lt;code&gt;NSManagedObjectContext&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s important to keep in mind the fundamental goal with creating the &amp;ldquo;Core Data stack&amp;rdquo;. At the end of the day, we&amp;rsquo;re all just trying to get our hands on an instance of &lt;code&gt;NSManagedObjectContext&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Nearly every Core Data framework Type that we interact with requires an instance of &lt;code&gt;NSManagedObjectContext&lt;/code&gt; to do its work. Whether it&amp;rsquo;s &lt;code&gt;NSEntityDescription&lt;/code&gt; to initialize new &lt;code&gt;NSManagedObject&lt;/code&gt; instances, an &lt;code&gt;NSFetchRequest&lt;/code&gt; to retrieve data, or an &lt;code&gt;NSFetchedResultsController&lt;/code&gt; to keep our UIs in sync, we&amp;rsquo;re always depending on &lt;code&gt;NSManagedObjectContext&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;So the bottom-line goal of setting up the &amp;ldquo;stack&amp;#8221; is to configure all the plumbing necessary for our apps to work with the &amp;ldquo;under the hood&amp;#8221; stuff of Core Data. The [thing] we interact with constantly is that all-valuable &lt;code&gt;NSManagedObjectContext&lt;/code&gt; instance.&lt;/p&gt;
+&lt;p&gt;So the bottom-line goal of setting up the &amp;ldquo;stack&amp;rdquo; is to configure all the plumbing necessary for our apps to work with the &amp;ldquo;under the hood&amp;rdquo; stuff of Core Data. The &lt;em&gt;thing&lt;/em&gt; we interact with constantly is that all-valuable &lt;code&gt;NSManagedObjectContext&lt;/code&gt; instance.&lt;/p&gt;
 
 &lt;p&gt;&lt;a name=&#34;create&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;creating-the-stack-with-nspersistentcontainer&#34;&gt;Creating the stack with NSPersistentContainer&lt;/h1&gt;
+&lt;h2 id=&#34;creating-the-stack-with-nspersistentcontainer&#34;&gt;Creating the stack with NSPersistentContainer&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;NSPersistentContainer&lt;/code&gt; saves a few keystrokes and abstracts away a few of the moving parts when it comes to setting up the Core Data stack. Compare my &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/&#34;&gt;Backwards Compatibility&lt;/a&gt; post if you&amp;rsquo;re curious about what&amp;rsquo;s being simplified.&lt;/p&gt;
 
-&lt;p&gt;So&amp;#8230; how&amp;rsquo;s it done?&lt;/p&gt;
+&lt;p&gt;So&amp;hellip; how&amp;rsquo;s it done?&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;First&lt;/strong&gt;: Make sure you&amp;rsquo;re targeting &lt;strong&gt;iOS 10+, macOS Sierra (10.12)+, watchOS 3+, or tvOS 10+&lt;/strong&gt;&lt;/p&gt;
 
@@ -3600,21 +3600,21 @@ case .error(let error):
 &lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;a name=&#34;step-by-step&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;step-by-step-through-the-code&#34;&gt;Step-by-step through the code&lt;/h2&gt;
+&lt;h3 id=&#34;step-by-step-through-the-code&#34;&gt;Step-by-step through the code&lt;/h3&gt;
 
 &lt;p&gt;Using &lt;code&gt;NSPersistentContainer&lt;/code&gt; can be seen as a 3 step process.&lt;/p&gt;
 
-&lt;p&gt;1 &amp;#8212; Initialize an &lt;code&gt;NSPersistentContainer&lt;/code&gt; instance. Its only parameter is the &lt;code&gt;name&lt;/code&gt; of the model (look at your .xcdatamodeld file for this)&lt;br /&gt;
-2 &amp;#8212; Call &lt;code&gt;loadPersistentStores&lt;/code&gt; on the container instance. This function &lt;em&gt;executes asynchronously&lt;/em&gt;, so to hook back in and continue doing things when the function is finished with its work, you supply a completionHandler.&lt;br /&gt;
-3 &amp;#8212; Guard against errors and use the container&amp;rsquo;s &lt;code&gt;viewContext&lt;/code&gt; property, which is the &lt;code&gt;NSManagedObjectContext&lt;/code&gt; instance you need. I haven&amp;rsquo;t written in detail about this (yet), but in my &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34;&gt;Pluralsight course on Core Data in Swift&lt;/a&gt;, I go over how to take the managed object context and follow a dependency injection pattern so that you isolate where it&amp;rsquo;s created, and use the single instance throughout your app in a way that&amp;rsquo;s testable.&lt;/p&gt;
+&lt;p&gt;1 &amp;ndash; Initialize an &lt;code&gt;NSPersistentContainer&lt;/code&gt; instance. Its only parameter is the &lt;code&gt;name&lt;/code&gt; of the model (look at your .xcdatamodeld file for this)&lt;br /&gt;
+2 &amp;ndash; Call &lt;code&gt;loadPersistentStores&lt;/code&gt; on the container instance. This function &lt;em&gt;executes asynchronously&lt;/em&gt;, so to hook back in and continue doing things when the function is finished with its work, you supply a completionHandler.&lt;br /&gt;
+3 &amp;ndash; Guard against errors and use the container&amp;rsquo;s &lt;code&gt;viewContext&lt;/code&gt; property, which is the &lt;code&gt;NSManagedObjectContext&lt;/code&gt; instance you need. I haven&amp;rsquo;t written in detail about this (yet), but in my &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34;&gt;Pluralsight course on Core Data in Swift&lt;/a&gt;, I go over how to take the managed object context and follow a dependency injection pattern so that you isolate where it&amp;rsquo;s created, and use the single instance throughout your app in a way that&amp;rsquo;s testable.&lt;/p&gt;
 
-&lt;p&gt;One consideration that I would encourage you to think about is the &lt;code&gt;guard&lt;/code&gt; statement. Ask: &amp;ldquo;Is &lt;code&gt;fatalError&lt;/code&gt; really the best thing for me to do?&amp;#8221;&lt;/p&gt;
+&lt;p&gt;One consideration that I would encourage you to think about is the &lt;code&gt;guard&lt;/code&gt; statement. Ask: &amp;ldquo;Is &lt;code&gt;fatalError&lt;/code&gt; really the best thing for me to do?&amp;rdquo;&lt;/p&gt;
 
 &lt;p&gt;A lot of apps that use Core Data really &lt;em&gt;can&amp;rsquo;t&lt;/em&gt; continue past this point if the persistent store can&amp;rsquo;t be loaded. In that case, the &lt;code&gt;guard&lt;/code&gt; may not be so bad. If you &lt;em&gt;can&lt;/em&gt; fall back to an alternate screen that doesn&amp;rsquo;t rely on Core Data though, that might be a more pleasant experience for your users than simply crashing with a fatal error.&lt;/p&gt;
 
 &lt;p&gt;&lt;a name=&#34;wrap-up&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;wrap-up&#34;&gt;Wrap up&lt;/h1&gt;
+&lt;h2 id=&#34;wrap-up&#34;&gt;Wrap up&lt;/h2&gt;
 
 &lt;p&gt;This is the simplest way to use &lt;code&gt;NSPersistentContainer&lt;/code&gt; to create your Core Data stack, and that&amp;rsquo;s where I want to leave it for today!&lt;/p&gt;
 
