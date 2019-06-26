@@ -1,5 +1,6 @@
 ---
 title: A Swift Implementation of the Core Data Stack Using NSPersistentContainer
+description: Provides a walk through of using NSPersistentContainer to set up the Core Data stack.
 author: Andrew
 type: blog
 date: 2017-05-15T18:19:46+00:00
