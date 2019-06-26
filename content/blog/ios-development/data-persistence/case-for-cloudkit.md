@@ -1,5 +1,6 @@
 ---
 title: The Case for CloudKit
+description: When it comes to remote backend services for mobile apps, you have options. What is the case for CloudKit?
 author: Andrew
 type: blog
 date: 2018-08-06T11:58:32+00:00
