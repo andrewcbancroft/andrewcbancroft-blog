@@ -299,7 +299,7 @@ MathJax.Hub.Config({
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptExtractor</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">extractPKCS7Container</span><span class="p">(</span><span class="kc">_</span> <span class="n">receiptData</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">PKCS7</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">extractPKCS7Container</span><span class="p">(</span><span class="kc">_</span> <span class="n">receiptData</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span> <span class="p">{</span>
         <span class="c1">// use Open SSL to extract the PKCS7 container</span>
         <span class="c1">// throw a ReceiptValidationError if something goes wrong in this process</span>
     <span class="p">}</span>
@@ -371,7 +371,7 @@ MathJax.Hub.Config({
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#ifndef pkcs7_union_accessors_h
 </span><span class="cp">#define pkcs7_union_accessors_h
 </span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&amp;lt;openssl/pkcs7.h&amp;gt;</span><span class="cp">
+<span class="cp">#include</span> <span class="cpf">&lt;openssl/pkcs7.h&amp;gt;</span><span class="cp">
 </span><span class="cp"></span>
 <span class="kt">char</span> <span class="o">*</span><span class="nf">pkcs7_d_char</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
 <span class="n">ASN1_OCTET_STRING</span> <span class="o">*</span><span class="nf">pkcs7_d_data</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
@@ -476,8 +476,8 @@ MathJax.Hub.Config({
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#import &amp;lt;openssl/pkcs7.h&amp;gt;
-</span><span class="cp">#import &amp;lt;openssl/objects.h&amp;gt;
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#import &lt;openssl/pkcs7.h&amp;gt;
+</span><span class="cp">#import &lt;openssl/objects.h&amp;gt;
 </span><span class="cp">#import &#34;pkcs7_union_accessors.h&#34;</span></code></pre></td></tr></table>
 </div>
 </div>
@@ -512,7 +512,7 @@ MathJax.Hub.Config({
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptExtractor</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">extractPKCS7Container</span><span class="p">(</span><span class="kc">_</span> <span class="n">receiptData</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">PKCS7</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">extractPKCS7Container</span><span class="p">(</span><span class="kc">_</span> <span class="n">receiptData</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span> <span class="p">{</span>
         <span class="kd">let</span> <span class="nv">receiptBIO</span> <span class="p">=</span> <span class="n">BIO_new</span><span class="p">(</span><span class="n">BIO_s_mem</span><span class="p">())</span>       
         <span class="n">BIO_write</span><span class="p">(</span><span class="n">receiptBIO</span><span class="p">,</span> <span class="p">(</span><span class="n">receiptData</span> <span class="k">as</span> <span class="n">NSData</span><span class="p">).</span><span class="n">bytes</span><span class="p">,</span> <span class="nb">Int32</span><span class="p">(</span><span class="n">receiptData</span><span class="p">.</span><span class="bp">count</span><span class="p">))</span>
         <span class="kd">let</span> <span class="nv">receiptPKCS7Container</span> <span class="p">=</span> <span class="n">d2i_PKCS7_bio</span><span class="p">(</span><span class="n">receiptBIO</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>

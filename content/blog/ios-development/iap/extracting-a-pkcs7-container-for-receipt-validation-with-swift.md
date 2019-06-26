@@ -68,7 +68,7 @@ So supposing you've [located and loaded][3] the receipt data, or used [Store Kit
 
 {{< highlight swift "linenos=table" >}}
 struct ReceiptExtractor {
-    func extractPKCS7Container(_ receiptData: Data) throws -> UnsafeMutablePointer&lt;PKCS7> {
+    func extractPKCS7Container(_ receiptData: Data) throws -> UnsafeMutablePointer<PKCS7> {
         // use Open SSL to extract the PKCS7 container
         // throw a ReceiptValidationError if something goes wrong in this process
     }
@@ -111,7 +111,7 @@ Thankfully, we can work around the problem by creating some wrappers. If you'll 
 #ifndef pkcs7_union_accessors_h
 #define pkcs7_union_accessors_h
 
-#include &lt;openssl/pkcs7.h&gt;
+#include <openssl/pkcs7.h&gt;
 
 char *pkcs7_d_char(PKCS7 *ptr);
 ASN1_OCTET_STRING *pkcs7_d_data(PKCS7 *ptr);
@@ -172,8 +172,8 @@ inline ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr) {
 After you create the union accessor files, you need to update your project's bridging header to import the new header file:
 
 {{< highlight c "linenos=table" >}}
-#import &lt;openssl/pkcs7.h&gt;
-#import &lt;openssl/objects.h&gt;
+#import <openssl/pkcs7.h&gt;
+#import <openssl/objects.h&gt;
 #import "pkcs7_union_accessors.h"
 {{< /highlight >}}
 
@@ -185,7 +185,7 @@ Now it's time to dive into the actual implementation of what I'm calling a `Rece
 
 {{< highlight swift "linenos=table" >}}
 struct ReceiptExtractor {
-    func extractPKCS7Container(_ receiptData: Data) throws -> UnsafeMutablePointer&lt;PKCS7> {
+    func extractPKCS7Container(_ receiptData: Data) throws -> UnsafeMutablePointer<PKCS7> {
         let receiptBIO = BIO_new(BIO_s_mem())       
         BIO_write(receiptBIO, (receiptData as NSData).bytes, Int32(receiptData.count))
         let receiptPKCS7Container = d2i_PKCS7_bio(receiptBIO, nil)
