@@ -72,7 +72,7 @@ Now you&rsquo;re ready to extract the PKCS #7 container and work with it."/>
   "@type": "BlogPosting",
   "headline": "Extracting a PKCS7 Container for Receipt Validation with Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2016\/06\/09\/extracting-a-pkcs7-container-for-receipt-validation-with-swift\/",
-  "wordCount": "1218",
+  "wordCount": "1220",
   "datePublished": "2016-06-10T03:44:58Z",
   "dateModified": "2019-06-26T00:00:00Z",
   "author": {
@@ -265,9 +265,18 @@ MathJax.Hub.Config({
 
 <p>If a validation step ever fails along the way, I&rsquo;ve decided to take advantage of Swift&rsquo;s error throwing features to clearly describe what failed. So far, there&rsquo;s only one case:</p>
 
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
-<span class="ln">3</span><span class="p">}</span></code></pre></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>I&rsquo;ll expand this enum Type to cover more failure conditions in this guide.</p>
 

@@ -50,7 +50,7 @@ Recall that I've created a [main Type called `ReceiptValidator`][4], with refere
 
 If a validation step ever fails along the way, I've decided to take advantage of Swift's error throwing features to clearly describe what failed. So far, there's only one case:
 
-{{< highlight swift "" >}}
+{{< highlight swift "linenos=table" >}}
 enum ReceiptValidationError : Error {
     case couldNotFindReceipt
 }
