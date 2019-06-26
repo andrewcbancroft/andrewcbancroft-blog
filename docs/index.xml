@@ -1471,28 +1471,15 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;When it comes to remote backend services for mobile apps, you’ve got options. What&amp;rsquo;s the case for CloudKit? Where does Apple&amp;rsquo;s remote data storage and sharing solution fit into the Apple Developer&amp;rsquo;s toolbox?&lt;/p&gt;
 
-&lt;p&gt;I recently put out a survey on Twitter, just to get a feel for what folks are using.&lt;figure class=&#34;wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I recently put out a survey on Twitter, just to get a feel for what folks are using.&lt;/p&gt;
 
-&lt;blockquote class=&#34;twitter-tweet&#34; data-width=&#34;500&#34; data-dnt=&#34;true&#34;&gt;
-  &lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
-    &lt;a href=&#34;https://twitter.com/hashtag/iosdev?src=hash&amp;ref_src=twsrc%5Etfw&#34;&gt;#iosdev&lt;/a&gt; folks: When your app needs a backend (ie, a remote server / remote database), what do you use?
-  &lt;/p&gt;
-  
-  &lt;p&gt;
-    I’m also interested in the “why” – reply with a tweet if you care to share! Thanks! 🙌🏻
-  &lt;/p&gt;
-  
-  &lt;p&gt;
-    &amp;mdash; Andrew Bancroft (@andrewcbancroft) &lt;a href=&#34;https://twitter.com/andrewcbancroft/status/1020265988561022976?ref_src=twsrc%5Etfw&#34;&gt;July 20, 2018&lt;/a&gt;
-  &lt;/p&gt;
-&lt;/blockquote&gt;
-  
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/iosdev?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#iosdev&lt;/a&gt; folks:  When your app needs a backend (ie, a remote server / remote database), what do you use?&lt;br&gt;&lt;br&gt;I’m also interested in the “why” - reply with a tweet if you care to share! Thanks! 🙌🏻&lt;/p&gt;&amp;mdash; Andrew Bancroft (@andrewcbancroft) &lt;a href=&#34;https://twitter.com/andrewcbancroft/status/1020265988561022976?ref_src=twsrc%5Etfw&#34;&gt;July 20, 2018&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
 
-&lt;p&gt;&lt;/figure&gt;&lt;/p&gt;
 
 &lt;p&gt;The clear winer was Firebase, followed by folks implementing their own backend server architecture. Dead last? A tie between Realm and CloudKit.&lt;/p&gt;
 
-&lt;p&gt;”Hmm&amp;#8230;”, I thought, “What’s up? Why no love for CloudKit?&amp;#8221;&lt;/p&gt;
+&lt;p&gt;”Hmm&amp;hellip;”, I thought, “What’s up? Why no love for CloudKit?&amp;rdquo;&lt;/p&gt;
 
 &lt;p&gt;Of the options on my own survey, I’ve had experience building apps using three of the four: CloudKit, Firebase, and “rolling my own backend” with an app built for my employer.&lt;/p&gt;
 
@@ -1502,7 +1489,7 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;apple-platforms-only&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;apple-platforms-only-cloudkit&#34;&gt;Apple Platforms Only? CloudKit.&lt;/h1&gt;
+&lt;h2 id=&#34;apple-platforms-only-cloudkit&#34;&gt;Apple Platforms Only? CloudKit.&lt;/h2&gt;
 
 &lt;p&gt;If you&amp;rsquo;re developing &lt;em&gt;solely&lt;/em&gt; for Apple&amp;rsquo;s platforms, CloudKit is the natural choice.&lt;/p&gt;
 
@@ -1510,7 +1497,7 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;cloudkit-js&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;expand-beyond-apple-platforms-with-cloudkit-js&#34;&gt;Expand Beyond Apple Platforms with CloudKit JS&lt;/h1&gt;
+&lt;h2 id=&#34;expand-beyond-apple-platforms-with-cloudkit-js&#34;&gt;Expand Beyond Apple Platforms with CloudKit JS&lt;/h2&gt;
 
 &lt;p&gt;Even if you&amp;rsquo;re &lt;em&gt;not&lt;/em&gt; developing solely for Apple&amp;rsquo;s platforms, CloudKit might still be a viable choice for you!&lt;/p&gt;
 
@@ -1522,7 +1509,7 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;authentication&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;built-in-authentication-cloudkit&#34;&gt;Built-in Authentication: CloudKit.&lt;/h1&gt;
+&lt;h2 id=&#34;built-in-authentication-cloudkit&#34;&gt;Built-in Authentication: CloudKit.&lt;/h2&gt;
 
 &lt;p&gt;If you&amp;rsquo;re tired of creating sign up and login screens, look no further than CloudKit.&lt;/p&gt;
 
@@ -1534,9 +1521,9 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;free-longer&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;cloudkit-is-free-for-longer&#34;&gt;CloudKit is Free for Longer&lt;/h1&gt;
+&lt;h2 id=&#34;cloudkit-is-free-for-longer&#34;&gt;CloudKit is Free for Longer&lt;/h2&gt;
 
-&lt;p&gt;All of the backend as a service providers offer a free tier or a free trial, and while I don&amp;rsquo;t have personal experience with these services&amp;rsquo; payment threshholds, it&amp;rsquo;s my observation that CloudKit&amp;rsquo;s free tier might &amp;ldquo;last longer&amp;#8221;. What do I mean by that?&lt;/p&gt;
+&lt;p&gt;All of the backend as a service providers offer a free tier or a free trial, and while I don&amp;rsquo;t have personal experience with these services&amp;rsquo; payment threshholds, it&amp;rsquo;s my observation that CloudKit&amp;rsquo;s free tier might &amp;ldquo;last longer&amp;rdquo;. What do I mean by that?&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Data of any kind stored in a user&amp;rsquo;s &lt;em&gt;private&lt;/em&gt; database doesn&amp;rsquo;t count against your app&amp;rsquo;s storage alotment&amp;#8230; it counts against the &lt;em&gt;user&amp;rsquo;s&lt;/em&gt; iCloud storage plan. This extends the mileage of your &lt;em&gt;app&amp;rsquo;s&lt;/em&gt; storage alotment.&lt;/li&gt;
@@ -1551,7 +1538,7 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;own-backend&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;rolling-your-own-backend-consider-cloudkit&#34;&gt;Rolling Your Own Backend? Consider CloudKit.&lt;/h1&gt;
+&lt;h2 id=&#34;rolling-your-own-backend-consider-cloudkit&#34;&gt;Rolling Your Own Backend? Consider CloudKit.&lt;/h2&gt;
 
 &lt;p&gt;Folks already invested in Realm or Firebase are already leveraging a backend as a service platform. It&amp;rsquo;s those that are maintaining backend server infrastructure &lt;em&gt;themselves&lt;/em&gt; that I might suggest consider CloudKit.&lt;/p&gt;
 
@@ -1563,7 +1550,7 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;first-party-only&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;company-requirement-1st-party-frameworks-and-services-only-cloudkit&#34;&gt;Company Requirement: 1st Party Frameworks and Services Only? CloudKit.&lt;/h1&gt;
+&lt;h2 id=&#34;company-requirement-1st-party-frameworks-and-services-only-cloudkit&#34;&gt;Company Requirement: 1st Party Frameworks and Services Only? CloudKit.&lt;/h2&gt;
 
 &lt;p&gt;This requirement is most likely to be seen within companies and organizations that have an aversion to bringing in a lot of 3rd party dependencies.&lt;/p&gt;
 
@@ -1575,7 +1562,7 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;third-party-risk-aversion&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;personal-3rd-party-risk-aversion-8230-cloudkit&#34;&gt;Personal 3rd Party Risk Aversion&amp;#8230; CloudKit.&lt;/h1&gt;
+&lt;h2 id=&#34;personal-3rd-party-risk-aversion-8230-cloudkit&#34;&gt;Personal 3rd Party Risk Aversion&amp;#8230; CloudKit.&lt;/h2&gt;
 
 &lt;p&gt;This one hits close to home for me, because I&amp;rsquo;ve experienced the pain of having a 3rd party service I depended on for &lt;em&gt;multiple apps&lt;/em&gt; be discontinued. &amp;#42;Cough&amp;#42; &lt;strong&gt;&lt;a href=&#34;https://blog.parseplatform.org/announcements/moving-on/&#34;&gt;Parse&lt;/a&gt;&lt;/strong&gt; &amp;#42;Cough&amp;#42;&lt;/p&gt;
 
@@ -1587,45 +1574,45 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;only-need-data-store&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;only-need-a-remote-data-store-keep-it-simple-cloudkit&#34;&gt;Only Need a Remote Data Store? Keep it Simple. CloudKit.&lt;/h1&gt;
+&lt;h2 id=&#34;only-need-a-remote-data-store-keep-it-simple-cloudkit&#34;&gt;Only Need a Remote Data Store? Keep it Simple. CloudKit.&lt;/h2&gt;
 
 &lt;p&gt;There is a &lt;em&gt;ton&lt;/em&gt; that can be done on-device these days. If all you&amp;rsquo;re in the market for is a remote data store to facilitate data sharing across devices or with other users and have no need of remote cloud functions or analytics or remote machine learning services, etc., you might opt to keep it simple and leverage CloudKit.&lt;/p&gt;
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;apple-uses&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;depend-on-what-apple-depends-on-cloudkit&#34;&gt;Depend On What Apple Depends On: CloudKit.&lt;/h1&gt;
+&lt;h2 id=&#34;depend-on-what-apple-depends-on-cloudkit&#34;&gt;Depend On What Apple Depends On: CloudKit.&lt;/h2&gt;
 
 &lt;p&gt;What does Apple depend on for their own apps&amp;rsquo; remote data storage and sharing needs?&lt;/p&gt;
 
 &lt;p&gt;Answer: CloudKit.&lt;/p&gt;
 
-&lt;p&gt;Clearly, Apple is in a unique situation: Apple neither needs nor cares to develop any of its apps for Android. Naturally, they&amp;rsquo;d depend on the very framework they created. Otherwise, we could argue, &amp;ldquo;What a bunch of hypocrites!&amp;#8221;, right?&lt;/p&gt;
+&lt;p&gt;Clearly, Apple is in a unique situation: Apple neither needs nor cares to develop any of its apps for Android. Naturally, they&amp;rsquo;d depend on the very framework they created. Otherwise, we could argue, &amp;ldquo;What a bunch of hypocrites!&amp;rdquo;, right?&lt;/p&gt;
 
 &lt;p&gt;CloudKit serves the needs of apps like Photos, iCloud Drive, Notes, News, and more.&lt;/p&gt;
 
-&lt;p&gt;It&amp;rsquo;s almost as if Apple developed CloudKit for Apple, and decided, &amp;ldquo;Hey, let&amp;rsquo;s open this up to our developers and let them tap in to what works awesome for us!&amp;#8221;&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s almost as if Apple developed CloudKit for Apple, and decided, &amp;ldquo;Hey, let&amp;rsquo;s open this up to our developers and let them tap in to what works awesome for us!&amp;rdquo;&lt;/p&gt;
 
 &lt;p&gt;I like that. I like the security of knowing that Apple depends on the framework they&amp;rsquo;re delivering to us.&lt;/p&gt;
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;tradeoffs&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;tradeoffs&#34;&gt;Tradeoffs&lt;/h1&gt;
+&lt;h2 id=&#34;tradeoffs&#34;&gt;Tradeoffs&lt;/h2&gt;
 
 &lt;p&gt;In fairness, I would point out a few trade-offs if you were to go with CloudKit.&lt;/p&gt;
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;no-android-support&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;no-native-android-support&#34;&gt;No Native Android support&lt;/h2&gt;
+&lt;h3 id=&#34;no-native-android-support&#34;&gt;No Native Android support&lt;/h3&gt;
 
-&lt;p&gt;This tradeoff is qualified with the words &amp;ldquo;no &lt;em&gt;native&lt;/em&gt; Android support&amp;#8221; for a reason. CloudKit JS may actually open the door for folks developing cross platform apps, though it may take some hacking.&lt;/p&gt;
+&lt;p&gt;This tradeoff is qualified with the words &amp;ldquo;no &lt;em&gt;native&lt;/em&gt; Android support&amp;rdquo; for a reason. CloudKit JS may actually open the door for folks developing cross platform apps, though it may take some hacking.&lt;/p&gt;
 
 &lt;p&gt;Expect some challenges on the Android side of things, but don&amp;rsquo;t completely count CloudKit out.&lt;/p&gt;
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;data-storage-only&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;data-storage-and-sharing-only-with-cloudkit&#34;&gt;Data storage and sharing &lt;em&gt;only&lt;/em&gt; with CloudKit&lt;/h2&gt;
+&lt;h3 id=&#34;data-storage-and-sharing-only-with-cloudkit&#34;&gt;Data storage and sharing &lt;em&gt;only&lt;/em&gt; with CloudKit&lt;/h3&gt;
 
-&lt;p&gt;With CloudKit, you get a fully-functional remote data storage and sharing service. If you&amp;rsquo;re wanting to leverage some advanced functionality like &amp;ldquo;cloud functions&amp;#8221;, analytics for your app, non-Apple ID authentication, remote machine learning services, and the like, you won&amp;rsquo;t find those features in CloudKit.&lt;/p&gt;
+&lt;p&gt;With CloudKit, you get a fully-functional remote data storage and sharing service. If you&amp;rsquo;re wanting to leverage some advanced functionality like &amp;ldquo;cloud functions&amp;rdquo;, analytics for your app, non-Apple ID authentication, remote machine learning services, and the like, you won&amp;rsquo;t find those features in CloudKit.&lt;/p&gt;
 
 &lt;p&gt;This doesn&amp;rsquo;t mean that Apple leaves you nanging when it comes to authentication, analytics, machine learning, etc.&lt;/p&gt;
 
@@ -1637,11 +1624,11 @@ I&amp;rsquo;m keeping it simple in this example, but there are various customiza
 
 &lt;p&gt;As I mentioned above though&amp;#8230; if all you really &lt;em&gt;need&lt;/em&gt; is a remote data store for cross-device data syncing, don&amp;rsquo;t over-complicate things. CloudKit can still serve you well.&lt;/p&gt;
 
-&lt;p&gt;Another alternative is to use a public cloud provider like Azure or AWS for &amp;ldquo;cloud functions&amp;#8221; or remote machine learning. If you prefer to component-ize these kinds of services, this is a viable alternative to Firebase, or Apple&amp;rsquo;s own solutions to these kinds of problems.&lt;/p&gt;
+&lt;p&gt;Another alternative is to use a public cloud provider like Azure or AWS for &amp;ldquo;cloud functions&amp;rdquo; or remote machine learning. If you prefer to component-ize these kinds of services, this is a viable alternative to Firebase, or Apple&amp;rsquo;s own solutions to these kinds of problems.&lt;/p&gt;
 
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;feedback&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;what-do-you-use-why&#34;&gt;What do you use? Why?&lt;/h1&gt;
+&lt;h2 id=&#34;what-do-you-use-why&#34;&gt;What do you use? Why?&lt;/h2&gt;
 
 &lt;p&gt;I&amp;rsquo;m a pragmatist. I don&amp;rsquo;t always use CloudKit. But I do like CloudKit when I can use it.&lt;/p&gt;
 
