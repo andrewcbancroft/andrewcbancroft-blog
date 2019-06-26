@@ -54,7 +54,7 @@ This is a continuation of my receipt validation series. I&rsquo;m assuming that&
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" />
 <meta property="article:published_time" content="2017-07-31T12:36:26&#43;00:00"/>
-<meta property="article:modified_time" content="2017-07-31T12:36:26&#43;00:00"/>
+<meta property="article:modified_time" content="2019-06-26T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Finalizing Receipt Validation in Swift – Computing a GUID Hash"/>
@@ -70,9 +70,9 @@ This is a continuation of my receipt validation series. I&rsquo;m assuming that&
   "@type": "BlogPosting",
   "headline": "Finalizing Receipt Validation in Swift – Computing a GUID Hash",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/07\/31\/finalizing-receipt-validation-in-swift-computing-a-guid-hash\/",
-  "wordCount": "1498",
+  "wordCount": "1513",
   "datePublished": "2017-07-31T12:36:26Z",
-  "dateModified": "2017-07-31T12:36:26Z",
+  "dateModified": "2019-06-26T00:00:00Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
@@ -227,20 +227,18 @@ MathJax.Hub.Config({
   <div class="resources-header">
     Resources
   </div>
-  
-
-<p><ul class="resources-content">
+  <ul class="resources-content">
     <li>
       <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
     </li>
   </ul>
-</div></p>
+</div>
 
 <p>Ready? Let&rsquo;s do this thing!</p>
 
 <p><a name="validating-with-receipt-validator" class="jump-target"></a></p>
 
-<h1 id="validating-the-device-guid-hash-with-receiptvalidator">Validating the device GUID hash with ReceiptValidator</h1>
+<h2 id="validating-the-device-guid-hash-with-receiptvalidator">Validating the device GUID hash with ReceiptValidator</h2>
 
 <p>For this final step, I&rsquo;ve imagined a single additional function within the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation"><code>ReceiptValidator</code> struct</a> called <code>validateHash(receipt:)</code>.</p>
 
@@ -249,73 +247,157 @@ MathJax.Hub.Config({
 <p>A <code>ReceiptValidationError</code> will be thrown if things go wrong within this function. No <code>ReceiptValidationError</code> being thrown indicates a successful hash computation and comparison.</p>
 
 <p>Here&rsquo;s the skeleton of the function:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">validateHash</span><span class="p">(</span><span class="n">receipt</span><span class="p">:</span> <span class="n">ParsedReceipt</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="c1">// Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison</span>
-<span class="ln">3</span>
-<span class="ln">4</span>    <span class="c1">// Compute the hash for your app &amp; device</span>
-<span class="ln">5</span>
-<span class="ln">6</span>    <span class="c1">// Compare the computed hash with the receipt&#39;s hash</span>
-<span class="ln">7</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">validateHash</span><span class="p">(</span><span class="n">receipt</span><span class="p">:</span> <span class="n">ParsedReceipt</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="c1">// Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison</span>
+
+    <span class="c1">// Compute the hash for your app &amp; device</span>
+
+    <span class="c1">// Compare the computed hash with the receipt&#39;s hash</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p><a name="signaling-validation-failure" class="jump-target"></a></p>
 
-<h1 id="signaling-hash-validation-failure">Signaling hash validation failure</h1>
+<h2 id="signaling-hash-validation-failure">Signaling hash validation failure</h2>
 
 <p>Before I get into the implementation of the <code>validateHash(receipt:)</code> function, let&rsquo;s define one more <code>ReceiptValidationError</code> case to describe a bad hash comparison outcome:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
-<span class="ln"> 3</span>    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
-<span class="ln"> 4</span>    <span class="k">case</span> <span class="n">receiptNotSigned</span>
-<span class="ln"> 5</span>    <span class="k">case</span> <span class="n">appleRootCertificateNotFound</span>
-<span class="ln"> 6</span>    <span class="k">case</span> <span class="n">receiptSignatureInvalid</span>
-<span class="ln"> 7</span>    <span class="k">case</span> <span class="n">malformedReceipt</span>
-<span class="ln"> 8</span>    <span class="k">case</span> <span class="n">malformedInAppPurchaseReceipt</span>
-<span class="ln"> 9</span>    <span class="k">case</span> <span class="n">incorrectHash</span>
-<span class="ln">10</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
+    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
+    <span class="k">case</span> <span class="n">receiptNotSigned</span>
+    <span class="k">case</span> <span class="n">appleRootCertificateNotFound</span>
+    <span class="k">case</span> <span class="n">receiptSignatureInvalid</span>
+    <span class="k">case</span> <span class="n">malformedReceipt</span>
+    <span class="k">case</span> <span class="n">malformedInAppPurchaseReceipt</span>
+    <span class="k">case</span> <span class="n">incorrectHash</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p><a name="implementing-validate-hash" class="jump-target"></a></p>
 
-<h1 id="implementing-validatehash-function">Implementing validateHash function</h1>
+<h2 id="implementing-validatehash-function">Implementing validateHash function</h2>
 
 <p>I&rsquo;ll put the code in front of you, and then do my best to explain my thought process.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">validateHash</span><span class="p">(</span><span class="n">receipt</span><span class="p">:</span> <span class="n">ParsedReceipt</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="c1">// Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison</span>
-<span class="ln"> 3</span>    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptOpaqueValueData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">opaqueValue</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln"> 4</span>    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptBundleIdData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">bundleIdData</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln"> 5</span>    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptHashData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">sha1Hash</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln"> 6</span>    
-<span class="ln"> 7</span>    <span class="kd">var</span> <span class="nv">deviceIdentifier</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">?.</span><span class="n">uuid</span>
-<span class="ln"> 8</span>    
-<span class="ln"> 9</span>    <span class="kd">let</span> <span class="nv">rawDeviceIdentifierPointer</span> <span class="p">=</span> <span class="bp">withUnsafePointer</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">deviceIdentifier</span><span class="p">,</span> <span class="p">{</span>
-<span class="ln">10</span>        <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">uuid_t</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
-<span class="ln">11</span>        <span class="k">return</span> <span class="n">UnsafeRawPointer</span><span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">)</span>
-<span class="ln">12</span>    <span class="p">})</span>
-<span class="ln">13</span>    
-<span class="ln">14</span>    <span class="kd">let</span> <span class="nv">deviceIdentifierData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">rawDeviceIdentifierPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">16</span><span class="p">)</span>
-<span class="ln">15</span>    
-<span class="ln">16</span>    <span class="c1">// Compute the hash for your app &amp; device</span>
-<span class="ln">17</span>    
-<span class="ln">18</span>    <span class="c1">// Set up the hasing context</span>
-<span class="ln">19</span>    <span class="kd">var</span> <span class="nv">computedHash</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
-<span class="ln">20</span>    <span class="kd">var</span> <span class="nv">sha1Context</span> <span class="p">=</span> <span class="n">SHA_CTX</span><span class="p">()</span>
-<span class="ln">21</span>    
-<span class="ln">22</span>    <span class="n">SHA1_Init</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">)</span>
-<span class="ln">23</span>    <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">deviceIdentifierData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">deviceIdentifierData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-<span class="ln">24</span>    <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">receiptOpaqueValueData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">receiptOpaqueValueData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-<span class="ln">25</span>    <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">receiptBundleIdData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">receiptBundleIdData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-<span class="ln">26</span>    <span class="n">SHA1_Final</span><span class="p">(&amp;</span><span class="n">computedHash</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">sha1Context</span><span class="p">)</span>
-<span class="ln">27</span>    
-<span class="ln">28</span>    <span class="kd">let</span> <span class="nv">computedHashData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">computedHash</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
-<span class="ln">29</span>    
-<span class="ln">30</span>    <span class="c1">// Compare the computed hash with the receipt&#39;s hash</span>
-<span class="ln">31</span>    <span class="k">guard</span> <span class="n">computedHashData</span><span class="p">.</span><span class="n">isEqual</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">receiptHashData</span> <span class="k">as</span> <span class="n">Data</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln">32</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">validateHash</span><span class="p">(</span><span class="n">receipt</span><span class="p">:</span> <span class="n">ParsedReceipt</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="c1">// Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptOpaqueValueData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">opaqueValue</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptBundleIdData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">bundleIdData</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptHashData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">sha1Hash</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+    
+    <span class="kd">var</span> <span class="nv">deviceIdentifier</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">?.</span><span class="n">uuid</span>
+    
+    <span class="kd">let</span> <span class="nv">rawDeviceIdentifierPointer</span> <span class="p">=</span> <span class="bp">withUnsafePointer</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">deviceIdentifier</span><span class="p">,</span> <span class="p">{</span>
+        <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">uuid_t</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
+        <span class="k">return</span> <span class="n">UnsafeRawPointer</span><span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">)</span>
+    <span class="p">})</span>
+    
+    <span class="kd">let</span> <span class="nv">deviceIdentifierData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">rawDeviceIdentifierPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">16</span><span class="p">)</span>
+    
+    <span class="c1">// Compute the hash for your app &amp; device</span>
+    
+    <span class="c1">// Set up the hasing context</span>
+    <span class="kd">var</span> <span class="nv">computedHash</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">sha1Context</span> <span class="p">=</span> <span class="n">SHA_CTX</span><span class="p">()</span>
+    
+    <span class="n">SHA1_Init</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">)</span>
+    <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">deviceIdentifierData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">deviceIdentifierData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">receiptOpaqueValueData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">receiptOpaqueValueData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">receiptBundleIdData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">receiptBundleIdData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="n">SHA1_Final</span><span class="p">(&amp;</span><span class="n">computedHash</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">sha1Context</span><span class="p">)</span>
+    
+    <span class="kd">let</span> <span class="nv">computedHashData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">computedHash</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+    
+    <span class="c1">// Compare the computed hash with the receipt&#39;s hash</span>
+    <span class="k">guard</span> <span class="n">computedHashData</span><span class="p">.</span><span class="n">isEqual</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">receiptHashData</span> <span class="k">as</span> <span class="n">Data</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p><a name="walkthrough" class="jump-target"></a></p>
 
-<h2 id="walking-through-validatehash">Walking through validateHash</h2>
+<h4 id="walking-through-validatehash">Walking through validateHash</h4>
 
 <p>First up, I&rsquo;ve placed three guard statements:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptOpaqueValueData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">opaqueValue</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln">2</span><span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptBundleIdData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">bundleIdData</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln">3</span><span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptHashData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">sha1Hash</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptOpaqueValueData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">opaqueValue</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+<span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptBundleIdData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">bundleIdData</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+<span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptHashData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">sha1Hash</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p>These help guarantee that the rest of the function will have all of the required pieces of data that it needs to fully compute a hash and compare it with what&rsquo;s in the receipt.</p>
 
 <p>The hash for your app is computed with the following three pieces of information:<br />
@@ -324,14 +406,30 @@ MathJax.Hub.Config({
 3) Your app&rsquo;s bundle identifier found within the receipt</p>
 
 <p>The app purchaser&rsquo;s device identifier is represented as a <code>uuid_t</code> from the Foundation library. However, to use it with the Open SSL library, we&rsquo;ll need to be working with an <code>NSData</code> instance. The following code goes from the <code>uuid_t</code> instance, to a raw pointer, to an <code>NSData</code> instance:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">deviceIdentifier</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">?.</span><span class="n">uuid</span>
-<span class="ln">2</span>
-<span class="ln">3</span><span class="kd">let</span> <span class="nv">rawDeviceIdentifierPointer</span> <span class="p">=</span> <span class="bp">withUnsafePointer</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">deviceIdentifier</span><span class="p">,</span> <span class="p">{</span>
-<span class="ln">4</span>    <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">uuid_t</span><span class="p">?&amp;</span><span class="n">gt</span><span class="p">;)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
-<span class="ln">5</span>    <span class="k">return</span> <span class="n">UnsafeRawPointer</span><span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">)</span>
-<span class="ln">6</span><span class="p">})</span>
-<span class="ln">7</span>
-<span class="ln">8</span><span class="kd">let</span> <span class="nv">deviceIdentifierData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">rawDeviceIdentifierPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">16</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">var</span> <span class="nv">deviceIdentifier</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">?.</span><span class="n">uuid</span>
+
+<span class="kd">let</span> <span class="nv">rawDeviceIdentifierPointer</span> <span class="p">=</span> <span class="bp">withUnsafePointer</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">deviceIdentifier</span><span class="p">,</span> <span class="p">{</span>
+    <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">uuid_t</span><span class="p">?&amp;</span><span class="n">gt</span><span class="p">;)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
+    <span class="k">return</span> <span class="n">UnsafeRawPointer</span><span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="kd">let</span> <span class="nv">deviceIdentifierData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">rawDeviceIdentifierPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">16</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p>The last chunk of code within the function actually computes the hash data.</p>
 
 <p>The hash is a SHA1 hash, so what we do here is initialize a SHA1 context, and then update it with all of the ingredients (device identifier, opaque data, and bundle identifier). The hash is finalized, and converted to an instance of <code>NSData</code>.</p>
@@ -340,68 +438,132 @@ MathJax.Hub.Config({
 
 <p><a name="final-receipt-validator" class="jump-target"></a></p>
 
-<h1 id="final-receiptvalidator">Final ReceiptValidator</h1>
+<h2 id="final-receiptvalidator">Final ReceiptValidator</h2>
 
 <p>Let&rsquo;s put it all together into the final <code>ReceiptValidator</code> struct. Additions are highlighted below:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">struct</span> <span class="nc">ReceiptValidator</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kd">let</span> <span class="nv">receiptLoader</span> <span class="p">=</span> <span class="n">ReceiptLoader</span><span class="p">()</span>
-<span class="ln"> 3</span>    <span class="kd">let</span> <span class="nv">receiptExtractor</span> <span class="p">=</span> <span class="n">ReceiptExtractor</span><span class="p">()</span>
-<span class="ln"> 4</span>    <span class="kd">let</span> <span class="nv">receiptSignatureValidator</span> <span class="p">=</span> <span class="n">ReceiptSignatureValidator</span><span class="p">()</span>
-<span class="ln"> 5</span>    <span class="kd">let</span> <span class="nv">receiptParser</span> <span class="p">=</span> <span class="n">ReceiptParser</span><span class="p">()</span>
-<span class="ln"> 6</span>    
-<span class="ln"> 7</span>    <span class="kd">func</span> <span class="nf">validateReceipt</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">ReceiptValidationResult</span> <span class="p">{</span>
-<span class="ln"> 8</span>        <span class="k">do</span> <span class="p">{</span>
-<span class="ln"> 9</span>            <span class="kd">let</span> <span class="nv">receiptData</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptLoader</span><span class="p">.</span><span class="n">loadReceipt</span><span class="p">()</span>
-<span class="ln">10</span>            <span class="kd">let</span> <span class="nv">receiptContainer</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptExtractor</span><span class="p">.</span><span class="n">extractPKCS7Container</span><span class="p">(</span><span class="n">receiptData</span><span class="p">)</span>
-<span class="ln">11</span>            
-<span class="ln">12</span>            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignaturePresence</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
-<span class="ln">13</span>            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignatureAuthenticity</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
-<span class="ln">14</span>            
-<span class="ln">15</span>            <span class="kd">let</span> <span class="nv">parsedReceipt</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptParser</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
-<span class="ln">16</span>            <span class="k">try</span> <span class="n">validateHash</span><span class="p">(</span><span class="n">receipt</span><span class="p">:</span> <span class="n">parsedReceipt</span><span class="p">)</span>
-<span class="ln">17</span>            
-<span class="ln">18</span>            <span class="k">return</span> <span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">parsedReceipt</span><span class="p">)</span>
-<span class="ln">19</span>        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">20</span>            <span class="k">return</span> <span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span> <span class="k">as</span><span class="o">!</span> <span class="n">ReceiptValidationError</span><span class="p">)</span>
-<span class="ln">21</span>        <span class="p">}</span>
-<span class="ln">22</span>    <span class="p">}</span>
-<span class="ln">23</span>    
-<span class="ln">24</span>    <span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">validateHash</span><span class="p">(</span><span class="n">receipt</span><span class="p">:</span> <span class="n">ParsedReceipt</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-<span class="ln">25</span>        <span class="c1">// Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison</span>
-<span class="ln">26</span>        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptOpaqueValueData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">opaqueValue</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln">27</span>        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptBundleIdData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">bundleIdData</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln">28</span>        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptHashData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">sha1Hash</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln">29</span>        
-<span class="ln">30</span>        <span class="kd">var</span> <span class="nv">deviceIdentifier</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">?.</span><span class="n">uuid</span>
-<span class="ln">31</span>        
-<span class="ln">32</span>        <span class="kd">let</span> <span class="nv">rawDeviceIdentifierPointer</span> <span class="p">=</span> <span class="bp">withUnsafePointer</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">deviceIdentifier</span><span class="p">,</span> <span class="p">{</span>
-<span class="ln">33</span>            <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">uuid_t</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
-<span class="ln">34</span>            <span class="k">return</span> <span class="n">UnsafeRawPointer</span><span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">)</span>
-<span class="ln">35</span>        <span class="p">})</span>
-<span class="ln">36</span>        
-<span class="ln">37</span>        <span class="kd">let</span> <span class="nv">deviceIdentifierData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">rawDeviceIdentifierPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">16</span><span class="p">)</span>
-<span class="ln">38</span>        
-<span class="ln">39</span>        <span class="c1">// Compute the hash for your app &amp; device</span>
-<span class="ln">40</span>        
-<span class="ln">41</span>        <span class="c1">// Set up the hasing context</span>
-<span class="ln">42</span>        <span class="kd">var</span> <span class="nv">computedHash</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
-<span class="ln">43</span>        <span class="kd">var</span> <span class="nv">sha1Context</span> <span class="p">=</span> <span class="n">SHA_CTX</span><span class="p">()</span>
-<span class="ln">44</span>        
-<span class="ln">45</span>        <span class="n">SHA1_Init</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">)</span>
-<span class="ln">46</span>        <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">deviceIdentifierData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">deviceIdentifierData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-<span class="ln">47</span>        <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">receiptOpaqueValueData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">receiptOpaqueValueData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-<span class="ln">48</span>        <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">receiptBundleIdData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">receiptBundleIdData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
-<span class="ln">49</span>        <span class="n">SHA1_Final</span><span class="p">(&amp;</span><span class="n">computedHash</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">sha1Context</span><span class="p">)</span>
-<span class="ln">50</span>        
-<span class="ln">51</span>        <span class="kd">let</span> <span class="nv">computedHashData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">computedHash</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
-<span class="ln">52</span>        
-<span class="ln">53</span>        <span class="c1">// Compare the computed hash with the receipt&#39;s hash</span>
-<span class="ln">54</span>        <span class="k">guard</span> <span class="n">computedHashData</span><span class="p">.</span><span class="n">isEqual</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">receiptHashData</span> <span class="k">as</span> <span class="n">Data</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
-<span class="ln">55</span>    <span class="p">}</span>
-<span class="ln">56</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptValidator</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">receiptLoader</span> <span class="p">=</span> <span class="n">ReceiptLoader</span><span class="p">()</span>
+    <span class="kd">let</span> <span class="nv">receiptExtractor</span> <span class="p">=</span> <span class="n">ReceiptExtractor</span><span class="p">()</span>
+    <span class="kd">let</span> <span class="nv">receiptSignatureValidator</span> <span class="p">=</span> <span class="n">ReceiptSignatureValidator</span><span class="p">()</span>
+    <span class="kd">let</span> <span class="nv">receiptParser</span> <span class="p">=</span> <span class="n">ReceiptParser</span><span class="p">()</span>
+    
+    <span class="kd">func</span> <span class="nf">validateReceipt</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">ReceiptValidationResult</span> <span class="p">{</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nv">receiptData</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptLoader</span><span class="p">.</span><span class="n">loadReceipt</span><span class="p">()</span>
+            <span class="kd">let</span> <span class="nv">receiptContainer</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptExtractor</span><span class="p">.</span><span class="n">extractPKCS7Container</span><span class="p">(</span><span class="n">receiptData</span><span class="p">)</span>
+            
+            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignaturePresence</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
+            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignatureAuthenticity</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
+            
+            <span class="kd">let</span> <span class="nv">parsedReceipt</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptParser</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
+            <span class="k">try</span> <span class="n">validateHash</span><span class="p">(</span><span class="n">receipt</span><span class="p">:</span> <span class="n">parsedReceipt</span><span class="p">)</span>
+            
+            <span class="k">return</span> <span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">parsedReceipt</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span> <span class="k">as</span><span class="o">!</span> <span class="n">ReceiptValidationError</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">validateHash</span><span class="p">(</span><span class="n">receipt</span><span class="p">:</span> <span class="n">ParsedReceipt</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+        <span class="c1">// Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison</span>
+        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptOpaqueValueData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">opaqueValue</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptBundleIdData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">bundleIdData</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">receiptHashData</span> <span class="p">=</span> <span class="n">receipt</span><span class="p">.</span><span class="n">sha1Hash</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+        
+        <span class="kd">var</span> <span class="nv">deviceIdentifier</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">?.</span><span class="n">uuid</span>
+        
+        <span class="kd">let</span> <span class="nv">rawDeviceIdentifierPointer</span> <span class="p">=</span> <span class="bp">withUnsafePointer</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">deviceIdentifier</span><span class="p">,</span> <span class="p">{</span>
+            <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">uuid_t</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
+            <span class="k">return</span> <span class="n">UnsafeRawPointer</span><span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">)</span>
+        <span class="p">})</span>
+        
+        <span class="kd">let</span> <span class="nv">deviceIdentifierData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">rawDeviceIdentifierPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">16</span><span class="p">)</span>
+        
+        <span class="c1">// Compute the hash for your app &amp; device</span>
+        
+        <span class="c1">// Set up the hasing context</span>
+        <span class="kd">var</span> <span class="nv">computedHash</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="kd">var</span> <span class="nv">sha1Context</span> <span class="p">=</span> <span class="n">SHA_CTX</span><span class="p">()</span>
+        
+        <span class="n">SHA1_Init</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">)</span>
+        <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">deviceIdentifierData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">deviceIdentifierData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+        <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">receiptOpaqueValueData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">receiptOpaqueValueData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+        <span class="n">SHA1_Update</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">,</span> <span class="n">receiptBundleIdData</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">receiptBundleIdData</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+        <span class="n">SHA1_Final</span><span class="p">(&amp;</span><span class="n">computedHash</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">sha1Context</span><span class="p">)</span>
+        
+        <span class="kd">let</span> <span class="nv">computedHashData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">computedHash</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+        
+        <span class="c1">// Compare the computed hash with the receipt&#39;s hash</span>
+        <span class="k">guard</span> <span class="n">computedHashData</span><span class="p">.</span><span class="n">isEqual</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">receiptHashData</span> <span class="k">as</span> <span class="n">Data</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">incorrectHash</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p><a name="what-to-do-from-here" class="jump-target"></a></p>
 
-<h1 id="what-to-do-from-here">What to do from here</h1>
+<h2 id="what-to-do-from-here">What to do from here</h2>
 
 <p>So what now?</p>
 
@@ -415,7 +577,7 @@ Here are a few ideas:</p>
 <ul>
 <li>Implement a grace period, just in case the receipt validation failure occurred for a reason that the user can&rsquo;t control (e.g. maybe we couldn&rsquo;t locate the receipt, and requesting a new one failed because Apple was having issues&#8230;)</li>
 <li>Disable a feature in your app because receipt validation failed too many times</li>
-<li>Maybe you just need to use the data within the <code>ParsedReceipt</code> because you&rsquo;re changing the way you monetize your app. Now, instead of making users pay $0.99 for the app, you&rsquo;re going to give it away for free, but let people buy an in-app purchase to enable &ldquo;pro&#8221; features, or remove ads&#8230;whatever. In this case, you may check the <code>ParsedReceipt</code> to see the original version of the app that your user downloaded. Maybe you want to require users who download your app after version 2.0 to buy an in-app purchase for [Feature X], but you want to give it to everyone who already <em>has</em> the app since they may have already paid $0.99 for it, and it&rsquo;d make them feel ripped off if they had to buy the in-app purchase.</li>
+<li>Maybe you just need to use the data within the <code>ParsedReceipt</code> because you&rsquo;re changing the way you monetize your app. Now, instead of making users pay $0.99 for the app, you&rsquo;re going to give it away for free, but let people buy an in-app purchase to enable &ldquo;pro&#8221; features, or remove ads&#8230;whatever. In this case, you may check the <code>ParsedReceipt</code> to see the original version of the app that your user downloaded. Maybe you want to require users who download your app after version 2.0 to buy an in-app purchase for <em>Feature X</em>, but you want to give it to everyone who already <em>has</em> the app since they may have already paid $0.99 for it, and it&rsquo;d make them feel ripped off if they had to buy the in-app purchase.</li>
 </ul>
 
 <p>How you handle the parsed receipt data or a receipt validation error is really customizable and specific to your particular app.</p>
@@ -430,9 +592,7 @@ Here are a few ideas:</p>
   <div class="resources-header">
     You might also enjoy&#8230;
   </div>
-  
-
-<p><ul class="resources-content">
+  <ul class="resources-content">
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
     </li>
@@ -440,7 +600,7 @@ Here are a few ideas:</p>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
     </li>
     <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS &amp; Swift the Easy Way</a>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS & Swift the Easy Way</a>
     </li>
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" Extracting a PKCS7 Container for Receipt Validation with Swift="title">Extracting a PKCS7 Container for Receipt Validation with Swift</a>
@@ -452,33 +612,10 @@ Here are a few ideas:</p>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/" Receipt Validation – Parse and Decode a Receipt with Swift="title">Receipt Validation – Parse and Decode a Receipt with Swift</a>
     </li>
   </ul>
-</div></p>
+</div>
 
 <p><a name="share" class="jump-target"></a></p>
 
-    <aside>
-      
-      
-      <div class="resources">
-        <div class="resources-header">
-            You might also enjoy...
-        </div>
-        
-        <ul class="resources-content">
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/">Receipt Validation –  Parse and Decode a Receipt with Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/">Receipt Validation – Verifying a Receipt Signature in Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/">Extracting a PKCS7 Container for Receipt Validation with Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">Loading a Receipt for Validation with Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/">Using an Existing SQLite Store with NSPersistentContainer</a></li>
-            
-        <ul>
-      
-    </aside>
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">

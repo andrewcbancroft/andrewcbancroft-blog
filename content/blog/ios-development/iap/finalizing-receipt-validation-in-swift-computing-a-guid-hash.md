@@ -3,6 +3,7 @@ title: Finalizing Receipt Validation in Swift – Computing a GUID Hash
 author: Andrew
 type: blog
 date: 2017-07-31T12:36:26+00:00
+lastmod: 2019-06-26T00:00:00+00:00
 url: /2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/
 dsq_thread_id:
   - "6030242278"
@@ -11,7 +12,7 @@ categories:
 tags:
   - Receipt Validation
   - Swift
-
+exclude_related: true
 ---
 The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that's stored within your receipt itself.
 
@@ -32,7 +33,6 @@ Just want the code? Here you go!
   <div class="resources-header">
     Resources
   </div>
-  
   <ul class="resources-content">
     <li>
       <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
@@ -44,7 +44,7 @@ Ready? Let's do this thing!
 
 <a name="validating-with-receipt-validator" class="jump-target"></a>
 
-# Validating the device GUID hash with ReceiptValidator
+## Validating the device GUID hash with ReceiptValidator
 
 For this final step, I've imagined a single additional function within the [`ReceiptValidator` struct][7] called `validateHash(receipt:)`.
 
@@ -54,7 +54,7 @@ A `ReceiptValidationError` will be thrown if things go wrong within this functio
 
 Here's the skeleton of the function:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 fileprivate func validateHash(receipt: ParsedReceipt) throws {
     // Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison
 
@@ -62,15 +62,15 @@ fileprivate func validateHash(receipt: ParsedReceipt) throws {
 
     // Compare the computed hash with the receipt's hash
 }
-```
+{{< /highlight >}}
 
 <a name="signaling-validation-failure" class="jump-target"></a>
 
-# Signaling hash validation failure
+## Signaling hash validation failure
 
 Before I get into the implementation of the `validateHash(receipt:)` function, let's define one more `ReceiptValidationError` case to describe a bad hash comparison outcome:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 enum ReceiptValidationError : Error {
     case couldNotFindReceipt
     case emptyReceiptContents
@@ -81,15 +81,15 @@ enum ReceiptValidationError : Error {
     case malformedInAppPurchaseReceipt
     case incorrectHash
 }
-```
+{{< /highlight >}}
 
 <a name="implementing-validate-hash" class="jump-target"></a>
 
-# Implementing validateHash function
+## Implementing validateHash function
 
 I'll put the code in front of you, and then do my best to explain my thought process.
 
-```swift
+{{< highlight swift "linenos=table" >}}
 fileprivate func validateHash(receipt: ParsedReceipt) throws {
     // Make sure that the ParsedReceipt instances has non-nil values needed for hash comparison
     guard let receiptOpaqueValueData = receipt.opaqueValue else { throw ReceiptValidationError.incorrectHash }
@@ -122,19 +122,19 @@ fileprivate func validateHash(receipt: ParsedReceipt) throws {
     // Compare the computed hash with the receipt's hash
     guard computedHashData.isEqual(to: receiptHashData as Data) else { throw ReceiptValidationError.incorrectHash }
 }
-```
+{{< /highlight >}}
 
 <a name="walkthrough" class="jump-target"></a>
 
-## Walking through validateHash
+#### Walking through validateHash
 
 First up, I've placed three guard statements:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 guard let receiptOpaqueValueData = receipt.opaqueValue else { throw ReceiptValidationError.incorrectHash }
 guard let receiptBundleIdData = receipt.bundleIdData else { throw ReceiptValidationError.incorrectHash }
 guard let receiptHashData = receipt.sha1Hash else { throw ReceiptValidationError.incorrectHash }
-```
+{{< /highlight >}}
 
 These help guarantee that the rest of the function will have all of the required pieces of data that it needs to fully compute a hash and compare it with what's in the receipt.
 
@@ -145,7 +145,7 @@ The hash for your app is computed with the following three pieces of information
 
 The app purchaser's device identifier is represented as a `uuid_t` from the Foundation library. However, to use it with the Open SSL library, we'll need to be working with an `NSData` instance. The following code goes from the `uuid_t` instance, to a raw pointer, to an `NSData` instance:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 var deviceIdentifier = UIDevice.current.identifierForVendor?.uuid
 
 let rawDeviceIdentifierPointer = withUnsafePointer(to: &deviceIdentifier, {
@@ -154,7 +154,7 @@ let rawDeviceIdentifierPointer = withUnsafePointer(to: &deviceIdentifier, {
 })
 
 let deviceIdentifierData = NSData(bytes: rawDeviceIdentifierPointer, length: 16)
-```
+{{< /highlight >}}
 
 The last chunk of code within the function actually computes the hash data.
 
@@ -164,11 +164,11 @@ The final guard takes the `computedHashData` instance, and compares it to the re
 
 <a name="final-receipt-validator" class="jump-target"></a>
 
-# Final ReceiptValidator
+## Final ReceiptValidator
 
 Let's put it all together into the final `ReceiptValidator` struct. Additions are highlighted below:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 struct ReceiptValidator {
     let receiptLoader = ReceiptLoader()
     let receiptExtractor = ReceiptExtractor()
@@ -225,11 +225,11 @@ struct ReceiptValidator {
         guard computedHashData.isEqual(to: receiptHashData as Data) else { throw ReceiptValidationError.incorrectHash }
     }
 }
-```
+{{< /highlight >}}
 
 <a name="what-to-do-from-here" class="jump-target"></a>
 
-# What to do from here
+## What to do from here
 
 So what now?
 
@@ -242,7 +242,7 @@ Here are a few ideas:
 
   * Implement a grace period, just in case the receipt validation failure occurred for a reason that the user can't control (e.g. maybe we couldn't locate the receipt, and requesting a new one failed because Apple was having issues&#8230;)
   * Disable a feature in your app because receipt validation failed too many times
-  * Maybe you just need to use the data within the `ParsedReceipt` because you're changing the way you monetize your app. Now, instead of making users pay $0.99 for the app, you're going to give it away for free, but let people buy an in-app purchase to enable "pro&#8221; features, or remove ads&#8230;whatever. In this case, you may check the `ParsedReceipt` to see the original version of the app that your user downloaded. Maybe you want to require users who download your app after version 2.0 to buy an in-app purchase for [Feature X], but you want to give it to everyone who already _has_ the app since they may have already paid $0.99 for it, and it'd make them feel ripped off if they had to buy the in-app purchase.
+  * Maybe you just need to use the data within the `ParsedReceipt` because you're changing the way you monetize your app. Now, instead of making users pay $0.99 for the app, you're going to give it away for free, but let people buy an in-app purchase to enable "pro&#8221; features, or remove ads&#8230;whatever. In this case, you may check the `ParsedReceipt` to see the original version of the app that your user downloaded. Maybe you want to require users who download your app after version 2.0 to buy an in-app purchase for *Feature X*, but you want to give it to everyone who already _has_ the app since they may have already paid $0.99 for it, and it'd make them feel ripped off if they had to buy the in-app purchase.
 
 How you handle the parsed receipt data or a receipt validation error is really customizable and specific to your particular app.
 
@@ -256,7 +256,6 @@ I hope this series has been helpful in setting you up to validate receipts local
   <div class="resources-header">
     You might also enjoy&#8230;
   </div>
-  
   <ul class="resources-content">
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
