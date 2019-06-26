@@ -101,6 +101,7 @@
 
     {{ .Content }}
 
+    {{- if not .Params.exclude_related }}
     <aside>
       {{ $related := .Site.Pages.Related . | first 5 }}
       {{ with $related }}
@@ -116,6 +117,7 @@
         <ul>
       {{ end }}
     </aside>
+    {{- end }}
 
     {{ template "_internal/disqus.html" . }}
   </article>

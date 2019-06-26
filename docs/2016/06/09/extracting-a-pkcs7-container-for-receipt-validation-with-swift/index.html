@@ -48,21 +48,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Extracting a PKCS7 Container for Receipt Validation with Swift" />
-<meta property="og:description" content="Updated on July 15, 2017 – Swift 3 
-So you&rsquo;ve prepared to test receipt validation by setting up your app in iTunes Connect.
-You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt. Perhaps you&rsquo;ve even done it the &ldquo;easy way&#8221; with CocoaPods.
+<meta property="og:description" content="So you&rsquo;ve prepared to test receipt validation by setting up your app in iTunes Connect.
+You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&rdquo; for the receipt. Perhaps you&rsquo;ve even done it the &ldquo;easy way&rdquo; with CocoaPods.
 You&rsquo;ve located and loaded the receipt for validation.
 Now you&rsquo;re ready to extract the PKCS #7 container and work with it." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" />
 <meta property="article:published_time" content="2016-06-10T03:44:58&#43;00:00"/>
-<meta property="article:modified_time" content="2016-06-10T03:44:58&#43;00:00"/>
+<meta property="article:modified_time" content="2019-06-26T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Extracting a PKCS7 Container for Receipt Validation with Swift"/>
-<meta name="twitter:description" content="Updated on July 15, 2017 – Swift 3 
-So you&rsquo;ve prepared to test receipt validation by setting up your app in iTunes Connect.
-You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt. Perhaps you&rsquo;ve even done it the &ldquo;easy way&#8221; with CocoaPods.
+<meta name="twitter:description" content="So you&rsquo;ve prepared to test receipt validation by setting up your app in iTunes Connect.
+You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&rdquo; for the receipt. Perhaps you&rsquo;ve even done it the &ldquo;easy way&rdquo; with CocoaPods.
 You&rsquo;ve located and loaded the receipt for validation.
 Now you&rsquo;re ready to extract the PKCS #7 container and work with it."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
@@ -74,9 +72,9 @@ Now you&rsquo;re ready to extract the PKCS #7 container and work with it."/>
   "@type": "BlogPosting",
   "headline": "Extracting a PKCS7 Container for Receipt Validation with Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2016\/06\/09\/extracting-a-pkcs7-container-for-receipt-validation-with-swift\/",
-  "wordCount": "1166",
+  "wordCount": "1218",
   "datePublished": "2016-06-10T03:44:58Z",
-  "dateModified": "2016-06-10T03:44:58Z",
+  "dateModified": "2019-06-26T00:00:00Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
@@ -207,14 +205,36 @@ MathJax.Hub.Config({
     <div class="content">
 
     <p></p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#recap-from-the-previous-guide">Recap from the previous guide</a></li>
+<li><a href="#receiptextractor-struct-outline">ReceiptExtractor struct outline</a></li>
+<li><a href="#new-receiptvalidationerror-cases">New ReceiptValidationError cases</a></li>
+<li><a href="#preparation-step-pkcs7-union-accessors">Preparation step: PKCS7 union accessors</a>
+<ul>
+<li>
+<ul>
+<li><a href="#pkcs7-union-accessors-h-implementation">pkcs7_union_accessors.h implementation</a></li>
+<li><a href="#pkcs7-union-accessors-c-implementation">pkcs7_union_accessors.c implementation</a></li>
+<li><a href="#bridging-header-updates">Bridging header updates</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#receiptextractor-struct-implementation">ReceiptExtractor struct implementation</a></li>
+<li><a href="#receiptextractor-struct-explanation">ReceiptExtractor struct explanation</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
 
     
 
-<p><small>Updated on July 15, 2017 – Swift 3 </small></p>
-
 <p>So you&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</p>
 
-<p>You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt. Perhaps you&rsquo;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &ldquo;easy way&#8221; with CocoaPods</a>.</p>
+<p>You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&rdquo; for the receipt. Perhaps you&rsquo;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &ldquo;easy way&rdquo; with CocoaPods</a>.</p>
 
 <p>You&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</p>
 
@@ -228,56 +248,82 @@ MathJax.Hub.Config({
   <div class="resources-header">
     Resources
   </div>
-  
-
-<p><ul class="resources-content">
+  <ul class="resources-content">
     <li>
       <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
     </li>
   </ul>
-</div></p>
+</div>
 
 <p><a name="recap" class="jump-target"></a></p>
 
-<h1 id="recap-from-the-previous-guide">Recap from the previous guide</h1>
+<h2 id="recap-from-the-previous-guide">Recap from the previous guide</h2>
 
 <p>In <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">Loading a Receipt for Validation with Swift</a>, I began the process of breaking out the various steps of the receipt validation process into separate single-responsibility structs with clearly named functions to help clarify what each piece of code is doing.</p>
 
 <p>Recall that I&rsquo;ve created a <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation">main Type called <code>ReceiptValidator</code></a>, with references to several smaller single-responsibility Types that it uses to accomplish the overall validation process. So accordingly, as of my last post in the series, I&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">created a <code>ReceiptLoader</code></a> that finds the receipt on the file system and loads it into memory.</p>
 
 <p>If a validation step ever fails along the way, I&rsquo;ve decided to take advantage of Swift&rsquo;s error throwing features to clearly describe what failed. So far, there&rsquo;s only one case:</p>
+
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
 <span class="ln">2</span>    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
 <span class="ln">3</span><span class="p">}</span></code></pre></div>
+
 <p>I&rsquo;ll expand this enum Type to cover more failure conditions in this guide.</p>
 
 <p><a name="receipt-extractor-outline" class="jump-target"></a></p>
 
-<h1 id="receiptextractor-struct-outline">ReceiptExtractor struct outline</h1>
+<h2 id="receiptextractor-struct-outline">ReceiptExtractor struct outline</h2>
 
 <p>The OpenSSL library comes to us in the form of a C static library. It&rsquo;s not a beautiful API to say the least. The names of the Types and functions are really cryptic at times, so I&rsquo;ve decided it&rsquo;s best for my own memory to wrap each step in small function routines that are named for what they do.</p>
 
 <p>So supposing you&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt data, or used <a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/StoreKit_Collection/">Store Kit</a> to request a receipt from Apple&#8230; Take a look at this new <code>ReceiptExtractor</code> skeleton of a struct to get an idea of what&rsquo;s going to be required to extract the PKCS7 container for the receipt:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">struct</span> <span class="nc">ReceiptExtractor</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">func</span> <span class="nf">extractPKCS7Container</span><span class="p">(</span><span class="kc">_</span> <span class="n">receiptData</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">PKCS7</span><span class="o">&gt;</span> <span class="p">{</span>
-<span class="ln">3</span>        <span class="c1">// use Open SSL to extract the PKCS7 container</span>
-<span class="ln">4</span>        <span class="c1">// throw a ReceiptValidationError if something goes wrong in this process</span>
-<span class="ln">5</span>    <span class="p">}</span>
-<span class="ln">6</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptExtractor</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">extractPKCS7Container</span><span class="p">(</span><span class="kc">_</span> <span class="n">receiptData</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">PKCS7</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="c1">// use Open SSL to extract the PKCS7 container</span>
+        <span class="c1">// throw a ReceiptValidationError if something goes wrong in this process</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p><a name="new-receiptvalidationerror-cases" class="jump-target"></a></p>
 
-<h1 id="new-receiptvalidationerror-cases">New ReceiptValidationError cases</h1>
+<h2 id="new-receiptvalidationerror-cases">New ReceiptValidationError cases</h2>
 
 <p>When extracting the receipt information from the PKCS7 container, there are going to be things that would cause overall validation to fail. For example, if the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">receipt <code>Data</code> instance</a> ends up being empty, that&rsquo;s a validation failure. The PKCS7 container needs to have information inside of it for validation to pass (obviously).</p>
 
 <p>So in this guide, I&rsquo;ll expand the <code>ReceiptValidationError</code> enum to have the following cases:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
-<span class="ln">3</span>    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
-<span class="ln">4</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
+    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p><a name="prep-pkcs7-union-accessors" class="jump-target"></a></p>
 
-<h1 id="preparation-step-pkcs7-union-accessors">Preparation step: PKCS7 union accessors</h1>
+<h2 id="preparation-step-pkcs7-union-accessors">Preparation step: PKCS7 union accessors</h2>
 
 <p>Before attempting to work with OpenSSL&rsquo;s PKCS7 functions, you&rsquo;ve got to do a little prep work to get the functions to play nicely with Swift.</p>
 
@@ -292,112 +338,201 @@ MathJax.Hub.Config({
 
 <p><a name="pkcs7-union-accessors-h-implementation" class="jump-target"></a></p>
 
-<h2 id="pkcs7-union-accessors-h-implementation">pkcs7_union_accessors.h implementation</h2>
+<h4 id="pkcs7-union-accessors-h-implementation">pkcs7_union_accessors.h implementation</h4>
 
-<p><pre class="lang:c decode:true " title="pkcs7_union_accessors.h" >#ifndef pkcs7_union_accessors_h
-#define pkcs7_union_accessors_h</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#ifndef pkcs7_union_accessors_h
+</span><span class="cp">#define pkcs7_union_accessors_h
+</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&amp;lt;openssl/pkcs7.h&amp;gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">char</span> <span class="o">*</span><span class="nf">pkcs7_d_char</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">ASN1_OCTET_STRING</span> <span class="o">*</span><span class="nf">pkcs7_d_data</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">PKCS7_SIGNED</span> <span class="o">*</span><span class="nf">pkcs7_d_sign</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">PKCS7_ENVELOPE</span> <span class="o">*</span><span class="nf">pkcs7_d_enveloped</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">PKCS7_SIGN_ENVELOPE</span> <span class="o">*</span><span class="nf">pkcs7_d_signed_and_enveloped</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">PKCS7_DIGEST</span> <span class="o">*</span><span class="nf">pkcs7_d_digest</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">PKCS7_ENCRYPT</span> <span class="o">*</span><span class="nf">pkcs7_d_encrypted</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">ASN1_TYPE</span> <span class="o">*</span><span class="nf">pkcs7_d_other</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
 
-<p>#include &lt;openssl/pkcs7.h&gt;</p>
+<span class="cp">#endif </span><span class="cm">/* pkcs7_union_accessors_h */</span></code></pre></td></tr></table>
+</div>
+</div>
 
-<p>char *pkcs7_d_char(PKCS7 *ptr);
-ASN1_OCTET_STRING *pkcs7_d_data(PKCS7 *ptr);
-PKCS7_SIGNED *pkcs7_d_sign(PKCS7 *ptr);
-PKCS7_ENVELOPE *pkcs7_d_enveloped(PKCS7 *ptr);
-PKCS7_SIGN_ENVELOPE *pkcs7_d_signed_and_enveloped(PKCS7 *ptr);
-PKCS7_DIGEST *pkcs7_d_digest(PKCS7 *ptr);
-PKCS7_ENCRYPT *pkcs7_d_encrypted(PKCS7 *ptr);
-ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr);</p>
+<p><a name="pkcs7-union-accessors-c-implementation" class="jump-target"></a></p>
 
-<p>#endif /* pkcs7_union_accessors_h */</p>
+<h4 id="pkcs7-union-accessors-c-implementation">pkcs7_union_accessors.c implementation</h4>
 
-<pre><code>
-&lt;a name=&quot;pkcs7-union-accessors-c-implementation&quot; class=&quot;jump-target&quot;&gt;&lt;/a&gt;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&#34;pkcs7_union_accessors.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kr">inline</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">pkcs7_d_char</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span>
 
-## pkcs7\_union\_accessors.c implementation
+<span class="kr">inline</span> <span class="n">ASN1_OCTET_STRING</span> <span class="o">*</span><span class="nf">pkcs7_d_data</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
 
-&lt;pre class=&quot;lang:c decode:true &quot; title=&quot;pkcs_union_accessors.c&quot; &gt;#include &quot;pkcs7_union_accessors.h&quot;
+<span class="kr">inline</span> <span class="n">PKCS7_SIGNED</span> <span class="o">*</span><span class="nf">pkcs7_d_sign</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">sign</span><span class="p">;</span>
+<span class="p">}</span>
 
-inline char *pkcs7_d_char(PKCS7 *ptr) {
-    return ptr-&amp;gt;d.ptr;
-}
+<span class="kr">inline</span> <span class="n">PKCS7_ENVELOPE</span> <span class="o">*</span><span class="nf">pkcs7_d_enveloped</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">enveloped</span><span class="p">;</span>
+<span class="p">}</span>
 
-inline ASN1_OCTET_STRING *pkcs7_d_data(PKCS7 *ptr) {
-    return ptr-&amp;gt;d.data;
-}
+<span class="kr">inline</span> <span class="n">PKCS7_SIGN_ENVELOPE</span> <span class="o">*</span><span class="nf">pkcs7_d_signed_and_enveloped</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">signed_and_enveloped</span><span class="p">;</span>
+<span class="p">}</span>
 
-inline PKCS7_SIGNED *pkcs7_d_sign(PKCS7 *ptr) {
-    return ptr-&amp;gt;d.sign;
-}
+<span class="kr">inline</span> <span class="n">PKCS7_DIGEST</span> <span class="o">*</span><span class="nf">pkcs7_d_digest</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">digest</span><span class="p">;</span>
+<span class="p">}</span>
 
-inline PKCS7_ENVELOPE *pkcs7_d_enveloped(PKCS7 *ptr) {
-    return ptr-&amp;gt;d.enveloped;
-}
+<span class="kr">inline</span> <span class="n">PKCS7_ENCRYPT</span> <span class="o">*</span><span class="nf">pkcs7_d_encrypted</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">encrypted</span><span class="p">;</span>
+<span class="p">}</span>
 
-inline PKCS7_SIGN_ENVELOPE *pkcs7_d_signed_and_enveloped(PKCS7 *ptr) {
-    return ptr-&amp;gt;d.signed_and_enveloped;
-}
-
-inline PKCS7_DIGEST *pkcs7_d_digest(PKCS7 *ptr) {
-    return ptr-&amp;gt;d.digest;
-}
-
-inline PKCS7_ENCRYPT *pkcs7_d_encrypted(PKCS7 *ptr) {
-    return ptr-&amp;gt;d.encrypted;
-}
-
-inline ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr) {
-    return ptr-&amp;gt;d.other;
-}
-</code></pre>
+<span class="kr">inline</span> <span class="n">ASN1_TYPE</span> <span class="o">*</span><span class="nf">pkcs7_d_other</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">other</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p><a name="bridging-header-updates" class="jump-target"></a></p>
 
-<h2 id="bridging-header-updates">Bridging header updates</h2>
+<h4 id="bridging-header-updates">Bridging header updates</h4>
 
 <p>After you create the union accessor files, you need to update your project&rsquo;s bridging header to import the new header file:</p>
 
-<p><pre class="lang:c decode:true " title="bridging header" >#import &lt;openssl/pkcs7.h&gt;
-#import &lt;openssl/objects.h&gt;
-#import &ldquo;pkcs7_union_accessors.h&rdquo;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#import &amp;lt;openssl/pkcs7.h&amp;gt;
+</span><span class="cp">#import &amp;lt;openssl/objects.h&amp;gt;
+</span><span class="cp">#import &#34;pkcs7_union_accessors.h&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
 
-<pre><code>
-&lt;a name=&quot;receiptextractor-implementation&quot; class=&quot;jump-target&quot;&gt;&lt;/a&gt;
+<p><a name="receiptextractor-implementation" class="jump-target"></a></p>
 
-# ReceiptExtractor struct implementation
+<h2 id="receiptextractor-struct-implementation">ReceiptExtractor struct implementation</h2>
 
-Now it's time to dive into the actual implementation of what I'm calling a `ReceiptExtractor`. Have a look at the code with some explanatory comments following:
+<p>Now it&rsquo;s time to dive into the actual implementation of what I&rsquo;m calling a <code>ReceiptExtractor</code>. Have a look at the code with some explanatory comments following:</p>
 
-```swift
-struct ReceiptExtractor {
-    func extractPKCS7Container(_ receiptData: Data) throws -&gt; UnsafeMutablePointer&amp;lt;PKCS7&gt; {
-        let receiptBIO = BIO_new(BIO_s_mem())       
-        BIO_write(receiptBIO, (receiptData as NSData).bytes, Int32(receiptData.count))
-        let receiptPKCS7Container = d2i_PKCS7_bio(receiptBIO, nil)
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptExtractor</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">extractPKCS7Container</span><span class="p">(</span><span class="kc">_</span> <span class="n">receiptData</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">PKCS7</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">receiptBIO</span> <span class="p">=</span> <span class="n">BIO_new</span><span class="p">(</span><span class="n">BIO_s_mem</span><span class="p">())</span>       
+        <span class="n">BIO_write</span><span class="p">(</span><span class="n">receiptBIO</span><span class="p">,</span> <span class="p">(</span><span class="n">receiptData</span> <span class="k">as</span> <span class="n">NSData</span><span class="p">).</span><span class="n">bytes</span><span class="p">,</span> <span class="nb">Int32</span><span class="p">(</span><span class="n">receiptData</span><span class="p">.</span><span class="bp">count</span><span class="p">))</span>
+        <span class="kd">let</span> <span class="nv">receiptPKCS7Container</span> <span class="p">=</span> <span class="n">d2i_PKCS7_bio</span><span class="p">(</span><span class="n">receiptBIO</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
         
-        guard receiptPKCS7Container != nil else {
-            throw ReceiptValidationError.emptyReceiptContents
-        }
+        <span class="k">guard</span> <span class="n">receiptPKCS7Container</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">emptyReceiptContents</span>
+        <span class="p">}</span>
         
-        let pkcs7DataTypeCode = OBJ_obj2nid(pkcs7_d_sign(receiptPKCS7Container).pointee.contents.pointee.type)
+        <span class="kd">let</span> <span class="nv">pkcs7DataTypeCode</span> <span class="p">=</span> <span class="n">OBJ_obj2nid</span><span class="p">(</span><span class="n">pkcs7_d_sign</span><span class="p">(</span><span class="n">receiptPKCS7Container</span><span class="p">).</span><span class="n">pointee</span><span class="p">.</span><span class="n">contents</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">type</span><span class="p">)</span>
         
-        guard pkcs7DataTypeCode == NID_pkcs7_data else {
-            throw ReceiptValidationError.emptyReceiptContents
-        }
+        <span class="k">guard</span> <span class="n">pkcs7DataTypeCode</span> <span class="p">==</span> <span class="n">NID_pkcs7_data</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">emptyReceiptContents</span>
+        <span class="p">}</span>
         
-        return receiptPKCS7Container!
-    }
-}
-</code></pre>
+        <span class="k">return</span> <span class="n">receiptPKCS7Container</span><span class="o">!</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p><a name="receiptextractor-explanation" class="jump-target"></a></p>
 
-<h1 id="receiptextractor-struct-explanation">ReceiptExtractor struct explanation</h1>
+<h2 id="receiptextractor-struct-explanation">ReceiptExtractor struct explanation</h2>
 
 <p>Most of the code above is a Swift translation of what&rsquo;s found at <a href="https://www.objc.io/issues/17-security/receipt-validation/">Objc.io&rsquo;s Receipt Validation guide</a>.</p>
 
 <p>I did a little research over at the OpenSSL site though, and thought it might be helpful for the curious to know what some of these non-intuitive function names stand for and what they do.</p>
 
-<p><code>BIO_new</code> for example. &ldquo;BIO&#8221; stands for &ldquo;Basic I/O&#8221;. It&rsquo;s an abstraction over the underlying basic input and output operations that your app uses for cryptographic operations.</p>
+<p><code>BIO_new</code> for example. &ldquo;BIO&rdquo; stands for &ldquo;Basic I/O&rdquo;. It&rsquo;s an abstraction over the underlying basic input and output operations that your app uses for cryptographic operations.</p>
 
 <p>What we&rsquo;re doing with <code>BIO_new(BIO_s_mem())</code> is saying that we want a new Basic I/O mechanism that uses <em>memory</em> for its I/O operations.</p>
 
@@ -407,7 +542,7 @@ struct ReceiptExtractor {
 
 <p>Once we have the container in hand, it&rsquo;s a matter of making sure it has contents.</p>
 
-<p>I couldn&rsquo;t find a lot of information about the call to <code>pkcs7_d_sign</code>, but the primary point of line 13 above is to get a &ldquo;numerical identifier&#8221;, which is what &ldquo;NID&#8221; stands for in <code>OBJ_obj2nid</code>.</p>
+<p>I couldn&rsquo;t find a lot of information about the call to <code>pkcs7_d_sign</code>, but the primary point of line 13 above is to get a &ldquo;numerical identifier&rdquo;, which is what &ldquo;NID&rdquo; stands for in <code>OBJ_obj2nid</code>.</p>
 
 <p>Digging into the PKCS #7 container, you can access the right property and convert it to a numerical identifier that you can check.</p>
 
@@ -421,11 +556,9 @@ struct ReceiptExtractor {
 
 <div class="resources">
   <div class="resources-header">
-    You might also enjoy&#8230;
+    You might also enjoy...
   </div>
-  
-
-<p><ul class="resources-content">
+  <ul class="resources-content">
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
     </li>
@@ -433,7 +566,7 @@ struct ReceiptExtractor {
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
     </li>
     <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS &amp; Swift the Easy Way</a>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS & Swift the Easy Way</a>
     </li>
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" title="Receipt Validation – Verifying a Receipt Signature in Swift">Receipt Validation – Verifying a Receipt Signature in Swift</a>
@@ -445,34 +578,10 @@ struct ReceiptExtractor {
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
     </li>
   </ul>
-</div></p>
+</div>
 
 <p><a name="share" class="jump-target"></a></p>
 
-
-    <aside>
-      
-      
-      <div class="resources">
-        <div class="resources-header">
-            You might also enjoy...
-        </div>
-        
-        <ul class="resources-content">
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">Loading a Receipt for Validation with Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">OpenSSL for iOS and Swift the Easy Way</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/02/creating-calendar-events-with-event-kit-and-swift/">Creating Calendar Events with Event Kit and Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/05/26/swift-cheat-sheet-for-dates-formatters-date-components/">Swift Cheat Sheet for Dates, Formatters, and Date Components</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/">Parse PFCloud – “JSON text did not start with array or object”</a></li>
-            
-        <ul>
-      
-    </aside>
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
