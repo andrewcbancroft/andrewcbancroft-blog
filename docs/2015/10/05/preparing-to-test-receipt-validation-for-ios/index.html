@@ -48,17 +48,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Preparing to Test Receipt Validation for iOS" />
-<meta property="og:description" content="Updated on July 15, 2017 – Swift 3 
-After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I&rsquo;ve decided to combine everything into the following guide. Whether you&rsquo;re working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application." />
+<meta property="og:description" content="This walk-through should provide guidance to get you ready to work with receipts in your iOS application." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" />
 <meta property="article:published_time" content="2015-10-05T18:25:09&#43;00:00"/>
-<meta property="article:modified_time" content="2015-10-05T18:25:09&#43;00:00"/>
+<meta property="article:modified_time" content="2019-06-27T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Preparing to Test Receipt Validation for iOS"/>
-<meta name="twitter:description" content="Updated on July 15, 2017 – Swift 3 
-After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I&rsquo;ve decided to combine everything into the following guide. Whether you&rsquo;re working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application."/>
+<meta name="twitter:description" content="This walk-through should provide guidance to get you ready to work with receipts in your iOS application."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -68,16 +66,16 @@ After having to piece together each step along the path of preparing to test rec
   "@type": "BlogPosting",
   "headline": "Preparing to Test Receipt Validation for iOS",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/10\/05\/preparing-to-test-receipt-validation-for-ios\/",
-  "wordCount": "997",
+  "wordCount": "1000",
   "datePublished": "2015-10-05T18:25:09Z",
-  "dateModified": "2015-10-05T18:25:09Z",
+  "dateModified": "2019-06-27T00:00:00Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "Swift, iOS, Receipt Validation"
+  "keywords": "In-App Purchases, Receipt Validation, Swift"
 
-  ,"description": ""
+  ,"description": "This walk-through should provide guidance to get you ready to work with receipts in your iOS application."
 }
 </script>
 
@@ -204,8 +202,6 @@ MathJax.Hub.Config({
 
     
 
-<p><small>Updated on July 15, 2017 – Swift 3 </small></p>
-
 <p>After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I&rsquo;ve decided to combine everything into the following guide. Whether you&rsquo;re working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application.</p>
 
 <p><a name="app-record-setup" class="jump-target"></a></p>
@@ -286,51 +282,115 @@ MathJax.Hub.Config({
 <p>As a quick example, consider the following class that will act as a <code>ReceiptFetcher</code>. To test things out, you can simply create an instance of this class in your primary view controller, and call <code>fetchReceipt</code> in the <code>viewDidLoad()</code> method.</p>
 
 <p>You&rsquo;ll be looking to make sure you&rsquo;re prompted for iTunes Store credentials, and that you successfully receive a receipt (ie, <code>request(_:didFailWithError:)</code> did not get called, but instead <code>requestDidFinish(_:)</code> got called):</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">Foundation</span>
-<span class="ln"> 2</span><span class="kd">import</span> <span class="nc">StoreKit</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span><span class="kd">class</span> <span class="nc">ReceiptFetcher</span> <span class="p">:</span> <span class="n">NSObject</span><span class="p">,</span> <span class="n">SKRequestDelegate</span> <span class="p">{</span>
-<span class="ln"> 5</span>    
-<span class="ln"> 6</span>    <span class="kd">let</span> <span class="nv">receiptRefreshRequest</span> <span class="p">=</span> <span class="n">SKReceiptRefreshRequest</span><span class="p">()</span>
-<span class="ln"> 7</span>    
-<span class="ln"> 8</span>    <span class="kr">override</span> <span class="kd">init</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 9</span>        <span class="kc">super</span><span class="p">.</span><span class="kd">init</span><span class="p">()</span>
-<span class="ln">10</span>        <span class="n">receiptRefreshRequest</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
-<span class="ln">11</span>    <span class="p">}</span>
-<span class="ln">12</span>    
-<span class="ln">13</span>    <span class="kd">func</span> <span class="nf">fetchReceipt</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">14</span>        <span class="kd">let</span> <span class="nv">receiptUrl</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">appStoreReceiptURL</span>
-<span class="ln">15</span>        
-<span class="ln">16</span>        <span class="k">do</span> <span class="p">{</span>
-<span class="ln">17</span>            <span class="k">if</span> <span class="kd">let</span> <span class="nv">receiptFound</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptUrl</span><span class="p">?.</span><span class="n">checkResourceIsReachable</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">18</span>                <span class="k">if</span> <span class="p">(</span><span class="n">receiptFound</span> <span class="p">==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln">19</span>                    <span class="n">receiptRefreshRequest</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
-<span class="ln">20</span>                <span class="p">}</span>
-<span class="ln">21</span>            <span class="p">}</span>
-<span class="ln">22</span>        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">23</span>            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Could not check for receipt presence for some reason... </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
-<span class="ln">24</span>        <span class="p">}</span>
-<span class="ln">25</span>    <span class="p">}</span>
-<span class="ln">26</span>    
-<span class="ln">27</span>    <span class="kd">func</span> <span class="nf">requestDidFinish</span><span class="p">(</span><span class="kc">_</span> <span class="n">request</span><span class="p">:</span> <span class="n">SKRequest</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln">28</span>        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;The request finished successfully&#34;</span><span class="p">)</span>
-<span class="ln">29</span>    <span class="p">}</span>
-<span class="ln">30</span>    
-<span class="ln">31</span>    <span class="kd">func</span> <span class="nf">request</span><span class="p">(</span><span class="kc">_</span> <span class="n">request</span><span class="p">:</span> <span class="n">SKRequest</span><span class="p">,</span> <span class="n">didFailWithError</span> <span class="n">error</span><span class="p">:</span> <span class="n">Error</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln">32</span>        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Something went wrong: </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
-<span class="ln">33</span>    <span class="p">}</span>
-<span class="ln">34</span><span class="p">}</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>    <span class="c1">// Note that an instance of ReceiptFetcher is kept at the class-level</span>
-<span class="ln"> 4</span>    <span class="kd">let</span> <span class="nv">receiptFetcher</span> <span class="p">=</span> <span class="n">ReceiptFetcher</span><span class="p">()</span>
-<span class="ln"> 5</span>    
-<span class="ln"> 6</span>    <span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 7</span>        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-<span class="ln"> 8</span>        <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
-<span class="ln"> 9</span>
-<span class="ln">10</span>        <span class="n">receiptFetcher</span><span class="p">.</span><span class="n">fetchReceipt</span><span class="p">()</span>
-<span class="ln">11</span>    <span class="p">}</span>
-<span class="ln">12</span><span class="p">}</span></code></pre></div>
+
+<p><strong>Receipt Fetcher</strong>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
+<span class="kd">import</span> <span class="nc">StoreKit</span>
+
+<span class="kd">class</span> <span class="nc">ReceiptFetcher</span> <span class="p">:</span> <span class="n">NSObject</span><span class="p">,</span> <span class="n">SKRequestDelegate</span> <span class="p">{</span>
+    
+    <span class="kd">let</span> <span class="nv">receiptRefreshRequest</span> <span class="p">=</span> <span class="n">SKReceiptRefreshRequest</span><span class="p">()</span>
+    
+    <span class="kr">override</span> <span class="kd">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kc">super</span><span class="p">.</span><span class="kd">init</span><span class="p">()</span>
+        <span class="n">receiptRefreshRequest</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">fetchReceipt</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">receiptUrl</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">appStoreReceiptURL</span>
+        
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="kd">let</span> <span class="nv">receiptFound</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptUrl</span><span class="p">?.</span><span class="n">checkResourceIsReachable</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">receiptFound</span> <span class="p">==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">receiptRefreshRequest</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Could not check for receipt presence for some reason... </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">requestDidFinish</span><span class="p">(</span><span class="kc">_</span> <span class="n">request</span><span class="p">:</span> <span class="n">SKRequest</span><span class="p">)</span> <span class="p">{</span>
+        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;The request finished successfully&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">request</span><span class="p">(</span><span class="kc">_</span> <span class="n">request</span><span class="p">:</span> <span class="n">SKRequest</span><span class="p">,</span> <span class="n">didFailWithError</span> <span class="n">error</span><span class="p">:</span> <span class="n">Error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Something went wrong: </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></p>
+
+<p><strong>View Controller</strong>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+
+    <span class="c1">// Note that an instance of ReceiptFetcher is kept at the class-level</span>
+    <span class="kd">let</span> <span class="nv">receiptFetcher</span> <span class="p">=</span> <span class="n">ReceiptFetcher</span><span class="p">()</span>
+    
+    <span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+        <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
+
+        <span class="n">receiptFetcher</span><span class="p">.</span><span class="n">fetchReceipt</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></p>
+
 <p><strong>Note:</strong> Once again, note that the instance of <code>ReceiptFetcher</code> is held at the view controller&rsquo;s class-level scope. This is necessary to allow the delegate callback functions to be invoked. If you initialize the <code>ReceiptFetcher</code> in <code>viewDidLoad</code> without holding a reference at the class level, the instance will be deallocated prior to the delegate callback functions being invoked.</p>
 
 <p><a name="build-run-on-device" class="jump-target"></a></p>
@@ -349,14 +409,12 @@ MathJax.Hub.Config({
   <div class="resources-header">
     You might also enjoy&#8230;
   </div>
-  
-
-<p><ul class="resources-content">
+  <ul class="resources-content">
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
     </li>
     <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS &amp; Swift the Easy Way</a>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS & Swift the Easy Way</a>
     </li>
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" title="Extracting a PKCS7 Container for Receipt Validation with Swift">Extracting a PKCS7 Container for Receipt Validation with Swift</a>
@@ -371,25 +429,10 @@ MathJax.Hub.Config({
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
     </li>
   </ul>
-</div></p>
+</div>
 
 <p><a name="share" class="jump-target"></a></p>
 
-    <aside>
-      
-      
-      <div class="resources">
-        <div class="resources-header">
-            You might also enjoy...
-        </div>
-        
-        <ul class="resources-content">
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2013/03/16/learning-ios-development/">Journey in iOS Development Series – In the Beginning…</a></li>
-            
-        <ul>
-      
-    </aside>
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">

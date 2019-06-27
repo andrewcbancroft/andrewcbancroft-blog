@@ -8,9 +8,8 @@ lastmod: 2019-06-26T00:00:00+00:00
 url: /2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/
 dsq_thread_id:
   - "6030242278"
-categories:
-  - Swift
 tags:
+  - In-App Purchases
   - Receipt Validation
   - Swift
 exclude_related: true

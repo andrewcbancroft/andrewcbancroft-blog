@@ -7,9 +7,8 @@ lastmod: 2019-06-26T00:00:00+00:00
 url: /2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/
 dsq_thread_id:
   - "4898612593"
-categories:
-  - Swift
 tags:
+  - In-App Purchases
   - OpenSSL
   - Receipt Validation
   - Swift

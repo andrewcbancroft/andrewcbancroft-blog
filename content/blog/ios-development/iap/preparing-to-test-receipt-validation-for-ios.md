@@ -1,24 +1,21 @@
 ---
 title: Preparing to Test Receipt Validation for iOS
+description: "This walk-through should provide guidance to get you ready to work with receipts in your iOS application."
 author: Andrew
 type: blog
 date: 2015-10-05T18:25:09+00:00
+lastmod: 2019-06-27T00:00:00+00:00
 url: /2015/10/05/preparing-to-test-receipt-validation-for-ios/
 dsq_thread_id:
   - "4196824551"
-categories:
-  - Swift
 tags:
-  - iOS
+  - In-App Purchases
   - Receipt Validation
-
+  - Swift
+exclude_related: true
 ---
-<small>Updated on July 15, 2017 – Swift 3 </small>
 
 After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I've decided to combine everything into the following guide. Whether you're working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application.
-
-
-
 
 <a name="app-record-setup" class="jump-target"></a>
 
@@ -97,7 +94,8 @@ As a quick example, consider the following class that will act as a `ReceiptFetc
 
 You'll be looking to make sure you're prompted for iTunes Store credentials, and that you successfully receive a receipt (ie, `request(_:didFailWithError:)` did not get called, but instead `requestDidFinish(_:)` got called):
 
-```swift
+**Receipt Fetcher**
+{{< highlight swift "linenos=table" >}}
 import Foundation
 import StoreKit
 
@@ -132,9 +130,10 @@ class ReceiptFetcher : NSObject, SKRequestDelegate {
         print("Something went wrong: \(error.localizedDescription)")
     }
 }
-```
+{{< / highlight  >}}
 
-```swift
+**View Controller**
+{{< highlight swift "linenos=table" >}}
 public class ViewController: UIViewController {
 
     // Note that an instance of ReceiptFetcher is kept at the class-level
@@ -147,7 +146,7 @@ public class ViewController: UIViewController {
         receiptFetcher.fetchReceipt()
     }
 }
-```
+{{< / highlight  >}}
 
 **Note:** Once again, note that the instance of `ReceiptFetcher` is held at the view controller's class-level scope. This is necessary to allow the delegate callback functions to be invoked. If you initialize the `ReceiptFetcher` in `viewDidLoad` without holding a reference at the class level, the instance will be deallocated prior to the delegate callback functions being invoked.
 
@@ -167,7 +166,6 @@ public class ViewController: UIViewController {
   <div class="resources-header">
     You might also enjoy&#8230;
   </div>
-  
   <ul class="resources-content">
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>

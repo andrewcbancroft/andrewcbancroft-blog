@@ -8,9 +8,8 @@ lastmod: 2019-06-27T00:00:00+00:00
 url: /2015/10/13/loading-a-receipt-for-validation-with-swift/
 dsq_thread_id:
   - "4223016914"
-categories:
-  - Swift
 tags:
+  - In-App Purchases
   - Receipt Validation
   - Swift
 exclude_related: true

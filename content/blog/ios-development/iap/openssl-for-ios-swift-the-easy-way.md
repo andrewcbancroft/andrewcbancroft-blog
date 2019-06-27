@@ -8,9 +8,8 @@ lastmod: 2019-06-27T00:00:00+00:00
 url: /2015/09/21/openssl-for-ios-swift-the-easy-way/
 dsq_thread_id:
   - "4153083561"
-categories:
-  - Swift
 tags:
+  - In-App Purchases
   - Cocoapods
   - OpenSSL
   - Swift

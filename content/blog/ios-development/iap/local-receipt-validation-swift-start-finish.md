@@ -9,9 +9,8 @@ url: /2017/08/01/local-receipt-validation-swift-start-finish/
 featured_image: /wp-content/uploads/2017/08/Graphic-Only-Local-Receipt-Validation-for-iOS-in-Swift-From-Start-to-Finish.png
 dsq_thread_id:
   - "6033658886"
-categories:
-  - Swift
 tags:
+  - In-App Purchases
   - Receipt Validation
   - Swift
 exclude_related: true

@@ -6,9 +6,8 @@ date: 2017-07-28T03:41:33+00:00
 url: /2017/07/27/receipt-validation-parsing-a-receipt-with-swift/
 dsq_thread_id:
   - "6021747553"
-categories:
-  - Swift
 tags:
+  - In-App Purchases
   - Receipt Validation
   - Swift
 
