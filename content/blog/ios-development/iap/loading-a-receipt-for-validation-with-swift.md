@@ -3,6 +3,7 @@ title: Loading a Receipt for Validation with Swift
 author: Andrew
 type: blog
 date: 2015-10-14T03:24:02+00:00
+lastmod: 2019-06-27T00:00:00+00:00
 url: /2015/10/13/loading-a-receipt-for-validation-with-swift/
 dsq_thread_id:
   - "4223016914"
@@ -11,9 +12,9 @@ categories:
 tags:
   - Receipt Validation
   - Swift
-
+exclude_related: true
+toc: true
 ---
-<small>Updated on July 15, 2017 – Swift 3 </small>
 
 I'm working through a progression of entries on the process of validating receipts with OpenSSL for iOS in Swift.
 
@@ -23,7 +24,6 @@ Just want the code? Here you go!
   <div class="resources-header">
     Resources
   </div>
-  
   <ul class="resources-content">
     <li>
       <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
@@ -84,11 +84,11 @@ Third, whenever some step along the way fails, I'm utilizing Swift's error handl
 
 The enum's definition is simple right now, but it will grow as time goes on with various other error conditions related to receipt validation (and why validation might fail):
 
-```swift
+{{< highlight swift "linenos=table" >}}
 enum ReceiptValidationError : Error {
     case couldNotFindReceipt
 }
-```
+{{< /highlight >}}
 
 This enum simply implements the `Error` "marker&#8221; protocol, which allows its values to be used in Swift's error-throwing system. For this blog entry, we'll stick with simply throwing the value `couldNotFindReceipt` whenever a receipt can't be found and needs to be re-requested from the App Store.
 
@@ -104,7 +104,7 @@ I mentioned `ReceiptLoader` in the overview. An implementation will follow, but 
 
 With that architecture in mind, here's what `ReceiptValidator` looks like right now:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 enum ReceiptValidationResult {
     case success
     case error(ReceiptValidationError)
@@ -124,7 +124,7 @@ struct ReceiptValidator {
         }
     }
 }
-```
+{{< /highlight >}}
 
 So the validator simply lets the `ReceiptLoader` instance do it's loading job. If it doesn't return any data containing a receipt to work with, the validator will catch the error and return the `.error` `ReceiptValidationResult` case with the error cast to a `ReceiptValidationError` as an associated value.
 
@@ -138,7 +138,7 @@ The `ReceiptLoader` has the sole responsibility of going to receipt storage loca
 
 Here's the implementation with explanation to follow:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 struct ReceiptLoader {
     let receiptUrl = Bundle.main.appStoreReceiptURL
     
@@ -165,7 +165,7 @@ struct ReceiptLoader {
         return false
     }
 }
-```
+{{< /highlight >}}
 
 The `loadReceipt()` method will do the job and either return a `Data` instance with the receipt contents that can be extracted and parsed in later steps, or it will throw the `ReceiptValidationError.couldNotFindReceipt` enum value.
 
@@ -177,7 +177,7 @@ The rest of the implementation is all around making sure the receipt is there an
 
 The View Controller is the kick-off point of all-things receipt validation. To have some code in front of us, take a look at this implementation. Explanatory details are below:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 public class ViewController: UIViewController, SKRequestDelegate {
     let receiptValidator = ReceiptValidator()
     let receiptRequest = SKReceiptRefreshRequest()
@@ -215,7 +215,7 @@ public class ViewController: UIViewController, SKRequestDelegate {
         // before disabling app functionality, or simply disable features
     }
 }
-```
+{{< /highlight >}}
 
 When the app starts and the controller has loaded, it will prepare itself in a couple of ways:
 
@@ -245,7 +245,6 @@ That about wraps up locating and loading the receipt. The _real_ challenges of u
   <div class="resources-header">
     You might also enjoy&#8230;
   </div>
-  
   <ul class="resources-content">
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
