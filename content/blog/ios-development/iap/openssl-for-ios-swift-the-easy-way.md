@@ -14,7 +14,7 @@ tags:
   - Cocoapods
   - OpenSSL
   - Swift
-
+exclude_related: true
 ---
 I'm currently working on outfitting an app I'm working on to be able to [validate receipts][1] to verify purchases of the app.
 
@@ -22,7 +22,7 @@ Little did I know, this adventure would introduce the need to understand how to 
 
 <a name="cryptography-library-needed" class="jump-target"></a>
 
-### Cryptography library needed
+## Cryptography library needed
 
 In order to even "open" the receipt itself, we've got to work with something called a "PKCS #7 container". Once we get the container open, we need to be able to validate Apple's certificate that they use to sign every purchase of every app.
 
@@ -36,7 +36,7 @@ I found that figuring out what to do to get OpenSSL into my project was harder t
 
 <a name="cocoapods" class="jump-target"></a>
 
-### OpenSSL for iOS with Cocoapods
+## OpenSSL for iOS with Cocoapods
 
 How easy is it to get started with OpenSSL for iOS with Cocoapods?
 
@@ -50,10 +50,11 @@ Once Cocoapods is installed, open your project in Xcode and add a new empty file
 
 In its contents, you simply add a reference to the OpenSSL library:
 
-<pre class="lang:sh decode:true " title="Podfile" >target 'NameOfYourApp' do
+{{< highlight sh "linenos=table" >}}
+target 'NameOfYourApp' do
     pod 'OpenSSL', '~> 1.0'
 end
-```
+{{< /highlight >}}
 
 Note that there are several &#8216;OpenSSL' Cocoapod specs out there to choose from. I originally tried one that looked like it was for iOS (OpenSSL-iOS), but I was never able to get Swift code to recognize the C functions and types.
 
@@ -83,10 +84,11 @@ Xcode will prompt you to create the bridging header – you should let it. Once 
 
 Within the bridging header, you can insert some `#import` statements to make the OpenSSL library components visible to your Swift project. For example, to start off, you could flesh out the bridging header with a couple of OpenSSL header files:
 
-<pre class="lang:objc decode:true " title="Bridging header" >#import &lt;openssl/pkcs7.h&gt;
-#import &lt;openssl/objects.h&gt;
+{{< highlight swift "linenos=table" >}}
+#import <openssl/pkcs7.h>
+#import <openssl/objects.h>
 // Others that you may need in your Swift project
-```
+{{< /highlight >}}
 
 <a name="xcode-7-bitcode" class="jump-target"></a>
 
@@ -116,7 +118,6 @@ That's all there is to getting OpenSSL built and added as a reference in your ap
   <div class="resources-header">
     You might also enjoy&#8230;
   </div>
-  
   <ul class="resources-content">
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
