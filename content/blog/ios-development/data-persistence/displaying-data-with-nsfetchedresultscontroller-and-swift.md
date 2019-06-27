@@ -173,7 +173,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 
 The final step in implementing `MainViewController` is to set up the table view so that it pulls data from `fetchedResultsController`. I'm implementing the [standard UITableViewDataSource methods][10] here, along with `tableView:titleForHeaderInSection`. Take a look:
 
-{{< highlight swift "hl_lines=7 15 34 linenos=table" >}}
+{{< highlight swift "hl_lines=7 15 34, linenos=table" >}}
 public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     // ...
@@ -230,7 +230,7 @@ Once the `UITableViewDataSource` methods are implemented, the implementation of 
 
 There's one final thing we need to do in order to get things rolling. In the ["maintain NSManagedObjectContext instance reference&#8221;][11] section of this post, I mentioned the strategy for assigning the `NSManagedObjectContext` instance in the `MainViewController`. Here's how I do it:
 
-{{< highlight swift "hl_lines=16-17 linenos=table" >}}
+{{< highlight swift "hl_lines=16-17, linenos=table" >}}
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // ...
