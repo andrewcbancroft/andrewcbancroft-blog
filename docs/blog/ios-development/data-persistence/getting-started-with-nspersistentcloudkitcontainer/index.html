@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/getting-started-with-nspersistentcloudkitcontainer\/",
-  "wordCount": "1207",
+  "wordCount": "1221",
   "datePublished": "2019-06-11T04:40:54Z",
   "dateModified": "2019-06-11T04:40:54Z",
   "author": {
@@ -469,20 +469,40 @@ Resources
 <p>I initialize the container in the <code>SceneDelegate</code>, so check out the code exerpt below to see where that gets set.</p>
 
 <p><strong>SceneDelegate.swift</strong>
-func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-    // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-    // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-    guard let _ = (scene as? UIWindowScene) else { return }
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="hl"><span class="lnt">11
+</span></span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.</span>
+    <span class="c1">// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.</span>
+    <span class="c1">// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">_</span> <span class="p">=</span> <span class="p">(</span><span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
     
-    let navigationController = self.window?.rootViewController as! UINavigationController
-    let mainVC = navigationController.viewControllers[0] as! MainViewController
+    <span class="kd">let</span> <span class="nv">navigationController</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="o">!</span> <span class="n">UINavigationController</span>
+    <span class="kd">let</span> <span class="nv">mainVC</span> <span class="p">=</span> <span class="n">navigationController</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="o">!</span> <span class="n">MainViewController</span>
     
-    let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    viewContext.automaticallyMergesChangesFromParent = true
-
-    mainVC.managedObjectContext = viewContext
-}</p>
+    <span class="kd">let</span> <span class="nv">viewContext</span> <span class="p">=</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">delegate</span> <span class="k">as</span><span class="o">!</span> <span class="n">AppDelegate</span><span class="p">).</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span>
+<span class="hl">    <span class="n">viewContext</span><span class="p">.</span><span class="n">automaticallyMergesChangesFromParent</span> <span class="p">=</span> <span class="kc">true</span>
+</span>
+    <span class="n">mainVC</span><span class="p">.</span><span class="n">managedObjectContext</span> <span class="p">=</span> <span class="n">viewContext</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></p>
 
 <p>Making this one-line change will enable the app (which is supported by <code>NSFetchedResultsController</code>) to update the UI in response to remote data changes&hellip;</p>
 
