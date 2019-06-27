@@ -97,7 +97,7 @@ At the function level, the usefulness of parameters is that you can supply input
 
 ```swift
 // prefer
-func getNameFromDatabase(database: Database) -&gt; String {
+func getNameFromDatabase(database: Database) -> String {
     return database.getName()
     // able to supply a controlled input via parameter, such as supplying a 
     // customized "fake" database to use for testing but still supply a "real" database in real life
@@ -105,14 +105,14 @@ func getNameFromDatabase(database: Database) -&gt; String {
 }
 
 // over
-func getNameFromDatabase() -&gt; String {
+func getNameFromDatabase() -> String {
     let database = Database()
     // stuck with talking to a real database
     return database.getName()
 }
 
 // and over
-func getNameFromDatabase() -&gt; String {
+func getNameFromDatabase() -> String {
     return self.database.getName()
     // requires additional setting of the database property on 'self'
     // before you're able to get results from this function

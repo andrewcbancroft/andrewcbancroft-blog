@@ -216,7 +216,7 @@ MathJax.Hub.Config({
 
 <p>I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&rsquo;ve recently learned about in Scala.  Essentially, I was trying to implement a factorial function as a <em>closure</em>, and I was trying to do it <em>recursively</em> (that is, without using a for/while loop).  Here&rsquo;s what I wanted to do:</p>
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">factorial</span> <span class="p">=</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Int</span> <span class="k">in</span>
+<span class="ln">2</span>    <span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="k">in</span>
 <span class="ln">3</span>    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 <span class="ln">4</span>        <span class="k">return</span> <span class="mi">1</span>
 <span class="ln">5</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -228,9 +228,9 @@ MathJax.Hub.Config({
 <p>Apparently, the closure (which is being initialized and assigned to the constant named &ldquo;factorial&#8221;) hasn&rsquo;t had a chance to fully initialize itself before the name <code>factorial</code> is used within the body.</p>
 
 <p>The frustrating part is that <a title="Rob Napier on Immutability and Swift" href="http://robnapier.net/llama-calculus" target="_blank">I <em>really</em> didn&rsquo;t want to type the letters v-a-r</a> to implement my solution.  But alas, as <a title="Stack Overflow - Handle Closure Recursively" href="http://stackoverflow.com/questions/25103534/how-to-handle-closure-recursivity" target="_blank">Stack Overflow</a> says, the following solution to the &ldquo;initial value&#8221; error works:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">var</span> <span class="nv">factorial</span><span class="p">:</span> <span class="p">(</span><span class="nb">Int</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Int</span>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">var</span> <span class="nv">factorial</span><span class="p">:</span> <span class="p">(</span><span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span>
 <span class="ln"> 2</span><span class="n">factorial</span> <span class="p">=</span> <span class="p">{</span>
-<span class="ln"> 3</span>    <span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Int</span> <span class="k">in</span>
+<span class="ln"> 3</span>    <span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="k">in</span>
 <span class="ln"> 4</span>    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 <span class="ln"> 5</span>        <span class="k">return</span> <span class="mi">1</span>
 <span class="ln"> 6</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -241,7 +241,7 @@ MathJax.Hub.Config({
 <span class="ln">11</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="ln">12</span><span class="c1">// Produces the correct result of 120</span></code></pre></div>
 <p>Of course, there&rsquo;s absolutely no reason for the implementation to be a closure – I was simply experimenting.  Here&rsquo;s the solution that I actually prefer&#8230; a good ole named function definition:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Int</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
 <span class="ln"> 2</span>    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 <span class="ln"> 3</span>        <span class="k">return</span> <span class="mi">1</span>
 <span class="ln"> 4</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>

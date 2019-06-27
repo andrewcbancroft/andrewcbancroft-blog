@@ -95,7 +95,7 @@ func alertCameraAccessNeeded() {
     )
 
     alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-    alert.addAction(UIAlertAction(title: "Allow Camera", style: .cancel, handler: { (alert) -&gt; Void in
+    alert.addAction(UIAlertAction(title: "Allow Camera", style: .cancel, handler: { (alert) -> Void in
         UIApplication.shared.open(settingsAppURL, options: [:], completionHandler: nil)
     }))
 

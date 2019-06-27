@@ -371,7 +371,7 @@ MathJax.Hub.Config({
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#ifndef pkcs7_union_accessors_h
 </span><span class="cp">#define pkcs7_union_accessors_h
 </span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;openssl/pkcs7.h&amp;gt;</span><span class="cp">
+<span class="cp">#include</span> <span class="cpf">&lt;openssl/pkcs7.h&gt;</span><span class="cp">
 </span><span class="cp"></span>
 <span class="kt">char</span> <span class="o">*</span><span class="nf">pkcs7_d_char</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
 <span class="n">ASN1_OCTET_STRING</span> <span class="o">*</span><span class="nf">pkcs7_d_data</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
@@ -430,35 +430,35 @@ MathJax.Hub.Config({
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&#34;pkcs7_union_accessors.h&#34;</span><span class="cp">
 </span><span class="cp"></span>
 <span class="kr">inline</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">pkcs7_d_char</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">d</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kr">inline</span> <span class="n">ASN1_OCTET_STRING</span> <span class="o">*</span><span class="nf">pkcs7_d_data</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">data</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">d</span><span class="p">.</span><span class="n">data</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kr">inline</span> <span class="n">PKCS7_SIGNED</span> <span class="o">*</span><span class="nf">pkcs7_d_sign</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">sign</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">d</span><span class="p">.</span><span class="n">sign</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kr">inline</span> <span class="n">PKCS7_ENVELOPE</span> <span class="o">*</span><span class="nf">pkcs7_d_enveloped</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">enveloped</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">d</span><span class="p">.</span><span class="n">enveloped</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kr">inline</span> <span class="n">PKCS7_SIGN_ENVELOPE</span> <span class="o">*</span><span class="nf">pkcs7_d_signed_and_enveloped</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">signed_and_enveloped</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">d</span><span class="p">.</span><span class="n">signed_and_enveloped</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kr">inline</span> <span class="n">PKCS7_DIGEST</span> <span class="o">*</span><span class="nf">pkcs7_d_digest</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">digest</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">d</span><span class="p">.</span><span class="n">digest</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kr">inline</span> <span class="n">PKCS7_ENCRYPT</span> <span class="o">*</span><span class="nf">pkcs7_d_encrypted</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">encrypted</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">d</span><span class="p">.</span><span class="n">encrypted</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kr">inline</span> <span class="n">ASN1_TYPE</span> <span class="o">*</span><span class="nf">pkcs7_d_other</span><span class="p">(</span><span class="n">PKCS7</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span><span class="n">d</span><span class="p">.</span><span class="n">other</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">d</span><span class="p">.</span><span class="n">other</span><span class="p">;</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
@@ -476,8 +476,8 @@ MathJax.Hub.Config({
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#import &lt;openssl/pkcs7.h&amp;gt;
-</span><span class="cp">#import &lt;openssl/objects.h&amp;gt;
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#import &lt;openssl/pkcs7.h&gt;
+</span><span class="cp">#import &lt;openssl/objects.h&gt;
 </span><span class="cp">#import &#34;pkcs7_union_accessors.h&#34;</span></code></pre></td></tr></table>
 </div>
 </div>

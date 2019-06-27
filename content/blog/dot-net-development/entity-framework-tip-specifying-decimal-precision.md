@@ -28,7 +28,7 @@ If you haven't implemented an override yet, go ahead and create one. If you've a
 ```c#
 protected override void OnModelCreating(DbModelBuilder modelBuilder)
 {
-    modelBuilder.Entity&lt;NameOfEntity>()
+    modelBuilder.Entity<NameOfEntity>()
                 .Property(p => p.NameOfProperty)
                 .HasPrecision(9, 4); // or whatever your schema specifies
 }

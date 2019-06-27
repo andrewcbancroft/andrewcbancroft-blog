@@ -27,8 +27,8 @@ As it turns out, <a title="Apple Developer Documentation - Conditionally Load R
 To accomplish this in Swift, you can create a new Swift file (I called mine "iOSVersions.swift&#8221;) to hold the following code:
 
 ```swift
-let iOS7 = floor(NSFoundationVersionNumber) &lt;= floor(NSFoundationVersionNumber_iOS_7_1)
-let iOS8 = floor(NSFoundationVersionNumber) &gt; floor(NSFoundationVersionNumber_iOS_7_1)
+let iOS7 = floor(NSFoundationVersionNumber) <= floor(NSFoundationVersionNumber_iOS_7_1)
+let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
 ```
 
 Whenever you need to check which iOS version the device is running, you can simply use the iOS8 / iOS7 constants that you just defined – they're accessible in other Swift files throughout your project:

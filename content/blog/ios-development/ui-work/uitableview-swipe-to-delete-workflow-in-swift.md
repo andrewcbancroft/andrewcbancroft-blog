@@ -158,7 +158,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // ...
 
-    func handleDeletePlanet(alertAction: UIAlertAction!) -&gt; Void {
+    func handleDeletePlanet(alertAction: UIAlertAction!) -> Void {
         if let indexPath = deletePlanetIndexPath {
             tableView.beginUpdates()
             

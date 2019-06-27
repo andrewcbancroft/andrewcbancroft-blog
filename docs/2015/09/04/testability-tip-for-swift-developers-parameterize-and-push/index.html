@@ -279,7 +279,7 @@ MathJax.Hub.Config({
 <span class="ln">13</span><span class="p">}</span></code></pre></div>
 <p>At the function level, the usefulness of parameters is that you can supply inputs and examine outputs with ease. If you pull in data from the encapsulating instance inside the function body, say by referencing <code>self.somePropertyValue</code>, you&rsquo;ve got a bit more setup to do to be able to accurately verify results. <code>somePropertyValue</code> needs to actually have a value before the function will produce accurate results. If you&rsquo;d opted to simply define parameters for everything the function needs in order to produce its output, you can test that function in isolation far more easily and be guaranteed that your results are correct and accurate.</p>
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// prefer</span>
-<span class="ln"> 2</span><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">(</span><span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">String</span> <span class="p">{</span>
+<span class="ln"> 2</span><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">(</span><span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
 <span class="ln"> 3</span>    <span class="k">return</span> <span class="n">database</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span>
 <span class="ln"> 4</span>    <span class="c1">// able to supply a controlled input via parameter, such as supplying a </span>
 <span class="ln"> 5</span>    <span class="c1">// customized &#34;fake&#34; database to use for testing but still supply a &#34;real&#34; database in real life</span>
@@ -287,14 +287,14 @@ MathJax.Hub.Config({
 <span class="ln"> 7</span><span class="p">}</span>
 <span class="ln"> 8</span>
 <span class="ln"> 9</span><span class="c1">// over</span>
-<span class="ln">10</span><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">String</span> <span class="p">{</span>
+<span class="ln">10</span><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
 <span class="ln">11</span>    <span class="kd">let</span> <span class="nv">database</span> <span class="p">=</span> <span class="n">Database</span><span class="p">()</span>
 <span class="ln">12</span>    <span class="c1">// stuck with talking to a real database</span>
 <span class="ln">13</span>    <span class="k">return</span> <span class="n">database</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span>
 <span class="ln">14</span><span class="p">}</span>
 <span class="ln">15</span>
 <span class="ln">16</span><span class="c1">// and over</span>
-<span class="ln">17</span><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">String</span> <span class="p">{</span>
+<span class="ln">17</span><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
 <span class="ln">18</span>    <span class="k">return</span> <span class="kc">self</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span>
 <span class="ln">19</span>    <span class="c1">// requires additional setting of the database property on &#39;self&#39;</span>
 <span class="ln">20</span>    <span class="c1">// before you&#39;re able to get results from this function</span>

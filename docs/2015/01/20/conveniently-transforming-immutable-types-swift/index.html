@@ -237,7 +237,7 @@ MathJax.Hub.Config({
 <span class="ln">14</span>        <span class="kc">self</span><span class="p">.</span><span class="n">climbingScore</span> <span class="p">=</span> <span class="n">climbingScore</span> <span class="p">??</span> <span class="n">scoreKeeper</span><span class="p">.</span><span class="n">climbingScore</span>
 <span class="ln">15</span>    <span class="p">}</span>
 <span class="ln">16</span>    
-<span class="ln">17</span>    <span class="kd">func</span> <span class="nf">incrementRunningScoreBy</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">Scorekeeper</span> <span class="p">{</span>
+<span class="ln">17</span>    <span class="kd">func</span> <span class="nf">incrementRunningScoreBy</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Scorekeeper</span> <span class="p">{</span>
 <span class="ln">18</span>        <span class="k">return</span> <span class="n">Scorekeeper</span><span class="p">(</span><span class="n">scoreKeeper</span><span class="p">:</span> <span class="kc">self</span><span class="p">,</span> <span class="n">runningScore</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">runningScore</span> <span class="o">+</span> <span class="n">points</span><span class="p">)</span>
 <span class="ln">19</span>    <span class="p">}</span>
 <span class="ln">20</span>    

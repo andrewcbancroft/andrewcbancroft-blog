@@ -90,7 +90,7 @@ When I create the Core Data stack, I like to encapsulate the code in a stand-alo
 Here are all three steps put together:
 
 ```swift
-func createMainContext() -&gt; NSManagedObjectContext {
+func createMainContext() -> NSManagedObjectContext {
     
     // Initialize NSManagedObjectModel
     let modelURL = Bundle.main.url(forResource: "NameOfDataModel", withExtension: "momd")

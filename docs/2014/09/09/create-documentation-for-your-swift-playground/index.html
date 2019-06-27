@@ -70,7 +70,7 @@ Of course, my immediate question / thought was, &ldquo;How&rsquo;d they do that
   "@type": "BlogPosting",
   "headline": "Create Documentation for your Swift Playground",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/09\/09\/create-documentation-for-your-swift-playground\/",
-  "wordCount": "480",
+  "wordCount": "473",
   "datePublished": "2014-09-10T03:44:16Z",
   "dateModified": "2014-09-10T03:44:16Z",
   "author": {
@@ -236,11 +236,11 @@ MathJax.Hub.Config({
 <li>Create a new HTML file in the Documentation folder.  It should contain the HTML markup and the text explanation that you&rsquo;d like to enhance your playground with.  Make sure it is a well-formed HTML document by the time you&rsquo;re finished creating it. I describe a quick way to jumpstart your documentation process at the end of this article&#8230;</li>
 <li>Although optional, I&rsquo;d recommend styling your HTML file with appropriate CSS.  Adding a CSS file and referencing it within the HTML file you created is probably a good idea (and this is allowed for Playground documentation).</li>
 <li>Open contents.xcplayground with the text editor of your choice by right-clicking and choosing &ldquo;Open With&#8221;.</li>
-<li>Modify the XML so that the <sections> element contains a <span class="lang:default decode:true  crayon-inline "><documentation></span> node as shown in the highlighted code lines in the example below.  Be sure to replace the relative-path value with the name of the HTML file you created in step 5 (I named mine &ldquo;doc-fragment-0.html&#8221;): <pre class="lang:xhtml mark:2-3 decode:true " title="contents.xcplayground Snippet">&lt;sections&gt;
-    &lt;documentation relative-path=&lsquo;doc-fragment-0.html&rsquo;&gt;
-    &lt;/documentation&gt;
-    &lt;code source-file-name=&lsquo;section-2.swift&rsquo;/&gt;
-&lt;/sections&gt;
+<li>Modify the XML so that the <sections> element contains a <span class="lang:default decode:true  crayon-inline "><documentation></span> node as shown in the highlighted code lines in the example below.  Be sure to replace the relative-path value with the name of the HTML file you created in step 5 (I named mine &ldquo;doc-fragment-0.html&#8221;): <pre class="lang:xhtml mark:2-3 decode:true " title="contents.xcplayground Snippet"><sections>
+    <documentation relative-path='doc-fragment-0.html'>
+    </documentation>
+    <code source-file-name='section-2.swift'/>
+</sections>
 ```
 
 9.  Save, and open the playground in Xcode 6.  Your Playground should now contain documentation!

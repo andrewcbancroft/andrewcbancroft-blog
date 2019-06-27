@@ -119,7 +119,7 @@ First, the protocol:
 
 ```swift
 protocol RatingPickerDelegate {
-    func preferredRatingSymbol(picker: RatingPicker) -&gt; UIImage?
+    func preferredRatingSymbol(picker: RatingPicker) -> UIImage?
     func didSelectRating(picker: RatingPicker, rating: Int)
     func didCancel(picker: RatingPicker)
 }
@@ -173,7 +173,7 @@ Choosing the delegate class is the final decision to make. It's not uncommon for
 
 ```swift
 class RatingPickerHandler: RatingPickerDelegate {
-    func preferredRatingSymbol(picker: RatingPicker) -&gt; UIImage? {
+    func preferredRatingSymbol(picker: RatingPicker) -> UIImage? {
         return UIImage(contentsOfFile: "Star.png")
     }
     

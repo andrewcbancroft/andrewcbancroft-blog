@@ -190,7 +190,7 @@ For this example, I'm going to go with the latter statement: that two `Places` a
 ```swift
 extension Place: Equatable {}
 
-func ==(lhs: Place, rhs: Place) -&gt; Bool {
+func ==(lhs: Place, rhs: Place) -> Bool {
     let areEqual = lhs.name == rhs.name && 
             lhs.latitude == rhs.latitude &&
             lhs.longitude == rhs.longitude &&

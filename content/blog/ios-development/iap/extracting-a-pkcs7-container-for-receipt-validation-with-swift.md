@@ -110,7 +110,7 @@ Thankfully, we can work around the problem by creating some wrappers. If you'll 
 #ifndef pkcs7_union_accessors_h
 #define pkcs7_union_accessors_h
 
-#include <openssl/pkcs7.h&gt;
+#include <openssl/pkcs7.h>
 
 char *pkcs7_d_char(PKCS7 *ptr);
 ASN1_OCTET_STRING *pkcs7_d_data(PKCS7 *ptr);
@@ -132,35 +132,35 @@ ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr);
 #include "pkcs7_union_accessors.h"
 
 inline char *pkcs7_d_char(PKCS7 *ptr) {
-    return ptr-&gt;d.ptr;
+    return ptr->d.ptr;
 }
 
 inline ASN1_OCTET_STRING *pkcs7_d_data(PKCS7 *ptr) {
-    return ptr-&gt;d.data;
+    return ptr->d.data;
 }
 
 inline PKCS7_SIGNED *pkcs7_d_sign(PKCS7 *ptr) {
-    return ptr-&gt;d.sign;
+    return ptr->d.sign;
 }
 
 inline PKCS7_ENVELOPE *pkcs7_d_enveloped(PKCS7 *ptr) {
-    return ptr-&gt;d.enveloped;
+    return ptr->d.enveloped;
 }
 
 inline PKCS7_SIGN_ENVELOPE *pkcs7_d_signed_and_enveloped(PKCS7 *ptr) {
-    return ptr-&gt;d.signed_and_enveloped;
+    return ptr->d.signed_and_enveloped;
 }
 
 inline PKCS7_DIGEST *pkcs7_d_digest(PKCS7 *ptr) {
-    return ptr-&gt;d.digest;
+    return ptr->d.digest;
 }
 
 inline PKCS7_ENCRYPT *pkcs7_d_encrypted(PKCS7 *ptr) {
-    return ptr-&gt;d.encrypted;
+    return ptr->d.encrypted;
 }
 
 inline ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr) {
-    return ptr-&gt;d.other;
+    return ptr->d.other;
 }
 {{< /highlight >}}
 
@@ -171,8 +171,8 @@ inline ASN1_TYPE *pkcs7_d_other(PKCS7 *ptr) {
 After you create the union accessor files, you need to update your project's bridging header to import the new header file:
 
 {{< highlight c "linenos=table" >}}
-#import <openssl/pkcs7.h&gt;
-#import <openssl/objects.h&gt;
+#import <openssl/pkcs7.h>
+#import <openssl/objects.h>
 #import "pkcs7_union_accessors.h"
 {{< /highlight >}}
 

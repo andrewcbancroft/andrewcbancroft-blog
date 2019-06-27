@@ -42,7 +42,7 @@ What could we do in Swift to convert an Objective-C macro that looks something l
 One thing we could do is write a function that produces the same thing:
 
 ```swift
-func squareNumber(n: Int) -&gt; Int {
+func squareNumber(n: Int) -> Int {
     return n * n
 }
 ```

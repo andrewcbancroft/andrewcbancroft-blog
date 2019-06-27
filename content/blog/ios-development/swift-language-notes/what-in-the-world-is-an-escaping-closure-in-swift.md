@@ -62,9 +62,9 @@ Here are a few scenarios that give rise to escaping closures.
 [Apple's docs][3] give an example of appending a closure that's passed into a function to a mutable array of closures within your class/struct:
 
 ```swift
-var completionHandlers: [() -&gt; Void] = []
+var completionHandlers: [() -> Void] = []
 
-func doSomething(completion: () -&gt; Void) {
+func doSomething(completion: () -> Void) {
     completionHandlers.append(completion)
 }
 ```
@@ -90,9 +90,9 @@ Within it, you make a call to _another_ function that performs an asynchronous a
 What if you only want to call the completion handler that was passed into `doSomething` _after_ the asynchronous action of the _other_ function completes. That is, what if you only want the two completion handlers to be executed _together_:
 
 ```swift
-func doSomething(completion: () -&gt; Void) {
+func doSomething(completion: () -> Void) {
     doSomeOtherAsynchronousThing(completion: {
-    () -&gt; Void in
+    () -> Void in
     // code that executes after the other asynchronous thing is done
     completion()
     })

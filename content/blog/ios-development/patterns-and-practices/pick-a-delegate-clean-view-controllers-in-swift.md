@@ -43,11 +43,11 @@ import MessageUI
 
 class EmailComposer: NSObject, MFMailComposeViewControllerDelegate {
     // Did this in order to mitigate needing to import MessageUI in my View Controller
-    func canSendMail() -&gt; Bool {
+    func canSendMail() -> Bool {
         return MFMailComposeViewController.canSendMail()
     }
     
-    func configuredMailComposeViewController() -&gt; MFMailComposeViewController {
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
         

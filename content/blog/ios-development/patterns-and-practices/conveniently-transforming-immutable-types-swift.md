@@ -49,7 +49,7 @@ class Scorekeeper {
         self.climbingScore = climbingScore ?? scoreKeeper.climbingScore
     }
     
-    func incrementRunningScoreBy(points: Int) -&gt; Scorekeeper {
+    func incrementRunningScoreBy(points: Int) -> Scorekeeper {
         return Scorekeeper(scoreKeeper: self, runningScore: self.runningScore + points)
     }
     

@@ -84,7 +84,7 @@ If you've lived long on the Internet, you're bound to have run across a Star War
 The function definition (minus the body) might look like this:
 
 ```swift
-func generateStarWarsName(firstName: String, lastName: String, birthYear: Int) -&gt; String { 
+func generateStarWarsName(firstName: String, lastName: String, birthYear: Int) -> String { 
     // ... 
 }
 ```
@@ -136,7 +136,7 @@ is `() -> Void`, since it takes no parameters, _and_ returns nothing.
 Here are a few more examples for you to practice function Type identification. Can you write out the correct notation for each function's Type?
 
 ```swift
-func complimentMe(name: String) -&gt; String { 
+func complimentMe(name: String) -> String { 
     // ... 
 }
 ```
@@ -168,7 +168,7 @@ func countToTen() {
 </div>
 
 ```swift
-func addInts(first: Int, second: Int) -&gt; Int { 
+func addInts(first: Int, second: Int) -> Int { 
     // ... 
 }
 ```
@@ -197,15 +197,15 @@ func fadeIn(duration: NSTimeInterval, delay: NSTimeInterval, completion: (Bool) 
     </p>
     
     ```swift
-func increment(input: Int) -&gt; Int {
+func increment(input: Int) -> Int {
     return input + 1
 }
 
-func decrement(input: Int) -&gt; Int {
+func decrement(input: Int) -> Int {
     return input - 1
 }
 
-func chooseAdjustmentFunction(increase: Bool) -&gt; (Int) -&gt; Int {
+func chooseAdjustmentFunction(increase: Bool) -> (Int) -> Int {
     return increase ? increment : decrement
 }
 ```

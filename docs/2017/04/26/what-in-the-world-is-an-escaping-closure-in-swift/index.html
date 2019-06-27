@@ -254,9 +254,9 @@ MathJax.Hub.Config({
 <h2 id="storing-the-closure-as-state">Storing the closure as <em>state</em></h2>
 
 <p><a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID546">Apple&rsquo;s docs</a> give an example of appending a closure that&rsquo;s passed into a function to a mutable array of closures within your class/struct:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">completionHandlers</span><span class="p">:</span> <span class="p">[()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Void</span><span class="p">]</span> <span class="p">=</span> <span class="p">[]</span>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">completionHandlers</span><span class="p">:</span> <span class="p">[()</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">]</span> <span class="p">=</span> <span class="p">[]</span>
 <span class="ln">2</span>
-<span class="ln">3</span><span class="kd">func</span> <span class="nf">doSomething</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Void</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">3</span><span class="kd">func</span> <span class="nf">doSomething</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span> <span class="p">{</span>
 <span class="ln">4</span>    <span class="n">completionHandlers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
 <span class="ln">5</span><span class="p">}</span></code></pre></div>
 <p>Presumabley then, at some later time after <code>doSomething</code> returns, all of the completion handlers in the array will be looped over and executed (or something like that)&#8230;</p>
@@ -278,9 +278,9 @@ MathJax.Hub.Config({
 <p>Within it, you make a call to <em>another</em> function that performs an asynchronous action and asks for a completion closure of its own.</p>
 
 <p>What if you only want to call the completion handler that was passed into <code>doSomething</code> <em>after</em> the asynchronous action of the <em>other</em> function completes. That is, what if you only want the two completion handlers to be executed <em>together</em>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">func</span> <span class="nf">doSomething</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Void</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">func</span> <span class="nf">doSomething</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span> <span class="p">{</span>
 <span class="ln">2</span>    <span class="n">doSomeOtherAsynchronousThing</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="p">{</span>
-<span class="ln">3</span>    <span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Void</span> <span class="k">in</span>
+<span class="ln">3</span>    <span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Void</span> <span class="k">in</span>
 <span class="ln">4</span>    <span class="c1">// code that executes after the other asynchronous thing is done</span>
 <span class="ln">5</span>    <span class="n">completion</span><span class="p">()</span>
 <span class="ln">6</span>    <span class="p">})</span>

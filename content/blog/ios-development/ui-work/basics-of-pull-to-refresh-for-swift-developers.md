@@ -145,7 +145,7 @@ func handleRefresh(refreshControl: UIRefreshControl) {
     let newMovie = Movie(title: "Serenity", genre: "Sci-fi")
     movies.append(newMovie)
     
-    movies.sort() { $0.title &lt; $1.title }
+    movies.sort() { $0.title < $1.title }
     
     self.tableView.reloadData()
     refreshControl.endRefreshing()
@@ -244,7 +244,7 @@ func handleRefresh(refreshControl: UIRefreshControl) {
     let newMovie = Movie(title: "Serenity", genre: "Sci-fi")
     movies.append(newMovie)
     
-    movies.sort() { $0.title &lt; $1.title }
+    movies.sort() { $0.title < $1.title }
     
     self.tableView.reloadData()
     refreshControl.endRefreshing()

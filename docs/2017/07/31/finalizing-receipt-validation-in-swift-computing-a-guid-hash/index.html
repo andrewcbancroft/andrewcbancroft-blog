@@ -349,7 +349,7 @@ MathJax.Hub.Config({
     <span class="kd">var</span> <span class="nv">deviceIdentifier</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">?.</span><span class="n">uuid</span>
     
     <span class="kd">let</span> <span class="nv">rawDeviceIdentifierPointer</span> <span class="p">=</span> <span class="bp">withUnsafePointer</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">deviceIdentifier</span><span class="p">,</span> <span class="p">{</span>
-        <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">uuid_t</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
+        <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&lt;</span><span class="n">uuid_t</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
         <span class="k">return</span> <span class="n">UnsafeRawPointer</span><span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">)</span>
     <span class="p">})</span>
     
@@ -358,7 +358,7 @@ MathJax.Hub.Config({
     <span class="c1">// Compute the hash for your app &amp; device</span>
     
     <span class="c1">// Set up the hasing context</span>
-    <span class="kd">var</span> <span class="nv">computedHash</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">computedHash</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&lt;</span><span class="nb">UInt8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
     <span class="kd">var</span> <span class="nv">sha1Context</span> <span class="p">=</span> <span class="n">SHA_CTX</span><span class="p">()</span>
     
     <span class="n">SHA1_Init</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">)</span>
@@ -418,7 +418,7 @@ MathJax.Hub.Config({
 <pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">var</span> <span class="nv">deviceIdentifier</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">?.</span><span class="n">uuid</span>
 
 <span class="kd">let</span> <span class="nv">rawDeviceIdentifierPointer</span> <span class="p">=</span> <span class="bp">withUnsafePointer</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">deviceIdentifier</span><span class="p">,</span> <span class="p">{</span>
-    <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">uuid_t</span><span class="p">?&amp;</span><span class="n">gt</span><span class="p">;)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
+    <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&lt;</span><span class="n">uuid_t</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
     <span class="k">return</span> <span class="n">UnsafeRawPointer</span><span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">)</span>
 <span class="p">})</span>
 
@@ -530,7 +530,7 @@ MathJax.Hub.Config({
         <span class="kd">var</span> <span class="nv">deviceIdentifier</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">identifierForVendor</span><span class="p">?.</span><span class="n">uuid</span>
         
         <span class="kd">let</span> <span class="nv">rawDeviceIdentifierPointer</span> <span class="p">=</span> <span class="bp">withUnsafePointer</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">deviceIdentifier</span><span class="p">,</span> <span class="p">{</span>
-            <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">uuid_t</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
+            <span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">:</span> <span class="nb">UnsafePointer</span><span class="p">&lt;</span><span class="n">uuid_t</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UnsafeRawPointer</span> <span class="k">in</span>
             <span class="k">return</span> <span class="n">UnsafeRawPointer</span><span class="p">(</span><span class="n">unsafeDeviceIdentifierPointer</span><span class="p">)</span>
         <span class="p">})</span>
         
@@ -539,7 +539,7 @@ MathJax.Hub.Config({
         <span class="c1">// Compute the hash for your app &amp; device</span>
         
         <span class="c1">// Set up the hasing context</span>
-        <span class="kd">var</span> <span class="nv">computedHash</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="kd">var</span> <span class="nv">computedHash</span> <span class="p">=</span> <span class="nb">Array</span><span class="p">&lt;</span><span class="nb">UInt8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">repeating</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">count</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
         <span class="kd">var</span> <span class="nv">sha1Context</span> <span class="p">=</span> <span class="n">SHA_CTX</span><span class="p">()</span>
         
         <span class="n">SHA1_Init</span><span class="p">(&amp;</span><span class="n">sha1Context</span><span class="p">)</span>

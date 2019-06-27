@@ -35,7 +35,7 @@ class Bird {
 		self.color = color
 	}
  
-	func isSwift() -&gt; Bool {
+	func isSwift() -> Bool {
 		return self.family == "Apodidae" ? true : false
 	}
 }

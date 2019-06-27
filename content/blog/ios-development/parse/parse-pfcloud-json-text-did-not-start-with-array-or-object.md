@@ -29,7 +29,7 @@ Weeeelll, it turns out that if you don't get the URL to your self-hosted Parse S
 I had left off the "/parse&#8221; portion of the URL to my self-hosted parse server:
 
 ```swift
-func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -&gt; Bool {
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
     // Override point for customization after application launch.
     let configuration = ParseClientConfiguration {
         $0.applicationId = "YourAppId"

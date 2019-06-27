@@ -99,7 +99,7 @@ fileprivate func validateHash(receipt: ParsedReceipt) throws {
     var deviceIdentifier = UIDevice.current.identifierForVendor?.uuid
     
     let rawDeviceIdentifierPointer = withUnsafePointer(to: &deviceIdentifier, {
-        (unsafeDeviceIdentifierPointer: UnsafePointer&lt;uuid_t?>) -> UnsafeRawPointer in
+        (unsafeDeviceIdentifierPointer: UnsafePointer<uuid_t?>) -> UnsafeRawPointer in
         return UnsafeRawPointer(unsafeDeviceIdentifierPointer)
     })
     
@@ -108,7 +108,7 @@ fileprivate func validateHash(receipt: ParsedReceipt) throws {
     // Compute the hash for your app & device
     
     // Set up the hasing context
-    var computedHash = Array&lt;UInt8>(repeating: 0, count: 20)
+    var computedHash = Array<UInt8>(repeating: 0, count: 20)
     var sha1Context = SHA_CTX()
     
     SHA1_Init(&sha1Context)
@@ -149,7 +149,7 @@ The app purchaser's device identifier is represented as a `uuid_t` from the Foun
 var deviceIdentifier = UIDevice.current.identifierForVendor?.uuid
 
 let rawDeviceIdentifierPointer = withUnsafePointer(to: &deviceIdentifier, {
-    (unsafeDeviceIdentifierPointer: UnsafePointer&lt;uuid_t?&gt;) -&gt; UnsafeRawPointer in
+    (unsafeDeviceIdentifierPointer: UnsafePointer<uuid_t?>) -> UnsafeRawPointer in
     return UnsafeRawPointer(unsafeDeviceIdentifierPointer)
 })
 
@@ -201,7 +201,7 @@ struct ReceiptValidator {
         var deviceIdentifier = UIDevice.current.identifierForVendor?.uuid
         
         let rawDeviceIdentifierPointer = withUnsafePointer(to: &deviceIdentifier, {
-            (unsafeDeviceIdentifierPointer: UnsafePointer&lt;uuid_t?>) -> UnsafeRawPointer in
+            (unsafeDeviceIdentifierPointer: UnsafePointer<uuid_t?>) -> UnsafeRawPointer in
             return UnsafeRawPointer(unsafeDeviceIdentifierPointer)
         })
         
@@ -210,7 +210,7 @@ struct ReceiptValidator {
         // Compute the hash for your app & device
         
         // Set up the hasing context
-        var computedHash = Array&lt;UInt8>(repeating: 0, count: 20)
+        var computedHash = Array<UInt8>(repeating: 0, count: 20)
         var sha1Context = SHA_CTX()
         
         SHA1_Init(&sha1Context)

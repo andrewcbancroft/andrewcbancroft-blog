@@ -217,7 +217,7 @@ MathJax.Hub.Config({
 <p>If you haven&rsquo;t implemented an override yet, go ahead and create one. If you&rsquo;ve already got some Code First stuff in your <code>OnModelCreating</code> override, add to it by following this example:</p>
 <div class="highlight"><pre class="chroma"><code class="language-c#" data-lang="c#"><span class="ln">1</span><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="n">OnModelCreating</span><span class="p">(</span><span class="n">DbModelBuilder</span> <span class="n">modelBuilder</span><span class="p">)</span>
 <span class="ln">2</span><span class="p">{</span>
-<span class="ln">3</span>    <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">NameOfEntity</span><span class="p">&gt;()</span>
+<span class="ln">3</span>    <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&lt;</span><span class="n">NameOfEntity</span><span class="p">&gt;()</span>
 <span class="ln">4</span>                <span class="p">.</span><span class="n">Property</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">NameOfProperty</span><span class="p">)</span>
 <span class="ln">5</span>                <span class="p">.</span><span class="n">HasPrecision</span><span class="p">(</span><span class="m">9</span><span class="p">,</span> <span class="m">4</span><span class="p">);</span> <span class="c1">// or whatever your schema specifies
 </span><span class="ln">6</span><span class="c1"></span><span class="p">}</span>

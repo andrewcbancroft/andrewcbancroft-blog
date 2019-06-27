@@ -271,11 +271,11 @@ MathJax.Hub.Config({
 
 <p>For example, defining an extension to <code>Person</code> <em>within</em> Person.swift allows the extension to access <code>private</code> properties and functions! Who knew?!</p>
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">extension</span> <span class="nc">Person</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">func</span> <span class="nf">getAge</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Int</span> <span class="p">{</span>
+<span class="ln">2</span>    <span class="kd">func</span> <span class="nf">getAge</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
 <span class="ln">3</span>        <span class="k">return</span> <span class="n">age</span> <span class="c1">// compiles, even though age is --private--</span>
 <span class="ln">4</span>    <span class="p">}</span>
 <span class="ln">5</span>    
-<span class="ln">6</span>    <span class="kd">func</span> <span class="nf">getFormattedAge</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">String</span> <span class="p">{</span>
+<span class="ln">6</span>    <span class="kd">func</span> <span class="nf">getFormattedAge</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
 <span class="ln">7</span>        <span class="k">return</span> <span class="n">formattedAge</span><span class="p">()</span> <span class="c1">// compiles, even though formattedAge is --private--</span>
 <span class="ln">8</span>    <span class="p">}</span>
 <span class="ln">9</span><span class="p">}</span></code></pre></div>
@@ -326,11 +326,11 @@ MathJax.Hub.Config({
 <span class="ln"> 5</span><span class="p">}</span>
 <span class="ln"> 6</span>
 <span class="ln"> 7</span><span class="kd">extension</span> <span class="nc">Person</span> <span class="p">{</span>
-<span class="ln"> 8</span>    <span class="kd">func</span> <span class="nf">getAge</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Int</span> <span class="p">{</span>
+<span class="ln"> 8</span>    <span class="kd">func</span> <span class="nf">getAge</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
 <span class="ln"> 9</span>        <span class="k">return</span> <span class="n">age</span>
 <span class="ln">10</span>    <span class="p">}</span>
 <span class="ln">11</span>    
-<span class="ln">12</span>    <span class="kd">func</span> <span class="nf">getFormattedAge</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">String</span> <span class="p">{</span>
+<span class="ln">12</span>    <span class="kd">func</span> <span class="nf">getFormattedAge</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
 <span class="ln">13</span>        <span class="k">return</span> <span class="n">formattedAge</span><span class="p">()</span>
 <span class="ln">14</span>    <span class="p">}</span>
 <span class="ln">15</span><span class="p">}</span></code></pre></div>

@@ -59,7 +59,7 @@ Having to divide the RGB values by 255.0 every time was just annoying enough tha
 
 ```swift
 extension UIColor {
-    static func colorWithRedValue(#redValue: CGFloat, greenValue: CGFloat, blueValue: CGFloat, alpha: CGFloat) -&gt; UIColor {
+    static func colorWithRedValue(#redValue: CGFloat, greenValue: CGFloat, blueValue: CGFloat, alpha: CGFloat) -> UIColor {
         return UIColor(red: redValue/255.0, green: greenValue/255.0, blue: blueValue/255.0, alpha: alpha)
     }
 }

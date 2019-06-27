@@ -195,7 +195,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     } catch _ {
     }
     
-    let fetchRequest = NSFetchRequest&lt;NSFetchRequestResult>(entityName: "Car")
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Car")
     let cars = (try! self.managedObjectContext?.fetch(fetchRequest)) as! [Car]
     
     print(cars, terminator: "")

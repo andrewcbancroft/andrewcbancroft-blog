@@ -68,10 +68,10 @@ class MyClass {
     }
     
     // If the array returned from executing a fetch request contains objects, return true; if empty, return false
-    func databaseHasRecordsForSomeEntity() -&gt; Bool {
+    func databaseHasRecordsForSomeEntity() -> Bool {
         let fetchRequest = NSFetchRequest(entityName: "SomeEntity")
         let fetchRequestResults = self.context.executeFetchRequest(fetchRequest, error: nil) // May want to do something with the error in real life...
-        return (fetchRequestResults?.count &gt; 0)
+        return (fetchRequestResults?.count > 0)
     }
 }
 ```
@@ -93,7 +93,7 @@ Next comes the way to make the mock. &nbsp;Read steps 3-5 and then look below fo
 ```swift
 import UIKit
 import XCTest
-import CoreData // &lt;-- Make sure to import CoreData or you will get errors when you try to use NSManagedObjectContext
+import CoreData // <-- Make sure to import CoreData or you will get errors when you try to use NSManagedObjectContext
 
 class MyClassTests: XCTestCase {
 

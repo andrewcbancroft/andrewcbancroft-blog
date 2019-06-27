@@ -44,11 +44,11 @@ Let's explore.
   5. Create a new HTML file in the Documentation folder.  It should contain the HTML markup and the text explanation that you'd like to enhance your playground with.  Make sure it is a well-formed HTML document by the time you're finished creating it. I describe a quick way to jumpstart your documentation process at the end of this article&#8230;
   6. Although optional, I'd recommend styling your HTML file with appropriate CSS.  Adding a CSS file and referencing it within the HTML file you created is probably a good idea (and this is allowed for Playground documentation).
   7. Open contents.xcplayground with the text editor of your choice by right-clicking and choosing "Open With&#8221;.
-  8. Modify the XML so that the <sections> element contains a <span class="lang:default decode:true  crayon-inline "><documentation></span> node as shown in the highlighted code lines in the example below.  Be sure to replace the relative-path value with the name of the HTML file you created in step 5 (I named mine "doc-fragment-0.html&#8221;): <pre class="lang:xhtml mark:2-3 decode:true " title="contents.xcplayground Snippet">&lt;sections&gt;
-        &lt;documentation relative-path='doc-fragment-0.html'&gt;
-        &lt;/documentation&gt;
-        &lt;code source-file-name='section-2.swift'/&gt;
-&lt;/sections&gt;
+  8. Modify the XML so that the <sections> element contains a <span class="lang:default decode:true  crayon-inline "><documentation></span> node as shown in the highlighted code lines in the example below.  Be sure to replace the relative-path value with the name of the HTML file you created in step 5 (I named mine "doc-fragment-0.html&#8221;): <pre class="lang:xhtml mark:2-3 decode:true " title="contents.xcplayground Snippet"><sections>
+        <documentation relative-path='doc-fragment-0.html'>
+        </documentation>
+        <code source-file-name='section-2.swift'/>
+</sections>
 ```
 
   9.  Save, and open the playground in Xcode 6.  Your Playground should now contain documentation!

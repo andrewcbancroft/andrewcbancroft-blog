@@ -78,7 +78,7 @@ class EventsViewController: UIViewController, UITableViewDataSource {
             
             // Use the configured NSPredicate to find and return events in the store that match
             self.events = eventStore.eventsMatchingPredicate(eventsPredicate).sort(){
-                (e1: EKEvent, e2: EKEvent) -&gt; Bool in
+                (e1: EKEvent, e2: EKEvent) -> Bool in
                 return e1.startDate.compare(e2.startDate) == NSComparisonResult.OrderedAscending
             }
         }

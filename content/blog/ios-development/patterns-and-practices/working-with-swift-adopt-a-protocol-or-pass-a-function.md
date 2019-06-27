@@ -74,7 +74,7 @@ In order to fully grasp how to go the "just depend on / pass the function&#8221;
 1 – Create a property on the Type you're implementing that is of some function Type. For example:
 
 ```swift
-struct Vehicle&lt;Fuel> {
+struct Vehicle<Fuel> {
     let move: (Fuel) -> Void
 }
 
@@ -82,9 +82,9 @@ struct Vehicle&lt;Fuel> {
 struct Gas {}
 struct RocketFuel {}
 
-let car = Vehicle&lt;Gas>(move: { _ in print("use gasoline to move") })
+let car = Vehicle<Gas>(move: { _ in print("use gasoline to move") })
 
-let rocket = Vehicle&lt;RocketFuel>(move: { _ in print("use rocket fuel to move") })
+let rocket = Vehicle<RocketFuel>(move: { _ in print("use rocket fuel to move") })
 
 car.move(Gas())
 rocket.move(RocketFuel())
@@ -95,7 +95,7 @@ A full explanation of indicating function Types can be found by reviewing my gui
 2 – Declare that such-and-such parameter on a function within your Type must be a function Type. For example:
 
 ```swift
-func getData(completion: (NSData) -&gt; Void) {
+func getData(completion: (NSData) -> Void) {
     let data: NSData = // do something to go get data
 
     // call completion handler when getting data is done

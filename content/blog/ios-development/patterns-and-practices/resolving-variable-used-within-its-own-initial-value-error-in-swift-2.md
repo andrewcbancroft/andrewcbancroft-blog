@@ -27,7 +27,7 @@ I was playing (in a playground, no less) with closures, trying to mimic some beh
 
 ```swift
 let factorial = {
-    (n: Int) -&gt; Int in
+    (n: Int) -> Int in
     if (n == 0) {
         return 1
     } else {
@@ -43,9 +43,9 @@ Apparently, the closure (which is being initialized and assigned to the constant
 The frustrating part is that <a title="Rob Napier on Immutability and Swift" href="http://robnapier.net/llama-calculus" target="_blank">I <em>really</em> didn't want to type the letters v-a-r</a> to implement my solution.  But alas, as <a title="Stack Overflow - Handle Closure Recursively" href="http://stackoverflow.com/questions/25103534/how-to-handle-closure-recursivity" target="_blank">Stack Overflow</a> says, the following solution to the "initial value&#8221; error works:
 
 ```swift
-var factorial: (Int) -&gt; Int
+var factorial: (Int) -> Int
 factorial = {
-    (n: Int) -&gt; Int in
+    (n: Int) -> Int in
     if (n == 0) {
         return 1
     } else {
@@ -60,7 +60,7 @@ factorial(5)
 Of course, there's absolutely no reason for the implementation to be a closure – I was simply experimenting.  Here's the solution that I actually prefer&#8230; a good ole named function definition:
 
 ```swift
-func factorial(n: Int) -&gt; Int {
+func factorial(n: Int) -> Int {
     if (n == 0) {
         return 1
     } else {

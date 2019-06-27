@@ -85,11 +85,11 @@ For example, defining an extension to `Person` _within_ Person.swift allows the 
 
 ```swift
 extension Person {
-    func getAge() -&gt; Int {
+    func getAge() -> Int {
         return age // compiles, even though age is --private--
     }
     
-    func getFormattedAge() -&gt; String {
+    func getFormattedAge() -> String {
         return formattedAge() // compiles, even though formattedAge is --private--
     }
 }
@@ -142,11 +142,11 @@ public struct Person {
 }
 
 extension Person {
-    func getAge() -&gt; Int {
+    func getAge() -> Int {
         return age
     }
     
-    func getFormattedAge() -&gt; String {
+    func getFormattedAge() -> String {
         return formattedAge()
     }
 }

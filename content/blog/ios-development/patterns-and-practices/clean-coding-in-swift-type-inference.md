@@ -71,7 +71,7 @@ let birdDetails: (genusSpecies: String, commonName: String) = birdDetailsFromSto
 //... somewhere else in a Swift file far, far away ...
 
 
-func birdDetailsFromStorage() -&gt; (genusSpecies: String, commonName: String) {
+func birdDetailsFromStorage() -> (genusSpecies: String, commonName: String) {
     return ("Apus apus", "Swift")
 }
 ```

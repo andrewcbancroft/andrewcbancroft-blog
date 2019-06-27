@@ -248,10 +248,10 @@ MathJax.Hub.Config({
 <span class="ln"> 9</span>    <span class="p">}</span>
 <span class="ln">10</span>    
 <span class="ln">11</span>    <span class="c1">// If the array returned from executing a fetch request contains objects, return true; if empty, return false</span>
-<span class="ln">12</span>    <span class="kd">func</span> <span class="nf">databaseHasRecordsForSomeEntity</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Bool</span> <span class="p">{</span>
+<span class="ln">12</span>    <span class="kd">func</span> <span class="nf">databaseHasRecordsForSomeEntity</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
 <span class="ln">13</span>        <span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;SomeEntity&#34;</span><span class="p">)</span>
 <span class="ln">14</span>        <span class="kd">let</span> <span class="nv">fetchRequestResults</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span> <span class="c1">// May want to do something with the error in real life...</span>
-<span class="ln">15</span>        <span class="k">return</span> <span class="p">(</span><span class="n">fetchRequestResults</span><span class="p">?.</span><span class="bp">count</span> <span class="p">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="ln">15</span>        <span class="k">return</span> <span class="p">(</span><span class="n">fetchRequestResults</span><span class="p">?.</span><span class="bp">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 <span class="ln">16</span>    <span class="p">}</span>
 <span class="ln">17</span><span class="p">}</span></code></pre></div>
 <p>I want to test if&nbsp;<code>databaseHasRecordsForSomeEntity</code>&nbsp;&nbsp;does what I intend it to do. So&#8230;</p>
@@ -269,7 +269,7 @@ MathJax.Hub.Config({
 <h4 id="5-nbsp-you-can-give-the-nested-class-a-name-such-as-mock-objectname">5. &nbsp;You can give the nested class a name such as Mock[ObjectName]</h4>
 <div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">UIKit</span>
 <span class="ln"> 2</span><span class="kd">import</span> <span class="nc">XCTest</span>
-<span class="ln"> 3</span><span class="kd">import</span> <span class="nc">CoreData</span> <span class="c1">// &amp;lt;-- Make sure to import CoreData or you will get errors when you try to use NSManagedObjectContext</span>
+<span class="ln"> 3</span><span class="kd">import</span> <span class="nc">CoreData</span> <span class="c1">// &lt;-- Make sure to import CoreData or you will get errors when you try to use NSManagedObjectContext</span>
 <span class="ln"> 4</span>
 <span class="ln"> 5</span><span class="kd">class</span> <span class="nc">MyClassTests</span><span class="p">:</span> <span class="n">XCTestCase</span> <span class="p">{</span>
 <span class="ln"> 6</span>

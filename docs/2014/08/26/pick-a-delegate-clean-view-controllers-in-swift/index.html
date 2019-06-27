@@ -228,11 +228,11 @@ MathJax.Hub.Config({
 <span class="ln"> 3</span>
 <span class="ln"> 4</span><span class="kd">class</span> <span class="nc">EmailComposer</span><span class="p">:</span> <span class="n">NSObject</span><span class="p">,</span> <span class="n">MFMailComposeViewControllerDelegate</span> <span class="p">{</span>
 <span class="ln"> 5</span>    <span class="c1">// Did this in order to mitigate needing to import MessageUI in my View Controller</span>
-<span class="ln"> 6</span>    <span class="kd">func</span> <span class="nf">canSendMail</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">Bool</span> <span class="p">{</span>
+<span class="ln"> 6</span>    <span class="kd">func</span> <span class="nf">canSendMail</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
 <span class="ln"> 7</span>        <span class="k">return</span> <span class="n">MFMailComposeViewController</span><span class="p">.</span><span class="n">canSendMail</span><span class="p">()</span>
 <span class="ln"> 8</span>    <span class="p">}</span>
 <span class="ln"> 9</span>    
-<span class="ln">10</span>    <span class="kd">func</span> <span class="nf">configuredMailComposeViewController</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">MFMailComposeViewController</span> <span class="p">{</span>
+<span class="ln">10</span>    <span class="kd">func</span> <span class="nf">configuredMailComposeViewController</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">MFMailComposeViewController</span> <span class="p">{</span>
 <span class="ln">11</span>        <span class="kd">let</span> <span class="nv">mailComposerVC</span> <span class="p">=</span> <span class="n">MFMailComposeViewController</span><span class="p">()</span>
 <span class="ln">12</span>        <span class="n">mailComposerVC</span><span class="p">.</span><span class="n">mailComposeDelegate</span> <span class="p">=</span> <span class="kc">self</span>
 <span class="ln">13</span>        

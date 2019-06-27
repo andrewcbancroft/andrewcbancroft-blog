@@ -37,8 +37,8 @@ Given the original array outlined above, we can create a new_&nbsp;sorted_ array
 
 ```swift
 let sortedArray = sorted(arrayOfIntsAsStrings, {
-    (str1: String, str2: String) -&gt; Bool in
-    return str1.toInt() &lt; str2.toInt()
+    (str1: String, str2: String) -> Bool in
+    return str1.toInt() < str2.toInt()
 })
 ```
 
@@ -50,8 +50,8 @@ Swift's&nbsp;sorted function takes two arguments: &nbsp;an Array, and a Closure.
 
 ```swift
 {
-    (str1: String, str2: String) -&gt; Bool in
-    return str1.toInt() &lt; str2.toInt()
+    (str1: String, str2: String) -> Bool in
+    return str1.toInt() < str2.toInt()
 }
 ```
 
