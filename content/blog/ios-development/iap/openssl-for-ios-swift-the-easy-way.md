@@ -1,8 +1,10 @@
 ---
 title: 'OpenSSL for iOS and Swift the Easy Way'
+description: "Shows how to obtain OpenSSL for use with Swift."
 author: Andrew
 type: blog
 date: 2015-09-22T04:39:28+00:00
+lastmod: 2019-06-27T00:00:00+00:00
 url: /2015/09/21/openssl-for-ios-swift-the-easy-way/
 dsq_thread_id:
   - "4153083561"
@@ -18,21 +20,18 @@ I'm currently working on outfitting an app I'm working on to be able to [validat
 
 Little did I know, this adventure would introduce the need to understand how to use cryptography in order to work with the receipt.
 
-
-
-
 <a name="cryptography-library-needed" class="jump-target"></a>
 
 ### Cryptography library needed
 
-In order to even "open&#8221; the receipt itself, we've got to work with something called a "PKCS #7 container&#8221;. Once we get the container open, we need to be able to validate Apple's certificate that they use to sign every purchase of every app.
+In order to even "open" the receipt itself, we've got to work with something called a "PKCS #7 container". Once we get the container open, we need to be able to validate Apple's certificate that they use to sign every purchase of every app.
 
 All of this requires the use of a cryptography library, and OpenSSL seems to be the common choice, due to its being open source.
 
 I found that figuring out what to do to get OpenSSL into my project was harder than I wanted it to be. It turns out that there are a few to do this, but I wanted the easiest to implement (and the easiest to maintain). The options I was able to identify are:
 
   * Build the binaries for each platform yourself. To do this you've got to make sure you build for both the simulator and the device by running special config routines and using makefiles and what-not. It seemed error-prone, and I'm not confident enough in my ability to know whether or not I've done it right.
-  * Download a pre-built static library – however, this introduces a risk that I wasn't really willing to take. How do I trust that pre-built library? If there's a vulnerability there, how do I easily upgrade the library to the patched version? Every recommendation I've seen thus far says, "Always build your own static library, rather than download it already-built from somewhere&#8221;.
+  * Download a pre-built static library – however, this introduces a risk that I wasn't really willing to take. How do I trust that pre-built library? If there's a vulnerability there, how do I easily upgrade the library to the patched version? Every recommendation I've seen thus far says, "Always build your own static library, rather than download it already-built from somewhere".
   * Cocoapods. Simply put, this was the easiest route for me.
 
 <a name="cocoapods" class="jump-target"></a>
@@ -77,10 +76,10 @@ If you don't already have an Objective-C bridging header, it's simple to get one
   * Choose File -> New -> File
   * Choose Source under iOS (on the left
   * Choose Objective-C File
-  * Name it "bridge&#8221; (or anything, really – it's a dummy file that you'll delete after Xcode generates the bridging header)
+  * Name it "bridge" (or anything, really – it's a dummy file that you'll delete after Xcode generates the bridging header)
   * Choose Next, and then Create
 
-Xcode will prompt you to create the bridging header – you should let it. Once it's created, you can delete "bridge.m&#8221; (the Objective-C .m file that you just created in the steps above).
+Xcode will prompt you to create the bridging header – you should let it. Once it's created, you can delete "bridge.m" (the Objective-C .m file that you just created in the steps above).
 
 Within the bridging header, you can insert some `#import` statements to make the OpenSSL library components visible to your Swift project. For example, to start off, you could flesh out the bridging header with a couple of OpenSSL header files:
 

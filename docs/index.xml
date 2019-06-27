@@ -8364,7 +8364,7 @@ If the result does not match the hash in the receipt, validation fails.&lt;/p&gt
 
 &lt;h3 id=&#34;cryptography-library-needed&#34;&gt;Cryptography library needed&lt;/h3&gt;
 
-&lt;p&gt;In order to even &amp;ldquo;open&amp;#8221; the receipt itself, we&amp;rsquo;ve got to work with something called a &amp;ldquo;PKCS #7 container&amp;#8221;. Once we get the container open, we need to be able to validate Apple&amp;rsquo;s certificate that they use to sign every purchase of every app.&lt;/p&gt;
+&lt;p&gt;In order to even &amp;ldquo;open&amp;rdquo; the receipt itself, we&amp;rsquo;ve got to work with something called a &amp;ldquo;PKCS #7 container&amp;rdquo;. Once we get the container open, we need to be able to validate Apple&amp;rsquo;s certificate that they use to sign every purchase of every app.&lt;/p&gt;
 
 &lt;p&gt;All of this requires the use of a cryptography library, and OpenSSL seems to be the common choice, due to its being open source.&lt;/p&gt;
 
@@ -8372,7 +8372,7 @@ If the result does not match the hash in the receipt, validation fails.&lt;/p&gt
 
 &lt;ul&gt;
 &lt;li&gt;Build the binaries for each platform yourself. To do this you&amp;rsquo;ve got to make sure you build for both the simulator and the device by running special config routines and using makefiles and what-not. It seemed error-prone, and I&amp;rsquo;m not confident enough in my ability to know whether or not I&amp;rsquo;ve done it right.&lt;/li&gt;
-&lt;li&gt;Download a pre-built static library – however, this introduces a risk that I wasn&amp;rsquo;t really willing to take. How do I trust that pre-built library? If there&amp;rsquo;s a vulnerability there, how do I easily upgrade the library to the patched version? Every recommendation I&amp;rsquo;ve seen thus far says, &amp;ldquo;Always build your own static library, rather than download it already-built from somewhere&amp;#8221;.&lt;/li&gt;
+&lt;li&gt;Download a pre-built static library – however, this introduces a risk that I wasn&amp;rsquo;t really willing to take. How do I trust that pre-built library? If there&amp;rsquo;s a vulnerability there, how do I easily upgrade the library to the patched version? Every recommendation I&amp;rsquo;ve seen thus far says, &amp;ldquo;Always build your own static library, rather than download it already-built from somewhere&amp;rdquo;.&lt;/li&gt;
 &lt;li&gt;Cocoapods. Simply put, this was the easiest route for me.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -8418,10 +8418,10 @@ If you don&#39;t already have an Objective-C bridging header, it&#39;s simple to
   * Choose File -&amp;gt; New -&amp;gt; File
   * Choose Source under iOS (on the left
   * Choose Objective-C File
-  * Name it &amp;quot;bridge&amp;amp;#8221; (or anything, really – it&#39;s a dummy file that you&#39;ll delete after Xcode generates the bridging header)
+  * Name it &amp;quot;bridge&amp;quot; (or anything, really – it&#39;s a dummy file that you&#39;ll delete after Xcode generates the bridging header)
   * Choose Next, and then Create
 
-Xcode will prompt you to create the bridging header – you should let it. Once it&#39;s created, you can delete &amp;quot;bridge.m&amp;amp;#8221; (the Objective-C .m file that you just created in the steps above).
+Xcode will prompt you to create the bridging header – you should let it. Once it&#39;s created, you can delete &amp;quot;bridge.m&amp;quot; (the Objective-C .m file that you just created in the steps above).
 
 Within the bridging header, you can insert some `#import` statements to make the OpenSSL library components visible to your Swift project. For example, to start off, you could flesh out the bridging header with a couple of OpenSSL header files:
 

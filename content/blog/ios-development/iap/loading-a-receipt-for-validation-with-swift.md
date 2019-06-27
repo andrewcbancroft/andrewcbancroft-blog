@@ -1,5 +1,6 @@
 ---
 title: Loading a Receipt for Validation with Swift
+description: "Walks you through how to load a receipt for validation with Swift"
 author: Andrew
 type: blog
 date: 2015-10-14T03:24:02+00:00
