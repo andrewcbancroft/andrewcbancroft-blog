@@ -172,7 +172,7 @@ Wherever you access your app's persistent CloudKit container to grab the `viewCo
 I initialize the container in the `SceneDelegate`, so check out the code exerpt below to see where that gets set.
 
 **SceneDelegate.swift**
-{{< highlight swift "hl_lines=11, linenos=table" >}}
+{{< highlight swift "hl_lines=11,linenos=table" >}}
 func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
