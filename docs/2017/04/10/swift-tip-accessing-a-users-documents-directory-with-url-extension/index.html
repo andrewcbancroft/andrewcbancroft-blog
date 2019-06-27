@@ -70,7 +70,7 @@ One way to simplify this is to use a Swift extension to URL. Doing this will hel
   "@type": "BlogPosting",
   "headline": "Swift Tip – Accessing a User’s Documents Directory with URL Extension",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/04\/10\/swift-tip-accessing-a-users-documents-directory-with-url-extension\/",
-  "wordCount": "217",
+  "wordCount": "222",
   "datePublished": "2017-04-10T18:01:23Z",
   "dateModified": "2017-04-10T18:01:23Z",
   "author": {
@@ -219,27 +219,56 @@ MathJax.Hub.Config({
 <p><a name="implementation" class="jump-target"></a></p>
 
 <h1 id="extension-implementation">Extension implementation</h1>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">extension</span> <span class="nc">URL</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">documentsURL</span><span class="p">:</span> <span class="n">URL</span> <span class="p">{</span>
-<span class="ln"> 3</span>        <span class="k">return</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
-<span class="ln"> 4</span>            <span class="p">.</span><span class="k">default</span>
-<span class="ln"> 5</span>            <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> 
-<span class="ln"> 6</span>                 <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> 
-<span class="ln"> 7</span>                 <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> 
-<span class="ln"> 8</span>                 <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-<span class="ln"> 9</span>    <span class="p">}</span>
-<span class="ln">10</span><span class="p">}</span></code></pre></div>
-<p><a name="usage" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="nc">URL</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">documentsURL</span><span class="p">:</span> <span class="n">URL</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
+            <span class="p">.</span><span class="k">default</span>
+            <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> 
+                 <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> 
+                 <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> 
+                 <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="usage" class="jump-target"></a></p>
 
 <h1 id="extension-usage">Extension usage</h1>
 
 <p>Here&rsquo;s an example of using the extension during the routine to create the Core Data stack. For that process, you need to grab a URL to where your SQLite database file will be located. Take a look:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// ...</span>
-<span class="ln">2</span>
-<span class="ln">3</span><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="n">URL</span><span class="p">.</span><span class="n">documentsURL</span><span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;AppDatabase.sqlite&#34;</span><span class="p">)</span>
-<span class="ln">4</span>
-<span class="ln">5</span><span class="c1">// use the URL</span></code></pre></div>
-<p>You could be needing to access the directory for saving files or retrieving files totally unrelated to Core Data. No matter what you&rsquo;re doing, being able to write <code>URL.documentsURL</code> is pretty convenient!</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// ...</span>
+
+<span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="n">URL</span><span class="p">.</span><span class="n">documentsURL</span><span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;AppDatabase.sqlite&#34;</span><span class="p">)</span>
+
+<span class="c1">// use the URL</span></code></pre></td></tr></table>
+</div>
+</div>
+You could be needing to access the directory for saving files or retrieving files totally unrelated to Core Data. No matter what you&rsquo;re doing, being able to write <code>URL.documentsURL</code> is pretty convenient!</p>
 
 <p><a name="share" class="jump-target"></a></p>
 

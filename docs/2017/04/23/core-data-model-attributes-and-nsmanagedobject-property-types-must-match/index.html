@@ -70,7 +70,7 @@ When the crash occurs, you&rsquo;re never sure if it was an existing problem, or
   "@type": "BlogPosting",
   "headline": "Core Data Model Attributes and NSManagedObject Property Types Must Match!",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/04\/23\/core-data-model-attributes-and-nsmanagedobject-property-types-must-match\/",
-  "wordCount": "495",
+  "wordCount": "496",
   "datePublished": "2017-04-23T20:03:34Z",
   "dateModified": "2017-04-23T20:03:34Z",
   "author": {
@@ -243,8 +243,16 @@ MathJax.Hub.Config({
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png" alt="createdOn as Optional attribute" width="358" height="110" class="alignnone size-full wp-image-13268" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png 358w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute-300x92.png 300w" sizes="(max-width: 358px) 100vw, 358px" /></a></p>
 
 <p>And over in the implementation of your <code>NSManagedObject</code> subclass, you have code that&rsquo;s written like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kr">@NSManaged</span> <span class="kd">var</span> <span class="nv">createdOn</span><span class="p">:</span> <span class="n">Date</span> <span class="c1">//instead of Date? (ie, the ? is missing)</span></code></pre></div>
-<p>What&rsquo;ll happen? Well, I can tell you what&rsquo;ll happen. :]</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kr">@NSManaged</span> <span class="kd">var</span> <span class="nv">createdOn</span><span class="p">:</span> <span class="n">Date</span> <span class="c1">//instead of Date? (ie, the ? is missing)</span></code></pre></td></tr></table>
+</div>
+</div>
+What&rsquo;ll happen? Well, I can tell you what&rsquo;ll happen. :]</p>
 
 <p>When you run the app and attempt to load objects from your persistent store that have been saved with <code>nil</code> for the <code>createdOn</code> value, your app will blow up:<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png" alt="EXC_BAD_INSTRUCTION" width="364" height="12" class="alignnone size-full wp-image-13265" style="display:inline-block;" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png 364w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION-300x10.png 300w" sizes="(max-width: 364px) 100vw, 364px" /></a></p>
 

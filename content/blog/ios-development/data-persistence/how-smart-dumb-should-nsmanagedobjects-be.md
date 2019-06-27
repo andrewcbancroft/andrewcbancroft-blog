@@ -52,7 +52,7 @@ Instead, implement a custom method with a signature that matches the signature o
 
 For example, if your `NSManagedObject` subclass has an `age` property and you wanted to implement special validation logic, you could do this:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 func validateAge(value: AutoreleasingUnsafeMutablePointer<AnyObject?>) throws {
     guard let valueNumber = value.pointee as? NSNumber else { return }
     
@@ -65,8 +65,7 @@ func validateAge(value: AutoreleasingUnsafeMutablePointer<AnyObject?>) throws {
     let error = NSError(domain: "EMPLOYEE_ERROR_DOMAIN", code: 1123, userInfo: userInfoDict)
     throw error
 }
-```
-
+{{< / highlight >}}
 You could also override one of these methods to add advanced validation:
 
 * `validateForInsert()`
@@ -91,12 +90,11 @@ Take a look at the method names and let that be a guiding factor in your decisio
 
 Xcode adds a `fetchRequest` method when it auto-generates code for you.  So...I'd say it's probably okay to put some *basic* fetching behavior with an `NSManagedObject` subclass.  Keep it simple though:
 
-```swift
+{{< highlight swift "linenos=table" >}}
   @nonobjc public class func fetchRequest() -> NSFetchRequest<EntityName> {
       return NSFetchRequest<EntityName>(entityName: "EntityName")
   }
-```
-
+{{< / highlight >}}
 My personal preference is to put object fetching behavior in a separate Type.
 
 You might make a `DataProvider` Type and let *it* handle setting up `NSFetchRequest`(s) with appropriate predicates and sort descriptors.
@@ -109,12 +107,11 @@ One piece of convenience code that I extend my `NSManagedObject` subclasses with
 
 This helps me avoid sprinkling the name of an Entity in `String` form throughout my code.
 
-```swift
+{{< highlight swift "linenos=table" >}}
 extension EntityName {
     static let entityName = "EntityName"
 }
-```
-
+{{< / highlight >}}
 When it comes to other types of functionality, my recommendation is to put that code elsewhere.
 
 Keep `NSManagedObject`s about Core Data-y things.  

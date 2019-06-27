@@ -75,7 +75,7 @@ The table view is using one prototype cell with an **Identifier** of **"Cell&#82
 
 MainViewController.swift is where the action is happening. Here's a quick outline of what we need to accomplish in this class:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     // maintain a reference to NSManagedObjectContext instance
@@ -84,8 +84,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 
     // Implement UITableViewDataSource methods
 }
-```
-
+{{< / highlight >}}
 As you can see, `MainViewController` is a class concerned with being the table view's data source and delegate. Additionally, it will serve as the `NSFetchedResultsControllerDelegate`. For this post, we won't actually need the fetched results controller delegate functionality to display data. Those methods are particularly useful for synchronizing things when data _changes_.
 
 With the class declaration out of the way, we'll investigate the class implementation one section at a time.
@@ -94,15 +93,14 @@ With the class declaration out of the way, we'll investigate the class implement
 
 #### Maintain NSManagedObjectContext instance reference
 
-```swift
+{{< highlight swift "linenos=table" >}}
 public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     public var context: NSManagedObjectContext!
 
     // ...
 }
-```
-
+{{< / highlight >}}
 You may be asking, "Where will you set this NSManagedObjectContext reference?&#8221;. I'm employing a pattern that I've found successful in the past: I assign it when the finishes launching through the AppDelegate's `application:didFinishLaunchingWithOptions` method. [More on this, shortly][7]&#8230;
 
 For now, know that we're counting on that [later step][7] to take place, since `context` is defined as an implicitly unwrapped optional.
@@ -113,7 +111,7 @@ For now, know that we're counting on that [later step][7] to take place, since `
 
 Next, we need to create and configure an `NSFetchedResultsController` instance. Here's a bit of code with comments to follow:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     // ...
@@ -138,8 +136,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
     // ...
 
 }
-```
-
+{{< / highlight >}}
 If you've not read [Colin Eberhardt's][8] [Swift Initialization and the Pain of Optionals][9] post, I highly recommend it. His post is a fantastic analysis, and the final option of using lazy stored properties initialized by a closure expression is what I've chosen to do here. I won't repeat his analysis here, so feel free to jump over to his post to figure out what's going on there.
 
 Within the closure expression, I'm setting up a fetch request with some sorting applied. All that's left is to initialize the `NSFetchedResultsController`, set its delegate and return it.
@@ -150,7 +147,7 @@ Within the closure expression, I'm setting up a fetch request with some sorting 
 
 Once the view has loaded, the idea is to perform the `NSFetchedResultsController` instance's fetch request so that it has data to use in our `UITableViewDataSource` methods. This is how to do it:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     // ...
@@ -169,15 +166,14 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
     // ...
 
 }
-```
-
+{{< / highlight >}}
 <a name="uitableviewdatasource-methods" class="jump-target"></a>
 
 #### UITableViewDataSource methods
 
 The final step in implementing `MainViewController` is to set up the table view so that it pulls data from `fetchedResultsController`. I'm implementing the [standard UITableViewDataSource methods][10] here, along with `tableView:titleForHeaderInSection`. Take a look:
 
-{{< highlight swift "hl_lines=7 15 34" >}}
+{{< highlight swift "hl_lines=7 15 34 linenos=table" >}}
 public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     // ...
@@ -234,7 +230,7 @@ Once the `UITableViewDataSource` methods are implemented, the implementation of 
 
 There's one final thing we need to do in order to get things rolling. In the ["maintain NSManagedObjectContext instance reference&#8221;][11] section of this post, I mentioned the strategy for assigning the `NSManagedObjectContext` instance in the `MainViewController`. Here's how I do it:
 
-{{< highlight swift "hl_lines=16-17" >}}
+{{< highlight swift "hl_lines=16-17 linenos=table" >}}
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // ...

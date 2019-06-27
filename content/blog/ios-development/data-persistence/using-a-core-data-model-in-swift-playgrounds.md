@@ -108,7 +108,7 @@ In the finder window, right-click the .app file, and click "Show package content
 
 That's it! Now that the "momd&#8221; file is in the playground's Resources folder, you're set to write code against it. You can insert `NSManagedObject` instances, perform fetch requests, etc. Here's an example that I wrote up:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 import UIKit
 import CoreData
 
@@ -141,8 +141,7 @@ let fr = NSFetchRequest(entityName: "Entity")
 let result = try! context.executeFetchRequest(fr)
 
 print(result)
-```
-
+{{< / highlight >}}
 [<img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png" alt="Fetch request result" width="968" height="73" class="alignnone size-full wp-image-13018" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png 968w, https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result-300x23.png 300w" sizes="(max-width: 968px) 100vw, 968px" />][11]
 
 Woohoo! I thought this was pretty cool.

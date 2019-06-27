@@ -47,7 +47,7 @@ So... how's it done?
 
 Once you've ticked the build target prerequisite above, check out this code example:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 //Step 1
 let container = NSPersistentContainer(name: "NameOfModel")
 
@@ -61,8 +61,7 @@ container.loadPersistentStores(completionHandler: {
     let mainContext = container.viewContext
     // Use the context to do Core Data stuff in your app
 })
-```
-
+{{< / highlight >}}
 <a name="step-by-step" class="jump-target"></a>
 
 ### Step-by-step through the code

@@ -70,7 +70,7 @@ After I read his guide, I got to thinking: I wonder if you can take an ."/>
   "@type": "BlogPosting",
   "headline": "Using a Core Data Model in Swift Playgrounds",
   "url": "https:\/\/www.andrewcbancroft.com\/2016\/07\/10\/using-a-core-data-model-in-swift-playgrounds\/",
-  "wordCount": "936",
+  "wordCount": "950",
   "datePublished": "2016-07-10T20:48:54Z",
   "dateModified": "2016-07-10T20:48:54Z",
   "author": {
@@ -301,39 +301,78 @@ MathJax.Hub.Config({
 <h2 id="write-core-data-code-to-use-model">Write Core Data code to use model</h2>
 
 <p>That&rsquo;s it! Now that the &ldquo;momd&#8221; file is in the playground&rsquo;s Resources folder, you&rsquo;re set to write code against it. You can insert <code>NSManagedObject</code> instances, perform fetch requests, etc. Here&rsquo;s an example that I wrote up:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">UIKit</span>
-<span class="ln"> 2</span><span class="kd">import</span> <span class="nc">CoreData</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span><span class="c1">// Core Data Stack Setup for In-Memory Store</span>
-<span class="ln"> 5</span><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createMainContext</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
-<span class="ln"> 6</span>    
-<span class="ln"> 7</span>    <span class="c1">// Replace &#34;Model&#34; with the name of your model</span>
-<span class="ln"> 8</span>    <span class="kd">let</span> <span class="nv">modelUrl</span> <span class="p">=</span> <span class="n">NSBundle</span><span class="p">.</span><span class="n">mainBundle</span><span class="p">().</span><span class="n">URLForResource</span><span class="p">(</span><span class="s">&#34;Model&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
-<span class="ln"> 9</span>    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">contentsOfurl</span><span class="p">:</span> <span class="n">modelUrl</span><span class="o">!</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span>
-<span class="ln">10</span>    
-<span class="ln">11</span>    <span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
-<span class="ln">12</span>    <span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStoreWithType</span><span class="p">(</span><span class="n">NSInMemoryStoreType</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">URL</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln">13</span>    
-<span class="ln">14</span>    <span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">MainQueueConcurrencyType</span><span class="p">)</span>
-<span class="ln">15</span>    <span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span>
-<span class="ln">16</span>    
-<span class="ln">17</span>    <span class="k">return</span> <span class="n">context</span>
-<span class="ln">18</span><span class="p">}</span>
-<span class="ln">19</span>
-<span class="ln">20</span><span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">createMainContext</span><span class="p">()</span>
-<span class="ln">21</span>
-<span class="ln">22</span><span class="c1">// Insert a new Entity</span>
-<span class="ln">23</span><span class="kd">let</span> <span class="nv">ent</span> <span class="p">=</span> <span class="n">NSEntityDescription</span><span class="p">.</span><span class="n">insertNewObjectForEntityForName</span><span class="p">(</span><span class="s">&#34;Entity&#34;</span><span class="p">,</span> <span class="n">inManagedObjectContext</span><span class="p">:</span> <span class="n">context</span><span class="p">)</span>
-<span class="ln">24</span><span class="n">ent</span><span class="p">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="n">forKey</span><span class="p">:</span> <span class="s">&#34;attribute&#34;</span><span class="p">)</span>
-<span class="ln">25</span>
-<span class="ln">26</span><span class="k">try</span><span class="o">!</span> <span class="n">context</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
-<span class="ln">27</span>
-<span class="ln">28</span><span class="c1">// Perform a fetch request</span>
-<span class="ln">29</span><span class="kd">let</span> <span class="nv">fr</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;Entity&#34;</span><span class="p">)</span>
-<span class="ln">30</span><span class="kd">let</span> <span class="nv">result</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">context</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fr</span><span class="p">)</span>
-<span class="ln">31</span>
-<span class="ln">32</span><span class="bp">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></code></pre></div>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png" alt="Fetch request result" width="968" height="73" class="alignnone size-full wp-image-13018" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png 968w, https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result-300x23.png 300w" sizes="(max-width: 968px) 100vw, 968px" /></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">UIKit</span>
+<span class="kd">import</span> <span class="nc">CoreData</span>
+
+<span class="c1">// Core Data Stack Setup for In-Memory Store</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">createMainContext</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
+    
+    <span class="c1">// Replace &#34;Model&#34; with the name of your model</span>
+    <span class="kd">let</span> <span class="nv">modelUrl</span> <span class="p">=</span> <span class="n">NSBundle</span><span class="p">.</span><span class="n">mainBundle</span><span class="p">().</span><span class="n">URLForResource</span><span class="p">(</span><span class="s">&#34;Model&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">.</span><span class="kd">init</span><span class="p">(</span><span class="n">contentsOfurl</span><span class="p">:</span> <span class="n">modelUrl</span><span class="o">!</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
+    <span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStoreWithType</span><span class="p">(</span><span class="n">NSInMemoryStoreType</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">URL</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+    
+    <span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">MainQueueConcurrencyType</span><span class="p">)</span>
+    <span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span>
+    
+    <span class="k">return</span> <span class="n">context</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">createMainContext</span><span class="p">()</span>
+
+<span class="c1">// Insert a new Entity</span>
+<span class="kd">let</span> <span class="nv">ent</span> <span class="p">=</span> <span class="n">NSEntityDescription</span><span class="p">.</span><span class="n">insertNewObjectForEntityForName</span><span class="p">(</span><span class="s">&#34;Entity&#34;</span><span class="p">,</span> <span class="n">inManagedObjectContext</span><span class="p">:</span> <span class="n">context</span><span class="p">)</span>
+<span class="n">ent</span><span class="p">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="n">forKey</span><span class="p">:</span> <span class="s">&#34;attribute&#34;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="o">!</span> <span class="n">context</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="c1">// Perform a fetch request</span>
+<span class="kd">let</span> <span class="nv">fr</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;Entity&#34;</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nv">result</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">context</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fr</span><span class="p">)</span>
+
+<span class="bp">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png" alt="Fetch request result" width="968" height="73" class="alignnone size-full wp-image-13018" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result.png 968w, https://www.andrewcbancroft.com/wp-content/uploads/2016/07/printed-result-300x23.png 300w" sizes="(max-width: 968px) 100vw, 968px" /></a></p>
 
 <p>Woohoo! I thought this was pretty cool.</p>
 

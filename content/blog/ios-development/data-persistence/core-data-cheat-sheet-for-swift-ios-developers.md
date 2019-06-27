@@ -31,7 +31,7 @@ One assumption I'm making in this post is that you've created NSManagedObject su
 
 #### Fetch all entities
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Assuming type has a reference to managed object context
 
 let fetchRequest = NSFetchRequest(entityName: "MyEntity")
@@ -41,13 +41,12 @@ do {
 } catch {
     // Do something in response to error condition
 }
-```
-
+{{< / highlight >}}
 <a name="fetch-max-n" class="jump-target"></a>
 
 #### Fetch maximum of N entities
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Assuming type has a reference to managed object context
 
 let fetchRequest = NSFetchRequest(entityName: "MyEntity")
@@ -58,13 +57,12 @@ do {
 } catch {
     // Do something in response to error condition
 }   
-```
-
+{{< / highlight >}}
 <a name="insert" class="jump-target"></a>
 
 ## Insert a new entity
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Assuming encapsulating Type has a reference to managed object context
 
 let newEntity = NSEntityDescription.insertNewObjectForEntityForName("MyEntity", inManagedObjectContext: self.managedObjectContext) as! MyEntity
@@ -75,13 +73,12 @@ do {
 } catch {
     // Do something in response to error condition
 }
-```
-
+{{< / highlight >}}
 <a name="update-single-entity" class="jump-target"></a>
 
 ## Update a single entity
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Assuming type has a reference to managed object context
 
 // Assuming that a specific NSManagedObject's objectID property is accessible
@@ -106,13 +103,12 @@ do {
 } catch {
     // Do something in response to error condition
 }
-```
-
+{{< / highlight >}}
 <a name="update-multiple-entities" class="jump-target"></a>
 
 ## Update multiple-entities
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Assuming type has a reference to managed object context
 
 let predicate = NSPredicate(format: "MyEntityAttribute == %@", "Matching Value")
@@ -137,13 +133,12 @@ do {
 } catch {
     // Do something in response to error condition
 }
-```
-
+{{< / highlight >}}
 <a name="delete-single-entity" class="jump-target"></a>
 
 ## Delete a single entity
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Assuming type has a reference to managed object context
 
 // Assuming that a specific NSManagedObject's objectID property is accessible
@@ -168,13 +163,12 @@ do {
 } catch {
     // Do something in response to error condition
 }
-```
-
+{{< / highlight >}}
 <a name="delete-multiple-entities" class="jump-target"></a>
 
 ## Delete multiple-entities
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Assuming type has a reference to managed object context
 
 let predicate = NSPredicate(format: "MyEntityAttribute == %@", "Matching Value")
@@ -197,21 +191,19 @@ do {
 } catch {
     // Do something in response to error condition
 }
-```
-
+{{< / highlight >}}
 <a name="migrate-automatically" class="jump-target"></a>
 
 ## Migrate Core Data Model with Automatic Migrations
 
-```swift
+{{< highlight swift "linenos=table" >}}
 let model = // set up model
 
 let pscOptions = [NSMigratePersistentStoresAutomaticallyOption : true, NSInferMappingModelAutomaticallyOption : true]
     
 let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
 try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: pscOptions)
-```
-
+{{< / highlight >}}
 <a name="related" class="jump-target"></a>
 
 <div class="resources">

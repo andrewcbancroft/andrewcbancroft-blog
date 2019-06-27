@@ -66,7 +66,7 @@
   "@type": "BlogPosting",
   "headline": "On Core Data Object Fetching and Display Strategies",
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/on-core-data-object-fetching-and-display-strategies\/",
-  "wordCount": "901",
+  "wordCount": "905",
   "datePublished": "2019-06-14T04:40:54Z",
   "dateModified": "2019-06-14T04:40:54Z",
   "author": {
@@ -209,17 +209,40 @@ MathJax.Hub.Config({
 <h2 id="setting-the-stage">Setting the Stage</h2>
 
 <p>Suppose one of the <code>NSManagedObject</code> subclasses from your Core Data data model looked like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
-<span class="ln">2</span>
-<span class="ln">3</span>    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">4</span>    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">5</span>
-<span class="ln">6</span><span class="p">}</span></code></pre></div>
-<p>Suppose that you also have a class that will provide <code>BlogIdeas</code> to your view controller:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="c1">// fetches BlogIdea instances to use in your view controller</span>
-<span class="ln">3</span><span class="p">}</span></code></pre></div>
-<p><strong>Requirement:</strong> Say that you need to list all of the <code>ideaTitle</code>s you have inside of a table view (note that you <em>don&rsquo;t</em> need to display the <code>ideaDescription</code> at this time).</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
+
+    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+Suppose that you also have a class that will provide <code>BlogIdeas</code> to your view controller:</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
+    <span class="c1">// fetches BlogIdea instances to use in your view controller</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<strong>Requirement:</strong> Say that you need to list all of the <code>ideaTitle</code>s you have inside of a table view (note that you <em>don&rsquo;t</em> need to display the <code>ideaDescription</code> at this time).</p>
 
 <p><strong>Question:</strong>  Which of the following strategies would you recommend for this requirement?</p>
 

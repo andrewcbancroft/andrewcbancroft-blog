@@ -70,7 +70,7 @@ With the introduction of dynamic frameworks in iOS 8, a world of possibility ope
   "@type": "BlogPosting",
   "headline": "Sharing a Core Data Model with a Swift Framework",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/08\/25\/sharing-a-core-data-model-with-a-swift-framework\/",
-  "wordCount": "1628",
+  "wordCount": "1634",
   "datePublished": "2015-08-26T04:04:05Z",
   "dateModified": "2015-08-26T04:04:05Z",
   "author": {
@@ -336,20 +336,46 @@ MathJax.Hub.Config({
 <h4 id="replace-managedobjectmodel-property-initialization">Replace managedObjectModel property initialization</h4>
 
 <p>Out of the box, Xcode generates some code to help locate your Core Data model file. The boilerplate <code>managedObjectModel</code> property looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">managedObjectModel</span><span class="p">:</span> <span class="n">NSManagedObjectModel</span> <span class="p">=</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="c1">// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.</span>
-<span class="ln">3</span>    <span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">NSBundle</span><span class="p">.</span><span class="n">mainBundle</span><span class="p">().</span><span class="n">URLForResource</span><span class="p">(</span><span class="s">&#34;DataModelFileName&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span><span class="o">!</span>
-<span class="ln">4</span>    <span class="k">return</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOfURL</span><span class="p">:</span> <span class="n">modelURL</span><span class="p">)</span><span class="o">!</span>
-<span class="ln">5</span><span class="p">}()</span></code></pre></div>
-<p>However, this won&rsquo;t work for us, because we&rsquo;re going to use the data model from CarKit, and CarKit is not in the <code>mainBundle()</code>. This is why we jumped over and copied the Bundle Identifier for CarKit in the previous step. To locate the data model file in <em>that</em> bundle, you&rsquo;ll replace the <code>managedObjectModel</code> initialization step to the following (for CarKit):</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">managedObjectModel</span><span class="p">:</span> <span class="n">NSManagedObjectModel</span> <span class="p">=</span> <span class="p">{</span>
-<span class="ln">2</span>        <span class="c1">// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.</span>
-<span class="ln">3</span>        <span class="kd">let</span> <span class="nv">carKitBundle</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="s">&#34;com.andrewcbancroft.CarKit&#34;</span><span class="p">)</span>
-<span class="ln">4</span>        
-<span class="ln">5</span>        <span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">carKitBundle</span><span class="o">!</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;CarModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span><span class="o">!</span>
-<span class="ln">6</span>        <span class="k">return</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="p">)</span><span class="o">!</span>
-<span class="ln">7</span><span class="p">}()</span></code></pre></div>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-1024x394.png" alt="16 - AppDelegate" width="1024" height="394" class="alignnone size-large wp-image-12253" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-1024x394.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-300x115.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-768x296.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate.png 1213w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">managedObjectModel</span><span class="p">:</span> <span class="n">NSManagedObjectModel</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="c1">// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.</span>
+    <span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">NSBundle</span><span class="p">.</span><span class="n">mainBundle</span><span class="p">().</span><span class="n">URLForResource</span><span class="p">(</span><span class="s">&#34;DataModelFileName&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span><span class="o">!</span>
+    <span class="k">return</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOfURL</span><span class="p">:</span> <span class="n">modelURL</span><span class="p">)</span><span class="o">!</span>
+<span class="p">}()</span></code></pre></td></tr></table>
+</div>
+</div>
+However, this won&rsquo;t work for us, because we&rsquo;re going to use the data model from CarKit, and CarKit is not in the <code>mainBundle()</code>. This is why we jumped over and copied the Bundle Identifier for CarKit in the previous step. To locate the data model file in <em>that</em> bundle, you&rsquo;ll replace the <code>managedObjectModel</code> initialization step to the following (for CarKit):</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">managedObjectModel</span><span class="p">:</span> <span class="n">NSManagedObjectModel</span> <span class="p">=</span> <span class="p">{</span>
+        <span class="c1">// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.</span>
+        <span class="kd">let</span> <span class="nv">carKitBundle</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="s">&#34;com.andrewcbancroft.CarKit&#34;</span><span class="p">)</span>
+        
+        <span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">carKitBundle</span><span class="o">!</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;CarModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span><span class="o">!</span>
+        <span class="k">return</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="p">)</span><span class="o">!</span>
+<span class="p">}()</span></code></pre></td></tr></table>
+</div>
+</div>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-1024x394.png" alt="16 - AppDelegate" width="1024" height="394" class="alignnone size-large wp-image-12253" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-1024x394.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-300x115.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-768x296.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate.png 1213w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 
 <p>Recall that &ldquo;CarModel&#8221; is the name of the Core Data model we created for the framework in CarKit. We simply look for that artifact by calling <code>URLForResource:withExtension:</code> on the <code>carKitBundle</code> to initialize an <code>NSManagedObjectModel</code> instance.</p>
 
@@ -367,27 +393,54 @@ MathJax.Hub.Config({
 <h4 id="taking-the-model-out-for-a-test-drive-pun-intended">Taking the model out for a test drive (pun intended)</h4>
 
 <p>It&rsquo;s simple enough to try things out by writing a simple little snippet of code in the <code>AppDelegate</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="kc">_</span> <span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="n">UIApplicationLaunchOptionsKey</span><span class="p">:</span> <span class="nb">Any</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="c1">// Override point for customization after application launch.</span>
-<span class="ln"> 3</span>    
-<span class="ln"> 4</span>    <span class="kd">let</span> <span class="nv">newCar</span> <span class="p">=</span> <span class="n">NSEntityDescription</span><span class="p">.</span><span class="n">insertNewObject</span><span class="p">(</span><span class="n">forEntityName</span><span class="p">:</span> <span class="s">&#34;Car&#34;</span><span class="p">,</span> <span class="n">into</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="o">!</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="n">Car</span>
-<span class="ln"> 5</span>    <span class="n">newCar</span><span class="p">.</span><span class="n">year</span> <span class="p">=</span> <span class="mi">2015</span>
-<span class="ln"> 6</span>    <span class="n">newCar</span><span class="p">.</span><span class="n">make</span> <span class="p">=</span> <span class="s">&#34;Tesla&#34;</span>
-<span class="ln"> 7</span>    <span class="n">newCar</span><span class="p">.</span><span class="n">model</span> <span class="p">=</span> <span class="s">&#34;S&#34;</span>
-<span class="ln"> 8</span>    
-<span class="ln"> 9</span>    <span class="k">do</span> <span class="p">{</span>
-<span class="ln">10</span>        <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">?.</span><span class="n">save</span><span class="p">()</span>
-<span class="ln">11</span>    <span class="p">}</span> <span class="k">catch</span> <span class="kc">_</span> <span class="p">{</span>
-<span class="ln">12</span>    <span class="p">}</span>
-<span class="ln">13</span>    
-<span class="ln">14</span>    <span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">NSFetchRequestResult</span><span class="o">&gt;</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;Car&#34;</span><span class="p">)</span>
-<span class="ln">15</span>    <span class="kd">let</span> <span class="nv">cars</span> <span class="p">=</span> <span class="p">(</span><span class="k">try</span><span class="o">!</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">?.</span><span class="n">fetch</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">))</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">Car</span><span class="p">]</span>
-<span class="ln">16</span>    
-<span class="ln">17</span>    <span class="bp">print</span><span class="p">(</span><span class="n">cars</span><span class="p">,</span> <span class="n">terminator</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
-<span class="ln">18</span>    
-<span class="ln">19</span>    <span class="k">return</span> <span class="kc">true</span>
-<span class="ln">20</span><span class="p">}</span></code></pre></div>
-<p>This code simply obtains a new Car object, sets some properties, and saves it all with the <code>managedObjectContext</code> instance that&rsquo;s configured in the <code>AppDelegate</code>.</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="kc">_</span> <span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="n">UIApplicationLaunchOptionsKey</span><span class="p">:</span> <span class="nb">Any</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
+    <span class="c1">// Override point for customization after application launch.</span>
+    
+    <span class="kd">let</span> <span class="nv">newCar</span> <span class="p">=</span> <span class="n">NSEntityDescription</span><span class="p">.</span><span class="n">insertNewObject</span><span class="p">(</span><span class="n">forEntityName</span><span class="p">:</span> <span class="s">&#34;Car&#34;</span><span class="p">,</span> <span class="n">into</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="o">!</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="n">Car</span>
+    <span class="n">newCar</span><span class="p">.</span><span class="n">year</span> <span class="p">=</span> <span class="mi">2015</span>
+    <span class="n">newCar</span><span class="p">.</span><span class="n">make</span> <span class="p">=</span> <span class="s">&#34;Tesla&#34;</span>
+    <span class="n">newCar</span><span class="p">.</span><span class="n">model</span> <span class="p">=</span> <span class="s">&#34;S&#34;</span>
+    
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">?.</span><span class="n">save</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="kc">_</span> <span class="p">{</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">NSFetchRequestResult</span><span class="o">&gt;</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;Car&#34;</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nv">cars</span> <span class="p">=</span> <span class="p">(</span><span class="k">try</span><span class="o">!</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">?.</span><span class="n">fetch</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">))</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">Car</span><span class="p">]</span>
+    
+    <span class="bp">print</span><span class="p">(</span><span class="n">cars</span><span class="p">,</span> <span class="n">terminator</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="kc">true</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+This code simply obtains a new Car object, sets some properties, and saves it all with the <code>managedObjectContext</code> instance that&rsquo;s configured in the <code>AppDelegate</code>.</p>
 
 <p>Then it goes and performs a fetch request to grab all the <code>Car</code> objects and prints them. The results? See for yourself:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-1024x592.png" alt="17 - Final Result" width="1024" height="592" class="alignnone size-large wp-image-12254" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-1024x592.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-300x173.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-768x444.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result.png 1470w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>

@@ -18,23 +18,21 @@ disppsbadge: true
 ## Setting the Stage
 Suppose one of the `NSManagedObject` subclasses from your Core Data data model looked like this:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 public class BlogIdea: NSManagedObject {
 
     @NSManaged public var ideaTitle: String?
     @NSManaged public var ideaDescription: String?
 
 }
-```
-
+{{< / highlight >}}
 Suppose that you also have a class that will provide `BlogIdeas` to your view controller:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 class BlogIdeaProvider {
     // fetches BlogIdea instances to use in your view controller
 }
-```
-
+{{< / highlight >}}
 **Requirement:** Say that you need to list all of the `ideaTitle`s you have inside of a table view (note that you *don't* need to display the `ideaDescription` at this time).
 
 **Question:**  Which of the following strategies would you recommend for this requirement?

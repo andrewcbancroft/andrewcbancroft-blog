@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/how-smart-dumb-should-nsmanagedobjects-be\/",
-  "wordCount": "663",
+  "wordCount": "667",
   "datePublished": "2019-06-19T04:40:54Z",
   "dateModified": "2019-06-19T04:40:54Z",
   "author": {
@@ -277,19 +277,38 @@ MathJax.Hub.Config({
 <p>Instead, implement a custom method with a signature that matches the signature of <code>validatePropertyName:error:</code>.</p>
 
 <p>For example, if your <code>NSManagedObject</code> subclass has an <code>age</code> property and you wanted to implement special validation logic, you could do this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">validateAge</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">AutoreleasingUnsafeMutablePointer</span><span class="p">&lt;</span><span class="nb">AnyObject</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">valueNumber</span> <span class="p">=</span> <span class="n">value</span><span class="p">.</span><span class="n">pointee</span> <span class="k">as</span><span class="p">?</span> <span class="n">NSNumber</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
-<span class="ln"> 3</span>    
-<span class="ln"> 4</span>    <span class="k">if</span> <span class="n">valueNumber</span><span class="p">.</span><span class="n">floatValue</span> <span class="o">&gt;</span> <span class="mf">0.0</span> <span class="p">{</span>
-<span class="ln"> 5</span>        <span class="k">return</span>
-<span class="ln"> 6</span>    <span class="p">}</span>
-<span class="ln"> 7</span>    
-<span class="ln"> 8</span>    <span class="kd">let</span> <span class="nv">errorStr</span> <span class="p">=</span> <span class="n">NSLocalizedString</span><span class="p">(</span><span class="s">&#34;Age must be greater than zero&#34;</span><span class="p">,</span> <span class="n">tableName</span><span class="p">:</span> <span class="s">&#34;Employee&#34;</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="s">&#34;validation: zero age error&#34;</span><span class="p">)</span>
-<span class="ln"> 9</span>    <span class="kd">let</span> <span class="nv">userInfoDict</span> <span class="p">=</span> <span class="p">[</span><span class="n">NSLocalizedDescriptionKey</span><span class="p">:</span> <span class="n">errorStr</span><span class="p">]</span>
-<span class="ln">10</span>    <span class="kd">let</span> <span class="nv">error</span> <span class="p">=</span> <span class="n">NSError</span><span class="p">(</span><span class="n">domain</span><span class="p">:</span> <span class="s">&#34;EMPLOYEE_ERROR_DOMAIN&#34;</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="mi">1123</span><span class="p">,</span> <span class="n">userInfo</span><span class="p">:</span> <span class="n">userInfoDict</span><span class="p">)</span>
-<span class="ln">11</span>    <span class="k">throw</span> <span class="n">error</span>
-<span class="ln">12</span><span class="p">}</span></code></pre></div>
-<p>You could also override one of these methods to add advanced validation:</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">validateAge</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">AutoreleasingUnsafeMutablePointer</span><span class="p">&lt;</span><span class="nb">AnyObject</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">valueNumber</span> <span class="p">=</span> <span class="n">value</span><span class="p">.</span><span class="n">pointee</span> <span class="k">as</span><span class="p">?</span> <span class="n">NSNumber</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="n">valueNumber</span><span class="p">.</span><span class="n">floatValue</span> <span class="o">&gt;</span> <span class="mf">0.0</span> <span class="p">{</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nv">errorStr</span> <span class="p">=</span> <span class="n">NSLocalizedString</span><span class="p">(</span><span class="s">&#34;Age must be greater than zero&#34;</span><span class="p">,</span> <span class="n">tableName</span><span class="p">:</span> <span class="s">&#34;Employee&#34;</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="s">&#34;validation: zero age error&#34;</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nv">userInfoDict</span> <span class="p">=</span> <span class="p">[</span><span class="n">NSLocalizedDescriptionKey</span><span class="p">:</span> <span class="n">errorStr</span><span class="p">]</span>
+    <span class="kd">let</span> <span class="nv">error</span> <span class="p">=</span> <span class="n">NSError</span><span class="p">(</span><span class="n">domain</span><span class="p">:</span> <span class="s">&#34;EMPLOYEE_ERROR_DOMAIN&#34;</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="mi">1123</span><span class="p">,</span> <span class="n">userInfo</span><span class="p">:</span> <span class="n">userInfoDict</span><span class="p">)</span>
+    <span class="k">throw</span> <span class="n">error</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+You could also override one of these methods to add advanced validation:</p>
 
 <ul>
 <li><code>validateForInsert()</code></li>
@@ -316,10 +335,20 @@ MathJax.Hub.Config({
 <h2 id="on-fetching-behavior">On Fetching Behavior</h2>
 
 <p>Xcode adds a <code>fetchRequest</code> method when it auto-generates code for you.  So&hellip;I&rsquo;d say it&rsquo;s probably okay to put some <em>basic</em> fetching behavior with an <code>NSManagedObject</code> subclass.  Keep it simple though:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span>  <span class="p">@</span><span class="n">nonobjc</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">func</span> <span class="n">fetchRequest</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">EntityName</span><span class="o">&gt;</span> <span class="p">{</span>
-<span class="ln">2</span>      <span class="k">return</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">EntityName</span><span class="o">&gt;</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;EntityName&#34;</span><span class="p">)</span>
-<span class="ln">3</span>  <span class="p">}</span></code></pre></div>
-<p>My personal preference is to put object fetching behavior in a separate Type.</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift">  <span class="p">@</span><span class="n">nonobjc</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">func</span> <span class="n">fetchRequest</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">EntityName</span><span class="o">&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">EntityName</span><span class="o">&gt;</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;EntityName&#34;</span><span class="p">)</span>
+  <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+My personal preference is to put object fetching behavior in a separate Type.</p>
 
 <p>You might make a <code>DataProvider</code> Type and let <em>it</em> handle setting up <code>NSFetchRequest</code>(s) with appropriate predicates and sort descriptors.</p>
 
@@ -330,10 +359,20 @@ MathJax.Hub.Config({
 <p>One piece of convenience code that I extend my <code>NSManagedObject</code> subclasses with is an <code>entityName</code> property.</p>
 
 <p>This helps me avoid sprinkling the name of an Entity in <code>String</code> form throughout my code.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">extension</span> <span class="nc">EntityName</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">entityName</span> <span class="p">=</span> <span class="s">&#34;EntityName&#34;</span>
-<span class="ln">3</span><span class="p">}</span></code></pre></div>
-<p>When it comes to other types of functionality, my recommendation is to put that code elsewhere.</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="nc">EntityName</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">entityName</span> <span class="p">=</span> <span class="s">&#34;EntityName&#34;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+When it comes to other types of functionality, my recommendation is to put that code elsewhere.</p>
 
 <p>Keep <code>NSManagedObject</code>s about Core Data-y things.</p>
 

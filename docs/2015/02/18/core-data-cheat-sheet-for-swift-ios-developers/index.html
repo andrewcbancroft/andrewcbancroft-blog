@@ -70,7 +70,7 @@ The code snippets below are here to help jog your memory when it&rsquo;s been a 
   "@type": "BlogPosting",
   "headline": "Core Data Cheat Sheet for Swift iOS Developers",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/02\/18\/core-data-cheat-sheet-for-swift-ios-developers\/",
-  "wordCount": "746",
+  "wordCount": "813",
   "datePublished": "2015-02-18T18:20:59Z",
   "dateModified": "2015-02-18T18:20:59Z",
   "author": {
@@ -225,157 +225,342 @@ MathJax.Hub.Config({
 <p><a name="fetch-all" class="jump-target"></a></p>
 
 <h4 id="fetch-all-entities">Fetch all entities</h4>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// Assuming type has a reference to managed object context</span>
-<span class="ln">2</span>
-<span class="ln">3</span><span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
-<span class="ln">4</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln">5</span>    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
-<span class="ln">6</span>    <span class="c1">// Do something with fetchedEntities</span>
-<span class="ln">7</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">8</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">9</span><span class="p">}</span></code></pre></div>
-<p><a name="fetch-max-n" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Assuming type has a reference to managed object context</span>
+
+<span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
+<span class="k">do</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
+    <span class="c1">// Do something with fetchedEntities</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="fetch-max-n" class="jump-target"></a></p>
 
 <h4 id="fetch-maximum-of-n-entities">Fetch maximum of N entities</h4>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Assuming type has a reference to managed object context</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span><span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
-<span class="ln"> 4</span><span class="n">fetchRequest</span><span class="p">.</span><span class="n">fetchLimit</span> <span class="p">=</span> <span class="mi">10</span>
-<span class="ln"> 5</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln"> 6</span>    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
-<span class="ln"> 7</span>    <span class="c1">// Do something with fetchedEntities</span>
-<span class="ln"> 8</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln"> 9</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">10</span><span class="p">}</span>   </code></pre></div>
-<p><a name="insert" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Assuming type has a reference to managed object context</span>
+
+<span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
+<span class="n">fetchRequest</span><span class="p">.</span><span class="n">fetchLimit</span> <span class="p">=</span> <span class="mi">10</span>
+<span class="k">do</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
+    <span class="c1">// Do something with fetchedEntities</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span>   </code></pre></td></tr></table>
+</div>
+</div>
+<a name="insert" class="jump-target"></a></p>
 
 <h2 id="insert-a-new-entity">Insert a new entity</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Assuming encapsulating Type has a reference to managed object context</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span><span class="kd">let</span> <span class="nv">newEntity</span> <span class="p">=</span> <span class="n">NSEntityDescription</span><span class="p">.</span><span class="n">insertNewObjectForEntityForName</span><span class="p">(</span><span class="s">&#34;MyEntity&#34;</span><span class="p">,</span> <span class="n">inManagedObjectContext</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="n">MyEntity</span>
-<span class="ln"> 4</span><span class="c1">// Set properties</span>
-<span class="ln"> 5</span>
-<span class="ln"> 6</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln"> 7</span>    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
-<span class="ln"> 8</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln"> 9</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">10</span><span class="p">}</span></code></pre></div>
-<p><a name="update-single-entity" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Assuming encapsulating Type has a reference to managed object context</span>
+
+<span class="kd">let</span> <span class="nv">newEntity</span> <span class="p">=</span> <span class="n">NSEntityDescription</span><span class="p">.</span><span class="n">insertNewObjectForEntityForName</span><span class="p">(</span><span class="s">&#34;MyEntity&#34;</span><span class="p">,</span> <span class="n">inManagedObjectContext</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="n">MyEntity</span>
+<span class="c1">// Set properties</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="update-single-entity" class="jump-target"></a></p>
 
 <h2 id="update-a-single-entity">Update a single entity</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Assuming type has a reference to managed object context</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span><span class="c1">// Assuming that a specific NSManagedObject&#39;s objectID property is accessible</span>
-<span class="ln"> 4</span><span class="c1">// Alternatively, could supply a predicate expression that&#39;s precise enough</span>
-<span class="ln"> 5</span><span class="c1">// to select only a _single_ entity</span>
-<span class="ln"> 6</span><span class="kd">let</span> <span class="nv">predicate</span> <span class="p">=</span> <span class="n">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&#34;objectID == %@&#34;</span><span class="p">,</span> <span class="n">objectIDFromNSManagedObject</span><span class="p">)</span>
-<span class="ln"> 7</span>
-<span class="ln"> 8</span><span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
-<span class="ln"> 9</span><span class="n">fetchRequest</span><span class="p">.</span><span class="n">predicate</span> <span class="p">=</span> <span class="n">predicate</span>
-<span class="ln">10</span>
-<span class="ln">11</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln">12</span>    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
-<span class="ln">13</span>    <span class="n">fetchedEntities</span><span class="p">.</span><span class="bp">first</span><span class="p">?.</span><span class="n">FirstPropertyToUpdate</span> <span class="p">=</span> <span class="n">NewValue</span>
-<span class="ln">14</span>    <span class="n">fetchedEntities</span><span class="p">.</span><span class="bp">first</span><span class="p">?.</span><span class="n">SecondPropertyToUpdate</span> <span class="p">=</span> <span class="n">NewValue</span>
-<span class="ln">15</span>    <span class="c1">// ... Update additional properties with new values</span>
-<span class="ln">16</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">17</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">18</span><span class="p">}</span>
-<span class="ln">19</span>
-<span class="ln">20</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln">21</span>    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
-<span class="ln">22</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">23</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">24</span><span class="p">}</span></code></pre></div>
-<p><a name="update-multiple-entities" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Assuming type has a reference to managed object context</span>
+
+<span class="c1">// Assuming that a specific NSManagedObject&#39;s objectID property is accessible</span>
+<span class="c1">// Alternatively, could supply a predicate expression that&#39;s precise enough</span>
+<span class="c1">// to select only a _single_ entity</span>
+<span class="kd">let</span> <span class="nv">predicate</span> <span class="p">=</span> <span class="n">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&#34;objectID == %@&#34;</span><span class="p">,</span> <span class="n">objectIDFromNSManagedObject</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
+<span class="n">fetchRequest</span><span class="p">.</span><span class="n">predicate</span> <span class="p">=</span> <span class="n">predicate</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
+    <span class="n">fetchedEntities</span><span class="p">.</span><span class="bp">first</span><span class="p">?.</span><span class="n">FirstPropertyToUpdate</span> <span class="p">=</span> <span class="n">NewValue</span>
+    <span class="n">fetchedEntities</span><span class="p">.</span><span class="bp">first</span><span class="p">?.</span><span class="n">SecondPropertyToUpdate</span> <span class="p">=</span> <span class="n">NewValue</span>
+    <span class="c1">// ... Update additional properties with new values</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="update-multiple-entities" class="jump-target"></a></p>
 
 <h2 id="update-multiple-entities">Update multiple-entities</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Assuming type has a reference to managed object context</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span><span class="kd">let</span> <span class="nv">predicate</span> <span class="p">=</span> <span class="n">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&#34;MyEntityAttribute == %@&#34;</span><span class="p">,</span> <span class="s">&#34;Matching Value&#34;</span><span class="p">)</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span><span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
-<span class="ln"> 6</span><span class="n">fetchRequest</span><span class="p">.</span><span class="n">predicate</span> <span class="p">=</span> <span class="n">predicate</span>
-<span class="ln"> 7</span>
-<span class="ln"> 8</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln"> 9</span>    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
-<span class="ln">10</span>    
-<span class="ln">11</span>    <span class="k">for</span> <span class="n">entity</span> <span class="k">in</span> <span class="n">fetchedEntities</span> <span class="p">{</span>
-<span class="ln">12</span>        <span class="n">entity</span><span class="p">.</span><span class="n">FirstPropertyToUpdate</span> <span class="p">=</span> <span class="n">NewValue</span>
-<span class="ln">13</span>        <span class="n">entity</span><span class="p">.</span><span class="n">SecondPropertyToUpdate</span> <span class="p">=</span> <span class="n">NewValue</span>
-<span class="ln">14</span>        <span class="c1">// ... Update additional properties with new values</span>
-<span class="ln">15</span>    <span class="p">}</span>
-<span class="ln">16</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">17</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">18</span><span class="p">}</span>
-<span class="ln">19</span>
-<span class="ln">20</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln">21</span>    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
-<span class="ln">22</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">23</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">24</span><span class="p">}</span></code></pre></div>
-<p><a name="delete-single-entity" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Assuming type has a reference to managed object context</span>
+
+<span class="kd">let</span> <span class="nv">predicate</span> <span class="p">=</span> <span class="n">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&#34;MyEntityAttribute == %@&#34;</span><span class="p">,</span> <span class="s">&#34;Matching Value&#34;</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
+<span class="n">fetchRequest</span><span class="p">.</span><span class="n">predicate</span> <span class="p">=</span> <span class="n">predicate</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">entity</span> <span class="k">in</span> <span class="n">fetchedEntities</span> <span class="p">{</span>
+        <span class="n">entity</span><span class="p">.</span><span class="n">FirstPropertyToUpdate</span> <span class="p">=</span> <span class="n">NewValue</span>
+        <span class="n">entity</span><span class="p">.</span><span class="n">SecondPropertyToUpdate</span> <span class="p">=</span> <span class="n">NewValue</span>
+        <span class="c1">// ... Update additional properties with new values</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="delete-single-entity" class="jump-target"></a></p>
 
 <h2 id="delete-a-single-entity">Delete a single entity</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Assuming type has a reference to managed object context</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span><span class="c1">// Assuming that a specific NSManagedObject&#39;s objectID property is accessible</span>
-<span class="ln"> 4</span><span class="c1">// Alternatively, could supply a predicate expression that&#39;s precise enough</span>
-<span class="ln"> 5</span><span class="c1">// to select only a _single_ entity</span>
-<span class="ln"> 6</span><span class="kd">let</span> <span class="nv">predicate</span> <span class="p">=</span> <span class="n">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&#34;objectID == %@&#34;</span><span class="p">,</span> <span class="n">objectIDFromNSManagedObject</span><span class="p">)</span>
-<span class="ln"> 7</span>
-<span class="ln"> 8</span><span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
-<span class="ln"> 9</span><span class="n">fetchRequest</span><span class="p">.</span><span class="n">predicate</span> <span class="p">=</span> <span class="n">predicate</span>
-<span class="ln">10</span>
-<span class="ln">11</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln">12</span>    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
-<span class="ln">13</span>    <span class="k">if</span> <span class="kd">let</span> <span class="nv">entityToDelete</span> <span class="p">=</span> <span class="n">fetchedEntities</span><span class="p">.</span><span class="bp">first</span> <span class="p">{</span>
-<span class="ln">14</span>        <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">deleteObject</span><span class="p">(</span><span class="n">entityToDelete</span><span class="p">)</span>
-<span class="ln">15</span>    <span class="p">}</span>
-<span class="ln">16</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">17</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">18</span><span class="p">}</span>
-<span class="ln">19</span>
-<span class="ln">20</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln">21</span>    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
-<span class="ln">22</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">23</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">24</span><span class="p">}</span></code></pre></div>
-<p><a name="delete-multiple-entities" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Assuming type has a reference to managed object context</span>
+
+<span class="c1">// Assuming that a specific NSManagedObject&#39;s objectID property is accessible</span>
+<span class="c1">// Alternatively, could supply a predicate expression that&#39;s precise enough</span>
+<span class="c1">// to select only a _single_ entity</span>
+<span class="kd">let</span> <span class="nv">predicate</span> <span class="p">=</span> <span class="n">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&#34;objectID == %@&#34;</span><span class="p">,</span> <span class="n">objectIDFromNSManagedObject</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
+<span class="n">fetchRequest</span><span class="p">.</span><span class="n">predicate</span> <span class="p">=</span> <span class="n">predicate</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
+    <span class="k">if</span> <span class="kd">let</span> <span class="nv">entityToDelete</span> <span class="p">=</span> <span class="n">fetchedEntities</span><span class="p">.</span><span class="bp">first</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">deleteObject</span><span class="p">(</span><span class="n">entityToDelete</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="delete-multiple-entities" class="jump-target"></a></p>
 
 <h2 id="delete-multiple-entities">Delete multiple-entities</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Assuming type has a reference to managed object context</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span><span class="kd">let</span> <span class="nv">predicate</span> <span class="p">=</span> <span class="n">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&#34;MyEntityAttribute == %@&#34;</span><span class="p">,</span> <span class="s">&#34;Matching Value&#34;</span><span class="p">)</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span><span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
-<span class="ln"> 6</span><span class="n">fetchRequest</span><span class="p">.</span><span class="n">predicate</span> <span class="p">=</span> <span class="n">predicate</span>
-<span class="ln"> 7</span>
-<span class="ln"> 8</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln"> 9</span>    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
-<span class="ln">10</span>    
-<span class="ln">11</span>    <span class="k">for</span> <span class="n">entity</span> <span class="k">in</span> <span class="n">fetchedEntities</span> <span class="p">{</span>
-<span class="ln">12</span>        <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">deleteObject</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
-<span class="ln">13</span>    <span class="p">}</span>
-<span class="ln">14</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">15</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">16</span><span class="p">}</span>
-<span class="ln">17</span>
-<span class="ln">18</span><span class="k">do</span> <span class="p">{</span>
-<span class="ln">19</span>    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
-<span class="ln">20</span><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">21</span>    <span class="c1">// Do something in response to error condition</span>
-<span class="ln">22</span><span class="p">}</span></code></pre></div>
-<p><a name="migrate-automatically" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Assuming type has a reference to managed object context</span>
+
+<span class="kd">let</span> <span class="nv">predicate</span> <span class="p">=</span> <span class="n">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&#34;MyEntityAttribute == %@&#34;</span><span class="p">,</span> <span class="s">&#34;Matching Value&#34;</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nv">fetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;MyEntity&#34;</span><span class="p">)</span>
+<span class="n">fetchRequest</span><span class="p">.</span><span class="n">predicate</span> <span class="p">=</span> <span class="n">predicate</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">fetchedEntities</span> <span class="p">=</span> <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">executeFetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="p">[</span><span class="n">MyEntity</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">entity</span> <span class="k">in</span> <span class="n">fetchedEntities</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">deleteObject</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+    <span class="c1">// Do something in response to error condition</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="migrate-automatically" class="jump-target"></a></p>
 
 <h2 id="migrate-core-data-model-with-automatic-migrations">Migrate Core Data Model with Automatic Migrations</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="c1">// set up model</span>
-<span class="ln">2</span>
-<span class="ln">3</span><span class="kd">let</span> <span class="nv">pscOptions</span> <span class="p">=</span> <span class="p">[</span><span class="n">NSMigratePersistentStoresAutomaticallyOption</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">NSInferMappingModelAutomaticallyOption</span> <span class="p">:</span> <span class="kc">true</span><span class="p">]</span>
-<span class="ln">4</span>    
-<span class="ln">5</span><span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
-<span class="ln">6</span><span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">pscOptions</span><span class="p">)</span></code></pre></div>
-<p><a name="related" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="c1">// set up model</span>
+
+<span class="kd">let</span> <span class="nv">pscOptions</span> <span class="p">=</span> <span class="p">[</span><span class="n">NSMigratePersistentStoresAutomaticallyOption</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">NSInferMappingModelAutomaticallyOption</span> <span class="p">:</span> <span class="kc">true</span><span class="p">]</span>
+    
+<span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
+<span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">pscOptions</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="related" class="jump-target"></a></p>
 
 <div class="resources">
   <div class="resources-header">

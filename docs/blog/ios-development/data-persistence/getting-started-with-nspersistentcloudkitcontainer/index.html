@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/getting-started-with-nspersistentcloudkitcontainer\/",
-  "wordCount": "1213",
+  "wordCount": "1207",
   "datePublished": "2019-06-11T04:40:54Z",
   "dateModified": "2019-06-11T04:40:54Z",
   "author": {
@@ -351,45 +351,99 @@ Resources
 <p>No relationships or extra configuration options&hellip; just one Entity to keep it a basic reference-able project.</p>
 
 <p>The <code>BlogIdea</code> NSManagedObject subclass is implemented like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
-<span class="ln">2</span>
-<span class="ln">3</span>    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">4</span>    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">5</span>
-<span class="ln">6</span>    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">entityName</span><span class="p">:</span> <span class="nb">String</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;BlogIdea&#34;</span> <span class="p">}</span>
-<span class="ln">7</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
+
+    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+
+    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">entityName</span><span class="p">:</span> <span class="nb">String</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;BlogIdea&#34;</span> <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <h3 id="view-controllers">View Controllers</h3>
 
 <p>There are two view controllers that come with this example:</p>
 
-<p><strong>MainViewController</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span>   <span class="n">UIViewController</span><span class="p">,</span> 
-<span class="ln"> 2</span>                            <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">,</span> 
-<span class="ln"> 3</span>                            <span class="n">UITableViewDataSource</span><span class="p">,</span> 
-<span class="ln"> 4</span>                            <span class="n">UITableViewDelegate</span> <span class="p">{</span>
-<span class="ln"> 5</span>    <span class="c1">// Responsible for listing out BlogIdeas in a table view</span>
-<span class="ln"> 6</span>
-<span class="ln"> 7</span>    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
-<span class="ln"> 8</span>    <span class="c1">// which gets initialized in the SceneDelegate.swift file</span>
-<span class="ln"> 9</span>    <span class="c1">// and passed to this view controller when the scene gets &#34;connected&#34;</span>
-<span class="ln">10</span>
-<span class="ln">11</span>    <span class="c1">// Uses NSFetchedResultsController to keep the table view in sync</span>
-<span class="ln">12</span>    <span class="c1">// with the Core Data managed object context</span>
-<span class="ln">13</span>
-<span class="ln">14</span>    <span class="c1">// Implements swipe-to-delete with delete confirmation</span>
-<span class="ln">15</span>
-<span class="ln">16</span>    <span class="c1">// Navigates to editor when someone taps on a table view row</span>
-<span class="ln">17</span>    <span class="c1">// and passes its NSManagedObjectContext instance along</span>
-<span class="ln">18</span><span class="p">}</span></code></pre></div>
-<p><strong>BlogIdeaEditorViewController</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">class</span> <span class="nc">BlogIdeaEditorViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="c1">// Responsible for creating new BlogIdeas</span>
-<span class="ln">3</span>
-<span class="ln">4</span>    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
-<span class="ln">5</span>    <span class="c1">// which gets passed along in MainViewController&#39;s prepare for segue method</span>
-<span class="ln">6</span>
-<span class="ln">7</span>    <span class="c1">// Able to edit existing BlogIdeas</span>
-<span class="ln">8</span><span class="p">}</span></code></pre></div>
+<p><strong>MainViewController</strong>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span>   <span class="n">UIViewController</span><span class="p">,</span> 
+                            <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">,</span> 
+                            <span class="n">UITableViewDataSource</span><span class="p">,</span> 
+                            <span class="n">UITableViewDelegate</span> <span class="p">{</span>
+    <span class="c1">// Responsible for listing out BlogIdeas in a table view</span>
+
+    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
+    <span class="c1">// which gets initialized in the SceneDelegate.swift file</span>
+    <span class="c1">// and passed to this view controller when the scene gets &#34;connected&#34;</span>
+
+    <span class="c1">// Uses NSFetchedResultsController to keep the table view in sync</span>
+    <span class="c1">// with the Core Data managed object context</span>
+
+    <span class="c1">// Implements swipe-to-delete with delete confirmation</span>
+
+    <span class="c1">// Navigates to editor when someone taps on a table view row</span>
+    <span class="c1">// and passes its NSManagedObjectContext instance along</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<strong>BlogIdeaEditorViewController</strong>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="nc">BlogIdeaEditorViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+    <span class="c1">// Responsible for creating new BlogIdeas</span>
+
+    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
+    <span class="c1">// which gets passed along in MainViewController&#39;s prepare for segue method</span>
+
+    <span class="c1">// Able to edit existing BlogIdeas</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></p>
+
 <h2 id="understanding-the-default-sync-behavior">Understanding the Default Sync Behavior</h2>
 
 <p>At this point no additional configuration has happened. The Core Data stack is the unmodified Xcode generated code, and the fetched results controller is hooked up to the managed object context for your app, ready to fetch Blog Ideas and help get them into the table view.</p>
@@ -415,20 +469,20 @@ Resources
 <p>I initialize the container in the <code>SceneDelegate</code>, so check out the code exerpt below to see where that gets set.</p>
 
 <p><strong>SceneDelegate.swift</strong>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="c1">// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.</span>
-<span class="ln"> 3</span>    <span class="c1">// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.</span>
-<span class="ln"> 4</span>    <span class="c1">// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).</span>
-<span class="ln"> 5</span>    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">_</span> <span class="p">=</span> <span class="p">(</span><span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
-<span class="ln"> 6</span>    
-<span class="ln"> 7</span>    <span class="kd">let</span> <span class="nv">navigationController</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="o">!</span> <span class="n">UINavigationController</span>
-<span class="ln"> 8</span>    <span class="kd">let</span> <span class="nv">mainVC</span> <span class="p">=</span> <span class="n">navigationController</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="o">!</span> <span class="n">MainViewController</span>
-<span class="ln"> 9</span>    
-<span class="ln">10</span>    <span class="kd">let</span> <span class="nv">viewContext</span> <span class="p">=</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">delegate</span> <span class="k">as</span><span class="o">!</span> <span class="n">AppDelegate</span><span class="p">).</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span>
-<span class="hl"><span class="ln">11</span>    <span class="n">viewContext</span><span class="p">.</span><span class="n">automaticallyMergesChangesFromParent</span> <span class="p">=</span> <span class="kc">true</span>
-</span><span class="ln">12</span>
-<span class="ln">13</span>    <span class="n">mainVC</span><span class="p">.</span><span class="n">managedObjectContext</span> <span class="p">=</span> <span class="n">viewContext</span>
-<span class="ln">14</span><span class="p">}</span></code></pre></div></p>
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+    // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+    // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    guard let _ = (scene as? UIWindowScene) else { return }
+    
+    let navigationController = self.window?.rootViewController as! UINavigationController
+    let mainVC = navigationController.viewControllers[0] as! MainViewController
+    
+    let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    viewContext.automaticallyMergesChangesFromParent = true
+
+    mainVC.managedObjectContext = viewContext
+}</p>
 
 <p>Making this one-line change will enable the app (which is supported by <code>NSFetchedResultsController</code>) to update the UI in response to remote data changes&hellip;</p>
 

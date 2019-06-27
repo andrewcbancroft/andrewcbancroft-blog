@@ -43,12 +43,11 @@ The Core Data stack can be created in about 3 steps:
 
 This corresponds to your .xcdatamodeld file. You'll want to glance over to the project navigator on the left and locate the .xcdatamodeld file to record its name for this step.
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Initialize NSManagedObjectModel
 let modelURL = Bundle.main.url(forResource: "NameOfDataModel", withExtension: "momd")
 guard let model = NSManagedObjectModel(contentsOf: modelURL!) else { fatalError("model not found") }
-```
-
+{{< / highlight >}}
 <a name="persistent-store-coordinator" class="jump-target"></a>
 
 ## 2) Initialize and configure an instance of NSPersistentStoreCoordinator with the NSManagedObjectModel instance and an NSPersistentStoreType
@@ -57,7 +56,7 @@ The reason you create the `NSManagedObjectModel` instance first is because the _
 
 In the code example that follows, I used `NSSQLiteStoreType` to create a SQLite persistent store. Regardless of what kind of persistent store you use though, `NSPersistentStoreCoordinator` needs your managed object model instance.
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Configure NSPersistentStoreCoordinator with an NSPersistentStore
 let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
 
@@ -67,20 +66,18 @@ let storeURL = try! FileManager
         .appendingPathComponent("NameOfDataModel.sqlite")
 
 try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
-```
-
+{{< / highlight >}}
 <a name="managed-object-context" class="jump-target"></a>
 
 ## 3) Initialize an instance of NSManagedObjectcontext and assign it the NSPersistentStoreCoordinator instance
 
 The last step is to initialize an instance of `NSManagedObjectContext` and assign it the `NSPersistentStoreCoordinator` instance.
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // Create and return NSManagedObjectContext
 let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 context.persistentStoreCoordinator = psc
-```
-
+{{< / highlight >}}
 <a name="code-example" class="jump-target"></a>
 
 # Putting it all together – creating the Core Data stack in code
@@ -89,7 +86,7 @@ When I create the Core Data stack, I like to encapsulate the code in a stand-alo
 
 Here are all three steps put together:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 func createMainContext() -> NSManagedObjectContext {
     
     // Initialize NSManagedObjectModel
@@ -112,8 +109,7 @@ func createMainContext() -> NSManagedObjectContext {
     
     return context
 }
-```
-
+{{< / highlight >}}
 Once you've got a function like `createMainContext()`, you'll be able to call it to obtain a fully-configured `NSManagedObjectContext` instance.
 
 I _highly_ recommend you avoid calling it inside any of your view controllers. Instead, my recommendation is to call it to obtain your `NSManagedObjectContext` instance inside of the `AppDelegate's` `application(_:didFinishLaunchingWithOptions:)` function. From there, you can pass it _to_ your first view controller, and from that first view controller on to _other_ view controllers that need it through `prepare(for segue:sender:)`.

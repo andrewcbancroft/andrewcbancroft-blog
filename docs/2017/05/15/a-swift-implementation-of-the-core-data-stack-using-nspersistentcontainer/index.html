@@ -66,7 +66,7 @@
   "@type": "BlogPosting",
   "headline": "A Swift Implementation of the Core Data Stack Using NSPersistentContainer",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/05\/15\/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer\/",
-  "wordCount": "664",
+  "wordCount": "670",
   "datePublished": "2017-05-15T18:19:46Z",
   "dateModified": "2019-06-26T00:00:00Z",
   "author": {
@@ -251,20 +251,40 @@ MathJax.Hub.Config({
 <p><code>NSPersistentContainer</code> is only available in Apple&rsquo;s latest platform versions (latest as of May, 2017).</p>
 
 <p>Once you&rsquo;ve ticked the build target prerequisite above, check out this code example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">//Step 1</span>
-<span class="ln"> 2</span><span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="n">NSPersistentContainer</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&#34;NameOfModel&#34;</span><span class="p">)</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span><span class="c1">// Step 2</span>
-<span class="ln"> 5</span><span class="c1">// Happens asynchronously!</span>
-<span class="ln"> 6</span><span class="n">container</span><span class="p">.</span><span class="n">loadPersistentStores</span><span class="p">(</span><span class="n">completionHandler</span><span class="p">:</span> <span class="p">{</span>
-<span class="ln"> 7</span>    <span class="n">persistentStoreDescription</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
-<span class="ln"> 8</span>    <span class="c1">// Step 3</span>
-<span class="ln"> 9</span>    <span class="k">guard</span> <span class="n">error</span> <span class="p">==</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Failed to load store: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span> <span class="p">}</span>
-<span class="ln">10</span>
-<span class="ln">11</span>    <span class="kd">let</span> <span class="nv">mainContext</span> <span class="p">=</span> <span class="n">container</span><span class="p">.</span><span class="n">viewContext</span>
-<span class="ln">12</span>    <span class="c1">// Use the context to do Core Data stuff in your app</span>
-<span class="ln">13</span><span class="p">})</span></code></pre></div>
-<p><a name="step-by-step" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">//Step 1</span>
+<span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="n">NSPersistentContainer</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&#34;NameOfModel&#34;</span><span class="p">)</span>
+
+<span class="c1">// Step 2</span>
+<span class="c1">// Happens asynchronously!</span>
+<span class="n">container</span><span class="p">.</span><span class="n">loadPersistentStores</span><span class="p">(</span><span class="n">completionHandler</span><span class="p">:</span> <span class="p">{</span>
+    <span class="n">persistentStoreDescription</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="c1">// Step 3</span>
+    <span class="k">guard</span> <span class="n">error</span> <span class="p">==</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Failed to load store: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="kd">let</span> <span class="nv">mainContext</span> <span class="p">=</span> <span class="n">container</span><span class="p">.</span><span class="n">viewContext</span>
+    <span class="c1">// Use the context to do Core Data stuff in your app</span>
+<span class="p">})</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="step-by-step" class="jump-target"></a></p>
 
 <h3 id="step-by-step-through-the-code">Step-by-step through the code</h3>
 

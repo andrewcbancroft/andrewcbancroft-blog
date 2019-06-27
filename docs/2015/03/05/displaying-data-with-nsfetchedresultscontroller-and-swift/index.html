@@ -68,7 +68,7 @@ With a Core Data data store seeded with data, the next logical step is to displa
   "@type": "BlogPosting",
   "headline": "Displaying Data With NSFetchedResultsController and Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/03\/05\/displaying-data-with-nsfetchedresultscontroller-and-swift\/",
-  "wordCount": "1354",
+  "wordCount": "1299",
   "datePublished": "2015-03-05T15:14:53Z",
   "dateModified": "2015-03-05T15:14:53Z",
   "author": {
@@ -289,28 +289,56 @@ MathJax.Hub.Config({
 <h3 id="mainviewcontroller-swift">MainViewController.swift</h3>
 
 <p>MainViewController.swift is where the action is happening. Here&rsquo;s a quick outline of what we need to accomplish in this class:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
-<span class="ln">2</span>
-<span class="ln">3</span>    <span class="c1">// maintain a reference to NSManagedObjectContext instance</span>
-<span class="ln">4</span>
-<span class="ln">5</span>    <span class="c1">// create and configure an NSFetchedResultsController instance</span>
-<span class="ln">6</span>
-<span class="ln">7</span>    <span class="c1">// Implement UITableViewDataSource methods</span>
-<span class="ln">8</span><span class="p">}</span></code></pre></div>
-<p>As you can see, <code>MainViewController</code> is a class concerned with being the table view&rsquo;s data source and delegate. Additionally, it will serve as the <code>NSFetchedResultsControllerDelegate</code>. For this post, we won&rsquo;t actually need the fetched results controller delegate functionality to display data. Those methods are particularly useful for synchronizing things when data <em>changes</em>.</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
+
+    <span class="c1">// maintain a reference to NSManagedObjectContext instance</span>
+
+    <span class="c1">// create and configure an NSFetchedResultsController instance</span>
+
+    <span class="c1">// Implement UITableViewDataSource methods</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+As you can see, <code>MainViewController</code> is a class concerned with being the table view&rsquo;s data source and delegate. Additionally, it will serve as the <code>NSFetchedResultsControllerDelegate</code>. For this post, we won&rsquo;t actually need the fetched results controller delegate functionality to display data. Those methods are particularly useful for synchronizing things when data <em>changes</em>.</p>
 
 <p>With the class declaration out of the way, we&rsquo;ll investigate the class implementation one section at a time.</p>
 
 <p><a name="nsmanagedobjectcontext-reference" class="jump-target"></a></p>
 
 <h4 id="maintain-nsmanagedobjectcontext-instance-reference">Maintain NSManagedObjectContext instance reference</h4>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
-<span class="ln">2</span>    
-<span class="ln">3</span>    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">context</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span><span class="o">!</span>
-<span class="ln">4</span>
-<span class="ln">5</span>    <span class="c1">// ...</span>
-<span class="ln">6</span><span class="p">}</span></code></pre></div>
-<p>You may be asking, &ldquo;Where will you set this NSManagedObjectContext reference?&#8221;. I&rsquo;m employing a pattern that I&rsquo;ve found successful in the past: I assign it when the finishes launching through the AppDelegate&rsquo;s <code>application:didFinishLaunchingWithOptions</code> method. <a href="#app-delegate">More on this, shortly</a>&#8230;</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
+    
+    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">context</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span><span class="o">!</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+You may be asking, &ldquo;Where will you set this NSManagedObjectContext reference?&#8221;. I&rsquo;m employing a pattern that I&rsquo;ve found successful in the past: I assign it when the finishes launching through the AppDelegate&rsquo;s <code>application:didFinishLaunchingWithOptions</code> method. <a href="#app-delegate">More on this, shortly</a>&#8230;</p>
 
 <p>For now, know that we&rsquo;re counting on that <a href="#app-delegate">later step</a> to take place, since <code>context</code> is defined as an implicitly unwrapped optional.</p>
 
@@ -319,31 +347,62 @@ MathJax.Hub.Config({
 <h4 id="create-and-configure-nsfetchedresultscontroller-instance">Create and configure NSFetchedResultsController instance</h4>
 
 <p>Next, we need to create and configure an <code>NSFetchedResultsController</code> instance. Here&rsquo;s a bit of code with comments to follow:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
-<span class="ln"> 2</span>    
-<span class="ln"> 3</span>    <span class="c1">// ...</span>
-<span class="ln"> 4</span>    
-<span class="ln"> 5</span>    <span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">fetchedResultsController</span><span class="p">:</span> <span class="n">NSFetchedResultsController</span> <span class="p">=</span> <span class="p">{</span>
-<span class="ln"> 6</span>        <span class="kd">let</span> <span class="nv">animalsFetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;Animal&#34;</span><span class="p">)</span>
-<span class="ln"> 7</span>        <span class="kd">let</span> <span class="nv">primarySortDescriptor</span> <span class="p">=</span> <span class="n">NSSortDescriptor</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&#34;classification.order&#34;</span><span class="p">,</span> <span class="n">ascending</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-<span class="ln"> 8</span>        <span class="kd">let</span> <span class="nv">secondarySortDescriptor</span> <span class="p">=</span> <span class="n">NSSortDescriptor</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&#34;commonName&#34;</span><span class="p">,</span> <span class="n">ascending</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-<span class="ln"> 9</span>        <span class="n">animalsFetchRequest</span><span class="p">.</span><span class="n">sortDescriptors</span> <span class="p">=</span> <span class="p">[</span><span class="n">primarySortDescriptor</span><span class="p">,</span> <span class="n">secondarySortDescriptor</span><span class="p">]</span>
-<span class="ln">10</span>        
-<span class="ln">11</span>        <span class="kd">let</span> <span class="nv">frc</span> <span class="p">=</span> <span class="n">NSFetchedResultsController</span><span class="p">(</span>
-<span class="ln">12</span>            <span class="n">fetchRequest</span><span class="p">:</span> <span class="n">animalsFetchRequest</span><span class="p">,</span>
-<span class="ln">13</span>            <span class="n">managedObjectContext</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">context</span><span class="p">,</span>
-<span class="ln">14</span>            <span class="n">sectionNameKeyPath</span><span class="p">:</span> <span class="s">&#34;classification.order&#34;</span><span class="p">,</span>
-<span class="ln">15</span>            <span class="n">cacheName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln">16</span>        
-<span class="ln">17</span>        <span class="n">frc</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
-<span class="ln">18</span>        
-<span class="ln">19</span>        <span class="k">return</span> <span class="n">frc</span>
-<span class="ln">20</span>        <span class="p">}()</span>
-<span class="ln">21</span>    
-<span class="ln">22</span>    <span class="c1">// ...</span>
-<span class="ln">23</span>
-<span class="ln">24</span><span class="p">}</span></code></pre></div>
-<p>If you&rsquo;ve not read <a href="https://twitter.com/ColinEberhardt">Colin Eberhardt&rsquo;s</a> <a href="http://blog.scottlogic.com/2014/11/20/swift-initialisation.html">Swift Initialization and the Pain of Optionals</a> post, I highly recommend it. His post is a fantastic analysis, and the final option of using lazy stored properties initialized by a closure expression is what I&rsquo;ve chosen to do here. I won&rsquo;t repeat his analysis here, so feel free to jump over to his post to figure out what&rsquo;s going on there.</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
+    
+    <span class="c1">// ...</span>
+    
+    <span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">fetchedResultsController</span><span class="p">:</span> <span class="n">NSFetchedResultsController</span> <span class="p">=</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">animalsFetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;Animal&#34;</span><span class="p">)</span>
+        <span class="kd">let</span> <span class="nv">primarySortDescriptor</span> <span class="p">=</span> <span class="n">NSSortDescriptor</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&#34;classification.order&#34;</span><span class="p">,</span> <span class="n">ascending</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+        <span class="kd">let</span> <span class="nv">secondarySortDescriptor</span> <span class="p">=</span> <span class="n">NSSortDescriptor</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&#34;commonName&#34;</span><span class="p">,</span> <span class="n">ascending</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+        <span class="n">animalsFetchRequest</span><span class="p">.</span><span class="n">sortDescriptors</span> <span class="p">=</span> <span class="p">[</span><span class="n">primarySortDescriptor</span><span class="p">,</span> <span class="n">secondarySortDescriptor</span><span class="p">]</span>
+        
+        <span class="kd">let</span> <span class="nv">frc</span> <span class="p">=</span> <span class="n">NSFetchedResultsController</span><span class="p">(</span>
+            <span class="n">fetchRequest</span><span class="p">:</span> <span class="n">animalsFetchRequest</span><span class="p">,</span>
+            <span class="n">managedObjectContext</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">sectionNameKeyPath</span><span class="p">:</span> <span class="s">&#34;classification.order&#34;</span><span class="p">,</span>
+            <span class="n">cacheName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+        
+        <span class="n">frc</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+        
+        <span class="k">return</span> <span class="n">frc</span>
+        <span class="p">}()</span>
+    
+    <span class="c1">// ...</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+If you&rsquo;ve not read <a href="https://twitter.com/ColinEberhardt">Colin Eberhardt&rsquo;s</a> <a href="http://blog.scottlogic.com/2014/11/20/swift-initialisation.html">Swift Initialization and the Pain of Optionals</a> post, I highly recommend it. His post is a fantastic analysis, and the final option of using lazy stored properties initialized by a closure expression is what I&rsquo;ve chosen to do here. I won&rsquo;t repeat his analysis here, so feel free to jump over to his post to figure out what&rsquo;s going on there.</p>
 
 <p>Within the closure expression, I&rsquo;m setting up a fetch request with some sorting applied. All that&rsquo;s left is to initialize the <code>NSFetchedResultsController</code>, set its delegate and return it.</p>
 
@@ -352,74 +411,99 @@ MathJax.Hub.Config({
 <h4 id="viewdidload">viewDidLoad()</h4>
 
 <p>Once the view has loaded, the idea is to perform the <code>NSFetchedResultsController</code> instance&rsquo;s fetch request so that it has data to use in our <code>UITableViewDataSource</code> methods. This is how to do it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>    <span class="c1">// ...</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span>    <span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 6</span>        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-<span class="ln"> 7</span>        <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span>            <span class="k">do</span> <span class="p">{</span>
-<span class="ln">10</span>                <span class="k">try</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">performFetch</span><span class="p">()</span>
-<span class="ln">11</span>            <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">12</span>                <span class="bp">print</span><span class="p">(</span><span class="s">&#34;An error occurred&#34;</span><span class="p">)</span>
-<span class="ln">13</span>            <span class="p">}</span>
-<span class="ln">14</span>    <span class="p">}</span>
-<span class="ln">15</span>
-<span class="ln">16</span>    <span class="c1">// ...</span>
-<span class="ln">17</span>
-<span class="ln">18</span><span class="p">}</span></code></pre></div>
-<p><a name="uitableviewdatasource-methods" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+        <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
+
+            <span class="k">do</span> <span class="p">{</span>
+                <span class="k">try</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">performFetch</span><span class="p">()</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+                <span class="bp">print</span><span class="p">(</span><span class="s">&#34;An error occurred&#34;</span><span class="p">)</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="uitableviewdatasource-methods" class="jump-target"></a></p>
 
 <h4 id="uitableviewdatasource-methods">UITableViewDataSource methods</h4>
 
 <p>The final step in implementing <code>MainViewController</code> is to set up the table view so that it pulls data from <code>fetchedResultsController</code>. I&rsquo;m implementing the <a href="http://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/">standard UITableViewDataSource methods</a> here, along with <code>tableView:titleForHeaderInSection</code>. Take a look:</p>
 
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span><span class="p">,</span> <span class="n">NSFetchedResultsControllerDelegate</span> <span class="p">{</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>    <span class="c1">// ...</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span>    <span class="c1">// </span><span class="cs">MARK:</span><span class="c1"> TableView Data Source</span>
-<span class="ln"> 6</span>    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">numberOfSectionsInTableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-<span class="hl"><span class="ln"> 7</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">sections</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">sections</span> <span class="p">{</span>
-</span><span class="ln"> 8</span>            <span class="k">return</span> <span class="n">sections</span><span class="p">.</span><span class="bp">count</span>
-<span class="ln"> 9</span>        <span class="p">}</span>
-<span class="ln">10</span>        
-<span class="ln">11</span>        <span class="k">return</span> <span class="mi">0</span>
-<span class="ln">12</span>    <span class="p">}</span>
-<span class="ln">13</span>    
-<span class="ln">14</span>    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-<span class="hl"><span class="ln">15</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">sections</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">sections</span> <span class="p">{</span>
-</span><span class="ln">16</span>            <span class="kd">let</span> <span class="nv">currentSection</span> <span class="p">=</span> <span class="n">sections</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> 
-<span class="ln">17</span>            <span class="k">return</span> <span class="n">currentSection</span><span class="p">.</span><span class="n">numberOfObjects</span>
-<span class="ln">18</span>        <span class="p">}</span>
-<span class="ln">19</span>        
-<span class="ln">20</span>        <span class="k">return</span> <span class="mi">0</span>
-<span class="ln">21</span>    <span class="p">}</span>
-<span class="ln">22</span>    
-<span class="ln">23</span>    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">cellForRowAtIndexPath</span> <span class="n">indexPath</span><span class="p">:</span> <span class="n">NSIndexPath</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UITableViewCell</span> <span class="p">{</span>
-<span class="ln">24</span>        <span class="kd">let</span> <span class="nv">cell</span> <span class="p">=</span> <span class="n">tableView</span><span class="p">.</span><span class="n">dequeueReusableCellWithIdentifier</span><span class="p">(</span><span class="s">&#34;Cell&#34;</span><span class="p">,</span> <span class="n">forIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span> 
-<span class="ln">25</span>        <span class="kd">let</span> <span class="nv">animal</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">objectAtIndexPath</span><span class="p">(</span><span class="n">indexPath</span><span class="p">)</span> <span class="k">as</span><span class="o">!</span> <span class="n">Animal</span>
-<span class="ln">26</span>        
-<span class="ln">27</span>        <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">animal</span><span class="p">.</span><span class="n">commonName</span>
-<span class="ln">28</span>        <span class="n">cell</span><span class="p">.</span><span class="n">detailTextLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">animal</span><span class="p">.</span><span class="n">habitat</span>
-<span class="ln">29</span>        
-<span class="ln">30</span>        <span class="k">return</span> <span class="n">cell</span>
-<span class="ln">31</span>    <span class="p">}</span>
-<span class="ln">32</span>    
-<span class="ln">33</span>    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">titleForHeaderInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span><span class="p">?</span> <span class="p">{</span>
-<span class="hl"><span class="ln">34</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">sections</span> <span class="p">=</span> <span class="n">fetchedResultsController</span><span class="p">.</span><span class="n">sections</span> <span class="p">{</span>
-</span><span class="ln">35</span>            <span class="kd">let</span> <span class="nv">currentSection</span> <span class="p">=</span> <span class="n">sections</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> 
-<span class="ln">36</span>            <span class="k">return</span> <span class="n">currentSection</span><span class="p">.</span><span class="n">name</span>
-<span class="ln">37</span>        <span class="p">}</span>
-<span class="ln">38</span>        
-<span class="ln">39</span>        <span class="k">return</span> <span class="kc">nil</span>
-<span class="ln">40</span>    <span class="p">}</span>
-<span class="ln">41</span>
-<span class="ln">42</span>    <span class="c1">// ...</span>
-<span class="ln">43</span>
-<span class="ln">44</span><span class="p">}</span></code></pre></div>
+public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+
+    // ...
+
+    // MARK: TableView Data Source
+    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if let sections = fetchedResultsController.sections {
+            return sections.count
+        }
+        
+        return 0
+    }
+    
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let sections = fetchedResultsController.sections {
+            let currentSection = sections[section] 
+            return currentSection.numberOfObjects
+        }
+        
+        return 0
+    }
+    
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+        let animal = fetchedResultsController.objectAtIndexPath(indexPath) as! Animal
+        
+        cell.textLabel?.text = animal.commonName
+        cell.detailTextLabel?.text = animal.habitat
+        
+        return cell
+    }
+    
+    public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let sections = fetchedResultsController.sections {
+            let currentSection = sections[section] 
+            return currentSection.name
+        }
+        
+        return nil
+    }
+
+    // ...
+
+}
 
 <p>Apart from a bit of <code>if let ___ = ___</code> syntax, there&rsquo;s not an awful lot of surprising code here if you&rsquo;re familiar with working with table views. I&rsquo;ve highlighted the relevant code related to <code>fetchedResultsController</code>. Without using <code>NSFetchedResultsController</code>, you&rsquo;d probably supply data to the table view from an array or a dictionary or both. The <code>fetchedResultsController</code> code simplifies the data display dilemma when you&rsquo;re using Core Data.</p>
 
@@ -431,30 +515,30 @@ MathJax.Hub.Config({
 
 <p>There&rsquo;s one final thing we need to do in order to get things rolling. In the <a href="#nsmanagedobjectcontext-reference">&ldquo;maintain NSManagedObjectContext instance reference&#8221;</a> section of this post, I mentioned the strategy for assigning the <code>NSManagedObjectContext</code> instance in the <code>MainViewController</code>. Here&rsquo;s how I do it:</p>
 
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">AppDelegate</span><span class="p">:</span> <span class="n">UIResponder</span><span class="p">,</span> <span class="n">UIApplicationDelegate</span> <span class="p">{</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>    <span class="c1">// ...</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span>
-<span class="ln"> 6</span>    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="n">NSObject</span><span class="p">:</span> <span class="nb">AnyObject</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
-<span class="ln"> 7</span>        <span class="c1">// Override point for customization after application launch.</span>
-<span class="ln"> 8</span>        
-<span class="ln"> 9</span>        <span class="kd">let</span> <span class="nv">dataHelper</span> <span class="p">=</span> <span class="n">DataHelper</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">)</span>
-<span class="ln">10</span>        <span class="n">dataHelper</span><span class="p">.</span><span class="n">seedDataStore</span><span class="p">()</span>
-<span class="ln">11</span>        
-<span class="ln">12</span>        <span class="n">dataHelper</span><span class="p">.</span><span class="n">printAllZoos</span><span class="p">()</span>
-<span class="ln">13</span>        <span class="n">dataHelper</span><span class="p">.</span><span class="n">printAllClassifications</span><span class="p">()</span>
-<span class="ln">14</span>        <span class="n">dataHelper</span><span class="p">.</span><span class="n">printAllAnimals</span><span class="p">()</span>
-<span class="ln">15</span>        
-<span class="hl"><span class="ln">16</span>        <span class="kd">let</span> <span class="nv">rootViewController</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="o">!</span><span class="p">.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="o">!</span> <span class="n">MainViewController</span>
-</span><span class="hl"><span class="ln">17</span>        <span class="n">rootViewController</span><span class="p">.</span><span class="n">context</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">;</span>
-</span><span class="ln">18</span>        
-<span class="ln">19</span>        <span class="k">return</span> <span class="kc">true</span>
-<span class="ln">20</span>    <span class="p">}</span>
-<span class="ln">21</span>
-<span class="ln">22</span>    <span class="c1">// ...</span>
-<span class="ln">23</span>
-<span class="ln">24</span><span class="p">}</span></code></pre></div>
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    // ...
+
+
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Override point for customization after application launch.
+        
+        let dataHelper = DataHelper(context: self.managedObjectContext)
+        dataHelper.seedDataStore()
+        
+        dataHelper.printAllZoos()
+        dataHelper.printAllClassifications()
+        dataHelper.printAllAnimals()
+        
+        let rootViewController = self.window!.rootViewController as! MainViewController
+        rootViewController.context = self.managedObjectContext;
+        
+        return true
+    }
+
+    // ...
+
+}
 
 <p><strong>Note:</strong> With iOS 13, the code to assign the <code>managedObjectContext</code> to the root view controller needs to go <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/">in your app&rsquo;s SceneDelegate</a>.</p>
 

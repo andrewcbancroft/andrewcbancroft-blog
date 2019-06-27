@@ -24,7 +24,7 @@ One way to simplify this is to use a Swift extension to `URL`. Doing this will h
 
 # Extension implementation
 
-```swift
+{{< highlight swift "linenos=table" >}}
 extension URL {
     static var documentsURL: URL {
         return try! FileManager
@@ -35,22 +35,20 @@ extension URL {
                  create: true)
     }
 }
-```
-
+{{< / highlight >}}
 <a name="usage" class="jump-target"></a>
 
 # Extension usage
 
 Here's an example of using the extension during the routine to create the Core Data stack. For that process, you need to grab a URL to where your SQLite database file will be located. Take a look:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 // ...
 
 let storeURL = URL.documentsURL.appendingPathComponent("AppDatabase.sqlite")
 
 // use the URL
-```
-
+{{< / highlight >}}
 You could be needing to access the directory for saving files or retrieving files totally unrelated to Core Data. No matter what you're doing, being able to write `URL.documentsURL` is pretty convenient!
 
 <a name="share" class="jump-target"></a>

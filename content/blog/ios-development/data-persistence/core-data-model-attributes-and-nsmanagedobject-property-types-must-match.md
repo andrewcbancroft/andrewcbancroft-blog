@@ -50,10 +50,9 @@ So what happens if you specify that a certain Attribute named, say, `createdOn` 
 
 And over in the implementation of your `NSManagedObject` subclass, you have code that's written like this:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 @NSManaged var createdOn: Date //instead of Date? (ie, the ? is missing)
-```
-
+{{< / highlight >}}
 What'll happen? Well, I can tell you what'll happen. :]
 
 When you run the app and attempt to load objects from your persistent store that have been saved with `nil` for the `createdOn` value, your app will blow up:[<img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png" alt="EXC_BAD_INSTRUCTION" width="364" height="12" class="alignnone size-full wp-image-13265" style="display:inline-block;" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png 364w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION-300x10.png 300w" sizes="(max-width: 364px) 100vw, 364px" />][1]

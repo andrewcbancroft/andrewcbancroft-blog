@@ -68,7 +68,7 @@ While NSPersistentContainer does aim to simplify the stack creation process, at 
   "@type": "BlogPosting",
   "headline": "Creating the Core Data Stack with Backwards Compatibility in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/04\/16\/creating-the-core-data-stack-with-backwards-compatibility-in-swift\/",
-  "wordCount": "717",
+  "wordCount": "729",
   "datePublished": "2017-04-16T21:23:46Z",
   "dateModified": "2017-04-16T21:23:46Z",
   "author": {
@@ -235,63 +235,128 @@ MathJax.Hub.Config({
 <h2 id="1-initialize-an-instance-of-nsmanagedobjectmodel">1) Initialize an instance of NSManagedObjectModel</h2>
 
 <p>This corresponds to your .xcdatamodeld file. You&rsquo;ll want to glance over to the project navigator on the left and locate the .xcdatamodeld file to record its name for this step.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// Initialize NSManagedObjectModel</span>
-<span class="ln">2</span><span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
-<span class="ln">3</span><span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="o">!</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span></code></pre></div>
-<p><a name="persistent-store-coordinator" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Initialize NSManagedObjectModel</span>
+<span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
+<span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="o">!</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="persistent-store-coordinator" class="jump-target"></a></p>
 
 <h2 id="2-initialize-and-configure-an-instance-of-nspersistentstorecoordinator-with-the-nsmanagedobjectmodel-instance-and-an-nspersistentstoretype">2) Initialize and configure an instance of NSPersistentStoreCoordinator with the NSManagedObjectModel instance and an NSPersistentStoreType</h2>
 
 <p>The reason you create the <code>NSManagedObjectModel</code> instance first is because the <em>next</em> step depends on it. <code>NSPersistentStoreCoordinator</code> will use your <code>NSManagedObjectModel</code> instance to configure itself and prepare to create the correct kind of persistent store based on what <code>NSPersistentStoreType</code> you tell it to use.</p>
 
 <p>In the code example that follows, I used <code>NSSQLiteStoreType</code> to create a SQLite persistent store. Regardless of what kind of persistent store you use though, <code>NSPersistentStoreCoordinator</code> needs your managed object model instance.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
-<span class="ln">2</span><span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
-<span class="ln">3</span>
-<span class="ln">4</span><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
-<span class="ln">5</span>        <span class="p">.</span><span class="k">default</span>
-<span class="ln">6</span>        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-<span class="ln">7</span>        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
-<span class="ln">8</span>
-<span class="ln">9</span><span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span></code></pre></div>
-<p><a name="managed-object-context" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
+<span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
+        <span class="p">.</span><span class="k">default</span>
+        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="managed-object-context" class="jump-target"></a></p>
 
 <h2 id="3-initialize-an-instance-of-nsmanagedobjectcontext-and-assign-it-the-nspersistentstorecoordinator-instance">3) Initialize an instance of NSManagedObjectcontext and assign it the NSPersistentStoreCoordinator instance</h2>
 
 <p>The last step is to initialize an instance of <code>NSManagedObjectContext</code> and assign it the <code>NSPersistentStoreCoordinator</code> instance.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// Create and return NSManagedObjectContext</span>
-<span class="ln">2</span><span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">mainQueueConcurrencyType</span><span class="p">)</span>
-<span class="ln">3</span><span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span></code></pre></div>
-<p><a name="code-example" class="jump-target"></a></p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Create and return NSManagedObjectContext</span>
+<span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">mainQueueConcurrencyType</span><span class="p">)</span>
+<span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span></code></pre></td></tr></table>
+</div>
+</div>
+<a name="code-example" class="jump-target"></a></p>
 
 <h1 id="putting-it-all-together-creating-the-core-data-stack-in-code">Putting it all together – creating the Core Data stack in code</h1>
 
 <p>When I create the Core Data stack, I like to encapsulate the code in a stand-alone function that returns an instance of <code>NSManagedObjectContext</code>.</p>
 
 <p>Here are all three steps put together:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">createMainContext</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
-<span class="ln"> 2</span>    
-<span class="ln"> 3</span>    <span class="c1">// Initialize NSManagedObjectModel</span>
-<span class="ln"> 4</span>    <span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
-<span class="ln"> 5</span>    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="o">!</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span>
-<span class="ln"> 6</span>    
-<span class="ln"> 7</span>    <span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
-<span class="ln"> 8</span>    <span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
-<span class="ln"> 9</span>
-<span class="ln">10</span>    <span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
-<span class="ln">11</span>            <span class="p">.</span><span class="k">default</span>
-<span class="ln">12</span>            <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-<span class="ln">13</span>            <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
-<span class="ln">14</span>    
-<span class="ln">15</span>    <span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln">16</span>    
-<span class="ln">17</span>    <span class="c1">// Create and return NSManagedObjectContext</span>
-<span class="ln">18</span>    <span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">mainQueueConcurrencyType</span><span class="p">)</span>
-<span class="ln">19</span>    <span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span>
-<span class="ln">20</span>    
-<span class="ln">21</span>    <span class="k">return</span> <span class="n">context</span>
-<span class="ln">22</span><span class="p">}</span></code></pre></div>
-<p>Once you&rsquo;ve got a function like <code>createMainContext()</code>, you&rsquo;ll be able to call it to obtain a fully-configured <code>NSManagedObjectContext</code> instance.</p>
+
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">createMainContext</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
+    
+    <span class="c1">// Initialize NSManagedObjectModel</span>
+    <span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="o">!</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span>
+    
+    <span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
+    <span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
+
+    <span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
+            <span class="p">.</span><span class="k">default</span>
+            <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+    
+    <span class="c1">// Create and return NSManagedObjectContext</span>
+    <span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">mainQueueConcurrencyType</span><span class="p">)</span>
+    <span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span>
+    
+    <span class="k">return</span> <span class="n">context</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+Once you&rsquo;ve got a function like <code>createMainContext()</code>, you&rsquo;ll be able to call it to obtain a fully-configured <code>NSManagedObjectContext</code> instance.</p>
 
 <p>I <em>highly</em> recommend you avoid calling it inside any of your view controllers. Instead, my recommendation is to call it to obtain your <code>NSManagedObjectContext</code> instance inside of the <code>AppDelegate's</code> <code>application(_:didFinishLaunchingWithOptions:)</code> function. From there, you can pass it <em>to</em> your first view controller, and from that first view controller on to <em>other</em> view controllers that need it through <code>prepare(for segue:sender:)</code>.</p>
 

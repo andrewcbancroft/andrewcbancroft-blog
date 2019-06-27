@@ -109,7 +109,7 @@ No relationships or extra configuration options... just one Entity to keep it a 
 
 The `BlogIdea` NSManagedObject subclass is implemented like this:
 
-```swift
+{{< highlight swift "linenos=table" >}}
 public class BlogIdea: NSManagedObject {
 
     @NSManaged public var ideaTitle: String?
@@ -117,13 +117,12 @@ public class BlogIdea: NSManagedObject {
 
     static var entityName: String { return "BlogIdea" }
 }
-```
-
+{{< / highlight >}}
 ### View Controllers
 There are two view controllers that come with this example:
 
 **MainViewController**
-```swift
+{{< highlight swift "linenos=table" >}}
 class MainViewController:   UIViewController, 
                             NSFetchedResultsControllerDelegate, 
                             UITableViewDataSource, 
@@ -142,10 +141,9 @@ class MainViewController:   UIViewController,
     // Navigates to editor when someone taps on a table view row
     // and passes its NSManagedObjectContext instance along
 }
-```
-
+{{< / highlight >}}
 **BlogIdeaEditorViewController**
-```swift
+{{< highlight swift "linenos=table" >}}
 class BlogIdeaEditorViewController: UIViewController {
     // Responsible for creating new BlogIdeas
 
@@ -154,8 +152,7 @@ class BlogIdeaEditorViewController: UIViewController {
 
     // Able to edit existing BlogIdeas
 }
-```
-
+{{< / highlight >}}
 ## Understanding the Default Sync Behavior
 At this point no additional configuration has happened. The Core Data stack is the unmodified Xcode generated code, and the fetched results controller is hooked up to the managed object context for your app, ready to fetch Blog Ideas and help get them into the table view.
 
@@ -175,7 +172,7 @@ Wherever you access your app's persistent CloudKit container to grab the `viewCo
 I initialize the container in the `SceneDelegate`, so check out the code exerpt below to see where that gets set.
 
 **SceneDelegate.swift**
-{{< highlight swift "hl_lines=11" >}}
+{{< highlight swift "hl_lines=11 linenos=table" >}}
 func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
