@@ -48,19 +48,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Receipt Validation –  Parse and Decode a Receipt with Swift" />
-<meta property="og:description" content="The aim of this guide is to help you parse a receipt and decode it so that you have readable pieces of metadata to inspect and finalize all of the receipt validation steps.
-This is a continuation of my receipt validation series. I&rsquo;m assuming that&#8230;
- You&rsquo;ve prepared to test receipt validation by setting up your app in iTunes Connect. You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt." />
+<meta property="og:description" content="The aim of this guide is to help you parse a receipt and decode it so that you have readable pieces of metadata to inspect and finalize all of the receipt validation steps." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/" />
 <meta property="article:published_time" content="2017-07-28T03:41:33&#43;00:00"/>
-<meta property="article:modified_time" content="2017-07-28T03:41:33&#43;00:00"/>
+<meta property="article:modified_time" content="2019-06-27T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Receipt Validation –  Parse and Decode a Receipt with Swift"/>
-<meta name="twitter:description" content="The aim of this guide is to help you parse a receipt and decode it so that you have readable pieces of metadata to inspect and finalize all of the receipt validation steps.
-This is a continuation of my receipt validation series. I&rsquo;m assuming that&#8230;
- You&rsquo;ve prepared to test receipt validation by setting up your app in iTunes Connect. You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt."/>
+<meta name="twitter:description" content="The aim of this guide is to help you parse a receipt and decode it so that you have readable pieces of metadata to inspect and finalize all of the receipt validation steps."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -70,16 +66,16 @@ This is a continuation of my receipt validation series. I&rsquo;m assuming that&
   "@type": "BlogPosting",
   "headline": "Receipt Validation –  Parse and Decode a Receipt with Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/07\/27\/receipt-validation-parsing-a-receipt-with-swift\/",
-  "wordCount": "3645",
+  "wordCount": "3666",
   "datePublished": "2017-07-28T03:41:33Z",
-  "dateModified": "2017-07-28T03:41:33Z",
+  "dateModified": "2019-06-27T00:00:00Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
   "keywords": "In-App Purchases, Receipt Validation, Swift"
 
-  ,"description": ""
+  ,"description": "The aim of this guide is to help you parse a receipt and decode it so that you have readable pieces of metadata to inspect and finalize all of the receipt validation steps."
 }
 </script>
 
@@ -203,6 +199,38 @@ MathJax.Hub.Config({
     <div class="content">
 
     <p></p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#the-final-goal-a-parsed-receipt">The final goal: A parsed receipt</a></li>
+<li><a href="#visualizing-the-encoded-receipt-s-structure">Visualizing the encoded receipt&rsquo;s structure</a></li>
+<li><a href="#receipt-parsing-strategy">Receipt parsing strategy</a>
+<ul>
+<li>
+<ul>
+<li><a href="#a-note-on-in-app-purchase-receipts">A note on in-app purchase receipts</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#preparation-step-helper-decoding-functions">Preparation step: Helper decoding functions</a></li>
+<li><a href="#handling-error-conditions">Handling error conditions</a></li>
+<li><a href="#implenting-receiptparser">Implenting ReceiptParser</a>
+<ul>
+<li>
+<ul>
+<li><a href="#parse-function-implementation"><code>parse</code> function implementation</a></li>
+<li><a href="#parseinapppurchaserectipt-function-implementation"><code>parseInAppPurchaseRectipt</code> function implementation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#final-receiptparser">Final <code>ReceiptParser</code></a></li>
+<li><a href="#using-receiptparser">Using <code>ReceiptParser</code></a></li>
+<li><a href="#preparing-to-finish-receipt-validation">Preparing to finish receipt validation!</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
 
     
 
@@ -212,7 +240,7 @@ MathJax.Hub.Config({
 
 <ul>
 <li>You&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</li>
-<li>You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt. Perhaps you&rsquo;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &ldquo;easy way&#8221; with CocoaPods</a>.</li>
+<li>You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&rdquo; for the receipt. Perhaps you&rsquo;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &ldquo;easy way&rdquo; with CocoaPods</a>.</li>
 <li>You&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</li>
 <li>You&rsquo;ve <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/">extracted the PKCS #7 container</a>.</li>
 <li>You&rsquo;ve <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/">verified the signature on the receipt</a></li>
@@ -226,20 +254,18 @@ MathJax.Hub.Config({
   <div class="resources-header">
     Resources
   </div>
-  
-
-<p><ul class="resources-content">
+  <ul class="resources-content">
     <li>
       <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
     </li>
   </ul>
-</div></p>
+</div>
 
 <p>Want to understand the final <code>ReceiptParser</code>? Let&rsquo;s get to it!</p>
 
 <p><a name="final-goal" class="jump-target"></a></p>
 
-<h1 id="the-final-goal-a-parsed-receipt">The final goal: A parsed receipt</h1>
+<h2 id="the-final-goal-a-parsed-receipt">The final goal: A parsed receipt</h2>
 
 <p>The final goal of this guide is a parsed receipt.</p>
 
@@ -255,30 +281,61 @@ MathJax.Hub.Config({
 </ul>
 
 <p>How does the following look?</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">struct</span> <span class="nc">ParsedReceipt</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kd">let</span> <span class="nv">bundleIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln"> 3</span>    <span class="kd">let</span> <span class="nv">bundleIdData</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
-<span class="ln"> 4</span>    <span class="kd">let</span> <span class="nv">appVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln"> 5</span>    <span class="kd">let</span> <span class="nv">opaqueValue</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
-<span class="ln"> 6</span>    <span class="kd">let</span> <span class="nv">sha1Hash</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
-<span class="ln"> 7</span>    <span class="kd">let</span> <span class="nv">inAppPurchaseReceipts</span><span class="p">:</span> <span class="p">[</span><span class="n">ParsedInAppPurchaseReceipt</span><span class="p">]?</span>
-<span class="ln"> 8</span>    <span class="kd">let</span> <span class="nv">originalAppVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln"> 9</span>    <span class="kd">let</span> <span class="nv">receiptCreationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">10</span>    <span class="kd">let</span> <span class="nv">expirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">11</span><span class="p">}</span>
-<span class="ln">12</span>
-<span class="ln">13</span><span class="kd">struct</span> <span class="nc">ParsedInAppPurchaseReceipt</span> <span class="p">{</span>
-<span class="ln">14</span>    <span class="kd">let</span> <span class="nv">quantity</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
-<span class="ln">15</span>    <span class="kd">let</span> <span class="nv">productIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">16</span>    <span class="kd">let</span> <span class="nv">transactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">17</span>    <span class="kd">let</span> <span class="nv">originalTransactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">18</span>    <span class="kd">let</span> <span class="nv">purchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">19</span>    <span class="kd">let</span> <span class="nv">originalPurchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">20</span>    <span class="kd">let</span> <span class="nv">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">21</span>    <span class="kd">let</span> <span class="nv">cancellationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">22</span>    <span class="kd">let</span> <span class="nv">webOrderLineItemId</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
-<span class="ln">23</span><span class="p">}</span></code></pre></div>
-<p>You may be wondering, &ldquo;How&rsquo;d he know what values are encoded within the extracted receipt payload?&#8221;. Apple has a very handy <a href="https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html">list of all the values that are encoded</a>, so I listed each property out in my struct according to their documentation.</p>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ParsedReceipt</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">bundleIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">bundleIdData</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">appVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">opaqueValue</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">sha1Hash</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">inAppPurchaseReceipts</span><span class="p">:</span> <span class="p">[</span><span class="n">ParsedInAppPurchaseReceipt</span><span class="p">]?</span>
+    <span class="kd">let</span> <span class="nv">originalAppVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">receiptCreationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">expirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="nc">ParsedInAppPurchaseReceipt</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">quantity</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">productIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">transactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">originalTransactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">purchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">originalPurchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">cancellationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">let</span> <span class="nv">webOrderLineItemId</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<p>You may be wondering, &ldquo;How&rsquo;d he know what values are encoded within the extracted receipt payload?&rdquo;. Apple has a very handy <a href="https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html">list of all the values that are encoded</a>, so I listed each property out in my struct according to their documentation.</p>
 
 <p>Parsing the receipt produces the most valuable piece of the whole process. Sure, it&rsquo;s necessary to go through all of the other validation steps, but having a <strong>decoded receipt</strong> with actual <strong>human-readable values</strong> is, to me, a huge step.</p>
 
@@ -290,18 +347,18 @@ MathJax.Hub.Config({
 
 <p><a name="visualizing-receipt-structure" class="jump-target"></a></p>
 
-<h1 id="visualizing-the-encoded-receipt-s-structure">Visualizing the encoded receipt&rsquo;s structure</h1>
+<h2 id="visualizing-the-encoded-receipt-s-structure">Visualizing the encoded receipt&rsquo;s structure</h2>
 
 <p>Up to now, we&rsquo;ve been working only with the PKCS #7 <em>container</em> for the receipt. Now it&rsquo;s time to dig into the container and see what it actually <em>contains</em>.</p>
 
 <p>If you crack open the container, what you find is a long series of bytes that encode the actual structure of the receipt.</p>
 
-<p>From beginning to end, the bytes <em>should</em> encode what&rsquo;s called an &ldquo;ASN.1 Set&#8221;. In fact, if you open the PKCS #7 container and it <em>doesn&rsquo;t</em> encode an ASN.1 Set, that&rsquo;d warrant a receipt validation failure&#8230;<a href="#handling-error-conditions">more about handling that in a minute</a>.</p>
+<p>From beginning to end, the bytes <em>should</em> encode what&rsquo;s called an &ldquo;ASN.1 Set&rdquo;. In fact, if you open the PKCS #7 container and it <em>doesn&rsquo;t</em> encode an ASN.1 Set, that&rsquo;d warrant a receipt validation failure&#8230;<a href="#handling-error-conditions">more about handling that in a minute</a>.</p>
 
 <p>Here&rsquo;s a visual representation of an ASN.1 Set:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set.jpeg"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set.jpeg" alt="ASN.1 Set" width="923" height="338" class="alignnone size-full wp-image-13513" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set.jpeg 923w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set-768x281.jpeg 768w" sizes="(max-width: 923px) 100vw, 923px" /></a></p>
 
-<p>Since we&rsquo;ve just got a bunch of bytes encoding things, there&rsquo;s got to be some way to say, &ldquo;This byte, or these series of bytes, represent [this human understandable thing]&#8221;.</p>
+<p>Since we&rsquo;ve just got a bunch of bytes encoding things, there&rsquo;s got to be some way to say, &ldquo;This byte, or these series of bytes, represent [this human understandable thing]&ldquo;.</p>
 
 <p>That&rsquo;s exactly what we&rsquo;ve got, as you can see by the visual representation.</p>
 
@@ -315,7 +372,7 @@ MathJax.Hub.Config({
 
 <p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg" alt="ASN.1 Sequence" width="919" height="337" class="alignnone size-full wp-image-13514" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg 919w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-768x282.jpeg 768w" sizes="(max-width: 919px) 100vw, 919px" /></a></p>
 
-<p>When it comes to app receipts, ASN.1 <em>Sequences</em> are used to say, &ldquo;Hey, this series of bytes encodes [the bundle identifier] or [the original app version] or [some other receipt attribute].&#8221;</p>
+<p>When it comes to app receipts, ASN.1 <em>Sequences</em> are used to say, &ldquo;Hey, this series of bytes encodes <em>the bundle identifier</em> or <em>the original app version</em> or <em>some other receipt attribute</em>.&rdquo;</p>
 
 <p>Each ASN.1 Sequence has a flag (the pink box in the visualization) to signal that the bytes that follow do, in fact, encode an ASN.1 Sequence.</p>
 
@@ -323,15 +380,15 @@ MathJax.Hub.Config({
 
 <p>The <em>type</em> of attribute (bundle identifier, for example) is encoded next in the series of bytes as an ASN.1 Integer (note that this isn&rsquo;t a Swift Int&#8230;yet&#8230;we&rsquo;ll decode it soon). Each attribute type has a unique ASN.1 Integer value, kind of like an ID. <a href="https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html">Apple&rsquo;s documentation</a> is helpful in figuring out which ASN.1 Integer value maps to which receipt attribute.</p>
 
-<p>After the attribute type comes some bytes that encode an &ldquo;attribute version&#8221;, also as an ASN.1 Integer. At the time of this guide&rsquo;s publication, &ldquo;attribute version&#8221; isn&rsquo;t used for anything. Nonetheless, the series of bytes right after the attribute type within the ASN.1 Sequence is reserved and will always represent the &ldquo;attribute version&#8221;.</p>
+<p>After the attribute type comes some bytes that encode an &ldquo;attribute version&rdquo;, also as an ASN.1 Integer. At the time of this guide&rsquo;s publication, &ldquo;attribute version&rdquo; isn&rsquo;t used for anything. Nonetheless, the series of bytes right after the attribute type within the ASN.1 Sequence is reserved and will always represent the &ldquo;attribute version&rdquo;.</p>
 
-<p>The remaining bytes in the ASN.1 Sequence encode the actual <em>value</em> of the attribute as an ASN.1 Octet String (don&rsquo;t let the word &ldquo;Octet String&#8221; trick you into thinking that it&rsquo;s actually a String&#8230; they&rsquo;re <em>bytes</em> that we&rsquo;ll have to decode shortly&#8230;)</p>
+<p>The remaining bytes in the ASN.1 Sequence encode the actual <em>value</em> of the attribute as an ASN.1 Octet String (don&rsquo;t let the word &ldquo;Octet String&rdquo; trick you into thinking that it&rsquo;s actually a String&#8230; they&rsquo;re <em>bytes</em> that we&rsquo;ll have to decode shortly&#8230;)</p>
 
 <p>Knowing how the receipt payload is structured will help us formulate a strategy around parsing it. Let&rsquo;s imagine a simple algorithm to do it now.</p>
 
 <p><a name="parsing-strategy" class="jump-target"></a></p>
 
-<h1 id="receipt-parsing-strategy">Receipt parsing strategy</h1>
+<h2 id="receipt-parsing-strategy">Receipt parsing strategy</h2>
 
 <p>Let&rsquo;s take it step by step. What if we approach parsing the receipt like this:</p>
 
@@ -347,7 +404,7 @@ MathJax.Hub.Config({
 
 <p><a name="note-on-iap-receipts" class="jump-target"></a></p>
 
-<h2 id="a-note-on-in-app-purchase-receipts">A note on in-app purchase receipts</h2>
+<h4 id="a-note-on-in-app-purchase-receipts">A note on in-app purchase receipts</h4>
 
 <p>As we follow the receipt parsing strategy steps that I just described, there&rsquo;s going to come a point where we run into the ASN.1 Sequence that encodes the in-app purchase receipts.</p>
 
@@ -359,7 +416,7 @@ MathJax.Hub.Config({
 
 <p><a name="helper-functions" class="jump-target"></a></p>
 
-<h1 id="preparation-step-helper-decoding-functions">Preparation step: Helper decoding functions</h1>
+<h2 id="preparation-step-helper-decoding-functions">Preparation step: Helper decoding functions</h2>
 
 <p>If you saw the <code>ParsedReceipt</code> struct that I proposed earlier in the guide, you&rsquo;ll notice that there are essentially four Swift Types that the receipt attributes (and in-app purchase receipt attributes) get decoded into:</p>
 
@@ -373,63 +430,124 @@ MathJax.Hub.Config({
 <p><code>NSData</code> has a constructor that can work with <code>UnsafeRawPointers</code> directly, but <code>Int?</code>, <code>String?</code>, and <code>Date?</code> need some help converting from the ASN.1 versions of those Types to the <em>Swift</em> versions of those Types.</p>
 
 <p>Let me put the code before you and follow up with what I&rsquo;m doing here:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span> <span class="n">intPointer</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span><span class="p">?</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="c1">// These will be set by ASN1_get_object</span>
-<span class="ln"> 3</span>    <span class="kd">var</span> <span class="nv">type</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="ln"> 4</span>    <span class="kd">var</span> <span class="nv">xclass</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="ln"> 5</span>    <span class="kd">var</span> <span class="nv">intLength</span> <span class="p">=</span> <span class="mi">0</span>
-<span class="ln"> 6</span>    
-<span class="ln"> 7</span>    <span class="n">ASN1_get_object</span><span class="p">(&amp;</span><span class="n">intPointer</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">intLength</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">type</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 8</span>    
-<span class="ln"> 9</span>    <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_INTEGER</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln">10</span>        <span class="k">return</span> <span class="kc">nil</span>
-<span class="ln">11</span>    <span class="p">}</span>
-<span class="ln">12</span>    
-<span class="ln">13</span>    <span class="kd">let</span> <span class="nv">integer</span> <span class="p">=</span> <span class="n">c2i_ASN1_INTEGER</span><span class="p">(</span><span class="kc">nil</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">intPointer</span><span class="p">,</span> <span class="n">intLength</span><span class="p">)</span>
-<span class="ln">14</span>    <span class="kd">let</span> <span class="nv">result</span> <span class="p">=</span> <span class="n">ASN1_INTEGER_get</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span>
-<span class="ln">15</span>    <span class="n">ASN1_INTEGER_free</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span>
-<span class="ln">16</span>    
-<span class="ln">17</span>    <span class="k">return</span> <span class="n">result</span>
-<span class="ln">18</span><span class="p">}</span>
-<span class="ln">19</span>
-<span class="ln">20</span><span class="kd">func</span> <span class="nf">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span> <span class="n">stringPointer</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span><span class="p">?</span> <span class="p">{</span>
-<span class="ln">21</span>    <span class="c1">// These will be set by ASN1_get_object</span>
-<span class="ln">22</span>    <span class="kd">var</span> <span class="nv">type</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="ln">23</span>    <span class="kd">var</span> <span class="nv">xclass</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="ln">24</span>    <span class="kd">var</span> <span class="nv">stringLength</span> <span class="p">=</span> <span class="mi">0</span>
-<span class="ln">25</span>
-<span class="ln">26</span>    <span class="n">ASN1_get_object</span><span class="p">(&amp;</span><span class="n">stringPointer</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">stringLength</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">type</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln">27</span>    
-<span class="ln">28</span>    <span class="k">if</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_UTF8STRING</span> <span class="p">{</span>
-<span class="ln">29</span>        <span class="kd">let</span> <span class="nv">mutableStringPointer</span> <span class="p">=</span> <span class="n">UnsafeMutableRawPointer</span><span class="p">(</span><span class="kr">mutating</span><span class="p">:</span> <span class="n">stringPointer</span><span class="o">!</span><span class="p">)</span>
-<span class="ln">30</span>        <span class="k">return</span> <span class="nb">String</span><span class="p">(</span><span class="n">bytesNoCopy</span><span class="p">:</span> <span class="n">mutableStringPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">stringLength</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="n">Encoding</span><span class="p">.</span><span class="n">utf8</span><span class="p">,</span> <span class="n">freeWhenDone</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
-<span class="ln">31</span>    <span class="p">}</span>
-<span class="ln">32</span>    
-<span class="ln">33</span>    <span class="k">if</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_IA5STRING</span> <span class="p">{</span>
-<span class="ln">34</span>        <span class="kd">let</span> <span class="nv">mutableStringPointer</span> <span class="p">=</span> <span class="n">UnsafeMutableRawPointer</span><span class="p">(</span><span class="kr">mutating</span><span class="p">:</span> <span class="n">stringPointer</span><span class="o">!</span><span class="p">)</span>
-<span class="ln">35</span>        <span class="k">return</span> <span class="nb">String</span><span class="p">(</span><span class="n">bytesNoCopy</span><span class="p">:</span> <span class="n">mutableStringPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">stringLength</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="n">Encoding</span><span class="p">.</span><span class="n">ascii</span><span class="p">,</span> <span class="n">freeWhenDone</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
-<span class="ln">36</span>    <span class="p">}</span>
-<span class="ln">37</span>    
-<span class="ln">38</span>    <span class="k">return</span> <span class="kc">nil</span>
-<span class="ln">39</span><span class="p">}</span>
-<span class="ln">40</span>
-<span class="ln">41</span><span class="kd">func</span> <span class="nf">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span> <span class="n">datePointer</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Date</span><span class="p">?</span> <span class="p">{</span>
-<span class="ln">42</span>    <span class="c1">// Date formatter code from https://www.objc.io/issues/17-security/receipt-validation/#parsing-the-receipt</span>
-<span class="ln">43</span>    <span class="kd">let</span> <span class="nv">dateFormatter</span> <span class="p">=</span> <span class="n">DateFormatter</span><span class="p">()</span>
-<span class="ln">44</span>    <span class="n">dateFormatter</span><span class="p">.</span><span class="n">locale</span> <span class="p">=</span> <span class="n">Locale</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="s">&#34;en_US_POSIX&#34;</span><span class="p">)</span>
-<span class="ln">45</span>    <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFormat</span> <span class="p">=</span> <span class="s">&#34;yyyy&#39;-&#39;MM&#39;-&#39;dd&#39;T&#39;HH&#39;:&#39;mm&#39;:&#39;ss&#39;Z&#39;&#34;</span>
-<span class="ln">46</span>    <span class="n">dateFormatter</span><span class="p">.</span><span class="n">timeZone</span> <span class="p">=</span> <span class="n">TimeZone</span><span class="p">(</span><span class="n">secondsFromGMT</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
-<span class="ln">47</span>    
-<span class="ln">48</span>    <span class="k">if</span> <span class="kd">let</span> <span class="nv">dateString</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">datePointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln">49</span>        <span class="k">return</span> <span class="n">dateFormatter</span><span class="p">.</span><span class="n">date</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">dateString</span><span class="p">)</span>
-<span class="ln">50</span>    <span class="p">}</span>
-<span class="ln">51</span>    
-<span class="ln">52</span>    <span class="k">return</span> <span class="kc">nil</span>
-<span class="ln">53</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span> <span class="n">intPointer</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&lt;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span><span class="p">?</span> <span class="p">{</span>
+    <span class="c1">// These will be set by ASN1_get_object</span>
+    <span class="kd">var</span> <span class="nv">type</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">xclass</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">intLength</span> <span class="p">=</span> <span class="mi">0</span>
+    
+    <span class="n">ASN1_get_object</span><span class="p">(&amp;</span><span class="n">intPointer</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">intLength</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">type</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+    
+    <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_INTEGER</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nv">integer</span> <span class="p">=</span> <span class="n">c2i_ASN1_INTEGER</span><span class="p">(</span><span class="kc">nil</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">intPointer</span><span class="p">,</span> <span class="n">intLength</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nv">result</span> <span class="p">=</span> <span class="n">ASN1_INTEGER_get</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span>
+    <span class="n">ASN1_INTEGER_free</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span> <span class="n">stringPointer</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&lt;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span><span class="p">?</span> <span class="p">{</span>
+    <span class="c1">// These will be set by ASN1_get_object</span>
+    <span class="kd">var</span> <span class="nv">type</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">xclass</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">stringLength</span> <span class="p">=</span> <span class="mi">0</span>
+
+    <span class="n">ASN1_get_object</span><span class="p">(&amp;</span><span class="n">stringPointer</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">stringLength</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">type</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_UTF8STRING</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">mutableStringPointer</span> <span class="p">=</span> <span class="n">UnsafeMutableRawPointer</span><span class="p">(</span><span class="kr">mutating</span><span class="p">:</span> <span class="n">stringPointer</span><span class="o">!</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">String</span><span class="p">(</span><span class="n">bytesNoCopy</span><span class="p">:</span> <span class="n">mutableStringPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">stringLength</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="n">Encoding</span><span class="p">.</span><span class="n">utf8</span><span class="p">,</span> <span class="n">freeWhenDone</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_IA5STRING</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">mutableStringPointer</span> <span class="p">=</span> <span class="n">UnsafeMutableRawPointer</span><span class="p">(</span><span class="kr">mutating</span><span class="p">:</span> <span class="n">stringPointer</span><span class="o">!</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">String</span><span class="p">(</span><span class="n">bytesNoCopy</span><span class="p">:</span> <span class="n">mutableStringPointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">stringLength</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="n">Encoding</span><span class="p">.</span><span class="n">ascii</span><span class="p">,</span> <span class="n">freeWhenDone</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span> <span class="n">datePointer</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&lt;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Date</span><span class="p">?</span> <span class="p">{</span>
+    <span class="c1">// Date formatter code from https://www.objc.io/issues/17-security/receipt-validation/#parsing-the-receipt</span>
+    <span class="kd">let</span> <span class="nv">dateFormatter</span> <span class="p">=</span> <span class="n">DateFormatter</span><span class="p">()</span>
+    <span class="n">dateFormatter</span><span class="p">.</span><span class="n">locale</span> <span class="p">=</span> <span class="n">Locale</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="s">&#34;en_US_POSIX&#34;</span><span class="p">)</span>
+    <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFormat</span> <span class="p">=</span> <span class="s">&#34;yyyy&#39;-&#39;MM&#39;-&#39;dd&#39;T&#39;HH&#39;:&#39;mm&#39;:&#39;ss&#39;Z&#39;&#34;</span>
+    <span class="n">dateFormatter</span><span class="p">.</span><span class="n">timeZone</span> <span class="p">=</span> <span class="n">TimeZone</span><span class="p">(</span><span class="n">secondsFromGMT</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="kd">let</span> <span class="nv">dateString</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="p">&amp;</span><span class="n">datePointer</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">dateFormatter</span><span class="p">.</span><span class="n">date</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">dateString</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p>Each of these decoding functions are dealing with the receipt attribute <em>value</em> portion of the ASN.1 Sequence that we&rsquo;re working on at the time. Recall the structure:<br />
 <a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg" alt="ASN.1 Sequence" width="919" height="337" class="alignnone size-full wp-image-13514" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg 919w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-768x282.jpeg 768w" sizes="(max-width: 919px) 100vw, 919px" /></a></p>
 
-<p>So we take in a pointer that&rsquo;s pointing <em>to</em> the start of one of the attribute <em>values</em> (a yellow box). The yellow box&rsquo;s ASN.1 Octet String encodes either an integer, a string, or a date. (Okay, technically I guess you could include NSData, but this doesn&rsquo;t need to be &ldquo;decoded&#8221; really. And the in-app purchase receipts will be parsed and decoded into the stated Types as well, so it all boils down to the three I just mentioned&#8230;thus the reason for only three helper functions).</p>
+<p>So we take in a pointer that&rsquo;s pointing <em>to</em> the start of one of the attribute <em>values</em> (a yellow box). The yellow box&rsquo;s ASN.1 Octet String encodes either an integer, a string, or a date. (Okay, technically I guess you could include NSData, but this doesn&rsquo;t need to be &ldquo;decoded&rdquo; really. And the in-app purchase receipts will be parsed and decoded into the stated Types as well, so it all boils down to the three I just mentioned&#8230;thus the reason for only three helper functions).</p>
 
 <p>The strategy for the first two functions is basically to take what we&rsquo;re pointing to, and call <code>ASN1_get_object</code>.</p>
 
@@ -441,314 +559,613 @@ MathJax.Hub.Config({
 
 <p><a name="handling-error-conditions" class="jump-target"></a></p>
 
-<h1 id="handling-error-conditions">Handling error conditions</h1>
+<h2 id="handling-error-conditions">Handling error conditions</h2>
 
 <p>The kinds of errors that can occur when parsing the receipt payload all have to do with unexpected structure.</p>
 
 <p>For example, if we&rsquo;re expecting to be stepping through an ASN.1 Payload or an ASN.1 Sequence but instead find that it&rsquo;s not what we expect, this is a situation where reeipt validation should fail, because there&rsquo;s no way to decode the receipt attributes if the bytes of the payload don&rsquo;t conform to the expected structure.</p>
 
-<p>In situations where the receipt payload or one of its in-app purchase receipt payloads is &ldquo;malformed&#8221; in some way, we can throw an <code>Error</code>.</p>
+<p>In situations where the receipt payload or one of its in-app purchase receipt payloads is &ldquo;malformed&rdquo; in some way, we can throw an <code>Error</code>.</p>
 
 <p>I&rsquo;ve highlighted two new <code>ReceiptValidationError</code> cases here:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
-<span class="ln">3</span>    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
-<span class="ln">4</span>    <span class="k">case</span> <span class="n">receiptNotSigned</span>
-<span class="ln">5</span>    <span class="k">case</span> <span class="n">appleRootCertificateNotFound</span>
-<span class="ln">6</span>    <span class="k">case</span> <span class="n">receiptSignatureInvalid</span>
-<span class="ln">7</span>    <span class="k">case</span> <span class="n">malformedReceipt</span>
-<span class="ln">8</span>    <span class="k">case</span> <span class="n">malformedInAppPurchaseReceipt</span>
-<span class="ln">9</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
+    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
+    <span class="k">case</span> <span class="n">receiptNotSigned</span>
+    <span class="k">case</span> <span class="n">appleRootCertificateNotFound</span>
+    <span class="k">case</span> <span class="n">receiptSignatureInvalid</span>
+    <span class="k">case</span> <span class="n">malformedReceipt</span>
+    <span class="k">case</span> <span class="n">malformedInAppPurchaseReceipt</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p><a name="implementing-receipt-parser" class="jump-target"></a></p>
 
-<h1 id="implenting-receiptparser">Implenting ReceiptParser</h1>
+<h2 id="implenting-receiptparser">Implenting ReceiptParser</h2>
 
 <p>OK! We&rsquo;ve got a few helper functions to decode the receipt attributes, and we&rsquo;ve got some <code>ReceiptValidationError</code> cases to throw in case parsing fails.</p>
 
 <p>At a very high level, the ReceiptParser will take the following skeletal structure:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">struct</span> <span class="nc">ReceiptParser</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kd">func</span> <span class="nf">parse</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">ParsedReceipt</span> <span class="p">{</span>
-<span class="ln"> 3</span>        <span class="kd">var</span> <span class="nv">bundleIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln"> 4</span>        <span class="kd">var</span> <span class="nv">bundleIdData</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
-<span class="ln"> 5</span>        <span class="kd">var</span> <span class="nv">appVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln"> 6</span>        <span class="kd">var</span> <span class="nv">opaqueValue</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
-<span class="ln"> 7</span>        <span class="kd">var</span> <span class="nv">sha1Hash</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
-<span class="ln"> 8</span>        <span class="kd">var</span> <span class="nv">inAppPurchaseReceipts</span> <span class="p">=</span> <span class="p">[</span><span class="n">ParsedInAppPurchaseReceipt</span><span class="p">]()</span>
-<span class="ln"> 9</span>        <span class="kd">var</span> <span class="nv">originalAppVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">10</span>        <span class="kd">var</span> <span class="nv">receiptCreationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">11</span>        <span class="kd">var</span> <span class="nv">expirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">12</span>        
-<span class="ln">13</span>        <span class="c1">// Parse the receipt, setting each variable</span>
-<span class="ln">14</span>        
-<span class="ln">15</span>        <span class="k">return</span> <span class="n">ParsedReceipt</span><span class="p">(</span><span class="n">bundleIdentifier</span><span class="p">:</span> <span class="n">bundleIdentifier</span><span class="p">,</span>
-<span class="ln">16</span>                             <span class="n">bundleIdData</span><span class="p">:</span> <span class="n">bundleIdData</span><span class="p">,</span>
-<span class="ln">17</span>                             <span class="n">appVersion</span><span class="p">:</span> <span class="n">appVersion</span><span class="p">,</span>
-<span class="ln">18</span>                             <span class="n">opaqueValue</span><span class="p">:</span> <span class="n">opaqueValue</span><span class="p">,</span>
-<span class="ln">19</span>                             <span class="n">sha1Hash</span><span class="p">:</span> <span class="n">sha1Hash</span><span class="p">,</span>
-<span class="ln">20</span>                             <span class="n">inAppPurchaseReceipts</span><span class="p">:</span> <span class="n">inAppPurchaseReceipts</span><span class="p">,</span>
-<span class="ln">21</span>                             <span class="n">originalAppVersion</span><span class="p">:</span> <span class="n">originalAppVersion</span><span class="p">,</span>
-<span class="ln">22</span>                             <span class="n">receiptCreationDate</span><span class="p">:</span> <span class="n">receiptCreationDate</span><span class="p">,</span>
-<span class="ln">23</span>                             <span class="n">expirationDate</span><span class="p">:</span> <span class="n">expirationDate</span><span class="p">)</span>
-<span class="ln">24</span>    <span class="p">}</span>
-<span class="ln">25</span>    
-<span class="ln">26</span>    <span class="kd">func</span> <span class="nf">parseInAppPurchaseReceipt</span><span class="p">(</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">payloadLength</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">ParsedInAppPurchaseReceipt</span> <span class="p">{</span>
-<span class="ln">27</span>        <span class="kd">var</span> <span class="nv">quantity</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
-<span class="ln">28</span>        <span class="kd">var</span> <span class="nv">productIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">29</span>        <span class="kd">var</span> <span class="nv">transactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">30</span>        <span class="kd">var</span> <span class="nv">originalTransactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">31</span>        <span class="kd">var</span> <span class="nv">purchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">32</span>        <span class="kd">var</span> <span class="nv">originalPurchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">33</span>        <span class="kd">var</span> <span class="nv">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">34</span>        <span class="kd">var</span> <span class="nv">cancellationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">35</span>        <span class="kd">var</span> <span class="nv">webOrderLineItemId</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
-<span class="ln">36</span>        
-<span class="ln">37</span>        <span class="c1">// Parse the in-app purchase receipt, setting each variable</span>
-<span class="ln">38</span>        
-<span class="ln">39</span>        <span class="k">return</span> <span class="n">ParsedInAppPurchaseReceipt</span><span class="p">(</span><span class="n">quantity</span><span class="p">:</span> <span class="n">quantity</span><span class="p">,</span>
-<span class="ln">40</span>                                          <span class="n">productIdentifier</span><span class="p">:</span> <span class="n">productIdentifier</span><span class="p">,</span>
-<span class="ln">41</span>                                          <span class="n">transactionIdentifier</span><span class="p">:</span> <span class="n">transactionIdentifier</span><span class="p">,</span>
-<span class="ln">42</span>                                          <span class="n">originalTransactionIdentifier</span><span class="p">:</span> <span class="n">originalTransactionIdentifier</span><span class="p">,</span>
-<span class="ln">43</span>                                          <span class="n">purchaseDate</span><span class="p">:</span> <span class="n">purchaseDate</span><span class="p">,</span>
-<span class="ln">44</span>                                          <span class="n">originalPurchaseDate</span><span class="p">:</span> <span class="n">originalPurchaseDate</span><span class="p">,</span>
-<span class="ln">45</span>                                          <span class="n">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">subscriptionExpirationDate</span><span class="p">,</span>
-<span class="ln">46</span>                                          <span class="n">cancellationDate</span><span class="p">:</span> <span class="n">cancellationDate</span><span class="p">,</span>
-<span class="ln">47</span>                                          <span class="n">webOrderLineItemId</span><span class="p">:</span> <span class="n">webOrderLineItemId</span><span class="p">)</span>
-<span class="ln">48</span>    <span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptParser</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">parse</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">ParsedReceipt</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nv">bundleIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">bundleIdData</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">appVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">opaqueValue</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">sha1Hash</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">inAppPurchaseReceipts</span> <span class="p">=</span> <span class="p">[</span><span class="n">ParsedInAppPurchaseReceipt</span><span class="p">]()</span>
+        <span class="kd">var</span> <span class="nv">originalAppVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">receiptCreationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">expirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+        
+        <span class="c1">// Parse the receipt, setting each variable</span>
+        
+        <span class="k">return</span> <span class="n">ParsedReceipt</span><span class="p">(</span><span class="n">bundleIdentifier</span><span class="p">:</span> <span class="n">bundleIdentifier</span><span class="p">,</span>
+                             <span class="n">bundleIdData</span><span class="p">:</span> <span class="n">bundleIdData</span><span class="p">,</span>
+                             <span class="n">appVersion</span><span class="p">:</span> <span class="n">appVersion</span><span class="p">,</span>
+                             <span class="n">opaqueValue</span><span class="p">:</span> <span class="n">opaqueValue</span><span class="p">,</span>
+                             <span class="n">sha1Hash</span><span class="p">:</span> <span class="n">sha1Hash</span><span class="p">,</span>
+                             <span class="n">inAppPurchaseReceipts</span><span class="p">:</span> <span class="n">inAppPurchaseReceipts</span><span class="p">,</span>
+                             <span class="n">originalAppVersion</span><span class="p">:</span> <span class="n">originalAppVersion</span><span class="p">,</span>
+                             <span class="n">receiptCreationDate</span><span class="p">:</span> <span class="n">receiptCreationDate</span><span class="p">,</span>
+                             <span class="n">expirationDate</span><span class="p">:</span> <span class="n">expirationDate</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">parseInAppPurchaseReceipt</span><span class="p">(</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&lt;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">payloadLength</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">ParsedInAppPurchaseReceipt</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nv">quantity</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">productIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">transactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">originalTransactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">purchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">originalPurchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">cancellationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+        <span class="kd">var</span> <span class="nv">webOrderLineItemId</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
+        
+        <span class="c1">// Parse the in-app purchase receipt, setting each variable</span>
+        
+        <span class="k">return</span> <span class="n">ParsedInAppPurchaseReceipt</span><span class="p">(</span><span class="n">quantity</span><span class="p">:</span> <span class="n">quantity</span><span class="p">,</span>
+                                          <span class="n">productIdentifier</span><span class="p">:</span> <span class="n">productIdentifier</span><span class="p">,</span>
+                                          <span class="n">transactionIdentifier</span><span class="p">:</span> <span class="n">transactionIdentifier</span><span class="p">,</span>
+                                          <span class="n">originalTransactionIdentifier</span><span class="p">:</span> <span class="n">originalTransactionIdentifier</span><span class="p">,</span>
+                                          <span class="n">purchaseDate</span><span class="p">:</span> <span class="n">purchaseDate</span><span class="p">,</span>
+                                          <span class="n">originalPurchaseDate</span><span class="p">:</span> <span class="n">originalPurchaseDate</span><span class="p">,</span>
+                                          <span class="n">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">subscriptionExpirationDate</span><span class="p">,</span>
+                                          <span class="n">cancellationDate</span><span class="p">:</span> <span class="n">cancellationDate</span><span class="p">,</span>
+                                          <span class="n">webOrderLineItemId</span><span class="p">:</span> <span class="n">webOrderLineItemId</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p>So a total of two functions: one to parse the overall receipt, and one to parse each in-app purchase receipt nested <em>within</em> the overall receipt.</p>
 
 <p>Now comes the hard part. Actually doing all the decoding. Don&rsquo;t forget the <a href="#parsing-strategy">strategy</a> we&rsquo;re going to take! That&rsquo;ll help you walk through this code without getting insanely overwhelmed (hopefully).</p>
 
 <p><a name="parse-function-implementation" class="jump-target"></a></p>
 
-<h2 id="parse-function-implementation"><code>parse</code> function implementation</h2>
+<h4 id="parse-function-implementation"><code>parse</code> function implementation</h4>
 
 <p>First, the implementation of <code>parse(_:)</code> with comments throughout to help you find where each step of the <a href="#parsing-strategy">strategy</a> is being implemented:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">  1</span><span class="kd">func</span> <span class="nf">parse</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">ParsedReceipt</span> <span class="p">{</span>
-<span class="ln">  2</span>    <span class="kd">var</span> <span class="nv">bundleIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">  3</span>    <span class="kd">var</span> <span class="nv">bundleIdData</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
-<span class="ln">  4</span>    <span class="kd">var</span> <span class="nv">appVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">  5</span>    <span class="kd">var</span> <span class="nv">opaqueValue</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
-<span class="ln">  6</span>    <span class="kd">var</span> <span class="nv">sha1Hash</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
-<span class="ln">  7</span>    <span class="kd">var</span> <span class="nv">inAppPurchaseReceipts</span> <span class="p">=</span> <span class="p">[</span><span class="n">ParsedInAppPurchaseReceipt</span><span class="p">]()</span>
-<span class="ln">  8</span>    <span class="kd">var</span> <span class="nv">originalAppVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">  9</span>    <span class="kd">var</span> <span class="nv">receiptCreationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln"> 10</span>    <span class="kd">var</span> <span class="nv">expirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln"> 11</span>    
-<span class="ln"> 12</span>    <span class="c1">// Strategy Step 1: Preliminary structure checks</span>
-<span class="ln"> 13</span>
-<span class="ln"> 14</span>    <span class="c1">// Must have data to work with</span>
-<span class="ln"> 15</span>    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">contents</span> <span class="p">=</span> <span class="n">PKCS7Container</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="n">sign</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">contents</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">octets</span> <span class="p">=</span> <span class="n">contents</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="n">data</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 16</span>        <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
-<span class="ln"> 17</span>    <span class="p">}</span>
-<span class="ln"> 18</span>    
-<span class="ln"> 19</span>    <span class="c1">// Determine the start and end of the receipt payload</span>
-<span class="ln"> 20</span>    <span class="kd">var</span> <span class="nv">currentASN1PayloadLocation</span> <span class="p">=</span> <span class="nb">UnsafePointer</span><span class="p">(</span><span class="n">octets</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
-<span class="ln"> 21</span>    <span class="kd">let</span> <span class="nv">endOfPayload</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="n">advanced</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="nb">Int</span><span class="p">(</span><span class="n">octets</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">length</span><span class="p">))</span>
-<span class="ln"> 22</span>    
-<span class="ln"> 23</span>    <span class="kd">var</span> <span class="nv">type</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="ln"> 24</span>    <span class="kd">var</span> <span class="nv">xclass</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="ln"> 25</span>    <span class="kd">var</span> <span class="nv">length</span> <span class="p">=</span> <span class="mi">0</span>
-<span class="ln"> 26</span>    
-<span class="ln"> 27</span>    <span class="n">ASN1_get_object</span><span class="p">(&amp;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">length</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">type</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">xclass</span><span class="p">,</span><span class="nb">Int</span><span class="p">(</span><span class="n">octets</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">length</span><span class="p">))</span>
-<span class="ln"> 28</span>    
-<span class="ln"> 29</span>    <span class="c1">// Payload must be an ASN1 Set</span>
-<span class="ln"> 30</span>    <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_SET</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 31</span>        <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
-<span class="ln"> 32</span>    <span class="p">}</span>
-<span class="ln"> 33</span>    
-<span class="ln"> 34</span>    <span class="c1">// Decode Payload</span>
-<span class="ln"> 35</span>    <span class="c1">// Strategy Step 2: Walk through payload (ASN1 Set) and parse each ASN1 Sequence </span>
-<span class="ln"> 36</span>    <span class="c1">// within (ASN1 Sets contain one or more ASN1 Sequences)</span>
-<span class="ln"> 37</span>    <span class="k">while</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endOfPayload</span> <span class="p">{</span>
-<span class="ln"> 38</span>        
-<span class="ln"> 39</span>        <span class="c1">// Get next ASN1 Sequence</span>
-<span class="ln"> 40</span>        <span class="n">ASN1_get_object</span><span class="p">(</span><span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">length</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">type</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span>
-<span class="ln"> 41</span>        
-<span class="ln"> 42</span>        <span class="c1">// ASN1 Object type must be an ASN1 Sequence</span>
-<span class="ln"> 43</span>        <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_SEQUENCE</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 44</span>            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
-<span class="ln"> 45</span>        <span class="p">}</span>
-<span class="ln"> 46</span>        
-<span class="ln"> 47</span>        <span class="c1">// Attribute type of ASN1 Sequence must be an Integer</span>
-<span class="ln"> 48</span>        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">attributeType</span> <span class="p">=</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 49</span>            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
-<span class="ln"> 50</span>        <span class="p">}</span>
-<span class="ln"> 51</span>        
-<span class="ln"> 52</span>        <span class="c1">// Attribute version of ASN1 Sequence must be an Integer</span>
-<span class="ln"> 53</span>        <span class="k">guard</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 54</span>            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
-<span class="ln"> 55</span>        <span class="p">}</span>
-<span class="ln"> 56</span>        
-<span class="ln"> 57</span>        <span class="c1">// Get ASN1 Sequence value</span>
-<span class="ln"> 58</span>        <span class="n">ASN1_get_object</span><span class="p">(</span><span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">length</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">type</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span>
-<span class="ln"> 59</span>        
-<span class="ln"> 60</span>        <span class="c1">// ASN1 Sequence value must be an ASN1 Octet String</span>
-<span class="ln"> 61</span>        <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_OCTET_STRING</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 62</span>            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
-<span class="ln"> 63</span>        <span class="p">}</span>
-<span class="ln"> 64</span>        
-<span class="ln"> 65</span>        <span class="c1">// Strategy Step 3: Decode attributes</span>
-<span class="ln"> 66</span>        <span class="k">switch</span> <span class="n">attributeType</span> <span class="p">{</span>
-<span class="ln"> 67</span>        <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
-<span class="ln"> 68</span>            <span class="kd">var</span> <span class="nv">startOfBundleId</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
-<span class="ln"> 69</span>            <span class="n">bundleIdData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">startOfBundleId</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 70</span>            <span class="n">bundleIdentifier</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfBundleId</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 71</span>        <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
-<span class="ln"> 72</span>            <span class="kd">var</span> <span class="nv">startOfAppVersion</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
-<span class="ln"> 73</span>            <span class="n">appVersion</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfAppVersion</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 74</span>        <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
-<span class="ln"> 75</span>            <span class="kd">let</span> <span class="nv">startOfOpaqueValue</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
-<span class="ln"> 76</span>            <span class="n">opaqueValue</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">startOfOpaqueValue</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 77</span>        <span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
-<span class="ln"> 78</span>            <span class="kd">let</span> <span class="nv">startOfSha1Hash</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
-<span class="ln"> 79</span>            <span class="n">sha1Hash</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">startOfSha1Hash</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 80</span>        <span class="k">case</span> <span class="mi">17</span><span class="p">:</span>
-<span class="ln"> 81</span>            <span class="kd">var</span> <span class="nv">startOfInAppPurchaseReceipt</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
-<span class="ln"> 82</span>            <span class="kd">let</span> <span class="nv">iapReceipt</span> <span class="p">=</span> <span class="k">try</span> <span class="n">parseInAppPurchaseReceipt</span><span class="p">(</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfInAppPurchaseReceipt</span><span class="p">,</span> <span class="n">payloadLength</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 83</span>            <span class="n">inAppPurchaseReceipts</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">iapReceipt</span><span class="p">)</span>
-<span class="ln"> 84</span>        <span class="k">case</span> <span class="mi">12</span><span class="p">:</span>
-<span class="ln"> 85</span>            <span class="kd">var</span> <span class="nv">startOfReceiptCreationDate</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
-<span class="ln"> 86</span>            <span class="n">receiptCreationDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfReceiptCreationDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 87</span>        <span class="k">case</span> <span class="mi">19</span><span class="p">:</span>
-<span class="ln"> 88</span>            <span class="kd">var</span> <span class="nv">startOfOriginalAppVersion</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
-<span class="ln"> 89</span>            <span class="n">originalAppVersion</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfOriginalAppVersion</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 90</span>        <span class="k">case</span> <span class="mi">21</span><span class="p">:</span>
-<span class="ln"> 91</span>            <span class="kd">var</span> <span class="nv">startOfExpirationDate</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
-<span class="ln"> 92</span>            <span class="n">expirationDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfExpirationDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 93</span>        <span class="k">default</span><span class="p">:</span>
-<span class="ln"> 94</span>            <span class="k">break</span>
-<span class="ln"> 95</span>        <span class="p">}</span>
-<span class="ln"> 96</span>        
-<span class="ln"> 97</span>        <span class="n">currentASN1PayloadLocation</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span><span class="p">?.</span><span class="n">advanced</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 98</span>    <span class="p">}</span>
-<span class="ln"> 99</span>    
-<span class="ln">100</span>    <span class="c1">// Strategy Step 4: Return ParsedReceipt</span>
-<span class="ln">101</span>    <span class="k">return</span> <span class="n">ParsedReceipt</span><span class="p">(</span><span class="n">bundleIdentifier</span><span class="p">:</span> <span class="n">bundleIdentifier</span><span class="p">,</span>
-<span class="ln">102</span>                            <span class="n">bundleIdData</span><span class="p">:</span> <span class="n">bundleIdData</span><span class="p">,</span>
-<span class="ln">103</span>                            <span class="n">appVersion</span><span class="p">:</span> <span class="n">appVersion</span><span class="p">,</span>
-<span class="ln">104</span>                            <span class="n">opaqueValue</span><span class="p">:</span> <span class="n">opaqueValue</span><span class="p">,</span>
-<span class="ln">105</span>                            <span class="n">sha1Hash</span><span class="p">:</span> <span class="n">sha1Hash</span><span class="p">,</span>
-<span class="ln">106</span>                            <span class="n">inAppPurchaseReceipts</span><span class="p">:</span> <span class="n">inAppPurchaseReceipts</span><span class="p">,</span>
-<span class="ln">107</span>                            <span class="n">originalAppVersion</span><span class="p">:</span> <span class="n">originalAppVersion</span><span class="p">,</span>
-<span class="ln">108</span>                            <span class="n">receiptCreationDate</span><span class="p">:</span> <span class="n">receiptCreationDate</span><span class="p">,</span>
-<span class="ln">109</span>                            <span class="n">expirationDate</span><span class="p">:</span> <span class="n">expirationDate</span><span class="p">)</span>
-<span class="ln">110</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">parse</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">ParsedReceipt</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">bundleIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">bundleIdData</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">appVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">opaqueValue</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">sha1Hash</span><span class="p">:</span> <span class="n">NSData</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">inAppPurchaseReceipts</span> <span class="p">=</span> <span class="p">[</span><span class="n">ParsedInAppPurchaseReceipt</span><span class="p">]()</span>
+    <span class="kd">var</span> <span class="nv">originalAppVersion</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">receiptCreationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">expirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    
+    <span class="c1">// Strategy Step 1: Preliminary structure checks</span>
+
+    <span class="c1">// Must have data to work with</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">contents</span> <span class="p">=</span> <span class="n">PKCS7Container</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="n">sign</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">contents</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">octets</span> <span class="p">=</span> <span class="n">contents</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="n">data</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Determine the start and end of the receipt payload</span>
+    <span class="kd">var</span> <span class="nv">currentASN1PayloadLocation</span> <span class="p">=</span> <span class="nb">UnsafePointer</span><span class="p">(</span><span class="n">octets</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nv">endOfPayload</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="n">advanced</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="nb">Int</span><span class="p">(</span><span class="n">octets</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">length</span><span class="p">))</span>
+    
+    <span class="kd">var</span> <span class="nv">type</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">xclass</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">length</span> <span class="p">=</span> <span class="mi">0</span>
+    
+    <span class="n">ASN1_get_object</span><span class="p">(&amp;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">length</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">type</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">xclass</span><span class="p">,</span><span class="nb">Int</span><span class="p">(</span><span class="n">octets</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">length</span><span class="p">))</span>
+    
+    <span class="c1">// Payload must be an ASN1 Set</span>
+    <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_SET</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Decode Payload</span>
+    <span class="c1">// Strategy Step 2: Walk through payload (ASN1 Set) and parse each ASN1 Sequence </span>
+    <span class="c1">// within (ASN1 Sets contain one or more ASN1 Sequences)</span>
+    <span class="k">while</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span> <span class="o">&lt;</span> <span class="n">endOfPayload</span> <span class="p">{</span>
+        
+        <span class="c1">// Get next ASN1 Sequence</span>
+        <span class="n">ASN1_get_object</span><span class="p">(</span><span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">length</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">type</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span>
+        
+        <span class="c1">// ASN1 Object type must be an ASN1 Sequence</span>
+        <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_SEQUENCE</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Attribute type of ASN1 Sequence must be an Integer</span>
+        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">attributeType</span> <span class="p">=</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Attribute version of ASN1 Sequence must be an Integer</span>
+        <span class="k">guard</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Get ASN1 Sequence value</span>
+        <span class="n">ASN1_get_object</span><span class="p">(</span><span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentASN1PayloadLocation</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">length</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">type</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">currentASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span>
+        
+        <span class="c1">// ASN1 Sequence value must be an ASN1 Octet String</span>
+        <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_OCTET_STRING</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedReceipt</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Strategy Step 3: Decode attributes</span>
+        <span class="k">switch</span> <span class="n">attributeType</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfBundleId</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
+            <span class="n">bundleIdData</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">startOfBundleId</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+            <span class="n">bundleIdentifier</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfBundleId</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfAppVersion</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
+            <span class="n">appVersion</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfAppVersion</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="kd">let</span> <span class="nv">startOfOpaqueValue</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
+            <span class="n">opaqueValue</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">startOfOpaqueValue</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="kd">let</span> <span class="nv">startOfSha1Hash</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
+            <span class="n">sha1Hash</span> <span class="p">=</span> <span class="n">NSData</span><span class="p">(</span><span class="n">bytes</span><span class="p">:</span> <span class="n">startOfSha1Hash</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">17</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfInAppPurchaseReceipt</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
+            <span class="kd">let</span> <span class="nv">iapReceipt</span> <span class="p">=</span> <span class="k">try</span> <span class="n">parseInAppPurchaseReceipt</span><span class="p">(</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfInAppPurchaseReceipt</span><span class="p">,</span> <span class="n">payloadLength</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+            <span class="n">inAppPurchaseReceipts</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">iapReceipt</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfReceiptCreationDate</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
+            <span class="n">receiptCreationDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfReceiptCreationDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">19</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfOriginalAppVersion</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
+            <span class="n">originalAppVersion</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfOriginalAppVersion</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">21</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfExpirationDate</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span>
+            <span class="n">expirationDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfExpirationDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="p">}</span>
+        
+        <span class="n">currentASN1PayloadLocation</span> <span class="p">=</span> <span class="n">currentASN1PayloadLocation</span><span class="p">?.</span><span class="n">advanced</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Strategy Step 4: Return ParsedReceipt</span>
+    <span class="k">return</span> <span class="n">ParsedReceipt</span><span class="p">(</span><span class="n">bundleIdentifier</span><span class="p">:</span> <span class="n">bundleIdentifier</span><span class="p">,</span>
+                            <span class="n">bundleIdData</span><span class="p">:</span> <span class="n">bundleIdData</span><span class="p">,</span>
+                            <span class="n">appVersion</span><span class="p">:</span> <span class="n">appVersion</span><span class="p">,</span>
+                            <span class="n">opaqueValue</span><span class="p">:</span> <span class="n">opaqueValue</span><span class="p">,</span>
+                            <span class="n">sha1Hash</span><span class="p">:</span> <span class="n">sha1Hash</span><span class="p">,</span>
+                            <span class="n">inAppPurchaseReceipts</span><span class="p">:</span> <span class="n">inAppPurchaseReceipts</span><span class="p">,</span>
+                            <span class="n">originalAppVersion</span><span class="p">:</span> <span class="n">originalAppVersion</span><span class="p">,</span>
+                            <span class="n">receiptCreationDate</span><span class="p">:</span> <span class="n">receiptCreationDate</span><span class="p">,</span>
+                            <span class="n">expirationDate</span><span class="p">:</span> <span class="n">expirationDate</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p>Aside from the work with pointers and the Open SSL function names, the strategy is pretty straight-forward when you look it from a bird&rsquo;s-eye point of view.</p>
 
 <p>Once again, if you&rsquo;re curious about how I knew to map each <code>case</code> within the <code>switch</code> to the correct receipt attribute, I simply got them from <a href="https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html">Apple&rsquo;s documentation</a>.</p>
 
 <p><a name="parse-in-app-purchase-receipt-implementation" class="jump-target"></a></p>
 
-<h2 id="parseinapppurchaserectipt-function-implementation"><code>parseInAppPurchaseRectipt</code> function implementation</h2>
+<h4 id="parseinapppurchaserectipt-function-implementation"><code>parseInAppPurchaseRectipt</code> function implementation</h4>
 
 <p>Now it&rsquo;s time to see how to parse an in-app purchase receipt payload. Take a look:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">  1</span><span class="kd">func</span> <span class="nf">parseInAppPurchaseReceipt</span><span class="p">(</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">payloadLength</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">ParsedInAppPurchaseReceipt</span> <span class="p">{</span>
-<span class="ln">  2</span>    <span class="kd">var</span> <span class="nv">quantity</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
-<span class="ln">  3</span>    <span class="kd">var</span> <span class="nv">productIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">  4</span>    <span class="kd">var</span> <span class="nv">transactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">  5</span>    <span class="kd">var</span> <span class="nv">originalTransactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-<span class="ln">  6</span>    <span class="kd">var</span> <span class="nv">purchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">  7</span>    <span class="kd">var</span> <span class="nv">originalPurchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">  8</span>    <span class="kd">var</span> <span class="nv">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln">  9</span>    <span class="kd">var</span> <span class="nv">cancellationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
-<span class="ln"> 10</span>    <span class="kd">var</span> <span class="nv">webOrderLineItemId</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
-<span class="ln"> 11</span>    
-<span class="ln"> 12</span>    <span class="c1">// Find the end of the in-app purchase receipt payload</span>
-<span class="ln"> 13</span>    <span class="kd">let</span> <span class="nv">endOfPayload</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="n">advanced</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="n">payloadLength</span><span class="p">)</span>
-<span class="ln"> 14</span>    <span class="kd">var</span> <span class="nv">type</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="ln"> 15</span>    <span class="kd">var</span> <span class="nv">xclass</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="ln"> 16</span>    <span class="kd">var</span> <span class="nv">length</span> <span class="p">=</span> <span class="mi">0</span>
-<span class="ln"> 17</span>    
-<span class="ln"> 18</span>    <span class="n">ASN1_get_object</span><span class="p">(&amp;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">length</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">type</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">payloadLength</span><span class="p">)</span>
-<span class="ln"> 19</span>    
-<span class="ln"> 20</span>    <span class="c1">// Payload must be an ASN1 Set</span>
-<span class="ln"> 21</span>    <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_SET</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 22</span>        <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
-<span class="ln"> 23</span>    <span class="p">}</span>
-<span class="ln"> 24</span>    
-<span class="ln"> 25</span>    <span class="c1">// Decode Payload</span>
-<span class="ln"> 26</span>    <span class="c1">// Step through payload (ASN1 Set) and parse each ASN1 Sequence within (ASN1 Sets contain one or more ASN1 Sequences)</span>
-<span class="ln"> 27</span>    <span class="k">while</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">endOfPayload</span> <span class="p">{</span>
-<span class="ln"> 28</span>        
-<span class="ln"> 29</span>        <span class="c1">// Get next ASN1 Sequence</span>
-<span class="ln"> 30</span>        <span class="n">ASN1_get_object</span><span class="p">(</span><span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">length</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">type</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span>
-<span class="ln"> 31</span>        
-<span class="ln"> 32</span>        <span class="c1">// ASN1 Object type must be an ASN1 Sequence</span>
-<span class="ln"> 33</span>        <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_SEQUENCE</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 34</span>            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
-<span class="ln"> 35</span>        <span class="p">}</span>
-<span class="ln"> 36</span>        
-<span class="ln"> 37</span>        <span class="c1">// Attribute type of ASN1 Sequence must be an Integer</span>
-<span class="ln"> 38</span>        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">attributeType</span> <span class="p">=</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 39</span>            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
-<span class="ln"> 40</span>        <span class="p">}</span>
-<span class="ln"> 41</span>        
-<span class="ln"> 42</span>        <span class="c1">// Attribute version of ASN1 Sequence must be an Integer</span>
-<span class="ln"> 43</span>        <span class="k">guard</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 44</span>            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
-<span class="ln"> 45</span>        <span class="p">}</span>
-<span class="ln"> 46</span>        
-<span class="ln"> 47</span>        <span class="c1">// Get ASN1 Sequence value</span>
-<span class="ln"> 48</span>        <span class="n">ASN1_get_object</span><span class="p">(</span><span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">length</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">type</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span>
-<span class="ln"> 49</span>        
-<span class="ln"> 50</span>        <span class="c1">// ASN1 Sequence value must be an ASN1 Octet String</span>
-<span class="ln"> 51</span>        <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_OCTET_STRING</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 52</span>            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
-<span class="ln"> 53</span>        <span class="p">}</span>
-<span class="ln"> 54</span>        
-<span class="ln"> 55</span>        <span class="c1">// Decode attributes</span>
-<span class="ln"> 56</span>        <span class="k">switch</span> <span class="n">attributeType</span> <span class="p">{</span>
-<span class="ln"> 57</span>        <span class="k">case</span> <span class="mi">1701</span><span class="p">:</span>
-<span class="ln"> 58</span>            <span class="kd">var</span> <span class="nv">startOfQuantity</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
-<span class="ln"> 59</span>            <span class="n">quantity</span> <span class="p">=</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfQuantity</span> <span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 60</span>        <span class="k">case</span> <span class="mi">1702</span><span class="p">:</span>
-<span class="ln"> 61</span>            <span class="kd">var</span> <span class="nv">startOfProductIdentifier</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
-<span class="ln"> 62</span>            <span class="n">productIdentifier</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfProductIdentifier</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 63</span>        <span class="k">case</span> <span class="mi">1703</span><span class="p">:</span>
-<span class="ln"> 64</span>            <span class="kd">var</span> <span class="nv">startOfTransactionIdentifier</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
-<span class="ln"> 65</span>            <span class="n">transactionIdentifier</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfTransactionIdentifier</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 66</span>        <span class="k">case</span> <span class="mi">1705</span><span class="p">:</span>
-<span class="ln"> 67</span>            <span class="kd">var</span> <span class="nv">startOfOriginalTransactionIdentifier</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
-<span class="ln"> 68</span>            <span class="n">originalTransactionIdentifier</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfOriginalTransactionIdentifier</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 69</span>        <span class="k">case</span> <span class="mi">1704</span><span class="p">:</span>
-<span class="ln"> 70</span>            <span class="kd">var</span> <span class="nv">startOfPurchaseDate</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
-<span class="ln"> 71</span>            <span class="n">purchaseDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfPurchaseDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 72</span>        <span class="k">case</span> <span class="mi">1706</span><span class="p">:</span>
-<span class="ln"> 73</span>            <span class="kd">var</span> <span class="nv">startOfOriginalPurchaseDate</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
-<span class="ln"> 74</span>            <span class="n">originalPurchaseDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfOriginalPurchaseDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 75</span>        <span class="k">case</span> <span class="mi">1708</span><span class="p">:</span>
-<span class="ln"> 76</span>            <span class="kd">var</span> <span class="nv">startOfSubscriptionExpirationDate</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
-<span class="ln"> 77</span>            <span class="n">subscriptionExpirationDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfSubscriptionExpirationDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 78</span>        <span class="k">case</span> <span class="mi">1712</span><span class="p">:</span>
-<span class="ln"> 79</span>            <span class="kd">var</span> <span class="nv">startOfCancellationDate</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
-<span class="ln"> 80</span>            <span class="n">cancellationDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfCancellationDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 81</span>        <span class="k">case</span> <span class="mi">1711</span><span class="p">:</span>
-<span class="ln"> 82</span>            <span class="kd">var</span> <span class="nv">startOfWebOrderLineItemId</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
-<span class="ln"> 83</span>            <span class="n">webOrderLineItemId</span> <span class="p">=</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfWebOrderLineItemId</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 84</span>        <span class="k">default</span><span class="p">:</span>
-<span class="ln"> 85</span>            <span class="k">break</span>
-<span class="ln"> 86</span>        <span class="p">}</span>
-<span class="ln"> 87</span>        
-<span class="ln"> 88</span>        <span class="n">currentInAppPurchaseASN1PayloadLocation</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="n">advanced</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
-<span class="ln"> 89</span>    <span class="p">}</span>
-<span class="ln"> 90</span>    
-<span class="ln"> 91</span>    <span class="k">return</span> <span class="n">ParsedInAppPurchaseReceipt</span><span class="p">(</span><span class="n">quantity</span><span class="p">:</span> <span class="n">quantity</span><span class="p">,</span>
-<span class="ln"> 92</span>                                        <span class="n">productIdentifier</span><span class="p">:</span> <span class="n">productIdentifier</span><span class="p">,</span>
-<span class="ln"> 93</span>                                        <span class="n">transactionIdentifier</span><span class="p">:</span> <span class="n">transactionIdentifier</span><span class="p">,</span>
-<span class="ln"> 94</span>                                        <span class="n">originalTransactionIdentifier</span><span class="p">:</span> <span class="n">originalTransactionIdentifier</span><span class="p">,</span>
-<span class="ln"> 95</span>                                        <span class="n">purchaseDate</span><span class="p">:</span> <span class="n">purchaseDate</span><span class="p">,</span>
-<span class="ln"> 96</span>                                        <span class="n">originalPurchaseDate</span><span class="p">:</span> <span class="n">originalPurchaseDate</span><span class="p">,</span>
-<span class="ln"> 97</span>                                        <span class="n">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">subscriptionExpirationDate</span><span class="p">,</span>
-<span class="ln"> 98</span>                                        <span class="n">cancellationDate</span><span class="p">:</span> <span class="n">cancellationDate</span><span class="p">,</span>
-<span class="ln"> 99</span>                                        <span class="n">webOrderLineItemId</span><span class="p">:</span> <span class="n">webOrderLineItemId</span><span class="p">)</span>
-<span class="ln">100</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">parseInAppPurchaseReceipt</span><span class="p">(</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">:</span> <span class="kr">inout</span> <span class="nb">UnsafePointer</span><span class="p">&lt;</span><span class="nb">UInt8</span><span class="o">&gt;?</span><span class="p">,</span> <span class="n">payloadLength</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="n">ParsedInAppPurchaseReceipt</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">quantity</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">productIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">transactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">originalTransactionIdentifier</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">purchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">originalPurchaseDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">cancellationDate</span><span class="p">:</span> <span class="n">Date</span><span class="p">?</span>
+    <span class="kd">var</span> <span class="nv">webOrderLineItemId</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span>
+    
+    <span class="c1">// Find the end of the in-app purchase receipt payload</span>
+    <span class="kd">let</span> <span class="nv">endOfPayload</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="n">advanced</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="n">payloadLength</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">type</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">xclass</span> <span class="p">=</span> <span class="nb">Int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nv">length</span> <span class="p">=</span> <span class="mi">0</span>
+    
+    <span class="n">ASN1_get_object</span><span class="p">(&amp;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">length</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">type</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">payloadLength</span><span class="p">)</span>
+    
+    <span class="c1">// Payload must be an ASN1 Set</span>
+    <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_SET</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Decode Payload</span>
+    <span class="c1">// Step through payload (ASN1 Set) and parse each ASN1 Sequence within (ASN1 Sets contain one or more ASN1 Sequences)</span>
+    <span class="k">while</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span> <span class="o">&lt;</span> <span class="n">endOfPayload</span> <span class="p">{</span>
+        
+        <span class="c1">// Get next ASN1 Sequence</span>
+        <span class="n">ASN1_get_object</span><span class="p">(</span><span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">length</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">type</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span>
+        
+        <span class="c1">// ASN1 Object type must be an ASN1 Sequence</span>
+        <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_SEQUENCE</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Attribute type of ASN1 Sequence must be an Integer</span>
+        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">attributeType</span> <span class="p">=</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Attribute version of ASN1 Sequence must be an Integer</span>
+        <span class="k">guard</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Get ASN1 Sequence value</span>
+        <span class="n">ASN1_get_object</span><span class="p">(</span><span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">length</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">type</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">xclass</span><span class="p">,</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="bp">distance</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">endOfPayload</span><span class="p">))</span>
+        
+        <span class="c1">// ASN1 Sequence value must be an ASN1 Octet String</span>
+        <span class="k">guard</span> <span class="n">type</span> <span class="p">==</span> <span class="n">V_ASN1_OCTET_STRING</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">malformedInAppPurchaseReceipt</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Decode attributes</span>
+        <span class="k">switch</span> <span class="n">attributeType</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="mi">1701</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfQuantity</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
+            <span class="n">quantity</span> <span class="p">=</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfQuantity</span> <span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">1702</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfProductIdentifier</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
+            <span class="n">productIdentifier</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfProductIdentifier</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">1703</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfTransactionIdentifier</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
+            <span class="n">transactionIdentifier</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfTransactionIdentifier</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">1705</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfOriginalTransactionIdentifier</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
+            <span class="n">originalTransactionIdentifier</span> <span class="p">=</span> <span class="n">DecodeASN1String</span><span class="p">(</span><span class="n">startOfString</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfOriginalTransactionIdentifier</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">1704</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfPurchaseDate</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
+            <span class="n">purchaseDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfPurchaseDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">1706</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfOriginalPurchaseDate</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
+            <span class="n">originalPurchaseDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfOriginalPurchaseDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">1708</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfSubscriptionExpirationDate</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
+            <span class="n">subscriptionExpirationDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfSubscriptionExpirationDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">1712</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfCancellationDate</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
+            <span class="n">cancellationDate</span> <span class="p">=</span> <span class="n">DecodeASN1Date</span><span class="p">(</span><span class="n">startOfDate</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfCancellationDate</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">1711</span><span class="p">:</span>
+            <span class="kd">var</span> <span class="nv">startOfWebOrderLineItemId</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span>
+            <span class="n">webOrderLineItemId</span> <span class="p">=</span> <span class="n">DecodeASN1Integer</span><span class="p">(</span><span class="n">startOfInt</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">#</span><span class="mi">038</span><span class="p">;</span><span class="n">startOfWebOrderLineItemId</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="p">}</span>
+        
+        <span class="n">currentInAppPurchaseASN1PayloadLocation</span> <span class="p">=</span> <span class="n">currentInAppPurchaseASN1PayloadLocation</span><span class="o">!</span><span class="p">.</span><span class="n">advanced</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="n">length</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">ParsedInAppPurchaseReceipt</span><span class="p">(</span><span class="n">quantity</span><span class="p">:</span> <span class="n">quantity</span><span class="p">,</span>
+                                        <span class="n">productIdentifier</span><span class="p">:</span> <span class="n">productIdentifier</span><span class="p">,</span>
+                                        <span class="n">transactionIdentifier</span><span class="p">:</span> <span class="n">transactionIdentifier</span><span class="p">,</span>
+                                        <span class="n">originalTransactionIdentifier</span><span class="p">:</span> <span class="n">originalTransactionIdentifier</span><span class="p">,</span>
+                                        <span class="n">purchaseDate</span><span class="p">:</span> <span class="n">purchaseDate</span><span class="p">,</span>
+                                        <span class="n">originalPurchaseDate</span><span class="p">:</span> <span class="n">originalPurchaseDate</span><span class="p">,</span>
+                                        <span class="n">subscriptionExpirationDate</span><span class="p">:</span> <span class="n">subscriptionExpirationDate</span><span class="p">,</span>
+                                        <span class="n">cancellationDate</span><span class="p">:</span> <span class="n">cancellationDate</span><span class="p">,</span>
+                                        <span class="n">webOrderLineItemId</span><span class="p">:</span> <span class="n">webOrderLineItemId</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p>As you can see, parsing an in-app purchase receipt uses the same strategy as parsing the overall receipt does.</p>
 
 <p>A receipt may contain zero or more in-app purchase receipts, so this function may get called zero, one, or many times, depending on what your app offers as in-app purchases, and of course, what your users have actually purchased.</p>
 
 <p><a name="final-receipt-parser" class="jump-target"></a></p>
 
-<h1 id="final-receiptparser">Final <code>ReceiptParser</code></h1>
+<h2 id="final-receiptparser">Final <code>ReceiptParser</code></h2>
 
 <p>I realize that breaking the code apart like I&rsquo;ve done is good for teaching purposes, but perhaps not so much for &ldquo;I just wanna copy-paste and <em>use</em> this&rdquo; purposes.</p>
 
@@ -756,38 +1173,72 @@ MathJax.Hub.Config({
 
 <p><a name="using-receipt-parser" class="jump-target"></a></p>
 
-<h1 id="using-receiptparser">Using <code>ReceiptParser</code></h1>
+<h2 id="using-receiptparser">Using <code>ReceiptParser</code></h2>
 
 <p>I initialize an instance of <code>ReceiptParser</code> in my <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator"><code>ReceiptValidator</code> struct</a>, and then call the <code>parse(_:)</code> function from <code>validateReceipt()</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">enum</span> <span class="nc">ReceiptValidationResult</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="k">case</span> <span class="n">success</span><span class="p">(</span><span class="n">ParsedReceipt</span><span class="p">)</span> <span class="c1">// Now has ParsedReceipt for an associated value</span>
-<span class="ln"> 3</span>    <span class="k">case</span> <span class="n">error</span><span class="p">(</span><span class="n">ReceiptValidationError</span><span class="p">)</span>
-<span class="ln"> 4</span><span class="p">}</span>
-<span class="ln"> 5</span>
-<span class="ln"> 6</span><span class="kd">struct</span> <span class="nc">ReceiptValidator</span> <span class="p">{</span>
-<span class="ln"> 7</span>    <span class="kd">let</span> <span class="nv">receiptLoader</span> <span class="p">=</span> <span class="n">ReceiptLoader</span><span class="p">()</span>
-<span class="ln"> 8</span>    <span class="kd">let</span> <span class="nv">receiptExtractor</span> <span class="p">=</span> <span class="n">ReceiptExtractor</span><span class="p">()</span>
-<span class="ln"> 9</span>    <span class="kd">let</span> <span class="nv">receiptSignatureValidator</span> <span class="p">=</span> <span class="n">ReceiptSignatureValidator</span><span class="p">()</span>
-<span class="ln">10</span>    <span class="kd">let</span> <span class="nv">receiptParser</span> <span class="p">=</span> <span class="n">ReceiptParser</span><span class="p">()</span>
-<span class="ln">11</span>    
-<span class="ln">12</span>    <span class="kd">func</span> <span class="nf">validateReceipt</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">ReceiptValidationResult</span> <span class="p">{</span>
-<span class="ln">13</span>        <span class="k">do</span> <span class="p">{</span>
-<span class="ln">14</span>            <span class="kd">let</span> <span class="nv">receiptData</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptLoader</span><span class="p">.</span><span class="n">loadReceipt</span><span class="p">()</span>
-<span class="ln">15</span>            <span class="kd">let</span> <span class="nv">receiptContainer</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptExtractor</span><span class="p">.</span><span class="n">extractPKCS7Container</span><span class="p">(</span><span class="n">receiptData</span><span class="p">)</span>
-<span class="ln">16</span>            
-<span class="ln">17</span>            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignaturePresence</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
-<span class="ln">18</span>            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignatureAuthenticity</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
-<span class="ln">19</span>            
-<span class="ln">20</span>            <span class="kd">let</span> <span class="nv">parsedReceipt</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptParser</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
-<span class="ln">21</span>            <span class="k">return</span> <span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">parsedReceipt</span><span class="p">)</span>
-<span class="ln">22</span>        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">23</span>            <span class="k">return</span> <span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span> <span class="k">as</span><span class="o">!</span> <span class="n">ReceiptValidationError</span><span class="p">)</span>
-<span class="ln">24</span>        <span class="p">}</span>
-<span class="ln">25</span>    <span class="p">}</span>
-<span class="ln">26</span><span class="p">}</span></code></pre></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="nc">ReceiptValidationResult</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">success</span><span class="p">(</span><span class="n">ParsedReceipt</span><span class="p">)</span> <span class="c1">// Now has ParsedReceipt for an associated value</span>
+    <span class="k">case</span> <span class="n">error</span><span class="p">(</span><span class="n">ReceiptValidationError</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="nc">ReceiptValidator</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nv">receiptLoader</span> <span class="p">=</span> <span class="n">ReceiptLoader</span><span class="p">()</span>
+    <span class="kd">let</span> <span class="nv">receiptExtractor</span> <span class="p">=</span> <span class="n">ReceiptExtractor</span><span class="p">()</span>
+    <span class="kd">let</span> <span class="nv">receiptSignatureValidator</span> <span class="p">=</span> <span class="n">ReceiptSignatureValidator</span><span class="p">()</span>
+    <span class="kd">let</span> <span class="nv">receiptParser</span> <span class="p">=</span> <span class="n">ReceiptParser</span><span class="p">()</span>
+    
+    <span class="kd">func</span> <span class="nf">validateReceipt</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">ReceiptValidationResult</span> <span class="p">{</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nv">receiptData</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptLoader</span><span class="p">.</span><span class="n">loadReceipt</span><span class="p">()</span>
+            <span class="kd">let</span> <span class="nv">receiptContainer</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptExtractor</span><span class="p">.</span><span class="n">extractPKCS7Container</span><span class="p">(</span><span class="n">receiptData</span><span class="p">)</span>
+            
+            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignaturePresence</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
+            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignatureAuthenticity</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
+            
+            <span class="kd">let</span> <span class="nv">parsedReceipt</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptParser</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">parsedReceipt</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span> <span class="k">as</span><span class="o">!</span> <span class="n">ReceiptValidationError</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
 <p><a name="preparing-to-finish-receipt-validation" class="jump-target"></a></p>
 
-<h1 id="preparing-to-finish-receipt-validation">Preparing to finish receipt validation!</h1>
+<h2 id="preparing-to-finish-receipt-validation">Preparing to finish receipt validation!</h2>
 
 <p>What a journey this has been! We&rsquo;re <em>almost done</em> with this receipt validation process.</p>
 
@@ -806,9 +1257,7 @@ MathJax.Hub.Config({
   <div class="resources-header">
     You might also enjoy...
   </div>
-  
-
-<p><ul class="resources-content">
+  <ul class="resources-content">
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
     </li>
@@ -816,7 +1265,7 @@ MathJax.Hub.Config({
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
     </li>
     <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS &amp; Swift the Easy Way</a>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS & Swift the Easy Way</a>
     </li>
     <li>
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" title="Extracting a PKCS7 Container for Receipt Validation with Swift">Extracting a PKCS7 Container for Receipt Validation with Swift</a>
@@ -828,33 +1277,10 @@ MathJax.Hub.Config({
       <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
     </li>
   </ul>
-</div></p>
+</div>
 
 <p><a name="share" class="jump-target"></a></p>
 
-    <aside>
-      
-      
-      <div class="resources">
-        <div class="resources-header">
-            You might also enjoy...
-        </div>
-        
-        <ul class="resources-content">
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/">Receipt Validation – Verifying a Receipt Signature in Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/">Extracting a PKCS7 Container for Receipt Validation with Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">Loading a Receipt for Validation with Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">Preparing to Test Receipt Validation for iOS</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">OpenSSL for iOS and Swift the Easy Way</a></li>
-            
-        <ul>
-      
-    </aside>
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
