@@ -3,6 +3,7 @@ title: Local Receipt Validation for iOS in Swift From Start to Finish
 author: Andrew
 type: blog
 date: 2017-08-01T17:55:09+00:00
+lastmod: 2019-06-27T00:00:00+00:00
 url: /2017/08/01/local-receipt-validation-swift-start-finish/
 featured_image: /wp-content/uploads/2017/08/Graphic-Only-Local-Receipt-Validation-for-iOS-in-Swift-From-Start-to-Finish.png
 dsq_thread_id:
@@ -12,7 +13,7 @@ categories:
 tags:
   - Receipt Validation
   - Swift
-
+exclude_related: true
 ---
 Local receipt validation in Swift doesn't seem to be widely written about. I've been able to find snippets of code scattered across the Internet, but nothing that brought everything together in one spot so that I could wrap my head around the whole process.
 
@@ -28,7 +29,6 @@ Just want the code? Here you go!
   <div class="resources-header">
     Resources
   </div>
-  
   <ul class="resources-content">
     <li>
       <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
@@ -36,7 +36,7 @@ Just want the code? Here you go!
   </ul>
 </div>
 
-# Seven guides taking you from start to finish
+## Seven guides taking you from start to finish
 
 If you're interested in learning about each step along the way, here are the seven guides I've written on the topic of local receipt validation in Swift:
 
@@ -48,7 +48,7 @@ If you're interested in learning about each step along the way, here are the sev
   * [Receipt Validation – Parse and Decode a Receipt with Swift][6]
   * [Finalizing Receipt Validation in Swift – Computing a GUID Hash][7]
 
-# Disclaimer
+## Disclaimer
 
 Preventing software piracy is hard. The code presented in these guides and shared in the Git repository is not meant to protect you against unauthorized usage of your app or its features.
 
