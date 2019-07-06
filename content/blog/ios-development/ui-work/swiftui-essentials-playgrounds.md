@@ -11,6 +11,8 @@ tags:
   - SwiftUI
   - Playground
 images:
+    - images/social-assets/Twitter - Apple's SwiftUI Essentials Tutorial Series as Playgrounds.png
+    - images/social-assets/Facebook - Apple's SwiftUI Essentials Tutorial Series as Playgrounds.png
 ---
 
 <a name="resources" class="jump-target"></a>

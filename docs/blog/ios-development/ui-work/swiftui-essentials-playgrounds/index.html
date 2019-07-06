@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+            (function () {
+                if (window.location.hostname === "localhost") {
+                    console.log("Analytics not running on local dev.");
+                    return;
+                } else {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-33022655-1');
+                }
+            })();
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds" />
+<meta property="og:description" content="Provides Swift Playgrounds for the Essentials series of Apple&#39;s SwiftUI tutorials." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/" />
+
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Apple%27s%20SwiftUI%20Essentials%20Tutorial%20Series%20as%20Playgrounds.png" />
+
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Apple%27s%20SwiftUI%20Essentials%20Tutorial%20Series%20as%20Playgrounds.png" />
+<meta property="article:published_time" content="2019-07-06T03:11:48&#43;00:00"/>
+<meta property="article:modified_time" content="2019-07-06T03:11:48&#43;00:00"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Apple%27s%20SwiftUI%20Essentials%20Tutorial%20Series%20as%20Playgrounds.png"/>
+
+<meta name="twitter:title" content="Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds"/>
+<meta name="twitter:description" content="Provides Swift Playgrounds for the Essentials series of Apple&#39;s SwiftUI tutorials."/>
+<meta name="generator" content="Hugo 0.55.6" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Apple's SwiftUI Essentials Tutorial Series as Playgrounds",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/www.andrewcbancroft.com\/images\/social-assets\/Twitter%20-%20Apple%27s%20SwiftUI%20Essentials%20Tutorial%20Series%20as%20Playgrounds.png",
+    "height": "512",
+    "width": "1024"
+  },
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/ui-work\/swiftui-essentials-playgrounds\/",
+  "wordCount": "291",
+  "datePublished": "2019-07-06T03:11:48Z",
+  "dateModified": "2019-07-06T03:11:48Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "SwiftUI, Playground"
+
+  ,"description": "Provides Swift Playgrounds for the Essentials series of Apple's SwiftUI tutorials."
+}
+</script>
+
+
+
+    <title>Apple&rsquo;s SwiftUI Essentials Tutorial Series as Playgrounds</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft"><i class="fab fa-github"></i> GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg"><i class="fab fa-youtube"></i> YouTube</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft"><i class="fas fa-play"></i> Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://dataday.life"><i class="fas fa-link"></i> www.dataday.life</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/index.xml"><i class="fas fa-rss"></i> Feed</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds</h1>
+    </header>
+    <div class="content">
+
+    <p></p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#why-playgrounds">Why Playgrounds?</a></li>
+<li><a href="#repository-structure">Repository Structure</a>
+<ul>
+<li><a href="#creating-and-combining-views">Creating and Combining Views</a></li>
+<li><a href="#building-lists-and-navigation">Building Lists and Navigation</a></li>
+<li><a href="#handling-user-input">Handling User Input</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
+
+    
+
+<p><a name="resources" class="jump-target"></a>
+<div class="resources">
+<div class="resources-header">
+Resources
+</div>
+<ul class="resources-content">
+<li>
+<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/swiftui-essentials-playgrounds">SwiftUI Essentials Tutorials as Playgrounds</a>
+</li>
+<li>
+<i class="fas fa-link"></i> <a href="https://developer.apple.com/tutorials/swiftui" rel="nofollow">Apple&rsquo;s SwiftUI tutorials</a>
+</li>
+</ul>
+</div></p>
+
+<h2 id="why-playgrounds">Why Playgrounds?</h2>
+
+<p>I&rsquo;ve been making my way through <a href="https://developer.apple.com/tutorials/swiftui" rel="nofollow">Apple&rsquo;s SwiftUI tutorials</a>.</p>
+
+<p>If you&rsquo;re anything like me, you learn by tinkering with things. Change the modifiers, reposition <code>Text</code>, use a different <code>Image</code>, and see what happens.</p>
+
+<p>BUT.</p>
+
+<p>Without macOS Catalina, iterating quickly on these tinker sessions involves starting and stopping a simulator to see the changes.</p>
+
+<p>#annoying, right?</p>
+
+<p><em>However</em>&hellip; since you can <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">use SwiftUI in a Playground</a>, I decided to take my learning experience out of the sample Xcode projects that Apple provides, and turn them into Playgrounds.</p>
+
+<p>I&rsquo;ve <a href="https://github.com/andrewcbancroft/swiftui-essentials-playgrounds">pushed them to GitHub</a>, <em>just in case</em> they&rsquo;d be useful to you.</p>
+
+<h2 id="repository-structure">Repository Structure</h2>
+
+<p>Each tutorial in the Essentials series has its own completed Playground.</p>
+
+<p><a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">Download or clone</a> the repository to experiment with the SwiftUI tutorials individually in a Playground environment.</p>
+
+<p>Run the playground, and <a href="https://www.andrewcbancroft.com/blog/ios-development/xcode/showing-live-view-in-swift-playground/">show the live preview</a> to see it in action.</p>
+
+<p><img src="run-preview.gif" alt="Run and Preview" /></p>
+
+<h3 id="creating-and-combining-views">Creating and Combining Views</h3>
+
+<p>All resources required for generating the SwiftUI preview have been added under the Resources folder.</p>
+
+<p><img src="creating-combining-views.png" alt="Creating and Combining Views" /></p>
+
+<h3 id="building-lists-and-navigation">Building Lists and Navigation</h3>
+
+<p>All resources required for generating the SwiftUI preview have been added under the Resources folder.</p>
+
+<p>Helper code for loading the JSON data file and generating images in the UI at different sizes has been placed in the <code>Data Helpers.swift</code> file.</p>
+
+<p><code>Model Objects.swift</code> contains the code for the <code>Landmark</code> and <code>Coordinates</code> types.</p>
+
+<p><img src="building-lists-and-navigation.gif" alt="Building Lists and Navigation" /></p>
+
+<h3 id="handling-user-input">Handling User Input</h3>
+
+<p>All resources required for generating the SwiftUI preview have been added under the Resources folder.</p>
+
+<p>Helper code for loading the JSON data file <strong>including the new isFavorite property</strong>, and generating images in the UI at different sizes has been placed in the <code>Data Helpers.swift</code> file.</p>
+
+<p><code>Model Objects.swift</code> contains the code for the <code>Landmark</code> and <code>Coordinates</code> types.  It also adds the <code>UserData</code> bindable object.</p>
+
+<p><img src="handling-user-input.gif" alt="Handling User Input" /></p>
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">Using SwiftUI in a Playground</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-does-declarative-mean/">SwiftUI is Declarative.  What Does That Mean?</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/taking-first-steps-with-swiftui/">Taking First Steps With SwiftUI</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/xcode/showing-live-view-in-swift-playground/">Showing the Live View in a Swift Playground</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/">Using a Core Data Model in Swift Playgrounds</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 164 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

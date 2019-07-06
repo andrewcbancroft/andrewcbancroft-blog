@@ -5,10 +5,87 @@
     <description>Recent content about iOS development with Swift  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Jun 2019 04:40:54 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jul 2019 03:11:48 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/</link>
+      <pubDate>Sat, 06 Jul 2019 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/</guid>
+      <description>
+
+&lt;p&gt;&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+&lt;div class=&#34;resources&#34;&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+Resources
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-file-code&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/andrewcbancroft/swiftui-essentials-playgrounds&#34;&gt;SwiftUI Essentials Tutorials as Playgrounds&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://developer.apple.com/tutorials/swiftui&#34; rel=&#34;nofollow&#34;&gt;Apple&amp;rsquo;s SwiftUI tutorials&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;why-playgrounds&#34;&gt;Why Playgrounds?&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been making my way through &lt;a href=&#34;https://developer.apple.com/tutorials/swiftui&#34; rel=&#34;nofollow&#34;&gt;Apple&amp;rsquo;s SwiftUI tutorials&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re anything like me, you learn by tinkering with things. Change the modifiers, reposition &lt;code&gt;Text&lt;/code&gt;, use a different &lt;code&gt;Image&lt;/code&gt;, and see what happens.&lt;/p&gt;
+
+&lt;p&gt;BUT.&lt;/p&gt;
+
+&lt;p&gt;Without macOS Catalina, iterating quickly on these tinker sessions involves starting and stopping a simulator to see the changes.&lt;/p&gt;
+
+&lt;p&gt;#annoying, right?&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;However&lt;/em&gt;&amp;hellip; since you can &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/&#34;&gt;use SwiftUI in a Playground&lt;/a&gt;, I decided to take my learning experience out of the sample Xcode projects that Apple provides, and turn them into Playgrounds.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve &lt;a href=&#34;https://github.com/andrewcbancroft/swiftui-essentials-playgrounds&#34;&gt;pushed them to GitHub&lt;/a&gt;, &lt;em&gt;just in case&lt;/em&gt; they&amp;rsquo;d be useful to you.&lt;/p&gt;
+
+&lt;h2 id=&#34;repository-structure&#34;&gt;Repository Structure&lt;/h2&gt;
+
+&lt;p&gt;Each tutorial in the Essentials series has its own completed Playground.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/&#34;&gt;Download or clone&lt;/a&gt; the repository to experiment with the SwiftUI tutorials individually in a Playground environment.&lt;/p&gt;
+
+&lt;p&gt;Run the playground, and &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/xcode/showing-live-view-in-swift-playground/&#34;&gt;show the live preview&lt;/a&gt; to see it in action.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;run-preview.gif&#34; alt=&#34;Run and Preview&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-and-combining-views&#34;&gt;Creating and Combining Views&lt;/h3&gt;
+
+&lt;p&gt;All resources required for generating the SwiftUI preview have been added under the Resources folder.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;creating-combining-views.png&#34; alt=&#34;Creating and Combining Views&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;building-lists-and-navigation&#34;&gt;Building Lists and Navigation&lt;/h3&gt;
+
+&lt;p&gt;All resources required for generating the SwiftUI preview have been added under the Resources folder.&lt;/p&gt;
+
+&lt;p&gt;Helper code for loading the JSON data file and generating images in the UI at different sizes has been placed in the &lt;code&gt;Data Helpers.swift&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Model Objects.swift&lt;/code&gt; contains the code for the &lt;code&gt;Landmark&lt;/code&gt; and &lt;code&gt;Coordinates&lt;/code&gt; types.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;building-lists-and-navigation.gif&#34; alt=&#34;Building Lists and Navigation&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;handling-user-input&#34;&gt;Handling User Input&lt;/h3&gt;
+
+&lt;p&gt;All resources required for generating the SwiftUI preview have been added under the Resources folder.&lt;/p&gt;
+
+&lt;p&gt;Helper code for loading the JSON data file &lt;strong&gt;including the new isFavorite property&lt;/strong&gt;, and generating images in the UI at different sizes has been placed in the &lt;code&gt;Data Helpers.swift&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Model Objects.swift&lt;/code&gt; contains the code for the &lt;code&gt;Landmark&lt;/code&gt; and &lt;code&gt;Coordinates&lt;/code&gt; types.  It also adds the &lt;code&gt;UserData&lt;/code&gt; bindable object.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;handling-user-input.gif&#34; alt=&#34;Handling User Input&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Make a Bash Script Executable</title>
