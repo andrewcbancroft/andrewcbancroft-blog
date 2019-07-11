@@ -52,3 +52,7 @@ In Beta 2, simply <a href="https://www.andrewcbancroft.com/blog/ios-development/
 Not with Beta 3.
 
 You can save new data and wait (and wait... and wait...).  It doesn't show up in the UI until after you re-launch the app.
+
+Here's what I'm experiencing:
+
+{{< youtube DLAwrSCl3Cc >}}
