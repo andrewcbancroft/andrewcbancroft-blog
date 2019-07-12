@@ -14,6 +14,7 @@ images:
   - images/social-assets/Twitter - NSPersistentCloudKitContainer Buggy Behavior List.png
   - images/social-assets/Facebook - NSPersistentCloudKitContainer Buggy Behavior List.png
 disppsbadge: true
+toc: true
 ---
 
 `NSPersistentCloudKitContainer` is brand new with Xcode 11 and iOS 13.
@@ -23,6 +24,9 @@ It works... kind of... sometimes...
 I'm keeping this list of buggy behavior to help keep my head straight.  I've also filed bug reports on each.
 
 Hopefully others in the iOS community who are experimenting with `NSPersistentCloudKitContainer` can confirm or deny these same oddities.  If they're fixed in a subsequent beta, I'll come back here and note it!
+
+## Enabling CloudKit doesn't create a default container
+In Xcode 11 Beta 3, adding the iCloud capability and clicking the CloudKit checkbox does not automatically create a container for your app.
 
 ## Existing data doesn't sync
 Suppose that...
