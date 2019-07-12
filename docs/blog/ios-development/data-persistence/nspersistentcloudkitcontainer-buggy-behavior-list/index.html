@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/nspersistentcloudkitcontainer-buggy-behavior-list\/",
-  "wordCount": "294",
+  "wordCount": "288",
   "datePublished": "2019-07-11T04:40:54Z",
   "dateModified": "2019-07-11T04:40:54Z",
   "author": {
@@ -252,17 +252,23 @@ MathJax.Hub.Config({
 
 <h2 id="existing-data-doesn-t-sync">Existing data doesn&rsquo;t sync</h2>
 
-<p>Suppose that&hellip;
-* You have an existing Core Data app
-* The app is installed on two devices with the same user signed in to iCloud
-* Data has been saved independently on both devices</p>
+<p>Suppose that&hellip;</p>
+
+<ul>
+<li>You have an existing Core Data app</li>
+<li>The app is installed on two devices with the same user signed in to iCloud</li>
+<li>Data has been saved independently on both devices</li>
+</ul>
 
 <p>Now suppose that you want to take advantage of the automagic syncing offered with <code>NSPersistendCloudKitContainer</code>.</p>
 
-<p>If you&hellip;
-* Set up your app to work with <code>NSPersistentCloudKitContainer</code>
-* Rebuild your app and install it on both devices
-* Launch the app on both devices&hellip;</p>
+<p>If you&hellip;</p>
+
+<ul>
+<li>Set up your app to work with <code>NSPersistentCloudKitContainer</code></li>
+<li>Rebuild your app and install it on both devices</li>
+<li>Launch the app on both devices&hellip;</li>
+</ul>
 
 <p>You might expect the existing data to show up on both devices.  <strong>It doesn&rsquo;t.</strong></p>
 

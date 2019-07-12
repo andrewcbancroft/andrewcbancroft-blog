@@ -30,6 +30,7 @@ In Xcode 11 Beta 3, adding the iCloud capability and clicking the CloudKit check
 
 ## Existing data doesn't sync
 Suppose that...
+
 * You have an existing Core Data app
 * The app is installed on two devices with the same user signed in to iCloud
 * Data has been saved independently on both devices
@@ -37,6 +38,7 @@ Suppose that...
 Now suppose that you want to take advantage of the automagic syncing offered with `NSPersistendCloudKitContainer`.
 
 If you...
+
 * Set up your app to work with `NSPersistentCloudKitContainer`
 * Rebuild your app and install it on both devices
 * Launch the app on both devices...
