@@ -62,3 +62,19 @@ You can save new data and wait (and wait... and wait...).  It doesn't show up in
 Here's what I'm experiencing:
 
 {{< youtube DLAwrSCl3Cc >}}
+
+## Record accessor methods missing in Xcode
+
+"On *my* machine", attempting to use the `record(for:)` methods on `NSPersistentCloudKitContainer` produce the following error message:
+
+> Value of type 'NSPersistentCloudKitContainer' has no member 'record'
+
+![Has no member 'record'](no-record-method.png)
+
+I can "Jump to definition" and the methods appear to be there...
+
+![Jump to Definition](jump-definition.gif)
+
+Attempting to use the function in code doesn't work...
+
+![No Member](no-member.gif)

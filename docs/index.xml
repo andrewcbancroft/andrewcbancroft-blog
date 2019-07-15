@@ -73,6 +73,24 @@
   &lt;iframe src=&#34;//www.youtube.com/embed/DLAwrSCl3Cc&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
 &lt;/div&gt;
 
+
+&lt;h2 id=&#34;record-accessor-methods-missing-in-xcode&#34;&gt;Record accessor methods missing in Xcode&lt;/h2&gt;
+
+&lt;p&gt;&amp;ldquo;On &lt;em&gt;my&lt;/em&gt; machine&amp;rdquo;, attempting to use the &lt;code&gt;record(for:)&lt;/code&gt; methods on &lt;code&gt;NSPersistentCloudKitContainer&lt;/code&gt; produce the following error message:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Value of type &amp;lsquo;NSPersistentCloudKitContainer&amp;rsquo; has no member &amp;lsquo;record&amp;rsquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;no-record-method.png&#34; alt=&#34;Has no member &#39;record&#39;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I can &amp;ldquo;Jump to definition&amp;rdquo; and the methods appear to be there&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;jump-definition.gif&#34; alt=&#34;Jump to Definition&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Attempting to use the function in code doesn&amp;rsquo;t work&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;no-member.gif&#34; alt=&#34;No Member&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

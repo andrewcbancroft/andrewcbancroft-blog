@@ -78,7 +78,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/nspersistentcloudkitcontainer-buggy-behavior-list\/",
-  "wordCount": "288",
+  "wordCount": "339",
   "datePublished": "2019-07-11T04:40:54Z",
   "dateModified": "2019-07-11T04:40:54Z",
   "author": {
@@ -231,6 +231,7 @@ MathJax.Hub.Config({
 <li><a href="#enabling-cloudkit-doesn-t-create-a-default-container">Enabling CloudKit doesn&rsquo;t create a default container</a></li>
 <li><a href="#existing-data-doesn-t-sync">Existing data doesn&rsquo;t sync</a></li>
 <li><a href="#data-only-syncs-after-you-close-and-re-launch-your-app">Data only syncs after you close and re-launch your app</a></li>
+<li><a href="#record-accessor-methods-missing-in-xcode">Record accessor methods missing in Xcode</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -293,6 +294,24 @@ MathJax.Hub.Config({
   <iframe src="//www.youtube.com/embed/DLAwrSCl3Cc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
+
+<h2 id="record-accessor-methods-missing-in-xcode">Record accessor methods missing in Xcode</h2>
+
+<p>&ldquo;On <em>my</em> machine&rdquo;, attempting to use the <code>record(for:)</code> methods on <code>NSPersistentCloudKitContainer</code> produce the following error message:</p>
+
+<blockquote>
+<p>Value of type &lsquo;NSPersistentCloudKitContainer&rsquo; has no member &lsquo;record&rsquo;</p>
+</blockquote>
+
+<p><img src="no-record-method.png" alt="Has no member 'record'" /></p>
+
+<p>I can &ldquo;Jump to definition&rdquo; and the methods appear to be there&hellip;</p>
+
+<p><img src="jump-definition.gif" alt="Jump to Definition" /></p>
+
+<p>Attempting to use the function in code doesn&rsquo;t work&hellip;</p>
+
+<p><img src="no-member.gif" alt="No Member" /></p>
 
     <aside>
       
