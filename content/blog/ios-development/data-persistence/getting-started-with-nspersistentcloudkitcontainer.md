@@ -37,7 +37,7 @@ Resources
 </div>
 <ul class="resources-content">
 <li>
-<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/BlogIdeaList">Blog Idea List Example Xcode Project</a>
+<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/BlogIdeaList"> Blog Idea List Example Xcode Project</a>
 </li>
 <li>
 <i class="fas fa-link"></i> <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">Using Core Data With CloudKit - WWDC 2019 Session 202</a>
