@@ -67,4 +67,6 @@ I kept as much out-of-the-box stuff as I could.
 
 Throughout the project, you'll notice ✴️ symbols to help draw your eye to the Core Data pieces.
 
+Grab the project [over at GitHub](https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI) and explore.
+
 More on improving the architecture and features soon!
