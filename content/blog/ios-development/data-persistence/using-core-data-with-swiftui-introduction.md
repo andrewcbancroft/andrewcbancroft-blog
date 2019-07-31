@@ -18,7 +18,7 @@ toc: true
 
 How does Apple intend for us to use Core Data with SwiftUI?
 
-Apple gave us a path forward with the most recent beta release of iOS 13 (Beta 5 at the time of this writing)!
+They gave us a path forward with the most recent beta release of iOS 13 (Beta 5 at the time of this writing)!
 
 <a name="resources" class="jump-target"></a>
 <div class="resources">
