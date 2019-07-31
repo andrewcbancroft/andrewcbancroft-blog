@@ -47,16 +47,22 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Converting Complex Objective-C Macros to Swift Functions" />
-<meta property="og:description" content="The question of how to convert #define macros from Objective-C to Swift is explained fairly simply in the Apple developer documentation on the subject. For simple macros, it&rsquo;s a matter of rewriting them as global constants. In fact, if you&rsquo;re using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the alternative to Objective-C macros a while back." />
+<meta property="og:title" content="Using Core Data With SwiftUI - An Introduction" />
+<meta property="og:description" content="Example of how to use Core Data with SwiftUI." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/01/29/converting-complex-objective-c-macros-swift-functions/" />
-<meta property="article:published_time" content="2015-01-29T13:00:51&#43;00:00"/>
-<meta property="article:modified_time" content="2015-01-29T13:00:51&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/" />
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Converting Complex Objective-C Macros to Swift Functions"/>
-<meta name="twitter:description" content="The question of how to convert #define macros from Objective-C to Swift is explained fairly simply in the Apple developer documentation on the subject. For simple macros, it&rsquo;s a matter of rewriting them as global constants. In fact, if you&rsquo;re using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the alternative to Objective-C macros a while back."/>
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20Core%20Data%20With%20SwiftUI.png" />
+
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Using%20Core%20Data%20With%20SwiftUI.png" />
+<meta property="article:published_time" content="2019-07-31T04:40:54&#43;00:00"/>
+<meta property="article:modified_time" content="2019-07-31T04:40:54&#43;00:00"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20Core%20Data%20With%20SwiftUI.png"/>
+
+<meta name="twitter:title" content="Using Core Data With SwiftUI - An Introduction"/>
+<meta name="twitter:description" content="Example of how to use Core Data with SwiftUI."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -64,24 +70,30 @@
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Converting Complex Objective-C Macros to Swift Functions",
-  "url": "https:\/\/www.andrewcbancroft.com\/2015\/01\/29\/converting-complex-objective-c-macros-swift-functions\/",
-  "wordCount": "526",
-  "datePublished": "2015-01-29T13:00:51Z",
-  "dateModified": "2015-01-29T13:00:51Z",
+  "headline": "Using Core Data With SwiftUI - An Introduction",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/www.andrewcbancroft.com\/images\/social-assets\/Twitter%20-%20Using%20Core%20Data%20With%20SwiftUI.png",
+    "height": "512",
+    "width": "1024"
+  },
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/using-core-data-with-swiftui-introduction\/",
+  "wordCount": "264",
+  "datePublished": "2019-07-31T04:40:54Z",
+  "dateModified": "2019-07-31T04:40:54Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "Swift, #define, Complex Macro"
+  "keywords": "Core Data, SwiftUI"
 
-  ,"description": ""
+  ,"description": "Example of how to use Core Data with SwiftUI."
 }
 </script>
 
 
 
-    <title>Converting Complex Objective-C Macros to Swift Functions</title>
+    <title>Using Core Data With SwiftUI - An Introduction</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -194,126 +206,92 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">Converting Complex Objective-C Macros to Swift Functions</h1>
+        <div class="alert alert-primary" role="alert">
+            Learning about data technologies on iOS? <br/><br/>
+            I've created courses on <a href="http://bit.ly/core-data-swift" class="alert-link">Core Data</a>, <a href="http://bit.ly/cloudkit-fundamentals" class="alert-link">CloudKit</a>, and <a href="http://bit.ly/core-data-primary-keys" class="alert-link">the Big Picture of Data Persistence on iOS</a> for <a href="http://bit.ly/ps-author-page" class="alert-link">Pluralsight</a>.  <br/><br/>Deepen your understanding by checking them out!
+          </div>
+      <h1 class="article-title">Using Core Data With SwiftUI - An Introduction</h1>
     </header>
     <div class="content">
 
     <p></p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#first-things-first">First Things First</a></li>
+<li><a href="#on-the-right-path">On the Right Path</a></li>
+<li><a href="#how-does-it-work">How Does It Work?</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
 
     
 
-<p>The question of how to convert <code>#define</code> macros from Objective-C to Swift is explained fairly simply in the <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-XID_20">Apple developer documentation on the subject</a>. For <em>simple</em> macros, it&rsquo;s a matter of rewriting them as global constants. In fact, if you&rsquo;re using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the <a href="http://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/">alternative to Objective-C macros</a> a while back.</p>
+<p>How does Apple intend for us to use Core Data with SwiftUI?</p>
 
-<p>Where we run into trouble is when we need to port <em>complex</em> Objective-C macros to Swift. According to the <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-XID_20">same documentation from Apple</a>,</p>
+<p>Apple gave us a path forward with the most recent beta release of iOS 13 (Beta 5 at the time of this writing)!</p>
 
-<blockquote>
-<p>Complex macros are used in C and Objective-C but have no counterpart in Swift.</p>
-</blockquote>
-
-<p>Yikes!</p>
-
-<p>Thankfully there <em>is</em> a silver lining after that scary first sentence:</p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/complex_macros.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/complex_macros.png" alt="Complex Macros Explanation" width="670" height="168" class="alignnone size-full wp-image-11214" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/complex_macros.png 670w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/complex_macros-300x75.png 300w" sizes="(max-width: 670px) 100vw, 670px" /></a></p>
-
-<blockquote>
-<p>In Swift, you can use functions and generics to achieve the same results without any compromises.</p>
-</blockquote>
-
-<p>That makes sense, actually! Complex Objective-C macros tend to look a <em>lot</em> like functions, so the transition to Swift was straightforward in a case I ran across recently.</p>
-
-<h2 id="two-examples">Two Examples:</h2>
-
-<h3 id="a-simple-example">A simple example</h3>
-
-<p>What could we do in Swift to convert an Objective-C macro that looks something like this?</p>
-
-<p><pre class="lang:objc decode:true " >#define SQUARE_NUMBER(n) n * n</p>
-
-<pre><code>
-One thing we could do is write a function that produces the same thing:
-
-```swift
-func squareNumber(n: Int) -&gt; Int {
-    return n * n
-}
-</code></pre>
-
-<h3 id="a-little-more-complicated">A little more complicated</h3>
-
-<p>An example situation that came to me on Twitter took the form of converting a macro that was a little more complicated than the simple example just presented. The input to the complex macro was a color, represented as a hexadecimal value, along with an alpha, represented as a float. The output? A <code>UIColor</code> instance based on some bitwise manipulations to that hex value.</p>
-
-<p>I&rsquo;ve created a GitHub example if you&rsquo;d like to play around with everything. The relevant code is reproduced below&#8230;</p>
-
+<p><a name="resources" class="jump-target"></a>
 <div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/ConvertComplexMacroExample" onclick="_gaq.push(['_trackEvent', 'outbound-article', 'https://github.com/andrewcbancroft/ConvertComplexMacroExample', 'Example Xcode Project']);" title="Convert Complex Macro Example Project">Example Xcode Project</a>
-    </li>
-  </ul>
+<div class="resources-header">
+Resources
+</div>
+<ul class="resources-content">
+<li>
+<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI"> Blog Idea List SwiftUI Example Xcode Project</a>
+</li>
+<li>
+<i class="fas fa-link"></i> <a href="https://developer.apple.com/videos/play/wwdc2019/226/" rel="nofollow">Data Flow Through SwiftUI - WWDC 2019 Session 226</a>
+</li>
+</ul>
 </div></p>
 
-<p>The macro form looked like this:</p>
+<h2 id="first-things-first">First Things First</h2>
 
-<p><pre class="lang:objc decode:true " >#define UIColorFromRGB(rgbValue, alphaValue) <br />
-[UIColor colorWithRed:((float)((rgbValue &gt;&gt; 16) &amp; 0xFF))/255.0 <br />
-green:((float)((rgbValue &gt;&gt; 8) &amp; 0xFF))/255.0 <br />
-blue:((float)((rgbValue &gt;&gt; 0) &amp; 0xFF))/255.0 <br />
-alpha:alphaValue]</p>
+<p>To work effectively with Core Data in SwiftUI, the <a href="https://developer.apple.com/videos/play/wwdc2019/226/">Data Flow Through SwiftUI</a> WWDC session is a huge help.</p>
 
-<pre><code>
-Rewriting it as a Swift function:
+<p>With this talk under your belt, you&rsquo;ll have at least been introduced to key words like <code>@State</code>, <code>@Binding</code>, <code>@ObservableObject</code> (which replaces <code>@BindableObject</code> as of Beta 5), and <code>@Environment</code>.</p>
 
-```swift
-func UIColorFromRGB(rgb: Int, alpha: Float) -&gt; UIColor {
-    let red = CGFloat(Float(((rgb&gt;&gt;16) &amp; 0xFF)) / 255.0)
-    let green = CGFloat(Float(((rgb&gt;&gt;8) &amp; 0xFF)) / 255.0)
-    let blue = CGFloat(Float(((rgb&gt;&gt;0) &amp; 0xFF)) / 255.0)
-    let alpha = CGFloat(alpha)
-    
-    return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-}
-</code></pre>
+<h2 id="on-the-right-path">On the Right Path</h2>
 
-<p>The main thing to keep in mind is that the output of the macro/function is the focus. The internals could change to better-adapt to Swift&rsquo;s features if you desire. If the macro was ugly inside, make it nice in Swift!</p>
+<p>Even prior to Beta 5, the &ldquo;right path&rdquo; for using Core Data with SwiftUI seemed to be through the <code>@Environment</code>.</p>
 
-<h3 id="where-should-the-function-go">Where should the function go?</h3>
+<p>In the release notes for iOS Beta 5, Apple seems to be leading us there:</p>
+
+<blockquote>
+<p><code>NSManagedObject</code> now conforms to <code>ObservableObject</code>.</p>
+
+<p>The new <code>@FetchRequest</code> property wrapper can drive views from the results of a fetch request</p>
+
+<p><code>managedObjectContext</code> is now <strong>included in the environment</strong>.</p>
+</blockquote>
+
+<p>With these three pieces in place, Apple has given us out-of-the-box support for using Core Data with SwiftUI.</p>
+
+<p>So&hellip;</p>
+
+<h2 id="how-does-it-work">How Does It Work?</h2>
+
+<p>I decided to create a basic, single-view app that can</p>
 
 <ul>
-<li>For organization&rsquo;s sake, you could create a new .swift file and place the function inside it at the global level. This would provide the most convenient transition for your Objective-C to Swift conversion, because <code>#defines</code> were available wherever you imported the Objective-C header file.</li>
-<li>Alternatively, you could encapsulate the function in a class/struct/enum.</li>
+<li>Persist a list of <code>BlogIdea</code>s to a Core Data persistent store</li>
+<li>Use the new <code>@FetchRequest</code> property wrapper to fetch <code>BlogIdea</code>s</li>
+<li>Use the <code>@Environment</code>&rsquo;s <code>managedObjectContext</code> to create and delete <code>BlogIdea</code>s</li>
 </ul>
 
-<h3 id="wrapping-up">Wrapping up</h3>
+<p>I kept as much out-of-the-box stuff as I could.</p>
 
-<p>With the power of Swift functions and the ability to even declare and use them globally, converting complex macros to a better Swift alternative is much less daunting than you might expect.</p>
+<p>Throughout the project, you&rsquo;ll notice ✴️ symbols to help draw your eye to the Core Data pieces.</p>
+
+<p>More on improving the architecture and features soon!</p>
 
     <aside>
       
-      
-      <div class="resources">
-        <div class="resources-header">
-            You might also enjoy...
-        </div>
-        
-        <ul class="resources-content">
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/">Swift Alternative to Objective-C Macros</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/">Conveniently Transforming Immutable Types in Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/">Unit Testing Model Layer with Core Data and Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/">Immutable Types with Changing State in Swift</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/">Getting Started with Unit Testing in Swift</a></li>
-            
-        <ul>
       
     </aside>
 
