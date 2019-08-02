@@ -47,20 +47,22 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Swift UIColor Extension – Create using RGB Values (Not %)" />
-<meta property="og:description" content="I&rsquo;ll say it up front – I&rsquo;m not a great designer. What tends to happen with me and projects is that I end up saving all-things color until the end of a project. You know&#8230; the old procrastinator&rsquo;s motto: &ldquo;If you don&rsquo;t get it done today and tomorrow doesn&rsquo;t come, then you ain&rsquo;t gotta do it!&#8221;
-So the other day came and I had to &ldquo;do color&#8221;&#8230;
-Thankfully, a buddy of mine has good skills in the area, and gave me a color palette to use." />
+<meta property="og:title" content="How to Pass NSManagedObjectContext to a SwiftUI View" />
+<meta property="og:description" content="Step 1 to using Core Data with SwiftUI is to initialize the Core Data stack and pass an instance of your NSManagedObjectContext to your view.
+First Things First The remainder of this how-to assumes that you&rsquo;ve already got a way to initialize the Core Data stack
+Ticking the &lsquo;Use Core Data&rsquo; checkbox when you start a new app will place some boilerplate code in AppDelegate
+Breaking Down the Code SceneDelegate." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/06/25/swift-uicolor-extension-create-using-rgb-values-not/" />
-<meta property="article:published_time" content="2015-06-26T03:11:48&#43;00:00"/>
-<meta property="article:modified_time" content="2015-06-26T03:11:48&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/" />
+<meta property="article:published_time" content="2019-08-02T03:11:48&#43;00:00"/>
+<meta property="article:modified_time" content="2019-08-02T03:11:48&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Swift UIColor Extension – Create using RGB Values (Not %)"/>
-<meta name="twitter:description" content="I&rsquo;ll say it up front – I&rsquo;m not a great designer. What tends to happen with me and projects is that I end up saving all-things color until the end of a project. You know&#8230; the old procrastinator&rsquo;s motto: &ldquo;If you don&rsquo;t get it done today and tomorrow doesn&rsquo;t come, then you ain&rsquo;t gotta do it!&#8221;
-So the other day came and I had to &ldquo;do color&#8221;&#8230;
-Thankfully, a buddy of mine has good skills in the area, and gave me a color palette to use."/>
+<meta name="twitter:title" content="How to Pass NSManagedObjectContext to a SwiftUI View"/>
+<meta name="twitter:description" content="Step 1 to using Core Data with SwiftUI is to initialize the Core Data stack and pass an instance of your NSManagedObjectContext to your view.
+First Things First The remainder of this how-to assumes that you&rsquo;ve already got a way to initialize the Core Data stack
+Ticking the &lsquo;Use Core Data&rsquo; checkbox when you start a new app will place some boilerplate code in AppDelegate
+Breaking Down the Code SceneDelegate."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -68,16 +70,16 @@ Thankfully, a buddy of mine has good skills in the area, and gave me a color pal
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Swift UIColor Extension – Create using RGB Values (Not %)",
-  "url": "https:\/\/www.andrewcbancroft.com\/2015\/06\/25\/swift-uicolor-extension-create-using-rgb-values-not\/",
-  "wordCount": "595",
-  "datePublished": "2015-06-26T03:11:48Z",
-  "dateModified": "2015-06-26T03:11:48Z",
+  "headline": "How to Pass NSManagedObjectContext to a SwiftUI View",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/passing-nsmanagedobjectcontext-to-swiftui-view\/",
+  "wordCount": "230",
+  "datePublished": "2019-08-02T03:11:48Z",
+  "dateModified": "2019-08-02T03:11:48Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "Swift, Extension, UIColor"
+  "keywords": "Core Data, SwiftUI"
 
   ,"description": ""
 }
@@ -85,7 +87,7 @@ Thankfully, a buddy of mine has good skills in the area, and gave me a color pal
 
 
 
-    <title>Swift UIColor Extension – Create using RGB Values (Not %)</title>
+    <title>How to Pass NSManagedObjectContext to a SwiftUI View</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -198,7 +200,11 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">Swift UIColor Extension – Create using RGB Values (Not %)</h1>
+        <div class="alert alert-primary" role="alert">
+            Learning about data technologies on iOS? <br/><br/>
+            I've created courses on <a href="http://bit.ly/core-data-swift" class="alert-link">Core Data</a>, <a href="http://bit.ly/cloudkit-fundamentals" class="alert-link">CloudKit</a>, and <a href="http://bit.ly/core-data-primary-keys" class="alert-link">the Big Picture of Data Persistence on iOS</a> for <a href="http://bit.ly/ps-author-page" class="alert-link">Pluralsight</a>.  <br/><br/>Deepen your understanding by checking them out!
+          </div>
+      <h1 class="article-title">How to Pass NSManagedObjectContext to a SwiftUI View</h1>
     </header>
     <div class="content">
 
@@ -206,80 +212,98 @@ MathJax.Hub.Config({
 
     
 
-<p>I&rsquo;ll say it up front – I&rsquo;m not a great designer. What tends to happen with me and projects is that I end up saving all-things color until the <em>end</em> of a project. You know&#8230; the old procrastinator&rsquo;s motto: &ldquo;If you don&rsquo;t get it done today and tomorrow doesn&rsquo;t come, then you ain&rsquo;t gotta do it!&#8221;</p>
+<p>Step 1 to <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/">using Core Data with SwiftUI</a> is to initialize the Core Data stack and pass an instance of your <code>NSManagedObjectContext</code> to your view.</p>
 
-<p>So the other day came and I had to &ldquo;do color&#8221;&#8230;</p>
+<h2 id="first-things-first">First Things First</h2>
 
-<p>Thankfully, a buddy of mine has good skills in the area, and gave me a color palette to use. Score!</p>
+<p>The remainder of this how-to assumes that you&rsquo;ve already got a way to initialize the Core Data stack</p>
 
-<p><a name="working-with-colors" class="jump-target"></a></p>
+<p>Ticking the &lsquo;Use Core Data&rsquo; checkbox when you start a new app will place some boilerplate code in <code>AppDelegate</code></p>
 
-<h3 id="working-with-colors">Working with colors</h3>
+<h2 id="breaking-down-the-code">Breaking Down the Code</h2>
 
-<p>I decided it might be nice to go ahead and encapsulate my color scheme in code and set the various tints and font colors and navigation bar backgrounds to their appropriate values in code.</p>
+<p><strong>SceneDelegate.swift</strong>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> 
+            <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> 
+            <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
 
-<p>This seemed like a really nice way to keep all the color stuff in once place, so that if I ever needed to change things, I&rsquo;d be able to do it in one spot, and the whole app would just magically take on the adjustments.</p>
-
-<p>Inevitably, I&rsquo;d need to create myself some <code>UIColor</code> instances.</p>
-
-<p><a name="baffled" class="jump-target"></a></p>
-
-<h3 id="baffled">Baffled</h3>
-
-<p>For those of us who spend a lot of time designing in the Storyboard, as opposed to creating views and layouts directly in code, coming up against the <code>UIColor</code> API when you haven&rsquo;t in a while can be&#8230;well&#8230;baffling. Not because it&rsquo;s &ldquo;hard&#8221; but because it&rsquo;s not as intuitive as it looks on first-sight. Here&rsquo;s what I mean&#8230;</p>
-
-<p>My color-adept friend had given me some hex color values. Looking at <code>UIColor</code> of course, there&rsquo;s no initializer or class function to create a color with such a value. No worries, though – there are plenty of converters out there!</p>
-
-<p>So I got my red, green, and blue values all in order and did the thing that seemed most obvious: I supplied <code>UIColor</code>&#8216;s init method with those values, verbatim:</p>
-
-<p><code>let primaryColor = UIColor(red: 39.0, green: 44.0, blue: 79.0, alpha: 1.0)</code></p>
-
-<p>And then I realized that I hit the same &ldquo;gotcha&#8221; that I had before. <code>UIColor</code> takes a <em>percentage</em> of red, green, and blue, not the <em>value</em> of red, green, and blue. I needed to divide the values by 255.0 each in order to obtain a value between 0 and 1 as the initializer requires. Sure, this is in <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIColor_Class/#//apple_ref/occ/instm/UIColor/initWithRed:green:blue:alpha:">the documentation</a>:</p>
-
-<blockquote>
-<p>The red component of the color object, specified as a value from 0.0 to 1.0.</p>
-</blockquote>
-
-<p>Similar instructions appear for green, blue, and alpha.</p>
-
-<p>It&rsquo;s easy enough to fix, but man – that sure seems like an easy-to-fall-for mistake if you&rsquo;re coming to this API after spending time away from it, or if you&rsquo;re brand new to iOS development.</p>
-
-<p><a name="uicolor-extension" class="jump-target"></a></p>
-
-<h3 id="uicolor-extension">UIColor extension</h3>
-
-<p>Having to divide the RGB values by 255.0 every time was just annoying enough that I created a <code>UIColor</code> extension to help me be able to do the intuitive thing and just supply the RGB values verbatim, like I&rsquo;d done to begin with. Here it is for your enjoyment:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">extension</span> <span class="nc">UIColor</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">colorWithRedValue</span><span class="p">(#</span><span class="n">redValue</span><span class="p">:</span> <span class="n">CGFloat</span><span class="p">,</span> <span class="n">greenValue</span><span class="p">:</span> <span class="n">CGFloat</span><span class="p">,</span> <span class="n">blueValue</span><span class="p">:</span> <span class="n">CGFloat</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="n">CGFloat</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UIColor</span> <span class="p">{</span>
-<span class="ln">3</span>        <span class="k">return</span> <span class="n">UIColor</span><span class="p">(</span><span class="n">red</span><span class="p">:</span> <span class="n">redValue</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="n">green</span><span class="p">:</span> <span class="n">greenValue</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="n">blue</span><span class="p">:</span> <span class="n">blueValue</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="n">alpha</span><span class="p">)</span>
-<span class="ln">4</span>    <span class="p">}</span>
-<span class="ln">5</span><span class="p">}</span></code></pre></div>
-<h3 id="wrapping-up">Wrapping up</h3>
-
-<p>I feel a little silly for having made this mistake, but hey – making the mistake is a good way to remember what not to do in the future. And now that I&rsquo;ve written an extension (and this blog post), maybe I&rsquo;ll be set for next time I spend extended periods of time avoiding colors.</p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" title="Fade In / Out Animations as Class Extensions in Swift">Fade In / Out Animations as Class Extensions in Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/10/15/rotate-animation-in-swift/" title="Rotate Animation in Swift">Rotate Animation in Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/" title="Slide In Animation in Swift">Slide In Animation in Swift</a>
-    </li>
-  </ul>
+    <span class="k">if</span> <span class="kd">let</span> <span class="nv">windowScene</span> <span class="p">=</span> <span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">window</span> <span class="p">=</span> <span class="n">UIWindow</span><span class="p">(</span><span class="n">windowScene</span><span class="p">:</span> <span class="n">windowScene</span><span class="p">)</span>
+        
+        <span class="c1">// ❇️ Get the managedObjectContext from the persistent container</span>
+        <span class="c1">// ❇️ This assumes you&#39;ve left the Core Data stack creation code within AppDelegate</span>
+        <span class="kd">let</span> <span class="nv">managedObjectContext</span> <span class="p">=</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">delegate</span> <span class="k">as</span><span class="o">!</span> <span class="n">AppDelegate</span><span class="p">).</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span>
+        
+        <span class="c1">// ❇️ Pass it to the ContentView through the </span>
+        <span class="c1">// ❇️ managedObjectContext @Environment variable</span>
+        <span class="kd">let</span> <span class="nv">contentView</span> <span class="p">=</span> <span class="n">ContentView</span><span class="p">()</span>
+                            <span class="p">.</span><span class="n">environment</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">,</span> <span class="n">managedObjectContext</span><span class="p">)</span>
+        
+        <span class="n">window</span><span class="p">.</span><span class="n">rootViewController</span> <span class="p">=</span> <span class="n">UIHostingController</span><span class="p">(</span><span class="n">rootView</span><span class="p">:</span> <span class="n">contentView</span><span class="p">)</span>
+        
+        <span class="kc">self</span><span class="p">.</span><span class="n">window</span> <span class="p">=</span> <span class="n">window</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">makeKeyAndVisible</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
 </div></p>
 
-<p><a name="share" class="jump-target"></a></p>
+<p><strong>ContentView.swift</strong></p>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">SwiftUI</span>
+
+<span class="kd">struct</span> <span class="nc">SwiftUIView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+    <span class="c1">// ❇️ Access the @Environment&#39;s managedObjectContext variable</span>
+    <span class="c1">// ❇️ and keep a reference to use later</span>
+    <span class="p">@</span><span class="n">Environment</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">)</span> <span class="kd">var</span> <span class="nv">managedObjectContext</span>
+
+    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+        <span class="c1">// ❇️ Use self.managedObjectContext however you need within your SwiftUI view!</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
     <aside>
       
@@ -291,15 +315,15 @@ MathJax.Hub.Config({
         
         <ul class="resources-content">
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/10/15/rotate-animation-in-swift/">Rotate Animation in Swift</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/">Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/">Creating Calendars with Event Kit and Swift</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">Using SwiftUI in a Playground</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/">Improvements to Unit Testing in Swift with Xcode 7</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-does-declarative-mean/">SwiftUI is Declarative.  What Does That Mean?</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/">Access Sub-Controllers from a UINavigationController in Swift</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/taking-first-steps-with-swiftui/">Taking First Steps With SwiftUI</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/">Sync Table View Data: NSFetchedResultsController and Swift</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/">iOS Data Persistence: The Big Picture</a></li>
             
         <ul>
       
