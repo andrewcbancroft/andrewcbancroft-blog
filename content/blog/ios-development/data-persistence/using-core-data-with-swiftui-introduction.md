@@ -55,7 +55,7 @@ With these three pieces in place, Apple has given us out-of-the-box support for 
 
 So...
 
-## How Does It Work?
+## How Do You Get Started?
 
 I decided to create a basic, single-view app that can
 
@@ -67,6 +67,7 @@ Grab the project [over at GitHub](https://github.com/andrewcbancroft/BlogIdeaLis
 
 I kept as much out-of-the-box stuff as I could.
 
+## How Does It Work?
 Throughout the project, you'll notice emoji symbols to help draw your eye to the Core Data pieces.
 
 ❇️ Alerts you to Core Data pieces
