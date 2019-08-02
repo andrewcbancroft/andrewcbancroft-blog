@@ -50,11 +50,13 @@ Resources
 &lt;p&gt;In the release notes for iOS Beta 5, Apple seems to be leading us there:&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;NSManagedObject&lt;/code&gt; now conforms to &lt;code&gt;ObservableObject&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;NSManagedObject&lt;/code&gt; now conforms to &lt;code&gt;ObservableObject&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;The new &lt;code&gt;@FetchRequest&lt;/code&gt; property wrapper can drive views from the results of a fetch request&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;The new &lt;code&gt;@FetchRequest&lt;/code&gt; property wrapper can drive views from the results of a fetch request&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;&lt;code&gt;managedObjectContext&lt;/code&gt; is now &lt;strong&gt;included in the environment&lt;/strong&gt;.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;managedObjectContext&lt;/code&gt; is now &lt;strong&gt;included in the environment&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;With these three pieces in place, Apple has given us out-of-the-box support for using Core Data with SwiftUI.&lt;/p&gt;

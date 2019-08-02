@@ -45,11 +45,11 @@ Even prior to Beta 5, the "right path" for using Core Data with SwiftUI seemed t
 
 In the release notes for iOS Beta 5, Apple seems to be leading us there:
 
-> `NSManagedObject` now conforms to `ObservableObject`. 
+> * `NSManagedObject` now conforms to `ObservableObject`. 
 
-> The new `@FetchRequest` property wrapper can drive views from the results of a fetch request
+> * The new `@FetchRequest` property wrapper can drive views from the results of a fetch request
 
-> `managedObjectContext` is now **included in the environment**.
+> * `managedObjectContext` is now **included in the environment**.
 
 With these three pieces in place, Apple has given us out-of-the-box support for using Core Data with SwiftUI.
 
