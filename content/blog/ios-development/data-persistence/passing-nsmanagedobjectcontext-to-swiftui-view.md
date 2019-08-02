@@ -14,7 +14,7 @@ tags:
 images:
 ---
 
-Step 1 to [using Core Data with SwiftUI](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/) is to initialize the Core Data stack and pass an instance of your `NSManagedObjectContext` to your view.
+Step one to [using Core Data with SwiftUI](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/) is to initialize the Core Data stack and pass an instance of your `NSManagedObjectContext` to your view.
 
 ## First Things First
 The remainder of this how-to assumes that you've already got a way to initialize the Core Data stack
