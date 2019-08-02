@@ -61,9 +61,9 @@ I decided to create a basic, single-view app that can
 
 * Persist a list of `BlogIdea`s to a Core Data persistent store
 * Use the new `@FetchRequest` property wrapper to fetch `BlogIdea`s
-* Use the `@Environment`'s `managedObjectContext` to create and delete `BlogIdea`s
+* Use the `@Environment`'s `managedObjectContext` to create, update, and delete `BlogIdea`s
 
-Grab the project [over at GitHub](https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI) and explore.
+Grab the project [over at GitHub](https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI) and explore!
 
 I kept as much out-of-the-box stuff as I could.
 

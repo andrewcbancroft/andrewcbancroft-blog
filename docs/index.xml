@@ -68,10 +68,10 @@ Resources
 &lt;ul&gt;
 &lt;li&gt;Persist a list of &lt;code&gt;BlogIdea&lt;/code&gt;s to a Core Data persistent store&lt;/li&gt;
 &lt;li&gt;Use the new &lt;code&gt;@FetchRequest&lt;/code&gt; property wrapper to fetch &lt;code&gt;BlogIdea&lt;/code&gt;s&lt;/li&gt;
-&lt;li&gt;Use the &lt;code&gt;@Environment&lt;/code&gt;&amp;rsquo;s &lt;code&gt;managedObjectContext&lt;/code&gt; to create and delete &lt;code&gt;BlogIdea&lt;/code&gt;s&lt;/li&gt;
+&lt;li&gt;Use the &lt;code&gt;@Environment&lt;/code&gt;&amp;rsquo;s &lt;code&gt;managedObjectContext&lt;/code&gt; to create, update, and delete &lt;code&gt;BlogIdea&lt;/code&gt;s&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Grab the project &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt;over at GitHub&lt;/a&gt; and explore.&lt;/p&gt;
+&lt;p&gt;Grab the project &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt;over at GitHub&lt;/a&gt; and explore!&lt;/p&gt;
 
 &lt;p&gt;I kept as much out-of-the-box stuff as I could.&lt;/p&gt;
 
