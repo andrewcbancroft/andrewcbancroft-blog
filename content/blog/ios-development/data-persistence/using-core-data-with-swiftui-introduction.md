@@ -67,6 +67,10 @@ Grab the project [over at GitHub](https://github.com/andrewcbancroft/BlogIdeaLis
 
 I kept as much out-of-the-box stuff as I could.
 
-Throughout the project, you'll notice ✴️ symbols to help draw your eye to the Core Data pieces.
+Throughout the project, you'll notice emoji symbols to help draw your eye to the Core Data pieces.
+
+❇️ Alerts you to Core Data pieces
+
+ℹ️ Alerts you to general info about what my brain was thinking when I wrote the code
 
 More on improving the architecture and features soon!
