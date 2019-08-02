@@ -65,3 +65,4 @@ struct SwiftUIView: View {
 }
 {{< / highlight >}}
 
+For a more complete guide to using Core Data with SwiftUI, you can refer to the [introduction I published](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/).  It includes an example project with all of the pieces stitched together!
