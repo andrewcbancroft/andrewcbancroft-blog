@@ -36,9 +36,10 @@ Resources
 </div>
 
 ## First Things First
-To work effectively with Core Data in SwiftUI, the [Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/) WWDC session is a huge help.
 
-With this talk under your belt, you'll have at least been introduced to key words like `@State`, `@Binding`, `@ObservableObject` (which replaces `@BindableObject` as of Beta 5), and `@Environment`.
+* To work effectively with Core Data in SwiftUI, the [Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/) WWDC session is a huge help.
+
+* With this talk under your belt, you'll have at least been introduced to key words like `@State`, `@Binding`, `@ObservableObject` (which replaces `@BindableObject` as of Beta 5), and `@Environment`.
 
 ## On the Right Path
 Even prior to Beta 5, the "right path" for using Core Data with SwiftUI seemed to be through the `@Environment`.
@@ -64,6 +65,10 @@ I decided to create a basic, single-view app that can
 * Use the `@Environment`'s `managedObjectContext` to create, update, and delete `BlogIdea`s
 
 Grab the project [over at GitHub](https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI) and explore!
+
+The sample project that includes a single Core Data Entity named `BlogIdea`:
+
+![Blog Idea Entity](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png)
 
 I kept as much out-of-the-box stuff as I could.
 

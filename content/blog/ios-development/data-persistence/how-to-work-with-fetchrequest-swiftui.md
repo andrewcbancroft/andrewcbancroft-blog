@@ -1,24 +1,22 @@
 ---
-title: "How to Pass NSManagedObjectContext to a SwiftUI View"
-description: "Breaks down how to pass an NSManagedObjectContext instance to your SwiftUI Views."
+title: "How to work with @FetchRequest in SwiftUI"
+description: "Breaks down how to use the @FetchRequest property wrapper in your SwiftUI Views."
 author: Andrew
 type: blog
-draft: false
+draft: true
 date: 2019-08-02T03:11:48+00:00
 wip: false
 showrecent: false
 disppsbadge: true
-toc: true
 tags:
   - Core Data
   - SwiftUI
 images:
 ---
 
-Step one to [using Core Data with SwiftUI](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/) is to initialize the Core Data stack and pass an instance of your `NSManagedObjectContext` to your view.
+Once you've [passed an NSManagedObjectContext instance to your SwiftUI View](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/), you'll need to pull data out of your Core Data persistent store with a fetch request.
 
 ## First Things First
-
 * The remainder of this how-to assumes that you've already got a way to initialize the Core Data stack.
 
   * Ticking the 'Use Core Data' checkbox when you start a new app will place some boilerplate code in `AppDelegate`.
@@ -40,13 +38,6 @@ Resources
 </div>
 
 ## Breaking Down the Code
-There are two key components to this:  the Core Data Stack, and the SwiftUI `@Environment`.
-
-"Passing in" your managed object context will probably happen early on in your app's launch sequence.  `SceneDelegate` is where I pass mine in with the Blog Idea List app.
-
-On the receiving end is your SwiftUI View.  An `@Environment` property wrapper needs to be set up in order to pull *out* the managed object context so you can use it.
-
-The following code snippets provide you glimpses into both sides of the coin.  Comments with ❇️ symbols will explain the details inline.
 
 **SceneDelegate.swift**
 {{< highlight swift "linenos=table" >}}
@@ -90,4 +81,4 @@ struct SwiftUIView: View {
 }
 {{< / highlight >}}
 
-For a more complete guide to using Core Data with SwiftUI, you can refer to the [introduction I published](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/).  It includes an [example project](https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI) with all of the pieces stitched together!
+For a more complete guide to using Core Data with SwiftUI, you can refer to the [introduction I published](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/).  It includes an example project with all of the pieces stitched together!
