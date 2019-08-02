@@ -22,11 +22,39 @@
 
 &lt;h2 id=&#34;first-things-first&#34;&gt;First Things First&lt;/h2&gt;
 
-&lt;p&gt;The remainder of this how-to assumes that you&amp;rsquo;ve already got a way to initialize the Core Data stack&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The remainder of this how-to assumes that you&amp;rsquo;ve already got a way to initialize the Core Data stack.&lt;/p&gt;
 
-&lt;p&gt;Ticking the &amp;lsquo;Use Core Data&amp;rsquo; checkbox when you start a new app will place some boilerplate code in &lt;code&gt;AppDelegate&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ticking the &amp;lsquo;Use Core Data&amp;rsquo; checkbox when you start a new app will place some boilerplate code in &lt;code&gt;AppDelegate&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Code examples are taken from my &amp;ldquo;Blog Idea List&amp;rdquo; sample project that includes a single Core Data Entity named &lt;code&gt;BlogIdea&lt;/code&gt;:&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png&#34; alt=&#34;Blog Idea Entity&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+&lt;div class=&#34;resources&#34;&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+Resources
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-file-code&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt; Blog Idea List SwiftUI Example Xcode Project&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;breaking-down-the-code&#34;&gt;Breaking Down the Code&lt;/h2&gt;
+
+&lt;p&gt;There are two key components to this:  the Core Data Stack, and the SwiftUI &lt;code&gt;@Environment&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Passing in&amp;rdquo; your managed object context will probably happen early on in your app&amp;rsquo;s launch sequence.  &lt;code&gt;SceneDelegate&lt;/code&gt; is where I pass mine in with the Blog Idea List app.&lt;/p&gt;
+
+&lt;p&gt;On the receiving end is your SwiftUI View.  An &lt;code&gt;@Environment&lt;/code&gt; property wrapper needs to be set up in order to pull &lt;em&gt;out&lt;/em&gt; the managed object context so you can use it.&lt;/p&gt;
+
+&lt;p&gt;The following code snippets provide you glimpses into both sides of the coin.  Comments with ❇️ symbols will explain the details inline.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;SceneDelegate.swift&lt;/strong&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -111,7 +139,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;p&gt;For a more complete guide to using Core Data with SwiftUI, you can refer to the &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction I published&lt;/a&gt;.  It includes an example project with all of the pieces stitched together!&lt;/p&gt;
+&lt;p&gt;For a more complete guide to using Core Data with SwiftUI, you can refer to the &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction I published&lt;/a&gt;.  It includes an &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt;example project&lt;/a&gt; with all of the pieces stitched together!&lt;/p&gt;
 </description>
     </item>
     
@@ -144,9 +172,11 @@ Resources
 
 &lt;h2 id=&#34;first-things-first&#34;&gt;First Things First&lt;/h2&gt;
 
-&lt;p&gt;To work effectively with Core Data in SwiftUI, the &lt;a href=&#34;https://developer.apple.com/videos/play/wwdc2019/226/&#34;&gt;Data Flow Through SwiftUI&lt;/a&gt; WWDC session is a huge help.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;To work effectively with Core Data in SwiftUI, the &lt;a href=&#34;https://developer.apple.com/videos/play/wwdc2019/226/&#34;&gt;Data Flow Through SwiftUI&lt;/a&gt; WWDC session is a huge help.&lt;/p&gt;&lt;/li&gt;
 
-&lt;p&gt;With this talk under your belt, you&amp;rsquo;ll have at least been introduced to key words like &lt;code&gt;@State&lt;/code&gt;, &lt;code&gt;@Binding&lt;/code&gt;, &lt;code&gt;@ObservableObject&lt;/code&gt; (which replaces &lt;code&gt;@BindableObject&lt;/code&gt; as of Beta 5), and &lt;code&gt;@Environment&lt;/code&gt;.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;With this talk under your belt, you&amp;rsquo;ll have at least been introduced to key words like &lt;code&gt;@State&lt;/code&gt;, &lt;code&gt;@Binding&lt;/code&gt;, &lt;code&gt;@ObservableObject&lt;/code&gt; (which replaces &lt;code&gt;@BindableObject&lt;/code&gt; as of Beta 5), and &lt;code&gt;@Environment&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;on-the-right-path&#34;&gt;On the Right Path&lt;/h2&gt;
 
@@ -179,6 +209,10 @@ Resources
 &lt;/ul&gt;
 
 &lt;p&gt;Grab the project &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt;over at GitHub&lt;/a&gt; and explore!&lt;/p&gt;
+
+&lt;p&gt;The sample project that includes a single Core Data Entity named &lt;code&gt;BlogIdea&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png&#34; alt=&#34;Blog Idea Entity&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I kept as much out-of-the-box stuff as I could.&lt;/p&gt;
 
