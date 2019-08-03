@@ -10,8 +10,8 @@ categories:
 wip: false
 showrecent: true
 images:
-  - images/social-assets/Twitter - Using Core Data With SwiftUI.png
-  - images/social-assets/Facebook - Using Core Data With SwiftUI.png
+  - /images/social-assets/Twitter - Using Core Data With SwiftUI.png
+  - /images/social-assets/Facebook - Using Core Data With SwiftUI.png
 disppsbadge: true
 toc: true
 ---

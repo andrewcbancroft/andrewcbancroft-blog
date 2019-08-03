@@ -12,8 +12,8 @@ tags:
   - Core Data
   - SwiftUI
 images:
-  - images/social-assets/Twitter - How to Use @FetchRequest in SwiftUI.png
-  - images/social-assets/Facebook - How to Use @FetchRequest in SwiftUI.png
+  - /images/social-assets/Twitter - How to Use @FetchRequest in SwiftUI.png
+  - /images/social-assets/Facebook - How to Use @FetchRequest in SwiftUI.png
 ---
 
 Once you've [passed an NSManagedObjectContext instance to your SwiftUI View](/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/), you'll need to pull data out of your Core Data persistent store with a fetch request.
