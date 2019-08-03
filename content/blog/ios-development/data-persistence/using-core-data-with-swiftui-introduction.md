@@ -79,4 +79,28 @@ Throughout the project, you'll notice emoji symbols to help draw your eye to the
 
 ℹ️ Alerts you to general info about what my brain was thinking when I wrote the code
 
-More on improving the architecture and features soon!
+## Code Walkthroughs
+I completely relate if you need to chunk things up and inspect the details of how each piece of the puzzle looks in isolation before you dive into the full app.
+
+I've written up two separate how-tos that show you more specific details:
+
+<div class="row align-items-center">
+<div class="col">
+<div class="card" style="width: 25rem;">
+  <a href="/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/"><img src="/images/social-assets/Twitter - How to Pass NSManagedObjectContext to a SwiftUI View.png" class="card-img-top" alt="How to Pass NSManagedObjectContext to a SwiftUI View"></a>
+  <div class="card-body">
+    <p class="card-text">Breaks down how to pass an NSManagedObjectContext instance to your SwiftUI Views.</p>
+  </div>
+</div>
+</div>
+<div class="col">
+<div class="card" style="width: 25rem;">
+  <a href="/blog/ios-development/data-persistence/how-to-use-fetchrequest-swiftui/"><img src="/images/social-assets/Twitter - How to Use @FetchRequest in SwiftUI.png" class="card-img-top" alt="How to Use @FetchRequest in SwiftUI"></a>
+  <div class="card-body">
+    <p class="card-text">Breaks down how to use the @FetchRequest property wrapper in your SwiftUI Views.</p>
+  </div>
+</div>
+</div>
+</div>
+
+

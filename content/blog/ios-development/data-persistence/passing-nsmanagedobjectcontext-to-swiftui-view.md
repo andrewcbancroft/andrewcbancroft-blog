@@ -13,6 +13,8 @@ tags:
   - Core Data
   - SwiftUI
 images:
+  - images/social-assets/Twitter - How to Pass NSManagedObjectContext to a SwiftUI View.png
+  - images/social-assets/Facebook - How to Pass NSManagedObjectContext to a SwiftUI View.png
 ---
 
 Step one to [using Core Data with SwiftUI](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/) is to initialize the Core Data stack and pass an instance of your `NSManagedObjectContext` to your view.
