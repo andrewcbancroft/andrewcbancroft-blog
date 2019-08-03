@@ -3,7 +3,7 @@ title: "How to work with @FetchRequest in SwiftUI"
 description: "Breaks down how to use the @FetchRequest property wrapper in your SwiftUI Views."
 author: Andrew
 type: blog
-draft: true
+draft: false
 date: 2019-08-02T03:11:48+00:00
 wip: false
 showrecent: false
@@ -17,10 +17,8 @@ images:
 Once you've [passed an NSManagedObjectContext instance to your SwiftUI View](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/), you'll need to pull data out of your Core Data persistent store with a fetch request.
 
 ## First Things First
-* The remainder of this how-to assumes that you've already got a way to initialize the Core Data stack.
-
-  * Ticking the 'Use Core Data' checkbox when you start a new app will place some boilerplate code in `AppDelegate`.
-
+* The remainder of this how-to assumes that you've already got a way to initialize the Core Data stack. Ticking the 'Use Core Data' checkbox when you start a new app will place some boilerplate code in `AppDelegate`.
+* `@Environment(\.managedobjectcontext)` must [be assigned](/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/) before the View is initialized for `@FetchRequest` to work.
 * Code examples are taken from my "Blog Idea List" sample project that includes a single Core Data Entity named `BlogIdea`:
 
 ![Blog Idea Entity](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png)
@@ -37,30 +35,39 @@ Resources
 </ul>
 </div>
 
+You can refer to my [introduction to using Core Data with SwiftUI](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/) to review all of the steps in one spot.  It includes an example project with all of the pieces stitched together!
+
 ## Breaking Down the Code
+There are three key components to this:
 
-**SceneDelegate.swift**
+1. A way to configure an `NSFetchRequest` *with* an `NSSortDescriptor` added. Your app will blow up 💥 if you don't have one added to your fetch request.
+2. The `@FetchRequest` property wrapper in your SwiftUI view.
+3. A SwiftUI View that displays the results of the executed fetch request.
+
+The following code snippets provide you an example of how to weave all three components together.
+
+Comments with ❇️ symbols will explain the details inline.
+
+**BlogIdea.swift**
 {{< highlight swift "linenos=table" >}}
-func scene(_ scene: UIScene, 
-            willConnectTo session: UISceneSession, 
-            options connectionOptions: UIScene.ConnectionOptions) {
+import Foundation
+import CoreData
 
-    if let windowScene = scene as? UIWindowScene {
-        let window = UIWindow(windowScene: windowScene)
+// ❇️ BlogIdea code generation is turned OFF in the xcdatamodeld file
+public class BlogIdea: NSManagedObject, Identifiable {
+    @NSManaged public var ideaTitle: String?
+    @NSManaged public var ideaDescription: String?
+}
+
+extension BlogIdea {
+    // ❇️ The @FetchRequest property wrapper in the ContentView will call this function
+    static func allIdeasFetchRequest() -> NSFetchRequest<BlogIdea> {
+        let request: NSFetchRequest<BlogIdea> = BlogIdea.fetchRequest() as! NSFetchRequest<BlogIdea>
         
-        // ❇️ Get the managedObjectContext from the persistent container
-        // ❇️ This assumes you've left the Core Data stack creation code within AppDelegate
-        let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        // ❇️ Pass it to the ContentView through the 
-        // ❇️ managedObjectContext @Environment variable
-        let contentView = ContentView()
-                            .environment(\.managedObjectContext, managedObjectContext)
-        
-        window.rootViewController = UIHostingController(rootView: contentView)
-        
-        self.window = window
-        window.makeKeyAndVisible()
+        // ❇️ The @FetchRequest property wrapper in the ContentView requires a sort descriptor
+        request.sortDescriptors = [NSSortDescriptor(key: "ideaTitle", ascending: true)]
+          
+        return request
     }
 }
 {{< / highlight >}}
@@ -71,14 +78,25 @@ func scene(_ scene: UIScene,
 import SwiftUI
 
 struct SwiftUIView: View {
-    // ❇️ Access the @Environment's managedObjectContext variable
-    // ❇️ and keep a reference to use later
-    @Environment(\.managedObjectContext) var managedObjectContext
+    // ❇️ The BlogIdea class has an `allIdeasFetchRequest` function that can be used here
+    @FetchRequest(fetchRequest: BlogIdea.allIdeasFetchRequest()) var blogIdeas: FetchedResults<BlogIdea>
 
     var body: some View {
-        // ❇️ Use self.managedObjectContext however you need within your SwiftUI view!
+        List(self.blogIdeas) { blogIdea in
+            Text(blogIdea.ideaTitle ?? "")
+        }
     }
 }
 {{< / highlight >}}
+
+ Note that you don't actually need to hold a reference to the `@Environment`'s `managedObjectContext`.
+
+ `@Environment`'s `managedObjectContext` must be set! But you don't have to "call" it or use it directly to make the fetch request "go".
+
+
+## Where's the Call to Perform the Fetch Request?
+With most Core Data apps, you're going to see a call to `fetch(_:)` somewhere in your code.
+
+This happens "behind the scenes" when you use the `@FetchRequest` property wrapper in your SwiftUI view. No need to use your managed object context to perform the fetch request manually.
 
 For a more complete guide to using Core Data with SwiftUI, you can refer to the [introduction I published](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/).  It includes an example project with all of the pieces stitched together!

@@ -19,10 +19,7 @@ Step one to [using Core Data with SwiftUI](/blog/ios-development/data-persistenc
 
 ## First Things First
 
-* The remainder of this how-to assumes that you've already got a way to initialize the Core Data stack.
-
-  * Ticking the 'Use Core Data' checkbox when you start a new app will place some boilerplate code in `AppDelegate`.
-
+* The remainder of this how-to assumes that you've already got a way to initialize the Core Data stack. Ticking the 'Use Core Data' checkbox when you start a new app will place some boilerplate code in `AppDelegate`.
 * Code examples are taken from my "Blog Idea List" sample project that includes a single Core Data Entity named `BlogIdea`:
 
 ![Blog Idea Entity](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png)
@@ -39,8 +36,13 @@ Resources
 </ul>
 </div>
 
+You can refer to my [introduction to using Core Data with SwiftUI](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/) to review all of the steps in one spot.  It includes an example project with all of the pieces stitched together!
+
 ## Breaking Down the Code
-There are two key components to this:  the Core Data Stack, and the SwiftUI `@Environment`.
+There are two key components to this:
+
+1. the Core Data Stack
+2. the SwiftUI `@Environment`'s `managedObjectContext` variable.
 
 "Passing in" your managed object context will probably happen early on in your app's launch sequence.  `SceneDelegate` is where I pass mine in with the Blog Idea List app.
 

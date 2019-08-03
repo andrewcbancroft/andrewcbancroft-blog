@@ -23,13 +23,8 @@
 &lt;h2 id=&#34;first-things-first&#34;&gt;First Things First&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;The remainder of this how-to assumes that you&amp;rsquo;ve already got a way to initialize the Core Data stack.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Ticking the &amp;lsquo;Use Core Data&amp;rsquo; checkbox when you start a new app will place some boilerplate code in &lt;code&gt;AppDelegate&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Code examples are taken from my &amp;ldquo;Blog Idea List&amp;rdquo; sample project that includes a single Core Data Entity named &lt;code&gt;BlogIdea&lt;/code&gt;:&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;The remainder of this how-to assumes that you&amp;rsquo;ve already got a way to initialize the Core Data stack. Ticking the &amp;lsquo;Use Core Data&amp;rsquo; checkbox when you start a new app will place some boilerplate code in &lt;code&gt;AppDelegate&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Code examples are taken from my &amp;ldquo;Blog Idea List&amp;rdquo; sample project that includes a single Core Data Entity named &lt;code&gt;BlogIdea&lt;/code&gt;:&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png&#34; alt=&#34;Blog Idea Entity&#34; /&gt;&lt;/p&gt;
@@ -46,9 +41,16 @@ Resources
 &lt;/ul&gt;
 &lt;/div&gt;&lt;/p&gt;
 
+&lt;p&gt;You can refer to my &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction to using Core Data with SwiftUI&lt;/a&gt; to review all of the steps in one spot.  It includes an example project with all of the pieces stitched together!&lt;/p&gt;
+
 &lt;h2 id=&#34;breaking-down-the-code&#34;&gt;Breaking Down the Code&lt;/h2&gt;
 
-&lt;p&gt;There are two key components to this:  the Core Data Stack, and the SwiftUI &lt;code&gt;@Environment&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;There are two key components to this:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;the Core Data Stack&lt;/li&gt;
+&lt;li&gt;the SwiftUI &lt;code&gt;@Environment&lt;/code&gt;&amp;rsquo;s &lt;code&gt;managedObjectContext&lt;/code&gt; variable.&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;&amp;ldquo;Passing in&amp;rdquo; your managed object context will probably happen early on in your app&amp;rsquo;s launch sequence.  &lt;code&gt;SceneDelegate&lt;/code&gt; is where I pass mine in with the Blog Idea List app.&lt;/p&gt;
 
@@ -140,6 +142,149 @@ Resources
 &lt;/div&gt;
 
 &lt;p&gt;For a more complete guide to using Core Data with SwiftUI, you can refer to the &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction I published&lt;/a&gt;.  It includes an &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt;example project&lt;/a&gt; with all of the pieces stitched together!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to work with @FetchRequest in SwiftUI</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-to-work-with-fetchrequest-swiftui/</link>
+      <pubDate>Fri, 02 Aug 2019 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-to-work-with-fetchrequest-swiftui/</guid>
+      <description>
+
+&lt;p&gt;Once you&amp;rsquo;ve &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;passed an NSManagedObjectContext instance to your SwiftUI View&lt;/a&gt;, you&amp;rsquo;ll need to pull data out of your Core Data persistent store with a fetch request.&lt;/p&gt;
+
+&lt;h2 id=&#34;first-things-first&#34;&gt;First Things First&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The remainder of this how-to assumes that you&amp;rsquo;ve already got a way to initialize the Core Data stack. Ticking the &amp;lsquo;Use Core Data&amp;rsquo; checkbox when you start a new app will place some boilerplate code in &lt;code&gt;AppDelegate&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@Environment(\.managedobjectcontext)&lt;/code&gt; must &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/&#34;&gt;be assigned&lt;/a&gt; before the View is initialized for &lt;code&gt;@FetchRequest&lt;/code&gt; to work.&lt;/li&gt;
+&lt;li&gt;Code examples are taken from my &amp;ldquo;Blog Idea List&amp;rdquo; sample project that includes a single Core Data Entity named &lt;code&gt;BlogIdea&lt;/code&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png&#34; alt=&#34;Blog Idea Entity&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+&lt;div class=&#34;resources&#34;&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+Resources
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-file-code&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt; Blog Idea List SwiftUI Example Xcode Project&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;You can refer to my &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction to using Core Data with SwiftUI&lt;/a&gt; to review all of the steps in one spot.  It includes an example project with all of the pieces stitched together!&lt;/p&gt;
+
+&lt;h2 id=&#34;breaking-down-the-code&#34;&gt;Breaking Down the Code&lt;/h2&gt;
+
+&lt;p&gt;There are three key components to this:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;A way to configure an &lt;code&gt;NSFetchRequest&lt;/code&gt; &lt;em&gt;with&lt;/em&gt; an &lt;code&gt;NSSortDescriptor&lt;/code&gt; added. Your app will blow up 💥 if you don&amp;rsquo;t have one added to your fetch request.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;@FetchRequest&lt;/code&gt; property wrapper in your SwiftUI view.&lt;/li&gt;
+&lt;li&gt;A SwiftUI View that displays the results of the executed fetch request.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The following code snippets provide you an example of how to weave all three components together.&lt;/p&gt;
+
+&lt;p&gt;Comments with ❇️ symbols will explain the details inline.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;BlogIdea.swift&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Foundation&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CoreData&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// ❇️ BlogIdea code generation is turned OFF in the xcdatamodeld file&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Identifiable&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;@NSManaged&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ideaTitle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;@NSManaged&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ideaDescription&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;extension&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;BlogIdea&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;// ❇️ The @FetchRequest property wrapper in the ContentView will call this function&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;allIdeasFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+        
+        &lt;span class=&#34;c1&#34;&gt;// ❇️ The @FetchRequest property wrapper in the ContentView requires a sort descriptor&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sortDescriptors&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSSortDescriptor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;ideaTitle&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ascending&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+          
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ContentView.swift&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SwiftUI&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SwiftUIView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;c1&#34;&gt;// ❇️ The BlogIdea class has an `allIdeasFetchRequest` function that can be used here&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;allIdeasFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;blogIdeas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FetchedResults&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;List&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;blogIdeas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;blogIdea&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;blogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ideaTitle&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;??&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Note that you don&amp;rsquo;t actually need to hold a reference to the &lt;code&gt;@Environment&lt;/code&gt;&amp;rsquo;s &lt;code&gt;managedObjectContext&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;@Environment&lt;/code&gt;&amp;rsquo;s &lt;code&gt;managedObjectContext&lt;/code&gt; must be set! But you don&amp;rsquo;t have to &amp;ldquo;call&amp;rdquo; it or use it directly to make the fetch request &amp;ldquo;go&amp;rdquo;.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-s-the-call-to-perform-the-fetch-request&#34;&gt;Where&amp;rsquo;s the Call to Perform the Fetch Request?&lt;/h2&gt;
+
+&lt;p&gt;With most Core Data apps, you&amp;rsquo;re going to see a call to &lt;code&gt;fetch(_:)&lt;/code&gt; somewhere in your code.&lt;/p&gt;
+
+&lt;p&gt;This happens &amp;ldquo;behind the scenes&amp;rdquo; when you use the &lt;code&gt;@FetchRequest&lt;/code&gt; property wrapper in your SwiftUI view. No need to use your managed object context to perform the fetch request manually.&lt;/p&gt;
+
+&lt;p&gt;For a more complete guide to using Core Data with SwiftUI, you can refer to the &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction I published&lt;/a&gt;.  It includes an example project with all of the pieces stitched together!&lt;/p&gt;
 </description>
     </item>
     

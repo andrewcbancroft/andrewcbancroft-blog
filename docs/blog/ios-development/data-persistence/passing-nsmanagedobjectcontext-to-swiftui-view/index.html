@@ -66,7 +66,7 @@
   "@type": "BlogPosting",
   "headline": "How to Pass NSManagedObjectContext to a SwiftUI View",
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/passing-nsmanagedobjectcontext-to-swiftui-view\/",
-  "wordCount": "386",
+  "wordCount": "420",
   "datePublished": "2019-08-02T03:11:48Z",
   "dateModified": "2019-08-02T03:11:48Z",
   "author": {
@@ -223,13 +223,8 @@ MathJax.Hub.Config({
 <h2 id="first-things-first">First Things First</h2>
 
 <ul>
-<li><p>The remainder of this how-to assumes that you&rsquo;ve already got a way to initialize the Core Data stack.</p>
-
-<ul>
-<li>Ticking the &lsquo;Use Core Data&rsquo; checkbox when you start a new app will place some boilerplate code in <code>AppDelegate</code>.</li>
-</ul></li>
-
-<li><p>Code examples are taken from my &ldquo;Blog Idea List&rdquo; sample project that includes a single Core Data Entity named <code>BlogIdea</code>:</p></li>
+<li>The remainder of this how-to assumes that you&rsquo;ve already got a way to initialize the Core Data stack. Ticking the &lsquo;Use Core Data&rsquo; checkbox when you start a new app will place some boilerplate code in <code>AppDelegate</code>.</li>
+<li>Code examples are taken from my &ldquo;Blog Idea List&rdquo; sample project that includes a single Core Data Entity named <code>BlogIdea</code>:</li>
 </ul>
 
 <p><img src="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png" alt="Blog Idea Entity" /></p>
@@ -246,9 +241,16 @@ Resources
 </ul>
 </div></p>
 
+<p>You can refer to my <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/">introduction to using Core Data with SwiftUI</a> to review all of the steps in one spot.  It includes an example project with all of the pieces stitched together!</p>
+
 <h2 id="breaking-down-the-code">Breaking Down the Code</h2>
 
-<p>There are two key components to this:  the Core Data Stack, and the SwiftUI <code>@Environment</code>.</p>
+<p>There are two key components to this:</p>
+
+<ol>
+<li>the Core Data Stack</li>
+<li>the SwiftUI <code>@Environment</code>&rsquo;s <code>managedObjectContext</code> variable.</li>
+</ol>
 
 <p>&ldquo;Passing in&rdquo; your managed object context will probably happen early on in your app&rsquo;s launch sequence.  <code>SceneDelegate</code> is where I pass mine in with the Blog Idea List app.</p>
 
@@ -351,6 +353,8 @@ Resources
         
         <ul class="resources-content">
             
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-to-work-with-fetchrequest-swiftui/">How to work with @FetchRequest in SwiftUI</a></li>
+            
             <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/">Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds</a></li>
             
             <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">Using SwiftUI in a Playground</a></li>
@@ -358,8 +362,6 @@ Resources
             <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-does-declarative-mean/">SwiftUI is Declarative.  What Does That Mean?</a></li>
             
             <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/taking-first-steps-with-swiftui/">Taking First Steps With SwiftUI</a></li>
-            
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/">iOS Data Persistence: The Big Picture</a></li>
             
         <ul>
       
@@ -398,7 +400,7 @@ Resources
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 167 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
+            <span class="text-muted">This project contains 168 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2019">2019</time>.</span>
         </div>
     </footer>
 

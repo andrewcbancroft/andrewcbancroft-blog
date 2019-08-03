@@ -47,20 +47,16 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Swift Tip – Accessing a User’s Documents Directory with URL Extension" />
-<meta property="og:description" content="When you need to access the documents directory on a user&rsquo;s device, what do you do?
-In the past, I know I&rsquo;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know – DRY – don&rsquo;t repeat yourself.
-One way to simplify this is to use a Swift extension to URL. Doing this will help you centralize where this code is located in your app, and keep your code DRY." />
+<meta property="og:title" content="How to work with @FetchRequest in SwiftUI" />
+<meta property="og:description" content="Breaks down how to use the @FetchRequest property wrapper in your SwiftUI Views." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/10/swift-tip-accessing-a-users-documents-directory-with-url-extension/" />
-<meta property="article:published_time" content="2017-04-10T18:01:23&#43;00:00"/>
-<meta property="article:modified_time" content="2017-04-10T18:01:23&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-to-work-with-fetchrequest-swiftui/" />
+<meta property="article:published_time" content="2019-08-02T03:11:48&#43;00:00"/>
+<meta property="article:modified_time" content="2019-08-02T03:11:48&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Swift Tip – Accessing a User’s Documents Directory with URL Extension"/>
-<meta name="twitter:description" content="When you need to access the documents directory on a user&rsquo;s device, what do you do?
-In the past, I know I&rsquo;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know – DRY – don&rsquo;t repeat yourself.
-One way to simplify this is to use a Swift extension to URL. Doing this will help you centralize where this code is located in your app, and keep your code DRY."/>
+<meta name="twitter:title" content="How to work with @FetchRequest in SwiftUI"/>
+<meta name="twitter:description" content="Breaks down how to use the @FetchRequest property wrapper in your SwiftUI Views."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -68,24 +64,24 @@ One way to simplify this is to use a Swift extension to URL. Doing this will hel
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Swift Tip – Accessing a User’s Documents Directory with URL Extension",
-  "url": "https:\/\/www.andrewcbancroft.com\/2017\/04\/10\/swift-tip-accessing-a-users-documents-directory-with-url-extension\/",
-  "wordCount": "222",
-  "datePublished": "2017-04-10T18:01:23Z",
-  "dateModified": "2017-04-10T18:01:23Z",
+  "headline": "How to work with @FetchRequest in SwiftUI",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/how-to-work-with-fetchrequest-swiftui\/",
+  "wordCount": "503",
+  "datePublished": "2019-08-02T03:11:48Z",
+  "dateModified": "2019-08-02T03:11:48Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "Swift, Swift Extension"
+  "keywords": "Core Data, SwiftUI"
 
-  ,"description": ""
+  ,"description": "Breaks down how to use the @FetchRequest property wrapper in your SwiftUI Views."
 }
 </script>
 
 
 
-    <title>Swift Tip – Accessing a User’s Documents Directory with URL Extension</title>
+    <title>How to work with @FetchRequest in SwiftUI</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -202,7 +198,7 @@ MathJax.Hub.Config({
             Learning about data technologies on iOS? <br/><br/>
             I've created courses on <a href="http://bit.ly/core-data-swift" class="alert-link">Core Data</a>, <a href="http://bit.ly/cloudkit-fundamentals" class="alert-link">CloudKit</a>, and <a href="http://bit.ly/core-data-primary-keys" class="alert-link">the Big Picture of Data Persistence on iOS</a> for <a href="http://bit.ly/ps-author-page" class="alert-link">Pluralsight</a>.  <br/><br/>Deepen your understanding by checking them out!
           </div>
-      <h1 class="article-title">Swift Tip – Accessing a User’s Documents Directory with URL Extension</h1>
+      <h1 class="article-title">How to work with @FetchRequest in SwiftUI</h1>
     </header>
     <div class="content">
 
@@ -210,17 +206,48 @@ MathJax.Hub.Config({
 
     
 
-<p>When you need to access the documents directory on a user&rsquo;s device, what do you do?</p>
+<p>Once you&rsquo;ve <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/">passed an NSManagedObjectContext instance to your SwiftUI View</a>, you&rsquo;ll need to pull data out of your Core Data persistent store with a fetch request.</p>
 
-<p>In the past, I know I&rsquo;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know – DRY – <em>don&rsquo;t repeat yourself</em>.</p>
+<h2 id="first-things-first">First Things First</h2>
 
-<p>One way to simplify this is to use a Swift extension to <code>URL</code>. Doing this will help you centralize where this code is located in your app, and keep your code DRY. If you need to access the documents directory in more than one spot, you&rsquo;re just a <code>URL</code> property call away from it.</p>
+<ul>
+<li>The remainder of this how-to assumes that you&rsquo;ve already got a way to initialize the Core Data stack. Ticking the &lsquo;Use Core Data&rsquo; checkbox when you start a new app will place some boilerplate code in <code>AppDelegate</code>.</li>
+<li><code>@Environment(\.managedobjectcontext)</code> must <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/">be assigned</a> before the View is initialized for <code>@FetchRequest</code> to work.</li>
+<li>Code examples are taken from my &ldquo;Blog Idea List&rdquo; sample project that includes a single Core Data Entity named <code>BlogIdea</code>:</li>
+</ul>
 
-<p><a name="implementation" class="jump-target"></a></p>
+<p><img src="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png" alt="Blog Idea Entity" /></p>
 
-<h1 id="extension-implementation">Extension implementation</h1>
+<p><a name="resources" class="jump-target"></a>
+<div class="resources">
+<div class="resources-header">
+Resources
+</div>
+<ul class="resources-content">
+<li>
+<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI"> Blog Idea List SwiftUI Example Xcode Project</a>
+</li>
+</ul>
+</div></p>
 
-<p><div class="highlight"><div class="chroma">
+<p>You can refer to my <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/">introduction to using Core Data with SwiftUI</a> to review all of the steps in one spot.  It includes an example project with all of the pieces stitched together!</p>
+
+<h2 id="breaking-down-the-code">Breaking Down the Code</h2>
+
+<p>There are three key components to this:</p>
+
+<ol>
+<li>A way to configure an <code>NSFetchRequest</code> <em>with</em> an <code>NSSortDescriptor</code> added. Your app will blow up 💥 if you don&rsquo;t have one added to your fetch request.</li>
+<li>The <code>@FetchRequest</code> property wrapper in your SwiftUI view.</li>
+<li>A SwiftUI View that displays the results of the executed fetch request.</li>
+</ol>
+
+<p>The following code snippets provide you an example of how to weave all three components together.</p>
+
+<p>Comments with ❇️ symbols will explain the details inline.</p>
+
+<p><strong>BlogIdea.swift</strong>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -232,45 +259,85 @@ MathJax.Hub.Config({
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="nc">URL</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">documentsURL</span><span class="p">:</span> <span class="n">URL</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
-            <span class="p">.</span><span class="k">default</span>
-            <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> 
-                 <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> 
-                 <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> 
-                 <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
+<span class="kd">import</span> <span class="nc">CoreData</span>
+
+<span class="c1">// ❇️ BlogIdea code generation is turned OFF in the xcdatamodeld file</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span><span class="p">,</span> <span class="n">Identifiable</span> <span class="p">{</span>
+    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="nc">BlogIdea</span> <span class="p">{</span>
+    <span class="c1">// ❇️ The @FetchRequest property wrapper in the ContentView will call this function</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">allIdeasFetchRequest</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">request</span><span class="p">:</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span> <span class="p">=</span> <span class="n">BlogIdea</span><span class="p">.</span><span class="n">fetchRequest</span><span class="p">()</span> <span class="k">as</span><span class="o">!</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span>
+        
+        <span class="c1">// ❇️ The @FetchRequest property wrapper in the ContentView requires a sort descriptor</span>
+        <span class="n">request</span><span class="p">.</span><span class="n">sortDescriptors</span> <span class="p">=</span> <span class="p">[</span><span class="n">NSSortDescriptor</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="s">&#34;ideaTitle&#34;</span><span class="p">,</span> <span class="n">ascending</span><span class="p">:</span> <span class="kc">true</span><span class="p">)]</span>
+          
+        <span class="k">return</span> <span class="n">request</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></p>
+
+<p><strong>ContentView.swift</strong></p>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">SwiftUI</span>
+
+<span class="kd">struct</span> <span class="nc">SwiftUIView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+    <span class="c1">// ❇️ The BlogIdea class has an `allIdeasFetchRequest` function that can be used here</span>
+    <span class="p">@</span><span class="n">FetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">:</span> <span class="n">BlogIdea</span><span class="p">.</span><span class="n">allIdeasFetchRequest</span><span class="p">())</span> <span class="kd">var</span> <span class="nv">blogIdeas</span><span class="p">:</span> <span class="n">FetchedResults</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span>
+
+    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+        <span class="n">List</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">blogIdeas</span><span class="p">)</span> <span class="p">{</span> <span class="n">blogIdea</span> <span class="k">in</span>
+            <span class="n">Text</span><span class="p">(</span><span class="n">blogIdea</span><span class="p">.</span><span class="n">ideaTitle</span> <span class="p">??</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<a name="usage" class="jump-target"></a></p>
 
-<h1 id="extension-usage">Extension usage</h1>
+<p>Note that you don&rsquo;t actually need to hold a reference to the <code>@Environment</code>&rsquo;s <code>managedObjectContext</code>.</p>
 
-<p>Here&rsquo;s an example of using the extension during the routine to create the Core Data stack. For that process, you need to grab a URL to where your SQLite database file will be located. Take a look:</p>
+<p><code>@Environment</code>&rsquo;s <code>managedObjectContext</code> must be set! But you don&rsquo;t have to &ldquo;call&rdquo; it or use it directly to make the fetch request &ldquo;go&rdquo;.</p>
 
-<p><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// ...</span>
+<h2 id="where-s-the-call-to-perform-the-fetch-request">Where&rsquo;s the Call to Perform the Fetch Request?</h2>
 
-<span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="n">URL</span><span class="p">.</span><span class="n">documentsURL</span><span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;AppDatabase.sqlite&#34;</span><span class="p">)</span>
+<p>With most Core Data apps, you&rsquo;re going to see a call to <code>fetch(_:)</code> somewhere in your code.</p>
 
-<span class="c1">// use the URL</span></code></pre></td></tr></table>
-</div>
-</div>
-You could be needing to access the directory for saving files or retrieving files totally unrelated to Core Data. No matter what you&rsquo;re doing, being able to write <code>URL.documentsURL</code> is pretty convenient!</p>
+<p>This happens &ldquo;behind the scenes&rdquo; when you use the <code>@FetchRequest</code> property wrapper in your SwiftUI view. No need to use your managed object context to perform the fetch request manually.</p>
 
-<p><a name="share" class="jump-target"></a></p>
+<p>For a more complete guide to using Core Data with SwiftUI, you can refer to the <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/">introduction I published</a>.  It includes an example project with all of the pieces stitched together!</p>
 
     <aside>
       
@@ -282,11 +349,15 @@ You could be needing to access the directory for saving files or retrieving file
         
         <ul class="resources-content">
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/11/03/the-5-ws-of-swift-extensions/">The 5 W’s of Swift Extensions</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/">How to Pass NSManagedObjectContext to a SwiftUI View</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/">Slide In Animation in Swift</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/">Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/">Fade In / Out Animations as Class Extensions in Swift</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">Using SwiftUI in a Playground</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-does-declarative-mean/">SwiftUI is Declarative.  What Does That Mean?</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/taking-first-steps-with-swiftui/">Taking First Steps With SwiftUI</a></li>
             
         <ul>
       
