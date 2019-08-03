@@ -14,7 +14,7 @@ tags:
 images:
 ---
 
-Once you've [passed an NSManagedObjectContext instance to your SwiftUI View](/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/), you'll need to pull data out of your Core Data persistent store with a fetch request.
+Once you've [passed an NSManagedObjectContext instance to your SwiftUI View](/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/), you'll need to pull data out of your Core Data persistent store with a fetch request.
 
 ## First Things First
 * The remainder of this how-to assumes that you've already got a way to initialize the Core Data stack. Ticking the 'Use Core Data' checkbox when you start a new app will place some boilerplate code in `AppDelegate`.
