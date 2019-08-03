@@ -66,7 +66,7 @@
   "@type": "BlogPosting",
   "headline": "How to Use @FetchRequest in SwiftUI",
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/how-to-use-fetchrequest-swiftui\/",
-  "wordCount": "503",
+  "wordCount": "504",
   "datePublished": "2019-08-03T03:11:48Z",
   "dateModified": "2019-08-03T03:11:48Z",
   "author": {
@@ -315,7 +315,7 @@ Resources
 <pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">SwiftUI</span>
 
 <span class="kd">struct</span> <span class="nc">SwiftUIView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
-    <span class="c1">// ❇️ The BlogIdea class has an `allIdeasFetchRequest` function that can be used here</span>
+    <span class="c1">// ❇️ The BlogIdea class has an `allIdeasFetchRequest` static function that can be used here</span>
     <span class="p">@</span><span class="n">FetchRequest</span><span class="p">(</span><span class="n">fetchRequest</span><span class="p">:</span> <span class="n">BlogIdea</span><span class="p">.</span><span class="n">allIdeasFetchRequest</span><span class="p">())</span> <span class="kd">var</span> <span class="nv">blogIdeas</span><span class="p">:</span> <span class="n">FetchedResults</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span>
 
     <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>

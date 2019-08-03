@@ -78,7 +78,7 @@ extension BlogIdea {
 import SwiftUI
 
 struct SwiftUIView: View {
-    // ❇️ The BlogIdea class has an `allIdeasFetchRequest` function that can be used here
+    // ❇️ The BlogIdea class has an `allIdeasFetchRequest` static function that can be used here
     @FetchRequest(fetchRequest: BlogIdea.allIdeasFetchRequest()) var blogIdeas: FetchedResults<BlogIdea>
 
     var body: some View {
