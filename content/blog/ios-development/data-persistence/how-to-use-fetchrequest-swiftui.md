@@ -1,10 +1,10 @@
 ---
-title: "How to work with @FetchRequest in SwiftUI"
+title: "How to Use @FetchRequest in SwiftUI"
 description: "Breaks down how to use the @FetchRequest property wrapper in your SwiftUI Views."
 author: Andrew
 type: blog
 draft: false
-date: 2019-08-02T03:11:48+00:00
+date: 2019-08-03T03:11:48+00:00
 wip: false
 showrecent: false
 disppsbadge: true
