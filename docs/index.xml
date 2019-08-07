@@ -412,6 +412,10 @@ Resources
 
 &lt;p&gt;Hopefully others in the iOS community who are experimenting with &lt;code&gt;NSPersistentCloudKitContainer&lt;/code&gt; can confirm or deny these same oddities.  If they&amp;rsquo;re fixed in a subsequent beta, I&amp;rsquo;ll come back here and note it!&lt;/p&gt;
 
+&lt;h2 id=&#34;which-beta-version-does-this-affect&#34;&gt;Which Beta Version Does This Affect?&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve tested out each of these on iOS 13 Beta 5 and Xcode 11 Beta 5.&lt;/p&gt;
+
 &lt;h2 id=&#34;enabling-cloudkit-doesn-t-create-a-default-container&#34;&gt;Enabling CloudKit doesn&amp;rsquo;t create a default container&lt;/h2&gt;
 
 &lt;p&gt;In Xcode 11 Beta 5, adding the iCloud capability and clicking the CloudKit checkbox is not automatically creating a default container for new apps that I&amp;rsquo;m testing&amp;hellip;&lt;/p&gt;
@@ -450,11 +454,11 @@ Resources
 
 &lt;h2 id=&#34;data-only-syncs-after-you-close-and-re-launch-your-app&#34;&gt;Data only syncs after you close and re-launch your app&lt;/h2&gt;
 
-&lt;p&gt;I really thought I had this figured out.  Beta 3 has proved me wrong.&lt;/p&gt;
+&lt;p&gt;I really thought I had this figured out.  Beta 5 has proved me wrong.&lt;/p&gt;
 
 &lt;p&gt;In Beta 2, simply &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/#reflecting-changes-in-the-ui&#34;&gt;setting &lt;code&gt;automaticallyMergesChangesFromParent&lt;/code&gt; on the container&amp;rsquo;s &lt;code&gt;viewContext&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt;&lt;/a&gt; seemed to work.&lt;/p&gt;
 
-&lt;p&gt;Not with Beta 3.&lt;/p&gt;
+&lt;p&gt;Not with Beta 5.&lt;/p&gt;
 
 &lt;p&gt;You can save new data and wait (and wait&amp;hellip; and wait&amp;hellip;).  It doesn&amp;rsquo;t show up in the UI until after you re-launch the app.&lt;/p&gt;
 

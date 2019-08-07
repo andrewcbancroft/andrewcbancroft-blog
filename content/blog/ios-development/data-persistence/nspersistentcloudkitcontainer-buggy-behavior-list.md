@@ -25,6 +25,9 @@ I'm keeping this list of buggy behavior to help keep my head straight.  I've als
 
 Hopefully others in the iOS community who are experimenting with `NSPersistentCloudKitContainer` can confirm or deny these same oddities.  If they're fixed in a subsequent beta, I'll come back here and note it!
 
+## Which Beta Version Does This Affect?
+I've tested out each of these on iOS 13 Beta 5 and Xcode 11 Beta 5.
+
 ## Enabling CloudKit doesn't create a default container
 In Xcode 11 Beta 5, adding the iCloud capability and clicking the CloudKit checkbox is not automatically creating a default container for new apps that I'm testing...
 
@@ -57,11 +60,11 @@ If you add *new* data on one device, *only the new data* that gets saved *after*
 
 ## Data only syncs after you close and re-launch your app
 
-I really thought I had this figured out.  Beta 3 has proved me wrong.
+I really thought I had this figured out.  Beta 5 has proved me wrong.
 
 In Beta 2, simply <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/#reflecting-changes-in-the-ui">setting `automaticallyMergesChangesFromParent` on the container's `viewContext` to `true`</a> seemed to work.
 
-Not with Beta 3.
+Not with Beta 5.
 
 You can save new data and wait (and wait... and wait...).  It doesn't show up in the UI until after you re-launch the app.
 
