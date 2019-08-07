@@ -29,7 +29,7 @@ Hopefully others in the iOS community who are experimenting with `NSPersistentCl
 I've tested out each of these on iOS 13 Beta 5 and Xcode 11 Beta 5.
 
 ## Enabling CloudKit doesn't create a default container
-In Xcode 11 Beta 5, adding the iCloud capability and clicking the CloudKit checkbox is not automatically creating a default container for new apps that I'm testing...
+In Xcode 11, adding the iCloud capability and clicking the CloudKit checkbox is not automatically creating a default container for new apps that I'm testing...
 
 **Xcode 10**
 ![Xcode 10 - Creates Default Container](XC10_CKDefaultContainer.gif)
