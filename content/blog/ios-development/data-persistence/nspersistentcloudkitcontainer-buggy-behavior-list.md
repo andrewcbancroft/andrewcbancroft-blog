@@ -26,7 +26,7 @@ I'm keeping this list of buggy behavior to help keep my head straight.  I've als
 Hopefully others in the iOS community who are experimenting with `NSPersistentCloudKitContainer` can confirm or deny these same oddities.  If they're fixed in a subsequent beta, I'll come back here and note it!
 
 ## Enabling CloudKit doesn't create a default container
-In Xcode 11 Beta 3, adding the iCloud capability and clicking the CloudKit checkbox is not automatically creating a default container for new apps that I'm testing...
+In Xcode 11 Beta 5, adding the iCloud capability and clicking the CloudKit checkbox is not automatically creating a default container for new apps that I'm testing...
 
 **Xcode 10**
 ![Xcode 10 - Creates Default Container](XC10_CKDefaultContainer.gif)
