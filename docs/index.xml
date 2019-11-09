@@ -10586,7 +10586,7 @@ This code simply obtains a new Car object, sets some properties, and saves it al
 
 &lt;p&gt;&lt;a name=&#34;model-with-cs&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;modeling-the-athlete-abstraction-with-c&#34;&gt;Modeling the Athlete abstraction with C&lt;/h4&gt;
+&lt;h4 id=&#34;modeling-the-athlete-abstraction-with-c&#34;&gt;Modeling the Athlete abstraction with C#&lt;/h4&gt;
 
 &lt;p&gt;In C#, we&amp;rsquo;ve got two possibilities: Create an interface, or create an abstract class.&lt;/p&gt;
 
@@ -10600,34 +10600,30 @@ This code simply obtains a new Car object, sets some properties, and saves it al
 &lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Using an abstract class may look very similar. The primary difference is in the declaration of each method, where we mark each of them &lt;code&gt;virtual&lt;/code&gt;, so that they can be overridden in a subclass to provide that customization point I talked about earlier:&lt;/p&gt;
 
-&lt;p&gt;&lt;pre class=&#34;lang:C# decode:true&#34; title=&#34;C# Abstract Class&#34;&gt;public abstract class Athlete
-{
-    public abstract void Run();
-    public abstract void Swim();
-    public abstract void Cycle();
-    // Other things that an Athlete may be able to do
-}&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;abstract&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Athlete&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;abstract&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Run&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;abstract&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Swim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;abstract&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Cycle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// Other things that an Athlete may be able to do
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;pre&gt;&lt;code&gt;
-Right off, you might be asking, &amp;quot;Should a marathon runner have to be able to swim and cycle??&amp;amp;#8221;. It&#39;s a great question, and I&#39;ll address it further down in the article when I discuss [&amp;quot;refactoring for enhanced composability with Swift protocol extensions&amp;amp;#8221;][3].
+&lt;p&gt;Right off, you might be asking, &amp;ldquo;Should a marathon runner have to be able to swim and cycle??&amp;#8221;. It&amp;rsquo;s a great question, and I&amp;rsquo;ll address it further down in the article when I discuss &lt;a href=&#34;#refactoring&#34;&gt;&amp;ldquo;refactoring for enhanced composability with Swift protocol extensions&amp;#8221;&lt;/a&gt;.&lt;/p&gt;
 
-&amp;lt;a name=&amp;quot;model-with-swift&amp;quot; class=&amp;quot;jump-target&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;
+&lt;p&gt;&lt;a name=&#34;model-with-swift&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-#### Modeling the Athlete abstraction with Swift
+&lt;h4 id=&#34;modeling-the-athlete-abstraction-with-swift&#34;&gt;Modeling the Athlete abstraction with Swift&lt;/h4&gt;
 
-In Swift, we essentially have one possibility that compares with C# for a pure abstraction, that is, just the blueprint describing an `Athlete&#39;s` capabilities: Create a protocol.
+&lt;p&gt;In Swift, we essentially have one possibility that compares with C# for a pure abstraction, that is, just the blueprint describing an &lt;code&gt;Athlete&#39;s&lt;/code&gt; capabilities: Create a protocol.&lt;/p&gt;
 
-The `Athlete` protocol might look something like this:
-
-```swift
-protocol Athlete {
-    func run()
-    func swim()
-    func cycle()
-    // Other things that an Athlete may be able to do
-}
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;p&gt;The &lt;code&gt;Athlete&lt;/code&gt; protocol might look something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;protocol&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Athlete&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;swim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;cycle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// Other things that an Athlete may be able to do&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We still don&amp;rsquo;t avoid the necessity of a marathon runner being required to be able to swim and cycle. And having read &lt;a href=&#34;http://owensd.io/2015/08/06/protocols.html&#34;&gt;David Owens&amp;rsquo; recent recommendations on Protocols&lt;/a&gt;, I&amp;rsquo;m even more uncomfortable with modeling an &lt;code&gt;Athlete&lt;/code&gt; this way, because it feels like we&amp;rsquo;re treating a protocol as a Type here, which he identifies as a less powerful usage of protocols.&lt;/p&gt;
 
 &lt;p&gt;I want to refactor this, but for this moment in time, we&amp;rsquo;ll stick with the code as-is, just to keep it as similar to the C# code as possible. I&amp;rsquo;ll discuss &lt;a href=&#34;#refactoring&#34;&gt;an option for refactoring this shortly&lt;/a&gt;.&lt;/p&gt;
@@ -10646,41 +10642,37 @@ protocol Athlete {
 
 &lt;p&gt;&lt;a name=&#34;default-implementation-with-cs&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h5 id=&#34;default-implementation-with-c&#34;&gt;Default implementation with C&lt;/h5&gt;
+&lt;h5 id=&#34;default-implementation-with-c&#34;&gt;Default implementation with C#&lt;/h5&gt;
 
 &lt;p&gt;In C#, abstract classes allow us to do just that. Here&amp;rsquo;s how a default implementation might be written:&lt;/p&gt;
 
-&lt;p&gt;&lt;pre class=&#34;lang:c# decode:true &#34; &gt;public abstract class Athlete
-{
-    public virtual void Run()
-    {
-        // run with average speed and endurance
-    }&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Run&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// run with average speed and endurance
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Swim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// swim with average speed and endurance
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Cycle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// cycle with average speed and endurance
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;pre&gt;&lt;code&gt;public virtual void Swim()
-{
-    // swim with average speed and endurance
-}
+&lt;p&gt;So now, when we want to model a &lt;code&gt;MarathonRunner&lt;/code&gt;, we can override his/her ability to run, swim, and cycle as appropriate:&lt;/p&gt;
 
-public virtual void Cycle()
-{
-    // cycle with average speed and endurance
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;
-So now, when we want to model a `MarathonRunner`, we can override his/her ability to run, swim, and cycle as appropriate:
-
-&amp;lt;pre class=&amp;quot;lang:c# decode:true &amp;quot; &amp;gt;public class MarathonRunner: Athlete
-{
-    public override void Run()
-    {
-        // run with average speed and __insane__ endurance
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;override&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Run&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// run with average speed and __insane__ endurance
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;It&amp;rsquo;s not terrible – At least here we can rely on the default implementation if we just want to give a &lt;code&gt;MarathonRunner&lt;/code&gt; &amp;ldquo;average&amp;#8221; abilities in all areas but running.&lt;/p&gt;
 

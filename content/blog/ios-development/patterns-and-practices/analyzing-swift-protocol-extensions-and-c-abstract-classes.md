@@ -59,7 +59,7 @@ How then, could we model an `Athlete` in an abstract way? That is, how can we pr
 
 <a name="model-with-cs" class="jump-target"></a>
 
-#### Modeling the Athlete abstraction with C#
+#### Modeling the Athlete abstraction with C\#
 
 In C#, we've got two possibilities: Create an interface, or create an abstract class.
 
@@ -77,14 +77,15 @@ public interface Athlete
 
 Using an abstract class may look very similar. The primary difference is in the declaration of each method, where we mark each of them `virtual`, so that they can be overridden in a subclass to provide that customization point I talked about earlier:
 
-<pre class="lang:C# decode:true" title="C# Abstract Class">public abstract class Athlete
+{{< highlight csharp >}}
+public abstract class Athlete
 {
     public abstract void Run();
     public abstract void Swim();
     public abstract void Cycle();
     // Other things that an Athlete may be able to do
 }
-```
+{{< /highlight >}}
 
 Right off, you might be asking, "Should a marathon runner have to be able to swim and cycle??&#8221;. It's a great question, and I'll address it further down in the article when I discuss ["refactoring for enhanced composability with Swift protocol extensions&#8221;][3].
 
@@ -123,11 +124,11 @@ How could we make this happen?
 
 <a name="default-implementation-with-cs" class="jump-target"></a>
 
-##### Default implementation with C#
+##### Default implementation with C\#
 
 In C#, abstract classes allow us to do just that. Here's how a default implementation might be written:
 
-<pre class="lang:c# decode:true " >public abstract class Athlete
+{{< highlight csharp >}}
 {
     public virtual void Run()
     {
@@ -144,18 +145,18 @@ In C#, abstract classes allow us to do just that. Here's how a default implement
         // cycle with average speed and endurance
     }
 }
-```
+{{< /highlight >}}
 
 So now, when we want to model a `MarathonRunner`, we can override his/her ability to run, swim, and cycle as appropriate:
 
-<pre class="lang:c# decode:true " >public class MarathonRunner: Athlete
+{{< highlight csharp >}}
 {
     public override void Run()
     {
         // run with average speed and __insane__ endurance
     }
 }
-```
+{{< /highlight >}}
 
 It's not terrible – At least here we can rely on the default implementation if we just want to give a `MarathonRunner` "average&#8221; abilities in all areas but running.
 
