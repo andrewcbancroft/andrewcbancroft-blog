@@ -42,6 +42,7 @@ I'm a born learner, passionate about discovery and about sharing new insights th
 
 Teaching is also one of my passions. As an [Author for Pluralsight](https://www.pluralsight.com/authors/andrew-bancroft), I've published a few courses to their library:
 
+* [iOS Debugging Fundamentals](http://bit.ly/ios-debugging-fundamentals)
 * [iOS Data Persistence: The BigPicure](http://bit.ly/ios-data-persistence-bp)
 * [CloudKit Fundamentals](http://bit.ly/cloudkit-fundamentals)
 * [Core Data Fundamentals with Swift](http://bit.ly/ps-core-data-swift)
