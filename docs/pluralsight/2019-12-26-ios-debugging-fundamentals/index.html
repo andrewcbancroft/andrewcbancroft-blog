@@ -47,18 +47,16 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Using PowerShell to Install a DLL into the GAC" />
-<meta property="og:description" content="A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.
-An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs." />
+<meta property="og:title" content="iOS Debugging Fundamentals" />
+<meta property="og:description" content="Nothing is more frustrating than haphazardly hoping to find the cause of bugs in your apps. Become strategic in your iOS debugging efforts! Learn to combine problem solving skills and Xcode’s debugging tools to maximize your bug fixing potential." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/12/16/using-powershell-to-install-a-dll-into-the-gac/" />
-<meta property="article:published_time" content="2015-12-16T17:45:55&#43;00:00"/>
-<meta property="article:modified_time" content="2015-12-16T17:45:55&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/pluralsight/2019-12-26-ios-debugging-fundamentals/" />
+<meta property="article:published_time" content="2019-12-26T10:03:33&#43;00:00"/>
+<meta property="article:modified_time" content="2019-12-26T10:03:33&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Using PowerShell to Install a DLL into the GAC"/>
-<meta name="twitter:description" content="A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.
-An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs."/>
+<meta name="twitter:title" content="iOS Debugging Fundamentals"/>
+<meta name="twitter:description" content="Nothing is more frustrating than haphazardly hoping to find the cause of bugs in your apps. Become strategic in your iOS debugging efforts! Learn to combine problem solving skills and Xcode’s debugging tools to maximize your bug fixing potential."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -66,24 +64,24 @@ An alternative, however, is to use PowerShell to install the DLL into the GAC. T
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Using PowerShell to Install a DLL into the GAC",
-  "url": "https:\/\/www.andrewcbancroft.com\/2015\/12\/16\/using-powershell-to-install-a-dll-into-the-gac\/",
-  "wordCount": "127",
-  "datePublished": "2015-12-16T17:45:55Z",
-  "dateModified": "2015-12-16T17:45:55Z",
+  "headline": "iOS Debugging Fundamentals",
+  "url": "https:\/\/www.andrewcbancroft.com\/pluralsight\/2019-12-26-ios-debugging-fundamentals\/",
+  "wordCount": "474",
+  "datePublished": "2019-12-26T10:03:33Z",
+  "dateModified": "2019-12-26T10:03:33Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": ".Net Development, GAC, PowerShell"
+  "keywords": "Pluralsight, Swift, Debugging, iOS"
 
-  ,"description": ""
+  ,"description": "Nothing is more frustrating than haphazardly hoping to find the cause of bugs in your apps. Become strategic in your iOS debugging efforts! Learn to combine problem solving skills and Xcode’s debugging tools to maximize your bug fixing potential."
 }
 </script>
 
 
 
-    <title>Using PowerShell to Install a DLL into the GAC</title>
+    <title>iOS Debugging Fundamentals</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -196,25 +194,123 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">Using PowerShell to Install a DLL into the GAC</h1>
+      <h1 class="article-title">iOS Debugging Fundamentals</h1>
     </header>
     <div class="content">
 
     <p></p>
 
-    <p>A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.</p>
+    
 
-<p>An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs.</p>
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="ln">1</span><span class="c">#Note that you should be running PowerShell as an Administrator</span>
-<span class="ln">2</span><span class="no">[System.Reflection.Assembly]</span><span class="p">::</span><span class="n">Load</span><span class="p">(</span><span class="s2">&#34;System.EnterpriseServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&#34;</span><span class="p">)</span>            
-<span class="ln">3</span><span class="nv">$publish</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">EnterpriseServices</span><span class="p">.</span><span class="n">Internal</span><span class="p">.</span><span class="n">Publish</span>            
-<span class="ln">4</span><span class="nv">$publish</span><span class="p">.</span><span class="n">GacInstall</span><span class="p">(</span><span class="s2">&#34;C:\Path\To\DLL.dll&#34;</span><span class="p">)</span>
-<span class="ln">5</span>
-<span class="ln">6</span><span class="c">#If installing into the GAC on a server hosting web applications in IIS, you need to restart IIS for the applications to pick up the change.</span>
-<span class="ln">7</span><span class="c">#Uncomment the next line if necessary...</span>
-<span class="ln">8</span><span class="c">#iisreset</span></code></pre></div>
+<p>Bugs are bound to happen. Getting rid of them is an essential skill if you want to keep your sanity when building apps.</p>
+
+<p>In this course, you will learn a set of thinking skills to couple with the fundamental tools that Xcode provides you for finding and fixing flaws in your apps.</p>
+
+<p>🐞1.5 hours
+🦟To the point
+🐛Engaging storyline
+🐜Relevant demos</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fas fa-video"></i> <a href="http://bit.ly/ios-debugging-fundamentals" target="_blank">iOS Debugging Fundamentals</a><a href="http://bit.ly/ios-debugging-fundamentals" target="_blank"><br /> <img src="https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png" alt="iOS Debugging Fundamentals" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
+    </li>
+  </ul>
+</div></p>
+
+<h1 id="course-outline">Course Outline</h1>
+
+<p>First, you will learn to approach debugging situations with a set of principles for strategic problem solving.</p>
+
+<p>Next, you will discover how to configure breakpoints and inspect view hierarchies effectively.</p>
+
+<p>Finally, you will explore how to interpret a backtrace, glean valuable information from the Xcode debug area and console, locate changes in your codebase and simulate conditions that happen in the wild.</p>
+
+<p>When you are finished with this course, you will have the skills and knowledge to strategically and methodically reason about probable causes of defects that you experience at runtime.</p>
+
+<h2 id="1-debugging-as-strategic-problem-solving">1 – Debugging as Strategic Problem Solving</h2>
+
+<p>Debugging means a lot of things to a lot of people.</p>
+
+<p>In this module, I will define the scope of debugging for you so that you’re clear on the skills you’ll walk away from this course with.</p>
+
+<p>You will begin to develop a problem solving mentality and learn a useful mnemonic for R.E.P.A.I.R.-ing broken apps.</p>
+
+<p>Learn how to categorize bugs into buckets for strategic resolution.</p>
+
+<p>Explore some of the most common sources of bugs to complete this module.</p>
+
+<h2 id="2-correcting-unmet-expectations">2 – Correcting Unmet Expectations</h2>
+
+<p>Probabilistic thinking is the key component of a debugging mindset.</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>Pausing an App to Gather Clues With Breakpoints</li>
+<li>Combining Problem Solving with Xcode Tools</li>
+<li>Managing Your Project’s Breakpoints</li>
+<li>Controlling Breakpoints by Defining Trigger Conditions</li>
+<li>Executing Actions When Breakpoints Are Triggered</li>
+<li>Inspecting User Interface Issues</li>
+</ul>
+
+<h2 id="4-addressing-app-crashes">4 – Addressing App Crashes</h2>
+
+<p>When an app crashes, it’s because of a critical problem that can’t be recovered from.</p>
+
+<p>In this module you will work on the following:</p>
+
+<ul>
+<li>Understanding Exceptional Issues</li>
+<li>Inspecting the Crash Scene with the Backtrace and Console Output</li>
+<li>Pausing before Errors and Exceptions Cause Crashes</li>
+<li>Avoiding Errors that Cause Crashes</li>
+</ul>
+
+<h2 id="5-alleviating-anomalies">5 – Alleviating Anomalies</h2>
+
+<p>Have you ever found yourself saying, “Something weird is going on” or “It used to work - what’s going on now??”</p>
+
+<p>Have you ever experienced one of those “intermittent” bugs that seem to present themselves rarely or inconsistently and are hard to even reproduce?</p>
+
+<p>Anomalous bugs can feel like they occur “out of nowhere”&hellip; but do they?</p>
+
+<p>To find out, you will explore these topics:</p>
+
+<ul>
+<li>Reasoning About Anomalous Bugs</li>
+<li>Inspecting App Changes</li>
+<li>Simulating Real-World Conditions With Xcode</li>
+</ul>
+
+<h1 id="feedback-welcome">Feedback Welcome!</h1>
+
+<p>My unwavering goal is to help you filter the noise and learn as efficiently as possible.</p>
+
+<p>I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!</p>
+
     <aside>
       
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/">iOS Data Persistence: The Big Picture</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2013/03/16/learning-ios-development/">Journey in iOS Development Series – In the Beginning…</a></li>
+            
+        <ul>
       
     </aside>
 
