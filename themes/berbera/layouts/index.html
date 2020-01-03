@@ -136,6 +136,24 @@
             </div>
         </div>
 
+        <span id="debugging" class="jump-target"></span>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Debugging</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/debugging/").ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <span id="eventkit" class="jump-target"></span>
         <div class="row" id="">
             <div class="col-sm-12">

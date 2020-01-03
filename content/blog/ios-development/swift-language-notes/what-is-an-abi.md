@@ -12,7 +12,7 @@ showrecent: false
 sol: false
 images:
 toc: false
-disppsbadge: false
+disppsdatabadge: false
 ---
 
 "ABI" stands for "**A**pplication **B**inary **I**nterface".

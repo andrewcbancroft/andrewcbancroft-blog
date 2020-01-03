@@ -13,7 +13,7 @@ showrecent: true
 images:
   - images/social-assets/Twitter - NSPersistentCloudKitContainer Buggy Behavior List.png
   - images/social-assets/Facebook - NSPersistentCloudKitContainer Buggy Behavior List.png
-disppsbadge: true
+disppsdatabadge: true
 toc: true
 ---
 

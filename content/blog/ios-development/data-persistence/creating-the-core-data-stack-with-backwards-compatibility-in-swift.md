@@ -11,7 +11,7 @@ categories:
 tags:
   - Core Data
   - Swift
-disppsbadge: true
+disppsdatabadge: true
 ---
 In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you'll be unable to take advantage of Core Data's latest "stack creation&#8221; class called `NSPersistentContainer`. So what can you do?
 

@@ -12,7 +12,7 @@ sol: false
 images:
 aliases:
   - /blog/ios-development/swifting-out-loud/on-core-data-object-fetching-and-display-strategies/
-disppsbadge: true
+disppsdatabadge: true
 ---
 
 ## Setting the Stage

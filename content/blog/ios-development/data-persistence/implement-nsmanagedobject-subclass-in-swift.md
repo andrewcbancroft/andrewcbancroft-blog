@@ -16,7 +16,7 @@ tags:
   - NSManagedObject Subclass
   - Swift
   - Swift Namespace
-disppsbadge: true
+disppsdatabadge: true
 ---
 
 <small>Updated on July 8, 2016 – Xcode 7</small>

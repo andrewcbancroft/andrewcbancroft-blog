@@ -7,7 +7,7 @@ draft: false
 date: 2019-08-02T03:11:48+00:00
 wip: false
 showrecent: false
-disppsbadge: true
+disppsdatabadge: true
 toc: true
 tags:
   - Core Data

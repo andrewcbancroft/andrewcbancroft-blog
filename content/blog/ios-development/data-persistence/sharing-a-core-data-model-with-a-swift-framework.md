@@ -12,7 +12,7 @@ tags:
   - Core Data
   - Framework
   - Swift
-disppsbadge: true
+disppsdatabadge: true
 ---
 
 <small>Updated on June 13, 2017 – Swift 3.0, Xcode 8</small>

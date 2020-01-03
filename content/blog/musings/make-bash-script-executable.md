@@ -9,7 +9,7 @@ showrecent: false
 sol: false
 images:
 toc: false
-disppsbadge: false
+disppsdatabadge: false
 ---
 
 If you constantly run the same set of commands at the command line, why not automate that?

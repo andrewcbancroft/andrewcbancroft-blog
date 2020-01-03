@@ -10,7 +10,7 @@ categories:
   - Swift
 tags:
   - CloudKit
-disppsbadge: true
+disppsdatabadge: true
 toc: false
 ---
 

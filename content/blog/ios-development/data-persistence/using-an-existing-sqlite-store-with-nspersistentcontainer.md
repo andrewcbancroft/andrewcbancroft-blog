@@ -12,7 +12,7 @@ tags:
   - Core Data
   - NSPersistentContainer
   - Swift
-disppsbadge: true
+disppsdatabadge: true
 ---
 
 If you've been creating the Core Data Stack [without NSPersistentContainer][1] and you're thinking about switching things up to _use_ `NSPersistentContainer`, you need to think about your existing SQLite persistent store.
