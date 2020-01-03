@@ -47,22 +47,22 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="SQL Sever Synonyms, Entity Framework, and Integrated Security" />
-<meta property="og:description" content="Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.
-Suppose you have the following scenario before you:
-Basics
- You&rsquo;re building an ASP.Net web application Entity Framework has been chosen as your ORM SQL Server (any version supporting Synonyms) is your backend database server of choice  Details" />
+<meta property="og:title" content="What Is Debugging (And What Isn&#39;t)?" />
+<meta property="og:description" content="All kinds of problems can happen when you’re building an iOS app. But are all problems debugging problems?  Which ones are and which ones aren&#39;t?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/" />
-<meta property="article:published_time" content="2015-05-01T17:44:31&#43;00:00"/>
-<meta property="article:modified_time" content="2015-05-01T17:44:31&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/debugging/what-is-debugging/" />
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="SQL Sever Synonyms, Entity Framework, and Integrated Security"/>
-<meta name="twitter:description" content="Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.
-Suppose you have the following scenario before you:
-Basics
- You&rsquo;re building an ASP.Net web application Entity Framework has been chosen as your ORM SQL Server (any version supporting Synonyms) is your backend database server of choice  Details"/>
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20What%20Is%20Debugging%20%28And%20What%20Isn%27t%29_.png" />
+
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20What%20Is%20Debugging%20%28And%20What%20Isn%27t%29_.png" />
+<meta property="article:published_time" content="2019-12-30T03:11:48&#43;00:00"/>
+<meta property="article:modified_time" content="2019-12-30T03:11:48&#43;00:00"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20What%20Is%20Debugging%20%28And%20What%20Isn%27t%29_.png"/>
+
+<meta name="twitter:title" content="What Is Debugging (And What Isn&#39;t)?"/>
+<meta name="twitter:description" content="All kinds of problems can happen when you’re building an iOS app. But are all problems debugging problems?  Which ones are and which ones aren&#39;t?"/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -70,24 +70,30 @@ Basics
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "SQL Sever Synonyms, Entity Framework, and Integrated Security",
-  "url": "https:\/\/www.andrewcbancroft.com\/2015\/05\/01\/using-sql-sever-synonyms-entity-framework-integrated-security\/",
-  "wordCount": "559",
-  "datePublished": "2015-05-01T17:44:31Z",
-  "dateModified": "2015-05-01T17:44:31Z",
+  "headline": "What Is Debugging (And What Isn't)?",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/www.andrewcbancroft.com\/images\/social-assets\/Twitter%20-%20What%20Is%20Debugging%20%28And%20What%20Isn%27t%29_.png",
+    "height": "512",
+    "width": "1024"
+  },
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/debugging\/what-is-debugging\/",
+  "wordCount": "580",
+  "datePublished": "2019-12-30T03:11:48Z",
+  "dateModified": "2019-12-30T03:11:48Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": ".Net Development, .Net, Entity Framework, Security, SQL Server"
+  "keywords": "Debugging, Xcode"
 
-  ,"description": ""
+  ,"description": "All kinds of problems can happen when you’re building an iOS app. But are all problems debugging problems?  Which ones are and which ones aren't?"
 }
 </script>
 
 
 
-    <title>SQL Sever Synonyms, Entity Framework, and Integrated Security</title>
+    <title>What Is Debugging (And What Isn&rsquo;t)?</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -201,81 +207,145 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">SQL Sever Synonyms, Entity Framework, and Integrated Security</h1>
+        <div class="alert alert-primary" role="alert">
+            Learning about debugging on iOS? <br/><br/>
+            I am the author of <a href="http://bit.ly/ios-debugging-fundamentals" class="alert-link">iOS Debugging Fundamentals</a> on <a href="http://bit.ly/ps-author-page" class="alert-link">Pluralsight</a>.  <br/><br/>Deepen your understanding by checking the course out!
+          </div>
+      <h1 class="article-title">What Is Debugging (And What Isn&#39;t)?</h1>
     </header>
     <div class="content">
 
     <p></p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#non-debugging-problems">Non-Debugging Problems</a>
+<ul>
+<li><a href="#build-problems">Build Problems</a></li>
+<li><a href="#learning-curves">Learning Curves</a></li>
+<li><a href="#xcode-warnings">Xcode Warnings</a></li>
+<li><a href="#design-dilemmas">Design Dilemmas</a></li>
+<li><a href="#user-experience-debates">User Experience Debates</a></li>
+<li><a href="#performance-optimization">Performance Optimization</a></li>
+</ul></li>
+<li><a href="#debugging-problems">Debugging Problems</a></li>
+<li><a href="#summing-up">Summing Up</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
 
     
 
-<p><a name="scenario" class="jump-target"></a></p>
+<p>Does it ever help you to narrow the scope of overwhelming topics like &ldquo;debugging&rdquo;?</p>
 
-<h3 id="scenario">Scenario</h3>
+<p>It helps <em>me</em>.</p>
 
-<p>This may be an edge case, but I spent enough time (a couple of <em>days</em>) spinning on this that I thought it warranted a signpost on the Internet.</p>
+<p>When you&rsquo;re new to something like iOS development, you may find yourself stepping into a world of problems.  Everyone around you is always fixing something it seems!</p>
 
-<p>Suppose you have the following scenario before you:</p>
+<p>All kinds of problems can happen when you’re building an iOS app.</p>
 
-<p><strong>Basics</strong></p>
+<p>But are all problems&hellip; <em>debugging</em> problems?</p>
 
-<ul>
-<li>You&rsquo;re building an ASP.Net web application</li>
-<li>Entity Framework has been chosen as your ORM</li>
-<li>SQL Server (any version supporting <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonyms</a>) is your backend database server of choice</li>
-</ul>
+<p>TLDR; Answer: Not necessarily.</p>
 
-<p><strong>Details</strong></p>
+<p>My brain appreciates focused definitions.  It lightens the the mental load a bit to &ldquo;bucket&rdquo; problems into categories.</p>
 
-<ul>
-<li>You&rsquo;re using &ldquo;Integrated Security=True&#8221; in your connection string to the database (in web.config)</li>
-<li>The Application Pool in which your app resides is running under a domain service account (ie, not the default identity)</li>
-<li>Your application primarily talks to one database, but there is information in <em>another</em> database that you need to pull into your app</li>
-<li>To access the data in that other database, you&rsquo;ve chosen to create a <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonym</a></li>
-</ul>
+<p>Which problems don&rsquo;t fit into the &ldquo;debugging problems&rdquo; category?  Which ones do?</p>
 
-<p>Every bullet point in this scenario is normal and valid, until you get to the part about using &ldquo;Integrated Security=True&#8221; in your connection string&#8230;</p>
+<h2 id="non-debugging-problems">Non-Debugging Problems</h2>
 
-<p><a name="login-failed" class="jump-target"></a></p>
+<p>This list of common problem areas definitely take up a developer&rsquo;s time. But rather than lump them all in with &ldquo;debugging&rdquo;, I prefer to treat them as problem sets of their own.</p>
 
-<h3 id="login-failed-for-user-8216-nt-authority-anonymous-logon">Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&rsquo;</h3>
+<h3 id="build-problems">Build Problems</h3>
 
-<p>If you had chosen to use SQL Server authentication in your conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&rsquo;s what I had been doing in my own application. I started running into the &ldquo;Login failed&#8230;&#8221; error message once I switched to Integrated Security.</p>
+<p>If your app won’t build, that’s definitely a must-solve problem.  However, buildtime errors are not debugging problems.</p>
 
-<p>For some reason &ldquo;Integrated Security=True&#8221; that throws Entity Framework for a loop. It accesses the database used in the <code>DbContext</code> instance just fine, but the second a line of code needs to use the object mapped to the <em>Synonym</em>, <strong>boom</strong>&#8230; crash&#8230; error&#8230;</p>
+<h3 id="learning-curves">Learning Curves</h3>
 
-<p><a name="reolving-error" class="jump-target"></a></p>
+<p>When you’re learning a new framework or trying something you’ve never done before, it can take some time to clear the hurdle of the Swift complier as you&rsquo;re coding.  Even still, this isn&rsquo;t debugging.</p>
 
-<h3 id="resolving-the-error">Resolving the error</h3>
+<h3 id="xcode-warnings">Xcode Warnings</h3>
 
-<p>It turns out that the resolution is really, really simple. Instead of using a Synonym, use a View. You don&rsquo;t have to change a single line of .Net code. Just make sure the view is named the same as the Synonym was (and drop the Synonym from the database, of course).</p>
+<p>If Xcode is issuing warnings, you should probably take heed and resolve them before shipping to the App Store.  But I still wouldn&rsquo;t call this debugging.</p>
 
-<p><a name="creating-view" class="jump-target"></a></p>
+<h3 id="design-dilemmas">Design Dilemmas</h3>
 
-<h4 id="creating-the-view">Creating the view</h4>
+<p>Design can get controversial, but overcoming these often-subjective dilemmas is not debugging.</p>
 
-<p>A Synonym essentially maps to an entire table, so the View&rsquo;s structure could literally be a simple <code>select * from [fully.qualified.database.objectName]</code>. If your DBA hates <code>select *</code>, you&rsquo;ll end up listing out every column that your Entity Framework object lists as one of its Properties.</p>
+<h3 id="user-experience-debates">User Experience Debates</h3>
 
-<p><a name="granting-permissions" class="jump-target"></a></p>
+<p>As with design dilemmas, user experience debates are also trouble spots for many developers.  The debates themselves, however, are not debugging.</p>
 
-<h4 id="granting-permissions">Granting permissions</h4>
+<h3 id="performance-optimization">Performance Optimization</h3>
 
-<p>If the service account that&rsquo;s running your Application Pool doesn&rsquo;t already have permission to the database objects you created the View for, you need to go in and grant appropriate permissions to that account. Otherwise, you&rsquo;re likely to get an error stating</p>
+<p>Sometimes, you get your app built and running, but you’re struggling with performance-related issues.  Even though it works (in a technical sense), it could be faster, more responsive, use less memory, etc.</p>
+
+<p>Optimization, however, is big enough to be in a category of its own for me.</p>
+
+<h2 id="debugging-problems">Debugging Problems</h2>
+
+<p>So&hellip; what <em>is</em> debugging then?</p>
+
+<p>This is how I define it in <a href="http://bit.ly/ios-debugging-fundamentals">iOS Debugging Fundamentals</a>:</p>
+
+<p>Debugging is&hellip;</p>
 
 <blockquote>
-<p>The server principal &ldquo;Domain\PrincipalName&#8221; is not able to access the database &ldquo;DatabaseName&#8221; under the current security context.</p>
+<p><strong>Investigating</strong> and <strong>fixing flaws</strong> that you and your users experience <strong>while your app is running</strong>.</p>
+
+<p><strong>Thinking about</strong> and <strong>correcting defects</strong> that happen at <strong>runtime</strong>.</p>
 </blockquote>
 
-<p>Be specific and granular with the permission you grant to the account. If you&rsquo;re just pulling in data for your app to display, only give the account SELECT permission on the database object your View references.</p>
+<p>Debugging is a two-part problem solving exercise: It involves thinking skills and fixing skills.  Debugging involves reasoning about the probable causes of flaws and defects in your apps. When you debug, you spend time trying to figure out the root cause of an issue you&rsquo;re noticing.</p>
 
-<h3 id="wrapping-up">Wrapping up</h3>
+<p>Once you find the source of the problem, your job shifts to applying your programming skills and your knowledge of the app&rsquo;s purpose (domain knowledge) to fix the problem.</p>
 
-<p>In essence, using a Synonym that references a database object in <em>another database</em> with Entity Framework and Integrated Security just doesn&rsquo;t work out in the end. Somehow, the security context loses the identity of the account running the application pool, and the dreated Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&rsquo; rears its ugly head. Thankfully, the solution is simple: Create a View instead of a Synonym, grant approprate permissions, and you&rsquo;ll be off and running (and you&rsquo;ll avoid usernames and passwords in your web.config)!</p>
+<p>But just as I started off this discussion by asking, &ldquo;Are all problems&hellip; <em>debugging</em> problems?&ldquo;, I&rsquo;m able to answer &ldquo;no&rdquo; by emphasizing <em>when</em> the problems occur, namely, at runtime.</p>
 
-<p><a name="share" class="jump-target"></a></p>
+<p>That&rsquo;s why build problems, learnig curves, Xcode warnings, design dilemmas, and UX debates aren&rsquo;t considered debugging activites (in my view).</p>
+
+<p>I grant that performance problems are typically noticed at runtime, <em>but</em>, I believe this to be a separate activity, primarily because the app <em>works</em> (even if it could work <em>better</em>).</p>
+
+<h2 id="summing-up">Summing Up</h2>
+
+<p>Narrowing the scope of debugging to reasoning about, inspecting, and repairing runtime problems lifts some cognitive weight for me.</p>
+
+<p>It allows me to enjoy programming a <em>lot</em> more when I know that I&rsquo;m not actually spending 99% of my time &ldquo;debugging&rdquo;. 😂</p>
+
+<p>If you&rsquo;re getting your bearings when it comes to debugging iOS apps, I&rsquo;d love to impact your learning experience. Perhaps my <a href="http://bit.ly/ios-debugging-fundamentals">iOS Debugging Fudamentals</a> course on Pluralsight will guide you to more efficient debugging experiences!</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fas fa-video"></i> <a href="http://bit.ly/ios-debugging-fundamentals" target="_blank">iOS Debugging Fundamentals</a><a href="http://bit.ly/ios-debugging-fundamentals" target="_blank"><br /> <img src="https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png" alt="iOS Debugging Fundamentals" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
+    </li>
+  </ul>
+</div></p>
 
     <aside>
       
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/pluralsight/2019-12-26-ios-debugging-fundamentals/">iOS Debugging Fundamentals</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/xcode/showing-live-view-in-swift-playground/">Showing the Live View in a Swift Playground</a></li>
+            
+        <ul>
       
     </aside>
 

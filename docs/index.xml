@@ -5,10 +5,111 @@
     <description>Recent content about iOS development with Swift  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Dec 2019 10:03:33 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 30 Dec 2019 03:11:48 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>What Is Debugging (And What Isn&#39;t)?</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/debugging/what-is-debugging/</link>
+      <pubDate>Mon, 30 Dec 2019 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/debugging/what-is-debugging/</guid>
+      <description>
+
+&lt;p&gt;Does it ever help you to narrow the scope of overwhelming topics like &amp;ldquo;debugging&amp;rdquo;?&lt;/p&gt;
+
+&lt;p&gt;It helps &lt;em&gt;me&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;When you&amp;rsquo;re new to something like iOS development, you may find yourself stepping into a world of problems.  Everyone around you is always fixing something it seems!&lt;/p&gt;
+
+&lt;p&gt;All kinds of problems can happen when you’re building an iOS app.&lt;/p&gt;
+
+&lt;p&gt;But are all problems&amp;hellip; &lt;em&gt;debugging&lt;/em&gt; problems?&lt;/p&gt;
+
+&lt;p&gt;TLDR; Answer: Not necessarily.&lt;/p&gt;
+
+&lt;p&gt;My brain appreciates focused definitions.  It lightens the the mental load a bit to &amp;ldquo;bucket&amp;rdquo; problems into categories.&lt;/p&gt;
+
+&lt;p&gt;Which problems don&amp;rsquo;t fit into the &amp;ldquo;debugging problems&amp;rdquo; category?  Which ones do?&lt;/p&gt;
+
+&lt;h2 id=&#34;non-debugging-problems&#34;&gt;Non-Debugging Problems&lt;/h2&gt;
+
+&lt;p&gt;This list of common problem areas definitely take up a developer&amp;rsquo;s time. But rather than lump them all in with &amp;ldquo;debugging&amp;rdquo;, I prefer to treat them as problem sets of their own.&lt;/p&gt;
+
+&lt;h3 id=&#34;build-problems&#34;&gt;Build Problems&lt;/h3&gt;
+
+&lt;p&gt;If your app won’t build, that’s definitely a must-solve problem.  However, buildtime errors are not debugging problems.&lt;/p&gt;
+
+&lt;h3 id=&#34;learning-curves&#34;&gt;Learning Curves&lt;/h3&gt;
+
+&lt;p&gt;When you’re learning a new framework or trying something you’ve never done before, it can take some time to clear the hurdle of the Swift complier as you&amp;rsquo;re coding.  Even still, this isn&amp;rsquo;t debugging.&lt;/p&gt;
+
+&lt;h3 id=&#34;xcode-warnings&#34;&gt;Xcode Warnings&lt;/h3&gt;
+
+&lt;p&gt;If Xcode is issuing warnings, you should probably take heed and resolve them before shipping to the App Store.  But I still wouldn&amp;rsquo;t call this debugging.&lt;/p&gt;
+
+&lt;h3 id=&#34;design-dilemmas&#34;&gt;Design Dilemmas&lt;/h3&gt;
+
+&lt;p&gt;Design can get controversial, but overcoming these often-subjective dilemmas is not debugging.&lt;/p&gt;
+
+&lt;h3 id=&#34;user-experience-debates&#34;&gt;User Experience Debates&lt;/h3&gt;
+
+&lt;p&gt;As with design dilemmas, user experience debates are also trouble spots for many developers.  The debates themselves, however, are not debugging.&lt;/p&gt;
+
+&lt;h3 id=&#34;performance-optimization&#34;&gt;Performance Optimization&lt;/h3&gt;
+
+&lt;p&gt;Sometimes, you get your app built and running, but you’re struggling with performance-related issues.  Even though it works (in a technical sense), it could be faster, more responsive, use less memory, etc.&lt;/p&gt;
+
+&lt;p&gt;Optimization, however, is big enough to be in a category of its own for me.&lt;/p&gt;
+
+&lt;h2 id=&#34;debugging-problems&#34;&gt;Debugging Problems&lt;/h2&gt;
+
+&lt;p&gt;So&amp;hellip; what &lt;em&gt;is&lt;/em&gt; debugging then?&lt;/p&gt;
+
+&lt;p&gt;This is how I define it in &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34;&gt;iOS Debugging Fundamentals&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;Debugging is&amp;hellip;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Investigating&lt;/strong&gt; and &lt;strong&gt;fixing flaws&lt;/strong&gt; that you and your users experience &lt;strong&gt;while your app is running&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Thinking about&lt;/strong&gt; and &lt;strong&gt;correcting defects&lt;/strong&gt; that happen at &lt;strong&gt;runtime&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Debugging is a two-part problem solving exercise: It involves thinking skills and fixing skills.  Debugging involves reasoning about the probable causes of flaws and defects in your apps. When you debug, you spend time trying to figure out the root cause of an issue you&amp;rsquo;re noticing.&lt;/p&gt;
+
+&lt;p&gt;Once you find the source of the problem, your job shifts to applying your programming skills and your knowledge of the app&amp;rsquo;s purpose (domain knowledge) to fix the problem.&lt;/p&gt;
+
+&lt;p&gt;But just as I started off this discussion by asking, &amp;ldquo;Are all problems&amp;hellip; &lt;em&gt;debugging&lt;/em&gt; problems?&amp;ldquo;, I&amp;rsquo;m able to answer &amp;ldquo;no&amp;rdquo; by emphasizing &lt;em&gt;when&lt;/em&gt; the problems occur, namely, at runtime.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s why build problems, learnig curves, Xcode warnings, design dilemmas, and UX debates aren&amp;rsquo;t considered debugging activites (in my view).&lt;/p&gt;
+
+&lt;p&gt;I grant that performance problems are typically noticed at runtime, &lt;em&gt;but&lt;/em&gt;, I believe this to be a separate activity, primarily because the app &lt;em&gt;works&lt;/em&gt; (even if it could work &lt;em&gt;better&lt;/em&gt;).&lt;/p&gt;
+
+&lt;h2 id=&#34;summing-up&#34;&gt;Summing Up&lt;/h2&gt;
+
+&lt;p&gt;Narrowing the scope of debugging to reasoning about, inspecting, and repairing runtime problems lifts some cognitive weight for me.&lt;/p&gt;
+
+&lt;p&gt;It allows me to enjoy programming a &lt;em&gt;lot&lt;/em&gt; more when I know that I&amp;rsquo;m not actually spending 99% of my time &amp;ldquo;debugging&amp;rdquo;. 😂&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re getting your bearings when it comes to debugging iOS apps, I&amp;rsquo;d love to impact your learning experience. Perhaps my &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34;&gt;iOS Debugging Fudamentals&lt;/a&gt; course on Pluralsight will guide you to more efficient debugging experiences!&lt;/p&gt;
+
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  
+
+&lt;p&gt;&lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;iOS Debugging Fundamentals&lt;/a&gt;&lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png&#34; alt=&#34;iOS Debugging Fundamentals&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>iOS Debugging Fundamentals</title>
