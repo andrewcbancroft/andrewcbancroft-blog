@@ -5,10 +5,101 @@
     <description>Recent content about iOS development with Swift  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Dec 2019 03:11:48 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jan 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>4 Things You Should Never Do When Debugging iOS Apps</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/debugging/4-things-never-do-when-debugging-ios-apps/</link>
+      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/debugging/4-things-never-do-when-debugging-ios-apps/</guid>
+      <description>
+
+&lt;h2 id=&#34;never-change-code-without-reproducing-the-problem-first&#34;&gt;Never change code without reproducing the problem first&lt;/h2&gt;
+
+&lt;p&gt;Reproducing the problem is a critical first step in debugging.&lt;/p&gt;
+
+&lt;p&gt;Before you start scouring your code&amp;hellip;
+Before you start setting breakpoints&amp;hellip;
+Before you start using tools or changing things&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;See if you can &lt;strong&gt;cause the bug to happen again&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The goal of this exercise is to &lt;strong&gt;confirm that the problem is consistent&lt;/strong&gt;. Reproducing the problem helps you &lt;strong&gt;clarify the conditions that are present when the bug happens.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Do your best to clearly state what’s going on &amp;ndash; I even write it down sometimes to document the problem and make sure I&amp;rsquo;ve got it pinned down.&lt;/p&gt;
+
+&lt;h2 id=&#34;never-bug-hunt-before-hypothesizing&#34;&gt;Never bug hunt before hypothesizing&lt;/h2&gt;
+
+&lt;p&gt;Having a plan sets you up to avoid haphazardly hoping to find the source of the problem you&amp;rsquo;re experiencing.&lt;/p&gt;
+
+&lt;p&gt;Before you set off to track down what&amp;rsquo;s going on, make an educated guess about what you &lt;em&gt;think&lt;/em&gt; might be going on.&lt;/p&gt;
+
+&lt;p&gt;Jot down a hypothesis or two (or three) and rank them in order of which feels more likely, based on your past debugging experiences.&lt;/p&gt;
+
+&lt;p&gt;Pair your hypothesis with possible Xcode tools to use and spots to look within your codebase to gather evidence to support or discredit the hypothesis.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Then&lt;/em&gt;, once you have a plan, head out into the code on a mission to investigate your hypothesis.&lt;/p&gt;
+
+&lt;p&gt;Take appropriate action based on your findings.&lt;/p&gt;
+
+&lt;h2 id=&#34;never-make-code-changes-without-a-new-branch&#34;&gt;Never make code changes without a new branch&lt;/h2&gt;
+
+&lt;p&gt;When you&amp;rsquo;re taking action though, make sure you&amp;rsquo;ve created a new code branch &lt;strong&gt;first&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Often, your investigation of a best-guess hypothesis about a bug&amp;rsquo;s root cause means you need to change something about your app.&lt;/p&gt;
+
+&lt;p&gt;Without a branch, you won&amp;rsquo;t be able to roll back to the original state of your code.&lt;/p&gt;
+
+&lt;p&gt;Set your self up to quickly iterate on evidence gathering.&lt;/p&gt;
+
+&lt;p&gt;Make a branch -&amp;gt; attempt a fix -&amp;gt; Did it work? Great! Does the bug persist? Rollback! (rinse and repeat)&lt;/p&gt;
+
+&lt;h2 id=&#34;never-change-more-than-one-thing-at-a-time&#34;&gt;Never change more than one &amp;ldquo;thing&amp;rdquo; at a time&lt;/h2&gt;
+
+&lt;p&gt;Imagine experiencing a bug.&lt;/p&gt;
+
+&lt;p&gt;Now you go in and change a line of code here, toggle an Xcode project setting there, refactor a function, and then re-run your app.&lt;/p&gt;
+
+&lt;p&gt;The bug is fixed!  Buuut&amp;hellip; which change from your list of changes was the actual fix?&lt;/p&gt;
+
+&lt;p&gt;Never change more than one thing at a time.&lt;/p&gt;
+
+&lt;p&gt;Doing so not only makes the actual fix ambiguous, but could also inadvertently cause &lt;em&gt;different&lt;/em&gt; bugs that you didn&amp;rsquo;t anticipate.&lt;/p&gt;
+
+&lt;p&gt;Whatever you do, only change one thing at a time when you&amp;rsquo;re attempting to fix a big.&lt;/p&gt;
+
+&lt;p&gt;Now&amp;hellip;what does &amp;ldquo;one thing&amp;rdquo; mean?&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;One thing&amp;rdquo; means &amp;ldquo;one fix strategy&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;In order to attempt some bug fixes, you may have to change 2 or 3 lines of code.  That&amp;rsquo;s okay.  You&amp;rsquo;re changing them as a &amp;ldquo;unit&amp;rdquo;, of sorts, as part of a single fix strategy.&lt;/p&gt;
+
+&lt;p&gt;Trying more than one fix strategy at a time is what I&amp;rsquo;m cautioning against.&lt;/p&gt;
+
+&lt;h2 id=&#34;summing-up&#34;&gt;Summing Up&lt;/h2&gt;
+
+&lt;p&gt;Debugging is challenging enough as it is. Don&amp;rsquo;t make debugging harder than it needs to be. Avoid these four things and you should be a much happier developer.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re getting your bearings when it comes to debugging iOS apps, I&amp;rsquo;d love to impact your learning experience. Perhaps my &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34;&gt;iOS Debugging Fudamentals&lt;/a&gt; course on Pluralsight will guide you to more efficient debugging experiences!&lt;/p&gt;
+
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  
+
+&lt;p&gt;&lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;iOS Debugging Fundamentals&lt;/a&gt;&lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png&#34; alt=&#34;iOS Debugging Fundamentals&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>What Is Debugging (And What Isn&#39;t)?</title>
