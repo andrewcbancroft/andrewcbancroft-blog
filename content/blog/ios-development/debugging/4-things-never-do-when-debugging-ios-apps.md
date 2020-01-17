@@ -34,9 +34,9 @@ Do your best to clearly state what’s going on -- I even write it down sometime
 ## Never bug hunt before hypothesizing
 Having a plan sets you up to avoid haphazardly hoping to find the source of the problem you're experiencing.
 
-Before you set off to track down what's going on, make an educated guess about what you *think* might be going on. 
+Before you set off to track down what's going on, **make an educated guess** about what you *think* might be going on. 
 
-Jot down a hypothesis or two (or three) and rank them in order of which feels more likely, based on your past debugging experiences.
+**Jot down a hypothesis** or two (or three) and rank them in order of **which feels more likely**, based on your past debugging experiences.
 
 Pair your hypothesis with possible Xcode tools to use and spots to look within your codebase to gather evidence to support or discredit the hypothesis.
 
@@ -49,7 +49,7 @@ When you're taking action though, make sure you've created a new code branch **f
 
 Often, your investigation of a best-guess hypothesis about a bug's root cause means you need to change something about your app.
 
-Without a branch, you won't be able to roll back to the original state of your code.
+**Without a branch, you won't be able to roll back** to the original state of your code.
 
 Set your self up to quickly iterate on evidence gathering.  
 
@@ -60,17 +60,17 @@ Imagine experiencing a bug.
 
 Now you go in and change a line of code here, toggle an Xcode project setting there, refactor a function, and then re-run your app.
 
-The bug is fixed!  Buuut... which change from your list of changes was the actual fix?
+The bug is fixed!  Buuut... **which change from your list of changes was the actual fix**?
 
 Never change more than one thing at a time. 
 
 Doing so not only makes the actual fix ambiguous, but could also inadvertently cause *different* bugs that you didn't anticipate.
 
-Whatever you do, only change one thing at a time when you're attempting to fix a big.
+Whatever you do, **only change one thing at a time** when you're attempting to fix a big.
 
 Now...what does "one thing" mean?
 
-"One thing" means "one fix strategy".
+"One thing" means **"one fix strategy"**.
 
 In order to attempt some bug fixes, you may have to change 2 or 3 lines of code.  That's okay.  You're changing them as a "unit", of sorts, as part of a single fix strategy.
 

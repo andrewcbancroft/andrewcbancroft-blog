@@ -36,9 +36,9 @@ Before you start using tools or changing things&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;Having a plan sets you up to avoid haphazardly hoping to find the source of the problem you&amp;rsquo;re experiencing.&lt;/p&gt;
 
-&lt;p&gt;Before you set off to track down what&amp;rsquo;s going on, make an educated guess about what you &lt;em&gt;think&lt;/em&gt; might be going on.&lt;/p&gt;
+&lt;p&gt;Before you set off to track down what&amp;rsquo;s going on, &lt;strong&gt;make an educated guess&lt;/strong&gt; about what you &lt;em&gt;think&lt;/em&gt; might be going on.&lt;/p&gt;
 
-&lt;p&gt;Jot down a hypothesis or two (or three) and rank them in order of which feels more likely, based on your past debugging experiences.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Jot down a hypothesis&lt;/strong&gt; or two (or three) and rank them in order of &lt;strong&gt;which feels more likely&lt;/strong&gt;, based on your past debugging experiences.&lt;/p&gt;
 
 &lt;p&gt;Pair your hypothesis with possible Xcode tools to use and spots to look within your codebase to gather evidence to support or discredit the hypothesis.&lt;/p&gt;
 
@@ -52,7 +52,7 @@ Before you start using tools or changing things&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;Often, your investigation of a best-guess hypothesis about a bug&amp;rsquo;s root cause means you need to change something about your app.&lt;/p&gt;
 
-&lt;p&gt;Without a branch, you won&amp;rsquo;t be able to roll back to the original state of your code.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Without a branch, you won&amp;rsquo;t be able to roll back&lt;/strong&gt; to the original state of your code.&lt;/p&gt;
 
 &lt;p&gt;Set your self up to quickly iterate on evidence gathering.&lt;/p&gt;
 
@@ -64,17 +64,17 @@ Before you start using tools or changing things&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;Now you go in and change a line of code here, toggle an Xcode project setting there, refactor a function, and then re-run your app.&lt;/p&gt;
 
-&lt;p&gt;The bug is fixed!  Buuut&amp;hellip; which change from your list of changes was the actual fix?&lt;/p&gt;
+&lt;p&gt;The bug is fixed!  Buuut&amp;hellip; &lt;strong&gt;which change from your list of changes was the actual fix&lt;/strong&gt;?&lt;/p&gt;
 
 &lt;p&gt;Never change more than one thing at a time.&lt;/p&gt;
 
 &lt;p&gt;Doing so not only makes the actual fix ambiguous, but could also inadvertently cause &lt;em&gt;different&lt;/em&gt; bugs that you didn&amp;rsquo;t anticipate.&lt;/p&gt;
 
-&lt;p&gt;Whatever you do, only change one thing at a time when you&amp;rsquo;re attempting to fix a big.&lt;/p&gt;
+&lt;p&gt;Whatever you do, &lt;strong&gt;only change one thing at a time&lt;/strong&gt; when you&amp;rsquo;re attempting to fix a big.&lt;/p&gt;
 
 &lt;p&gt;Now&amp;hellip;what does &amp;ldquo;one thing&amp;rdquo; mean?&lt;/p&gt;
 
-&lt;p&gt;&amp;ldquo;One thing&amp;rdquo; means &amp;ldquo;one fix strategy&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;One thing&amp;rdquo; means &lt;strong&gt;&amp;ldquo;one fix strategy&amp;rdquo;&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;In order to attempt some bug fixes, you may have to change 2 or 3 lines of code.  That&amp;rsquo;s okay.  You&amp;rsquo;re changing them as a &amp;ldquo;unit&amp;rdquo;, of sorts, as part of a single fix strategy.&lt;/p&gt;
 

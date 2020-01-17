@@ -252,9 +252,9 @@ Before you start using tools or changing things&hellip;</p>
 
 <p>Having a plan sets you up to avoid haphazardly hoping to find the source of the problem you&rsquo;re experiencing.</p>
 
-<p>Before you set off to track down what&rsquo;s going on, make an educated guess about what you <em>think</em> might be going on.</p>
+<p>Before you set off to track down what&rsquo;s going on, <strong>make an educated guess</strong> about what you <em>think</em> might be going on.</p>
 
-<p>Jot down a hypothesis or two (or three) and rank them in order of which feels more likely, based on your past debugging experiences.</p>
+<p><strong>Jot down a hypothesis</strong> or two (or three) and rank them in order of <strong>which feels more likely</strong>, based on your past debugging experiences.</p>
 
 <p>Pair your hypothesis with possible Xcode tools to use and spots to look within your codebase to gather evidence to support or discredit the hypothesis.</p>
 
@@ -268,7 +268,7 @@ Before you start using tools or changing things&hellip;</p>
 
 <p>Often, your investigation of a best-guess hypothesis about a bug&rsquo;s root cause means you need to change something about your app.</p>
 
-<p>Without a branch, you won&rsquo;t be able to roll back to the original state of your code.</p>
+<p><strong>Without a branch, you won&rsquo;t be able to roll back</strong> to the original state of your code.</p>
 
 <p>Set your self up to quickly iterate on evidence gathering.</p>
 
@@ -280,17 +280,17 @@ Before you start using tools or changing things&hellip;</p>
 
 <p>Now you go in and change a line of code here, toggle an Xcode project setting there, refactor a function, and then re-run your app.</p>
 
-<p>The bug is fixed!  Buuut&hellip; which change from your list of changes was the actual fix?</p>
+<p>The bug is fixed!  Buuut&hellip; <strong>which change from your list of changes was the actual fix</strong>?</p>
 
 <p>Never change more than one thing at a time.</p>
 
 <p>Doing so not only makes the actual fix ambiguous, but could also inadvertently cause <em>different</em> bugs that you didn&rsquo;t anticipate.</p>
 
-<p>Whatever you do, only change one thing at a time when you&rsquo;re attempting to fix a big.</p>
+<p>Whatever you do, <strong>only change one thing at a time</strong> when you&rsquo;re attempting to fix a big.</p>
 
 <p>Now&hellip;what does &ldquo;one thing&rdquo; mean?</p>
 
-<p>&ldquo;One thing&rdquo; means &ldquo;one fix strategy&rdquo;.</p>
+<p>&ldquo;One thing&rdquo; means <strong>&ldquo;one fix strategy&rdquo;</strong>.</p>
 
 <p>In order to attempt some bug fixes, you may have to change 2 or 3 lines of code.  That&rsquo;s okay.  You&rsquo;re changing them as a &ldquo;unit&rdquo;, of sorts, as part of a single fix strategy.</p>
 
