@@ -50,7 +50,7 @@ Finally, it may be that the developer of a framework or function you’re using 
 
 Some developers will use `assert` in a function to test that a condition is met before their function proceeds.
 
-Guard statements mixed with a `fatalError` in the Else block could also be a failure protection strategy.
+Guard statements mixed with a `fatalError` in the `else` block could also be a failure protection strategy.
 
 In both cases your app would crash when the assert or guard conditions are not met.
 

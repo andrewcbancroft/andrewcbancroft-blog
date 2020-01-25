@@ -55,7 +55,7 @@
 
 &lt;p&gt;Some developers will use &lt;code&gt;assert&lt;/code&gt; in a function to test that a condition is met before their function proceeds.&lt;/p&gt;
 
-&lt;p&gt;Guard statements mixed with a &lt;code&gt;fatalError&lt;/code&gt; in the Else block could also be a failure protection strategy.&lt;/p&gt;
+&lt;p&gt;Guard statements mixed with a &lt;code&gt;fatalError&lt;/code&gt; in the &lt;code&gt;else&lt;/code&gt; block could also be a failure protection strategy.&lt;/p&gt;
 
 &lt;p&gt;In both cases your app would crash when the assert or guard conditions are not met.&lt;/p&gt;
 
