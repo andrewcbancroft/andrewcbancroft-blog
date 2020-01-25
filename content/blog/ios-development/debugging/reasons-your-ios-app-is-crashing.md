@@ -13,7 +13,7 @@ tags:
   - Debugging
   - Xcode
   - Crash
-introtext: "App crashes can feel so... abrubpt, can't they? When you experience a crash, it might calm your nerves to know that there are a finite number of reasons for your app to crash. Four, in fact. Here they are... "
+introtext: "App crashes can feel so... abrupt, can't they? When you experience a crash, it might calm your nerves to know that there are a finite number of reasons for your app to crash. Four, in fact. Here they are... "
 images:
   - /images/social-assets/Twitter - 4 Reasons Your iOS App Is Crashing.png
   - /images/social-assets/Facebook - 4 Reasons Your iOS App Is Crashing.png
