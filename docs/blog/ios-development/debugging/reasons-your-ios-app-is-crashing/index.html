@@ -47,22 +47,22 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Disabling Xcode’s OS-Level Debug Logging" />
-<meta property="og:description" content="Full credit to Russell Ivanovic for his tweet for figuring out how to disable Xcode 8&rsquo;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&rsquo;s helpful to you as well.
-If you&rsquo;re tired of sifting through operating system-level logging to the debug console while you&rsquo;re debugging your app, it&rsquo;s actually fairly easy to silence.
-
-1. Edit the scheme for your app:" />
+<meta property="og:title" content="4 Reasons Your iOS App Is Crashing" />
+<meta property="og:description" content="Wondering why your app is crashing? When it comes down to it, there are four possible reasons..." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2016/10/28/disabling-xcode-os-level-debug-logging/" />
-<meta property="article:published_time" content="2016-10-28T05:06:19&#43;00:00"/>
-<meta property="article:modified_time" content="2016-10-28T05:06:19&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/debugging/reasons-your-ios-app-is-crashing/" />
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Disabling Xcode’s OS-Level Debug Logging"/>
-<meta name="twitter:description" content="Full credit to Russell Ivanovic for his tweet for figuring out how to disable Xcode 8&rsquo;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&rsquo;s helpful to you as well.
-If you&rsquo;re tired of sifting through operating system-level logging to the debug console while you&rsquo;re debugging your app, it&rsquo;s actually fairly easy to silence.
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%204%20Reasons%20Your%20iOS%20App%20Is%20Crashing.png" />
 
-1. Edit the scheme for your app:"/>
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%204%20Reasons%20Your%20iOS%20App%20Is%20Crashing.png" />
+<meta property="article:published_time" content="2020-01-25T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-01-25T00:00:00&#43;00:00"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%204%20Reasons%20Your%20iOS%20App%20Is%20Crashing.png"/>
+
+<meta name="twitter:title" content="4 Reasons Your iOS App Is Crashing"/>
+<meta name="twitter:description" content="Wondering why your app is crashing? When it comes down to it, there are four possible reasons..."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -70,24 +70,30 @@ If you&rsquo;re tired of sifting through operating system-level logging to the d
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Disabling Xcode’s OS-Level Debug Logging",
-  "url": "https:\/\/www.andrewcbancroft.com\/2016\/10\/28\/disabling-xcode-os-level-debug-logging\/",
-  "wordCount": "140",
-  "datePublished": "2016-10-28T05:06:19Z",
-  "dateModified": "2016-10-28T05:06:19Z",
+  "headline": "4 Reasons Your iOS App Is Crashing",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/www.andrewcbancroft.com\/images\/social-assets\/Twitter%20-%204%20Reasons%20Your%20iOS%20App%20Is%20Crashing.png",
+    "height": "512",
+    "width": "1024"
+  },
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/debugging\/reasons-your-ios-app-is-crashing\/",
+  "wordCount": "353",
+  "datePublished": "2020-01-25T00:00:00Z",
+  "dateModified": "2020-01-25T00:00:00Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "iOS \/ Mac, Debug, Logging, Xcode 8"
+  "keywords": "Debugging, Xcode, Crash"
 
-  ,"description": ""
+  ,"description": "Wondering why your app is crashing? When it comes down to it, there are four possible reasons..."
 }
 </script>
 
 
 
-    <title>Disabling Xcode’s OS-Level Debug Logging</title>
+    <title>4 Reasons Your iOS App Is Crashing</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -201,30 +207,114 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">Disabling Xcode’s OS-Level Debug Logging</h1>
+        <div class="alert alert-primary" role="alert">
+            Learning about debugging on iOS? <br/><br/>
+            I am the author of <a href="http://bit.ly/ios-debugging-fundamentals" class="alert-link">iOS Debugging Fundamentals</a> on <a href="http://bit.ly/ps-author-page" class="alert-link">Pluralsight</a>.  <br/><br/>Deepen your understanding by checking the course out!
+          </div>
+      <h1 class="article-title">4 Reasons Your iOS App Is Crashing</h1>
     </header>
     <div class="content">
 
-    <p></p>
+    <p>App crashes can feel so... abrubpt, can&#39;t they? When you experience a crash, it might calm your nerves to know that there are a finite number of reasons for your app to crash. Four, in fact. Here they are... </p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#cpu-cannot-execute-an-instruction">CPU cannot execute an instruction</a></li>
+<li><a href="#ios-is-ensuring-its-own-stability">iOS is ensuring its own stability</a></li>
+<li><a href="#swift-runtime-is-preventing-failure">Swift runtime is preventing failure</a></li>
+<li><a href="#another-developer-is-preventing-failure">Another developer is preventing failure</a></li>
+<li><a href="#summing-up">Summing Up</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
 
-    <p>Full credit to <a href="https://twitter.com/rustyshelf">Russell Ivanovic</a> for his <a href="https://twitter.com/rustyshelf/status/775505191160328194">tweet</a> for figuring out how to disable Xcode 8&rsquo;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&rsquo;s helpful to you as well.</p>
+    
 
-<p>If you&rsquo;re tired of sifting through operating system-level logging to the debug console while you&rsquo;re debugging your app, it&rsquo;s actually fairly easy to silence.</p>
+<h2 id="cpu-cannot-execute-an-instruction">CPU cannot execute an instruction</h2>
 
-<p><a name="edit-scheme" class="jump-target"></a><br />
-1. Edit the scheme for your app:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png" alt="Edit Scheme" width="529" height="182" class="alignnone size-full wp-image-13064" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png 529w, https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2-300x103.png 300w" sizes="(max-width: 529px) 100vw, 529px" /></a></p>
+<p>Sometimes we developers don&rsquo;t play fair with the CPU.</p>
 
-<p><a name="new-environment-variable" class="jump-target"></a><br />
-2. In the &#8216;Run&rsquo; section, click on &#8216;Arguments&rsquo; tab, and add a new Environment Variable. Use <code>OS_ACTIVITY_MODE</code> for the name, and <code>disable</code> for the value:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png" alt="New Environment Variable" width="895" height="506" class="alignnone size-full wp-image-13068" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png 895w, https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4-300x170.png 300w" sizes="(max-width: 895px) 100vw, 895px" /></a></p>
+<p>Suppose that I wrote some code that ended up telling the CPU to divide by zero.</p>
 
-<p>That&rsquo;s it! Closing the Scheme editor and re-running your app will produce a beautifully silent console window, leaving you free to see what you wanted to see with <code>print()</code>, or other app-specific info (such as runtime exceptions) without having to sift through all that OS-level logging.</p>
+<p>That&rsquo;s&hellip; impossible&hellip; for you <em>and</em> the CPU.</p>
 
-<p><a name="share" class="jump-target"></a></p>
+<h2 id="ios-is-ensuring-its-own-stability">iOS is ensuring its own stability</h2>
+
+<p>iOS may be enforcing a fundamental requirement or policy for its own stability.</p>
+
+<p>Apple isn&rsquo;t going to let developers wreck the overall user experience of iOS.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li>Your app takes forever to launch</li>
+<li>Your app is using too much memory</li>
+</ul>
+
+<p>iOS will opt for killing your app to protect the user’s overall iOS experience.</p>
+
+<h2 id="swift-runtime-is-preventing-failure">Swift runtime is preventing failure</h2>
+
+<p>There are certain protections within the Swift runtime that may cause your app to crash.</p>
+
+<p>For example, if you’ve got an array with 5 elements inside (indexed from 0 to 4), and you attempt to access the 6th one by referencing index 5, the Swift runtime will kill your app when it sees this kind of instruction.</p>
+
+<p>Force-unwrapping optionals using the <code>!</code> operator is another classic app crasher.</p>
+
+<h2 id="another-developer-is-preventing-failure">Another developer is preventing failure</h2>
+
+<p>Finally, it may be that the developer of a framework or function you’re using is preventing you from misusing his/her API.</p>
+
+<p>Some developers will use <code>assert</code> in a function to test that a condition is met before their function proceeds.</p>
+
+<p>Guard statements mixed with a <code>fatalError</code> in the Else block could also be a failure protection strategy.</p>
+
+<p>In both cases your app would crash when the assert or guard conditions are not met.</p>
+
+<p>While it would be nicer to see an <code>Error</code> instead of a crash, knowing that these are posssible &ldquo;under the hood&rdquo; reasons for the crash you&rsquo;re seeing can be helpful.</p>
+
+<h2 id="summing-up">Summing Up</h2>
+
+<p>It&rsquo;s true: a crash can feel like it comes out of nowhere. Scoping the problem into four &ldquo;big picture&rdquo; reasons for a crash has helped me think rationally and probabilistically about what&rsquo;s going on.</p>
+
+<p>If you&rsquo;re getting your bearings when it comes to debugging iOS apps, I&rsquo;d love to impact your learning experience. Perhaps my <a href="http://bit.ly/ios-debugging-fundamentals">iOS Debugging Fudamentals</a> course on Pluralsight will guide you to more efficient debugging experiences!</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fas fa-video"></i> <a href="http://bit.ly/ios-debugging-fundamentals" target="_blank">iOS Debugging Fundamentals</a><a href="http://bit.ly/ios-debugging-fundamentals" target="_blank"><br /> <img src="https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png" alt="iOS Debugging Fundamentals" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
+    </li>
+  </ul>
+</div></p>
 
     <aside>
       
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/debugging/4-things-never-do-when-debugging-ios-apps/">4 Things You Should Never Do When Debugging iOS Apps</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/debugging/what-is-debugging/">What Is Debugging (And What Isn&#39;t)?</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/pluralsight/2019-12-26-ios-debugging-fundamentals/">iOS Debugging Fundamentals</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/xcode/showing-live-view-in-swift-playground/">Showing the Live View in a Swift Playground</a></li>
+            
+        <ul>
       
     </aside>
 
