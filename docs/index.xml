@@ -5,10 +5,169 @@
     <description>Recent content about iOS development with Swift  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Jan 2020 00:53:49 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOS Receipt Validation: Understanding and Troubleshooting the Original App Version Field</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/iap/ios-receipt-validation-understanding-troubleshooting-original-app-version-field/</link>
+      <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/iap/ios-receipt-validation-understanding-troubleshooting-original-app-version-field/</guid>
+      <description>
+
+&lt;h2 id=&#34;setting-the-stage-with-a-use-case-for-checking-the-original-application-version&#34;&gt;Setting the stage with a use case for checking the original_application_version&lt;/h2&gt;
+
+&lt;p&gt;The task appears to be simple.  Suppose that&amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You have an existing app on the app store that&amp;rsquo;s currently at version 1.2&lt;/li&gt;
+&lt;li&gt;You want to shift to the &amp;ldquo;freemium&amp;rdquo; model by implementing in-app purchases starting with version 1.3&lt;/li&gt;
+&lt;li&gt;You want to be fair to previous-purchasers of my app (anyone who downloaded the app between version 1.0 and 1.2)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Therefore&amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You want to check to see if someone originally purchased version 1.2 or below of your app so that you can &amp;ldquo;grandfather them in&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To figure this out, you&amp;rsquo;ll need to &lt;a href=&#34;2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/&#34;&gt;implement local receipt validation&lt;/a&gt; or set up an environment to do &lt;a href=&#34;https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html#//apple_ref/doc/uid/TP40010573-CH104-SW1&#34;&gt;remote receipt validation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When you&amp;rsquo;re done, you&amp;rsquo;ll get access to a field that contains an &amp;ldquo;original application version&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The temptation is to inspect this field, parse it out into major and minor version numbers, and write some conditional logic to unlock (or not) certain features of your app.&lt;/p&gt;
+
+&lt;p&gt;But&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;what-does-original-application-version-really-mean&#34;&gt;What does original_application_version really mean?&lt;/h2&gt;
+
+&lt;p&gt;&amp;ldquo;Original application version&amp;rdquo; may not mean what you think it means.&lt;/p&gt;
+
+&lt;p&gt;What &lt;em&gt;does&lt;/em&gt; it mean?&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Original application version&amp;rdquo; refers to the value of &lt;strong&gt;the Build field of your Xcode project&lt;/strong&gt; at the time a user downloaded it from the App Store:
+&lt;img src=&#34;Xcode-project-build-field.png&#34; alt=&#34;Xcode Project Build Field 1.2.5&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Just&lt;/strong&gt; the Build field?&lt;/p&gt;
+
+&lt;p&gt;Yes. &lt;em&gt;Just&lt;/em&gt; the Build field.&lt;/p&gt;
+
+&lt;p&gt;And that&amp;rsquo;s weird, because when you and I think of &amp;ldquo;application versions&amp;rdquo;, we naturally think in terms of the &lt;a href=&#34;https://semver.org/&#34;&gt;semantic version number&lt;/a&gt; of our apps.&lt;/p&gt;
+
+&lt;p&gt;Our brains think &amp;ldquo;1.2.5&amp;rdquo; as &amp;ldquo;{majorVersion}.{minorVersion}.{patchNumber}&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Many folks use that natural intuition and splice together the Version and Build fields from the Xcode project configuration screen to make what could be considered to be the full semantic version of an app.&lt;/p&gt;
+
+&lt;p&gt;If you follow this logic through and conclude that the Version + Build fields are what appears in the &lt;code&gt;original_application_version&lt;/code&gt; field of the Receipt, you&amp;rsquo;ll be in for a rude awakening like I was.&lt;/p&gt;
+
+&lt;p&gt;Your grandfathering unlocking logic could be buggy if you&amp;rsquo;re thinking &amp;ldquo;Build == patch number&amp;rdquo; and Apple is thinking &amp;ldquo;Build == application version at time of download from App Store&amp;rdquo;.&lt;/p&gt;
+
+&lt;h2 id=&#34;gotchas-when-inspecting-the-original-application-version-field&#34;&gt;Gotchas when inspecting the original_application_version field&lt;/h2&gt;
+
+&lt;h3 id=&#34;sandbox-vs-app-store-receipts&#34;&gt;Sandbox vs App Store receipts&lt;/h3&gt;
+
+&lt;p&gt;To make things even trickier, the value that&amp;rsquo;s present in this &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/&#34;&gt;parsed receipt&lt;/a&gt; field is unlikely to be the same between the receipt you get from the sandbox environment and the receipt you get from the production environment (the App Store).&lt;/p&gt;
+
+&lt;p&gt;According to &lt;a href=&#34;https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html&#34;&gt;Apple&amp;rsquo;s Receipt Validation Programming Guide&lt;/a&gt;, the &amp;ldquo;original application version&amp;rdquo; field &lt;strong&gt;always contains &amp;ldquo;1.0&amp;rdquo; in the sandbox environment&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The only way that your sandbox receipt and your App Store receipt &amp;ldquo;original application version&amp;rdquo; fields will match is if you put &amp;ldquo;1.0&amp;rdquo; in the Build field of your Xcode project and deploy to the App Store.&lt;/p&gt;
+
+&lt;h3 id=&#34;version-build-confusion&#34;&gt;Version / Build confusion&lt;/h3&gt;
+
+&lt;p&gt;Furthermore, the fact that the sandbox environment has &amp;ldquo;1.0&amp;rdquo; as its value makes it look like it contains a {majorVersion}.{minorVersion} combo.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s deceiving.&lt;/p&gt;
+
+&lt;p&gt;It might &lt;em&gt;seem&lt;/em&gt; like &amp;ldquo;original application version&amp;rdquo; corresponds to the &lt;strong&gt;Version&lt;/strong&gt; field instead of the &lt;strong&gt;Build&lt;/strong&gt; field of your Xcode project configuration.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;But it doesn&amp;rsquo;t.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;build-number-cautions&#34;&gt;Build number cautions&lt;/h2&gt;
+
+&lt;p&gt;Coming full circle now.&lt;/p&gt;
+
+&lt;p&gt;In the past, I often used the Build field of my Xcode project to mean the equivalent of a patch number for a given major-minor version of my app.&lt;/p&gt;
+
+&lt;p&gt;Using &amp;ldquo;Build&amp;rdquo; to mean &amp;ldquo;patch number&amp;rdquo; is a less-than-ideal use of the Build field if you plan to do app version checking for &amp;ldquo;grandfathering in&amp;rdquo; like I did.&lt;/p&gt;
+
+&lt;p&gt;Why?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1) Apple uses it to mean &amp;ldquo;app version at time of download&amp;rdquo;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;By now you might be realizing that the using your Xcode project&amp;rsquo;s Build field to mean &amp;ldquo;patch number&amp;rdquo; when &lt;em&gt;Apple&lt;/em&gt; uses it to mean &amp;ldquo;app version at time of download&amp;rdquo; presents some discrepancies in meaning, yes?&lt;/p&gt;
+
+&lt;p&gt;When it comes to receipt checking, it only makes sense to come to terms with what Build means &lt;em&gt;to Apple&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll set yourself up for success if you adjust &lt;em&gt;your&lt;/em&gt; ussage to match theirs.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2) Build numbers aren&amp;rsquo;t unique&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Build numbers can be reused across releases of your app.&lt;/p&gt;
+
+&lt;p&gt;Suppose that you decide you want to use your Xcode project&amp;rsquo;s Version and Build fields to construct a &amp;ldquo;semantic version&amp;rdquo; for your app.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You use &amp;ldquo;1.0&amp;rdquo; as your Xcode project&amp;rsquo;s Version.&lt;/li&gt;
+&lt;li&gt;You implement five rounds of bug fixes and land on &amp;ldquo;5&amp;rdquo; as your Xcode project&amp;rsquo;s Build.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In this way, you encode &amp;ldquo;1.0.5&amp;rdquo; as the semantic version of your app.&lt;/p&gt;
+
+&lt;p&gt;Now suppose that later on&amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You use &amp;ldquo;1.1&amp;rdquo; as your Xcode project&amp;rsquo;s Version.&lt;/li&gt;
+&lt;li&gt;You implement five more rounds bug fixes for version 1.1 and land on &amp;ldquo;5&amp;rdquo; as your Xcode project&amp;rsquo;s Build.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In this way, you encode &amp;ldquo;1.1.5&amp;rdquo; as the &amp;ldquo;semantic version&amp;rdquo; of your app.&lt;/p&gt;
+
+&lt;p&gt;Guess what: The receipts for both app releases will contain &amp;ldquo;5&amp;rdquo; in the &amp;ldquo;original application version&amp;rdquo; field.&lt;/p&gt;
+
+&lt;p&gt;Why?&lt;/p&gt;
+
+&lt;p&gt;Because &amp;ldquo;original application version&amp;rdquo; only contains the value from the Build field, and that&amp;rsquo;s the Build value that landed in the App Store for both releases.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3) Using sequential &amp;ldquo;patch number&amp;rdquo; integers for the Build doesn&amp;rsquo;t contain enough encoded information to perform &amp;ldquo;grandfathering in&amp;rdquo; logic&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To set yourself up for &amp;ldquo;grandfathering in&amp;rdquo; logic, you want to encode enough meaning in the Build field to write the most appropriate conditional logic for locking/unlocking your app&amp;rsquo;s purchase-only features.&lt;/p&gt;
+
+&lt;h2 id=&#34;choosing-a-strategic-build-value&#34;&gt;Choosing a strategic Build value&lt;/h2&gt;
+
+&lt;p&gt;What could you do?  Here are a few ideas:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Regardless of what&amp;rsquo;s in the Version field of your Xcode project configuration, you could encode the &lt;strong&gt;full semantic version&lt;/strong&gt; of your app in the Build field.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Doing this will let you parse the &amp;ldquo;original application version&amp;rdquo; value like you&amp;rsquo;d expect and implement the right &lt;code&gt;if-else&lt;/code&gt; statements in your code.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You could encode more meaningful information in the Build field, such as a &amp;ldquo;date&amp;rdquo; represented as an integer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Suppose that it&amp;rsquo;s January 1, 2020 and you&amp;rsquo;re preparing builds for an App Store submission.&lt;/p&gt;
+
+&lt;p&gt;You could put &amp;ldquo;20200101.1&amp;rdquo; in the Build field to represent the first build of today&amp;rsquo;s submission.&lt;/p&gt;
+
+&lt;p&gt;Things may not go perfect during testing with the first upload.&lt;/p&gt;
+
+&lt;p&gt;If you need to submit a new build, you could change the Build field&amp;rsquo;s value to &amp;ldquo;20200101.2&amp;rdquo; to represent the second build of today&amp;rsquo;s submission.&lt;/p&gt;
+
+&lt;p&gt;In both cases, you&amp;rsquo;ve encoded a &amp;ldquo;date&amp;rdquo; as an integer inside of the Build field.&lt;/p&gt;
+
+&lt;p&gt;Now suppose that you want to grandfather in everyone who bought your app prior to today (January 1, 2020 from the scenario above).&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the pseudo code narrative of the branching logic you&amp;rsquo;d write:&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;If the user&amp;rsquo;s receipt contains a value less than 20200101 in his/her original application version field, consider them an original purchaser, grandfather them in, and unlock the feature.  Otherwise, make them buy the in-app purchase before unlocking.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Bottom line:&lt;/strong&gt; If you can come to terms with the nuances of your app receipt&amp;rsquo;s &amp;ldquo;original application version&amp;rdquo; field, you&amp;rsquo;ll ensure that your app works correctly in production.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Privacy Policy</title>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33022655-1"></script>
+    <script>
+            (function () {
+                if (window.location.hostname === "localhost") {
+                    console.log("Analytics not running on local dev.");
+                    return;
+                } else {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-33022655-1');
+                }
+            })();
+    </script>
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+    "palette": {
+        "popup": {
+        "background": "#3e8bc5"
+        },
+        "button": {
+        "background": "#8ec760",
+        "text": "#ffffff"
+        }
+    }
+    })});
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="iOS Receipt Validation: Understanding and Troubleshooting the Original App Version Field" />
+<meta property="og:description" content="The &#39;original_application_version&#39; field of your app&#39;s receipt may not mean what you think it means, especially with App Store production environment receipts." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/iap/ios-receipt-validation-understanding-troubleshooting-original-app-version-field/" />
+
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20iOS%20Receipt%20Validation_%20Understanding%20and%20Troubleshooting%20the%20Original%20App%20Version%20Field.png" />
+
+<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20iOS%20Receipt%20Validation_%20Understanding%20and%20Troubleshooting%20the%20Original%20App%20Version%20Field.png" />
+<meta property="article:published_time" content="2020-02-05T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-02-05T00:00:00&#43;00:00"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20iOS%20Receipt%20Validation_%20Understanding%20and%20Troubleshooting%20the%20Original%20App%20Version%20Field.png"/>
+
+<meta name="twitter:title" content="iOS Receipt Validation: Understanding and Troubleshooting the Original App Version Field"/>
+<meta name="twitter:description" content="The &#39;original_application_version&#39; field of your app&#39;s receipt may not mean what you think it means, especially with App Store production environment receipts."/>
+<meta name="generator" content="Hugo 0.55.6" /> 
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "iOS Receipt Validation: Understanding and Troubleshooting the Original App Version Field",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/www.andrewcbancroft.com\/images\/social-assets\/Twitter%20-%20iOS%20Receipt%20Validation_%20Understanding%20and%20Troubleshooting%20the%20Original%20App%20Version%20Field.png",
+    "height": "512",
+    "width": "1024"
+  },
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/iap\/ios-receipt-validation-understanding-troubleshooting-original-app-version-field\/",
+  "wordCount": "1128",
+  "datePublished": "2020-02-05T00:00:00Z",
+  "dateModified": "2020-02-05T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "In-App Purchases, Receipt Validation"
+
+  ,"description": "The 'original_application_version' field of your app's receipt may not mean what you think it means, especially with App Store production environment receipts."
+}
+</script>
+
+
+
+    <title>iOS Receipt Validation: Understanding and Troubleshooting the Original App Version Field</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+        
+    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Topics
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <h6 class="dropdown-header">iOS Development</h6>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency Management</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#debugging">Debugging</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and Practices</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language Notes</a>
+                                
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                            </div>
+                        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft"><i class="fas fa-play"></i> Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft"><i class="fab fa-github"></i> GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg"><i class="fab fa-youtube"></i> YouTube</a>
+                            <a class="dropdown-item" href="https://dataday.life"><i class="fas fa-link"></i> www.dataday.life</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/index.xml"><i class="fas fa-rss"></i> Feed</a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">iOS Receipt Validation: Understanding and Troubleshooting the Original App Version Field</h1>
+    </header>
+    <div class="content">
+
+    <p>If you&#39;re checking the &#39;original_application_version&#39; field to see if someone originally purchased a specific version of your app, you&#39;ll want to explore the nuances of your app&#39;s receipt to ensure that your app works correctly in production.</p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#setting-the-stage-with-a-use-case-for-checking-the-original-application-version">Setting the stage with a use case for checking the original_application_version</a></li>
+<li><a href="#what-does-original-application-version-really-mean">What does original_application_version really mean?</a></li>
+<li><a href="#gotchas-when-inspecting-the-original-application-version-field">Gotchas when inspecting the original_application_version field</a>
+<ul>
+<li><a href="#sandbox-vs-app-store-receipts">Sandbox vs App Store receipts</a></li>
+<li><a href="#version-build-confusion">Version / Build confusion</a></li>
+</ul></li>
+<li><a href="#build-number-cautions">Build number cautions</a></li>
+<li><a href="#choosing-a-strategic-build-value">Choosing a strategic Build value</a></li>
+</ul></li>
+</ul>
+</nav>
+    </aside>
+
+    
+
+<h2 id="setting-the-stage-with-a-use-case-for-checking-the-original-application-version">Setting the stage with a use case for checking the original_application_version</h2>
+
+<p>The task appears to be simple.  Suppose that&hellip;</p>
+
+<ul>
+<li>You have an existing app on the app store that&rsquo;s currently at version 1.2</li>
+<li>You want to shift to the &ldquo;freemium&rdquo; model by implementing in-app purchases starting with version 1.3</li>
+<li>You want to be fair to previous-purchasers of my app (anyone who downloaded the app between version 1.0 and 1.2)</li>
+</ul>
+
+<p>Therefore&hellip;</p>
+
+<ul>
+<li>You want to check to see if someone originally purchased version 1.2 or below of your app so that you can &ldquo;grandfather them in&rdquo;</li>
+</ul>
+
+<p>To figure this out, you&rsquo;ll need to <a href="2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/">implement local receipt validation</a> or set up an environment to do <a href="https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateRemotely.html#//apple_ref/doc/uid/TP40010573-CH104-SW1">remote receipt validation</a>.</p>
+
+<p>When you&rsquo;re done, you&rsquo;ll get access to a field that contains an &ldquo;original application version&rdquo;.</p>
+
+<p>The temptation is to inspect this field, parse it out into major and minor version numbers, and write some conditional logic to unlock (or not) certain features of your app.</p>
+
+<p>But&hellip;</p>
+
+<h2 id="what-does-original-application-version-really-mean">What does original_application_version really mean?</h2>
+
+<p>&ldquo;Original application version&rdquo; may not mean what you think it means.</p>
+
+<p>What <em>does</em> it mean?</p>
+
+<p>&ldquo;Original application version&rdquo; refers to the value of <strong>the Build field of your Xcode project</strong> at the time a user downloaded it from the App Store:
+<img src="Xcode-project-build-field.png" alt="Xcode Project Build Field 1.2.5" /></p>
+
+<p><strong>Just</strong> the Build field?</p>
+
+<p>Yes. <em>Just</em> the Build field.</p>
+
+<p>And that&rsquo;s weird, because when you and I think of &ldquo;application versions&rdquo;, we naturally think in terms of the <a href="https://semver.org/">semantic version number</a> of our apps.</p>
+
+<p>Our brains think &ldquo;1.2.5&rdquo; as &ldquo;{majorVersion}.{minorVersion}.{patchNumber}&rdquo;.</p>
+
+<p>Many folks use that natural intuition and splice together the Version and Build fields from the Xcode project configuration screen to make what could be considered to be the full semantic version of an app.</p>
+
+<p>If you follow this logic through and conclude that the Version + Build fields are what appears in the <code>original_application_version</code> field of the Receipt, you&rsquo;ll be in for a rude awakening like I was.</p>
+
+<p>Your grandfathering unlocking logic could be buggy if you&rsquo;re thinking &ldquo;Build == patch number&rdquo; and Apple is thinking &ldquo;Build == application version at time of download from App Store&rdquo;.</p>
+
+<h2 id="gotchas-when-inspecting-the-original-application-version-field">Gotchas when inspecting the original_application_version field</h2>
+
+<h3 id="sandbox-vs-app-store-receipts">Sandbox vs App Store receipts</h3>
+
+<p>To make things even trickier, the value that&rsquo;s present in this <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/">parsed receipt</a> field is unlikely to be the same between the receipt you get from the sandbox environment and the receipt you get from the production environment (the App Store).</p>
+
+<p>According to <a href="https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html">Apple&rsquo;s Receipt Validation Programming Guide</a>, the &ldquo;original application version&rdquo; field <strong>always contains &ldquo;1.0&rdquo; in the sandbox environment</strong>.</p>
+
+<p>The only way that your sandbox receipt and your App Store receipt &ldquo;original application version&rdquo; fields will match is if you put &ldquo;1.0&rdquo; in the Build field of your Xcode project and deploy to the App Store.</p>
+
+<h3 id="version-build-confusion">Version / Build confusion</h3>
+
+<p>Furthermore, the fact that the sandbox environment has &ldquo;1.0&rdquo; as its value makes it look like it contains a {majorVersion}.{minorVersion} combo.</p>
+
+<p>It&rsquo;s deceiving.</p>
+
+<p>It might <em>seem</em> like &ldquo;original application version&rdquo; corresponds to the <strong>Version</strong> field instead of the <strong>Build</strong> field of your Xcode project configuration.</p>
+
+<p><em>But it doesn&rsquo;t.</em></p>
+
+<h2 id="build-number-cautions">Build number cautions</h2>
+
+<p>Coming full circle now.</p>
+
+<p>In the past, I often used the Build field of my Xcode project to mean the equivalent of a patch number for a given major-minor version of my app.</p>
+
+<p>Using &ldquo;Build&rdquo; to mean &ldquo;patch number&rdquo; is a less-than-ideal use of the Build field if you plan to do app version checking for &ldquo;grandfathering in&rdquo; like I did.</p>
+
+<p>Why?</p>
+
+<p><strong>1) Apple uses it to mean &ldquo;app version at time of download&rdquo;</strong></p>
+
+<p>By now you might be realizing that the using your Xcode project&rsquo;s Build field to mean &ldquo;patch number&rdquo; when <em>Apple</em> uses it to mean &ldquo;app version at time of download&rdquo; presents some discrepancies in meaning, yes?</p>
+
+<p>When it comes to receipt checking, it only makes sense to come to terms with what Build means <em>to Apple</em>.</p>
+
+<p>You&rsquo;ll set yourself up for success if you adjust <em>your</em> ussage to match theirs.</p>
+
+<p><strong>2) Build numbers aren&rsquo;t unique</strong></p>
+
+<p>Build numbers can be reused across releases of your app.</p>
+
+<p>Suppose that you decide you want to use your Xcode project&rsquo;s Version and Build fields to construct a &ldquo;semantic version&rdquo; for your app.</p>
+
+<ul>
+<li>You use &ldquo;1.0&rdquo; as your Xcode project&rsquo;s Version.</li>
+<li>You implement five rounds of bug fixes and land on &ldquo;5&rdquo; as your Xcode project&rsquo;s Build.</li>
+</ul>
+
+<p>In this way, you encode &ldquo;1.0.5&rdquo; as the semantic version of your app.</p>
+
+<p>Now suppose that later on&hellip;</p>
+
+<ul>
+<li>You use &ldquo;1.1&rdquo; as your Xcode project&rsquo;s Version.</li>
+<li>You implement five more rounds bug fixes for version 1.1 and land on &ldquo;5&rdquo; as your Xcode project&rsquo;s Build.</li>
+</ul>
+
+<p>In this way, you encode &ldquo;1.1.5&rdquo; as the &ldquo;semantic version&rdquo; of your app.</p>
+
+<p>Guess what: The receipts for both app releases will contain &ldquo;5&rdquo; in the &ldquo;original application version&rdquo; field.</p>
+
+<p>Why?</p>
+
+<p>Because &ldquo;original application version&rdquo; only contains the value from the Build field, and that&rsquo;s the Build value that landed in the App Store for both releases.</p>
+
+<p><strong>3) Using sequential &ldquo;patch number&rdquo; integers for the Build doesn&rsquo;t contain enough encoded information to perform &ldquo;grandfathering in&rdquo; logic</strong></p>
+
+<p>To set yourself up for &ldquo;grandfathering in&rdquo; logic, you want to encode enough meaning in the Build field to write the most appropriate conditional logic for locking/unlocking your app&rsquo;s purchase-only features.</p>
+
+<h2 id="choosing-a-strategic-build-value">Choosing a strategic Build value</h2>
+
+<p>What could you do?  Here are a few ideas:</p>
+
+<ul>
+<li>Regardless of what&rsquo;s in the Version field of your Xcode project configuration, you could encode the <strong>full semantic version</strong> of your app in the Build field.</li>
+</ul>
+
+<p>Doing this will let you parse the &ldquo;original application version&rdquo; value like you&rsquo;d expect and implement the right <code>if-else</code> statements in your code.</p>
+
+<ul>
+<li>You could encode more meaningful information in the Build field, such as a &ldquo;date&rdquo; represented as an integer</li>
+</ul>
+
+<p>Suppose that it&rsquo;s January 1, 2020 and you&rsquo;re preparing builds for an App Store submission.</p>
+
+<p>You could put &ldquo;20200101.1&rdquo; in the Build field to represent the first build of today&rsquo;s submission.</p>
+
+<p>Things may not go perfect during testing with the first upload.</p>
+
+<p>If you need to submit a new build, you could change the Build field&rsquo;s value to &ldquo;20200101.2&rdquo; to represent the second build of today&rsquo;s submission.</p>
+
+<p>In both cases, you&rsquo;ve encoded a &ldquo;date&rdquo; as an integer inside of the Build field.</p>
+
+<p>Now suppose that you want to grandfather in everyone who bought your app prior to today (January 1, 2020 from the scenario above).</p>
+
+<p>Here&rsquo;s the pseudo code narrative of the branching logic you&rsquo;d write:</p>
+
+<p>&ldquo;If the user&rsquo;s receipt contains a value less than 20200101 in his/her original application version field, consider them an original purchaser, grandfather them in, and unlock the feature.  Otherwise, make them buy the in-app purchase before unlocking.&rdquo;</p>
+
+<p><strong>Bottom line:</strong> If you can come to terms with the nuances of your app receipt&rsquo;s &ldquo;original application version&rdquo; field, you&rsquo;ll ensure that your app works correctly in production.</p>
+
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/08/01/local-receipt-validation-swift-start-finish/">Local Receipt Validation for iOS in Swift From Start to Finish</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/">Receipt Validation –  Parse and Decode a Receipt with Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/">Receipt Validation – Verifying a Receipt Signature in Swift</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/">Extracting a PKCS7 Container for Receipt Validation with Swift</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 174 pages and is available on <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>. Copyright &copy; Andrew Bancroft, <time datetime="2020">2020</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
