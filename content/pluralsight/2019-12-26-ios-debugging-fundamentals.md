@@ -68,7 +68,7 @@ Topics in this module include...
 * Executing Actions When Breakpoints Are Triggered
 * Inspecting User Interface Issues
 
-## 4 – Addressing App Crashes
+## 3 – Addressing App Crashes
 
 When an app crashes, it’s because of a critical problem that can’t be recovered from.
 
@@ -79,7 +79,7 @@ In this module you will work on the following:
 * Pausing before Errors and Exceptions Cause Crashes
 * Avoiding Errors that Cause Crashes
 
-## 5 – Alleviating Anomalies
+## 4 – Alleviating Anomalies
 
 Have you ever found yourself saying, “Something weird is going on” or “It used to work - what’s going on now??”
 
