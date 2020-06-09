@@ -3,6 +3,7 @@ title: Receipt Validation – Verifying a Receipt Signature in Swift
 description: "The aim of this guide is to help you take a look inside the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt."
 author: Andrew
 type: blog
+disppsiapbadge: true
 date: 2017-07-16T21:43:21+00:00
 lastmod: 2019-06-27T00:00:00+00:00
 url: /2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/

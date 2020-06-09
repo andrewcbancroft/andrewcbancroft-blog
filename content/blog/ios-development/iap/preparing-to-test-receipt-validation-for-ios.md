@@ -3,6 +3,7 @@ title: Preparing to Test Receipt Validation for iOS
 description: "This walk-through should provide guidance to get you ready to work with receipts in your iOS application."
 author: Andrew
 type: blog
+disppsiapbadge: true
 date: 2015-10-05T18:25:09+00:00
 lastmod: 2019-06-27T00:00:00+00:00
 url: /2015/10/05/preparing-to-test-receipt-validation-for-ios/

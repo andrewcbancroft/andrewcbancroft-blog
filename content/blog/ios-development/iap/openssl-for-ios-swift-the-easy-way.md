@@ -3,6 +3,7 @@ title: 'OpenSSL for iOS and Swift the Easy Way'
 description: "Shows how to obtain OpenSSL for use with Swift."
 author: Andrew
 type: blog
+disppsiapbadge: true
 date: 2015-09-22T04:39:28+00:00
 lastmod: 2019-06-27T00:00:00+00:00
 url: /2015/09/21/openssl-for-ios-swift-the-easy-way/

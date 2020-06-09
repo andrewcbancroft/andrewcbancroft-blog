@@ -3,6 +3,7 @@ title: Local Receipt Validation for iOS in Swift From Start to Finish
 description: "Provides linkes to my seven guides that will take you from preparing to test receipt validation, all the way through to working with the result of the receipt validation process to enable/disable features of your app."
 author: Andrew
 type: blog
+disppsiapbadge: true
 date: 2017-08-01T17:55:09+00:00
 lastmod: 2019-06-27T00:00:00+00:00
 url: /2017/08/01/local-receipt-validation-swift-start-finish/

@@ -3,6 +3,7 @@ title: Finalizing Receipt Validation in Swift – Computing a GUID Hash
 description: "The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that's stored within your receipt itself."
 author: Andrew
 type: blog
+disppsiapbadge: true
 date: 2017-07-31T12:36:26+00:00
 lastmod: 2019-06-26T00:00:00+00:00
 url: /2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/

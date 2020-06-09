@@ -3,6 +3,7 @@ title: 'Receipt Validation –  Parse and Decode a Receipt with Swift'
 description: "The aim of this guide is to help you parse a receipt and decode it so that you have readable pieces of metadata to inspect and finalize all of the receipt validation steps."
 author: Andrew
 type: blog
+disppsiapbadge: true
 date: 2017-07-28T03:41:33+00:00
 lastmod: 2019-06-27T00:00:00+00:00
 url: /2017/07/27/receipt-validation-parsing-a-receipt-with-swift/
