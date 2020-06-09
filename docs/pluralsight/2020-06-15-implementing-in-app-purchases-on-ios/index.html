@@ -47,18 +47,16 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="How Old is Silas Allen?" />
-<meta property="og:description" content="&ldquo;Ooooohh, now&#8230; how old is he??&#8221; I love this question. Really! I do! Every time I&rsquo;m asked I get to talk about my kid, and that&rsquo;s always fun. But today, things just got even more fun. Now, instead of just telling people his approximate age, I can show them his precise age down to the second!
-As some of you know, I&rsquo;ve been nerding out on learning to build iOS apps for iPhone and iPad." />
+<meta property="og:title" content="Implementing In-App Purchases on iOS" />
+<meta property="og:description" content="Offering digital products and services directly within your app is a great way to grow your revenue. This course will teach you how to offer digital content as in-app purchases for your iOS apps." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2013/03/31/how-old-is-silas-allen/" />
-<meta property="article:published_time" content="2013-03-31T14:36:07&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-31T14:36:07&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/" />
+<meta property="article:published_time" content="2020-06-09T10:03:33&#43;00:00"/>
+<meta property="article:modified_time" content="2020-06-09T10:03:33&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="How Old is Silas Allen?"/>
-<meta name="twitter:description" content="&ldquo;Ooooohh, now&#8230; how old is he??&#8221; I love this question. Really! I do! Every time I&rsquo;m asked I get to talk about my kid, and that&rsquo;s always fun. But today, things just got even more fun. Now, instead of just telling people his approximate age, I can show them his precise age down to the second!
-As some of you know, I&rsquo;ve been nerding out on learning to build iOS apps for iPhone and iPad."/>
+<meta name="twitter:title" content="Implementing In-App Purchases on iOS"/>
+<meta name="twitter:description" content="Offering digital products and services directly within your app is a great way to grow your revenue. This course will teach you how to offer digital content as in-app purchases for your iOS apps."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -66,24 +64,24 @@ As some of you know, I&rsquo;ve been nerding out on learning to build iOS apps f
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "How Old is Silas Allen?",
-  "url": "https:\/\/www.andrewcbancroft.com\/2013\/03\/31\/how-old-is-silas-allen\/",
-  "wordCount": "239",
-  "datePublished": "2013-03-31T14:36:07Z",
-  "dateModified": "2013-03-31T14:36:07Z",
+  "headline": "Implementing In-App Purchases on iOS",
+  "url": "https:\/\/www.andrewcbancroft.com\/pluralsight\/2020-06-15-implementing-in-app-purchases-on-ios\/",
+  "wordCount": "656",
+  "datePublished": "2020-06-09T10:03:33Z",
+  "dateModified": "2020-06-09T10:03:33Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "iOS \/ Mac"
+  "keywords": "Pluralsight, Swift, In-App Purchases, StoreKit, iOS"
 
-  ,"description": ""
+  ,"description": "Offering digital products and services directly within your app is a great way to grow your revenue. This course will teach you how to offer digital content as in-app purchases for your iOS apps."
 }
 </script>
 
 
 
-    <title>How Old is Silas Allen?</title>
+    <title>Implementing In-App Purchases on iOS</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -197,25 +195,147 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">How Old is Silas Allen?</h1>
+      <h1 class="article-title">Implementing In-App Purchases on iOS</h1>
     </header>
     <div class="content">
 
     <p></p>
 
-    <p>&ldquo;Ooooohh, now&#8230; how old is he??&#8221;  I love this question.  Really!  I do!  Every time I&rsquo;m asked I get to talk about my kid, and that&rsquo;s always fun.  But today, things just got even <em>more</em> fun.  Now, instead of just telling people his approximate age, I can <strong>show</strong> them his <em>precise</em> age down to the second!</p>
+    
 
-<p>As some of you know, I&rsquo;ve been nerding out on learning to build iOS apps for iPhone and iPad.  Well, to celebrate Silas turning another month old, I built a little app that tells me how many years, months, weeks, days, hours, minutes, and seconds he is old.  I also built in functionality so that I can see how much longer it will be until his birthday (actually, I think I just thought of a bug with that part, but it won&rsquo;t show itself until 2014 so I have time&#8230;it shouldn&rsquo;t be nearly as bad as the Y2K panic – but date math is non-trivial, just so you know). _<br />
-_</p>
+<p>Monetizing apps is challenging. In this course, Implementing In-App Purchases on iOS, you’ll learn to offer digital products and services directly within your app as in-app purchases.</p>
 
-<p>And yes, for those of you who are just as OCD as I am, I did consider the fact that he was born at 12:06 AM (sorry&#8230;they didn&rsquo;t give us the exact millisecond of his debut or I&rsquo;d have that in there too).</p>
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
 
-<p>Check out this video of the app showing his age as he turned 3 months old this morning!</p>
+<p><ul class="resources-content">
+    <li>
+      <i class="fas fa-video"></i> <a href="https://bit.ly/implementing-in-app-purchases-ios" target="_blank">Implementing In-App Purchases on iOS</a><a href="https://bit.ly/implementing-in-app-purchases-ios" target="_blank"><br /> <img src="https://www.andrewcbancroft.com/images/social-assets/implementing-in-app-purchases-ios-title.png" alt="Implementing In-App Purchases on iOS" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
+    </li>
+  </ul>
+</div></p>
 
-<p><a href="http://vimeo.com/63031780">Silas Allen Turns 3 Months Old!</a> from <a href="http://vimeo.com/user8393753">Andrew Bancroft</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+<h1 id="course-outline">Course Outline</h1>
+
+<p>First, you’ll explore how to translate business requirements into digital products and configure them in App Store Connect and Xcode.</p>
+
+<p>Next, you’ll discover how to build and test a store within your app using StoreKit.</p>
+
+<p>Finally, you’ll learn how to make sure purchases made within your app are authentic, and unlock content that’s been purchased by your users.</p>
+
+<p>When you’re finished with this course, you’ll have the skills and knowledge needed to implement in-app purchases on iOS!</p>
+
+<h2 id="1-preparing-to-implement-in-app-purchases">1 – Preparing to Implement In-App Purchases</h2>
+
+<p>Prepare to implement in-app purchases by understanding what’s involved from a big picture standpoint.</p>
+
+<p>You will learn to configure digital products in App Store Connect and Xcode to kick off your in-app purchase learning adventure.</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>The Perks (And the Work) Ahead of You</li>
+<li>First Things First - Checking off the Prerequisites</li>
+<li>Matching Product Types to Business Requirements</li>
+<li>Setting Up Products in App Store Connect</li>
+<li>Setting Up an Auto-Renewable Subscription</li>
+<li>Configuring an Xcode Project for In-App Purchases</li>
+</ul>
+
+<h2 id="2-building-in-app-purchase-functionality-with-storekit">2 – Building In-App Purchase Functionality with StoreKit</h2>
+
+<p>The focus of this module is on the StoreKit APIs for working with digital products and App Store Connect.</p>
+
+<p>You will learn to build and test a fully-working store view that will support in-app purchases.</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>Using StoreKit to Build In-App Purchase Functionality: A Roadmap</li>
+<li>Retrieving a Set of Products for Purchase from the App Store</li>
+<li>Displaying Products in a User Interface</li>
+<li>Implementing a “Buy” Button</li>
+<li>Preparing to Test Purchases by Setting up a Sandbox Tester Account</li>
+<li>Making Test Purchases</li>
+<li>Implementing a “Restore Purchases” Button</li>
+</ul>
+
+<h2 id="3-protecting-your-revenue-by-verifying-purchase-authenticity">3 – Protecting Your Revenue by Verifying Purchase Authenticity</h2>
+
+<p>After all your hard work to implement in-app purchases, how awful would it be if malicious users <em>stole</em> the content you&rsquo;ve labored to create?</p>
+
+<p>In this module, you will learn to implement measures to protect revenue generated through in-app purchases by validating App Store receipts.</p>
+
+<p>Receipt validation is a notoriously burdensome hassle. But it doesn&rsquo;t have to be!</p>
+
+<p>I will teach you how to implement server-side receipt validation from end-to-end with <em>no</em> third-party libraries, <em>no</em> complicated server setup, and <em>no</em> platform-specific proprietary tools.</p>
+
+<p>Here&rsquo;s the roadmap of topics incluced:</p>
+
+<ul>
+<li>Verifying Purchase Authenticity by Validating App Store Receipts</li>
+<li>Weighing Strategies for Receipt Validation</li>
+<li>Charting the Course for Server-side Receipt Validation</li>
+<li>Sending the Receipt from Your App to Your Server</li>
+<li>Writing Server-side Code to Forward the Receipt to the App Store for Validation</li>
+<li>Handling the Response from the App Store on Your Server</li>
+<li>Accounting for the Sandbox Environment on Your Server</li>
+<li>Handling the Response from Your Server in Your App</li>
+<li>The Case of the Missing Receipt: Requesting a Refresh</li>
+</ul>
+
+<h2 id="4-unlocking-purchased-content">4 – Unlocking Purchased Content</h2>
+
+<p>After a user makes a valid purchase, you&rsquo;ve got to unlock the content they legitimately bought!</p>
+
+<p>Each product type has its own nuances for how to unlock and provide the associated content though.</p>
+
+<p>What do you need to think about, and what code do you need to write to make it happen?</p>
+
+<p>To find out, you will explore these topics:</p>
+
+<ul>
+<li>Analyzing Content-providing Logic by Product Type</li>
+<li>Persisting Purchased Products Securely</li>
+<li>Using the iOS Keychain</li>
+<li>Keeping Track of Consumable Product Inventory</li>
+<li>Managing Non-Renewing Subscriptions</li>
+<li>Synchronizing Purchases Across Devices</li>
+<li>Handling Auto-Renewable Subscriptions</li>
+<li>Saving Non-Consumable Transactions</li>
+<li>Preparing for App Store Review</li>
+</ul>
+
+<h1 id="feedback-welcome">Feedback Welcome!</h1>
+
+<p>From the beginning I set out to make the course I wish <em>I</em> had when I started learning to implement in-app purchases for <em>my</em> apps.  My unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!</p>
+
+<p>I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!</p>
 
     <aside>
       
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/iap/ios-receipt-validation-understanding-troubleshooting-original-app-version-field/">iOS Receipt Validation: Understanding and Troubleshooting the Original App Version Field</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/pluralsight/2019-12-26-ios-debugging-fundamentals/">iOS Debugging Fundamentals</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/">iOS Data Persistence: The Big Picture</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/08/01/local-receipt-validation-swift-start-finish/">Local Receipt Validation for iOS in Swift From Start to Finish</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a></li>
+            
+        <ul>
       
     </aside>
 

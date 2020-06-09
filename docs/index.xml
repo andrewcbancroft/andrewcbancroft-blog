@@ -5,10 +5,132 @@
     <description>Recent content about iOS development with Swift  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2020 10:03:33 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Implementing In-App Purchases on iOS</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/</link>
+      <pubDate>Tue, 09 Jun 2020 10:03:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/</guid>
+      <description>
+
+&lt;p&gt;Monetizing apps is challenging. In this course, Implementing In-App Purchases on iOS, you’ll learn to offer digital products and services directly within your app as in-app purchases.&lt;/p&gt;
+
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  
+
+&lt;p&gt;&lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://bit.ly/implementing-in-app-purchases-ios&#34; target=&#34;_blank&#34;&gt;Implementing In-App Purchases on iOS&lt;/a&gt;&lt;a href=&#34;https://bit.ly/implementing-in-app-purchases-ios&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/implementing-in-app-purchases-ios-title.png&#34; alt=&#34;Implementing In-App Purchases on iOS&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+
+&lt;p&gt;First, you’ll explore how to translate business requirements into digital products and configure them in App Store Connect and Xcode.&lt;/p&gt;
+
+&lt;p&gt;Next, you’ll discover how to build and test a store within your app using StoreKit.&lt;/p&gt;
+
+&lt;p&gt;Finally, you’ll learn how to make sure purchases made within your app are authentic, and unlock content that’s been purchased by your users.&lt;/p&gt;
+
+&lt;p&gt;When you’re finished with this course, you’ll have the skills and knowledge needed to implement in-app purchases on iOS!&lt;/p&gt;
+
+&lt;h2 id=&#34;1-preparing-to-implement-in-app-purchases&#34;&gt;1 – Preparing to Implement In-App Purchases&lt;/h2&gt;
+
+&lt;p&gt;Prepare to implement in-app purchases by understanding what’s involved from a big picture standpoint.&lt;/p&gt;
+
+&lt;p&gt;You will learn to configure digital products in App Store Connect and Xcode to kick off your in-app purchase learning adventure.&lt;/p&gt;
+
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Perks (And the Work) Ahead of You&lt;/li&gt;
+&lt;li&gt;First Things First - Checking off the Prerequisites&lt;/li&gt;
+&lt;li&gt;Matching Product Types to Business Requirements&lt;/li&gt;
+&lt;li&gt;Setting Up Products in App Store Connect&lt;/li&gt;
+&lt;li&gt;Setting Up an Auto-Renewable Subscription&lt;/li&gt;
+&lt;li&gt;Configuring an Xcode Project for In-App Purchases&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;2-building-in-app-purchase-functionality-with-storekit&#34;&gt;2 – Building In-App Purchase Functionality with StoreKit&lt;/h2&gt;
+
+&lt;p&gt;The focus of this module is on the StoreKit APIs for working with digital products and App Store Connect.&lt;/p&gt;
+
+&lt;p&gt;You will learn to build and test a fully-working store view that will support in-app purchases.&lt;/p&gt;
+
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Using StoreKit to Build In-App Purchase Functionality: A Roadmap&lt;/li&gt;
+&lt;li&gt;Retrieving a Set of Products for Purchase from the App Store&lt;/li&gt;
+&lt;li&gt;Displaying Products in a User Interface&lt;/li&gt;
+&lt;li&gt;Implementing a “Buy” Button&lt;/li&gt;
+&lt;li&gt;Preparing to Test Purchases by Setting up a Sandbox Tester Account&lt;/li&gt;
+&lt;li&gt;Making Test Purchases&lt;/li&gt;
+&lt;li&gt;Implementing a “Restore Purchases” Button&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;3-protecting-your-revenue-by-verifying-purchase-authenticity&#34;&gt;3 – Protecting Your Revenue by Verifying Purchase Authenticity&lt;/h2&gt;
+
+&lt;p&gt;After all your hard work to implement in-app purchases, how awful would it be if malicious users &lt;em&gt;stole&lt;/em&gt; the content you&amp;rsquo;ve labored to create?&lt;/p&gt;
+
+&lt;p&gt;In this module, you will learn to implement measures to protect revenue generated through in-app purchases by validating App Store receipts.&lt;/p&gt;
+
+&lt;p&gt;Receipt validation is a notoriously burdensome hassle. But it doesn&amp;rsquo;t have to be!&lt;/p&gt;
+
+&lt;p&gt;I will teach you how to implement server-side receipt validation from end-to-end with &lt;em&gt;no&lt;/em&gt; third-party libraries, &lt;em&gt;no&lt;/em&gt; complicated server setup, and &lt;em&gt;no&lt;/em&gt; platform-specific proprietary tools.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the roadmap of topics incluced:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Verifying Purchase Authenticity by Validating App Store Receipts&lt;/li&gt;
+&lt;li&gt;Weighing Strategies for Receipt Validation&lt;/li&gt;
+&lt;li&gt;Charting the Course for Server-side Receipt Validation&lt;/li&gt;
+&lt;li&gt;Sending the Receipt from Your App to Your Server&lt;/li&gt;
+&lt;li&gt;Writing Server-side Code to Forward the Receipt to the App Store for Validation&lt;/li&gt;
+&lt;li&gt;Handling the Response from the App Store on Your Server&lt;/li&gt;
+&lt;li&gt;Accounting for the Sandbox Environment on Your Server&lt;/li&gt;
+&lt;li&gt;Handling the Response from Your Server in Your App&lt;/li&gt;
+&lt;li&gt;The Case of the Missing Receipt: Requesting a Refresh&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;4-unlocking-purchased-content&#34;&gt;4 – Unlocking Purchased Content&lt;/h2&gt;
+
+&lt;p&gt;After a user makes a valid purchase, you&amp;rsquo;ve got to unlock the content they legitimately bought!&lt;/p&gt;
+
+&lt;p&gt;Each product type has its own nuances for how to unlock and provide the associated content though.&lt;/p&gt;
+
+&lt;p&gt;What do you need to think about, and what code do you need to write to make it happen?&lt;/p&gt;
+
+&lt;p&gt;To find out, you will explore these topics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Analyzing Content-providing Logic by Product Type&lt;/li&gt;
+&lt;li&gt;Persisting Purchased Products Securely&lt;/li&gt;
+&lt;li&gt;Using the iOS Keychain&lt;/li&gt;
+&lt;li&gt;Keeping Track of Consumable Product Inventory&lt;/li&gt;
+&lt;li&gt;Managing Non-Renewing Subscriptions&lt;/li&gt;
+&lt;li&gt;Synchronizing Purchases Across Devices&lt;/li&gt;
+&lt;li&gt;Handling Auto-Renewable Subscriptions&lt;/li&gt;
+&lt;li&gt;Saving Non-Consumable Transactions&lt;/li&gt;
+&lt;li&gt;Preparing for App Store Review&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+
+&lt;p&gt;From the beginning I set out to make the course I wish &lt;em&gt;I&lt;/em&gt; had when I started learning to implement in-app purchases for &lt;em&gt;my&lt;/em&gt; apps.  My unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!&lt;/p&gt;
+
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>iOS Receipt Validation: Understanding and Troubleshooting the Original App Version Field</title>

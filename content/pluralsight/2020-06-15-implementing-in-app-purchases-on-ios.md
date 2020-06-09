@@ -3,8 +3,8 @@ title: 'Implementing In-App Purchases on iOS'
 description: "Offering digital products and services directly within your app is a great way to grow your revenue. This course will teach you how to offer digital content as in-app purchases for your iOS apps."
 author: Andrew
 type: blog
-date: 2020-06-15T10:03:33+00:00
-draft: true
+date: 2020-06-09T10:03:33+00:00
+draft: false
 categories:
   - Pluralsight
   - Swift
@@ -23,7 +23,7 @@ Monetizing apps is challenging. In this course, Implementing In-App Purchases on
   
   <ul class="resources-content">
     <li>
-      <i class="fas fa-video"></i> <a href="http://bit.ly/ios-debugging-fundamentals" target="_blank">Implementing In-App Purchases on iOS</a><a href="http://bit.ly/ios-debugging-fundamentals" target="_blank"><br /> <img src="/images/social-assets/ios-debugging-fundamentals-title.png" alt="Implementing In-App Purchases on iOS" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
+      <i class="fas fa-video"></i> <a href="https://bit.ly/implementing-in-app-purchases-ios" target="_blank">Implementing In-App Purchases on iOS</a><a href="https://bit.ly/implementing-in-app-purchases-ios" target="_blank"><br /> <img src="/images/social-assets/implementing-in-app-purchases-ios-title.png" alt="Implementing In-App Purchases on iOS" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
     </li>
   </ul>
 </div>
