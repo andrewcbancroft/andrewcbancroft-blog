@@ -3,12 +3,12 @@ title: "iOS Receipt Validation: Understanding and Troubleshooting the Original A
 description: "The 'original_application_version' field of your app's receipt may not mean what you think it means, especially with App Store production environment receipts."
 author: Andrew
 type: blog
+disppsiapbadge: true
 draft: false
 date: 2020-02-05T00:00:00+00:00
 wip: false
 showrecent: true
 toc: true
-disppsiapbadge: true
 tags:
   - In-App Purchases
   - Receipt Validation
