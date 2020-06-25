@@ -110,7 +110,7 @@
 
 &lt;h3 id=&#34;test-edge-cases&#34;&gt;Test Edge Cases&lt;/h3&gt;
 
-&lt;p&gt;To support testing out what could be considered &amp;ldquo;edge cases&amp;rdquo; in the in-app purchasing experience, Xcode 12 also has the ability to simulate things like&lt;/p&gt;
+&lt;p&gt;To support testing out what could be considered &amp;ldquo;edge cases&amp;rdquo; in the in-app purchasing experience, Xcode 12 also has the ability to simulate things like:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Time Rate for Auto-Renewable Subscription expiration&lt;/li&gt;
@@ -131,9 +131,13 @@
 
 &lt;p&gt;But that&amp;rsquo;s still a long time to wait between making a subscription purchase, and trying out expiration logic, isn&amp;rsquo;t it?&lt;/p&gt;
 
-&lt;p&gt;Problem. Solved.  Now you can select even shorter durations for testing subscription expiration using the Time Rate menu option in Xcode&amp;rsquo;s editor menu when you&amp;rsquo;re on the StoreKit configuration page.&lt;/p&gt;
+&lt;p&gt;Problem. Solved.  Now you can select even shorter durations for testing subscription expiration using the Time Rate menu option in Xcode&amp;rsquo;s editor menu &lt;strong&gt;when you&amp;rsquo;re on the StoreKit configuration page&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;time-rate.png&#34; alt=&#34;Time Rate&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Remember: To see this editor menu, you have to be in the StoreKit configuration file of your app.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;If a second equals a day, and there&amp;rsquo;s 30ish days in a month, a six month subscription should expire and auto-renew in &lt;strong&gt;three-ish&lt;/strong&gt; minutes now.&lt;/p&gt;
 
@@ -158,9 +162,9 @@
 &lt;p&gt;Testing things out locally is amazingly powerful for getting you started, but before you deploy your app to the App Store and send it into review, you still have to&amp;hellip;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Set up your products in App Store Connect&lt;/li&gt;
-&lt;li&gt;Set up a Sandbox tester account in App Store Connect&lt;/li&gt;
-&lt;li&gt;Test out your server-side receipt validation logic with receipts signed by a &amp;ldquo;real&amp;rdquo; App Store environment&lt;/li&gt;
+&lt;li&gt;Set up your products in App Store Connect &amp;hellip; right now the Xcode configuration doesn&amp;rsquo;t get &amp;ldquo;pushed up&amp;rdquo; to App Store Connect, so it&amp;rsquo;s a double-entry world right now.&lt;/li&gt;
+&lt;li&gt;Set up a Sandbox tester account in App Store Connect so that you can&amp;hellip;&lt;/li&gt;
+&lt;li&gt;Test out your in-app purchasing workflow and receipt validation logic with receipts signed by a &amp;ldquo;real&amp;rdquo; App Store environment (just like your TestFlight testers and your &lt;strong&gt;App Reviewer&lt;/strong&gt; will use)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;And if you&amp;rsquo;re using App Store server notifications to detect changes to auto-renewable subscriptions, you need to test those out as well.&lt;/p&gt;
