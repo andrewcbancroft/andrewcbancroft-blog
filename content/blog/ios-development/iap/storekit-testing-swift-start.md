@@ -13,7 +13,6 @@ tags:
   - In-App Purchases
   - Receipt Validation
   - StoreKit
-introtext: ""
 images:
   - /images/social-assets/Twitter - StoreKit Testing Swift Start.png
   - /images/social-assets/Facebook - StoreKit Testing Swift Start.png
