@@ -3,7 +3,7 @@ title: "WWDC - The Worldwide Developer Community"
 description: "What if WWDC didn't have to feel like such a Worldwide Developer Competition?"
 author: Andrew
 type: blog
-date: 2020-06-28T00:00:00+00:00
+date: 2020-06-29T00:00:00+00:00
 showrecent: true
 draft: false
 categories:
