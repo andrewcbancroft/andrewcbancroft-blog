@@ -15,7 +15,7 @@ images:
   - images/social-assets/Twitter - Getting Started With NSPersistentCloudKitContainer.png
   - images/social-assets/Facebook - Getting Started With NSPersistentCloudKitContainer.png
 toc: true
-introtext: "What is it like to sync data from Core Cata to iCloud using Apple's new NSPersistentCloudKitContainer?  Here I provide an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using this new class."
+introtext: "What is it like to sync data from Core Data to iCloud using Apple's new NSPersistentCloudKitContainer?  Here I provide an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using this new class."
 disppsdatabadge: true
 ---
 
