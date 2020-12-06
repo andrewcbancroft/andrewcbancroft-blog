@@ -47,18 +47,16 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Using PowerShell to Install a DLL into the GAC" />
-<meta property="og:description" content="A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.
-An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs." />
+<meta property="og:title" content="iOS 14 Getting Started" />
+<meta property="og:description" content="Building for iOS is an incredibly valuable skill for any developer. This course will teach you to make iOS apps with adaptive user interfaces that work on multiple devices using Xcode, Swift, and SwiftUI." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/12/16/using-powershell-to-install-a-dll-into-the-gac/" />
-<meta property="article:published_time" content="2015-12-16T17:45:55&#43;00:00"/>
-<meta property="article:modified_time" content="2015-12-16T17:45:55&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/pluralsight/2020-12-04-ios-14-getting-started/" />
+<meta property="article:published_time" content="2020-12-04T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-12-04T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Using PowerShell to Install a DLL into the GAC"/>
-<meta name="twitter:description" content="A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.
-An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs."/>
+<meta name="twitter:title" content="iOS 14 Getting Started"/>
+<meta name="twitter:description" content="Building for iOS is an incredibly valuable skill for any developer. This course will teach you to make iOS apps with adaptive user interfaces that work on multiple devices using Xcode, Swift, and SwiftUI."/>
 <meta name="generator" content="Hugo 0.55.6" /> 
     
     
@@ -66,24 +64,24 @@ An alternative, however, is to use PowerShell to install the DLL into the GAC. T
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Using PowerShell to Install a DLL into the GAC",
-  "url": "https:\/\/www.andrewcbancroft.com\/2015\/12\/16\/using-powershell-to-install-a-dll-into-the-gac\/",
-  "wordCount": "127",
-  "datePublished": "2015-12-16T17:45:55Z",
-  "dateModified": "2015-12-16T17:45:55Z",
+  "headline": "iOS 14 Getting Started",
+  "url": "https:\/\/www.andrewcbancroft.com\/pluralsight\/2020-12-04-ios-14-getting-started\/",
+  "wordCount": "884",
+  "datePublished": "2020-12-04T00:00:00Z",
+  "dateModified": "2020-12-04T00:00:00Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": ".Net Development, GAC, PowerShell"
+  "keywords": "Pluralsight, Swift, SwiftUI, iOS"
 
-  ,"description": ""
+  ,"description": "Building for iOS is an incredibly valuable skill for any developer. This course will teach you to make iOS apps with adaptive user interfaces that work on multiple devices using Xcode, Swift, and SwiftUI."
 }
 </script>
 
 
 
-    <title>Using PowerShell to Install a DLL into the GAC</title>
+    <title>iOS 14 Getting Started</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -197,25 +195,199 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-      <h1 class="article-title">Using PowerShell to Install a DLL into the GAC</h1>
+      <h1 class="article-title">iOS 14 Getting Started</h1>
     </header>
     <div class="content">
 
     <p></p>
 
-    <p>A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.</p>
+    
 
-<p>An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs.</p>
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="ln">1</span><span class="c">#Note that you should be running PowerShell as an Administrator</span>
-<span class="ln">2</span><span class="no">[System.Reflection.Assembly]</span><span class="p">::</span><span class="n">Load</span><span class="p">(</span><span class="s2">&#34;System.EnterpriseServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&#34;</span><span class="p">)</span>            
-<span class="ln">3</span><span class="nv">$publish</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">EnterpriseServices</span><span class="p">.</span><span class="n">Internal</span><span class="p">.</span><span class="n">Publish</span>            
-<span class="ln">4</span><span class="nv">$publish</span><span class="p">.</span><span class="n">GacInstall</span><span class="p">(</span><span class="s2">&#34;C:\Path\To\DLL.dll&#34;</span><span class="p">)</span>
-<span class="ln">5</span>
-<span class="ln">6</span><span class="c">#If installing into the GAC on a server hosting web applications in IIS, you need to restart IIS for the applications to pick up the change.</span>
-<span class="ln">7</span><span class="c">#Uncomment the next line if necessary...</span>
-<span class="ln">8</span><span class="c">#iisreset</span></code></pre></div>
+<p>Developing for iOS is a valuable and in-demand skill, but if you haven&rsquo;t developed in the Apple world before, it can be surprisingly different.</p>
+
+<p>In this course, iOS 14: Getting Started, you&rsquo;ll quickly get up and running using Xcode 12, Swift 5, and SwiftUI to build great iOS apps and tap into the latest features in iOS 14.</p>
+
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  
+
+<p><ul class="resources-content">
+    <li>
+      <i class="fas fa-video"></i> <a href="https://bit.ly/iOS14-getting-started" target="_blank">iOS 14 Getting Started</a><a href="https://bit.ly/iOS14-getting-started" target="_blank"><br /> <img src="https://www.andrewcbancroft.com/images/social-assets/ios-14-getting-started.png" alt="iOS 14 Getting Started" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
+    </li>
+  </ul>
+</div></p>
+
+<h1 id="course-outline">Course Outline</h1>
+
+<p>First, you&rsquo;ll see the tools and learn how to create iOS apps with adaptive user interfaces that work on multiple devices.</p>
+
+<p>Next, you’ll learn how to manage iOS projects and define the building blocks of your own iOS applications.</p>
+
+<p>Finally, you&rsquo;ll explore working with data-driven controls and understand navigation options.</p>
+
+<p>When you’re finished with this course, you&rsquo;ll know current best practices, iOS architecture, and the most important ideas you need to feel comfortable bringing your developer skills into the iOS and Apple developer world.</p>
+
+<h2 id="1-preparing-to-build-ios-applications">1 – Preparing to Build iOS Applications</h2>
+
+<p>Prepare to implement iOS apps by understanding what’s involved from a big picture standpoint.</p>
+
+<p>We begin at the beginning to bring you up to speed and set the foundation for the remainder of the course.</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>What You Need for Building iOS Apps</li>
+<li>Creating an iOS Project with Xcode</li>
+<li>Exploring an iOS Project</li>
+<li>How to Learn iOS</li>
+<li>The Night Watch Scenario</li>
+<li>Working with Xcode Projects</li>
+<li>Grasping the Basics of the Xcode Development Environment</li>
+<li>Summary</li>
+</ul>
+
+<h2 id="2-building-single-view-applications">2 - Building Single View Applications</h2>
+
+<p>Building single view applications is the starting point for most of us who are learning to build iOS apps because they allow us a simplified architecture that focuses on a single screen performing a single responsibility.</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>Preparing to Build Single View Apps</li>
+<li>Understanding the SwiftUI Framework</li>
+<li>Understanding Views</li>
+<li>Combining and Laying out Views</li>
+<li>Understanding the SwiftUI Layout System</li>
+<li>Aligning and Positioning Views</li>
+<li>Customizing UI Appearance</li>
+<li>Developing a SwiftUI Mindset</li>
+<li>Using Icons and Symbols</li>
+<li>Managing Views with Groups</li>
+</ul>
+
+<h2 id="3-creating-data-driven-lists">3 - Creating Data-driven Lists</h2>
+
+<p>Just about any day in which you use an iPhone or iPad for more than a few minutes, you&rsquo;ll almost certainly end up in an app that uses a List View.</p>
+
+<p>It&rsquo;s the most common way to show a structured, scrollable series of items, and List Views are a core competency for an iOS developer working in SwiftUI, so it&rsquo;s the first complex control we dive into.</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>Preparing to Work with Lists</li>
+<li>Understanding Lists</li>
+<li>Creating a List</li>
+<li>Controlling a List with Data</li>
+<li>Using ForEach to Supply List Content</li>
+<li>Adding Sections and Headings</li>
+</ul>
+
+<h2 id="4-building-ios-apps-with-multiple-screens">4 - Building iOS Apps with Multiple Screens</h2>
+
+<p>Here I cover how to create apps multiple screens and how to think about and enable navigation between them.</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>Defining Apps with Multiple Screens</li>
+<li>Implementing Navigation Views</li>
+<li>Adding Navigation to an Existing Project</li>
+<li>Extracting Reusable Subviews</li>
+<li>Creating a Tabbed Application</li>
+<li>Recapping Multi-view Applications</li>
+</ul>
+
+<h2 id="5-adding-behavior-and-working-with-data">5 - Adding Behavior and Working With Data</h2>
+
+<p>The thing that makes an app come alive is the behavior we add, and the dynamic responses to that behavior that get reflected in the user interface.</p>
+
+<p>In any application, a user interface has one critical job: to accurately represent the <strong>data</strong> of our application in what it displays on the screen.</p>
+
+<p>In SwiftUI, data and behavior go hand-in-hand, and I cover how to respond to user interaction in this module.</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>Preparing to Add Basic Behavior</li>
+<li>Extending the Data Model</li>
+<li>Understanding the View Update Cycle in SwiftUI</li>
+<li>Adding Basic Behavior</li>
+<li>Connecting a Subview to a Parent View’s Data</li>
+<li>Using Classes as Data Models</li>
+<li>Sharing a Data Model through the SwiftUI Environment</li>
+<li>Bringing the Data Model and Behavior to the Night Watch App</li>
+</ul>
+
+<h2 id="6-putting-it-all-together">6 - Putting It All Together</h2>
+
+<p>There’s nothing like practicing your skills in new contexts to refine them and solidify what you’ve learned.</p>
+
+<p>We go into some additional controls and techniques for building apps with SwiftUI before concluding the course.</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>Applying What You’ve Learned</li>
+<li>Integrating the Extended Data Model</li>
+<li>Adding the Mark Complete Behavior</li>
+<li>Adding a Toolbar and Toggle Control</li>
+<li>Implementing Swipe and Move Actions for a List</li>
+<li>Resetting the List</li>
+<li>Showing an Alert</li>
+<li>Creating an Adaptive UI</li>
+<li>Adding and Customizing Layout Variations</li>
+<li>Getting Ready for the App Store</li>
+</ul>
+
+<h2 id="7-publishing-to-the-app-store">7 - Publishing to the App Store</h2>
+
+<p>Finishing an app and getting it out the door to your users is one of the best feelings in the world.</p>
+
+<p>Beyond the emotional aspect of publishing an app though, more and more employers want to see job candidates who have published at least one app to the App Store.</p>
+
+<p>So in this final module, I complete the journey by setting you up to get an app into the App Store and bolster your resume!</p>
+
+<p>Topics in this module include&hellip;</p>
+
+<ul>
+<li>Preparing to Publish Your App</li>
+<li>Adding Images and App Icons</li>
+<li>Responding to Dark Mode</li>
+<li>Creating an iOS App Launch Screen</li>
+<li>Submitting an App for Review</li>
+<li>Continuing Your iOS Developer Journey</li>
+</ul>
+
+<h1 id="feedback-welcome">Feedback Welcome!</h1>
+
+<p>From the beginning my unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!</p>
+
+<p>I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!</p>
+
     <aside>
       
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">Using SwiftUI in a Playground</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-environment-keys-possible/">What Are All of the Possible Environment Keys in SwiftUI?</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/">Implementing In-App Purchases on iOS</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/pluralsight/2019-12-26-ios-debugging-fundamentals/">iOS Debugging Fundamentals</a></li>
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-to-use-fetchrequest-swiftui/">How to Use @FetchRequest in SwiftUI</a></li>
+            
+        <ul>
       
     </aside>
 
