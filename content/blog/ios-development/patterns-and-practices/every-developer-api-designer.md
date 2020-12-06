@@ -12,6 +12,7 @@ categories:
 tags:
   - API Design
   - System Architecture
+dispiosgettingstartedbadge: true
 
 ---
 Every function; every class; every struct and enum and protocol is an API.

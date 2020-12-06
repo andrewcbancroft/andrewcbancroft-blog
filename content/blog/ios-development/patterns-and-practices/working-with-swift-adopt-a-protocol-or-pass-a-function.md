@@ -12,6 +12,7 @@ tags:
   - Functions
   - Protocols
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 Without fail, any time [Rob Napier][1] ([@cocoaphony][2]) speaks or writes, I gain insight into new and deeper ways to solve problems with Swift.

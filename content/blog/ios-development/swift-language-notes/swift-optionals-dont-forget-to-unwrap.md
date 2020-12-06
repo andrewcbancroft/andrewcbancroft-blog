@@ -15,6 +15,7 @@ tags:
   - Swift
   - Swift Optionals
   - Xcode Compiler Error
+dispiosgettingstartedbadge: true
 
 ---
 There is a compiler error that throws me off every time I see it.  It takes the form,

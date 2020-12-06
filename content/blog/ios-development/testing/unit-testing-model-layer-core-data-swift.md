@@ -14,6 +14,7 @@ tags:
   - Model
   - Swift
   - Unit Testing
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on November 19, 2015 – Swift 2.0</small>

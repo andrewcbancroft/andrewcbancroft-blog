@@ -12,6 +12,7 @@ categories:
 tags:
   - Swift
   - Swift Extension
+dispiosgettingstartedbadge: true
 
 ---
 For newcomers to Swift, the concept of extending a Type may be new, so I thought I'd share a high-level overview of Swift extensions in the style of asking the 5 W's: Who? What? When? Where? Why?

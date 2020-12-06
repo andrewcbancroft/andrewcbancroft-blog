@@ -12,6 +12,7 @@ categories:
 tags:
   - Closures
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 If you're mostly in the business of coding up closures to pass off to other functions as [callbacks][1], you may not have run into the concept of an "escaping closure&#8221; yet.

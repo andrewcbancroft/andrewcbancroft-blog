@@ -14,6 +14,7 @@ tags:
   - Rotate Animation
   - Swift
   - UIView Extension
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on December 14, 2015 – Swift 2.0 + new examples</small>

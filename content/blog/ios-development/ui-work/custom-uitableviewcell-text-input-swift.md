@@ -12,6 +12,7 @@ tags:
   - Swift
   - UITableView
   - UITableViewCell
+dispiosgettingstartedbadge: true
 
 ---
 The need to collect data via text input is a common in many applications. This walk-through showcases how to create a custom `UITableViewCell` for accepting text input within a `UITableView`.

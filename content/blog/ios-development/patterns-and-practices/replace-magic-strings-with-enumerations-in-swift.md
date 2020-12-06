@@ -14,6 +14,7 @@ tags:
   - Clean Code
   - Enumerations
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 "What can I do to avoid these &#8216;magic strings' in my code?&#8221; – This was the question I asked myself recently as I found myself in `prepareForSegue` comparing `segue.segueIdentifier` to in-line hard-coded Strings.  This kind of in-line hard-coding of a String for comparison purposes is what I mean by "magic strings&#8221; in this article.  I knew this felt like a bad idea, but the solution to a cleaner option wasn't readily apparent to me.

@@ -15,6 +15,7 @@ tags:
   - Functional Programming
   - Recursion
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 While experimenting with a few things today, I experienced this compiler error:

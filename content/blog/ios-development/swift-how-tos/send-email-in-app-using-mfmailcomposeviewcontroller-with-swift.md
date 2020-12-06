@@ -12,6 +12,7 @@ categories:
 tags:
   - In-App Email
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on October 11, 2016 – Swift 3.0</small>

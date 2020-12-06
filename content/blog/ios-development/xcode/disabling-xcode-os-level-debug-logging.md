@@ -12,6 +12,7 @@ tags:
   - Debug
   - Logging
   - Xcode 8
+dispiosgettingstartedbadge: true
 ---
 Full credit to [Russell Ivanovic][1] for his [tweet][2] for figuring out how to disable Xcode 8's extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it's helpful to you as well.
 

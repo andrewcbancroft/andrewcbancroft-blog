@@ -12,6 +12,7 @@ tags:
   - Circular Progress
   - Storyboard
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on April 17, 2017 – Swift 3</small>

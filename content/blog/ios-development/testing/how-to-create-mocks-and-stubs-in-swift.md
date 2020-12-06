@@ -16,6 +16,7 @@ tags:
   - Stub
   - Swift
   - Unit Test
+dispiosgettingstartedbadge: true
 
 ---
 Without 100% support for a mocking framework like <a title="OCMock" href="http://ocmock.org/" target="_blank">OCMock</a>, I found myself needing to get creative when building&nbsp;mock objects and method stubs in Swift unit tests. &nbsp;The great thing about testing is that you're&#8230;well&#8230;&nbsp;_testing things out_ to see if they'll work, and I found a solution that I'm pretty happy&nbsp;with for now. &nbsp;I'm open to better ways, so leave a comment if you've had good results using a different design!

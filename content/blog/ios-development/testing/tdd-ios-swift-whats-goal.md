@@ -13,6 +13,7 @@ tags:
   - Swift
   - TDD
   - Unit Testing
+dispiosgettingstartedbadge: true
 
 ---
 Before actually _doing_ Test Driven Development (TDD) for your iOS / Mac app, it's really important to ask a very fundamental question: What's the goal? What am I aiming for when I say I want to drive my iOS development with tests?

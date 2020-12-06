@@ -12,6 +12,7 @@ tags:
   - Swift
   - TDD
   - Unit Test
+dispiosgettingstartedbadge: true
 
 ---
 There are times when it feels paralyzing to write tests _first_ before any production code is written. Even with good requirements documentation, I often find myself asking, "How am I supposed to write a test to verify **_x_** about some **_thing_** that doesn't exist in actual code yet?&#8221; It can be crippling.

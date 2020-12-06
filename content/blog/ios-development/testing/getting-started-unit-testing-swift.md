@@ -12,6 +12,7 @@ categories:
 tags:
   - Swift
   - Unit Testing
+dispiosgettingstartedbadge: true
 
 ---
 Getting set up to write unit tests in Swift, while not _difficult_, isn't exactly _intuitive_. I've written [several posts and gathered a few resources on unit testing in Swift][1], but I haven't yet published a "getting started&#8221; guide until now.

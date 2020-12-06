@@ -16,6 +16,7 @@ tags:
   - Clean Code
   - Functions
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 I've been thinking a lot about how the principles of clean coding (Bob Martin's "<a title="Amazon - Clean Code" href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882" target="_blank">Clean Code</a>") apply in Swift. How do I express clean code in this language? Conversely, how do I _avoid_ writing _cryptic_ code in Swift? What language features help me write clear and self-explanatory code and what language features present the potential for tempting me to write obscure code in Swift?

@@ -11,6 +11,7 @@ categories:
 tags:
   - Access Control
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 As it turns out, Swift isn't C# (or Java or VB.Net or&#8230;)! My day job keeps me busy writing C#, so I'll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.

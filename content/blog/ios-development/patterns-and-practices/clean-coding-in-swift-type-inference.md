@@ -16,6 +16,7 @@ tags:
   - Clean Code
   - Swift
   - Type Inference
+dispiosgettingstartedbadge: true
 
 ---
 Quick!  Tell me!  What is the Type of the `birdDetails`constant in this code example:

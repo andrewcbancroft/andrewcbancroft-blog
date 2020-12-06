@@ -12,6 +12,7 @@ tags:
   - Swift
   - Swipe to Delete
   - UITableView
+dispiosgettingstartedbadge: true
 
 ---
 Data management applications, by which I mean an app where you're allowing users to add, edit, and delete bits of data as part of your app's core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.

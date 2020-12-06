@@ -11,6 +11,7 @@ categories:
 tags:
   - Extensions
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 How often do we take an initial cursory look at some documentation, shake our heads and say, "Ok, sure! Got it!&#8221;, and then some time later get to the actual usage of that perceived understanding only to find out, "Woah – this is behaving differently than I expected! I wonder if the documentation says anything about this?!&#8221;

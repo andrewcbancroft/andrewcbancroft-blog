@@ -14,6 +14,7 @@ tags:
   - Constants
   - Objective-C Macro
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 I've previously written about <a title="Replace Magic Strings with Enumerations in Swift" href="http://www.andrewcbancroft.com/2014/09/02/replace-magic-strings-with-enumerations-in-swift/" target="_blank">using enumerations in Swift to encapsulate special values</a> that could end up falling into the "magic string&#8221; category if they were to simply be scattered in-line throughout your code. The primary example I proposed for such a "magic string&#8221; replacement was Storyboard Segue Identifiers.  These special identifiers have such a specific purpose that felt to me like a natural fit to create a Type in the form of an enumeration (which I called SegueIdentifier) to group them all together in one place so that I could easily find them and modify them, should I ever need to do so.

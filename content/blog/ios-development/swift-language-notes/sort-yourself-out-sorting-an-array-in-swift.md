@@ -13,6 +13,7 @@ tags:
   - Sort Array
   - Sorted Function
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 I had a question come to me today&nbsp;regarding sorting an array of integers that are actually&nbsp;_encoded_ as strings in the array. &nbsp;Data comes to is in a variety of encodings/types, so it's quite common to need to adjust things to the right state for working with. &nbsp;Let's take a look at how to solve this one.

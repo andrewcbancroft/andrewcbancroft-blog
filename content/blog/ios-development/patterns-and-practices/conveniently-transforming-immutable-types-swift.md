@@ -12,6 +12,7 @@ tags:
   - Functional Programming
   - Immutability
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 A few weeks ago I wrote about [Immutable Types and Changing State in Swift][1], where I hoped to convey an "aha!-moment&#8221; that happened for me.

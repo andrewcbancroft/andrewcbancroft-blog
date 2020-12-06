@@ -12,6 +12,7 @@ tags:
   - Pull to Refresh
   - Swift
   - UIRefreshControl
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on September 21, 2016 – Swift 3.0</small>

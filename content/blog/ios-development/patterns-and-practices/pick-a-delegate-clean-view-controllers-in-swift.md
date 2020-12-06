@@ -15,6 +15,7 @@ tags:
   - Delegation
   - Swift
   - View Controllers
+dispiosgettingstartedbadge: true
 
 ---
 The delegation pattern is ubiquitous in iOS development – the pattern is&nbsp;a "<a title="Cocoa Core Competencies" href="https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/Delegation.html" target="_blank">core competency</a>&#8221; for developing in Cocoa, and if you program with the iOS SDK for any length of time and you'll end up writing some code that&nbsp;resembles&nbsp;`someInstance.delegate = someDelegate`.

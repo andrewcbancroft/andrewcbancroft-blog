@@ -14,6 +14,7 @@ tags:
   - Swift
   - UIActionSheet
   - UIView Tag Property
+dispiosgettingstartedbadge: true
 
 ---
 The challenge when dealing with the presentation and handling of more than one `UIActionSheet` in a single View Controller is made clear by asking, "How am I going to tell which action sheet I'm dealing with so that I can handle the user's choice appropriately?&#8221;

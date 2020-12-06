@@ -11,6 +11,7 @@ categories:
 tags:
   - Swift 4 Upgrade
   - UIColor
+dispiosgettingstartedbadge: true
 
 ---
 I upgraded a project to Swift 4 today and hit a compiler error:

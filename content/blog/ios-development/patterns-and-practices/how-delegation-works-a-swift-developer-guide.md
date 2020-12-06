@@ -12,6 +12,7 @@ tags:
   - Delegation
   - Design Pattern
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on October 11, 2016 – Swift 3.0</small>

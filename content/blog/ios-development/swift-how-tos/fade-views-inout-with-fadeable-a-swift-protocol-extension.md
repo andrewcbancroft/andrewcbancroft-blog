@@ -12,6 +12,7 @@ tags:
   - Fade In
   - Fade Out
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 During the production of my [Pluralsight course on Managing Xcode Project Dependencies with CocoaPods][1], I wanted to provide viewers of the course the opportunity to see how to create and deploy a simple library out to the CocoaPods Trunk.

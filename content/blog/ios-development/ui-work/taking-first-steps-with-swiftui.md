@@ -11,6 +11,7 @@ tags:
 images:
   - images/social-assets/Twitter - Taking First Steps With SwiftUI.png
   - images/social-assets/FB - Taking First Steps With SwiftUI.png
+dispiosgettingstartedbadge: true
 ---
 
 <a name="resources" class="jump-target"></a>

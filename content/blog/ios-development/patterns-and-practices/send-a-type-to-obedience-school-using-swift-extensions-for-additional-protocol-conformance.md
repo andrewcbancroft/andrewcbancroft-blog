@@ -13,6 +13,7 @@ tags:
   - Extensions
   - Protocols
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 Did you know that you can make _any_ Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don't have the source code for, adopt a protocol that it doesn't normally conform to out of the box?

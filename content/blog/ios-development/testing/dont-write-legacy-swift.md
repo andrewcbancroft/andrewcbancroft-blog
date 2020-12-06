@@ -12,6 +12,7 @@ categories:
 tags:
   - Swift
   - Unit Testing
+dispiosgettingstartedbadge: true
 
 ---
 “Legacy Swift”.&nbsp; Is that an odd phrase to you, too?

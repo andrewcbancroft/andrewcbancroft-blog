@@ -13,6 +13,7 @@ tags:
   - Functional Programming
   - Immutability
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I've seen a lot in the functional programming arena as it relates to Swift.

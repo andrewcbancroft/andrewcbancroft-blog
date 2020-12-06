@@ -11,6 +11,7 @@ categories:
 tags:
   - Swift
   - Swift Optionals
+dispiosgettingstartedbadge: true
 
 ---
 Do you find your Swift code riddled with `!`&#8216;s?

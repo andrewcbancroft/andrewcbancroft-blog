@@ -12,6 +12,7 @@ tags:
   - AppDelegate
   - Swift
   - UINavigationController
+dispiosgettingstartedbadge: true
 
 ---
 The sequence of accessing a `UINavigationController's` first child from within the `AppDelegate` or within `prepareForSegue(_:sender:)` always gets me. Here are a few quick snippets to help you and I quickly get up and running when working with navigation controllers in our Swift applications:

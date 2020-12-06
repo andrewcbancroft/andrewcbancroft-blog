@@ -15,6 +15,7 @@ tags:
   - Swift
   - Swift Extension
   - UIView Extension
+dispiosgettingstartedbadge: true
 
 ---
 In a previous post about <a title="Fade In / Out Animations as Class Extensions in Swift" href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" target="_blank">fade animations</a> in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call `fadeIn()` or `fadeOut()` on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them _somewhere_. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews.

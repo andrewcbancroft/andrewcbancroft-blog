@@ -11,6 +11,7 @@ categories:
   - Swift
 tags:
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 In a [previous walkthrough on sending e-mails in-app][1], I explored how to use `MFMailComposeViewController` to allow a user to compose an e-mail without ever leaving your app. I then [followed up with a proposal for better-segregating the responsibilities][2] of composing an e-mail and responding to the delegate callbacks out of the View Controller.

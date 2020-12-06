@@ -11,6 +11,7 @@ categories:
 tags:
   - Callbacks
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on October 12, 2016 – Swift 3.0</small>

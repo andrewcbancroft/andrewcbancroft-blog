@@ -12,6 +12,7 @@ categories:
 tags:
   - Closures
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 My last entry on [escaping closures][1] ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that's a different story&#8230; :]

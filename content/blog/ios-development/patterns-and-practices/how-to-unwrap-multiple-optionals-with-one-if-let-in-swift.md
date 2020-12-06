@@ -11,6 +11,7 @@ categories:
 tags:
   - Swift
   - Swift Optionals
+dispiosgettingstartedbadge: true
 
 ---
 What do you do when you've got two (or more) optionals that you need to safely unwrap and work with?

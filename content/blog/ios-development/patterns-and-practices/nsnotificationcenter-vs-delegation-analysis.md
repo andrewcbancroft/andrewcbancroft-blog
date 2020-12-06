@@ -13,6 +13,7 @@ tags:
   - Delegate
   - NSNotificationCenter
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 In [Fundamentals of NSNotificationCenter in Swift][1], a [commenter asked][2] me to elaborate on a response I'd given to a dialog going on below the blog post. I had stated:

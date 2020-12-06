@@ -13,6 +13,7 @@ tags:
   - Social Media
   - Swift
   - Twitter
+dispiosgettingstartedbadge: true
 
 ---
 Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple's built-in support for two major social media platforms: Facebook, and Twitter.

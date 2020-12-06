@@ -14,6 +14,7 @@ tags:
   - iOS 7
   - iOS 8
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 While iOS 8 is now officially in the wild, it may take a bit of time to reach the level of user adoption that iOS 7 had accumulated over the past year.  If you plan to target the widest number of users for your app (at least in these early days of the iOS 8 roll-out), it'd probably be wise to include iOS 7 in your target audience.

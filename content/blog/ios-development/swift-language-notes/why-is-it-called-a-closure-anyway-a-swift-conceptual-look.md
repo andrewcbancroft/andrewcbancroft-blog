@@ -12,6 +12,7 @@ categories:
 tags:
   - Closures
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 <a name="whats-in-a-name" class="jump-target"></a>

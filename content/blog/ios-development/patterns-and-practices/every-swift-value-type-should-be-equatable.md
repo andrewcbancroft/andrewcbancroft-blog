@@ -12,6 +12,7 @@ tags:
   - Equatable
   - Swift
   - Value Types
+dispiosgettingstartedbadge: true
 
 ---
 As I listened to the WWDC15 talk on [Building Better Apps with Value Types in Swift][1] I was struck by a sentence that I had never dawned on me before:

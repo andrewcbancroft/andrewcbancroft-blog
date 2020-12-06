@@ -12,7 +12,7 @@ tags:
   - Blogging
   - Community
   - Swift
-
+dispiosgettingstartedbadge: true
 ---
 If Swift is your iOS/Mac development language of choice, my goal in this post is to persuade you that you should not only write Swift&#8230; you should write _about_ Swift. Here are 7 reasons (in the order in which they flowed out of my brain):
 

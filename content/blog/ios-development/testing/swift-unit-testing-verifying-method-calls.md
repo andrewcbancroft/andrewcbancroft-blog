@@ -13,6 +13,7 @@ categories:
 tags:
   - Swift
   - Unit Testing
+dispiosgettingstartedbadge: true
 
 ---
 In this unit testing screencast for Swift developers, we explore how to use Test Driven Development to verify method calls.

@@ -12,6 +12,7 @@ tags:
   - Functional Programming
   - Functions
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 For the well-versed functional programmer, the fact that [functions in Swift are _Types_][1] is no surprise. But I'm relatively new to the game on that front, so when I first encountered the idea of thinking of a function as a Type back when Swift was announced in 2014, it was a real eye-opener for me.

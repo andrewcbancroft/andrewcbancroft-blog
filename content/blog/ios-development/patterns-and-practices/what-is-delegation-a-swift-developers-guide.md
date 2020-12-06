@@ -12,6 +12,7 @@ tags:
   - Delegate
   - Delegation
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 Of the major design patterns that are prevalent in iOS development, delegation is one that appears quite often. For many developers entering app development for the iOS platform, dealing with delegates is a new concept. It certainly was for me.

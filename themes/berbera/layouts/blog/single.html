@@ -74,6 +74,12 @@
             I am the author of <a href="https://bit.ly/implementing-in-app-purchases-ios" class="alert-link">Implementing In-app Purchases on iOS</a> on <a href="http://bit.ly/ps-author-page" class="alert-link">Pluralsight</a>.  <br/><br/>Deepen your understanding by watching the course!
           </div>
         {{- end }}
+        {{- if .Params.dispiosgettingstartedbadge }}
+        <div class="alert alert-primary" role="alert">
+            Learning about iOS development? <br/><br/>
+            I am the author of <a href="https://bit.ly/iOS14-getting-started" class="alert-link">iOS 14 Getting Started</a> on <a href="http://bit.ly/ps-author-page" class="alert-link">Pluralsight</a>.  <br/><br/>Deepen your understanding by watching the course!
+          </div>
+        {{- end }}
       <h1 class="article-title">{{ .Title }}</h1>
       {{- if .Params.displaydate }}
       <div class="article_date">

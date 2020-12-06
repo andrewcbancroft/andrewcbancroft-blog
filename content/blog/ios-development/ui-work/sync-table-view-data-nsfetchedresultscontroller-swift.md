@@ -12,6 +12,7 @@ tags:
   - NSFetchedResultsController
   - Swift
   - UITableView
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on September 23, 2015 – Swift 2.0</small>

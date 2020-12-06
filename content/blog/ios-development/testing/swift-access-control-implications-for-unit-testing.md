@@ -17,6 +17,7 @@ tags:
   - Unit Test
   - Use of unresolved identifier
   - Xcode 6 Beta 4
+dispiosgettingstartedbadge: true
 
 ---
 If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you're not alone!

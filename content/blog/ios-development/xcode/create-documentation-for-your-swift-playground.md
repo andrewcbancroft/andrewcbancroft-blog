@@ -13,6 +13,7 @@ tags:
   - Documentation
   - Playground
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 As I opened Apple's latest <a title="Apple Swift Developer Blog - Patterns Playground" href="https://developer.apple.com/swift/blog/?id=13" target="_blank">"Patterns Playground&#8221; blog post</a>, I was impressed with the look and feel.  Rather than create the documentation as comment blocks, they managed to put in sharp-looking notes and explanations before each code example / experiment.  It's like an interactive book, reminiscent of the Swift Programming Language iBook!  Here's a snippet of what their Playground looks like:

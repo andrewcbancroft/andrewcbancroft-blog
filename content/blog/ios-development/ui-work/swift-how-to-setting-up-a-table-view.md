@@ -12,6 +12,7 @@ tags:
   - Screencast
   - Swift
   - UITableView
+dispiosgettingstartedbadge: true
 
 ---
 Think of this screencast as the "Hello World&#8221; of creating a view controller with a table view. I cover organizing things in the Storyboard, Auto Layout constraints, and the implementation of the data source protocol methods for a table view.

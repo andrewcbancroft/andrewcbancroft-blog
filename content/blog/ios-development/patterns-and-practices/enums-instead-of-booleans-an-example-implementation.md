@@ -13,6 +13,7 @@ tags:
   - Clean Code
   - Enum
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 This blog entry was inspired by [Objc.io's snippet titled "Enums instead of Booleans&#8221;][1]. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven't seen it, check it out before continuing on!

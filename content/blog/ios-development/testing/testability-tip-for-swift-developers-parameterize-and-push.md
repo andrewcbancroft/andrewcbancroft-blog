@@ -11,6 +11,7 @@ categories:
 tags:
   - Swift
   - Unit Testing
+dispiosgettingstartedbadge: true
 
 ---
 In a previous "Testability Tip for Swift Developers&#8221;, [I discussed the principle of observability][1]. "If it's observable, it's testable&#8221; was the primary conclusion of the article, and I pointed toward using the `public` access control modifier for parts of your app that you intend to test.

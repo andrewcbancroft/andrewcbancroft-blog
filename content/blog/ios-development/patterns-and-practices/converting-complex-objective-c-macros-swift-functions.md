@@ -12,6 +12,7 @@ tags:
   - '#define'
   - Complex Macro
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 The question of how to convert `#define` macros from Objective-C to Swift is explained fairly simply in the [Apple developer documentation on the subject][1]. For _simple_ macros, it's a matter of rewriting them as global constants. In fact, if you're using the hybrid Objective-C &#8212; Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the [alternative to Objective-C macros][2] a while back.

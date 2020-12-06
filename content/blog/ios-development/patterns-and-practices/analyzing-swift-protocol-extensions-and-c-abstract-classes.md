@@ -13,7 +13,7 @@ tags:
   - Abstract Class
   - Protocols
   - Swift
-
+dispiosgettingstartedbadge: true
 ---
 Being a C# developer by day and a Swift developer by night has me constantly thinking about the similarities and differences between these two languages. I genuinely enjoy programming with each, and I love it when I can take a strategy that works well in one language, and see where that might cross over to the other. One of the areas I've been pondering as of late is the idea of how Swift and C# compare in terms of protocol extensions and abstract classes.
 

@@ -14,6 +14,7 @@ tags:
   - Swift
   - Unowned
   - Weak
+dispiosgettingstartedbadge: true
 
 ---
 I'm willing to bet that a good number of Swift developers struggle with the particulars of how `strong`, `weak`, and `unowned` affect the run-time behavior of their code. I, myself, wouldn't want to have to give an explanation of the finer points of Automatic Reference Counting (ARC) if my life depended on it.

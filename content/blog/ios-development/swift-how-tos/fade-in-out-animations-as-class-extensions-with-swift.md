@@ -18,6 +18,7 @@ tags:
   - Swift
   - Swift Extension
   - UIView Extension
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on December 6, 2016 – Xcode 8 & Swift 3.0</small>

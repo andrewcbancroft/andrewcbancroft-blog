@@ -11,6 +11,7 @@ categories:
 tags:
   - Protocol Oriented Programming
   - Swift
+dispiosgettingstartedbadge: true
 
 ---
 A [question was asked on Reddit][1] and showed up in my feed as I was browsing this weekend:

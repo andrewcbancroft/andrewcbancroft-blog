@@ -13,6 +13,7 @@ tags:
   - Swift
   - TDD
   - Unit Testing
+dispiosgettingstartedbadge: true
 
 ---
 Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a `private` function, however, I often scratch my head and ask, "How am I supposed to test this??&#8221;.

@@ -14,6 +14,7 @@ tags:
   - Swift
   - Tutorial
   - Walkthrough
+dispiosgettingstartedbadge: true
 
 ---
 <small>Updated on September 19, 2016 – Xcode 8 & Swift 3.0</small>

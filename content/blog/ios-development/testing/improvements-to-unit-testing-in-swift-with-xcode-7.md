@@ -12,6 +12,7 @@ tags:
   - Swift
   - Unit Testing
   - Xcode 7
+dispiosgettingstartedbadge: true
 
 ---
 One of the most exciting things that's come out of WWDC 2015 is the fact that unit testing in Swift has been greatly simplified. The latest announcements have actually rendered a few of my articles on the subject obsolete, once Xcode 7 is in full circulation among the Swift developer community.

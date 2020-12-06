@@ -13,6 +13,7 @@ tags:
   - Swift
   - UIImagePickerController
   - UIImagePickerControllerDelegate
+dispiosgettingstartedbadge: true
 
 ---
 This is a cheat sheet of the code and workflow for iPhone camera access and usage, from requesting permission to using the photo taken with a user's device.

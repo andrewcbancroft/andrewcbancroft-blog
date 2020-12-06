@@ -16,6 +16,7 @@ toc: true
 images:
   - images/social-assets/Twitter Accessing the Root View Controller at Launch on iOS 13 with SceneDelegate.png
   - images/social-assets/Facebook Accessing the Root View Controller at Launch on iOS 13 with SceneDelegate.png
+dispiosgettingstartedbadge: true
 ---
 
 A new <a href="https://developer.apple.com/documentation/uikit/uiwindowscenedelegate" rel="nofollow">SceneDelegate</a> was introduced for Storyboard-based apps in iOS 13, and with it came some changes in how you're able to access your app's root view controller at app launch.

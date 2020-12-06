@@ -14,6 +14,7 @@ tags:
 images:
   - images/social-assets/Twitter - Using SwiftUI in a Playground.png
   - images/social-assets/Facebook - Using SwiftUI in a Playground.png
+dispiosgettingstartedbadge: true
 ---
 
 If you're looking for a quicker way to iterate while you're building SwiftUI views, and you don't have macOS Catalina installed, you might enjoy the Playground experience more than you enjoy pressing `command + R` every time you make a change and want to see it in the user interface.

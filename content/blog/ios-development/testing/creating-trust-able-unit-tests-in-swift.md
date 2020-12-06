@@ -11,6 +11,7 @@ categories:
 tags:
   - Swift
   - Unit Testing
+dispiosgettingstartedbadge: true
 
 ---
 It may come as a surprise to you, but a green-lit passing unit test is not _always_ a sign that all is well with our software. Our apps and their corresponding unit test suites always start off clean and basic and simple.
