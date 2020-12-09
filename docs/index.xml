@@ -5,10 +5,57 @@
     <description>Recent content about iOS development with Swift  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 09 Dec 2020 04:21:19 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to Download Old Versions of Xcode</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/xcode/how-to-download-old-versions-of-xcode/</link>
+      <pubDate>Wed, 09 Dec 2020 04:21:19 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/xcode/how-to-download-old-versions-of-xcode/</guid>
+      <description>
+
+&lt;h2 id=&#34;whyyy-would-i-need-an-old-version-of-xcode&#34;&gt;Whyyy would I need an old version of Xcode?&lt;/h2&gt;
+
+&lt;p&gt;Valid question &amp;ndash; it&amp;rsquo;s not often you&amp;rsquo;ll need one.  Two reasons off the top of my head though:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1) To compare with your previous experience&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Perhaps you&amp;rsquo;re just wanting to see what things &amp;ldquo;used to be like&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Maybe you&amp;rsquo;re struggling with the infamous &amp;ldquo;this code worked before&amp;hellip;now it doesn&amp;rsquo;t&amp;hellip;what changed?&amp;rdquo; and you just want to build your project with a prior version of Xcode in order to rule it out as the culprit.&lt;/p&gt;
+
+&lt;p&gt;Grabbing an older version of Xcode could help you here.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2) To upgrade a very old project to newer versions of Swift&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I hit this one the other day. I needed to update the exercise files for my &lt;a href=&#34;http://bit.ly/core-data-swift&#34;&gt;Core Data Fundamentals with Swift&lt;/a&gt; course on &lt;a href=&#34;http://bit.ly/ps-author-page&#34;&gt;Pluralsight&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I opened the project in Xcode 12 and this popped up:
+&lt;img src=&#34;unsupported-version-of-swift.png&#34; width=&#34;50%&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Xcode &lt;em&gt;10.1&lt;/em&gt;???  That was a &lt;em&gt;while&lt;/em&gt; ago. 😅&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-download&#34;&gt;How to download&lt;/h2&gt;
+
+&lt;p&gt;Regardless of your &lt;em&gt;reason&lt;/em&gt;, the good news is that you can download old versions of Xcode (and a lot of other tools) from the Apple Developer Center.&lt;/p&gt;
+
+&lt;p&gt;The link is a bit hidden though, so I&amp;rsquo;ll leave it here for you as an easy-to-find breadcrumb:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://developer.apple.com/download/more/&#34;&gt;https://developer.apple.com/download/more/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll need to sign in to your Apple Developer account, but once you&amp;rsquo;re in, you&amp;rsquo;ll have access to &lt;em&gt;lots&lt;/em&gt; of old stuff.&lt;/p&gt;
+
+&lt;p&gt;Every version of Xcode is available &amp;ndash; all the way back to version 1.0, released in &lt;strong&gt;2003&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll also find prior versions of macOS, old versions of the command line tools, prior betas and release candidates of Xcode and macOS, and more.&lt;/p&gt;
+
+&lt;p&gt;How cool is that?&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>iOS 14 Getting Started</title>
