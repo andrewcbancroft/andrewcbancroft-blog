@@ -40,8 +40,17 @@ Xcode *10.1*???  That was a *while* ago. 😅
 Regardless of your *reason*, the good news is that you can download old versions of Xcode (and a lot of other tools) from the Apple Developer Center.
 
 The link is a bit hidden though, so I'll leave it here for you as an easy-to-find breadcrumb:
-
-[https://developer.apple.com/download/more/](https://developer.apple.com/download/more/)
+<a name="resources" class="jump-target"></a>
+<div class="resources">
+<div class="resources-header">
+Resources
+</div>
+<ul class="resources-content">
+<li>
+<i class="fas fa-link"></i> <a href="https://developer.apple.com/download/more/" rel="nofollow">https://developer.apple.com/download/more/</a>
+</li>
+</ul>
+</div>
 
 You'll need to sign in to your Apple Developer account, but once you're in, you'll have access to *lots* of old stuff.
 
