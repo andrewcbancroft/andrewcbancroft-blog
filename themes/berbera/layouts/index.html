@@ -28,25 +28,28 @@
 </div>
 {{ end }}
 
+{{ define "search" }}
+<div class="search">
+    <script>
+            (function() {
+              var cx = '016138606771195789274:s6zbbzcudhy';
+              var gcse = document.createElement('script');
+              gcse.type = 'text/javascript';
+              gcse.async = true;
+              gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(gcse, s);
+            })();
+          </script>
+          <gcse:search></gcse:search>
+</div>
+{{ end }}
+
 {{ define "main" }}
 {{ $dateFormat := default " January 2, 2006" (index .Site.Params "date_format") }}
 
 <main>
     <div class="homepage">
-            <div class="search">
-                    <script>
-                            (function() {
-                              var cx = '016138606771195789274:s6zbbzcudhy';
-                              var gcse = document.createElement('script');
-                              gcse.type = 'text/javascript';
-                              gcse.async = true;
-                              gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-                              var s = document.getElementsByTagName('script')[0];
-                              s.parentNode.insertBefore(gcse, s);
-                            })();
-                          </script>
-                          <gcse:search></gcse:search>
-            </div>
         <span id="recent-work" class="jump-target"></span>
         <div class="row" id="">
             <div class="col-sm-12">
