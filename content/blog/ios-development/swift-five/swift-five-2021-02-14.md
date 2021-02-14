@@ -43,7 +43,7 @@ Beautiful.
 
 ## Ship something. Anything.
 
-I agree with [Eduardo](https://twitter.com/edouard_iosdev) and [Jeff](https://twitter.com/JeffMorhous).  
+I'm thankful for this advice from [Eduardo](https://twitter.com/edouard_iosdev) and [Jeff](https://twitter.com/JeffMorhous).  
 
 Perfection is overrated.  Ship something.  Anything.  Then improve it over time!
 
