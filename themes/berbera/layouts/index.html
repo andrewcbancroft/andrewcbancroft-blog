@@ -254,7 +254,7 @@
                     <h4 class="card-header">"Swift Five" Series</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/swift-language-notes/").ByTitle }}
+                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/swift-five/").ByDate }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
