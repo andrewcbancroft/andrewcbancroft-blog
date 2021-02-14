@@ -22,11 +22,11 @@ He shares about the sobering reality of how much effort and dedication it really
 
 {{< tweet 1356655172169170944 >}}
 
-## Core ML brings the beauty of braille to the seeing
+## CoreML brings the beauty of braille to the seeing
 
 How cool is this? [Aaron Stephenson](https://twitter.com/azzoor) is learning braile. He's also a developer.
 
-What does he do to check himself to make sure he's reading things correctly? He trains a Core ML model to recognize braile letters and display them using augmented reality.
+What does he do to check himself to make sure he's reading things correctly? He trains a CoreML model to recognize braile letters and display them using augmented reality.
 
 Beautiful.
 
