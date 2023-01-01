@@ -43,18 +43,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Up and Running with Unity IOC Container for ASP.Net MVC" />
-<meta property="og:description" content="The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.&nbsp; However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running.&nbsp;
-The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP." />
+<meta property="og:description" content="The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it. However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running. The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/" />
-<meta property="article:published_time" content="2014-10-27T18:07:21&#43;00:00"/>
-<meta property="article:modified_time" content="2014-10-27T18:07:21&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-10-27T18:07:21+00:00" />
+<meta property="article:modified_time" content="2014-10-27T18:07:21+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Up and Running with Unity IOC Container for ASP.Net MVC"/>
-<meta name="twitter:description" content="The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.&nbsp; However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running.&nbsp;
-The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="twitter:description" content="The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it. However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running. The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -89,7 +88,7 @@ The following is a quick-reference for myself, and for anyone else who’s inter
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -198,82 +197,61 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.&nbsp; However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running.&nbsp;</p>
-
+    <p>The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.  However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running. </p>
 <p>The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP.Net MVC project.</p>
-
 <h3 id="assumptions">Assumptions:</h3>
-
 <ul>
-<li><p>Using Visual Studio 2013</p>
-
+<li>Using Visual Studio 2013
 <ul>
-<li><p>Using ASP.Net MVC 5</p>
-
+<li>
+<p>Using ASP.Net MVC 5</p>
 <ul>
-<li><p>Have already created a new, fresh solution (File –&gt; New Project, etc)</ul></p>
-
-<h3 id="walkthrough">Walkthrough</h3></li>
+<li>Have already created a new, fresh solution (File –&gt; New Project, etc)<!-- raw HTML omitted --></li>
 </ul>
-
+<h3 id="walkthrough">Walkthrough</h3>
 <p>Begin by right-clicking your solution, and choosing to “Manage NuGet Packages for Solution…”:</p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image.png"><img title="image" style="border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; display: inline; border-top-width: 0px" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb.png" width="504" height="367" /></a></p>
-
-<p>Next, choose to search for packages found at nuget.org.&nbsp; In the search bar in the upper right, type in “Unity”, and press enter.&nbsp; Choose to install “Unity bootstrapper for ASP.NET MVC”:</p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8.png"><img title="SNAGHTMLb1d5c8" style="border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; display: inline; border-top-width: 0px" border="0" alt="SNAGHTMLb1d5c8" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8_thumb.png" width="504" height="325" /></a></p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image1.png"><img title="image" style="border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb1.png" width="309" height="398" /></a></p>
-
-<p>Now that the appropriate NuGet package is installed, you’re set to start using the Unity IOC Container.&nbsp;</p>
-
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image.png"><!-- raw HTML omitted --></a></p>
+<p>Next, choose to search for packages found at nuget.org.  In the search bar in the upper right, type in “Unity”, and press enter.  Choose to install “Unity bootstrapper for ASP.NET MVC”:</p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image1.png"><!-- raw HTML omitted --></a></p>
+<p>Now that the appropriate NuGet package is installed, you’re set to start using the Unity IOC Container. </p>
 <h3 id="using-unity-for-dependency-injection-and-management">Using Unity for Dependency Injection and Management</h3>
-
-<p>I’ve contrived an example and tried to show side-by-side views of the bare minimums you need to program in order to start taking advantage of Unity for managing your dependencies.&nbsp;&nbsp; I’m going to show how to inject a concrete implementation of a very simple Interface into the HomeController. The steps go something like this:</p>
-
+<p>I’ve contrived an example and tried to show side-by-side views of the bare minimums you need to program in order to start taking advantage of Unity for managing your dependencies.   I’m going to show how to inject a concrete implementation of a very simple Interface into the HomeController. The steps go something like this:</p>
 <ol>
-<li><p>Create an Interface (in this example, I called it IUnityExample) which specifies that an implementer of this interface must define an itWorksMessage method that returns a string.</p>
-
+<li>Create an Interface (in this example, I called it IUnityExample) which specifies that an implementer of this interface must define an itWorksMessage method that returns a string.
 <ul>
-<li><p>Create a new class called UnityExample.&nbsp;&nbsp; Specify that it implements IUnityExample in the class declaration line.&nbsp; Implement the required itWorksMessage method.</p>
-
+<li>Create a new class called UnityExample.   Specify that it implements IUnityExample in the class declaration line.  Implement the required itWorksMessage method.
 <ul>
-<li><p>In HomeController.cs, declare a private variable to hold an instance of an IUnityExample.</p>
-
+<li>In HomeController.cs, declare a private variable to hold an instance of an IUnityExample.
 <ul>
-<li><p>In HomeController.cs, declare a new constructor which takes an IUnityExample (to be injected by Unity) and sets the privately declared IUnityExample variable to the instance that’s passed in.</p>
-
+<li>In HomeController.cs, declare a new constructor which takes an IUnityExample (to be injected by Unity) and sets the privately declared IUnityExample variable to the instance that’s passed in.
 <ul>
-<li><p>Utilize the itWorksMessage somehow.&nbsp; In my example, I set the return value to a new dynamic property called ViewBag.Message inside the Index method.</p>
-
+<li>
+<p>Utilize the itWorksMessage somehow.  In my example, I set the return value to a new dynamic property called ViewBag.Message inside the Index method.</p>
 <ul>
-<li>In UnityConfig.cs, register IUnityExample and UnityExample with the container inside the RegisterTypes method.</ol>
-Let’s pause here and show that side-by-side view I referred to a second ago.&nbsp; Perhaps visualizing the files in play will help bring the whole picture into view:
-<br /></li>
+<li>In UnityConfig.cs, register IUnityExample and UnityExample with the container inside the RegisterTypes method.<!-- raw HTML omitted -->
+Let’s pause here and show that side-by-side view I referred to a second ago.  Perhaps visualizing the files in play will help bring the whole picture into view:</li>
 </ul>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image5.png"><img title="image" style="border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb5.png" width="720" height="308" /></a></p>
-
-<p>At this point, we’re done with writing C# code, and we’re ready to move into the View layer.&nbsp; This final step will access ViewBag.Message, and display it at the bottom of the page.&nbsp; It’s fairly straight-forward.&nbsp; Inside Views –&gt; Home –&gt; Index.cshtml, simply add a <div> that contains @ViewBag.Message:</p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image3.png"><img title="image" style="border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb3.png" width="624" height="217" /></a></p>
-
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image5.png"><!-- raw HTML omitted --></a></p>
+<p>At this point, we’re done with writing C# code, and we’re ready to move into the View layer.  This final step will access ViewBag.Message, and display it at the bottom of the page.  It’s fairly straight-forward.  Inside Views –&gt; Home –&gt; Index.cshtml, simply add a <!-- raw HTML omitted --> that contains @ViewBag.Message:</p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image3.png"><!-- raw HTML omitted --></a></p>
 <p>To confirm everything works, run your solution and verify the results!</p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image4.png"><img title="image" style="border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb4.png" width="720" height="263" /></a></p>
-
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image4.png"><!-- raw HTML omitted --></a></p>
 <h3 id="summary">Summary</h3>
-
-<p>In this article, you’ve seen how to use NuGet to install the required components to get up and running with the Unity Inversion of Control container.&nbsp; Additionally, you saw a bare-bones example demonstrating the steps required to start using Unity to manage your dependencies with ASP.Net MVC.</p></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ol></li>
-</ul></li>
+<p>In this article, you’ve seen how to use NuGet to install the required components to get up and running with the Unity Inversion of Control container.  Additionally, you saw a bare-bones example demonstrating the steps required to start using Unity to manage your dependencies with ASP.Net MVC.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
 </ul>
 
     <aside>
@@ -283,7 +261,7 @@ Let’s pause here and show that side-by-side view I referred to a second ago.&n
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

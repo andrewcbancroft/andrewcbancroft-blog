@@ -43,18 +43,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="DotNetZip – Solving Mac Decompression Issues" />
-<meta property="og:description" content="As part of a ASP.Net Web API service that I&rsquo;m co-developing, I have gotten familiar with the DotNetZip Library.&nbsp; It&rsquo;s fantastic.&nbsp; We&rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.
+<meta property="og:description" content="As part of a ASP.Net Web API service that I&rsquo;m co-developing, I have gotten familiar with the DotNetZip Library. It&rsquo;s fantastic. We&rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.
 During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/" />
-<meta property="article:published_time" content="2013-12-28T20:55:27&#43;00:00"/>
-<meta property="article:modified_time" content="2013-12-28T20:55:27&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2013-12-28T20:55:27+00:00" />
+<meta property="article:modified_time" content="2013-12-28T20:55:27+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="DotNetZip – Solving Mac Decompression Issues"/>
-<meta name="twitter:description" content="As part of a ASP.Net Web API service that I&rsquo;m co-developing, I have gotten familiar with the DotNetZip Library.&nbsp; It&rsquo;s fantastic.&nbsp; We&rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.
+<meta name="twitter:description" content="As part of a ASP.Net Web API service that I&rsquo;m co-developing, I have gotten familiar with the DotNetZip Library. It&rsquo;s fantastic. We&rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.
 During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -89,7 +90,7 @@ During testing, things worked great on Windows machines, but the moment we teste
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -198,55 +199,30 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>As part of a ASP.Net Web API service that I&rsquo;m co-developing, I have gotten familiar with the <a title="DotNetZip Codeplex Page" href="http://dotnetzip.codeplex.com/" target="_blank">DotNetZip Library</a>.&nbsp; It&rsquo;s fantastic.&nbsp; We&rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.</p>
-
+    <p>As part of a ASP.Net Web API service that I&rsquo;m co-developing, I have gotten familiar with the <!-- raw HTML omitted -->DotNetZip Library<!-- raw HTML omitted -->.  It&rsquo;s fantastic.  We&rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.</p>
 <p>During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.</p>
-
 <h2 id="synopsis">Synopsis:</h2>
-
-<p>Problem:&nbsp; On a Mac, a zip file would be downloaded, but it could not be extracted.&nbsp; Double-clicking the zip file resulted in the creation of a .cpgz file.</p>
-
-<p>Solution:&nbsp; In ASP.Net code, change</p>
-
-<p>HttpContext.Current.Response.ContentType = &ldquo;application/zip&#8221;</p>
-
+<p>Problem:  On a Mac, a zip file would be downloaded, but it could not be extracted.  Double-clicking the zip file resulted in the creation of a .cpgz file.</p>
+<p>Solution:  In ASP.Net code, change</p>
+<p>HttpContext.Current.Response.ContentType = &ldquo;application/zip”</p>
 <p>to</p>
-
-<p>HttpContext.Current.Response.ContentType = &ldquo;application/octet-stream&#8221;</p>
-
+<p>HttpContext.Current.Response.ContentType = &ldquo;application/octet-stream”</p>
 <h2 id="problem-details">Problem Details:</h2>
-
 <p>A zip archive would download as normal, but as things were wrapping up, Safari would try to decompress the file and it would fail.</p>
-
 <p>Error from Safari&rsquo;s download manager area:</p>
-
-<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed.png"><img class="alignnone size-medium wp-image-585" style="src=&quot;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed-300x43.png&quot;" width="300" height="43" /></a></p>
-
-<p>Furthermore, when attempting to simply extract the files directly using the built in Mac Archive Utility (by double-clicking the zip file), the utility would actually re-archive the file, rather than extract it.&nbsp; The end result was the creation of a .cpgz file.&nbsp; Attempting to decompress <em>that</em> file would result in creating another .zip file, which, when double-clicked, created another .cpgz file, and so on, and so on.</p>
-
+<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed.png"><!-- raw HTML omitted --></a></p>
+<p>Furthermore, when attempting to simply extract the files directly using the built in Mac Archive Utility (by double-clicking the zip file), the utility would actually re-archive the file, rather than extract it.  The end result was the creation of a .cpgz file.  Attempting to decompress <em>that</em> file would result in creating another .zip file, which, when double-clicked, created another .cpgz file, and so on, and so on.</p>
 <p>Archive Utility re-archiving the zip file when double-clicked (rather than <em>un</em>-archiving it)</p>
-
-<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM.png"><img class="alignnone size-medium wp-image-586" alt="Screen Shot 2013-10-10 at 4.13.48 PM" src="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM-300x106.png" width="300" height="106" /></a></p>
-
+<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM.png"><!-- raw HTML omitted --></a></p>
 <p>Creation of .cpgz file:</p>
-
-<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png"><img class="alignnone size-full wp-image-584" alt="Created_cpgz_file" src="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png" width="280" height="22" /></a></p>
-
+<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png"><!-- raw HTML omitted --></a></p>
 <p>Needless to say, the solution to this problem, though somewhat mysterious, was quite simple for me.</p>
-
-<p>In my ASP.Net code, I was writing the zip file to the Response OutputStream.&nbsp; I had added a content type of &ldquo;application/zip&#8221; to the response.&nbsp; This is what was breaking the zip files on a Mac.&nbsp; Buried <a title="DotNetZip Library Forum" href="http://dotnetzip.codeplex.com/discussions/59740" target="_blank">in the DotNetZip Library&rsquo;s forum was a post</a> recommending changing the content type to &ldquo;application/octet-stream&#8221; instead.&nbsp; That single changed fixed the issue for standard zip files!</p>
-
+<p>In my ASP.Net code, I was writing the zip file to the Response OutputStream.  I had added a content type of &ldquo;application/zip” to the response.  This is what was breaking the zip files on a Mac.  Buried <!-- raw HTML omitted -->in the DotNetZip Library&rsquo;s forum was a post<!-- raw HTML omitted --> recommending changing the content type to &ldquo;application/octet-stream” instead.  That single changed fixed the issue for standard zip files!</p>
 <h2 id="solution-details">Solution Details:</h2>
-
 <p>Change</p>
-
-<p>HttpContext.Current.Response.ContentType = &ldquo;application/zip&#8221;</p>
-
+<p>HttpContext.Current.Response.ContentType = &ldquo;application/zip”</p>
 <p>to</p>
-
-<p>HttpContext.Current.Response.ContentType = &ldquo;application/octet-stream&#8221;</p>
+<p>HttpContext.Current.Response.ContentType = &ldquo;application/octet-stream”</p>
 
     <aside>
       
@@ -272,7 +248,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

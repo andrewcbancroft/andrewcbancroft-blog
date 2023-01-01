@@ -43,16 +43,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Core Data: Solving Ambiguous Type / Redeclaration of Type" />
-<meta property="og:description" content="I just finished roasting some coffee from Peru. I&rsquo;ve never had it before, but it got me thinking about my Roaster On the Go &ldquo;app&#8221; as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate Working with Unwind Segues Programmatically in Swift, but now I&rsquo;m going to use it to show you how to resolve these errors that can crop up when you&rsquo;re implementing NSManagedObject subclasses for your Core Data Entities." />
+<meta property="og:description" content="I just finished roasting some coffee from Peru. I&rsquo;ve never had it before, but it got me thinking about my Roaster On the Go &ldquo;app” as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate Working with Unwind Segues Programmatically in Swift, but now I&rsquo;m going to use it to show you how to resolve these errors that can crop up when you&rsquo;re implementing NSManagedObject subclasses for your Core Data Entities." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/03/28/core-data-solving-ambiguous-type-redeclaration-of-type/" />
-<meta property="article:published_time" content="2017-03-29T02:57:05&#43;00:00"/>
-<meta property="article:modified_time" content="2017-03-29T02:57:05&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/03/28/core-data-solving-ambiguous-type-redeclaration-of-type/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2017-03-29T02:57:05+00:00" />
+<meta property="article:modified_time" content="2017-03-29T02:57:05+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Core Data: Solving Ambiguous Type / Redeclaration of Type"/>
-<meta name="twitter:description" content="I just finished roasting some coffee from Peru. I&rsquo;ve never had it before, but it got me thinking about my Roaster On the Go &ldquo;app&#8221; as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate Working with Unwind Segues Programmatically in Swift, but now I&rsquo;m going to use it to show you how to resolve these errors that can crop up when you&rsquo;re implementing NSManagedObject subclasses for your Core Data Entities."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="twitter:description" content="I just finished roasting some coffee from Peru. I&rsquo;ve never had it before, but it got me thinking about my Roaster On the Go &ldquo;app” as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate Working with Unwind Segues Programmatically in Swift, but now I&rsquo;m going to use it to show you how to resolve these errors that can crop up when you&rsquo;re implementing NSManagedObject subclasses for your Core Data Entities."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -61,7 +62,7 @@
   "@type": "BlogPosting",
   "headline": "Core Data: Solving Ambiguous Type / Redeclaration of Type",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/03\/28\/core-data-solving-ambiguous-type-redeclaration-of-type\/",
-  "wordCount": "674",
+  "wordCount": "631",
   "datePublished": "2017-03-29T02:57:05Z",
   "dateModified": "2017-03-29T02:57:05Z",
   "author": {
@@ -87,7 +88,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -200,119 +201,63 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>I just finished roasting some coffee from Peru. I&rsquo;ve never had it before, but it got me thinking about my <a href="https://github.com/andrewcbancroft/RoasterOnTheGo">Roaster On the Go</a> &ldquo;app&#8221; as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate <a href="https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/">Working with Unwind Segues Programmatically in Swift</a>, but now I&rsquo;m going to use it to show you how to resolve these errors that can crop up when you&rsquo;re implementing <code>NSManagedObject</code> subclasses for your Core Data Entities.</p>
-
-<p><a name="scenario" class="jump-target"></a></p>
-
-<h1 id="scenario-adding-a-data-model">Scenario – Adding a data model</h1>
-
-<p>The &ldquo;app&#8221; doesn&rsquo;t currently use Core Data, but for this article, I&rsquo;ve created a rudimentary data model that includes a single Entity called <code>Product</code>:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/RoasterOnTheGo_xcdatamodel.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/RoasterOnTheGo_xcdatamodel.png" alt="RoasterOnTheGo_xcdatamodel" width="529" height="148" class="alignnone size-full wp-image-13091" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/RoasterOnTheGo_xcdatamodel.png 529w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/RoasterOnTheGo_xcdatamodel-300x84.png 300w" sizes="(max-width: 529px) 100vw, 529px" /></a></p>
-
+    <p>I just finished roasting some coffee from Peru. I&rsquo;ve never had it before, but it got me thinking about my <a href="https://github.com/andrewcbancroft/RoasterOnTheGo">Roaster On the Go</a> &ldquo;app” as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate <a href="https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/">Working with Unwind Segues Programmatically in Swift</a>, but now I&rsquo;m going to use it to show you how to resolve these errors that can crop up when you&rsquo;re implementing <code>NSManagedObject</code> subclasses for your Core Data Entities.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h1 id="scenario--adding-a-data-model">Scenario – Adding a data model</h1>
+<p>The &ldquo;app” doesn&rsquo;t currently use Core Data, but for this article, I&rsquo;ve created a rudimentary data model that includes a single Entity called <code>Product</code>:<br>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/RoasterOnTheGo_xcdatamodel.png"><!-- raw HTML omitted --></a></p>
 <p>Now suppose that I&rsquo;m ready to <a href="https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">implement a subclass of NSManagedObject</a> for the <code>Product</code> Entity.</p>
-
 <p>Doing so right now using Xcode 8&rsquo;s default settings is going to give me all kinds of issues.</p>
-
 <p>To be clear, I&rsquo;m using <strong>Xcode 8.2</strong> for this scenario.</p>
-
 <p>The error that I&rsquo;m getting when I attempt to build after creating a subclass of <code>NSManagedObject</code> for the <code>Product</code> Entity is one of the following (depending on how you choose to create the <code>NSManagedObject</code> subclass):</p>
-
 <blockquote>
-<p>Invalid redeclaration of &#8216;Product&rsquo;</p>
+<p>Invalid redeclaration of ‘Product'</p>
 </blockquote>
-
 <p>or</p>
-
 <blockquote>
-<p>&#8216;Product&rsquo; is ambiguous for type lookup in this context</p>
+<p>‘Product&rsquo; is ambiguous for type lookup in this context</p>
 </blockquote>
-
 <p>or in the compiler output</p>
-
 <blockquote>
-<p>filename &ldquo;Product+CoreDataClass.swift&#8221; used twice</p>
+<p>filename &ldquo;Product+CoreDataClass.swift” used twice</p>
 </blockquote>
-
 <p>What&rsquo;s happening??</p>
-
 <p><strong>This is a conflict with Xcode 8&rsquo;s auto codegen for <code>NSManagedObject</code> subclasses.</strong> In some versions of Xcode 8 (version 8.2, for example), this auto codegen is turned <strong>on by default</strong>. This can present a problem if you intend to manually create <code>NSManagedObjectSubclasses</code> for your Entities.</p>
-
-<p><a name="solution" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="solution">Solution</h1>
-
 <p>To solve this problem, or to avoid it before it occurs, you essentially need to turn off Xcode 8&rsquo;s auto code generation feature for <code>NSManagedObject</code> subclasses if you intend to implement your <code>NSManagedObject</code> subclasses manually (my personal preference).</p>
-
 <p>Take a look at the steps below to get your project building again:</p>
-
-<p><a name="step1" class="jump-target"></a></p>
-
-<h2 id="1-turn-off-automatic-code-generation-for-nsmanagedobject-subclasses">1 – Turn off automatic code generation for NSManagedObject subclasses</h2>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="1--turn-off-automatic-code-generation-for-nsmanagedobject-subclasses">1 – Turn off automatic code generation for NSManagedObject subclasses</h2>
 <p>Open your data model (the .xcdatamodeld file in your project).</p>
-
-<p>Click on each Entity in your data model and in the Data Model Inspector of the Utilities Pane, change the Codegen property from &ldquo;Class Definition&#8221; or &ldquo;Category/Extension&#8221; to <strong>&ldquo;Manual/None&#8221;</strong>:</p>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff-1024x297.png" alt="Turn code generation off" width="1024" height="297" class="alignnone size-large wp-image-13107" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff-1024x297.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff-300x87.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff.png 1284w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
-
-<p><a name="step2" class="jump-target"></a></p>
-
-<h2 id="2-choose-module">2 – Choose module</h2>
-
-<p>You also need to tell Xcode where it can look to find a definition for the <code>NSManagedObject</code> subclass that you will implement for this Entity by choosing &ldquo;Current Product Module&#8221; for the Module value:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject-1024x312.png" alt="Choose &quot;Current Product Module&quot; as module value" width="1024" height="312" class="alignnone size-large wp-image-13109" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject-1024x312.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject-300x91.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject.png 1284w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
-
+<p>Click on each Entity in your data model and in the Data Model Inspector of the Utilities Pane, change the Codegen property from &ldquo;Class Definition” or &ldquo;Category/Extension” to <strong>&ldquo;Manual/None”</strong>:</p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CodeGenOff.png"><!-- raw HTML omitted --></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="2--choose-module">2 – Choose module</h2>
+<p>You also need to tell Xcode where it can look to find a definition for the <code>NSManagedObject</code> subclass that you will implement for this Entity by choosing &ldquo;Current Product Module” for the Module value:<br>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/Module_CurrentProject.png"><!-- raw HTML omitted --></a></p>
 <p><strong>Save</strong> your .xcdatamodeld file.</p>
-
-<p><a name="step3" class="jump-target"></a></p>
-
-<h2 id="3-clear-derived-data">3 – Clear derived data</h2>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="3--clear-derived-data">3 – Clear derived data</h2>
 <p>Behind the scenes, Xcode creates files and implements Types for the Entities in your data model. It puts them in your derived data folder and automatically traverses this folder to look for Type definitions for Core Data Entities. So in order to get your project building again, you need to get rid of those files that Xcode created automatically.</p>
-
-<p>The &ldquo;big hammer&#8221; for this is to simply clear all of your project&rsquo;s derived data. To do this, click on the Products menu, hold down the Option key, and click &ldquo;Clean build folder&#8230;&#8221;:</p>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CleanBuildFolder.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CleanBuildFolder.png" alt="Product -> Press Option Key -&gt; Clean Build Folder&hellip;&rdquo; width=&ldquo;224&rdquo; height=&ldquo;321&rdquo; class=&ldquo;alignnone size-full wp-image-13118&rdquo; srcset=&ldquo;https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CleanBuildFolder.png 224w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CleanBuildFolder-209x300.png 209w&rdquo; sizes=&ldquo;(max-width: 224px) 100vw, 224px&rdquo; /&gt;</a></p>
-
+<p>The &ldquo;big hammer” for this is to simply clear all of your project&rsquo;s derived data. To do this, click on the Products menu, hold down the Option key, and click &ldquo;Clean build folder…”:</p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/CleanBuildFolder.png"><!-- raw HTML omitted --></a></p>
 <p><em>Alternatively</em>, you could opt to go in and delete the <em>only</em> auto-generated Swift files, but you&rsquo;ve got to do some digging.</p>
-
-<p>Click on File -&gt; Project Settings:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/ProjectSettings1.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/ProjectSettings1.png" alt="File -> Project Settings&rdquo; width=&ldquo;353&rdquo; height=&ldquo;495&rdquo; class=&ldquo;alignnone size-full wp-image-13121&rdquo; srcset=&ldquo;https://www.andrewcbancroft.com/wp-content/uploads/2017/03/ProjectSettings1.png 353w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/ProjectSettings1-214x300.png 214w&rdquo; sizes=&ldquo;(max-width: 353px) 100vw, 353px&rdquo; /&gt;</a></p>
-
-<p>Next, click on the arrow next to the path leading to your default derived data folder:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/DerivedData.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/DerivedData.png" alt="Click derived data folder arrow" width="534" height="320" class="alignnone size-full wp-image-13122" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/DerivedData.png 534w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/DerivedData-300x180.png 300w" sizes="(max-width: 534px) 100vw, 534px" /></a></p>
-
-<p>Next, find the folder for your project at the root of your default derived data directory (where you were taken in Finder when you clicked the arrow in Project Settings). Then get ready to dig&#8230;</p>
-
+<p>Click on File -&gt; Project Settings:<br>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/ProjectSettings1.png"><!-- raw HTML omitted --></a></p>
+<p>Next, click on the arrow next to the path leading to your default derived data folder:<br>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/DerivedData.png"><!-- raw HTML omitted --></a></p>
+<p>Next, find the folder for your project at the root of your default derived data directory (where you were taken in Finder when you clicked the arrow in Project Settings). Then get ready to dig…</p>
 <p>Click Build -&gt; Intermediates -&gt; ProjectName.build -&gt; Debug-iphonesimulator -&gt; ProjectName.build -&gt; DerivedSources -&gt; CoreDataGenerated -&gt; ProjectName</p>
-
-<p><strong>Delete the .swift files</strong> in this folder.<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/PathToAutoGeneratedFiles.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/PathToAutoGeneratedFiles-1024x198.png" alt="Path to auto-generated Entities" width="1024" height="198" class="alignnone size-large wp-image-13123" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/PathToAutoGeneratedFiles-1024x198.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/PathToAutoGeneratedFiles-300x58.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
-
-<p><a name="step4" class="jump-target"></a></p>
-
-<h2 id="4-rebuild">4 – Rebuild</h2>
-
-<p>After you rebuild, any compiler errors you previously had, related to &ldquo;ambiguous Type&#8221; or &ldquo;redeclaration of Type&#8221; should be resolved!</p>
-
-<p><a name="course" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fas fa-video"></i> <a href="http://bit.ly/ps-core-data-swift" target="_blank">Core Data Fundamentals with Swift</a><br /> <a href="http://bit.ly/ps-core-data-swift" target="_blank"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png" alt="Core Data Fundamentals with Swift" width="1024" height="576" class="alignnone size-large wp-image-13163" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w" sizes="(max-width: 1024px) 100vw, 1024px" /></a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><strong>Delete the .swift files</strong> in this folder.<br>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/03/PathToAutoGeneratedFiles.png"><!-- raw HTML omitted --></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="4--rebuild">4 – Rebuild</h2>
+<p>After you rebuild, any compiler errors you previously had, related to &ldquo;ambiguous Type” or &ldquo;redeclaration of Type” should be resolved!</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -340,7 +285,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -45,20 +45,17 @@
 <meta property="og:title" content="Getting Started With NSPersistentCloudKitContainer" />
 <meta property="og:description" content="Provides an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-11T04:40:54+00:00" />
+<meta property="article:modified_time" content="2019-06-11T04:40:54+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png" />
-<meta property="article:published_time" content="2019-06-11T04:40:54&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-11T04:40:54&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Getting%20Started%20With%20NSPersistentCloudKitContainer.png"/>
 
 <meta name="twitter:title" content="Getting Started With NSPersistentCloudKitContainer"/>
 <meta name="twitter:description" content="Provides an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -73,7 +70,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/getting-started-with-nspersistentcloudkitcontainer\/",
-  "wordCount": "1221",
+  "wordCount": "1204",
   "datePublished": "2019-06-11T04:40:54Z",
   "dateModified": "2019-06-11T04:40:54Z",
   "author": {
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,143 +211,82 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#first-things-first">First Things First</a></li>
-<li><a href="#setup">Setup</a>
-<ul>
-<li><a href="#the-core-data-cloudkit-stack">The Core Data + CloudKit Stack</a></li>
-<li><a href="#what-about-existing-apps">What About Existing Apps?</a></li>
-<li><a href="#adding-capabilities">Adding Capabilities</a>
-<ul>
-<li><a href="#add-icloud-cloudkit">Add iCloud + CloudKit</a></li>
-<li><a href="#add-background-modes-remote-notifications">Add Background Modes + Remote Notifications</a></li>
-</ul></li>
-<li><a href="#what-about-registering-for-remote-notifications">What About Registering for Remote Notifications?</a></li>
-<li><a href="#what-about-my-data-model-in-icloud">What About My Data Model in iCloud?</a></li>
-</ul></li>
-<li><a href="#walking-through-the-example-project">Walking Through the Example Project</a>
-<ul>
-<li><a href="#user-interface">User Interface</a></li>
-<li><a href="#data-model">Data Model</a></li>
-<li><a href="#view-controllers">View Controllers</a></li>
-</ul></li>
-<li><a href="#understanding-the-default-sync-behavior">Understanding the Default Sync Behavior</a></li>
-<li><a href="#reflecting-changes-in-the-ui">Reflecting Changes in the UI</a></li>
-<li><a href="#revisiting-the-icloud-schema">Revisiting the iCloud Schema</a></li>
-<li><a href="#where-s-my-data">Where&rsquo;s My Data?</a></li>
-<li><a href="#wrapping-up">Wrapping Up</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#first-things-first">First Things First</a></li>
+    <li><a href="#setup">Setup</a>
+      <ul>
+        <li><a href="#the-core-data--cloudkit-stack">The Core Data + CloudKit Stack</a></li>
+        <li><a href="#what-about-existing-apps">What About Existing Apps?</a></li>
+        <li><a href="#adding-capabilities">Adding Capabilities</a></li>
+        <li><a href="#what-about-registering-for-remote-notifications">What About Registering for Remote Notifications?</a></li>
+        <li><a href="#what-about-my-data-model-in-icloud">What About My Data Model in iCloud?</a></li>
+      </ul>
+    </li>
+    <li><a href="#walking-through-the-example-project">Walking Through the Example Project</a>
+      <ul>
+        <li><a href="#user-interface">User Interface</a></li>
+        <li><a href="#data-model">Data Model</a></li>
+        <li><a href="#view-controllers">View Controllers</a></li>
+      </ul>
+    </li>
+    <li><a href="#understanding-the-default-sync-behavior">Understanding the Default Sync Behavior</a></li>
+    <li><a href="#reflecting-changes-in-the-ui">Reflecting Changes in the UI</a></li>
+    <li><a href="#revisiting-the-icloud-schema">Revisiting the iCloud Schema</a></li>
+    <li><a href="#wheres-my-data">Where&rsquo;s My Data?</a></li>
+    <li><a href="#wrapping-up">Wrapping Up</a></li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<h2 id="first-things-first">First Things First</h2>
-
+    <h2 id="first-things-first">First Things First</h2>
 <ul>
 <li>In order to use <code>NSPersistentCloudKitContainer</code> in your app, you need to be targeting iOS 13+.</li>
 <li>The CloudKit syncing portion only works on physical devices (not in the simulator).  That being the case, you&rsquo;ll need two or more devices running the app and using the same iCloud account to fully test things out and make sure syncing and data merging behavior works as you&rsquo;d expect it to.</li>
 </ul>
-
 <p>The goal of this walkthrough is to provide you with a fully-working example of performing and synchronizing create, read, update, and delete operations using <code>NSPersistentCloudKitContainer</code>.</p>
-
-<p>It&rsquo;s the project I wish I had for referencing the basics&hellip;something <strong>beyond</strong> the out-of-the-box, saving a list of timestamps that comes pre-implemented with a Master-Detail app, but something <strong>less complicated</strong> than <a href="https://developer.apple.com/documentation/coredata/synchronizing_a_local_store_to_the_cloud" rel="nofollow">Apple&rsquo;s example project</a> which ends up having several relationships involved in the data model, extra features configured on the persistent container, etc.</p>
-
+<p>It&rsquo;s the project I wish I had for referencing the basics&hellip;something <strong>beyond</strong> the out-of-the-box, saving a list of timestamps that comes pre-implemented with a Master-Detail app, but something <strong>less complicated</strong> than <!-- raw HTML omitted -->Apple&rsquo;s example project<!-- raw HTML omitted --> which ends up having several relationships involved in the data model, extra features configured on the persistent container, etc.</p>
 <p>I offer it to you as reference as well &ndash; I hope it helps!</p>
-
-<p><a name="resources" class="jump-target"></a>
-<div class="resources">
-<div class="resources-header">
-Resources
-</div>
-<ul class="resources-content">
-<li>
-<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/BlogIdeaList"> Blog Idea List Example Xcode Project</a>
-</li>
-<li>
-<i class="fas fa-link"></i> <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">Using Core Data With CloudKit - WWDC 2019 Session 202</a>
-</li>
-</ul>
-</div></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <h2 id="setup">Setup</h2>
-
 <p>The easiest way to get stareted with <code>NSPersistentCloudKitContainer</code> is to enable Core Data and CloudKit when you start your new project.</p>
-
-<p><img src="enable-core-data-cloudkit.png" alt="Enable Core Data and CloudKit" /></p>
-
-<h3 id="the-core-data-cloudkit-stack">The Core Data + CloudKit Stack</h3>
-
+<p><img src="enable-core-data-cloudkit.png" alt="Enable Core Data and CloudKit"></p>
+<h3 id="the-core-data--cloudkit-stack">The Core Data + CloudKit Stack</h3>
 <p>Xcode provides the Core Data Stack code you need in the usual location: in the AppDelegate.swift file.</p>
-
 <p>There&rsquo;s one notable difference though.  Instead of initializing a normal <code>NSPersistentContainer</code>, Xcode uses the new <code>NSPersistentCloudKitContainer</code> (this is why it&rsquo;s important to check the CloudKit box when you create your app).</p>
-
-<p><img src="nspersistentcloudkitcontainer-code.png" alt="NSPersistentCloudKitContainer" /></p>
-
+<p><img src="nspersistentcloudkitcontainer-code.png" alt="NSPersistentCloudKitContainer"></p>
 <h3 id="what-about-existing-apps">What About Existing Apps?</h3>
-
 <p>If you&rsquo;ve got an existing app that&rsquo;s using a &ldquo;regular&rdquo; <code>NSPersistentContainer</code>, you can change it to <code>NSPersistentCloudKitContainer</code> and continue on from there!</p>
-
 <p>If you&rsquo;re not using <code>NSPersistentContainer</code> with your app yet, <a href="https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/">my guide on how to migrate</a> may be of help!</p>
-
 <h3 id="adding-capabilities">Adding Capabilities</h3>
-
 <p>While Xcode auto-generates the Core Data + CloudKit stack for you, it does <em>not</em> enable iCloud for you.</p>
-
 <p>To enable full functionality, you need to go to your <strong>Xcode project settings</strong>.</p>
-
 <p>Then click on the <strong>Signing &amp; Capabilities</strong> section and add the <strong>iCloud</strong> and <strong>Background Modes</strong> capabilities.</p>
-
 <p>Check the <strong>CloudKit checkbox</strong>, and the <strong>Remote Notifications checkbox</strong>.</p>
-
-<h4 id="add-icloud-cloudkit">Add iCloud + CloudKit</h4>
-
-<p><img src="add-icloud.gif" alt="Add iCloud with CloudKit" /></p>
-
-<h4 id="add-background-modes-remote-notifications">Add Background Modes + Remote Notifications</h4>
-
-<p><img src="add-background-modes.gif" alt="Add Background Modes with Remote Notifications" /></p>
-
+<h4 id="add-icloud--cloudkit">Add iCloud + CloudKit</h4>
+<p><img src="add-icloud.gif" alt="Add iCloud with CloudKit"></p>
+<h4 id="add-background-modes--remote-notifications">Add Background Modes + Remote Notifications</h4>
+<p><img src="add-background-modes.gif" alt="Add Background Modes with Remote Notifications"></p>
 <h3 id="what-about-registering-for-remote-notifications">What About Registering for Remote Notifications?</h3>
-
 <p>The beauty of <code>NSPersistentCloudKitContainer</code> is that it handles all the work required to listen for and respond to remote notifications.</p>
-
 <p>This means that data saved locally on <em>one</em> device gets pushed up to iCloud synced back down to <em>another</em> device automatically.</p>
-
 <h3 id="what-about-my-data-model-in-icloud">What About My Data Model in iCloud?</h3>
-
 <p>When you enable the iCloud capability for your app, Xcode automatically creates a container for your app in the CloudKit Dashboard.</p>
-
 <p>It does <em>not</em>, however, create a schema that matches your Core Data model&hellip;yet.  This is a setting you can toggle, but the default behavior is to <a href="#revisiting-the-icloud-schema">&ldquo;lazily&rdquo; create the schema</a> as people create objects and save them to your persistent store.</p>
-
-<p><img src="empty-schema.gif" alt="Empty Schema" /></p>
-
+<p><img src="empty-schema.gif" alt="Empty Schema"></p>
 <h2 id="walking-through-the-example-project">Walking Through the Example Project</h2>
-
 <p>WWDC always gets the blog ideas flowing through my brain, so this little app&rsquo;s theme is &ldquo;saving a list of blog ideas&rdquo;, both locally, and <em>across</em> my devices using <code>NSPersistentCloudKitContainer</code>.</p>
-
 <h3 id="user-interface">User Interface</h3>
-
 <p>The user interfacde allows you to perform the essential operations of a data-driven app:  create, read, update, and delete objects.</p>
-
-<p><img src="user-interface.png" alt="User Interface" /></p>
-
+<p><img src="user-interface.png" alt="User Interface"></p>
 <h3 id="data-model">Data Model</h3>
-
 <p>The data model for this is basic:  a single <code>BlogIdea</code> Entity with two <code>String</code> properties: <code>ideaTitle</code> and <code>ideaDescription</code>.</p>
-
-<p><img src="data-model.png" alt="BlogIdea Data Model" /></p>
-
+<p><img src="data-model.png" alt="BlogIdea Data Model"></p>
 <p>No relationships or extra configuration options&hellip; just one Entity to keep it a basic reference-able project.</p>
-
 <p>The <code>BlogIdea</code> NSManagedObject subclass is implemented like this:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -359,24 +295,21 @@ Resources
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
-
-    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-
-    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">entityName</span><span class="p">:</span> <span class="nb">String</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;BlogIdea&#34;</span> <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">entityName</span><span class="p">:</span> <span class="nb">String</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;BlogIdea&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
 <h3 id="view-controllers">View Controllers</h3>
-
 <p>There are two view controllers that come with this example:</p>
-
 <p><strong>MainViewController</strong>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -396,30 +329,30 @@ Resources
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span>   <span class="n">UIViewController</span><span class="p">,</span> 
-                            <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">,</span> 
-                            <span class="n">UITableViewDataSource</span><span class="p">,</span> 
-                            <span class="n">UITableViewDelegate</span> <span class="p">{</span>
-    <span class="c1">// Responsible for listing out BlogIdeas in a table view</span>
-
-    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
-    <span class="c1">// which gets initialized in the SceneDelegate.swift file</span>
-    <span class="c1">// and passed to this view controller when the scene gets &#34;connected&#34;</span>
-
-    <span class="c1">// Uses NSFetchedResultsController to keep the table view in sync</span>
-    <span class="c1">// with the Core Data managed object context</span>
-
-    <span class="c1">// Implements swipe-to-delete with delete confirmation</span>
-
-    <span class="c1">// Navigates to editor when someone taps on a table view row</span>
-    <span class="c1">// and passes its NSManagedObjectContext instance along</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MainViewController</span><span class="p">:</span>   <span class="n">UIViewController</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                            <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                            <span class="n">UITableViewDataSource</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                            <span class="n">UITableViewDelegate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Responsible for listing out BlogIdeas in a table view</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// which gets initialized in the SceneDelegate.swift file</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// and passed to this view controller when the scene gets &#34;connected&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Uses NSFetchedResultsController to keep the table view in sync</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// with the Core Data managed object context</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Implements swipe-to-delete with delete confirmation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Navigates to editor when someone taps on a table view row</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// and passes its NSManagedObjectContext instance along</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <strong>BlogIdeaEditorViewController</strong>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -429,45 +362,34 @@ Resources
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="nc">BlogIdeaEditorViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
-    <span class="c1">// Responsible for creating new BlogIdeas</span>
-
-    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
-    <span class="c1">// which gets passed along in MainViewController&#39;s prepare for segue method</span>
-
-    <span class="c1">// Able to edit existing BlogIdeas</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">BlogIdeaEditorViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Responsible for creating new BlogIdeas</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Holds a reference to an NSManagedObjectContext instance</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// which gets passed along in MainViewController&#39;s prepare for segue method</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Able to edit existing BlogIdeas</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></p>
-
 <h2 id="understanding-the-default-sync-behavior">Understanding the Default Sync Behavior</h2>
-
 <p>At this point no additional configuration has happened. The Core Data stack is the unmodified Xcode generated code, and the fetched results controller is hooked up to the managed object context for your app, ready to fetch Blog Ideas and help get them into the table view.</p>
-
 <p>If you open the project, build and run on two devices, and begin adding Blog Ideas, updating them, deleting them, etc. what happens?</p>
-
 <p>The first observation is that&hellip;things&hellip;don&rsquo;t&hellip;seem to be working&hellip;</p>
 
-
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="//www.youtube.com/embed/DLAwrSCl3Cc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+  <iframe src="https://www.youtube.com/embed/DLAwrSCl3Cc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-
 <p>&hellip;At least not how I thought they would.</p>
-
 <p>I <em>expected</em> my Blog List view to automatically update in response to changes made on my other device, buuut&hellip; nope.  Thankfully it&rsquo;s an &ldquo;easy&rdquo; fix.</p>
-
 <h2 id="reflecting-changes-in-the-ui">Reflecting Changes in the UI</h2>
-
 <p>Wherever you access your app&rsquo;s persistent CloudKit container to grab the <code>viewContext</code>, you need to set the <code>automaticallyMergesChangesFromParent</code> property to <code>true</code>.</p>
-
 <p>I initialize the container in the <code>SceneDelegate</code>, so check out the code exerpt below to see where that gets set.</p>
-
 <p><strong>SceneDelegate.swift</strong>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -483,47 +405,34 @@ Resources
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.</span>
-    <span class="c1">// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.</span>
-    <span class="c1">// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).</span>
-    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">_</span> <span class="p">=</span> <span class="p">(</span><span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
-    
-    <span class="kd">let</span> <span class="nv">navigationController</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="o">!</span> <span class="n">UINavigationController</span>
-    <span class="kd">let</span> <span class="nv">mainVC</span> <span class="p">=</span> <span class="n">navigationController</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="o">!</span> <span class="n">MainViewController</span>
-    
-    <span class="kd">let</span> <span class="nv">viewContext</span> <span class="p">=</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">delegate</span> <span class="k">as</span><span class="o">!</span> <span class="n">AppDelegate</span><span class="p">).</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span>
-<span class="hl">    <span class="n">viewContext</span><span class="p">.</span><span class="n">automaticallyMergesChangesFromParent</span> <span class="p">=</span> <span class="kc">true</span>
-</span>
-    <span class="n">mainVC</span><span class="p">.</span><span class="n">managedObjectContext</span> <span class="p">=</span> <span class="n">viewContext</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).</span>
+</span></span><span class="line"><span class="cl">    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">_</span> <span class="p">=</span> <span class="p">(</span><span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">navigationController</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span> <span class="k">as</span><span class="p">!</span> <span class="n">UINavigationController</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">mainVC</span> <span class="p">=</span> <span class="n">navigationController</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="p">!</span> <span class="n">MainViewController</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">viewContext</span> <span class="p">=</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">delegate</span> <span class="k">as</span><span class="p">!</span> <span class="n">AppDelegate</span><span class="p">).</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span>
+</span></span><span class="line hl"><span class="cl">    <span class="n">viewContext</span><span class="p">.</span><span class="n">automaticallyMergesChangesFromParent</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">mainVC</span><span class="p">.</span><span class="n">managedObjectContext</span> <span class="p">=</span> <span class="n">viewContext</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></p>
-
 <p>Making this one-line change will enable the app (which is supported by <code>NSFetchedResultsController</code>) to update the UI in response to remote data changes&hellip;</p>
-
 <p><strong>eventually</strong></p>
-
 <p>It can be slow (anywhere from 5 to 15 seconds).  But it will eventually update.</p>
-
 <h2 id="revisiting-the-icloud-schema">Revisiting the iCloud Schema</h2>
-
 <p>Once you save an object, the schema within the iCloud Dashboard will update to reflect the properties you designed in your Core Data Model.</p>
-
-<p><img src="revisit-schema.png" alt="Revisiting the Schema" /></p>
-
-<h2 id="where-s-my-data">Where&rsquo;s My Data?</h2>
-
+<p><img src="revisit-schema.png" alt="Revisiting the Schema"></p>
+<h2 id="wheres-my-data">Where&rsquo;s My Data?</h2>
 <p>If you attempt to query for BlogIdea records in any of the iCloud databases provisioned for your app, you won&rsquo;t find any.</p>
-
 <p>Why?</p>
-
-<p>That&rsquo;s because Apple fully manages a hidden Zone for your Core Data + CloudKit data. It was veeeery briefly mentioned in the <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">WWDC 2019 presentation</a> (right about 10:50 if you&rsquo;re watching).</p>
-
+<p>That&rsquo;s because Apple fully manages a hidden Zone for your Core Data + CloudKit data. It was veeeery briefly mentioned in the <!-- raw HTML omitted -->WWDC 2019 presentation<!-- raw HTML omitted --> (right about 10:50 if you&rsquo;re watching).</p>
 <h2 id="wrapping-up">Wrapping Up</h2>
-
 <p>My hope was to provide you with a fully-working example of performing and synchronizing create, read, update, and delete operations using <code>NSPersistentCloudKitContainer</code>.</p>
-
 <p>Check out the <a href="https://github.com/andrewcbancroft/BlogIdeaList">GitHub repo</a>, leave a comment, or <a href="https://twitter.com/andrewcbancroft">@ me on Twitter</a> to continue the conversation from here!</p>
 
     <aside>
@@ -533,7 +442,7 @@ Resources
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

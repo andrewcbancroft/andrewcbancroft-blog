@@ -47,16 +47,17 @@
 In the past, I know I&rsquo;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know – DRY – don&rsquo;t repeat yourself.
 One way to simplify this is to use a Swift extension to URL. Doing this will help you centralize where this code is located in your app, and keep your code DRY." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/10/swift-tip-accessing-a-users-documents-directory-with-url-extension/" />
-<meta property="article:published_time" content="2017-04-10T18:01:23&#43;00:00"/>
-<meta property="article:modified_time" content="2017-04-10T18:01:23&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/10/swift-tip-accessing-a-users-documents-directory-with-url-extension/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2017-04-10T18:01:23+00:00" />
+<meta property="article:modified_time" content="2017-04-10T18:01:23+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Tip – Accessing a User’s Documents Directory with URL Extension"/>
 <meta name="twitter:description" content="When you need to access the documents directory on a user&rsquo;s device, what do you do?
 In the past, I know I&rsquo;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know – DRY – don&rsquo;t repeat yourself.
 One way to simplify this is to use a Swift extension to URL. Doing this will help you centralize where this code is located in your app, and keep your code DRY."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -91,7 +92,7 @@ One way to simplify this is to use a Swift extension to URL. Doing this will hel
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -204,21 +205,14 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>When you need to access the documents directory on a user&rsquo;s device, what do you do?</p>
-
+    <p>When you need to access the documents directory on a user&rsquo;s device, what do you do?</p>
 <p>In the past, I know I&rsquo;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know – DRY – <em>don&rsquo;t repeat yourself</em>.</p>
-
 <p>One way to simplify this is to use a Swift extension to <code>URL</code>. Doing this will help you centralize where this code is located in your app, and keep your code DRY. If you need to access the documents directory in more than one spot, you&rsquo;re just a <code>URL</code> property call away from it.</p>
-
-<p><a name="implementation" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="extension-implementation">Extension implementation</h1>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -230,43 +224,39 @@ MathJax.Hub.Config({
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="nc">URL</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">documentsURL</span><span class="p">:</span> <span class="n">URL</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
-            <span class="p">.</span><span class="k">default</span>
-            <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> 
-                 <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> 
-                 <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> 
-                 <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">extension</span> <span class="nc">URL</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">documentsURL</span><span class="p">:</span> <span class="n">URL</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">try</span><span class="p">!</span> <span class="n">FileManager</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="k">default</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                 <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                 <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                 <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<a name="usage" class="jump-target"></a></p>
-
+<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="extension-usage">Extension usage</h1>
-
 <p>Here&rsquo;s an example of using the extension during the routine to create the Core Data stack. For that process, you need to grab a URL to where your SQLite database file will be located. Take a look:</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// ...</span>
-
-<span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="n">URL</span><span class="p">.</span><span class="n">documentsURL</span><span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;AppDatabase.sqlite&#34;</span><span class="p">)</span>
-
-<span class="c1">// use the URL</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="c1">// ...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="n">URL</span><span class="p">.</span><span class="n">documentsURL</span><span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;AppDatabase.sqlite&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// use the URL</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 You could be needing to access the directory for saving files or retrieving files totally unrelated to Core Data. No matter what you&rsquo;re doing, being able to write <code>URL.documentsURL</code> is pretty convenient!</p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -290,7 +280,7 @@ You could be needing to access the directory for saving files or retrieving file
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

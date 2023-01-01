@@ -45,20 +45,17 @@
 <meta property="og:title" content="StoreKit Testing Swift Start" />
 <meta property="og:description" content="What if you could test your StoreKit functionality 100% locally while developing?  With StoreKit testing, now you can!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/iap/storekit-testing-swift-start/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/iap/storekit-testing-swift-start/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20StoreKit%20Testing%20Swift%20Start.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20StoreKit%20Testing%20Swift%20Start.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2020-06-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-25T00:00:00+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20StoreKit%20Testing%20Swift%20Start.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20StoreKit%20Testing%20Swift%20Start.png" />
-<meta property="article:published_time" content="2020-06-25T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2020-06-25T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20StoreKit%20Testing%20Swift%20Start.png"/>
 
 <meta name="twitter:title" content="StoreKit Testing Swift Start"/>
 <meta name="twitter:description" content="What if you could test your StoreKit functionality 100% locally while developing?  With StoreKit testing, now you can!"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,179 +211,111 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li><a href="#manually-testing-storekit-code">Manually Testing StoreKit Code</a>
-<ul>
-<li><a href="#development-workflow-changes">Development Workflow Changes</a></li>
-<li><a href="#making-test-purchases">Making Test Purchases</a></li>
-<li><a href="#development-workflow-enhancements">Development Workflow Enhancements</a>
-<ul>
-<li><a href="#storekit-transaction-manager">StoreKit Transaction Manager</a></li>
-<li><a href="#test-edge-cases">Test Edge Cases</a></li>
-<li><a href="#auto-renewable-subscription-testing-enhancements">Auto-Renewable Subscription Testing Enhancements</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#automated-testing-for-storekit-code">Automated Testing for StoreKit Code</a></li>
-<li><a href="#is-the-sandbox-environment-still-useful">Is the Sandbox Environment Still Useful?</a></li>
-</ul>
+  <ul>
+    <li><a href="#development-workflow-changes">Development Workflow Changes</a></li>
+    <li><a href="#making-test-purchases">Making Test Purchases</a></li>
+    <li><a href="#development-workflow-enhancements">Development Workflow Enhancements</a>
+      <ul>
+        <li><a href="#storekit-transaction-manager">StoreKit Transaction Manager</a></li>
+        <li><a href="#test-edge-cases">Test Edge Cases</a></li>
+        <li><a href="#auto-renewable-subscription-testing-enhancements">Auto-Renewable Subscription Testing Enhancements</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<h1 id="manually-testing-storekit-code">Manually Testing StoreKit Code</h1>
-
+    <h1 id="manually-testing-storekit-code">Manually Testing StoreKit Code</h1>
 <h2 id="development-workflow-changes">Development Workflow Changes</h2>
-
 <p>The previous workflow for setting up in-app purchases was a bit disjointed.</p>
-
 <p>You&rsquo;d have to create your app in Xcode&hellip; then jump out to App Store Connect to define your app <em>there</em>&hellip; set up your digital products <em>there</em> (in App Store Connect)&hellip; and then jump <em>back</em> to Xcode to write your StoreKit code.</p>
-
 <p><strong>Now</strong>, you can get started in Xcode, and <em>stay</em> in Xcode.  Here&rsquo;s how:</p>
-
 <ul>
 <li>Go to the File menu</li>
 <li>Click New ➡️ File</li>
 <li>Type &ldquo;storekit&rdquo; into the filter</li>
 <li>Click Next to add a StoreKit Configuration File ✅</li>
 </ul>
-
-<p><img src="add-storekit-configuration.gif" alt="Add StoreKit Configuration File" /></p>
-
+<p><img src="add-storekit-configuration.gif" alt="Add StoreKit Configuration File"></p>
 <p>From there, you get to add the digital products you intend to offer in your app, all without leaving Xcode!</p>
-
 <p>Xcode offers support for configuring all three product types:</p>
-
 <ul>
 <li>Consumable</li>
 <li>Non-Consumable</li>
 <li>Auto-Renewable Subscription</li>
 </ul>
-
 <blockquote>
 <p>‼️Note: It appears that Non-Renewing Subscriptions are no longer encouraged</p>
 </blockquote>
-
-<p><img src="set-up-products.png" alt="Set Up Products" /></p>
-
+<p><img src="set-up-products.png" alt="Set Up Products"></p>
 <p>Once you have all of your products configured and your Store view written, you&rsquo;ll want to <em>use</em> your configuration for testing.</p>
-
 <p>To do it, you need to edit your app&rsquo;s scheme:</p>
-
 <ul>
 <li>Click your app target in the toolbar</li>
 <li>Click Edit Scheme&hellip;</li>
 <li>Click Options</li>
 <li>Find StoreKit Configuration, and select the configuration you&rsquo;ve added for your project in the dropdown ✅</li>
 </ul>
-
-<p><img src="edit-scheme.gif" alt="Edit Scheme" /></p>
-
+<p><img src="edit-scheme.gif" alt="Edit Scheme"></p>
 <h2 id="making-test-purchases">Making Test Purchases</h2>
-
 <p>Now to actually test things!</p>
-
 <p>To test things locally, you don&rsquo;t need to create a sandbox tester account first (something <em>else</em> you used to have to do before testing in-app purchases).</p>
-
 <p>Everything happens locally.</p>
-
 <p>All of your code that would be communicating with the App Store itself in Production, is &ldquo;taken care of&rdquo; by Xcode.</p>
-
 <p>So you may be wondering&hellip;</p>
-
-<p>❓&rdquo;Do my SKPaymentTransactionObserver functions get executed when they&rsquo;re supposed to?&rdquo;</p>
-
+<p>❓&quot;Do my SKPaymentTransactionObserver functions get executed when they&rsquo;re supposed to?&quot;</p>
 <p>👉<strong>Yes</strong>.</p>
-
-<p>❓&rdquo;Do I get a receipt for the purchase?&rdquo;</p>
-
+<p>❓&quot;Do I get a receipt for the purchase?&quot;</p>
 <p>👉<strong>Yes</strong>.</p>
-
-<p>❓&rdquo;Can I use that receipt to validate successfully?&rdquo;</p>
-
+<p>❓&quot;Can I use that receipt to validate successfully?&quot;</p>
 <p>👉<strong>Kinda</strong>. Receipts from the local Xcode environment are not signed with the same signature as the Sandbox and Production environments are, so they cannot be used if you&rsquo;re implementing server-side receipt validation.</p>
-
 <h2 id="development-workflow-enhancements">Development Workflow Enhancements</h2>
-
 <h3 id="storekit-transaction-manager">StoreKit Transaction Manager</h3>
-
 <p>How often does your implementation work perfectly <strong>the first time</strong>?</p>
-
 <p>Rarely?</p>
-
 <p>Yeah&hellip; I&rsquo;m with you.</p>
-
 <p>With the new <strong>StoreKit Transaction Manager</strong>, it&rsquo;s easy to &ldquo;clear things out&rdquo; so that previous test purchases that didn&rsquo;t go so well can be tried again fresh, as if a purchase never happened.</p>
-
-<p><img src="storekit-transaction-manager.gif" alt="StoreKit Transaction Manager" /></p>
-
+<p><img src="storekit-transaction-manager.gif" alt="StoreKit Transaction Manager"></p>
 <blockquote>
 <p>Note: If you don&rsquo;t see the StoreKit Transaction Manager icon in the debug console, make sure you&rsquo;ve added the In-App Purchasing capability to your app.  Then try again.</p>
 </blockquote>
-
 <h3 id="test-edge-cases">Test Edge Cases</h3>
-
 <p>To support testing out what could be considered &ldquo;edge cases&rdquo; in the in-app purchasing experience, Xcode 12 also has the ability to simulate things like:</p>
-
 <ul>
 <li>Time Rate for Auto-Renewable Subscription expiration</li>
 <li>Interrupted purchases</li>
 <li>Failed transactions</li>
 <li>Ask To Buy</li>
 </ul>
-
-<p><img src="edge-cases.png" alt="Edge Cases" /></p>
-
+<p><img src="edge-cases.png" alt="Edge Cases"></p>
 <h3 id="auto-renewable-subscription-testing-enhancements">Auto-Renewable Subscription Testing Enhancements</h3>
-
 <p>Testing subscription expiration is important for preserving the revenue you intend to generate from auto-renewable subscriptions.</p>
-
 <p>The challenge is that you and I don&rsquo;t have time to wait!</p>
-
 <p>Previously, you could update your product in App Store Connect to have a shorter duration, and the Sandbox environment would interpret, say, a six month subscription to be &ldquo;30 minutes&rdquo; worth of time.</p>
-
 <p>But that&rsquo;s still a long time to wait between making a subscription purchase, and trying out expiration logic, isn&rsquo;t it?</p>
-
 <p>Problem. Solved.  Now you can select even shorter durations for testing subscription expiration using the Time Rate menu option in Xcode&rsquo;s editor menu <strong>when you&rsquo;re on the StoreKit configuration page</strong>.</p>
-
-<p><img src="time-rate.png" alt="Time Rate" /></p>
-
+<p><img src="time-rate.png" alt="Time Rate"></p>
 <blockquote>
 <p>Remember: To see this editor menu, you have to be in the StoreKit configuration file of your app.</p>
 </blockquote>
-
 <p>If a second equals a day, and there&rsquo;s 30ish days in a month, a six month subscription should expire and auto-renew in <strong>three-ish</strong> minutes now.</p>
-
 <p>A huge help for impatient types like myself!</p>
-
 <h1 id="automated-testing-for-storekit-code">Automated Testing for StoreKit Code</h1>
-
 <p>Tired of launching your app and clicking around manually to test things out?</p>
-
 <p>Not only is that tedious, you and I are bound to either miss something, or test inconsistently, leading to a potentially sub-par end-user experience.</p>
-
 <p>Apple has given us a new <strong>StoreKitTest framework</strong> that you can use within XCTest!</p>
-
 <p>Everything that you can point-and-click on is fully testable with unit and UI tests with zero human interaction.</p>
-
 <p>To get started using this new framework, it&rsquo;s <code>import StoreKitTest</code>.</p>
-
 <h1 id="is-the-sandbox-environment-still-useful">Is the Sandbox Environment Still Useful?</h1>
-
 <p>Super useful.</p>
-
 <p>Testing things out locally is amazingly powerful for getting you started, but before you deploy your app to the App Store and send it into review, you still have to&hellip;</p>
-
 <ul>
 <li>Set up your products in App Store Connect &hellip; right now the Xcode configuration doesn&rsquo;t get &ldquo;pushed up&rdquo; to App Store Connect, so it&rsquo;s a double-entry world right now.</li>
 <li>Set up a Sandbox tester account in App Store Connect so that you can&hellip;</li>
 <li>Test out your in-app purchasing workflow and receipt validation logic with receipts signed by a &ldquo;real&rdquo; App Store environment (just like your TestFlight testers and your <strong>App Reviewer</strong> will use)</li>
 </ul>
-
 <p>And if you&rsquo;re using App Store server notifications to detect changes to auto-renewable subscriptions, you need to test those out as well.</p>
-
 <p>So for all of these reasons, the Sandbox environment is still there, and is still useful.</p>
-
 <p>Alas, <em>some</em> manual testing is still required, but can you imagine some of the possibilities for getting started with implementing in-app purchases, right in Xcode, on day zero of your project?</p>
 
     <aside>
@@ -415,7 +344,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

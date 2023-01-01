@@ -45,20 +45,17 @@
 <meta property="og:title" content="Resolving Failed to Load Model Named... with Core Data" />
 <meta property="og:description" content="Offers a few possibilities on how to resolve a Core Data error: Failed to load model named..." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/resolving-core-data-failed-to-load-model-named/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/resolving-core-data-failed-to-load-model-named/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Resolving%20Failed%20to%20Load%20Model%20Named...%20with%20Core%20Data.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Resolving%20Failed%20to%20Load%20Model%20Named...%20with%20Core%20Data.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-06T04:40:54+00:00" />
+<meta property="article:modified_time" content="2019-06-06T04:40:54+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Resolving%20Failed%20to%20Load%20Model%20Named...%20with%20Core%20Data.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Resolving%20Failed%20to%20Load%20Model%20Named...%20with%20Core%20Data.png" />
-<meta property="article:published_time" content="2019-06-06T04:40:54&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-06T04:40:54&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Resolving%20Failed%20to%20Load%20Model%20Named...%20with%20Core%20Data.png"/>
 
 <meta name="twitter:title" content="Resolving Failed to Load Model Named... with Core Data"/>
 <meta name="twitter:description" content="Offers a few possibilities on how to resolve a Core Data error: Failed to load model named..."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -212,40 +209,26 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>You&rsquo;ve done the work to get your Core Data model ready, but right when you hit run, <em>wham</em>.  Your debug output log shows:</p>
-
+    <p>You&rsquo;ve done the work to get your Core Data model ready, but right when you hit run, <em>wham</em>.  Your debug output log shows:</p>
 <blockquote>
 <p>Failed to load model named <strong>ModelName</strong></p>
 </blockquote>
-
 <p>You you may experience one of these when you attempt to access your persistent container:</p>
-
 <blockquote>
 <p>Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value</p>
 </blockquote>
-
 <p>What in the world is going on?</p>
-
 <h2 id="double-check-target-membership">Double-check Target Membership</h2>
-
 <p>This is particularly important if you happend to have copied and pasted and <code>.xcdatamodeld</code> file between projects.</p>
-
-<p><img src="target-membership.png" alt="Check Target Membership" /></p>
-
+<p><img src="target-membership.png" alt="Check Target Membership"></p>
 <h2 id="double-check-model-name">Double-check Model Name</h2>
-
 <p>Your model name needs to match throughout the various places you refer to it.  Things can get out of sync if you ever rename your model.</p>
-
 <p>Check to make sure that the following all match:</p>
-
 <ul>
 <li><strong>YourModelName</strong>.xcdatamodeld</li>
 <li>let container = NSPersistentContainer(name: &ldquo;<strong>YourModelName</strong>&rdquo;)</li>
 </ul>
-
-<p><img src="match-model-names.png" alt="Model Names Must Match" /></p>
+<p><img src="match-model-names.png" alt="Model Names Must Match"></p>
 
     <aside>
       
@@ -254,7 +237,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

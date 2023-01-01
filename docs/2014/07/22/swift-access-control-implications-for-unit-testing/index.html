@@ -43,22 +43,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Swift Access Control – Implications for Unit Testing" />
-<meta property="og:description" content="If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you&rsquo;re not alone!
+<meta property="og:description" content="If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier…”, you&rsquo;re not alone!
 Unit Tests and Swift Access Control When Swift access control came into the picture, we suddenly had a little more to consider. From the Apple docs:
 Swift access control has three access levels:
- private entities can only be accessed from within the source file where they are defined." />
+private entities can only be accessed from within the source file where they are defined. internal entities can be accessed anywhere within the target where they are defined." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/" />
-<meta property="article:published_time" content="2014-07-23T04:04:43&#43;00:00"/>
-<meta property="article:modified_time" content="2014-07-23T04:04:43&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-07-23T04:04:43+00:00" />
+<meta property="article:modified_time" content="2014-07-23T04:04:43+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Access Control – Implications for Unit Testing"/>
-<meta name="twitter:description" content="If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you&rsquo;re not alone!
+<meta name="twitter:description" content="If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier…”, you&rsquo;re not alone!
 Unit Tests and Swift Access Control When Swift access control came into the picture, we suddenly had a little more to consider. From the Apple docs:
 Swift access control has three access levels:
- private entities can only be accessed from within the source file where they are defined."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+private entities can only be accessed from within the source file where they are defined. internal entities can be accessed anywhere within the target where they are defined."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -67,7 +68,7 @@ Swift access control has three access levels:
   "@type": "BlogPosting",
   "headline": "Swift Access Control – Implications for Unit Testing",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/07\/22\/swift-access-control-implications-for-unit-testing\/",
-  "wordCount": "396",
+  "wordCount": "368",
   "datePublished": "2014-07-23T04:04:43Z",
   "dateModified": "2014-07-23T04:04:43Z",
   "author": {
@@ -93,7 +94,7 @@ Swift access control has three access levels:
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -206,64 +207,33 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier&#8230;”, you&rsquo;re not alone!</p>
-
+    <p>If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier…”, you&rsquo;re not alone!</p>
 <h3 id="unit-tests-and-swift-access-control">Unit Tests and Swift Access Control</h3>
-
 <p>When Swift access control came into the picture, we suddenly had a little more to consider. From the Apple docs:</p>
-
 <p>Swift access control has three access levels:</p>
-
 <ul>
 <li>private entities can only be accessed from within the source file where they are defined.</li>
 <li>internal entities can be accessed anywhere within the target where they are defined.</li>
-<li>public entities can be accessed from anywhere within the target and from any other context<br />
+<li>public entities can be accessed from anywhere within the target and from any other context<br>
 that imports the current target’s module.</li>
 </ul>
-
-<p>By default, most entities in a source file have internal access.<br />
-So given the following&#8230;</p>
-
+<p>By default, most entities in a source file have internal access.<br>
+So given the following…</p>
 <ul>
 <li>Out of the box, your unit tests are part of a separate test target</li>
 <li>The default access control for a class is <em>internal</em>, (meaning that if you do not explicitly specify an access control on the class / properties / functions, they&rsquo;re marked internal behind the scenes)</li>
 </ul>
-
-<p>&#8230; we now know why the unit tests break, unless we make a few tweaks:  classes marked internal are only seen <em>within a set of specified targets</em> and our unit tests are in a separate target that our class is not a part of by default.</p>
-
+<p>… we now know why the unit tests break, unless we make a few tweaks:  classes marked internal are only seen <em>within a set of specified targets</em> and our unit tests are in a separate target that our class is not a part of by default.</p>
 <h3 id="options">Options</h3>
-
 <p>It seems to me that we have two options:</p>
-
 <ol>
 <li>Change the access control on our class to <em>public</em>.  Additionally, mark any methods we intend to test with <em>public</em> also.</li>
 <li>Add the class(es) you want to be able to write unit tests for to the tests target.</li>
 </ol>
-
 <h3 id="solution">Solution</h3>
-
 <p>I found option #2 to be the easiest to implement at first. <em>However</em>, it turns out that this can lead to some <a href="https://github.com/Quick/Quick/issues/91">really obscure issues</a>. An <a href="https://twitter.com/modocache/status/549042409838219264">enlightening Twitter conversation</a> also shed some light on the subject, and pointed to the solution of testing only publicly accessible behavior that your Types expose, rather than trying to test internal implementation. That probably deserves a blog entry of its own, but for now, I’ll leave it to say that I’d recommend not adding your .swift source files to your test target, but rather to adjust the access control modifiers of the things you want to test to public (ie, Option # 1).</p>
-
-<div class="related-posts">
-  You might also enjoy</p> 
-  
-  <ul>
-    <li>
-      <a href="http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/" title="Don’t Write Legacy Swift">Don't Write Legacy Swift</a>
-    </li>
-    <li>
-      <a href="http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/" title="Getting Started with Unit Testing in Swift">Getting Started with Unit Testing in Swift</a>
-    </li>
-    <li>
-      <a href="http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/" title="Swift Unit Testing Resources">Swift Unit Testing Resources</a>
-    </li>
-    <li>
-      <a href="http://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/" title="TDD for iOS in Swift – What’s the Goal?">TDD for iOS in Swift – What’s the Goal?</a>
-    </li>
-  </ul>
-</div>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
     <aside>
       
@@ -285,7 +255,7 @@ So given the following&#8230;</p>
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

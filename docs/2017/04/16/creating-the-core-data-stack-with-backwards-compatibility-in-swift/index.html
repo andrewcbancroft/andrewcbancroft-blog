@@ -43,18 +43,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Creating the Core Data Stack with Backwards Compatibility in Swift" />
-<meta property="og:description" content="In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&rsquo;ll be unable to take advantage of Core Data&rsquo;s latest &ldquo;stack creation&#8221; class called NSPersistentContainer. So what can you do?
+<meta property="og:description" content="In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&rsquo;ll be unable to take advantage of Core Data&rsquo;s latest &ldquo;stack creation” class called NSPersistentContainer. So what can you do?
 While NSPersistentContainer does aim to simplify the stack creation process, at the end of the day, it&rsquo;s not terrible to have to mess with some of this Core Data plumbing." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/" />
-<meta property="article:published_time" content="2017-04-16T21:23:46&#43;00:00"/>
-<meta property="article:modified_time" content="2017-04-16T21:23:46&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2017-04-16T21:23:46+00:00" />
+<meta property="article:modified_time" content="2017-04-16T21:23:46+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Creating the Core Data Stack with Backwards Compatibility in Swift"/>
-<meta name="twitter:description" content="In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&rsquo;ll be unable to take advantage of Core Data&rsquo;s latest &ldquo;stack creation&#8221; class called NSPersistentContainer. So what can you do?
+<meta name="twitter:description" content="In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&rsquo;ll be unable to take advantage of Core Data&rsquo;s latest &ldquo;stack creation” class called NSPersistentContainer. So what can you do?
 While NSPersistentContainer does aim to simplify the stack creation process, at the end of the day, it&rsquo;s not terrible to have to mess with some of this Core Data plumbing."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -63,7 +64,7 @@ While NSPersistentContainer does aim to simplify the stack creation process, at 
   "@type": "BlogPosting",
   "headline": "Creating the Core Data Stack with Backwards Compatibility in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/04\/16\/creating-the-core-data-stack-with-backwards-compatibility-in-swift\/",
-  "wordCount": "729",
+  "wordCount": "691",
   "datePublished": "2017-04-16T21:23:46Z",
   "dateModified": "2017-04-16T21:23:46Z",
   "author": {
@@ -89,7 +90,7 @@ While NSPersistentContainer does aim to simplify the stack creation process, at 
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,59 +203,39 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&rsquo;ll be unable to take advantage of Core Data&rsquo;s latest &ldquo;stack creation&#8221; class called <code>NSPersistentContainer</code>. So what can you do?</p>
-
+    <p>In 2017, we live in a world where there are still non-iOS 10 devices out in the wild. If your app is targeting an iOS version earlier than iOS 10, or macOS Sierra (10.12), you&rsquo;ll be unable to take advantage of Core Data&rsquo;s latest &ldquo;stack creation” class called <code>NSPersistentContainer</code>. So what can you do?</p>
 <p>While <code>NSPersistentContainer</code> <em>does</em> aim to simplify the stack creation process, at the end of the day, it&rsquo;s not terrible to have to mess with some of this Core Data plumbing.</p>
-
-<p><a name="end-goal" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="end-goal-of-creating-the-core-data-stack">End goal of creating the Core Data stack</h1>
-
 <p>The end goal of Creating the Core Data stack is to get an instance of <code>NSManagedObjectContext</code>. That&rsquo;s it.</p>
-
 <p>Most apps that rely on Core Data will end up making fetch requests to obtain data, or wire up other classes like <code>NSFetchedResultsController</code>. To make these things work, you&rsquo;ve got to provide an instance of <code>NSManagedObjectContext</code>.</p>
-
 <p><code>NSManagedObjectContext</code> is sort of that central gear in the whole system that makes the other gears turn.</p>
-
 <p>So. Bottom line: Once you have an instance of <code>NSManagedObjectContext</code>, you&rsquo;re golden. That&rsquo;s what creating the Core Data stack gives you in the end.</p>
-
-<p><a name="3-steps" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="3-steps-to-creating-the-core-data-stack">3 steps to creating the Core Data stack</h1>
-
 <p>The Core Data stack can be created in about 3 steps:</p>
-
-<p><a name="managed-object-model" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="1-initialize-an-instance-of-nsmanagedobjectmodel">1) Initialize an instance of NSManagedObjectModel</h2>
-
 <p>This corresponds to your .xcdatamodeld file. You&rsquo;ll want to glance over to the project navigator on the left and locate the .xcdatamodeld file to record its name for this step.</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Initialize NSManagedObjectModel</span>
-<span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
-<span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="o">!</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="c1">// Initialize NSManagedObjectModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="p">!)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<a name="persistent-store-coordinator" class="jump-target"></a></p>
-
+<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="2-initialize-and-configure-an-instance-of-nspersistentstorecoordinator-with-the-nsmanagedobjectmodel-instance-and-an-nspersistentstoretype">2) Initialize and configure an instance of NSPersistentStoreCoordinator with the NSManagedObjectModel instance and an NSPersistentStoreType</h2>
-
 <p>The reason you create the <code>NSManagedObjectModel</code> instance first is because the <em>next</em> step depends on it. <code>NSPersistentStoreCoordinator</code> will use your <code>NSManagedObjectModel</code> instance to configure itself and prepare to create the correct kind of persistent store based on what <code>NSPersistentStoreType</code> you tell it to use.</p>
-
 <p>In the code example that follows, I used <code>NSSQLiteStoreType</code> to create a SQLite persistent store. Regardless of what kind of persistent store you use though, <code>NSPersistentStoreCoordinator</code> needs your managed object model instance.</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -265,46 +246,39 @@ MathJax.Hub.Config({
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
-<span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
-
-<span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
-        <span class="p">.</span><span class="k">default</span>
-        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
-
-<span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="p">!</span> <span class="n">FileManager</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="k">default</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<a name="managed-object-context" class="jump-target"></a></p>
-
+<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="3-initialize-an-instance-of-nsmanagedobjectcontext-and-assign-it-the-nspersistentstorecoordinator-instance">3) Initialize an instance of NSManagedObjectcontext and assign it the NSPersistentStoreCoordinator instance</h2>
-
 <p>The last step is to initialize an instance of <code>NSManagedObjectContext</code> and assign it the <code>NSPersistentStoreCoordinator</code> instance.</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="c1">// Create and return NSManagedObjectContext</span>
-<span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">mainQueueConcurrencyType</span><span class="p">)</span>
-<span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="c1">// Create and return NSManagedObjectContext</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">mainQueueConcurrencyType</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<a name="code-example" class="jump-target"></a></p>
-
-<h1 id="putting-it-all-together-creating-the-core-data-stack-in-code">Putting it all together – creating the Core Data stack in code</h1>
-
+<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h1 id="putting-it-all-together--creating-the-core-data-stack-in-code">Putting it all together – creating the Core Data stack in code</h1>
 <p>When I create the Core Data stack, I like to encapsulate the code in a stand-alone function that returns an instance of <code>NSManagedObjectContext</code>.</p>
-
 <p>Here are all three steps put together:</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -328,75 +302,40 @@ MathJax.Hub.Config({
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">createMainContext</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
-    
-    <span class="c1">// Initialize NSManagedObjectModel</span>
-    <span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
-    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="o">!</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span>
-    
-    <span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
-    <span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
-
-    <span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
-            <span class="p">.</span><span class="k">default</span>
-            <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
-    
-    <span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-    
-    <span class="c1">// Create and return NSManagedObjectContext</span>
-    <span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">mainQueueConcurrencyType</span><span class="p">)</span>
-    <span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span>
-    
-    <span class="k">return</span> <span class="n">context</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">createMainContext</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSManagedObjectContext</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Initialize NSManagedObjectModel</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">modelURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;momd&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">NSManagedObjectModel</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">modelURL</span><span class="p">!)</span> <span class="k">else</span> <span class="p">{</span> <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;model not found&#34;</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="p">!</span> <span class="n">FileManager</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="k">default</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Create and return NSManagedObjectContext</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">context</span> <span class="p">=</span> <span class="n">NSManagedObjectContext</span><span class="p">(</span><span class="n">concurrencyType</span><span class="p">:</span> <span class="p">.</span><span class="n">mainQueueConcurrencyType</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="p">.</span><span class="n">persistentStoreCoordinator</span> <span class="p">=</span> <span class="n">psc</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">context</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 Once you&rsquo;ve got a function like <code>createMainContext()</code>, you&rsquo;ll be able to call it to obtain a fully-configured <code>NSManagedObjectContext</code> instance.</p>
-
 <p>I <em>highly</em> recommend you avoid calling it inside any of your view controllers. Instead, my recommendation is to call it to obtain your <code>NSManagedObjectContext</code> instance inside of the <code>AppDelegate's</code> <code>application(_:didFinishLaunchingWithOptions:)</code> function. From there, you can pass it <em>to</em> your first view controller, and from that first view controller on to <em>other</em> view controllers that need it through <code>prepare(for segue:sender:)</code>.</p>
-
-<p>For more on this &ldquo;dependency injection&#8221; strategy, or if you&rsquo;re more of a visual learner, check out my Pluralsight course, <a href="http://bit.ly/ps-core-data-swift">Core Data Fundamentals with Swift</a>!<br />
-<a name="course" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fas fa-video"></i> <a href="http://bit.ly/ps-core-data-swift" target="_blank">Core Data Fundamentals with Swift</a><br /> <a href="http://bit.ly/ps-core-data-swift" target="_blank"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png" alt="Core Data Fundamentals with Swift" width="1024" height="576" class="alignnone size-large wp-image-13163" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w" sizes="(max-width: 1024px) 100vw, 1024px" /></a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/" title="Core Data Cheat Sheet for Swift iOS Developers">Core Data Cheat Sheet for Swift iOS Developers</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/" title="Displaying Data With NSFetchedResultsController and Swift">Displaying Data With NSFetchedResultsController and Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/" title="Unit Testing Model Layer with Core Data and Swift">Unit Testing Model Layer with Core Data and Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/" title="Implement NSManagedObject Subclass in Swift">Implement NSManagedObject Subclass in Swift</a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p>For more on this &ldquo;dependency injection” strategy, or if you&rsquo;re more of a visual learner, check out my Pluralsight course, <a href="http://bit.ly/ps-core-data-swift">Core Data Fundamentals with Swift</a>!<br>
+<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -424,7 +363,7 @@ Once you&rsquo;ve got a function like <code>createMainContext()</code>, you&rsqu
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -45,14 +45,15 @@
 <meta property="og:title" content="SSRS: Which server sent my e-mail subscription?" />
 <meta property="og:description" content="I was recently troubleshooting a seemingly bizarre issue I was having with one of our report subscriptions – the production version was running normally, but our customer suddenly began receiving a very old version of the same report subscription. After disabling the subscription from all non-production servers that I knew about, the customer continued to receive the rogue e-mail. I needed to figure out which “mystery” report server was sending the e-mail subscription." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2012/07/25/ssrs-which-server-sent-my-e-mail-subscription/" />
-<meta property="article:published_time" content="2012-07-25T13:56:24&#43;00:00"/>
-<meta property="article:modified_time" content="2012-07-25T13:56:24&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2012/07/25/ssrs-which-server-sent-my-e-mail-subscription/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2012-07-25T13:56:24+00:00" />
+<meta property="article:modified_time" content="2012-07-25T13:56:24+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="SSRS: Which server sent my e-mail subscription?"/>
 <meta name="twitter:description" content="I was recently troubleshooting a seemingly bizarre issue I was having with one of our report subscriptions – the production version was running normally, but our customer suddenly began receiving a very old version of the same report subscription. After disabling the subscription from all non-production servers that I knew about, the customer continued to receive the rogue e-mail. I needed to figure out which “mystery” report server was sending the e-mail subscription."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -87,7 +88,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -197,17 +198,11 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>I was recently troubleshooting a seemingly bizarre issue I was having with one of our report subscriptions – the production version was running normally, but our customer suddenly began receiving a very old version of the same report subscription.  After disabling the subscription from all non-production servers that I knew about, the customer continued to receive the rogue e-mail.  I needed to figure out which “mystery” report server was sending the e-mail subscription.</p>
-
 <p>The answer was simple once I stepped back from the problem and remembered that there’s such a thing as a header to an e-mail that gives details about where the e-mail is coming from.</p>
-
 <p>Outlook 2010 provides a way for you to view an e-mail’s header by clicking File –&gt; Info –&gt; Properties:</p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/image.png"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border-width: 0px;" title="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/image_thumb.png" alt="image" width="576" height="566" border="0" /></a></p>
-
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/image.png"><!-- raw HTML omitted --></a></p>
 <p>The Internet headers section is where to look – it’ll tell you which server was involved at the very beginning.</p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/SNAGHTML1d27d81.png"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border-width: 0px;" title="SNAGHTML1d27d81" src="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/SNAGHTML1d27d81_thumb.png" alt="SNAGHTML1d27d81" width="577" height="518" border="0" /></a></p>
-
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2012/07/SNAGHTML1d27d81.png"><!-- raw HTML omitted --></a></p>
 <p>This turned out to be the key – after identifying the report server that was sending the e-mail to Exchange for delivery, I was able to disable the report subscription once and for all.</p>
 
     <aside>
@@ -230,7 +225,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

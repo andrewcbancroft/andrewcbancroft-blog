@@ -45,20 +45,17 @@
 <meta property="og:title" content="NSPersistentCloudKitContainer Buggy Behavior List" />
 <meta property="og:description" content="A list of odd, buggy behavior that I&#39;m experiencing with NSPersistentCloudKitContainer during the Xcode 11 and iOS 13 Betas." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/nspersistentcloudkitcontainer-buggy-behavior-list/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/nspersistentcloudkitcontainer-buggy-behavior-list/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20NSPersistentCloudKitContainer%20Buggy%20Behavior%20List.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20NSPersistentCloudKitContainer%20Buggy%20Behavior%20List.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-07-11T04:40:54+00:00" />
+<meta property="article:modified_time" content="2019-07-11T04:40:54+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20NSPersistentCloudKitContainer%20Buggy%20Behavior%20List.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20NSPersistentCloudKitContainer%20Buggy%20Behavior%20List.png" />
-<meta property="article:published_time" content="2019-07-11T04:40:54&#43;00:00"/>
-<meta property="article:modified_time" content="2019-07-11T04:40:54&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20NSPersistentCloudKitContainer%20Buggy%20Behavior%20List.png"/>
 
 <meta name="twitter:title" content="NSPersistentCloudKitContainer Buggy Behavior List"/>
 <meta name="twitter:description" content="A list of odd, buggy behavior that I&#39;m experiencing with NSPersistentCloudKitContainer during the Xcode 11 and iOS 13 Betas."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -221,104 +218,66 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#which-beta-version-does-this-affect">Which Beta Version Does This Affect?</a></li>
-<li><a href="#enabling-cloudkit-doesn-t-create-a-default-container">Enabling CloudKit doesn&rsquo;t create a default container</a></li>
-<li><a href="#existing-data-doesn-t-sync">Existing data doesn&rsquo;t sync</a></li>
-<li><a href="#data-only-syncs-after-you-close-and-re-launch-your-app">Data only syncs after you close and re-launch your app</a></li>
-<li><a href="#record-accessor-methods-missing-in-xcode">Record accessor methods missing in Xcode</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#which-beta-version-does-this-affect">Which Beta Version Does This Affect?</a></li>
+    <li><a href="#enabling-cloudkit-doesnt-create-a-default-container">Enabling CloudKit doesn&rsquo;t create a default container</a></li>
+    <li><a href="#existing-data-doesnt-sync">Existing data doesn&rsquo;t sync</a></li>
+    <li><a href="#data-only-syncs-after-you-close-and-re-launch-your-app">Data only syncs after you close and re-launch your app</a></li>
+    <li><a href="#record-accessor-methods-missing-in-xcode">Record accessor methods missing in Xcode</a></li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<p><code>NSPersistentCloudKitContainer</code> is brand new with Xcode 11 and iOS 13.</p>
-
+    <p><code>NSPersistentCloudKitContainer</code> is brand new with Xcode 11 and iOS 13.</p>
 <p>It works&hellip; kind of&hellip; sometimes&hellip;</p>
-
 <p>I&rsquo;m keeping this list of buggy behavior to help keep my head straight.  I&rsquo;ve also filed bug reports on each.</p>
-
 <p>Hopefully others in the iOS community who are experimenting with <code>NSPersistentCloudKitContainer</code> can confirm or deny these same oddities.  If they&rsquo;re fixed in a subsequent beta, I&rsquo;ll come back here and note it!</p>
-
 <h2 id="which-beta-version-does-this-affect">Which Beta Version Does This Affect?</h2>
-
 <p>I&rsquo;ve tested out each of these on iOS 13 Beta 5 and Xcode 11 Beta 5.</p>
-
-<h2 id="enabling-cloudkit-doesn-t-create-a-default-container">Enabling CloudKit doesn&rsquo;t create a default container</h2>
-
+<h2 id="enabling-cloudkit-doesnt-create-a-default-container">Enabling CloudKit doesn&rsquo;t create a default container</h2>
 <p>In Xcode 11, adding the iCloud capability and clicking the CloudKit checkbox is not automatically creating a default container for new apps that I&rsquo;m testing&hellip;</p>
-
 <p><strong>Xcode 10</strong>
-<img src="XC10_CKDefaultContainer.gif" alt="Xcode 10 - Creates Default Container" /></p>
-
+<img src="XC10_CKDefaultContainer.gif" alt="Xcode 10 - Creates Default Container"></p>
 <p><strong>Xcode 11</strong>
-<img src="XC11_NoCKDefaultContainer.gif" alt="Xcode 11 - Does Not Create Default Container" /></p>
-
-<h2 id="existing-data-doesn-t-sync">Existing data doesn&rsquo;t sync</h2>
-
+<img src="XC11_NoCKDefaultContainer.gif" alt="Xcode 11 - Does Not Create Default Container"></p>
+<h2 id="existing-data-doesnt-sync">Existing data doesn&rsquo;t sync</h2>
 <p>Suppose that&hellip;</p>
-
 <ul>
 <li>You have an existing Core Data app</li>
 <li>The app is installed on two devices with the same user signed in to iCloud</li>
 <li>Data has been saved independently on both devices</li>
 </ul>
-
 <p>Now suppose that you want to take advantage of the automagic syncing offered with <code>NSPersistendCloudKitContainer</code>.</p>
-
 <p>If you&hellip;</p>
-
 <ul>
 <li>Set up your app to work with <code>NSPersistentCloudKitContainer</code></li>
 <li>Rebuild your app and install it on both devices</li>
 <li>Launch the app on both devices&hellip;</li>
 </ul>
-
 <p>You might expect the existing data to show up on both devices.  <strong>It doesn&rsquo;t.</strong></p>
-
 <p>If you add <em>new</em> data on one device, <em>only the new data</em> that gets saved <em>after</em> the <code>NSPersistentCloudKitContainer</code> conversion gets synced.  Existing data never does.</p>
-
 <p>🤷🏼‍♂️</p>
-
 <h2 id="data-only-syncs-after-you-close-and-re-launch-your-app">Data only syncs after you close and re-launch your app</h2>
-
 <p>I really thought I had this figured out.  Beta 5 has proved me wrong.</p>
-
-<p>In Beta 2, simply <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/#reflecting-changes-in-the-ui">setting <code>automaticallyMergesChangesFromParent</code> on the container&rsquo;s <code>viewContext</code> to <code>true</code></a> seemed to work.</p>
-
+<p>In Beta 2, simply <!-- raw HTML omitted -->setting <code>automaticallyMergesChangesFromParent</code> on the container&rsquo;s <code>viewContext</code> to <code>true</code><!-- raw HTML omitted --> seemed to work.</p>
 <p>Not with Beta 5.</p>
-
 <p>You can save new data and wait (and wait&hellip; and wait&hellip;).  It doesn&rsquo;t show up in the UI until after you re-launch the app.</p>
-
 <p>Here&rsquo;s what I&rsquo;m experiencing:</p>
 
-
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="//www.youtube.com/embed/DLAwrSCl3Cc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+  <iframe src="https://www.youtube.com/embed/DLAwrSCl3Cc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-
 <h2 id="record-accessor-methods-missing-in-xcode">Record accessor methods missing in Xcode</h2>
-
 <p>&ldquo;On <em>my</em> machine&rdquo;, attempting to use the <code>record(for:)</code> methods on <code>NSPersistentCloudKitContainer</code> produce the following error message:</p>
-
 <blockquote>
 <p>Value of type &lsquo;NSPersistentCloudKitContainer&rsquo; has no member &lsquo;record&rsquo;</p>
 </blockquote>
-
-<p><img src="no-record-method.png" alt="Has no member 'record'" /></p>
-
+<p><img src="no-record-method.png" alt="Has no member &amp;lsquo;record&amp;rsquo;"></p>
 <p>I can &ldquo;Jump to definition&rdquo; and the methods appear to be there&hellip;</p>
-
-<p><img src="jump-definition.gif" alt="Jump to Definition" /></p>
-
+<p><img src="jump-definition.gif" alt="Jump to Definition"></p>
 <p>Attempting to use the function in code doesn&rsquo;t work&hellip;</p>
-
-<p><img src="no-member.gif" alt="No Member" /></p>
+<p><img src="no-member.gif" alt="No Member"></p>
 
     <aside>
       
@@ -327,7 +286,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

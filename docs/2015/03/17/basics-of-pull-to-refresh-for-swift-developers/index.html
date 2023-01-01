@@ -44,19 +44,20 @@
 
 <meta property="og:title" content="Basics of Pull to Refresh for Swift Developers" />
 <meta property="og:description" content="Updated on September 21, 2016 – Swift 3.0
-Implementing &ldquo;pull to refresh&#8221; is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:
- They&rsquo;re working with a UITableViewController They&rsquo;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it  This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app." />
+Implementing &ldquo;pull to refresh” is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:
+They&rsquo;re working with a UITableViewController They&rsquo;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/" />
-<meta property="article:published_time" content="2015-03-17T17:55:52&#43;00:00"/>
-<meta property="article:modified_time" content="2015-03-17T17:55:52&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/03/17/basics-of-pull-to-refresh-for-swift-developers/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-03-17T17:55:52+00:00" />
+<meta property="article:modified_time" content="2015-03-17T17:55:52+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Basics of Pull to Refresh for Swift Developers"/>
 <meta name="twitter:description" content="Updated on September 21, 2016 – Swift 3.0
-Implementing &ldquo;pull to refresh&#8221; is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:
- They&rsquo;re working with a UITableViewController They&rsquo;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it  This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+Implementing &ldquo;pull to refresh” is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:
+They&rsquo;re working with a UITableViewController They&rsquo;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -65,7 +66,7 @@ Implementing &ldquo;pull to refresh&#8221; is a common need that arises when wor
   "@type": "BlogPosting",
   "headline": "Basics of Pull to Refresh for Swift Developers",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/03\/17\/basics-of-pull-to-refresh-for-swift-developers\/",
-  "wordCount": "1229",
+  "wordCount": "1216",
   "datePublished": "2015-03-17T17:55:52Z",
   "dateModified": "2015-03-17T17:55:52Z",
   "author": {
@@ -91,7 +92,7 @@ Implementing &ldquo;pull to refresh&#8221; is a common need that arises when wor
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -204,223 +205,162 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p><small>Updated on September 21, 2016 – Swift 3.0</small></p>
-
-<p>Implementing &ldquo;pull to refresh&#8221; is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:</p>
-
+    <p><!-- raw HTML omitted -->Updated on September 21, 2016 – Swift 3.0<!-- raw HTML omitted --></p>
+<p>Implementing &ldquo;pull to refresh” is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:</p>
 <ol>
 <li>They&rsquo;re working with a UITableViewController</li>
 <li>They&rsquo;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it</li>
 </ol>
-
 <p>This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app.</p>
-
-<p><a name="example-scenario" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="example-scenario">Example scenario</h3>
-
 <p>For this guide, suppose that we have a list of movies that we&rsquo;d like to display in a table view. Pulling to refresh will fetch more movies and update the table view to show the new ones.</p>
-
 <p>If you&rsquo;re the type that likes to simply dive into a working example, both implementations are available to download from GitHub:</p>
-
-<div class="resources">
-  <div class="resources-header">
-    Example projects
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fab fa-github fa-lg"></i> Example implemented with UITableViewController <div>
-        (<a href="https://github.com/andrewcbancroft/PullToRefreshExample_UITableViewController/tree/swift-2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/PullToRefreshExample_UITableViewController/tree/master">Swift 3.0</a>)
-      </div>
-    </li></p>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <pre><code>&lt;li&gt;
   &lt;i class=&quot;fab fa-github fa-lg&quot;&gt;&lt;/i&gt; Example implemented with regular view controller + UITableView &lt;div&gt;
     (&lt;a href=&quot;https://github.com/andrewcbancroft/PullToRefreshExample_RegularViewController/tree/swift-2.3&quot;&gt;Swift 2.3&lt;/a&gt; | &lt;a href=&quot;https://github.com/andrewcbancroft/PullToRefreshExample_RegularViewController/tree/master&quot;&gt;Swift 3.0&lt;/a&gt;)
   &lt;/div&gt;
 &lt;/li&gt;
 </code></pre>
-
-<p></ul>
-</div></p>
-
+<!-- raw HTML omitted -->
 <p><strong>Note:</strong> Code in the main article below is written in Swift 3.0, but code examples for Swift 2.3 are found in the example projects above.</p>
-
 <p><code>Movies</code> are represented by a simple struct:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">struct</span> <span class="nc">Movie</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">let</span> <span class="nv">title</span><span class="p">:</span> <span class="nb">String</span>
-<span class="ln">3</span>    <span class="kd">let</span> <span class="nv">genre</span><span class="p">:</span> <span class="nb">String</span>
-<span class="ln">4</span><span class="p">}</span></code></pre></div>
-<p>The table view (regardless of whether we use a <code>UITableViewController</code> or a regular <code>UIViewController</code>) has the following setup&#8230;</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">struct</span> <span class="nc">Movie</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kd">let</span> <span class="nv">title</span><span class="p">:</span> <span class="nb">String</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="kd">let</span> <span class="nv">genre</span><span class="p">:</span> <span class="nb">String</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The table view (regardless of whether we use a <code>UITableViewController</code> or a regular <code>UIViewController</code>) has the following setup…</p>
 <p>Initial data source values:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">movies</span> <span class="p">=</span> <span class="p">[</span>
-<span class="ln">2</span>    <span class="n">Movie</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Lion King&#34;</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="s">&#34;Animation&#34;</span><span class="p">),</span>
-<span class="ln">3</span>    <span class="n">Movie</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Star Wars&#34;</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="s">&#34;Sci-fi&#34;</span><span class="p">)</span>
-<span class="ln">4</span><span class="p">]</span></code></pre></div>
-<p>Setting up the table view&rsquo;s data source protocol methods depends on whether you&rsquo;re using a <a href="#table-view-controller">UITableViewController</a> or a <a href="#regular-view-controller">regular UIViewController</a> with a table view as one of its content views, so we&rsquo;ll cover those in the individual examples.</p>
-
-<p><a name="table-view-controller" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">var</span> <span class="nv">movies</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">Movie</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Lion King&#34;</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="s">&#34;Animation&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">Movie</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Star Wars&#34;</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="s">&#34;Sci-fi&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div><p>Setting up the table view&rsquo;s data source protocol methods depends on whether you&rsquo;re using a <a href="#table-view-controller">UITableViewController</a> or a <a href="#regular-view-controller">regular UIViewController</a> with a table view as one of its content views, so we&rsquo;ll cover those in the individual examples.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="implementing-with-uitableviewcontroller">Implementing with UITableViewController</h3>
-
-<p><a name="tvc-example-setup" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="finish-example-setup">Finish example setup</h4>
-
 <p>When working with a <code>UITableViewController</code>, we simply override the data source method implementations. The following is how I&rsquo;ve chosen to do it for this example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="kc">_</span> <span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="k">return</span> <span class="n">movies</span><span class="p">.</span><span class="bp">count</span>
-<span class="ln"> 3</span><span class="p">}</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span><span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="kc">_</span> <span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">cellForRowAt</span> <span class="n">indexPath</span><span class="p">:</span> <span class="n">IndexPath</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UITableViewCell</span> <span class="p">{</span>
-<span class="ln"> 6</span>    <span class="kd">let</span> <span class="nv">cell</span> <span class="p">=</span> <span class="n">tableView</span><span class="p">.</span><span class="n">dequeueReusableCell</span><span class="p">(</span><span class="n">withIdentifier</span><span class="p">:</span> <span class="s">&#34;cell&#34;</span><span class="p">)</span><span class="o">!</span>
-<span class="ln"> 7</span>    
-<span class="ln"> 8</span>    <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">indexPath</span> <span class="k">as</span> <span class="n">NSIndexPath</span><span class="p">).</span><span class="n">row</span><span class="p">].</span><span class="n">title</span>
-<span class="ln"> 9</span>    <span class="n">cell</span><span class="p">.</span><span class="n">detailTextLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">indexPath</span> <span class="k">as</span> <span class="n">NSIndexPath</span><span class="p">).</span><span class="n">row</span><span class="p">].</span><span class="n">genre</span>
-<span class="ln">10</span>    
-<span class="ln">11</span>    <span class="k">return</span> <span class="n">cell</span>
-<span class="ln">12</span><span class="p">}</span></code></pre></div>
-<p><a name="enable-refreshing-storyboard" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="kc">_</span> <span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">return</span> <span class="n">movies</span><span class="p">.</span><span class="bp">count</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="kc">_</span> <span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">cellForRowAt</span> <span class="n">indexPath</span><span class="p">:</span> <span class="n">IndexPath</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UITableViewCell</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">let</span> <span class="nv">cell</span> <span class="p">=</span> <span class="n">tableView</span><span class="p">.</span><span class="n">dequeueReusableCell</span><span class="p">(</span><span class="n">withIdentifier</span><span class="p">:</span> <span class="s">&#34;cell&#34;</span><span class="p">)</span><span class="o">!</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">indexPath</span> <span class="k">as</span> <span class="n">NSIndexPath</span><span class="p">).</span><span class="n">row</span><span class="p">].</span><span class="n">title</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">cell</span><span class="p">.</span><span class="n">detailTextLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">indexPath</span> <span class="k">as</span> <span class="n">NSIndexPath</span><span class="p">).</span><span class="n">row</span><span class="p">].</span><span class="n">genre</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">return</span> <span class="n">cell</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="enable-refreshing-in-storyboard">Enable refreshing in Storyboard</h4>
-
 <p>When you&rsquo;re working with a <code>UITableViewController</code>, the solution is fairly simple: First, Select the table view controller in your storyboard, open the attributes inspector, and enable refreshing:</p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-1024x740.png" alt="Table View Controller - Enable Refreshing" width="1024" height="740" class="alignnone size-large wp-image-11511" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-1024x740.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-300x217.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing.png 1083w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
-
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing.png"><!-- raw HTML omitted --></a></p>
 <p>A <code>UITableViewController</code> comes outfitted with a reference to a <code>UIRefreshControl</code> out of the box. You simply need to wire up a few things to initiate and complete the refresh when the user pulls down.</p>
-
-<p><a name="override-viewdidload" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="override-viewdidload">Override viewDidLoad()</h4>
-
 <p>In your override of <code>viewDidLoad()</code>, add a target to handle the refresh as follows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-<span class="ln">3</span>    <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
-<span class="ln">4</span>    
-<span class="ln">5</span>    <span class="kc">self</span><span class="p">.</span><span class="n">refreshControl</span><span class="p">?.</span><span class="n">addTarget</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">ViewController</span><span class="p">.</span><span class="n">handleRefresh</span><span class="p">(</span><span class="kc">_</span><span class="p">:)),</span> <span class="k">for</span><span class="p">:</span> <span class="n">UIControlEvents</span><span class="p">.</span><span class="n">valueChanged</span><span class="p">)</span>
-<span class="ln">6</span><span class="p">}</span></code></pre></div>
-<p>Here are a couple of things to observe about the code above:</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="kc">self</span><span class="p">.</span><span class="n">refreshControl</span><span class="p">?.</span><span class="n">addTarget</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">ViewController</span><span class="p">.</span><span class="n">handleRefresh</span><span class="p">(</span><span class="kc">_</span><span class="p">:)),</span> <span class="k">for</span><span class="p">:</span> <span class="n">UIControlEvents</span><span class="p">.</span><span class="n">valueChanged</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Here are a couple of things to observe about the code above:</p>
 <ol>
 <li>Swift&rsquo;s new #selector feature helps with specifying which action will handle the refresh. Since I&rsquo;ve specified <code>ViewController.handleRefresh(_:)</code> (note the underscore and the colon!) as the action argument, I need to define a function in this <code>UITableViewController</code> class with the same name. Additionally, the function should take one argument.</li>
 <li>We&rsquo;d like this action to be called for the <code>UIControlEvent</code> called <code>ValueChanged</code>.</li>
 </ol>
-
-<p><a name="tvc-handle-refresh-function" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="implement-handlerefresh-function">Implement handleRefresh function</h4>
-
 <p>The <code>handleRefresh:</code> function may look something like the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">handleRefresh</span><span class="p">(</span><span class="n">refreshControl</span><span class="p">:</span> <span class="n">UIRefreshControl</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="c1">// Do some reloading of data and update the table view&#39;s data source</span>
-<span class="ln"> 3</span>    <span class="c1">// Fetch more objects from a web service, for example...</span>
-<span class="ln"> 4</span>    
-<span class="ln"> 5</span>    <span class="c1">// Simply adding an object to the data source for this example</span>
-<span class="ln"> 6</span>    <span class="kd">let</span> <span class="nv">newMovie</span> <span class="p">=</span> <span class="n">Movie</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Serenity&#34;</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="s">&#34;Sci-fi&#34;</span><span class="p">)</span>
-<span class="ln"> 7</span>    <span class="n">movies</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">newMovie</span><span class="p">)</span>
-<span class="ln"> 8</span>    
-<span class="ln"> 9</span>    <span class="n">movies</span><span class="p">.</span><span class="bp">sort</span><span class="p">()</span> <span class="p">{</span> <span class="nv">$0</span><span class="p">.</span><span class="n">title</span> <span class="o">&lt;</span> <span class="nv">$1</span><span class="p">.</span><span class="n">title</span> <span class="p">}</span>
-<span class="ln">10</span>    
-<span class="ln">11</span>    <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
-<span class="ln">12</span>    <span class="n">refreshControl</span><span class="p">.</span><span class="n">endRefreshing</span><span class="p">()</span>
-<span class="ln">13</span><span class="p">}</span></code></pre></div>
-<p>That should complete the pull to refresh implementation when you&rsquo;re working with a <code>UITableViewController</code>!</p>
-
-<p><a name="regular-view-controller" class="jump-target"></a></p>
-
-<h3 id="implementing-with-regular-view-controller-uitableview">Implementing with regular view controller + UITableView</h3>
-
-<p><a name="reg-tv-example-setup" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">handleRefresh</span><span class="p">(</span><span class="n">refreshControl</span><span class="p">:</span> <span class="n">UIRefreshControl</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="c1">// Do some reloading of data and update the table view&#39;s data source</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="c1">// Fetch more objects from a web service, for example...</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// Simply adding an object to the data source for this example</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">let</span> <span class="nv">newMovie</span> <span class="p">=</span> <span class="n">Movie</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Serenity&#34;</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="s">&#34;Sci-fi&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="n">movies</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">newMovie</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">movies</span><span class="p">.</span><span class="bp">sort</span><span class="p">()</span> <span class="p">{</span> <span class="nv">$0</span><span class="p">.</span><span class="n">title</span> <span class="o">&lt;</span> <span class="nv">$1</span><span class="p">.</span><span class="n">title</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">refreshControl</span><span class="p">.</span><span class="n">endRefreshing</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>That should complete the pull to refresh implementation when you&rsquo;re working with a <code>UITableViewController</code>!</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="implementing-with-regular-view-controller--uitableview">Implementing with regular view controller + UITableView</h3>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="finish-example-setup-1">Finish example setup</h4>
-
 <p>When working with a <em>regular</em> <code>UIViewController</code>, there are a few extra steps involved in getting things set up:</p>
-
 <ol>
 <li>Create an IBOutlet from the storyboard to the view controller</li>
 <li>Wire up the table view&rsquo;s data source and delegate from the storyboard</li>
 <li>Implement the <a href="http://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/">required table view data source methods</a></li>
 </ol>
-
 <p>Creating the IBOutlet is a matter of control+clicking and dragging from the table view in the Storyboard to the view controller code to create the outlet.</p>
-
 <p>To wire up the table view&rsquo;s data source and delegate in the Storyboard, control+click the table view and drag up to the yellow view controller icon:</p>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png" alt="Wire up table view&#039;s data source and delegate" width="789" height="746" class="alignnone size-full wp-image-11681" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png 789w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource-300x284.png 300w" sizes="(max-width: 789px) 100vw, 789px" /></a></p>
-
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png"><!-- raw HTML omitted --></a></p>
 <p>The data source protocol method implementations may look something like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span> <span class="nb">Int</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="k">return</span> <span class="n">movies</span><span class="p">.</span><span class="bp">count</span>
-<span class="ln"> 3</span><span class="p">}</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span><span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="kc">_</span> <span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">cellForRowAt</span> <span class="n">indexPath</span><span class="p">:</span> <span class="n">IndexPath</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UITableViewCell</span> <span class="p">{</span>
-<span class="ln"> 6</span>    <span class="kd">let</span> <span class="nv">cell</span> <span class="p">=</span> <span class="n">tableView</span><span class="p">.</span><span class="n">dequeueReusableCell</span><span class="p">(</span><span class="n">withIdentifier</span><span class="p">:</span> <span class="s">&#34;cell&#34;</span><span class="p">)</span><span class="o">!</span>
-<span class="ln"> 7</span>    
-<span class="ln"> 8</span>    <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">indexPath</span> <span class="k">as</span> <span class="n">NSIndexPath</span><span class="p">).</span><span class="n">row</span><span class="p">].</span><span class="n">title</span>
-<span class="ln"> 9</span>    <span class="n">cell</span><span class="p">.</span><span class="n">detailTextLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">indexPath</span> <span class="k">as</span> <span class="n">NSIndexPath</span><span class="p">).</span><span class="n">row</span><span class="p">].</span><span class="n">genre</span>
-<span class="ln">10</span>    
-<span class="ln">11</span>    <span class="k">return</span> <span class="n">cell</span>
-<span class="ln">12</span><span class="p">}</span></code></pre></div>
-<p><a name="setup-refresh-control" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"> <span class="nb">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">return</span> <span class="n">movies</span><span class="p">.</span><span class="bp">count</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="kc">_</span> <span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">cellForRowAt</span> <span class="n">indexPath</span><span class="p">:</span> <span class="n">IndexPath</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UITableViewCell</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">let</span> <span class="nv">cell</span> <span class="p">=</span> <span class="n">tableView</span><span class="p">.</span><span class="n">dequeueReusableCell</span><span class="p">(</span><span class="n">withIdentifier</span><span class="p">:</span> <span class="s">&#34;cell&#34;</span><span class="p">)</span><span class="o">!</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">indexPath</span> <span class="k">as</span> <span class="n">NSIndexPath</span><span class="p">).</span><span class="n">row</span><span class="p">].</span><span class="n">title</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">cell</span><span class="p">.</span><span class="n">detailTextLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">movies</span><span class="p">[(</span><span class="n">indexPath</span> <span class="k">as</span> <span class="n">NSIndexPath</span><span class="p">).</span><span class="n">row</span><span class="p">].</span><span class="n">genre</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">return</span> <span class="n">cell</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="set-up-uirefreshcontrol">Set up UIRefreshControl</h4>
-
 <p>Whereas a <code>UITableViewController</code> comes pre-fit with a <code>UIRefreshControl</code>, a regular <code>UIViewController</code> does not. It&rsquo;s simple enough to set one up though. Here is a snippet defining a lazily instantiated variable which creates and configures a <code>UIRefreshControl</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">refreshControl</span><span class="p">:</span> <span class="n">UIRefreshControl</span> <span class="p">=</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">let</span> <span class="nv">refreshControl</span> <span class="p">=</span> <span class="n">UIRefreshControl</span><span class="p">()</span>
-<span class="ln">3</span>    <span class="n">refreshControl</span><span class="p">.</span><span class="n">addTarget</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">ViewController</span><span class="p">.</span><span class="n">handleRefresh</span><span class="p">(</span><span class="kc">_</span><span class="p">:)),</span> <span class="k">for</span><span class="p">:</span> <span class="n">UIControlEvents</span><span class="p">.</span><span class="n">valueChanged</span><span class="p">)</span>
-<span class="ln">4</span>    
-<span class="ln">5</span>    <span class="k">return</span> <span class="n">refreshControl</span>
-<span class="ln">6</span><span class="p">}()</span></code></pre></div>
-<p>The most complicated thing about the code I just proposed is how the <code>UIRefreshControl</code> instance is assigned lazily by means of the closure expression denoted by <code>= { // ...closure body with setup code... }()</code> in the above snippet. Using this approach allows me to complete the setup all in one spot without the use of optionals. You may prefer doing this another way. The bottom line goal is to have a <code>UIRefreshControl</code> instance that we can add to the table view (coming up).</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">refreshControl</span><span class="p">:</span> <span class="n">UIRefreshControl</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kd">let</span> <span class="nv">refreshControl</span> <span class="p">=</span> <span class="n">UIRefreshControl</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">refreshControl</span><span class="p">.</span><span class="n">addTarget</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">ViewController</span><span class="p">.</span><span class="n">handleRefresh</span><span class="p">(</span><span class="kc">_</span><span class="p">:)),</span> <span class="k">for</span><span class="p">:</span> <span class="n">UIControlEvents</span><span class="p">.</span><span class="n">valueChanged</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="k">return</span> <span class="n">refreshControl</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}()</span>
+</span></span></code></pre></div><p>The most complicated thing about the code I just proposed is how the <code>UIRefreshControl</code> instance is assigned lazily by means of the closure expression denoted by <code>= { // ...closure body with setup code... }()</code> in the above snippet. Using this approach allows me to complete the setup all in one spot without the use of optionals. You may prefer doing this another way. The bottom line goal is to have a <code>UIRefreshControl</code> instance that we can add to the table view (coming up).</p>
 <p>As for the body of the closure expression, we&rsquo;re adding a target-action to the <code>UIRefreshControl</code> instance, <a href="#override-viewdidload">just like we did when we were dealing with a UITableViewController</a>.</p>
-
-<p>As with the <code>UITableViewController</code> example, note:<br />
-1. Since I&rsquo;ve specified &ldquo;handleRefresh:&#8221; (note the colon!) as the action argument, I need to define a function in this <code>UITableViewController</code> class with the same name. Additionally, the function should take one argument.<br />
-2. We&rsquo;d like this action to be called for the <code>UIControlEvent</code> called <code>ValueChanged</code>.</p>
-
-<p><a name="regvc-override-viewdidload" class="jump-target"></a></p>
-
+<p>As with the <code>UITableViewController</code> example, note:</p>
+<ol>
+<li>Since I&rsquo;ve specified &ldquo;handleRefresh:” (note the colon!) as the action argument, I need to define a function in this <code>UITableViewController</code> class with the same name. Additionally, the function should take one argument.</li>
+<li>We&rsquo;d like this action to be called for the <code>UIControlEvent</code> called <code>ValueChanged</code>.</li>
+</ol>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="override-viewdidload-1">Override viewDidLoad</h4>
-
 <p>Assuming that <a href="#reg-tv-example-setup">there is an outlet to the table view in the Storyboard</a>, the next step is to add the <code>UIRefreshControl</code> as a subview to the table view:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-<span class="ln">3</span>    <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
-<span class="ln">4</span>    
-<span class="ln">5</span>    <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">addSubview</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">refreshControl</span><span class="p">)</span>
-<span class="ln">6</span><span class="p">}</span></code></pre></div>
-<p><a name="regvc-handle-refresh-function" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">addSubview</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">refreshControl</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="implement-handlerefresh-function-1">Implement handleRefresh function</h4>
-
 <p>The <code>handleRefresh</code> function is implemented exactly as it was when we were dealing with a <code>UITableViewController</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">handleRefresh</span><span class="p">(</span><span class="n">refreshControl</span><span class="p">:</span> <span class="n">UIRefreshControl</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="c1">// Do some reloading of data and update the table view&#39;s data source</span>
-<span class="ln"> 3</span>    <span class="c1">// Fetch more objects from a web service, for example...</span>
-<span class="ln"> 4</span>    
-<span class="ln"> 5</span>    <span class="c1">// Simply adding an object to the data source for this example</span>
-<span class="ln"> 6</span>    <span class="kd">let</span> <span class="nv">newMovie</span> <span class="p">=</span> <span class="n">Movie</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Serenity&#34;</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="s">&#34;Sci-fi&#34;</span><span class="p">)</span>
-<span class="ln"> 7</span>    <span class="n">movies</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">newMovie</span><span class="p">)</span>
-<span class="ln"> 8</span>    
-<span class="ln"> 9</span>    <span class="n">movies</span><span class="p">.</span><span class="bp">sort</span><span class="p">()</span> <span class="p">{</span> <span class="nv">$0</span><span class="p">.</span><span class="n">title</span> <span class="o">&lt;</span> <span class="nv">$1</span><span class="p">.</span><span class="n">title</span> <span class="p">}</span>
-<span class="ln">10</span>    
-<span class="ln">11</span>    <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
-<span class="ln">12</span>    <span class="n">refreshControl</span><span class="p">.</span><span class="n">endRefreshing</span><span class="p">()</span>
-<span class="ln">13</span><span class="p">}</span></code></pre></div>
-<h3 id="wrapping-up">Wrapping up</h3>
-
-<p>Implementing &ldquo;pull to refresh&#8221; is a common need that arises when working with table views. Here we&rsquo;ve explored how to implement this feature using both a <code>UITableViewController</code> <em>and</em> with a regular view controller and a table view.</p>
-
-<p><a name="share" class="jump-target"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">handleRefresh</span><span class="p">(</span><span class="n">refreshControl</span><span class="p">:</span> <span class="n">UIRefreshControl</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="c1">// Do some reloading of data and update the table view&#39;s data source</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="c1">// Fetch more objects from a web service, for example...</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// Simply adding an object to the data source for this example</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">let</span> <span class="nv">newMovie</span> <span class="p">=</span> <span class="n">Movie</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Serenity&#34;</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="s">&#34;Sci-fi&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="n">movies</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">newMovie</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">movies</span><span class="p">.</span><span class="bp">sort</span><span class="p">()</span> <span class="p">{</span> <span class="nv">$0</span><span class="p">.</span><span class="n">title</span> <span class="o">&lt;</span> <span class="nv">$1</span><span class="p">.</span><span class="n">title</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">refreshControl</span><span class="p">.</span><span class="n">endRefreshing</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="wrapping-up">Wrapping up</h3>
+<p>Implementing &ldquo;pull to refresh” is a common need that arises when working with table views. Here we&rsquo;ve explored how to implement this feature using both a <code>UITableViewController</code> <em>and</em> with a regular view controller and a table view.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -448,7 +388,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

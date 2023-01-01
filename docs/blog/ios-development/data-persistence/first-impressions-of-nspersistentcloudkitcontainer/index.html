@@ -45,20 +45,17 @@
 <meta property="og:title" content="First Impressions of NSPersistentCloudKitContainer" />
 <meta property="og:description" content="Outlines my initial impressions of NSPersistentCloudKitContainer and what excites me about building Core Data and CloudKit apps moving forward." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/first-impressions-of-nspersistentcloudkitcontainer/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/first-impressions-of-nspersistentcloudkitcontainer/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20First%20Impressions%20of%20NSPersistentCloudKitContainer.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/FB%20-%20First%20Impressions%20of%20NSPersistentCloudKitContainer.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-06T04:40:54+00:00" />
+<meta property="article:modified_time" content="2019-06-06T04:40:54+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20First%20Impressions%20of%20NSPersistentCloudKitContainer.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/FB%20-%20First%20Impressions%20of%20NSPersistentCloudKitContainer.png" />
-<meta property="article:published_time" content="2019-06-06T04:40:54&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-06T04:40:54&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20First%20Impressions%20of%20NSPersistentCloudKitContainer.png"/>
 
 <meta name="twitter:title" content="First Impressions of NSPersistentCloudKitContainer"/>
 <meta name="twitter:description" content="Outlines my initial impressions of NSPersistentCloudKitContainer and what excites me about building Core Data and CloudKit apps moving forward."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -73,7 +70,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/first-impressions-of-nspersistentcloudkitcontainer\/",
-  "wordCount": "538",
+  "wordCount": "520",
   "datePublished": "2019-06-06T04:40:54Z",
   "dateModified": "2019-06-06T04:40:54Z",
   "author": {
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -212,94 +209,54 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p><a name="resources" class="jump-target"></a>
-<div class="resources">
-<div class="resources-header">
-Resources
-</div>
-<ul class="resources-content">
-<li>
-<i class="fas fa-link"></i> <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">Using Core Data With CloudKit - WWDC 2019 Session 202</a>
-</li>
-<li>
-<i class="fas fa-file-code"></i> <a href="https://developer.apple.com/documentation/coredata/synchronizing_a_local_store_to_the_cloud" rel="nofollow">Sample Project from Apple</a>
-</li>
-</ul>
-</div></p>
-
+    <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <h2 id="how-nspersistentcloudkitcontainer-helps">How NSPersistentCloudKitContainer Helps</h2>
-
 <p>I suppose the first question everyone should ask is, &ldquo;What&rsquo;s the big deal?  How does <code>NSPersistentCloudKitContainer</code> even help me?&rdquo;</p>
-
-<p>I noted at least <strong>three huge wins</strong> from the <a href="https://developer.apple.com/videos/play/wwdc2019/202" rel="nofollow">WWDC 2019 session</a>.  Ask yourself&hellip;</p>
-
-<p>1) &ldquo;Do I want to figure out how to retrieve data from CloudKit and merge it with my local Core Data persistent store on my own?&rdquo; &ndash; No?  Me either. 😃</p>
-
+<p>I noted at least <strong>three huge wins</strong> from the <!-- raw HTML omitted -->WWDC 2019 session<!-- raw HTML omitted -->.  Ask yourself&hellip;</p>
+<ol>
+<li>&ldquo;Do I want to figure out how to retrieve data from CloudKit and merge it with my local Core Data persistent store on my own?&rdquo; &ndash; No?  Me either. 😃</li>
+</ol>
 <p><code>NSPersistentCloudKitContainer</code> handles making a local replica of your app&rsquo;s CloudKit data.</p>
-
-<p>2) &ldquo;Do I want to implement synchronization schedluing and all the error handling that comes with CloudKit?&rdquo; &ndash; I <em>definitely</em> don&rsquo;t&hellip;</p>
-
+<ol start="2">
+<li>&ldquo;Do I want to implement synchronization schedluing and all the error handling that comes with CloudKit?&rdquo; &ndash; I <em>definitely</em> don&rsquo;t&hellip;</li>
+</ol>
 <p><code>NSPersistentCloudKitContainer</code> handles scheduling CloudKit operations, and takes your <code>// handle errors</code> placeholder code (👀) and actually implements it the right way internally. #sweet</p>
-
-<p>3) &ldquo;Do I want to map between <code>NSManagedObjects</code> and <code>CKRecords</code> by hand?&rdquo; &ndash; Not if that could be automagic!</p>
-
+<ol start="3">
+<li>&ldquo;Do I want to map between <code>NSManagedObjects</code> and <code>CKRecords</code> by hand?&rdquo; &ndash; Not if that could be automagic!</li>
+</ol>
 <p><code>NSPersistentCloudKitContainer</code> handles transforming your <code>NSManagedObjects</code> into <code>CKRecords</code> as well.</p>
-
 <h2 id="exciting-times">Exciting Times</h2>
-
 <p>Apple did a lot of work to <strong>encapsulate a very common set of code patterns</strong> that were necessary for implementing an app with Core Data and CloudKit.</p>
-
 <p>They claim to be able to <strong>save us thousands of lines of code</strong> (and I believe it!).</p>
-
 <p>I have an app that uses Core Data locally. I&rsquo;ve been wanting to enable CloudKit on, so that data is synced across my users&rsquo; devices.  Every time I think about what it&rsquo;ll take to get the Core Data pieces talking the on the same wavelength as the CloudKit pieces, I just dread the inevitable headache that would ensue.  So I run away.  😬</p>
-
 <p>My hope is to see what it&rsquo;s like to enable <code>NSPersistentCloudKitContainer</code> with that existing app.  I&rsquo;ll be sure to document the journey!</p>
-
 <h1 id="dipping-a-toe-in">Dipping a Toe In</h1>
-
 <p>Just a couple of tidbits about the setup process for getting started with this new class&hellip;</p>
-
-<h2 id="enabling-core-data-cloudkit">Enabling Core Data + CloudKit</h2>
-
+<h2 id="enabling-core-data--cloudkit">Enabling Core Data + CloudKit</h2>
 <p>While it&rsquo;s not <em>absolutely</em> required to check these checkboxes, Xcode will provide you with some of the boilerplate code necessary for working with Core Data and CloudKit <strong>together</strong>.</p>
-
-<p><img src="enable-coredata-cloudkit.png" alt="Check Use Core Data + CloudKit" /></p>
-
+<p><img src="enable-coredata-cloudkit.png" alt="Check Use Core Data + CloudKit"></p>
 <h2 id="starting-point">Starting Point</h2>
-
 <p>Xcode generates some code in your AppDelegate.swift file to initialize the Core Data Stack, only this time, instead of a standard <code>NSPersistentContainer</code>, it initializes the new <code>NSPersistentCloudKitContainer</code>:</p>
-
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="hl"><span class="ln"> 1</span><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">persistentContainer</span><span class="p">:</span> <span class="n">NSPersistentCloudKitContainer</span> <span class="p">=</span> <span class="p">{</span>
-</span><span class="hl"><span class="ln"> 2</span>        <span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="n">NSPersistentCloudKitContainer</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&#34;NSPersistentCloudKitContainer_First_Steps&#34;</span><span class="p">)</span>
-</span><span class="ln"> 3</span>        <span class="n">container</span><span class="p">.</span><span class="n">loadPersistentStores</span><span class="p">(</span><span class="n">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">storeDescription</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
-<span class="ln"> 4</span>            <span class="k">if</span> <span class="kd">let</span> <span class="nv">error</span> <span class="p">=</span> <span class="n">error</span> <span class="k">as</span> <span class="n">NSError</span><span class="p">?</span> <span class="p">{</span>
-<span class="ln"> 5</span>                <span class="c1">// Replace this implementation with code to handle the error appropriately.</span>
-<span class="ln"> 6</span>                <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Unresolved error </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">, </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">userInfo</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
-<span class="ln"> 7</span>            <span class="p">}</span>
-<span class="ln"> 8</span>        <span class="p">})</span>
-<span class="ln"> 9</span>        <span class="k">return</span> <span class="n">container</span>
-<span class="ln">10</span>    <span class="p">}()</span></code></pre></div>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line hl"><span class="ln"> 1</span><span class="cl"><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">persistentContainer</span><span class="p">:</span> <span class="n">NSPersistentCloudKitContainer</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="ln"> 2</span><span class="cl">        <span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="n">NSPersistentCloudKitContainer</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&#34;NSPersistentCloudKitContainer_First_Steps&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">        <span class="n">container</span><span class="p">.</span><span class="n">loadPersistentStores</span><span class="p">(</span><span class="n">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">storeDescription</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="k">in</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">            <span class="k">if</span> <span class="kd">let</span> <span class="nv">error</span> <span class="p">=</span> <span class="n">error</span> <span class="k">as</span> <span class="n">NSError</span><span class="p">?</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">                <span class="c1">// Replace this implementation with code to handle the error appropriately.</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">                <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Unresolved error </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">, </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">userInfo</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="k">return</span> <span class="n">container</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="p">}()</span></span></span></code></pre></div>
 <h2 id="not-ready-yet-more-to-enable">Not Ready Yet (more to enable)</h2>
-
 <h4 id="enable-cloudkit-capability">Enable CloudKit Capability</h4>
-
 <p>Since you&rsquo;re working with CloudKit in this scenario, you still need to <em>enable</em> CloudKit so that your app has the appropriate <strong>entitlements</strong>, and so that your app&rsquo;s <strong>CloudKit container</strong> gets created in iCloud.</p>
-
-<p><img src="enable-icloud.gif" alt="Enable iCloud" /></p>
-
+<p><img src="enable-icloud.gif" alt="Enable iCloud"></p>
 <h4 id="enable-remote-notifications">Enable Remote Notifications</h4>
-
 <p>CloudKit also uses Push Notifications to alert your app to data changes coming in from other devices.  To get these notifications, you need to enable the Remote Notifications capability for your app as well.</p>
-
-<p><img src="enable-remote-notifications.gif" alt="Enable Remote Notifications" /></p>
-
+<p><img src="enable-remote-notifications.gif" alt="Enable Remote Notifications"></p>
 <h2 id="next-steps">Next Steps</h2>
-
-<p>When it comes to learning what to do next, <a href="https://developer.apple.com/documentation/coredata/synchronizing_a_local_store_to_the_cloud" rel="nofollow">Apple has provided a sample project</a> that I hope to examine and take apart.</p>
-
+<p>When it comes to learning what to do next, <!-- raw HTML omitted -->Apple has provided a sample project<!-- raw HTML omitted --> that I hope to examine and take apart.</p>
 <p>More to come!</p>
 
     <aside>
@@ -309,7 +266,7 @@ Resources
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

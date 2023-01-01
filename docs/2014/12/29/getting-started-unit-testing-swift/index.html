@@ -43,18 +43,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Getting Started with Unit Testing in Swift" />
-<meta property="og:description" content="Getting set up to write unit tests in Swift, while not difficult, isn&rsquo;t exactly intuitive. I&rsquo;ve written several posts and gathered a few resources on unit testing in Swift, but I haven&rsquo;t yet published a &ldquo;getting started&#8221; guide until now.
-Where does one get started with unit testing in Swift when they&rsquo;ve never gotten started before? Here are 5 steps to help you successfully begin unit testing in Swift:" />
+<meta property="og:description" content="Getting set up to write unit tests in Swift, while not difficult, isn&rsquo;t exactly intuitive. I&rsquo;ve written several posts and gathered a few resources on unit testing in Swift, but I haven&rsquo;t yet published a &ldquo;getting started” guide until now.
+Where does one get started with unit testing in Swift when they&rsquo;ve never gotten started before? Here are 5 steps to help you successfully begin unit testing in Swift:
+1 – Create your project The obvious first step." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/" />
-<meta property="article:published_time" content="2014-12-29T12:00:50&#43;00:00"/>
-<meta property="article:modified_time" content="2014-12-29T12:00:50&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-12-29T12:00:50+00:00" />
+<meta property="article:modified_time" content="2014-12-29T12:00:50+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Getting Started with Unit Testing in Swift"/>
-<meta name="twitter:description" content="Getting set up to write unit tests in Swift, while not difficult, isn&rsquo;t exactly intuitive. I&rsquo;ve written several posts and gathered a few resources on unit testing in Swift, but I haven&rsquo;t yet published a &ldquo;getting started&#8221; guide until now.
-Where does one get started with unit testing in Swift when they&rsquo;ve never gotten started before? Here are 5 steps to help you successfully begin unit testing in Swift:"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="twitter:description" content="Getting set up to write unit tests in Swift, while not difficult, isn&rsquo;t exactly intuitive. I&rsquo;ve written several posts and gathered a few resources on unit testing in Swift, but I haven&rsquo;t yet published a &ldquo;getting started” guide until now.
+Where does one get started with unit testing in Swift when they&rsquo;ve never gotten started before? Here are 5 steps to help you successfully begin unit testing in Swift:
+1 – Create your project The obvious first step."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -89,7 +92,7 @@ Where does one get started with unit testing in Swift when they&rsquo;ve never g
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,48 +205,27 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>Getting set up to write unit tests in Swift, while not <em>difficult</em>, isn&rsquo;t exactly <em>intuitive</em>. I&rsquo;ve written <a href="http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/">several posts and gathered a few resources on unit testing in Swift</a>, but I haven&rsquo;t yet published a &ldquo;getting started&#8221; guide until now.</p>
-
+    <p>Getting set up to write unit tests in Swift, while not <em>difficult</em>, isn&rsquo;t exactly <em>intuitive</em>. I&rsquo;ve written <a href="http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/">several posts and gathered a few resources on unit testing in Swift</a>, but I haven&rsquo;t yet published a &ldquo;getting started” guide until now.</p>
 <p>Where does one get started with unit testing in Swift when they&rsquo;ve never gotten started before? Here are 5 steps to help you successfully begin unit testing in Swift:</p>
-
-<h3 id="1-create-your-project">1 – Create your project</h3>
-
-<p>The obvious first step. If you don&rsquo;t already have a project going, create a new one to organize the code for your app idea. Xcode 6 will automatically generate two &ldquo;targets&#8221; for you. One will be your app&rsquo;s main module and contains all the code which, when compiled, is meant to be run in the iOS simulator / on an iOS device.</p>
-
+<h3 id="1--create-your-project">1 – Create your project</h3>
+<p>The obvious first step. If you don&rsquo;t already have a project going, create a new one to organize the code for your app idea. Xcode 6 will automatically generate two &ldquo;targets” for you. One will be your app&rsquo;s main module and contains all the code which, when compiled, is meant to be run in the iOS simulator / on an iOS device.</p>
 <p>The other will be your test target, which, as the name implies, is where you write your unit test code.</p>
-
 <p>It&rsquo;s important to note that there are <em>two compilation targets</em> that you&rsquo;ll be working with as you unit test. Source code that&rsquo;s part of one compilation target isn&rsquo;t part of the other by default. This is important to at least <em>know</em> as we move forward in this walkthrough.</p>
-
-<h3 id="2-framework-considerations-toggle-defines-module-8221-in-your-build-settings">2 – Framework considerations: toggle &ldquo;Defines Module&#8221; in your build settings</h3>
-
+<h3 id="2--framework-considerations-toggle-defines-module8221-in-your-build-settings">2 – Framework considerations: toggle &ldquo;Defines Module” in your build settings</h3>
 <p>This step becomes especially critical if you&rsquo;re using or plan to use a <a href="https://github.com/Quick/Quick">unit testing framework like Quick</a>. It&rsquo;s not required to use something like Quick, but it can enhance your testing experience if you prefer something other than the out-of-the-box <code>XCTestCase</code> setup.</p>
-
-<p>When you’re working with frameworks, <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-XID_88">Apple recommends</a> that you make sure the &ldquo;Defines Module&#8221; build setting, found under Packaging, is set to Yes.</p>
-
-<p>If you are relying on, or <em>could</em> be relying on &ldquo;non-standard&#8221; .framework files for your app, make sure you toggle this flag in your Xcode build settings:<br />
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-1024x679.png" alt="Build Settings - Defines Module" width="730" height="484" class="alignnone size-large wp-image-10371" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-1024x679.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-300x199.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-1200x796.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj.png 1387w" sizes="(max-width: 730px) 100vw, 730px" /></a></p>
-
-<h3 id="3-import-your-main-project-module-into-your-test-file-s">3 – Import your main project (module) into your test file(s)</h3>
-
-<p>In your test target, at the top of each of your .swift files that contain your XCTestCase classes, write an import statement to bring in your main project&rsquo;s module. In normal scenarios, your app&rsquo;s module is named the same as your Xcode project file.<br />
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-1024x671.png" alt="Import Module for Testing" width="730" height="478" class="alignnone size-large wp-image-10381" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-1024x671.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-300x196.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-1200x786.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift.png 1393w" sizes="(max-width: 730px) 100vw, 730px" /></a></p>
-
-<p><a id="public-testable"></a></p>
-
-<h3 id="4-access-control-public-testable">4 – Access control: Public == Testable</h3>
-
-<p>Any classes/structs/enums/methods that you need to use in your tests must have a <code>public</code> access control modifier. <code>Internal</code> (default) and <code>private</code> Types and functions can&rsquo;t be &ldquo;seen&#8221; by your unit tests, so you need to go the <code>public</code> route if you want to test those things.</p>
-
+<p>When you’re working with frameworks, <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-XID_88">Apple recommends</a> that you make sure the &ldquo;Defines Module” build setting, found under Packaging, is set to Yes.</p>
+<p>If you are relying on, or <em>could</em> be relying on &ldquo;non-standard” .framework files for your app, make sure you toggle this flag in your Xcode build settings:<br>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj.png"><!-- raw HTML omitted --></a></p>
+<h3 id="3--import-your-main-project-module-into-your-test-files">3 – Import your main project (module) into your test file(s)</h3>
+<p>In your test target, at the top of each of your .swift files that contain your XCTestCase classes, write an import statement to bring in your main project&rsquo;s module. In normal scenarios, your app&rsquo;s module is named the same as your Xcode project file.<br>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift.png"><!-- raw HTML omitted --></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="4--access-control-public--testable">4 – Access control: Public == Testable</h3>
+<p>Any classes/structs/enums/methods that you need to use in your tests must have a <code>public</code> access control modifier. <code>Internal</code> (default) and <code>private</code> Types and functions can&rsquo;t be &ldquo;seen” by your unit tests, so you need to go the <code>public</code> route if you want to test those things.</p>
 <p>Previously I&rsquo;d written on <a href="http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/">Swift access control and its implications for unit testing</a>. There, I proposed simply adding your main project&rsquo;s .swift source files to your test target, but it turns out that this can lead to some <a href="https://github.com/Quick/Quick/issues/91">really obscure issues</a>. An enlightening <a href="https://twitter.com/modocache/status/549042409838219264">Twitter conversation</a> also shed some light on the subject, and pointed to the solution of testing only publicly accessible <em>behavior</em> that your Types expose, rather than trying to test internal implementation. That probably deserves a blog entry of its own, but for now, I&rsquo;ll leave it to say that I&rsquo;d recommend <em>not</em> adding your .swift source files to your test target, but rather to adjust the access control modifiers of the things you want to test to <code>public</code>.</p>
-
-<h3 id="5-write-tests">5 – Write tests!</h3>
-
+<h3 id="5--write-tests">5 – Write tests!</h3>
 <p>With your main project imported into a test file, and your Types and functions declared with appropriate <code>public</code> accessibility, you&rsquo;re all set to begin writing tests in Swift!</p>
-
 <h3 id="summary">Summary</h3>
-
 <p>We&rsquo;ve gone from 0 to ready-to-test in this getting started guide to unit testing in Swift. From here, you may be interested in pursuing other topics related to unit testing in Swift. <a href="http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/">Check out my ever-growing unit testing resource list for more information</a>!</p>
 
     <aside>
@@ -272,7 +254,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

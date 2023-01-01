@@ -46,15 +46,16 @@
 <meta property="og:description" content="By default, Entity Framework takes the .Net decimal Type and maps it to SQL Server&rsquo;s decimal(18,2) data type.
 If you&rsquo;ve got a property on an Entity that is of Type decimal, but down in your database, you&rsquo;re allowing for greater precision than 2 decimal places (scale is actually the proper term for the number of places after the decimal), you need to tell Entity Framework this information. Otherwise, decimal values that you save to your database will be truncated at the default 2 decimal places." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/" />
-<meta property="article:published_time" content="2017-03-29T20:57:27&#43;00:00"/>
-<meta property="article:modified_time" content="2017-03-29T20:57:27&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2017-03-29T20:57:27+00:00" />
+<meta property="article:modified_time" content="2017-03-29T20:57:27+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Entity Framework Tip – Specifying Decimal Precision"/>
 <meta name="twitter:description" content="By default, Entity Framework takes the .Net decimal Type and maps it to SQL Server&rsquo;s decimal(18,2) data type.
 If you&rsquo;ve got a property on an Entity that is of Type decimal, but down in your database, you&rsquo;re allowing for greater precision than 2 decimal places (scale is actually the proper term for the number of places after the decimal), you need to tell Entity Framework this information. Otherwise, decimal values that you save to your database will be truncated at the default 2 decimal places."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -89,7 +90,7 @@ If you&rsquo;ve got a property on an Entity that is of Type decimal, but down in
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -198,27 +199,19 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>By default, Entity Framework takes the .Net <code>decimal</code> Type and maps it to SQL Server&rsquo;s <code>decimal(18,2)</code> data type.</p>
-
+    <p>By default, Entity Framework takes the .Net <code>decimal</code> Type and maps it to SQL Server&rsquo;s <code>decimal(18,2)</code> data type.</p>
 <p>If you&rsquo;ve got a property on an Entity that is of Type <code>decimal</code>, but down in your database, you&rsquo;re allowing for greater precision than 2 decimal places (<a href="https://docs.microsoft.com/en-us/sql/t-sql/data-types/precision-scale-and-length-transact-sql"><em>scale</em></a> is actually the proper term for the number of places after the decimal), you need to tell Entity Framework this information. Otherwise, decimal values that you save to your database will be truncated at the default <strong>2</strong> decimal places.</p>
-
 <h2 id="updating-decimal-scale-with-entity-framework">Updating decimal scale with Entity Framework</h2>
-
 <p>To tell Entity Framework that you need different precision than <code>decimal(18,2)</code>, you need to <strong>open your DbContext</strong> implementation.</p>
-
 <p>Then take a look at your <code>OnModelCreating</code> override.</p>
-
 <p>If you haven&rsquo;t implemented an override yet, go ahead and create one. If you&rsquo;ve already got some Code First stuff in your <code>OnModelCreating</code> override, add to it by following this example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-c#" data-lang="c#"><span class="ln">1</span><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="n">OnModelCreating</span><span class="p">(</span><span class="n">DbModelBuilder</span> <span class="n">modelBuilder</span><span class="p">)</span>
-<span class="ln">2</span><span class="p">{</span>
-<span class="ln">3</span>    <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&lt;</span><span class="n">NameOfEntity</span><span class="p">&gt;()</span>
-<span class="ln">4</span>                <span class="p">.</span><span class="n">Property</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">NameOfProperty</span><span class="p">)</span>
-<span class="ln">5</span>                <span class="p">.</span><span class="n">HasPrecision</span><span class="p">(</span><span class="m">9</span><span class="p">,</span> <span class="m">4</span><span class="p">);</span> <span class="c1">// or whatever your schema specifies
-</span><span class="ln">6</span><span class="c1"></span><span class="p">}</span>
-</code></pre></div>
-<p>It&rsquo;s as simple as that! Once you make this update, your decimal values won&rsquo;t be truncated at the second decimal place anymore. They&rsquo;ll be as precise as you&rsquo;ve specified in your call to <code>HasPrecision()</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="n">OnModelCreating</span><span class="p">(</span><span class="n">DbModelBuilder</span> <span class="n">modelBuilder</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&lt;</span><span class="n">NameOfEntity</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">                <span class="p">.</span><span class="n">Property</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">NameOfProperty</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">                <span class="p">.</span><span class="n">HasPrecision</span><span class="p">(</span><span class="m">9</span><span class="p">,</span> <span class="m">4</span><span class="p">);</span> <span class="c1">// or whatever your schema specifies</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>It&rsquo;s as simple as that! Once you make this update, your decimal values won&rsquo;t be truncated at the second decimal place anymore. They&rsquo;ll be as precise as you&rsquo;ve specified in your call to <code>HasPrecision()</code>.</p>
 
     <aside>
       
@@ -240,7 +233,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

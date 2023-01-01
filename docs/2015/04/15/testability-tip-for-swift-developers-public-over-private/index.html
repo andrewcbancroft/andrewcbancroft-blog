@@ -43,20 +43,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Testability Tip for Swift Developers – Public Over Private" />
-<meta property="og:description" content="Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a private function, however, I often scratch my head and ask, &ldquo;How am I supposed to test this??&#8221;.
-Most experienced testers will tell you, &ldquo;Don&rsquo;t test private implementation – only public API&#8221;.
-&ldquo;Okay&#8230; But how, does that private function get tested?&#8221;, I always asked." />
+<meta property="og:description" content="Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a private function, however, I often scratch my head and ask, &ldquo;How am I supposed to test this??”.
+Most experienced testers will tell you, &ldquo;Don&rsquo;t test private implementation – only public API”.
+&ldquo;Okay… But how, does that private function get tested?”, I always asked." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/" />
-<meta property="article:published_time" content="2015-04-15T18:52:11&#43;00:00"/>
-<meta property="article:modified_time" content="2015-04-15T18:52:11&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-04-15T18:52:11+00:00" />
+<meta property="article:modified_time" content="2015-04-15T18:52:11+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Testability Tip for Swift Developers – Public Over Private"/>
-<meta name="twitter:description" content="Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a private function, however, I often scratch my head and ask, &ldquo;How am I supposed to test this??&#8221;.
-Most experienced testers will tell you, &ldquo;Don&rsquo;t test private implementation – only public API&#8221;.
-&ldquo;Okay&#8230; But how, does that private function get tested?&#8221;, I always asked."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="twitter:description" content="Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a private function, however, I often scratch my head and ask, &ldquo;How am I supposed to test this??”.
+Most experienced testers will tell you, &ldquo;Don&rsquo;t test private implementation – only public API”.
+&ldquo;Okay… But how, does that private function get tested?”, I always asked."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -65,7 +66,7 @@ Most experienced testers will tell you, &ldquo;Don&rsquo;t test private implemen
   "@type": "BlogPosting",
   "headline": "Testability Tip for Swift Developers – Public Over Private",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/04\/15\/testability-tip-for-swift-developers-public-over-private\/",
-  "wordCount": "1013",
+  "wordCount": "990",
   "datePublished": "2015-04-15T18:52:11Z",
   "dateModified": "2015-04-15T18:52:11Z",
   "author": {
@@ -91,7 +92,7 @@ Most experienced testers will tell you, &ldquo;Don&rsquo;t test private implemen
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -204,134 +205,71 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a <code>private</code> function, however, I often scratch my head and ask, &ldquo;How am I supposed to test this??&#8221;.</p>
-
-<p>Most experienced testers will tell you, &ldquo;Don&rsquo;t test private implementation – only public API&#8221;.</p>
-
-<p>&ldquo;Okay&#8230; But how, does that private function get tested?&#8221;, I always asked.</p>
-
+    <p>Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a <code>private</code> function, however, I often scratch my head and ask, &ldquo;How am I supposed to test this??”.</p>
+<p>Most experienced testers will tell you, &ldquo;Don&rsquo;t test private implementation – only public API”.</p>
+<p>&ldquo;Okay… But how, does that private function get tested?”, I always asked.</p>
 <p>In this article, I intend to share a testability tip catered to the Swift developer community that helps alleviate this issue with testing private functions.</p>
-
-<p><a name="testing-and-observability" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="testing-and-observability">Testing and observability</h3>
-
-<p><a name="developers-as-clients-of-apis" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="developers-as-clients-of-apis">Developers as clients of APIs</h4>
-
-<p>As developers, we are &ldquo;clients&#8221; of APIs on a daily basis. We interact with other developers&rsquo; frameworks and libraries through the visible, observable, Application Programming Interface that they&rsquo;ve exposed to us. It&rsquo;s the way they&rsquo;ve designed for us to interact with their code.</p>
-
+<p>As developers, we are &ldquo;clients” of APIs on a daily basis. We interact with other developers&rsquo; frameworks and libraries through the visible, observable, Application Programming Interface that they&rsquo;ve exposed to us. It&rsquo;s the way they&rsquo;ve designed for us to interact with their code.</p>
 <p>Notice three words that I chose in that introductory paragraph:</p>
-
 <ul>
 <li>Visible</li>
 <li>Observable</li>
 <li>Exposed</li>
 </ul>
-
-<p>If we are going to use another developer&rsquo;s library, <em>all we have</em> as developers is the public interface that they&rsquo;ve made visible to us&#8230; It&rsquo;s the only observable thing we can look at and go, &ldquo;Oh! Okay, to do this, I call <em>that</em> function&#8221;. The only thing exposed are the functions and properties that the developer intends for us to see.</p>
-
-<p><a name="tests-as-clients-of-apis" class="jump-target"></a></p>
-
+<p>If we are going to use another developer&rsquo;s library, <em>all we have</em> as developers is the public interface that they&rsquo;ve made visible to us… It&rsquo;s the only observable thing we can look at and go, &ldquo;Oh! Okay, to do this, I call <em>that</em> function”. The only thing exposed are the functions and properties that the developer intends for us to see.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="tests-as-clients-of-apis">Tests as clients of APIs</h4>
-
-<p>Have you ever viewed your unit test suite as a &ldquo;client&#8221; of your code? It is!</p>
-
+<p>Have you ever viewed your unit test suite as a &ldquo;client” of your code? It is!</p>
 <p>And just like a developer, the unit tests in your test target interacts with <em>your</em> app&rsquo;s API through the same visible, observable, interface that you&rsquo;ve exposed to them.</p>
-
-<p>If you start to personify your test target and think of it in terms of &ldquo;just another client of your code&#8221;, you begin to see that it really doesn&rsquo;t have any more visibility of your code than another developer would if he or she were consuming it.</p>
-
+<p>If you start to personify your test target and think of it in terms of &ldquo;just another client of your code”, you begin to see that it really doesn&rsquo;t have any more visibility of your code than another developer would if he or she were consuming it.</p>
 <p>All of this boils down to say, if it&rsquo;s observable, it&rsquo;s testable. Which means, the easiest and most natural code to test is <code>public</code> code.</p>
-
-<p><a name="public-over-private" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="public-over-private-and-internal">Public over private (and internal)</h3>
-
 <p>So should <em>everything</em> be <code>public</code> instead of <code>private</code> or <code>internal</code>? Certainly not.</p>
-
 <p>Object-oriented programming strives for data-hiding and encapsulation, so there <em>are</em> reasons to keep some things non-public.</p>
-
 <p>Additionally, there are <a href="https://developer.apple.com/swift/blog/?id=27">certain Swift compiler optimizations</a> (which lead to run-time optimizations) that can be gained when you mark things in your Type as <code>final</code>. Using the <code>private</code> access modifier allows the compiler to <em>infer</em> that it is <code>final</code> because it&rsquo;s narrowly scoped to the current Type <em>only</em>. These are handy things to know, but as is always the case with optimization, avoid <em>premature</em> optimization by <em>measuring first</em> to decide if you really need them.</p>
-
 <p>Whenever possible, I prefer <code>public</code> over the other access modifiers to help enable testing for my apps.</p>
-
-<p>So when is &ldquo;whenever possible&#8221;?</p>
-
-<p><a name="reason-for-existence" class="jump-target"></a></p>
-
-<h4 id="public-when-part-of-a-type-s-reason-for-existence">Public when part of a Type&rsquo;s reason for existence</h4>
-
-<p>Obviously, properties and functions that are part of a Type&rsquo;s core purpose can be marked <code>public</code>. My practice is to decide, &ldquo;Is this function why this Type exists?&#8221;. If so, I mark it as <code>public</code>.</p>
-
+<p>So when is &ldquo;whenever possible”?</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h4 id="public-when-part-of-a-types-reason-for-existence">Public when part of a Type&rsquo;s reason for existence</h4>
+<p>Obviously, properties and functions that are part of a Type&rsquo;s core purpose can be marked <code>public</code>. My practice is to decide, &ldquo;Is this function why this Type exists?”. If so, I mark it as <code>public</code>.</p>
 <p>Note also that the Type itself needs to be marked public if it&rsquo;s going to be visible to your unit tests.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Instead of this (default --internal-- access)...</span>
-<span class="ln"> 2</span><span class="kd">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
-<span class="ln"> 3</span>    <span class="kd">func</span> <span class="nf">myFunc</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 4</span>        <span class="c1">// Performs something essential to why MyClass exists</span>
-<span class="ln"> 5</span>    <span class="p">}</span>
-<span class="ln"> 6</span><span class="p">}</span>
-<span class="ln"> 7</span>
-<span class="ln"> 8</span><span class="c1">// Make things public...</span>
-<span class="ln"> 9</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
-<span class="ln">10</span>    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">myFunc</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">11</span>        <span class="c1">// Performs something essential to why MyClass exists</span>
-<span class="ln">12</span>    <span class="p">}</span>
-<span class="ln">13</span><span class="p">}</span></code></pre></div>
-<p><a name="new-type" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// Instead of this (default --internal-- access)...</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">func</span> <span class="nf">myFunc</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="c1">// Performs something essential to why MyClass exists</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1">// Make things public...</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClass</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">myFunc</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="c1">// Performs something essential to why MyClass exists</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="transition-many-private-components-to-new-type">Transition many private components to new Type</h4>
-
-<p>Having <em>many</em> <code>private</code> properties and functions can be an indication that there needs to be a new Type created to encapsulate those components. I&rsquo;ve heard developers talk about this situation as one that &ldquo;screams, &#8216;New Type!&rsquo;&#8221;.</p>
-
+<p>Having <em>many</em> <code>private</code> properties and functions can be an indication that there needs to be a new Type created to encapsulate those components. I&rsquo;ve heard developers talk about this situation as one that &ldquo;screams, ‘New Type!&rsquo;”.</p>
 <p>If we extract out sets of related <code>private</code> properties and functions into a new Type, those pieces of code <em>are the reason that Type exists</em>, and thus should be marked <code>public</code>. Testing, then, becomes a matter of writing unit tests for the new Type and its public API!</p>
-
 <p>Even if you just have a few <code>private</code> code blocks in the Type you&rsquo;re trying to test, it can sometimes make your testing life easier to transition them to a new Type as <code>public</code> components.</p>
-
 <p>If I&rsquo;m really uncomfortable marking functions <code>public</code> in the Type where they currently exist, creating a new Type and marking them <code>public</code> there is usually the better alternative, and it immediately enables testing for that set of code.</p>
-
-<p><a name="testing-non-public" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="testing-non-public-code">Testing non-public code</h3>
-
-<p>As I mentioned in the beginning, it&rsquo;s not good to just haphazardly go through your code and &ldquo;<code>public</code> all the things!!&#8221;. After <em>appropriately</em> marking fundamental functions <code>public</code> and transitioning sets of <code>private</code> functions to new Types where they can happily live as part of <em>that</em> Type&rsquo;s public API, there will likely be a few <code>private</code> or <code>internal</code> things left over.</p>
-
+<p>As I mentioned in the beginning, it&rsquo;s not good to just haphazardly go through your code and &ldquo;<code>public</code> all the things!!”. After <em>appropriately</em> marking fundamental functions <code>public</code> and transitioning sets of <code>private</code> functions to new Types where they can happily live as part of <em>that</em> Type&rsquo;s public API, there will likely be a few <code>private</code> or <code>internal</code> things left over.</p>
 <p>How do these get tested?</p>
-
 <p>Well, ideally, these are small, simple, helper functions that are only useful when called within the Type you&rsquo;re working on.</p>
-
 <p>If these functions produce observable results in the places where they&rsquo;re called, you end up testing these non-public components <em>implicitly</em>, that is, by testing the things that <em>are</em> <code>public</code>.</p>
-
-<p>During the course of testing some <code>public</code> function which calls another non-public function, that non-public function&rsquo;s logic will be executed. If the outcome of that function&rsquo;s execution affects the Type&rsquo;s state, or the output of its <code>public</code> parent function, those are the things that you&rsquo;d be able to write unit tests for, because those are the &ldquo;observation points&#8221;, so to speak.</p>
-
+<p>During the course of testing some <code>public</code> function which calls another non-public function, that non-public function&rsquo;s logic will be executed. If the outcome of that function&rsquo;s execution affects the Type&rsquo;s state, or the output of its <code>public</code> parent function, those are the things that you&rsquo;d be able to write unit tests for, because those are the &ldquo;observation points”, so to speak.</p>
 <h3 id="wrapping-up">Wrapping up</h3>
-
 <p>The bottom line is: observable == testable. Just like another developer, the suite of unit tests in your test target interacts with your app&rsquo;s API through the visible, observable, interface that you&rsquo;ve exposed to them. The more observable your API components are, the more testable your code becomes. Which is why I prefer <code>public</code> over <code>private</code> whenever possible!</p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/tag/unit-testing/" title="Browse All Unit Testing Articles @ andrewcbancroft.com">Browse All Unit Testing Articles @ andrewcbancroft.com</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/" title="Swift Unit Testing Resources">Swift Unit Testing Resources</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/" title="Swift Access Control – Implications for Unit Testing">Swift Access Control – Implications for Unit Testing</a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -359,7 +297,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

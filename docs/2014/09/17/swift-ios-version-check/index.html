@@ -46,15 +46,16 @@
 <meta property="og:description" content="While iOS 8 is now officially in the wild, it may take a bit of time to reach the level of user adoption that iOS 7 had accumulated over the past year. If you plan to target the widest number of users for your app (at least in these early days of the iOS 8 roll-out), it&rsquo;d probably be wise to include iOS 7 in your target audience.
 When accommodating iOS 7 users, you&rsquo;ll inevitably run into instances where you need to check which iOS version the device is running, so that you can implement a fall-back plan for older versions of iOS." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/09/17/swift-ios-version-check/" />
-<meta property="article:published_time" content="2014-09-18T04:44:36&#43;00:00"/>
-<meta property="article:modified_time" content="2014-09-18T04:44:36&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/09/17/swift-ios-version-check/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-09-18T04:44:36+00:00" />
+<meta property="article:modified_time" content="2014-09-18T04:44:36+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift iOS Version Checking"/>
 <meta name="twitter:description" content="While iOS 8 is now officially in the wild, it may take a bit of time to reach the level of user adoption that iOS 7 had accumulated over the past year. If you plan to target the widest number of users for your app (at least in these early days of the iOS 8 roll-out), it&rsquo;d probably be wise to include iOS 7 in your target audience.
 When accommodating iOS 7 users, you&rsquo;ll inevitably run into instances where you need to check which iOS version the device is running, so that you can implement a fall-back plan for older versions of iOS."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -89,7 +90,7 @@ When accommodating iOS 7 users, you&rsquo;ll inevitably run into instances whe
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -203,23 +204,19 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>While iOS 8 is now officially in the wild, it may take a bit of time to reach the level of user adoption that iOS 7 had accumulated over the past year.  If you plan to target the widest number of users for your app (at least in these early days of the iOS 8 roll-out), it&rsquo;d probably be wise to include iOS 7 in your target audience.</p>
-
 <p>When accommodating iOS 7 users, you&rsquo;ll inevitably run into instances where you need to check which iOS version the device is running, so that you can implement a fall-back plan for older versions of iOS.</p>
-
-<p>In Objective-C, I&rsquo;ve seen this accomplished by using pre-processor directives, or with introspection.  Swift, however, <a title="Apple Developer Documentation - No Swift Preprocessor Directives" href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-XID_20" target="_blank">has no pre-processor directives in v1.0</a>, and <a title="Apple Developer Documentation - NSObject Protocol" href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Protocols/NSObject_Protocol/index.html" target="_blank">only objects which conform to the NSObject protocol</a> can utilize the <code>respondsToSelector:</code> method call.  What to do?</p>
-
-<p>As it turns out, <a title="Apple Developer Documentation - Conditionally Load Resources" href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/TransitionGuide/SupportingEarlieriOS.html#//apple_ref/doc/uid/TP40013174-CH14-SW1" target="_blank">Apple has guidance</a> that would actually work for both Objective-C <em>and</em> Swift – It involves simply checking the <code>NSFoundationVersionNumber</code> of the device against one of the pre-defined values defined in NSObjCRuntime.h.</p>
-
-<p>To accomplish this in Swift, you can create a new Swift file (I called mine &ldquo;iOSVersions.swift&#8221;) to hold the following code:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">iOS7</span> <span class="p">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber_iOS_7_1</span><span class="p">)</span>
-<span class="ln">2</span><span class="kd">let</span> <span class="nv">iOS8</span> <span class="p">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber_iOS_7_1</span><span class="p">)</span></code></pre></div>
-<p>Whenever you need to check which iOS version the device is running, you can simply use the iOS8 / iOS7 constants that you just defined – they&rsquo;re accessible in other Swift files throughout your project:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="k">if</span> <span class="n">iOS8</span> <span class="p">{</span>
-<span class="ln">2</span>  <span class="c1">//Do some iOS 8-specific things that may not be supported in older versions</span>
-<span class="ln">3</span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln">4</span>  <span class="c1">//Implement your fall-back plan for older versions of iOS</span>
-<span class="ln">5</span><span class="p">}</span></code></pre></div>
-<p>With these little snippets, you should be empowered to support iOS 7 while taking advantage of new iOS 8-only features and APIs.  You can also begin to move away from deprecated ways of doing things, while not breaking your app for iOS 7 users, so long as iOS 7 retains a significant slice of the iOS version pie.</p>
+<p>In Objective-C, I&rsquo;ve seen this accomplished by using pre-processor directives, or with introspection.  Swift, however, <!-- raw HTML omitted -->has no pre-processor directives in v1.0<!-- raw HTML omitted -->, and <!-- raw HTML omitted -->only objects which conform to the NSObject protocol<!-- raw HTML omitted --> can utilize the <code>respondsToSelector:</code> method call.  What to do?</p>
+<p>As it turns out, <!-- raw HTML omitted -->Apple has guidance<!-- raw HTML omitted --> that would actually work for both Objective-C <em>and</em> Swift – It involves simply checking the <code>NSFoundationVersionNumber</code> of the device against one of the pre-defined values defined in NSObjCRuntime.h.</p>
+<p>To accomplish this in Swift, you can create a new Swift file (I called mine &ldquo;iOSVersions.swift”) to hold the following code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">let</span> <span class="nv">iOS7</span> <span class="p">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber_iOS_7_1</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="kd">let</span> <span class="nv">iOS8</span> <span class="p">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber_iOS_7_1</span><span class="p">)</span>
+</span></span></code></pre></div><p>Whenever you need to check which iOS version the device is running, you can simply use the iOS8 / iOS7 constants that you just defined – they&rsquo;re accessible in other Swift files throughout your project:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">if</span> <span class="n">iOS8</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="c1">//Do some iOS 8-specific things that may not be supported in older versions</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  <span class="c1">//Implement your fall-back plan for older versions of iOS</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>With these little snippets, you should be empowered to support iOS 7 while taking advantage of new iOS 8-only features and APIs.  You can also begin to move away from deprecated ways of doing things, while not breaking your app for iOS 7 users, so long as iOS 7 retains a significant slice of the iOS version pie.</p>
 
     <aside>
       
@@ -247,7 +244,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

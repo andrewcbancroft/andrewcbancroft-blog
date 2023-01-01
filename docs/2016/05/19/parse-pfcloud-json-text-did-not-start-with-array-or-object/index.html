@@ -46,19 +46,20 @@
 <meta property="og:description" content="It&rsquo;s always the little things that lead to flatter foreheads (or at least it is for me).
 Banging my head against the desk this evening working on a Parse migration, I finally figured out what was causing an error condition in a PFCloud function call.
 The request to the server succeeded, but the response was malformed somehow:
- Error Domain=NSCocoaErrorDomain Code=3840 &ldquo;JSON text did not start with array or object and option to allow fragments not set." />
+Error Domain=NSCocoaErrorDomain Code=3840 &ldquo;JSON text did not start with array or object and option to allow fragments not set." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/" />
-<meta property="article:published_time" content="2016-05-20T03:33:03&#43;00:00"/>
-<meta property="article:modified_time" content="2016-05-20T03:33:03&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2016-05-20T03:33:03+00:00" />
+<meta property="article:modified_time" content="2016-05-20T03:33:03+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Parse PFCloud – “JSON text did not start with array or object”"/>
 <meta name="twitter:description" content="It&rsquo;s always the little things that lead to flatter foreheads (or at least it is for me).
 Banging my head against the desk this evening working on a Parse migration, I finally figured out what was causing an error condition in a PFCloud function call.
 The request to the server succeeded, but the response was malformed somehow:
- Error Domain=NSCocoaErrorDomain Code=3840 &ldquo;JSON text did not start with array or object and option to allow fragments not set."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+Error Domain=NSCocoaErrorDomain Code=3840 &ldquo;JSON text did not start with array or object and option to allow fragments not set."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -93,7 +94,7 @@ The request to the server succeeded, but the response was malformed somehow:
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -203,33 +204,26 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>It&rsquo;s always the little things that lead to flatter foreheads (or at least it is for me).</p>
-
 <p>Banging my head against the desk this evening working on a Parse migration, I finally figured out what was causing an error condition in a <code>PFCloud</code> function call.</p>
-
 <p>The request to the server succeeded, but the response was malformed somehow:</p>
-
 <blockquote>
-<p>Error Domain=NSCocoaErrorDomain Code=3840 &ldquo;JSON text did not start with array or object and option to allow fragments not set.&#8221; UserInfo={NSDebugDescription=JSON text did not start with array or object and option to allow fragments not set.}</p>
+<p>Error Domain=NSCocoaErrorDomain Code=3840 &ldquo;JSON text did not start with array or object and option to allow fragments not set.” UserInfo={NSDebugDescription=JSON text did not start with array or object and option to allow fragments not set.}</p>
 </blockquote>
-
-<p>&ldquo;What?? I <em>know</em> the response is supposed to be JSON – I can even test it out and it works great in <a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en">Postman</a>.&#8221;</p>
-
+<p>&ldquo;What?? I <em>know</em> the response is supposed to be JSON – I can even test it out and it works great in <a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en">Postman</a>.”</p>
 <p>Weeeelll, it turns out that if you don&rsquo;t get the URL to your self-hosted Parse Server correct, you&rsquo;re going to get a response that&rsquo;s not JSON. Doh!</p>
-
-<p>I had left off the &ldquo;/parse&#8221; portion of the URL to my self-hosted parse server:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="n">NSObject</span> <span class="p">:</span> <span class="nb">AnyObject</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="c1">// Override point for customization after application launch.</span>
-<span class="ln"> 3</span>    <span class="kd">let</span> <span class="nv">configuration</span> <span class="p">=</span> <span class="n">ParseClientConfiguration</span> <span class="p">{</span>
-<span class="ln"> 4</span>        <span class="nv">$0</span><span class="p">.</span><span class="n">applicationId</span> <span class="p">=</span> <span class="s">&#34;YourAppId&#34;</span>
-<span class="ln"> 5</span>        <span class="nv">$0</span><span class="p">.</span><span class="n">clientKey</span> <span class="p">=</span> <span class="s">&#34;YourClientKey&#34;</span>
-<span class="ln"> 6</span>        <span class="nv">$0</span><span class="p">.</span><span class="n">server</span> <span class="p">=</span> <span class="s">&#34;https://your-self-hosted-parse-server/parse&#34;</span>
-<span class="ln"> 7</span>    <span class="p">}</span>
-<span class="ln"> 8</span>    <span class="n">Parse</span><span class="p">.</span><span class="n">initializeWithConfiguration</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
-<span class="ln"> 9</span>    
-<span class="ln">10</span>    <span class="k">return</span> <span class="kc">true</span>
-<span class="ln">11</span><span class="p">}</span></code></pre></div>
-<p>So, the bottom-line take-away? Make sure you get the <em>full</em> URL to your self-hosted Parse Server set to the <code>server</code> property of your <code>ParseClientConfiguration</code> instance. That endpoint could vary based on how you deployed the server to your cloud host of choice. For me, it was my goofy mistake of leaving off &ldquo;/parse&#8221;.</p>
-
+<p>I had left off the &ldquo;/parse” portion of the URL to my self-hosted parse server:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="n">NSObject</span> <span class="p">:</span> <span class="nb">AnyObject</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="c1">// Override point for customization after application launch.</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">let</span> <span class="nv">configuration</span> <span class="p">=</span> <span class="n">ParseClientConfiguration</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="nv">$0</span><span class="p">.</span><span class="n">applicationId</span> <span class="p">=</span> <span class="s">&#34;YourAppId&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="nv">$0</span><span class="p">.</span><span class="n">clientKey</span> <span class="p">=</span> <span class="s">&#34;YourClientKey&#34;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="nv">$0</span><span class="p">.</span><span class="n">server</span> <span class="p">=</span> <span class="s">&#34;https://your-self-hosted-parse-server/parse&#34;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">Parse</span><span class="p">.</span><span class="n">initializeWithConfiguration</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>So, the bottom-line take-away? Make sure you get the <em>full</em> URL to your self-hosted Parse Server set to the <code>server</code> property of your <code>ParseClientConfiguration</code> instance. That endpoint could vary based on how you deployed the server to your cloud host of choice. For me, it was my goofy mistake of leaving off &ldquo;/parse”.</p>
 <p>Go forth and may your forehead be ever-more round than mine.</p>
 
     <aside>
@@ -258,7 +252,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

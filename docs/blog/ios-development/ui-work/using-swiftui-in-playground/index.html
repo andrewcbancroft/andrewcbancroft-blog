@@ -45,20 +45,17 @@
 <meta property="og:title" content="Using SwiftUI in a Playground" />
 <meta property="og:description" content="What if you could iterate on SwiftUI views more quickly, even if you lack macOS Catalina? Try it out in a Swift Playground!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20SwiftUI%20in%20a%20Playground.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Using%20SwiftUI%20in%20a%20Playground.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-13T04:00:18+00:00" />
+<meta property="article:modified_time" content="2019-06-13T04:00:18+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20SwiftUI%20in%20a%20Playground.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Using%20SwiftUI%20in%20a%20Playground.png" />
-<meta property="article:published_time" content="2019-06-13T04:00:18&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-13T04:00:18&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20SwiftUI%20in%20a%20Playground.png"/>
 
 <meta name="twitter:title" content="Using SwiftUI in a Playground"/>
 <meta name="twitter:description" content="What if you could iterate on SwiftUI views more quickly, even if you lack macOS Catalina? Try it out in a Swift Playground!"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -213,29 +210,26 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>If you&rsquo;re looking for a quicker way to iterate while you&rsquo;re building SwiftUI views, and you don&rsquo;t have macOS Catalina installed, you might enjoy the Playground experience more than you enjoy pressing <code>command + R</code> every time you make a change and want to see it in the user interface.</p>
-
 <p>How do you do it?  Here&rsquo;s a code snippet to copy-paste into a Playground to get you going.</p>
-
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">UIKit</span>
-<span class="hl"><span class="ln"> 2</span><span class="kd">import</span> <span class="nc">PlaygroundSupport</span>
-</span><span class="hl"><span class="ln"> 3</span><span class="kd">import</span> <span class="nc">SwiftUI</span>
-</span><span class="ln"> 4</span>
-<span class="ln"> 5</span><span class="c1">// Make a SwiftUI view</span>
-<span class="ln"> 6</span><span class="kd">struct</span> <span class="nc">ContentView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
-<span class="ln"> 7</span>    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
-<span class="ln"> 8</span>        <span class="n">Text</span><span class="p">(</span><span class="s">&#34;SwiftUI in a Playground!&#34;</span><span class="p">)</span>
-<span class="ln"> 9</span>    <span class="p">}</span>
-<span class="ln">10</span><span class="p">}</span>
-<span class="ln">11</span>
-<span class="ln">12</span><span class="c1">// Make a UIHostingController</span>
-<span class="hl"><span class="ln">13</span><span class="kd">let</span> <span class="nv">viewController</span> <span class="p">=</span> <span class="n">UIHostingController</span><span class="p">(</span><span class="n">rootView</span><span class="p">:</span> <span class="n">ContentView</span><span class="p">())</span>
-</span><span class="ln">14</span>
-<span class="ln">15</span><span class="c1">// Assign it to the playground&#39;s liveView</span>
-<span class="hl"><span class="ln">16</span><span class="n">PlaygroundPage</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">liveView</span> <span class="p">=</span> <span class="n">viewController</span>
-</span><span class="ln">17</span>
-<span class="ln">18</span><span class="c1">// RUN!</span></code></pre></div>
-
-<p><img src="result.png" alt="Result" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">import</span> <span class="nc">UIKit</span>
+</span></span><span class="line hl"><span class="ln"> 2</span><span class="cl"><span class="kd">import</span> <span class="nc">PlaygroundSupport</span>
+</span></span><span class="line hl"><span class="ln"> 3</span><span class="cl"><span class="kd">import</span> <span class="nc">SwiftUI</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1">// Make a SwiftUI view</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="kd">struct</span> <span class="nc">ContentView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="n">Text</span><span class="p">(</span><span class="s">&#34;SwiftUI in a Playground!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1">// Make a UIHostingController</span>
+</span></span><span class="line hl"><span class="ln">13</span><span class="cl"><span class="kd">let</span> <span class="nv">viewController</span> <span class="p">=</span> <span class="n">UIHostingController</span><span class="p">(</span><span class="n">rootView</span><span class="p">:</span> <span class="n">ContentView</span><span class="p">())</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1">// Assign it to the playground&#39;s liveView</span>
+</span></span><span class="line hl"><span class="ln">16</span><span class="cl"><span class="n">PlaygroundPage</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">liveView</span> <span class="p">=</span> <span class="n">viewController</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1">// RUN!</span></span></span></code></pre></div>
+<p><img src="result.png" alt="Result"></p>
 
     <aside>
       
@@ -263,7 +257,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

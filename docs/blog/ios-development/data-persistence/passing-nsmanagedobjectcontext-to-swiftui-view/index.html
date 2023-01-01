@@ -45,20 +45,17 @@
 <meta property="og:title" content="How to Pass NSManagedObjectContext to a SwiftUI View" />
 <meta property="og:description" content="Breaks down how to pass an NSManagedObjectContext instance to your SwiftUI Views." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20How%20to%20Pass%20NSManagedObjectContext%20to%20a%20SwiftUI%20View.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20How%20to%20Pass%20NSManagedObjectContext%20to%20a%20SwiftUI%20View.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-08-02T03:11:48+00:00" />
+<meta property="article:modified_time" content="2019-08-02T03:11:48+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20How%20to%20Pass%20NSManagedObjectContext%20to%20a%20SwiftUI%20View.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20How%20to%20Pass%20NSManagedObjectContext%20to%20a%20SwiftUI%20View.png" />
-<meta property="article:published_time" content="2019-08-02T03:11:48&#43;00:00"/>
-<meta property="article:modified_time" content="2019-08-02T03:11:48&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20How%20to%20Pass%20NSManagedObjectContext%20to%20a%20SwiftUI%20View.png"/>
 
 <meta name="twitter:title" content="How to Pass NSManagedObjectContext to a SwiftUI View"/>
 <meta name="twitter:description" content="Breaks down how to pass an NSManagedObjectContext instance to your SwiftUI Views."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -73,7 +70,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/passing-nsmanagedobjectcontext-to-swiftui-view\/",
-  "wordCount": "420",
+  "wordCount": "412",
   "datePublished": "2019-08-02T03:11:48Z",
   "dateModified": "2019-08-02T03:11:48Z",
   "author": {
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,62 +211,36 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#first-things-first">First Things First</a></li>
-<li><a href="#breaking-down-the-code">Breaking Down the Code</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#first-things-first">First Things First</a></li>
+    <li><a href="#breaking-down-the-code">Breaking Down the Code</a></li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<p>Step one to <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/">using Core Data with SwiftUI</a> is to initialize the Core Data stack and pass an instance of your <code>NSManagedObjectContext</code> to your view.</p>
-
+    <p>Step one to <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/">using Core Data with SwiftUI</a> is to initialize the Core Data stack and pass an instance of your <code>NSManagedObjectContext</code> to your view.</p>
 <h2 id="first-things-first">First Things First</h2>
-
 <ul>
 <li>The remainder of this how-to assumes that you&rsquo;ve already got a way to initialize the Core Data stack. Ticking the &lsquo;Use Core Data&rsquo; checkbox when you start a new app will place some boilerplate code in <code>AppDelegate</code>.</li>
 <li>Code examples are taken from my &ldquo;Blog Idea List&rdquo; sample project that includes a single Core Data Entity named <code>BlogIdea</code>:</li>
 </ul>
-
-<p><img src="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png" alt="Blog Idea Entity" /></p>
-
-<p><a name="resources" class="jump-target"></a>
-<div class="resources">
-<div class="resources-header">
-Resources
-</div>
-<ul class="resources-content">
-<li>
-<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI"> Blog Idea List SwiftUI Example Xcode Project</a>
-</li>
-</ul>
-</div></p>
-
+<p><img src="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png" alt="Blog Idea Entity"></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>You can refer to my <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/">introduction to using Core Data with SwiftUI</a> to review all of the steps in one spot.  It includes an example project with all of the pieces stitched together!</p>
-
 <h2 id="breaking-down-the-code">Breaking Down the Code</h2>
-
 <p>There are two key components to this:</p>
-
 <ol>
 <li>the Core Data Stack</li>
 <li>the SwiftUI <code>@Environment</code>&rsquo;s <code>managedObjectContext</code> variable.</li>
 </ol>
-
 <p>&ldquo;Passing in&rdquo; your managed object context will probably happen early on in your app&rsquo;s launch sequence.  <code>SceneDelegate</code> is where I pass mine in with the Blog Idea List app.</p>
-
 <p>On the receiving end is your SwiftUI View.  An <code>@Environment</code> property wrapper needs to be set up in order to pull <em>out</em> the managed object context so you can use it.</p>
-
 <p>The following code snippets provide you glimpses into both sides of the coin.  Comments with ❇️ symbols will explain the details inline.</p>
-
 <p><strong>SceneDelegate.swift</strong>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -293,36 +264,34 @@ Resources
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> 
-            <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> 
-            <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">if</span> <span class="kd">let</span> <span class="nv">windowScene</span> <span class="p">=</span> <span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nv">window</span> <span class="p">=</span> <span class="n">UIWindow</span><span class="p">(</span><span class="n">windowScene</span><span class="p">:</span> <span class="n">windowScene</span><span class="p">)</span>
-        
-        <span class="c1">// ❇️ Get the managedObjectContext from the persistent container</span>
-        <span class="c1">// ❇️ This assumes you&#39;ve left the Core Data stack creation code within AppDelegate</span>
-        <span class="kd">let</span> <span class="nv">managedObjectContext</span> <span class="p">=</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">delegate</span> <span class="k">as</span><span class="o">!</span> <span class="n">AppDelegate</span><span class="p">).</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span>
-        
-        <span class="c1">// ❇️ Pass it to the ContentView through the </span>
-        <span class="c1">// ❇️ managedObjectContext @Environment variable</span>
-        <span class="kd">let</span> <span class="nv">contentView</span> <span class="p">=</span> <span class="n">ContentView</span><span class="p">()</span>
-                            <span class="p">.</span><span class="n">environment</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">,</span> <span class="n">managedObjectContext</span><span class="p">)</span>
-        
-        <span class="n">window</span><span class="p">.</span><span class="n">rootViewController</span> <span class="p">=</span> <span class="n">UIHostingController</span><span class="p">(</span><span class="n">rootView</span><span class="p">:</span> <span class="n">contentView</span><span class="p">)</span>
-        
-        <span class="kc">self</span><span class="p">.</span><span class="n">window</span> <span class="p">=</span> <span class="n">window</span>
-        <span class="n">window</span><span class="p">.</span><span class="n">makeKeyAndVisible</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="kd">let</span> <span class="nv">windowScene</span> <span class="p">=</span> <span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">window</span> <span class="p">=</span> <span class="n">UIWindow</span><span class="p">(</span><span class="n">windowScene</span><span class="p">:</span> <span class="n">windowScene</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// ❇️ Get the managedObjectContext from the persistent container</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// ❇️ This assumes you&#39;ve left the Core Data stack creation code within AppDelegate</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">managedObjectContext</span> <span class="p">=</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">delegate</span> <span class="k">as</span><span class="p">!</span> <span class="n">AppDelegate</span><span class="p">).</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// ❇️ Pass it to the ContentView through the </span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// ❇️ managedObjectContext @Environment variable</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">contentView</span> <span class="p">=</span> <span class="n">ContentView</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">.</span><span class="n">environment</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">,</span> <span class="n">managedObjectContext</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">window</span><span class="p">.</span><span class="n">rootViewController</span> <span class="p">=</span> <span class="n">UIHostingController</span><span class="p">(</span><span class="n">rootView</span><span class="p">:</span> <span class="n">contentView</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">window</span> <span class="p">=</span> <span class="n">window</span>
+</span></span><span class="line"><span class="cl">        <span class="n">window</span><span class="p">.</span><span class="n">makeKeyAndVisible</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></p>
-
 <p><strong>ContentView.swift</strong></p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -335,20 +304,19 @@ Resources
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">SwiftUI</span>
-
-<span class="kd">struct</span> <span class="nc">SwiftUIView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
-    <span class="c1">// ❇️ Access the @Environment&#39;s managedObjectContext variable</span>
-    <span class="c1">// ❇️ and keep a reference to use later</span>
-    <span class="p">@</span><span class="n">Environment</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">)</span> <span class="kd">var</span> <span class="nv">managedObjectContext</span>
-
-    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
-        <span class="c1">// ❇️ Use self.managedObjectContext however you need within your SwiftUI view!</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">SwiftUI</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">SwiftUIView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ❇️ Access the @Environment&#39;s managedObjectContext variable</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ❇️ and keep a reference to use later</span>
+</span></span><span class="line"><span class="cl">    <span class="p">@</span><span class="n">Environment</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">)</span> <span class="kd">var</span> <span class="nv">managedObjectContext</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// ❇️ Use self.managedObjectContext however you need within your SwiftUI view!</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
 <p>For a more complete guide to using Core Data with SwiftUI, you can refer to the <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/">introduction I published</a>.  It includes an <a href="https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI">example project</a> with all of the pieces stitched together!</p>
 
     <aside>
@@ -377,7 +345,7 @@ Resources
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

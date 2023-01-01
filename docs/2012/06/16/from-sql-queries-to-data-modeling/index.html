@@ -46,15 +46,16 @@
 <meta property="og:description" content="This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I&rsquo;m pretty stoked about some of the amazing features of SQL Server 2012&rsquo;s BI stack.
 During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2012/06/16/from-sql-queries-to-data-modeling/" />
-<meta property="article:published_time" content="2012-06-16T19:25:15&#43;00:00"/>
-<meta property="article:modified_time" content="2012-06-16T19:25:15&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2012/06/16/from-sql-queries-to-data-modeling/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2012-06-16T19:25:15+00:00" />
+<meta property="article:modified_time" content="2012-06-16T19:25:15+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="From SQL Queries to Data Modeling"/>
 <meta name="twitter:description" content="This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I&rsquo;m pretty stoked about some of the amazing features of SQL Server 2012&rsquo;s BI stack.
 During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -89,7 +90,7 @@ During the course of the week I discovered something that has been emerging in m
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -199,15 +200,10 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I&rsquo;m pretty stoked about some of the amazing features of SQL Server 2012&rsquo;s BI stack.</p>
-
-<p>During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model. I walked away from session after session thinking, &ldquo;Man, this is so doable now!!&#8221;. This was the single most impressive and perspective altering concept that flooded into my brain this week.</p>
-
+<p>During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model. I walked away from session after session thinking, &ldquo;Man, this is so doable now!!”. This was the single most impressive and perspective altering concept that flooded into my brain this week.</p>
 <p>There comes a time in every organization that necessitates a paradigm shift: One that involves a move <em>toward</em> data <em>modeling</em> and a <em>away</em> from SQL query writing for the purpose of supplying data sets to reports. By no means am I suggesting that writing SQL will disappear for database / BI Developers – but as a means to serving as the backbone of an organization&rsquo;s reporting infrastructure, there will inevitably come a time that employing more and more people capable of writing SQL will be unsustainable.</p>
-
 <p>The reasons for this are clear: As an enterprise continuously builds or purchases data collection systems, the users of those systems expect to be able to get <em>information</em> back out. So they ask questions. Unpredictable combinations of questions. They are too numerous and too diverse for even a dedicated team of reporting people to write SQL to a database every time a business person has a question they want to ask of their data. For a while, parameterized reports suffice for most questions. But still the organization grows and evolves, and decision makers expect that they should be able to analyze information at their convenience, not at the mercy of the IT Department&rsquo;s work schedule.</p>
-
 <p>Microsoft has worked hard to give BI developers effective ways to build models so as to enable us to write less SQL (at least when it comes to supplying answers to the multitude of questions that come our way) and empower our business folks to create their own reports that are based on the model we build. In my view, this is the direction that we must inevitably go. Without this, IT becomes a significant bottleneck to the progress that could be made from timely data analysis.</p>
-
 <p>I&rsquo;m personally looking forward to using SQL Server 2012 to promote better query-ability and visibility of the information my customers are dying to get their hands on!</p>
 
     <aside>
@@ -217,7 +213,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -44,25 +44,26 @@
 
 <meta property="og:title" content="Swift 4 Upgrade Error: ‘init(colorLiteralRed:green:blue:alpha:)’ is unavailable" />
 <meta property="og:description" content="I upgraded a project to Swift 4 today and hit a compiler error:
- &#8216;init(colorLiteralRed:green:blue:alpha:)&rsquo; is unavailable: This initializer is only meant to be used by color literals.
- The fix is pretty simple: Don&rsquo;t use that initializer! (thank you, Captain Obvious!)
+‘init(colorLiteralRed:green:blue:alpha:)&rsquo; is unavailable: This initializer is only meant to be used by color literals.
+The fix is pretty simple: Don&rsquo;t use that initializer! (thank you, Captain Obvious!)
 The correct initializer to use for specifying a red, green, blue, and alpha to get a UIColor instance in Swift 4 is:
 UIColor(red:green:blue:alpha:)
 So essentially, just replace colorLiteralRed:, and replace it with just red:, and the compiler error will go away." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/" />
-<meta property="article:published_time" content="2018-01-24T12:35:04&#43;00:00"/>
-<meta property="article:modified_time" content="2018-01-24T12:35:04&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2018-01-24T12:35:04+00:00" />
+<meta property="article:modified_time" content="2018-01-24T12:35:04+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift 4 Upgrade Error: ‘init(colorLiteralRed:green:blue:alpha:)’ is unavailable"/>
 <meta name="twitter:description" content="I upgraded a project to Swift 4 today and hit a compiler error:
- &#8216;init(colorLiteralRed:green:blue:alpha:)&rsquo; is unavailable: This initializer is only meant to be used by color literals.
- The fix is pretty simple: Don&rsquo;t use that initializer! (thank you, Captain Obvious!)
+‘init(colorLiteralRed:green:blue:alpha:)&rsquo; is unavailable: This initializer is only meant to be used by color literals.
+The fix is pretty simple: Don&rsquo;t use that initializer! (thank you, Captain Obvious!)
 The correct initializer to use for specifying a red, green, blue, and alpha to get a UIColor instance in Swift 4 is:
 UIColor(red:green:blue:alpha:)
 So essentially, just replace colorLiteralRed:, and replace it with just red:, and the compiler error will go away."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -97,7 +98,7 @@ So essentially, just replace colorLiteralRed:, and replace it with just red:, an
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -211,19 +212,13 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>I upgraded a project to Swift 4 today and hit a compiler error:</p>
-
 <blockquote>
-<p>&#8216;init(colorLiteralRed:green:blue:alpha:)&rsquo; is unavailable: This initializer is only meant to be used by color literals.</p>
+<p>‘init(colorLiteralRed:green:blue:alpha:)&rsquo; is unavailable: This initializer is only meant to be used by color literals.</p>
 </blockquote>
-
 <p>The fix is pretty simple: <strong>Don&rsquo;t use that initializer</strong>! (thank you, Captain Obvious!)</p>
-
 <p>The correct initializer to use for specifying a red, green, blue, and alpha to get a <code>UIColor</code> instance in Swift 4 is:</p>
-
 <p><code>UIColor(red:green:blue:alpha:)</code></p>
-
 <p>So essentially, just replace <code>colorLiteralRed:</code>, and replace it with just <code>red:</code>, and the compiler error will go away. Here&rsquo;s an example of how to call it:</p>
-
 <p><code>let color = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1.0)</code></p>
 
     <aside>
@@ -244,7 +239,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

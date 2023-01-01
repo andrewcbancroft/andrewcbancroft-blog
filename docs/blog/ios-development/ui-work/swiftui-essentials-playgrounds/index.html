@@ -45,20 +45,17 @@
 <meta property="og:title" content="Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds" />
 <meta property="og:description" content="Provides Swift Playgrounds for the Essentials series of Apple&#39;s SwiftUI tutorials." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Apple%27s%20SwiftUI%20Essentials%20Tutorial%20Series%20as%20Playgrounds.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Apple%27s%20SwiftUI%20Essentials%20Tutorial%20Series%20as%20Playgrounds.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-07-06T03:11:48+00:00" />
+<meta property="article:modified_time" content="2019-07-06T03:11:48+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Apple%27s%20SwiftUI%20Essentials%20Tutorial%20Series%20as%20Playgrounds.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Apple%27s%20SwiftUI%20Essentials%20Tutorial%20Series%20as%20Playgrounds.png" />
-<meta property="article:published_time" content="2019-07-06T03:11:48&#43;00:00"/>
-<meta property="article:modified_time" content="2019-07-06T03:11:48&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Apple%27s%20SwiftUI%20Essentials%20Tutorial%20Series%20as%20Playgrounds.png"/>
 
 <meta name="twitter:title" content="Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds"/>
 <meta name="twitter:description" content="Provides Swift Playgrounds for the Essentials series of Apple&#39;s SwiftUI tutorials."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -73,7 +70,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/ui-work\/swiftui-essentials-playgrounds\/",
-  "wordCount": "291",
+  "wordCount": "282",
   "datePublished": "2019-07-06T03:11:48Z",
   "dateModified": "2019-07-06T03:11:48Z",
   "author": {
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,89 +211,47 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#why-playgrounds">Why Playgrounds?</a></li>
-<li><a href="#repository-structure">Repository Structure</a>
-<ul>
-<li><a href="#creating-and-combining-views">Creating and Combining Views</a></li>
-<li><a href="#building-lists-and-navigation">Building Lists and Navigation</a></li>
-<li><a href="#handling-user-input">Handling User Input</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#why-playgrounds">Why Playgrounds?</a></li>
+    <li><a href="#repository-structure">Repository Structure</a>
+      <ul>
+        <li><a href="#creating-and-combining-views">Creating and Combining Views</a></li>
+        <li><a href="#building-lists-and-navigation">Building Lists and Navigation</a></li>
+        <li><a href="#handling-user-input">Handling User Input</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<p><a name="resources" class="jump-target"></a>
-<div class="resources">
-<div class="resources-header">
-Resources
-</div>
-<ul class="resources-content">
-<li>
-<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/swiftui-essentials-playgrounds">SwiftUI Essentials Tutorials as Playgrounds</a>
-</li>
-<li>
-<i class="fas fa-link"></i> <a href="https://developer.apple.com/tutorials/swiftui" rel="nofollow">Apple&rsquo;s SwiftUI tutorials</a>
-</li>
-</ul>
-</div></p>
-
+    <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <h2 id="why-playgrounds">Why Playgrounds?</h2>
-
-<p>I&rsquo;ve been making my way through <a href="https://developer.apple.com/tutorials/swiftui" rel="nofollow">Apple&rsquo;s SwiftUI tutorials</a>.</p>
-
+<p>I&rsquo;ve been making my way through <!-- raw HTML omitted -->Apple&rsquo;s SwiftUI tutorials<!-- raw HTML omitted -->.</p>
 <p>If you&rsquo;re anything like me, you learn by tinkering with things. Change the modifiers, reposition <code>Text</code>, use a different <code>Image</code>, and see what happens.</p>
-
 <p>BUT.</p>
-
 <p>Without macOS Catalina, iterating quickly on these tinker sessions involves starting and stopping a simulator to see the changes.</p>
-
 <p>#annoying, right?</p>
-
 <p><em>However</em>&hellip; since you can <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">use SwiftUI in a Playground</a>, I decided to take my learning experience out of the sample Xcode projects that Apple provides, and turn them into Playgrounds.</p>
-
 <p>I&rsquo;ve <a href="https://github.com/andrewcbancroft/swiftui-essentials-playgrounds">pushed them to GitHub</a>, <em>just in case</em> they&rsquo;d be useful to you.</p>
-
 <h2 id="repository-structure">Repository Structure</h2>
-
 <p>Each tutorial in the Essentials series has its own completed Playground.</p>
-
 <p><a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">Download or clone</a> the repository to experiment with the SwiftUI tutorials individually in a Playground environment.</p>
-
 <p>Run the playground, and <a href="https://www.andrewcbancroft.com/blog/ios-development/xcode/showing-live-view-in-swift-playground/">show the live preview</a> to see it in action.</p>
-
-<p><img src="run-preview.gif" alt="Run and Preview" /></p>
-
+<p><img src="run-preview.gif" alt="Run and Preview"></p>
 <h3 id="creating-and-combining-views">Creating and Combining Views</h3>
-
 <p>All resources required for generating the SwiftUI preview have been added under the Resources folder.</p>
-
-<p><img src="creating-combining-views.png" alt="Creating and Combining Views" /></p>
-
+<p><img src="creating-combining-views.png" alt="Creating and Combining Views"></p>
 <h3 id="building-lists-and-navigation">Building Lists and Navigation</h3>
-
 <p>All resources required for generating the SwiftUI preview have been added under the Resources folder.</p>
-
 <p>Helper code for loading the JSON data file and generating images in the UI at different sizes has been placed in the <code>Data Helpers.swift</code> file.</p>
-
 <p><code>Model Objects.swift</code> contains the code for the <code>Landmark</code> and <code>Coordinates</code> types.</p>
-
-<p><img src="building-lists-and-navigation.gif" alt="Building Lists and Navigation" /></p>
-
+<p><img src="building-lists-and-navigation.gif" alt="Building Lists and Navigation"></p>
 <h3 id="handling-user-input">Handling User Input</h3>
-
 <p>All resources required for generating the SwiftUI preview have been added under the Resources folder.</p>
-
 <p>Helper code for loading the JSON data file <strong>including the new isFavorite property</strong>, and generating images in the UI at different sizes has been placed in the <code>Data Helpers.swift</code> file.</p>
-
 <p><code>Model Objects.swift</code> contains the code for the <code>Landmark</code> and <code>Coordinates</code> types.  It also adds the <code>UserData</code> bindable object.</p>
-
-<p><img src="handling-user-input.gif" alt="Handling User Input" /></p>
+<p><img src="handling-user-input.gif" alt="Handling User Input"></p>
 
     <aside>
       
@@ -324,7 +279,7 @@ Resources
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

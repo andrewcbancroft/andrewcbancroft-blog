@@ -43,20 +43,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Solving React Native’s “No bundle url present” Error" />
-<meta property="og:description" content="I hit the &ldquo;No bundle url present.&#8221; roadblock today and had to dig a bit to find the solution. I&rsquo;m going to describe how I encountered the problem, and provide the solution that&rsquo;s worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.
-
-The Problem  You&rsquo;ve got a React Native app. In the terminal, you run react-native run-ios.  In the simulator, you hit a roadblock with the following error in a bright red screen:" />
+<meta property="og:description" content="I hit the &ldquo;No bundle url present.” roadblock today and had to dig a bit to find the solution. I&rsquo;m going to describe how I encountered the problem, and provide the solution that&rsquo;s worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.
+The Problem You&rsquo;ve got a React Native app. In the terminal, you run react-native run-ios. In the simulator, you hit a roadblock with the following error in a bright red screen:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/22/solving-react-natives-no-bundle-url-present-error/" />
-<meta property="article:published_time" content="2017-04-22T17:49:11&#43;00:00"/>
-<meta property="article:modified_time" content="2017-04-22T17:49:11&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/22/solving-react-natives-no-bundle-url-present-error/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2017-04-22T17:49:11+00:00" />
+<meta property="article:modified_time" content="2017-04-22T17:49:11+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Solving React Native’s “No bundle url present” Error"/>
-<meta name="twitter:description" content="I hit the &ldquo;No bundle url present.&#8221; roadblock today and had to dig a bit to find the solution. I&rsquo;m going to describe how I encountered the problem, and provide the solution that&rsquo;s worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.
-
-The Problem  You&rsquo;ve got a React Native app. In the terminal, you run react-native run-ios.  In the simulator, you hit a roadblock with the following error in a bright red screen:"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="twitter:description" content="I hit the &ldquo;No bundle url present.” roadblock today and had to dig a bit to find the solution. I&rsquo;m going to describe how I encountered the problem, and provide the solution that&rsquo;s worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.
+The Problem You&rsquo;ve got a React Native app. In the terminal, you run react-native run-ios. In the simulator, you hit a roadblock with the following error in a bright red screen:"/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -91,7 +90,7 @@ The Problem  You&rsquo;ve got a React Native app. In the terminal, you run react
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -200,45 +199,30 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>I hit the &ldquo;No bundle url present.&#8221; roadblock today and had to dig a bit to find the solution. I&rsquo;m going to describe how I encountered the problem, and provide the solution that&rsquo;s worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.</p>
-
-<p><a name="problem" class="jump-target"></a></p>
-
+    <p>I hit the &ldquo;No bundle url present.” roadblock today and had to dig a bit to find the solution. I&rsquo;m going to describe how I encountered the problem, and provide the solution that&rsquo;s worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="the-problem">The Problem</h1>
-
 <ul>
 <li>You&rsquo;ve got a React Native app.</li>
 <li>In the terminal, you run <code>react-native run-ios</code>.</li>
 </ul>
-
 <p>In the simulator, you hit a roadblock with the following error in a bright red screen:</p>
-
 <blockquote>
 <p>No bundle url present. Make sure you&rsquo;re running a packager server or have included a .jsbundle file in your application bundle.</p>
 </blockquote>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/Glass.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/Glass.png" alt="No bundle URL present" width="370" height="666" class="alignnone size-full wp-image-13258" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/Glass.png 370w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/Glass-167x300.png 167w" sizes="(max-width: 370px) 100vw, 370px" /></a></p>
-
-<p><a name="solution" class="jump-target"></a></p>
-
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/Glass.png"><!-- raw HTML omitted --></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="the-solution">The Solution</h1>
-
-<p>Buried <a href="https://github.com/facebook/react-native/issues/12754">in the comments</a> of one of the React Native repo&rsquo;s issues on GitHub, I found a solution that worked for me&#8230;</p>
-
+<p>Buried <a href="https://github.com/facebook/react-native/issues/12754">in the comments</a> of one of the React Native repo&rsquo;s issues on GitHub, I found a solution that worked for me…</p>
 <ul>
 <li>Open a terminal window</li>
 <li><code>cd</code> into <code>YOUR_PROJECT/ios</code></li>
 <li>Remove the build folder with <code>rm -r build</code></li>
 <li>Run <code>react-native run-ios</code> again</li>
 </ul>
-
 <p>Alternatively, you could open Finder, navigate to <code>YOUR_PROJECT/ios</code> and delete the <code>build</code> folder. Then run <code>react-native run-ios</code> again.</p>
-
 <p>I&rsquo;m not sure what causes this (that bothers me), but but at least I&rsquo;ve found something to get me going again.</p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -247,7 +231,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -45,20 +45,17 @@
 <meta property="og:title" content="4 Things You Should Never Do When Debugging iOS Apps" />
 <meta property="og:description" content="Don&#39;t make debugging harder than it needs to be. Here are four things you should avoid doing when debugging iOS Apps." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/debugging/4-things-never-do-when-debugging-ios-apps/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/debugging/4-things-never-do-when-debugging-ios-apps/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%204%20Things%20You%20Should%20Never%20Do%20When%20Debugging%20iOS%20Apps.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%204%20Things%20You%20Should%20Never%20Do%20When%20Debugging%20iOS%20Apps.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2020-01-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-01-16T00:00:00+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%204%20Things%20You%20Should%20Never%20Do%20When%20Debugging%20iOS%20Apps.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%204%20Things%20You%20Should%20Never%20Do%20When%20Debugging%20iOS%20Apps.png" />
-<meta property="article:published_time" content="2020-01-16T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2020-01-16T00:00:00&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%204%20Things%20You%20Should%20Never%20Do%20When%20Debugging%20iOS%20Apps.png"/>
 
 <meta name="twitter:title" content="4 Things You Should Never Do When Debugging iOS Apps"/>
 <meta name="twitter:description" content="Don&#39;t make debugging harder than it needs to be. Here are four things you should avoid doing when debugging iOS Apps."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -73,7 +70,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/debugging\/4-things-never-do-when-debugging-ios-apps\/",
-  "wordCount": "542",
+  "wordCount": "538",
   "datePublished": "2020-01-16T00:00:00Z",
   "dateModified": "2020-01-16T00:00:00Z",
   "author": {
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,101 +211,53 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#never-change-code-without-reproducing-the-problem-first">Never change code without reproducing the problem first</a></li>
-<li><a href="#never-bug-hunt-before-hypothesizing">Never bug hunt before hypothesizing</a></li>
-<li><a href="#never-make-code-changes-without-a-new-branch">Never make code changes without a new branch</a></li>
-<li><a href="#never-change-more-than-one-thing-at-a-time">Never change more than one &ldquo;thing&rdquo; at a time</a></li>
-<li><a href="#summing-up">Summing Up</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#never-change-code-without-reproducing-the-problem-first">Never change code without reproducing the problem first</a></li>
+    <li><a href="#never-bug-hunt-before-hypothesizing">Never bug hunt before hypothesizing</a></li>
+    <li><a href="#never-make-code-changes-without-a-new-branch">Never make code changes without a new branch</a></li>
+    <li><a href="#never-change-more-than-one-thing-at-a-time">Never change more than one &ldquo;thing&rdquo; at a time</a></li>
+    <li><a href="#summing-up">Summing Up</a></li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<h2 id="never-change-code-without-reproducing-the-problem-first">Never change code without reproducing the problem first</h2>
-
+    <h2 id="never-change-code-without-reproducing-the-problem-first">Never change code without reproducing the problem first</h2>
 <p>Reproducing the problem is a critical first step in debugging.</p>
-
 <p>Before you start scouring your code&hellip;
 Before you start setting breakpoints&hellip;
 Before you start using tools or changing things&hellip;</p>
-
 <p>See if you can <strong>cause the bug to happen again</strong>.</p>
-
 <p>The goal of this exercise is to <strong>confirm that the problem is consistent</strong>. Reproducing the problem helps you <strong>clarify the conditions that are present when the bug happens.</strong></p>
-
 <p>Do your best to clearly state what’s going on &ndash; I even write it down sometimes to document the problem and make sure I&rsquo;ve got it pinned down.</p>
-
 <h2 id="never-bug-hunt-before-hypothesizing">Never bug hunt before hypothesizing</h2>
-
 <p>Having a plan sets you up to avoid haphazardly hoping to find the source of the problem you&rsquo;re experiencing.</p>
-
 <p>Before you set off to track down what&rsquo;s going on, <strong>make an educated guess</strong> about what you <em>think</em> might be going on.</p>
-
 <p><strong>Jot down a hypothesis</strong> or two (or three) and rank them in order of <strong>which feels more likely</strong>, based on your past debugging experiences.</p>
-
 <p>Pair your hypothesis with possible Xcode tools to use and spots to look within your codebase to gather evidence to support or discredit the hypothesis.</p>
-
 <p><em>Then</em>, once you have a plan, head out into the code on a mission to investigate your hypothesis.</p>
-
 <p>Take appropriate action based on your findings.</p>
-
 <h2 id="never-make-code-changes-without-a-new-branch">Never make code changes without a new branch</h2>
-
 <p>When you&rsquo;re taking action though, make sure you&rsquo;ve created a new code branch <strong>first</strong>.</p>
-
 <p>Often, your investigation of a best-guess hypothesis about a bug&rsquo;s root cause means you need to change something about your app.</p>
-
 <p><strong>Without a branch, you won&rsquo;t be able to roll back</strong> to the original state of your code.</p>
-
 <p>Set your self up to quickly iterate on evidence gathering.</p>
-
 <p>Make a branch -&gt; attempt a fix -&gt; Did it work? Great! Does the bug persist? Rollback! (rinse and repeat)</p>
-
 <h2 id="never-change-more-than-one-thing-at-a-time">Never change more than one &ldquo;thing&rdquo; at a time</h2>
-
 <p>Imagine experiencing a bug.</p>
-
 <p>Now you go in and change a line of code here, toggle an Xcode project setting there, refactor a function, and then re-run your app.</p>
-
 <p>The bug is fixed!  Buuut&hellip; <strong>which change from your list of changes was the actual fix</strong>?</p>
-
 <p>Never change more than one thing at a time.</p>
-
 <p>Doing so not only makes the actual fix ambiguous, but could also inadvertently cause <em>different</em> bugs that you didn&rsquo;t anticipate.</p>
-
 <p>Whatever you do, <strong>only change one thing at a time</strong> when you&rsquo;re attempting to fix a big.</p>
-
 <p>Now&hellip;what does &ldquo;one thing&rdquo; mean?</p>
-
 <p>&ldquo;One thing&rdquo; means <strong>&ldquo;one fix strategy&rdquo;</strong>.</p>
-
 <p>In order to attempt some bug fixes, you may have to change 2 or 3 lines of code.  That&rsquo;s okay.  You&rsquo;re changing them as a &ldquo;unit&rdquo;, of sorts, as part of a single fix strategy.</p>
-
 <p>Trying more than one fix strategy at a time is what I&rsquo;m cautioning against.</p>
-
 <h2 id="summing-up">Summing Up</h2>
-
 <p>Debugging is challenging enough as it is. Don&rsquo;t make debugging harder than it needs to be. Avoid these four things and you should be a much happier developer.</p>
-
 <p>If you&rsquo;re getting your bearings when it comes to debugging iOS apps, I&rsquo;d love to impact your learning experience. Perhaps my <a href="http://bit.ly/ios-debugging-fundamentals">iOS Debugging Fudamentals</a> course on Pluralsight will guide you to more efficient debugging experiences!</p>
-
-<div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fas fa-video"></i> <a href="http://bit.ly/ios-debugging-fundamentals" target="_blank">iOS Debugging Fundamentals</a><a href="http://bit.ly/ios-debugging-fundamentals" target="_blank"><br /> <img src="https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png" alt="iOS Debugging Fundamentals" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
-    </li>
-  </ul>
-</div></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
     <aside>
       
@@ -332,7 +281,7 @@ Before you start using tools or changing things&hellip;</p>
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

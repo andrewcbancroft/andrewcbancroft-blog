@@ -46,23 +46,24 @@
 <meta property="og:description" content="In my recent op-ed on clean coding in Swift focused on Type Inference, I began by saying,
 Quick! Tell me! What is the Type of the birdDetails constant in this code example:
 let birdDetails = birdDetailsFromStorage()
-With no additional context to glean information from, the correct answer to the question is, &ldquo;I have absolutely no clue&#8230;&#8221;
-But is that concluding assertion true? Hmm&#8230;
+With no additional context to glean information from, the correct answer to the question is, &ldquo;I have absolutely no clue…”
+But is that concluding assertion true? Hmm…
 I&rsquo;m learning, and as I&rsquo;ve weighed a recent Twitter conversation and thought on a comment thread that Rob Napier made on the post quoted above, I&rsquo;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/" />
-<meta property="article:published_time" content="2014-08-21T02:19:45&#43;00:00"/>
-<meta property="article:modified_time" content="2014-08-21T02:19:45&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-08-21T02:19:45+00:00" />
+<meta property="article:modified_time" content="2014-08-21T02:19:45+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Expanded Thoughts on Swift’s Type Inference"/>
 <meta name="twitter:description" content="In my recent op-ed on clean coding in Swift focused on Type Inference, I began by saying,
 Quick! Tell me! What is the Type of the birdDetails constant in this code example:
 let birdDetails = birdDetailsFromStorage()
-With no additional context to glean information from, the correct answer to the question is, &ldquo;I have absolutely no clue&#8230;&#8221;
-But is that concluding assertion true? Hmm&#8230;
+With no additional context to glean information from, the correct answer to the question is, &ldquo;I have absolutely no clue…”
+But is that concluding assertion true? Hmm…
 I&rsquo;m learning, and as I&rsquo;ve weighed a recent Twitter conversation and thought on a comment thread that Rob Napier made on the post quoted above, I&rsquo;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -71,7 +72,7 @@ I&rsquo;m learning, and as I&rsquo;ve weighed a recent Twitter conversation and
   "@type": "BlogPosting",
   "headline": "Expanded Thoughts on Swift’s Type Inference",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/08\/20\/expanded-thoughts-on-swifts-type-inference\/",
-  "wordCount": "511",
+  "wordCount": "483",
   "datePublished": "2014-08-21T02:19:45Z",
   "dateModified": "2014-08-21T02:19:45Z",
   "author": {
@@ -97,7 +98,7 @@ I&rsquo;m learning, and as I&rsquo;ve weighed a recent Twitter conversation and
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -210,59 +211,28 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    <p>In my recent <a title="Clean Coding in Swift – Type Inference" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/" target="_blank">op-ed on clean coding in Swift focused on Type Inference</a>, I began by saying,</p>
-
+    <p>In my recent <!-- raw HTML omitted -->op-ed on clean coding in Swift focused on Type Inference<!-- raw HTML omitted -->, I began by saying,</p>
 <p>Quick!  Tell me!  What is the Type of the <code>birdDetails</code> constant in this code example:</p>
-
 <p><code>let birdDetails = birdDetailsFromStorage()</code></p>
-
-<p>With no additional context to glean information from, the correct answer to the question is, &ldquo;I have absolutely no clue&#8230;&#8221;</p>
-
-<p><strong>But is that concluding assertion <em>true</em>?  Hmm&#8230;</strong></p>
-
-<p><em>I&rsquo;m learning</em>, and as I&rsquo;ve weighed a recent Twitter conversation and thought on a <a title="Rob Napier Comment" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721" target="_blank">comment thread that Rob Napier made</a> on the post quoted above, I&rsquo;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift.</p>
-
-<p>Something struck me as I read <a title="Rob's Comment" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721" target="_blank">Rob&rsquo;s comment</a>:  Why <em>wouldn&rsquo;t</em> I know the Type that would be inferred from what is returned by <code>birdDetailsFromStorage()</code> and assigned to <code>birdDetails</code>?  Presumably, I named the function what I named it intentionally.  The part I missed, was that if I had <em>designed</em> well and created a Type called <code>BirdDetails</code> (say, a Struct as Rob proposed), then all of a sudden, an inference can be made by both the compiler <em>and</em> a human that the <code>birdDetails</code> constant is&#8230; well&#8230; an instance of <code>BirdDetails</code>.  Imagine that!</p>
-
+<p>With no additional context to glean information from, the correct answer to the question is, &ldquo;I have absolutely no clue…”</p>
+<p><strong>But is that concluding assertion <em>true</em>?  Hmm…</strong></p>
+<p><em>I&rsquo;m learning</em>, and as I&rsquo;ve weighed a recent Twitter conversation and thought on a <!-- raw HTML omitted -->comment thread that Rob Napier made<!-- raw HTML omitted --> on the post quoted above, I&rsquo;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift.</p>
+<p>Something struck me as I read <!-- raw HTML omitted -->Rob&rsquo;s comment<!-- raw HTML omitted -->:  Why <em>wouldn&rsquo;t</em> I know the Type that would be inferred from what is returned by <code>birdDetailsFromStorage()</code> and assigned to <code>birdDetails</code>?  Presumably, I named the function what I named it intentionally.  The part I missed, was that if I had <em>designed</em> well and created a Type called <code>BirdDetails</code> (say, a Struct as Rob proposed), then all of a sudden, an inference can be made by both the compiler <em>and</em> a human that the <code>birdDetails</code> constant is… well… an instance of <code>BirdDetails</code>.  Imagine that!</p>
 <p>To quote Rob (emphasis added):</p>
-
 <blockquote>
-<p><span style="color: #3f4549;">Type inference should only be used when the result is unambiguous, but <strong>the best solution is to</strong> <strong>make the result unambiguous</strong>.</span></p>
+<p><!-- raw HTML omitted -->Type inference should only be used when the result is unambiguous, but <!-- raw HTML omitted -->the best solution is to<!-- raw HTML omitted --> <!-- raw HTML omitted -->make the result unambiguous<!-- raw HTML omitted -->.<!-- raw HTML omitted --></p>
 </blockquote>
-
 <p>Bingo.  The <em>best</em> solution is to <em>make</em> the result unambiguous.  You and I as code authors are in charge of the clarity or ambiguity of our code – it&rsquo;s up to us to <em>make</em> the results of our function evaluations unambiguous.</p>
-
-<p>When I named the function <code>birdDetailsFromStorage()</code>, I heavily implied something about its return Type in the name.  I even implied it in the name of the <em>constant</em>.  I was expecting the return Type to be something that encapsulated whatever &ldquo;bird details&#8221; are – I just didn&rsquo;t realize it at the time (although it&rsquo;s super obvious now)!</p>
-
-<p>The very _name_ of a thing sets expectations for you and the readers of your code.  It&rsquo;s our job to set ourselves up for that expectation to be <em>fulfilled</em>!  B<span style="color: #3f4549;">e predictable with the return Type of your functions for your own sake.  A function signature should be such that when you run across <code>birdDetailsFromStorage()</code>in some piece of code, you are able to legitimately expect it to return a <code>BirdDetails</code>.  </span></p>
-
-<p><span style="color: #3f4549;">Using this predictable, </span>convention-based approach to give humans the right clues about what the compiler is going to compute a Type to be makes Type Inference a totally legitimate language feature to embrace for the sake of your code&rsquo;s clarity and simplicity.</p>
-
+<p>When I named the function <code>birdDetailsFromStorage()</code>, I heavily implied something about its return Type in the name.  I even implied it in the name of the <em>constant</em>.  I was expecting the return Type to be something that encapsulated whatever &ldquo;bird details” are – I just didn&rsquo;t realize it at the time (although it&rsquo;s super obvious now)!</p>
+<p>The very <em>name</em> of a thing sets expectations for you and the readers of your code.  It&rsquo;s our job to set ourselves up for that expectation to be <em>fulfilled</em>!  B<!-- raw HTML omitted -->e predictable with the return Type of your functions for your own sake.  A function signature should be such that when you run across <code>birdDetailsFromStorage()</code>in some piece of code, you are able to legitimately expect it to return a <code>BirdDetails</code>.  <!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted -->Using this predictable, <!-- raw HTML omitted -->convention-based approach to give humans the right clues about what the compiler is going to compute a Type to be makes Type Inference a totally legitimate language feature to embrace for the sake of your code&rsquo;s clarity and simplicity.</p>
 <p>I&rsquo;ll leave you with a final quote from Rob&rsquo;s comments:</p>
-
 <blockquote>
-<p><span style="color: #3f4549;">Don&rsquo;t go implying that you&rsquo;re returning one thing when you&rsquo;re returning another. If you must, then yes, explicit types are your punishment. 😀</span></p>
+<p><!-- raw HTML omitted -->Don&rsquo;t go implying that you&rsquo;re returning one thing when you&rsquo;re returning another. If you must, then yes, explicit types are your punishment. 😀<!-- raw HTML omitted --></p>
 </blockquote>
-
-<p>Thank you Rob for your insight and feedback.  You can read more of Rob&rsquo;s work at <a title="Rob Napier's Blog" href="http://robnapier.net" target="_blank"><a href="http://robnapier.net">http://robnapier.net</a></a>.</p>
-
-<div class="related-posts">
-  <p>
-    You might also enjoy
-  </p>
-  
-  <ul>
-    <li>
-      <a title="Clean Coding in Swift – Functions" href="http://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/" target="_blank">Clean Coding in Swift – Functions</a>
-    </li>
-    <li>
-      <a title="Clean Coding in Swift – Type Inference" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/" target="_blank">Clean Coding in Swift – Type Inference</a>
-    </li>
-    <li>
-      <a title="Pick a Delegate… Any Delegate… On Clean View Controllers in Swift" href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/" target="_blank">Pick a Delegate… Any Delegate… On Clean View Controllers in Swift</a>
-    </li>
-  </ul>
-</div>
+<p>Thank you Rob for your insight and feedback.  You can read more of Rob&rsquo;s work at <!-- raw HTML omitted --><a href="http://robnapier.net">http://robnapier.net</a><!-- raw HTML omitted -->.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
     <aside>
       
@@ -290,7 +260,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

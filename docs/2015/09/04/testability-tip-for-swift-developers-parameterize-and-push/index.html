@@ -43,18 +43,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Testability Tip for Swift Developers – Parameterize and Push" />
-<meta property="og:description" content="In a previous &ldquo;Testability Tip for Swift Developers&#8221;, I discussed the principle of observability. &ldquo;If it&rsquo;s observable, it&rsquo;s testable&#8221; was the primary conclusion of the article, and I pointed toward using the public access control modifier for parts of your app that you intend to test.
-In this edition, I&rsquo;d like to introduce a new principle that I try to adhere to when I&rsquo;m unit testing, namely, &ldquo;If it&rsquo;s controllable, it&rsquo;s testable&#8221;." />
+<meta property="og:description" content="In a previous &ldquo;Testability Tip for Swift Developers”, I discussed the principle of observability. &ldquo;If it&rsquo;s observable, it&rsquo;s testable” was the primary conclusion of the article, and I pointed toward using the public access control modifier for parts of your app that you intend to test.
+In this edition, I&rsquo;d like to introduce a new principle that I try to adhere to when I&rsquo;m unit testing, namely, &ldquo;If it&rsquo;s controllable, it&rsquo;s testable”." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/09/04/testability-tip-for-swift-developers-parameterize-and-push/" />
-<meta property="article:published_time" content="2015-09-04T18:36:52&#43;00:00"/>
-<meta property="article:modified_time" content="2015-09-04T18:36:52&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/09/04/testability-tip-for-swift-developers-parameterize-and-push/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-09-04T18:36:52+00:00" />
+<meta property="article:modified_time" content="2015-09-04T18:36:52+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Testability Tip for Swift Developers – Parameterize and Push"/>
-<meta name="twitter:description" content="In a previous &ldquo;Testability Tip for Swift Developers&#8221;, I discussed the principle of observability. &ldquo;If it&rsquo;s observable, it&rsquo;s testable&#8221; was the primary conclusion of the article, and I pointed toward using the public access control modifier for parts of your app that you intend to test.
-In this edition, I&rsquo;d like to introduce a new principle that I try to adhere to when I&rsquo;m unit testing, namely, &ldquo;If it&rsquo;s controllable, it&rsquo;s testable&#8221;."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="twitter:description" content="In a previous &ldquo;Testability Tip for Swift Developers”, I discussed the principle of observability. &ldquo;If it&rsquo;s observable, it&rsquo;s testable” was the primary conclusion of the article, and I pointed toward using the public access control modifier for parts of your app that you intend to test.
+In this edition, I&rsquo;d like to introduce a new principle that I try to adhere to when I&rsquo;m unit testing, namely, &ldquo;If it&rsquo;s controllable, it&rsquo;s testable”."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -63,7 +64,7 @@ In this edition, I&rsquo;d like to introduce a new principle that I try to adher
   "@type": "BlogPosting",
   "headline": "Testability Tip for Swift Developers – Parameterize and Push",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/09\/04\/testability-tip-for-swift-developers-parameterize-and-push\/",
-  "wordCount": "1028",
+  "wordCount": "1015",
   "datePublished": "2015-09-04T18:36:52Z",
   "dateModified": "2015-09-04T18:36:52Z",
   "author": {
@@ -89,7 +90,7 @@ In this edition, I&rsquo;d like to introduce a new principle that I try to adher
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,131 +203,92 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>In a previous &ldquo;Testability Tip for Swift Developers&#8221;, <a href="https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/">I discussed the principle of observability</a>. &ldquo;If it&rsquo;s observable, it&rsquo;s testable&#8221; was the primary conclusion of the article, and I pointed toward using the <code>public</code> access control modifier for parts of your app that you intend to test.</p>
-
-<p>In this edition, I&rsquo;d like to introduce a new principle that I try to adhere to when I&rsquo;m unit testing, namely, &ldquo;If it&rsquo;s controllable, it&rsquo;s testable&#8221;. Here&rsquo;s what I mean by &ldquo;controllable&#8221;&#8230;</p>
-
-<p><a name="controllability" class="jump-target"></a></p>
-
+    <p>In a previous &ldquo;Testability Tip for Swift Developers”, <a href="https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/">I discussed the principle of observability</a>. &ldquo;If it&rsquo;s observable, it&rsquo;s testable” was the primary conclusion of the article, and I pointed toward using the <code>public</code> access control modifier for parts of your app that you intend to test.</p>
+<p>In this edition, I&rsquo;d like to introduce a new principle that I try to adhere to when I&rsquo;m unit testing, namely, &ldquo;If it&rsquo;s controllable, it&rsquo;s testable”. Here&rsquo;s what I mean by &ldquo;controllable”…</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="controllability">Controllability</h3>
-
 <p>In <a href="https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/">Testing is to Software as Experiment is to Science</a>, I analyzed how testing software mirrors scientific experimentation. Good scientific experiments are controllable. That is, they are set up such that everything stays as constant as possible except the thing you&rsquo;re poking at.</p>
-
 <p>Changing multiple things at a time in an experiment clouds the ability to verify that [tweak x] produced [y outcome]. So a scientist will do his/her best to <em>control</em> the environment by holding as many variables constant as possible, so that he/she can make accurate conclusions about the outcome.</p>
-
-<p>The same goes for testing software. If I&rsquo;m going to automate a test, I want to set up my &ldquo;experiment&#8221; such that I control as much of the system as possible so that I can set up valid expectations and verify results coming from the system under test. Note that I&rsquo;m using the term &ldquo;system&#8221; in a very broad sense – it could be referring to an entire app, a single &ldquo;object&#8221;, or a function.</p>
-
-<p><a name="parameterize-push" class="jump-target"></a></p>
-
+<p>The same goes for testing software. If I&rsquo;m going to automate a test, I want to set up my &ldquo;experiment” such that I control as much of the system as possible so that I can set up valid expectations and verify results coming from the system under test. Note that I&rsquo;m using the term &ldquo;system” in a very broad sense – it could be referring to an entire app, a single &ldquo;object”, or a function.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="parameterize-and-push">Parameterize and push</h3>
-
-<p>So where does &ldquo;parameterize and push&#8221; come into play?</p>
-
+<p>So where does &ldquo;parameterize and push” come into play?</p>
 <p>Parameterizing sets us up with the ability to provide <em>inputs</em> into the system we&rsquo;re testing. Anytime you have an input, you have the ability to supply a value of your choosing.</p>
-
-<p>Serving as inputs to the system, you can view parameters as entry points for <em>controls</em>. They&rsquo;re &ldquo;controls&#8221; because <em>we</em> decide what those values should be before we pass them off as arguments <em>to</em> those parameters. So long as the system we&rsquo;re testing only gets the data it uses from its inputs (its parameters), we can be guaranteed predictable, controlled outputs on the other end.</p>
-
-<p><a name="forms" class="jump-target"></a></p>
-
+<p>Serving as inputs to the system, you can view parameters as entry points for <em>controls</em>. They&rsquo;re &ldquo;controls” because <em>we</em> decide what those values should be before we pass them off as arguments <em>to</em> those parameters. So long as the system we&rsquo;re testing only gets the data it uses from its inputs (its parameters), we can be guaranteed predictable, controlled outputs on the other end.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="forms-of-parameterization">Forms of parameterization</h3>
-
 <p>Three forms of parameterization are common:</p>
-
 <ol>
 <li>At the instance level through initializers</li>
 <li>At the instance level through property setters</li>
 <li>At the function level through function parameters</li>
 </ol>
-
 <p>Using an initializer, or a <code>public</code> variable property, or by adding parameters to your functions and using only those parameters for the function&rsquo;s computation and output production, you give yourself the ability to control the system in various ways that are appropriate on a test-by-test basis.</p>
-
-<p><a name="usefulness" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="usefulness-and-examples-of-parameterization">Usefulness and examples of parameterization</h3>
-
-<p>Setting up your instance definitions to use a set of inputs from the very start through initialization gives you the ability to provide real &ldquo;production-ready&#8221; values in your app, but fake &ldquo;test-customized&#8221; values for testing. <a href="https://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/">Creating fake objects</a> for testing is outside the scope of this article, but providing public initializers with parameters is a really great way to set yourself up for being able to test that particular instance.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Prefer</span>
-<span class="ln"> 2</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DatabaseCommunicator</span> <span class="p">{</span>
-<span class="ln"> 3</span>    <span class="kd">let</span> <span class="nv">database</span><span class="p">:</span> <span class="n">Database</span>
-<span class="ln"> 4</span>    
-<span class="ln"> 5</span>    <span class="kd">public</span> <span class="kd">init</span> <span class="p">(</span><span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 6</span>        <span class="kc">self</span><span class="p">.</span><span class="n">database</span> <span class="p">=</span> <span class="n">database</span>
-<span class="ln"> 7</span>        <span class="c1">// able to supply a controlled input via parameter, such as supplying a </span>
-<span class="ln"> 8</span>        <span class="c1">// customized &#34;fake&#34; database to use for testing but still supply a &#34;real&#34; database in real life</span>
-<span class="ln"> 9</span>    <span class="p">}</span>
-<span class="ln">10</span><span class="p">}</span>
-<span class="ln">11</span>
-<span class="ln">12</span><span class="c1">// over</span>
-<span class="ln">13</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DatabaseCommunicator</span> <span class="p">{</span>
-<span class="ln">14</span>    <span class="kd">let</span> <span class="nv">database</span> <span class="p">=</span> <span class="n">Database</span><span class="p">()</span>
-<span class="ln">15</span>    <span class="c1">// stuck with talking to a real database...</span>
-<span class="ln">16</span><span class="p">}</span></code></pre></div>
-<p>Another viable option is to provide public variable properties that can be set after the instance is initialized. This is a little more round-about, but I would still call it a form of &ldquo;parameterization&#8221; because the strategy still provides you with the same control point that an initializer with parameters does.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// prefer</span>
-<span class="ln"> 2</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DatabaseCommunicator</span> <span class="p">{</span>
-<span class="ln"> 3</span>    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">database</span><span class="p">:</span> <span class="n">Database</span>
-<span class="ln"> 4</span>    <span class="c1">// able to supply a controlled input via property setter, such as supplying a </span>
-<span class="ln"> 5</span>    <span class="c1">// customized &#34;fake&#34; database to use for testing but still supply a &#34;real&#34; database in real life</span>
-<span class="ln"> 6</span>    <span class="kd">public</span> <span class="kd">init</span><span class="p">()</span> <span class="p">{</span> <span class="kc">self</span><span class="p">.</span><span class="n">database</span> <span class="p">=</span> <span class="n">Database</span><span class="p">()}</span>
-<span class="ln"> 7</span><span class="p">}</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span><span class="c1">// over</span>
-<span class="ln">10</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DatabaseCommunicator</span> <span class="p">{</span>
-<span class="ln">11</span>    <span class="kd">let</span> <span class="nv">database</span> <span class="p">=</span> <span class="n">Database</span><span class="p">()</span>
-<span class="ln">12</span>    <span class="c1">// stuck with talking to a real database</span>
-<span class="ln">13</span><span class="p">}</span></code></pre></div>
-<p>At the function level, the usefulness of parameters is that you can supply inputs and examine outputs with ease. If you pull in data from the encapsulating instance inside the function body, say by referencing <code>self.somePropertyValue</code>, you&rsquo;ve got a bit more setup to do to be able to accurately verify results. <code>somePropertyValue</code> needs to actually have a value before the function will produce accurate results. If you&rsquo;d opted to simply define parameters for everything the function needs in order to produce its output, you can test that function in isolation far more easily and be guaranteed that your results are correct and accurate.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// prefer</span>
-<span class="ln"> 2</span><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">(</span><span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
-<span class="ln"> 3</span>    <span class="k">return</span> <span class="n">database</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span>
-<span class="ln"> 4</span>    <span class="c1">// able to supply a controlled input via parameter, such as supplying a </span>
-<span class="ln"> 5</span>    <span class="c1">// customized &#34;fake&#34; database to use for testing but still supply a &#34;real&#34; database in real life</span>
-<span class="ln"> 6</span>   
-<span class="ln"> 7</span><span class="p">}</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span><span class="c1">// over</span>
-<span class="ln">10</span><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
-<span class="ln">11</span>    <span class="kd">let</span> <span class="nv">database</span> <span class="p">=</span> <span class="n">Database</span><span class="p">()</span>
-<span class="ln">12</span>    <span class="c1">// stuck with talking to a real database</span>
-<span class="ln">13</span>    <span class="k">return</span> <span class="n">database</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span>
-<span class="ln">14</span><span class="p">}</span>
-<span class="ln">15</span>
-<span class="ln">16</span><span class="c1">// and over</span>
-<span class="ln">17</span><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
-<span class="ln">18</span>    <span class="k">return</span> <span class="kc">self</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span>
-<span class="ln">19</span>    <span class="c1">// requires additional setting of the database property on &#39;self&#39;</span>
-<span class="ln">20</span>    <span class="c1">// before you&#39;re able to get results from this function</span>
-<span class="ln">21</span><span class="p">}</span></code></pre></div>
-<p><a name="di" class="jump-target"></a></p>
-
-<h3 id="parameterization-or-dependency-injection-8221">Parameterization or &ldquo;Dependency Injection&#8221;?</h3>
-
+<p>Setting up your instance definitions to use a set of inputs from the very start through initialization gives you the ability to provide real &ldquo;production-ready” values in your app, but fake &ldquo;test-customized” values for testing. <a href="https://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/">Creating fake objects</a> for testing is outside the scope of this article, but providing public initializers with parameters is a really great way to set yourself up for being able to test that particular instance.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// Prefer</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DatabaseCommunicator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">let</span> <span class="nv">database</span><span class="p">:</span> <span class="n">Database</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="kd">public</span> <span class="kd">init</span> <span class="p">(</span><span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">database</span> <span class="p">=</span> <span class="n">database</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="c1">// able to supply a controlled input via parameter, such as supplying a </span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="c1">// customized &#34;fake&#34; database to use for testing but still supply a &#34;real&#34; database in real life</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1">// over</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DatabaseCommunicator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="kd">let</span> <span class="nv">database</span> <span class="p">=</span> <span class="n">Database</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="c1">// stuck with talking to a real database...</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Another viable option is to provide public variable properties that can be set after the instance is initialized. This is a little more round-about, but I would still call it a form of &ldquo;parameterization” because the strategy still provides you with the same control point that an initializer with parameters does.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// prefer</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DatabaseCommunicator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">database</span><span class="p">:</span> <span class="n">Database</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="c1">// able to supply a controlled input via property setter, such as supplying a </span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// customized &#34;fake&#34; database to use for testing but still supply a &#34;real&#34; database in real life</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">public</span> <span class="kd">init</span><span class="p">()</span> <span class="p">{</span> <span class="kc">self</span><span class="p">.</span><span class="n">database</span> <span class="p">=</span> <span class="n">Database</span><span class="p">()}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1">// over</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DatabaseCommunicator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="kd">let</span> <span class="nv">database</span> <span class="p">=</span> <span class="n">Database</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="c1">// stuck with talking to a real database</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>At the function level, the usefulness of parameters is that you can supply inputs and examine outputs with ease. If you pull in data from the encapsulating instance inside the function body, say by referencing <code>self.somePropertyValue</code>, you&rsquo;ve got a bit more setup to do to be able to accurately verify results. <code>somePropertyValue</code> needs to actually have a value before the function will produce accurate results. If you&rsquo;d opted to simply define parameters for everything the function needs in order to produce its output, you can test that function in isolation far more easily and be guaranteed that your results are correct and accurate.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// prefer</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">(</span><span class="n">database</span><span class="p">:</span> <span class="n">Database</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">return</span> <span class="n">database</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="c1">// able to supply a controlled input via parameter, such as supplying a </span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// customized &#34;fake&#34; database to use for testing but still supply a &#34;real&#34; database in real life</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">   
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1">// over</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="kd">let</span> <span class="nv">database</span> <span class="p">=</span> <span class="n">Database</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="c1">// stuck with talking to a real database</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="k">return</span> <span class="n">database</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1">// and over</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="kd">func</span> <span class="nf">getNameFromDatabase</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="k">return</span> <span class="kc">self</span><span class="p">.</span><span class="n">database</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="c1">// requires additional setting of the database property on &#39;self&#39;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="c1">// before you&#39;re able to get results from this function</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="parameterization-or-dependency-injection8221">Parameterization or &ldquo;Dependency Injection”?</h3>
 <p>Yes.</p>
-
-<p>What I&rsquo;m calling &ldquo;parameterization&#8221; is really just &ldquo;dependency injection&#8221;. But the term &ldquo;dependency injection&#8221; can sound really daunting, while we&rsquo;re used to working with parameters. I intend for the meaning of each term for the purpose of this article to be equivalent.</p>
-
+<p>What I&rsquo;m calling &ldquo;parameterization” is really just &ldquo;dependency injection”. But the term &ldquo;dependency injection” can sound really daunting, while we&rsquo;re used to working with parameters. I intend for the meaning of each term for the purpose of this article to be equivalent.</p>
 <h3 id="wrapping-up">Wrapping up</h3>
-
-<p>Parameterizing, your instance definitions and functions provides you an immense amount of leverage when it comes to controlling your system under test. I encourage you to try this out and do your best to shift to a more parameterized approach to writing your code for improved testability. Remember, &ldquo;Controllable is testable&#8221;!</p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/" title="Testability Tip for Swift Developers – Public Over Private">Testability Tip for Swift Developers – Public Over Private</a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p>Parameterizing, your instance definitions and functions provides you an immense amount of leverage when it comes to controlling your system under test. I encourage you to try this out and do your best to shift to a more parameterized approach to writing your code for improved testability. Remember, &ldquo;Controllable is testable”!</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -354,7 +316,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

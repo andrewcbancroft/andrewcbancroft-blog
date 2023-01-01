@@ -45,20 +45,17 @@
 <meta property="og:title" content="Accessing the Root View Controller at Launch on iOS 13 with SceneDelegate" />
 <meta property="og:description" content="With iOS 13 comes a new SceneDelegate class, which changes how you access your root view controller at app launch. Learn what to do now with this change." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20Accessing%20the%20Root%20View%20Controller%20at%20Launch%20on%20iOS%2013%20with%20SceneDelegate.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20Accessing%20the%20Root%20View%20Controller%20at%20Launch%20on%20iOS%2013%20with%20SceneDelegate.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-07T18:20:41+00:00" />
+<meta property="article:modified_time" content="2019-06-07T18:20:41+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20Accessing%20the%20Root%20View%20Controller%20at%20Launch%20on%20iOS%2013%20with%20SceneDelegate.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20Accessing%20the%20Root%20View%20Controller%20at%20Launch%20on%20iOS%2013%20with%20SceneDelegate.png" />
-<meta property="article:published_time" content="2019-06-07T18:20:41&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-07T18:20:41&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20Accessing%20the%20Root%20View%20Controller%20at%20Launch%20on%20iOS%2013%20with%20SceneDelegate.png"/>
 
 <meta name="twitter:title" content="Accessing the Root View Controller at Launch on iOS 13 with SceneDelegate"/>
 <meta name="twitter:description" content="With iOS 13 comes a new SceneDelegate class, which changes how you access your root view controller at app launch. Learn what to do now with this change."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,51 +211,40 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#the-old-way">The Old Way</a></li>
-<li><a href="#what-to-do-now">What To Do Now</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#the-old-way">The Old Way</a></li>
+    <li><a href="#what-to-do-now">What To Do Now</a></li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<p>A new <a href="https://developer.apple.com/documentation/uikit/uiwindowscenedelegate" rel="nofollow">SceneDelegate</a> was introduced for Storyboard-based apps in iOS 13, and with it came some changes in how you&rsquo;re able to access your app&rsquo;s root view controller at app launch.</p>
-
+    <p>A new <!-- raw HTML omitted -->SceneDelegate<!-- raw HTML omitted --> was introduced for Storyboard-based apps in iOS 13, and with it came some changes in how you&rsquo;re able to access your app&rsquo;s root view controller at app launch.</p>
 <h2 id="the-old-way">The Old Way</h2>
-
 <p><code>AppDelegate</code> Swift file used to be where code landed for accessing your app&rsquo;s <code>rootViewController</code>:</p>
-
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span>    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="kc">_</span> <span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">LaunchOptionsKey</span><span class="p">:</span> <span class="nb">Any</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
-<span class="ln">2</span>        <span class="c1">// Override point for customization after application launch.</span>
-<span class="hl"><span class="ln">3</span>        <span class="kd">let</span> <span class="nv">rootVC</span> <span class="p">=</span> <span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span>
-</span><span class="ln">4</span>
-<span class="ln">5</span>        <span class="k">return</span> <span class="kc">true</span>
-<span class="ln">6</span>    <span class="p">}</span></code></pre></div>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl">    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="kc">_</span> <span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">LaunchOptionsKey</span><span class="p">:</span> <span class="nb">Any</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">        <span class="c1">// Override point for customization after application launch.</span>
+</span></span><span class="line hl"><span class="ln">3</span><span class="cl">        <span class="kd">let</span> <span class="nv">rootVC</span> <span class="p">=</span> <span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="p">}</span></span></span></code></pre></div>
 <h2 id="what-to-do-now">What To Do Now</h2>
-
 <p><em>Now</em>, you&rsquo;ll be moving that code over to your app&rsquo;s <code>SceneDelegate</code> Swift file:</p>
-
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">SceneDelegate</span><span class="p">:</span> <span class="n">UIResponder</span><span class="p">,</span> <span class="n">UIWindowSceneDelegate</span> <span class="p">{</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span>    <span class="kd">var</span> <span class="nv">window</span><span class="p">:</span> <span class="n">UIWindow</span><span class="p">?</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span>
-<span class="ln"> 6</span>    <span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 7</span>        <span class="c1">// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.</span>
-<span class="ln"> 8</span>        <span class="c1">// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.</span>
-<span class="ln"> 9</span>        <span class="c1">// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).</span>
-<span class="ln">10</span>        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">_</span> <span class="p">=</span> <span class="p">(</span><span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
-<span class="ln">11</span>        
-<span class="hl"><span class="ln">12</span>        <span class="kd">let</span> <span class="nv">rootVC</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span> 
-</span><span class="ln">13</span>    <span class="p">}</span>
-<span class="ln">14</span>
-<span class="ln">15</span>    <span class="c1">// ... the rest of SceneDelegate</span>
-<span class="ln">16</span><span class="p">}</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">SceneDelegate</span><span class="p">:</span> <span class="n">UIResponder</span><span class="p">,</span> <span class="n">UIWindowSceneDelegate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">var</span> <span class="nv">window</span><span class="p">:</span> <span class="n">UIWindow</span><span class="p">?</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">func</span> <span class="nf">scene</span><span class="p">(</span><span class="kc">_</span> <span class="n">scene</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">,</span> <span class="n">willConnectTo</span> <span class="n">session</span><span class="p">:</span> <span class="n">UISceneSession</span><span class="p">,</span> <span class="n">options</span> <span class="n">connectionOptions</span><span class="p">:</span> <span class="n">UIScene</span><span class="p">.</span><span class="n">ConnectionOptions</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="c1">// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="c1">// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="c1">// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">_</span> <span class="p">=</span> <span class="p">(</span><span class="n">scene</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIWindowScene</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        
+</span></span><span class="line hl"><span class="ln">12</span><span class="cl">        <span class="kd">let</span> <span class="nv">rootVC</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">window</span><span class="p">?.</span><span class="n">rootViewController</span> 
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="c1">// ... the rest of SceneDelegate</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span></span></span></code></pre></div>
 
     <aside>
       
@@ -286,7 +272,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -46,15 +46,16 @@
 <meta property="og:description" content="Without fail, any time Rob Napier (@cocoaphony) speaks or writes, I gain insight into new and deeper ways to solve problems with Swift.
 In January 2016, he gave a talk at dotSwift, and I wanted to record my thoughts on something he said that made a lot of sense when it comes to the topic of, &ldquo;Should I create and adopt a protocol for this Type I&rsquo;m creating, or should I just pass it a function instead?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2016/05/05/working-with-swift-adopt-a-protocol-or-pass-a-function/" />
-<meta property="article:published_time" content="2016-05-05T17:59:16&#43;00:00"/>
-<meta property="article:modified_time" content="2016-05-05T17:59:16&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/05/05/working-with-swift-adopt-a-protocol-or-pass-a-function/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2016-05-05T17:59:16+00:00" />
+<meta property="article:modified_time" content="2016-05-05T17:59:16+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Working with Swift:  Adopt a Protocol or Pass a Function?"/>
 <meta name="twitter:description" content="Without fail, any time Rob Napier (@cocoaphony) speaks or writes, I gain insight into new and deeper ways to solve problems with Swift.
 In January 2016, he gave a talk at dotSwift, and I wanted to record my thoughts on something he said that made a lot of sense when it comes to the topic of, &ldquo;Should I create and adopt a protocol for this Type I&rsquo;m creating, or should I just pass it a function instead?"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -63,7 +64,7 @@ In January 2016, he gave a talk at dotSwift, and I wanted to record my thoughts 
   "@type": "BlogPosting",
   "headline": "Working with Swift:  Adopt a Protocol or Pass a Function?",
   "url": "https:\/\/www.andrewcbancroft.com\/2016\/05\/05\/working-with-swift-adopt-a-protocol-or-pass-a-function\/",
-  "wordCount": "778",
+  "wordCount": "764",
   "datePublished": "2016-05-05T17:59:16Z",
   "dateModified": "2016-05-05T17:59:16Z",
   "author": {
@@ -89,7 +90,7 @@ In January 2016, he gave a talk at dotSwift, and I wanted to record my thoughts 
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,118 +203,74 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>Without fail, any time <a href="http://robnapier.net/">Rob Napier</a> (<a href="https://twitter.com/cocoaphony">@cocoaphony</a>) speaks or writes, I gain insight into new and deeper ways to solve problems with Swift.</p>
-
-<p>In January 2016, he <a href="http://www.thedotpost.com/2016/01/rob-napier-beyond-crusty-real-world-protocols">gave a talk at dotSwift</a>, and I wanted to record my thoughts on something he said that made a lot of sense when it comes to the topic of, &ldquo;Should I create and adopt a protocol for this Type I&rsquo;m creating, or should I just pass it a function instead?&#8221;</p>
-
-<p><a name="two-insights" class="jump-target"></a></p>
-
+    <p>Without fail, any time <a href="http://robnapier.net/">Rob Napier</a> (<a href="https://twitter.com/cocoaphony">@cocoaphony</a>) speaks or writes, I gain insight into new and deeper ways to solve problems with Swift.</p>
+<p>In January 2016, he <a href="http://www.thedotpost.com/2016/01/rob-napier-beyond-crusty-real-world-protocols">gave a talk at dotSwift</a>, and I wanted to record my thoughts on something he said that made a lot of sense when it comes to the topic of, &ldquo;Should I create and adopt a protocol for this Type I&rsquo;m creating, or should I just pass it a function instead?”</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="two-insights">Two insights</h1>
-
 <p>During the talk, he compared some scenarios that were meant to help determine when to create a protocol, or when doing so would be overly complex, and passing a function might be the simpler thing to do instead.</p>
-
 <p>Two phrases caught my attention:</p>
-
 <blockquote>
 <p>A protocol is really just a <em>promise</em> to implement some functions, and a struct is mostly just a bundle of functions that implement the promise.</p>
 </blockquote>
-
 <p>and</p>
-
 <blockquote>
 <p>I can pass you an object that <em>promises</em> a function, <strong>or</strong>, I could just pass you the function.</p>
 </blockquote>
-
 <p><strong>[mind blown]</strong></p>
-
-<p>So in other words, there are times when, rather than going through the formality of&#8230;</p>
-
+<p>So in other words, there are times when, rather than going through the formality of…</p>
 <ul>
 <li>Creating a protocol defining one or more functions that should be implemented</li>
-<li>Creating a Type that <em>adopts</em> that protocol to promise that &ldquo;I (as a class/struct/enum) will implement this/these function(s)&#8221;</li>
+<li>Creating a Type that <em>adopts</em> that protocol to promise that &ldquo;I (as a class/struct/enum) will implement this/these function(s)”</li>
 <li>Creating an instance of that Type</li>
 <li>Passing off the instance to <em>another</em> Type that needs to <em>call</em> that promised function</li>
 </ul>
-
-<p>&#8230;life might be simpler and code might be more clear and more concise when you just&#8230; <strong>pass the function</strong> instead!</p>
-
-<p><a name="when-to-pass-a-function" class="jump-target"></a></p>
-
+<p>…life might be simpler and code might be more clear and more concise when you just… <strong>pass the function</strong> instead!</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="when-to-pass-a-function">When to pass a function</h1>
-
-<p>Rob gave us a couple or three <strong>rules of thumb</strong>. Not hard-and-fast, &ldquo;It should always be this way&#8221;, but just some guiding thoughts to filter our decision-making about our architecture.</p>
-
-<p>When it comes to finding opportunities that lend themselves to going the &ldquo;just pass the function&#8221; route, consider the following:</p>
-
+<p>Rob gave us a couple or three <strong>rules of thumb</strong>. Not hard-and-fast, &ldquo;It should always be this way”, but just some guiding thoughts to filter our decision-making about our architecture.</p>
+<p>When it comes to finding opportunities that lend themselves to going the &ldquo;just pass the function” route, consider the following:</p>
 <ul>
 <li>If you&rsquo;re creating a Type that depends on a single piece of functionality (a single function), maybe try depending on / passing just the function, rather than creating a protocol.</li>
-<li>If you&rsquo;re creating a Type that depends on more than a single function, but the nature of the dependent relationship is short-lived, maybe try depending on / passing just the function. How do you know if it&rsquo;s short-lived? Ask, &ldquo;How many times am I going to call the function(s) that I depend on? Once, and then I&rsquo;m done? Or multiple times throughout the application life-cycle?&#8221; If it&rsquo;s a once and done kind of relationship, much like a <a href="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/">callback</a>, then perhaps just depending on and passing the function, rather than creating a protocol, is the simpler route.</li>
+<li>If you&rsquo;re creating a Type that depends on more than a single function, but the nature of the dependent relationship is short-lived, maybe try depending on / passing just the function. How do you know if it&rsquo;s short-lived? Ask, &ldquo;How many times am I going to call the function(s) that I depend on? Once, and then I&rsquo;m done? Or multiple times throughout the application life-cycle?” If it&rsquo;s a once and done kind of relationship, much like a <a href="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/">callback</a>, then perhaps just depending on and passing the function, rather than creating a protocol, is the simpler route.</li>
 </ul>
-
-<p><a name="when-to-use-a-protocol" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="when-to-use-a-protocol">When to use a protocol</h1>
-
 <p>For some rules of thumb when it comes to choosing a protocol over just passing a function, you might consider:</p>
-
 <ul>
 <li>If you&rsquo;re creating a Type that depends on 3 or more related functions, wrapping those functions up in a protocol might be cleaner and more clear.</li>
 <li>If you&rsquo;re creating a Type that depends on some functions for a long period of time, consider a protocol. Long-lived relationships are better-described in a protocol. Think of something like a table view&rsquo;s data source. This is a good example of when to use a protocol to describe the dependency and the relationship, because as data changes, the table view will need to constantly call into those protocol methods to refresh itself.</li>
 </ul>
-
-<p><a name="how-to-depend-on-a-function" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="how-to-depend-on-a-function">How to depend on a function</h1>
-
-<p>In order to fully grasp how to go the &ldquo;just depend on / pass the function&#8221; route, you need to have an understanding of how <a href="https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/">function Types are described in Swift</a>. With this knowledge, you&rsquo;re set to do a couple of things:</p>
-
+<p>In order to fully grasp how to go the &ldquo;just depend on / pass the function” route, you need to have an understanding of how <a href="https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/">function Types are described in Swift</a>. With this knowledge, you&rsquo;re set to do a couple of things:</p>
 <p>1 – Create a property on the Type you&rsquo;re implementing that is of some function Type. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">struct</span> <span class="nc">Vehicle</span><span class="p">&lt;</span><span class="n">Fuel</span><span class="o">&gt;</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kd">let</span> <span class="nv">move</span><span class="p">:</span> <span class="p">(</span><span class="n">Fuel</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span>
-<span class="ln"> 3</span><span class="p">}</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span><span class="c1">// Fuel Types</span>
-<span class="ln"> 6</span><span class="kd">struct</span> <span class="nc">Gas</span> <span class="p">{}</span>
-<span class="ln"> 7</span><span class="kd">struct</span> <span class="nc">RocketFuel</span> <span class="p">{}</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span><span class="kd">let</span> <span class="nv">car</span> <span class="p">=</span> <span class="n">Vehicle</span><span class="p">&lt;</span><span class="n">Gas</span><span class="o">&gt;</span><span class="p">(</span><span class="n">move</span><span class="p">:</span> <span class="p">{</span> <span class="kc">_</span> <span class="k">in</span> <span class="bp">print</span><span class="p">(</span><span class="s">&#34;use gasoline to move&#34;</span><span class="p">)</span> <span class="p">})</span>
-<span class="ln">10</span>
-<span class="ln">11</span><span class="kd">let</span> <span class="nv">rocket</span> <span class="p">=</span> <span class="n">Vehicle</span><span class="p">&lt;</span><span class="n">RocketFuel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">move</span><span class="p">:</span> <span class="p">{</span> <span class="kc">_</span> <span class="k">in</span> <span class="bp">print</span><span class="p">(</span><span class="s">&#34;use rocket fuel to move&#34;</span><span class="p">)</span> <span class="p">})</span>
-<span class="ln">12</span>
-<span class="ln">13</span><span class="n">car</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">Gas</span><span class="p">())</span>
-<span class="ln">14</span><span class="n">rocket</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">RocketFuel</span><span class="p">())</span></code></pre></div>
-<p>A full explanation of indicating function Types can be found by reviewing my guide on <a href="https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/">Swift Functions as Types</a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">struct</span> <span class="nc">Vehicle</span><span class="p">&lt;</span><span class="n">Fuel</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="kd">let</span> <span class="nv">move</span><span class="p">:</span> <span class="p">(</span><span class="n">Fuel</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1">// Fuel Types</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="kd">struct</span> <span class="nc">Gas</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="kd">struct</span> <span class="nc">RocketFuel</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="kd">let</span> <span class="nv">car</span> <span class="p">=</span> <span class="n">Vehicle</span><span class="p">&lt;</span><span class="n">Gas</span><span class="p">&gt;(</span><span class="n">move</span><span class="p">:</span> <span class="p">{</span> <span class="kc">_</span> <span class="k">in</span> <span class="bp">print</span><span class="p">(</span><span class="s">&#34;use gasoline to move&#34;</span><span class="p">)</span> <span class="p">})</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="kd">let</span> <span class="nv">rocket</span> <span class="p">=</span> <span class="n">Vehicle</span><span class="p">&lt;</span><span class="n">RocketFuel</span><span class="p">&gt;(</span><span class="n">move</span><span class="p">:</span> <span class="p">{</span> <span class="kc">_</span> <span class="k">in</span> <span class="bp">print</span><span class="p">(</span><span class="s">&#34;use rocket fuel to move&#34;</span><span class="p">)</span> <span class="p">})</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="n">car</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">Gas</span><span class="p">())</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="n">rocket</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">RocketFuel</span><span class="p">())</span>
+</span></span></code></pre></div><p>A full explanation of indicating function Types can be found by reviewing my guide on <a href="https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/">Swift Functions as Types</a></p>
 <p>2 – Declare that such-and-such parameter on a function within your Type must be a function Type. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">func</span> <span class="nf">getData</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="p">(</span><span class="n">NSData</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">let</span> <span class="nv">data</span><span class="p">:</span> <span class="n">NSData</span> <span class="p">=</span> <span class="c1">// do something to go get data</span>
-<span class="ln">3</span>
-<span class="ln">4</span>    <span class="c1">// call completion handler when getting data is done</span>
-<span class="ln">5</span>    <span class="n">completion</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="ln">6</span><span class="p">}</span></code></pre></div>
-<p>The above is an example of a callback scenario, which I give full treatment in <a href="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/">Fundamentals of Callbacks for Swift Developers</a></p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/" title="Swift Functions as Types">Swift Functions as Types</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/" title="Fundamentals of Callbacks for Swift Developers">Fundamentals of Callbacks for Swift Developers</a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">func</span> <span class="nf">getData</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="p">(</span><span class="n">NSData</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kd">let</span> <span class="nv">data</span><span class="p">:</span> <span class="n">NSData</span> <span class="p">=</span> <span class="c1">// do something to go get data</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="c1">// call completion handler when getting data is done</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="n">completion</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The above is an example of a callback scenario, which I give full treatment in <a href="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/">Fundamentals of Callbacks for Swift Developers</a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -341,7 +298,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

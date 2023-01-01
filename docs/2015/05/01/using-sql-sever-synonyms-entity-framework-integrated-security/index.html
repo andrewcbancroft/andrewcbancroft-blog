@@ -46,19 +46,22 @@
 <meta property="og:description" content="Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.
 Suppose you have the following scenario before you:
 Basics
- You&rsquo;re building an ASP.Net web application Entity Framework has been chosen as your ORM SQL Server (any version supporting Synonyms) is your backend database server of choice  Details" />
+You&rsquo;re building an ASP.Net web application Entity Framework has been chosen as your ORM SQL Server (any version supporting Synonyms) is your backend database server of choice Details
+You&rsquo;re using &ldquo;Integrated Security=True” in your connection string to the database (in web." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/" />
-<meta property="article:published_time" content="2015-05-01T17:44:31&#43;00:00"/>
-<meta property="article:modified_time" content="2015-05-01T17:44:31&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-05-01T17:44:31+00:00" />
+<meta property="article:modified_time" content="2015-05-01T17:44:31+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="SQL Sever Synonyms, Entity Framework, and Integrated Security"/>
 <meta name="twitter:description" content="Scenario This may be an edge case, but I spent enough time (a couple of days) spinning on this that I thought it warranted a signpost on the Internet.
 Suppose you have the following scenario before you:
 Basics
- You&rsquo;re building an ASP.Net web application Entity Framework has been chosen as your ORM SQL Server (any version supporting Synonyms) is your backend database server of choice  Details"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+You&rsquo;re building an ASP.Net web application Entity Framework has been chosen as your ORM SQL Server (any version supporting Synonyms) is your backend database server of choice Details
+You&rsquo;re using &ldquo;Integrated Security=True” in your connection string to the database (in web."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -93,7 +96,7 @@ Basics
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,72 +205,44 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p><a name="scenario" class="jump-target"></a></p>
-
+    <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="scenario">Scenario</h3>
-
 <p>This may be an edge case, but I spent enough time (a couple of <em>days</em>) spinning on this that I thought it warranted a signpost on the Internet.</p>
-
 <p>Suppose you have the following scenario before you:</p>
-
 <p><strong>Basics</strong></p>
-
 <ul>
 <li>You&rsquo;re building an ASP.Net web application</li>
 <li>Entity Framework has been chosen as your ORM</li>
 <li>SQL Server (any version supporting <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonyms</a>) is your backend database server of choice</li>
 </ul>
-
 <p><strong>Details</strong></p>
-
 <ul>
-<li>You&rsquo;re using &ldquo;Integrated Security=True&#8221; in your connection string to the database (in web.config)</li>
+<li>You&rsquo;re using &ldquo;Integrated Security=True” in your connection string to the database (in web.config)</li>
 <li>The Application Pool in which your app resides is running under a domain service account (ie, not the default identity)</li>
 <li>Your application primarily talks to one database, but there is information in <em>another</em> database that you need to pull into your app</li>
 <li>To access the data in that other database, you&rsquo;ve chosen to create a <a href="https://msdn.microsoft.com/en-us/library/ms187552.aspx">Synonym</a></li>
 </ul>
-
-<p>Every bullet point in this scenario is normal and valid, until you get to the part about using &ldquo;Integrated Security=True&#8221; in your connection string&#8230;</p>
-
-<p><a name="login-failed" class="jump-target"></a></p>
-
-<h3 id="login-failed-for-user-8216-nt-authority-anonymous-logon">Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&rsquo;</h3>
-
-<p>If you had chosen to use SQL Server authentication in your conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&rsquo;s what I had been doing in my own application. I started running into the &ldquo;Login failed&#8230;&#8221; error message once I switched to Integrated Security.</p>
-
-<p>For some reason &ldquo;Integrated Security=True&#8221; that throws Entity Framework for a loop. It accesses the database used in the <code>DbContext</code> instance just fine, but the second a line of code needs to use the object mapped to the <em>Synonym</em>, <strong>boom</strong>&#8230; crash&#8230; error&#8230;</p>
-
-<p><a name="reolving-error" class="jump-target"></a></p>
-
+<p>Every bullet point in this scenario is normal and valid, until you get to the part about using &ldquo;Integrated Security=True” in your connection string…</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="login-failed-for-user-8216nt-authorityanonymous-logon">Login failed for user ‘NT AUTHORITY\ANONYMOUS LOGON'</h3>
+<p>If you had chosen to use SQL Server authentication in your conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&rsquo;s what I had been doing in my own application. I started running into the &ldquo;Login failed…” error message once I switched to Integrated Security.</p>
+<p>For some reason &ldquo;Integrated Security=True” that throws Entity Framework for a loop. It accesses the database used in the <code>DbContext</code> instance just fine, but the second a line of code needs to use the object mapped to the <em>Synonym</em>, <strong>boom</strong>… crash… error…</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="resolving-the-error">Resolving the error</h3>
-
 <p>It turns out that the resolution is really, really simple. Instead of using a Synonym, use a View. You don&rsquo;t have to change a single line of .Net code. Just make sure the view is named the same as the Synonym was (and drop the Synonym from the database, of course).</p>
-
-<p><a name="creating-view" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="creating-the-view">Creating the view</h4>
-
 <p>A Synonym essentially maps to an entire table, so the View&rsquo;s structure could literally be a simple <code>select * from [fully.qualified.database.objectName]</code>. If your DBA hates <code>select *</code>, you&rsquo;ll end up listing out every column that your Entity Framework object lists as one of its Properties.</p>
-
-<p><a name="granting-permissions" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="granting-permissions">Granting permissions</h4>
-
 <p>If the service account that&rsquo;s running your Application Pool doesn&rsquo;t already have permission to the database objects you created the View for, you need to go in and grant appropriate permissions to that account. Otherwise, you&rsquo;re likely to get an error stating</p>
-
 <blockquote>
-<p>The server principal &ldquo;Domain\PrincipalName&#8221; is not able to access the database &ldquo;DatabaseName&#8221; under the current security context.</p>
+<p>The server principal &ldquo;Domain\PrincipalName” is not able to access the database &ldquo;DatabaseName” under the current security context.</p>
 </blockquote>
-
 <p>Be specific and granular with the permission you grant to the account. If you&rsquo;re just pulling in data for your app to display, only give the account SELECT permission on the database object your View references.</p>
-
 <h3 id="wrapping-up">Wrapping up</h3>
-
-<p>In essence, using a Synonym that references a database object in <em>another database</em> with Entity Framework and Integrated Security just doesn&rsquo;t work out in the end. Somehow, the security context loses the identity of the account running the application pool, and the dreated Login failed for user &#8216;NT AUTHORITY\ANONYMOUS LOGON&rsquo; rears its ugly head. Thankfully, the solution is simple: Create a View instead of a Synonym, grant approprate permissions, and you&rsquo;ll be off and running (and you&rsquo;ll avoid usernames and passwords in your web.config)!</p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p>In essence, using a Synonym that references a database object in <em>another database</em> with Entity Framework and Integrated Security just doesn&rsquo;t work out in the end. Somehow, the security context loses the identity of the account running the application pool, and the dreated Login failed for user ‘NT AUTHORITY\ANONYMOUS LOGON&rsquo; rears its ugly head. Thankfully, the solution is simple: Create a View instead of a Synonym, grant approprate permissions, and you&rsquo;ll be off and running (and you&rsquo;ll avoid usernames and passwords in your web.config)!</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -276,7 +251,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

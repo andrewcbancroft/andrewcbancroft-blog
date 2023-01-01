@@ -45,20 +45,19 @@
 <meta property="og:title" content="FIX – Query in Parse Cloud Code Returns Unauthorized Error" />
 <meta property="og:description" content="The Parse migration process has begun – I&rsquo;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
 The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!
-
 Problem Overview Any time I did a query in my Parse Cloud Code, the query would fail." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/" />
-<meta property="article:published_time" content="2016-04-06T04:27:49&#43;00:00"/>
-<meta property="article:modified_time" content="2016-04-06T04:27:49&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2016-04-06T04:27:49+00:00" />
+<meta property="article:modified_time" content="2016-04-06T04:27:49+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="FIX – Query in Parse Cloud Code Returns Unauthorized Error"/>
 <meta name="twitter:description" content="The Parse migration process has begun – I&rsquo;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
 The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!
-
 Problem Overview Any time I did a query in my Parse Cloud Code, the query would fail."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -67,7 +66,7 @@ Problem Overview Any time I did a query in my Parse Cloud Code, the query would 
   "@type": "BlogPosting",
   "headline": "FIX – Query in Parse Cloud Code Returns Unauthorized Error",
   "url": "https:\/\/www.andrewcbancroft.com\/2016\/04\/05\/fix-query-in-parse-cloud-code-returns-unauthorized-error\/",
-  "wordCount": "486",
+  "wordCount": "119",
   "datePublished": "2016-04-06T04:27:49Z",
   "dateModified": "2016-04-06T04:27:49Z",
   "author": {
@@ -93,7 +92,7 @@ Problem Overview Any time I did a query in my Parse Cloud Code, the query would 
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,95 +201,13 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>The Parse migration process has begun – I&rsquo;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.</p>
-
+    <p>The Parse migration process has begun – I&rsquo;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.</p>
 <p>The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!</p>
-
-<p><a name="problem-overview" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="problem-overview">Problem Overview</h1>
-
-<p>Any time I did a query in my Parse Cloud Code, the query would fail. Every time I&rsquo;d make a request to my Cloud Code function, I&rsquo;d get &ldquo;500 Internal Server Error&#8221; as my response.</p>
-
-<p>I finally wised up and adjusted my query so that I could see the specific &ldquo;internal server error&#8221; that was occurring:</p>
-
-<p><pre class="lang:js mark:8 decode:true " title="Parse Query" >var query = new Parse.Query(&ldquo;NameOfParseClassImFetching&rdquo;);</p>
-
-<p>query.find({
-    success: function(results){
-        // Do things with the results
-    },
-    error: function(error) {
-        response.error(error);
-    }
-});</p>
-
-<pre><code>
-When the details came back as to what was failing, the JSON object in the response looked like this:
-
-&lt;pre class=&quot;lang:js decode:true &quot; &gt;{
-  &quot;code&quot;: 141,
-  &quot;error&quot;: {
-    &quot;message&quot;: &quot;unauthorized&quot;
-  }
-}
-</code></pre>
-
-<p>I got to searching and found an <a href="https://github.com/ParsePlatform/parse-server/issues/356">issue on GitHub</a> that pointed me in the right direction, but to spare you reading through the entire thread, here&rsquo;s the gist:</p>
-
-<p><a name="solution" class="jump-target"></a></p>
-
-<h1 id="solution">Solution</h1>
-
-<p>I happened to be using a version of the Parse Server Example that was missing a critical line of configuration in index.js. When you configure your Parse Server by calling <code>new ParseServer</code>, you need to make sure that there&rsquo;s a <code>serverURL</code> property that&rsquo;s set to the URL of your Parse Server&rsquo;s API endpoint.</p>
-
-<p>My config didn&rsquo;t have this, but the moment I added it, my Cloud Code queries worked perfectly as they did before. Here&rsquo;s a look at my final index.js file with the relevant line highlighted:</p>
-
-<p><pre class="lang:js mark:18 decode:true " title="index.js" >// Example express application adding the parse-server module to expose Parse
-// compatible API routes.</p>
-
-<p>var express = require(&lsquo;express&rsquo;);
-var ParseServer = require(&lsquo;parse-server&rsquo;).ParseServer;</p>
-
-<p>var databaseUri = process.env.DATABASE_URI || process.env.MONGOLAB_URI</p>
-
-<p>if (!databaseUri) {
-  console.log(&lsquo;DATABASE_URI not specified, falling back to localhost.&lsquo;);
-}</p>
-
-<p>var api = new ParseServer({
-  databaseURI: databaseUri || &lsquo;mongodb://localhost:27017/dev&rsquo;,
-  cloud: process.env.CLOUD_CODE_MAIN || __dirname + &lsquo;/cloud/main.js&rsquo;,
-  appId: process.env.APP_ID || &lsquo;myAppId&rsquo;,
-  masterKey: process.env.MASTER_KEY || &ldquo;, //Add your master key here. Keep it secret!
-  serverurl: &lsquo;<a href="http://url-to-your-parse-api-endpoint/parse'">http://url-to-your-parse-api-endpoint/parse'</a>
-});
-// Client-keys like the javascript key or the .NET key are not necessary with parse-server
-// If you wish you require them, you can set them as options in the initialization above:
-// javascriptKey, restAPIKey, dotNetKey, clientKey</p>
-
-<p>var app = express();</p>
-
-<p>// Serve the Parse API on the /parse URL prefix
-var mountPath = process.env.PARSE_MOUNT || &lsquo;/parse&rsquo;;
-app.use(mountPath, api);</p>
-
-<p>// Parse Server plays nicely with the rest of your web routes
-app.get(&lsquo;/&rsquo;, function(req, res) {
-  res.status(200).send(&lsquo;I dream of being a web site.&rsquo;);
-});</p>
-
-<p>var port = process.env.PORT || 1337;
-app.listen(port, function() {
-    console.log(&lsquo;parse-server-example running on port &rsquo; + port + &lsquo;.&rsquo;);
-});
-```</p>
-
-<p>I hope this little breadcrumb finds its way to someone before <em>they</em> spend 3 hours on a silly configuration issue.</p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p>Any time I did a query in my Parse Cloud Code, the query would fail. Every time I&rsquo;d make a request to my Cloud Code function, I&rsquo;d get &ldquo;500 Internal Server Error” as my response.</p>
+<p>I finally wised up and adjusted my query so that I could see the specific &ldquo;internal server error” that was occurring:</p>
+<!-- raw HTML omitted -->
 
     <aside>
       
@@ -318,7 +235,7 @@ app.listen(port, function() {
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -46,15 +46,16 @@
 <meta property="og:description" content="Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple&rsquo;s built-in support for two major social media platforms: Facebook, and Twitter.
 For your convenience, I&rsquo;ve created a simple GitHub repository with an example Xcode project to help you see all of this code in action:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/11/23/get-social-with-swift-posting-to-facebook-and-twitter/" />
-<meta property="article:published_time" content="2015-11-23T19:17:38&#43;00:00"/>
-<meta property="article:modified_time" content="2015-11-23T19:17:38&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/11/23/get-social-with-swift-posting-to-facebook-and-twitter/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-11-23T19:17:38+00:00" />
+<meta property="article:modified_time" content="2015-11-23T19:17:38+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Get Social With Swift – Posting to Facebook and Twitter"/>
 <meta name="twitter:description" content="Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple&rsquo;s built-in support for two major social media platforms: Facebook, and Twitter.
 For your convenience, I&rsquo;ve created a simple GitHub repository with an example Xcode project to help you see all of this code in action:"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -63,7 +64,7 @@ For your convenience, I&rsquo;ve created a simple GitHub repository with an exam
   "@type": "BlogPosting",
   "headline": "Get Social With Swift – Posting to Facebook and Twitter",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/11\/23\/get-social-with-swift-posting-to-facebook-and-twitter\/",
-  "wordCount": "621",
+  "wordCount": "617",
   "datePublished": "2015-11-23T19:17:38Z",
   "dateModified": "2015-11-23T19:17:38Z",
   "author": {
@@ -89,7 +90,7 @@ For your convenience, I&rsquo;ve created a simple GitHub repository with an exam
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,120 +203,82 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple&rsquo;s built-in support for two major social media platforms: Facebook, and Twitter.</p>
-
+    <p>Building social media features into our apps has never been easier! In this guide, I will walk you through how to get started with accessing the Social framework for iOS so that you can take advantage of Apple&rsquo;s built-in support for two major social media platforms: Facebook, and Twitter.</p>
 <p>For your convenience, I&rsquo;ve created a simple GitHub repository with an example Xcode project to help you see all of this code in action:</p>
-
-<div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SocialSwift" title="SocialSwift">SocialSwift Example Project</a>
-    </li>
-  </ul>
-</div></p>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p><strong>Note</strong>: To try things out in this guide you need to run your app on a physical device, because the Social media features we&rsquo;re looking at below are not available in the iOS Simulator.</p>
-
-<p><a name="import" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="importing-the-social-module">Importing the Social module</h3>
-
 <p>The first step is to import the Social module into your .swift file. It&rsquo;s a simple declaration at the top of your file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// ...</span>
-<span class="ln">2</span>
-<span class="ln">3</span><span class="kd">import</span> <span class="nc">UIKit</span>
-<span class="ln">4</span><span class="kd">import</span> <span class="nc">Social</span>
-<span class="ln">5</span>
-<span class="ln">6</span><span class="c1">// ...</span></code></pre></div>
-<p><a name="check-availability" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// ...</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="kd">import</span> <span class="nc">UIKit</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="kd">import</span> <span class="nc">Social</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="c1">// ...</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="checking-service-availability">Checking service availability</h3>
-
 <p>Next up is to make sure that the user has Facebook, Twitter, or both set up on their device.</p>
-
 <p>In the <a href="https://github.com/andrewcbancroft/SocialSwift">example that&rsquo;s included with this guide</a>, I will respond to a user&rsquo;s tapping on a button in the UI to trigger the presentation of an <code>SLComposeViewController</code> instance (which we&rsquo;ll configure shortly).</p>
-
 <p>Within the body of the IBAction associated with the button, I will check whether or not the Facebook service is available:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">postToFacebookTapped</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">UIButton</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="k">if</span><span class="p">(</span><span class="n">SLComposeViewController</span><span class="p">.</span><span class="n">isAvailableForServiceType</span><span class="p">(</span><span class="n">SLServiceTypeFacebook</span><span class="p">))</span> <span class="p">{</span>
-<span class="ln">3</span>        <span class="c1">//...</span>
-<span class="ln">4</span>    <span class="p">}</span>
-<span class="ln">5</span><span class="p">}</span></code></pre></div>
-<p><a name="service-types" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">postToFacebookTapped</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">UIButton</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">SLComposeViewController</span><span class="p">.</span><span class="n">isAvailableForServiceType</span><span class="p">(</span><span class="n">SLServiceTypeFacebook</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="c1">//...</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="service-types">Service types</h4>
-
 <p>Currently there are 4 service types that represented by String constants in Swift. Passing one of the following into <code>SLComposeViewController.isAvailableForServiceType(_:)</code> will check for that service&rsquo;s availability on the user&rsquo;s device:</p>
-
 <ul>
 <li>SLServiceTypeFacebook</li>
 <li>SLServiceTypeTwitter</li>
 <li>SLServiceTypeSinaWeibo</li>
 <li>SLServiceTypeTencentWeibo</li>
 </ul>
-
 <p>For the purposes of this guide, we&rsquo;ll look at the first two, which map to Facebook and Twitter, respectively.</p>
-
 <p><strong>Note</strong>: Social media features in the Social module are not available for use/testing on the iOS Simulator, so you need to use a physical device to try things out.</p>
-
-<p><a name="create-controller" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="creating-an-slcomposeviewcontroller">Creating an SLComposeViewController</h3>
-
 <p>The Social framework comes with a Type that allows us to present some Apple-built UI to post to any of the four service types. To get at this out-of-the-box user interface, we look to <code>SLComposeViewController's</code> initializer that takes an argument for the type of service we&rsquo;d like to create a post for:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">postToFacebookTapped</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">UIButton</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="k">if</span><span class="p">(</span><span class="n">SLComposeViewController</span><span class="p">.</span><span class="n">isAvailableForServiceType</span><span class="p">(</span><span class="n">SLServiceTypeFacebook</span><span class="p">))</span> <span class="p">{</span>
-<span class="ln">3</span>        <span class="kd">let</span> <span class="nv">socialController</span> <span class="p">=</span> <span class="n">SLComposeViewController</span><span class="p">(</span><span class="n">forServiceType</span><span class="p">:</span> <span class="n">SLServiceTypeFacebook</span><span class="p">)</span>
-<span class="ln">4</span>
-<span class="ln">5</span>        <span class="c1">// ...</span>
-<span class="ln">6</span>    <span class="p">}</span>
-<span class="ln">7</span><span class="p">}</span></code></pre></div>
-<p>In this code snippet, we&rsquo;re creating an <code>SLComposeViewController</code> instance to post to Facebook, since I&rsquo;ve specified the <code>SLServiceTypeFacebook</code> type to the initializer.</p>
-
-<p><a name="configure" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">postToFacebookTapped</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">UIButton</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">SLComposeViewController</span><span class="p">.</span><span class="n">isAvailableForServiceType</span><span class="p">(</span><span class="n">SLServiceTypeFacebook</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="kd">let</span> <span class="nv">socialController</span> <span class="p">=</span> <span class="n">SLComposeViewController</span><span class="p">(</span><span class="n">forServiceType</span><span class="p">:</span> <span class="n">SLServiceTypeFacebook</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="c1">// ...</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>In this code snippet, we&rsquo;re creating an <code>SLComposeViewController</code> instance to post to Facebook, since I&rsquo;ve specified the <code>SLServiceTypeFacebook</code> type to the initializer.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="optional-configure-the-slcomposeviewcontroller">(optional) Configure the SLComposeViewController</h3>
-
-<p>Optionally, you can choose to pre-populate the &ldquo;create post&#8221; UI with some initial text, an image, or a URL. Here&rsquo;s a sample of what that might look like:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">postToFacebookTapped</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">UIButton</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="k">if</span><span class="p">(</span><span class="n">SLComposeViewController</span><span class="p">.</span><span class="n">isAvailableForServiceType</span><span class="p">(</span><span class="n">SLServiceTypeFacebook</span><span class="p">))</span> <span class="p">{</span>
-<span class="ln"> 3</span>        <span class="kd">let</span> <span class="nv">socialController</span> <span class="p">=</span> <span class="n">SLComposeViewController</span><span class="p">(</span><span class="n">forServiceType</span><span class="p">:</span> <span class="n">SLServiceTypeFacebook</span><span class="p">)</span>
-<span class="ln"> 4</span><span class="c1">//            socialController.setInitialText(&#34;Hello World!&#34;)</span>
-<span class="ln"> 5</span><span class="c1">//            socialController.addImage(someUIImageInstance)</span>
-<span class="ln"> 6</span><span class="c1">//            socialController.addURL(someNSURLInstance)</span>
-<span class="ln"> 7</span>        
-<span class="ln"> 8</span>        <span class="c1">// ...</span>
-<span class="ln"> 9</span>    <span class="p">}</span>
-<span class="ln">10</span><span class="p">}</span></code></pre></div>
-<p><a name="present-controller" class="jump-target"></a></p>
-
+<p>Optionally, you can choose to pre-populate the &ldquo;create post” UI with some initial text, an image, or a URL. Here&rsquo;s a sample of what that might look like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">postToFacebookTapped</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">UIButton</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">SLComposeViewController</span><span class="p">.</span><span class="n">isAvailableForServiceType</span><span class="p">(</span><span class="n">SLServiceTypeFacebook</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">        <span class="kd">let</span> <span class="nv">socialController</span> <span class="p">=</span> <span class="n">SLComposeViewController</span><span class="p">(</span><span class="n">forServiceType</span><span class="p">:</span> <span class="n">SLServiceTypeFacebook</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1">//            socialController.setInitialText(&#34;Hello World!&#34;)</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1">//            socialController.addImage(someUIImageInstance)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1">//            socialController.addURL(someNSURLInstance)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="c1">// ...</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="present-the-slcomposeviewcontroller">Present the SLComposeViewController</h3>
-
 <p>The last step is to present the controller!</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">postToFacebookTapped</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">UIButton</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="k">if</span><span class="p">(</span><span class="n">SLComposeViewController</span><span class="p">.</span><span class="n">isAvailableForServiceType</span><span class="p">(</span><span class="n">SLServiceTypeFacebook</span><span class="p">))</span> <span class="p">{</span>
-<span class="ln"> 3</span>        <span class="kd">let</span> <span class="nv">socialController</span> <span class="p">=</span> <span class="n">SLComposeViewController</span><span class="p">(</span><span class="n">forServiceType</span><span class="p">:</span> <span class="n">SLServiceTypeFacebook</span><span class="p">)</span>
-<span class="ln"> 4</span><span class="c1">//            socialController.setInitialText(&#34;Hello World!&#34;)</span>
-<span class="ln"> 5</span><span class="c1">//            socialController.addImage(someUIImageInstance)</span>
-<span class="ln"> 6</span><span class="c1">//            socialController.addURL(someNSURLInstance)</span>
-<span class="ln"> 7</span>        
-<span class="ln"> 8</span>        <span class="kc">self</span><span class="p">.</span><span class="n">presentViewController</span><span class="p">(</span><span class="n">socialController</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln"> 9</span>    <span class="p">}</span>
-<span class="ln">10</span><span class="p">}</span></code></pre></div>
-<p>If you need to perform an action when the user has finished their post (or cancelled the action), the completion closure is your opportunity to hook into that event and execute the code you need.</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">postToFacebookTapped</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">UIButton</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">SLComposeViewController</span><span class="p">.</span><span class="n">isAvailableForServiceType</span><span class="p">(</span><span class="n">SLServiceTypeFacebook</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">        <span class="kd">let</span> <span class="nv">socialController</span> <span class="p">=</span> <span class="n">SLComposeViewController</span><span class="p">(</span><span class="n">forServiceType</span><span class="p">:</span> <span class="n">SLServiceTypeFacebook</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1">//            socialController.setInitialText(&#34;Hello World!&#34;)</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1">//            socialController.addImage(someUIImageInstance)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1">//            socialController.addURL(someNSURLInstance)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">presentViewController</span><span class="p">(</span><span class="n">socialController</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If you need to perform an action when the user has finished their post (or cancelled the action), the completion closure is your opportunity to hook into that event and execute the code you need.</p>
 <h3 id="wrapping-up">Wrapping up</h3>
-
 <p>As you can see, integrating social media sharing capability into your app has never been easier. Now, in this guide, I didn&rsquo;t explicitly go over how to create posts for Twitter, but it&rsquo;s as simple as switching <code>SLServiceTypeFacebook</code> to <code>SLServiceTypeTwitter</code>. The example I&rsquo;ve provided with this guide does include code for Twitter, so feel free to <a href="https://github.com/andrewcbancroft/SocialSwift">download the full project over at GitHub</a>!</p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -343,7 +306,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

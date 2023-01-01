@@ -45,14 +45,15 @@
 <meta property="og:title" content="Why is Swift ABI Stability a Big Deal?" />
 <meta property="og:description" content="Explains why Swift 5.0 and ABI Stability are great!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/why-is-abi-stability-a-big-deal/" />
-<meta property="article:published_time" content="2019-06-21T04:40:54&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-21T04:40:54&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/why-is-abi-stability-a-big-deal/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-21T04:40:54+00:00" />
+<meta property="article:modified_time" content="2019-06-21T04:40:54+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Why is Swift ABI Stability a Big Deal?"/>
 <meta name="twitter:description" content="Explains why Swift 5.0 and ABI Stability are great!"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -87,7 +88,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -208,17 +209,11 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>Imagine writing some Swift code.  You want to share it across multiple apps, so you build a framework.  You compile it with the Swift 4.0 compiler.</p>
-
 <p>Now imagine Apple announces Swift 4.1.  Sweet!  You decide to build a new app and compile it with the Swift 4.1 compiler.</p>
-
 <p>Ah, but your apps needs some of that &ldquo;shared feature&rdquo; code from your framework.</p>
-
 <p>Will it work?  I&rsquo;ll give you one guess. (the answer&rsquo;s &ldquo;nope&rdquo;)</p>
-
 <p>Prior to &ldquo;ABI stability&rdquo; being a feature of Swift, the only guarantee we had that two pieces of compiled code could talk to one another is if the two pieces of code were compiled with the <strong>same compiler</strong>.</p>
-
 <p>A framework could be compiled with the Swift 4.0 compiler. <em>You</em> can build an app with the Swift 4.1 compiler.  <strong>BUT. The two cannot communicate.</strong>  Either the framework or your app needed to be <strong>re</strong>compiled using the same version of the compiler for it to work.</p>
-
 <p>Now, &ldquo;ABI stability&rdquo; <em>is</em> a feature of Swift Proper.  A framework could be compiled with the Swift 5.0 compiler. <em>You</em> can build an app with the Swift 5.1 compiler.  <strong>The two can communicate!</strong></p>
 
     <aside>
@@ -228,7 +223,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

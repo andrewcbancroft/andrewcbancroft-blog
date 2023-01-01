@@ -48,9 +48,10 @@ Getting Started Guide If you&rsquo;re new to unit testing or are trying to get s
 Screencast Large / Full-Screen Viewing
 GitHub Example GitHub repo of the example developed in the screencast." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/" />
-<meta property="article:published_time" content="2014-12-22T13:09:28&#43;00:00"/>
-<meta property="article:modified_time" content="2014-12-22T13:09:28&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-12-22T13:09:28+00:00" />
+<meta property="article:modified_time" content="2014-12-22T13:09:28+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Unit Testing – Verifying Method Calls"/>
@@ -58,7 +59,7 @@ GitHub Example GitHub repo of the example developed in the screencast." />
 Getting Started Guide If you&rsquo;re new to unit testing or are trying to get set up with unit testing in a Swift project, you might check out my getting started guide before jumping into the screencast.
 Screencast Large / Full-Screen Viewing
 GitHub Example GitHub repo of the example developed in the screencast."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -93,7 +94,7 @@ GitHub Example GitHub repo of the example developed in the screencast."/>
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -206,112 +207,60 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>In this unit testing screencast for Swift developers, we explore how to use Test Driven Development to verify method calls.</p>
-
+    <p>In this unit testing screencast for Swift developers, we explore how to use Test Driven Development to verify method calls.</p>
 <h3 id="getting-started-guide">Getting Started Guide</h3>
-
 <p>If you&rsquo;re new to unit testing or are trying to get set up with unit testing in a Swift project, you might <a href="http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/">check out my getting started guide</a> before jumping into the screencast.</p>
-
 <h3 id="screencast">Screencast</h3>
-
-<p><span class="text-center"><a href="http://youtu.be/hC2Dni9SAWY" target="_blank">Large / Full-Screen Viewing</a></span></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted -->Large / Full-Screen Viewing<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="github-example">GitHub Example</h3>
-
 <p><a href="https://github.com/andrewcbancroft/SwiftTDDVerifyMethodCalls">GitHub repo</a> of the example developed in the screencast.</p>
-
 <h3 id="screencast-transcript">Screencast Transcript</h3>
-
-<h4 id="0-01">[0:01]</h4>
-
+<h4 id="001">[0:01]</h4>
 <p>Hi, I&rsquo;m Andrew from andrewcbancroft.com, and I&rsquo;m bringing you a test driven development example for iOS in Swift.</p>
-
 <p>The goal of this video is to teach you how to write a unit test to verify that a method was called.</p>
-
-<h4 id="0-21">[0:21]</h4>
-
+<h4 id="021">[0:21]</h4>
 <p>I&rsquo;ll begin in Xcode 6.1.1 with a side-by-side view of my TestCase class, and my primary View Controller class. This is what Xcode generated for me when I chose to create a new Single View Application.</p>
-
-<h4 id="0-38">[0:38]</h4>
-
-<p>Imagine a scenario with me: Suppose that as part of your application&rsquo;s requirements, you mush show an Alert View after your primary view loads. How would we go about using Test Driven Development to implement this &ldquo;feature&#8221;?</p>
-
-<h4 id="0-53">[0:53]</h4>
-
-<p>Well, we&rsquo;d write a test, of course – I&rsquo;ll name it something appropriate like &ldquo;testUIAlertViewShowsAfterViewLoads&#8221;</p>
-
-<h4 id="1-04">[1:04]</h4>
-
-<p>Next, I need to create an instance of my ViewController class so that I can test it.<br />
-But immediately, I run into trouble. It seems that my TestCase class can&rsquo;t &ldquo;see&#8221; my View Controller class.</p>
-
-<h4 id="1-17">[1:17]</h4>
-
+<h4 id="038">[0:38]</h4>
+<p>Imagine a scenario with me: Suppose that as part of your application&rsquo;s requirements, you mush show an Alert View after your primary view loads. How would we go about using Test Driven Development to implement this &ldquo;feature”?</p>
+<h4 id="053">[0:53]</h4>
+<p>Well, we&rsquo;d write a test, of course – I&rsquo;ll name it something appropriate like &ldquo;testUIAlertViewShowsAfterViewLoads”</p>
+<h4 id="104">[1:04]</h4>
+<p>Next, I need to create an instance of my ViewController class so that I can test it.<br>
+But immediately, I run into trouble. It seems that my TestCase class can&rsquo;t &ldquo;see” my View Controller class.</p>
+<h4 id="117">[1:17]</h4>
 <p>Thankfully, it&rsquo;s a simple fix: Simply add the View Controller class to your Test target.</p>
-
-<h4 id="1-26">[1:26]</h4>
-
+<h4 id="126">[1:26]</h4>
 <p>With everything compiling now, we can move to the next line of test code.</p>
-
-<h4 id="1-32">[1:32]</h4>
-
-<p>First off, in order to test my View Controller&rsquo;s Alert View functionality, the Alert View has got to be visible to my test. The easiest thing for me to do at this point is to assume that there will be a property on my View Controller that I can set. This allows me to perform a kind of dependency injection known as &ldquo;setter injection&#8221;. All it really means is that the property is dual-purpose. When the app runs on my iPhone, it&rsquo;ll use a real UIAlertView. But when I run it in my tests, I can plug in a UIAlertView that I control the behavior of, so that I can verify what I need to in my tests.</p>
-
-<h4 id="2-16">[2:16]</h4>
-
-<p>The ability to swap in a kind of Alert View that I control really is the &ldquo;magic sauce&#8221; to this whole test-driven operation. In order to know whether or not a UI element was &ldquo;shown&#8221; in a unit test without actually showing something on the screen in a simulator or device, I need to invent something known as a test-double. A fake object, if you will.</p>
-
-<h4 id="2-44">[2:44]</h4>
-
-<p>My Fake Alert View will have some special capabilities that allow me to know whether the &ldquo;show()&#8221; method was called on it. At the same time, it needs to be able to be substituted in my View Controller for a real UIAlertView.</p>
-
-<h4 id="3-00">[3:00]</h4>
-
+<h4 id="132">[1:32]</h4>
+<p>First off, in order to test my View Controller&rsquo;s Alert View functionality, the Alert View has got to be visible to my test. The easiest thing for me to do at this point is to assume that there will be a property on my View Controller that I can set. This allows me to perform a kind of dependency injection known as &ldquo;setter injection”. All it really means is that the property is dual-purpose. When the app runs on my iPhone, it&rsquo;ll use a real UIAlertView. But when I run it in my tests, I can plug in a UIAlertView that I control the behavior of, so that I can verify what I need to in my tests.</p>
+<h4 id="216">[2:16]</h4>
+<p>The ability to swap in a kind of Alert View that I control really is the &ldquo;magic sauce” to this whole test-driven operation. In order to know whether or not a UI element was &ldquo;shown” in a unit test without actually showing something on the screen in a simulator or device, I need to invent something known as a test-double. A fake object, if you will.</p>
+<h4 id="244">[2:44]</h4>
+<p>My Fake Alert View will have some special capabilities that allow me to know whether the &ldquo;show()” method was called on it. At the same time, it needs to be able to be substituted in my View Controller for a real UIAlertView.</p>
+<h4 id="300">[3:00]</h4>
 <p>Since Swift supports object-oriented design, we have inheritance at our disposal here.</p>
-
-<h4 id="3-07">[3:07]</h4>
-
+<h4 id="307">[3:07]</h4>
 <p>I&rsquo;ll create a nested class inside my test function called FakeAlertView. Notice that it&rsquo;s a subclass of UIAlertView. What&rsquo;s great about this is that it meets both of my testing requirements: I can control it&rsquo;s behavior, and it can be substituted anywhere a UIAlertView is needed.</p>
-
-<h4 id="3-28">[3:28]</h4>
-
+<h4 id="328">[3:28]</h4>
 <p>I&rsquo;ll finish fleshing out this fake object in a minute. Now that Xcode isn&rsquo;t complaining about not knowing what a FakeAlertView is, I&rsquo;ll turn my attention to a new compiler complaint: I don&rsquo;t have an alertView property on my View Controller yet, so I&rsquo;ll add one.</p>
-
-<h4 id="3-50">[3:50]</h4>
-
+<h4 id="350">[3:50]</h4>
 <p>There&rsquo;s just a little more setup that&rsquo;s needed in order to be able to verify that the show method was called. Since show() doesn&rsquo;t return anything, we need some way to know that its logic was executed. I&rsquo;ll do two things to expose this:</p>
-
-<h4 id="4-06">[4:06]</h4>
-
+<h4 id="406">[4:06]</h4>
 <ol>
 <li>I&rsquo;ll have a boolean property called showWasCalled on my FakeAlertView that is initially set to false.</li>
 <li>I&rsquo;ll override the show() method in this fake UIAlertView subclass. Inside the method body, I&rsquo;ll reassign the value of showWasCalled to true. That will be enough for me to use inside an XCTAssert, which is coming up.</li>
 </ol>
-
-<h4 id="4-35">[4:35]</h4>
-
+<h4 id="435">[4:35]</h4>
 <p>We&rsquo;re nearing the finish line here. All that&rsquo;s left is to call my View Controller&rsquo;s viewDidLoad method, and write my assertion.</p>
-
-<h4 id="4-44">[4:44]</h4>
-
+<h4 id="444">[4:44]</h4>
 <p>The only thing I&rsquo;d tell you to make note of is that we need to cast the View Controller&rsquo;s UIAlertView instance to a FakeAlertView so that we can access the showWasCalled property.</p>
-
-<h4 id="4-57">[4:57]</h4>
-
+<h4 id="457">[4:57]</h4>
 <p>Running the test at this point should produce a failing test, which is exactly what we want (because there&rsquo;s no code that calls the alertView&rsquo;s show() method in viewDidLoad()).</p>
-
-<h4 id="5-08">[5:08]</h4>
-
+<h4 id="508">[5:08]</h4>
 <p>The last step to this adventure is to write the production code to pass the test. In viewDidLoad, I call my alertView&rsquo;s show method and re-run the tests.</p>
-
-<h4 id="5-19">[5:19]</h4>
-
+<h4 id="519">[5:19]</h4>
 <p>And we&rsquo;re green! Which means we&rsquo;ve managed to successfully verify that a method was called.</p>
-
-<h4 id="5-27">[5:27]</h4>
-
+<h4 id="527">[5:27]</h4>
 <p>Thanks for watching – I have other resources related to Swift and iOS development at andrewcbancroft.com.</p>
 
     <aside>
@@ -340,7 +289,7 @@ But immediately, I run into trouble. It seems that my TestCase class can&rsquo;t
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

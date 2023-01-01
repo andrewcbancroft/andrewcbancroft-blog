@@ -45,14 +45,15 @@
 <meta property="og:title" content="Preparing to Test Receipt Validation for iOS" />
 <meta property="og:description" content="This walk-through should provide guidance to get you ready to work with receipts in your iOS application." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" />
-<meta property="article:published_time" content="2015-10-05T18:25:09&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-27T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-10-05T18:25:09+00:00" />
+<meta property="article:modified_time" content="2019-06-27T00:00:00+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Preparing to Test Receipt Validation for iOS"/>
 <meta name="twitter:description" content="This walk-through should provide guidance to get you ready to work with receipts in your iOS application."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -61,7 +62,7 @@
   "@type": "BlogPosting",
   "headline": "Preparing to Test Receipt Validation for iOS",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/10\/05\/preparing-to-test-receipt-validation-for-ios\/",
-  "wordCount": "1000",
+  "wordCount": "943",
   "datePublished": "2015-10-05T18:25:09Z",
   "dateModified": "2019-06-27T00:00:00Z",
   "author": {
@@ -87,7 +88,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -200,93 +201,53 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I&rsquo;ve decided to combine everything into the following guide. Whether you&rsquo;re working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application.</p>
-
-<p><a name="app-record-setup" class="jump-target"></a></p>
-
+    <p>After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I&rsquo;ve decided to combine everything into the following guide. Whether you&rsquo;re working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="itunes-connect-app-record-setup">iTunes Connect App Record Setup</h3>
-
-<h5 id="1-log-in-to-the-apple-developer-member-center">1 – Log in to the Apple Developer Member Center.</h5>
-
-<h5 id="2-make-sure-you-have-a-bundle-identifier-set-up-for-your-app">2 – Make sure you have a bundle identifier set up for your app.</h5>
-
+<h5 id="1--log-in-to-the-apple-developer-member-center">1 – Log in to the Apple Developer Member Center.</h5>
+<h5 id="2--make-sure-you-have-a-bundle-identifier-set-up-for-your-app">2 – Make sure you have a bundle identifier set up for your app.</h5>
 <p>If this is an existing app you&rsquo;re wanting to add receipt validation to, you&rsquo;re already set. If this is a brand new, un-released app, you need to set up a bundle identifier first.</p>
-
-<p>2a) Click on Certificates, Identifiers &amp; Profiles:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier-1024x296.png" alt="Manage bundle identifier" width="1024" height="296" class="alignnone size-large wp-image-12325" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier-1024x296.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier-300x87.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier.png 1102w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
-
-<p>2b) Click on Identifiers:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers.png" alt="Identifiers" width="1005" height="455" class="alignnone size-full wp-image-12326" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers.png 1005w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers-300x136.png 300w" sizes="(max-width: 1005px) 100vw, 1005px" /></a></p>
-
-<p>2c) Add a new App ID that&rsquo;s appropriate for your app:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id.png" alt="Add app id" width="1021" height="495" class="alignnone size-full wp-image-12327" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id.png 1021w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id-300x145.png 300w" sizes="(max-width: 1021px) 100vw, 1021px" /></a></p>
-
-<h5 id="3-log-into-itunes-connect">3 – Log into iTunes Connect.</h5>
-
-<h5 id="4-click-my-apps-8221-from-the-main-itunes-connect-dashboard-page">4 – Click &ldquo;My Apps&#8221; from the main iTunes Connect dashboard page.</h5>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps-1024x495.png" alt="iTunes Connect - My Apps" width="1024" height="495" class="alignnone size-large wp-image-12331" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps-1024x495.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps-300x145.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps.png 1040w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
-
-<h5 id="5-click-the-button-to-add-your-app-into-itunes-connect">5 – Click the + button to add your app into iTunes Connect.</h5>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app.png" alt="Add App" width="454" height="252" class="alignnone size-full wp-image-12332" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app.png 454w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-300x167.png 300w" sizes="(max-width: 454px) 100vw, 454px" /></a></p>
-
-<p><a name="sandbox-tester-setup" class="jump-target"></a></p>
-
+<p>2a) Click on Certificates, Identifiers &amp; Profiles:<br>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier.png"><!-- raw HTML omitted --></a></p>
+<p>2b) Click on Identifiers:<br>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers.png"><!-- raw HTML omitted --></a></p>
+<p>2c) Add a new App ID that&rsquo;s appropriate for your app:<br>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id.png"><!-- raw HTML omitted --></a></p>
+<h5 id="3--log-into-itunes-connect">3 – Log into iTunes Connect.</h5>
+<h5 id="4--click-my-apps8221-from-the-main-itunes-connect-dashboard-page">4 – Click &ldquo;My Apps” from the main iTunes Connect dashboard page.</h5>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps.png"><!-- raw HTML omitted --></a></p>
+<h5 id="5--click-the--button-to-add-your-app-into-itunes-connect">5 – Click the + button to add your app into iTunes Connect.</h5>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app.png"><!-- raw HTML omitted --></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="sandbox-tester-setup">Sandbox Tester Setup</h3>
-
-<h4 id="1-create-a-new-e-mail-address-that-s-not-associated-with-an-apple-id-already">1 – Create a new e-mail address that&rsquo;s not associated with an Apple ID already</h4>
-
+<h4 id="1--create-a-new-e-mail-address-thats-not-associated-with-an-apple-id-already">1 – Create a new e-mail address that&rsquo;s not associated with an Apple ID already</h4>
 <p>Your sandbox user account is actually going to be a separate Apple ID. Since it&rsquo;s probably going to be <em>you</em> that&rsquo;s testing the purchasing and receipt features of your app, you will need to create a new e-mail address to associate with a new Apple ID, since Apple does not allow you to use an e-mail address already associated with an existing Apple ID.</p>
-
-<h5 id="2-log-in-to-itunes-connect-if-you-re-not-still-logged-in-from-the-previous-steps">2 – Log in to iTunes Connect if you&rsquo;re not still logged in from the previous steps</h5>
-
-<h5 id="3-click-on-users-and-roles">3 – Click on Users and Roles</h5>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles-1024x445.png" alt="iTunes Connect - Users and Roles" width="1024" height="445" class="alignnone size-large wp-image-12335" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles-1024x445.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles-300x130.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles.png 1165w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
-
-<h5 id="4-click-sandbox-testers">4 – Click Sandbox Testers</h5>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1.png" alt="Sandbox Testers" width="762" height="177" class="alignnone size-full wp-image-12337" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1.png 762w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1-300x70.png 300w" sizes="(max-width: 762px) 100vw, 762px" /></a></p>
-
-<h5 id="5-click-the-add-button">5 – Click the Add (+) button</h5>
-
-<h5 id="6-fill-out-all-of-the-information-on-this-page-and-use-the-new-e-mail-address-you-created-as-the-email-field-value">6 – Fill out all of the information on this page, and use the new e-mail address you created as the Email field value.</h5>
-
-<h5 id="7-save-the-new-sandbox-user">7 – Save the new sandbox user.</h5>
-
-<h5 id="8-you-will-receive-an-e-mail-from-apple-asking-you-to-verify-your-new-apple-id-verify-it">8 – You will receive an e-mail from Apple asking you to verify your new Apple ID. Verify it.</h5>
-
-<p><a name="ios-device-setup" class="jump-target"></a></p>
-
+<h5 id="2--log-in-to-itunes-connect-if-youre-not-still-logged-in-from-the-previous-steps">2 – Log in to iTunes Connect if you&rsquo;re not still logged in from the previous steps</h5>
+<h5 id="3--click-on-users-and-roles">3 – Click on Users and Roles</h5>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles.png"><!-- raw HTML omitted --></a></p>
+<h5 id="4--click-sandbox-testers">4 – Click Sandbox Testers</h5>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1.png"><!-- raw HTML omitted --></a></p>
+<h5 id="5--click-the-add--button">5 – Click the Add (+) button</h5>
+<h5 id="6--fill-out-all-of-the-information-on-this-page-and-use-the-new-e-mail-address-you-created-as-the-email-field-value">6 – Fill out all of the information on this page, and use the new e-mail address you created as the Email field value.</h5>
+<h5 id="7--save-the-new-sandbox-user">7 – Save the new sandbox user.</h5>
+<h5 id="8--you-will-receive-an-e-mail-from-apple-asking-you-to-verify-your-new-apple-id-verify-it">8 – You will receive an e-mail from Apple asking you to verify your new Apple ID. Verify it.</h5>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="ios-device-setup">iOS Device Setup</h3>
-
-<h5 id="1-on-your-physical-device-not-in-the-simulator-open-settings-and-navigate-to-app-and-itunes-stores-8221">1 – On your physical device (not in the Simulator), open Settings and navigate to &ldquo;App and iTunes Stores&#8221;.</h5>
-
-<h5 id="2-sign-out-of-your-regular-apple-id-but-do-not-re-sign-in-using-your-new-sandbox-tester-apple-id-that-you-just-set-up-doing-this-will-pose-the-risk-of-invalidating-your-sandbox-user-test-account-this-is-explained-over-in-the-apple-developer-documentation-8">2 – Sign out of your regular Apple ID, but <em>do not</em> re-sign in using your new Sandbox Tester Apple ID that you just set up. Doing this will pose the risk of invalidating your Sandbox User test account. This is explained over in the <a href="https://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Chapters/SettingUpUserAccounts.html#//apple_ref/doc/uid/TP40011225-CH25-SW9">Apple Developer documentation</a>:</h5>
-
+<h5 id="1--on-your-physical-device-not-in-the-simulator-open-settings-and-navigate-to-app-and-itunes-stores8221">1 – On your physical device (not in the Simulator), open Settings and navigate to &ldquo;App and iTunes Stores”.</h5>
+<h5 id="2--sign-out-of-your-regular-apple-id-but-_do-not_-re-sign-in-using-your-new-sandbox-tester-apple-id-that-you-just-set-up-doing-this-will-pose-the-risk-of-invalidating-your-sandbox-user-test-account-this-is-explained-over-in-the-apple-developer-documentation8">2 – Sign out of your regular Apple ID, but <em>do not</em> re-sign in using your new Sandbox Tester Apple ID that you just set up. Doing this will pose the risk of invalidating your Sandbox User test account. This is explained over in the <a href="https://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Chapters/SettingUpUserAccounts.html#//apple_ref/doc/uid/TP40011225-CH25-SW9">Apple Developer documentation</a>:</h5>
 <blockquote>
 <p>Important: If you mistakenly use a sandbox tester account to log in to a production environment on your test device instead of your test environment, the sandbox account becomes invalid and can’t be used again. If this happens, create a new sandbox tester account with a new email address.</p>
 </blockquote>
-
 <p>Later on, when you run your app on your device from Xcode, you&rsquo;ll get a prompt to sign in to the <em>fake</em> App Store. You&rsquo;ll enter the credentials you created for the Sandbox User test account into the prompt.</p>
-
 <p><strong>Note:</strong> Ideally, this step is done on an iOS <em>test</em> device, not on your own personal device. That being said, there are times (like in my own situation) where you might not have a test device and you&rsquo;re forced to switch between Apple IDs to test.</p>
-
-<h5 id="3-go-through-the-necessary-steps-to-set-up-a-new-itunes-store-account-you-ll-receive-a-welcome-8221-e-mail-from-the-itunes-store-once-everything-is-completely-set-up">3 – Go through the necessary steps to set up a new iTunes Store account. You&rsquo;ll receive a &ldquo;Welcome&#8221; e-mail from the iTunes Store once everything is completely set up.</h5>
-
+<h5 id="3--go-through-the-necessary-steps-to-set-up-a-new-itunes-store-account-youll-receive-a-welcome8221-e-mail-from-the-itunes-store-once-everything-is-completely-set-up">3 – Go through the necessary steps to set up a new iTunes Store account. You&rsquo;ll receive a &ldquo;Welcome” e-mail from the iTunes Store once everything is completely set up.</h5>
 <h3 id="write-some-receipt-verification-code">Write Some Receipt Verification Code</h3>
-
 <p>As a quick example, consider the following class that will act as a <code>ReceiptFetcher</code>. To test things out, you can simply create an instance of this class in your primary view controller, and call <code>fetchReceipt</code> in the <code>viewDidLoad()</code> method.</p>
-
 <p>You&rsquo;ll be looking to make sure you&rsquo;re prompted for iTunes Store credentials, and that you successfully receive a receipt (ie, <code>request(_:didFailWithError:)</code> did not get called, but instead <code>requestDidFinish(_:)</code> got called):</p>
-
 <p><strong>Receipt Fetcher</strong>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -322,47 +283,46 @@ MathJax.Hub.Config({
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">import</span> <span class="nc">Foundation</span>
-<span class="kd">import</span> <span class="nc">StoreKit</span>
-
-<span class="kd">class</span> <span class="nc">ReceiptFetcher</span> <span class="p">:</span> <span class="n">NSObject</span><span class="p">,</span> <span class="n">SKRequestDelegate</span> <span class="p">{</span>
-    
-    <span class="kd">let</span> <span class="nv">receiptRefreshRequest</span> <span class="p">=</span> <span class="n">SKReceiptRefreshRequest</span><span class="p">()</span>
-    
-    <span class="kr">override</span> <span class="kd">init</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kc">super</span><span class="p">.</span><span class="kd">init</span><span class="p">()</span>
-        <span class="n">receiptRefreshRequest</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
-    <span class="p">}</span>
-    
-    <span class="kd">func</span> <span class="nf">fetchReceipt</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nv">receiptUrl</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">appStoreReceiptURL</span>
-        
-        <span class="k">do</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="kd">let</span> <span class="nv">receiptFound</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptUrl</span><span class="p">?.</span><span class="n">checkResourceIsReachable</span><span class="p">()</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">receiptFound</span> <span class="p">==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">receiptRefreshRequest</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Could not check for receipt presence for some reason... </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    
-    <span class="kd">func</span> <span class="nf">requestDidFinish</span><span class="p">(</span><span class="kc">_</span> <span class="n">request</span><span class="p">:</span> <span class="n">SKRequest</span><span class="p">)</span> <span class="p">{</span>
-        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;The request finished successfully&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="kd">func</span> <span class="nf">request</span><span class="p">(</span><span class="kc">_</span> <span class="n">request</span><span class="p">:</span> <span class="n">SKRequest</span><span class="p">,</span> <span class="n">didFailWithError</span> <span class="n">error</span><span class="p">:</span> <span class="n">Error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Something went wrong: </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">Foundation</span>
+</span></span><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">StoreKit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">ReceiptFetcher</span> <span class="p">:</span> <span class="n">NSObject</span><span class="p">,</span> <span class="n">SKRequestDelegate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">receiptRefreshRequest</span> <span class="p">=</span> <span class="n">SKReceiptRefreshRequest</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kr">override</span> <span class="kd">init</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">super</span><span class="p">.</span><span class="kd">init</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">receiptRefreshRequest</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">fetchReceipt</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">receiptUrl</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">appStoreReceiptURL</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="kd">let</span> <span class="nv">receiptFound</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptUrl</span><span class="p">?.</span><span class="n">checkResourceIsReachable</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">receiptFound</span> <span class="p">==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">receiptRefreshRequest</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Could not check for receipt presence for some reason... </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">requestDidFinish</span><span class="p">(</span><span class="kc">_</span> <span class="n">request</span><span class="p">:</span> <span class="n">SKRequest</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;The request finished successfully&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">request</span><span class="p">(</span><span class="kc">_</span> <span class="n">request</span><span class="p">:</span> <span class="n">SKRequest</span><span class="p">,</span> <span class="n">didFailWithError</span> <span class="n">error</span><span class="p">:</span> <span class="n">Error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">print</span><span class="p">(</span><span class="s">&#34;Something went wrong: </span><span class="si">\(</span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></p>
-
 <p><strong>View Controller</strong>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -376,67 +336,34 @@ MathJax.Hub.Config({
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
-
-    <span class="c1">// Note that an instance of ReceiptFetcher is kept at the class-level</span>
-    <span class="kd">let</span> <span class="nv">receiptFetcher</span> <span class="p">=</span> <span class="n">ReceiptFetcher</span><span class="p">()</span>
-    
-    <span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-        <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
-
-        <span class="n">receiptFetcher</span><span class="p">.</span><span class="n">fetchReceipt</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Note that an instance of ReceiptFetcher is kept at the class-level</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">receiptFetcher</span> <span class="p">=</span> <span class="n">ReceiptFetcher</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Do any additional setup after loading the view, typically from a nib.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">receiptFetcher</span><span class="p">.</span><span class="n">fetchReceipt</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></p>
-
 <p><strong>Note:</strong> Once again, note that the instance of <code>ReceiptFetcher</code> is held at the view controller&rsquo;s class-level scope. This is necessary to allow the delegate callback functions to be invoked. If you initialize the <code>ReceiptFetcher</code> in <code>viewDidLoad</code> without holding a reference at the class level, the instance will be deallocated prior to the delegate callback functions being invoked.</p>
-
-<p><a name="build-run-on-device" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="debug-app-on-device">Debug App on Device</h3>
-
-<h5 id="1-run-your-app-from-xcode-on-the-device-you-ve-just-set-up">1 – Run your app from Xcode on the device you&rsquo;ve just set up.</h5>
-
-<h5 id="2-executing-code-such-as-a-request-to-refresh-a-receipt-should-prompt-you-for-your-newly-created-sandbox-tester-credentials">2 – Executing code, such as a request to refresh a receipt should prompt you for your newly created Sandbox Tester credentials.</h5>
-
-<h5 id="3-enter-the-password-for-that-apple-id-you-should-receive-a-receipt">3 – Enter the password for that Apple ID – you should receive a receipt!</h5>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  <ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS & Swift the Easy Way</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" title="Extracting a PKCS7 Container for Receipt Validation with Swift">Extracting a PKCS7 Container for Receipt Validation with Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" title="Receipt Validation – Verifying a Receipt Signature in Swift">Receipt Validation – Verifying a Receipt Signature in Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/" title="Receipt Validation – Parse and Decode a Receipt with Swift">Receipt Validation – Parse and Decode a Receipt with Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
-    </li>
-  </ul>
-</div>
-
-<p><a name="share" class="jump-target"></a></p>
+<h5 id="1--run-your-app-from-xcode-on-the-device-youve-just-set-up">1 – Run your app from Xcode on the device you&rsquo;ve just set up.</h5>
+<h5 id="2--executing-code-such-as-a-request-to-refresh-a-receipt-should-prompt-you-for-your-newly-created-sandbox-tester-credentials">2 – Executing code, such as a request to refresh a receipt should prompt you for your newly created Sandbox Tester credentials.</h5>
+<h5 id="3--enter-the-password-for-that-apple-id--you-should-receive-a-receipt">3 – Enter the password for that Apple ID – you should receive a receipt!</h5>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

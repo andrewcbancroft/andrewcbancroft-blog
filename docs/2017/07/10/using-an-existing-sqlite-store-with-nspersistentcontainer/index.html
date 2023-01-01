@@ -48,9 +48,10 @@ Creating the stack with NSPersistentContainer handles the creation of SQLite sto
 But how do you go about telling NSPersistentContainer about your existing SQLite store?
 Let&rsquo;s take a look now at how you can configure the container to use your previously-created persistent store." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/" />
-<meta property="article:published_time" content="2017-07-10T18:02:05&#43;00:00"/>
-<meta property="article:modified_time" content="2017-07-10T18:02:05&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2017-07-10T18:02:05+00:00" />
+<meta property="article:modified_time" content="2017-07-10T18:02:05+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Using an Existing SQLite Store with NSPersistentContainer"/>
@@ -58,7 +59,7 @@ Let&rsquo;s take a look now at how you can configure the container to use your p
 Creating the stack with NSPersistentContainer handles the creation of SQLite stores internally, so brand new setups using NSPersistentContainer are pretty easy.
 But how do you go about telling NSPersistentContainer about your existing SQLite store?
 Let&rsquo;s take a look now at how you can configure the container to use your previously-created persistent store."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -67,7 +68,7 @@ Let&rsquo;s take a look now at how you can configure the container to use your p
   "@type": "BlogPosting",
   "headline": "Using an Existing SQLite Store with NSPersistentContainer",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/07\/10\/using-an-existing-sqlite-store-with-nspersistentcontainer\/",
-  "wordCount": "421",
+  "wordCount": "393",
   "datePublished": "2017-07-10T18:02:05Z",
   "dateModified": "2017-07-10T18:02:05Z",
   "author": {
@@ -93,7 +94,7 @@ Let&rsquo;s take a look now at how you can configure the container to use your p
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -206,99 +207,53 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>If you&rsquo;ve been creating the Core Data Stack <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">without NSPersistentContainer</a> and you&rsquo;re thinking about switching things up to <em>use</em> <code>NSPersistentContainer</code>, you need to think about your existing SQLite persistent store.</p>
-
+    <p>If you&rsquo;ve been creating the Core Data Stack <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/">without NSPersistentContainer</a> and you&rsquo;re thinking about switching things up to <em>use</em> <code>NSPersistentContainer</code>, you need to think about your existing SQLite persistent store.</p>
 <p><a href="https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/">Creating the stack with NSPersistentContainer</a> handles the creation of SQLite stores internally, so brand new setups using <code>NSPersistentContainer</code> are pretty easy.</p>
-
 <p>But how do you go about telling <code>NSPersistentContainer</code> about your <em>existing</em> SQLite store?</p>
-
 <p>Let&rsquo;s take a look now at how you can configure the container to use your previously-created persistent store.</p>
-
-<p><a name="before" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="before-nspersistentcontainer">Before NSPersistentContainer</h1>
-
 <p>Supposing that your <strong>previous</strong> Core Data stack creation step pointed to a .sqlite file somewhere in your user&rsquo;s documents directory:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
-<span class="ln">2</span><span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span> <span class="c1">// model instance creation not shown here...</span>
-<span class="ln">3</span>
-<span class="ln">4</span><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
-<span class="ln">5</span>        <span class="p">.</span><span class="k">default</span>
-<span class="ln">6</span>        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-<span class="ln">7</span>        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
-<span class="ln">8</span>
-<span class="ln">9</span><span class="k">try</span><span class="o">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span></code></pre></div>
-<p><a name="after" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// Configure NSPersistentStoreCoordinator with an NSPersistentStore</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="kd">let</span> <span class="nv">psc</span> <span class="p">=</span> <span class="n">NSPersistentStoreCoordinator</span><span class="p">(</span><span class="n">managedObjectModel</span><span class="p">:</span> <span class="n">model</span><span class="p">)</span> <span class="c1">// model instance creation not shown here...</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="p">!</span> <span class="n">FileManager</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="p">.</span><span class="k">default</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">
+</span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="k">try</span><span class="p">!</span> <span class="n">psc</span><span class="p">.</span><span class="n">addPersistentStore</span><span class="p">(</span><span class="n">ofType</span><span class="p">:</span> <span class="n">NSSQLiteStoreType</span><span class="p">,</span> <span class="n">configurationName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="after-nspersistentcontainer">After NSPersistentContainer</h1>
-
 <p>The key to migrating to <code>NSPersistentStore</code> with an existing SQLite persistent store is the <code>NSPersistentStoreDescription</code> class. Take a look at the following code to see how to configure an instance of <code>NSPersistentStoreDescription</code> and assign it to the <code>NSPersistentContainer</code> instance&rsquo;s <code>persistentStoreDescriptions</code> property:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="n">NSPersistentContainer</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">)</span>
-<span class="ln"> 2</span>
-<span class="ln"> 3</span><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="o">!</span> <span class="n">FileManager</span>
-<span class="ln"> 4</span>        <span class="p">.</span><span class="k">default</span>
-<span class="ln"> 5</span>        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-<span class="ln"> 6</span>        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
-<span class="ln"> 7</span>
-<span class="ln"> 8</span><span class="kd">let</span> <span class="nv">storeDescription</span> <span class="p">=</span> <span class="n">NSPersistentStoreDescription</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">)</span>
-<span class="ln"> 9</span><span class="n">container</span><span class="p">.</span><span class="n">persistentStoreDescriptions</span> <span class="p">=</span> <span class="p">[</span><span class="n">storeDescription</span><span class="p">]</span>
-<span class="ln">10</span>
-<span class="ln">11</span><span class="c1">// Remaining setup for NSPersistentContainer</span></code></pre></div>
-<p><a name="breakdown" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="n">NSPersistentContainer</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&#34;NameOfDataModel&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="kd">let</span> <span class="nv">storeURL</span> <span class="p">=</span> <span class="k">try</span><span class="p">!</span> <span class="n">FileManager</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="p">.</span><span class="k">default</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="p">.</span><span class="n">documentDirectory</span><span class="p">,</span> <span class="k">in</span><span class="p">:</span> <span class="p">.</span><span class="n">userDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="p">.</span><span class="n">appendingPathComponent</span><span class="p">(</span><span class="s">&#34;NameOfDataModel.sqlite&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="kd">let</span> <span class="nv">storeDescription</span> <span class="p">=</span> <span class="n">NSPersistentStoreDescription</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">storeURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="n">container</span><span class="p">.</span><span class="n">persistentStoreDescriptions</span> <span class="p">=</span> <span class="p">[</span><span class="n">storeDescription</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1">// Remaining setup for NSPersistentContainer</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="breaking-it-down">Breaking it down</h2>
-
 <p>The <code>let storeURL =</code> portion of the code is identical in both snippets.</p>
-
 <p>The difference is how you tell the Stack where the persistent store is located. In times past, you&rsquo;d tell the NSPersistentStore<strong>Coordinator</strong> this information through its <code>addPersistentStore</code> method.</p>
-
-<p>With NSPersistent<strong>Container</strong>, you need to do two things:<br />
+<p>With NSPersistent<strong>Container</strong>, you need to do two things:<br>
 <strong>1</strong> – Initialize an <code>NSPersistentStoreDescription</code> instance with the <code>storeURL</code> (i.e. the URL to where your existing persistent store is located).</p>
-
 <p><strong>2</strong> – Assign the <code>NSPersistentStoreDescription</code> instance to the <code>NSPersistentContainer's</code> <code>persistentStoreDescriptions</code> property.</p>
-
 <p>One subtlety to note is that the property&rsquo;s name is <em>plural</em>: persistentStoreDescription<strong>s</strong>.</p>
-
 <p>Even though may only a single persistent store description instance to assign, such as in the example code above, <strong>you still need to wrap it in an array</strong> before you assign it, since it&rsquo;s possible to add more than one description to the container.</p>
-
 <p>With that adjustment to the <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/"><code>NSPersistentContainer</code> stack creation process</a>, your app will once again use the persistent store it used to use!</p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/" title="Creating the Core Data Stack with Backwards Compatibility in Swift"</a>Creating the Core Data Stack with Backwards Compatibility in Swift
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/" title="Core Data Cheat Sheet for Swift iOS Developers"</a>Core Data Cheat Sheet for Swift iOS Developers
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="course" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fas fa-video"></i> <a href="http://bit.ly/ps-core-data-swift" target="_blank">Core Data Fundamentals with Swift</a><br /> <a href="http://bit.ly/ps-core-data-swift" target="_blank"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png" alt="Core Data Fundamentals with Swift" width="1024" height="576" class="alignnone size-large wp-image-13163" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w" sizes="(max-width: 1024px) 100vw, 1024px" /></a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -326,7 +281,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

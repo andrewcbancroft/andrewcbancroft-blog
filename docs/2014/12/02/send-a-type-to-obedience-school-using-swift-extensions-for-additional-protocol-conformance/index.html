@@ -47,16 +47,17 @@
 You can – even if you don&rsquo;t have the original source code for that Type! It&rsquo;s a powerful and intriguing proposition. Let&rsquo;s explore how this is possible.
 How, you ask? Well, as the title of this article suggests, Swift extensions are the way to do it." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/" />
-<meta property="article:published_time" content="2014-12-02T19:15:33&#43;00:00"/>
-<meta property="article:modified_time" content="2014-12-02T19:15:33&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-12-02T19:15:33+00:00" />
+<meta property="article:modified_time" content="2014-12-02T19:15:33+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Send a Type to Obedience School – Using Swift Extensions for Additional Protocol Conformance"/>
 <meta name="twitter:description" content="Did you know that you can make any Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don&rsquo;t have the source code for, adopt a protocol that it doesn&rsquo;t normally conform to out of the box?
 You can – even if you don&rsquo;t have the original source code for that Type! It&rsquo;s a powerful and intriguing proposition. Let&rsquo;s explore how this is possible.
 How, you ask? Well, as the title of this article suggests, Swift extensions are the way to do it."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -65,7 +66,7 @@ How, you ask? Well, as the title of this article suggests, Swift extensions are 
   "@type": "BlogPosting",
   "headline": "Send a Type to Obedience School – Using Swift Extensions for Additional Protocol Conformance",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/12\/02\/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance\/",
-  "wordCount": "473",
+  "wordCount": "474",
   "datePublished": "2014-12-02T19:15:33Z",
   "dateModified": "2014-12-02T19:15:33Z",
   "author": {
@@ -91,7 +92,7 @@ How, you ask? Well, as the title of this article suggests, Swift extensions are 
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -204,48 +205,33 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>Did you know that you can make <em>any</em> Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don&rsquo;t have the source code for, adopt a protocol that it doesn&rsquo;t normally conform to out of the box?</p>
-
+    <p>Did you know that you can make <em>any</em> Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don&rsquo;t have the source code for, adopt a protocol that it doesn&rsquo;t normally conform to out of the box?</p>
 <p><strong>You can</strong> – <em>even if you don&rsquo;t have the original source code for that Type</em>! It&rsquo;s a powerful and intriguing proposition. Let&rsquo;s explore how this is possible.</p>
-
 <h3 id="how-you-ask">How, you ask?</h3>
-
 <p>Well, as the title of this article suggests, Swift extensions are the way to do it. To demonstrate this capability, consider the following scenario:</p>
-
 <ul>
 <li>You&rsquo;re using a library that lets you create instances of <code>Bird</code> , and you don&rsquo;t have access to the source code for the library.</li>
-<li><code>Bird</code> has a property called <code>species</code> and a property called <code>commonName</code> .</li>
-<li>You&rsquo;d like <code>Bird</code> to conform to the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/SwiftStandardLibraryReference/Printable.html" title="Swift Standard Library Reference - Printable Protocol">Printable protocol, defined in the Swift standard library</a>, so that you can call <code>println(_:)</code> on <code>Bird</code> instances, and have it log something useful to the console.</li>
-<li>When <code>println(_:)</code> is passed a <code>Bird</code> instance, you&rsquo;d like it to print out something like &ldquo;[species] (ie, [commonName]).&#8221;, and have [species] and [commonName] be replaced by the <code>Bird</code>&#8216;s real values.</li>
+<li><code>Bird </code> has a property called <code>species </code> and a property called <code>commonName</code> .</li>
+<li>You&rsquo;d like <code>Bird </code> to conform to the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/SwiftStandardLibraryReference/Printable.html" title="Swift Standard Library Reference - Printable Protocol">Printable protocol, defined in the Swift standard library</a>, so that you can call <code>println(_:)</code> on <code>Bird </code> instances, and have it log something useful to the console.</li>
+<li>When <code>println(_:)</code> is passed a <code>Bird </code> instance, you&rsquo;d like it to print out something like &ldquo;[species] (ie, [commonName]).”, and have [species] and [commonName] be replaced by the <code>Bird</code>‘s real values.</li>
 </ul>
-
-<p>Remember that you don&rsquo;t have access to the original source code of <code>Bird</code> . Without Swift extensions, there would be no way for you to tell the compiler that you&rsquo;d like <code>Bird</code> to adopt and conform to the <code>Printable</code> protocol.</p>
-
-<p>Thankfully, extensions <em>do</em> exist, and we can teach a <code>Bird</code> new tricks, enabling its conformance to <code>Printable</code> .</p>
-
+<p>Remember that you don&rsquo;t have access to the original source code of <code>Bird</code> . Without Swift extensions, there would be no way for you to tell the compiler that you&rsquo;d like <code>Bird </code> to adopt and conform to the <code>Printable </code> protocol.</p>
+<p>Thankfully, extensions <em>do</em> exist, and we can teach a <code>Bird </code> new tricks, enabling its conformance to <code>Printable</code> .</p>
 <h3 id="protocol-conformance-extension">Protocol Conformance Extension</h3>
-
-<p>As stated in the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/SwiftStandardLibraryReference/Printable.html" title="Swift Standard Library Reference - Printable Protocol">Printable protocol documentation</a>, a Type adopting the <code>Printable</code> protocol must implement a single, read-only property named <code>description</code> .</p>
-
+<p>As stated in the <a href="https://developer.apple.com/library/ios/documentation/General/Reference/SwiftStandardLibraryReference/Printable.html" title="Swift Standard Library Reference - Printable Protocol">Printable protocol documentation</a>, a Type adopting the <code>Printable </code> protocol must implement a single, read-only property named <code>description</code> .</p>
 <p>The extension, then would be implemented as follows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="c1">// Explicitly specify protocol adoption</span>
-<span class="ln">2</span><span class="kd">extension</span> <span class="nc">Bird</span><span class="p">:</span> <span class="nb">Printable</span> <span class="p">{</span>
-<span class="ln">3</span>
-<span class="ln">4</span>    <span class="c1">// Implement the required property to make Bird conform to the protocol</span>
-<span class="ln">5</span>    <span class="kd">var</span> <span class="nv">description</span><span class="p">:</span> <span class="nb">String</span> <span class="p">{</span>
-<span class="ln">6</span>        <span class="k">return</span> <span class="s">&#34;</span><span class="si">\(</span><span class="n">species</span><span class="si">)</span><span class="s"> (ie, </span><span class="si">\(</span><span class="n">commonName</span><span class="si">)</span><span class="s">)&#34;</span>
-<span class="ln">7</span>    <span class="p">}</span>
-<span class="ln">8</span><span class="p">}</span></code></pre></div>
-<p>The magic line in the code above is highlighted. This tells the compiler that <code>Bird</code> will be extended to adopt the <code>Printable</code> protocol.</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// Explicitly specify protocol adoption</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="kd">extension</span> <span class="nc">Bird</span><span class="p">:</span> <span class="nb">Printable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="c1">// Implement the required property to make Bird conform to the protocol</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="kd">var</span> <span class="nv">description</span><span class="p">:</span> <span class="nb">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="k">return</span> <span class="s">&#34;</span><span class="si">\(</span><span class="n">species</span><span class="si">)</span><span class="s"> (ie, </span><span class="si">\(</span><span class="n">commonName</span><span class="si">)</span><span class="s">)&#34;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The magic line in the code above is highlighted. This tells the compiler that <code>Bird</code> will be extended to adopt the <code>Printable</code> protocol.</p>
 <p>Of course, the remaining requirement then, is to implement the specification of the protocol so that <code>Bird</code> conforms to it, which is what the body of the extension contains.</p>
-
-<p><em>Note that simply extending <code>Bird</code> to have a read-only <code>description</code> property will *not</em> suffice for making the Type adopt the protocol. There is no &ldquo;implicit&#8221; protocol adoption in Swift, so you must specify in the extension declaration that you intend for the Type to adopt the protocol.</p>
-
+<p><em>Note that simply extending <code>Bird</code> to have a read-only <code>description</code> property will *not</em> suffice for making the Type adopt the protocol. There is no &ldquo;implicit” protocol adoption in Swift, so you must specify in the extension declaration that you intend for the Type to adopt the protocol.</p>
 <h3 id="conclusion">Conclusion</h3>
-
 <p>With this little example, you&rsquo;ve seen how using an extension can enable a Class, Enumeration, or Struct to adopt and conform to a protocol that it normally wouldn&rsquo;t out of the box. It&rsquo;s especially neat that you can do this for <em>any</em> such Type, whether you have control over its original source code or not.</p>
 
     <aside>
@@ -274,7 +260,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

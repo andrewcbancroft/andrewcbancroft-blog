@@ -44,21 +44,18 @@
 
 <meta property="og:title" content="401 Unauthorized Browsing Site From Local IIS Instance" />
 <meta property="og:description" content="I spent waaaaay way way way too long fighting this one, so I&rsquo;m saving everything I found on the issue so that I never lose it.
-
-Setup  Running Internet Information Services (IIS) 8.5 on my laptop. Set up a site with an ASP.Net MVC web application Windows Authentication.  
-Problem  Browsing the site locally continually prompts for my domain username and password. Credentials are never accepted / I&rsquo;m never authenticated." />
+Setup Running Internet Information Services (IIS) 8.5 on my laptop. Set up a site with an ASP.Net MVC web application Windows Authentication. Problem Browsing the site locally continually prompts for my domain username and password. Credentials are never accepted / I&rsquo;m never authenticated. Cancelling the login prompt ultimately responds with 401 Unauthorized." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/" />
-<meta property="article:published_time" content="2016-01-21T17:16:23&#43;00:00"/>
-<meta property="article:modified_time" content="2016-01-21T17:16:23&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2016-01-21T17:16:23+00:00" />
+<meta property="article:modified_time" content="2016-01-21T17:16:23+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="401 Unauthorized Browsing Site From Local IIS Instance"/>
 <meta name="twitter:description" content="I spent waaaaay way way way too long fighting this one, so I&rsquo;m saving everything I found on the issue so that I never lose it.
-
-Setup  Running Internet Information Services (IIS) 8.5 on my laptop. Set up a site with an ASP.Net MVC web application Windows Authentication.  
-Problem  Browsing the site locally continually prompts for my domain username and password. Credentials are never accepted / I&rsquo;m never authenticated."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+Setup Running Internet Information Services (IIS) 8.5 on my laptop. Set up a site with an ASP.Net MVC web application Windows Authentication. Problem Browsing the site locally continually prompts for my domain username and password. Credentials are never accepted / I&rsquo;m never authenticated. Cancelling the login prompt ultimately responds with 401 Unauthorized."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -93,7 +90,7 @@ Problem  Browsing the site locally continually prompts for my domain username an
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,45 +199,31 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>I spent waaaaay way way way too long fighting this one, so I&rsquo;m saving everything I found on the issue so that I never lose it.</p>
-
-<p><a name="setup" class="jump-target"></a></p>
-
+    <p>I spent waaaaay way way way too long fighting this one, so I&rsquo;m saving everything I found on the issue so that I never lose it.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="setup">Setup</h3>
-
 <ul>
 <li>Running Internet Information Services (IIS) 8.5 on my laptop.</li>
 <li>Set up a site with an ASP.Net MVC web application Windows Authentication.</li>
 </ul>
-
-<p><a name="problem" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="problem">Problem</h3>
-
 <ul>
 <li>Browsing the site locally continually prompts for my domain username and password.</li>
 <li>Credentials are never accepted / I&rsquo;m never authenticated.</li>
 <li>Cancelling the login prompt ultimately responds with 401 Unauthorized.</li>
 </ul>
-
 <p>When accessing the site with Fiddler, IIS simply responds with 401 Unauthorized.</p>
-
-<p><a name="solution" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="solution-with-original-sources">Solution (with original sources)</h3>
-
 <p>An incredibly helpful StackOverflow titled <a href="http://stackoverflow.com/questions/7387156/unable-to-get-windows-authentication-to-work-through-local-iis">Unable to get windows authentication to work through local IIS</a> provided the solution.</p>
-
 <p><em>Its</em> source was a KnowledgeBase article from Microsoft: <a href="https://support.microsoft.com/en-us/kb/896861">https://support.microsoft.com/en-us/kb/896861</a></p>
-
 <ol>
-<li>Set the<br />
-DisableStrictNameChecking<br />
+<li>Set the<br>
+DisableStrictNameChecking<br>
 registry entry to 1. For more information about how to do this, refer to article <a href="http://support.microsoft.com/kb/281308">281308</a> in the Microsoft Knowledge Base</li>
 <li>Click Start, click Run, type regedit, and then click OK.</li>
-<li>In Registry Editor, locate and then click the following registry key:<br />
+<li>In Registry Editor, locate and then click the following registry key:<br>
 <strong>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0</strong></li>
 <li>Right-click <strong>MSV1_0</strong>, point to New, and then click Multi-String Value.</li>
 <li>Type <strong>BackConnectionHostNames</strong>, and then press ENTER.</li>
@@ -248,8 +231,7 @@ registry entry to 1. For more information about how to do this, refer to article
 <li>In the Value data box, type the host name or the host names for the sites that are on the local computer, and then click OK.</li>
 <li>Quit Registry Editor, and then restart the IISAdmin service. (to do this, I ran iisreset from a Powershell prompt)</li>
 </ol>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -258,7 +240,7 @@ registry entry to 1. For more information about how to do this, refer to article
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

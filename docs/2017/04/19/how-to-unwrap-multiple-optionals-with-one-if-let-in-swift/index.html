@@ -47,16 +47,17 @@
 Code examples Suppose that you&rsquo;ve got two arrays, both of which are optional. What I want to do right now is walk through a couple of scenarios where I unwrap them at the same time and print them to the console with a single if-let statement.
 First, watch how it&rsquo;s done to accomplish the goal of this article&rsquo;s title." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/" />
-<meta property="article:published_time" content="2017-04-19T17:25:41&#43;00:00"/>
-<meta property="article:modified_time" content="2017-04-19T17:25:41&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2017-04-19T17:25:41+00:00" />
+<meta property="article:modified_time" content="2017-04-19T17:25:41+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="How to Unwrap Multiple Optionals with One If-Let in Swift"/>
 <meta name="twitter:description" content="What do you do when you&rsquo;ve got two (or more) optionals that you need to safely unwrap and work with?
 Code examples Suppose that you&rsquo;ve got two arrays, both of which are optional. What I want to do right now is walk through a couple of scenarios where I unwrap them at the same time and print them to the console with a single if-let statement.
 First, watch how it&rsquo;s done to accomplish the goal of this article&rsquo;s title."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -65,7 +66,7 @@ First, watch how it&rsquo;s done to accomplish the goal of this article&rsquo;s 
   "@type": "BlogPosting",
   "headline": "How to Unwrap Multiple Optionals with One If-Let in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/04\/19\/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift\/",
-  "wordCount": "401",
+  "wordCount": "400",
   "datePublished": "2017-04-19T17:25:41Z",
   "dateModified": "2017-04-19T17:25:41Z",
   "author": {
@@ -91,7 +92,7 @@ First, watch how it&rsquo;s done to accomplish the goal of this article&rsquo;s 
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -204,68 +205,53 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>What do you do when you&rsquo;ve got two (or more) optionals that you need to safely unwrap and work with?</p>
-
+    <p>What do you do when you&rsquo;ve got two (or more) optionals that you need to safely unwrap and work with?</p>
 <h1 id="code-examples">Code examples</h1>
-
 <p>Suppose that you&rsquo;ve got two arrays, both of which are optional. What I want to do right now is walk through a couple of scenarios where I unwrap them at the same time and print them to the console with a single <code>if-let</code> statement.</p>
-
 <p>First, watch <em>how</em> it&rsquo;s done to accomplish the goal of this article&rsquo;s title. :]</p>
-
 <p>Then, compare what you expected to be the print output, to the <em>actual</em> output to make sure your understanding of how the syntax works is complete.</p>
-
 <p>Ready?</p>
-
 <h2 id="scenario-1-both-arrays-are-initialized-non-nil">Scenario 1: Both arrays are initialized (non-nil)</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">greetings</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]?</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;Howdy!&#34;</span><span class="p">,</span> <span class="s">&#34;Hello!&#34;</span><span class="p">]</span>
-<span class="ln">2</span><span class="kd">var</span> <span class="nv">salutations</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]?</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;Hi!&#34;</span><span class="p">,</span> <span class="s">&#34;Hey!&#34;</span><span class="p">]</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="k">if</span> <span class="kd">let</span> <span class="nv">g</span> <span class="p">=</span> <span class="n">greetings</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">s</span> <span class="p">=</span> <span class="n">salutations</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="bp">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="ln">3</span>    <span class="bp">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="ln">4</span><span class="p">}</span></code></pre></div>
-<p><strong>Output:</strong><br />
-[&ldquo;Howdy!&#8221;, &ldquo;Hello!&#8221;]<br />
-[&ldquo;Hi!&#8221;, &ldquo;Hey!&#8221;]</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">var</span> <span class="nv">greetings</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]?</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;Howdy!&#34;</span><span class="p">,</span> <span class="s">&#34;Hello!&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="kd">var</span> <span class="nv">salutations</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]?</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;Hi!&#34;</span><span class="p">,</span> <span class="s">&#34;Hey!&#34;</span><span class="p">]</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">if</span> <span class="kd">let</span> <span class="nv">g</span> <span class="p">=</span> <span class="n">greetings</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">s</span> <span class="p">=</span> <span class="n">salutations</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="bp">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="bp">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>Output:</strong><br>
+[&ldquo;Howdy!”, &ldquo;Hello!”]<br>
+[&ldquo;Hi!”, &ldquo;Hey!”]</p>
 <h3 id="breaking-it-down">Breaking it down</h3>
-
 <p>The syntax for unwrapping multiple optionals with a single if-let block is straightforward. It&rsquo;s <code>if</code> followed by a series of <code>let [constantName] = [optionalName]</code> statements, separated by commas.</p>
-
 <p>The output of this one is pretty much what you&rsquo;d expect, too. The string form of the arrays is printed to the console window in Xcode or in your Playground.</p>
-
 <h2 id="scenario-2-one-array-is-initialized-non-nil-and-the-other-is-nil">Scenario 2: One array is initialized (non-nil), and the other is nil</h2>
-
 <p>Now suppose that the arrays looked like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">greetings</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]?</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;Howdy!&#34;</span><span class="p">,</span> <span class="s">&#34;Hello!&#34;</span><span class="p">]</span>
-<span class="ln">2</span><span class="kd">var</span> <span class="nv">salutations</span><span class="p">:</span> <span class="kc">nil</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="k">if</span> <span class="kd">let</span> <span class="nv">g</span> <span class="p">=</span> <span class="n">greetings</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">s</span> <span class="p">=</span> <span class="n">salutations</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="bp">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="ln">3</span>    <span class="bp">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="ln">4</span><span class="p">}</span></code></pre></div>
-<p>Question: What do you think will be printed?</p>
-
-<p>1) [&ldquo;Howdy!&#8221;, &ldquo;Hello!&#8221;] and &ldquo;nil&#8221;<br />
-2) Just [&ldquo;Howdy!&#8221;, &ldquo;Hello!&#8221;]<br />
-3) Nothing will be printed</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">var</span> <span class="nv">greetings</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">]?</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;Howdy!&#34;</span><span class="p">,</span> <span class="s">&#34;Hello!&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="kd">var</span> <span class="nv">salutations</span><span class="p">:</span> <span class="kc">nil</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">if</span> <span class="kd">let</span> <span class="nv">g</span> <span class="p">=</span> <span class="n">greetings</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">s</span> <span class="p">=</span> <span class="n">salutations</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="bp">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="bp">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Question: What do you think will be printed?</p>
+<ol>
+<li>[&ldquo;Howdy!”, &ldquo;Hello!”] and &ldquo;nil”</li>
+<li>Just [&ldquo;Howdy!”, &ldquo;Hello!”]</li>
+<li>Nothing will be printed</li>
+</ol>
 <p>If you chose door number <strong>3</strong>, you&rsquo;d be correct.</p>
-
 <p>The if-let block between the {}&rsquo;s is only executed if <strong>both</strong> <code>greetings</code> and <code>salutations</code> are non-nil.</p>
-
 <h1 id="takeaway">Takeaway</h1>
-
 <p>Unwrapping multiple optionals with a single if-let statement is pretty easy: <code>if</code> followed by a series of <code>let [constantName] = [optionalName]</code> statements, separated by commas.</p>
-
-<p>The behavior is similar to using the <code>&amp;&amp;</code> operator in a normal <code>if</code> condition. It&rsquo;s like saying &ldquo;if this optional is non-nil AND this optional is non-nil, then do this&#8221;</p>
-
+<p>The behavior is similar to using the <code>&amp;&amp;</code> operator in a normal <code>if</code> condition. It&rsquo;s like saying &ldquo;if this optional is non-nil AND this optional is non-nil, then do this”</p>
 <p>If you expect to work with one of the optionals in the list even if the other is nil, you&rsquo;re going to need to split that up into multiple if-lets:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="k">if</span> <span class="kd">let</span> <span class="nv">g</span> <span class="p">=</span> <span class="n">greetings</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="bp">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="ln">3</span><span class="p">}</span>
-<span class="ln">4</span>
-<span class="ln">5</span><span class="k">if</span> <span class="kd">let</span> <span class="nv">s</span> <span class="p">=</span> <span class="n">salutations</span> <span class="p">{</span>
-<span class="ln">6</span>    <span class="bp">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="ln">7</span><span class="p">}</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">if</span> <span class="kd">let</span> <span class="nv">g</span> <span class="p">=</span> <span class="n">greetings</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="bp">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="k">if</span> <span class="kd">let</span> <span class="nv">s</span> <span class="p">=</span> <span class="n">salutations</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="bp">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>
     <aside>
       
       
@@ -292,7 +278,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

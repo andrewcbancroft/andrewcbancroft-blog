@@ -44,29 +44,30 @@
 
 <meta property="og:title" content="Swift Framework Woes – Unresolved Identifier? No Member?" />
 <meta property="og:description" content="It&rsquo;s the simple things that get us, isn&rsquo;t it?
-I was working on a simple little framework the other day, and I&rsquo;d gotten things just how I wanted&#8230; or so I thought.
+I was working on a simple little framework the other day, and I&rsquo;d gotten things just how I wanted… or so I thought.
 I was ready to test things out and import the framework into my real app.
 import MyShinyNewFramework
 Sweet! No build errors!
 // attempt to use things defined in the framework
-Not so sweet&#8230;
- Use of unresolved identifier &#8216;&#8230;&lsquo;" />
+Not so sweet…
+Use of unresolved identifier ‘…&#39;" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/" />
-<meta property="article:published_time" content="2016-01-08T18:40:55&#43;00:00"/>
-<meta property="article:modified_time" content="2016-01-08T18:40:55&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2016-01-08T18:40:55+00:00" />
+<meta property="article:modified_time" content="2016-01-08T18:40:55+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Framework Woes – Unresolved Identifier? No Member?"/>
 <meta name="twitter:description" content="It&rsquo;s the simple things that get us, isn&rsquo;t it?
-I was working on a simple little framework the other day, and I&rsquo;d gotten things just how I wanted&#8230; or so I thought.
+I was working on a simple little framework the other day, and I&rsquo;d gotten things just how I wanted… or so I thought.
 I was ready to test things out and import the framework into my real app.
 import MyShinyNewFramework
 Sweet! No build errors!
 // attempt to use things defined in the framework
-Not so sweet&#8230;
- Use of unresolved identifier &#8216;&#8230;&lsquo;"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+Not so sweet…
+Use of unresolved identifier ‘…&#39;"/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -101,7 +102,7 @@ Not so sweet&#8230;
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,37 +215,22 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>It&rsquo;s the simple things that get us, isn&rsquo;t it?</p>
-
-<p>I was working on a simple little framework the other day, and I&rsquo;d gotten things just how I wanted&#8230; or so I thought.</p>
-
+    <p>It&rsquo;s the simple things that get us, isn&rsquo;t it?</p>
+<p>I was working on a simple little framework the other day, and I&rsquo;d gotten things just how I wanted… or so I thought.</p>
 <p>I was ready to test things out and import the framework into my real app.</p>
-
 <p><code>import MyShinyNewFramework</code></p>
-
 <p>Sweet! No build errors!</p>
-
 <p><code>// attempt to use things defined in the framework</code></p>
-
-<p>Not so sweet&#8230;</p>
-
+<p>Not so sweet…</p>
 <blockquote>
-<p>Use of unresolved identifier &#8216;&#8230;&lsquo;</p>
-
-<p>Value of type &#8216;&#8230;&rsquo; has no member &#8216;&#8230;&lsquo;</p>
+<p>Use of unresolved identifier ‘…'</p>
+<p>Value of type ‘…&rsquo; has no member ‘…'</p>
 </blockquote>
-
 <p>I scrunched my forehead, puzzled, and immediately it came to me.</p>
-
 <p><code>public</code> <code>public</code> <code>public</code> all the things! Or at least, the things that others need to use from the framework. :]</p>
-
-<p><em>Of course</em> a framework&rsquo;s usable API needs to be public, but I write far more code that doesn&rsquo;t require thought of access control modifiers than code that <em>does</em>, so there&rsquo;s always that initial head-scratching that happens when you&rsquo;re to the point of testing and go, &ldquo;WHAT?? Why is this not working??!&#8221;</p>
-
+<p><em>Of course</em> a framework&rsquo;s usable API needs to be public, but I write far more code that doesn&rsquo;t require thought of access control modifiers than code that <em>does</em>, so there&rsquo;s always that initial head-scratching that happens when you&rsquo;re to the point of testing and go, &ldquo;WHAT?? Why is this not working??!”</p>
 <h4 id="key-takeaway">Key Takeaway</h4>
-
-<p>Whenever you&rsquo;re developing code (such as a framework) that&rsquo;s intended to be used from the perspective of another Swift module, you need to include <code>public</code> before Types and functions that are intended to be &ldquo;seen&#8221; and called from that other module. Otherwise, you&rsquo;ll get those same fun compiler errors and join me in saying to yourself, &ldquo;Doh! Yep&#8230; public&#8230; <em>again</em>.&#8221;</p>
+<p>Whenever you&rsquo;re developing code (such as a framework) that&rsquo;s intended to be used from the perspective of another Swift module, you need to include <code>public</code> before Types and functions that are intended to be &ldquo;seen” and called from that other module. Otherwise, you&rsquo;ll get those same fun compiler errors and join me in saying to yourself, &ldquo;Doh! Yep… public… <em>again</em>.”</p>
 
     <aside>
       
@@ -272,7 +258,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

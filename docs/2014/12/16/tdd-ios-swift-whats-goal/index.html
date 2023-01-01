@@ -46,15 +46,16 @@
 <meta property="og:description" content="Before actually doing Test Driven Development (TDD) for your iOS / Mac app, it&rsquo;s really important to ask a very fundamental question: What&rsquo;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?
 2 Goals of TDD in iOS A recent course I watched on Pluralsight called TDD as a Design Tool gave me some insight on two goals for doing Test Driven Development:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/" />
-<meta property="article:published_time" content="2014-12-16T12:00:10&#43;00:00"/>
-<meta property="article:modified_time" content="2014-12-16T12:00:10&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-12-16T12:00:10+00:00" />
+<meta property="article:modified_time" content="2014-12-16T12:00:10+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TDD for iOS in Swift – What’s the Goal?"/>
 <meta name="twitter:description" content="Before actually doing Test Driven Development (TDD) for your iOS / Mac app, it&rsquo;s really important to ask a very fundamental question: What&rsquo;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?
 2 Goals of TDD in iOS A recent course I watched on Pluralsight called TDD as a Design Tool gave me some insight on two goals for doing Test Driven Development:"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -63,7 +64,7 @@
   "@type": "BlogPosting",
   "headline": "TDD for iOS in Swift – What’s the Goal?",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/12\/16\/tdd-ios-swift-whats-goal\/",
-  "wordCount": "742",
+  "wordCount": "711",
   "datePublished": "2014-12-16T12:00:10Z",
   "dateModified": "2014-12-16T12:00:10Z",
   "author": {
@@ -89,7 +90,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,86 +203,41 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>Before actually <em>doing</em> Test Driven Development (TDD) for your iOS / Mac app, it&rsquo;s really important to ask a very fundamental question: What&rsquo;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?</p>
-
+    <p>Before actually <em>doing</em> Test Driven Development (TDD) for your iOS / Mac app, it&rsquo;s really important to ask a very fundamental question: What&rsquo;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?</p>
 <h2 id="2-goals-of-tdd-in-ios">2 Goals of TDD in iOS</h2>
-
 <p>A recent course I watched on <a href="http://www.pluralsight.com" title="Pluralsight">Pluralsight</a> called <a href="http://www.pluralsight.com/courses/tdd-as-design-tool" title="Pluralsight - TDD as a Design Tool">TDD as a Design Tool</a> gave me some insight on two goals for doing Test Driven Development:</p>
-
 <ul>
 <li>Make sure my code is in the right place</li>
 <li>Make sure my logic is correct</li>
 </ul>
-
-<p>Let&rsquo;s take them one at a time&#8230;</p>
-
+<p>Let&rsquo;s take them one at a time…</p>
 <h3 id="a-place-for-everything-and-everything-in-its-place">A place for everything, and everything in its place</h3>
-
-<p>Believe it or not, Test Driven Development is an extremely powerful tool for ensuring that code is written in the right place. But what do I mean by &ldquo;the right place&#8221;?</p>
-
-<p>In the object-oriented world, &ldquo;places&#8221; are data structures, such as classes and structs, and their publicly accessible methods.</p>
-
+<p>Believe it or not, Test Driven Development is an extremely powerful tool for ensuring that code is written in the right place. But what do I mean by &ldquo;the right place”?</p>
+<p>In the object-oriented world, &ldquo;places” are data structures, such as classes and structs, and their publicly accessible methods.</p>
 <p>When I employ TDD in a project, I will tend to be driven to making sure my code ends up in the right place. I&rsquo;ll give you an example:</p>
-
 <h4 id="starting-places">Starting Places</h4>
-
-<p>When I create a new iOS project, Xcode sets me up with a Storyboard, a blank Scene, and a View Controller. Xcode also generates a Test target for me&#8230; BUT a what am I most aware of right from the onset? The Storyboard and the View Controller.</p>
-
+<p>When I create a new iOS project, Xcode sets me up with a Storyboard, a blank Scene, and a View Controller. Xcode also generates a Test target for me… BUT a what am I most aware of right from the onset? The Storyboard and the View Controller.</p>
 <p>The natural inclination, then is to start dragging things onto the design surface and wiring them up to the controller as Outlets and Actions, and off I go!</p>
-
 <p>It&rsquo;s like I&rsquo;m lead to the ever-common temptation to put <em>all</em> my code for a given screen in the application inside its corresponding View Controller.</p>
-
 <h4 id="tdd-tension">TDD Tension</h4>
-
-<p>While I may be led there, and while it may seem convenient, it would seem that TDD wants to start me off in a different &ldquo;place&#8221; altogether. Since TDD asserts that I should not write any code unless there&rsquo;s a test requiring it to be written, I&rsquo;d be driven away from my main project into my Test project. My canvas at that point is a fresh XCTestCase class.</p>
-
+<p>While I may be led there, and while it may seem convenient, it would seem that TDD wants to start me off in a different &ldquo;place” altogether. Since TDD asserts that I should not write any code unless there&rsquo;s a test requiring it to be written, I&rsquo;d be driven away from my main project into my Test project. My canvas at that point is a fresh XCTestCase class.</p>
 <p>UI at this point is not on my mind. Here, I care more about the <em>foundations</em> of the app itself. I begin to consider the application&rsquo;s domain, and its behavior <em>apart</em> from its user interface. This is very important if I want to truly write decoupled, modular, maintainable code.</p>
-
 <p>Rather than weigh down my View Controller with tons of responsibility, TDD drives me to try and build <em>separate</em> classes to steward <em>small</em> bits of my application. Those small classes can be tested <strong>much</strong> more easily than trying to get an enormous View Controller instantiated and configured in my test suite.</p>
-
 <p>This is just one small example of how TDD can get you off on the right track to putting code in its proper place.</p>
-
 <h3 id="your-logic-was-impeccable-captain">Your logic was impeccable, Captain</h3>
-
-<p>The second goal of TDD in iOS is making sure my logic is correct, or, as Spock would say, &ldquo;impeccable&#8221;.</p>
-
-<p>Does my application&rsquo;s code do what it <em>should</em> do? Can I write my code in such a way that I can easily verify it? TDD, by nature, pushes me in the direction of being able to verify the accuracy of my code&rsquo;s logical outcomes&#8230; that is, how it behaves.</p>
-
+<p>The second goal of TDD in iOS is making sure my logic is correct, or, as Spock would say, &ldquo;impeccable”.</p>
+<p>Does my application&rsquo;s code do what it <em>should</em> do? Can I write my code in such a way that I can easily verify it? TDD, by nature, pushes me in the direction of being able to verify the accuracy of my code&rsquo;s logical outcomes… that is, how it behaves.</p>
 <h4 id="fascinating-is-a-word-i-use-for-the-unexpected">Fascinating is a word I use for the unexpected</h4>
-
-<p>Testing has this way of setting expectations. One thing I&rsquo;ve really enjoyed about TDD&rsquo;s notorious red-green-refactor cycle is that I know certainly and immediately when I&rsquo;ve messed up (ie, run across a &ldquo;fascinating&#8221; situation in Spock terms).</p>
-
+<p>Testing has this way of setting expectations. One thing I&rsquo;ve really enjoyed about TDD&rsquo;s notorious red-green-refactor cycle is that I know certainly and immediately when I&rsquo;ve messed up (ie, run across a &ldquo;fascinating” situation in Spock terms).</p>
 <ul>
 <li>When I write the test, it should fail the first time. If it doesn&rsquo;t, I&rsquo;ve messed up.</li>
 <li>When I write the code to pass the test and the test fails, I <em>also</em> know I&rsquo;ve messed up.</li>
 </ul>
-
 <h2 id="next-steps">Next Steps</h2>
-
 <p>With the fundamental goals of TDD in place, I feel more prepared from a foundational standpoint to venture into actuall test-driven practices for iOS.</p>
-
 <p>I am learning so much in the area of testing – it&rsquo;s a technique I&rsquo;m practicing regularly, both in Swift and in C# (for fun and for work, respectively), so as I grow and discover ways to optimize the TDD experience in Xcode / Swift, I&rsquo;ll be sharing them. Stay tuned!</p>
-
-<div class="related-posts">
-  You might also enjoy</p> 
-  
-  <ul>
-    <li>
-      <a href="http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/" title="Swift Unit Testing Resources">Swift Unit Testing Resources</a>
-    </li>
-    <li>
-      <a href="http://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/" title="Swift Unit Testing – Verifying Method Calls">Swift Unit Testing – Verifying Method Calls</a>
-    </li>
-    <li>
-      <a href="http://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/" title="How to Create Mocks and Stubs in Swift">How to Create Mocks and Stubs in Swift</a>
-    </li>
-    <li>
-      <a href="http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/" title="Swift Access Control – Implications for Unit Testing">Swift Access Control – Implications for Unit Testing</a>
-    </li>
-  </ul>
-</div>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
     <aside>
       
@@ -309,7 +265,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -45,18 +45,19 @@
 <meta property="og:title" content="Improvements to Unit Testing in Swift with Xcode 7" />
 <meta property="og:description" content="One of the most exciting things that&rsquo;s come out of WWDC 2015 is the fact that unit testing in Swift has been greatly simplified. The latest announcements have actually rendered a few of my articles on the subject obsolete, once Xcode 7 is in full circulation among the Swift developer community.
 If you&rsquo;re using Xcode 6.x, you may still find use in a couple of my previous articles:
- Swift Access Control – Implications for Unit Testing Testability Tip for Swift Developers – Public Over Private  If you&rsquo;re jumping headlong into Xcode 7 world, setting yourself up for unit testing is incredibly simple." />
+Swift Access Control – Implications for Unit Testing Testability Tip for Swift Developers – Public Over Private If you&rsquo;re jumping headlong into Xcode 7 world, setting yourself up for unit testing is incredibly simple." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/" />
-<meta property="article:published_time" content="2015-06-10T17:43:09&#43;00:00"/>
-<meta property="article:modified_time" content="2015-06-10T17:43:09&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-06-10T17:43:09+00:00" />
+<meta property="article:modified_time" content="2015-06-10T17:43:09+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Improvements to Unit Testing in Swift with Xcode 7"/>
 <meta name="twitter:description" content="One of the most exciting things that&rsquo;s come out of WWDC 2015 is the fact that unit testing in Swift has been greatly simplified. The latest announcements have actually rendered a few of my articles on the subject obsolete, once Xcode 7 is in full circulation among the Swift developer community.
 If you&rsquo;re using Xcode 6.x, you may still find use in a couple of my previous articles:
- Swift Access Control – Implications for Unit Testing Testability Tip for Swift Developers – Public Over Private  If you&rsquo;re jumping headlong into Xcode 7 world, setting yourself up for unit testing is incredibly simple."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+Swift Access Control – Implications for Unit Testing Testability Tip for Swift Developers – Public Over Private If you&rsquo;re jumping headlong into Xcode 7 world, setting yourself up for unit testing is incredibly simple."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -91,7 +92,7 @@ If you&rsquo;re using Xcode 6.x, you may still find use in a couple of my previo
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -205,18 +206,13 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>One of the most exciting things that&rsquo;s come out of WWDC 2015 is the fact that unit testing in Swift has been greatly simplified. The latest announcements have actually rendered a few of my articles on the subject obsolete, once Xcode 7 is in full circulation among the Swift developer community.</p>
-
 <p>If you&rsquo;re using Xcode 6.x, you may still find use in a couple of my previous articles:</p>
-
 <ul>
 <li><a href="http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/">Swift Access Control – Implications for Unit Testing</a></li>
 <li><a href="http://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/">Testability Tip for Swift Developers – Public Over Private</a></li>
 </ul>
-
 <p>If you&rsquo;re jumping headlong into Xcode 7 world, setting yourself up for unit testing is incredibly simple. Essentially, all <code>internal</code> and <code>public</code> Types (and members of those Types) are visible to your unit test project when you import the module using the <code>@testable</code> keyword in front of the import. With Xcode 7, there&rsquo;s no reason to change any of the access modifiers on your Types/members to support testing.</p>
-
-<p><a href="https://twitter.com/NatashaTheRobot">@natashatherobot</a> has an <a href="http://natashatherobot.com/swift-2-xcode-7-unit-testing-access/">excellent 3-step write-up</a> that I won&rsquo;t repeat here. To summarize though, you&rsquo;ll simply&#8230;</p>
-
+<p><a href="https://twitter.com/NatashaTheRobot">@natashatherobot</a> has an <a href="http://natashatherobot.com/swift-2-xcode-7-unit-testing-access/">excellent 3-step write-up</a> that I won&rsquo;t repeat here. To summarize though, you&rsquo;ll simply…</p>
 <ul>
 <li>Code your Types (classes/structs/enums) using the default <code>internal</code> access.</li>
 <li>Add an import statement to the file containing your <code>XCTestCases</code>. There&rsquo;s special syntax for this now: <code>@testable import AppName/ModuleName</code></li>
@@ -249,7 +245,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

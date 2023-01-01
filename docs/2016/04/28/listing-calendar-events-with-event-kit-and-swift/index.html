@@ -45,20 +45,19 @@
 <meta property="og:title" content="Listing Calendar Events with Event Kit and Swift" />
 <meta property="og:description" content="This is the continuation of a series of articles I&rsquo;ve writing for Swift developers working with Event Kit.
 Supposing that after asking the user for permission to use their calendars, and even allowing users to create new calendars from within your iOS app, one possible next step could be to list out all of the events for a calendar that they tap on.
-
 Demo Here&rsquo;s what we&rsquo;re going for by the end of this:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2016/04/28/listing-calendar-events-with-event-kit-and-swift/" />
-<meta property="article:published_time" content="2016-04-28T17:50:22&#43;00:00"/>
-<meta property="article:modified_time" content="2016-04-28T17:50:22&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/04/28/listing-calendar-events-with-event-kit-and-swift/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2016-04-28T17:50:22+00:00" />
+<meta property="article:modified_time" content="2016-04-28T17:50:22+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Listing Calendar Events with Event Kit and Swift"/>
 <meta name="twitter:description" content="This is the continuation of a series of articles I&rsquo;ve writing for Swift developers working with Event Kit.
 Supposing that after asking the user for permission to use their calendars, and even allowing users to create new calendars from within your iOS app, one possible next step could be to list out all of the events for a calendar that they tap on.
-
 Demo Here&rsquo;s what we&rsquo;re going for by the end of this:"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -67,7 +66,7 @@ Demo Here&rsquo;s what we&rsquo;re going for by the end of this:"/>
   "@type": "BlogPosting",
   "headline": "Listing Calendar Events with Event Kit and Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2016\/04\/28\/listing-calendar-events-with-event-kit-and-swift\/",
-  "wordCount": "676",
+  "wordCount": "628",
   "datePublished": "2016-04-28T17:50:22Z",
   "dateModified": "2016-04-28T17:50:22Z",
   "author": {
@@ -93,7 +92,7 @@ Demo Here&rsquo;s what we&rsquo;re going for by the end of this:"/>
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,146 +201,73 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>This is the continuation of a series of articles I&rsquo;ve writing for Swift developers working with Event Kit.</p>
-
+    <p>This is the continuation of a series of articles I&rsquo;ve writing for Swift developers working with Event Kit.</p>
 <p>Supposing that after <a href="https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/">asking the user for permission</a> to use their calendars, and even allowing users to <a href="https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/">create <em>new</em> calendars</a> from within your iOS app, one possible next step could be to list out all of the events for a calendar that they tap on.</p>
-
-<p><a name="demo" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="demo">Demo</h1>
-
 <p>Here&rsquo;s what we&rsquo;re going for by the end of this:</p>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/list-events-demo.gif"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/list-events-demo.gif" alt="List Events Demo" width="468" height="844" class="alignnone size-full wp-image-12819" /></a></p>
-
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/04/list-events-demo.gif"><!-- raw HTML omitted --></a></p>
 <p>In this walk-through, I&rsquo;ll explore the Event Kit API that allows us to query the user&rsquo;s device to find and list out events for a calendar that match a date range.</p>
-
-<p><a name="example-project" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="example-project">Example project</h1>
-
 <p>I&rsquo;ve got an example project up on GitHub that contains all the code necessary to list out events for a calendar inside of a table view. You can download that project here:</p>
-
-<div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/EventTracker/tree/list-events-for-calendar" title="Event Tracker Example Project">Event Tracker Example Project</a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="querying-for-events" class="jump-target"></a></p>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="querying-for-events">Querying for events</h1>
-
 <p>The primary thing you&rsquo;ll need to do in order to display a list of events from a calendar is to query the event store for events matching a properly configured <code>NSPredicate</code>.</p>
-
 <p>Here&rsquo;s a snippet of code, followed by an analysis of what&rsquo;s going on:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">EventsViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kd">var</span> <span class="nv">calendar</span><span class="p">:</span> <span class="n">EKCalendar</span><span class="o">!</span> <span class="c1">// Passed in from previous view controller</span>
-<span class="ln"> 3</span>    <span class="kd">var</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="n">EKEvent</span><span class="p">]?</span>
-<span class="ln"> 4</span>
-<span class="ln"> 5</span>    <span class="c1">// ...</span>
-<span class="ln"> 6</span>
-<span class="ln"> 7</span>    <span class="kd">func</span> <span class="nf">loadEvents</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 8</span>        <span class="c1">// Create a date formatter instance to use for converting a string to a date</span>
-<span class="ln"> 9</span>        <span class="kd">let</span> <span class="nv">dateFormatter</span> <span class="p">=</span> <span class="n">NSDateFormatter</span><span class="p">()</span>
-<span class="ln">10</span>        <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFormat</span> <span class="p">=</span> <span class="s">&#34;yyyy-MM-dd&#34;</span>
-<span class="ln">11</span>        
-<span class="ln">12</span>        <span class="c1">// Create start and end date NSDate instances to build a predicate for which events to select</span>
-<span class="ln">13</span>        <span class="kd">let</span> <span class="nv">startDate</span> <span class="p">=</span> <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFromString</span><span class="p">(</span><span class="s">&#34;2016-01-01&#34;</span><span class="p">)</span>
-<span class="ln">14</span>        <span class="kd">let</span> <span class="nv">endDate</span> <span class="p">=</span> <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFromString</span><span class="p">(</span><span class="s">&#34;2016-12-31&#34;</span><span class="p">)</span>
-<span class="ln">15</span>        
-<span class="ln">16</span>        <span class="k">if</span> <span class="kd">let</span> <span class="nv">startDate</span> <span class="p">=</span> <span class="n">startDate</span><span class="p">,</span> <span class="n">endDate</span> <span class="p">=</span> <span class="n">endDate</span> <span class="p">{</span>
-<span class="ln">17</span>            <span class="kd">let</span> <span class="nv">eventStore</span> <span class="p">=</span> <span class="n">EKEventStore</span><span class="p">()</span>
-<span class="ln">18</span>            
-<span class="ln">19</span>            <span class="c1">// Use an event store instance to create and properly configure an NSPredicate</span>
-<span class="ln">20</span>            <span class="kd">let</span> <span class="nv">eventsPredicate</span> <span class="p">=</span> <span class="n">eventStore</span><span class="p">.</span><span class="n">predicateForEventsWithStartDate</span><span class="p">(</span><span class="n">startDate</span><span class="p">,</span> <span class="n">endDate</span><span class="p">:</span> <span class="n">endDate</span><span class="p">,</span> <span class="n">calendars</span><span class="p">:</span> <span class="p">[</span><span class="n">calendar</span><span class="p">])</span>
-<span class="ln">21</span>            
-<span class="ln">22</span>            <span class="c1">// Use the configured NSPredicate to find and return events in the store that match</span>
-<span class="ln">23</span>            <span class="kc">self</span><span class="p">.</span><span class="n">events</span> <span class="p">=</span> <span class="n">eventStore</span><span class="p">.</span><span class="n">eventsMatchingPredicate</span><span class="p">(</span><span class="n">eventsPredicate</span><span class="p">).</span><span class="bp">sort</span><span class="p">(){</span>
-<span class="ln">24</span>                <span class="p">(</span><span class="n">e1</span><span class="p">:</span> <span class="n">EKEvent</span><span class="p">,</span> <span class="n">e2</span><span class="p">:</span> <span class="n">EKEvent</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="k">in</span>
-<span class="ln">25</span>                <span class="k">return</span> <span class="n">e1</span><span class="p">.</span><span class="n">startDate</span><span class="p">.</span><span class="n">compare</span><span class="p">(</span><span class="n">e2</span><span class="p">.</span><span class="n">startDate</span><span class="p">)</span> <span class="p">==</span> <span class="n">NSComparisonResult</span><span class="p">.</span><span class="n">OrderedAscending</span>
-<span class="ln">26</span>            <span class="p">}</span>
-<span class="ln">27</span>        <span class="p">}</span>
-<span class="ln">28</span>    <span class="p">}</span>
-<span class="ln">29</span>    <span class="c1">// ...</span>
-<span class="ln">30</span><span class="p">}</span></code></pre></div>
-<p><a name="context-view-controller" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">EventsViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="kd">var</span> <span class="nv">calendar</span><span class="p">:</span> <span class="n">EKCalendar</span><span class="p">!</span> <span class="c1">// Passed in from previous view controller</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">var</span> <span class="nv">events</span><span class="p">:</span> <span class="p">[</span><span class="n">EKEvent</span><span class="p">]?</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// ...</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kd">func</span> <span class="nf">loadEvents</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="c1">// Create a date formatter instance to use for converting a string to a date</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="kd">let</span> <span class="nv">dateFormatter</span> <span class="p">=</span> <span class="n">NSDateFormatter</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFormat</span> <span class="p">=</span> <span class="s">&#34;yyyy-MM-dd&#34;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="c1">// Create start and end date NSDate instances to build a predicate for which events to select</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="kd">let</span> <span class="nv">startDate</span> <span class="p">=</span> <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFromString</span><span class="p">(</span><span class="s">&#34;2016-01-01&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="kd">let</span> <span class="nv">endDate</span> <span class="p">=</span> <span class="n">dateFormatter</span><span class="p">.</span><span class="n">dateFromString</span><span class="p">(</span><span class="s">&#34;2016-12-31&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="k">if</span> <span class="kd">let</span> <span class="nv">startDate</span> <span class="p">=</span> <span class="n">startDate</span><span class="p">,</span> <span class="n">endDate</span> <span class="p">=</span> <span class="n">endDate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">            <span class="kd">let</span> <span class="nv">eventStore</span> <span class="p">=</span> <span class="n">EKEventStore</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">            
+</span></span><span class="line"><span class="ln">19</span><span class="cl">            <span class="c1">// Use an event store instance to create and properly configure an NSPredicate</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="kd">let</span> <span class="nv">eventsPredicate</span> <span class="p">=</span> <span class="n">eventStore</span><span class="p">.</span><span class="n">predicateForEventsWithStartDate</span><span class="p">(</span><span class="n">startDate</span><span class="p">,</span> <span class="n">endDate</span><span class="p">:</span> <span class="n">endDate</span><span class="p">,</span> <span class="n">calendars</span><span class="p">:</span> <span class="p">[</span><span class="n">calendar</span><span class="p">])</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">            
+</span></span><span class="line"><span class="ln">22</span><span class="cl">            <span class="c1">// Use the configured NSPredicate to find and return events in the store that match</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">            <span class="kc">self</span><span class="p">.</span><span class="n">events</span> <span class="p">=</span> <span class="n">eventStore</span><span class="p">.</span><span class="n">eventsMatchingPredicate</span><span class="p">(</span><span class="n">eventsPredicate</span><span class="p">).</span><span class="bp">sort</span><span class="p">(){</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">                <span class="p">(</span><span class="n">e1</span><span class="p">:</span> <span class="n">EKEvent</span><span class="p">,</span> <span class="n">e2</span><span class="p">:</span> <span class="n">EKEvent</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="k">in</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">                <span class="k">return</span> <span class="n">e1</span><span class="p">.</span><span class="n">startDate</span><span class="p">.</span><span class="n">compare</span><span class="p">(</span><span class="n">e2</span><span class="p">.</span><span class="n">startDate</span><span class="p">)</span> <span class="p">==</span> <span class="n">NSComparisonResult</span><span class="p">.</span><span class="n">OrderedAscending</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">    <span class="c1">// ...</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="context-view-controller">Context: View controller</h2>
-
 <p>The context of the above snippet is a view controller. Inside the view controller class, there&rsquo;s a calendar instance that is presumably set in the previous view controller&rsquo;s <code>prepareForSegue</code> method. There&rsquo;s also an optional array of <code>EKEvent</code> instances that acts as the data source for a table view, and a function called <code>loadEvents</code> in this view controller.</p>
-
-<p><a name="configure-start-end-dates" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="configure-start-and-end-dates">Configure start and end dates</h2>
-
 <p>The first few lines of code within the <code>loadEvents</code> function are to facilitate configuring a start and end date to use for querying the event store.</p>
-
-<p><a name="generate-nspredicate" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="use-the-event-store-to-generate-nspredicate">Use the event store to generate NSPredicate</h2>
-
 <p>To actually query the store, you need to create an <code>NSPredicate</code> instance. However, rather than calling <code>NSPredicate's</code> initializer, you will use an <code>EKEventStore</code> instance to <em>generate</em> a predicate. Apparently there&rsquo;s some under-the-hood work that goes on to get a properly configured <code>NSPredicate</code> instance to use in your query.</p>
-
 <p>So assuming you&rsquo;ve got a valid start date, end date (both <code>NSDate</code> instances), and one or more calendars to search for events within, you&rsquo;ll use the event store&rsquo;s <code>predicateForEventsWithStartDate(_: endDate: calendars:)</code> method to get an <code>NSPredicate</code> instance.</p>
-
-<p><a name="query-with-nspredicate" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="query-the-event-store-with-generated-nspredicate">Query the event store with generated NSPredicate</h2>
-
 <p>The last step is to call <code>eventsMatchingPredicate(_:)</code> on the event store, and use the predicate you just generated. You can optionally sort them, as I&rsquo;ve done in the snippet.</p>
-
 <h1 id="wrapping-up">Wrapping up</h1>
-
 <p>That&rsquo;s the meat of querying the event store for a list of events. To learn how display them in a table view, I would recommend going ahead and <a href="https://github.com/andrewcbancroft/EventTracker/tree/list-events-for-calendar">grabbing the example project that I&rsquo;ve provided</a>. I&rsquo;ve also got a couple of guides on working with table views if you need assistance with that part:</p>
-
-<div class="resources">
-  <div class="resources-header">
-    Table View Guides
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fab fa-link"></i> <a href="https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/" title="Swift How-To: Setting up a Table View">Swift How-To: Setting up a Table View</a>
-    </li>
-    <li>
-      <i class="fab fa-link"></i> <a href="https://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/" title="Swift UITableViewDataSource Cheat Sheet">Swift UITableViewDataSource Cheat Sheet</a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/" title="Beginner’s Guide to Event Kit in Swift – Requesting Permission">Beginner’s Guide to Event Kit in Swift – Requesting Permission</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/06/17/creating-calendars-with-event-kit-and-swift/" title="Creating Calendars with Event Kit and Swift">Creating Calendars with Event Kit and Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/02/creating-calendar-events-with-event-kit-and-swift/" title="Creating Calendar Events with Event Kit and Swift">Creating Calendar Events with Event Kit and Swift</a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -369,7 +295,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -45,20 +45,17 @@
 <meta property="og:title" content="What Is Debugging (And What Isn&#39;t)?" />
 <meta property="og:description" content="All kinds of problems can happen when you’re building an iOS app. But are all problems debugging problems?  Which ones are and which ones aren&#39;t?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/debugging/what-is-debugging/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/debugging/what-is-debugging/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20What%20Is%20Debugging%20%28And%20What%20Isn%27t%29_.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20What%20Is%20Debugging%20%28And%20What%20Isn%27t%29_.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-12-30T03:11:48+00:00" />
+<meta property="article:modified_time" content="2019-12-30T03:11:48+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20What%20Is%20Debugging%20%28And%20What%20Isn%27t%29_.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20What%20Is%20Debugging%20%28And%20What%20Isn%27t%29_.png" />
-<meta property="article:published_time" content="2019-12-30T03:11:48&#43;00:00"/>
-<meta property="article:modified_time" content="2019-12-30T03:11:48&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20What%20Is%20Debugging%20%28And%20What%20Isn%27t%29_.png"/>
 
 <meta name="twitter:title" content="What Is Debugging (And What Isn&#39;t)?"/>
 <meta name="twitter:description" content="All kinds of problems can happen when you’re building an iOS app. But are all problems debugging problems?  Which ones are and which ones aren&#39;t?"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -73,7 +70,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/debugging\/what-is-debugging\/",
-  "wordCount": "580",
+  "wordCount": "576",
   "datePublished": "2019-12-30T03:11:48Z",
   "dateModified": "2019-12-30T03:11:48Z",
   "author": {
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,117 +211,67 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#non-debugging-problems">Non-Debugging Problems</a>
-<ul>
-<li><a href="#build-problems">Build Problems</a></li>
-<li><a href="#learning-curves">Learning Curves</a></li>
-<li><a href="#xcode-warnings">Xcode Warnings</a></li>
-<li><a href="#design-dilemmas">Design Dilemmas</a></li>
-<li><a href="#user-experience-debates">User Experience Debates</a></li>
-<li><a href="#performance-optimization">Performance Optimization</a></li>
-</ul></li>
-<li><a href="#debugging-problems">Debugging Problems</a></li>
-<li><a href="#summing-up">Summing Up</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#non-debugging-problems">Non-Debugging Problems</a>
+      <ul>
+        <li><a href="#build-problems">Build Problems</a></li>
+        <li><a href="#learning-curves">Learning Curves</a></li>
+        <li><a href="#xcode-warnings">Xcode Warnings</a></li>
+        <li><a href="#design-dilemmas">Design Dilemmas</a></li>
+        <li><a href="#user-experience-debates">User Experience Debates</a></li>
+        <li><a href="#performance-optimization">Performance Optimization</a></li>
+      </ul>
+    </li>
+    <li><a href="#debugging-problems">Debugging Problems</a></li>
+    <li><a href="#summing-up">Summing Up</a></li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<p>Does it ever help you to narrow the scope of overwhelming topics like &ldquo;debugging&rdquo;?</p>
-
+    <p>Does it ever help you to narrow the scope of overwhelming topics like &ldquo;debugging&rdquo;?</p>
 <p>It helps <em>me</em>.</p>
-
 <p>When you&rsquo;re new to something like iOS development, you may find yourself stepping into a world of problems.  Everyone around you is always fixing something it seems!</p>
-
 <p>All kinds of problems can happen when you’re building an iOS app.</p>
-
 <p>But are all problems&hellip; <em>debugging</em> problems?</p>
-
 <p>TLDR; Answer: Not necessarily.</p>
-
 <p>My brain appreciates focused definitions.  It lightens the the mental load a bit to &ldquo;bucket&rdquo; problems into categories.</p>
-
 <p>Which problems don&rsquo;t fit into the &ldquo;debugging problems&rdquo; category?  Which ones do?</p>
-
 <h2 id="non-debugging-problems">Non-Debugging Problems</h2>
-
 <p>This list of common problem areas definitely take up a developer&rsquo;s time. But rather than lump them all in with &ldquo;debugging&rdquo;, I prefer to treat them as problem sets of their own.</p>
-
 <h3 id="build-problems">Build Problems</h3>
-
 <p>If your app won’t build, that’s definitely a must-solve problem.  However, buildtime errors are not debugging problems.</p>
-
 <h3 id="learning-curves">Learning Curves</h3>
-
 <p>When you’re learning a new framework or trying something you’ve never done before, it can take some time to clear the hurdle of the Swift complier as you&rsquo;re coding.  Even still, this isn&rsquo;t debugging.</p>
-
 <h3 id="xcode-warnings">Xcode Warnings</h3>
-
 <p>If Xcode is issuing warnings, you should probably take heed and resolve them before shipping to the App Store.  But I still wouldn&rsquo;t call this debugging.</p>
-
 <h3 id="design-dilemmas">Design Dilemmas</h3>
-
 <p>Design can get controversial, but overcoming these often-subjective dilemmas is not debugging.</p>
-
 <h3 id="user-experience-debates">User Experience Debates</h3>
-
 <p>As with design dilemmas, user experience debates are also trouble spots for many developers.  The debates themselves, however, are not debugging.</p>
-
 <h3 id="performance-optimization">Performance Optimization</h3>
-
 <p>Sometimes, you get your app built and running, but you’re struggling with performance-related issues.  Even though it works (in a technical sense), it could be faster, more responsive, use less memory, etc.</p>
-
 <p>Optimization, however, is big enough to be in a category of its own for me.</p>
-
 <h2 id="debugging-problems">Debugging Problems</h2>
-
 <p>So&hellip; what <em>is</em> debugging then?</p>
-
 <p>This is how I define it in <a href="http://bit.ly/ios-debugging-fundamentals">iOS Debugging Fundamentals</a>:</p>
-
 <p>Debugging is&hellip;</p>
-
 <blockquote>
 <p><strong>Investigating</strong> and <strong>fixing flaws</strong> that you and your users experience <strong>while your app is running</strong>.</p>
-
+</blockquote>
+<blockquote>
 <p><strong>Thinking about</strong> and <strong>correcting defects</strong> that happen at <strong>runtime</strong>.</p>
 </blockquote>
-
 <p>Debugging is a two-part problem solving exercise: It involves thinking skills and fixing skills.  Debugging involves reasoning about the probable causes of flaws and defects in your apps. When you debug, you spend time trying to figure out the root cause of an issue you&rsquo;re noticing.</p>
-
 <p>Once you find the source of the problem, your job shifts to applying your programming skills and your knowledge of the app&rsquo;s purpose (domain knowledge) to fix the problem.</p>
-
-<p>But just as I started off this discussion by asking, &ldquo;Are all problems&hellip; <em>debugging</em> problems?&ldquo;, I&rsquo;m able to answer &ldquo;no&rdquo; by emphasizing <em>when</em> the problems occur, namely, at runtime.</p>
-
+<p>But just as I started off this discussion by asking, &ldquo;Are all problems&hellip; <em>debugging</em> problems?&rdquo;, I&rsquo;m able to answer &ldquo;no&rdquo; by emphasizing <em>when</em> the problems occur, namely, at runtime.</p>
 <p>That&rsquo;s why build problems, learnig curves, Xcode warnings, design dilemmas, and UX debates aren&rsquo;t considered debugging activites (in my view).</p>
-
 <p>I grant that performance problems are typically noticed at runtime, <em>but</em>, I believe this to be a separate activity, primarily because the app <em>works</em> (even if it could work <em>better</em>).</p>
-
 <h2 id="summing-up">Summing Up</h2>
-
 <p>Narrowing the scope of debugging to reasoning about, inspecting, and repairing runtime problems lifts some cognitive weight for me.</p>
-
 <p>It allows me to enjoy programming a <em>lot</em> more when I know that I&rsquo;m not actually spending 99% of my time &ldquo;debugging&rdquo;. 😂</p>
-
 <p>If you&rsquo;re getting your bearings when it comes to debugging iOS apps, I&rsquo;d love to impact your learning experience. Perhaps my <a href="http://bit.ly/ios-debugging-fundamentals">iOS Debugging Fudamentals</a> course on Pluralsight will guide you to more efficient debugging experiences!</p>
-
-<div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fas fa-video"></i> <a href="http://bit.ly/ios-debugging-fundamentals" target="_blank">iOS Debugging Fundamentals</a><a href="http://bit.ly/ios-debugging-fundamentals" target="_blank"><br /> <img src="https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png" alt="iOS Debugging Fundamentals" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
-    </li>
-  </ul>
-</div></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
     <aside>
       
@@ -346,7 +293,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -43,22 +43,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Diagnosing “Restore failed” with ASP.NET 5 on Mac" />
-<meta property="og:description" content="Following along with Steve Smith&rsquo;s &ldquo;Your First ASP.NET 5 Application on a Mac&#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&rsquo;t work due to a problem with restoring the project&rsquo;s dependencies.
-
+<meta property="og:description" content="Following along with Steve Smith&rsquo;s &ldquo;Your First ASP.NET 5 Application on a Mac”, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&rsquo;t work due to a problem with restoring the project&rsquo;s dependencies.
 Retracing my steps I got ASP.NET installed on my Mac, and I even got a cool little template going using Yeoman.
 I opened up my scaffolded project using Visual Studio Code, and began the dependency restore process." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/" />
-<meta property="article:published_time" content="2015-08-09T20:57:02&#43;00:00"/>
-<meta property="article:modified_time" content="2015-08-09T20:57:02&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-08-09T20:57:02+00:00" />
+<meta property="article:modified_time" content="2015-08-09T20:57:02+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Diagnosing “Restore failed” with ASP.NET 5 on Mac"/>
-<meta name="twitter:description" content="Following along with Steve Smith&rsquo;s &ldquo;Your First ASP.NET 5 Application on a Mac&#8221;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&rsquo;t work due to a problem with restoring the project&rsquo;s dependencies.
-
+<meta name="twitter:description" content="Following along with Steve Smith&rsquo;s &ldquo;Your First ASP.NET 5 Application on a Mac”, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&rsquo;t work due to a problem with restoring the project&rsquo;s dependencies.
 Retracing my steps I got ASP.NET installed on my Mac, and I even got a cool little template going using Yeoman.
 I opened up my scaffolded project using Visual Studio Code, and began the dependency restore process."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -93,7 +92,7 @@ I opened up my scaffolded project using Visual Studio Code, and began the depend
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,51 +201,29 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>Following along with Steve Smith&rsquo;s <a href="http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html">&ldquo;Your First ASP.NET 5 Application on a Mac&#8221;</a>, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&rsquo;t work due to a problem with restoring the project&rsquo;s dependencies.</p>
-
-<p><a name="retracing-steps" class="jump-target"></a></p>
-
+    <p>Following along with Steve Smith&rsquo;s <a href="http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html">&ldquo;Your First ASP.NET 5 Application on a Mac”</a>, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&rsquo;t work due to a problem with restoring the project&rsquo;s dependencies.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="retracing-my-steps">Retracing my steps</h3>
-
 <p>I <a href="http://docs.asp.net/en/latest/getting-started/installing-on-mac.html">got ASP.NET installed on my Mac</a>, and I even got a cool little template going using <a href="http://yeoman.io/">Yeoman</a>.</p>
-
 <p>I opened up my scaffolded project using Visual Studio Code, and began the dependency restore process. But it failed. So I troubleshooted (troubleshot?), and it failed some more.</p>
-
-<p>&ldquo;Restore failed Unknown header: 3208085783&#8221;.</p>
-
-<p>I found David Fowler&rsquo;s <a href="http://davidfowl.com/diagnosing-dependency-issues-with-asp-net-5/">&ldquo;Diagnosing Dependency Issues with ASP.NET 5&#8221;</a>, but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:</p>
-
+<p>&ldquo;Restore failed Unknown header: 3208085783”.</p>
+<p>I found David Fowler&rsquo;s <a href="http://davidfowl.com/diagnosing-dependency-issues-with-asp-net-5/">&ldquo;Diagnosing Dependency Issues with ASP.NET 5”</a>, but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:</p>
 <blockquote>
-<p>Make sure your DNX and packages are on the same version &ldquo;train&#8221;</p>
+<p>Make sure your DNX and packages are on the same version &ldquo;train”</p>
 </blockquote>
-
 <p>My issue wasn&rsquo;t with DNX, but with <strong>Mono</strong>.</p>
-
-<p><a name="mis-matched-mono" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="mis-matched-mono-versions">Mis-matched Mono versions</h3>
-
 <p>When I followed the instructions for installing ASP.NET, I distinctly remember installing Mono using the installer package available at their website.</p>
-
 <p>What I <em>failed</em> to realize, however, was that a while back (long enough ago to where it didn&rsquo;t hit me until just a few minutes ago), I installed Mono using Homebrew.</p>
-
 <p>So despite my efforts to install Mono using the installer package, the Mono that everything in my system was using was the one installed by Homebrew, which was version 3.10.</p>
-
-<p><a name="resolved" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="resolved">Resolved</h3>
-
 <p>To resolve the issue, I went ahead and just ran <code>brew upgrade mono</code>.</p>
-
 <p>Verifying that Mono was successfully upgraded via a <code>mono --version</code> command, I retried the dependency restoration in my scaffolded ASP.NET 5 application.</p>
-
 <p>The result?</p>
-
-<p><code>dnu restore</code> produced a wonderfully green, &ldquo;Restore complete&#8221;!</p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><code>dnu restore</code> produced a wonderfully green, &ldquo;Restore complete”!</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -268,7 +245,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

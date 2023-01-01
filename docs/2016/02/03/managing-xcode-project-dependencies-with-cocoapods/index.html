@@ -43,18 +43,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Managing Xcode Project Dependencies with CocoaPods" />
-<meta property="og:description" content="Course Outline I try to get as practical as possible in the course. As you&rsquo;re watching you&rsquo;ll be &ldquo;embedded&#8221; into a team of iOS developers, and you&rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through not having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.
-The course is a progressive journey." />
+<meta property="og:description" content="Course Outline I try to get as practical as possible in the course. As you&rsquo;re watching you&rsquo;ll be &ldquo;embedded” into a team of iOS developers, and you&rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through not having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.
+The course is a progressive journey. First, the team has problems managing dependencies without a dependency manager." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/" />
-<meta property="article:published_time" content="2016-02-03T18:23:49&#43;00:00"/>
-<meta property="article:modified_time" content="2016-02-03T18:23:49&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/" /><meta property="article:section" content="pluralsight" />
+<meta property="article:published_time" content="2016-02-03T18:23:49+00:00" />
+<meta property="article:modified_time" content="2016-02-03T18:23:49+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Managing Xcode Project Dependencies with CocoaPods"/>
-<meta name="twitter:description" content="Course Outline I try to get as practical as possible in the course. As you&rsquo;re watching you&rsquo;ll be &ldquo;embedded&#8221; into a team of iOS developers, and you&rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through not having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.
-The course is a progressive journey."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="twitter:description" content="Course Outline I try to get as practical as possible in the course. As you&rsquo;re watching you&rsquo;ll be &ldquo;embedded” into a team of iOS developers, and you&rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through not having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.
+The course is a progressive journey. First, the team has problems managing dependencies without a dependency manager."/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -89,7 +90,7 @@ The course is a progressive journey."/>
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -198,44 +199,24 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<h1 id="course-outline">Course Outline</h1>
-
-<p>I try to get as practical as possible in the course. As you&rsquo;re watching you&rsquo;ll be &ldquo;embedded&#8221; into a team of iOS developers, and you&rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through <em>not</em> having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.</p>
-
-<p>The course is a progressive journey. First, the team has problems managing dependencies without a dependency manager. Then, they bring in CocoaPods to help them find and organize 3rd party libraries. <em>Then</em>, they start to think, &ldquo;Hey, what if we could create our <em>own</em> CocoaPod libraries?&#8221;. Finally, they use that knowledge of how to create a CocoaPod library to set up a private repository to share code internally between projects with their team.</p>
-
+    <h1 id="course-outline">Course Outline</h1>
+<p>I try to get as practical as possible in the course. As you&rsquo;re watching you&rsquo;ll be &ldquo;embedded” into a team of iOS developers, and you&rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through <em>not</em> having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.</p>
+<p>The course is a progressive journey. First, the team has problems managing dependencies without a dependency manager. Then, they bring in CocoaPods to help them find and organize 3rd party libraries. <em>Then</em>, they start to think, &ldquo;Hey, what if we could create our <em>own</em> CocoaPod libraries?”. Finally, they use that knowledge of how to create a CocoaPod library to set up a private repository to share code internally between projects with their team.</p>
 <p>I&rsquo;ve got four modules that cover the following topics:</p>
-
-<h2 id="1-introducing-project-dependency-management">1 - Introducing Project Dependency Management</h2>
-
-<p>I teach the basic concepts and definitions associated with &ldquo;project dependency management&#8221;. What is it all about? Why does it matter? And most importantly, how is it done in the Apple Ecosystem?</p>
-
-<h2 id="2-managing-dependencies-with-cocoapods">2 - Managing Dependencies with CocoaPods</h2>
-
+<h2 id="1---introducing-project-dependency-management">1 - Introducing Project Dependency Management</h2>
+<p>I teach the basic concepts and definitions associated with &ldquo;project dependency management”. What is it all about? Why does it matter? And most importantly, how is it done in the Apple Ecosystem?</p>
+<h2 id="2---managing-dependencies-with-cocoapods">2 - Managing Dependencies with CocoaPods</h2>
 <p>I guide you through installing CocoaPods, configuring your Xcode project to use CocoaPods, and working with the CocoaPods command line utility.</p>
-
-<h2 id="3-creating-cocoapod-libraries">3 - Creating CocoaPod Libraries</h2>
-
+<h2 id="3---creating-cocoapod-libraries">3 - Creating CocoaPod Libraries</h2>
 <p>This is where things turned really fun for me. :] In this module of the course, I teach you how to create a CocoaPod library, host its source code on GitHub, and publish the library to the CocoaPods Trunk.</p>
-
-<h2 id="4-hosting-a-private-cocoapods-repository">4 - Hosting a Private CocoaPods Repository</h2>
-
+<h2 id="4---hosting-a-private-cocoapods-repository">4 - Hosting a Private CocoaPods Repository</h2>
 <p>As the capstone to the course, I teach you how to set up a private spec repository and how to configure CocoaPods to utilize it. It really is the culmination of everything learned in the prior modules, but it&rsquo;s also one of the most practical strategies for sharing code between your various Xcode projects that I&rsquo;ve found to-date.</p>
-
 <p>In addition to the four modules of content, the course comes with an example Swift iOS app if you&rsquo;re a Pluralsight Plus subscriber!</p>
-
 <h1 id="something-for-everyone">Something for Everyone</h1>
-
 <p>The course is targeted at beginning to intermediate level developers. I assume no prior knowledge of how to work with a dependency manager.</p>
-
 <p>That being the case, I do my best to offer something for everyone. If you&rsquo;ve never used a dependency manager on another platform before, I&rsquo;ve got you covered – I&rsquo;ll take you step by step through using CocoaPods.</p>
-
 <p>If you&rsquo;re already using CocoaPods in your Xcode project, maybe you can benefit from the modules on creating CocoaPod libraries yourself! If you&rsquo;re already creating libraries and contributing to the open source community, what about setting up that private spec repository to share with your team internally?</p>
-
 <h1 id="feedback-welcome">Feedback Welcome!</h1>
-
 <p>I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!</p>
 
     <aside>
@@ -264,7 +245,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

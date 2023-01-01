@@ -45,20 +45,17 @@
 <meta property="og:title" content="Taking First Steps With SwiftUI" />
 <meta property="og:description" content="A listing of learnings from the Apple SwiftUI Creating and Combining Views tutorial" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/taking-first-steps-with-swiftui/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/taking-first-steps-with-swiftui/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Taking%20First%20Steps%20With%20SwiftUI.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/FB%20-%20Taking%20First%20Steps%20With%20SwiftUI.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-03T03:11:48+00:00" />
+<meta property="article:modified_time" content="2019-06-03T03:11:48+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Taking%20First%20Steps%20With%20SwiftUI.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/FB%20-%20Taking%20First%20Steps%20With%20SwiftUI.png" />
-<meta property="article:published_time" content="2019-06-03T03:11:48&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-03T03:11:48&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Taking%20First%20Steps%20With%20SwiftUI.png"/>
 
 <meta name="twitter:title" content="Taking First Steps With SwiftUI"/>
 <meta name="twitter:description" content="A listing of learnings from the Apple SwiftUI Creating and Combining Views tutorial"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -73,7 +70,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/ui-work\/taking-first-steps-with-swiftui\/",
-  "wordCount": "442",
+  "wordCount": "439",
   "datePublished": "2019-06-03T03:11:48Z",
   "dateModified": "2019-06-03T03:11:48Z",
   "author": {
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -212,112 +209,75 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p><a name="resources" class="jump-target"></a>
-<div class="resources">
-<div class="resources-header">
-Resources
-</div>
-<ul class="resources-content">
-<li>
-<i class="fas fa-book"></i> <a href="https://developer.apple.com/tutorials/swiftui/creating-and-combining-views" rel="nofollow">Tutorial Reference</a>
-</li>
-</ul>
-</div></p>
-
+    <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <h2 id="enabling-swiftui">Enabling SwiftUI</h2>
-
 <p>Opting in to using SwiftUI is as easy as creating a new project with Xcode 11 and clicking the &ldquo;Use SwiftUI&rdquo; checkbox.</p>
-
-<p><img src="enable-swiftui.png" alt="Check Use SwiftUI" /></p>
-
+<p><img src="enable-swiftui.png" alt="Check Use SwiftUI"></p>
 <h2 id="starting-point">Starting Point</h2>
-
 <p>Xcode will give you two structs to start with:</p>
-
 <ul>
 <li>One that describes the <code>View</code>&rsquo;s content and layout</li>
 <li>One that declares a preview for that <code>View</code></li>
 </ul>
-
 <p><strong>View</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">struct</span> <span class="nc">ContentView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
-<span class="ln">3</span>        <span class="c1">// This is where you describe the view&#39;s content, layout, and behavior</span>
-<span class="ln">4</span>    <span class="p">}</span>
-<span class="ln">5</span><span class="p">}</span></code></pre></div>
-<p>A view&rsquo;s content, layout, and behavior get described in the <code>body</code> property.</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">struct</span> <span class="nc">ContentView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="c1">// This is where you describe the view&#39;s content, layout, and behavior</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>A view&rsquo;s content, layout, and behavior get described in the <code>body</code> property.</p>
 <p><strong>Preview</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">struct</span> <span class="nc">ContentView_Previews</span> <span class="p">:</span> <span class="n">PreviewProvider</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">previews</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
-<span class="ln">3</span>        <span class="n">ContentView</span><span class="p">()</span>
-<span class="ln">4</span>    <span class="p">}</span>
-<span class="ln">5</span><span class="p">}</span></code></pre></div>
-<h2 id="seeing-what-you-re-doing">Seeing What You&rsquo;re Doing</h2>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">struct</span> <span class="nc">ContentView_Previews</span> <span class="p">:</span> <span class="n">PreviewProvider</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">previews</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="n">ContentView</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="seeing-what-youre-doing">Seeing What You&rsquo;re Doing</h2>
 <p>Xcode gives you a canvas so that you can visually see what your SwiftUI code is doing.</p>
-
 <p>Open it by clicking <code>Editor &gt; Editor and Canvas</code></p>
-
-<h2 id="wait-where-s-the-canvas">Wait, Where&rsquo;s the Canvas?</h2>
-
+<h2 id="wait-wheres-the-canvas">Wait, Where&rsquo;s the Canvas?</h2>
 <p>If you don&rsquo;t have the option to view the canvas in Xcode, it&rsquo;s because this feature requires you to be running macOS Catalina.</p>
-
 <p>Don&rsquo;t feel left out of the SwiftUI fun, though!  Just press <code>command</code> + <code>R</code> to see everything load up in the iOS 13 Simulator.</p>
-
 <p>If you&rsquo;re learning, you might opt to use <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">SwiftUI in a Playground</a> for a more convenient workflow!</p>
-
-<h2 id="syncing-changes-between-swiftui-code-and-xcode-s-canvas">Syncing Changes Between SwiftUI Code and Xcode&rsquo;s Canvas</h2>
-
+<h2 id="syncing-changes-between-swiftui-code-and-xcodes-canvas">Syncing Changes Between SwiftUI Code and Xcode&rsquo;s Canvas</h2>
 <p>Changing and saving your SwiftUI view code automatically updates the canvas preview.</p>
-
 <p>Changing the view using Xcode&rsquo;s view inspector automatically updates your SwiftUI code!</p>
-
 <p>I love this quote:</p>
-
 <blockquote>
 <p>Your code is always the source of truth for the view. When you use the inspector to change or remove a modifier, Xcode updates your code immediately to match.</p>
 </blockquote>
-
-<h2 id="combining-views-the-key-is-stacks">Combining Views:  The Key is Stacks</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">struct</span> <span class="nc">ContentView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
-<span class="ln">3</span>        <span class="c1">// This is where you describe the view&#39;s content, layout, and behavior</span>
-<span class="ln">4</span>    <span class="p">}</span>
-<span class="ln">5</span><span class="p">}</span></code></pre></div>
-<p>A view&rsquo;s content, layout, and behavior get described in the <code>body</code> property.</p>
-
+<h2 id="combining-views--the-key-is-stacks">Combining Views:  The Key is Stacks</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">struct</span> <span class="nc">ContentView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="c1">// This is where you describe the view&#39;s content, layout, and behavior</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>A view&rsquo;s content, layout, and behavior get described in the <code>body</code> property.</p>
 <p><code>body</code> only returns a single view, though.</p>
-
 <p>To combine multiple views together, you use a <strong>stack</strong>.</p>
-
 <p>Stacks can be vertical (<code>VStack</code>), horizontal (<code>HStack</code>), or &ldquo;back-to-front&rdquo; (<code>ZStack</code>).</p>
-
 <h2 id="spacing-things-out">Spacing Things Out</h2>
-
 <p>Use a <code>Spacer</code> to make a containing view expand out to use all of its parent view</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">struct</span> <span class="nc">ContentView</span> <span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
-<span class="ln"> 3</span>        <span class="n">VStack</span><span class="p">(</span><span class="n">alignment</span><span class="p">:</span> <span class="p">.</span><span class="n">leading</span><span class="p">,</span> <span class="n">spacing</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 4</span>            <span class="n">Text</span><span class="p">(</span><span class="s">&#34;Turtle Rock&#34;</span><span class="p">)</span>
-<span class="ln"> 5</span>                <span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">title</span><span class="p">)</span>
-<span class="ln"> 6</span>            
-<span class="ln"> 7</span>            <span class="n">HStack</span><span class="p">{</span>
-<span class="ln"> 8</span>                <span class="n">Text</span><span class="p">(</span><span class="s">&#34;Joshua Tree National Park&#34;</span><span class="p">)</span>
-<span class="ln"> 9</span>                    <span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">subheadline</span><span class="p">)</span>
-<span class="ln">10</span>                
-<span class="ln">11</span>                <span class="n">Spacer</span><span class="p">()</span> <span class="c1">// Make the horizontal stack use up all the horizontal space of the parent VStack</span>
-<span class="ln">12</span>                
-<span class="ln">13</span>                <span class="n">Text</span><span class="p">(</span><span class="s">&#34;California&#34;</span><span class="p">)</span>
-<span class="ln">14</span>                    <span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">subheadline</span><span class="p">)</span>
-<span class="ln">15</span>            <span class="p">}</span>
-<span class="ln">16</span>        <span class="p">}</span>
-<span class="ln">17</span>    <span class="p">}</span>
-<span class="ln">18</span><span class="p">}</span></code></pre></div>
-<h2 id="giving-views-some-breathing-room">Giving Views Some Breathing Room</h2>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">struct</span> <span class="nc">ContentView</span> <span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">        <span class="n">VStack</span><span class="p">(</span><span class="n">alignment</span><span class="p">:</span> <span class="p">.</span><span class="n">leading</span><span class="p">,</span> <span class="n">spacing</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">            <span class="n">Text</span><span class="p">(</span><span class="s">&#34;Turtle Rock&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">                <span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">title</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">            
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">            <span class="n">HStack</span><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">                <span class="n">Text</span><span class="p">(</span><span class="s">&#34;Joshua Tree National Park&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">                    <span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">subheadline</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">                
+</span></span><span class="line"><span class="ln">11</span><span class="cl">                <span class="n">Spacer</span><span class="p">()</span> <span class="c1">// Make the horizontal stack use up all the horizontal space of the parent VStack</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">                
+</span></span><span class="line"><span class="ln">13</span><span class="cl">                <span class="n">Text</span><span class="p">(</span><span class="s">&#34;California&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">                    <span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">subheadline</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="giving-views-some-breathing-room">Giving Views Some Breathing Room</h2>
 <p>Use the <code>padding()</code> modifier to give a view some breathing room.</p>
 
     <aside>
@@ -327,7 +287,7 @@ Resources
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

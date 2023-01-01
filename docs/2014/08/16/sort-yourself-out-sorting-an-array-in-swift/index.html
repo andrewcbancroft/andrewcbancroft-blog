@@ -43,20 +43,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Sort It Out – Sorting an Array in Swift" />
-<meta property="og:description" content="I had a question come to me today&nbsp;regarding sorting an array of integers that are actually&nbsp;encoded as strings in the array. &nbsp;Data comes to is in a variety of encodings/types, so it&rsquo;s quite common to need to adjust things to the right state for working with. &nbsp;Let&rsquo;s take a look at how to solve this one.
-The Dilemma Given an array like this&#8230;
-1let arrayOfIntsAsStrings = [&#34;103&#34;, &#34;2&#34;, &#34;1&#34;, &#34;50&#34;, &#34;55&#34;, &#34;98&#34;] &#8230; the question arises: &nbsp;&ldquo;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this&nbsp;[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;] (integer comparison), not this [&quot;1&amp;#8221;, &quot;1000&amp;#8221;, &quot;103&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;]&nbsp;&nbsp;(string comparison)?" />
+<meta property="og:description" content="I had a question come to me today regarding sorting an array of integers that are actually encoded as strings in the array. Data comes to is in a variety of encodings/types, so it&rsquo;s quite common to need to adjust things to the right state for working with. Let&rsquo;s take a look at how to solve this one.
+The Dilemma Given an array like this…
+1let arrayOfIntsAsStrings = [&#34;103&#34;, &#34;2&#34;, &#34;1&#34;, &#34;50&#34;, &#34;55&#34;, &#34;98&#34;] … the question arises: &ldquo;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this [&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;] (integer comparison), not this [&quot;1&amp;#8221;, &quot;1000&amp;#8221;, &quot;103&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;] (string comparison)?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/08/16/sort-yourself-out-sorting-an-array-in-swift/" />
-<meta property="article:published_time" content="2014-08-16T18:06:26&#43;00:00"/>
-<meta property="article:modified_time" content="2014-08-16T18:06:26&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/08/16/sort-yourself-out-sorting-an-array-in-swift/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-08-16T18:06:26+00:00" />
+<meta property="article:modified_time" content="2014-08-16T18:06:26+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Sort It Out – Sorting an Array in Swift"/>
-<meta name="twitter:description" content="I had a question come to me today&nbsp;regarding sorting an array of integers that are actually&nbsp;encoded as strings in the array. &nbsp;Data comes to is in a variety of encodings/types, so it&rsquo;s quite common to need to adjust things to the right state for working with. &nbsp;Let&rsquo;s take a look at how to solve this one.
-The Dilemma Given an array like this&#8230;
-1let arrayOfIntsAsStrings = [&#34;103&#34;, &#34;2&#34;, &#34;1&#34;, &#34;50&#34;, &#34;55&#34;, &#34;98&#34;] &#8230; the question arises: &nbsp;&ldquo;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this&nbsp;[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;] (integer comparison), not this [&quot;1&amp;#8221;, &quot;1000&amp;#8221;, &quot;103&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;]&nbsp;&nbsp;(string comparison)?"/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="twitter:description" content="I had a question come to me today regarding sorting an array of integers that are actually encoded as strings in the array. Data comes to is in a variety of encodings/types, so it&rsquo;s quite common to need to adjust things to the right state for working with. Let&rsquo;s take a look at how to solve this one.
+The Dilemma Given an array like this…
+1let arrayOfIntsAsStrings = [&#34;103&#34;, &#34;2&#34;, &#34;1&#34;, &#34;50&#34;, &#34;55&#34;, &#34;98&#34;] … the question arises: &ldquo;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this [&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;] (integer comparison), not this [&quot;1&amp;#8221;, &quot;1000&amp;#8221;, &quot;103&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;] (string comparison)?"/>
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -65,7 +66,7 @@ The Dilemma Given an array like this&#8230;
   "@type": "BlogPosting",
   "headline": "Sort It Out – Sorting an Array in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/08\/16\/sort-yourself-out-sorting-an-array-in-swift\/",
-  "wordCount": "541",
+  "wordCount": "557",
   "datePublished": "2014-08-16T18:06:26Z",
   "dateModified": "2014-08-16T18:06:26Z",
   "author": {
@@ -91,7 +92,7 @@ The Dilemma Given an array like this&#8230;
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -204,45 +205,32 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>I had a question come to me today&nbsp;regarding sorting an array of integers that are actually&nbsp;<em>encoded</em> as strings in the array. &nbsp;Data comes to is in a variety of encodings/types, so it&rsquo;s quite common to need to adjust things to the right state for working with. &nbsp;Let&rsquo;s take a look at how to solve this one.</p>
-
+    <p>I had a question come to me today regarding sorting an array of integers that are actually <em>encoded</em> as strings in the array.  Data comes to is in a variety of encodings/types, so it&rsquo;s quite common to need to adjust things to the right state for working with.  Let&rsquo;s take a look at how to solve this one.</p>
 <h2 id="the-dilemma">The Dilemma</h2>
-
-<p>Given an array like this&#8230;</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">arrayOfIntsAsStrings</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;103&#34;</span><span class="p">,</span> <span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;50&#34;</span><span class="p">,</span> <span class="s">&#34;55&#34;</span><span class="p">,</span> <span class="s">&#34;98&#34;</span><span class="p">]</span></code></pre></div>
-<p>&#8230; the question arises: &nbsp;&ldquo;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this&nbsp;<code>[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;]</code> (integer comparison), not this <code>[&quot;1&amp;#8221;, &quot;1000&amp;#8221;, &quot;103&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;]</code>&nbsp;&nbsp;(string comparison)?&#8221; Enter Swift&rsquo;s <code>sorted</code>&nbsp;function:</p>
-
+<p>Given an array like this…</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">let</span> <span class="nv">arrayOfIntsAsStrings</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#34;103&#34;</span><span class="p">,</span> <span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;50&#34;</span><span class="p">,</span> <span class="s">&#34;55&#34;</span><span class="p">,</span> <span class="s">&#34;98&#34;</span><span class="p">]</span>
+</span></span></code></pre></div><p>… the question arises:  &ldquo;How do I sort this in numerical order so that my output array is still an array of strings, but sorted like this <code>[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;]</code> (integer comparison), not this <code>[&quot;1&amp;#8221;, &quot;1000&amp;#8221;, &quot;103&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;]</code>  (string comparison)?” Enter Swift&rsquo;s <code>sorted</code> function:</p>
 <blockquote>
-<p>“Swift’s standard library provides a function called sorted, which sorts an array of values of a known type, based on the output of a sorting closure that you provide. Once it completes the sorting process, the sorted function returns a new array of the same type and size as the old one, with its elements in the correct sorted order. The original array is not modified by the sorted function.” Excerpt From: Apple Inc. “The Swift Programming Language.” iBooks. <a title="Swift iBook" href="https://itun.es/us/jEUH0.l" target="_blank"><a href="https://itun.es/us/jEUH0.l">https://itun.es/us/jEUH0.l</a></a></p>
+<p>“Swift’s standard library provides a function called sorted, which sorts an array of values of a known type, based on the output of a sorting closure that you provide. Once it completes the sorting process, the sorted function returns a new array of the same type and size as the old one, with its elements in the correct sorted order. The original array is not modified by the sorted function.” Excerpt From: Apple Inc. “The Swift Programming Language.” iBooks. <!-- raw HTML omitted --><a href="https://itun.es/us/jEUH0.l">https://itun.es/us/jEUH0.l</a><!-- raw HTML omitted --></p>
 </blockquote>
-
 <p>This is exactly what we need to do the job here.</p>
-
 <h2 id="the-gist">The Gist</h2>
-
-<p>Given the original array outlined above, we can create a new<em>&nbsp;sorted</em> array like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">sortedArray</span> <span class="p">=</span> <span class="bp">sorted</span><span class="p">(</span><span class="n">arrayOfIntsAsStrings</span><span class="p">,</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="p">(</span><span class="n">str1</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">str2</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="k">in</span>
-<span class="ln">3</span>    <span class="k">return</span> <span class="n">str1</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">str2</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span>
-<span class="ln">4</span><span class="p">})</span></code></pre></div>
-<p>This code produces our desired output: &nbsp;<code>[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;]</code></p>
-
-<h2 id="the-nbsp-details">The&nbsp;Details</h2>
-
-<p>Swift&rsquo;s&nbsp;sorted function takes two arguments: &nbsp;an Array, and a Closure. &nbsp;The part that may be confusing is the closure argument. &nbsp;Isolated it looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="p">{</span>
-<span class="ln">2</span>    <span class="p">(</span><span class="n">str1</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">str2</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="k">in</span>
-<span class="ln">3</span>    <span class="k">return</span> <span class="n">str1</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">str2</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span>
-<span class="ln">4</span><span class="p">}</span></code></pre></div>
-<p>Swift&nbsp;provides several <a title="Apple Developer Documentation - Swift Closures" href="https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html" target="_blank">shorthand forms of the closure syntax</a>, but I&rsquo;ve chosen the longest-form here just for full exposure and clarity. &nbsp;The closure I&rsquo;ve written simply needs to compute a&nbsp;Bool value representing the result of a comparison between two values&nbsp;– in this case, I&rsquo;m wanting to do <em>integer</em> comparison, so I write this: &nbsp;<code>str1.toInt()</code>&nbsp;and <code>str2.toInt()</code>.</p>
-
-<p>You can choose whatever parameter names you&rsquo;d like, and you can actually&nbsp;rely on Type Inference in the parameter section&nbsp;&#8212; the compiler can work out what Types your parameters are. &nbsp;But if it helps clue you in to what the code is doing, you can <a title="Clean Coding in Swift – Type Inference" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/" target="_blank"><em>specify</em> the Types in the closure&rsquo;s parameter section, as I wrote about recently</a>, and as I did in my example when I wrote <code>str1: String, str2: String</code>&nbsp;(I could have left off the <code>: String</code>).</p>
-
-<p>Within the closure&rsquo;s body, you can put in as many lines of logic as are necessary in order to produce an appropriate comparison result to get your Array in the right order. &nbsp;If it gets <em>too</em> complicated to do it in-line, think about encapsulating that logic inside one or more functions in the spirit of writing <a title="Clean Coding in Swift – Functions" href="http://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/" target="_blank">clean code</a>.</p>
-
-<p>To produce an appropriate comparison result, you&rsquo;ll have to consider the Types of the data you&rsquo;re working with within the closure and consider any casting or manipulation you&rsquo;ll need to do to produce the correct result like we did in our example. Other than that, it&rsquo;s pretty straightforward to sort it&nbsp;out!</p>
+<p>Given the original array outlined above, we can create a new_ sorted_ array like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">let</span> <span class="nv">sortedArray</span> <span class="p">=</span> <span class="bp">sorted</span><span class="p">(</span><span class="n">arrayOfIntsAsStrings</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="p">(</span><span class="n">str1</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">str2</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="k">in</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">return</span> <span class="n">str1</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">str2</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>This code produces our desired output:  <code>[&quot;1&amp;#8221;, &quot;2&amp;#8221;, &quot;50&amp;#8221;, &quot;55&amp;#8221;, &quot;98&amp;#8221;, &quot;103&amp;#8221;, &quot;1000&amp;#8221;]</code></p>
+<h2 id="thenbspdetails">The Details</h2>
+<p>Swift&rsquo;s sorted function takes two arguments:  an Array, and a Closure.  The part that may be confusing is the closure argument.  Isolated it looks like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="p">(</span><span class="n">str1</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">str2</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="k">in</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">return</span> <span class="n">str1</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">str2</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Swift provides several <!-- raw HTML omitted -->shorthand forms of the closure syntax<!-- raw HTML omitted -->, but I&rsquo;ve chosen the longest-form here just for full exposure and clarity.  The closure I&rsquo;ve written simply needs to compute a Bool value representing the result of a comparison between two values – in this case, I&rsquo;m wanting to do <em>integer</em> comparison, so I write this:  <code>str1.toInt()</code> and <code>str2.toInt()</code>.</p>
+<p>You can choose whatever parameter names you&rsquo;d like, and you can actually rely on Type Inference in the parameter section — the compiler can work out what Types your parameters are.  But if it helps clue you in to what the code is doing, you can <!-- raw HTML omitted --><!-- raw HTML omitted -->specify<!-- raw HTML omitted --> the Types in the closure&rsquo;s parameter section, as I wrote about recently<!-- raw HTML omitted -->, and as I did in my example when I wrote <code>str1: String, str2: String</code> (I could have left off the <code>: String</code>).</p>
+<p>Within the closure&rsquo;s body, you can put in as many lines of logic as are necessary in order to produce an appropriate comparison result to get your Array in the right order.  If it gets <em>too</em> complicated to do it in-line, think about encapsulating that logic inside one or more functions in the spirit of writing <!-- raw HTML omitted -->clean code<!-- raw HTML omitted -->.</p>
+<p>To produce an appropriate comparison result, you&rsquo;ll have to consider the Types of the data you&rsquo;re working with within the closure and consider any casting or manipulation you&rsquo;ll need to do to produce the correct result like we did in our example. Other than that, it&rsquo;s pretty straightforward to sort it out!</p>
 
     <aside>
       
@@ -270,7 +258,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

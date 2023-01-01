@@ -43,18 +43,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <meta property="og:title" content="Clarifying Swift Access Control (Hint:  Swift Isn’t C#)" />
-<meta property="og:description" content="As it turns out, Swift isn&rsquo;t C# (or Java or VB.Net or&#8230;)! My day job keeps me busy writing C#, so I&rsquo;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.
+<meta property="og:description" content="As it turns out, Swift isn&rsquo;t C# (or Java or VB.Net or…)! My day job keeps me busy writing C#, so I&rsquo;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.
 I just spent the greater part of a week experimenting with Swift extensions. I was trying to figure out some seemingly strange behavior that they were exhibiting." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/" />
-<meta property="article:published_time" content="2015-04-24T18:02:34&#43;00:00"/>
-<meta property="article:modified_time" content="2015-04-24T18:02:34&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2015-04-24T18:02:34+00:00" />
+<meta property="article:modified_time" content="2015-04-24T18:02:34+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Clarifying Swift Access Control (Hint:  Swift Isn’t C#)"/>
-<meta name="twitter:description" content="As it turns out, Swift isn&rsquo;t C# (or Java or VB.Net or&#8230;)! My day job keeps me busy writing C#, so I&rsquo;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.
+<meta name="twitter:description" content="As it turns out, Swift isn&rsquo;t C# (or Java or VB.Net or…)! My day job keeps me busy writing C#, so I&rsquo;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.
 I just spent the greater part of a week experimenting with Swift extensions. I was trying to figure out some seemingly strange behavior that they were exhibiting."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -63,7 +64,7 @@ I just spent the greater part of a week experimenting with Swift extensions. I w
   "@type": "BlogPosting",
   "headline": "Clarifying Swift Access Control (Hint:  Swift Isn’t C#)",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/04\/24\/clarifying-swift-access-control-hint-swift-isnt-c-sharp\/",
-  "wordCount": "810",
+  "wordCount": "793",
   "datePublished": "2015-04-24T18:02:34Z",
   "dateModified": "2015-04-24T18:02:34Z",
   "author": {
@@ -89,7 +90,7 @@ I just spent the greater part of a week experimenting with Swift extensions. I w
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,99 +203,51 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>As it turns out, Swift isn&rsquo;t C# (or Java or VB.Net or&#8230;)! My day job keeps me busy writing C#, so I&rsquo;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.</p>
-
+    <p>As it turns out, Swift isn&rsquo;t C# (or Java or VB.Net or…)! My day job keeps me busy writing C#, so I&rsquo;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.</p>
 <p>I just spent the greater part of a week experimenting with Swift extensions. I was trying to figure out some seemingly strange behavior that they were exhibiting.</p>
-
-<p>After publishing <a href="http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/" title="3 Nuances of Swift Extensions">&ldquo;3 Nuances of Swift Extensions&#8221;</a>, I quickly learned that I had a fundamental misunderstanding of Swift access control, thanks to some observant folks in the Swift community.</p>
-
-<p>What was the hiccup? Read on to find out where I went wrong&#8230;</p>
-
-<p><a name="how-private-is-private" class="jump-target"></a></p>
-
+<p>After publishing <a href="http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/" title="3 Nuances of Swift Extensions">&ldquo;3 Nuances of Swift Extensions”</a>, I quickly learned that I had a fundamental misunderstanding of Swift access control, thanks to some observant folks in the Swift community.</p>
+<p>What was the hiccup? Read on to find out where I went wrong…</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="how-private-is-private">How private is private?</h3>
-
-<p>One of the most surprising &ldquo;nuances&#8221; from <a href="http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/" title="3 Nuances of Swift Extensions">&ldquo;3 Nuances of Swift Extensions&#8221;</a> that I discovered was that if you define an extension within the same source file as another Type, the extension&rsquo;s members can see the <em>other</em> Type&rsquo;s <code>private</code> properties and functions! &ldquo;Whaaat?? How is this possible?!&#8221;, I reacted.</p>
-
-<p>Well&#8230; To restate the obvious, Swift isn&rsquo;t C#&#8230; and it isn&rsquo;t C# in more ways than just syntax.</p>
-
-<p>Ever since access control modifiers were introduced in Xcode 6 Beta 4, I had it in my mind that <code>public</code>, <code>private</code>, and <code>internal</code> worked just like they do in C#. Sure, I read <a href="https://developer.apple.com/swift/blog/?id=5">the blog article on access control published by the Swift team</a>, but it was a mere cursory look. I basically saw the three key words and thought, &ldquo;Ah, I got this&#8230; moving on!&#8221;</p>
-
+<p>One of the most surprising &ldquo;nuances” from <a href="http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/" title="3 Nuances of Swift Extensions">&ldquo;3 Nuances of Swift Extensions”</a> that I discovered was that if you define an extension within the same source file as another Type, the extension&rsquo;s members can see the <em>other</em> Type&rsquo;s <code>private</code> properties and functions! &ldquo;Whaaat?? How is this possible?!”, I reacted.</p>
+<p>Well… To restate the obvious, Swift isn&rsquo;t C#… and it isn&rsquo;t C# in more ways than just syntax.</p>
+<p>Ever since access control modifiers were introduced in Xcode 6 Beta 4, I had it in my mind that <code>public</code>, <code>private</code>, and <code>internal</code> worked just like they do in C#. Sure, I read <a href="https://developer.apple.com/swift/blog/?id=5">the blog article on access control published by the Swift team</a>, but it was a mere cursory look. I basically saw the three key words and thought, &ldquo;Ah, I got this… moving on!”</p>
 <p>This was a fundamental mistake for me to make, and it goes to show that just because there are <em>similarities</em> between languages, it doesn&rsquo;t mean the <em>semantics</em> of those similarities carry over.</p>
-
-<p><a name="semantics-of-private" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="semantics-of-private">Semantics of private</h3>
-
 <p><code>Private</code> is the access modifier that got me all confused. The concept of <code>public</code> and <code>internal</code> carry over fairly nicely, but <code>private</code> is the one that&rsquo;s fundamentally different between C# and Swift, so that&rsquo;s where I&rsquo;ll focus.</p>
-
 <p>In addition to this article, recommend giving <a href="https://developer.apple.com/swift/blog/?id=5">the Swift team&rsquo;s original article on access control</a> a very close read, just to make sure all the semantics of <code>public</code> and <code>internal</code> in Swift are clear as well.</p>
-
-<p><a name="private-and-c-sharp" class="jump-target"></a></p>
-
-<h4 id="private-and-c">Private and C</h4>
-
-<p>In C#, <code>private</code> members of a Type are &ldquo;truly&#8221; private. They are only visible <em>within that Type</em>. The member&rsquo;s visibility is limited to the curly braces enclosing the Type&rsquo;s implementation. That&rsquo;s it. No subclass can see <code>private</code> members. No other Types can see those members, no matter which file those Types are defined in. <code>Private</code> is private.</p>
-
-<p><a name="private-and-swift" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h4 id="private-and-c">Private and C#</h4>
+<p>In C#, <code>private</code> members of a Type are &ldquo;truly” private. They are only visible <em>within that Type</em>. The member&rsquo;s visibility is limited to the curly braces enclosing the Type&rsquo;s implementation. That&rsquo;s it. No subclass can see <code>private</code> members. No other Types can see those members, no matter which file those Types are defined in. <code>Private</code> is private.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="private-and-swift">Private and Swift</h4>
-
-<p>And then there&rsquo;s Swift. <code>Private</code> takes on <em>entirely different</em> semantics in Swift, and herein lay my fundamental misunderstanding. It was obvious that I just didn&rsquo;t &ldquo;get it&#8221; if you read through the <a href="http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/" title="3 Nuances of Swift Extensions">Nuances Article</a>. [sigh]</p>
-
+<p>And then there&rsquo;s Swift. <code>Private</code> takes on <em>entirely different</em> semantics in Swift, and herein lay my fundamental misunderstanding. It was obvious that I just didn&rsquo;t &ldquo;get it” if you read through the <a href="http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/" title="3 Nuances of Swift Extensions">Nuances Article</a>. [sigh]</p>
 <p>In Swift, a <code>private</code> Type, or a <code>public</code>/<code>internal</code> Type&rsquo;s <code>private</code> <em>members</em> are visible to <em>anything else</em> defined within the same <strong>file</strong>.</p>
-
 <p>This isn&rsquo;t a characteristic that&rsquo;s limited to extensions. <em>Anything</em> defined in the same source file as something else can see everything. This is a shocker if you&rsquo;re coming from C# or a similar language where the semantics of access control are used for encapsulation purposes.</p>
-
-<p><a name="proof-by-example" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="proof-by-example">Proof by example</h4>
-
 <p>So suppose you have a file named Types.swift, and within you have the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">private</span> <span class="kd">struct</span> <span class="nc">Person</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="kd">private</span> <span class="kd">let</span> <span class="nv">name</span><span class="p">:</span> <span class="nb">String</span>
-<span class="ln">3</span><span class="p">}</span>
-<span class="ln">4</span>
-<span class="ln">5</span><span class="kd">private</span> <span class="kd">struct</span> <span class="nc">Greeter</span> <span class="p">{</span>
-<span class="ln">6</span>    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">greet</span><span class="p">(</span><span class="n">person</span><span class="p">:</span> <span class="n">Person</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln">7</span>        <span class="bp">println</span><span class="p">(</span><span class="s">&#34;Hi, I&#39;m </span><span class="si">\(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
-<span class="ln">8</span>    <span class="p">}</span>
-<span class="ln">9</span><span class="p">}</span></code></pre></div>
-<p>If you&rsquo;re a C# developer, you look at that code and immediately go, &ldquo;Yeah, that&rsquo;s not gonna work&#8230; <code>name</code> is <code>private</code> to <code>Person</code> and can&rsquo;t be referenced outside that Type&#8221;.</p>
-
-<p>But in Swift, this is totally legitimate. Even though <code>Person</code> is <code>private</code>, <code>Greeter</code> can see <code>Person</code> and initialize one, <em>and</em> it can see <code>Person</code>&#8216;s <code>private</code> property, <code>name</code>.</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">private</span> <span class="kd">struct</span> <span class="nc">Person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kd">private</span> <span class="kd">let</span> <span class="nv">name</span><span class="p">:</span> <span class="nb">String</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="kd">private</span> <span class="kd">struct</span> <span class="nc">Greeter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">greet</span><span class="p">(</span><span class="n">person</span><span class="p">:</span> <span class="n">Person</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">        <span class="bp">println</span><span class="p">(</span><span class="s">&#34;Hi, I&#39;m </span><span class="si">\(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If you&rsquo;re a C# developer, you look at that code and immediately go, &ldquo;Yeah, that&rsquo;s not gonna work… <code>name</code> is <code>private</code> to <code>Person</code> and can&rsquo;t be referenced outside that Type”.</p>
+<p>But in Swift, this is totally legitimate. Even though <code>Person</code> is <code>private</code>, <code>Greeter</code> can see <code>Person</code> and initialize one, <em>and</em> it can see <code>Person</code>‘s <code>private</code> property, <code>name</code>.</p>
 <p><code>Private</code> in Swift simply limits visibility to Types and members within the same <em>source file</em>. Multiple Types defined in the same source file can see other <code>private</code> Types, as well as other Types&rsquo; <code>private</code> properties and functions. In other words, &ldquo;<code>private</code> isn&rsquo;t <code>private</code>&rdquo;, if you&rsquo;re thinking of private like a C# developer (or a developer familiar with other languages with access control modifiers similar to C#).</p>
-
 <h3 id="wrapping-up">Wrapping up</h3>
-
 <p>There is a fundamental difference in the semantics of access control between C# and Swift.</p>
-
 <p>In C#, we typically think of access control in terms of inheritance characteristics. The modifiers affect the Type and revolve around the Type and its interaction with other Types.</p>
-
 <p>Swift, controls access to members in terms of <em>source file</em> and <em>module</em>. Types defined within the same source file see everything about each other, including <code>private</code> members. <code>Internal</code> Types and members expand visibility to anywhere within the same module. Finally, <code>public</code> access makes Types and their members visible <em>everywhere</em>, even to Types defined in other modules.</p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/" title="3 Nuances of Swift Extensions">3 Nuances of Swift Extensions</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/" title="Swift Access Control – Implications for Unit Testing">Swift Access Control – Implications for Unit Testing</a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -322,7 +275,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

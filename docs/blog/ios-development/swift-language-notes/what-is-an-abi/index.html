@@ -45,14 +45,15 @@
 <meta property="og:title" content="What is an ABI" />
 <meta property="og:description" content="Explains the concept of an ABI." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/what-is-an-abi/" />
-<meta property="article:published_time" content="2019-06-20T04:40:54&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-20T04:40:54&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/swift-language-notes/what-is-an-abi/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-20T04:40:54+00:00" />
+<meta property="article:modified_time" content="2019-06-20T04:40:54+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="What is an ABI"/>
 <meta name="twitter:description" content="Explains the concept of an ABI."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -87,7 +88,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -208,29 +209,17 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>&ldquo;ABI&rdquo; stands for &ldquo;<strong>A</strong>pplication <strong>B</strong>inary <strong>I</strong>nterface&rdquo;.</p>
-
 <p>The word &ldquo;interface&rdquo; means the same as it does in other places where you hear the word.</p>
-
 <p>If a <em>human</em> wants to interact with a computer, s/he needs a way to engage with it.  A <strong>user</strong> interface is the point where humans and computers communicate with one another.</p>
-
 <p>If a <em>computer</em> wants to interact with a computer, it needs a way to engage as well.  An API&hellip;an <strong>Application Programming</strong> Interface is the point where computers interact with other computers.  It&rsquo;s also the point where a computer communicates with itself!  Computers are just instruction performers.  Developers plan out and write sets of instructions for computers to perform with code. Since the code doesn&rsquo;t write itself (yet!), APIs are <em>also</em> the point where developers like you and I stitch together chunks of code.  Every class, struct, property, function&hellip;all of them are some form of API.</p>
-
 <p>So what&rsquo;s an <strong>Application Binary</strong> Interface?</p>
-
 <p>If you stack all of these interfaces, one on top of the other, a <strong>U</strong>I would be on the top.  Underneath the UI are APIs.  And then&hellip; ABIs.</p>
-
 <p>ABI&rsquo;s are one level deeper than <strong>AP</strong>Is. They&rsquo;re one step down from code that developers write.</p>
-
 <p>Developers write instructions for computers to perform in a language. Say&hellip;Swift!</p>
-
 <p>Computers perform instructions, but iPhones and Macs don&rsquo;t &ldquo;speak&rdquo; Swift.  They &ldquo;speak&rdquo; <strong>binary</strong>.</p>
-
 <p>For a computer to <em>understand</em>, much less <em>perform</em> instructions that developers have written in Swift, those instructions have to be translated and packaged. Translating Swift code and packaging it up is called <em>compiling</em>.</p>
-
 <p>When you launch an app, iOS begins to perform the instructions that a developer compiled.  A message is received by one piece of compiled code and performed by another piece of compiled code.  The result is sent over to another piece of compiled code.  And so on and so on&hellip;</p>
-
 <p>If <em>compiled code</em> wants to interact with other <em>compiled code</em>, guess what?  It needs a way to do that.  It needs an interface.  A <strong>binary</strong> interface.</p>
-
 <p>An ABI is the point where <em>compiled code</em> interacts with <em>other compiled code</em> while an app is running.</p>
 
     <aside>
@@ -240,7 +229,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

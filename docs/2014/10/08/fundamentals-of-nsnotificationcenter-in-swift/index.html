@@ -46,15 +46,16 @@
 <meta property="og:description" content="Updated on September 19, 2016 – Xcode 8 &amp; Swift 3.0
 The goal of this post is to help you grasp the fundamentals of using NSNotificationCenter in your Swift iOS app. The topic isn&rsquo;t necessarily new, and there&rsquo;s no difference except syntax between Objective-C and Swift implementations involving NSNotificationCenter. Even still, I&rsquo;m hoping to add to the understanding of this useful tool by giving a fully-working example on GitHub (Swift 2." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/" />
-<meta property="article:published_time" content="2014-10-08T18:27:47&#43;00:00"/>
-<meta property="article:modified_time" content="2014-10-08T18:27:47&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-10-08T18:27:47+00:00" />
+<meta property="article:modified_time" content="2014-10-08T18:27:47+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Fundamentals of NSNotificationCenter in Swift"/>
 <meta name="twitter:description" content="Updated on September 19, 2016 – Xcode 8 &amp; Swift 3.0
 The goal of this post is to help you grasp the fundamentals of using NSNotificationCenter in your Swift iOS app. The topic isn&rsquo;t necessarily new, and there&rsquo;s no difference except syntax between Objective-C and Swift implementations involving NSNotificationCenter. Even still, I&rsquo;m hoping to add to the understanding of this useful tool by giving a fully-working example on GitHub (Swift 2."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -63,7 +64,7 @@ The goal of this post is to help you grasp the fundamentals of using NSNotificat
   "@type": "BlogPosting",
   "headline": "Fundamentals of NSNotificationCenter in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/10\/08\/fundamentals-of-nsnotificationcenter-in-swift\/",
-  "wordCount": "1380",
+  "wordCount": "1370",
   "datePublished": "2014-10-08T18:27:47Z",
   "dateModified": "2014-10-08T18:27:47Z",
   "author": {
@@ -89,7 +90,7 @@ The goal of this post is to help you grasp the fundamentals of using NSNotificat
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,154 +203,107 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p><small>Updated on September 19, 2016 – Xcode 8 &amp; Swift 3.0</small></p>
-
-<p>The goal of this post is to help you grasp the fundamentals of using <code>NSNotificationCenter</code> in your Swift iOS app. The topic isn&rsquo;t necessarily new, and there&rsquo;s no difference except syntax between Objective-C and Swift implementations involving <code>NSNotificationCenter</code>. Even still, I&rsquo;m hoping to add to the understanding of this useful tool by giving a fully-working example on GitHub (<a title="GitHub - Swift NSNotificationCenter Example" href="https://github.com/andrewcbancroft/SwiftNSNotificationCenter/tree/swift-2.3" target="_blank">Swift 2.3</a> and <a title="GitHub - Swift NSNotificationCenter Example" href="https://github.com/andrewcbancroft/SwiftNSNotificationCenter" target="_blank">Swift 3.0</a>), and by sharing the insight that&rsquo;s clicked in my own brain as I explain the example.</p>
-
+    <p><!-- raw HTML omitted -->Updated on September 19, 2016 – Xcode 8 &amp; Swift 3.0<!-- raw HTML omitted --></p>
+<p>The goal of this post is to help you grasp the fundamentals of using <code>NSNotificationCenter</code> in your Swift iOS app. The topic isn&rsquo;t necessarily new, and there&rsquo;s no difference except syntax between Objective-C and Swift implementations involving <code>NSNotificationCenter</code>. Even still, I&rsquo;m hoping to add to the understanding of this useful tool by giving a fully-working example on GitHub (<!-- raw HTML omitted -->Swift 2.3<!-- raw HTML omitted --> and <!-- raw HTML omitted -->Swift 3.0<!-- raw HTML omitted -->), and by sharing the insight that&rsquo;s clicked in my own brain as I explain the example.</p>
 <p><strong>Note:</strong> Code in the main article below is written in Swift 3.0, but code examples for Swift 2.3 are found in the <a href="https://github.com/andrewcbancroft/SwiftNSNotificationCenter/tree/swift-2.3">example project</a>.</p>
-
-<p><a name="what-is-it" class="jump-target"></a></p>
-
-<h3 id="first-things-first-what-is-this-thing">First things first: What <em>is</em> this thing?</h3>
-
-<p>When I first heard <code>NSNotificationCenter</code>, I thought &ldquo;push notifications&#8221;. However, <code>NSNotificationCenter</code> has nothing to do with sending or receiving push notifications in iOS. Rather, it is a communication tool internal to your app. It provides a way for one instance of a class/struct to notify one or more <em>other</em> class/struct instances about something. The goal in doing this is to enable those 1+ other class or struct instances to take appropriate action based the communication they receive. An common analogy comes to mind: think &ldquo;radio tower&#8221;. <code>NSNotificationCenter</code> is the central hub that acts as a <em>broadcaster</em> of notifications. If that still seems vague, hang tight – seeing the example below should help it all come together for you.</p>
-
-<p><a name="should-i-use-it" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="first-things-first-what-_is_-this-thing">First things first: What <em>is</em> this thing?</h3>
+<p>When I first heard <code>NSNotificationCenter</code>, I thought &ldquo;push notifications”. However, <code>NSNotificationCenter</code> has nothing to do with sending or receiving push notifications in iOS. Rather, it is a communication tool internal to your app. It provides a way for one instance of a class/struct to notify one or more <em>other</em> class/struct instances about something. The goal in doing this is to enable those 1+ other class or struct instances to take appropriate action based the communication they receive. An common analogy comes to mind: think &ldquo;radio tower”. <code>NSNotificationCenter</code> is the central hub that acts as a <em>broadcaster</em> of notifications. If that still seems vague, hang tight – seeing the example below should help it all come together for you.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="should-i-use-it">Should I use it?</h3>
-
-<p>Before diving into the basic workflow, it&rsquo;s worth asking, &ldquo;Should I use <code>NSNotificationCenter</code>, or is there some other option that&rsquo;s more appropriate for my app&rsquo;s internal communication needs?&#8221;</p>
-
+<p>Before diving into the basic workflow, it&rsquo;s worth asking, &ldquo;Should I use <code>NSNotificationCenter</code>, or is there some other option that&rsquo;s more appropriate for my app&rsquo;s internal communication needs?”</p>
 <p>It is often the case that there is more than one way to solve a problem in software development, and it&rsquo;s no different with <code>NSNotificationCenter</code>. There is more than one way to accomplish instance-to-instance communication at run-time. I&rsquo;ve written about two such forms of communication in my post titled <a href="https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/">NSNotificationCenter vs Delegation – An Analysis</a>. It may be worth reading up on, just to make sure you&rsquo;re using the right tool for the right kind of communication.</p>
-
-<p><a name="basic-workflow" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="basic-workflow">Basic Workflow</h3>
-
 <p><code>NSNotificationCenter.default</code> is at the center of it all when it comes to this discussion.</p>
-
 <p>The basic workflow of using <code>NSNotificationCenter</code> goes something like this:</p>
-
 <ol>
-<li>Since `NSNotificationCenter` is in the business of broadcasting notifications, the first thing to do is to specify a way to uniquely identify a notification. This is most easily accomplished by defining a constant string value (using `let` syntax in Swift) at a globally-visible scope. The string constant you define here will serve as a &ldquo;notification key&#8221;. If you have several notification keys that you need to define, perhaps creating a new .swift file called &ldquo;NSNotificationCenterKeys.swift&#8221; is a clean way to do this.</li>
-<li>Steps 2 and 3 of the workflow go hand-in-hand. Without implementing the one, implementing the other doesn&rsquo;t make much sense&#8230; Step 2 is to <em>post</em> a notification to `NSNotificationCenter.default` identified by the key that was created in step 1. In radio terms, the class or struct instance desiring to post a notification asks the default notification center to broadcast the notification key defined in step 1&#8230; this class or struct instance chooses the right situations to request that the notification key be sent out based on business logic specific to the project&rsquo;s requirements.</li>
-<li>Step 3 is to set up 1+ class or struct instances to be <em>listeners</em>, or more properly, <em>observers</em> of a particular notification. Such an observer will be able to tell that it&rsquo;s &ldquo;heard&#8221; the notification, because it will be &ldquo;listening for&#8221; a notification that uses the same key that was created in step 1, which is the key used in step 2 to <em>post</em> the notification. In radio terms, the listener is tuned in to the default notification center&rsquo;s station that&rsquo;s identified by that special key defined in step 1 and posted in step 2. So you see now why steps 2 and 3 go hand-in-hand. With no posts to the notification center on that station, tuning in will do no good. Likewise, posting a notification but having no listeners accomplishes nothing.</li>
+<li>Since `NSNotificationCenter` is in the business of broadcasting notifications, the first thing to do is to specify a way to uniquely identify a notification. This is most easily accomplished by defining a constant string value (using `let` syntax in Swift) at a globally-visible scope. The string constant you define here will serve as a &ldquo;notification key”. If you have several notification keys that you need to define, perhaps creating a new .swift file called &ldquo;NSNotificationCenterKeys.swift” is a clean way to do this.</li>
+<li>Steps 2 and 3 of the workflow go hand-in-hand. Without implementing the one, implementing the other doesn&rsquo;t make much sense… Step 2 is to <em>post</em> a notification to `NSNotificationCenter.default` identified by the key that was created in step 1. In radio terms, the class or struct instance desiring to post a notification asks the default notification center to broadcast the notification key defined in step 1… this class or struct instance chooses the right situations to request that the notification key be sent out based on business logic specific to the project&rsquo;s requirements.</li>
+<li>Step 3 is to set up 1+ class or struct instances to be <em>listeners</em>, or more properly, <em>observers</em> of a particular notification. Such an observer will be able to tell that it&rsquo;s &ldquo;heard” the notification, because it will be &ldquo;listening for” a notification that uses the same key that was created in step 1, which is the key used in step 2 to <em>post</em> the notification. In radio terms, the listener is tuned in to the default notification center&rsquo;s station that&rsquo;s identified by that special key defined in step 1 and posted in step 2. So you see now why steps 2 and 3 go hand-in-hand. With no posts to the notification center on that station, tuning in will do no good. Likewise, posting a notification but having no listeners accomplishes nothing.</li>
 <li>Finally, what should the observing instance <em>do</em> once it&rsquo;s detected the notification? Well, when signing up to be an observer, the instance must also specify the name of a function that will be called upon receipt of the notification it&rsquo;s listening for. Whatever action or routine is appropriate to perform at that time is what that function&rsquo;s implementation should contain.</li>
 </ol>
-
-<p><a name="visualize" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="visualizing-nsnotificationcenter-by-example">Visualizing NSNotificationCenter by Example</h3>
-
-<p>If you&rsquo;re like me, you need less talk and more example, so I&rsquo;ve created a simple Xcode project that you can grab over at GitHub (<a title="GitHub - Swift NSNotificationCenter Example" href="https://github.com/andrewcbancroft/SwiftNSNotificationCenter" target="_blank">Swift 2.3</a> and <a title="GitHub - Swift NSNotificationCenter Example" href="https://github.com/andrewcbancroft/SwiftNSNotificationCenter/tree/swift-3.0" target="_blank">Swift 3.0</a>). Running the project will allow you to click through a series of tabs in a tab view controller, post a notification, and see the results. It looks much like this:</p>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExample.gif"><img class="size-full wp-image-5461 aligncenter" src="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExample.gif" alt="NS Notification Center Example" width="356" height="636" /></a></p>
-
+<p>If you&rsquo;re like me, you need less talk and more example, so I&rsquo;ve created a simple Xcode project that you can grab over at GitHub (<!-- raw HTML omitted -->Swift 2.3<!-- raw HTML omitted --> and <!-- raw HTML omitted -->Swift 3.0<!-- raw HTML omitted -->). Running the project will allow you to click through a series of tabs in a tab view controller, post a notification, and see the results. It looks much like this:</p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExample.gif"><!-- raw HTML omitted --></a></p>
 <p>Working back through the basic workflow with this example you can find the following key aspects of implementing a <code>NSNotificationCenter</code> solution (lines of code to pay special attention to will be highlighted).</p>
-
-<p><a name="steps1-2" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="steps-1-and-2">Steps 1 and 2:</h4>
-
-<p>I&rsquo;ve chosen my <code>FirstViewController</code> class to be the one that defines the global constant with a unique notification key and tells the default notification center to post that notification when the &ldquo;Notify!&#8221; button is tapped:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// 1. Globally define a &#34;special notification key&#34; constant that can be broadcast / tuned in to...</span>
-<span class="ln"> 2</span><span class="kd">let</span> <span class="nv">mySpecialNotificationKey</span> <span class="p">=</span> <span class="s">&#34;com.andrewcbancroft.specialNotificationKey&#34;</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span><span class="kd">class</span> <span class="nc">FirstViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
-<span class="ln"> 5</span>    <span class="kr">@IBOutlet</span> <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">sentNotificationLabel</span><span class="p">:</span> <span class="n">UILabel</span><span class="o">!</span>
-<span class="ln"> 6</span>    
-<span class="ln"> 7</span>    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 8</span>        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-<span class="ln"> 9</span>        <span class="n">NotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">addObserver</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">FirstViewController</span><span class="p">.</span><span class="n">updateNotificationSentLabel</span><span class="p">),</span> <span class="n">name</span><span class="p">:</span> <span class="n">NSNotification</span><span class="p">.</span><span class="n">Name</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span> <span class="n">mySpecialNotificationKey</span><span class="p">),</span> <span class="n">object</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln">10</span>    <span class="p">}</span>
-<span class="ln">11</span>
-<span class="ln">12</span>    <span class="c1">// 2. Post notification using &#34;special notification key&#34;</span>
-<span class="ln">13</span>    <span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">notify</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">14</span>        <span class="n">NotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">Notification</span><span class="p">.</span><span class="n">Name</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span> <span class="n">mySpecialNotificationKey</span><span class="p">),</span> <span class="n">object</span><span class="p">:</span> <span class="kc">self</span><span class="p">)</span>
-<span class="ln">15</span>    <span class="p">}</span>
-<span class="ln">16</span>    
-<span class="ln">17</span>    <span class="kd">func</span> <span class="nf">updateNotificationSentLabel</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">18</span>        <span class="kc">self</span><span class="p">.</span><span class="n">sentNotificationLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;Notification sent!&#34;</span>
-<span class="ln">19</span>    <span class="p">}</span>
-<span class="ln">20</span><span class="p">}</span></code></pre></div>
-<p><a name="steps3-4" class="jump-target"></a></p>
-
+<p>I&rsquo;ve chosen my <code>FirstViewController</code> class to be the one that defines the global constant with a unique notification key and tells the default notification center to post that notification when the &ldquo;Notify!” button is tapped:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// 1. Globally define a &#34;special notification key&#34; constant that can be broadcast / tuned in to...</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">let</span> <span class="nv">mySpecialNotificationKey</span> <span class="p">=</span> <span class="s">&#34;com.andrewcbancroft.specialNotificationKey&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="kd">class</span> <span class="nc">FirstViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="kr">@IBOutlet</span> <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">sentNotificationLabel</span><span class="p">:</span> <span class="n">UILabel</span><span class="p">!</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="n">NotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">addObserver</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">FirstViewController</span><span class="p">.</span><span class="n">updateNotificationSentLabel</span><span class="p">),</span> <span class="n">name</span><span class="p">:</span> <span class="n">NSNotification</span><span class="p">.</span><span class="n">Name</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span> <span class="n">mySpecialNotificationKey</span><span class="p">),</span> <span class="n">object</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="c1">// 2. Post notification using &#34;special notification key&#34;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">notify</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="n">NotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">Notification</span><span class="p">.</span><span class="n">Name</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span> <span class="n">mySpecialNotificationKey</span><span class="p">),</span> <span class="n">object</span><span class="p">:</span> <span class="kc">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="kd">func</span> <span class="nf">updateNotificationSentLabel</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">sentNotificationLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;Notification sent!&#34;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="steps-3-and-4">Steps 3 and 4:</h4>
-
 <p>Both of these steps are implemented in very similar ways in my <code>SecondViewController</code> and <code>ThirdViewController</code> classes. The code should speak for itself:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">SecondViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kr">@IBOutlet</span> <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">notificationLabel</span><span class="p">:</span> <span class="n">UILabel</span><span class="o">!</span>
-<span class="ln"> 3</span>    
-<span class="ln"> 4</span>    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 5</span>        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-<span class="ln"> 6</span>
-<span class="ln"> 7</span>        <span class="c1">// 3.  Observe (listen for) &#34;special notification key&#34;</span>
-<span class="ln"> 8</span>        <span class="n">NotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">addObserver</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">SecondViewController</span><span class="p">.</span><span class="n">actOnSpecialNotification</span><span class="p">),</span> <span class="n">name</span><span class="p">:</span> <span class="n">NSNotification</span><span class="p">.</span><span class="n">Name</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span> <span class="n">mySpecialNotificationKey</span><span class="p">),</span> <span class="n">object</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln"> 9</span>    <span class="p">}</span>
-<span class="ln">10</span>
-<span class="ln">11</span>    <span class="c1">// 4.  Implement function to act on that notification</span>
-<span class="ln">12</span>    <span class="c1">// The name of this function must match the selector argument you specified when you called addObserver()</span>
-<span class="ln">13</span>    <span class="kd">func</span> <span class="nf">actOnSpecialNotification</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">14</span>        <span class="kc">self</span><span class="p">.</span><span class="n">notificationLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;I heard the notification!&#34;</span>
-<span class="ln">15</span>    <span class="p">}</span>
-<span class="ln">16</span><span class="p">}</span>
-<span class="ln">17</span>
-<span class="ln">18</span>
-<span class="ln">19</span><span class="kd">class</span> <span class="nc">ThirdViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
-<span class="ln">20</span>    <span class="kr">@IBOutlet</span> <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">notificationLabel</span><span class="p">:</span> <span class="n">UILabel</span><span class="o">!</span>
-<span class="ln">21</span>    
-<span class="ln">22</span>    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">23</span>        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-<span class="ln">24</span>        <span class="n">NotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">addObserver</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">ThirdViewController</span><span class="p">.</span><span class="n">actOnSpecialNotification</span><span class="p">),</span> <span class="n">name</span><span class="p">:</span> <span class="n">NSNotification</span><span class="p">.</span><span class="n">Name</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span> <span class="n">mySpecialNotificationKey</span><span class="p">),</span> <span class="n">object</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln">25</span>    <span class="p">}</span>
-<span class="ln">26</span>    
-<span class="ln">27</span>    <span class="kd">func</span> <span class="nf">actOnSpecialNotification</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">28</span>        <span class="kc">self</span><span class="p">.</span><span class="n">notificationLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;I heard the notification, too!&#34;</span>
-<span class="ln">29</span>    <span class="p">}</span>
-<span class="ln">30</span><span class="p">}</span></code></pre></div>
-<p>Finally, to reiterate the explanation in visual form and for easy reference, I&rsquo;ve annotated a screen shot taken from the project&rsquo;s code:</p>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExplanation_Swift3.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExplanation_Swift3-1024x825.png" alt="NSNotificationCenter Explanation" width="1024" height="825" class="alignnone size-large wp-image-13039" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExplanation_Swift3-1024x825.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExplanation_Swift3-300x242.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExplanation_Swift3.png 1100w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
-
-<p><a name="remove-observer" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">SecondViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="kr">@IBOutlet</span> <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">notificationLabel</span><span class="p">:</span> <span class="n">UILabel</span><span class="p">!</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="c1">// 3.  Observe (listen for) &#34;special notification key&#34;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="n">NotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">addObserver</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">SecondViewController</span><span class="p">.</span><span class="n">actOnSpecialNotification</span><span class="p">),</span> <span class="n">name</span><span class="p">:</span> <span class="n">NSNotification</span><span class="p">.</span><span class="n">Name</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span> <span class="n">mySpecialNotificationKey</span><span class="p">),</span> <span class="n">object</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="c1">// 4.  Implement function to act on that notification</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="c1">// The name of this function must match the selector argument you specified when you called addObserver()</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="kd">func</span> <span class="nf">actOnSpecialNotification</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">notificationLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;I heard the notification!&#34;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl">
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="kd">class</span> <span class="nc">ThirdViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="kr">@IBOutlet</span> <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">notificationLabel</span><span class="p">:</span> <span class="n">UILabel</span><span class="p">!</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="n">NotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">addObserver</span><span class="p">(</span><span class="kc">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">ThirdViewController</span><span class="p">.</span><span class="n">actOnSpecialNotification</span><span class="p">),</span> <span class="n">name</span><span class="p">:</span> <span class="n">NSNotification</span><span class="p">.</span><span class="n">Name</span><span class="p">(</span><span class="n">rawValue</span><span class="p">:</span> <span class="n">mySpecialNotificationKey</span><span class="p">),</span> <span class="n">object</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="kd">func</span> <span class="nf">actOnSpecialNotification</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">notificationLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;I heard the notification, too!&#34;</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Finally, to reiterate the explanation in visual form and for easy reference, I&rsquo;ve annotated a screen shot taken from the project&rsquo;s code:</p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/NSNotificationCenterExplanation_Swift3.png"><!-- raw HTML omitted --></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="removing-an-observer">Removing an observer</h3>
-
 <p>One final requirement for working with <code>NSNotificationCenter</code> is to remove an observer when it no longer needs to listen for notifications. When might this situation arise?</p>
-
 <ul>
 <li>When the observer is no longer referenced and thus deallocated from memory, it should tell the default notification center that it can be removed</li>
 <li>When some condition occurs in your application that renders it no longer relevant for an instance to listen for notifications</li>
 </ul>
-
 <p>The first situation is the most common, and is for sure the scenario that we want to protect against, so that the default notification center doesn&rsquo;t continue to manage observers that are no longer capable of actively listening. To satisfy the requirement of removing an observer when an instance is deallocated, we could provide something like the following <code>deinit</code> method:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">deinit</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="n">NSNotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">removeObserver</span><span class="p">(</span><span class="kc">self</span><span class="p">)</span>
-<span class="ln">3</span><span class="p">}</span></code></pre></div>
-<p>For the second bullet point, you can simply write the same line of code that&rsquo;s highlighted in the above snippet, wherever it makes sense for you to tell the default notification center when it&rsquo;s appropriate to stop sending messages to the instance in question.</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">deinit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">NSNotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">removeObserver</span><span class="p">(</span><span class="kc">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>For the second bullet point, you can simply write the same line of code that&rsquo;s highlighted in the above snippet, wherever it makes sense for you to tell the default notification center when it&rsquo;s appropriate to stop sending messages to the instance in question.</p>
 <h3 id="summary">Summary</h3>
-
 <p><code>NSNotificationCenter</code> is particularly useful when there are multiple class or struct instances that need to take action based on something that happens elsewhere in your application. For this type of scenario, <code>NSNotificationCenter</code> can be a great tool to wield as you develop apps in Swift for iOS.</p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/" title="NSNotificationCenter vs Delegation – An Analysis">NSNotificationCenter vs Delegation – An Analysis</a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -377,7 +331,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

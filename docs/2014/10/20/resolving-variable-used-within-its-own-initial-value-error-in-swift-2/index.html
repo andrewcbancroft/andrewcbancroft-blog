@@ -44,21 +44,22 @@
 
 <meta property="og:title" content="Resolving “Variable used within its own initial value” Error in Swift" />
 <meta property="og:description" content="While experimenting with a few things today, I experienced this compiler error:
- Variable used within its own initial value
- Let me describe the situation I was in&#8230;
+Variable used within its own initial value
+Let me describe the situation I was in…
 I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&rsquo;ve recently learned about in Scala. Essentially, I was trying to implement a factorial function as a closure, and I was trying to do it recursively (that is, without using a for/while loop)." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/" />
-<meta property="article:published_time" content="2014-10-20T13:50:52&#43;00:00"/>
-<meta property="article:modified_time" content="2014-10-20T13:50:52&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-10-20T13:50:52+00:00" />
+<meta property="article:modified_time" content="2014-10-20T13:50:52+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Resolving “Variable used within its own initial value” Error in Swift"/>
 <meta name="twitter:description" content="While experimenting with a few things today, I experienced this compiler error:
- Variable used within its own initial value
- Let me describe the situation I was in&#8230;
+Variable used within its own initial value
+Let me describe the situation I was in…
 I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&rsquo;ve recently learned about in Scala. Essentially, I was trying to implement a factorial function as a closure, and I was trying to do it recursively (that is, without using a for/while loop)."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -67,7 +68,7 @@ I was playing (in a playground, no less) with closures, trying to mimic some beh
   "@type": "BlogPosting",
   "headline": "Resolving “Variable used within its own initial value” Error in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/10\/20\/resolving-variable-used-within-its-own-initial-value-error-in-swift-2\/",
-  "wordCount": "349",
+  "wordCount": "348",
   "datePublished": "2014-10-20T13:50:52Z",
   "dateModified": "2014-10-20T13:50:52Z",
   "author": {
@@ -93,7 +94,7 @@ I was playing (in a playground, no less) with closures, trying to mimic some beh
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -207,51 +208,46 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>While experimenting with a few things today, I experienced this compiler error:</p>
-
 <blockquote>
 <p>Variable used within its own initial value</p>
 </blockquote>
-
-<p>Let me describe the situation I was in&#8230;</p>
-
+<p>Let me describe the situation I was in…</p>
 <p>I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&rsquo;ve recently learned about in Scala.  Essentially, I was trying to implement a factorial function as a <em>closure</em>, and I was trying to do it <em>recursively</em> (that is, without using a for/while loop).  Here&rsquo;s what I wanted to do:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">factorial</span> <span class="p">=</span> <span class="p">{</span>
-<span class="ln">2</span>    <span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="k">in</span>
-<span class="ln">3</span>    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln">4</span>        <span class="k">return</span> <span class="mi">1</span>
-<span class="ln">5</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln">6</span>        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="ln">7</span>    <span class="p">}</span>
-<span class="ln">8</span><span class="p">}</span></code></pre></div>
-<p>If you&rsquo;ve seen factorial before, the above implementation isn&rsquo;t new.  The &ldquo;base case&#8221; that will let the recursion stop is the expression <code>if (n == 0)</code>, and the recursive case is in the <code>else</code> block, where <code>factorial</code> gets called <em>again</em> within its own body&rsquo;s definition.  Only problem is&#8230; this doesn&rsquo;t work in Swift 1.0.</p>
-
-<p>Apparently, the closure (which is being initialized and assigned to the constant named &ldquo;factorial&#8221;) hasn&rsquo;t had a chance to fully initialize itself before the name <code>factorial</code> is used within the body.</p>
-
-<p>The frustrating part is that <a title="Rob Napier on Immutability and Swift" href="http://robnapier.net/llama-calculus" target="_blank">I <em>really</em> didn&rsquo;t want to type the letters v-a-r</a> to implement my solution.  But alas, as <a title="Stack Overflow - Handle Closure Recursively" href="http://stackoverflow.com/questions/25103534/how-to-handle-closure-recursivity" target="_blank">Stack Overflow</a> says, the following solution to the &ldquo;initial value&#8221; error works:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">var</span> <span class="nv">factorial</span><span class="p">:</span> <span class="p">(</span><span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span>
-<span class="ln"> 2</span><span class="n">factorial</span> <span class="p">=</span> <span class="p">{</span>
-<span class="ln"> 3</span>    <span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="k">in</span>
-<span class="ln"> 4</span>    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 5</span>        <span class="k">return</span> <span class="mi">1</span>
-<span class="ln"> 6</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 7</span>        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="ln"> 8</span>    <span class="p">}</span>
-<span class="ln"> 9</span><span class="p">}</span>
-<span class="ln">10</span>
-<span class="ln">11</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="ln">12</span><span class="c1">// Produces the correct result of 120</span></code></pre></div>
-<p>Of course, there&rsquo;s absolutely no reason for the implementation to be a closure – I was simply experimenting.  Here&rsquo;s the solution that I actually prefer&#8230; a good ole named function definition:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 3</span>        <span class="k">return</span> <span class="mi">1</span>
-<span class="ln"> 4</span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-<span class="ln"> 5</span>        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="ln"> 6</span>    <span class="p">}</span>
-<span class="ln"> 7</span><span class="p">}</span>
-<span class="ln"> 8</span>
-<span class="ln"> 9</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="ln">10</span><span class="c1">// Produces the correct result of 120</span></code></pre></div>
-<p>&nbsp;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">let</span> <span class="nv">factorial</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="k">in</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">        <span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If you&rsquo;ve seen factorial before, the above implementation isn&rsquo;t new.  The &ldquo;base case” that will let the recursion stop is the expression <code>if (n == 0)</code>, and the recursive case is in the <code>else</code> block, where <code>factorial</code> gets called <em>again</em> within its own body&rsquo;s definition.  Only problem is… this doesn&rsquo;t work in Swift 1.0.</p>
+<p>Apparently, the closure (which is being initialized and assigned to the constant named &ldquo;factorial”) hasn&rsquo;t had a chance to fully initialize itself before the name <code>factorial</code> is used within the body.</p>
+<p>The frustrating part is that <!-- raw HTML omitted -->I <!-- raw HTML omitted -->really<!-- raw HTML omitted --> didn&rsquo;t want to type the letters v-a-r<!-- raw HTML omitted --> to implement my solution.  But alas, as <!-- raw HTML omitted -->Stack Overflow<!-- raw HTML omitted --> says, the following solution to the &ldquo;initial value” error works:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">var</span> <span class="nv">factorial</span><span class="p">:</span> <span class="p">(</span><span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="n">factorial</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="k">in</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1">// Produces the correct result of 120</span>
+</span></span></code></pre></div><p>Of course, there&rsquo;s absolutely no reason for the implementation to be a closure – I was simply experimenting.  Here&rsquo;s the solution that I actually prefer… a good ole named function definition:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">        <span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1">// Produces the correct result of 120</span>
+</span></span></code></pre></div><p> </p>
 
     <aside>
       
@@ -279,7 +275,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -45,20 +45,17 @@
 <meta property="og:title" content="How Smart (Or Dumb?) Should NSManagedObjects Be?" />
 <meta property="og:description" content="Offers thoughts on what to implement in an NSManagedObject subclass." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-smart-dumb-should-nsmanagedobjects-be/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-smart-dumb-should-nsmanagedobjects-be/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20How%20Smart%20Or%20Dumb%20Should%20NSManagedObjects%20Be.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20How%20Smart%20Or%20Dumb%20Should%20NSManagedObjects%20Be.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-19T04:40:54+00:00" />
+<meta property="article:modified_time" content="2019-06-19T04:40:54+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20How%20Smart%20Or%20Dumb%20Should%20NSManagedObjects%20Be.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20How%20Smart%20Or%20Dumb%20Should%20NSManagedObjects%20Be.png" />
-<meta property="article:published_time" content="2019-06-19T04:40:54&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-19T04:40:54&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20How%20Smart%20Or%20Dumb%20Should%20NSManagedObjects%20Be.png"/>
 
 <meta name="twitter:title" content="How Smart (Or Dumb?) Should NSManagedObjects Be?"/>
 <meta name="twitter:description" content="Offers thoughts on what to implement in an NSManagedObject subclass."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,69 +211,45 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#tldr">TLDR;</a></li>
-<li><a href="#designed-overrides">Designed Overrides</a>
-<ul>
-<li><a href="#managed-object-life-cycle-events">Managed Object &ldquo;Life Cycle&rdquo; Events</a></li>
-<li><a href="#validation-code">Validation Code</a></li>
-<li><a href="#key-value-observing">Key-Value Observing</a></li>
-<li><a href="#summarizing-designed-overrides">Summarizing Designed Overrides</a></li>
-</ul></li>
-<li><a href="#on-fetching-behavior">On Fetching Behavior</a></li>
-<li><a href="#on-convenience-properties-functions">On Convenience Properties &amp; Functions</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#tldr">TLDR;</a></li>
+    <li><a href="#designed-overrides">Designed Overrides</a>
+      <ul>
+        <li><a href="#managed-object-life-cycle-events">Managed Object &ldquo;Life Cycle&rdquo; Events</a></li>
+        <li><a href="#validation-code">Validation Code</a></li>
+        <li><a href="#key-value-observing">Key-Value Observing</a></li>
+        <li><a href="#summarizing-designed-overrides">Summarizing Designed Overrides</a></li>
+      </ul>
+    </li>
+    <li><a href="#on-fetching-behavior">On Fetching Behavior</a></li>
+    <li><a href="#on-convenience-properties--functions">On Convenience Properties &amp; Functions</a></li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<p>Apps aren&rsquo;t &ldquo;dumb&rdquo;.  Apps do things.  <em>Smart</em> things.  The question is:  Where do the &ldquo;smart parts&rdquo; go?</p>
-
+    <p>Apps aren&rsquo;t &ldquo;dumb&rdquo;.  Apps do things.  <em>Smart</em> things.  The question is:  Where do the &ldquo;smart parts&rdquo; go?</p>
 <p>So how you smart or how dumb should <code>NSManagedObject</code> subclasses be?</p>
-
 <p>What code should you write in one of these? What should you <em>not</em>?</p>
-
 <h2 id="tldr">TLDR;</h2>
-
 <p>Keep <code>NSManagedObject</code>s about Core Data-y things.</p>
-
 <p>Ask, &ldquo;Does this help my <code>NSManagedObject</code> subclass work with Core Data-related functionality?&rdquo;</p>
-
 <p>Let the answer to that question guide your decision about whether to extend your <code>NSManagedObject</code> subclass with additional features.</p>
-
 <h2 id="designed-overrides">Designed Overrides</h2>
-
 <p>Apple has designed some spots for you to customize an <code>NSManagedObject</code>&rsquo;s default behavior.</p>
-
 <h3 id="managed-object-life-cycle-events">Managed Object &ldquo;Life Cycle&rdquo; Events</h3>
-
 <p><code>NSManagedObject</code> comes with several overridable methods that you can implement in order to &ldquo;hook in&rdquo; to the life cycle of the object.  What do I mean?  Check out this sampling of overrideable methods:</p>
-
 <p><code>awakeFromFetch()</code>: Provides an opportunity to add code into the life cycle of the managed object when Core Data is bringing the object from the persistent store into memory.</p>
-
 <p><code>awakeFromInsert()</code>: Provides an opportunity to add code into the life cycle of the managed object when it is initially created.</p>
-
 <p><code>willSave()</code>: Provides an opportunity to add code into the life cycle of the managed object when it is about to be saved.</p>
-
 <p><code>didSave()</code>: Provides an opportunity to add code into the life cycle of the managed object after the managed object’s context completes a save operation.</p>
-
 <p>These methods can be overwritten to add code that should be strategically executed at these pre-determined-by-Apple points in time.</p>
-
 <h3 id="validation-code">Validation Code</h3>
-
 <p>You can implement custom validation logic in an <code>NSManagedObject</code> subclass.  Don&rsquo;t override <code>validateValue(_:forKey:)</code> though.</p>
-
 <p>Instead, implement a custom method with a signature that matches the signature of <code>validatePropertyName:error:</code>.</p>
-
 <p>For example, if your <code>NSManagedObject</code> subclass has an <code>age</code> property and you wanted to implement special validation logic, you could do this:</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -290,92 +263,70 @@ MathJax.Hub.Config({
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">validateAge</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">AutoreleasingUnsafeMutablePointer</span><span class="p">&lt;</span><span class="nb">AnyObject</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">valueNumber</span> <span class="p">=</span> <span class="n">value</span><span class="p">.</span><span class="n">pointee</span> <span class="k">as</span><span class="p">?</span> <span class="n">NSNumber</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
-    
-    <span class="k">if</span> <span class="n">valueNumber</span><span class="p">.</span><span class="n">floatValue</span> <span class="o">&gt;</span> <span class="mf">0.0</span> <span class="p">{</span>
-        <span class="k">return</span>
-    <span class="p">}</span>
-    
-    <span class="kd">let</span> <span class="nv">errorStr</span> <span class="p">=</span> <span class="n">NSLocalizedString</span><span class="p">(</span><span class="s">&#34;Age must be greater than zero&#34;</span><span class="p">,</span> <span class="n">tableName</span><span class="p">:</span> <span class="s">&#34;Employee&#34;</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="s">&#34;validation: zero age error&#34;</span><span class="p">)</span>
-    <span class="kd">let</span> <span class="nv">userInfoDict</span> <span class="p">=</span> <span class="p">[</span><span class="n">NSLocalizedDescriptionKey</span><span class="p">:</span> <span class="n">errorStr</span><span class="p">]</span>
-    <span class="kd">let</span> <span class="nv">error</span> <span class="p">=</span> <span class="n">NSError</span><span class="p">(</span><span class="n">domain</span><span class="p">:</span> <span class="s">&#34;EMPLOYEE_ERROR_DOMAIN&#34;</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="mi">1123</span><span class="p">,</span> <span class="n">userInfo</span><span class="p">:</span> <span class="n">userInfoDict</span><span class="p">)</span>
-    <span class="k">throw</span> <span class="n">error</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">validateAge</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">AutoreleasingUnsafeMutablePointer</span><span class="p">&lt;</span><span class="nb">AnyObject</span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">valueNumber</span> <span class="p">=</span> <span class="n">value</span><span class="p">.</span><span class="n">pointee</span> <span class="k">as</span><span class="p">?</span> <span class="n">NSNumber</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">valueNumber</span><span class="p">.</span><span class="n">floatValue</span> <span class="o">&gt;</span> <span class="mf">0.0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">errorStr</span> <span class="p">=</span> <span class="n">NSLocalizedString</span><span class="p">(</span><span class="s">&#34;Age must be greater than zero&#34;</span><span class="p">,</span> <span class="n">tableName</span><span class="p">:</span> <span class="s">&#34;Employee&#34;</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="s">&#34;validation: zero age error&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">userInfoDict</span> <span class="p">=</span> <span class="p">[</span><span class="n">NSLocalizedDescriptionKey</span><span class="p">:</span> <span class="n">errorStr</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">error</span> <span class="p">=</span> <span class="n">NSError</span><span class="p">(</span><span class="n">domain</span><span class="p">:</span> <span class="s">&#34;EMPLOYEE_ERROR_DOMAIN&#34;</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="mi">1123</span><span class="p">,</span> <span class="n">userInfo</span><span class="p">:</span> <span class="n">userInfoDict</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="n">error</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 You could also override one of these methods to add advanced validation:</p>
-
 <ul>
 <li><code>validateForInsert()</code></li>
 <li><code>validateForUpdate()</code></li>
 <li><code>validateForDelete()</code></li>
 </ul>
-
 <h3 id="key-value-observing">Key-Value Observing</h3>
-
 <p><code>NSManagedObject</code> subclasses inherit methods related to key-value observing that could be appropriate to override.</p>
-
 <h3 id="summarizing-designed-overrides">Summarizing Designed Overrides</h3>
-
 <p>Have you noticed a pattern in each of these sections?</p>
-
 <p>Key word:  <strong>override</strong></p>
-
 <p>Apple designed <code>NSManagedObject</code> with intentional, overrideable methods.</p>
-
 <p>&ldquo;Should I implement <code>this code</code> here?&rdquo;</p>
-
 <p>Take a look at the method names and let that be a guiding factor in your decision-making.</p>
-
 <h2 id="on-fetching-behavior">On Fetching Behavior</h2>
-
 <p>Xcode adds a <code>fetchRequest</code> method when it auto-generates code for you.  So&hellip;I&rsquo;d say it&rsquo;s probably okay to put some <em>basic</em> fetching behavior with an <code>NSManagedObject</code> subclass.  Keep it simple though:</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift">  <span class="p">@</span><span class="n">nonobjc</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">func</span> <span class="n">fetchRequest</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">EntityName</span><span class="o">&gt;</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">EntityName</span><span class="o">&gt;</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;EntityName&#34;</span><span class="p">)</span>
-  <span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl">  <span class="p">@</span><span class="n">nonobjc</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">func</span> <span class="n">fetchRequest</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">EntityName</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">EntityName</span><span class="p">&gt;(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;EntityName&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 My personal preference is to put object fetching behavior in a separate Type.</p>
-
 <p>You might make a <code>DataProvider</code> Type and let <em>it</em> handle setting up <code>NSFetchRequest</code>(s) with appropriate predicates and sort descriptors.</p>
-
 <p>Avoid putting <em>all</em> data-providing code in a catch-all <code>DataProvider</code>.  If you&rsquo;re fetching <code>Note</code>s, make a <code>NoteProvider</code>.  If you&rsquo;re fetching <code>Tag</code>s, make a <code>TagProvider</code>.</p>
-
-<h2 id="on-convenience-properties-functions">On Convenience Properties &amp; Functions</h2>
-
+<h2 id="on-convenience-properties--functions">On Convenience Properties &amp; Functions</h2>
 <p>One piece of convenience code that I extend my <code>NSManagedObject</code> subclasses with is an <code>entityName</code> property.</p>
-
 <p>This helps me avoid sprinkling the name of an Entity in <code>String</code> form throughout my code.</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="nc">EntityName</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">entityName</span> <span class="p">=</span> <span class="s">&#34;EntityName&#34;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">extension</span> <span class="nc">EntityName</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">entityName</span> <span class="p">=</span> <span class="s">&#34;EntityName&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 When it comes to other types of functionality, my recommendation is to put that code elsewhere.</p>
-
 <p>Keep <code>NSManagedObject</code>s about Core Data-y things.</p>
-
 <p>Ask, &ldquo;Does this help my <code>NSManagedObject</code> subclass work with Core Data-related functionality?&rdquo;</p>
-
 <p>Let the answer to that question guide your decision about whether to extend your <code>NSManagedObject</code> subclass with additional features.</p>
-
 <p>&ldquo;Additional features&rdquo; often translates to &ldquo;additional responsibility&rdquo;. Single responsibility is the name of the game if you can achieve it.</p>
 
     <aside>
@@ -385,7 +336,7 @@ When it comes to other types of functionality, my recommendation is to put that 
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

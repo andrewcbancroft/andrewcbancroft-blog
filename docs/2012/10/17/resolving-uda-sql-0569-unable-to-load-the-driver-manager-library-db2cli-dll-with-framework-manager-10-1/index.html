@@ -46,15 +46,16 @@
 <meta property="og:description" content="When installing Framework Manager 10.1 and attempting to use it for the first time, things went down hill nearly immediately. I made sure to install a copy of the DB2 client on my development machine, but I still ran into issues connecting to data sources in Framework Manager.
 For those who need to install a DB2 client, IBM provides those downloads here for DB2 10.1. For other versions, you can go here." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2012/10/17/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/" />
-<meta property="article:published_time" content="2012-10-17T15:29:23&#43;00:00"/>
-<meta property="article:modified_time" content="2012-10-17T15:29:23&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2012/10/17/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2012-10-17T15:29:23+00:00" />
+<meta property="article:modified_time" content="2012-10-17T15:29:23+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Resolving “UDA-SQL-0569 Unable to load the driver manager library ( db2cli.dll )” with Framework Manager 10.1"/>
 <meta name="twitter:description" content="When installing Framework Manager 10.1 and attempting to use it for the first time, things went down hill nearly immediately. I made sure to install a copy of the DB2 client on my development machine, but I still ran into issues connecting to data sources in Framework Manager.
 For those who need to install a DB2 client, IBM provides those downloads here for DB2 10.1. For other versions, you can go here."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -89,7 +90,7 @@ For those who need to install a DB2 client, IBM provides those downloads here f
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -199,33 +200,24 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>When installing Framework Manager 10.1 and attempting to use it for the first time, things went down hill nearly immediately.  I made sure to install a copy of the DB2 client on my development machine, but I still ran into issues connecting to data sources in Framework Manager.</p>
-
 <p>For those who need to install a DB2 client, IBM provides those downloads <a href="http://www-01.ibm.com/support/docview.wss?rs=4020&amp;uid=swg21385217">here</a> for DB2 10.1.  For other versions, you can go <a href="http://www-01.ibm.com/support/docview.wss?uid=swg27016878">here</a>.  [Added 3/19/2013]</p>
-
-<p>A good explanation of what each DB2 client &ldquo;package&#8221; includes and what they&rsquo;re used for can be found <a href="http://www.db2dean.com/Previous/DB2Client.html">here</a>.</p>
-
+<p>A good explanation of what each DB2 client &ldquo;package” includes and what they&rsquo;re used for can be found <a href="http://www.db2dean.com/Previous/DB2Client.html">here</a>.</p>
 <p><strong>Steps that I was taking:</strong></p>
-
 <ul>
 <li>Load Framework Manager and open a project</li>
 <li>Expand Data Sources</li>
 <li>Right-Click Data Source and click Test</li>
 <li>The following happens:</li>
 </ul>
-
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2012/10/SNAGHTML194624.png"><img style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border-width: 0px;" title="SNAGHTML194624" alt="SNAGHTML194624" src="http://www.andrewcbancroft.com/wp-content/uploads/2012/10/SNAGHTML194624_thumb.png" width="666" height="208" border="0" /></a></p>
-
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2012/10/SNAGHTML194624.png"><!-- raw HTML omitted --></a></p>
 <p><strong>Text from dialog box:</strong></p>
-
-<p>QE-DEF-0285 The logon failed.<br />
-QE-DEF-0325 The logon failed for the following reason:<br />
-RQP-DEF-0068 Unable to connect to at least one database during a multi-database attach to 1 database(s) in:<br />
-DW<br />
-UDA-SQL-0569 Unable to load the driver manager library ( db2cli.dll ).<br />
+<p>QE-DEF-0285 The logon failed.<br>
+QE-DEF-0325 The logon failed for the following reason:<br>
+RQP-DEF-0068 Unable to connect to at least one database during a multi-database attach to 1 database(s) in:<br>
+DW<br>
+UDA-SQL-0569 Unable to load the driver manager library ( db2cli.dll ).<br>
 UDA-SQL-0571 The operating system returned an error message ( The specified module could not be found. ).</p>
-
 <p><strong>How I resolved this:</strong></p>
-
 <p>I simply moved C:Program FilesIBMSQLLIBBIN placed in PATH variable near the front of the list of directories. Depending on your installation directory, you may need to change the path above to fit your environment.  But this seems to have resolved my problem entirely.</p>
 
     <aside>
@@ -248,7 +240,7 @@ UDA-SQL-0571 The operating system returned an error message ( The specified modu
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

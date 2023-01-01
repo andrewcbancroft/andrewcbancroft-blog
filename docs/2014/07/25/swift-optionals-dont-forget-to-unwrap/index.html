@@ -44,23 +44,24 @@
 
 <meta property="og:title" content="Swift Optionals?  Don’t Forget to Unwrap!" />
 <meta property="og:description" content="There is a compiler error that throws me off every time I see it. It takes the form,
- &#8216;ClassName?&rsquo; does not have a member named &#8216;memberName&rsquo;
- This can happen when you&rsquo;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
+‘ClassName?&rsquo; does not have a member named ‘memberName&#39;
+This can happen when you&rsquo;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
 For example, given this class definition:
 1class Bird { 2	var family: String 3	var color: String 4 5	init(family: String, color: String) { 6	self." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/" />
-<meta property="article:published_time" content="2014-07-26T02:23:53&#43;00:00"/>
-<meta property="article:modified_time" content="2014-07-26T02:23:53&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2014-07-26T02:23:53+00:00" />
+<meta property="article:modified_time" content="2014-07-26T02:23:53+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Optionals?  Don’t Forget to Unwrap!"/>
 <meta name="twitter:description" content="There is a compiler error that throws me off every time I see it. It takes the form,
- &#8216;ClassName?&rsquo; does not have a member named &#8216;memberName&rsquo;
- This can happen when you&rsquo;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
+‘ClassName?&rsquo; does not have a member named ‘memberName&#39;
+This can happen when you&rsquo;ve declared a variable as an optional, but forget to unwrap that optional when you attempt to call a method on it.
 For example, given this class definition:
 1class Bird { 2	var family: String 3	var color: String 4 5	init(family: String, color: String) { 6	self."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -95,7 +96,7 @@ For example, given this class definition:
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -208,58 +209,49 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>There is a compiler error that throws me off every time I see it.  It takes the form,</p>
-
+    <p>There is a compiler error that throws me off every time I see it.  It takes the form,</p>
 <blockquote>
-<p>&#8216;ClassName?&rsquo; does not have a member named &#8216;memberName&rsquo;</p>
+<p>‘ClassName?&rsquo; does not have a member named ‘memberName'</p>
 </blockquote>
-
 <p>This can happen when you&rsquo;ve declared a variable as an optional, but forget to <em>unwrap</em> that optional when you attempt to call a method on it.</p>
-
 <p>For example, given this class definition:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">Bird</span> <span class="p">{</span>
-<span class="ln"> 2</span>	<span class="kd">var</span> <span class="nv">family</span><span class="p">:</span> <span class="nb">String</span>
-<span class="ln"> 3</span>	<span class="kd">var</span> <span class="nv">color</span><span class="p">:</span> <span class="nb">String</span>
-<span class="ln"> 4</span> 
-<span class="ln"> 5</span>	<span class="kd">init</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 6</span>		<span class="kc">self</span><span class="p">.</span><span class="n">family</span> <span class="p">=</span> <span class="n">family</span>
-<span class="ln"> 7</span>		<span class="kc">self</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">color</span>
-<span class="ln"> 8</span>	<span class="p">}</span>
-<span class="ln"> 9</span> 
-<span class="ln">10</span>	<span class="kd">func</span> <span class="nf">isSwift</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
-<span class="ln">11</span>		<span class="k">return</span> <span class="kc">self</span><span class="p">.</span><span class="n">family</span> <span class="p">==</span> <span class="s">&#34;Apodidae&#34;</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span>
-<span class="ln">12</span>	<span class="p">}</span>
-<span class="ln">13</span><span class="p">}</span></code></pre></div>
-<p>If, say in a ViewController, I declare a variable that I intend to reference an _optional_ <code>Bird</code> instance like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">birdInstance</span><span class="p">:</span> <span class="n">Bird</span><span class="p">?</span></code></pre></div>
-<p>And then I later initialize this variable with a <code>Bird</code> instance, perhaps in <code>viewDidLoad()</code> :</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">birdInstance</span> <span class="p">=</span> <span class="n">Bird</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="s">&#34;Apodidae&#34;</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="s">&#34;Black&#34;</span><span class="p">)</span></code></pre></div>
-<p>If I attempt to invoke the <code>isSwift</code> method on the <code>birdInstance</code> later  on, I&rsquo;ll get a compiler error:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="bp">println</span><span class="p">(</span><span class="n">birdInstance</span><span class="p">.</span><span class="n">isSwift</span><span class="p">())</span></code></pre></div>
-<blockquote>
-<p>error: &#8216;Bird?&rsquo; does not have a member named &#8216;isSwift&rsquo;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">Bird</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">	<span class="kd">var</span> <span class="nv">family</span><span class="p">:</span> <span class="nb">String</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">	<span class="kd">var</span> <span class="nv">color</span><span class="p">:</span> <span class="nb">String</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">	<span class="kd">init</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">		<span class="kc">self</span><span class="p">.</span><span class="n">family</span> <span class="p">=</span> <span class="n">family</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">		<span class="kc">self</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">color</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">10</span><span class="cl">	<span class="kd">func</span> <span class="nf">isSwift</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">		<span class="k">return</span> <span class="kc">self</span><span class="p">.</span><span class="n">family</span> <span class="p">==</span> <span class="s">&#34;Apodidae&#34;</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If, say in a ViewController, I declare a variable that I intend to reference an <em>optional</em> <code>Bird</code> instance like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">var</span> <span class="nv">birdInstance</span><span class="p">:</span> <span class="n">Bird</span><span class="p">?</span>
+</span></span></code></pre></div><p>And then I later initialize this variable with a <code>Bird</code> instance, perhaps in <code>viewDidLoad()</code> :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">birdInstance</span> <span class="p">=</span> <span class="n">Bird</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="s">&#34;Apodidae&#34;</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="s">&#34;Black&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>If I attempt to invoke the <code>isSwift</code> method on the <code>birdInstance</code> later  on, I&rsquo;ll get a compiler error:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="bp">println</span><span class="p">(</span><span class="n">birdInstance</span><span class="p">.</span><span class="n">isSwift</span><span class="p">())</span>
+</span></span></code></pre></div><blockquote>
+<p>error: ‘Bird?&rsquo; does not have a member named ‘isSwift'</p>
 </blockquote>
-
-<p>This may seem pretty basic &#8212; after all, I declared the <code>birdInstance</code> as an optional and I know optionals need special treatment.  How could I make this mistake??  Perhaps this is just a consequence of my current stage in life, trying to code in 15-30 minute spurts with my 1 <sup>1</sup>&frasl;<sub>2</sub> year old running around, haha.</p>
-
-<p>We all deal with this though:  it&rsquo;s fairly easy to write some code and come back to it later and not remember how you declared your variable in an earlier coding session.  Then when you&rsquo;re presented a message saying that your class doesn&rsquo;t have a member named &ldquo;___&#8221;, you immediately go to the class definition and see the function there, plain as day.  It&rsquo;s easy to spend 3-5 minutes scratching your head thinking, &ldquo;What in the world??!&#8221; &#8230; And then you realize – it&rsquo;s that <em>optional declaration</em> that you forgot to handle.</p>
-
+<p>This may seem pretty basic — after all, I declared the <code>birdInstance</code> as an optional and I know optionals need special treatment.  How could I make this mistake??  Perhaps this is just a consequence of my current stage in life, trying to code in 15-30 minute spurts with my 1 1/2 year old running around, haha.</p>
+<p>We all deal with this though:  it&rsquo;s fairly easy to write some code and come back to it later and not remember how you declared your variable in an earlier coding session.  Then when you&rsquo;re presented a message saying that your class doesn&rsquo;t have a member named &ldquo;___”, you immediately go to the class definition and see the function there, plain as day.  It&rsquo;s easy to spend 3-5 minutes scratching your head thinking, &ldquo;What in the world??!” … And then you realize – it&rsquo;s that <em>optional declaration</em> that you forgot to handle.</p>
 <p>To fix this, of course, you can do any number of things, depending on your situation.</p>
-
 <h5 id="force-unwrap-the-optional-and-invoke-the-method">Force unwrap the optional and invoke the method:</h5>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">birdInstance</span><span class="o">!</span><span class="p">.</span><span class="n">isSwift</span><span class="p">()</span> <span class="c1">// Force unwrapped -- **CAUTION** make sure that birdInstance gets instantiated before you do this,&amp;nbsp;or you&#39;ll get a runtime error</span></code></pre></div>
-<h5 id="employ-optional-chaining-and-invoke-the-method">Employ optional chaining and invoke the method:</h5>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">birdInstance</span><span class="p">?.</span><span class="n">isSwift</span><span class="p">()</span></code></pre></div>
-<h5 id="declare-the-variable-as-implicitly-unwrapped-optional-then-invoke-the-method-later-without-extra-exclamation-or-question-marks">Declare the variable as implicitly unwrapped optional, then invoke the method later without extra exclamation or question marks:</h5>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">var</span> <span class="nv">birdInstance</span><span class="p">:</span> <span class="n">Bird</span><span class="o">!</span> <span class="c1">// Implicitly unwrapped -- **CAUTION** make sure that birdInstance gets instantiated before you use it, or you&#39;ll get a runtime error</span>
-<span class="ln">2</span><span class="n">birdInstance</span> <span class="p">=</span> <span class="n">Bird</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="s">&#34;Apodidae&#34;</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="s">&#34;Black&#34;</span><span class="p">)</span>
-<span class="ln">3</span>
-<span class="ln">4</span><span class="c1">// Some time later, invoke isSwift</span>
-<span class="ln">5</span>
-<span class="ln">6</span><span class="bp">println</span><span class="p">(</span><span class="n">birdInstance</span><span class="p">.</span><span class="n">isSwift</span><span class="p">())</span></code></pre></div>
-<p><a title="CompileSwift - Optionals" href="http://www.compileswift.com/intermediate/optionals/?utm_content=bufferfba01&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer" target="_blank">A blog post by Peter Witham over at CompileSwift</a> was the article that caused me to think, &ldquo;OH!  I haven&rsquo;t done anything with my optional&#8230;<em>that&rsquo;s</em> the problem&#8221;.  Credit to you, sir, for your post!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">birdInstance</span><span class="p">!.</span><span class="n">isSwift</span><span class="p">()</span> <span class="c1">// Force unwrapped -- **CAUTION** make sure that birdInstance gets instantiated before you do this,&amp;nbsp;or you&#39;ll get a runtime error</span>
+</span></span></code></pre></div><h5 id="employ-optional-chaining-and-invoke-the-method">Employ optional chaining and invoke the method:</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">birdInstance</span><span class="p">?.</span><span class="n">isSwift</span><span class="p">()</span>
+</span></span></code></pre></div><h5 id="declare-the-variable-as-implicitly-unwrapped-optional-then-invoke-the-method-later-without-extra-exclamation-or-question-marks">Declare the variable as implicitly unwrapped optional, then invoke the method later without extra exclamation or question marks:</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">var</span> <span class="nv">birdInstance</span><span class="p">:</span> <span class="n">Bird</span><span class="p">!</span> <span class="c1">// Implicitly unwrapped -- **CAUTION** make sure that birdInstance gets instantiated before you use it, or you&#39;ll get a runtime error</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">birdInstance</span> <span class="p">=</span> <span class="n">Bird</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="s">&#34;Apodidae&#34;</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="s">&#34;Black&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1">// Some time later, invoke isSwift</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="bp">println</span><span class="p">(</span><span class="n">birdInstance</span><span class="p">.</span><span class="n">isSwift</span><span class="p">())</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted -->A blog post by Peter Witham over at CompileSwift<!-- raw HTML omitted --> was the article that caused me to think, &ldquo;OH!  I haven&rsquo;t done anything with my optional…<em>that&rsquo;s</em> the problem”.  Credit to you, sir, for your post!</p>
 
     <aside>
       
@@ -283,7 +275,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

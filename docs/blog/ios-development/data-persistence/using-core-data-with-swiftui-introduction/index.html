@@ -45,20 +45,17 @@
 <meta property="og:title" content="Using Core Data With SwiftUI - An Introduction" />
 <meta property="og:description" content="Example of how to use Core Data with SwiftUI." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20Core%20Data%20With%20SwiftUI.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Using%20Core%20Data%20With%20SwiftUI.png" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-07-31T04:40:54+00:00" />
+<meta property="article:modified_time" content="2019-07-31T04:40:54+00:00" />
 
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20Core%20Data%20With%20SwiftUI.png" />
-
-<meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Using%20Core%20Data%20With%20SwiftUI.png" />
-<meta property="article:published_time" content="2019-07-31T04:40:54&#43;00:00"/>
-<meta property="article:modified_time" content="2019-07-31T04:40:54&#43;00:00"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20Core%20Data%20With%20SwiftUI.png"/>
 
 <meta name="twitter:title" content="Using Core Data With SwiftUI - An Introduction"/>
 <meta name="twitter:description" content="Example of how to use Core Data with SwiftUI."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -73,7 +70,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/using-core-data-with-swiftui-introduction\/",
-  "wordCount": "376",
+  "wordCount": "334",
   "datePublished": "2019-07-31T04:40:54Z",
   "dateModified": "2019-07-31T04:40:54Z",
   "author": {
@@ -99,7 +96,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -214,118 +211,68 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#first-things-first">First Things First</a></li>
-<li><a href="#on-the-right-path">On the Right Path</a></li>
-<li><a href="#how-do-you-get-started">How Do You Get Started?</a></li>
-<li><a href="#how-does-it-work">How Does It Work?</a></li>
-<li><a href="#code-walkthroughs">Code Walkthroughs</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#first-things-first">First Things First</a></li>
+    <li><a href="#on-the-right-path">On the Right Path</a></li>
+    <li><a href="#how-do-you-get-started">How Do You Get Started?</a></li>
+    <li><a href="#how-does-it-work">How Does It Work?</a></li>
+    <li><a href="#code-walkthroughs">Code Walkthroughs</a></li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<p>How does Apple intend for us to use Core Data with SwiftUI?</p>
-
+    <p>How does Apple intend for us to use Core Data with SwiftUI?</p>
 <p>They gave us a path forward with the most recent beta release of iOS 13 (Beta 5 at the time of this writing)!</p>
-
-<p><a name="resources" class="jump-target"></a>
-<div class="resources">
-<div class="resources-header">
-Resources
-</div>
-<ul class="resources-content">
-<li>
-<i class="fas fa-file-code"></i> <a href="https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI"> Blog Idea List SwiftUI Example Xcode Project</a>
-</li>
-<li>
-<i class="fas fa-link"></i> <a href="https://developer.apple.com/videos/play/wwdc2019/226/" rel="nofollow">Data Flow Through SwiftUI - WWDC 2019 Session 226</a>
-</li>
-</ul>
-</div></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <h2 id="first-things-first">First Things First</h2>
-
 <ul>
-<li><p>To work effectively with Core Data in SwiftUI, the <a href="https://developer.apple.com/videos/play/wwdc2019/226/">Data Flow Through SwiftUI</a> WWDC session is a huge help.</p></li>
-
-<li><p>With this talk under your belt, you&rsquo;ll have at least been introduced to key words like <code>@State</code>, <code>@Binding</code>, <code>@ObservableObject</code> (which replaces <code>@BindableObject</code> as of Beta 5), and <code>@Environment</code>.</p></li>
+<li>
+<p>To work effectively with Core Data in SwiftUI, the <a href="https://developer.apple.com/videos/play/wwdc2019/226/">Data Flow Through SwiftUI</a> WWDC session is a huge help.</p>
+</li>
+<li>
+<p>With this talk under your belt, you&rsquo;ll have at least been introduced to key words like <code>@State</code>, <code>@Binding</code>, <code>@ObservableObject</code> (which replaces <code>@BindableObject</code> as of Beta 5), and <code>@Environment</code>.</p>
+</li>
 </ul>
-
 <h2 id="on-the-right-path">On the Right Path</h2>
-
 <p>Even prior to Beta 5, the &ldquo;right path&rdquo; for using Core Data with SwiftUI seemed to be through the <code>@Environment</code>.</p>
-
 <p>In the release notes for iOS Beta 5, Apple seems to be leading us there:</p>
-
 <blockquote>
 <ul>
-<li><p><code>NSManagedObject</code> now conforms to <code>ObservableObject</code>.</p></li>
-
-<li><p>The new <code>@FetchRequest</code> property wrapper can drive views from the results of a fetch request</p></li>
-
-<li><p><code>managedObjectContext</code> is now <strong>included in the environment</strong>.</p></li>
+<li><code>NSManagedObject</code> now conforms to <code>ObservableObject</code>.</li>
 </ul>
 </blockquote>
-
+<blockquote>
+<ul>
+<li>The new <code>@FetchRequest</code> property wrapper can drive views from the results of a fetch request</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><code>managedObjectContext</code> is now <strong>included in the environment</strong>.</li>
+</ul>
+</blockquote>
 <p>With these three pieces in place, Apple has given us out-of-the-box support for using Core Data with SwiftUI.</p>
-
 <p>So&hellip;</p>
-
 <h2 id="how-do-you-get-started">How Do You Get Started?</h2>
-
 <p>I decided to create a basic, single-view app that can</p>
-
 <ul>
 <li>Persist a list of <code>BlogIdea</code>s to a Core Data persistent store</li>
 <li>Use the new <code>@FetchRequest</code> property wrapper to fetch <code>BlogIdea</code>s</li>
 <li>Use the <code>@Environment</code>&rsquo;s <code>managedObjectContext</code> to create, update, and delete <code>BlogIdea</code>s</li>
 </ul>
-
 <p>Grab the project <a href="https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI">over at GitHub</a> and explore!</p>
-
 <p>The sample project that includes a single Core Data Entity named <code>BlogIdea</code>:</p>
-
-<p><img src="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png" alt="Blog Idea Entity" /></p>
-
+<p><img src="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png" alt="Blog Idea Entity"></p>
 <p>I kept as much out-of-the-box stuff as I could.</p>
-
 <h2 id="how-does-it-work">How Does It Work?</h2>
-
 <p>Throughout the project, you&rsquo;ll notice emoji symbols to help draw your eye to the Core Data pieces.</p>
-
 <p>❇️ Alerts you to Core Data pieces</p>
-
 <p>ℹ️ Alerts you to general info about what my brain was thinking when I wrote the code</p>
-
 <h2 id="code-walkthroughs">Code Walkthroughs</h2>
-
 <p>I completely relate if you need to chunk things up and inspect the details of how each piece of the puzzle looks in isolation before you dive into the full app.</p>
-
 <p>I&rsquo;ve written up two separate how-tos that show you more specific details:</p>
-
-<div class="row align-items-center">
-<div class="col">
-<div class="card" style="width: 25rem;">
-  <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/"><img src="https://www.andrewcbancroft.com/images/social-assets/Twitter - How to Pass NSManagedObjectContext to a SwiftUI View.png" class="card-img-top" alt="How to Pass NSManagedObjectContext to a SwiftUI View"></a>
-  <div class="card-body">
-    <p class="card-text">Breaks down how to pass an NSManagedObjectContext instance to your SwiftUI Views.</p>
-  </div>
-</div>
-</div>
-<div class="col">
-<div class="card" style="width: 25rem;">
-  <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-to-use-fetchrequest-swiftui/"><img src="https://www.andrewcbancroft.com/images/social-assets/Twitter - How to Use @FetchRequest in SwiftUI.png" class="card-img-top" alt="How to Use @FetchRequest in SwiftUI"></a>
-  <div class="card-body">
-    <p class="card-text">Breaks down how to use the @FetchRequest property wrapper in your SwiftUI Views.</p>
-  </div>
-</div>
-</div>
-</div>
+<!-- raw HTML omitted -->
 
     <aside>
       
@@ -334,7 +281,7 @@ Resources
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

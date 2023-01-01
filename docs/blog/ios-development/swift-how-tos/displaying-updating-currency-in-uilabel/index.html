@@ -45,14 +45,15 @@
 <meta property="og:title" content="Displaying and Updating Currency in a UILabel" />
 <meta property="og:description" content="Provides an example of how to display and upate currency values in a UILabel." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/displaying-updating-currency-in-uilabel/" />
-<meta property="article:published_time" content="2019-06-01T04:31:49&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-01T04:31:49&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/swift-how-tos/displaying-updating-currency-in-uilabel/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-01T04:31:49+00:00" />
+<meta property="article:modified_time" content="2019-06-01T04:31:49+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Displaying and Updating Currency in a UILabel"/>
 <meta name="twitter:description" content="Provides an example of how to display and upate currency values in a UILabel."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -61,7 +62,7 @@
   "@type": "BlogPosting",
   "headline": "Displaying and Updating Currency in a UILabel",
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/swift-how-tos\/displaying-updating-currency-in-uilabel\/",
-  "wordCount": "272",
+  "wordCount": "265",
   "datePublished": "2019-06-01T04:31:49Z",
   "dateModified": "2019-06-01T04:31:49Z",
   "author": {
@@ -86,7 +87,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -199,81 +200,59 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p><a name="resources" class="jump-target"></a>
-<div class="resources">
-<div class="resources-header">
-Resources
-</div>
-<div class="resources-download-instructions">
-Right-click -&gt; Save as&hellip;
-</div>
-<ul class="resources-content">
-<li>
-<i class="fas fa-file"></i> <a href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog/ios-development/swift-how-tos/displaying-updating-currency-in-uilabel.playground" download>Swift Playground</a>
-</li>
-</ul>
-</div></p>
-
+    <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <h2 id="setup">Setup</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">import</span> <span class="nc">UIKit</span>
-<span class="ln"> 2</span><span class="kd">import</span> <span class="nc">PlaygroundSupport</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span><span class="kd">class</span> <span class="nc">MyViewController</span> <span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
-<span class="ln"> 5</span>    
-<span class="ln"> 6</span>    <span class="kd">var</span> <span class="nv">currencyLabel</span> <span class="p">=</span> <span class="n">UILabel</span><span class="p">()</span>
-<span class="ln"> 7</span>    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">loadView</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 8</span>        <span class="kd">let</span> <span class="nv">view</span> <span class="p">=</span> <span class="n">UIView</span><span class="p">()</span>
-<span class="ln"> 9</span>        <span class="n">view</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="p">=</span> <span class="p">.</span><span class="n">white</span>
-<span class="ln">10</span>
-<span class="ln">11</span>        <span class="n">currencyLabel</span><span class="p">.</span><span class="n">frame</span> <span class="p">=</span> <span class="n">CGRect</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
-<span class="ln">12</span>        <span class="n">currencyLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;$0.00&#34;</span>
-<span class="ln">13</span>        <span class="n">currencyLabel</span><span class="p">.</span><span class="n">textColor</span> <span class="p">=</span> <span class="p">.</span><span class="n">black</span>
-<span class="ln">14</span>        
-<span class="ln">15</span>        <span class="n">view</span><span class="p">.</span><span class="n">addSubview</span><span class="p">(</span><span class="n">currencyLabel</span><span class="p">)</span>
-<span class="ln">16</span>        <span class="kc">self</span><span class="p">.</span><span class="n">view</span> <span class="p">=</span> <span class="n">view</span>
-<span class="ln">17</span>    <span class="p">}</span>
-<span class="ln">18</span><span class="p">}</span>
-<span class="ln">19</span>
-<span class="ln">20</span><span class="kd">let</span> <span class="nv">viewController</span> <span class="p">=</span> <span class="n">MyViewController</span><span class="p">()</span>
-<span class="ln">21</span><span class="n">PlaygroundPage</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">liveView</span> <span class="p">=</span> <span class="n">viewController</span></code></pre></div>
-<p><strong>Live View</strong>
-<img src="starting-label-value.png" alt="Starting Label Value" /></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">import</span> <span class="nc">UIKit</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">import</span> <span class="nc">PlaygroundSupport</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="kd">class</span> <span class="nc">MyViewController</span> <span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">var</span> <span class="nv">currencyLabel</span> <span class="p">=</span> <span class="n">UILabel</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">loadView</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="kd">let</span> <span class="nv">view</span> <span class="p">=</span> <span class="n">UIView</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="n">view</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="p">=</span> <span class="p">.</span><span class="n">white</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="n">currencyLabel</span><span class="p">.</span><span class="n">frame</span> <span class="p">=</span> <span class="n">CGRect</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="n">currencyLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;$0.00&#34;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="n">currencyLabel</span><span class="p">.</span><span class="n">textColor</span> <span class="p">=</span> <span class="p">.</span><span class="n">black</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="n">view</span><span class="p">.</span><span class="n">addSubview</span><span class="p">(</span><span class="n">currencyLabel</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">view</span> <span class="p">=</span> <span class="n">view</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="kd">let</span> <span class="nv">viewController</span> <span class="p">=</span> <span class="n">MyViewController</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="n">PlaygroundPage</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">liveView</span> <span class="p">=</span> <span class="n">viewController</span>
+</span></span></code></pre></div><p><strong>Live View</strong>
+<img src="starting-label-value.png" alt="Starting Label Value"></p>
 <h2 id="exract-the-current-currency-value-from-the-label">Exract the current currency value from the label</h2>
-
 <p>Chances are, you&rsquo;re displaying whatever currency value you&rsquo;re displaying as a <code>String</code> in your user interface.
 Therefore, you need to extract it out of whatever UI element you&rsquo;re displaying it in, and get it ready to do &ldquo;number stuff&rdquo; with&hellip;</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">currentTotalString</span> <span class="p">=</span> <span class="n">viewController</span><span class="p">.</span><span class="n">currencyLabel</span><span class="p">.</span><span class="n">text</span><span class="p">?.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;$&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="n">CompareOptions</span><span class="p">.</span><span class="n">literal</span><span class="p">,</span> <span class="n">range</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln">2</span>
-<span class="ln">3</span><span class="kd">var</span> <span class="nv">currentTotal</span> <span class="p">=</span> <span class="n">NSDecimalNumber</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">currentTotalString</span><span class="p">)</span></code></pre></div>
-<p>0</p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">let</span> <span class="nv">currentTotalString</span> <span class="p">=</span> <span class="n">viewController</span><span class="p">.</span><span class="n">currencyLabel</span><span class="p">.</span><span class="n">text</span><span class="p">?.</span><span class="n">replacingOccurrences</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="s">&#34;$&#34;</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="n">CompareOptions</span><span class="p">.</span><span class="n">literal</span><span class="p">,</span> <span class="n">range</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="kd">var</span> <span class="nv">currentTotal</span> <span class="p">=</span> <span class="n">NSDecimalNumber</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">currentTotalString</span><span class="p">)</span>
+</span></span></code></pre></div><p>0</p>
 <h2 id="make-a-random-currency-amount-to-add-to-the-current-total">Make a random currency amount to add to the current total</h2>
-
 <p>For this example, create a random number to between 0 and 5 to test out adding some amount to the current total.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">randomRange</span> <span class="p">=</span> <span class="nb">Range</span><span class="p">&lt;</span><span class="nb">Double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">uncheckedBounds</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">5.0</span><span class="p">))</span>
-<span class="ln">2</span><span class="kd">let</span> <span class="nv">randomAmount</span> <span class="p">=</span> <span class="nb">Double</span><span class="p">.</span><span class="n">random</span><span class="p">(</span><span class="k">in</span><span class="p">:</span> <span class="n">randomRange</span><span class="p">)</span>
-<span class="ln">3</span><span class="kd">let</span> <span class="nv">amountToAdd</span> <span class="p">=</span> <span class="n">NSDecimalNumber</span><span class="p">(</span><span class="n">floatLiteral</span><span class="p">:</span> <span class="n">randomAmount</span><span class="p">)</span></code></pre></div>
-<p>2.095023084295587 <code>// Output from my Playground run</code></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">let</span> <span class="nv">randomRange</span> <span class="p">=</span> <span class="nb">Range</span><span class="p">&lt;</span><span class="nb">Double</span><span class="p">&gt;(</span><span class="n">uncheckedBounds</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">5.0</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="kd">let</span> <span class="nv">randomAmount</span> <span class="p">=</span> <span class="nb">Double</span><span class="p">.</span><span class="n">random</span><span class="p">(</span><span class="k">in</span><span class="p">:</span> <span class="n">randomRange</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="kd">let</span> <span class="nv">amountToAdd</span> <span class="p">=</span> <span class="n">NSDecimalNumber</span><span class="p">(</span><span class="n">floatLiteral</span><span class="p">:</span> <span class="n">randomAmount</span><span class="p">)</span>
+</span></span></code></pre></div><p>2.095023084295587 <code>// Output from my Playground run</code></p>
 <h2 id="add-to-the-current-total">Add to the current total</h2>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="n">currentTotal</span> <span class="p">=</span> <span class="n">currentTotal</span><span class="p">.</span><span class="n">adding</span><span class="p">(</span><span class="n">amountToAdd</span><span class="p">)</span></code></pre></div>
-<p>2.095023084295587 <code>// Output from my Playground run</code></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">currentTotal</span> <span class="p">=</span> <span class="n">currentTotal</span><span class="p">.</span><span class="n">adding</span><span class="p">(</span><span class="n">amountToAdd</span><span class="p">)</span>
+</span></span></code></pre></div><p>2.095023084295587 <code>// Output from my Playground run</code></p>
 <h2 id="make-a-currency-formatter-format-as-currency-and-update-the-ui">Make a currency formatter, format as currency, and update the UI</h2>
-
 <p>The way to format numbers as currency is with a <a href="https://developer.apple.com/documentation/foundation/numberformatter">NumberFormatter</a>.
 I&rsquo;m keeping it simple in this example, but there are various customization points available to you.</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">let</span> <span class="nv">currencyFormatter</span> <span class="p">=</span> <span class="n">NumberFormatter</span><span class="p">()</span>
-<span class="ln">2</span><span class="n">currencyFormatter</span><span class="p">.</span><span class="n">locale</span> <span class="p">=</span> <span class="n">Locale</span><span class="p">.</span><span class="n">current</span>
-<span class="ln">3</span><span class="n">currencyFormatter</span><span class="p">.</span><span class="n">usesGroupingSeparator</span> <span class="p">=</span> <span class="kc">true</span>
-<span class="ln">4</span><span class="n">currencyFormatter</span><span class="p">.</span><span class="n">numberStyle</span> <span class="p">=</span> <span class="n">NumberFormatter</span><span class="p">.</span><span class="n">Style</span><span class="p">.</span><span class="n">currency</span>
-<span class="ln">5</span>
-<span class="ln">6</span><span class="n">viewController</span><span class="p">.</span><span class="n">currencyLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">currencyFormatter</span><span class="p">.</span><span class="n">string</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">currentTotal</span><span class="p">)</span></code></pre></div>
-<p><strong>Live View</strong>
-<img src="ending-label-value.png" alt="Ending Label Value" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">let</span> <span class="nv">currencyFormatter</span> <span class="p">=</span> <span class="n">NumberFormatter</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">currencyFormatter</span><span class="p">.</span><span class="n">locale</span> <span class="p">=</span> <span class="n">Locale</span><span class="p">.</span><span class="n">current</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">currencyFormatter</span><span class="p">.</span><span class="n">usesGroupingSeparator</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="n">currencyFormatter</span><span class="p">.</span><span class="n">numberStyle</span> <span class="p">=</span> <span class="n">NumberFormatter</span><span class="p">.</span><span class="n">Style</span><span class="p">.</span><span class="n">currency</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="n">viewController</span><span class="p">.</span><span class="n">currencyLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">currencyFormatter</span><span class="p">.</span><span class="n">string</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">currentTotal</span><span class="p">)</span>
+</span></span></code></pre></div><p><strong>Live View</strong>
+<img src="ending-label-value.png" alt="Ending Label Value"></p>
 
     <aside>
       
@@ -282,7 +261,7 @@ I&rsquo;m keeping it simple in this example, but there are various customization
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

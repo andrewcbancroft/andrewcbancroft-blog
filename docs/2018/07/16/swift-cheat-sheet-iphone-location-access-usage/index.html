@@ -44,25 +44,22 @@
 
 <meta property="og:title" content="Swift Cheat Sheet for iPhone Location Services Access and Usage" />
 <meta property="og:description" content="This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&rsquo;s device.
-
 Framework Import import CoreLocation
-
 Set Location Usage Description in Info.plist This is a required first step
 If you don&rsquo;t set this, your app simply won&rsquo;t present the user with the system alert to request access to the location (and, of course, you won&rsquo;t be getting any location data for your app either)." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2018/07/16/swift-cheat-sheet-iphone-location-access-usage/" />
-<meta property="article:published_time" content="2018-07-17T00:43:03&#43;00:00"/>
-<meta property="article:modified_time" content="2018-07-17T00:43:03&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2018/07/16/swift-cheat-sheet-iphone-location-access-usage/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2018-07-17T00:43:03+00:00" />
+<meta property="article:modified_time" content="2018-07-17T00:43:03+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Swift Cheat Sheet for iPhone Location Services Access and Usage"/>
 <meta name="twitter:description" content="This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&rsquo;s device.
-
 Framework Import import CoreLocation
-
 Set Location Usage Description in Info.plist This is a required first step
 If you don&rsquo;t set this, your app simply won&rsquo;t present the user with the system alert to request access to the location (and, of course, you won&rsquo;t be getting any location data for your app either)."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -97,7 +94,7 @@ If you don&rsquo;t set this, your app simply won&rsquo;t present the user with t
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -210,143 +207,114 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&rsquo;s device.</p>
-
-<p><a name="framework-import" class="jump-target"></a></p>
-
+    <p>This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&rsquo;s device.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="framework-import">Framework Import</h1>
-
 <p><code>import CoreLocation</code></p>
-
-<p><a name="location-usage-description" class="jump-target"></a></p>
-
-<h1 id="set-location-usage-description-in-info-plist">Set Location Usage Description in Info.plist</h1>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h1 id="set-location-usage-description-in-infoplist">Set Location Usage Description in Info.plist</h1>
 <p><strong>This is a required first step</strong></p>
-
 <p>If you <strong>don&rsquo;t</strong> set this, your app simply won&rsquo;t present the user with the system alert to request access to the location (and, of course, you won&rsquo;t be getting any location data for your app either).</p>
-
 <p>When you request permission to use the device&rsquo;s location, a short message will appear in the default iOS system dialog. You customize this message by adding one of the following keys to your Info.plist file:</p>
-
 <ul>
 <li>Privacy – Location Always and When In Use Usage Description</li>
 <li>Privacy – Location Always Usage Description</li>
 <li>Privacy – Location When In Use Usage Description</li>
 </ul>
-
 <p>For the <strong>value</strong> of this plist property, type a short string describing what you&rsquo;re using the location for.</p>
-
-<p><a name="location-manager-delegate" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="initialize-cllocationmanager-and-implement-cllocationmanagerdelegate">Initialize CLLocationManager and Implement CLLocationManagerDelegate</h1>
-
 <p><code>CLLocationManager</code> is the name of the class that gives you a way to request location services permission. It is also responsible for starting the location tracking process.</p>
-
 <p>It needs a corresponding <code>CLLocationManagerDelegate</code> to be assigned. The location manager instance you initialize will alert you to location services authorization changes (ie, if the user turns off location services permissions for your app) <em>through</em> the one of the methods that your delegate class implements.</p>
-
 <p>The location manager instance will also send you the user&rsquo;s current location through one of the methods your delegate class implements.</p>
-
 <p>Here is an example of initializing the <code>CLLocationManager</code> instance, and setting its delegate.</p>
-
-<p>There&rsquo;s also a <code>currentLocation</code> variable that will get continually updated&#8230;</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">class</span> <span class="nc">NameOfViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">CLLocationManagerDelegate</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kd">private</span> <span class="kd">let</span> <span class="nv">locationManager</span> <span class="p">=</span> <span class="n">CLLocationManager</span><span class="p">()</span>
-<span class="ln"> 3</span>
-<span class="ln"> 4</span>    <span class="c1">// This will get updated via the location manager delegate&#39;s didUpdateLocations method</span>
-<span class="ln"> 5</span>    <span class="kd">var</span> <span class="nv">currentLocation</span><span class="p">:</span> <span class="n">CLLocation</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span> 
-<span class="ln"> 6</span>
-<span class="ln"> 7</span>    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 8</span>        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-<span class="ln"> 9</span>        
-<span class="ln">10</span>        <span class="c1">// Do any additional setup after loading the view.</span>
-<span class="ln">11</span>
-<span class="ln">12</span>        <span class="n">locationManager</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
-<span class="ln">13</span>
-<span class="ln">14</span>        <span class="kc">self</span><span class="p">.</span><span class="n">startLocationServices</span><span class="p">()</span> <span class="c1">// This function is implemented below...</span>
-<span class="ln">15</span>    <span class="p">}</span>
-<span class="ln">16</span><span class="p">}</span></code></pre></div>
-<p>Here is an example of how to implement the two <code>CLLocationManagerDelegate</code> methods:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// Monitor location services authorization changes</span>
-<span class="ln"> 2</span><span class="kd">func</span> <span class="nf">locationManager</span><span class="p">(</span><span class="kc">_</span> <span class="n">manager</span><span class="p">:</span> <span class="n">CLLocationManager</span><span class="p">,</span>
-<span class="ln"> 3</span>                        <span class="n">didChangeAuthorization</span> <span class="n">status</span><span class="p">:</span> <span class="n">CLAuthorizationStatus</span><span class="p">)</span> <span class="p">{</span>
-<span class="ln"> 4</span>    <span class="k">switch</span> <span class="n">status</span> <span class="p">{</span>
-<span class="ln"> 5</span>    <span class="k">case</span> <span class="p">.</span><span class="n">notDetermined</span><span class="p">:</span> 
-<span class="ln"> 6</span>        <span class="k">break</span>
-<span class="ln"> 7</span>    <span class="k">case</span> <span class="p">.</span><span class="n">authorizedWhenInUse</span><span class="p">,</span> <span class="p">.</span><span class="n">authorizedAlways</span><span class="p">:</span>
-<span class="ln"> 8</span>        <span class="k">if</span> <span class="n">CLLocationManager</span><span class="p">.</span><span class="n">locationServicesEnabled</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 9</span>            <span class="kc">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">startUpdatingLocation</span><span class="p">()</span>
-<span class="ln">10</span>        <span class="p">}</span>
-<span class="ln">11</span>    <span class="k">case</span> <span class="p">.</span><span class="n">restricted</span><span class="p">,</span> <span class="p">.</span><span class="n">denied</span><span class="p">:</span> 
-<span class="ln">12</span>        <span class="kc">self</span><span class="p">.</span><span class="n">alertLocationAccessNeeded</span><span class="p">()</span>
-<span class="ln">13</span>    <span class="p">}</span>
-<span class="ln">14</span>
-<span class="ln">15</span><span class="c1">// Get the device&#39;s current location and assign the latest CLLocation value to your tracking variable</span>
-<span class="ln">16</span><span class="kd">func</span> <span class="nf">locationManager</span><span class="p">(</span><span class="kc">_</span> <span class="n">manager</span><span class="p">:</span> <span class="n">CLLocationManager</span><span class="p">,</span>
-<span class="ln">17</span>                        <span class="n">didUpdateLocations</span> <span class="n">locations</span><span class="p">:</span> <span class="p">[</span><span class="n">CLLocation</span><span class="p">])</span> <span class="p">{</span>
-<span class="ln">18</span>    <span class="kc">self</span><span class="p">.</span><span class="n">currentLocation</span> <span class="p">=</span> <span class="n">locations</span><span class="p">.</span><span class="bp">last</span>
-<span class="ln">19</span>    <span class="p">}</span>
-<span class="ln">20</span><span class="p">}</span></code></pre></div>
-<p><a name="start-location-services" class="jump-target"></a></p>
-
+<p>There&rsquo;s also a <code>currentLocation</code> variable that will get continually updated…</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">NameOfViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">CLLocationManagerDelegate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="kd">private</span> <span class="kd">let</span> <span class="nv">locationManager</span> <span class="p">=</span> <span class="n">CLLocationManager</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="c1">// This will get updated via the location manager delegate&#39;s didUpdateLocations method</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="kd">var</span> <span class="nv">currentLocation</span><span class="p">:</span> <span class="n">CLLocation</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span> 
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="c1">// Do any additional setup after loading the view.</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="n">locationManager</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">startLocationServices</span><span class="p">()</span> <span class="c1">// This function is implemented below...</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Here is an example of how to implement the two <code>CLLocationManagerDelegate</code> methods:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// Monitor location services authorization changes</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">func</span> <span class="nf">locationManager</span><span class="p">(</span><span class="kc">_</span> <span class="n">manager</span><span class="p">:</span> <span class="n">CLLocationManager</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">                        <span class="n">didChangeAuthorization</span> <span class="n">status</span><span class="p">:</span> <span class="n">CLAuthorizationStatus</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">switch</span> <span class="n">status</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">notDetermined</span><span class="p">:</span> 
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">break</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">authorizedWhenInUse</span><span class="p">,</span> <span class="p">.</span><span class="n">authorizedAlways</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="k">if</span> <span class="n">CLLocationManager</span><span class="p">.</span><span class="n">locationServicesEnabled</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="kc">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">startUpdatingLocation</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">restricted</span><span class="p">,</span> <span class="p">.</span><span class="n">denied</span><span class="p">:</span> 
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">alertLocationAccessNeeded</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1">// Get the device&#39;s current location and assign the latest CLLocation value to your tracking variable</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="kd">func</span> <span class="nf">locationManager</span><span class="p">(</span><span class="kc">_</span> <span class="n">manager</span><span class="p">:</span> <span class="n">CLLocationManager</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">                        <span class="n">didUpdateLocations</span> <span class="n">locations</span><span class="p">:</span> <span class="p">[</span><span class="n">CLLocation</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="kc">self</span><span class="p">.</span><span class="n">currentLocation</span> <span class="p">=</span> <span class="n">locations</span><span class="p">.</span><span class="bp">last</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="start-location-services-check-location-authorization-status-request-permission">Start Location Services, Check Location Authorization Status, Request Permission</h1>
-
 <p>When you first start location services in your app, you will want to immediately check your app&rsquo;s current authorization status for location services, just in case the user has gone in and disabled location services permission for your app since the last time he/she used it.</p>
-
 <p>If it&rsquo;s the first time the user has launched your app, the <code>.notDetermined</code> case will get hit. This is where you request permission for the first time.</p>
-
 <p>If the user grants permission, you can use the <code>CLLocationManager</code> instance that your class is using to start updating the user&rsquo;s location.</p>
-
 <p>If, however, the user denies permission, you can alert them to the fact that your app needs access to his/her location for [<a href="#location-usage-description">insert some good reason here</a>].</p>
-
 <p>Here&rsquo;s a code snippet showing this in action:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">startLocationServices</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="n">locationManager</span><span class="p">.</span><span class="n">desiredAccuracy</span> <span class="p">=</span> <span class="n">kCLLocationAccuracyBest</span>
-<span class="ln"> 3</span>    
-<span class="ln"> 4</span>    <span class="kd">let</span> <span class="nv">locationAuthorizationStatus</span> <span class="p">=</span> <span class="n">CLLocationManager</span><span class="p">.</span><span class="n">authorizationStatus</span><span class="p">()</span>
-<span class="ln"> 5</span>    
-<span class="ln"> 6</span>    <span class="k">switch</span> <span class="n">locationAuthorizationStatus</span> <span class="p">{</span>
-<span class="ln"> 7</span>    <span class="k">case</span> <span class="p">.</span><span class="n">notDetermined</span><span class="p">:</span> 
-<span class="ln"> 8</span>        <span class="kc">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">requestWhenInUseAuthorization</span><span class="p">()</span> <span class="c1">// This is where you request permission to use location services</span>
-<span class="ln"> 9</span>    <span class="k">case</span> <span class="p">.</span><span class="n">authorizedWhenInUse</span><span class="p">,</span> <span class="p">.</span><span class="n">authorizedAlways</span><span class="p">:</span>
-<span class="ln">10</span>        <span class="k">if</span> <span class="n">CLLocationManager</span><span class="p">.</span><span class="n">locationServicesEnabled</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln">11</span>            <span class="kc">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">startUpdatingLocation</span><span class="p">()</span>
-<span class="ln">12</span>        <span class="p">}</span>
-<span class="ln">13</span>    <span class="k">case</span> <span class="p">.</span><span class="n">restricted</span><span class="p">,</span> <span class="p">.</span><span class="n">denied</span><span class="p">:</span> 
-<span class="ln">14</span>        <span class="kc">self</span><span class="p">.</span><span class="n">alertLocationAccessNeeded</span><span class="p">()</span>
-<span class="ln">15</span>    <span class="p">}</span>
-<span class="ln">16</span><span class="p">}</span></code></pre></div>
-<p><strong>Note</strong>: You can test for the <code>.notDetermined</code> case by deleting the app on the device, if it&rsquo;s already been installed or run on a device from the debugger.</p>
-
-<p><a name="alert-location-access-needed" class="jump-target"></a></p>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">startLocationServices</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="n">locationManager</span><span class="p">.</span><span class="n">desiredAccuracy</span> <span class="p">=</span> <span class="n">kCLLocationAccuracyBest</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kd">let</span> <span class="nv">locationAuthorizationStatus</span> <span class="p">=</span> <span class="n">CLLocationManager</span><span class="p">.</span><span class="n">authorizationStatus</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">switch</span> <span class="n">locationAuthorizationStatus</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">notDetermined</span><span class="p">:</span> 
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">requestWhenInUseAuthorization</span><span class="p">()</span> <span class="c1">// This is where you request permission to use location services</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">authorizedWhenInUse</span><span class="p">,</span> <span class="p">.</span><span class="n">authorizedAlways</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="k">if</span> <span class="n">CLLocationManager</span><span class="p">.</span><span class="n">locationServicesEnabled</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            <span class="kc">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">startUpdatingLocation</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">restricted</span><span class="p">,</span> <span class="p">.</span><span class="n">denied</span><span class="p">:</span> 
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">alertLocationAccessNeeded</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>Note</strong>: You can test for the <code>.notDetermined</code> case by deleting the app on the device, if it&rsquo;s already been installed or run on a device from the debugger.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="alert-location-services-access-needed">Alert Location Services Access Needed</h1>
-
 <p>If location services access has been denied or restricted, you can alert the user and direct them to the Settings app to make the appropriate permissions adjustment:</p>
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="kd">func</span> <span class="nf">alertLocationAccessNeeded</span><span class="p">()</span> <span class="p">{</span>
-<span class="ln"> 2</span>    <span class="kd">let</span> <span class="nv">settingsAppURL</span> <span class="p">=</span> <span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">UIApplicationOpenSettingsURLString</span><span class="p">)</span><span class="o">!</span>
-<span class="ln"> 3</span>    
-<span class="ln"> 4</span>    <span class="kd">let</span> <span class="nv">alert</span> <span class="p">=</span> <span class="n">UIAlertController</span><span class="p">(</span>
-<span class="ln"> 5</span>        <span class="n">title</span><span class="p">:</span> <span class="s">&#34;Need Location Access&#34;</span><span class="p">,</span>
-<span class="ln"> 6</span>        <span class="n">message</span><span class="p">:</span> <span class="s">&#34;Location access is required for including the location of the hazard.&#34;</span><span class="p">,</span>
-<span class="ln"> 7</span>        <span class="n">preferredStyle</span><span class="p">:</span> <span class="n">UIAlertControllerStyle</span><span class="p">.</span><span class="n">alert</span>
-<span class="ln"> 8</span>    <span class="p">)</span>
-<span class="ln"> 9</span>    
-<span class="ln">10</span>    <span class="n">alert</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Cancel&#34;</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="p">.</span><span class="k">default</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="kc">nil</span><span class="p">))</span>
-<span class="ln">11</span>    <span class="n">alert</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Allow Location Access&#34;</span><span class="p">,</span>
-<span class="ln">12</span>                                    <span class="n">style</span><span class="p">:</span> <span class="p">.</span><span class="n">cancel</span><span class="p">,</span>
-<span class="ln">13</span>                                    <span class="n">handler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">alert</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span> <span class="k">in</span>
-<span class="ln">14</span>                                    <span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">settingsAppURL</span><span class="p">,</span>
-<span class="ln">15</span>                                                                <span class="n">options</span><span class="p">:</span> <span class="p">[:],</span>
-<span class="ln">16</span>                                                                <span class="n">completionHandler</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln">17</span>    <span class="p">}))</span>
-<span class="ln">18</span>    
-<span class="ln">19</span>    <span class="n">present</span><span class="p">(</span><span class="n">alert</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln">20</span><span class="p">}</span></code></pre></div>
-<p><strong>Note</strong>: You can test for this case (<code>.restricted</code> and <code>.denied</code>) by going to the Settings app and turning off location services access for your app, if it&rsquo;s been previously granted.</p>
-
-<p><a name="share" class="jump-target"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">alertLocationAccessNeeded</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="kd">let</span> <span class="nv">settingsAppURL</span> <span class="p">=</span> <span class="n">URL</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="n">UIApplicationOpenSettingsURLString</span><span class="p">)</span><span class="o">!</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kd">let</span> <span class="nv">alert</span> <span class="p">=</span> <span class="n">UIAlertController</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="n">title</span><span class="p">:</span> <span class="s">&#34;Need Location Access&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="n">message</span><span class="p">:</span> <span class="s">&#34;Location access is required for including the location of the hazard.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="n">preferredStyle</span><span class="p">:</span> <span class="n">UIAlertControllerStyle</span><span class="p">.</span><span class="n">alert</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">alert</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Cancel&#34;</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="p">.</span><span class="k">default</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="kc">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="n">alert</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Allow Location Access&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">                                    <span class="n">style</span><span class="p">:</span> <span class="p">.</span><span class="n">cancel</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">                                    <span class="n">handler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">alert</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span> <span class="k">in</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">                                    <span class="n">UIApplication</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">settingsAppURL</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">                                                                <span class="n">options</span><span class="p">:</span> <span class="p">[:],</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">                                                                <span class="n">completionHandler</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}))</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="n">present</span><span class="p">(</span><span class="n">alert</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>Note</strong>: You can test for this case (<code>.restricted</code> and <code>.denied</code>) by going to the Settings app and turning off location services access for your app, if it&rsquo;s been previously granted.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -355,7 +323,7 @@ MathJax.Hub.Config({
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

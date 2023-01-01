@@ -44,19 +44,20 @@
 
 <meta property="og:title" content="Core Data Model Attributes and NSManagedObject Property Types Must Match!" />
 <meta property="og:description" content="I admit – it might have taken me less time to figure out my runtime exception if I hadn&rsquo;t just migrated my project to Swift 3 when I encountered the bug.
-That&rsquo;s the problem isn&rsquo;t it? You go in&#8230; you intend to do one thing. Before long, you&rsquo;ve got 15 files with an M out to the right. The project builds (finally), but ah – then there&rsquo;s runtime.
+That&rsquo;s the problem isn&rsquo;t it? You go in… you intend to do one thing. Before long, you&rsquo;ve got 15 files with an M out to the right. The project builds (finally), but ah – then there&rsquo;s runtime.
 When the crash occurs, you&rsquo;re never sure if it was an existing problem, or if it was caused by the code conversion." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/" />
-<meta property="article:published_time" content="2017-04-23T20:03:34&#43;00:00"/>
-<meta property="article:modified_time" content="2017-04-23T20:03:34&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2017-04-23T20:03:34+00:00" />
+<meta property="article:modified_time" content="2017-04-23T20:03:34+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Core Data Model Attributes and NSManagedObject Property Types Must Match!"/>
 <meta name="twitter:description" content="I admit – it might have taken me less time to figure out my runtime exception if I hadn&rsquo;t just migrated my project to Swift 3 when I encountered the bug.
-That&rsquo;s the problem isn&rsquo;t it? You go in&#8230; you intend to do one thing. Before long, you&rsquo;ve got 15 files with an M out to the right. The project builds (finally), but ah – then there&rsquo;s runtime.
+That&rsquo;s the problem isn&rsquo;t it? You go in… you intend to do one thing. Before long, you&rsquo;ve got 15 files with an M out to the right. The project builds (finally), but ah – then there&rsquo;s runtime.
 When the crash occurs, you&rsquo;re never sure if it was an existing problem, or if it was caused by the code conversion."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -65,7 +66,7 @@ When the crash occurs, you&rsquo;re never sure if it was an existing problem, or
   "@type": "BlogPosting",
   "headline": "Core Data Model Attributes and NSManagedObject Property Types Must Match!",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/04\/23\/core-data-model-attributes-and-nsmanagedobject-property-types-must-match\/",
-  "wordCount": "496",
+  "wordCount": "490",
   "datePublished": "2017-04-23T20:03:34Z",
   "dateModified": "2017-04-23T20:03:34Z",
   "author": {
@@ -91,7 +92,7 @@ When the crash occurs, you&rsquo;re never sure if it was an existing problem, or
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -204,92 +205,49 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<p>I admit – it might have taken me less time to figure out my runtime exception if I hadn&rsquo;t just migrated my project to Swift 3 when I encountered the bug.</p>
-
-<p>That&rsquo;s the problem isn&rsquo;t it? You go in&#8230; you intend to do one thing. Before long, you&rsquo;ve got 15 files with an <code>M</code> out to the right. The project builds (finally), but ah – then there&rsquo;s <em>runtime</em>.</p>
-
+    <p>I admit – it might have taken me less time to figure out my runtime exception if I hadn&rsquo;t just migrated my project to Swift 3 when I encountered the bug.</p>
+<p>That&rsquo;s the problem isn&rsquo;t it? You go in… you intend to do one thing. Before long, you&rsquo;ve got 15 files with an <code>M</code> out to the right. The project builds (finally), but ah – then there&rsquo;s <em>runtime</em>.</p>
 <p>When the crash occurs, you&rsquo;re never sure if it was an <em>existing</em> problem, or if it was caused by the code conversion. Who knows – maybe it&rsquo;s both?</p>
-
-<p>Perhaps this is a story more about code conversion than it is about Core Data. In any case, perhaps it&rsquo;ll help a poor soul struggling to figure out why <a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png" alt="EXC_BAD_INSTRUCTION" width="364" height="12" class="alignnone size-full wp-image-13265" style="display:inline-block;" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png 364w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION-300x10.png 300w" sizes="(max-width: 364px) 100vw, 364px" /></a> just happened.</p>
-
-<p><a name="match" class="jump-target"></a></p>
-
-<h1 id="data-model-attributes-and-nsmanagedobject-property-types-match-em">Data model Attributes and NSManagedObject property types – Match &lsquo;em!</h1>
-
+<p>Perhaps this is a story more about code conversion than it is about Core Data. In any case, perhaps it&rsquo;ll help a poor soul struggling to figure out why <a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png"><!-- raw HTML omitted --></a> just happened.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h1 id="data-model-attributes-and-nsmanagedobject-property-types--match-em">Data model Attributes and NSManagedObject property types – Match &rsquo;em!</h1>
 <p>Whenever you&rsquo;re creating a subclass of <code>NSManagedObject</code> for the Entities in your data model, you&rsquo;re in a mapping process.</p>
-
 <p>Each Attribute on an Entity maps over to a <em>property</em> on the <code>NSManagedObjectSubclass</code>.</p>
-
 <p>Not only must the <em>names</em> of those Attributes and properties match, but the <em>Types</em> of each must match as well.</p>
-
-<p><a name="optionals-types" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="optionals-are-types">Optionals are Types</h1>
-
 <p><code>String</code> isn&rsquo;t the same as <code>String?</code>.</p>
-
 <p><code>Date</code> isn&rsquo;t the same as <code>Date?</code>.</p>
-
 <p>They&rsquo;re different <em>Types</em>.</p>
-
 <p>So what happens if you specify that a certain Attribute named, say, <code>createdOn</code> is a <code>Date</code> with the Optional checkbox checked in the data model designer like this:</p>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png" alt="createdOn as Optional attribute" width="358" height="110" class="alignnone size-full wp-image-13268" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png 358w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute-300x92.png 300w" sizes="(max-width: 358px) 100vw, 358px" /></a></p>
-
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png"><!-- raw HTML omitted --></a></p>
 <p>And over in the implementation of your <code>NSManagedObject</code> subclass, you have code that&rsquo;s written like this:</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kr">@NSManaged</span> <span class="kd">var</span> <span class="nv">createdOn</span><span class="p">:</span> <span class="n">Date</span> <span class="c1">//instead of Date? (ie, the ? is missing)</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kr">@NSManaged</span> <span class="kd">var</span> <span class="nv">createdOn</span><span class="p">:</span> <span class="n">Date</span> <span class="c1">//instead of Date? (ie, the ? is missing)</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 What&rsquo;ll happen? Well, I can tell you what&rsquo;ll happen. :]</p>
-
-<p>When you run the app and attempt to load objects from your persistent store that have been saved with <code>nil</code> for the <code>createdOn</code> value, your app will blow up:<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png" alt="EXC_BAD_INSTRUCTION" width="364" height="12" class="alignnone size-full wp-image-13265" style="display:inline-block;" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png 364w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION-300x10.png 300w" sizes="(max-width: 364px) 100vw, 364px" /></a></p>
-
-<p>Xcode isn&rsquo;t entirely unhelpful. While the <code>EXC_BAD_INSTRUCTION</code> message in the text editor isn&rsquo;t very illuminating, the Debug Navigator on the left (<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/debug-nav.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/debug-nav.png" alt="Debug navigator - 6th icon from left in the left sidebar" width="251" height="30" class="alignnone size-full wp-image-13279" style="display:inline-block;" /></a>) provides some clues.</p>
-
-<p>For me, it displayed just the breadcrumb that made me go, &ldquo;Oh! Let me go check and see if I&rsquo;ve got a Type mis-match between my data model and my <code>NSManagedObject</code> subclass&#8221;:</p>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch.png" alt="Unconditionally bridge from Objective C NSDate? to Date" width="452" height="88" class="alignnone size-full wp-image-13271" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch.png 452w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch-300x58.png 300w" sizes="(max-width: 452px) 100vw, 452px" /></a></p>
-
-<p>Interesting&#8230; It looks like there was an attempt to go from an <code>NSDate?</code> (<em>optional</em>) instance to a <code>Date</code> (<em>non</em>-optional).</p>
-
+<p>When you run the app and attempt to load objects from your persistent store that have been saved with <code>nil</code> for the <code>createdOn</code> value, your app will blow up:<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png"><!-- raw HTML omitted --></a></p>
+<p>Xcode isn&rsquo;t entirely unhelpful. While the <code>EXC_BAD_INSTRUCTION</code> message in the text editor isn&rsquo;t very illuminating, the Debug Navigator on the left (<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/debug-nav.png"><!-- raw HTML omitted --></a>) provides some clues.</p>
+<p>For me, it displayed just the breadcrumb that made me go, &ldquo;Oh! Let me go check and see if I&rsquo;ve got a Type mis-match between my data model and my <code>NSManagedObject</code> subclass”:</p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch.png"><!-- raw HTML omitted --></a></p>
+<p>Interesting… It looks like there was an attempt to go from an <code>NSDate?</code> (<em>optional</em>) instance to a <code>Date</code> (<em>non</em>-optional).</p>
 <p>The issue isn&rsquo;t that I&rsquo;ve got a mismatch between <code>NSDate</code> and <code>Date</code>. The runtime can swap those around and substitute them easily.</p>
-
-<p>Rather, it&rsquo;s that I&rsquo;m trying to go from <em>optional</em>, where <code>nil</code> is fine, to <em>non</em>-optional, where <code>nil</code>&#8230;well&#8230;crashes things.</p>
-
-<p><a name="lessons-learned" class="jump-target"></a></p>
-
+<p>Rather, it&rsquo;s that I&rsquo;m trying to go from <em>optional</em>, where <code>nil</code> is fine, to <em>non</em>-optional, where <code>nil</code>…well…crashes things.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="lessons-learned">Lessons learned</h1>
-
 <p>What have I learned?</p>
-
-<p>1 – Map Attributes to <code>NSManagedObject</code> subclass properties carefully.<br />
-2 – Don&rsquo;t accidentally miss a <code>?</code> to indicate that a property is optional if I&rsquo;ve got it marked as optional in the data model<br />
+<p>1 – Map Attributes to <code>NSManagedObject</code> subclass properties carefully.<br>
+2 – Don&rsquo;t accidentally miss a <code>?</code> to indicate that a property is optional if I&rsquo;ve got it marked as optional in the data model<br>
 3 – Read the Debug Navigator. It&rsquo;s not just a list of gibberish – it can actually provide helpful clues so you know where to go look to solve your problem!</p>
-
-<p><a name="course" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  
-
-<p><ul class="resources-content">
-    <li>
-      <i class="fas fa-video"></i> <a href="http://bit.ly/ps-core-data-swift" target="_blank">Core Data Fundamentals with Swift</a><br /> <a href="http://bit.ly/ps-core-data-swift" target="_blank"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png" alt="Core Data Fundamentals with Swift" width="1024" height="576" class="alignnone size-large wp-image-13163" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w" sizes="(max-width: 1024px) 100vw, 1024px" /></a>
-    </li>
-  </ul>
-</div></p>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
     <aside>
       
@@ -317,7 +275,7 @@ What&rsquo;ll happen? Well, I can tell you what&rsquo;ll happen. :]</p>
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

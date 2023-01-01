@@ -45,14 +45,15 @@
 <meta property="og:title" content="Receipt Validation – Verifying a Receipt Signature in Swift" />
 <meta property="og:description" content="The aim of this guide is to help you take a look inside the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" />
-<meta property="article:published_time" content="2017-07-16T21:43:21&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-27T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2017-07-16T21:43:21+00:00" />
+<meta property="article:modified_time" content="2019-06-27T00:00:00+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Receipt Validation – Verifying a Receipt Signature in Swift"/>
 <meta name="twitter:description" content="The aim of this guide is to help you take a look inside the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -61,7 +62,7 @@
   "@type": "BlogPosting",
   "headline": "Receipt Validation – Verifying a Receipt Signature in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/07\/16\/receipt-validation-verifying-a-receipt-signature-in-swift\/",
-  "wordCount": "1858",
+  "wordCount": "1798",
   "datePublished": "2017-07-16T21:43:21Z",
   "dateModified": "2019-06-27T00:00:00Z",
   "author": {
@@ -87,7 +88,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -202,119 +203,77 @@ MathJax.Hub.Config({
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
       <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#recap-from-the-previous-guide">Recap from the previous guide</a></li>
-<li><a href="#preparation-step-download-apple-s-root-certificate">Preparation step: Download Apple&rsquo;s root certificate</a></li>
-<li><a href="#what-can-go-wrong-with-receipt-signature-verification">What can go wrong with receipt signature verification?</a></li>
-<li><a href="#receiptsignaturevalidator-concept">ReceiptSignatureValidator concept</a></li>
-<li><a href="#receiptsignaturevalidator-implementation">ReceiptSignatureValidator implementation</a>
-<ul>
-<li><a href="#checking-signature-presence">Checking signature presence</a></li>
-<li><a href="#checking-signature-authenticity">Checking signature authenticity</a>
-<ul>
-<li><a href="#loading-apple-s-root-certificate">Loading Apple&rsquo;s root certificate</a></li>
-<li><a href="#verifying-signature-authenticity">Verifying signature authenticity</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#putting-it-all-together">Putting it all together</a>
-<ul>
-<li><a href="#final-receiptsignaturevalidator-implementation">Final ReceiptSignatureValidator implementation</a></li>
-<li><a href="#additions-to-receiptvalidator">Additions to ReceiptValidator</a></li>
-<li><a href="#handling-errors">Handling errors</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#upcoming-hurdles">Upcoming hurdles</a></li>
-</ul>
+  <ul>
+    <li><a href="#recap-from-the-previous-guide">Recap from the previous guide</a></li>
+    <li><a href="#preparation-step-download-apples-root-certificate">Preparation step: Download Apple&rsquo;s root certificate</a></li>
+    <li><a href="#what-can-go-wrong-with-receipt-signature-verification">What can go wrong with receipt signature verification?</a></li>
+    <li><a href="#receiptsignaturevalidator-concept">ReceiptSignatureValidator concept</a></li>
+    <li><a href="#receiptsignaturevalidator-implementation">ReceiptSignatureValidator implementation</a>
+      <ul>
+        <li><a href="#checking-signature-presence">Checking signature presence</a></li>
+        <li><a href="#checking-signature-authenticity">Checking signature authenticity</a></li>
+      </ul>
+    </li>
+    <li><a href="#putting-it-all-together">Putting it all together</a>
+      <ul>
+        <li><a href="#final-receiptsignaturevalidator-implementation">Final ReceiptSignatureValidator implementation</a></li>
+        <li><a href="#additions-to-receiptvalidator">Additions to ReceiptValidator</a></li>
+        <li><a href="#handling-errors">Handling errors</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </aside>
 
-    
-
-<ul>
+    <ul>
 <li>You&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/">prepared to test receipt validation</a> by setting up your app in iTunes Connect.</li>
-<li>You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope&#8221; for the receipt. Perhaps you&rsquo;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &ldquo;easy way&#8221; with CocoaPods</a>.</li>
+<li>You&rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &ldquo;envelope” for the receipt. Perhaps you&rsquo;ve even done it <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/">the &ldquo;easy way” with CocoaPods</a>.</li>
 <li>You&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt for validation.</li>
 <li>You&rsquo;ve <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/">extracted the PKCS #7 container</a>.</li>
 </ul>
-
 <p>The aim of this guide is to help you take a look <em>inside</em> the PKCS #7 container, and verify the presence and authenticity of the signature on the receipt.</p>
-
 <p>Just want the code? Here you go!</p>
-
-<div class="resources">
-  <div class="resources-header">
-    Resources
-  </div>
-  <ul class="resources-content">
-    <li>
-      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
-    </li>
-  </ul>
-</div>
-
-<p><a name="recap" class="jump-target"></a></p>
-
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="recap-from-the-previous-guide">Recap from the previous guide</h2>
-
 <p>In <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">Loading a Receipt for Validation with Swift</a>, I began the process of breaking out the various steps of the receipt validation process into separate single-responsibility structs with clearly named functions to help clarify what each piece of code is doing.</p>
-
 <p>Recall that I’ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation">created a main Type called <code>ReceiptValidator</code></a>, with references to several smaller single-responsibility Types that it uses to accomplish the overall validation process.</p>
-
 <p>Accordingly, I’ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">created a ReceiptLoader</a> that finds the receipt on the file system and loads it into memory.</p>
-
 <p>As of the last entry in this series of guides, I&rsquo;ve also <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/#receiptextractor-implementation">got a <code>ReceiptExtractor</code></a> to extract the receipt contents from its PKCS #7 container.</p>
-
 <p>If a validation step ever fails along the way, I’ve decided to take advantage of Swift’s error throwing features to clearly describe what failed. So far, there’s only two cases:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
-    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
-<p><a name="apple-root-cert" class="jump-target"></a></p>
-
-<h2 id="preparation-step-download-apple-s-root-certificate">Preparation step: Download Apple&rsquo;s root certificate</h2>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="preparation-step-download-apples-root-certificate">Preparation step: Download Apple&rsquo;s root certificate</h2>
 <p>You need a copy of Apple&rsquo;s root certificate in order to fully complete this phase of receipt validation.</p>
-
 <p>How do you get a copy of it? Great question (with an answer)!</p>
-
-<p>If you go to <a href="https://www.apple.com/certificateauthority/">https://www.apple.com/certificateauthority/</a>, you can get your hands on a copy by downloading the &ldquo;Apple Inc. Root Certificate&#8221; file:</p>
-
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI.png" alt="Apple Certificate Page" width="798" height="688" class="alignnone size-full wp-image-12375" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI.png 798w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI-300x259.png 300w" sizes="(max-width: 798px) 100vw, 798px" /></a></p>
-
-<p>Once you have it, you need to add the certificate to your Xcode project, and add it to your app&rsquo;s target:<br />
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership-1024x621.png" alt="Apple Root Certificate Target Membership" width="1024" height="621" class="alignnone size-large wp-image-12920" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership-1024x621.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership-300x182.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership.png 1223w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
-
-<p><a name="what-can-go-wrong" class="jump-target"></a></p>
-
+<p>If you go to <a href="https://www.apple.com/certificateauthority/">https://www.apple.com/certificateauthority/</a>, you can get your hands on a copy by downloading the &ldquo;Apple Inc. Root Certificate” file:</p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/Apple_PKI.png"><!-- raw HTML omitted --></a></p>
+<p>Once you have it, you need to add the certificate to your Xcode project, and add it to your app&rsquo;s target:<br>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/06/root_cert_target_membership.png"><!-- raw HTML omitted --></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="what-can-go-wrong-with-receipt-signature-verification">What can go wrong with receipt signature verification?</h2>
-
-<p>I&rsquo;ll start off the code piece of this guide by asking, &ldquo;What could go wrong?&#8221;. That&rsquo;ll help define a few more <code>ReceiptValidationError</code> cases, and might point us in a direction when it comes to implementing a new Type to use within the <code>ReceiptValidator</code>.</p>
-
+<p>I&rsquo;ll start off the code piece of this guide by asking, &ldquo;What could go wrong?”. That&rsquo;ll help define a few more <code>ReceiptValidationError</code> cases, and might point us in a direction when it comes to implementing a new Type to use within the <code>ReceiptValidator</code>.</p>
 <p>Right off the bat, I can think of two or three things that could go awry at this stage of the receipt validation process:</p>
-
-<p>1 – The receipt that we loaded may not be signed at all<br />
-2 – We don&rsquo;t have a copy of Apple&rsquo;s root certificate to validate the signature with<br />
+<p>1 – The receipt that we loaded may not be signed at all<br>
+2 – We don&rsquo;t have a copy of Apple&rsquo;s root certificate to validate the signature with<br>
 3 – The signature on the receipt is invalid because it doesn&rsquo;t match against Apple&rsquo;s root certificate</p>
-
 <p>I&rsquo;ll add those three new error states to the <code>ReceiptValidationError</code> enum now:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -323,42 +282,31 @@ MathJax.Hub.Config({
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
-    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
-    <span class="k">case</span> <span class="n">receiptNotSigned</span>
-    <span class="k">case</span> <span class="n">appleRootCertificateNotFound</span>
-    <span class="k">case</span> <span class="n">receiptSignatureInvalid</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">enum</span> <span class="nc">ReceiptValidationError</span> <span class="p">:</span> <span class="n">Error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="n">couldNotFindReceipt</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="n">emptyReceiptContents</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="n">receiptNotSigned</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="n">appleRootCertificateNotFound</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="n">receiptSignatureInvalid</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
-<p><a name="concept" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="receiptsignaturevalidator-concept">ReceiptSignatureValidator concept</h2>
-
 <p>Another step, another Type. This has been my strategy so far, so I&rsquo;m stickin&rsquo; to it!</p>
-
 <p>I&rsquo;m validating the <strong>presence</strong> and <strong>authenticity</strong> of the signature on the receipt, so I picked the name <code>ReceiptSignatureValidator</code> for this one.</p>
-
 <p>When I identified three new <code>ReceiptValidationError</code> cases earlier, I had in mind that they could potentially point me in a direction when implementing this new <code>ReceiptSignatureValidator</code> Type.</p>
-
 <p>What if this Type had two functions?</p>
-
 <ul>
 <li><code>checkSignaturePresence</code></li>
 <li><code>checkSignatureAuthenticity</code></li>
 </ul>
-
 <p>In <code>checkSignaturePresence</code>, I&rsquo;ll look, and if the receipt isn&rsquo;t signed at all, I&rsquo;ll throw the <code>receiptNotSigned</code> Error case.</p>
-
 <p>In <code>checkSignatureAuthenticity</code>, I&rsquo;ll look, and if the Apple root certificate is missing from the bundle for some reason, I&rsquo;ll throw <code>appleRootCertificateNotFound</code>. And if the signature on the receipt doesn&rsquo;t jive with Apple&rsquo;s root certificate, I&rsquo;ll throw <code>receiptSignatureInvalid</code>.</p>
-
 <p>Here&rsquo;s the skeleton of the struct:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -369,37 +317,28 @@ MathJax.Hub.Config({
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptSignatureValidator</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">checkSignaturePresence</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-        <span class="c1">// Implementation coming</span>
-    <span class="p">}</span>
-    
-    <span class="kd">func</span> <span class="nf">checkSignatureAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-        <span class="c1">// Implementation coming</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">ReceiptSignatureValidator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">checkSignaturePresence</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="p">&gt;)</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Implementation coming</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">checkSignatureAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="p">&gt;)</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Implementation coming</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
 <p>Both <code>checkSignaturePresence</code> and <code>checkSignatureAuthenticity</code> need to peek into the PKCS #7 container that encapsulates the receipt data, so each function asks for a reference to an <code>UnsafeMutablePointer&lt;PKCS7&gt;</code> as one of its arguments.</p>
-
 <p>If you&rsquo;re following along with the series, you&rsquo;ll be glad to know that <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/#receiptextractor-implementation">the <code>ReceiptExtractor</code> that we built previously</a> has a method called <code>extractPKCS7Container</code> that actually <em>returns</em> a <code>UnsafeMutablePointer&lt;PKCS7&gt;</code>, so you can just use the a call to <code>extractPKCS7Container</code> with the new <code>ReceiptSignatureValidator's</code> functions.</p>
-
-<p><a name="implementation" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="receiptsignaturevalidator-implementation">ReceiptSignatureValidator implementation</h2>
-
-<p>Now to actually <em>implement</em> <code>ReceiptSignatureValidator</code>&#8230;</p>
-
-<p><a name="signature-presence" class="jump-target"></a></p>
-
+<p>Now to actually <em>implement</em> <code>ReceiptSignatureValidator</code>…</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="checking-signature-presence">Checking signature presence</h3>
-
 <p>Checking for the presence of a signature is actually relatively simple. Take a look:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -414,41 +353,32 @@ MathJax.Hub.Config({
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptSignatureValidator</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">checkSignaturePresence</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nv">pkcs7SignedTypeCode</span> <span class="p">=</span> <span class="n">OBJ_obj2nid</span><span class="p">(</span><span class="n">PKCS7Container</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">type</span><span class="p">)</span>
-        
-        <span class="k">guard</span> <span class="n">pkcs7SignedTypeCode</span> <span class="p">==</span> <span class="n">NID_pkcs7_signed</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">receiptNotSigned</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    
-    <span class="kd">func</span> <span class="nf">checkSignatureAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-        <span class="c1">// Implementation coming</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">ReceiptSignatureValidator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">checkSignaturePresence</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="p">&gt;)</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">pkcs7SignedTypeCode</span> <span class="p">=</span> <span class="n">OBJ_obj2nid</span><span class="p">(</span><span class="n">PKCS7Container</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">type</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">guard</span> <span class="n">pkcs7SignedTypeCode</span> <span class="p">==</span> <span class="n">NID_pkcs7_signed</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">receiptNotSigned</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">checkSignatureAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="p">&gt;)</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Implementation coming</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
 <p>The PKCS #7 container has a type code associated with it if it&rsquo;s <em>signed</em>. All we need to do is access that type code, and compare it against the <code>NID_pkcs7_signed</code> constant.</p>
-
 <p>In order to be valid, the receipt <em>must</em> be signed, so I&rsquo;ve implemented this as a guard.</p>
-
-<p><a name="signature-authenticity" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="checking-signature-authenticity">Checking signature authenticity</h3>
-
-<p><a name="load-apple-root-cert" class="jump-target"></a></p>
-
-<h4 id="loading-apple-s-root-certificate">Loading Apple&rsquo;s root certificate</h4>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h4 id="loading-apples-root-certificate">Loading Apple&rsquo;s root certificate</h4>
 <p>Now comes the part where we check whether the signature on the receipt is authentic or not.</p>
-
 <p>First, we&rsquo;ve got to load up Apple&rsquo;s root certificate (assuming it exists in the app bundle). Here&rsquo;s a function that can be nested inside of <code>ReceiptSignatureValidator</code> to do the job:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -469,62 +399,49 @@ MathJax.Hub.Config({
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">loadAppleRootCertificate</span><span class="p">()</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">X509</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">guard</span>
-        <span class="kd">let</span> <span class="nv">appleRootCertificateURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;AppleIncRootCertificate&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;cer&#34;</span><span class="p">),</span>
-        <span class="kd">let</span> <span class="nv">appleRootCertificateData</span> <span class="p">=</span> <span class="k">try</span><span class="p">?</span> <span class="n">Data</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">appleRootCertificateURL</span><span class="p">)</span>
-        <span class="k">else</span> <span class="p">{</span>
-            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">appleRootCertificateNotFound</span>
-    <span class="p">}</span>
-    
-    <span class="c1">//①</span>
-    <span class="kd">let</span> <span class="nv">appleRootCertificateBIO</span> <span class="p">=</span> <span class="n">BIO_new</span><span class="p">(</span><span class="n">BIO_s_mem</span><span class="p">())</span>
-
-    <span class="c1">//②</span>
-    <span class="n">BIO_write</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="p">(</span><span class="n">appleRootCertificateData</span> <span class="k">as</span> <span class="n">NSData</span><span class="p">).</span><span class="n">bytes</span><span class="p">,</span> <span class="nb">Int32</span><span class="p">(</span><span class="n">appleRootCertificateData</span><span class="p">.</span><span class="bp">count</span><span class="p">))</span>
-
-    <span class="c1">//③</span>
-    <span class="kd">let</span> <span class="nv">appleRootCertificateX509</span> <span class="p">=</span> <span class="n">d2i_X509_bio</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">appleRootCertificateX509</span><span class="o">!</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">loadAppleRootCertificate</span><span class="p">()</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">X509</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">guard</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">appleRootCertificateURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;AppleIncRootCertificate&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;cer&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">appleRootCertificateData</span> <span class="p">=</span> <span class="k">try</span><span class="p">?</span> <span class="n">Data</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">appleRootCertificateURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">appleRootCertificateNotFound</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//①</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">appleRootCertificateBIO</span> <span class="p">=</span> <span class="n">BIO_new</span><span class="p">(</span><span class="n">BIO_s_mem</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//②</span>
+</span></span><span class="line"><span class="cl">    <span class="n">BIO_write</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="p">(</span><span class="n">appleRootCertificateData</span> <span class="k">as</span> <span class="n">NSData</span><span class="p">).</span><span class="n">bytes</span><span class="p">,</span> <span class="nb">Int32</span><span class="p">(</span><span class="n">appleRootCertificateData</span><span class="p">.</span><span class="bp">count</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//③</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">appleRootCertificateX509</span> <span class="p">=</span> <span class="n">d2i_X509_bio</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">appleRootCertificateX509</span><span class="p">!</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
 <p>This function guards against the absence of Apple&rsquo;s root certificate. If it can&rsquo;t be found in the main bundle, the function throws <code>appleRootCertificateNotFound</code>. This error is obviously preventable, but hey – never hurts to protect yourself if you&rsquo;re using this code in multiple projects and forget to grab a copy of Apple&rsquo;s root certificate.</p>
-
 <p>① As long as the .cer file exists in the app bundle, the next step is to create a new in-memory BIO (basic input-output) pointer. That&rsquo;s what <code>let appleRootCertificateBIO = BIO_new(BIO_s_mem())</code> does.</p>
-
 <p>② Next, we&rsquo;ve got to write the contents of the certificate to memory so we can work with it:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="n">BIO_write</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="p">(</span><span class="n">appleRootCertificateData</span> <span class="k">as</span> <span class="n">NSData</span><span class="p">).</span><span class="n">bytes</span><span class="p">,</span> <span class="nb">Int32</span><span class="p">(</span><span class="n">appleRootCertificateData</span><span class="p">.</span><span class="bp">count</span><span class="p">))</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="n">BIO_write</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="p">(</span><span class="n">appleRootCertificateData</span> <span class="k">as</span> <span class="n">NSData</span><span class="p">).</span><span class="n">bytes</span><span class="p">,</span> <span class="nb">Int32</span><span class="p">(</span><span class="n">appleRootCertificateData</span><span class="p">.</span><span class="bp">count</span><span class="p">))</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
 <p><code>BIO_write</code> needs a location to write to, namely, our <code>appleRootCertificateBIO</code> pointer.</p>
-
 <p>It also needs to know <em>what</em> to write: <code>(appleRootCertificateData as NSData).bytes</code></p>
-
 <p>Finally, it needs to know the length of the data to write: <code>Int32(appleRootCertificateData.count)</code></p>
-
 <p>③ Once that&rsquo;s complete, we can obtain pointer to an <code>X509</code>, which will be used for the next step: verifying the authenticity of the signature on the receipt with the x509 certificate from Apple&rsquo;s root certificate authority. <code>let appleRootCertificateX509 = d2i_X509_bio(appleRootCertificateBIO, nil)</code> gives us our return value!</p>
-
-<p><a name="verify-authenticity" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h4 id="verifying-signature-authenticity">Verifying signature authenticity</h4>
-
 <p>The final step is to take the <code>X509</code> pointer, and use it to verify the authenticity of the signature on the PKCS #7 Container.</p>
-
 <p>Once again, here&rsquo;s a function that can take both items and do the work:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -544,50 +461,39 @@ MathJax.Hub.Config({
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">verifyAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">x509Certificate</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">X509</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-    <span class="c1">//①</span>
-    <span class="kd">let</span> <span class="nv">x509CertificateStore</span> <span class="p">=</span> <span class="n">X509_STORE_new</span><span class="p">()</span>
-
-    <span class="c1">//②</span>
-    <span class="n">X509_STORE_add_cert</span><span class="p">(</span><span class="n">x509CertificateStore</span><span class="p">,</span> <span class="n">x509Certificate</span><span class="p">)</span>
-    
-    <span class="c1">//③</span>
-    <span class="n">OpenSSL_add_all_digests</span><span class="p">()</span>
-    
-    <span class="c1">//④</span>
-    <span class="kd">let</span> <span class="nv">result</span> <span class="p">=</span> <span class="n">PKCS7_verify</span><span class="p">(</span><span class="n">PKCS7Container</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">x509CertificateStore</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    
-    <span class="c1">//⑤</span>
-    <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">receiptSignatureInvalid</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">verifyAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">x509Certificate</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">X509</span><span class="p">&gt;,</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="p">&gt;)</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//①</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">x509CertificateStore</span> <span class="p">=</span> <span class="n">X509_STORE_new</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//②</span>
+</span></span><span class="line"><span class="cl">    <span class="n">X509_STORE_add_cert</span><span class="p">(</span><span class="n">x509CertificateStore</span><span class="p">,</span> <span class="n">x509Certificate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//③</span>
+</span></span><span class="line"><span class="cl">    <span class="n">OpenSSL_add_all_digests</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//④</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">result</span> <span class="p">=</span> <span class="n">PKCS7_verify</span><span class="p">(</span><span class="n">PKCS7Container</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">x509CertificateStore</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">//⑤</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">receiptSignatureInvalid</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
 <p>① The X509 Store is what holds the information for verification, so we use <code>X509_STORE_new()</code> to create one.</p>
-
 <p>② Next, <code>X509_STORE_add_cert</code> function is used to prepare the X509 Store, and the X509 <em>Certificate</em> for verification purposes.</p>
-
 <p>③ OpenSSL keeps an internal table of digest algorithms and ciphers. It uses this table to lookup ciphers via certain functions. <code>OpenSSL_add_all_digests()</code> is called to load the necessary digest algorithms for verification.</p>
-
 <p>④ The final step is to use the <code>PKCS7_verify</code> function, passing it the PKCS #7 Container, and the x509 Certificate Store.</p>
-
 <p>⑤ <code>PKCS7_Verify</code> will return <strong>1</strong> if the signature is valid. If <code>PKCS7_Verify</code> returns any integer value <em>other than</em> 1, the signature is to be interpreted as <em>invalid</em>.</p>
-
-<p><a name="putting-it-all-together" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="putting-it-all-together">Putting it all together</h2>
-
-<p><a name="final-implementation" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="final-receiptsignaturevalidator-implementation">Final ReceiptSignatureValidator implementation</h3>
-
 <p>The final version of the <code>ReceiptSignatureValidator</code> looks like this:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -632,61 +538,57 @@ MathJax.Hub.Config({
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptSignatureValidator</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">checkSignaturePresence</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nv">pkcs7SignedTypeCode</span> <span class="p">=</span> <span class="n">OBJ_obj2nid</span><span class="p">(</span><span class="n">PKCS7Container</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">type</span><span class="p">)</span>
-        
-        <span class="k">guard</span> <span class="n">pkcs7SignedTypeCode</span> <span class="p">==</span> <span class="n">NID_pkcs7_signed</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">receiptNotSigned</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    
-    <span class="kd">func</span> <span class="nf">checkSignatureAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nv">appleRootCertificateX509</span> <span class="p">=</span> <span class="k">try</span> <span class="n">loadAppleRootCertificate</span><span class="p">()</span>
-        
-        <span class="k">try</span> <span class="n">verifyAuthenticity</span><span class="p">(</span><span class="n">appleRootCertificateX509</span><span class="p">,</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="n">PKCS7Container</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">loadAppleRootCertificate</span><span class="p">()</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">X509</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="k">guard</span>
-            <span class="kd">let</span> <span class="nv">appleRootCertificateURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;AppleIncRootCertificate&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;cer&#34;</span><span class="p">),</span>
-            <span class="kd">let</span> <span class="nv">appleRootCertificateData</span> <span class="p">=</span> <span class="k">try</span><span class="p">?</span> <span class="n">Data</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">appleRootCertificateURL</span><span class="p">)</span>
-            <span class="k">else</span> <span class="p">{</span>
-                <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">appleRootCertificateNotFound</span>
-        <span class="p">}</span>
-        
-        <span class="kd">let</span> <span class="nv">appleRootCertificateBIO</span> <span class="p">=</span> <span class="n">BIO_new</span><span class="p">(</span><span class="n">BIO_s_mem</span><span class="p">())</span>
-        <span class="n">BIO_write</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="p">(</span><span class="n">appleRootCertificateData</span> <span class="k">as</span> <span class="n">NSData</span><span class="p">).</span><span class="n">bytes</span><span class="p">,</span> <span class="nb">Int32</span><span class="p">(</span><span class="n">appleRootCertificateData</span><span class="p">.</span><span class="bp">count</span><span class="p">))</span>
-        <span class="kd">let</span> <span class="nv">appleRootCertificateX509</span> <span class="p">=</span> <span class="n">d2i_X509_bio</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-        
-        <span class="k">return</span> <span class="n">appleRootCertificateX509</span><span class="o">!</span>
-    <span class="p">}</span>
-    
-    <span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">verifyAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">x509Certificate</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">X509</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="o">&gt;</span><span class="p">)</span> <span class="kr">throws</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nv">x509CertificateStore</span> <span class="p">=</span> <span class="n">X509_STORE_new</span><span class="p">()</span>
-        <span class="n">X509_STORE_add_cert</span><span class="p">(</span><span class="n">x509CertificateStore</span><span class="p">,</span> <span class="n">x509Certificate</span><span class="p">)</span>
-        
-        <span class="n">OpenSSL_add_all_digests</span><span class="p">()</span>
-        
-        <span class="kd">let</span> <span class="nv">result</span> <span class="p">=</span> <span class="n">PKCS7_verify</span><span class="p">(</span><span class="n">PKCS7Container</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">x509CertificateStore</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        
-        <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">{</span>
-            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">receiptSignatureInvalid</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">ReceiptSignatureValidator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">checkSignaturePresence</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="p">&gt;)</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">pkcs7SignedTypeCode</span> <span class="p">=</span> <span class="n">OBJ_obj2nid</span><span class="p">(</span><span class="n">PKCS7Container</span><span class="p">.</span><span class="n">pointee</span><span class="p">.</span><span class="n">type</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">guard</span> <span class="n">pkcs7SignedTypeCode</span> <span class="p">==</span> <span class="n">NID_pkcs7_signed</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">receiptNotSigned</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">checkSignatureAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="p">&gt;)</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">appleRootCertificateX509</span> <span class="p">=</span> <span class="k">try</span> <span class="n">loadAppleRootCertificate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="n">verifyAuthenticity</span><span class="p">(</span><span class="n">appleRootCertificateX509</span><span class="p">,</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="n">PKCS7Container</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">loadAppleRootCertificate</span><span class="p">()</span> <span class="kr">throws</span> <span class="p">-&gt;</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">X509</span><span class="p">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">guard</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nv">appleRootCertificateURL</span> <span class="p">=</span> <span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span> <span class="s">&#34;AppleIncRootCertificate&#34;</span><span class="p">,</span> <span class="n">withExtension</span><span class="p">:</span> <span class="s">&#34;cer&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nv">appleRootCertificateData</span> <span class="p">=</span> <span class="k">try</span><span class="p">?</span> <span class="n">Data</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">appleRootCertificateURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">appleRootCertificateNotFound</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">appleRootCertificateBIO</span> <span class="p">=</span> <span class="n">BIO_new</span><span class="p">(</span><span class="n">BIO_s_mem</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BIO_write</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="p">(</span><span class="n">appleRootCertificateData</span> <span class="k">as</span> <span class="n">NSData</span><span class="p">).</span><span class="n">bytes</span><span class="p">,</span> <span class="nb">Int32</span><span class="p">(</span><span class="n">appleRootCertificateData</span><span class="p">.</span><span class="bp">count</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">appleRootCertificateX509</span> <span class="p">=</span> <span class="n">d2i_X509_bio</span><span class="p">(</span><span class="n">appleRootCertificateBIO</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">appleRootCertificateX509</span><span class="p">!</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">fileprivate</span> <span class="kd">func</span> <span class="nf">verifyAuthenticity</span><span class="p">(</span><span class="kc">_</span> <span class="n">x509Certificate</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">X509</span><span class="p">&gt;,</span> <span class="n">PKCS7Container</span><span class="p">:</span> <span class="nb">UnsafeMutablePointer</span><span class="p">&lt;</span><span class="n">PKCS7</span><span class="p">&gt;)</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">x509CertificateStore</span> <span class="p">=</span> <span class="n">X509_STORE_new</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">X509_STORE_add_cert</span><span class="p">(</span><span class="n">x509CertificateStore</span><span class="p">,</span> <span class="n">x509Certificate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">OpenSSL_add_all_digests</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">result</span> <span class="p">=</span> <span class="n">PKCS7_verify</span><span class="p">(</span><span class="n">PKCS7Container</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">x509CertificateStore</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="n">ReceiptValidationError</span><span class="p">.</span><span class="n">receiptSignatureInvalid</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
-<p><a name="additions-to-receipt-validator" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="additions-to-receiptvalidator">Additions to ReceiptValidator</h3>
-
 <p>The <code>ReceiptValidator</code> struct that&rsquo;s been growing to accommodate each of the steps now looks like this (additions highlighted):</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -707,37 +609,33 @@ MathJax.Hub.Config({
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="nc">ReceiptValidator</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nv">receiptLoader</span> <span class="p">=</span> <span class="n">ReceiptLoader</span><span class="p">()</span>
-    <span class="kd">let</span> <span class="nv">receiptExtractor</span> <span class="p">=</span> <span class="n">ReceiptExtractor</span><span class="p">()</span>
-    <span class="kd">let</span> <span class="nv">receiptSignatureValidator</span> <span class="p">=</span> <span class="n">ReceiptSignatureValidator</span><span class="p">()</span>
-
-    
-    <span class="kd">func</span> <span class="nf">validateReceipt</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">ReceiptValidationResult</span> <span class="p">{</span>
-        <span class="k">do</span> <span class="p">{</span>
-            <span class="kd">let</span> <span class="nv">receiptData</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptLoader</span><span class="p">.</span><span class="n">loadReceipt</span><span class="p">()</span>
-            <span class="kd">let</span> <span class="nv">receiptContainer</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptExtractor</span><span class="p">.</span><span class="n">extractPKCS7Container</span><span class="p">(</span><span class="n">receiptData</span><span class="p">)</span>
-            
-            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignaturePresence</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
-            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignatureAuthenticity</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">.</span><span class="n">success</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span> <span class="k">as</span><span class="o">!</span> <span class="n">ReceiptValidationError</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">ReceiptValidator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">receiptLoader</span> <span class="p">=</span> <span class="n">ReceiptLoader</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">receiptExtractor</span> <span class="p">=</span> <span class="n">ReceiptExtractor</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">receiptSignatureValidator</span> <span class="p">=</span> <span class="n">ReceiptSignatureValidator</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">func</span> <span class="nf">validateReceipt</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="n">ReceiptValidationResult</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nv">receiptData</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptLoader</span><span class="p">.</span><span class="n">loadReceipt</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nv">receiptContainer</span> <span class="p">=</span> <span class="k">try</span> <span class="n">receiptExtractor</span><span class="p">.</span><span class="n">extractPKCS7Container</span><span class="p">(</span><span class="n">receiptData</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignaturePresence</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="n">receiptSignatureValidator</span><span class="p">.</span><span class="n">checkSignatureAuthenticity</span><span class="p">(</span><span class="n">receiptContainer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">.</span><span class="n">success</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span> <span class="k">as</span><span class="p">!</span> <span class="n">ReceiptValidationError</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
-<p><a name="handling-errors" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="handling-errors">Handling errors</h3>
-
 <p>The final piece is to attempt to do something intelligent with any of the possible error conditions that could be included with the <code>ReceiptValidator</code> validation result. Here&rsquo;s a sample implementation at the call site for <code>validateReceipt()</code> (probably in a view controller somewhere in your app:</p>
-
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -752,64 +650,33 @@ MathJax.Hub.Config({
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
-
-    <span class="kd">let</span> <span class="nv">validationResult</span> <span class="p">=</span> <span class="n">receiptValidator</span><span class="p">.</span><span class="n">validateReceipt</span><span class="p">()</span>
-        
-    <span class="k">switch</span> <span class="n">validationResult</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="p">.</span><span class="n">success</span><span class="p">:</span>
-        <span class="c1">// Enable app features</span>
-    <span class="k">case</span> <span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="kd">let</span> <span class="nv">error</span><span class="p">):</span>
-        <span class="bp">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-        <span class="n">receiptRequest</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
-    <span class="p">}</span>   
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">validationResult</span> <span class="p">=</span> <span class="n">receiptValidator</span><span class="p">.</span><span class="n">validateReceipt</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="n">validationResult</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">success</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Enable app features</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="kd">let</span> <span class="nv">error</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">receiptRequest</span><span class="p">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>   
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-
 <p>In the case where the receipt signature is invalid, my only thought right now is to request a new receipt from the app store and attempt to re-validate it.</p>
-
-<p><a name="upcoming-hurdles" class="jump-target"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h1 id="upcoming-hurdles">Upcoming hurdles</h1>
-
 <p>Wait, there&rsquo;s more? In short, yes. We&rsquo;ve made significant progress, but <a href="https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html#//apple_ref/doc/uid/TP40010573-CH1-SW2">there&rsquo;s still more work to be done</a> if you want to fully validate a receipt for your app, or for an in-app purchase.</p>
-
-<p><a name="related" class="jump-target"></a></p>
-
-<div class="resources">
-  <div class="resources-header">
-    You might also enjoy&#8230;
-  </div>
-  <ul class="resources-content">
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS & Swift the Easy Way</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" title="Extracting a PKCS7 Container for Receipt Validation with Swift">Extracting a PKCS7 Container for Receipt Validation with Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/" title="Receipt Validation – Parse and Decode a Receipt with Swift">Receipt Validation – Parse and Decode a Receipt with Swift</a>
-    </li>
-    <li>
-      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
-    </li>
-  </ul>
-</div>
-
-<p><a name="share" class="jump-target"></a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

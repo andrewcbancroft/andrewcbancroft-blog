@@ -45,14 +45,15 @@
 <meta property="og:title" content="On Core Data Object Fetching and Display Strategies" />
 <meta property="og:description" content="Offers thoughts on a strategy question from my inbox for fetching Core Data objects and displaying them in a table view." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/on-core-data-object-fetching-and-display-strategies/" />
-<meta property="article:published_time" content="2019-06-14T04:40:54&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-14T04:40:54&#43;00:00"/>
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/on-core-data-object-fetching-and-display-strategies/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-14T04:40:54+00:00" />
+<meta property="article:modified_time" content="2019-06-14T04:40:54+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="On Core Data Object Fetching and Display Strategies"/>
 <meta name="twitter:description" content="Offers thoughts on a strategy question from my inbox for fetching Core Data objects and displaying them in a table view."/>
-<meta name="generator" content="Hugo 0.55.6" /> 
+<meta name="generator" content="Hugo 0.101.0" /> 
     
     
 <script type="application/ld+json">
@@ -87,7 +88,7 @@
     <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
         
-    <link href="" rel="alternate" type="application/rss+xml" title="Andrew Bancroft" /> 
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -200,15 +201,11 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    
-
-<h2 id="setting-the-stage">Setting the Stage</h2>
-
+    <h2 id="setting-the-stage">Setting the Stage</h2>
 <p>Suppose one of the <code>NSManagedObject</code> subclasses from your Core Data data model looked like this:</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -216,141 +213,116 @@ MathJax.Hub.Config({
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
-
-    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
-
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogIdea</span><span class="p">:</span> <span class="n">NSManagedObject</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaTitle</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">@NSManaged</span> <span class="kd">public</span> <span class="kd">var</span> <span class="nv">ideaDescription</span><span class="p">:</span> <span class="nb">String</span><span class="p">?</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 Suppose that you also have a class that will provide <code>BlogIdeas</code> to your view controller:</p>
-
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-swift" data-lang="swift"><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
-    <span class="c1">// fetches BlogIdea instances to use in your view controller</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// fetches BlogIdea instances to use in your view controller</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <strong>Requirement:</strong> Say that you need to list all of the <code>ideaTitle</code>s you have inside of a table view (note that you <em>don&rsquo;t</em> need to display the <code>ideaDescription</code> at this time).</p>
-
 <p><strong>Question:</strong>  Which of the following strategies would you recommend for this requirement?</p>
-
-<p>1) Fetch all the <code>BlogIdea</code> objects, return them, and then use those returned <code>NSManagedObject</code> instances to display the <code>ideaTitle</code> in the table view.</p>
-
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
-<span class="hl"><span class="ln">2</span>    <span class="kd">func</span> <span class="nf">fetchBlogIdeas</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="n">BlogIdea</span><span class="p">]</span> <span class="p">{</span>
-</span><span class="ln">3</span>        <span class="c1">// fetch BlogIdea instances</span>
-<span class="ln">4</span>
-<span class="ln">5</span>        <span class="c1">// return the BlogIdea NSManagedObject subclass for the view controller to use</span>
-<span class="ln">6</span>    <span class="p">}</span>
-<span class="ln">7</span><span class="p">}</span></code></pre></div>
-
-<p>2) Fetch all of the <code>BlogIdea</code> objects, but make a <code>fetchBlogIdeaTitles</code> function instead. Just return the <code>ideaTitle</code>s, say, in an array of strings to display in the table view.</p>
-
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln">1</span><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
-<span class="hl"><span class="ln">2</span>    <span class="kd">func</span> <span class="nf">fetchBlogIdeaTitles</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">{</span>
-</span><span class="ln">3</span>        <span class="c1">// fetch BlogIdea instances</span>
-<span class="ln">4</span>
-<span class="ln">5</span>        <span class="c1">// pull out ONLY the ideaTitle, </span>
-<span class="ln">6</span>        <span class="c1">// assemble an array for the titles, </span>
-<span class="ln">7</span>        <span class="c1">// return the array</span>
-<span class="ln">8</span>    <span class="p">}</span>
-<span class="ln">9</span><span class="p">}</span></code></pre></div>
-
+<ol>
+<li>Fetch all the <code>BlogIdea</code> objects, return them, and then use those returned <code>NSManagedObject</code> instances to display the <code>ideaTitle</code> in the table view.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="ln">2</span><span class="cl">    <span class="kd">func</span> <span class="nf">fetchBlogIdeas</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="n">BlogIdea</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="c1">// fetch BlogIdea instances</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="c1">// return the BlogIdea NSManagedObject subclass for the view controller to use</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="p">}</span></span></span></code></pre></div>
+<ol start="2">
+<li>Fetch all of the <code>BlogIdea</code> objects, but make a <code>fetchBlogIdeaTitles</code> function instead. Just return the <code>ideaTitle</code>s, say, in an array of strings to display in the table view.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="ln">2</span><span class="cl">    <span class="kd">func</span> <span class="nf">fetchBlogIdeaTitles</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="c1">// fetch BlogIdea instances</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="c1">// pull out ONLY the ideaTitle, </span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="c1">// assemble an array for the titles, </span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">        <span class="c1">// return the array</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="p">}</span></span></span></code></pre></div>
 <h2 id="swifting-out-loud">Swifting Out Loud</h2>
-
 <p>I&rsquo;ll give my recommendation and then walk through my reasoning.</p>
-
 <p>In nearly all situations, I would go with option number 1: fetch the <code>NSManagedObject</code> instances that I need to display, and work with those fully-featured objects, rather than go through the effort to return only the <code>String</code>s that I need for display.</p>
-
 <p><strong>Why?</strong></p>
-
 <p>To that, I&rsquo;d ask the question:  &ldquo;What are you planning to do <em>next</em>, once the <code>ideaTitle</code>s are displayed in the table view?</p>
-
 <p>Presumably, you&rsquo;re displaying them <em>so that</em> a user can tap on a cell and&hellip;do something with them.  And that &ldquo;do something with them&rdquo; part almost always means</p>
-
 <ul>
 <li>Show <em>more</em> details (in which case, you need the <code>ideaDescription</code> property as well now)</li>
 <li><em>Edit</em> the object (in which case you get all your saving features only <strong>if</strong> it&rsquo;s in <code>NSManagedObject</code> form)</li>
 <li><em>Delete</em> the object (again&hellip;needs to be a full <code>NSManagedObject</code> to easily delete)</li>
 </ul>
-
 <h2 id="efficiency-trade-offs">Efficiency Trade-offs</h2>
-
 <p>One might be concerned about efficiency &ndash; &ldquo;Why return a full object when you only need one of its properties?&rdquo;</p>
-
 <p>That&rsquo;s true. You only need one property&hellip;<em>for now</em>.  Again, I think it goes back to &ldquo;what happens next?&rdquo;</p>
-
 <h3 id="fetching-efficiency">Fetching Efficiency</h3>
-
 <p>Will you display the <code>ideaTitle</code> and then have to go fetch <em>again</em> to get the rest of what you need from your persistent store?  That&rsquo;s almost guaranteed to be less efficient than holding the full <code>NSManagedObject</code> in memory from the start.</p>
-
 <h3 id="memory-efficiency">Memory Efficiency</h3>
-
 <p>If you&rsquo;re trying to stay memory-efficient, perhaps another idea is to fetch only a subset of the <code>BlogIdea</code>s&hellip; You could limit the number of results that come back (after all, only so many can be shown in a table view at a time, anyway, right?).</p>
-
 <h3 id="code-efficiency">Code Efficiency</h3>
-
 <p>When you say &ldquo;Core Data&rdquo; and &ldquo;table view&rdquo; in the same sentence, it should also trigger the word <code>NSFetchedResultsController</code>.  This class is a huuuuge help because it was designed specifically for displaying data from <code>NSManagedObject</code>s in table or collection views.  If you only return an array of <code>String</code>s, you&rsquo;ll have to write a bunch of boiler plate code yourself to keep your table view in sync with your persistent store, but you get all of that for free with <code>NSFetchedResultsController</code>.</p>
-
 <p>Using <code>NSFetchedResultsController</code> would change the code a bit.  Instead of returning an array of blog ideas (<code>[BlogIdea]</code>), you could hold a reference to a <code>NSFetchedResultsController&lt;BlogIdea&gt;</code> and configure it to fetch:</p>
-
-<div class="highlight"><pre class="chroma"><code class="language-swift" data-lang="swift"><span class="ln"> 1</span><span class="c1">// </span><span class="cs">MARK:</span><span class="c1"> - Concept</span>
-<span class="ln"> 2</span><span class="c1">// If you give a `Provider` a persistent container, and a fetched results controller delegate to talk back to,</span>
-<span class="ln"> 3</span><span class="c1">// a `Provider` Type can act as a liaison between the view controller and the pieces of Core Data that are needed</span>
-<span class="ln"> 4</span><span class="c1">// to initialize a fetched results controller, perform fetches, and other Core Data related actions on behalf of your</span>
-<span class="ln"> 5</span><span class="c1">// view controller (instead of you putting all this code in the view controller itself)...</span>
-<span class="ln"> 6</span>
-<span class="ln"> 7</span><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
-<span class="ln"> 8</span>    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">persistentContainer</span><span class="p">:</span> <span class="n">NSPersistentContainer</span>
-<span class="ln"> 9</span>    <span class="kd">private</span> <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">fetchedResultsControllerDelegate</span><span class="p">:</span> <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">?</span>
-<span class="ln">10</span>    
-<span class="ln">11</span>    <span class="c1">// </span><span class="cs">MARK:</span><span class="c1"> - Initializers</span>
-<span class="ln">12</span>    <span class="kd">init</span><span class="p">(</span><span class="n">with</span> <span class="n">persistentContainer</span><span class="p">:</span> <span class="n">NSPersistentContainer</span><span class="p">,</span> 
-<span class="ln">13</span>              <span class="n">fetchedResultsControllerDelegate</span><span class="p">:</span> <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">?)</span> <span class="p">{</span>
-<span class="ln">14</span>
-<span class="ln">15</span>        <span class="kc">self</span><span class="p">.</span><span class="n">persistentContainer</span> <span class="p">=</span> <span class="n">persistentContainer</span>
-<span class="ln">16</span>        <span class="kc">self</span><span class="p">.</span><span class="n">fetchedResultsControllerDelegate</span> <span class="p">=</span> <span class="n">fetchedResultsControllerDelegate</span>
-<span class="ln">17</span>
-<span class="ln">18</span>    <span class="p">}</span>
-<span class="ln">19</span>    
-<span class="ln">20</span>    <span class="c1">// use this in your view controller to display BlogIdea instances</span>
-<span class="hl"><span class="ln">21</span>    <span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">fetchedResultsController</span> <span class="p">:</span> <span class="n">NSFetchedResultsController</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span> <span class="p">=</span> <span class="p">{</span>
-</span><span class="ln">22</span>        <span class="c1">// Configure a fetched results controller and perform an initial fetch</span>
-<span class="ln">23</span>        <span class="kd">let</span> <span class="nv">blogIdeasFetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span><span class="p">(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;BlogIdea&#34;</span><span class="p">)</span>
-<span class="ln">24</span>        
-<span class="ln">25</span>        <span class="kd">let</span> <span class="nv">controller</span> <span class="p">=</span> <span class="n">NSFetchedResultsController</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="o">&gt;</span><span class="p">(</span>  <span class="n">fetchRequest</span><span class="p">:</span> <span class="n">blogIdeasFetchRequest</span><span class="p">,</span>
-<span class="ln">26</span>                                                                <span class="n">managedObjectContext</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span><span class="p">,</span>
-<span class="ln">27</span>                                                                <span class="n">sectionNameKeyPath</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
-<span class="ln">28</span>                                                                <span class="n">cacheName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="ln">29</span>        
-<span class="ln">30</span>        <span class="n">controller</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">fetchedResultsControllerDelegate</span>
-<span class="ln">31</span>        
-<span class="ln">32</span>        <span class="k">do</span> <span class="p">{</span>
-<span class="ln">33</span>            <span class="k">try</span> <span class="n">controller</span><span class="p">.</span><span class="n">performFetch</span><span class="p">()</span>
-<span class="ln">34</span>        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-<span class="ln">35</span>            <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;</span><span class="si">\(</span><span class="kc">#function</span><span class="si">)</span><span class="s">: Failed to performFetch: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
-<span class="ln">36</span>        <span class="p">}</span>
-<span class="ln">37</span>        
-<span class="ln">38</span>        <span class="k">return</span> <span class="n">controller</span>
-<span class="ln">39</span>    <span class="p">}()</span>
-<span class="ln">40</span><span class="p">}</span></code></pre></div>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// </span><span class="cs">MARK:</span><span class="c1"> - Concept</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1">// If you give a `Provider` a persistent container, and a fetched results controller delegate to talk back to,</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1">// a `Provider` Type can act as a liaison between the view controller and the pieces of Core Data that are needed</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1">// to initialize a fetched results controller, perform fetches, and other Core Data related actions on behalf of your</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1">// view controller (instead of you putting all this code in the view controller itself)...</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="kd">class</span> <span class="nc">BlogIdeaProvider</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">persistentContainer</span><span class="p">:</span> <span class="n">NSPersistentContainer</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="kd">private</span> <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">fetchedResultsControllerDelegate</span><span class="p">:</span> <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">?</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="c1">// </span><span class="cs">MARK:</span><span class="c1"> - Initializers</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="kd">init</span><span class="p">(</span><span class="n">with</span> <span class="n">persistentContainer</span><span class="p">:</span> <span class="n">NSPersistentContainer</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln">13</span><span class="cl">              <span class="n">fetchedResultsControllerDelegate</span><span class="p">:</span> <span class="n">NSFetchedResultsControllerDelegate</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">persistentContainer</span> <span class="p">=</span> <span class="n">persistentContainer</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">fetchedResultsControllerDelegate</span> <span class="p">=</span> <span class="n">fetchedResultsControllerDelegate</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="c1">// use this in your view controller to display BlogIdea instances</span>
+</span></span><span class="line hl"><span class="ln">21</span><span class="cl">    <span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">fetchedResultsController</span> <span class="p">:</span> <span class="n">NSFetchedResultsController</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="c1">// Configure a fetched results controller and perform an initial fetch</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="kd">let</span> <span class="nv">blogIdeasFetchRequest</span> <span class="p">=</span> <span class="n">NSFetchRequest</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="p">&gt;(</span><span class="n">entityName</span><span class="p">:</span> <span class="s">&#34;BlogIdea&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        <span class="kd">let</span> <span class="nv">controller</span> <span class="p">=</span> <span class="n">NSFetchedResultsController</span><span class="p">&lt;</span><span class="n">BlogIdea</span><span class="p">&gt;(</span>  <span class="n">fetchRequest</span><span class="p">:</span> <span class="n">blogIdeasFetchRequest</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">                                                                <span class="n">managedObjectContext</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">persistentContainer</span><span class="p">.</span><span class="n">viewContext</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">                                                                <span class="n">sectionNameKeyPath</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">                                                                <span class="n">cacheName</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        <span class="n">controller</span><span class="p">.</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">fetchedResultsControllerDelegate</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">        
+</span></span><span class="line"><span class="ln">32</span><span class="cl">        <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">            <span class="k">try</span> <span class="n">controller</span><span class="p">.</span><span class="n">performFetch</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">            <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;</span><span class="si">\(</span><span class="kc">#function</span><span class="si">)</span><span class="s">: Failed to performFetch: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        
+</span></span><span class="line"><span class="ln">38</span><span class="cl">        <span class="k">return</span> <span class="n">controller</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">    <span class="p">}()</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl"><span class="p">}</span></span></span></code></pre></div>
 <h2 id="concluding-thoughts">Concluding Thoughts</h2>
-
 <p>I know I keep going back to it, but I think it&rsquo;s what will help make the decision.</p>
-
 <p>What&rsquo;s the next thing you&rsquo;re expecting to happen after you fetch the objects and display them?</p>
-
 <p>Let that be your guiding principle for your fetching and displaying strategy.</p>
-
 <p>With Core Data, it&rsquo;s almost always going to be more convenient to be working with <code>NSManagedObject</code>s.  Start there, and handle efficiency problems as they arise. 🙌🏻</p>
 
     <aside>
@@ -360,7 +332,7 @@ Suppose that you also have a class that will provide <code>BlogIdeas</code> to y
 
     <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
