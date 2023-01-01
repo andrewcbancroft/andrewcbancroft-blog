@@ -62,7 +62,7 @@
                 <div class="card">
                     <div class="article_list card-body recent-work-body">
                         <ul>
-                                {{ range first 5 (where .Pages "Params.showrecent" true).ByDate.Reverse }}
+                                {{ range first 5 (where .Site.Pages "Params.showrecent" true).ByDate.Reverse }}
                                 <li><a href="{{.Permalink}}">{{.Title}}</a></li>
                                 <i class="fas fa-calendar-day"></i> <time datetime="{{ .Date.Format " 2006-01-02T15:04:05Z07:00 " }}">{{ .Date.Format $dateFormat }}</time>
                                 <div class="excerpt">{{.Description}}</div>
@@ -85,7 +85,7 @@
                 <div class="card">
                     <div class="article_list card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/pluralsight/") }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/pluralsight/") }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -110,7 +110,7 @@
                     <h4 class="card-header">Data Persistence</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/data-persistence/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/data-persistence/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -128,7 +128,7 @@
                     <h4 class="card-header">Dependency Management</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/dependency-management/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/dependency-management/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -146,7 +146,7 @@
                     <h4 class="card-header">Debugging</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/debugging/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/debugging/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -164,7 +164,7 @@
                     <h4 class="card-header">Event Kit</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/eventkit/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/eventkit/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -182,7 +182,7 @@
                     <h4 class="card-header">In-App Purchases</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/iap/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/iap/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -200,7 +200,7 @@
                     <h4 class="card-header">Parse</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/parse/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/parse/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -218,7 +218,7 @@
                     <h4 class="card-header">Patterns and Practices</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/patterns-and-practices/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/patterns-and-practices/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -236,7 +236,7 @@
                     <h4 class="card-header">React Native</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/react-native/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/react-native/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -254,7 +254,7 @@
                     <h4 class="card-header">"Swift Five" Series</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/swift-five/").ByDate }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/swift-five/").ByDate }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -272,7 +272,7 @@
                     <h4 class="card-header">Swift How-To's</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/swift-how-tos/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/swift-how-tos/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -290,7 +290,7 @@
                     <h4 class="card-header">Swift Language Notes</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/swift-language-notes/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/swift-language-notes/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -308,7 +308,7 @@
                     <h4 class="card-header">Swifting Out Loud</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/swifting-out-loud/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/swifting-out-loud/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -326,7 +326,7 @@
                     <h4 class="card-header">Testing</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/testing/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/testing/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -344,7 +344,7 @@
                     <h4 class="card-header">User Interface Work</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/ui-work/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/ui-work/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -362,7 +362,7 @@
                     <h4 class="card-header">Xcode</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/ios-development/xcode/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/ios-development/xcode/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -386,7 +386,7 @@
                     <!-- <h4 class="card-header">SQL Server</h4> -->
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/dot-net-development/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/dot-net-development/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
@@ -410,7 +410,7 @@
                     <h4 class="card-header">Musings</h4>
                     <div class="card-body">
                         <ul>
-                            {{ range (where .Pages "File.Dir" "in" "/blog/musings/").ByTitle }}
+                            {{ range (where .Site.Pages "File.Dir" "in" "/blog/musings/").ByTitle }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
