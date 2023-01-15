@@ -85,7 +85,7 @@
                 <div class="card">
                     <div class="article_list card-body">
                         <ul>
-                            {{ range (where .Site.Pages "File.Dir" "in" "/pluralsight/") }}
+                            {{ range (where .Site.RegularPages "File.Dir" "in" "/pluralsight/") }}
                             <li>
                                 <a href="{{.Permalink}}">{{.Title}}</a>
                             </li>
