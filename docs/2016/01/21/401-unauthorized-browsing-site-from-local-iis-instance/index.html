@@ -205,13 +205,13 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>I spent waaaaay way way way too long fighting this one, so I&rsquo;m saving everything I found on the issue so that I never lose it.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="setup" class="jump-target"></a></p>
 <h3 id="setup">Setup</h3>
 <ul>
 <li>Running Internet Information Services (IIS) 8.5 on my laptop.</li>
 <li>Set up a site with an ASP.Net MVC web application Windows Authentication.</li>
 </ul>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="problem" class="jump-target"></a></p>
 <h3 id="problem">Problem</h3>
 <ul>
 <li>Browsing the site locally continually prompts for my domain username and password.</li>
@@ -219,7 +219,7 @@ MathJax.Hub.Config({
 <li>Cancelling the login prompt ultimately responds with 401 Unauthorized.</li>
 </ul>
 <p>When accessing the site with Fiddler, IIS simply responds with 401 Unauthorized.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="solution" class="jump-target"></a></p>
 <h3 id="solution-with-original-sources">Solution (with original sources)</h3>
 <p>An incredibly helpful StackOverflow titled <a href="http://stackoverflow.com/questions/7387156/unable-to-get-windows-authentication-to-work-through-local-iis">Unable to get windows authentication to work through local IIS</a> provided the solution.</p>
 <p><em>Its</em> source was a KnowledgeBase article from Microsoft: <a href="https://support.microsoft.com/en-us/kb/896861">https://support.microsoft.com/en-us/kb/896861</a></p>
@@ -236,7 +236,7 @@ registry entry to 1. For more information about how to do this, refer to article
 <li>In the Value data box, type the host name or the host names for the sites that are on the local computer, and then click OK.</li>
 <li>Quit Registry Editor, and then restart the IISAdmin service. (to do this, I ran iisreset from a Powershell prompt)</li>
 </ol>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -276,7 +276,7 @@ registry entry to 1. For more information about how to do this, refer to article
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

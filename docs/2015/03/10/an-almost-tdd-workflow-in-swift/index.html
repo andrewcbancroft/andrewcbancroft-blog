@@ -210,7 +210,7 @@ MathJax.Hub.Config({
 
     <p>There are times when it feels paralyzing to write tests <em>first</em> before any production code is written. Even with good requirements documentation, I often find myself asking, &ldquo;How am I supposed to write a test to verify <strong><em>x</em></strong> about some <strong><em>thing</em></strong> that doesn&rsquo;t exist in actual code yet?” It can be crippling.</p>
 <p>The following is a workflow that&rsquo;s helped me grow in my test-first development skills. When I find myself staring at the screen, paralyzed because I&rsquo;m &ldquo;not supposed to write actual production code until the test is written”, I often turn to the workflow that I&rsquo;m about to describe to help me break through to being productive. With practice and experience, I find myself needing this strategy less and less, but I&rsquo;ve found it helpful to use this (almost) TDD workflow as a gateway into full test-first development.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="setup" class="jump-target"></a></p>
 <h3 id="set-up-side-by-side-view-test-on-left--code-on-right">Set up side-by-side view: Test on left | Code on right</h3>
 <p>My starting place is to always have a test file open on the left, and the actual production code file that I want to write tests for on the right. This does a couple of things for me:</p>
 <ol>
@@ -218,20 +218,20 @@ MathJax.Hub.Config({
 <li>It helps me keep tests at the forefront of my mind. Without seeing them in front of me, I could more easily forget about them. Having the split IDE keeps me conscious of the need to prioritize testing.</li>
 </ol>
 <p>I recently <a href="http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/">wrote about a technique to seed a Core Data database</a>, and with that post, I <a href="https://github.com/andrewcbancroft/Zootastic">included a project called &ldquo;Zootastic”</a> – a contrived app that modeled the storage and display of <code>Zoos</code> (along with <code>Animals</code> and their <code>Classifications</code>). I created a class called <code>DataHelper</code> which had several <code>seed()</code> methods. For the purposes of having an example before us, suppose that I wanted to test <code>DataHelper</code>. My screen might look something like this, with my tests on the left, and my <code>DataHelper</code> class on the right:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/TestsLeft_CodeRight.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/TestsLeft_CodeRight.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/TestsLeft_CodeRight-1024x208.png" alt="Test on the left | Code on the right" width="1024" height="208" class="alignnone size-large wp-image-11495" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/TestsLeft_CodeRight-1024x208.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/TestsLeft_CodeRight-300x61.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="write-code" class="jump-target"></a></p>
 <h3 id="write-the-actual-production-code">Write the actual production code</h3>
 <p>What I want is to insert 3 Zoo objects into the Core Data data store. But without the actual code before me, it&rsquo;s hard to imagine what the test(s) for that code might look like.</p>
 <p>When I get stuck in this way, I&rsquo;ll go ahead and write the actual production code:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteProductionCode.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteProductionCode.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteProductionCode-1024x264.png" alt="Write the production code" width="1024" height="264" class="alignnone size-large wp-image-11497" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteProductionCode-1024x264.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteProductionCode-300x77.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p>One important thing to remember is that you don&rsquo;t want to write a <em>ton</em> of code in this step… just enough to spark your brain into figuring out what kinds of tests you can write. Write small increments of code. The more you write, the harder it will be to ensure you&rsquo;ve covered the code and the various edge cases that may exist. Your goal is not to write the <em>app</em>. Your goal is to write a function, or a <em>part</em> of the function – just enough to get you going with tests.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="write-test" class="jump-target"></a></p>
 <h3 id="write-a-test-that-will-exercise-the-code">Write a test that will exercise the code</h3>
 <p>Having some real code with real class names and real function names usually helps me see what I need to do in terms of testing.</p>
 <p>In the example I have going, I&rsquo;d like my <code>seedZoos()</code> function to insert 3 <code>Zoo</code> objects into my CoreData data store.</p>
 <p>At this point, it&rsquo;s pretty easy for me to think of the name of my first test. How about, <code>testSeedZoosInserts3ZooObjectsIntoDataStore()</code>:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteTest.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteTest.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteTest-1024x385.png" alt="Write a test" width="1024" height="385" class="alignnone size-large wp-image-11498" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteTest-1024x385.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteTest-300x113.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="comment-code" class="jump-target"></a></p>
 <h3 id="comment-out-the-production-code-so-that-the-test-will-fail">Comment out the production code so that the test will fail</h3>
 <p>Running the tests right now would produce a passing test. &ldquo;Great!”, you say – but here&rsquo;s my issue with simply running the test, seeing it pass, and moving on <em>without</em> ever having seen it fail:</p>
 <p>There are <em>many</em> ways to produce passing tests without actually verifying the results of executing the app&rsquo;s code.</p>
@@ -241,27 +241,27 @@ MathJax.Hub.Config({
 <li>Suppose I copied and pasted a test and intended to replace the implementation to test my new code. But I get distracted between when I pasted it and when I ran it for the first time. If I ran it, saw &ldquo;pass” and moved on, the test wouldn&rsquo;t be doing its job – it&rsquo;d be testing something that I already tested, and not these new lines of code I just produced!</li>
 </ul>
 <p>The point is this: There are too many ways to write a test that doesn&rsquo;t truly test your code. Suffice it to say, you should <em>always</em> make the test fail so that you know it&rsquo;s wired up to the right production code. Thus, this crucial step: <strong>comment out the production code</strong>. It&rsquo;ll ensure you get a failing test on the first run (if you&rsquo;re truly testing the right thing).</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/CommentProductionCode.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/CommentProductionCode.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/CommentProductionCode-1024x379.png" alt="Comment out the production code" width="1024" height="379" class="alignnone size-large wp-image-11492" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/CommentProductionCode-1024x379.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/CommentProductionCode-300x111.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="run-test-fail" class="jump-target"></a></p>
 <h3 id="run-the-test-and-verify-that-it-fails">Run the test and verify that it fails</h3>
 <p>With the production code I just wrote commented out, I run the test. My expectation at this point is that it will <em>fail</em>, because the <code>seedZoos()</code> function does <em>not</em> currently insert any <code>Zoo</code> objects into the data store.</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Fail.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Fail.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Fail-1024x380.png" alt="Run test - the test should fail" width="1024" height="380" class="alignnone size-large wp-image-11493" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Fail-1024x380.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Fail-300x111.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p><strong>If the test doesn&rsquo;t fail, something is wrong.</strong> Check the basics: Did you include an assert at the end of the test? Are you exercising the right production code? Continue troubleshooting and re-running the test until it fails.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="uncomment-code" class="jump-target"></a></p>
 <h3 id="uncomment-the-production-code-so-that-the-test-will-pass">Uncomment the production code so that the test will pass</h3>
 <p>Once I&rsquo;ve been able to make the test fail, I uncomment the production code.</p>
 <p>The idea here is that once the production code is now &ldquo;live”, the test that&rsquo;s currently failing should <em>pass</em>, now that production code is performing appropriate logic to meet the test&rsquo;s assertion requirements. We know that the test currently fails, so if it passes <em>after</em> we uncomment the production code, the only reason it could pass is because the production code is doing the right thing for that particular test&rsquo;s assertion. Nothing else about our work environment changed, so nothing else except the uncommented production code could have been the cause of the passing test.</p>
 <p>Here&rsquo;s a view of the IDE in the state right before I run the test again to watch it pass:<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/UncommentProductionCode.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/UncommentProductionCode.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/UncommentProductionCode-1024x380.png" alt="Uncomment the production code" width="1024" height="380" class="alignnone size-large wp-image-11496" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/UncommentProductionCode-1024x380.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/UncommentProductionCode-300x111.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="run-test-pass" class="jump-target"></a></p>
 <h3 id="run-the-test-and-verify-that-it-passes">Run the test and verify that it passes</h3>
 <p>The last step in this (almost) TDD workflow is to run the test one more time. This time it should pass:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Pass.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Pass.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Pass-1024x382.png" alt="Run test - the test should pass" width="1024" height="382" class="alignnone size-large wp-image-11494" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Pass-1024x382.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Pass-300x112.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p><strong>If the test <em>doesn&rsquo;t</em> pass, then something is wrong.</strong> Check the basics: Does the test assert the right thing? Does the production code perform correct logic that would satisfy the test&rsquo;s assertion? Continue troubleshooting and revise the necessary code until you have a passing test.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="rinse-repeat" class="jump-target"></a></p>
 <h3 id="rinse-and-repeat">Rinse and repeat</h3>
 <p>You can perform this workflow as my times as you need. This is a stepping stone, so the hope is that eventually you&rsquo;ll be able to write the tests <em>first</em>. It takes a little practice, but using this technique has, in my experience, been a gateway to true Test Driven Development.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -320,7 +320,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

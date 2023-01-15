@@ -207,7 +207,7 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>Following along with Steve Smith&rsquo;s <a href="http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html">&ldquo;Your First ASP.NET 5 Application on a Mac”</a>, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&rsquo;t work due to a problem with restoring the project&rsquo;s dependencies.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="retracing-steps" class="jump-target"></a></p>
 <h3 id="retracing-my-steps">Retracing my steps</h3>
 <p>I <a href="http://docs.asp.net/en/latest/getting-started/installing-on-mac.html">got ASP.NET installed on my Mac</a>, and I even got a cool little template going using <a href="http://yeoman.io/">Yeoman</a>.</p>
 <p>I opened up my scaffolded project using Visual Studio Code, and began the dependency restore process. But it failed. So I troubleshooted (troubleshot?), and it failed some more.</p>
@@ -217,18 +217,18 @@ MathJax.Hub.Config({
 <p>Make sure your DNX and packages are on the same version &ldquo;train”</p>
 </blockquote>
 <p>My issue wasn&rsquo;t with DNX, but with <strong>Mono</strong>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="mis-matched-mono" class="jump-target"></a></p>
 <h3 id="mis-matched-mono-versions">Mis-matched Mono versions</h3>
 <p>When I followed the instructions for installing ASP.NET, I distinctly remember installing Mono using the installer package available at their website.</p>
 <p>What I <em>failed</em> to realize, however, was that a while back (long enough ago to where it didn&rsquo;t hit me until just a few minutes ago), I installed Mono using Homebrew.</p>
 <p>So despite my efforts to install Mono using the installer package, the Mono that everything in my system was using was the one installed by Homebrew, which was version 3.10.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="resolved" class="jump-target"></a></p>
 <h3 id="resolved">Resolved</h3>
 <p>To resolve the issue, I went ahead and just ran <code>brew upgrade mono</code>.</p>
 <p>Verifying that Mono was successfully upgraded via a <code>mono --version</code> command, I retried the dependency restoration in my scaffolded ASP.NET 5 application.</p>
 <p>The result?</p>
 <p><code>dnu restore</code> produced a wonderfully green, &ldquo;Restore complete”!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -281,7 +281,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

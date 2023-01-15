@@ -59,7 +59,7 @@ Inspiration A simple idea came to mind: Create something that allows client deve
   "@type": "BlogPosting",
   "headline": "Fade Views In/Out with Fadeable – A Swift Protocol Extension",
   "url": "https:\/\/www.andrewcbancroft.com\/2016\/02\/22\/fade-views-inout-with-fadeable-a-swift-protocol-extension\/",
-  "wordCount": "497",
+  "wordCount": "514",
   "datePublished": "2016-02-22T19:07:27Z",
   "dateModified": "2016-02-22T19:07:27Z",
   "author": {
@@ -209,18 +209,26 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>During the production of my <a href="https://www.pluralsight.com/courses/cocoapods-xcode-project-dependencies">Pluralsight course on Managing Xcode Project Dependencies with CocoaPods</a>, I wanted to provide viewers of the course the opportunity to see how to create and deploy a simple library out to the CocoaPods Trunk.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="inspiration" class="jump-target"></a></p>
 <h3 id="inspiration">Inspiration</h3>
 <p>A simple idea came to mind: Create something that allows client developers of the pod to easily fade views in or out on any UIView instance. If you&rsquo;ve read andrewcbancroft.com for a long time, you might remember that I <a href="https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/">wrote on this very subject already</a>, but there, I used an extension to UIView, because protocol extensions hadn&rsquo;t been invented yet!</p>
 <p>For my course, I borrowed an idea that I first saw done by <a href="https://twitter.com/FlexMonkey">@NSFlexMonkey</a> when he built the <a href="http://flexmonkey.blogspot.co.uk/2015/10/rotatable-swift-protocol-extension-to.html">Rotateable protocol extension</a>. Only instead of rotating, I&rsquo;m fading, so I named it &ldquo;Fadeable”!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="demo" class="jump-target"></a></p>
 <h3 id="demo">Demo</h3>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/02/fadeable-gif.gif"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/02/fadeable-gif.gif"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/02/fadeable-gif.gif" alt="Fadeable Gif Demo" width="374" height="668" class="alignnone size-full wp-image-12654" /></a></p>
+<p><a name="sample" class="jump-target"></a></p>
 <h3 id="fadeable-code-sample">Fadeable code sample</h3>
 <p>The &ldquo;library&rsquo;s” source can be found over at GitHub:</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/Fadeable" title="Fadeable">Fadeable</a>
+    </li>
+  </ul>
+</div>
 <p>Here&rsquo;s a snippet from the repository so you can see what the extension&rsquo;s doing:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">import</span> <span class="nc">UIKit</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">
@@ -263,13 +271,24 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="creating-cocoapod-libraries" class="jump-target"></a></p>
 <h3 id="creating-cocoapod-libraries">Creating CocoaPod libraries</h3>
 <p>If you&rsquo;re interested in seeing a full walk-through of how I created and published the Fadeable Library to the CocoaPods Trunk, I would love it if you gave Module 3 of my Pluralsight course, titled a watch! It&rsquo;s titled <a href="https://www.pluralsight.com/courses/cocoapods-xcode-project-dependencies">Creating CocoaPod Libraries</a> and covers from beginning to end, the process of creating a library that&rsquo;s compatible with CocoaPods.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/" title="Managing Xcode Project Dependencies with CocoaPods">Managing Xcode Project Dependencies with CocoaPods</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/" title="Slide In Animation in Swift">Slide In Animation in Swift</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -328,7 +347,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

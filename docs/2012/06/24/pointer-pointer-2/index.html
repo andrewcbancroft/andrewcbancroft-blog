@@ -61,7 +61,7 @@ A pointer stores an address of where some piece of data &ldquo;lives” (begins 
   "@type": "BlogPosting",
   "headline": "Pointer Pointer #2",
   "url": "https:\/\/www.andrewcbancroft.com\/2012\/06\/24\/pointer-pointer-2\/",
-  "wordCount": "284",
+  "wordCount": "309",
   "datePublished": "2012-06-24T14:23:33Z",
   "dateModified": "2012-06-24T14:23:33Z",
   "author": {
@@ -223,7 +223,9 @@ printf(&ldquo;intPointer, itself, is stored at an address, which is different th
 }<br>
 [/cpp]</p>
 <p>Output (on my machine):</p>
-<!-- raw HTML omitted -->
+<p class="note">
+  intPointer stores the address of i, which is: <strong>0x7fff6bacab9c</strong><br /> intPointer, itself, is stored at an address, which is different than the address intPointer stores: <strong>0x7fff6bacaba0</strong>
+</p>
 <p>This may or may not be obvious to you (it wasn&rsquo;t to me until I understood a tiny bit of what&rsquo;s happening a little further down in the computer&rsquo;s layers of abstraction).  When it comes down to it, all of our C code is an abstraction.  C, and any high-level programming language removes the complexity of having to figure out how to lay down bit patterns in memory (among other things).</p>
 <p>The key insight I gained from this discovery is that <em>any</em> type of variable, including pointers, that we declare and use in C code eventually translates to some bit pattern in memory that our computers use to do work with.  It took realizing that pointers, themselves were stored in memory to see this, but I&rsquo;m glad it finally came to light because it&rsquo;s helped de-mystify some of the mystery world of pointers.</p>
 
@@ -276,7 +278,7 @@ printf(&ldquo;intPointer, itself, is stored at an address, which is different th
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

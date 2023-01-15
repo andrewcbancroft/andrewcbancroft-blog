@@ -61,7 +61,7 @@ As it turns out, most of the major features of the app are things that I&rsquo;v
   "@type": "BlogPosting",
   "headline": "Dissecting 10 Read 10 Said – My New Swift iOS App",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/07\/22\/dissecting-10-read-10-said-my-new-swift-ios-app\/",
-  "wordCount": "610",
+  "wordCount": "708",
   "datePublished": "2015-07-23T03:57:33Z",
   "dateModified": "2015-07-23T03:57:33Z",
   "author": {
@@ -210,52 +210,108 @@ MathJax.Hub.Config({
 <p>While the goal of the app is to help you implement the <a href="http://10read10said.andrewcbancroft.com/" title="10 Read 10 Said Strategy">&ldquo;10 Read 10 Said” strategy for memorizing Bible verses</a>, my goal in this <em>article</em> is to dissect the app, and share with you how some of the major features were implemented.</p>
 <p>As it turns out, <em>most</em> of the major features of the app are things that I&rsquo;ve already written about over the <a href="http://www.andrewcbancroft.com/category/software-development/ios-mac/swift/" title="Swift Content at andrewcbancroft.com">past year of producing Swift content</a>! The approach I&rsquo;ll take, then, is to walk through each screen and point out which articles I&rsquo;ve written might pertain to the particular feature implementations that are visible from that screen.</p>
 <p>I hope this tour satisfies the curiosity of many like myself who ask, &ldquo;I wonder how they did that!”</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="demo" class="jump-target"></a></p>
 <h3 id="app-demo">App Demo</h3>
 <p>To demonstrate the major functionality of the app, I&rsquo;ve created a short (50 second) YouTube video. Take a look, and then I&rsquo;ll break down each screen:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="verse-list" class="jump-target"></a></p>
 <h3 id="verse-list">Verse List</h3>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Verse-List.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Verse-List.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Verse-List-576x1024.png" alt="Verse List" width="326" height="774" class="alignnone size-large wp-image-12126" /></a></p>
+<p><a name="navigation-controller" class="jump-target"></a></p>
 <h4 id="navigation-controller">Navigation Controller</h4>
 <p>To begin, the Verse List scene has been embedded in a <code>UINavigationController</code>. This caused me to have to make a few changes in <code>AppDelegate</code> to properly dig in to access the verse list controller and set some properties on it.</p>
 <p>I&rsquo;ve covered the details of how to &ldquo;unpack” a <code>UINavigationController</code> and access its first <em>child</em> view controller in my article titled <a href="http://www.andrewcbancroft.com/2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/">&ldquo;Access Sub-Controllers from a UINavigationController in Swift”</a>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="table-view" class="jump-target"></a></p>
 <h4 id="table-view">Table View</h4>
 <p>The next most obvious thing to notice about the verse list is that it&rsquo;s been implemented with a <code>UITableView</code>. Additionally, each cell is a &ldquo;custom” cell, rather than one of the default cell styles that Xcode gives you out of the box. I&rsquo;ve written an article or three on these:</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="resources">
+  <div class="resources-header">
+    UITableView Articles
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/" title="Swift How-To: Setting up a Table View">Swift How-To: Setting up a Table View</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/02/12/custom-uitableviewcell-text-input-swift/" title="Custom UITableViewCell for Text Input in Swift">Custom UITableViewCell for Text Input in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/" title="UITableView Swipe to Delete Workflow in Swift">UITableView Swipe to Delete Workflow in Swift</a>
+    </li>
+  </ul>
+</div>
+<p><a name="data-source" class="jump-target"></a></p>
 <h4 id="data-soure">Data Soure</h4>
 <p>The verse list&rsquo;s data source is an <code>NSFetchedResultsController</code>. This, of course, implies that my underlying data framework for the app is Core Data. Here are some of the articles I&rsquo;ve written on these subjects:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="core-data" class="jump-target"></a></p>
 <h5 id="core-data">Core Data</h5>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="resources">
+  <div class="resources-header">
+    Core Data Articles
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/" title="Core Data Cheat Sheet for Swift iOS Developers">Core Data Cheat Sheet for Swift iOS Developers</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/" title="Implement NSManagedObject Subclass in Swift">Implement NSManagedObject Subclass in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/" title="Unit Testing Model Layer with Core Data and Swift">Unit Testing Model Layer with Core Data and Swift</a>
+    </li>
+  </ul>
+</div>
+<p><a name="ns-fetched-results-controller" class="jump-target"></a></p>
 <h5 id="nsfetchedresultscontroller">NSFetchedResultsController</h5>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="resources">
+  <div class="resources-header">
+    NSFetchedResultsController Articles
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/" title="Displaying Data With NSFetchedResultsController and Swift">Displaying Data With NSFetchedResultsController and Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/" title="Sync Table View Data: NSFetchedResultsController and Swift">Sync Table View Data: NSFetchedResultsController and Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/" title="Using Swift to Seed a Core Data Database">Using Swift to Seed a Core Data Database</a>
+    </li>
+  </ul>
+</div>
+<p><a name="add-verse" class="jump-target"></a></p>
 <h3 id="add-verse">Add Verse</h3>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Add-Verse.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Add-Verse.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Add-Verse-576x1024.png" alt="Add Verse" width="326" height="774" class="alignnone size-large wp-image-12124" /></a></p>
 <p>Adding a verse and synchronizing things to the table view (and the persistent data store) involves all-things Core Data and <code>NSFetchedResultsController</code>. Using the combination of these two made things super easy to keep up-to-date in the UI.</p>
 <p>When you press ‘Save&rsquo;, your verse gets sent to the managed object context for the app. Once it&rsquo;s saved using the context, the verse list gets automatically updated using its <code>NSFetchedResultsController</code> data source. I really liked the results!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="memorize" class="jump-target"></a></p>
 <h3 id="memorize">Memorize</h3>
 <p>The memorization screen brings into play a few UI elements that I&rsquo;ve experimented with and written on in the past. First, let&rsquo;s take a look at these two screen layouts to have the visual before us:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="read-it-said-it" class="jump-target"></a></p>
 <h4 id="read-it-said-it">Read It, Said It</h4>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Read-It.png"><!-- raw HTML omitted --></a></p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Said-It.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Read-It.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Read-It-576x1024.png" alt="Memorize - Read It" width="326" height="774" class="alignnone size-large wp-image-12123" /></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Said-It.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Said-It-576x1024.png" alt="Memorize - Said It" width="326" height="774" class="alignnone size-large wp-image-12122" /></a></p>
 <p>The most notable thing I can think of on this scene is the circular progress indicator to help visualize how close you are to completing the read / said goal.</p>
 <p>A few other subtle notes are the fade in/out animations that happen when you complete the read goal, the said goal, and the peek/hide action. Check out the related articles for those pieces:</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div class="resources">
+  <div class="resources-header">
+    UI Articles
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/07/09/circular-progress-indicator-in-swift/" title="Circular Progress Indicator in Swift">Circular Progress Indicator in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" title="Fade In / Out Animations as Class Extensions in Swift">Fade In / Out Animations as Class Extensions in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/06/25/swift-uicolor-extension-create-using-rgb-values-not/" title="Swift UIColor Extension – Create using RGB Values (Not %)">Swift UIColor Extension – Create using RGB Values (Not %)</a>
+    </li>
+  </ul>
+</div>
 <h3 id="wrapping-up">Wrapping up</h3>
 <p>While this isn&rsquo;t the first app I&rsquo;ve worked on and published to the App Store, it <em>is</em> my first <em>personal</em> project idea that&rsquo;s out there. I had a lot of fun building it as a utility for myself in my own Scripture memorization efforts. My hope is that the tool (and more importantly, <a href="http://10read10said.andrewcbancroft.com/">the strategy</a>) is helpful to others as well!</p>
 <p>My goal in this article was to give you a &ldquo;behind the scenes” look at 10 Read 10 Said. I hope your curiosity has been satisfied by some of these inside looks into the app!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -314,7 +370,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

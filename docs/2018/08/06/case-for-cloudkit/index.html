@@ -216,23 +216,23 @@ MathJax.Hub.Config({
 <p>Of the options on my own survey, I’ve had experience building apps using three of the four: CloudKit, Firebase, and “rolling my own backend” with an app built for my employer.</p>
 <p>So I asked myself, “When would <em>you</em> use CloudKit, Andrew?”</p>
 <p>Here’s how I tend break it down. The more of these that apply to you and your app development experience, the stronger the case for using CloudKit (in my opinion):</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="apple-platforms-only"></a></p>
 <h2 id="apple-platforms-only-cloudkit">Apple Platforms Only? CloudKit.</h2>
 <p>If you&rsquo;re developing <em>solely</em> for Apple&rsquo;s platforms, CloudKit is the natural choice.</p>
 <p>One of the other CloudKit alternatives mentioned in the survey might have the upper hand if you&rsquo;re developing for Android as well, but if you&rsquo;re sticking to the Apple ecosystem, it makes sense to use their remote data storage and sharing service (ie, CloudKit).</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="cloudkit-js"></a></p>
 <h2 id="expand-beyond-apple-platforms-with-cloudkit-js">Expand Beyond Apple Platforms with CloudKit JS</h2>
 <p>Even if you&rsquo;re <em>not</em> developing solely for Apple&rsquo;s platforms, CloudKit might still be a viable choice for you!</p>
 <p>Apple designed <a href="https://developer.apple.com/documentation/cloudkitjs">CloudKit JS</a> to create companion web apps to your iOS and macOS apps. You must have an existing CloudKit app and enable web services to use CloudKit JS, but once you&rsquo;ve got an Apple app configured, you can leverage CloudKit in the web version of your app if you have one.</p>
 <p>As I engaged with folks on Twitter about this, I learned that some were even leveraging CloudKit in an Android app using CloudKit JS as a bridge into the Apple ecosystem.</p>
 <p>This opens up the audience for your app tremendously!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="authentication"></a></p>
 <h2 id="built-in-authentication-cloudkit">Built-in Authentication: CloudKit.</h2>
 <p>If you&rsquo;re tired of creating sign up and login screens, look no further than CloudKit.</p>
 <p>This is especially true if you&rsquo;re only worrying with developing for Apple&rsquo;s Platforms.</p>
 <p>Users signed in with an Apple ID are automatically authenticated when your app uses CloudKit.</p>
 <p>Kiss the sign up/login screens goodbye!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="free-longer"></a></p>
 <h2 id="cloudkit-is-free-for-longer">CloudKit is Free for Longer</h2>
 <p>All of the backend as a service providers offer a free tier or a free trial, and while I don&rsquo;t have personal experience with these services&rsquo; payment threshholds, it&rsquo;s my observation that CloudKit&rsquo;s free tier might &ldquo;last longer&rdquo;. What do I mean by that?</p>
 <ol>
@@ -242,28 +242,28 @@ MathJax.Hub.Config({
 * Realm Platform <a href="https://realm.io/pricing">offers a 30 day free trial</a>, but is $30/month after that, and acts primarily as a remote data store for non-binary data.</li>
 <li>As the number of users for your app grows, your storage and transfer limits scale with your app&rsquo;s user base. I don&rsquo;t have personal experience here, but I wonder… by the time your app grows to 100,000 users (the tipping point for Apple to scale your app&rsquo;s alotments up), how probable is it that you&rsquo;d already be paying to use Firebase?</li>
 </ol>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="own-backend"></a></p>
 <h2 id="rolling-your-own-backend-consider-cloudkit">Rolling Your Own Backend? Consider CloudKit.</h2>
 <p>Folks already invested in Realm or Firebase are already leveraging a backend as a service platform. It&rsquo;s those that are maintaining backend server infrastructure <em>themselves</em> that I might suggest consider CloudKit.</p>
 <p>I&rsquo;ve been in the shoes of those who have to roll their own backend server and maintain those VMs, databases, web servers… the works.</p>
 <p>Many times this is because there&rsquo;s a need to connect a mobile app to an organization&rsquo;s on-premise/public cloud ecosystem, and for that, I can totally empathize.</p>
 <p>CloudKit offers a reliable alternative that organizations developing for Apple&rsquo;s platforms should consider. It&rsquo;s a huge weight off the shoulders to abstract the backend and let Apple maintain those servers and storage components. Data stored in the <strong>public</strong> cloud database <em>is</em> accessible programmatically, so your organization <em>can</em> get at data stored there for incorporation into its internal ecosystem.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="first-party-only"></a></p>
 <h2 id="company-requirement-1st-party-frameworks-and-services-only-cloudkit">Company Requirement: 1st Party Frameworks and Services Only? CloudKit.</h2>
 <p>This requirement is most likely to be seen within companies and organizations that have an aversion to bringing in a lot of 3rd party dependencies.</p>
 <p>Those of us who have an employer or who work for clients that have a say in what our app development toolkit can consist of may need to consider options within the Apple ecosystem.</p>
 <p>CloudKit is a dependable choice for risk-averse companies.</p>
 <p>Speaking of risk aversion…</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="third-party-risk-aversion"></a></p>
 <h2 id="personal-3rd-party-risk-aversion8230-cloudkit">Personal 3rd Party Risk Aversion… CloudKit.</h2>
 <p>This one hits close to home for me, because I&rsquo;ve experienced the pain of having a 3rd party service I depended on for <em>multiple apps</em> be discontinued. *Cough* <strong><a href="https://blog.parseplatform.org/announcements/moving-on/">Parse</a></strong> *Cough*</p>
 <p>I&rsquo;m usually okay with 3rd party libraries, but 3rd party <em>services</em> are another story altogether for me.</p>
 <p>When you&rsquo;re using a library that ends up fading away, it may take a little reworking to get your code to compile with an alternative.</p>
 <p>But when you&rsquo;ve got data that your app depends on living on a remote server hosted by a 3rd party, and that service goes away… Oy! Talk about the pain, frustration, and hassle of having to do a <em>migration</em> <strong>on top of</strong> rewriting code.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="only-need-data-store"></a></p>
 <h2 id="only-need-a-remote-data-store-keep-it-simple-cloudkit">Only Need a Remote Data Store? Keep it Simple. CloudKit.</h2>
 <p>There is a <em>ton</em> that can be done on-device these days. If all you&rsquo;re in the market for is a remote data store to facilitate data sharing across devices or with other users and have no need of remote cloud functions or analytics or remote machine learning services, etc., you might opt to keep it simple and leverage CloudKit.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="apple-uses"></a></p>
 <h2 id="depend-on-what-apple-depends-on-cloudkit">Depend On What Apple Depends On: CloudKit.</h2>
 <p>What does Apple depend on for their own apps&rsquo; remote data storage and sharing needs?</p>
 <p>Answer: CloudKit.</p>
@@ -271,14 +271,14 @@ MathJax.Hub.Config({
 <p>CloudKit serves the needs of apps like Photos, iCloud Drive, Notes, News, and more.</p>
 <p>It&rsquo;s almost as if Apple developed CloudKit for Apple, and decided, &ldquo;Hey, let&rsquo;s open this up to our developers and let them tap in to what works awesome for us!&rdquo;</p>
 <p>I like that. I like the security of knowing that Apple depends on the framework they&rsquo;re delivering to us.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="tradeoffs"></a></p>
 <h2 id="tradeoffs">Tradeoffs</h2>
 <p>In fairness, I would point out a few trade-offs if you were to go with CloudKit.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="no-android-support"></a></p>
 <h3 id="no-native-android-support">No Native Android support</h3>
 <p>This tradeoff is qualified with the words &ldquo;no <em>native</em> Android support&rdquo; for a reason. CloudKit JS may actually open the door for folks developing cross platform apps, though it may take some hacking.</p>
 <p>Expect some challenges on the Android side of things, but don&rsquo;t completely count CloudKit out.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="data-storage-only"></a></p>
 <h3 id="data-storage-and-sharing-_only_-with-cloudkit">Data storage and sharing <em>only</em> with CloudKit</h3>
 <p>With CloudKit, you get a fully-functional remote data storage and sharing service. If you&rsquo;re wanting to leverage some advanced functionality like &ldquo;cloud functions&rdquo;, analytics for your app, non-Apple ID authentication, remote machine learning services, and the like, you won&rsquo;t find those features in CloudKit.</p>
 <p>This doesn&rsquo;t mean that Apple leaves you nanging when it comes to authentication, analytics, machine learning, etc.</p>
@@ -287,11 +287,11 @@ MathJax.Hub.Config({
 <p>If, after considering Apple&rsquo;s component solutions, you&rsquo;re looking for alternatives, Firebase offers all of the above as sort of an all-in-one package.</p>
 <p>As I mentioned above though… if all you really <em>need</em> is a remote data store for cross-device data syncing, don&rsquo;t over-complicate things. CloudKit can still serve you well.</p>
 <p>Another alternative is to use a public cloud provider like Azure or AWS for &ldquo;cloud functions&rdquo; or remote machine learning. If you prefer to component-ize these kinds of services, this is a viable alternative to Firebase, or Apple&rsquo;s own solutions to these kinds of problems.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="feedback"></a></p>
 <h2 id="what-do-you-use-why">What do you use? Why?</h2>
 <p>I&rsquo;m a pragmatist. I don&rsquo;t always use CloudKit. But I do like CloudKit when I can use it.</p>
 <p>What do <em>you</em> use? Why? What&rsquo;s your experience with backend as a service providers? What else would you consider in the case for CloudKit? What other tradeoffs do you recognize?</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a class="jump-target" name="share"></a></p>
 
     <aside>
       
@@ -331,7 +331,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

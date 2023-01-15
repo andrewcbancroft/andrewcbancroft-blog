@@ -214,16 +214,16 @@ MathJax.Hub.Config({
 
     <p>Full credit to <a href="https://twitter.com/rustyshelf">Russell Ivanovic</a> for his <a href="https://twitter.com/rustyshelf/status/775505191160328194">tweet</a> for figuring out how to disable Xcode 8&rsquo;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&rsquo;s helpful to you as well.</p>
 <p>If you&rsquo;re tired of sifting through operating system-level logging to the debug console while you&rsquo;re debugging your app, it&rsquo;s actually fairly easy to silence.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="edit-scheme" class="jump-target"></a></p>
 <ol>
 <li>Edit the scheme for your app:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png"><!-- raw HTML omitted --></a></li>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png" alt="Edit Scheme" width="529" height="182" class="alignnone size-full wp-image-13064" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png 529w, https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2-300x103.png 300w" sizes="(max-width: 529px) 100vw, 529px" /></a></li>
 </ol>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><br>
+<p><a name="new-environment-variable" class="jump-target"></a><br>
 2. In the ‘Run&rsquo; section, click on ‘Arguments&rsquo; tab, and add a new Environment Variable. Use <code>OS_ACTIVITY_MODE</code> for the name, and <code>disable</code> for the value:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png" alt="New Environment Variable" width="895" height="506" class="alignnone size-full wp-image-13068" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png 895w, https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4-300x170.png 300w" sizes="(max-width: 895px) 100vw, 895px" /></a></p>
 <p>That&rsquo;s it! Closing the Scheme editor and re-running your app will produce a beautifully silent console window, leaving you free to see what you wanted to see with <code>print()</code>, or other app-specific info (such as runtime exceptions) without having to sift through all that OS-level logging.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -263,7 +263,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

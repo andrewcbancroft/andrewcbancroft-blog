@@ -61,7 +61,7 @@ This is a continuation on a series of articles I&rsquo;ve written on Core Data a
   "@type": "BlogPosting",
   "headline": "Sync Table View Data: NSFetchedResultsController and Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/05\/28\/sync-table-view-data-nsfetchedresultscontroller-swift\/",
-  "wordCount": "1076",
+  "wordCount": "1108",
   "datePublished": "2015-05-29T03:20:54Z",
   "dateModified": "2015-05-29T03:20:54Z",
   "author": {
@@ -210,14 +210,22 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    <p><!-- raw HTML omitted -->Updated on September 23, 2015 – Swift 2.0<!-- raw HTML omitted --></p>
+    <p><small>Updated on September 23, 2015 – Swift 2.0</small></p>
 <p>My goal with this article is to help you utilize the full power of <code>NSFetchedResultsController</code>.</p>
 <p>This is a continuation on a series of articles I&rsquo;ve written on Core Data and <code>NSFetchedResultsController</code>, so you may want to check out those previous posts to get an idea of where I&rsquo;m picking up in this walk-through. Previously I touched on <a href="http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/" title="Using Swift to Seed a Core Data Database">how to seed a Core Data database</a>, and <a href="http://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/" title="Displaying Data With NSFetchedResultsController and Swift">how to take that data and display it in a table view with an NSFetchedResultsController</a>.</p>
 <p>As with the previous posts, I&rsquo;m providing an example Xcode project over at GitHub, so feel free to follow along with the live working example:</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa"></i> <a href="https://github.com/andrewcbancroft/Zootastic/tree/NSFetchedResultsController_SyncTableView" title="GitHub - Sync Table View Example Project" target="_blank">Sync Table View Example Project</a>
+    </li>
+  </ul>
+</div>
 <p>In this installment to the series, I want to answer the question, &ldquo;How do I update the rows in a table view when I add or remove objects from the Core Data database?” I will show how to implement the <code>NSFetchedResultsControllerDelegate</code> protocol, which is the key to automatically synchronizing changes made to your Core Data persistent store with a table view.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="examine-delegate-protocol" class="jump-target"></a></p>
 <h3 id="examining-the-nsfetchedresultscontrollerdelegate-protocol">Examining the NSFetchedResultsControllerDelegate protocol</h3>
 <p>The <code>NSFetchedResultsControllerDelegate</code> protocol is the piece of the puzzle that helps us update a table view with changes made to the Core Data persistent store. There are five methods that we&rsquo;ll be taking a look at:</p>
 <ul>
@@ -261,7 +269,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="kd">public</span> <span class="kd">func</span> <span class="nf">controllerDidChangeContent</span><span class="p">(</span><span class="n">controller</span><span class="p">:</span> <span class="n">NSFetchedResultsController</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln">30</span><span class="cl">    <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">endUpdates</span><span class="p">()</span>
 </span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="did-change-object" class="jump-target"></a></p>
 <h3 id="controller_didchangeobjectatindexpathforchangetypenewindexpath">controller(_:didChangeObject:atIndexPath:forChangeType:newIndexPath:)</h3>
 <p>This is the method that governs how we want to handle the rows in a table view when the synchronization would require inserting rows, updating existing ones, removing them, or reordering them.</p>
 <p>I&rsquo;ll give you the implementation and then point out a couple of &ldquo;gotchas” and expound a little more. Recall that we&rsquo;re working with a sample app named &ldquo;Zootastic”, so if you see references to <code>Animals</code> in the example, you&rsquo;ll know why. :]</p>
@@ -310,7 +318,7 @@ MathJax.Hub.Config({
 <li>First of all, notice that first argument of the majority of the <code>tableView</code> methods takes an <em>array</em> of <code>NSIndexPaths</code>. Be sure to wrap your argument in <code>[</code> and <code>]</code> to create an array.</li>
 <li>Pay extra attention to which index path parameter you&rsquo;re referencing in each case. For insert, the goal is to add a row at the <code>newIndexPath</code>. For Delete, the goal is to remove the row at <code>indexPath</code>. Move will require a deletion of the <code>indexPath</code> and an insertion at the <code>newIndexPath</code>. Getting these mixed up will cause runtime errors, so pay close attention here!</li>
 </ol>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="did-change-section" class="jump-target"></a></p>
 <h3 id="controller_didchangesectionatindexforchangetype">controller(_:didChangeSection:atIndex:forChangeType:)</h3>
 <p>If your table view only has one section, you don&rsquo;t need to worry with this one.</p>
 <p>If your table view has multiple sections, you want to make sure and implement this protocol method – if you fail to do so and the change to the persistent store results in adjustments to the table view that can&rsquo;t be handled, runtime errors can occur. For example, deleting all rows in a section would result in the section needing to be deleted as well, but without this protocol method being implemented, the update to the table view can&rsquo;t be made and the app crashes.</p>
@@ -338,10 +346,24 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>For this one, we&rsquo;re only implementing code for Insert and Delete. The necessary information to insert a section or remove a section (ie, the <code>sectionIndex</code>) comes as a parameter to the method.</p>
 <p>We utilize an <code>NSIndexSet</code> to wrap up the section that needs to be inserted or deleted and pass it to the table view&rsquo;s <code>insertSections()</code> and <code>deleteSections()</code> methods, respectively.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/" title="Using a Core Data Model in Swift Playgrounds">Using a Core Data Model in Swift Playgrounds</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/" title="Using Swift to Seed a Core Data Database">Using Swift to Seed a Core Data Database</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/" title="Displaying Data With NSFetchedResultsController and Swift">Displaying Data With NSFetchedResultsController and Swift</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -400,7 +422,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

@@ -57,7 +57,7 @@
   "@type": "BlogPosting",
   "headline": "Receipt Validation –  Parse and Decode a Receipt with Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2017\/07\/27\/receipt-validation-parsing-a-receipt-with-swift\/",
-  "wordCount": "3607",
+  "wordCount": "3666",
   "datePublished": "2017-07-28T03:41:33Z",
   "dateModified": "2019-06-27T00:00:00Z",
   "author": {
@@ -241,9 +241,18 @@ MathJax.Hub.Config({
 </ul>
 <p>After finishing this guide, you&rsquo;ll still have to <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/">compute the GUID hash of your app</a> to compare with the hash that&rsquo;s found within the receipt. You&rsquo;ll also have to inspect the receipt data to perform any app-specific verification steps. But in order to do either, you&rsquo;ll need the parsed receipt metadata.</p>
 <p>Just want the code? Here you go!</p>
-<!-- raw HTML omitted -->
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
+    </li>
+  </ul>
+</div>
 <p>Want to understand the final <code>ReceiptParser</code>? Let&rsquo;s get to it!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="final-goal" class="jump-target"></a></p>
 <h2 id="the-final-goal-a-parsed-receipt">The final goal: A parsed receipt</h2>
 <p>The final goal of this guide is a parsed receipt.</p>
 <p>What do you say we start things off by defining what one looks like?</p>
@@ -312,20 +321,20 @@ MathJax.Hub.Config({
 <p>Full disclaimer though: parsing the receipt is not very… Swifty.</p>
 <p>We&rsquo;re going to be working with all kinds of ugly things like <code>UnsafeMutablePointers</code>, and cryptically-named C Types.</p>
 <p>Let&rsquo;s take it one step at a time though…</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="visualizing-receipt-structure" class="jump-target"></a></p>
 <h2 id="visualizing-the-encoded-receipts-structure">Visualizing the encoded receipt&rsquo;s structure</h2>
 <p>Up to now, we&rsquo;ve been working only with the PKCS #7 <em>container</em> for the receipt. Now it&rsquo;s time to dig into the container and see what it actually <em>contains</em>.</p>
 <p>If you crack open the container, what you find is a long series of bytes that encode the actual structure of the receipt.</p>
 <p>From beginning to end, the bytes <em>should</em> encode what&rsquo;s called an &ldquo;ASN.1 Set&rdquo;. In fact, if you open the PKCS #7 container and it <em>doesn&rsquo;t</em> encode an ASN.1 Set, that&rsquo;d warrant a receipt validation failure…<a href="#handling-error-conditions">more about handling that in a minute</a>.</p>
 <p>Here&rsquo;s a visual representation of an ASN.1 Set:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set.jpeg"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set.jpeg"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set.jpeg" alt="ASN.1 Set" width="923" height="338" class="alignnone size-full wp-image-13513" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set.jpeg 923w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Set-768x281.jpeg 768w" sizes="(max-width: 923px) 100vw, 923px" /></a></p>
 <p>Since we&rsquo;ve just got a bunch of bytes encoding things, there&rsquo;s got to be some way to say, &ldquo;This byte, or these series of bytes, represent [this human understandable thing]&rdquo;.</p>
 <p>That&rsquo;s exactly what we&rsquo;ve got, as you can see by the visual representation.</p>
 <p>The first byte in the receipt payload (the green box in the visualization) signals that the bytes that follow encode an ASN.1 Set.</p>
 <p>The next bytes in the series (the blue box) encode how long the ASN.1 Set is, so that as you&rsquo;re going along parsing and decoding the contents of the Set, you know when to stop.</p>
 <p>The final series of bytes (the yellow boxes) encode chunks of information that can be decoded to give you human readable receipt attributes. Those chunks, themselves, are encoded as ASN.1 <em>Sequences</em>.</p>
 <p>So what does an ASN.1 Sequence look like? Here&rsquo;s a visual:</p>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg"><!-- raw HTML omitted --></a></p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg" alt="ASN.1 Sequence" width="919" height="337" class="alignnone size-full wp-image-13514" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg 919w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-768x282.jpeg 768w" sizes="(max-width: 919px) 100vw, 919px" /></a></p>
 <p>When it comes to app receipts, ASN.1 <em>Sequences</em> are used to say, &ldquo;Hey, this series of bytes encodes <em>the bundle identifier</em> or <em>the original app version</em> or <em>some other receipt attribute</em>.&rdquo;</p>
 <p>Each ASN.1 Sequence has a flag (the pink box in the visualization) to signal that the bytes that follow do, in fact, encode an ASN.1 Sequence.</p>
 <p>Then, just like an ASN.1 Set, the next bytes in line (the blue box) encode how long the Sequence is. Then comes what we&rsquo;re really after in all this Set/Sequence talk:</p>
@@ -333,7 +342,7 @@ MathJax.Hub.Config({
 <p>After the attribute type comes some bytes that encode an &ldquo;attribute version&rdquo;, also as an ASN.1 Integer. At the time of this guide&rsquo;s publication, &ldquo;attribute version&rdquo; isn&rsquo;t used for anything. Nonetheless, the series of bytes right after the attribute type within the ASN.1 Sequence is reserved and will always represent the &ldquo;attribute version&rdquo;.</p>
 <p>The remaining bytes in the ASN.1 Sequence encode the actual <em>value</em> of the attribute as an ASN.1 Octet String (don&rsquo;t let the word &ldquo;Octet String&rdquo; trick you into thinking that it&rsquo;s actually a String… they&rsquo;re <em>bytes</em> that we&rsquo;ll have to decode shortly…)</p>
 <p>Knowing how the receipt payload is structured will help us formulate a strategy around parsing it. Let&rsquo;s imagine a simple algorithm to do it now.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="parsing-strategy" class="jump-target"></a></p>
 <h2 id="receipt-parsing-strategy">Receipt parsing strategy</h2>
 <p>Let&rsquo;s take it step by step. What if we approach parsing the receipt like this:</p>
 <p><strong>1)</strong> Do some preliminary checks to ensure that the receipt payload is in the correct structural format (it should be an ASN.1 Set, for example).</p>
@@ -341,13 +350,13 @@ MathJax.Hub.Config({
 <p><strong>3)</strong> Decode its Octet String value into actual, human-readable values. The decoded values would be represented by Swift Types (Int, String, Date are sufficient to cover all of the possibilities for receipts). The final decoded value depends on what <em>type</em> of attribute it is.</p>
 <p><strong>4)</strong> Create and return a ParsedReceipt instance as the final product.</p>
 <p>If at any point the receipt payload fails to live up to the expected structure, receipt validation will fail, and we can signal that by throwing an error.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="note-on-iap-receipts" class="jump-target"></a></p>
 <h4 id="a-note-on-in-app-purchase-receipts">A note on in-app purchase receipts</h4>
 <p>As we follow the receipt parsing strategy steps that I just described, there&rsquo;s going to come a point where we run into the ASN.1 Sequence that encodes the in-app purchase receipts.</p>
 <p>These are special.</p>
 <p>In-app purchase receipts are encoded as ASN.1 Sets (with ASN.1 Sequences within) <em>inside</em> the primary ASN.1 Set receipt payload. In other words, they&rsquo;re <em>nested</em> ASN.1 Sets within the <em>overall</em> ASN.1 Set that encodes the whole receipt. The nested Set contains the <em>in-app purchase</em> receipt attributes.</p>
 <p>So in order to decode these, we&rsquo;ll have to apply the receipt parsing strategy <em>within</em> the receipt parsing strategy. Fun, huh? We&rsquo;ll only have to do it for the in-app purchase receipt attributes though.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="helper-functions" class="jump-target"></a></p>
 <h2 id="preparation-step-helper-decoding-functions">Preparation step: Helper decoding functions</h2>
 <p>If you saw the <code>ParsedReceipt</code> struct that I proposed earlier in the guide, you&rsquo;ll notice that there are essentially four Swift Types that the receipt attributes (and in-app purchase receipt attributes) get decoded into:</p>
 <ul>
@@ -471,13 +480,13 @@ MathJax.Hub.Config({
 </div>
 </div>
 <p>Each of these decoding functions are dealing with the receipt attribute <em>value</em> portion of the ASN.1 Sequence that we&rsquo;re working on at the time. Recall the structure:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg" alt="ASN.1 Sequence" width="919" height="337" class="alignnone size-full wp-image-13514" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence.jpeg 919w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-300x110.jpeg 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/07/ASN1Sequence-768x282.jpeg 768w" sizes="(max-width: 919px) 100vw, 919px" /></a></p>
 <p>So we take in a pointer that&rsquo;s pointing <em>to</em> the start of one of the attribute <em>values</em> (a yellow box). The yellow box&rsquo;s ASN.1 Octet String encodes either an integer, a string, or a date. (Okay, technically I guess you could include NSData, but this doesn&rsquo;t need to be &ldquo;decoded&rdquo; really. And the in-app purchase receipts will be parsed and decoded into the stated Types as well, so it all boils down to the three I just mentioned…thus the reason for only three helper functions).</p>
 <p>The strategy for the first two functions is basically to take what we&rsquo;re pointing to, and call <code>ASN1_get_object</code>.</p>
 <p>This function call gets us enough information to decode the bytes from the start of the object to the end of the object into either an <code>Int?</code> or a <code>String?</code>. If it fails, <code>nil</code> is returned.</p>
 <p>Decoding dates simply involves initializing a <code>DateFormatter</code> with the appropriate locale and date format. The datePointer parameter actually points to an encoded <em>string</em>, so the strategy is to use the <code>DecodeASN1String</code> function we made, and pass the date string to the date formatter.</p>
 <p>So long as the string can be decoded, the date formatter instance is used to create an actual <code>Date?</code> instance and return it. Otherwise, <code>nil</code> is returned.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="handling-error-conditions" class="jump-target"></a></p>
 <h2 id="handling-error-conditions">Handling error conditions</h2>
 <p>The kinds of errors that can occur when parsing the receipt payload all have to do with unexpected structure.</p>
 <p>For example, if we&rsquo;re expecting to be stepping through an ASN.1 Payload or an ASN.1 Sequence but instead find that it&rsquo;s not what we expect, this is a situation where reeipt validation should fail, because there&rsquo;s no way to decode the receipt attributes if the bytes of the payload don&rsquo;t conform to the expected structure.</p>
@@ -507,7 +516,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="implementing-receipt-parser" class="jump-target"></a></p>
 <h2 id="implenting-receiptparser">Implenting ReceiptParser</h2>
 <p>OK! We&rsquo;ve got a few helper functions to decode the receipt attributes, and we&rsquo;ve got some <code>ReceiptValidationError</code> cases to throw in case parsing fails.</p>
 <p>At a very high level, the ReceiptParser will take the following skeletal structure:</p>
@@ -615,7 +624,7 @@ MathJax.Hub.Config({
 </div>
 <p>So a total of two functions: one to parse the overall receipt, and one to parse each in-app purchase receipt nested <em>within</em> the overall receipt.</p>
 <p>Now comes the hard part. Actually doing all the decoding. Don&rsquo;t forget the <a href="#parsing-strategy">strategy</a> we&rsquo;re going to take! That&rsquo;ll help you walk through this code without getting insanely overwhelmed (hopefully).</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="parse-function-implementation" class="jump-target"></a></p>
 <h4 id="parse-function-implementation"><code>parse</code> function implementation</h4>
 <p>First, the implementation of <code>parse(_:)</code> with comments throughout to help you find where each step of the <a href="#parsing-strategy">strategy</a> is being implemented:</p>
 <div class="highlight"><div class="chroma">
@@ -846,7 +855,7 @@ MathJax.Hub.Config({
 </div>
 <p>Aside from the work with pointers and the Open SSL function names, the strategy is pretty straight-forward when you look it from a bird&rsquo;s-eye point of view.</p>
 <p>Once again, if you&rsquo;re curious about how I knew to map each <code>case</code> within the <code>switch</code> to the correct receipt attribute, I simply got them from <a href="https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html">Apple&rsquo;s documentation</a>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="parse-in-app-purchase-receipt-implementation" class="jump-target"></a></p>
 <h4 id="parseinapppurchaserectipt-function-implementation"><code>parseInAppPurchaseRectipt</code> function implementation</h4>
 <p>Now it&rsquo;s time to see how to parse an in-app purchase receipt payload. Take a look:</p>
 <div class="highlight"><div class="chroma">
@@ -1057,11 +1066,11 @@ MathJax.Hub.Config({
 </div>
 <p>As you can see, parsing an in-app purchase receipt uses the same strategy as parsing the overall receipt does.</p>
 <p>A receipt may contain zero or more in-app purchase receipts, so this function may get called zero, one, or many times, depending on what your app offers as in-app purchases, and of course, what your users have actually purchased.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="final-receipt-parser" class="jump-target"></a></p>
 <h2 id="final-receiptparser">Final <code>ReceiptParser</code></h2>
 <p>I realize that breaking the code apart like I&rsquo;ve done is good for teaching purposes, but perhaps not so much for &ldquo;I just wanna copy-paste and <em>use</em> this&rdquo; purposes.</p>
 <p>I&rsquo;ll spare you having to scroll through <em>all</em> that code again. If you&rsquo;d like to see the full <code>ReceiptParser</code>, <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">check out the Swifty Local Receipt Validator repo on GitHub</a>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="using-receipt-parser" class="jump-target"></a></p>
 <h2 id="using-receiptparser">Using <code>ReceiptParser</code></h2>
 <p>I initialize an instance of <code>ReceiptParser</code> in my <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator"><code>ReceiptValidator</code> struct</a>, and then call the <code>parse(_:)</code> function from <code>validateReceipt()</code>:</p>
 <div class="highlight"><div class="chroma">
@@ -1122,7 +1131,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="preparing-to-finish-receipt-validation" class="jump-target"></a></p>
 <h2 id="preparing-to-finish-receipt-validation">Preparing to finish receipt validation!</h2>
 <p>What a journey this has been! We&rsquo;re <em>almost done</em> with this receipt validation process.</p>
 <p>What&rsquo;s left? After this guide, you still need to&hellip;</p>
@@ -1131,9 +1140,33 @@ MathJax.Hub.Config({
 <li>You&rsquo;ll also have to inspect the receipt data to perform any app-specific verification steps.</li>
 </ul>
 <p>We&rsquo;re that much closer now though! See you next time.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy...
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS & Swift the Easy Way</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" title="Extracting a PKCS7 Container for Receipt Validation with Swift">Extracting a PKCS7 Container for Receipt Validation with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" title="Receipt Validation – Verifying a Receipt Signature in Swift">Receipt Validation – Verifying a Receipt Signature in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
 
     <div id="disqus_thread"></div>
@@ -1169,7 +1202,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

@@ -213,10 +213,10 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>This is a cheat sheet of the code and workflow for iPhone location access and usage, from requesting permission to using the location of the user&rsquo;s device.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="framework-import" class="jump-target"></a></p>
 <h1 id="framework-import">Framework Import</h1>
 <p><code>import CoreLocation</code></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="location-usage-description" class="jump-target"></a></p>
 <h1 id="set-location-usage-description-in-infoplist">Set Location Usage Description in Info.plist</h1>
 <p><strong>This is a required first step</strong></p>
 <p>If you <strong>don&rsquo;t</strong> set this, your app simply won&rsquo;t present the user with the system alert to request access to the location (and, of course, you won&rsquo;t be getting any location data for your app either).</p>
@@ -227,7 +227,7 @@ MathJax.Hub.Config({
 <li>Privacy – Location When In Use Usage Description</li>
 </ul>
 <p>For the <strong>value</strong> of this plist property, type a short string describing what you&rsquo;re using the location for.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="location-manager-delegate" class="jump-target"></a></p>
 <h1 id="initialize-cllocationmanager-and-implement-cllocationmanagerdelegate">Initialize CLLocationManager and Implement CLLocationManagerDelegate</h1>
 <p><code>CLLocationManager</code> is the name of the class that gives you a way to request location services permission. It is also responsible for starting the location tracking process.</p>
 <p>It needs a corresponding <code>CLLocationManagerDelegate</code> to be assigned. The location manager instance you initialize will alert you to location services authorization changes (ie, if the user turns off location services permissions for your app) <em>through</em> the one of the methods that your delegate class implements.</p>
@@ -271,7 +271,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="kc">self</span><span class="p">.</span><span class="n">currentLocation</span> <span class="p">=</span> <span class="n">locations</span><span class="p">.</span><span class="bp">last</span>
 </span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="start-location-services" class="jump-target"></a></p>
 <h1 id="start-location-services-check-location-authorization-status-request-permission">Start Location Services, Check Location Authorization Status, Request Permission</h1>
 <p>When you first start location services in your app, you will want to immediately check your app&rsquo;s current authorization status for location services, just in case the user has gone in and disabled location services permission for your app since the last time he/she used it.</p>
 <p>If it&rsquo;s the first time the user has launched your app, the <code>.notDetermined</code> case will get hit. This is where you request permission for the first time.</p>
@@ -295,7 +295,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p><strong>Note</strong>: You can test for the <code>.notDetermined</code> case by deleting the app on the device, if it&rsquo;s already been installed or run on a device from the debugger.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="alert-location-access-needed" class="jump-target"></a></p>
 <h1 id="alert-location-services-access-needed">Alert Location Services Access Needed</h1>
 <p>If location services access has been denied or restricted, you can alert the user and direct them to the Settings app to make the appropriate permissions adjustment:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">alertLocationAccessNeeded</span><span class="p">()</span> <span class="p">{</span>
@@ -319,7 +319,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="n">present</span><span class="p">(</span><span class="n">alert</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p><strong>Note</strong>: You can test for this case (<code>.restricted</code> and <code>.denied</code>) by going to the Settings app and turning off location services access for your app, if it&rsquo;s been previously granted.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -359,7 +359,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

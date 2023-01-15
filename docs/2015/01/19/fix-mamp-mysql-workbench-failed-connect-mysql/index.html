@@ -206,17 +206,17 @@ MathJax.Hub.Config({
 
     <p>Installing <a href="http://www.mamp.info/">MAMP</a> was easy. I did, however, spend at least 45 minutes trying to get MySQL Workbench to connect to my local MySQL database server. The solution was simple, but getting there led me around the Internet and back with little help. Hopefully this signpost will help others having connection issues with MySQL Workbench to MAMP MySQL servers as well.</p>
 <p>Once MAMP is installed and the MySQL server has started, you&rsquo;ll be taken to a start screen that looks something like this:<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen.png" alt="MAMP Start Screen Port Number" width="601" height="411" class="alignnone size-full wp-image-11187" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen.png 601w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen-300x205.png 300w" sizes="(max-width: 601px) 100vw, 601px" /></a></p>
 <p><strong>The information presented there is misleading.</strong> The start page instructs you to use port 3306. So I did:<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen.png" alt="Settings based on MAMP Start Screen" width="897" height="515" class="alignnone size-full wp-image-11185" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen.png 897w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen-300x172.png 300w" sizes="(max-width: 897px) 100vw, 897px" /></a></p>
 <p>When testing the connection, however, I got the dreaded &ldquo;Failed to Connect to MySQL at localhost”:<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection.png" alt="Error on Test Connection" width="412" height="146" class="alignnone size-full wp-image-11184" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection.png 412w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection-300x106.png 300w" sizes="(max-width: 412px) 100vw, 412px" /></a></p>
 <p>It turns out that MAMP has a preferences panel wherein you can configure the ports for your Apache and MySQL servers. And of course, MySQL was <em>not</em> set to use port 3306, as the start page led me to believe. Rather, it was set to use port 8889:<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_Preferences_Port.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_Preferences_Port.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_Preferences_Port.png" alt="MAMP Preferences Port Number" width="529" height="400" class="alignnone size-full wp-image-11186" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_Preferences_Port.png 529w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_Preferences_Port-300x227.png 300w" sizes="(max-width: 529px) 100vw, 529px" /></a></p>
 <p>Adjusting the settings to use the port listed in the MAMP preferences pane led to a successful connection!<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnMAMPPreferences1.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnMAMPPreferences1.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnMAMPPreferences1.png" alt="Settings based on MAMP Preferences" width="897" height="515" class="alignnone size-full wp-image-11198" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnMAMPPreferences1.png 897w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnMAMPPreferences1-300x172.png 300w" sizes="(max-width: 897px) 100vw, 897px" /></a></p>
 <p>Good to go!<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/GoodToGo.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/GoodToGo.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/01/GoodToGo.png" alt="Good to go!" width="414" height="144" class="alignnone size-full wp-image-11190" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/01/GoodToGo.png 414w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/GoodToGo-300x104.png 300w" sizes="(max-width: 414px) 100vw, 414px" /></a></p>
 
     <aside>
       
@@ -256,7 +256,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

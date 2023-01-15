@@ -61,7 +61,7 @@ They&rsquo;re working with a UITableViewController They&rsquo;re working with a 
   "@type": "BlogPosting",
   "headline": "Basics of Pull to Refresh for Swift Developers",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/03\/17\/basics-of-pull-to-refresh-for-swift-developers\/",
-  "wordCount": "1216",
+  "wordCount": "1227",
   "datePublished": "2015-03-17T17:55:52Z",
   "dateModified": "2015-03-17T17:55:52Z",
   "author": {
@@ -210,26 +210,35 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    <p><!-- raw HTML omitted -->Updated on September 21, 2016 – Swift 3.0<!-- raw HTML omitted --></p>
+    <p><small>Updated on September 21, 2016 – Swift 3.0</small></p>
 <p>Implementing &ldquo;pull to refresh” is a common need that arises when working with table views. There are typically two scenarios that folks find themselves in when attempting to implement this feature:</p>
 <ol>
 <li>They&rsquo;re working with a UITableViewController</li>
 <li>They&rsquo;re working with a non-UITableViewController, but their view incorporates a regular UITableView, either taking up the whole screen, or a smaller portion of it</li>
 </ol>
 <p>This entry will explore both scenarios to help you get up and running quickly with implementing pull to refresh for your Swift iOS app.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="example-scenario" class="jump-target"></a></p>
 <h3 id="example-scenario">Example scenario</h3>
 <p>For this guide, suppose that we have a list of movies that we&rsquo;d like to display in a table view. Pulling to refresh will fetch more movies and update the table view to show the new ones.</p>
 <p>If you&rsquo;re the type that likes to simply dive into a working example, both implementations are available to download from GitHub:</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div class="resources">
+  <div class="resources-header">
+    Example projects
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> Example implemented with UITableViewController <div>
+        (<a href="https://github.com/andrewcbancroft/PullToRefreshExample_UITableViewController/tree/swift-2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/PullToRefreshExample_UITableViewController/tree/master">Swift 3.0</a>)
+      </div>
+    </li>
 <pre><code>&lt;li&gt;
   &lt;i class=&quot;fab fa-github fa-lg&quot;&gt;&lt;/i&gt; Example implemented with regular view controller + UITableView &lt;div&gt;
     (&lt;a href=&quot;https://github.com/andrewcbancroft/PullToRefreshExample_RegularViewController/tree/swift-2.3&quot;&gt;Swift 2.3&lt;/a&gt; | &lt;a href=&quot;https://github.com/andrewcbancroft/PullToRefreshExample_RegularViewController/tree/master&quot;&gt;Swift 3.0&lt;/a&gt;)
   &lt;/div&gt;
 &lt;/li&gt;
 </code></pre>
-<!-- raw HTML omitted -->
+  </ul>
+</div>
 <p><strong>Note:</strong> Code in the main article below is written in Swift 3.0, but code examples for Swift 2.3 are found in the example projects above.</p>
 <p><code>Movies</code> are represented by a simple struct:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">struct</span> <span class="nc">Movie</span> <span class="p">{</span>
@@ -243,9 +252,9 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">Movie</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&#34;Star Wars&#34;</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="s">&#34;Sci-fi&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">]</span>
 </span></span></code></pre></div><p>Setting up the table view&rsquo;s data source protocol methods depends on whether you&rsquo;re using a <a href="#table-view-controller">UITableViewController</a> or a <a href="#regular-view-controller">regular UIViewController</a> with a table view as one of its content views, so we&rsquo;ll cover those in the individual examples.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="table-view-controller" class="jump-target"></a></p>
 <h3 id="implementing-with-uitableviewcontroller">Implementing with UITableViewController</h3>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="tvc-example-setup" class="jump-target"></a></p>
 <h4 id="finish-example-setup">Finish example setup</h4>
 <p>When working with a <code>UITableViewController</code>, we simply override the data source method implementations. The following is how I&rsquo;ve chosen to do it for this example:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="kc">_</span> <span class="n">tableView</span><span class="p">:</span> <span class="n">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
@@ -260,12 +269,12 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">10</span><span class="cl">    
 </span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">return</span> <span class="n">cell</span>
 </span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="enable-refreshing-storyboard" class="jump-target"></a></p>
 <h4 id="enable-refreshing-in-storyboard">Enable refreshing in Storyboard</h4>
 <p>When you&rsquo;re working with a <code>UITableViewController</code>, the solution is fairly simple: First, Select the table view controller in your storyboard, open the attributes inspector, and enable refreshing:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-1024x740.png" alt="Table View Controller - Enable Refreshing" width="1024" height="740" class="alignnone size-large wp-image-11511" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-1024x740.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing-300x217.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/03/TableView_EnableRefreshing.png 1083w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p>A <code>UITableViewController</code> comes outfitted with a reference to a <code>UIRefreshControl</code> out of the box. You simply need to wire up a few things to initiate and complete the refresh when the user pulls down.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="override-viewdidload" class="jump-target"></a></p>
 <h4 id="override-viewdidload">Override viewDidLoad()</h4>
 <p>In your override of <code>viewDidLoad()</code>, add a target to handle the refresh as follows:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
@@ -279,7 +288,7 @@ MathJax.Hub.Config({
 <li>Swift&rsquo;s new #selector feature helps with specifying which action will handle the refresh. Since I&rsquo;ve specified <code>ViewController.handleRefresh(_:)</code> (note the underscore and the colon!) as the action argument, I need to define a function in this <code>UITableViewController</code> class with the same name. Additionally, the function should take one argument.</li>
 <li>We&rsquo;d like this action to be called for the <code>UIControlEvent</code> called <code>ValueChanged</code>.</li>
 </ol>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="tvc-handle-refresh-function" class="jump-target"></a></p>
 <h4 id="implement-handlerefresh-function">Implement handleRefresh function</h4>
 <p>The <code>handleRefresh:</code> function may look something like the following:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">handleRefresh</span><span class="p">(</span><span class="n">refreshControl</span><span class="p">:</span> <span class="n">UIRefreshControl</span><span class="p">)</span> <span class="p">{</span>
@@ -296,9 +305,9 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">refreshControl</span><span class="p">.</span><span class="n">endRefreshing</span><span class="p">()</span>
 </span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>That should complete the pull to refresh implementation when you&rsquo;re working with a <code>UITableViewController</code>!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="regular-view-controller" class="jump-target"></a></p>
 <h3 id="implementing-with-regular-view-controller--uitableview">Implementing with regular view controller + UITableView</h3>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="reg-tv-example-setup" class="jump-target"></a></p>
 <h4 id="finish-example-setup-1">Finish example setup</h4>
 <p>When working with a <em>regular</em> <code>UIViewController</code>, there are a few extra steps involved in getting things set up:</p>
 <ol>
@@ -308,7 +317,7 @@ MathJax.Hub.Config({
 </ol>
 <p>Creating the IBOutlet is a matter of control+clicking and dragging from the table view in the Storyboard to the view controller code to create the outlet.</p>
 <p>To wire up the table view&rsquo;s data source and delegate in the Storyboard, control+click the table view and drag up to the yellow view controller icon:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png" alt="Wire up table view&#039;s data source and delegate" width="789" height="746" class="alignnone size-full wp-image-11681" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource.png 789w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/WireTableViewDataSource-300x284.png 300w" sizes="(max-width: 789px) 100vw, 789px" /></a></p>
 <p>The data source protocol method implementations may look something like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"> <span class="nb">Int</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">return</span> <span class="n">movies</span><span class="p">.</span><span class="bp">count</span>
@@ -322,7 +331,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">10</span><span class="cl">    
 </span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">return</span> <span class="n">cell</span>
 </span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="setup-refresh-control" class="jump-target"></a></p>
 <h4 id="set-up-uirefreshcontrol">Set up UIRefreshControl</h4>
 <p>Whereas a <code>UITableViewController</code> comes pre-fit with a <code>UIRefreshControl</code>, a regular <code>UIViewController</code> does not. It&rsquo;s simple enough to set one up though. Here is a snippet defining a lazily instantiated variable which creates and configures a <code>UIRefreshControl</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">refreshControl</span><span class="p">:</span> <span class="n">UIRefreshControl</span> <span class="p">=</span> <span class="p">{</span>
@@ -338,7 +347,7 @@ MathJax.Hub.Config({
 <li>Since I&rsquo;ve specified &ldquo;handleRefresh:” (note the colon!) as the action argument, I need to define a function in this <code>UITableViewController</code> class with the same name. Additionally, the function should take one argument.</li>
 <li>We&rsquo;d like this action to be called for the <code>UIControlEvent</code> called <code>ValueChanged</code>.</li>
 </ol>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="regvc-override-viewdidload" class="jump-target"></a></p>
 <h4 id="override-viewdidload-1">Override viewDidLoad</h4>
 <p>Assuming that <a href="#reg-tv-example-setup">there is an outlet to the table view in the Storyboard</a>, the next step is to add the <code>UIRefreshControl</code> as a subview to the table view:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
@@ -347,7 +356,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">4</span><span class="cl">    
 </span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">addSubview</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">refreshControl</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="regvc-handle-refresh-function" class="jump-target"></a></p>
 <h4 id="implement-handlerefresh-function-1">Implement handleRefresh function</h4>
 <p>The <code>handleRefresh</code> function is implemented exactly as it was when we were dealing with a <code>UITableViewController</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">handleRefresh</span><span class="p">(</span><span class="n">refreshControl</span><span class="p">:</span> <span class="n">UIRefreshControl</span><span class="p">)</span> <span class="p">{</span>
@@ -365,7 +374,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="wrapping-up">Wrapping up</h3>
 <p>Implementing &ldquo;pull to refresh” is a common need that arises when working with table views. Here we&rsquo;ve explored how to implement this feature using both a <code>UITableViewController</code> <em>and</em> with a regular view controller and a table view.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -424,7 +433,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

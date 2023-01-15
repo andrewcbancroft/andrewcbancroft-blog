@@ -63,7 +63,7 @@ Now you&rsquo;re ready to extract the PKCS #7 container and work with it."/>
   "@type": "BlogPosting",
   "headline": "Extracting a PKCS7 Container for Receipt Validation with Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2016\/06\/09\/extracting-a-pkcs7-container-for-receipt-validation-with-swift\/",
-  "wordCount": "1160",
+  "wordCount": "1220",
   "datePublished": "2016-06-10T03:44:58Z",
   "dateModified": "2019-06-26T00:00:00Z",
   "author": {
@@ -235,8 +235,17 @@ MathJax.Hub.Config({
 <p>Now you&rsquo;re ready to extract the PKCS #7 container and work with it.</p>
 <p>The aim of this guide is to get you started using the OpenSSL library in your Swift code by employing it to extract the receipt contents from its PKCS #7 container.</p>
 <p>Just want the code? Here you go!</p>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator">Swifty Local Receipt Validator</a>
+    </li>
+  </ul>
+</div>
+<p><a name="recap" class="jump-target"></a></p>
 <h2 id="recap-from-the-previous-guide">Recap from the previous guide</h2>
 <p>In <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">Loading a Receipt for Validation with Swift</a>, I began the process of breaking out the various steps of the receipt validation process into separate single-responsibility structs with clearly named functions to help clarify what each piece of code is doing.</p>
 <p>Recall that I&rsquo;ve created a <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation">main Type called <code>ReceiptValidator</code></a>, with references to several smaller single-responsibility Types that it uses to accomplish the overall validation process. So accordingly, as of my last post in the series, I&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">created a <code>ReceiptLoader</code></a> that finds the receipt on the file system and loads it into memory.</p>
@@ -254,7 +263,7 @@ MathJax.Hub.Config({
 </div>
 </div>
 <p>I&rsquo;ll expand this enum Type to cover more failure conditions in this guide.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="receipt-extractor-outline" class="jump-target"></a></p>
 <h2 id="receiptextractor-struct-outline">ReceiptExtractor struct outline</h2>
 <p>The OpenSSL library comes to us in the form of a C static library. It&rsquo;s not a beautiful API to say the least. The names of the Types and functions are really cryptic at times, so I&rsquo;ve decided it&rsquo;s best for my own memory to wrap each step in small function routines that are named for what they do.</p>
 <p>So supposing you&rsquo;ve <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/">located and loaded</a> the receipt data, or used <a href="https://developer.apple.com/library/ios/documentation/StoreKit/Reference/StoreKit_Collection/">Store Kit</a> to request a receipt from Apple… Take a look at this new <code>ReceiptExtractor</code> skeleton of a struct to get an idea of what&rsquo;s going to be required to extract the PKCS7 container for the receipt:</p>
@@ -276,7 +285,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="new-receiptvalidationerror-cases" class="jump-target"></a></p>
 <h2 id="new-receiptvalidationerror-cases">New ReceiptValidationError cases</h2>
 <p>When extracting the receipt information from the PKCS7 container, there are going to be things that would cause overall validation to fail. For example, if the <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation">receipt <code>Data</code> instance</a> ends up being empty, that&rsquo;s a validation failure. The PKCS7 container needs to have information inside of it for validation to pass (obviously).</p>
 <p>So in this guide, I&rsquo;ll expand the <code>ReceiptValidationError</code> enum to have the following cases:</p>
@@ -294,7 +303,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="prep-pkcs7-union-accessors" class="jump-target"></a></p>
 <h2 id="preparation-step-pkcs7-union-accessors">Preparation step: PKCS7 union accessors</h2>
 <p>Before attempting to work with OpenSSL&rsquo;s PKCS7 functions, you&rsquo;ve got to do a little prep work to get the functions to play nicely with Swift.</p>
 <p>Unfortunately, Swift doesn&rsquo;t work well with <a href="https://en.wikipedia.org/wiki/Union_type#C.2FC.2B.2B">C union types</a>. It simply can&rsquo;t see things defined with a C union.</p>
@@ -303,7 +312,7 @@ MathJax.Hub.Config({
 <li>pkcs7_union_accessors.h</li>
 <li>pkcs7_union_accessors.c</li>
 </ul>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="pkcs7-union-accessors-h-implementation" class="jump-target"></a></p>
 <h4 id="pkcs7_union_accessorsh-implementation">pkcs7_union_accessors.h implementation</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -341,7 +350,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="cl"><span class="cp">#endif </span><span class="cm">/* pkcs7_union_accessors_h */</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="pkcs7-union-accessors-c-implementation" class="jump-target"></a></p>
 <h4 id="pkcs7_union_accessorsc-implementation">pkcs7_union_accessors.c implementation</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -415,7 +424,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="bridging-header-updates" class="jump-target"></a></p>
 <h4 id="bridging-header-updates">Bridging header updates</h4>
 <p>After you create the union accessor files, you need to update your project&rsquo;s bridging header to import the new header file:</p>
 <div class="highlight"><div class="chroma">
@@ -430,7 +439,7 @@ MathJax.Hub.Config({
 </span></span></span><span class="line"><span class="cl"><span class="cp">#import &#34;pkcs7_union_accessors.h&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="receiptextractor-implementation" class="jump-target"></a></p>
 <h2 id="receiptextractor-struct-implementation">ReceiptExtractor struct implementation</h2>
 <p>Now it&rsquo;s time to dive into the actual implementation of what I&rsquo;m calling a <code>ReceiptExtractor</code>. Have a look at the code with some explanatory comments following:</p>
 <div class="highlight"><div class="chroma">
@@ -477,7 +486,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="receiptextractor-explanation" class="jump-target"></a></p>
 <h2 id="receiptextractor-struct-explanation">ReceiptExtractor struct explanation</h2>
 <p>Most of the code above is a Swift translation of what&rsquo;s found at <a href="https://www.objc.io/issues/17-security/receipt-validation/">Objc.io&rsquo;s Receipt Validation guide</a>.</p>
 <p>I did a little research over at the OpenSSL site though, and thought it might be helpful for the curious to know what some of these non-intuitive function names stand for and what they do.</p>
@@ -491,9 +500,33 @@ MathJax.Hub.Config({
 <p>As long as the NID returned is equal to the <code>NID_pkcs7_data</code> constant value, things are good. If they&rsquo;re not, that means the receipt has no information and validation fails (thus, the guard and throw statement in lines 14-15).</p>
 <p>If everything passes the guard, though, the PKCS #7 container is returned, and we&rsquo;re ready for the next step of the receipt validation process, which is to verify the signature on the receipt with Apple&rsquo;s root certificate. <em>That</em>, however, will happen in another entry to this series.</p>
 <p>Until next time!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy...
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/" title="Preparing to Test Receipt Validation for iOS">Preparing to Test Receipt Validation for iOS</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS & Swift the Easy Way</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" title="Receipt Validation – Verifying a Receipt Signature in Swift">Receipt Validation – Verifying a Receipt Signature in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/" title="Receipt Validation – Parse and Decode a Receipt with Swift">Receipt Validation – Parse and Decode a Receipt with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
 
     <div id="disqus_thread"></div>
@@ -529,7 +562,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

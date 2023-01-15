@@ -206,36 +206,36 @@ MathJax.Hub.Config({
 
     <p>The old adage &ldquo;Don&rsquo;t go reinventing the wheel” comes into play <em>often</em> when developing software, doesn&rsquo;t it? Why build this [thing] ourselves when someone else has invented it already?</p>
 <p>Fantastic libraries and frameworks exist out there to assist developers with common and sometimes even difficult problems. Whether it be an easier-to-use abstraction over the networking stack with <a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> or <a href="https://github.com/Alamofire/Alamofire">AlamoFire</a>, or adding a popular behavior-driven development testing framework like <a href="https://github.com/Quick/Quick">Quick</a> to our workflow, we find ourselves constantly wanting to be able to take advantage of the things that others are doing in the community so we don&rsquo;t have to invent that wheel again ourselves.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="need-dependency-management" class="jump-target"></a></p>
 <h3 id="the-need-for-dependency-management">The need for dependency management</h3>
 <p>With that comes the need for an easy way to manage external dependencies in our projects. We find the need to make sure that our projects have the right versions of whatever libraries or frameworks we&rsquo;re bringing in. We want to ensure that if we move to another machine or add folks to our teams that they can go and restore all those same external dependencies without a lot of hassle. Therein lies at least partial justification for the usage of dependency managers.</p>
 <p>The long-running &ldquo;king of the hill” of dependency management for iOS developers has been the ever-popular <a href="https://cocoapods.org/">CocoaPods</a>. However, there&rsquo;s a new kid on the block, and its picking up popularity. This &ldquo;new” dependency manager is called <a href="https://github.com/Carthage/Carthage">Carthage</a>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="what-is-carthage" class="jump-target"></a></p>
 <h3 id="what-is-carthage">What is Carthage?</h3>
 <p>From the GitHub repository&rsquo;s main page for Carthage (emphasis mine):</p>
 <blockquote>
 <p>Carthage is intended to be the simplest way to add frameworks to your Cocoa application… Ultimately, we created Carthage because we wanted the <strong>simplest tool possible</strong>—a dependency manager that gets the job done <strong>without taking over the responsibility of Xcode</strong>, and <strong>without creating extra work for framework authors</strong>.</p>
 </blockquote>
 <p>I&rsquo;ve used Carthage for simple tasks like bringing in Quick for unit testing. It delivers on the promise of being simple, but even in its simplicity, installing and using Carthage requires the use of the Terminal.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="terminal-tension" class="jump-target"></a></p>
 <h3 id="terminal-tension">Terminal tension</h3>
 <p>If you&rsquo;ll withhold judgement of this confession, I&rsquo;ll openly share that I&rsquo;m not a whiz on the command line. I <em>have</em> found that the more I spend time in the Terminal, the less timid I become. It&rsquo;s been a gradual transition into spending intentional time on the command line, but I share this to simply relate to those of you who, like me, find themselves thinking, &ldquo;Really? All of this involves running commands in the Terminal? Ugh…”</p>
 <p>Hang in there. Becoming proficient at this will take practice, but it&rsquo;s worth it. Carthage really does make your dependency management simpler and more shareable with your team. Even if you&rsquo;re working alone, I recommend investing the time to overcoming any anxiety you may have around the Terminal.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="installing-carthage" class="jump-target"></a></p>
 <h3 id="installing-carthage">Installing Carthage</h3>
 <p>So here&rsquo;s the deal: The folks on the Carthage team have actually made it pretty easy to install Carthage <em>without</em> the Terminal. If you go to their <a href="https://github.com/Carthage/Carthage/releases">releases page on GitHub</a> and download + run the Carthage.pkg file for the latest release, you&rsquo;ll be set up. BUT, <strong>Carthage is a command-line tool</strong>, so to use it, you&rsquo;ll still need the Terminal.</p>
 <p>With that in mind, I&rsquo;ve decided to get used to working with this tool <em>totally</em> from the command-line from the start, which means installing it from the Terminal window. There&rsquo;s a couple more steps involved, but I&rsquo;d argue that it&rsquo;s good practice. If you&rsquo;re wanting to overcome your anxiety around the Terminal, skip the .pkg installation method and continue on.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="terminal-installation" class="jump-target"></a></p>
 <h3 id="terminal-installation">Terminal installation</h3>
 <p>Installing Carthage from the command line assumes that you have a package manager for OSX called <a href="http://brew.sh/">&ldquo;Homebrew”</a> installed on your Mac. If you don&rsquo;t, you need it. And yes, <em>it</em> involves the Terminal too, but don&rsquo;t worry – I&rsquo;ve got you covered in the steps to follow. We&rsquo;ll use Homebrew to install Carthage which will be used to manage the external dependencies in our app.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="installing-homebrew" class="jump-target"></a></p>
 <h4 id="first-things-first--installing-homebrew">First things first – installing Homebrew</h4>
 <p>Installing Homebrew isn&rsquo;t complicated. It just involves knowing the command to run in the Terminal to get it downloaded and registered in your machine.</p>
 <p>From the <a href="http://brew.sh/">Homebrew homepage</a> we learn that the installation simply requires us to type in the following in the Terminal:</p>
 <p><code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></p>
 <p>Pasting in the command and pressing enter will immediately produce a <em>lot</em> of stuff in the terminal window. It&rsquo;s okay. Don&rsquo;t panic.</p>
 <p>It&rsquo;s simply letting you know what&rsquo;s about to happen if you agree to continue:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png" alt="Homebrew Install Command" width="580" height="364" class="alignnone size-full wp-image-12168" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png 580w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command-300x188.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
 <p>So it&rsquo;s going to…</p>
 <ul>
 <li>Install some files into some directories on your computer.</li>
@@ -244,33 +244,33 @@ MathJax.Hub.Config({
 </ul>
 <p>You&rsquo;re prompted to press ‘RETURN&rsquo; to continue (or anything else to stop the installation). If you&rsquo;re good with the changes it describes to you, press ‘RETURN'.</p>
 <p>Yikes! What&rsquo;s all this now?<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png" alt="Elevate permissions using sudo" width="580" height="365" class="alignnone size-full wp-image-12169" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png 580w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions-300x189.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
 <p>Well, for the installation to continue, Homebrew needs to elevate the level of permissions it has in order write all the files it needs to write and to set all the permissions it needs to set. Under the hood, it&rsquo;s run a <code>sudo</code> command. It requires your password to authorize this elevation. Go ahead and type your password, and press ‘RETURN&rsquo; to continue.</p>
 <p>The installation will continue by downloading all of the necessary files and performing all the changes it said it&rsquo;d make. When it&rsquo;s done, you&rsquo;ll get an &ldquo;Installation Successful” message:</p>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png"><!-- raw HTML omitted --></a></p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png" alt="Homebrew Installation Successful" width="586" height="367" class="alignnone size-full wp-image-12177" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png 586w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful-300x188.png 300w" sizes="(max-width: 586px) 100vw, 586px" /></a></p>
 <p>Sweet! To test it out, you can simply type <code>brew help</code> like it suggests in the line below the &ldquo;Installation successful!” message. It should print out a bunch of stuff to the Terminal window, explaining how to use Homebrew:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png" alt="It works!" width="581" height="366" class="alignnone size-full wp-image-12172" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png 581w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works-300x189.png 300w" sizes="(max-width: 581px) 100vw, 581px" /></a></p>
 <p>Well done! We can now use Homebrew to install Carthage. You can use it to install all kinds of other fantastic utilities as well, but for now we&rsquo;ll focus on the Carthage installation…</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="now-install-carthage" class="jump-target"></a></p>
 <h4 id="now-to-install-carthage">Now to install Carthage</h4>
 <p>With Homebrew installed, we&rsquo;re almost there. From the <a href="https://github.com/Carthage/Carthage">Carthage GitHub repository page</a>, we learn what commands to run on the command line to get Carthage installed.</p>
 <p>First, we run <code>brew update</code> to make sure that Homebrew is totally up-to-date. If you just installed Homebrew for the first time, you&rsquo;re probably good to go. Just to be safe though, go ahead and run it.<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png" alt="Brew Update" width="582" height="363" class="alignnone size-full wp-image-12189" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png 582w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update-300x187.png 300w" sizes="(max-width: 582px) 100vw, 582px" /></a></p>
 <p>The last step is to run <code>brew install carthage</code>. Yes. It&rsquo;s that simple. Homebrew will take care of everything else for you! Here&rsquo;s the final result:</p>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png" alt="Brew Install Carthage" width="580" height="362" class="alignnone size-full wp-image-12188" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png 580w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage-300x187.png 300w" sizes="(max-width: 580px) 100vw, 580px" /></a></p>
+<p><a name="cartfiles" class="jump-target"></a></p>
 <h3 id="cartfiles">Cartfiles</h3>
 <p>Once Carthage is installed, it&rsquo;s time to create your Cartfile file. After I read <a href="https://github.com/Carthage/Carthage">the documentation</a> on how to set this up, I found myself doubting whether I&rsquo;d done it right, so again, to alleviate any fears our there around the mystery of what&rsquo;s going on I&rsquo;ll share what I&rsquo;ve discovered.</p>
 <p>First of all, the documentation merely says, &ldquo;Create a Cartfile that lists the frameworks you’d like to use in your project.” I scratched my head and asked, &ldquo;Okay – well, where? And should it have a file extension?”</p>
 <p>The answers that worked for me were, &ldquo;Somewhere in your Xcode project (I put it under Supporting Files)” and &ldquo;No file extension…just the name Cartfile works”.</p>
 <p>To demonstrate, here&rsquo;s a couple of screenshots depicting how to add a Cartfile to your Xcode project…</p>
 <p>Simply add a new Empty file, found under iOS -&gt; Other:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-1024x409.png" alt="New empty file" width="1024" height="409" class="alignnone size-large wp-image-12191" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-1024x409.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-300x120.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file.png 1394w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p>In the new file dialog, simply type in &ldquo;Cartfile”, and press Create:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create.png" alt="Cartfile -> Create" width="783" height="298" class="alignnone size-full wp-image-12192" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create.png 783w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create-300x114.png 300w" sizes="(max-width: 783px) 100vw, 783px" /></a></p>
 <h3 id="wrapping-up">Wrapping up</h3>
 <p>This is where I&rsquo;m going to stop for now and defer to the <a href="https://github.com/Carthage/Carthage">Carthage GitHub documentation</a> to explain more about what exactly to put into the Cartfile and how to run the subsequent commands to grab the libraries and frameworks you list, and build them so that they can be added to your Xcode project. I may pick this back up again, but this guide was starting to get lengthy, and I felt that actually building the frameworks from a Cartfile could very well deserve isolated treatment for the sake of clarity. If you&rsquo;re interested in reading more on Carthage, sound off in the comments or shoot me an e-mail! Thanks for reading.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -329,7 +329,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

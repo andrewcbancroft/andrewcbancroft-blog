@@ -41,7 +41,7 @@
 <meta property="og:description" content="You can visit Part 1 of this troubleshooting series by clicking here.
 During our configuration of Reporting Services for SharePoint I ran into another common issue.
 I consulted MSDN once again and followed the directions given at this MSDN article. Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:
-Even after adding the Reporting Services service account to the SSAS Tabular instance as a server administrator, we still hit this error." />
+Cannot connect to the server or database." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2012-06-30T19:44:36+00:00" />
@@ -53,7 +53,7 @@ Even after adding the Reporting Services service account to the SSAS Tabular ins
 <meta name="twitter:description" content="You can visit Part 1 of this troubleshooting series by clicking here.
 During our configuration of Reporting Services for SharePoint I ran into another common issue.
 I consulted MSDN once again and followed the directions given at this MSDN article. Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:
-Even after adding the Reporting Services service account to the SSAS Tabular instance as a server administrator, we still hit this error."/>
+Cannot connect to the server or database."/>
 <meta name="generator" content="Hugo 0.101.0" />
 
     
@@ -63,7 +63,7 @@ Even after adding the Reporting Services service account to the SSAS Tabular ins
   "@type": "BlogPosting",
   "headline": "Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)",
   "url": "https:\/\/www.andrewcbancroft.com\/2012\/06\/30\/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2\/",
-  "wordCount": "146",
+  "wordCount": "193",
   "datePublished": "2012-06-30T19:44:36Z",
   "dateModified": "2012-06-30T19:44:36Z",
   "author": {
@@ -210,11 +210,15 @@ MathJax.Hub.Config({
 
     <p>You can visit Part 1 of this troubleshooting series by <a href="http://andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/" title="Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)">clicking here</a>.</p>
 <p>During our configuration of Reporting Services for SharePoint I ran into another common issue.</p>
-<p>I consulted MSDN once again and followed the directions <!-- raw HTML omitted -->given at this MSDN article<!-- raw HTML omitted -->.  Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:</p>
-<!-- raw HTML omitted -->
+<p>I consulted MSDN once again and followed the directions <a title="PowerPivot BI Semantic Model Connection (.bism) " href="http://msdn.microsoft.com/en-us/library/gg471575.aspx" target="_blank">given at this MSDN article</a>.  Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:</p>
+<div class="note">
+  Cannot connect to the server or database.
+</div>
 <p>Even after adding the Reporting Services service account to the SSAS Tabular instance as a server administrator, we still hit this error.</p>
 <p>Once again I found little documentation out there as I was troubleshooting, presumably because SQL Server 2012 is still quite new.  Here&rsquo;s what we did to fix our problem:</p>
-<!-- raw HTML omitted -->
+<div class="note">
+  <strong>The Analysis Services service must be running under a domain account.</strong>  When I installed SSAS, I took all the defaults for the server installation.  The SSAS service was running under some default built-in account which ended up being the problem.
+</div>
 <p>Once we switched this to run under a domain account, I was able to create BI Semantic Model Connections using this library document type with no issues.</p>
 
     <aside>
@@ -266,7 +270,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

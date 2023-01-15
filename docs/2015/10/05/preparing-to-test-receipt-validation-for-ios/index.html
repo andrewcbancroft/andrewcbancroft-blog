@@ -57,7 +57,7 @@
   "@type": "BlogPosting",
   "headline": "Preparing to Test Receipt Validation for iOS",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/10\/05\/preparing-to-test-receipt-validation-for-ios\/",
-  "wordCount": "943",
+  "wordCount": "1000",
   "datePublished": "2015-10-05T18:25:09Z",
   "dateModified": "2019-06-27T00:00:00Z",
   "author": {
@@ -207,36 +207,36 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I&rsquo;ve decided to combine everything into the following guide. Whether you&rsquo;re working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="app-record-setup" class="jump-target"></a></p>
 <h3 id="itunes-connect-app-record-setup">iTunes Connect App Record Setup</h3>
 <h5 id="1--log-in-to-the-apple-developer-member-center">1 – Log in to the Apple Developer Member Center.</h5>
 <h5 id="2--make-sure-you-have-a-bundle-identifier-set-up-for-your-app">2 – Make sure you have a bundle identifier set up for your app.</h5>
 <p>If this is an existing app you&rsquo;re wanting to add receipt validation to, you&rsquo;re already set. If this is a brand new, un-released app, you need to set up a bundle identifier first.</p>
 <p>2a) Click on Certificates, Identifiers &amp; Profiles:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier-1024x296.png" alt="Manage bundle identifier" width="1024" height="296" class="alignnone size-large wp-image-12325" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier-1024x296.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier-300x87.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/manage-bundle-identifier.png 1102w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p>2b) Click on Identifiers:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers.png" alt="Identifiers" width="1005" height="455" class="alignnone size-full wp-image-12326" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers.png 1005w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/identifiers-300x136.png 300w" sizes="(max-width: 1005px) 100vw, 1005px" /></a></p>
 <p>2c) Add a new App ID that&rsquo;s appropriate for your app:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id.png" alt="Add app id" width="1021" height="495" class="alignnone size-full wp-image-12327" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id.png 1021w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-id-300x145.png 300w" sizes="(max-width: 1021px) 100vw, 1021px" /></a></p>
 <h5 id="3--log-into-itunes-connect">3 – Log into iTunes Connect.</h5>
 <h5 id="4--click-my-apps8221-from-the-main-itunes-connect-dashboard-page">4 – Click &ldquo;My Apps” from the main iTunes Connect dashboard page.</h5>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps.png"><!-- raw HTML omitted --></a></p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps-1024x495.png" alt="iTunes Connect - My Apps" width="1024" height="495" class="alignnone size-large wp-image-12331" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps-1024x495.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps-300x145.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/itunes-connect-my-apps.png 1040w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <h5 id="5--click-the--button-to-add-your-app-into-itunes-connect">5 – Click the + button to add your app into iTunes Connect.</h5>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app.png" alt="Add App" width="454" height="252" class="alignnone size-full wp-image-12332" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app.png 454w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/add-app-300x167.png 300w" sizes="(max-width: 454px) 100vw, 454px" /></a></p>
+<p><a name="sandbox-tester-setup" class="jump-target"></a></p>
 <h3 id="sandbox-tester-setup">Sandbox Tester Setup</h3>
 <h4 id="1--create-a-new-e-mail-address-thats-not-associated-with-an-apple-id-already">1 – Create a new e-mail address that&rsquo;s not associated with an Apple ID already</h4>
 <p>Your sandbox user account is actually going to be a separate Apple ID. Since it&rsquo;s probably going to be <em>you</em> that&rsquo;s testing the purchasing and receipt features of your app, you will need to create a new e-mail address to associate with a new Apple ID, since Apple does not allow you to use an e-mail address already associated with an existing Apple ID.</p>
 <h5 id="2--log-in-to-itunes-connect-if-youre-not-still-logged-in-from-the-previous-steps">2 – Log in to iTunes Connect if you&rsquo;re not still logged in from the previous steps</h5>
 <h5 id="3--click-on-users-and-roles">3 – Click on Users and Roles</h5>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles.png"><!-- raw HTML omitted --></a></p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles-1024x445.png" alt="iTunes Connect - Users and Roles" width="1024" height="445" class="alignnone size-large wp-image-12335" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles-1024x445.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles-300x130.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/users-and-roles.png 1165w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <h5 id="4--click-sandbox-testers">4 – Click Sandbox Testers</h5>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1.png"><!-- raw HTML omitted --></a></p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1.png" alt="Sandbox Testers" width="762" height="177" class="alignnone size-full wp-image-12337" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1.png 762w, https://www.andrewcbancroft.com/wp-content/uploads/2015/10/sandbox-testers1-300x70.png 300w" sizes="(max-width: 762px) 100vw, 762px" /></a></p>
 <h5 id="5--click-the-add--button">5 – Click the Add (+) button</h5>
 <h5 id="6--fill-out-all-of-the-information-on-this-page-and-use-the-new-e-mail-address-you-created-as-the-email-field-value">6 – Fill out all of the information on this page, and use the new e-mail address you created as the Email field value.</h5>
 <h5 id="7--save-the-new-sandbox-user">7 – Save the new sandbox user.</h5>
 <h5 id="8--you-will-receive-an-e-mail-from-apple-asking-you-to-verify-your-new-apple-id-verify-it">8 – You will receive an e-mail from Apple asking you to verify your new Apple ID. Verify it.</h5>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="ios-device-setup" class="jump-target"></a></p>
 <h3 id="ios-device-setup">iOS Device Setup</h3>
 <h5 id="1--on-your-physical-device-not-in-the-simulator-open-settings-and-navigate-to-app-and-itunes-stores8221">1 – On your physical device (not in the Simulator), open Settings and navigate to &ldquo;App and iTunes Stores”.</h5>
 <h5 id="2--sign-out-of-your-regular-apple-id-but-_do-not_-re-sign-in-using-your-new-sandbox-tester-apple-id-that-you-just-set-up-doing-this-will-pose-the-risk-of-invalidating-your-sandbox-user-test-account-this-is-explained-over-in-the-apple-developer-documentation8">2 – Sign out of your regular Apple ID, but <em>do not</em> re-sign in using your new Sandbox Tester Apple ID that you just set up. Doing this will pose the risk of invalidating your Sandbox User test account. This is explained over in the <a href="https://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Chapters/SettingUpUserAccounts.html#//apple_ref/doc/uid/TP40011225-CH25-SW9">Apple Developer documentation</a>:</h5>
@@ -356,14 +356,38 @@ MathJax.Hub.Config({
 </div>
 </div></p>
 <p><strong>Note:</strong> Once again, note that the instance of <code>ReceiptFetcher</code> is held at the view controller&rsquo;s class-level scope. This is necessary to allow the delegate callback functions to be invoked. If you initialize the <code>ReceiptFetcher</code> in <code>viewDidLoad</code> without holding a reference at the class level, the instance will be deallocated prior to the delegate callback functions being invoked.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="build-run-on-device" class="jump-target"></a></p>
 <h3 id="debug-app-on-device">Debug App on Device</h3>
 <h5 id="1--run-your-app-from-xcode-on-the-device-youve-just-set-up">1 – Run your app from Xcode on the device you&rsquo;ve just set up.</h5>
 <h5 id="2--executing-code-such-as-a-request-to-refresh-a-receipt-should-prompt-you-for-your-newly-created-sandbox-tester-credentials">2 – Executing code, such as a request to refresh a receipt should prompt you for your newly created Sandbox Tester credentials.</h5>
 <h5 id="3--enter-the-password-for-that-apple-id--you-should-receive-a-receipt">3 – Enter the password for that Apple ID – you should receive a receipt!</h5>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/" title="Loading a Receipt for Validation with Swift">Loading a Receipt for Validation with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/" title="OpenSSL for iOS &#038; Swift the Easy Way">OpenSSL for iOS & Swift the Easy Way</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/" title="Extracting a PKCS7 Container for Receipt Validation with Swift">Extracting a PKCS7 Container for Receipt Validation with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/" title="Receipt Validation – Verifying a Receipt Signature in Swift">Receipt Validation – Verifying a Receipt Signature in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/" title="Receipt Validation – Parse and Decode a Receipt with Swift">Receipt Validation – Parse and Decode a Receipt with Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/" title="Finalizing Receipt Validation in Swift – Computing a GUID Hash">Finalizing Receipt Validation in Swift – Computing a GUID Hash</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
 
     <div id="disqus_thread"></div>
@@ -399,7 +423,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

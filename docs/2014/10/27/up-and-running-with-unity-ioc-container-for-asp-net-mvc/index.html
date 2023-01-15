@@ -211,14 +211,14 @@ MathJax.Hub.Config({
 <li>
 <p>Using ASP.Net MVC 5</p>
 <ul>
-<li>Have already created a new, fresh solution (File –&gt; New Project, etc)<!-- raw HTML omitted --></li>
+<li>Have already created a new, fresh solution (File –&gt; New Project, etc)</ul></li>
 </ul>
 <h3 id="walkthrough">Walkthrough</h3>
 <p>Begin by right-clicking your solution, and choosing to “Manage NuGet Packages for Solution…”:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image.png"><img title="image" style="border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; display: inline; border-top-width: 0px" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb.png" width="504" height="367" /></a></p>
 <p>Next, choose to search for packages found at nuget.org.  In the search bar in the upper right, type in “Unity”, and press enter.  Choose to install “Unity bootstrapper for ASP.NET MVC”:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8.png"><!-- raw HTML omitted --></a></p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image1.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8.png"><img title="SNAGHTMLb1d5c8" style="border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; display: inline; border-top-width: 0px" border="0" alt="SNAGHTMLb1d5c8" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8_thumb.png" width="504" height="325" /></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image1.png"><img title="image" style="border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb1.png" width="309" height="398" /></a></p>
 <p>Now that the appropriate NuGet package is installed, you’re set to start using the Unity IOC Container. </p>
 <h3 id="using-unity-for-dependency-injection-and-management">Using Unity for Dependency Injection and Management</h3>
 <p>I’ve contrived an example and tried to show side-by-side views of the bare minimums you need to program in order to start taking advantage of Unity for managing your dependencies.   I’m going to show how to inject a concrete implementation of a very simple Interface into the HomeController. The steps go something like this:</p>
@@ -234,14 +234,14 @@ MathJax.Hub.Config({
 <li>
 <p>Utilize the itWorksMessage somehow.  In my example, I set the return value to a new dynamic property called ViewBag.Message inside the Index method.</p>
 <ul>
-<li>In UnityConfig.cs, register IUnityExample and UnityExample with the container inside the RegisterTypes method.<!-- raw HTML omitted -->
+<li>In UnityConfig.cs, register IUnityExample and UnityExample with the container inside the RegisterTypes method.</ol>
 Let’s pause here and show that side-by-side view I referred to a second ago.  Perhaps visualizing the files in play will help bring the whole picture into view:</li>
 </ul>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image5.png"><!-- raw HTML omitted --></a></p>
-<p>At this point, we’re done with writing C# code, and we’re ready to move into the View layer.  This final step will access ViewBag.Message, and display it at the bottom of the page.  It’s fairly straight-forward.  Inside Views –&gt; Home –&gt; Index.cshtml, simply add a <!-- raw HTML omitted --> that contains @ViewBag.Message:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image3.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image5.png"><img title="image" style="border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb5.png" width="720" height="308" /></a></p>
+<p>At this point, we’re done with writing C# code, and we’re ready to move into the View layer.  This final step will access ViewBag.Message, and display it at the bottom of the page.  It’s fairly straight-forward.  Inside Views –&gt; Home –&gt; Index.cshtml, simply add a <div> that contains @ViewBag.Message:</p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image3.png"><img title="image" style="border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb3.png" width="624" height="217" /></a></p>
 <p>To confirm everything works, run your solution and verify the results!</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image4.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image4.png"><img title="image" style="border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb4.png" width="720" height="263" /></a></p>
 <h3 id="summary">Summary</h3>
 <p>In this article, you’ve seen how to use NuGet to install the required components to get up and running with the Unity Inversion of Control container.  Additionally, you saw a bare-bones example demonstrating the steps required to start using Unity to manage your dependencies with ASP.Net MVC.</p>
 </li>
@@ -297,7 +297,7 @@ Let’s pause here and show that side-by-side view I referred to a second ago. 
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

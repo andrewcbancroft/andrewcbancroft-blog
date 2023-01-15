@@ -59,7 +59,7 @@ Table Views for Data Entry? Table views provide nice, built-in styles that prese
   "@type": "BlogPosting",
   "headline": "Custom UITableViewCell for Text Input in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/02\/12\/custom-uitableviewcell-text-input-swift\/",
-  "wordCount": "963",
+  "wordCount": "967",
   "datePublished": "2015-02-12T13:00:50Z",
   "dateModified": "2015-02-12T13:00:50Z",
   "author": {
@@ -209,56 +209,64 @@ MathJax.Hub.Config({
     <p></p>
 
     <p>The need to collect data via text input is a common in many applications. This walk-through showcases how to create a custom <code>UITableViewCell</code> for accepting text input within a <code>UITableView</code>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="tableview-data-entry" class="jump-target"></a></p>
 <h3 id="table-views-for-data-entry">Table Views for Data Entry?</h3>
 <p>Table views provide nice, built-in styles that present a form-like view for collecting data from your users. They also have inherent scrolling capabilities. Finally, there is some handy keyboard handling, such as auto-scrolling to avoid covering up a data entry cell, or hiding the keyboard when the user scrolls the Table View. Both of those are challenging to get right if you were to do implement a data entry form some other way.</p>
 <p>Many of Apple&rsquo;s own UIs utilize table views to collect data from the user (think Settings, Calendar, Reminders).</p>
 <p>For those reasons, I think a table view is a really convenient choice for collecting data from a user.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="step-by-step" class="jump-target"></a></p>
 <h3 id="step-by-step-walkthrough">Step by Step Walkthrough</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/CustomTextInputTableViewCell"title="Custom Text Input TableView Cell Example">Example Xcode Project</a>
+    </li>
+  </ul>
+</div>
+<p><a name="drag-tableview" class="jump-target"></a></p>
 <h4 id="drag-a-table-view-to-storyboard">Drag a table view to Storyboard</h4>
 <p>Assuming that you have a View Controller already on the Storyboard design surface, drag a table view onto the Storyboard scene.<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_%E2%80%94_Edited_and_Edit_Post_%E2%80%B9_Andrew_Bancroft_%E2%80%94_WordPress_and_AddVerseControllerTests_swift.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_%E2%80%94_Edited_and_Edit_Post_%E2%80%B9_Andrew_Bancroft_%E2%80%94_WordPress_and_AddVerseControllerTests_swift.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Edit_Post_‹_Andrew_Bancroft_—_WordPress_and_AddVerseControllerTests_swift-1024x569.png" alt="Drag Table View to Storyboard" width="1024" height="569" class="alignnone size-large wp-image-11324" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Edit_Post_‹_Andrew_Bancroft_—_WordPress_and_AddVerseControllerTests_swift-1024x569.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Edit_Post_‹_Andrew_Bancroft_—_WordPress_and_AddVerseControllerTests_swift-300x167.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="data-source-delegate" class="jump-target"></a></p>
 <h4 id="wire-up-table-view-data-source-and-delegate">Wire up table view data source and delegate</h4>
 <p>For this step it&rsquo;s helpful to have the document outline pane visible. Selecting the Table View from the document outline and subsequently Control + Click + Dragging to the View Controller icon on the Storyboard scene will allow you to link the table view&rsquo;s dataSource and delegate properties to the View Controller.<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Ctrl-Click-Drag-to-set-DataSource-and-Delegate.png"><!-- raw HTML omitted --></a></p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-DataSource-and-Delegate.png"><!-- raw HTML omitted --></a><br>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Ctrl-Click-Drag-to-set-DataSource-and-Delegate.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Ctrl-Click-Drag-to-set-DataSource-and-Delegate-1024x507.png" alt="Ctrl+Click-Drag to set DataSource and Delegate" width="1024" height="507" class="alignnone size-large wp-image-11683" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Ctrl-Click-Drag-to-set-DataSource-and-Delegate-1024x507.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Ctrl-Click-Drag-to-set-DataSource-and-Delegate-300x148.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-DataSource-and-Delegate.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-DataSource-and-Delegate-1024x508.png" alt="Set DataSource and Delegate" width="1024" height="508" class="alignnone size-large wp-image-11354" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-DataSource-and-Delegate-1024x508.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-DataSource-and-Delegate-300x149.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><br>
 Note that you&rsquo;ll need to perform the Control + Click + Drag maneuver twice to set both the dataSource and the delegate.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="dismiss-keyboard" class="jump-target"></a></p>
 <h4 id="configure-keyboard-dismissal-for-table-view">Configure keyboard dismissal for table view</h4>
 <p>With the attributes inspector selected in the utilities pane, scroll down to the Keyboard option and set it to &ldquo;Dismiss on drag”.<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1.png"><!-- raw HTML omitted --></a><br>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1-1024x509.png" alt="Configure Keyboard Dismissal" width="1024" height="509" class="alignnone size-large wp-image-11357" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1-1024x509.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Keyboard-Dismissal1-300x149.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><br>
 This can be helpful if you&rsquo;d like the keyboard to automatically hide itself when the user scrolls the table view.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="constraints" class="jump-target"></a></p>
 <h4 id="set-constraints-increase-prototype-cells-count">Set constraints, increase prototype cells count</h4>
 <p>Use the document outline to set constraints. With the attributes inspector selected in the utilities pane, select &ldquo;Dynamic Prototypes” for the Content property, and set the Prototype Count property to 1 (or more, depending on your needs).<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1.png"><!-- raw HTML omitted --></a><br>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1-1024x508.png" alt="Set Constraints and Prototype Cells" width="1024" height="508" class="alignnone size-large wp-image-11352" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1-1024x508.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Set-Constraints-and-Prototype-Cells1-300x149.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><br>
 Configuring constraints on the table view will ensure that it displays properly on all device sizes and orientations.</p>
 <p>In this particular example, there&rsquo;s only one kind of prototype cell that I want the table view to display. If I had multiple prototypes, I&rsquo;d increase the prototype cells count to match the number of prototypes I had.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="drag-text-field" class="jump-target"></a></p>
 <h4 id="drag-text-field-to-cell-increase-text-field-width">Drag text field to cell, increase text field width</h4>
 <p>Drag a text field into the cell&rsquo;s contents and use Xcode&rsquo;s blue guides to adjust the width so that it takes up the whole cell.<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_%E2%80%94_Edited_and_Main_storyboard_1.png"><!-- raw HTML omitted --></a><br>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_%E2%80%94_Edited_and_Main_storyboard_1.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1-1024x622.png" alt="Drag Text Field to Cell" width="1024" height="622" class="alignnone size-large wp-image-11325" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1-1024x622.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1-300x182.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard_1.png 1488w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><br>
 Now comes the customization of the prototype cell itself. Since we&rsquo;re designing it for text input, we&rsquo;ll use a text field as the contents of the table view cell prototype.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="configure-text-field-constraints" class="jump-target"></a></p>
 <h4 id="configure-text-field-constraints-and-border">Configure Text Field Constraints and Border</h4>
 <p>Use the document outline to set constraints for the text field. With the text field selected, and the attributes inspector selected in the utilities pane, set the Border Style property to the style you prefer.<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Text-Field-Constraints-and-Border.png"><!-- raw HTML omitted --></a><br>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Text-Field-Constraints-and-Border.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Text-Field-Constraints-and-Border-1024x508.png" alt="Configure Text Field Constraints and Border" width="1024" height="508" class="alignnone size-large wp-image-11350" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Text-Field-Constraints-and-Border-1024x508.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Configure-Text-Field-Constraints-and-Border-300x149.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><br>
 Configuring constraints on the text field will ensure that it displays properly on all device sizes and orientations.</p>
 <p>Depending on your taste / needs, you can change the border style from rounded to none, or whichever other border style is most appealing for your app.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="text-input-cell-class" class="jump-target"></a></p>
 <h4 id="create-new-textinputtableviewcell-class">Create new TextInputTableViewCell class</h4>
 <p>Add a new .swift file named TextInputTableViewCell to your project. Create a new class in that file called <code>TextInputTableViewCell</code> which inherits from <code>UITableViewCell</code>.<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_and_Main_storyboard.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_and_Main_storyboard.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_and_Main_storyboard-1024x567.png" alt="Create new class - TextInputTableViewCell" width="1024" height="567" class="alignnone size-large wp-image-11330" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_and_Main_storyboard-1024x567.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_and_Main_storyboard-300x166.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="ib-outlet" class="jump-target"></a></p>
 <h4 id="create-an-iboutlet-between-the-text-field-and-the-textinputtableviewcell-class">Create an IBOutlet between the text field and the TextInputTableViewCell class</h4>
 <p>Use the document outline to Control + Click + Drag and IBOutlet to the <code>TextInputTableViewCell</code> class.<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Create-IBOutlet1.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Create-IBOutlet1.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Create-IBOutlet1-1024x512.png" alt="Create IBOutlet" width="1024" height="512" class="alignnone size-large wp-image-11684" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Create-IBOutlet1-1024x512.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Create-IBOutlet1-300x150.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="implement-class" class="jump-target"></a></p>
 <h4 id="implement-textinputtableviewcell-class">Implement TextInputTableViewCell class</h4>
 <p>An example implementation with a function for configuring the text field&rsquo;s properties might look something like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">import</span> <span class="nc">UIKit</span>
@@ -274,15 +282,15 @@ Configuring constraints on the text field will ensure that it displays properly 
 </span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="n">textField</span><span class="p">.</span><span class="n">accessibilityLabel</span> <span class="p">=</span> <span class="n">placeholder</span>
 </span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="storyboard-setup" class="jump-target"></a></p>
 <h4 id="change-cell-class-in-storyboard-to-textinputtableviewcell">Change cell class in Storyboard to TextInputTableViewCell</h4>
 <p>Use the document outline to select the Table View Cell. With the identity inspector selected in the utilities pane, change the Class property to your TextInputTableViewCell class.<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_%E2%80%94_Edited_and_Main_storyboard.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_%E2%80%94_Edited_and_Main_storyboard.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard-1024x513.png" alt="Change Cell Class to TextInputCell" width="1024" height="513" class="alignnone size-large wp-image-11328" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard-1024x513.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_and_Main_storyboard-300x150.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="reuse-identifier" class="jump-target"></a></p>
 <h4 id="set-reuse-identifier">Set reuse identifier</h4>
 <p>With the Table View Cell still selected in the document outline, select the attribute inspector in the utilities pane and change the Identifier property to &ldquo;TextInputCell” (or some other string that&rsquo;s easily remembered).<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_%E2%80%94_Edited_2.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_%E2%80%94_Edited_2.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_2-1024x511.png" alt="Set Reuse Identifier" width="1024" height="511" class="alignnone size-large wp-image-11323" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_2-1024x511.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Main_storyboard_—_Edited_2-300x150.png 300w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="implement-datasource-delegate" class="jump-target"></a></p>
 <h4 id="implement-table-view-data-source-and-delegate-methods">Implement table view data source and delegate methods</h4>
 <p>In the View Controller, specify that it adopts the <code>UITableViewDataSource</code> and <code>UITableViewDelegate</code> protocols. Implement the appropriate protocol methods.<br>
 I&rsquo;ve written a <a href="http://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/">cheat sheet</a> for this, but I&rsquo;ll also provide the following sample implementation of the mai <code>ViewController</code> class:</p>
@@ -301,12 +309,12 @@ I&rsquo;ve written a <a href="http://www.andrewcbancroft.com/2014/11/24/swift-ui
 </span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>Lines 9 and 11 are of most importance. Notice that I&rsquo;m dequeueing a TextInputCell, which is what I set the reuse identifier of my cell to be. I&rsquo;m also casting the dequeued cell as a TextInputTableViewCell so that it can be configured (line 11)</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="run-in-simulator" class="jump-target"></a></p>
 <h4 id="run-in-simulator">Run in simulator</h4>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Simulator-Output.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Simulator-Output.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Simulator-Output.png" alt="Simulator Output" width="473" height="869" class="alignnone size-full wp-image-11365" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Simulator-Output.png 473w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Simulator-Output-163x300.png 163w" sizes="(max-width: 473px) 100vw, 473px" /></a></p>
 <h3 id="wrapping-up">Wrapping up</h3>
 <p>In this walkthrough, my goal was to show how to take advantage of a table view&rsquo;s inherent styles, scrolling capabilities, and keyboard handling to make form-like text input easier. We created a custom subclass of UITableViewCell to accomplish this task. Take a look at the <a href="https://github.com/andrewcbancroft/CustomTextInputTableViewCell">example published to GitHub</a> to dive in further and explore the walkthrough in more depth.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -365,7 +373,7 @@ I&rsquo;ve written a <a href="http://www.andrewcbancroft.com/2014/11/24/swift-ui
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

@@ -204,7 +204,7 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    <p>As part of a ASP.Net Web API service that I&rsquo;m co-developing, I have gotten familiar with the <!-- raw HTML omitted -->DotNetZip Library<!-- raw HTML omitted -->.  It&rsquo;s fantastic.  We&rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.</p>
+    <p>As part of a ASP.Net Web API service that I&rsquo;m co-developing, I have gotten familiar with the <a title="DotNetZip Codeplex Page" href="http://dotnetzip.codeplex.com/" target="_blank">DotNetZip Library</a>.  It&rsquo;s fantastic.  We&rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.</p>
 <p>During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.</p>
 <h2 id="synopsis">Synopsis:</h2>
 <p>Problem:  On a Mac, a zip file would be downloaded, but it could not be extracted.  Double-clicking the zip file resulted in the creation of a .cpgz file.</p>
@@ -215,14 +215,14 @@ MathJax.Hub.Config({
 <h2 id="problem-details">Problem Details:</h2>
 <p>A zip archive would download as normal, but as things were wrapping up, Safari would try to decompress the file and it would fail.</p>
 <p>Error from Safari&rsquo;s download manager area:</p>
-<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed.png"><img class="alignnone size-medium wp-image-585" style="src=&quot;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed-300x43.png&quot;" width="300" height="43" /></a></p>
 <p>Furthermore, when attempting to simply extract the files directly using the built in Mac Archive Utility (by double-clicking the zip file), the utility would actually re-archive the file, rather than extract it.  The end result was the creation of a .cpgz file.  Attempting to decompress <em>that</em> file would result in creating another .zip file, which, when double-clicked, created another .cpgz file, and so on, and so on.</p>
 <p>Archive Utility re-archiving the zip file when double-clicked (rather than <em>un</em>-archiving it)</p>
-<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM.png"><img class="alignnone size-medium wp-image-586" alt="Screen Shot 2013-10-10 at 4.13.48 PM" src="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM-300x106.png" width="300" height="106" /></a></p>
 <p>Creation of .cpgz file:</p>
-<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png"><img class="alignnone size-full wp-image-584" alt="Created_cpgz_file" src="http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png" width="280" height="22" /></a></p>
 <p>Needless to say, the solution to this problem, though somewhat mysterious, was quite simple for me.</p>
-<p>In my ASP.Net code, I was writing the zip file to the Response OutputStream.  I had added a content type of &ldquo;application/zip” to the response.  This is what was breaking the zip files on a Mac.  Buried <!-- raw HTML omitted -->in the DotNetZip Library&rsquo;s forum was a post<!-- raw HTML omitted --> recommending changing the content type to &ldquo;application/octet-stream” instead.  That single changed fixed the issue for standard zip files!</p>
+<p>In my ASP.Net code, I was writing the zip file to the Response OutputStream.  I had added a content type of &ldquo;application/zip” to the response.  This is what was breaking the zip files on a Mac.  Buried <a title="DotNetZip Library Forum" href="http://dotnetzip.codeplex.com/discussions/59740" target="_blank">in the DotNetZip Library&rsquo;s forum was a post</a> recommending changing the content type to &ldquo;application/octet-stream” instead.  That single changed fixed the issue for standard zip files!</p>
 <h2 id="solution-details">Solution Details:</h2>
 <p>Change</p>
 <p>HttpContext.Current.Response.ContentType = &ldquo;application/zip”</p>
@@ -284,7 +284,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

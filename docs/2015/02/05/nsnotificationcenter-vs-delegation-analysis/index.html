@@ -61,7 +61,7 @@ I&rsquo;ve been thinking for some time since I responded with that comment. What
   "@type": "BlogPosting",
   "headline": "NSNotificationCenter vs Delegation – An Analysis",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/02\/05\/nsnotificationcenter-vs-delegation-analysis\/",
-  "wordCount": "1146",
+  "wordCount": "1177",
   "datePublished": "2015-02-05T13:00:26Z",
   "dateModified": "2015-02-05T13:00:26Z",
   "author": {
@@ -233,7 +233,7 @@ MathJax.Hub.Config({
 <p>Let&rsquo;s explore some of those answers from the perspective of each communication strategy, starting with NSNotificationCenter.</p>
 <h3 id="answers-from-the-nsnotificationcenter-perspective">Answers from the NSNotificationCenter Perspective</h3>
 <p>With NSNotificationCenter as an instance-to-instance communication strategy, we have the following environment:<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png" alt="Notification Center Environment" width="945" height="374" class="alignnone size-full wp-image-11252" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png 945w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment-300x119.png 300w" sizes="(max-width: 945px) 100vw, 945px" /></a></p>
 <p>Note that Listeners 1 to n may or may not exist. The graphic is assuming that 1+ Listener instances have &ldquo;tuned in” to a particular notification key.</p>
 <h5 id="expectations">Expectations</h5>
 <p>What do I expect to happen? Well, the most reasonable thing I (as a &ldquo;notifier instance”) can expect is for some other &ldquo;listener instance” somewhere to tune in to the notification key I&rsquo;m broadcasting. I have no way of knowing what would happen after that. It&rsquo;s up to the listener to do something intelligent with the notification that [x event] occurred. I, as a notifier, can expect nothing more.</p>
@@ -246,7 +246,7 @@ MathJax.Hub.Config({
 <p>We lose a good deal of clarity when heavy usage of NSNotificationCenter occurs in an application. There may be appropriate times to use NSNotificationCenter in your app. Keep in mind that it becomes much more difficult to sort out various interactions when more and more listener instances are responding a notification. Trying to reason about how the system as a whole arrived at its current state isn&rsquo;t as easy when NSNotificationCenter enters the picture. Other developers with less knowledge of the app as a whole would suffer from this loss of clarity.</p>
 <h3 id="answers-from-the-delegate-perspective">Answers from the Delegate Perspective</h3>
 <p>With a delegate, we have a significantly different strategy at hand. To put it before us:<br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png" alt="Delegate Environment" width="948" height="497" class="alignnone size-full wp-image-11251" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png 948w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment-300x157.png 300w" sizes="(max-width: 948px) 100vw, 948px" /></a></p>
 <h5 id="expectations-1">Expectations</h5>
 <p>The delegation strategy deals with protocols. Protocols by nature give us reliable a way to…</p>
 <ol>
@@ -262,10 +262,27 @@ MathJax.Hub.Config({
 <p>With the advantage of dealing with intelligently named protocols and clearly outlined method names, the delegation strategy would win the battle of clarity in my opinion. I can look at the delegator instance and say, &ldquo;When execution of this instance&rsquo;s logic gets to this point, reliance on the delegate kicks in and [x, y, and z] happens. I can jump over to the delegate&rsquo;s implementation and say, &ldquo;[x] does this, [y] does that, and [z] does this other thing.” Other developers with less knowledge of the app as a whole would enjoy this added clarity quite readily.</p>
 <h3 id="in-summary">In Summary</h3>
 <p>Here, I&rsquo;ve analyzed NSNotificationCenter, side by side with the delegation pattern, by imagining myself in the role of each instance (notifier, listener | delegator, delegate). I assessed each strategy in terms of expectations, perceived control, impact, and clarity, attempting to shed light on what it means for an environment to be &ldquo;more structured” or &ldquo;less structured”. My hope was to shed light on my use of the term &ldquo;structured environment”, and to share my thoughts on some of the implications of using each strategy.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/" title="What is Delegation? – A Swift Developer’s Guide">What is Delegation? – A Swift Developer’s Guide</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/" title="How Delegation Works – A Swift Developer’s Guide">How Delegation Works – A Swift Developer’s Guide</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/" title="Fundamentals of NSNotificationCenter in Swift">Fundamentals of NSNotificationCenter in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/" title="Fundamentals of Callbacks for Swift Developers">Fundamentals of Callbacks for Swift Developers</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -324,7 +341,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

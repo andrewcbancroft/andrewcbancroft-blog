@@ -213,7 +213,7 @@ MathJax.Hub.Config({
     <p>When you need to access the documents directory on a user&rsquo;s device, what do you do?</p>
 <p>In the past, I know I&rsquo;ve gotten used to typing out the same set of code over and over throughout my apps. I know, I know – DRY – <em>don&rsquo;t repeat yourself</em>.</p>
 <p>One way to simplify this is to use a Swift extension to <code>URL</code>. Doing this will help you centralize where this code is located in your app, and keep your code DRY. If you need to access the documents directory in more than one spot, you&rsquo;re just a <code>URL</code> property call away from it.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="implementation" class="jump-target"></a></p>
 <h1 id="extension-implementation">Extension implementation</h1>
 <p><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -241,7 +241,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a name="usage" class="jump-target"></a></p>
 <h1 id="extension-usage">Extension usage</h1>
 <p>Here&rsquo;s an example of using the extension during the routine to create the Core Data stack. For that process, you need to grab a URL to where your SQLite database file will be located. Take a look:</p>
 <p><div class="highlight"><div class="chroma">
@@ -261,7 +261,7 @@ MathJax.Hub.Config({
 </div>
 </div>
 You could be needing to access the directory for saving files or retrieving files totally unrelated to Core Data. No matter what you&rsquo;re doing, being able to write <code>URL.documentsURL</code> is pretty convenient!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -316,7 +316,7 @@ You could be needing to access the directory for saving files or retrieving file
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

@@ -59,7 +59,7 @@ A few discussions I&rsquo;ve had recently have prompted me to question what I th
   "@type": "BlogPosting",
   "headline": "3 Nuances of Swift Extensions",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/04\/22\/3-nuances-of-swift-extensions\/",
-  "wordCount": "1421",
+  "wordCount": "1445",
   "datePublished": "2015-04-22T17:52:36Z",
   "dateModified": "2015-04-22T17:52:36Z",
   "author": {
@@ -211,7 +211,7 @@ MathJax.Hub.Config({
     <p>How often do we take an initial cursory look at some documentation, shake our heads and say, &ldquo;Ok, sure! Got it!”, and then some time later get to the actual usage of that perceived understanding only to find out, &ldquo;Woah – this is behaving differently than I expected! I wonder if the documentation says anything about this?!”</p>
 <p>A few discussions I&rsquo;ve had recently have prompted me to question what I thought I knew about Swift extensions. I have read documentation about extensions and I <em>thought</em> I understood them pretty thoroughly. However, these conversations, along with some experimentation done on my own revealed a few nuances that I didn&rsquo;t pick up on before.</p>
 <p><strong>Update:</strong> Almost immediately after publishing this article, the Swift community chimed in and helped me figure out my fundamental hiccup which prompted the aforementioned experimentation in the first place. I&rsquo;ve written a follow-up article called <a href="http://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/" title="Clarifying Swift Access Control (Hint:  Swift Isn’t C#)">&ldquo;Clarifying Swift Access Control”</a>, describing that misunderstanding. I recommend giving that one a read to avoid making the same mistake I did!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="3-nuances" class="jump-target"></a></p>
 <h3 id="three-nuances-of-extensions">Three nuances of extensions</h3>
 <p>In particular, the following three nuances challenged what I thought I knew about Swift extensions:</p>
 <ol>
@@ -251,11 +251,11 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">29</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>Now, suppose that I wanted to extend <code>Person</code> and inspect the three nuances about the extension&rsquo;s capabilities and behaviors that I introduced at the beginning of this article…</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="extension-visibility" class="jump-target"></a></p>
 <h3 id="extensions-and-visibility-into-extended-type">Extensions and visibility into extended Type</h3>
 <p>When I introduced that first nuance about visibility into the extended Type, I asked the question, &ldquo;Can they see things marked <code>private</code>?” The answer surprised me at first: <em>Yes</em>…they <em>can</em>.</p>
 <p>However, here&rsquo;s where the second nuance comes in: It absolutely does matter <em>where</em> the extension is defined.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="defined-same-file" class="jump-target"></a></p>
 <h4 id="defined-within-same-file">Defined within same file</h4>
 <p>Extensions defined within the same file as the Type they&rsquo;re extending have access to <code>private</code> members of that Type.</p>
 <p>For example, defining an extension to <code>Person</code> <em>within</em> Person.swift allows the extension to access <code>private</code> properties and functions! Who knew?!</p>
@@ -273,16 +273,16 @@ MathJax.Hub.Config({
 <p>I&rsquo;m <em>in the source file</em> of the Type I&rsquo;m &ldquo;extending”. So whether I write the additional functionality as an extension for the Type, or just define what would have been in the extension <em>inside the Type, itself</em>, the net effect is the same.</p>
 <p>Therefore, the compiler essentially says, &ldquo;I see this extension being defined, but there&rsquo;s really no point. It&rsquo;s in the same file that the Type is defined in… so the developer <em>could have</em> just written all this code within the Type itself… so I&rsquo;ll let him/her refer to <code>private</code> code blocks.”</p>
 <p><strong>Update:</strong> My reasoning above reveals that I truly didn&rsquo;t have an understanding of Swift access control. I recommend giving my followup article titled <a href="http://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/" title="Clarifying Swift Access Control (Hint:  Swift Isn’t C#)">&ldquo;Clarifying Swift Access Control”</a> a read for more details!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="defined-separate-file" class="jump-target"></a></p>
 <h4 id="defined-in-a-separate-file">Defined in a separate file</h4>
 <p>Moving the extension definition into a separate file, however, causes the extension to lose that visibility into the Type it&rsquo;s extending.</p>
 <p>Following the inverse of my previous reasoning about <code>private</code> visibility when the extension is defined within the same file, this behavior actually makes sense to me.</p>
 <p>Most of the time, you&rsquo;d be writing an extension for Types that you <em>don&rsquo;t</em> have the source to. In that scenario, extensions would have the same visibility that any client of the Type&rsquo;s exposed API would have, namely, the things marked <code>public</code>.</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/PersonExtensions_swift.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/PersonExtensions_swift.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/PersonExtensions_swift.png" alt="PersonExtensions.swift" width="506" height="159" class="alignnone size-full wp-image-11731" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/04/PersonExtensions_swift.png 506w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/PersonExtensions_swift-300x94.png 300w" sizes="(max-width: 506px) 100vw, 506px" /></a></p>
+<p><a name="default-acces-control" class="jump-target"></a></p>
 <h3 id="default-extension-access-control">Default extension access control</h3>
 <p>The final nuance also yielded some semi-surprising results for me. <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/AccessControl.html#//apple_ref/doc/uid/TP40014097-CH41-ID25">Apple&rsquo;s documentation</a> says it, but until I experimented and saw it in action, I didn&rsquo;t catch the nuance around the default access control modifiers applied to extensions.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="no-explicit-access-control" class="jump-target"></a></p>
 <h4 id="default-access-when-no-explicit-access-modifiers-specified">Default access when no explicit access modifiers specified</h4>
 <p>In short, when you declare an extension but specify no explicit access modifiers (ie, you just use the default), the extension&rsquo;s default access level depends on the access level of the Type it&rsquo;s extending.</p>
 <ul>
@@ -307,26 +307,37 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>Using the default access modifiers as shown in the code snippet above exposes access to the extension&rsquo;s new API to instances within the same module. However, it does <em>not</em> expose additional public API for the Type it&rsquo;s extending to a client of that Type that&rsquo;s in another <em>module</em> (for example, the unit test target, which is another Swift module).</p>
 <p><strong>Same Module</strong><br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/SameModule.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/SameModule.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/SameModule.png" alt="Extended API within the same module" width="505" height="264" class="alignnone size-full wp-image-11733" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/04/SameModule.png 505w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/SameModule-300x157.png 300w" sizes="(max-width: 505px) 100vw, 505px" /></a></p>
 <p><strong>Different Module (test target)</strong><br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/DifferentModule.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/DifferentModule.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/DifferentModule.png" alt="Extended API in a different module" width="507" height="171" class="alignnone size-full wp-image-11734" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/04/DifferentModule.png 507w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/DifferentModule-300x101.png 300w" sizes="(max-width: 507px) 100vw, 507px" /></a></p>
 <p>For some reason, I had it in my head that if a Type that I&rsquo;m extending is <code>public</code>, the extension&rsquo;s members would default to <code>public</code>. I don&rsquo;t know <em>why</em> I thought that, but thankfully my experimentation cleared up!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="default-declaration-public-implementation" class="jump-target"></a></p>
 <h4 id="default-access-when-using-default-extension-declaration-but-specify-public-for-implementation">Default access when using default extension declaration, but specify public for implementation</h4>
 <p>Adding <code>public</code> access control modifiers to the extension implementation&rsquo;s members makes those members visible everywhere (that is, both within the same module, and within the test target).</p>
 <p>The location of the extension&rsquo;s declaration, be it within the same source file as the Type it&rsquo;s extending, or in a separate source file, does not matter in terms of what the extension exposes when adding <code>public</code> members… But only extensions declared within the same source file as the Type it&rsquo;s extending can see <code>private</code> members of that Type, as we discovered previously.</p>
 <p><strong>Extensions declared in same <em>and</em> separate source files</strong><br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_extension_members.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_extension_members.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_extension_members-1024x645.png" alt="Public extension members defined within the same source file, and in separate source files..." width="1024" height="645" class="alignnone size-large wp-image-11752" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_extension_members-1024x645.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_extension_members-300x189.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_extension_members.png 1061w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p><strong>Public extension members visible in different module (test target)</strong><br>
-<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_member_visibility.png"><!-- raw HTML omitted --></a></p>
+<a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_member_visibility.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_member_visibility.png" alt="Regardless of where the extension is declared, all public members are visible to  other modules (such as the test target)." width="533" height="353" class="alignnone size-full wp-image-11753" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_member_visibility.png 533w, https://www.andrewcbancroft.com/wp-content/uploads/2015/04/public_member_visibility-300x199.png 300w" sizes="(max-width: 533px) 100vw, 533px" /></a></p>
 <p>But notice that on the line where I&rsquo;ve written <code>extension Person { ... }</code> that I haven&rsquo;t specified an access control modifier for the extension, itself. I&rsquo;ve only added <code>public</code> to its <em>members</em>. Even still, the new functions are visible to the test target which is a different module.</p>
 <p>In other words, there&rsquo;s no need to write <code>public extension Person { ... }</code>. Since <code>Person</code> is <code>public</code>, the extension just uses the Type&rsquo;s access level for its own declaration.</p>
 <h3 id="wrapping-up">Wrapping up</h3>
 <p>The three nuances about Swift extensions that were analyzed here were &ldquo;surprising” enough to me to warrant some experimentation. My hope is that the analysis that was done will help clear up these subtleties for others who are struggling with understanding how Swift extensions behave!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/11/03/the-5-ws-of-swift-extensions/" title="The 5 W’s of Swift Extensions">The 5 W’s of Swift Extensions</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/" title="Send a Type to Obedience School – Using Swift Extensions for Additional Protocol Conformance">Send a Type to Obedience School – Using Swift Extensions for Additional Protocol Conformance</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -385,7 +396,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

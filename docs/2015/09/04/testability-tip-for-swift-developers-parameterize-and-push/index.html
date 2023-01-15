@@ -59,7 +59,7 @@ In this edition, I&rsquo;d like to introduce a new principle that I try to adher
   "@type": "BlogPosting",
   "headline": "Testability Tip for Swift Developers – Parameterize and Push",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/09\/04\/testability-tip-for-swift-developers-parameterize-and-push\/",
-  "wordCount": "1015",
+  "wordCount": "1028",
   "datePublished": "2015-09-04T18:36:52Z",
   "dateModified": "2015-09-04T18:36:52Z",
   "author": {
@@ -210,17 +210,17 @@ MathJax.Hub.Config({
 
     <p>In a previous &ldquo;Testability Tip for Swift Developers”, <a href="https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/">I discussed the principle of observability</a>. &ldquo;If it&rsquo;s observable, it&rsquo;s testable” was the primary conclusion of the article, and I pointed toward using the <code>public</code> access control modifier for parts of your app that you intend to test.</p>
 <p>In this edition, I&rsquo;d like to introduce a new principle that I try to adhere to when I&rsquo;m unit testing, namely, &ldquo;If it&rsquo;s controllable, it&rsquo;s testable”. Here&rsquo;s what I mean by &ldquo;controllable”…</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="controllability" class="jump-target"></a></p>
 <h3 id="controllability">Controllability</h3>
 <p>In <a href="https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/">Testing is to Software as Experiment is to Science</a>, I analyzed how testing software mirrors scientific experimentation. Good scientific experiments are controllable. That is, they are set up such that everything stays as constant as possible except the thing you&rsquo;re poking at.</p>
 <p>Changing multiple things at a time in an experiment clouds the ability to verify that [tweak x] produced [y outcome]. So a scientist will do his/her best to <em>control</em> the environment by holding as many variables constant as possible, so that he/she can make accurate conclusions about the outcome.</p>
 <p>The same goes for testing software. If I&rsquo;m going to automate a test, I want to set up my &ldquo;experiment” such that I control as much of the system as possible so that I can set up valid expectations and verify results coming from the system under test. Note that I&rsquo;m using the term &ldquo;system” in a very broad sense – it could be referring to an entire app, a single &ldquo;object”, or a function.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="parameterize-push" class="jump-target"></a></p>
 <h3 id="parameterize-and-push">Parameterize and push</h3>
 <p>So where does &ldquo;parameterize and push” come into play?</p>
 <p>Parameterizing sets us up with the ability to provide <em>inputs</em> into the system we&rsquo;re testing. Anytime you have an input, you have the ability to supply a value of your choosing.</p>
 <p>Serving as inputs to the system, you can view parameters as entry points for <em>controls</em>. They&rsquo;re &ldquo;controls” because <em>we</em> decide what those values should be before we pass them off as arguments <em>to</em> those parameters. So long as the system we&rsquo;re testing only gets the data it uses from its inputs (its parameters), we can be guaranteed predictable, controlled outputs on the other end.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="forms" class="jump-target"></a></p>
 <h3 id="forms-of-parameterization">Forms of parameterization</h3>
 <p>Three forms of parameterization are common:</p>
 <ol>
@@ -229,7 +229,7 @@ MathJax.Hub.Config({
 <li>At the function level through function parameters</li>
 </ol>
 <p>Using an initializer, or a <code>public</code> variable property, or by adding parameters to your functions and using only those parameters for the function&rsquo;s computation and output production, you give yourself the ability to control the system in various ways that are appropriate on a test-by-test basis.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="usefulness" class="jump-target"></a></p>
 <h3 id="usefulness-and-examples-of-parameterization">Usefulness and examples of parameterization</h3>
 <p>Setting up your instance definitions to use a set of inputs from the very start through initialization gives you the ability to provide real &ldquo;production-ready” values in your app, but fake &ldquo;test-customized” values for testing. <a href="https://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/">Creating fake objects</a> for testing is outside the scope of this article, but providing public initializers with parameters is a really great way to set yourself up for being able to test that particular instance.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// Prefer</span>
@@ -284,16 +284,24 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="c1">// requires additional setting of the database property on &#39;self&#39;</span>
 </span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="c1">// before you&#39;re able to get results from this function</span>
 </span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="di" class="jump-target"></a></p>
 <h3 id="parameterization-or-dependency-injection8221">Parameterization or &ldquo;Dependency Injection”?</h3>
 <p>Yes.</p>
 <p>What I&rsquo;m calling &ldquo;parameterization” is really just &ldquo;dependency injection”. But the term &ldquo;dependency injection” can sound really daunting, while we&rsquo;re used to working with parameters. I intend for the meaning of each term for the purpose of this article to be equivalent.</p>
 <h3 id="wrapping-up">Wrapping up</h3>
 <p>Parameterizing, your instance definitions and functions provides you an immense amount of leverage when it comes to controlling your system under test. I encourage you to try this out and do your best to shift to a more parameterized approach to writing your code for improved testability. Remember, &ldquo;Controllable is testable”!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/" title="Testability Tip for Swift Developers – Public Over Private">Testability Tip for Swift Developers – Public Over Private</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -352,7 +360,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

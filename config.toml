@@ -11,3 +11,6 @@ canonifyURLs=true
 publishDir="docs"
 disableKinds = ["section", "taxonomy", "taxonomyTerm"]
 disqusShortname="andrewcbancroft"
+
+[markup.goldmark.renderer]
+unsafe= true

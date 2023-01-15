@@ -61,7 +61,7 @@ As a bonus to this amazing component, recent contributions by Kaan have opened u
   "@type": "BlogPosting",
   "headline": "Circular Progress Indicator in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/07\/09\/circular-progress-indicator-in-swift\/",
-  "wordCount": "723",
+  "wordCount": "727",
   "datePublished": "2015-07-10T04:31:49Z",
   "dateModified": "2015-07-10T04:31:49Z",
   "author": {
@@ -210,33 +210,41 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    <p><!-- raw HTML omitted -->Updated on April 17, 2017 – Swift 3<!-- raw HTML omitted --></p>
+    <p><small>Updated on April 17, 2017 – Swift 3</small></p>
 <p>Circular progress indicators are a nice and compact way to visualize progress information for users of your iOS app. I was extremely grateful to come across <a href="https://github.com/kaandedeoglu/KDCircularProgress">Kaan Dedeoglu&rsquo;s KDCircularProgress project on GitHub</a>. It&rsquo;s a versatile little UI component written in Swift that provides a great amount of flexibility and customization options. I love it!</p>
 <p>As a bonus to this amazing component, recent contributions by Kaan have opened up the ability for us to lay out and set up the circular progress indicator in the Storyboard!</p>
 <p>My goal in this article is to help get you up and running with this library in your own Storyboard-based Swift project.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="example" class="jump-target"></a></p>
 <h3 id="example-project">Example project</h3>
 <p>Kaan&rsquo;s GitHub repository has an example project, but I&rsquo;ve also gone ahead and made one as well for showing how to use this indicator in a Storyboard. We&rsquo;ll be using the example I created as a reference point for the forthcoming walk-through.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/circprogexample1.gif"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/CircularProgressExample" title="Circular Progress Example">Circular Progress Example</a>
+    </li>
+  </ul>
+</div>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/circprogexample1.gif"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/circprogexample1.gif" alt="Circular Progress Example" width="372" height="681" class="alignnone size-full wp-image-12087" /></a></p>
+<p><a name="getting-started" class="jump-target"></a></p>
 <h3 id="getting-started">Getting started</h3>
 <p>The most obvious starting place is to head over to the <a href="https://github.com/kaandedeoglu/KDCircularProgress">KDCircularProgress repository on GitHub</a> to grab the <a href="https://github.com/kaandedeoglu/KDCircularProgress/blob/master/KDCircularProgress/KDCircularProgress.swift">KDCircularProgress.swift source file</a> and add it to your own Swift project. Kaan has things set up with CocoaPods as well if you care to use that. I found adding the .swift file to my project to be the least intrusive way to add this indicator to my UI components arsenal.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="to-storyboard" class="jump-target"></a></p>
 <h3 id="to-the-storyboard">To the Storyboard!</h3>
 <p>Since Kaan added <code>IBDesignable</code> and <code>IBInspectable</code> support, working with the circular progress indicator in the Storyboard is super easy.</p>
 <p>To get started, all you need to do is drag a plain View over to the Storyboard Scene. Set up your constraints to correctly position the view where you need it:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/UIView-with-Constraints.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/UIView-with-Constraints.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/UIView-with-Constraints.png" alt="UIView with Constraints" width="906" height="855" class="alignnone size-full wp-image-12080" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/UIView-with-Constraints.png 906w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/UIView-with-Constraints-300x283.png 300w" sizes="(max-width: 906px) 100vw, 906px" /></a></p>
 <p>Next, you need to set the View&rsquo;s class to a <em>custom</em> class, namely, <code>KDCircularProgress</code>:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Set-View-Class.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Set-View-Class.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Set-View-Class.png" alt="Set View Class" width="916" height="701" class="alignnone size-full wp-image-12081" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Set-View-Class.png 916w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Set-View-Class-300x230.png 300w" sizes="(max-width: 916px) 100vw, 916px" /></a></p>
 <p>With that in place, Xcode will process things and allow you to modify the properties of the progress indicator directly in the attributes section of the Utilities pane. Best of all, you&rsquo;ll see those changes be reflected in the Storyboard scene in real-time as you adjust values!</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Customized-in-storyboard.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Customized-in-storyboard.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Customized-in-storyboard.png" alt="Customized in Storyboard" width="841" height="702" class="alignnone size-full wp-image-12083" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Customized-in-storyboard.png 841w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Customized-in-storyboard-300x250.png 300w" sizes="(max-width: 841px) 100vw, 841px" /></a></p>
+<p><a name="view-did-load" class="jump-target"></a></p>
 <h3 id="viewdidload">viewDidLoad()</h3>
 <p>While in the Storyboard, I set a few values so that I could actually see certain colors when progress had been made. However, to get things set to their true initial state, there may be some values you want to reset in <code>viewDidLoad()</code>. For example, I set the <code>angle</code> property to 90 degrees so that I could see the color of the progress track in the storyboard. But when I load the app, I want the angle to be 0 degrees (since no progress has been made when the app first loads).</p>
 <p>To accomplish this, you&rsquo;d simply make sure there&rsquo;s an outlet between your progress view in the Storyboard and the View Controller. Once they&rsquo;re connected, you can write something as simple as <code>circularProgressView.angle = 0</code> to start off with no progress.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="increasing-progress" class="jump-target"></a></p>
 <h3 id="increasing-progress">Increasing progress</h3>
 <p>We&rsquo;re dealing with a progress indicator here, so this implies that there&rsquo;s a beginning, some incremental steps taken toward a completion goal, and of course, the fully completed <em>whatever it was you were doing</em>.</p>
 <p>The example I&rsquo;ve contrived is a simple counter with an upper limit of 5. So as you tap &ldquo;Increase Progress”, the circular progress view should update to be some fraction of the way around the 360 degree circle based upon how close we are to completing the count to 5.</p>
@@ -253,7 +261,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="n">circularProgressView</span><span class="p">.</span><span class="n">animate</span><span class="p">(</span><span class="n">toAngle</span><span class="p">:</span> <span class="n">newAngleValue</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="resetting" class="jump-target"></a></p>
 <h3 id="resetting-the-indicator">Resetting the indicator</h3>
 <p>To reset everything, we&rsquo;d want to update the state of our current count back to 0.</p>
 <p>The change to the circular progress indicator&rsquo;s visualization of the progress state can be animated by calling the view&rsquo;s <code>animate(fromAngle:toAngle:duration:completion:)</code> method:</p>
@@ -263,7 +271,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="wrapping-up">Wrapping up</h3>
 <p>There are a <em>ton</em> of other customization options that you can play with. I highly recommend this UI component if you&rsquo;re looking for an easy-to-use, versatile circular progress indicator!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -322,7 +330,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

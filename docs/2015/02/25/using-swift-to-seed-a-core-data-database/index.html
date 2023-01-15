@@ -59,7 +59,7 @@ During development, I&rsquo;ve found that it&rsquo;s often convenient to seed a 
   "@type": "BlogPosting",
   "headline": "Using Swift to Seed a Core Data Database",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/02\/25\/using-swift-to-seed-a-core-data-database\/",
-  "wordCount": "1685",
+  "wordCount": "1729",
   "datePublished": "2015-02-26T03:44:53Z",
   "dateModified": "2015-02-26T03:44:53Z",
   "author": {
@@ -210,10 +210,18 @@ MathJax.Hub.Config({
 
     <p>Designing an application&rsquo;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.</p>
 <p>During development, I&rsquo;ve found that it&rsquo;s often convenient to seed a Core Data database with sample data so that I can preview how it&rsquo;ll look in my application. Along with that, it&rsquo;s nice to start with a fresh copy of the data each time I run the app. Let&rsquo;s explore how to accomplish this task in Swift!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="scenario-setup" class="jump-target"></a></p>
 <h3 id="scenario-setup">Scenario setup</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/Zootastic/tree/BaseProject_SeedDataStore" title="Zootastic">Example Xcode Project</a>
+    </li>
+  </ul>
+</div>
 <p>I&rsquo;ve created a fictitious Core Data app called &ldquo;Zootastic”, which is intended to model zoos, and the animals that each zoo cares for. (I&rsquo;ll give you one guess as to what kinds of shows and activities my two year old and I have been in to lately). :]</p>
 <p>Specifically, I have the following Entities:</p>
 <ul>
@@ -242,12 +250,12 @@ MathJax.Hub.Config({
 </li>
 </ul>
 <p>I&rsquo;ve <a href="http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">created NSManagedObject subclasses</a> for each of my entities, to make it easier to set properties.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="data-helper" class="jump-target"></a></p>
 <h3 id="datahelperswift">DataHelper.swift</h3>
 <p>Once a Core Data data model is set up, we&rsquo;re ready to create what I called <code>DataHelper</code>. It serves the purpose of seeding the data store, and logging the data store&rsquo;s contents back out to the console. It violates the single-responsibility principle, but wait! Don&rsquo;t lynch me!</p>
 <p>Knowing that this class is intended to be used <em>solely</em> for development, I didn&rsquo;t put a lot of effort into separating concerns. I opted for a &ldquo;here&rsquo;s where I go to do all my seeding for manual testing purposes” approach.</p>
 <p>Here are a few snippets from the class (<a href="https://github.com/andrewcbancroft/Zootastic/tree/BaseProject_SeedDataStore">grab the full Xcode project</a> over at GitHub):</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="data-helper-initialization" class="jump-target"></a></p>
 <h4 id="initialization">Initialization</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DataHelper</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="kd">let</span> <span class="nv">context</span><span class="p">:</span> <span class="n">NSManagedObjectContext</span>
@@ -260,7 +268,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln"> 9</span><span class="cl">
 </span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>The primary thing to take away from the initialization routine is that instead of calling out to the AppDelegate to get an instance of the <code>NSManagedObjectContext</code>, I&rsquo;m choosing to require it to be passed in during the initialization of <code>DataHelper</code>. It&rsquo;s a pattern I like to practice because it allows me to do unit tests in real-world applications that use Core Data.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="data-helper-seed-zoos" class="jump-target"></a></p>
 <h4 id="seedzoos">seedZoos()</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DataHelper</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">
@@ -293,7 +301,7 @@ MathJax.Hub.Config({
 <li>This function may look a bit interesting. I&rsquo;ve chosen to create an array of <em>tuples</em> that I loop over and use to extract actual <code>Zoo</code> information when I call <code>NSEntityDescription.insertNewObjectForEntityForName()</code>. It just looked nice to me to have two chunks of code to analyze inside the function: One (the array of tuples) to see all of the zoo information I plan to insert, and another (the for-loop) to do the actual inserting into the data store. Adding more <code>Zoo</code>s in the future would mean simply adding another tuple to the array. Convenient!</li>
 <li>Since I&rsquo;ve <a href="http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/">created NSManagedObject subclasses</a> for my entities, I can cast the result of <code>NSEntityDescription.insertNewObjectForEntityForName()</code> to an actual <code>Zoo</code>, to work with the properties directly.</li>
 </ul>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="data-helper-print-all-zoos" class="jump-target"></a></p>
 <h4 id="printallzoos">printAllZoos()</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DataHelper</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">
@@ -317,7 +325,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p><code>printAllZoos()</code> function utilizes a standard <code>NSFetchRequest</code>, along with an <code>NSSortDescriptor</code>. Check out my <a href="http://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/">cheat sheet</a> for more examples of common Core Data operations.</p>
 <p>Once again, having the <code>NSManagedObject</code> subclass in place allows me to cast the result of the fetch request to a <code>[Zoo]</code>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="data-helper-seed-animals" class="jump-target"></a></p>
 <h4 id="seedanimals">seedAnimals()</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DataHelper</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">
@@ -375,7 +383,7 @@ MathJax.Hub.Config({
 <p>I&rsquo;ve chosen to go ahead and execute fetch requests for the entities I made in previous <code>seed___()</code> functions. Additionally, rather than deal with <code>NSPredicate</code>, I just grab <em>all</em> <code>Classifications</code> and <em>all</em> <code>Zoos</code>, and use array&rsquo;s <code>filter</code> function to get the exact Entity I want.</p>
 <p>The last thing I&rsquo;ll mention / warn against, is that I <em>am</em> using explicitly unwrapped optionals in this function. I&rsquo;ve gone ahead and &ldquo;risked it”, trusting that I&rsquo;m only using this technique during development time to help me see how things will look in my UI. In other words, this isn&rsquo;t code that will end up in Production. It&rsquo;s simply meant to help me while I&rsquo;m developing, so I&rsquo;ve gone ahead and done things the quick way here.</p>
 <p>The rest of the function follows the same patterns that have already been used in this example.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="app-delegate" class="jump-target"></a></p>
 <h3 id="appdelegateswift">AppDelegate.swift</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">:</span> <span class="n">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="n">NSObject</span><span class="p">:</span> <span class="nb">AnyObject</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">        <span class="c1">// Override point for customization after application launch.</span>
@@ -390,7 +398,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="k">return</span> <span class="kc">true</span>
 </span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
 </span></span></code></pre></div><p>Above is a peek at what my AppDelegate.swift file&rsquo;s <code>application:didFinishLaunchingWithOptions:</code> function looks like. Nothing fancy going on here. I&rsquo;m simply initializing a <code>DataHelper</code> instance with the <code>NSManagedObjectContext</code> instance that&rsquo;s created in this class, and calling the seed and print functions I defined earlier.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="starting-fresh" class="jump-target"></a></p>
 <h3 id="starting-fresh-every-time">Starting fresh every time</h3>
 <p>I&rsquo;ve found that sometimes it helps to have a freshly seeded data store every time I the app while I&rsquo;m in development mode. When I&rsquo;m testing the UI, I may create new entities during my manual testing, but one of the convenient things about seeding the data store is that I don&rsquo;t <em>have</em> to. And even if I did, it&rsquo;s often quite nice to start fresh each run. To do this we&rsquo;ll dive into some of the boilerplate code that Xcode generates for us when we choose to use Core Data when we create the project. Specifically, we&rsquo;ll target the <code>persistentStoreCoordinator</code> closure:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kr">lazy</span> <span class="kd">var</span> <span class="nv">persistentStoreCoordinator</span><span class="p">:</span> <span class="n">NSPersistentStoreCoordinator</span> <span class="p">=</span> <span class="p">{</span>
@@ -427,13 +435,38 @@ MathJax.Hub.Config({
 <p>I&rsquo;ve highlighted the key line that I added (everything else was already in place, generated for me by Xcode). Adding that line removes the sqlite database. The lines that follow add it back in a fresh state.</p>
 <h3 id="wrapping-up">Wrapping up</h3>
 <p>Designing an application&rsquo;s UI can be difficult without actual data to present. During development, it&rsquo;s often convenient to seed a Core Data database with sample data so that we can preview how it&rsquo;ll look in our application. Along with that, it&rsquo;s nice to start with a fresh copy of the data each time we run the app. We explored how to accomplish this task in Swift!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/" title="Using a Core Data Model in Swift Playgrounds">Using a Core Data Model in Swift Playgrounds</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/" title="Sharing a Core Data Model with a Swift Framework">Sharing a Core Data Model with a Swift Framework</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/" title="Displaying Data With NSFetchedResultsController and Swift">Displaying Data With NSFetchedResultsController and Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/" title="Sync Table View Data: NSFetchedResultsController and Swift">Sync Table View Data: NSFetchedResultsController and Swift</a>
+    </li>
+  </ul>
+</div>
+<p><a name="course" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fas fa-video"></i> <a href="http://bit.ly/ps-core-data-swift" target="_blank">Core Data Fundamentals with Swift</a><br /> <a href="http://bit.ly/ps-core-data-swift" target="_blank"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png" alt="Core Data Fundamentals with Swift" width="1024" height="576" class="alignnone size-large wp-image-13163" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w" sizes="(max-width: 1024px) 100vw, 1024px" /></a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -492,7 +525,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

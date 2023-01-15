@@ -61,7 +61,7 @@ Cycles of code changes and additions and re-writes take place throughout the day
   "@type": "BlogPosting",
   "headline": "Creating Trust-able Unit Tests in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/11\/03\/creating-trust-able-unit-tests-in-swift\/",
-  "wordCount": "749",
+  "wordCount": "772",
   "datePublished": "2015-11-04T02:42:08Z",
   "dateModified": "2015-11-04T02:42:08Z",
   "author": {
@@ -215,7 +215,7 @@ MathJax.Hub.Config({
 <p>Cycles of code changes and additions and re-writes take place throughout the days, weeks, and months of the application development cycle. The app&rsquo;s code-base and unit tests become more complex as the end-product progresses along its asymptotic approach to completion.</p>
 <p>Unit tests are only as good as they are <em>trust-able</em>. As our products navigate their way through development iterations, how can we keep a handle on the trustworthiness of our unit tests? How can we be assured that they&rsquo;re testing the right thing? How can we know that changing a unit test because a fundamental requirement has changed is still accurate when it lights up green? After all, we&rsquo;re writing <em>code</em> to test our code!</p>
 <p>Here, I explore several categories of thought that will help you think about creating trust-able unit tests.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="organization" class="jump-target"></a></p>
 <h3 id="test-organization">Test Organization</h3>
 <p>How you organize the code within a single unit test can make all the difference in understanding it when you return to it later.</p>
 <p>Having a consistent strategy for organizing the body of a test function will save you time and effort in trying to understand what&rsquo;s happening. Keeping things consistent across a team of developers will make everyone more productive as well.</p>
@@ -245,7 +245,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>They&rsquo;re exactly the same structures with different descriptive comments outlining the three phases of the test.</p>
 <p>The outline itself can help you look at the test and verify its trustworthiness as it pertains to its logical, clear order and organization.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="length" class="jump-target"></a></p>
 <h3 id="test-length">Test Length</h3>
 <p>Another contributor to the trustworthiness of a given unit test is the number of lines of code it has.</p>
 <p>It&rsquo;s been said that a 100% guaranteed bug-free line of code is the line of code that was never written in the first place!</p>
@@ -253,20 +253,37 @@ MathJax.Hub.Config({
 <p>Small (<strong>&lt;20ish</strong> lines of code) tests are more-trusted than large tests.</p>
 <p>20 lines of code is sort of arbitrary, but can help alert you to when you might need to re-look at the test and apply DRY (Don&rsquo;t Repeat Yourself) principles. Large test bodies may be a sign that there&rsquo;s a possible opportunity to factor out common, repeated test code.</p>
 <p>Extracting out larger portions of code into smaller named functions may also help with the clarity of your unit test code, leading you to say with greater confidence, &ldquo;I trust that this test is correct”.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="complexity" class="jump-target"></a></p>
 <h3 id="test-complexity">Test Complexity</h3>
 <p>Unit tests should be as simple as possible. Reducing the complexity of a unit test results in clarity.</p>
 <p>Make sure there&rsquo;s a clear path through the test case.</p>
 <p>Avoid branching logic (if-else statements) or looping constructs in your tests if at all possible. If you find the need to test two code paths of your system under test, write two tests for that, rather than applying if-else logic inside of a single unit test.</p>
 <p>If you&rsquo;re using analytics, such as <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">cyclomatic complexity</a>, absolutely make sure your unit tests have as low of a cyclomatic complexity as possible.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="semantics" class="jump-target"></a></p>
 <h3 id="test-semantics">Test Semantics</h3>
 <p>Applying simple clean coding practices to your unit tests can also go a long way in terms of being able to trust your tests.</p>
 <p>Use descriptive and meaningful phrases (DAMP) in your test names and variables. Be sure to update them as the semantics of your system under test change. This will provide a consistency and accuracy to the <em>names</em> of things that will lead to a greater confidence that your tests are giving you an accurate picture of the health of your system.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/" title="Don’t Write Legacy Swift">Don’t Write Legacy Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/tag/unit-testing/" title="Unit Testing @ andrewcbancroft.com">Unit Testing @ andrewcbancroft.com</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/" title="Getting Started with Unit Testing in Swift">Getting Started with Unit Testing in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/" title="Swift Unit Testing Resources">Swift Unit Testing Resources</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -325,7 +342,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

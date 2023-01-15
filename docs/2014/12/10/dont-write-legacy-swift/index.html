@@ -63,7 +63,7 @@ What an impact those words had on me as I’ve transitioned over to Swift from O
   "@type": "BlogPosting",
   "headline": "Don’t Write Legacy Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/12\/10\/dont-write-legacy-swift\/",
-  "wordCount": "671",
+  "wordCount": "691",
   "datePublished": "2014-12-10T12:00:51Z",
   "dateModified": "2014-12-10T12:00:51Z",
   "author": {
@@ -215,16 +215,16 @@ MathJax.Hub.Config({
     <p>“Legacy Swift”.  Is that an odd phrase to you, too?</p>
 <p>“Legacy” has connotations such as “old”, “difficult-to-change”, “outdated”, etc. Juxtaposing “legacy” and “Swift” would never have crossed my mind until I read Michael Feathers’, <a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052" title="Working Effectively With Legacy Code">Working Effectively With Legacy Code</a>, where he asserts,</p>
 <blockquote>
-<p><!-- raw HTML omitted -->Legacy code is simply code without tests.<!-- raw HTML omitted --></p>
+<p><font face="Thread-00004318-Id-00000000">Legacy code is simply code without tests.</font></p>
 </blockquote>
 <p>What an impact those words had on me as I’ve transitioned over to Swift from Objective-C.  If it’s true that legacy code is code without tests, it’s easy to see how you and I could be writing legacy Swift, even though Swift is a brand new language!</p>
 <p>And whether you agree with Feathers’ definition of “legacy code” or not (he readily admits the potential for controversy with the definition), I think we can <em>all</em> concede that unit testing our code has many benefits and leads to the ability to <em>consistently,</em> <em>objectively</em> <em>verify</em>  the quality of our code at the end of the day.</p>
 <h3 id="legacy-swift--bad-swift">Legacy Swift == Bad Swift</h3>
 <p>Unashamedly, Feathers writes,</p>
 <blockquote>
-<p><!-- raw HTML omitted -->Code without tests is bad code…With tests, we can change the behavior of our code quickly and verifiably. Without them, we really don’t know if our code is getting better or worse.<!-- raw HTML omitted --></p>
+<p><font face="Thread-00004318-Id-00000000">Code without tests is bad code…With tests, we can change the behavior of our code quickly and verifiably. Without them, we really don’t know if our code is getting better or worse.</font></p>
 </blockquote>
-<p><!-- raw HTML omitted -->My take-away from that quote is this:  The <!-- raw HTML omitted -->only<!-- raw HTML omitted -->  way to consistently, objectively verify whether my code is getting better or worse is to execute it and see if the results are what I expected.  I can do this in the Simulator / on my device, over and <!-- raw HTML omitted -->over<!-- raw HTML omitted --> <!-- raw HTML omitted --><!-- raw HTML omitted -->and over<!-- raw HTML omitted --><!-- raw HTML omitted -->, opening myself up to a never-ending, time-consuming, error-prone testing cycle, OR I can write automated unit tests and run them every time as I make incremental changes to my software.<!-- raw HTML omitted --></p>
+<p><font size="6" face="Thread-00004318-Id-00000001">My take-away from that quote is this:  The <em>only</em>  way to consistently, objectively verify whether my code is getting better or worse is to execute it and see if the results are what I expected.  I can do this in the Simulator / on my device, over and <em>over</em> <strong><em>and over</em></strong>, opening myself up to a never-ending, time-consuming, error-prone testing cycle, OR I can write automated unit tests and run them every time as I make incremental changes to my software.</font></p>
 <h3 id="testing-is-hard-for-me">Testing is hard (for me)</h3>
 <p>I have not always been the most successful at writing unit tests.  Test-driven development (TDD) is difficult for me at times.  I often find myself sitting, staring at the screen as if looking into an abyss, unsure of what I’m supposed to do next.  (Any of you TDD-ers who’ve figured out how to imagine the structure of your production code <em>prior to it being written</em> so that a test can be crafted <em>first</em>, let me know your tricks!)</p>
 <p>I’m growing in this area of writing testable code, and the tests that go along with it.  Admittedly, I’m still in the stages of “this is hard”, sometimes. </p>
@@ -240,8 +240,17 @@ MathJax.Hub.Config({
 <p>[Legacy code is code without tests] is a good working definition, and it points to a solution.</p>
 </blockquote>
 <p>And that solution is straightforward:  Begin writing tests for your code, and you’ll avoid writing legacy Swift.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div class="related-posts">
+  You might also enjoy</p> 
+  <ul>
+    <li>
+      <a href="http://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/" title="How to Create Mocks and Stubs in Swift">How to Create Mocks and Stubs in Swift</a>
+    </li>
+    <li>
+      <a href="http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/" title="Swift Access Control – Implications for Unit Testing">Swift Access Control – Implications for Unit Testing</a>
+    </li>
+  </ul>
+</div>
 
     <aside>
       
@@ -300,7 +309,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

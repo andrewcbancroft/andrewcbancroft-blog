@@ -210,7 +210,7 @@ MathJax.Hub.Config({
 
     <p>This blog entry was inspired by <a href="http://www.objc.io/snippets/12.html">Objc.io&rsquo;s snippet titled &ldquo;Enums instead of Booleans”</a>. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven&rsquo;t seen it, check it out before continuing on!</p>
 <p>Objc.io&rsquo;s snippet focused primarily on the definition and <em>consumption</em> of the enumeration values. What I&rsquo;d like to focus on here is the implementation of the thing that <em>produces</em> those values for the switch-case that will consume them later on.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="example-scenario" class="jump-target"></a></p>
 <h3 id="example-scenario">Example scenario</h3>
 <p>To put an example before us, consider the following scenario:</p>
 <ul>
@@ -220,7 +220,7 @@ MathJax.Hub.Config({
 <li>Finally, if the user has never had a subscription, we&rsquo;d still like to deny access to the content, but perhaps offer them the opportunity to subscribe.</li>
 </ul>
 <p>Using Objc.io&rsquo;s idea as a springboard, we could program this in a couple of ways:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="booleans" class="jump-target"></a></p>
 <h3 id="1--we-could-define-a-few-boolean-properties-throughout-that-would-indicate-the-users-subscription-status">1 – We could define a few boolean properties throughout that would indicate the user&rsquo;s subscription status:</h3>
 <ul>
 <li><code>isSubscriber</code></li>
@@ -229,7 +229,7 @@ MathJax.Hub.Config({
 </ul>
 <p>What I find interesting about this approach is that it&rsquo;s not clear, from looking at the properties, that they&rsquo;re all mutually exclusive. Can I be a <strong>subscriber</strong> whose <strong>subscription has expired</strong>? If my <strong>subscription expired</strong>, am I a <strong>non-subscriber</strong>?</p>
 <p>It could be that I&rsquo;ve chosen poor names for the properties, but if I wanted to make clear that the statuses are mutually exclusive, there&rsquo;s a better way to encapsulate them. Objc.io helpfully pointed us in the direction of that better encapsulation method. Yep… you got it: enumerations!</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="enums-instead" class="jump-target"></a></p>
 <h3 id="2--as-the-title-of-the-blog-entry-signals-we-could-replace-the-booleans-with-an-enumeration">2 – As the title of the blog entry signals, we could replace the booleans with an enumeration:</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">SubscriberStatus</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">case</span> <span class="n">CurrentSubscriber</span>
@@ -252,7 +252,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">13</span><span class="cl">    
 </span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="produce-enum-values" class="jump-target"></a></p>
 <h3 id="producing-the-enumeration-values">Producing the enumeration values</h3>
 <p>The one thing that left me scratching my head on at first was the part of the whole scheme that would <em>produce</em> the enumeration values. In my example above, I&rsquo;ve left out what the implementation of <code>Registrant</code> looks like.</p>
 <p>When I&rsquo;m consuming the enumeration values, I&rsquo;m riding on the fact that <code>registrant.subscriberStatus</code> has some way of producing a correct <code>SubscriberStatus</code> for the registrant. But what does that look like? Well… here&rsquo;s one possibility:</p>
@@ -281,7 +281,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>So as you can see, the thing that <em>produces</em> the enumeration values <em>does</em> have some <code>if</code>s and <code>Bool</code>s in it. I couldn&rsquo;t really think of another way to do this. To simplify the readability of the <code>subscriberStatus</code> property&rsquo;s implementation, I&rsquo;ve abstracted the more complicated computational logic for figuring out whether or not a subscription is on file or if the registrant is overdue for payment into functions.</p>
 <p>Even though we do still have some <code>Bool</code>s to deal with, what we&rsquo;ve gained (in my opinion) is clarity on the consumption end. To me, it&rsquo;s worth it to have the <code>Bool</code> logic buried in one spot so that throughout the rest of my app, I can deal with clear, understandable, enumeration values.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -340,7 +340,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

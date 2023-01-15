@@ -57,7 +57,7 @@
   "@type": "BlogPosting",
   "headline": "Slide In Animation in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/09\/24\/slide-in-animation-in-swift\/",
-  "wordCount": "1347",
+  "wordCount": "1381",
   "datePublished": "2014-09-24T18:25:52Z",
   "dateModified": "2014-09-24T18:25:52Z",
   "author": {
@@ -206,17 +206,19 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    <p>In a previous post about <!-- raw HTML omitted -->fade animations<!-- raw HTML omitted --> in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call <code>fadeIn()</code> or <code>fadeOut()</code> on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them <em>somewhere</em>. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews.</p>
+    <p>In a previous post about <a title="Fade In / Out Animations as Class Extensions in Swift" href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" target="_blank">fade animations</a> in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call <code>fadeIn()</code> or <code>fadeOut()</code> on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them <em>somewhere</em>. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews.</p>
 <p>Well, I liked the idea so much that when it came time for me to implement a slide animation, I kept the same strategy, and I&rsquo;d like to share my implementation with you today.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="animation-demo" class="jump-target"></a></p>
 <h3 id="animation-demo">Animation demo</h3>
 <p>To start off with, here&rsquo;s a sample of what the animation does:</p>
-<!-- raw HTML omitted -->
-<p>The easiest way to get the gist of what I&rsquo;ve done is to <!-- raw HTML omitted -->head over to GitHub and download the example Xcode Project<!-- raw HTML omitted -->. In real life, I&rsquo;ve combined the fade animations and the slide animation into the same UIView extension, but for education&rsquo;s sake, I&rsquo;ve split them out so you can easily see the moving parts.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p style="text-align: center;">
+  <a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/SlideAnimationSample2.gif"><img class="alignnone size-full wp-image-5171" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/SlideAnimationSample2.gif" alt="Slide Animation Example" width="285" height="509" /></a>
+</p>
+<p>The easiest way to get the gist of what I&rsquo;ve done is to <a title="GitHub - SwiftSlideAnimation" href="https://github.com/andrewcbancroft/SwiftSlideAnimation" target="_blank">head over to GitHub and download the example Xcode Project</a>. In real life, I&rsquo;ve combined the fade animations and the slide animation into the same UIView extension, but for education&rsquo;s sake, I&rsquo;ve split them out so you can easily see the moving parts.</p>
+<p><a name="overview" class="jump-target"></a></p>
 <h3 id="implementation-overview">Implementation overview</h3>
 <p>There are three major parts to this example implementation, which I&rsquo;ll explain in detail shortly. Here&rsquo;s the overview:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="overview-create-extension" class="jump-target"></a></p>
 <h4 id="1--create-the-uiview-extension">1 – Create the UIView extension</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">import</span> <span class="nc">UIKit</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">
@@ -243,7 +245,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">addAnimation</span><span class="p">(</span><span class="n">slideInFromLeftTransition</span><span class="p">,</span> <span class="n">forKey</span><span class="p">:</span> <span class="s">&#34;slideInFromLeftTransition&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="overview-setup-storyboard" class="jump-target"></a></p>
 <h4 id="2--set-up-the-storyboard">2 – Set up the storyboard</h4>
 <ul>
 <li>From the Utilities panel, drag over a regular View to act as a wrapper for the sliding text (use a <em>regular</em> View, not a Container View)</li>
@@ -251,7 +253,7 @@ MathJax.Hub.Config({
 <li>Set up auto layout constraints for both the wrapper and the Label</li>
 <li>Set the wrapper view&rsquo;s Clip Subviews property to <em>checked</em> in the Attributes Inspector</li>
 </ul>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="overview-code-vc" class="jump-target"></a></p>
 <h4 id="3--code-the-view-controller--initiate-slide-animation">3 – Code the View Controller – initiate slide animation.</h4>
 <p>In my example, I wired the trigger up to a button&rsquo;s <code>touchUpInside</code> action. For you, it may be something different that triggers the animation to begin. Whatever it may be, call <code>slideInFromLeft()</code> on your UIView instance (in my case, the UILabel).</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">slideTextButtonTapped</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="n">UIButton</span><span class="p">)</span> <span class="p">{</span>
@@ -259,10 +261,10 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">slidingTextLabel</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&#34;Sliding Text!&#34;</span>
 </span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="p">}</span>
 </span></span></code></pre></div><p>Notice that directly after the call to <code>slideInFromLeft()</code>, I change the label&rsquo;s text property to contain the new text that I want to slide in.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="details" class="jump-target"></a></p>
 <h3 id="implementation-details">Implementation details</h3>
-<p>The real work all happens inside the UIViewExtensions.swift file where I add the <code>slideInFromLeft()</code> <!-- raw HTML omitted -->function to a UIView&rsquo;s arsenal.`</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>The real work all happens inside the UIViewExtensions.swift file where I add the <code>slideInFromLeft()</code> <span class="crayon-sy">function to a UIView&rsquo;s arsenal.`</p>
+<p><a name="details-uiviewextensions-swift" class="jump-target"></a></p>
 <h4 id="uiviewextensionsswift">UIViewExtensions.swift</h4>
 <p>First to note is that I&rsquo;ve provided a few default values in the function&rsquo;s signature so that the animation can be initiated as simply as writing <code>viewInstance.slideInFromLeft()</code>, or as &ldquo;complicated” as providing argument values to both duration and completionDelegate:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">extension</span> <span class="nc">UIView</span> <span class="p">{</span>
@@ -298,7 +300,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">addAnimation</span><span class="p">(</span><span class="n">slideInFromLeftTransition</span><span class="p">,</span> <span class="n">forKey</span><span class="p">:</span> <span class="s">&#34;slideInFromLeftTransition&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="details-storyboard-setup" class="jump-target"></a></p>
 <h4 id="storyboard-setup-details">Storyboard setup details</h4>
 <p>This is probably the more challenging piece, just because it takes some tweaking to get the auto layout constraints just right.</p>
 <ul>
@@ -313,7 +315,7 @@ MathJax.Hub.Config({
 </ul>
 </li>
 </ul>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Wrapper-View-Constraints.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Wrapper-View-Constraints.png"><img class="alignnone size-large wp-image-5091" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Wrapper-View-Constraints-1024x644.png" alt="Wrapper View Constraints" width="730" height="459" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Wrapper-View-Constraints-1024x644.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Wrapper-View-Constraints-300x188.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Wrapper-View-Constraints-1200x754.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Wrapper-View-Constraints.png 1469w" sizes="(max-width: 730px) 100vw, 730px" /></a></p>
 <p>Next, I made sure that my label that will be sliding is <em>inside</em> the wrapper view. I set its constraints to</p>
 <ul>
 <li>Center Horizontally in Container</li>
@@ -321,10 +323,10 @@ MathJax.Hub.Config({
 <li>Equal Widths</li>
 <li>Equal Heights</li>
 </ul>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints.png"><img class="alignnone size-large wp-image-5081" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints-1024x642.png" alt="Label Constraints" width="730" height="457" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints-1024x642.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints-300x188.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints-1200x752.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Label-Constraints.png 1471w" sizes="(max-width: 730px) 100vw, 730px" /></a></p>
 <p>The last thing I do in the storyboard before wiring things in the View Controller is to select the wrapper view and make sure it&rsquo;s Clip Subviews property is <em>checked</em>. As an experiment, toggle this option and watch the effect it has on the animation&rsquo;s appearance:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked.png"><img class="alignnone size-large wp-image-5071" src="http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked-1024x646.png" alt="Clib Subviews Checked" width="730" height="460" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked-1024x646.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked-300x189.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked-1200x757.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Clib-Subviews-Checked.png 1475w" sizes="(max-width: 730px) 100vw, 730px" /></a></p>
+<p><a name="details-vc-implementation" class="jump-target"></a></p>
 <h4 id="view-controller-implementation">View controller implementation</h4>
 <p>The final piece of the setup is to wire things up to the View Controller and animate the Label.</p>
 <p>Since I needed to reference the Label containing the text that I&rsquo;d like to animate, I created an <code>IBOutlet</code> from my storyboard to my View Controller:</p>
@@ -352,10 +354,27 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">2</span><span class="cl">        <span class="bp">println</span><span class="p">(</span><span class="s">&#34;Animation stopped&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="p">}</span>
 </span></span></code></pre></div><p>That&rsquo;s a wrap, folks! Hope this strategy is helpful for you as you think about where to place code for your UIView animations.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/02/22/fade-views-inout-with-fadeable-a-swift-protocol-extension/" title="Fade Views In/Out with Fadeable – A Swift Protocol Extension">Fade Views In/Out with Fadeable – A Swift Protocol Extension</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a title="The 5 W’s of Swift Extensions" href="http://www.andrewcbancroft.com/2014/11/03/the-5-ws-of-swift-extensions/">The 5 W’s of Swift Extensions</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a title="Fade In / Out Animations as Class Extensions in Swift" href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" target="_blank">Fade In / Out Animations as Class Extensions in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a title="Rotate Animation in Swift" href="http://www.andrewcbancroft.com/2014/10/15/rotate-animation-in-swift/" target="_blank">Rotate Animation in Swift</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -414,7 +433,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

@@ -228,7 +228,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>If you&rsquo;ve seen factorial before, the above implementation isn&rsquo;t new.  The &ldquo;base case” that will let the recursion stop is the expression <code>if (n == 0)</code>, and the recursive case is in the <code>else</code> block, where <code>factorial</code> gets called <em>again</em> within its own body&rsquo;s definition.  Only problem is… this doesn&rsquo;t work in Swift 1.0.</p>
 <p>Apparently, the closure (which is being initialized and assigned to the constant named &ldquo;factorial”) hasn&rsquo;t had a chance to fully initialize itself before the name <code>factorial</code> is used within the body.</p>
-<p>The frustrating part is that <!-- raw HTML omitted -->I <!-- raw HTML omitted -->really<!-- raw HTML omitted --> didn&rsquo;t want to type the letters v-a-r<!-- raw HTML omitted --> to implement my solution.  But alas, as <!-- raw HTML omitted -->Stack Overflow<!-- raw HTML omitted --> says, the following solution to the &ldquo;initial value” error works:</p>
+<p>The frustrating part is that <a title="Rob Napier on Immutability and Swift" href="http://robnapier.net/llama-calculus" target="_blank">I <em>really</em> didn&rsquo;t want to type the letters v-a-r</a> to implement my solution.  But alas, as <a title="Stack Overflow - Handle Closure Recursively" href="http://stackoverflow.com/questions/25103534/how-to-handle-closure-recursivity" target="_blank">Stack Overflow</a> says, the following solution to the &ldquo;initial value” error works:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">var</span> <span class="nv">factorial</span><span class="p">:</span> <span class="p">(</span><span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="n">factorial</span> <span class="p">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="k">in</span>
@@ -311,7 +311,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

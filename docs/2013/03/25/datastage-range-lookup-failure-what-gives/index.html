@@ -214,7 +214,7 @@ MathJax.Hub.Config({
 <li>Transaction Date (will help me with my lookup)
 <ul>
 <li>
-<p>Other columns that aren’t relevant to this particular task<!-- raw HTML omitted -->
+<p>Other columns that aren’t relevant to this particular task</ul>
 I also have a slowly changing dimension that tracks a historical record of each student’s major for various time intervals.  It contains</p>
 </li>
 <li>
@@ -225,26 +225,26 @@ I also have a slowly changing dimension that tracks a historical record of each 
 <li>
 <p>Expiration Date of the student’s major (will help with lookup)</p>
 <ul>
-<li>Student’s major (the information I want to use to supplement my fact row)<!-- raw HTML omitted --></li>
+<li>Student’s major (the information I want to use to supplement my fact row)</ul></li>
 </ul>
 <h3 id="range-lookup-my-failing-setup">Range Lookup (My [failing] Setup):</h3>
 <p>To accomplish my goal of supplementing the fact record with the student’s major, I needed to do a range lookup.  Below are sample screenshots of how I was attempting to set things up:</p>
 <p><strong>View of the job design surface:</strong></p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image9.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image9.png"><img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb9.png" width="523" height="478" /></a></p>
 <p><strong>View of Lookup Stage:</strong></p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image10.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image10.png"><img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb10.png" width="702" height="326" /></a></p>
 <p>Notice that I use StudentID as a key so that I match the funding row to a particular student.  Now, to get his/her major at the time they were funded, I do a range lookup on the DateFunded column…</p>
 <p><strong>View of Range Lookup on DateFunded:</strong></p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image11.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image11.png"><img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb11.png" width="725" height="517" /></a></p>
 <p>After compiling the job and running it, I would receive this error message: </p>
 <p>Lookup_StudentFieldOfStudy,0: Job aborting due to <strong>lookup failure</strong> on link: List_StudentFieldOfStudy</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image12.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image12.png"><img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb12.png" width="725" height="121" /></a></p>
 <h3 id="problem-solved">Problem Solved:</h3>
 <p>As stated in the introduction, to fix this problem, I simply added a sort stage prior to the lookup stage on the link serving as my reference (that is, on the link containing the value I’m trying to look up, which in my case was the student’s major/field of study).  Here are some screen shots of how my job looked after I fixed it:</p>
 <p><strong>View of the job design surface:</strong></p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image13.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image13.png"><img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb13.png" width="691" height="462" /></a></p>
 <p><strong>View of Sort Stage:</strong></p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/SNAGHTML100fd47.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/SNAGHTML100fd47.png"><img title="SNAGHTML100fd47" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="SNAGHTML100fd47" src="http://www.andrewcbancroft.com/wp-content/uploads/2013/03/SNAGHTML100fd47_thumb.png" width="517" height="397" /></a></p>
 <p>An important note about the sort stage.  I needed to include <strong>two sort keys</strong> – one to sort the students, and another to sort the effective dates of each student’s major(s).</p>
 <p>Everything else in the job remained exactly the same.  The results were a successfully running job with no lookup failures.</p>
 </li>
@@ -311,7 +311,7 @@ I also have a slowly changing dimension that tracks a historical record of each 
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

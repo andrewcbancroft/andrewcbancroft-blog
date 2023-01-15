@@ -61,7 +61,7 @@ Since I&rsquo;ve given two other detailed walk-throughs on the topic, I&rsquo;ll
   "@type": "BlogPosting",
   "headline": "Rotate Animation in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/10\/15\/rotate-animation-in-swift\/",
-  "wordCount": "922",
+  "wordCount": "952",
   "datePublished": "2014-10-16T02:57:24Z",
   "dateModified": "2014-10-16T02:57:24Z",
   "author": {
@@ -210,13 +210,21 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    <p><!-- raw HTML omitted -->Updated on December 14, 2015 – Swift 2.0 + new examples<!-- raw HTML omitted --></p>
-<p>With this post, I intend to wrap up my series on animations as UIView Extensions in Swift… for now.  Truthfully, these ideas flowed out of a real-world app that I was working on, which required various simple animations (<!-- raw HTML omitted -->fading in/out<!-- raw HTML omitted -->, <!-- raw HTML omitted -->sliding text<!-- raw HTML omitted -->, and now, rotating a view 360 degrees).</p>
+    <p><small>Updated on December 14, 2015 – Swift 2.0 + new examples</small></p>
+<p>With this post, I intend to wrap up my series on animations as UIView Extensions in Swift… for now.  Truthfully, these ideas flowed out of a real-world app that I was working on, which required various simple animations (<a title="Fade In / Out Animations as Class Extensions in Swift" href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" target="_blank">fading in/out</a>, <a title="Slide In Animation in Swift" href="http://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/" target="_blank">sliding text</a>, and now, rotating a view 360 degrees).</p>
 <p>Since I&rsquo;ve given two other detailed walk-throughs on the topic, I&rsquo;ll try to be to-the-point on this one.</p>
 <p>As with the others, I&rsquo;ve created a <a href="https://github.com/andrewcbancroft/SwiftRotateAnimation" title="GitHub - SwiftRotateAnimation">GitHub project</a> for you to see the animation in action, and even modify to your liking.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation">Rotate Animation Example Project</a>
+    </li>
+  </ul>
+</div>
+<p><a name="the-extension" class="jump-target"></a></p>
 <h3 id="the-extension">The Extension</h3>
 <p>The following code adds a method to any UIView instance called <code>rotate360Degrees</code>. The code can be placed in a Swift file called &ldquo;UIViewExtensions.swift”:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">import</span> <span class="nc">UIKit</span>
@@ -236,15 +244,15 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>The only critical thing to notice in the above code snippet is the value passed to the <code>CABasicAnimation</code> constructor.  The <code>&quot;transform.rotation&amp;#8221;</code> string is what sets things up to go spinning, and the string <em>must</em> be typed exactly as-is for the animation to work.</p>
 <p>As in my previous animation posts, I provide myself a couple of parameters to set for a little bit of customization if I want it. Since the parameters have default values, the method can be invoked by writing <code>someUIViewInstance.rotate360Degrees()</code> for simple cases.  For more &ldquo;advanced” scenarios where you need to adjust how long the animation takes, or to perform some logic after the animation completes, you can pass in a duration value other than 1.0, assign a completionDelegate, or both, depending on your needs.</p>
-<p>Check out the <!-- raw HTML omitted -->GitHub example<!-- raw HTML omitted --> for details on how to configure things for the <code>completionDelegate</code>.  I&rsquo;ll be walking through that more &ldquo;advanced” case shortly as well.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>Check out the <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation" target="_blank">GitHub example</a> for details on how to configure things for the <code>completionDelegate</code>.  I&rsquo;ll be walking through that more &ldquo;advanced” case shortly as well.</p>
+<p><a name="example" class="jump-target"></a></p>
 <h3 id="example">Example</h3>
 <p>Perhaps you&rsquo;re asking, &ldquo;Why spinning UIViews?”…</p>
 <p>In my example, I&rsquo;ve proposed a simple button that would be used to refresh the view / data in a real-world scenario.  When the button is tapped, I want the button to rotate 360 degrees.</p>
 <p>In the &ldquo;advanced” example, I want it to rotate continually until a process of some sort finishes, at which point the animation stops until initiated again.  Take a look:</p>
-<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/RotateAnimationExample.gif"><!-- raw HTML omitted --></a></p>
+<p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/RotateAnimationExample.gif"><img class="size-full wp-image-5661 aligncenter" src="https://www.andrewcbancroft.com/wp-content/uploads/2014/10/RotateAnimationExample.gif" alt="Rotate Animation Example" width="357" height="636" /></a></p>
 <p> </p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="rotate-once" class="jump-target"></a></p>
 <h3 id="simple-case--rotate-once">Simple Case – Rotate Once</h3>
 <p>Once the UIView extension is in place, the simple use case is… well… pretty simple:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span> <span class="p">{</span>
@@ -255,9 +263,9 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="c1">// Perhaps start a process which will refresh the UI...</span>
 </span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="advanced" class="jump-target"></a></p>
 <h3 id="advanced8221-case--rotate-until-process-finishes">&ldquo;Advanced” Case – Rotate Until Process Finishes</h3>
-<p>In my example, I decided to simulate a long-running process by using a custom-built <code>Timer</code> class, heavily inspired by <!-- raw HTML omitted -->Samuel Mullen&rsquo;s implementation<!-- raw HTML omitted --> (with a few modifications to fit my needs).  If you&rsquo;re looking through the <!-- raw HTML omitted -->GitHub example<!-- raw HTML omitted -->, try not to get too bogged down in the details of the <code>Timer</code>, unless it just intrigues you.  In real life, you may decide perform a web service call to refresh your data model, or refresh your UI (or both).  Whatever the case may be, you&rsquo;ll likely end up with similar logic:</p>
+<p>In my example, I decided to simulate a long-running process by using a custom-built <code>Timer</code> class, heavily inspired by <a title="Samuel Mullen - Using Swift Closures with NSTimer" href="http://www.samuelmullen.com/2014/07/using-swifts-closures-with-nstimer" target="_blank">Samuel Mullen&rsquo;s implementation</a> (with a few modifications to fit my needs).  If you&rsquo;re looking through the <a title="GitHub - SwiftRotateAnimation" href="https://github.com/andrewcbancroft/SwiftRotateAnimation" target="_blank">GitHub example</a>, try not to get too bogged down in the details of the <code>Timer</code>, unless it just intrigues you.  In real life, you may decide perform a web service call to refresh your data model, or refresh your UI (or both).  Whatever the case may be, you&rsquo;ll likely end up with similar logic:</p>
 <ul>
 <li>Refresh button is tapped</li>
 <li>If the button isn&rsquo;t already rotating, make it start</li>
@@ -297,14 +305,28 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">30</span><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">shouldStopRotating</span> <span class="p">=</span> <span class="kc">false</span>
 </span></span><span class="line"><span class="ln">31</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</span></span></code></pre></div><p><a name="summary" class="jump-target"></a></p>
 <h3 id="summary">Summary</h3>
 <p>I tried to strike a balance between making these simple animations easy to call on my labels, buttons, and other UIView subclasses, and just shoving everything into a UIViewExtensions.swift file.  The related set of animations just seemed like a really nice use case for Swift extensions, and the strategy served me well in a recent project.  Hopefully the series has sparked some ideas in your mind for how to employ extensions to enhance the capabilities of a class so that your code is easier and cleaner to write.</p>
 <p>As always – thanks for reading!<br>
-<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a title="The 5 W’s of Swift Extensions" href="http://www.andrewcbancroft.com/2014/11/03/the-5-ws-of-swift-extensions/">The 5 W’s of Swift Extensions</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a title="Fade In / Out Animations as Class Extensions in Swift" href="http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/" target="_blank">Fade In / Out Animations as Class Extensions in Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a title="Slide In Animation in Swift" href="http://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/" target="_blank">Slide In Animation in Swift</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -363,7 +385,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

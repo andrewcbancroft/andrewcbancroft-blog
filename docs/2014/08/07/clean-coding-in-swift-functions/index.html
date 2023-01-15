@@ -59,7 +59,7 @@ I am beginning a commentary series that I hope will encourage clean coding pr
   "@type": "BlogPosting",
   "headline": "Clean Coding in Swift – Functions",
   "url": "https:\/\/www.andrewcbancroft.com\/2014\/08\/07\/clean-coding-in-swift-functions\/",
-  "wordCount": "826",
+  "wordCount": "853",
   "datePublished": "2014-08-07T18:16:23Z",
   "dateModified": "2014-08-07T18:16:23Z",
   "author": {
@@ -208,17 +208,17 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    <p>I&rsquo;ve been thinking a lot about how the principles of clean coding (Bob Martin&rsquo;s &ldquo;<!-- raw HTML omitted -->Clean Code<!-- raw HTML omitted -->&rdquo;) apply in Swift. How do I express clean code in this language? Conversely, how do I <em>avoid</em> writing <em>cryptic</em> code in Swift? What language features help me write clear and self-explanatory code and what language features present the potential for tempting me to write obscure code in Swift?</p>
+    <p>I&rsquo;ve been thinking a lot about how the principles of clean coding (Bob Martin&rsquo;s &ldquo;<a title="Amazon - Clean Code" href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882" target="_blank">Clean Code</a>&rdquo;) apply in Swift. How do I express clean code in this language? Conversely, how do I <em>avoid</em> writing <em>cryptic</em> code in Swift? What language features help me write clear and self-explanatory code and what language features present the potential for tempting me to write obscure code in Swift?</p>
 <p>I am beginning a commentary series that I hope will encourage clean coding practice in myself and in the Swift developer community. Dialog on these topics is welcomed – I have not &ldquo;arrived”, so please – help me help the Swift community for the better!</p>
 <p>The first in the series is on writing clean functions in Swift. As it turns out, Swift provides some really great mechanisms for defining self-explanatory, clear-purposed functions. We&rsquo;ll start by analyzing the features around naming functions and their parameters, and will conclude on thinking through function decomposition.</p>
 <h5 id="function-names">Function Names</h5>
 <p>Something that I really enjoyed about Objective-C was that while method names were often long and verbose, they were extremely descriptive. My code often read like a narrative, and I enjoyed that. Some may have hated it, but I found it extremely helpful in facilitating my recollection of a method&rsquo;s intended purpose and the expectations around its argument requirements.</p>
 <p>I do my best to think hard about the names that I give my functions, ascribing to them a name that is specific, targeted, and focused on the single &ldquo;thing” that each one does. Nothing in Swift mandates that we leave the verbosity of Objective-C naming conventions behind. In fact, the exact opposite is true!  One example is that swift intentionally provides us with the ability to add external parameter names <em>so that</em> we can be as descriptive as we need to be about the names of our functions.</p>
 <h5 id="parameter-names">Parameter Names</h5>
-<p><!-- raw HTML omitted -->Swift&rsquo;s external parameter names<!-- raw HTML omitted -->, in my opinion, are wonderful for helping write self-documenting code. They simply help guide my mind back to what a given function does and needs in order to do its job. Anything to help me get back in the zone is worth spending a few extra keystrokes on, especially since Xcode&rsquo;s auto-completion assists me so well when calling functions with long signatures.</p>
+<p><a title="Apple Developer Documentation - External Parameter Names" href="https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html#//apple_ref/doc/uid/TP40014097-CH10-XID_255" target="_blank">Swift&rsquo;s external parameter names</a>, in my opinion, are wonderful for helping write self-documenting code. They simply help guide my mind back to what a given function does and needs in order to do its job. Anything to help me get back in the zone is worth spending a few extra keystrokes on, especially since Xcode&rsquo;s auto-completion assists me so well when calling functions with long signatures.</p>
 <p>Apple recommends the following:</p>
 <blockquote>
-<p><!-- raw HTML omitted -->Consider using external parameter names whenever the purpose of a function’s arguments would be unclear to someone reading your code for the first time.<!-- raw HTML omitted --></p>
+<p><span style="color: #414141;">Consider using external parameter names whenever the purpose of a function’s arguments would be unclear to someone reading your code for the first time.</span></p>
 </blockquote>
 <p>I would only add that sometimes, that <em>someone</em> &ldquo;reading your code for the first time” is <em>you</em>. Not technically, of course, but think about this: Write some code, leave it, and come back to it some time later. Will it make sense? Will you immediately go, &ldquo;Ah, I know what I meant there”, or will you do like I&rsquo;ve often done and say, &ldquo;<em>WHAT</em> in the <em>WORLD</em> was I <em>THINKING</em>??!?”.</p>
 <p>Spending a few seconds on typing a few more words to save brain power and potentially <em>more</em> seconds/minutes some time later is a worthy investment. And if you work on a team, your teammates will appreciate the extra care you put in to providing as many hints as possible through inventing good names. Good naming includes parameter names. Why <em>not</em> take advantage of the fact that Swift provides you this opportunity to write self-documenting code?</p>
@@ -257,9 +257,22 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>What&rsquo;s neat about the final result of the decomposition is that not only is my <code>washCar</code> function shorter and more readable (from 13 lines to 3 lines), but I got code re-use by making the <code>rinse&lt;</code> function take a duration argument.</p>
 <p>Hopefully these thoughts spark a few ideas in you.  Constructive feedback is welcome!  How are <em>you</em> thinking about writing clean code in Swift?</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-
+<div class="related-posts">
+  <p>
+    You might also enjoy
+  </p>
+  <ul>
+    <li>
+      <a title="Clean Coding in Swift – Type Inference" href="http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/" target="_blank">Clean Coding in Swift Type Inference</a>
+    </li>
+    <li>
+      <a title="Expanded Thoughts on Swift’s Type Inference" href="http://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/" target="_blank">Expanded Thoughts on Swift's Type Inference</a>
+    </li>
+    <li>
+      <a title="Pick a Delegate… Any Delegate… On Clean View Controllers in Swift" href="http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/" target="_blank">Pick a Delegate… Any Delegate… On Clean View Controllers in Swift</a>
+    </li>
+  </ul>
+</div>
     <aside>
       
       
@@ -317,7 +330,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

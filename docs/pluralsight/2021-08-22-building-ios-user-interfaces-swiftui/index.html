@@ -37,19 +37,17 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Using SwiftUI in a Playground" />
-<meta property="og:description" content="What if you could iterate on SwiftUI views more quickly, even if you lack macOS Catalina? Try it out in a Swift Playground!" />
+<meta property="og:title" content="Building iOS User Interfaces with SwiftUI" />
+<meta property="og:description" content="This course will teach you to make iOS apps with engaging user interfaces using Xcode, Swift, and SwiftUI." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20SwiftUI%20in%20a%20Playground.png" /><meta property="og:image" content="https://www.andrewcbancroft.com/images/social-assets/Facebook%20-%20Using%20SwiftUI%20in%20a%20Playground.png" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2019-06-13T04:00:18+00:00" />
-<meta property="article:modified_time" content="2019-06-13T04:00:18+00:00" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/pluralsight/2021-08-22-building-ios-user-interfaces-swiftui/" /><meta property="article:section" content="pluralsight" />
+<meta property="article:published_time" content="2021-08-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-08-22T00:00:00+00:00" />
 
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://www.andrewcbancroft.com/images/social-assets/Twitter%20-%20Using%20SwiftUI%20in%20a%20Playground.png"/>
-
-<meta name="twitter:title" content="Using SwiftUI in a Playground"/>
-<meta name="twitter:description" content="What if you could iterate on SwiftUI views more quickly, even if you lack macOS Catalina? Try it out in a Swift Playground!"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Building iOS User Interfaces with SwiftUI"/>
+<meta name="twitter:description" content="This course will teach you to make iOS apps with engaging user interfaces using Xcode, Swift, and SwiftUI."/>
 <meta name="generator" content="Hugo 0.101.0" />
 
     
@@ -57,30 +55,24 @@
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Using SwiftUI in a Playground",
-  "image": {
-    "@type": "ImageObject",
-    "url": "https:\/\/www.andrewcbancroft.com\/images\/social-assets\/Twitter%20-%20Using%20SwiftUI%20in%20a%20Playground.png",
-    "height": "512",
-    "width": "1024"
-  },
-  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/ui-work\/using-swiftui-in-playground\/",
-  "wordCount": "122",
-  "datePublished": "2019-06-13T04:00:18Z",
-  "dateModified": "2019-06-13T04:00:18Z",
+  "headline": "Building iOS User Interfaces with SwiftUI",
+  "url": "https:\/\/www.andrewcbancroft.com\/pluralsight\/2021-08-22-building-ios-user-interfaces-swiftui\/",
+  "wordCount": "659",
+  "datePublished": "2021-08-22T00:00:00Z",
+  "dateModified": "2021-08-22T00:00:00Z",
   "author": {
     "@type": "Person",
     "name": "Andrew"
   },
-  "keywords": "SwiftUI, Swift, Playground"
+  "keywords": "Pluralsight, Swift, SwiftUI, iOS"
 
-  ,"description": "What if you could iterate on SwiftUI views more quickly, even if you lack macOS Catalina? Try it out in a Swift Playground!"
+  ,"description": "This course will teach you to make iOS apps with engaging user interfaces using Xcode, Swift, and SwiftUI."
 }
 </script>
 
 
 
-    <title>Using SwiftUI in a Playground</title>
+    <title>Building iOS User Interfaces with SwiftUI</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
@@ -204,37 +196,96 @@ MathJax.Hub.Config({
 <article>
   <div class="article">
     <header>
-        <div class="alert alert-primary" role="alert">
-            Learning about iOS development? <br/><br/>
-            I am the author of <a href="https://bit.ly/iOS14-getting-started" class="alert-link">iOS 14 Getting Started</a> and <a href="http://bit.ly/ps-author-page" class="alert-link">six other courses on Pluralsight</a>.  <br/><br/>Deepen your understanding by watching!
-          </div>
-      <h1 class="article-title">Using SwiftUI in a Playground</h1>
+      <h1 class="article-title">Building iOS User Interfaces with SwiftUI</h1>
     </header>
     <div class="content">
 
     <p></p>
 
-    <p>If you&rsquo;re looking for a quicker way to iterate while you&rsquo;re building SwiftUI views, and you don&rsquo;t have macOS Catalina installed, you might enjoy the Playground experience more than you enjoy pressing <code>command + R</code> every time you make a change and want to see it in the user interface.</p>
-<p>How do you do it?  Here&rsquo;s a code snippet to copy-paste into a Playground to get you going.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">import</span> <span class="nc">UIKit</span>
-</span></span><span class="line hl"><span class="ln"> 2</span><span class="cl"><span class="kd">import</span> <span class="nc">PlaygroundSupport</span>
-</span></span><span class="line hl"><span class="ln"> 3</span><span class="cl"><span class="kd">import</span> <span class="nc">SwiftUI</span>
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1">// Make a SwiftUI view</span>
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="kd">struct</span> <span class="nc">ContentView</span><span class="p">:</span> <span class="n">View</span> <span class="p">{</span>
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="n">Text</span><span class="p">(</span><span class="s">&#34;SwiftUI in a Playground!&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="ln">11</span><span class="cl">
-</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1">// Make a UIHostingController</span>
-</span></span><span class="line hl"><span class="ln">13</span><span class="cl"><span class="kd">let</span> <span class="nv">viewController</span> <span class="p">=</span> <span class="n">UIHostingController</span><span class="p">(</span><span class="n">rootView</span><span class="p">:</span> <span class="n">ContentView</span><span class="p">())</span>
-</span></span><span class="line"><span class="ln">14</span><span class="cl">
-</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c1">// Assign it to the playground&#39;s liveView</span>
-</span></span><span class="line hl"><span class="ln">16</span><span class="cl"><span class="n">PlaygroundPage</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">liveView</span> <span class="p">=</span> <span class="n">viewController</span>
-</span></span><span class="line"><span class="ln">17</span><span class="cl">
-</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1">// RUN!</span></span></span></code></pre></div>
-<p><img src="result.png" alt="Result"></p>
+    <p>Designing efficient and dynamic apps is essential for taking your iOS developer skills to the next level.</p>
+<p>In this course, Building iOS User Interfaces with SwiftUI, you&rsquo;ll build upon the basic knowledge of iOS development you’ve already gained in order to build compelling iOS apps that engage your users.</p>
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fas fa-video"></i> <a href="https://bit.ly/building-ios-ui-swiftui" target="_blank">Building iOS User Interfaces with SwiftUI</a><a href="https://bit.ly/building-ios-ui-swiftui" target="_blank"><br /> <img src="https://www.andrewcbancroft.com/images/social-assets/building-ios-user-interfaces-swiftui.png" alt="Building iOS User Interfaces with SwiftUI" width="1024" height="576" class="alignnone size-large wp-image-13737"/></a>
+    </li>
+  </ul>
+</div>
+<h1 id="course-outline">Course Outline</h1>
+<p>First, you&rsquo;ll see the tools and learn how to create iOS apps with adaptive user interfaces that work on multiple devices.</p>
+<p>Next, you’ll learn how to manage iOS projects and define the building blocks of your own iOS applications.</p>
+<p>Finally, you&rsquo;ll explore working with data-driven controls and understand navigation options.</p>
+<p>When you’re finished with this course, you&rsquo;ll know current best practices, iOS architecture, and the most important ideas you need to feel comfortable bringing your developer skills into the iOS and Apple developer world.</p>
+<h2 id="1---designing-interfaces-with-swiftui">1 - Designing Interfaces with SwiftUI</h2>
+<p>In this introductory module, we begin where the iOS Getting Started course left off and prepare you to handle next-level interface building with SwiftUI.</p>
+<p>Topics in this module include&hellip;</p>
+<ul>
+<li>Preparing to Design User Interfaces with SwiftUI</li>
+<li>The Snowhaven Renovation Scenario</li>
+<li>Defining SwiftUI Views</li>
+<li>Creating Basic Designs and Layouts</li>
+<li>Representing Data in User Interfaces</li>
+<li>Customizing the Appearance of Views</li>
+<li>Changing the Size and Scale of Views</li>
+<li>Adding Effects to Views</li>
+<li>Layering Views with ZStacks</li>
+<li>Implementing Navigation and Displaying a Modal View</li>
+</ul>
+<h2 id="2---handling-user-input">2 - Handling User Input</h2>
+<p>There’s no such thing as an app without data.
+In this module, I set you up for building dynamic, interactive applications by unpacking questions like:</p>
+<ul>
+<li>How do we model real-world objects and concepts as data that SwiftUI can work with?</li>
+<li>How do we integrate data into an app, so it’s usable in the right views at the right time?</li>
+<li>And how do we load data that’s been saved… display it… and, most importantly, for this module…change it using different editing controls with SwiftUI…</li>
+</ul>
+<p>Topics in this module include&hellip;</p>
+<ul>
+<li>Working with Data in SwiftUI</li>
+<li>Establishing an App’s Data Flow</li>
+<li>Loading and Displaying Data</li>
+<li>Editing Text Data with Text Fields</li>
+<li>Persisting (or Cancelling) Data Changes</li>
+<li>Working with Picker Views</li>
+<li>Switching Between Binary Options with Toggles</li>
+<li>Editing Numeric Data with Text Fields</li>
+<li>Displaying Editing Controls in a Form</li>
+</ul>
+<h2 id="3---bringing-apps-to-life-with-drawing-animation-and-gestures">3 - Bringing Apps to Life with Drawing, Animation, and Gestures</h2>
+<p>SwiftUI provides you with all the tools necessary to make your apps even more dynamic by responding to user gestures like taps and swipes… The framework also gives you everything you need to express your creativity by drawing your own graphics, and adding animations throughout your apps to bring things to life.</p>
+<p>Topics in this module include&hellip;</p>
+<ul>
+<li>Understanding the SwiftUI Drawing System</li>
+<li>Drawing with Paths</li>
+<li>Using GeometryReader</li>
+<li>Applying Transformations to Paths</li>
+<li>Building Reusable Shapes</li>
+<li>Understanding Animations</li>
+<li>Adding Basic Animation</li>
+<li>Animating View Hierarchy Changes with Transitions</li>
+<li>Combining Multiple Animations and Transitions</li>
+<li>Responding to Gestures</li>
+</ul>
+<h2 id="4---integrating-swiftui-and-uikit">4 - Integrating SwiftUI and UIKit</h2>
+<p>By now, you know that SwiftUI is wonderful, but&hellip; it’s not the only Apple UI framework used in today’s Apple Developer world. <strong>UIKit</strong> is still very widely used and even includes some UI components that are not currently available in the SwiftUI framework.</p>
+<p>As we wrap up the course, I explore the answer to this question: How can we, as developers, mix SwiftUI and UIKit to leverage the power of both frameworks?</p>
+<p>Topics in this module include&hellip;</p>
+<ul>
+<li>Preparing to Integrate SwiftUI and UIKit</li>
+<li>Representing UIKit ViewControllers in SwiftUI</li>
+<li>Making SwiftUI Views Compatible with UIKit</li>
+<li>Representing UIKit Views in SwiftUI</li>
+<li>Sharing State Between SwiftUI and UIKit</li>
+<li>Coordinating User Interaction Between UIViewControllers and SwiftUI</li>
+<li>Coordinating User Interaction Between UIViews and SwiftUI</li>
+<li>Applying the Finishing Touches</li>
+</ul>
+<h1 id="feedback-welcome">Feedback Welcome!</h1>
+<p>From the beginning my unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!</p>
+<p>I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!</p>
 
     <aside>
       
@@ -246,15 +297,15 @@ MathJax.Hub.Config({
         
         <ul class="resources-content">
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/">Using a Core Data Model in Swift Playgrounds</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/pluralsight/2020-12-04-ios-14-getting-started/">iOS 14 Getting Started</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/2014/09/09/create-documentation-for-your-swift-playground/">Create Documentation for your Swift Playground</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/">Using SwiftUI in a Playground</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/">Accessing the Root View Controller at Launch on iOS 13 with SceneDelegate</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-environment-keys-possible/">What Are All of the Possible Environment Keys in SwiftUI?</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-does-declarative-mean/">SwiftUI is Declarative.  What Does That Mean?</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/">Implementing In-App Purchases on iOS</a></li>
             
-            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/ui-work/taking-first-steps-with-swiftui/">Taking First Steps With SwiftUI</a></li>
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/pluralsight/2019-12-26-ios-debugging-fundamentals/">iOS Debugging Fundamentals</a></li>
             
         <ul>
       

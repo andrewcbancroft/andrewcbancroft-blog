@@ -61,7 +61,7 @@ Embedding a view controller inside a navigation controller gives us some built-i
   "@type": "BlogPosting",
   "headline": "Working with Unwind Segues Programmatically in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/12\/18\/working-with-unwind-segues-programmatically-in-swift\/",
-  "wordCount": "806",
+  "wordCount": "815",
   "datePublished": "2015-12-18T18:22:55Z",
   "dateModified": "2015-12-18T18:22:55Z",
   "author": {
@@ -210,17 +210,25 @@ MathJax.Hub.Config({
 
     <p></p>
 
-    <p><!-- raw HTML omitted -->Updated on September 20, 2016 – Xcode 8 &amp; Swift 3.0<!-- raw HTML omitted --></p>
+    <p><small>Updated on September 20, 2016 – Xcode 8 &amp; Swift 3.0</small></p>
 <p>Navigating between screens is a critical component to building iOS applications. The mechanism for navigation in Storyboard-based applications is the <em>segue</em>. Using segues, we can travel ahead to the next screen, which is extremely common. We can also travel <em>backward</em> in the screen &ldquo;navigation stack” by programming a special kind of segue called an <em>unwind</em> segue.</p>
 <p>Embedding a view controller inside a navigation controller gives us some built-in forward and backward navigation, so you may be asking, &ldquo;What&rsquo;s the need for an unwind segue??”</p>
 <p>Well, suppose that we need to programmatically <em>trigger</em> the backward navigation, based on an interaction with something other than the default &ldquo;back” button on the navigation bar. How would you do it? Yep – you&rsquo;ve got it: by using an unwind segue.</p>
 <p>This is a walk-through of how to work with unwind segues programmatically in Swift.</p>
 <p><strong>Note:</strong> Code in the main article below is written in Swift 3.0, but code examples for Swift 2.3 are found in the <a href="https://github.com/andrewcbancroft/RoasterOnTheGo/tree/swift-2.3">example project</a>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="example" class="jump-target"></a></p>
 <h3 id="example">Example</h3>
 <p>An example app called &ldquo;Roasters on the Go” has been created for this walk-through to help give you some context. It&rsquo;s a mock mobile order system for purchasing green, un-roasted coffee beans (so that you can roast them yourself)!</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> RoasterOnTheGo Example Project (<a href="https://github.com/andrewcbancroft/RoasterOnTheGo/tree/swift-2.3" title="RoasterOnTheGo - Swift 2.3">Swift 2.3</a> | <a href="https://github.com/andrewcbancroft/RoasterOnTheGo/tree/master" title="RoasterOnTheGo - Swift 3.0">Swift 3.0</a>)
+    </li>
+  </ul>
+</div>
 <ul>
 <li>We&rsquo;ll start at a list of coffees categorized by region</li>
 <li>Tapping an coffee origin country will take you to the order screen</li>
@@ -228,9 +236,9 @@ MathJax.Hub.Config({
 <li><strong>Tapping &ldquo;OK” on the alert will trigger the unwind segue</strong> (which is the goal of this walk-through)</li>
 </ul>
 <p>Here&rsquo;s a sample of what the fake app does:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/demo.gif"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/demo.gif"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/demo.gif" alt="Unwind Segue Demo" width="366" height="663" class="alignnone size-full wp-image-12483" /></a></p>
 <p>The goal is to go back to the list of coffee origins after ‘OK&rsquo; is pressed on the alert. Let&rsquo;s look at the steps to make this happen.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="create-action" class="jump-target"></a></p>
 <h3 id="1--create-an-unwindto___-ibaction">1 – Create an unwindTo___ IBAction</h3>
 <p>The first step is to create an IBAction that we can wire up the unwind segue to.</p>
 <p>Supposing that you&rsquo;ve got two view controller: The MenuViewController which lists out the menu of coffees to purchase, and the OrderViewController which allows your app users to buy that particular coffee.</p>
@@ -243,23 +251,23 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">6</span><span class="cl">    
 </span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="c1">// ...</span>
 </span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action.png"><!-- raw HTML omitted --></a></p>
+</span></span></code></pre></div><p><a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action-1024x534.png" alt="Create an Unwind Action" width="1024" height="534" class="alignnone size-large wp-image-12474" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action-1024x534.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action-300x156.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action.png 1218w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p>Placing the IBAction code in the right spot is critical to the functioning of the unwind segue. In this example where we want to go from Order to Menu, if you place the IBAction in the OrderViewController, the Storyboard will let you wire it up just fine, but the transition back to the menu screen will never happen at runtime.</p>
 <p>Therefore, it&rsquo;s important to remember: Place the &ldquo;unwindTo___” IBAction function in the view controller source file for the screen you&rsquo;re unwinding back to.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="wire-unwind" class="jump-target"></a></p>
 <h3 id="2--wire-up-the-unwind-segue">2 – Wire up the unwind segue</h3>
 <p>Next up is to wire connect the view controller to the unwind segue IBAction that we just created.</p>
 <p>Here, you&rsquo;re going to be looking at the screen that you&rsquo;re going to unwind <em>from</em>. In the running example, this will be the Order View Controller&rsquo;s scene in the Storyboard.</p>
 <p>To wire up the OrderViewController to its unwind segue, you need to right-click and drag (or control + drag) from the View Controller icon to the Exit icon in the Storyboard Scene:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue-1024x542.png" alt="Drag to Create Segue" width="1024" height="542" class="alignnone size-large wp-image-12473" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue-1024x542.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue-300x159.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue.png 1199w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p>You&rsquo;ll be presented with list of IBActions to connect to. You&rsquo;ll choose the unwind segue action that was created in step 1:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue-1024x542.png" alt="Create Segue" width="1024" height="542" class="alignnone size-large wp-image-12472" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue-1024x542.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue-300x159.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue.png 1201w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+<p><a name="identifier" class="jump-target"></a></p>
 <h3 id="3--specify-a-segue-identifier">3 – Specify a segue identifier</h3>
 <p>For this step, you&rsquo;ll want to make sure that the Document Outline of the Storyboard is expanded. This will allow you to easily select the unwind segue in the outline, and specify its identifier in the Attributes Inspector of the Utilities Pane:<br>
-<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id.png"><!-- raw HTML omitted --></a></p>
+<a href="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id.png"><img src="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id-1024x566.png" alt="Specify Segue Identifier" width="1024" height="566" class="alignnone size-large wp-image-12471" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id-1024x566.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id-300x166.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id.png 1200w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
 <p>Since we want to take the user back to the menu when placing an order is finished, we&rsquo;ll give it the identifier of &ldquo;unwindToMenu”.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="trigger" class="jump-target"></a></p>
 <h3 id="4--trigger-unwind-segue-programmatically">4 – Trigger unwind segue programmatically</h3>
 <p>The final step is to write a bit of code to trigger the unwind segue at the appropriate time.</p>
 <p>In our example, we want to trigger it when the user taps on the ‘OK&rsquo; button of the alert. Here&rsquo;s a snippet of code that will accomplish that task:</p>
@@ -275,7 +283,7 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="wrapping-up">Wrapping up</h3>
 <p>Whenever you need to programmatically trigger backward navigation in your app, using an unwind segue can be a great feature to take advantage of. This walk-through took you step-by-step through working with unwind segues in Swift.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -334,7 +342,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>

@@ -59,7 +59,7 @@ Making changes to the information listed in the table view and signaling those c
   "@type": "BlogPosting",
   "headline": "UITableView Swipe to Delete Workflow in Swift",
   "url": "https:\/\/www.andrewcbancroft.com\/2015\/07\/16\/uitableview-swipe-to-delete-workflow-in-swift\/",
-  "wordCount": "1252",
+  "wordCount": "1286",
   "datePublished": "2015-07-17T04:00:18Z",
   "dateModified": "2015-07-17T04:00:18Z",
   "author": {
@@ -211,7 +211,7 @@ MathJax.Hub.Config({
     <p>Data management applications, by which I mean an app where you&rsquo;re allowing users to add, edit, and delete bits of data as part of your app&rsquo;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.</p>
 <p>Making <em>changes</em> to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps. How do we allow users to add or remove &ldquo;records” to the system? Furthermore, how do we signal that those changes were effective and refresh the view of the data in the UI?</p>
 <p>The primary concern I want to focus in on in this article is the ever-common paradigm of &ldquo;swipe to delete” when using a table view. What could the workflow of deleting a row from the table view (and its data source) look like? How could it be implemented in Swift? Let&rsquo;s explore…</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="workflow" class="jump-target"></a></p>
 <h3 id="workflow">Workflow</h3>
 <p>The workflow of &ldquo;swipe to delete” that I typically use in my own applications is this:</p>
 <ul>
@@ -221,17 +221,25 @@ MathJax.Hub.Config({
 </ul>
 <p>The confirmation step is atypical for iOS it seems. Swiping to delete an e-mail or a reminder or just about anything else in Apple&rsquo;s own apps simply deletes the item right away.</p>
 <p>There may be a good reason for this, but I like to give folks an out if they didn&rsquo;t mean to do it. It&rsquo;s fair enough to say, &ldquo;Well, they went to the effort of swiping the row <em>and</em> pressing the button… surely they mean to do it!”. I still feel more comfortable if I get the opportunity to cancel something like a delete operation. Feel free to disagree there – for this article, I&rsquo;ll assume you want to include that into your delete workflow, and will demonstrate a simple way to implement all three steps of the strategy.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="implementation" class="jump-target"></a></p>
 <h3 id="implementation">Implementation</h3>
 <p>To demonstrate the implementation of this workflow, suppose that we&rsquo;ve got a table view listing out all of the planets in our solar system (all of the news on Pluto this week has me thinking in this direction, so I just went with it). Feel free to grab the example project over at GitHub:</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div class="resources">
+  <div class="resources-header">
+    Resources
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fab fa-github fa-lg"></i> <a href="https://github.com/andrewcbancroft/SwipeToDeleteExample" title="Swipe to Delete Example">Swipe to Delete Example</a>
+    </li>
+  </ul>
+</div>
 <p>The table view looks like this once its data source is all configured:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM.png"><!-- raw HTML omitted --></a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM-576x1024.png" alt="Table View with Planets" width="576" height="1024" class="alignnone size-large wp-image-12096" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM-576x1024.png 576w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM-169x300.png 169w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.06-PM.png 750w" sizes="(max-width: 576px) 100vw, 576px" /></a></p>
+<p><a name="swipe" class="jump-target"></a></p>
 <h4 id="swipe">Swipe</h4>
 <p>What we want is to be able to swipe one of the rows and delete the planet from the data source and, consequently, remove it from the table view in a nice, fluid way:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM-576x1024.png" alt="Table View - Delete Button Revealed" width="576" height="1024" class="alignnone size-large wp-image-12097" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM-576x1024.png 576w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM-169x300.png 169w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.11-PM.png 750w" sizes="(max-width: 576px) 100vw, 576px" /></a></p>
 <p>To accomplish this, we need to do a couple of things.</p>
 <p>First, your view controller needs to conform to the <code>UITableViewDelegate</code> protocol, because the swipe to delete functionality is encapsulated by one of the table view delegate methods. It&rsquo;s a simple change at the class declaration:</p>
 <p><code>class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate { ... }</code></p>
@@ -258,10 +266,10 @@ MathJax.Hub.Config({
 </span></span></code></pre></div><p>So what&rsquo;s happening here? The primary thing to notice is that we&rsquo;re evaluating the editingStyle from the method&rsquo;s parameter list. Comparing it to the <code>.Delete</code> <code>UITableViewCellEditingStyle</code> value is what allows us to know that the Delete button was tapped.</p>
 <p>Since I have a confirmation step to take care of, I&rsquo;ve chosen to store the <code>indexPath</code> of the row we&rsquo;re wanting to delete in a class-viewable variable so that I can use it later on when we handle the deletion (if the user confirms it).</p>
 <p>The final step of this function is to call <code>confirmDelete()</code>, which has its own explanation coming up…</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="confirm" class="jump-target"></a></p>
 <h4 id="confirm">Confirm</h4>
 <p>The next step is confirming that the user really wants to delete the particular planet they&rsquo;ve initiated the delete action on:</p>
-<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM.png"><!-- raw HTML omitted --></a></p>
+<p><a href="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM.png"><img src="http://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM-576x1024.png" alt="Delete Confirmation" width="576" height="1024" class="alignnone size-large wp-image-12098" srcset="https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM-576x1024.png 576w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM-169x300.png 169w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/iOS-Simulator-Screen-Shot-Jul-16-2015-1.07.15-PM.png 750w" sizes="(max-width: 576px) 100vw, 576px" /></a></p>
 <p>How is this implemented? It all boils down to using iOS 8&rsquo;s new <code>UIAlertController</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">
@@ -288,7 +296,7 @@ MathJax.Hub.Config({
 </span></span></code></pre></div><p>We&rsquo;re asking the user if they&rsquo;re sure they want to permanently delete the planet using the <code>.ActionSheet</code> style.</p>
 <p>The next step of the function is to create a couple of <code>UIAlertAction</code> buttons: one for Delete and one for Cancel, with the appropriate style (<code>.Destructive</code> and <code>.Cancel</code>, respectively).</p>
 <p>Finally, we provide a function to each <code>UIAlertAction</code> instance. The handlers, of course, could have been implemented with closures, but I chose to built out a couple of named functions, just to be able to step through it with you, and to separate out the logic of the steps a little more. Feel free to do whichever seems most natural to you.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="delete-cancel" class="jump-target"></a></p>
 <h4 id="delete-or-cancel">Delete or cancel</h4>
 <p>This is the final step! The following code snippet is an implementation of the two handlers specified for the initialization step of the <code>UIAlertAction</code> buttons, which were <code>handleDeletePlanet</code> and <code>cancelDeletePlanet</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">class</span> <span class="nc">ViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">UITableViewDataSource</span><span class="p">,</span> <span class="n">UITableViewDelegate</span> <span class="p">{</span>
@@ -331,10 +339,27 @@ MathJax.Hub.Config({
 <p>There&rsquo;s one gotcha, that I&rsquo;ve tried to highlight by way of comment in the code snippet: Notice that within the call to <code>deleteRowsAtIndexPaths</code> (plural), I&rsquo;ve wrapped the <code>indexPath</code> we&rsquo;re removing in an array. It&rsquo;s subtle, but this delegate method expects an array of <code>indexPath</code> instances, not a single index path instance. It&rsquo;s simple enough, but it can catch you off guard if you&rsquo;re in the mindset of removing a single row and come across this method, which is flexible enough to allow you to delete several at a time.</p>
 <h3 id="wrapping-up">Wrapping up</h3>
 <p>Swipe -&gt; confirm -&gt; delete or cancel. Those are the steps we analyzed in this commonly needed workflow in data management applications.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="related" class="jump-target"></a></p>
+<div class="resources">
+  <div class="resources-header">
+    You might also enjoy&#8230;
+  </div>
+  <ul class="resources-content">
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/" title="Swift How-To: Setting up a Table View">Swift How-To: Setting up a Table View</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/" title="Swift UITableViewDataSource Cheat Sheet">Swift UITableViewDataSource Cheat Sheet</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/" title="Sync Table View Data: NSFetchedResultsController and Swift">Sync Table View Data: NSFetchedResultsController and Swift</a>
+    </li>
+    <li>
+      <i class="fa fa-angle-right"></i> <a href="http://www.andrewcbancroft.com/2015/02/12/custom-uitableviewcell-text-input-swift/" title="Custom UITableViewCell for Text Input in Swift">Custom UITableViewCell for Text Input in Swift</a>
+    </li>
+  </ul>
+</div>
+<p><a name="share" class="jump-target"></a></p>
 
     <aside>
       
@@ -393,7 +418,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">This project contains 181 pages and is available on <a
+            <span class="text-muted">This project contains 182 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
         </div>
