@@ -11,6 +11,8 @@ tags:
 wip: false
 showrecent: true
 images:
+  - /images/social-assets/Twitter - Pre-populate a SwiftData Persistent Store.png
+  - /images/social-assets/Facebook - Pre-populate a SwiftData Persistent Store.png
 toc: true
 introtext: "Pre-populating a SwiftData persistent store can be helpful if you want to provide your users with some initial data to work with when they launch your app for the first time. You might also need to seed a persistent store with test data for your unit tests or provide your Xcode preview with some initial data. The question is: How do you do it?"
 disppsdatabadge: true
