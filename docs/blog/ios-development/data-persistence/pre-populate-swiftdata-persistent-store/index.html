@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6356224024630676" crossorigin="anonymous"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6356224024630676",
+        enable_page_level_ads: true,
+        overlays: {bottom: true}
+    });
+    </script>
+
+    <link rel="stylesheet" type="text/css"
+        href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#3e8bc5"
+                    },
+                    "button": {
+                        "background": "#8ec760",
+                        "text": "#ffffff"
+                    }
+                }
+            })
+        });
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Pre-populate a SwiftData Persistent Store" />
+<meta property="og:description" content="Learn how to pre-populte your SwiftData persistent store in a variety of scenarios." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/pre-populate-swiftdata-persistent-store/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-06-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-15T00:00:00+00:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pre-populate a SwiftData Persistent Store"/>
+<meta name="twitter:description" content="Learn how to pre-populte your SwiftData persistent store in a variety of scenarios."/>
+<meta name="generator" content="Hugo 0.101.0" />
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Pre-populate a SwiftData Persistent Store",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/pre-populate-swiftdata-persistent-store\/",
+  "wordCount": "1586",
+  "datePublished": "2023-06-15T00:00:00Z",
+  "dateModified": "2023-06-15T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "SwiftData"
+
+  ,"description": "Learn how to pre-populte your SwiftData persistent store in a variety of scenarios."
+}
+</script>
+
+
+
+    <title>Pre-populate a SwiftData Persistent Store</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+        integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet">
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top px-5">
+        <a class="navbar-brand" href="https://www.andrewcbancroft.com"><i class="fas fa-home"></i> Andrew Bancroft</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.andrewcbancroft.com#pluralsight-courses">Pluralsight Courses</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Topics
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <h6 class="dropdown-header">iOS Development</h6>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#data-persistence">Data Persistence</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#dependency-management">Dependency
+                            Management</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#debugging">Debugging</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#eventkit">Event Kit</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#iap">In-App Purchases</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#parse">Parse</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#patterns-and-practices">Patterns and
+                            Practices</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#react-native">React Native</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-five">"Swift Five" Series</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-how-tos">Swift How-To's</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#swift-language-notes">Swift Language
+                            Notes</a>
+                        
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#testing">Testing</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#ui-work">User Interface Work</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#xcode">Xcode</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#dot-net-development">.Net Development</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com#musings">Musings</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Connect With Me
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft"><i
+                                class="fas fa-play"></i> Pluralsight Courses</a>
+                        <a class="dropdown-item" href="https://github.com/andrewcbancroft"><i class="fab fa-github"></i>
+                            GitHub</a>
+                        <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/"><i
+                                class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a class="dropdown-item" rel="me" href="https://hachyderm.io/@andrewcbancroft"><i class="fab fa-mastodon"></i> Mastodon</a>
+                        <a class="dropdown-item" href="https://twitter.com/andrewcbancroft"><i
+                                class="fab fa-twitter"></i> Twitter</a>
+                        <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg"><i
+                                class="fab fa-youtube"></i> YouTube</a>
+                        <a class="dropdown-item" href="https://dataday.life"><i class="fas fa-link"></i>
+                            www.dataday.life</a>
+                        <a class="dropdown-item" href="https://www.andrewcbancroft.com/index.xml"><i class="fas fa-rss"></i> Feed</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+
+
+<article>
+  <div class="article">
+    <header>
+        <div class="alert alert-primary" role="alert">
+            Learning about data technologies on iOS? <br/><br/>
+            I am the author of <a href="http://bit.ly/core-data-swift" class="alert-link">Core Data</a>, <a href="http://bit.ly/cloudkit-fundamentals" class="alert-link">CloudKit</a>, and <a href="http://bit.ly/core-data-primary-keys" class="alert-link">the Big Picture of Data Persistence on iOS</a> on <a href="http://bit.ly/ps-author-page" class="alert-link">Pluralsight</a>.  <br/><br/>Deepen your understanding by watching the courses!
+          </div>
+      <h1 class="article-title">Pre-populate a SwiftData Persistent Store</h1>
+    </header>
+    <div class="content">
+
+    <p>Pre-populating a SwiftData persistent store can be helpful if you want to provide your users with some initial data to work with when they launch your app for the first time. You might also need to seed a persistent store with test data for your unit tests or provide your Xcode preview with some initial data. The question is: How do you do it?</p>
+    <aside class="toc">
+      <div class="toc-header">Jump to...</div>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#building-blocks">Building Blocks</a>
+      <ul>
+        <li><a href="#initialize-a-modelcontainer">Initialize a <code>ModelContainer</code></a></li>
+        <li><a href="#initialize-instances-of-your-model-classes">Initialize instances of your <code>@Model</code> class(es)</a></li>
+        <li><a href="#insert-those-model-instances-into-your-modelcontainers-maincontext">Insert those model instances into your <code>ModelContainer</code>&rsquo;s <code>mainContext</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#where-do-you-write-all-this-code">Where do you write all this code?</a>
+      <ul>
+        <li><a href="#for-your-production-app">For your production app</a></li>
+        <li><a href="#for-an-xcode-preview">For an Xcode preview</a></li>
+        <li><a href="#for-your-unit-tests">For your unit tests</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </aside>
+
+    <h2 id="building-blocks">Building Blocks</h2>
+<p>These three building blocks will get you there:</p>
+<ol>
+<li>A <code>ModelContainer</code> instance</li>
+<li>One or more instances of your <code>@Model</code> class(es)</li>
+<li>Inserting those model instances into your <code>ModelContainer</code>&rsquo;s <code>mainContext</code></li>
+</ol>
+<p>Let’s take those building blocks one at a time.</p>
+<h3 id="initialize-a-modelcontainer">Initialize a <code>ModelContainer</code></h3>
+<p>Suppose that you’ve got a SwiftData model called <code>Item</code> that looks something like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="p">@</span><span class="n">Model</span>
+</span></span><span class="line"><span class="cl"><span class="kr">final</span> <span class="kd">class</span> <span class="nc">Item</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">timestamp</span><span class="p">:</span> <span class="n">Date</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">init</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">self</span><span class="p">.</span><span class="n">timestamp</span> <span class="p">=</span> <span class="n">timestamp</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To pre-populate your SwiftData persistent store with instances of <code>Item</code>, you need to initialize a <code>ModelContainer</code>. A <code>ModelContainer</code> manages everything about <em>where</em> SwiftData will store instances of your <code>Item</code> class.</p>
+<p>This code will initialize a <code>ModelContainer</code> that tells SwiftData to persist instances of <code>Item</code> to permanent storage:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="k">try</span> <span class="n">ModelContainer</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">:</span> <span class="n">Item</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//...more code to come</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Failed to create container&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If you’d like SwiftData to persist instances of <code>Item</code> in memory instead, this code will do it:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="hl"><span class="lnt">3
+</span></span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="k">try</span> <span class="n">ModelContainer</span><span class="p">(</span>
+</span></span><span class="line hl"><span class="cl">        <span class="k">for</span><span class="p">:</span> <span class="n">Item</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="n">ModelConfiguration</span><span class="p">(</span><span class="n">inMemory</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//...more code to come</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Failed to create container&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>A <code>ModelContainer</code> with an in-memory <code>ModelConfiguration</code> will not retain any <code>Item</code> instances that you save whenever someone re-launches your app. That being the case, using an in-memory <code>ModelConfiguration</code> is more suited for unit testing, or for supplying data to your Xcode previews.</p>
+<h3 id="initialize-instances-of-your-model-classes">Initialize instances of your <code>@Model</code> class(es)</h3>
+<p>Once you configure a <code>ModelContainer</code>, you need some instances of your <code>@Model</code> class to insert into the SwiftData persistent store.</p>
+<p>If you just need a few instances to seed your persistent store with, you can initialize them manually like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">items</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If you need <em>more</em> than a few instances, you may opt to decode instances of your <code>@Model</code> class from something like a CSV file, a JSON file, or a property list that you include with your application’s main bundle.</p>
+<h3 id="insert-those-model-instances-into-your-modelcontainers-maincontext">Insert those model instances into your <code>ModelContainer</code>&rsquo;s <code>mainContext</code></h3>
+<p>The last step is to insert those instances of your model into your <code>ModelContainer</code>&rsquo;s <code>mainContext</code>.</p>
+<p>This code loops over an array of <code>Item</code> instances and inserts them into your SwiftData persistent store:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">item</span> <span class="k">in</span> <span class="n">items</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">container</span><span class="p">.</span><span class="n">mainContext</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="where-do-you-write-all-this-code">Where do you write all this code?</h2>
+<p>You may be reading the building block code above and think, “Wait…where do I <em>write</em> all this code?”</p>
+<p>The answer depends on what you’re trying to do.</p>
+<ul>
+<li>Are you trying to pre-populate your SwiftData persistent store for your production app?</li>
+<li>Are you trying to pre-populate the persistent store for an Xcode preview?</li>
+<li>Are you trying to pre-populate it for your unit tests?</li>
+</ul>
+<h3 id="for-your-production-app">For your production app</h3>
+<p>In this scenario, you can create a new Swift file to put your code in. A name like <strong>SwiftDataAppContainer</strong> could work just fine. It’s also fine to add the code to your <strong>“AppName”App.swift</strong> file where you initialize your SwiftUI <code>App</code> instance.</p>
+<p><code>ModelContainer</code>&rsquo;s initializer can throw, but you can’t just write a <code>do-catch</code> statement globally. You may consider wrapping the container creation code in a closure, and running that closure immediately by adding <code>()</code> to the end of the closure expression:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt"> 1
+</span></span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="hl"><span class="lnt">10
+</span></span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line hl"><span class="cl"><span class="p">@</span><span class="n">MainActor</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">appContainer</span><span class="p">:</span> <span class="n">ModelContainer</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="k">try</span> <span class="n">ModelContainer</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="n">Item</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//...</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="n">container</span> <span class="c1">// this line wasn&#39;t in any of the examples above</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Failed to create container&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line hl"><span class="cl"><span class="p">}()</span> <span class="c1">// The &#34;()&#34; here runs the closure immediately</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You need to the <code>appContainer</code> declaration with the <code>@MainActor</code> attribute because <code>container</code>&rsquo;s <code>mainContext</code> is annotated with the <code>@MainActor</code> attribute. You’ll get a compiler error like this if you don’t:</p>
+<blockquote>
+<p>Main actor-isolated property &lsquo;mainContext&rsquo; can not be referenced from a non-isolated context</p>
+</blockquote>
+<p>Once you have the <code>appContainer</code> instance, you can modify your SwiftUI view, or one of your app instance’s <code>WindowGroup</code>s to have a model container:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="hl"><span class="lnt">7
+</span></span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="p">@</span><span class="n">main</span>
+</span></span><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">TrySwiftDataApp</span><span class="p">:</span> <span class="n">App</span> <span class="p">{</span>    
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">Scene</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WindowGroup</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ContentView</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="n">modelContainer</span><span class="p">(</span><span class="n">appContainer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Pre-populating your SwiftData persistent store for an app that you plan to publish to the App Store comes with a special consideration: You’ve got to handle the case where someone has already launched your app and the data store pre-population code has already done its work.</p>
+<p>In other words, you probably only want to pre-populate your persistent store on “first launch”.</p>
+<p>To prevent the persistent store from being pre-populated over and over again, do a check to make sure the store is empty before you start inserting model instances into the <code>mainContext</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="c1">// Make sure the persistent store is empty. If it&#39;s not, return the non-empty container.</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nv">itemFetchDescriptor</span> <span class="p">=</span> <span class="n">FetchDescriptor</span><span class="p">&lt;</span><span class="n">Item</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl"><span class="n">itemFetchDescriptor</span><span class="p">.</span><span class="n">fetchLimit</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">guard</span> <span class="k">try</span> <span class="n">container</span><span class="p">.</span><span class="n">mainContext</span><span class="p">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">itemFetchDescriptor</span><span class="p">).</span><span class="bp">count</span> <span class="p">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="n">container</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You can keep things efficient by setting the <code>FetchDescriptor</code> instance’s <code>fetchLimit</code> to <code>1</code>. In other words, you don’t need to fetch every <code>Item</code> instance from the persistent store to decide whether the store is empty or not.</p>
+<p>As long as the <code>count</code> of items that <code>fetch</code> returns is <code>0</code>, you can rest assured that the persistent store is empty and pre-populate it. If that’s not the case, the <code>guard</code>&rsquo;s <code>else</code> branch will run and return the non-empty <code>ModelContainer</code> instance.</p>
+<p>Here’s the full code example with that check included:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="p">@</span><span class="n">MainActor</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">appContainer</span><span class="p">:</span> <span class="n">ModelContainer</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="k">try</span> <span class="n">ModelContainer</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="n">Item</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Make sure the persistent store is empty. If it&#39;s not, return the non-empty container.</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nv">itemFetchDescriptor</span> <span class="p">=</span> <span class="n">FetchDescriptor</span><span class="p">&lt;</span><span class="n">Item</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">itemFetchDescriptor</span><span class="p">.</span><span class="n">fetchLimit</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">guard</span> <span class="k">try</span> <span class="n">container</span><span class="p">.</span><span class="n">mainContext</span><span class="p">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">itemFetchDescriptor</span><span class="p">).</span><span class="bp">count</span> <span class="p">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="n">container</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// This code will only run if the persistent store is empty.</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">items</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">item</span> <span class="k">in</span> <span class="n">items</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">container</span><span class="p">.</span><span class="n">mainContext</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">container</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Failed to create container&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="for-an-xcode-preview">For an Xcode preview</h3>
+<p>If you’re trying to pre-populate a SwiftData persistent store for an Xcode preview of your SwiftUI view, you can create a new Swift file to put your code in and name it something like <strong>SwiftDataPreviewContainer</strong>.</p>
+<p>In this file, you can write code that’s similar to the code you’d write for your production app but with a couple of changes:</p>
+<ol>
+<li>You don’t need to check for an empty store, because</li>
+<li>You’re going to initialize the <code>ModelContainer</code> with an in-memory store</li>
+</ol>
+<p>Here’s the full code example of what the preview container could look like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt"> 1
+</span></span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="hl"><span class="lnt"> 5
+</span></span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line hl"><span class="cl"><span class="p">@</span><span class="n">MainActor</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">previewContainer</span><span class="p">:</span> <span class="n">ModelContainer</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="k">try</span> <span class="n">ModelContainer</span><span class="p">(</span>
+</span></span><span class="line hl"><span class="cl">            <span class="k">for</span><span class="p">:</span> <span class="n">Item</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="n">ModelConfiguration</span><span class="p">(</span><span class="n">inMemory</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">items</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">item</span> <span class="k">in</span> <span class="n">items</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">container</span><span class="p">.</span><span class="n">mainContext</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">container</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Failed to create container&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then you can (in theory) use the new <code>#Preview</code> macro if you’re using Xcode 15 or above:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt">1
+</span></span><span class="lnt">2
+</span><span class="hl"><span class="lnt">3
+</span></span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line hl"><span class="cl"><span class="p">#</span><span class="n">Preview</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ContentView</span><span class="p">()</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="n">modelContainer</span><span class="p">(</span><span class="n">previewContainer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I wrote, “in theory” because there’s a bug (as of June 14, 2023) with Xcode that causes the preview to crash when you use this macro.</p>
+<p>As a workaround — or if you’re not using Xcode 15 — you can embed this model creation code inside of a custom <code>PreviewProvider</code> type:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt"> 1
+</span></span><span class="hl"><span class="lnt"> 2
+</span></span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="hl"><span class="lnt">24
+</span></span><span class="hl"><span class="lnt">25
+</span></span><span class="hl"><span class="lnt">26
+</span></span><span class="hl"><span class="lnt">27
+</span></span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line hl"><span class="cl"><span class="kd">struct</span> <span class="nc">ContentView_Previews</span><span class="p">:</span> <span class="n">PreviewProvider</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">previewContainer</span><span class="p">:</span> <span class="n">ModelContainer</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="k">try</span> <span class="n">ModelContainer</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">:</span> <span class="n">Item</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="n">ModelConfiguration</span><span class="p">(</span><span class="n">inMemory</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nv">items</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">item</span> <span class="k">in</span> <span class="n">items</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">container</span><span class="p">.</span><span class="n">mainContext</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">container</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Failed to create container&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line hl"><span class="cl">    <span class="kd">static</span> <span class="kd">var</span> <span class="nv">previews</span><span class="p">:</span> <span class="n">some</span> <span class="n">View</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">        <span class="n">ContentView</span><span class="p">()</span>
+</span></span><span class="line hl"><span class="cl">            <span class="p">.</span><span class="n">modelContainer</span><span class="p">(</span><span class="n">previewContainer</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="for-your-unit-tests">For your unit tests</h3>
+<p>Pre-populating your SwiftData persistent store for your unit tests is similar to doing so for your Xcode previews, in that (depending on what you’re testing), you probably don’t need to check for an empty persistent store before pre-populating it, and you’ll likely benefit from using an in-memory store.</p>
+<p>Here’s what you need to do:</p>
+<ol>
+<li>Mark your <code>XCTestCase</code> class as a <code>@MainActor</code>:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="hl"><span class="lnt">1
+</span></span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line hl"><span class="cl"><span class="p">@</span><span class="n">MainActor</span>
+</span></span><span class="line"><span class="cl"><span class="kr">final</span> <span class="kd">class</span> <span class="nc">TrySwiftDataTests</span><span class="p">:</span> <span class="n">XCTestCase</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Add a stored property to your <code>XCTestCase</code> that will hold your <code>ModelContainer</code>:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nv">testContainer</span><span class="p">:</span> <span class="n">ModelContainer</span><span class="p">?</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>Set the <code>testContainer</code> property inside the <code>setUpWithError</code> function:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">setUpWithError</span><span class="p">()</span> <span class="kr">throws</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Put setup code here. This method is called before the invocation of each test method in the class.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kc">self</span><span class="p">.</span><span class="n">testContainer</span> <span class="p">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nv">container</span> <span class="p">=</span> <span class="k">try</span> <span class="n">ModelContainer</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">:</span> <span class="n">Item</span><span class="p">.</span><span class="kc">self</span><span class="p">,</span> <span class="n">ModelConfiguration</span><span class="p">(</span><span class="n">inMemory</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nv">items</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Item</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="n">Date</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">item</span> <span class="k">in</span> <span class="n">items</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">container</span><span class="p">.</span><span class="n">mainContext</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="n">object</span><span class="p">:</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">container</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">fatalError</span><span class="p">(</span><span class="s">&#34;Failed to create container&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>Use the <code>testContainer</code> in any tests that need it:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">testExample</span><span class="p">()</span> <span class="kr">throws</span> <span class="p">{</span>        
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">fetchDescriptor</span> <span class="p">=</span> <span class="n">FetchDescriptor</span><span class="p">&lt;</span><span class="n">Item</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">result</span> <span class="p">=</span> <span class="k">try</span> <span class="n">testContainer</span><span class="p">?.</span><span class="n">mainContext</span><span class="p">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">fetchDescriptor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">?.</span><span class="bp">count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+    <aside>
+      
+      
+      <div class="resources">
+        <div class="resources-header">
+            You might also enjoy...
+        </div>
+        
+        <ul class="resources-content">
+            
+            <li><i class="fa fa-angle-right"></i> <a href="https://www.andrewcbancroft.com/blog/ios-development/data-persistence/add-swift-data-to-existing-app/">Add SwiftData to an Existing App</a></li>
+            
+        <ul>
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">This project contains 184 pages and is available on <a
+                    href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
+                Copyright &copy; Andrew Bancroft, <time datetime="2023">2023</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
