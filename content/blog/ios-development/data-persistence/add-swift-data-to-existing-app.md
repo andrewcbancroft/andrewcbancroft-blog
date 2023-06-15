@@ -11,6 +11,8 @@ tags:
 wip: false
 showrecent: true
 images:
+  - /images/social-assets/Twitter - Add SwiftData to an Existing App.png
+  - /images/social-assets/Facebook - Add SwiftData to an Existing App.png
 toc: true
 introtext: "Are you looking to add SwiftData to your existing app but don't know where to start? Let's explore the steps you need to take."
 disppsdatabadge: true
