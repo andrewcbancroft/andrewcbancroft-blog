@@ -4,13 +4,14 @@
 <head>
 
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6356224024630676" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6356224024630676"
+        crossorigin="anonymous"></script>
     <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-6356224024630676",
-        enable_page_level_ads: true,
-        overlays: {bottom: true}
-    });
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6356224024630676",
+            enable_page_level_ads: true,
+            overlays: { bottom: true }
+        });
     </script>
 
     <link rel="stylesheet" type="text/css"
@@ -170,7 +171,8 @@ MathJax.Hub.Config({
                             GitHub</a>
                         <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/"><i
                                 class="fab fa-linkedin"></i> LinkedIn</a>
-                        <a class="dropdown-item" rel="me" href="https://hachyderm.io/@andrewcbancroft"><i class="fab fa-mastodon"></i> Mastodon</a>
+                        <a class="dropdown-item" rel="me" href="https://hachyderm.io/@andrewcbancroft"><i
+                                class="fab fa-mastodon"></i> Mastodon</a>
                         <a class="dropdown-item" href="https://twitter.com/andrewcbancroft"><i
                                 class="fab fa-twitter"></i> Twitter</a>
                         <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg"><i
@@ -295,7 +297,73 @@ MathJax.Hub.Config({
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
+    <script>
+        function createCopyButton(highlightDiv) {
+            const button = document.createElement("button");
+            button.className = "copy-code-button";
+            button.type = "button";
+            button.innerText = "Copy";
+            button.addEventListener("click", () =>
+                copyCodeToClipboard(button, highlightDiv)
+            );
+            addCopyButtonToDom(button, highlightDiv);
+        }
 
+        async function copyCodeToClipboard(button, highlightDiv) {
+            const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+                .innerText;
+            try {
+                result = await navigator.permissions.query({ name: "clipboard-write" });
+                if (result.state == "granted" || result.state == "prompt") {
+                    await navigator.clipboard.writeText(codeToCopy);
+                } else {
+                    copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+                }
+            } catch (_) {
+                copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+            } finally {
+                codeWasCopied(button);
+            }
+        }
+
+        function copyCodeBlockExecCommand(codeToCopy, highlightDiv) {
+            const textArea = document.createElement("textArea");
+            textArea.contentEditable = "true";
+            textArea.readOnly = "false";
+            textArea.className = "copyable-text-area";
+            textArea.value = codeToCopy;
+            highlightDiv.insertBefore(textArea, highlightDiv.firstChild);
+            const range = document.createRange();
+            range.selectNodeContents(textArea);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+            document.execCommand("copy");
+            highlightDiv.removeChild(textArea);
+        }
+
+        function codeWasCopied(button) {
+            button.blur();
+            button.innerText = "Copied!";
+            setTimeout(function () {
+                button.innerText = "Copy";
+            }, 2000);
+        }
+
+        function addCopyButtonToDom(button, highlightDiv) {
+            highlightDiv.insertBefore(button, highlightDiv.firstChild);
+            const wrapper = document.createElement("div");
+            wrapper.className = "highlight-wrapper";
+            highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
+            wrapper.appendChild(highlightDiv);
+        }
+
+        document
+            .querySelectorAll(".highlight")
+            .forEach((highlightDiv) => createCopyButton(highlightDiv));
+
+    </script>
 </body>
 
 </html>
