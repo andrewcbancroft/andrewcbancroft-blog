@@ -5,10 +5,112 @@
     <description>Recent content about iOS development with Swift in iOS  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/tags/ios/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>iOS 17 Fundamentals</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2023-12-10-ios-17-fundamentals/</link>
+      <pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2023-12-10-ios-17-fundamentals/</guid>
+      <description>&lt;p&gt;Developing for iOS is a valuable and in-demand skill, but it can be surprisingly different if you haven&amp;rsquo;t developed for Apple platforms before.&lt;/p&gt;
+&lt;p&gt;In this course, iOS 17 Fundamentals, you&amp;rsquo;ll quickly get up and running using Xcode 15, Swift 5, and SwiftUI to build great iOS apps and tap into the latest features of iOS 17.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://bit.ly/ios-17-fundamentals&#34; target=&#34;_blank&#34;&gt;iOS 17 Fundamentals&lt;/a&gt;&lt;a href=&#34;https://bit.ly/ios-17-fundamentals&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-17-fundamentals-title.png&#34; alt=&#34;iOS 17 Fundamentals&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;First, you’ll see the tools and learn the core principles for designing iOS apps with adaptive, accessible, and localized user interfaces that work on multiple devices.&lt;/p&gt;
+&lt;p&gt;Next, you&amp;rsquo;ll explore how to tackle some of the most common scenarios you’ll run into when you’re building an app for iOS 17, like performing common networking tasks, managing data, adding push notifications to your application, and implementing widgets.&lt;/p&gt;
+&lt;p&gt;Finally, you’ll learn how to take your app and publish it on the App Store. When you’re finished with this course, you&amp;rsquo;ll know current best practices, iOS architecture, and the most important ideas you need to feel comfortable bringing your app ideas to iOS 17.&lt;/p&gt;
+&lt;h2 id=&#34;1---preparing-to-build-ios-17-applications&#34;&gt;1 - Preparing to Build iOS 17 Applications&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Version Check: What You Need to Get Started&lt;/li&gt;
+&lt;li&gt;How to Learn iOS Development&lt;/li&gt;
+&lt;li&gt;Introducing “Improvado” - An App for Continuous Improvement&lt;/li&gt;
+&lt;li&gt;Transitioning an App to iOS 17&lt;/li&gt;
+&lt;li&gt;Supporting Older Versions of iOS&lt;/li&gt;
+&lt;li&gt;What Every iOS 17 App Needs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2---designing-applications-for-ios-17&#34;&gt;2 - Designing Applications for iOS 17&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Introducing Apple&amp;rsquo;s Human Interface Guidelines&lt;/li&gt;
+&lt;li&gt;Making an Adaptive User Interface&lt;/li&gt;
+&lt;li&gt;Adding and Customizing Layout Variations&lt;/li&gt;
+&lt;li&gt;Supporting Dynamic Type&lt;/li&gt;
+&lt;li&gt;Implementing Dark Mode&lt;/li&gt;
+&lt;li&gt;Working with SFSymbols 5&lt;/li&gt;
+&lt;li&gt;Making Apps Accessible&lt;/li&gt;
+&lt;li&gt;Localizing an iOS Application&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3---performing-common-networking-tasks&#34;&gt;3 - Performing Common Networking Tasks&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understanding URL Sessions&lt;/li&gt;
+&lt;li&gt;Checking Network Connectivity&lt;/li&gt;
+&lt;li&gt;Sending HTTP Requests&lt;/li&gt;
+&lt;li&gt;Requesting Data from REST APIs&lt;/li&gt;
+&lt;li&gt;Inspecting HTTP Responses&lt;/li&gt;
+&lt;li&gt;Handling Networking Errors&lt;/li&gt;
+&lt;li&gt;Organizing Networking Code&lt;/li&gt;
+&lt;li&gt;Integrating Networking Tasks with SwiftUI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4---managing-data&#34;&gt;4 - Managing Data&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understanding Data Management Scenarios&lt;/li&gt;
+&lt;li&gt;Encoding and Decoding Data&lt;/li&gt;
+&lt;li&gt;Managing Preferences with UserDefaults&lt;/li&gt;
+&lt;li&gt;Synchronizing Settings with iCloud Key-value Store&lt;/li&gt;
+&lt;li&gt;Configuring Apps with Property Lists&lt;/li&gt;
+&lt;li&gt;Performing File Management Tasks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5---adding-push-notification-support&#34;&gt;5 - Adding Push Notification Support&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understanding Notification Scenarios&lt;/li&gt;
+&lt;li&gt;Requesting Permission to Deliver Notifications&lt;/li&gt;
+&lt;li&gt;Sending Local Notifications&lt;/li&gt;
+&lt;li&gt;Sidebar: Understanding the Delegation Design Pattern&lt;/li&gt;
+&lt;li&gt;Responding to Local Notifications&lt;/li&gt;
+&lt;li&gt;Configuring an Xcode Project for Remote Notifications&lt;/li&gt;
+&lt;li&gt;Testing Remote Notifications&lt;/li&gt;
+&lt;li&gt;Making Notifications Actionable&lt;/li&gt;
+&lt;li&gt;Sending Silent Background Notifications&lt;/li&gt;
+&lt;li&gt;Setting Up a Remote Notification Server&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;6---implementing-widgets&#34;&gt;6 - Implementing Widgets&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Adding a Widget to an Xcode Project&lt;/li&gt;
+&lt;li&gt;Configuring a Widget&lt;/li&gt;
+&lt;li&gt;Sharing Data between an App and a Widget&lt;/li&gt;
+&lt;li&gt;Making Widgets Configurable&lt;/li&gt;
+&lt;li&gt;Creating Interactive Widgets&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;7---publishing-to-the-app-store&#34;&gt;7 - Publishing to the App Store&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Publish Your App&lt;/li&gt;
+&lt;li&gt;Adding an App Icon&lt;/li&gt;
+&lt;li&gt;Creating an iOS App Launch Screen&lt;/li&gt;
+&lt;li&gt;Building a Release Version of Your App&lt;/li&gt;
+&lt;li&gt;Configuring an App in App Store Connect&lt;/li&gt;
+&lt;li&gt;Submitting an App for Review&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Building iOS User Interfaces with SwiftUI</title>
