@@ -1,0 +1,360 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Functions on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/functions/</link>
+    <description>Recent content about iOS development with Swift in Functions  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 May 2016 17:59:16 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/functions/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Working with Swift:  Adopt a Protocol or Pass a Function?</title>
+      <link>https://www.andrewcbancroft.com/2016/05/05/working-with-swift-adopt-a-protocol-or-pass-a-function/</link>
+      <pubDate>Thu, 05 May 2016 17:59:16 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/05/05/working-with-swift-adopt-a-protocol-or-pass-a-function/</guid>
+      <description>&lt;p&gt;Without fail, any time &lt;a href=&#34;http://robnapier.net/&#34;&gt;Rob Napier&lt;/a&gt; (&lt;a href=&#34;https://twitter.com/cocoaphony&#34;&gt;@cocoaphony&lt;/a&gt;) speaks or writes, I gain insight into new and deeper ways to solve problems with Swift.&lt;/p&gt;
+&lt;p&gt;In January 2016, he &lt;a href=&#34;http://www.thedotpost.com/2016/01/rob-napier-beyond-crusty-real-world-protocols&#34;&gt;gave a talk at dotSwift&lt;/a&gt;, and I wanted to record my thoughts on something he said that made a lot of sense when it comes to the topic of, &amp;ldquo;Should I create and adopt a protocol for this Type I&amp;rsquo;m creating, or should I just pass it a function instead?”&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;two-insights&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;two-insights&#34;&gt;Two insights&lt;/h1&gt;
+&lt;p&gt;During the talk, he compared some scenarios that were meant to help determine when to create a protocol, or when doing so would be overly complex, and passing a function might be the simpler thing to do instead.&lt;/p&gt;
+&lt;p&gt;Two phrases caught my attention:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A protocol is really just a &lt;em&gt;promise&lt;/em&gt; to implement some functions, and a struct is mostly just a bundle of functions that implement the promise.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I can pass you an object that &lt;em&gt;promises&lt;/em&gt; a function, &lt;strong&gt;or&lt;/strong&gt;, I could just pass you the function.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;[mind blown]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;So in other words, there are times when, rather than going through the formality of…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Creating a protocol defining one or more functions that should be implemented&lt;/li&gt;
+&lt;li&gt;Creating a Type that &lt;em&gt;adopts&lt;/em&gt; that protocol to promise that &amp;ldquo;I (as a class/struct/enum) will implement this/these function(s)”&lt;/li&gt;
+&lt;li&gt;Creating an instance of that Type&lt;/li&gt;
+&lt;li&gt;Passing off the instance to &lt;em&gt;another&lt;/em&gt; Type that needs to &lt;em&gt;call&lt;/em&gt; that promised function&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;…life might be simpler and code might be more clear and more concise when you just… &lt;strong&gt;pass the function&lt;/strong&gt; instead!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;when-to-pass-a-function&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;when-to-pass-a-function&#34;&gt;When to pass a function&lt;/h1&gt;
+&lt;p&gt;Rob gave us a couple or three &lt;strong&gt;rules of thumb&lt;/strong&gt;. Not hard-and-fast, &amp;ldquo;It should always be this way”, but just some guiding thoughts to filter our decision-making about our architecture.&lt;/p&gt;
+&lt;p&gt;When it comes to finding opportunities that lend themselves to going the &amp;ldquo;just pass the function” route, consider the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you&amp;rsquo;re creating a Type that depends on a single piece of functionality (a single function), maybe try depending on / passing just the function, rather than creating a protocol.&lt;/li&gt;
+&lt;li&gt;If you&amp;rsquo;re creating a Type that depends on more than a single function, but the nature of the dependent relationship is short-lived, maybe try depending on / passing just the function. How do you know if it&amp;rsquo;s short-lived? Ask, &amp;ldquo;How many times am I going to call the function(s) that I depend on? Once, and then I&amp;rsquo;m done? Or multiple times throughout the application life-cycle?” If it&amp;rsquo;s a once and done kind of relationship, much like a &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34;&gt;callback&lt;/a&gt;, then perhaps just depending on and passing the function, rather than creating a protocol, is the simpler route.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;when-to-use-a-protocol&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;when-to-use-a-protocol&#34;&gt;When to use a protocol&lt;/h1&gt;
+&lt;p&gt;For some rules of thumb when it comes to choosing a protocol over just passing a function, you might consider:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you&amp;rsquo;re creating a Type that depends on 3 or more related functions, wrapping those functions up in a protocol might be cleaner and more clear.&lt;/li&gt;
+&lt;li&gt;If you&amp;rsquo;re creating a Type that depends on some functions for a long period of time, consider a protocol. Long-lived relationships are better-described in a protocol. Think of something like a table view&amp;rsquo;s data source. This is a good example of when to use a protocol to describe the dependency and the relationship, because as data changes, the table view will need to constantly call into those protocol methods to refresh itself.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;how-to-depend-on-a-function&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;how-to-depend-on-a-function&#34;&gt;How to depend on a function&lt;/h1&gt;
+&lt;p&gt;In order to fully grasp how to go the &amp;ldquo;just depend on / pass the function” route, you need to have an understanding of how &lt;a href=&#34;https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/&#34;&gt;function Types are described in Swift&lt;/a&gt;. With this knowledge, you&amp;rsquo;re set to do a couple of things:&lt;/p&gt;
+&lt;p&gt;1 – Create a property on the Type you&amp;rsquo;re implementing that is of some function Type. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Vehicle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Fuel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;move&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Fuel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Void&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Fuel Types&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Gas&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;RocketFuel&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;car&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vehicle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Gas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;move&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;use gasoline to move&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;rocket&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vehicle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RocketFuel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;move&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;use rocket fuel to move&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;car&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;move&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Gas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;rocket&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;move&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RocketFuel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A full explanation of indicating function Types can be found by reviewing my guide on &lt;a href=&#34;https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/&#34;&gt;Swift Functions as Types&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2 – Declare that such-and-such parameter on a function within your Type must be a function Type. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;getData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSData&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// do something to go get data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// call completion handler when getting data is done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The above is an example of a callback scenario, which I give full treatment in &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34;&gt;Fundamentals of Callbacks for Swift Developers&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/&#34; title=&#34;Swift Functions as Types&#34;&gt;Swift Functions as Types&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34; title=&#34;Fundamentals of Callbacks for Swift Developers&#34;&gt;Fundamentals of Callbacks for Swift Developers&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Swift Functions as Types</title>
+      <link>https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/</link>
+      <pubDate>Fri, 18 Mar 2016 18:11:02 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/</guid>
+      <description>&lt;p&gt;For the well-versed functional programmer, the fact that [functions in Swift are &lt;em&gt;Types&lt;/em&gt;][1] is no surprise. But I&amp;rsquo;m relatively new to the game on that front, so when I first encountered the idea of thinking of a function as a Type back when Swift was announced in 2014, it was a real eye-opener for me.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;swift-types-general&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;swift-types-in-general&#34;&gt;Swift Types (in general)&lt;/h1&gt;
+&lt;p&gt;In order to understand &lt;em&gt;functions&lt;/em&gt; as Types, it&amp;rsquo;s probably a good idea to know what folks are talking about when they use the term &amp;ldquo;Type” in a general sense.&lt;/p&gt;
+&lt;p&gt;In Swift, we&amp;rsquo;ve got two kinds of Types when we talk about them generally:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Named Types&lt;/li&gt;
+&lt;li&gt;Compound Types&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;named-types&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;named-types&#34;&gt;Named Types&lt;/h2&gt;
+&lt;p&gt;Named Types are those which are defined and identified by the &lt;em&gt;name&lt;/em&gt; that they&amp;rsquo;re given. Classes, structs, enums, and protocols fit this category of Type.&lt;/p&gt;
+&lt;p&gt;To define a Named Type, you&amp;rsquo;d do something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SomeNewClassType&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SomeNewStructType&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;enum&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SomeNewEnumType&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;protocol&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SomeNewProtocolType&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Initializing instances of Types and using their properties and methods, passing them around to functions that require parameters of those Types, or setting them as values to properties of other Types are all pretty standard thoughts that come to mind when using named Types.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;compound-types&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;compound-types&#34;&gt;Compound Types&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Compound&lt;/em&gt; Types, on the other hand, don&amp;rsquo;t have names. Rather, they have &amp;ldquo;signatures” that define and identify them as Types. Swift has two compound Types: functions and tuples.&lt;/p&gt;
+&lt;p&gt;Now I know what you might be thinking: &amp;ldquo;Functions have names!”&lt;/p&gt;
+&lt;p&gt;Indeed many do. But when we&amp;rsquo;re thinking about them in terms of their &lt;em&gt;Type-ness&lt;/em&gt;, we&amp;rsquo;ve got to go beyond the name to the function&amp;rsquo;s &amp;ldquo;signature” characteristics.&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;name&lt;/em&gt; of a function (or tuple, since they can be type-aliased) is simply how we &lt;em&gt;refer&lt;/em&gt; to the function in code to execute it or pass it around as an argument.&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;signature” of the function, however, is the part that characterizes the function as a &lt;em&gt;Type&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;I want to analyze what I&amp;rsquo;m talking about when I refer to a function&amp;rsquo;s &amp;ldquo;signature”, because that really is as the heart of my goal for this blog entry…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;function-types&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;function-types&#34;&gt;Function Types&lt;/h1&gt;
+&lt;p&gt;What exactly makes up a function&amp;rsquo;s &lt;em&gt;Type-ness&lt;/em&gt; or &amp;ldquo;signature” as I&amp;rsquo;ve been calling it? Two things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Type(s) of its &lt;strong&gt;parameters&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;The Type that the function &lt;strong&gt;returns&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Combining the Type(s) that the function receives as inputs, and the Type that it returns composes to give the function &lt;em&gt;its&lt;/em&gt; Type / &amp;ldquo;signature”.&lt;/p&gt;
+&lt;h1 id=&#34;reading-a-functions-type&#34;&gt;Reading a function&amp;rsquo;s Type&lt;/h1&gt;
+&lt;p&gt;It always helps me to visualize, so take apart an example.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;ve lived long on the Internet, you&amp;rsquo;re bound to have run across a Star Wars name generator… Plug in your name, and maybe a birth year, and out comes some crazy &amp;ldquo;Star Wars name” for you.&lt;/p&gt;
+&lt;p&gt;The function definition (minus the body) might look like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;generateStarWarsName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;firstName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lastName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;birthYear&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If someone were to ask you, &amp;ldquo;What is the &lt;code&gt;generateStarWarsName&lt;/code&gt; function&amp;rsquo;s Type?”, you could answer: &amp;ldquo;&lt;code&gt;generateStarWarsName&lt;/code&gt; is a function Type that has three parameters, the first two of Type String, the last of Type Int, and that returns a value of Type String.”&lt;/p&gt;
+&lt;p&gt;Wordy? Yes. But it does explain in precise terms what the function&amp;rsquo;s Type is.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;function-type-notation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;function-type-notation&#34;&gt;Function Type notation&lt;/h1&gt;
+&lt;p&gt;Rather than write out the paragraph describing the function&amp;rsquo;s Type, it&amp;rsquo;s far more convenient to indicate a the Type of a function using a standard notation. This notation is also the syntax that the Swift compiler uses when it&amp;rsquo;s trying to work with function Types.&lt;/p&gt;
+&lt;p&gt;Essentially, it boils down to stripping away the function&amp;rsquo;s name and the parameter names to leave behind the raw Type information that composes to give the function &lt;em&gt;its&lt;/em&gt; Type.&lt;/p&gt;
+&lt;p&gt;Given the above &lt;code&gt;generateStarWarsName&lt;/code&gt; function, we could notate its Type as follows:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(String, String, Int) -&amp;gt; String&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;See how that works?&lt;/p&gt;
+&lt;p&gt;Remove &amp;ldquo;generateStarWarsName”, &amp;ldquo;firstName: &amp;ldquo;, &amp;ldquo;lastName: &amp;ldquo;, and &amp;ldquo;birthYear: ” and you&amp;rsquo;re left with that raw Type information. What remains is the function&amp;rsquo;s Type notation.&lt;/p&gt;
+&lt;p&gt;It tells you (and the Swift compiler) everything you need to know to be able identify the Type of that function… it&amp;rsquo;s &amp;ldquo;signature”, if you will.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;gotchas&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gotchas&#34;&gt;Gotchas&lt;/h2&gt;
+&lt;p&gt;A couple of gotchas when it comes to notating a function&amp;rsquo;s Type:&lt;/p&gt;
+&lt;p&gt;1 – If a function takes no parameters, the &amp;ldquo;parameter portion” of the Type notation will simply be &lt;code&gt;()&lt;/code&gt; with nothing between the parentheses.&lt;/p&gt;
+&lt;p&gt;So for example, the Type notation of&lt;br&gt;
+&lt;code&gt;func returnHelloString() -&amp;gt; String {}&lt;/code&gt;&lt;br&gt;
+is &lt;code&gt;() -&amp;gt; String&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;2 – If a function has no return type (ie, it doesn&amp;rsquo;t return anything), the &amp;ldquo;return type portion” of the Type notation will be &lt;code&gt;-&amp;gt; Void&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So for example, the Type notation of&lt;br&gt;
+&lt;code&gt;func sayHello() {}&lt;/code&gt;&lt;br&gt;
+is &lt;code&gt;() -&amp;gt; Void&lt;/code&gt;, since it takes no parameters, &lt;em&gt;and&lt;/em&gt; returns nothing.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;practice&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;practice&#34;&gt;Practice&lt;/h1&gt;
+&lt;p&gt;Here are a few more examples for you to practice function Type identification. Can you write out the correct notation for each function&amp;rsquo;s Type?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;complimentMe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a id=&#34;show-answer-1&#34; style=&#34;cursor: pointer;&#34;&gt;Show answer&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;answer-1&#34; style=&#34;display: none;&#34;&gt;
+  `(String) -&gt; String`
+&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;countToTen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... prints 1 to 10 to the console ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a id=&#34;show-answer-2&#34; style=&#34;cursor: pointer;&#34;&gt;Show answer&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;answer-2&#34; style=&#34;display: none;&#34;&gt;
+  `() -&gt; Void`&lt;/p&gt; 
+  &lt;p&gt;
+    Notice that while `countToTen` doesn&#39;t have the &#34;-&gt; Void&amp;#8221; in its definition, it &lt;em&gt;is&lt;/em&gt; listed in the function&#39;s Type notation for clarity.
+  &lt;/p&gt;
+  &lt;p&gt;
+    When you read this function&#39;s Type, you&#39;d say, &#34;This is a function Type which takes no parameters and returns Void.&amp;#8221;
+  &lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;addInts&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;first&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;second&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a id=&#34;show-answer-3&#34; style=&#34;cursor: pointer;&#34;&gt;Show answer&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;answer-3&#34; style=&#34;display: none;&#34;&gt;
+  `(Int, Int) -&gt; Int`
+&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;fadeIn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;duration&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSTimeInterval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSTimeInterval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Bool&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a id=&#34;show-answer-4&#34; style=&#34;cursor: pointer;&#34;&gt;Show answer&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;answer-4&#34; style=&#34;display: none;&#34;&gt;
+  `(NSTimeInterval, NSTimeInterval, (Bool) -&gt; Void)) -&gt; Void`&lt;/p&gt; 
+  &lt;p&gt;
+    This one&#39;s actually a more complicated &#34;compound Type&amp;#8221; – note the third parameter which indicates that `fadeIn` receives a function Type &lt;em&gt;as one of its inputs&lt;/em&gt;. Remember that since functions are Types, they carry the characteristic of being able to be passed around to other functions as parameters, or stored in variables/constants! &lt;/div&gt; 
+&lt;pre&gt;&lt;code&gt;&amp;lt;p&amp;gt;
+&amp;lt;/p&amp;gt;
+
+```swift
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;func increment(input: Int) -&amp;gt; Int {
+return input + 1
+}&lt;/p&gt;
+&lt;p&gt;func decrement(input: Int) -&amp;gt; Int {
+return input - 1
+}&lt;/p&gt;
+&lt;p&gt;func chooseAdjustmentFunction(increase: Bool) -&amp;gt; (Int) -&amp;gt; Int {
+return increase ? increment : decrement
+}&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    
+    &amp;lt;p&amp;gt;
+      &amp;lt;a id=&amp;#34;show-answer-5&amp;#34; style=&amp;#34;cursor: pointer;&amp;#34;&amp;gt;Show answer&amp;lt;/a&amp;gt;
+    &amp;lt;/p&amp;gt;
+    
+    &amp;lt;div id=&amp;#34;answer-5&amp;#34; style=&amp;#34;display: none;&amp;#34;&amp;gt;
+      increment: `(Int) -&amp;gt; Int`&amp;lt;br /&amp;gt; decrement: `(Int) -&amp;gt; Int`&amp;lt;/p&amp;gt; 
+      
+      &amp;lt;p&amp;gt;
+        chooseAdjustmentFunction(_:): `(Bool) -&amp;gt; (Int) -&amp;gt; Int`
+      &amp;lt;/p&amp;gt;
+      
+      &amp;lt;p&amp;gt;
+        This one&amp;#39;s complicated in a slightly different way. This time, it&amp;#39;s the return Type of the function that&amp;#39;s kind of crazy.
+      &amp;lt;/p&amp;gt;
+      
+      &amp;lt;p&amp;gt;
+        Read this as, &amp;#34;A function Type which takes as Bool as a parameter and returns a function Type which takes an Int as a parameter and returns an Int.&amp;amp;#8221;
+      &amp;lt;/p&amp;gt;
+      
+      &amp;lt;p&amp;gt;
+        You can see how the Types of the `increment` and `decrement` functions &amp;lt;em&amp;gt;match&amp;lt;/em&amp;gt; the return Type of the `chooseAdjustmentFunction` function. &amp;lt;/div&amp;gt; 
+        
+        &amp;lt;h1&amp;gt;
+          Wrapping up
+        &amp;lt;/h1&amp;gt;
+        
+        &amp;lt;p&amp;gt;
+          Knowing that functions are Types in Swift is a powerful thing. Being able to correctly articulate the Type of a function, and produce its notation in valid Swift syntax is even &amp;lt;em&amp;gt;more&amp;lt;/em&amp;gt; powerful, because it&amp;#39;s at that point when you&amp;#39;ll be able to recognize which kinds of functions are valid to pass as parameters to &amp;lt;em&amp;gt;other&amp;lt;/em&amp;gt; functions, or to assign as properties of other Types. It can also play a role in Swift&amp;#39;s pattern matching features. But alas, those topics for another day!
+        &amp;lt;/p&amp;gt;
+        
+        &amp;lt;p&amp;gt;
+          &amp;lt;a name=&amp;#34;related&amp;#34; class=&amp;#34;jump-target&amp;#34;&amp;gt;&amp;lt;/a&amp;gt;
+        &amp;lt;/p&amp;gt;
+        
+        &amp;lt;div class=&amp;#34;resources&amp;#34;&amp;gt;
+          &amp;lt;div class=&amp;#34;resources-header&amp;#34;&amp;gt;
+            You might also enjoy&amp;amp;#8230;
+          &amp;lt;/div&amp;gt;
+          
+          &amp;lt;ul class=&amp;#34;resources-content&amp;#34;&amp;gt;
+            &amp;lt;li&amp;gt;
+              &amp;lt;i class=&amp;#34;fa fa-angle-right&amp;#34;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;a href=&amp;#34;https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/&amp;#34; title=&amp;#34;Immutable Types with Changing State in Swift&amp;#34;&amp;gt;Immutable Types with Changing State in Swift&amp;lt;/a&amp;gt;
+            &amp;lt;/li&amp;gt;
+            &amp;lt;li&amp;gt;
+              &amp;lt;i class=&amp;#34;fa fa-angle-right&amp;#34;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;a href=&amp;#34;https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/&amp;#34; title=&amp;#34;Conveniently Transforming Immutable Types in Swift&amp;#34;&amp;gt;Conveniently Transforming Immutable Types in Swift&amp;lt;/a&amp;gt;
+            &amp;lt;/li&amp;gt;
+          &amp;lt;/ul&amp;gt;
+        &amp;lt;/div&amp;gt;
+        
+        &amp;lt;p&amp;gt;
+          &amp;lt;a name=&amp;#34;share&amp;#34; class=&amp;#34;jump-target&amp;#34;&amp;gt;&amp;lt;/a&amp;gt;
+        &amp;lt;/p&amp;gt;
+        
+        &amp;lt;p&amp;gt;
+        &amp;lt;/p&amp;gt;
+
+ [1]: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html#//apple_ref/doc/uid/TP40014097-CH10-ID158
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Clean Coding in Swift – Functions</title>
+      <link>https://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/</link>
+      <pubDate>Thu, 07 Aug 2014 18:16:23 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been thinking a lot about how the principles of clean coding (Bob Martin&amp;rsquo;s &amp;ldquo;&lt;a title=&#34;Amazon - Clean Code&#34; href=&#34;http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882&#34; target=&#34;_blank&#34;&gt;Clean Code&lt;/a&gt;&amp;rdquo;) apply in Swift. How do I express clean code in this language? Conversely, how do I &lt;em&gt;avoid&lt;/em&gt; writing &lt;em&gt;cryptic&lt;/em&gt; code in Swift? What language features help me write clear and self-explanatory code and what language features present the potential for tempting me to write obscure code in Swift?&lt;/p&gt;
+&lt;p&gt;I am beginning a commentary series that I hope will encourage clean coding practice in myself and in the Swift developer community. Dialog on these topics is welcomed – I have not &amp;ldquo;arrived”, so please – help me help the Swift community for the better!&lt;/p&gt;
+&lt;p&gt;The first in the series is on writing clean functions in Swift. As it turns out, Swift provides some really great mechanisms for defining self-explanatory, clear-purposed functions. We&amp;rsquo;ll start by analyzing the features around naming functions and their parameters, and will conclude on thinking through function decomposition.&lt;/p&gt;
+&lt;h5 id=&#34;function-names&#34;&gt;Function Names&lt;/h5&gt;
+&lt;p&gt;Something that I really enjoyed about Objective-C was that while method names were often long and verbose, they were extremely descriptive. My code often read like a narrative, and I enjoyed that. Some may have hated it, but I found it extremely helpful in facilitating my recollection of a method&amp;rsquo;s intended purpose and the expectations around its argument requirements.&lt;/p&gt;
+&lt;p&gt;I do my best to think hard about the names that I give my functions, ascribing to them a name that is specific, targeted, and focused on the single &amp;ldquo;thing” that each one does. Nothing in Swift mandates that we leave the verbosity of Objective-C naming conventions behind. In fact, the exact opposite is true!  One example is that swift intentionally provides us with the ability to add external parameter names &lt;em&gt;so that&lt;/em&gt; we can be as descriptive as we need to be about the names of our functions.&lt;/p&gt;
+&lt;h5 id=&#34;parameter-names&#34;&gt;Parameter Names&lt;/h5&gt;
+&lt;p&gt;&lt;a title=&#34;Apple Developer Documentation - External Parameter Names&#34; href=&#34;https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html#//apple_ref/doc/uid/TP40014097-CH10-XID_255&#34; target=&#34;_blank&#34;&gt;Swift&amp;rsquo;s external parameter names&lt;/a&gt;, in my opinion, are wonderful for helping write self-documenting code. They simply help guide my mind back to what a given function does and needs in order to do its job. Anything to help me get back in the zone is worth spending a few extra keystrokes on, especially since Xcode&amp;rsquo;s auto-completion assists me so well when calling functions with long signatures.&lt;/p&gt;
+&lt;p&gt;Apple recommends the following:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color: #414141;&#34;&gt;Consider using external parameter names whenever the purpose of a function’s arguments would be unclear to someone reading your code for the first time.&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I would only add that sometimes, that &lt;em&gt;someone&lt;/em&gt; &amp;ldquo;reading your code for the first time” is &lt;em&gt;you&lt;/em&gt;. Not technically, of course, but think about this: Write some code, leave it, and come back to it some time later. Will it make sense? Will you immediately go, &amp;ldquo;Ah, I know what I meant there”, or will you do like I&amp;rsquo;ve often done and say, &amp;ldquo;&lt;em&gt;WHAT&lt;/em&gt; in the &lt;em&gt;WORLD&lt;/em&gt; was I &lt;em&gt;THINKING&lt;/em&gt;??!?”.&lt;/p&gt;
+&lt;p&gt;Spending a few seconds on typing a few more words to save brain power and potentially &lt;em&gt;more&lt;/em&gt; seconds/minutes some time later is a worthy investment. And if you work on a team, your teammates will appreciate the extra care you put in to providing as many hints as possible through inventing good names. Good naming includes parameter names. Why &lt;em&gt;not&lt;/em&gt; take advantage of the fact that Swift provides you this opportunity to write self-documenting code?&lt;/p&gt;
+&lt;h5 id=&#34;function-decomposition&#34;&gt;Function Decomposition&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In order to make sure our functions are doing &amp;ldquo;one thing”, we need to make sure that the statements within our function are all at the same level of abstraction. -Bob Martin, Clean Code pg. 36&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is just general advice without respect to a specific language. A couple of things to think about:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt; Watch out for key words like &amp;ldquo;and” / &amp;ldquo;or” in your function names. These red-flag words often indicate that your function is doing more than one thing and can be further decomposed. Consider:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;washAndDryCar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Logic to wash and dry a car&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A preferred decomposition could look something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;washCar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Logic to wash a car&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;dryCar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Logic to dry a car&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt; Doing one thing can still involve multiple steps. But if each step takes a few steps of its own, that group of steps can be extracted out into another function. Consider:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;washCar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Pre-rinse code (example implementation - 4 lines)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Soap code (example implementation - 5 lines)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Rinse code (exmple implementation - 4 lines)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A preferred decomposition might look something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;washCar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;rinse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;durationInSeconds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;25.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;soapCar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;rinse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;durationInSeconds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;60.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;What&amp;rsquo;s neat about the final result of the decomposition is that not only is my &lt;code&gt;washCar&lt;/code&gt; function shorter and more readable (from 13 lines to 3 lines), but I got code re-use by making the &lt;code&gt;rinse&amp;lt;&lt;/code&gt; function take a duration argument.&lt;/p&gt;
+&lt;p&gt;Hopefully these thoughts spark a few ideas in you.  Constructive feedback is welcome!  How are &lt;em&gt;you&lt;/em&gt; thinking about writing clean code in Swift?&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  &lt;p&gt;
+    You might also enjoy
+  &lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Clean Coding in Swift – Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/&#34; target=&#34;_blank&#34;&gt;Clean Coding in Swift Type Inference&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Expanded Thoughts on Swift’s Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/&#34; target=&#34;_blank&#34;&gt;Expanded Thoughts on Swift&#39;s Type Inference&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Pick a Delegate… Any Delegate… On Clean View Controllers in Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/&#34; target=&#34;_blank&#34;&gt;Pick a Delegate… Any Delegate… On Clean View Controllers in Swift&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,119 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Type Inference on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/type-inference/</link>
+    <description>Recent content about iOS development with Swift in Type Inference  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 21 Aug 2014 02:19:45 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/type-inference/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Expanded Thoughts on Swift’s Type Inference</title>
+      <link>https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/</link>
+      <pubDate>Thu, 21 Aug 2014 02:19:45 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/</guid>
+      <description>&lt;p&gt;In my recent &lt;a title=&#34;Clean Coding in Swift – Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/&#34; target=&#34;_blank&#34;&gt;op-ed on clean coding in Swift focused on Type Inference&lt;/a&gt;, I began by saying,&lt;/p&gt;
+&lt;p&gt;Quick!  Tell me!  What is the Type of the &lt;code&gt;birdDetails&lt;/code&gt; constant in this code example:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;let birdDetails = birdDetailsFromStorage()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;With no additional context to glean information from, the correct answer to the question is, &amp;ldquo;I have absolutely no clue…”&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But is that concluding assertion &lt;em&gt;true&lt;/em&gt;?  Hmm…&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I&amp;rsquo;m learning&lt;/em&gt;, and as I&amp;rsquo;ve weighed a recent Twitter conversation and thought on a &lt;a title=&#34;Rob Napier Comment&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721&#34; target=&#34;_blank&#34;&gt;comment thread that Rob Napier made&lt;/a&gt; on the post quoted above, I&amp;rsquo;m compelled to expand a little on my first post on Type Inference as it relates to clean code in Swift.&lt;/p&gt;
+&lt;p&gt;Something struck me as I read &lt;a title=&#34;Rob&#39;s Comment&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/#comment-1551252721&#34; target=&#34;_blank&#34;&gt;Rob&amp;rsquo;s comment&lt;/a&gt;:  Why &lt;em&gt;wouldn&amp;rsquo;t&lt;/em&gt; I know the Type that would be inferred from what is returned by &lt;code&gt;birdDetailsFromStorage()&lt;/code&gt; and assigned to &lt;code&gt;birdDetails&lt;/code&gt;?  Presumably, I named the function what I named it intentionally.  The part I missed, was that if I had &lt;em&gt;designed&lt;/em&gt; well and created a Type called &lt;code&gt;BirdDetails&lt;/code&gt; (say, a Struct as Rob proposed), then all of a sudden, an inference can be made by both the compiler &lt;em&gt;and&lt;/em&gt; a human that the &lt;code&gt;birdDetails&lt;/code&gt; constant is… well… an instance of &lt;code&gt;BirdDetails&lt;/code&gt;.  Imagine that!&lt;/p&gt;
+&lt;p&gt;To quote Rob (emphasis added):&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color: #3f4549;&#34;&gt;Type inference should only be used when the result is unambiguous, but &lt;strong&gt;the best solution is to&lt;/strong&gt; &lt;strong&gt;make the result unambiguous&lt;/strong&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Bingo.  The &lt;em&gt;best&lt;/em&gt; solution is to &lt;em&gt;make&lt;/em&gt; the result unambiguous.  You and I as code authors are in charge of the clarity or ambiguity of our code – it&amp;rsquo;s up to us to &lt;em&gt;make&lt;/em&gt; the results of our function evaluations unambiguous.&lt;/p&gt;
+&lt;p&gt;When I named the function &lt;code&gt;birdDetailsFromStorage()&lt;/code&gt;, I heavily implied something about its return Type in the name.  I even implied it in the name of the &lt;em&gt;constant&lt;/em&gt;.  I was expecting the return Type to be something that encapsulated whatever &amp;ldquo;bird details” are – I just didn&amp;rsquo;t realize it at the time (although it&amp;rsquo;s super obvious now)!&lt;/p&gt;
+&lt;p&gt;The very &lt;em&gt;name&lt;/em&gt; of a thing sets expectations for you and the readers of your code.  It&amp;rsquo;s our job to set ourselves up for that expectation to be &lt;em&gt;fulfilled&lt;/em&gt;!  B&lt;span style=&#34;color: #3f4549;&#34;&gt;e predictable with the return Type of your functions for your own sake.  A function signature should be such that when you run across &lt;code&gt;birdDetailsFromStorage()&lt;/code&gt;in some piece of code, you are able to legitimately expect it to return a &lt;code&gt;BirdDetails&lt;/code&gt;.  &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: #3f4549;&#34;&gt;Using this predictable, &lt;/span&gt;convention-based approach to give humans the right clues about what the compiler is going to compute a Type to be makes Type Inference a totally legitimate language feature to embrace for the sake of your code&amp;rsquo;s clarity and simplicity.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll leave you with a final quote from Rob&amp;rsquo;s comments:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color: #3f4549;&#34;&gt;Don&amp;rsquo;t go implying that you&amp;rsquo;re returning one thing when you&amp;rsquo;re returning another. If you must, then yes, explicit types are your punishment. 😀&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Thank you Rob for your insight and feedback.  You can read more of Rob&amp;rsquo;s work at &lt;a title=&#34;Rob Napier&#39;s Blog&#34; href=&#34;http://robnapier.net&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://robnapier.net&#34;&gt;http://robnapier.net&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  &lt;p&gt;
+    You might also enjoy
+  &lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Clean Coding in Swift – Functions&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/&#34; target=&#34;_blank&#34;&gt;Clean Coding in Swift – Functions&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Clean Coding in Swift – Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/&#34; target=&#34;_blank&#34;&gt;Clean Coding in Swift – Type Inference&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Pick a Delegate… Any Delegate… On Clean View Controllers in Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/&#34; target=&#34;_blank&#34;&gt;Pick a Delegate… Any Delegate… On Clean View Controllers in Swift&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Clean Coding in Swift – Type Inference</title>
+      <link>https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/</link>
+      <pubDate>Wed, 13 Aug 2014 04:22:25 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/</guid>
+      <description>&lt;p&gt;Quick!  Tell me!  What is the Type of the &lt;code&gt;birdDetails&lt;/code&gt;constant in this code example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;birdDetails&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;birdDetailsFromStorage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With no additional context to glean information from, the correct answer to the question is, &amp;ldquo;I have absolutely no clue…”  &lt;a title=&#34;Expanded Thoughts on Swift’s Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;Or is it?&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Not fair!”, you say.  &amp;ldquo;In the real world, I&amp;rsquo;d have the ability to option-click and learn the type from a pop-up tooltip, or learn this information by inspection from Xcode&amp;rsquo;s utilities panel.”&lt;/p&gt;
+&lt;p&gt;Truth.  We would.  &lt;em&gt;But…&lt;/em&gt; should we &lt;em&gt;have&lt;/em&gt; to for an example like the one above?  Could we have helped ourselves out a bit by being explicit about the type of &lt;code&gt;birdDetails&lt;/code&gt;?&lt;/p&gt;
+&lt;p&gt;This was the question I asked myself as I set out to determine how and when I prefer to explicitly specify the Types of my variables and constants at declaration-time, rather than letting the compiler &lt;em&gt;infer&lt;/em&gt; the Type for me.&lt;/p&gt;
+&lt;p&gt;&lt;a title=&#34;Apple Documentation - Type Inference&#34; href=&#34;https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html#//apple_ref/doc/uid/TP40014097-CH5-XID_468&#34; target=&#34;_blank&#34;&gt;Type Inference&lt;/a&gt; is powerful and convenient.  It enables us to leave off explicit type specifications when we declare a variable or constant, leaving us with nice, terse, clean-&lt;em&gt;looking&lt;/em&gt; code.  But in reality, for examples like the one posed above, is clean-&lt;em&gt;looking&lt;/em&gt; truly &amp;ldquo;clean code”?&lt;/p&gt;
+&lt;p&gt;From Apple&amp;rsquo;s documentation:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color: #414141;&#34;&gt;Type inference enables a compiler to deduce the type of a particular expression automatically when it compiles your code, simply by examining the values you provide.&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The key phrase that stuck out to me was this:  &amp;ldquo;Type inference enables a &lt;strong&gt;&lt;em&gt;compiler&lt;/em&gt;&lt;/strong&gt; to deduce the type of a particular expression…”.  Humans are not compilers!&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t know about you, but I could use all the help I can get when it comes to figuring out simple things like the Type resulting from an expression.  Sure, I could rely on the IDE, but in debugging, or in trying to simply read and understand what the intention of my code is when I come back to it sometime later, I want to focus on the &lt;em&gt;code&lt;/em&gt;, not on pop-up tool tips or inspector panels.&lt;/p&gt;
+&lt;p&gt;For instances where deducing the type is not simple for a human to do (and I mean &lt;em&gt;really&lt;/em&gt; simple), I&amp;rsquo;m getting to where I prefer to specify the Type up-front.  We&amp;rsquo;re used to doing this in Objective-C, and I even do it in C# when using &lt;span class=&#34;lang:c# decode:true  crayon-inline &#34;&gt;var&lt;/span&gt; would obscure things.  When a language gives me the option to be clear about Types, I try to take advantage of that valuable language feature for all but the simplest of situations.&lt;/p&gt;
+&lt;h3 id=&#34;the-simplest-of-situations&#34;&gt;The Simplest of Situations&lt;/h3&gt;
+&lt;p&gt;Let&amp;rsquo;s think for a moment about this so-called &amp;ldquo;simplest of situations”.  I would define such a situation to be when the Type resulting from an expression can easily, at a glance, be inferred by a human being &lt;em&gt;without&lt;/em&gt; assistance from an IDE.  It&amp;rsquo;s all about context here, and for these simplest of situations, I love Type Inference.&lt;/p&gt;
+&lt;p&gt;Compare the following two lines of code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;birdDetails&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Swift&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;birdDetails&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Swift&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the example just presented, typing &amp;ldquo;&lt;code&gt;: String&lt;/code&gt; ” to explicitly specify &lt;code&gt;birdDetails&lt;/code&gt;‘ type is superfluous in my opinion (and I prefer not to be repetitively redundant when I can).  It&amp;rsquo;s crystal clear that &lt;code&gt;birdDetails&lt;/code&gt; in this example is a &lt;code&gt;String&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;However&lt;/em&gt;, in situations like the one at the beginning of the article where, by simply &lt;em&gt;looking,&lt;/em&gt; I would have to answer, &amp;ldquo;I have no clue what the Type of this is”, my preference / proposal for your consideration would be to go ahead and specify the Type at declaration time.  Consider:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;birdDetails&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;genusSpecies&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;commonName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;birdDetailsFromStorage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//... somewhere else in a Swift file far, far away ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;birdDetailsFromStorage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;genusSpecies&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;commonName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Apus apus&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Swift&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When I&amp;rsquo;m writing this the first time, I can spend the time looking up the function&amp;rsquo;s return Type and specify it when I declare my constant.  It will make my life so much easier down the road.&lt;/p&gt;
+&lt;p&gt;Don&amp;rsquo;t stumble over the fact that &lt;code&gt;birdDetails&lt;/code&gt; is a tuple type &lt;code&gt;(String, String)&lt;/code&gt;.  The point is that the function could have returned &lt;em&gt;anything&lt;/em&gt;, and it would still have been impossible for me to tell you what the Type of the constant was just by looking, had I not specified it upon its declaration.&lt;/p&gt;
+&lt;p&gt;Being explicit about the type in the declaration has great potential to immediately help us get our bearings around a particular set of code when we return to it after any length of time.  And it seems to me that one of the principal goals of writing clean code is to help ourselves and our teams make sense of code quicker so that everyone&amp;rsquo;s happier and more productive.&lt;/p&gt;
+&lt;p&gt;Whew.  That was a long-winded exploration of some things to think about when relying on (or avoiding) Type Inference in your own code.  Thanks for reading!&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Since publishing this op-ed, I&amp;rsquo;ve &lt;a title=&#34;Expanded Thoughts on Swift’s Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/&#34; target=&#34;_blank&#34;&gt;expanded my thoughts on Type Inference&lt;/a&gt; as it relates to clean coding practices in Swift.  I highly recommend that this post be read and considered alongside my latest musings,which were heavily influenced by Rob Napier&amp;rsquo;s comments below.&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  &lt;p&gt;
+    You might also enjoy
+  &lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Clean Coding in Swift – Functions&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/&#34; target=&#34;_blank&#34;&gt;Clean Coding in Swift – Functions&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Expanded Thoughts on Swift’s Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/&#34; target=&#34;_blank&#34;&gt;Expanded Thoughts on Swift&#39;s Type Inference&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Pick a Delegate… Any Delegate… On Clean View Controllers in Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/&#34; target=&#34;_blank&#34;&gt;Pick a Delegate… Any Delegate… On Clean View Controllers in Swift&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

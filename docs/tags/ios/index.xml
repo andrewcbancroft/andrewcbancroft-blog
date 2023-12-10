@@ -1,0 +1,489 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iOS on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/ios/</link>
+    <description>Recent content about iOS development with Swift in iOS  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Aug 2021 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Building iOS User Interfaces with SwiftUI</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2021-08-22-building-ios-user-interfaces-swiftui/</link>
+      <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2021-08-22-building-ios-user-interfaces-swiftui/</guid>
+      <description>&lt;p&gt;Designing efficient and dynamic apps is essential for taking your iOS developer skills to the next level.&lt;/p&gt;
+&lt;p&gt;In this course, Building iOS User Interfaces with SwiftUI, you&amp;rsquo;ll build upon the basic knowledge of iOS development you’ve already gained in order to build compelling iOS apps that engage your users.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://bit.ly/building-ios-ui-swiftui&#34; target=&#34;_blank&#34;&gt;Building iOS User Interfaces with SwiftUI&lt;/a&gt;&lt;a href=&#34;https://bit.ly/building-ios-ui-swiftui&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/building-ios-user-interfaces-swiftui.png&#34; alt=&#34;Building iOS User Interfaces with SwiftUI&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;First, you&amp;rsquo;ll see the tools and learn how to create iOS apps with adaptive user interfaces that work on multiple devices.&lt;/p&gt;
+&lt;p&gt;Next, you’ll learn how to manage iOS projects and define the building blocks of your own iOS applications.&lt;/p&gt;
+&lt;p&gt;Finally, you&amp;rsquo;ll explore working with data-driven controls and understand navigation options.&lt;/p&gt;
+&lt;p&gt;When you’re finished with this course, you&amp;rsquo;ll know current best practices, iOS architecture, and the most important ideas you need to feel comfortable bringing your developer skills into the iOS and Apple developer world.&lt;/p&gt;
+&lt;h2 id=&#34;1---designing-interfaces-with-swiftui&#34;&gt;1 - Designing Interfaces with SwiftUI&lt;/h2&gt;
+&lt;p&gt;In this introductory module, we begin where the iOS Getting Started course left off and prepare you to handle next-level interface building with SwiftUI.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Design User Interfaces with SwiftUI&lt;/li&gt;
+&lt;li&gt;The Snowhaven Renovation Scenario&lt;/li&gt;
+&lt;li&gt;Defining SwiftUI Views&lt;/li&gt;
+&lt;li&gt;Creating Basic Designs and Layouts&lt;/li&gt;
+&lt;li&gt;Representing Data in User Interfaces&lt;/li&gt;
+&lt;li&gt;Customizing the Appearance of Views&lt;/li&gt;
+&lt;li&gt;Changing the Size and Scale of Views&lt;/li&gt;
+&lt;li&gt;Adding Effects to Views&lt;/li&gt;
+&lt;li&gt;Layering Views with ZStacks&lt;/li&gt;
+&lt;li&gt;Implementing Navigation and Displaying a Modal View&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2---handling-user-input&#34;&gt;2 - Handling User Input&lt;/h2&gt;
+&lt;p&gt;There’s no such thing as an app without data.
+In this module, I set you up for building dynamic, interactive applications by unpacking questions like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How do we model real-world objects and concepts as data that SwiftUI can work with?&lt;/li&gt;
+&lt;li&gt;How do we integrate data into an app, so it’s usable in the right views at the right time?&lt;/li&gt;
+&lt;li&gt;And how do we load data that’s been saved… display it… and, most importantly, for this module…change it using different editing controls with SwiftUI…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Working with Data in SwiftUI&lt;/li&gt;
+&lt;li&gt;Establishing an App’s Data Flow&lt;/li&gt;
+&lt;li&gt;Loading and Displaying Data&lt;/li&gt;
+&lt;li&gt;Editing Text Data with Text Fields&lt;/li&gt;
+&lt;li&gt;Persisting (or Cancelling) Data Changes&lt;/li&gt;
+&lt;li&gt;Working with Picker Views&lt;/li&gt;
+&lt;li&gt;Switching Between Binary Options with Toggles&lt;/li&gt;
+&lt;li&gt;Editing Numeric Data with Text Fields&lt;/li&gt;
+&lt;li&gt;Displaying Editing Controls in a Form&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3---bringing-apps-to-life-with-drawing-animation-and-gestures&#34;&gt;3 - Bringing Apps to Life with Drawing, Animation, and Gestures&lt;/h2&gt;
+&lt;p&gt;SwiftUI provides you with all the tools necessary to make your apps even more dynamic by responding to user gestures like taps and swipes… The framework also gives you everything you need to express your creativity by drawing your own graphics, and adding animations throughout your apps to bring things to life.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understanding the SwiftUI Drawing System&lt;/li&gt;
+&lt;li&gt;Drawing with Paths&lt;/li&gt;
+&lt;li&gt;Using GeometryReader&lt;/li&gt;
+&lt;li&gt;Applying Transformations to Paths&lt;/li&gt;
+&lt;li&gt;Building Reusable Shapes&lt;/li&gt;
+&lt;li&gt;Understanding Animations&lt;/li&gt;
+&lt;li&gt;Adding Basic Animation&lt;/li&gt;
+&lt;li&gt;Animating View Hierarchy Changes with Transitions&lt;/li&gt;
+&lt;li&gt;Combining Multiple Animations and Transitions&lt;/li&gt;
+&lt;li&gt;Responding to Gestures&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4---integrating-swiftui-and-uikit&#34;&gt;4 - Integrating SwiftUI and UIKit&lt;/h2&gt;
+&lt;p&gt;By now, you know that SwiftUI is wonderful, but&amp;hellip; it’s not the only Apple UI framework used in today’s Apple Developer world. &lt;strong&gt;UIKit&lt;/strong&gt; is still very widely used and even includes some UI components that are not currently available in the SwiftUI framework.&lt;/p&gt;
+&lt;p&gt;As we wrap up the course, I explore the answer to this question: How can we, as developers, mix SwiftUI and UIKit to leverage the power of both frameworks?&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Integrate SwiftUI and UIKit&lt;/li&gt;
+&lt;li&gt;Representing UIKit ViewControllers in SwiftUI&lt;/li&gt;
+&lt;li&gt;Making SwiftUI Views Compatible with UIKit&lt;/li&gt;
+&lt;li&gt;Representing UIKit Views in SwiftUI&lt;/li&gt;
+&lt;li&gt;Sharing State Between SwiftUI and UIKit&lt;/li&gt;
+&lt;li&gt;Coordinating User Interaction Between UIViewControllers and SwiftUI&lt;/li&gt;
+&lt;li&gt;Coordinating User Interaction Between UIViews and SwiftUI&lt;/li&gt;
+&lt;li&gt;Applying the Finishing Touches&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;From the beginning my unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!&lt;/p&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS 14 Getting Started</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2020-12-04-ios-14-getting-started/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2020-12-04-ios-14-getting-started/</guid>
+      <description>&lt;p&gt;Developing for iOS is a valuable and in-demand skill, but if you haven&amp;rsquo;t developed in the Apple world before, it can be surprisingly different.&lt;/p&gt;
+&lt;p&gt;In this course, iOS 14: Getting Started, you&amp;rsquo;ll quickly get up and running using Xcode 12, Swift 5, and SwiftUI to build great iOS apps and tap into the latest features in iOS 14.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://bit.ly/iOS14-getting-started&#34; target=&#34;_blank&#34;&gt;iOS 14 Getting Started&lt;/a&gt;&lt;a href=&#34;https://bit.ly/iOS14-getting-started&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-14-getting-started.png&#34; alt=&#34;iOS 14 Getting Started&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;First, you&amp;rsquo;ll see the tools and learn how to create iOS apps with adaptive user interfaces that work on multiple devices.&lt;/p&gt;
+&lt;p&gt;Next, you’ll learn how to manage iOS projects and define the building blocks of your own iOS applications.&lt;/p&gt;
+&lt;p&gt;Finally, you&amp;rsquo;ll explore working with data-driven controls and understand navigation options.&lt;/p&gt;
+&lt;p&gt;When you’re finished with this course, you&amp;rsquo;ll know current best practices, iOS architecture, and the most important ideas you need to feel comfortable bringing your developer skills into the iOS and Apple developer world.&lt;/p&gt;
+&lt;h2 id=&#34;1--preparing-to-build-ios-applications&#34;&gt;1 – Preparing to Build iOS Applications&lt;/h2&gt;
+&lt;p&gt;Prepare to implement iOS apps by understanding what’s involved from a big picture standpoint.&lt;/p&gt;
+&lt;p&gt;We begin at the beginning to bring you up to speed and set the foundation for the remainder of the course.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What You Need for Building iOS Apps&lt;/li&gt;
+&lt;li&gt;Creating an iOS Project with Xcode&lt;/li&gt;
+&lt;li&gt;Exploring an iOS Project&lt;/li&gt;
+&lt;li&gt;How to Learn iOS&lt;/li&gt;
+&lt;li&gt;The Night Watch Scenario&lt;/li&gt;
+&lt;li&gt;Working with Xcode Projects&lt;/li&gt;
+&lt;li&gt;Grasping the Basics of the Xcode Development Environment&lt;/li&gt;
+&lt;li&gt;Summary&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2---building-single-view-applications&#34;&gt;2 - Building Single View Applications&lt;/h2&gt;
+&lt;p&gt;Building single view applications is the starting point for most of us who are learning to build iOS apps because they allow us a simplified architecture that focuses on a single screen performing a single responsibility.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Build Single View Apps&lt;/li&gt;
+&lt;li&gt;Understanding the SwiftUI Framework&lt;/li&gt;
+&lt;li&gt;Understanding Views&lt;/li&gt;
+&lt;li&gt;Combining and Laying out Views&lt;/li&gt;
+&lt;li&gt;Understanding the SwiftUI Layout System&lt;/li&gt;
+&lt;li&gt;Aligning and Positioning Views&lt;/li&gt;
+&lt;li&gt;Customizing UI Appearance&lt;/li&gt;
+&lt;li&gt;Developing a SwiftUI Mindset&lt;/li&gt;
+&lt;li&gt;Using Icons and Symbols&lt;/li&gt;
+&lt;li&gt;Managing Views with Groups&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3---creating-data-driven-lists&#34;&gt;3 - Creating Data-driven Lists&lt;/h2&gt;
+&lt;p&gt;Just about any day in which you use an iPhone or iPad for more than a few minutes, you&amp;rsquo;ll almost certainly end up in an app that uses a List View.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s the most common way to show a structured, scrollable series of items, and List Views are a core competency for an iOS developer working in SwiftUI, so it&amp;rsquo;s the first complex control we dive into.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Work with Lists&lt;/li&gt;
+&lt;li&gt;Understanding Lists&lt;/li&gt;
+&lt;li&gt;Creating a List&lt;/li&gt;
+&lt;li&gt;Controlling a List with Data&lt;/li&gt;
+&lt;li&gt;Using ForEach to Supply List Content&lt;/li&gt;
+&lt;li&gt;Adding Sections and Headings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4---building-ios-apps-with-multiple-screens&#34;&gt;4 - Building iOS Apps with Multiple Screens&lt;/h2&gt;
+&lt;p&gt;Here I cover how to create apps multiple screens and how to think about and enable navigation between them.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Defining Apps with Multiple Screens&lt;/li&gt;
+&lt;li&gt;Implementing Navigation Views&lt;/li&gt;
+&lt;li&gt;Adding Navigation to an Existing Project&lt;/li&gt;
+&lt;li&gt;Extracting Reusable Subviews&lt;/li&gt;
+&lt;li&gt;Creating a Tabbed Application&lt;/li&gt;
+&lt;li&gt;Recapping Multi-view Applications&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5---adding-behavior-and-working-with-data&#34;&gt;5 - Adding Behavior and Working With Data&lt;/h2&gt;
+&lt;p&gt;The thing that makes an app come alive is the behavior we add, and the dynamic responses to that behavior that get reflected in the user interface.&lt;/p&gt;
+&lt;p&gt;In any application, a user interface has one critical job: to accurately represent the &lt;strong&gt;data&lt;/strong&gt; of our application in what it displays on the screen.&lt;/p&gt;
+&lt;p&gt;In SwiftUI, data and behavior go hand-in-hand, and I cover how to respond to user interaction in this module.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Add Basic Behavior&lt;/li&gt;
+&lt;li&gt;Extending the Data Model&lt;/li&gt;
+&lt;li&gt;Understanding the View Update Cycle in SwiftUI&lt;/li&gt;
+&lt;li&gt;Adding Basic Behavior&lt;/li&gt;
+&lt;li&gt;Connecting a Subview to a Parent View’s Data&lt;/li&gt;
+&lt;li&gt;Using Classes as Data Models&lt;/li&gt;
+&lt;li&gt;Sharing a Data Model through the SwiftUI Environment&lt;/li&gt;
+&lt;li&gt;Bringing the Data Model and Behavior to the Night Watch App&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;6---putting-it-all-together&#34;&gt;6 - Putting It All Together&lt;/h2&gt;
+&lt;p&gt;There’s nothing like practicing your skills in new contexts to refine them and solidify what you’ve learned.&lt;/p&gt;
+&lt;p&gt;We go into some additional controls and techniques for building apps with SwiftUI before concluding the course.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applying What You’ve Learned&lt;/li&gt;
+&lt;li&gt;Integrating the Extended Data Model&lt;/li&gt;
+&lt;li&gt;Adding the Mark Complete Behavior&lt;/li&gt;
+&lt;li&gt;Adding a Toolbar and Toggle Control&lt;/li&gt;
+&lt;li&gt;Implementing Swipe and Move Actions for a List&lt;/li&gt;
+&lt;li&gt;Resetting the List&lt;/li&gt;
+&lt;li&gt;Showing an Alert&lt;/li&gt;
+&lt;li&gt;Creating an Adaptive UI&lt;/li&gt;
+&lt;li&gt;Adding and Customizing Layout Variations&lt;/li&gt;
+&lt;li&gt;Getting Ready for the App Store&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;7---publishing-to-the-app-store&#34;&gt;7 - Publishing to the App Store&lt;/h2&gt;
+&lt;p&gt;Finishing an app and getting it out the door to your users is one of the best feelings in the world.&lt;/p&gt;
+&lt;p&gt;Beyond the emotional aspect of publishing an app though, more and more employers want to see job candidates who have published at least one app to the App Store.&lt;/p&gt;
+&lt;p&gt;So in this final module, I complete the journey by setting you up to get an app into the App Store and bolster your resume!&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Publish Your App&lt;/li&gt;
+&lt;li&gt;Adding Images and App Icons&lt;/li&gt;
+&lt;li&gt;Responding to Dark Mode&lt;/li&gt;
+&lt;li&gt;Creating an iOS App Launch Screen&lt;/li&gt;
+&lt;li&gt;Submitting an App for Review&lt;/li&gt;
+&lt;li&gt;Continuing Your iOS Developer Journey&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;From the beginning my unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!&lt;/p&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implementing In-App Purchases on iOS</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/</link>
+      <pubDate>Tue, 09 Jun 2020 10:03:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/</guid>
+      <description>&lt;p&gt;Monetizing apps is challenging. In this course, Implementing In-App Purchases on iOS, you’ll learn to offer digital products and services directly within your app as in-app purchases.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://bit.ly/implementing-in-app-purchases-ios&#34; target=&#34;_blank&#34;&gt;Implementing In-App Purchases on iOS&lt;/a&gt;&lt;a href=&#34;https://bit.ly/implementing-in-app-purchases-ios&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/implementing-in-app-purchases-ios-title.png&#34; alt=&#34;Implementing In-App Purchases on iOS&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;First, you’ll explore how to translate business requirements into digital products and configure them in App Store Connect and Xcode.&lt;/p&gt;
+&lt;p&gt;Next, you’ll discover how to build and test a store within your app using StoreKit.&lt;/p&gt;
+&lt;p&gt;Finally, you’ll learn how to make sure purchases made within your app are authentic, and unlock content that’s been purchased by your users.&lt;/p&gt;
+&lt;p&gt;When you’re finished with this course, you’ll have the skills and knowledge needed to implement in-app purchases on iOS!&lt;/p&gt;
+&lt;h2 id=&#34;1--preparing-to-implement-in-app-purchases&#34;&gt;1 – Preparing to Implement In-App Purchases&lt;/h2&gt;
+&lt;p&gt;Prepare to implement in-app purchases by understanding what’s involved from a big picture standpoint.&lt;/p&gt;
+&lt;p&gt;You will learn to configure digital products in App Store Connect and Xcode to kick off your in-app purchase learning adventure.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Perks (And the Work) Ahead of You&lt;/li&gt;
+&lt;li&gt;First Things First - Checking off the Prerequisites&lt;/li&gt;
+&lt;li&gt;Matching Product Types to Business Requirements&lt;/li&gt;
+&lt;li&gt;Setting Up Products in App Store Connect&lt;/li&gt;
+&lt;li&gt;Setting Up an Auto-Renewable Subscription&lt;/li&gt;
+&lt;li&gt;Configuring an Xcode Project for In-App Purchases&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2--building-in-app-purchase-functionality-with-storekit&#34;&gt;2 – Building In-App Purchase Functionality with StoreKit&lt;/h2&gt;
+&lt;p&gt;The focus of this module is on the StoreKit APIs for working with digital products and App Store Connect.&lt;/p&gt;
+&lt;p&gt;You will learn to build and test a fully-working store view that will support in-app purchases.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Using StoreKit to Build In-App Purchase Functionality: A Roadmap&lt;/li&gt;
+&lt;li&gt;Retrieving a Set of Products for Purchase from the App Store&lt;/li&gt;
+&lt;li&gt;Displaying Products in a User Interface&lt;/li&gt;
+&lt;li&gt;Implementing a “Buy” Button&lt;/li&gt;
+&lt;li&gt;Preparing to Test Purchases by Setting up a Sandbox Tester Account&lt;/li&gt;
+&lt;li&gt;Making Test Purchases&lt;/li&gt;
+&lt;li&gt;Implementing a “Restore Purchases” Button&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3--protecting-your-revenue-by-verifying-purchase-authenticity&#34;&gt;3 – Protecting Your Revenue by Verifying Purchase Authenticity&lt;/h2&gt;
+&lt;p&gt;After all your hard work to implement in-app purchases, how awful would it be if malicious users &lt;em&gt;stole&lt;/em&gt; the content you&amp;rsquo;ve labored to create?&lt;/p&gt;
+&lt;p&gt;In this module, you will learn to implement measures to protect revenue generated through in-app purchases by validating App Store receipts.&lt;/p&gt;
+&lt;p&gt;Receipt validation is a notoriously burdensome hassle. But it doesn&amp;rsquo;t have to be!&lt;/p&gt;
+&lt;p&gt;I will teach you how to implement server-side receipt validation from end-to-end with &lt;em&gt;no&lt;/em&gt; third-party libraries, &lt;em&gt;no&lt;/em&gt; complicated server setup, and &lt;em&gt;no&lt;/em&gt; platform-specific proprietary tools.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s the roadmap of topics incluced:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Verifying Purchase Authenticity by Validating App Store Receipts&lt;/li&gt;
+&lt;li&gt;Weighing Strategies for Receipt Validation&lt;/li&gt;
+&lt;li&gt;Charting the Course for Server-side Receipt Validation&lt;/li&gt;
+&lt;li&gt;Sending the Receipt from Your App to Your Server&lt;/li&gt;
+&lt;li&gt;Writing Server-side Code to Forward the Receipt to the App Store for Validation&lt;/li&gt;
+&lt;li&gt;Handling the Response from the App Store on Your Server&lt;/li&gt;
+&lt;li&gt;Accounting for the Sandbox Environment on Your Server&lt;/li&gt;
+&lt;li&gt;Handling the Response from Your Server in Your App&lt;/li&gt;
+&lt;li&gt;The Case of the Missing Receipt: Requesting a Refresh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4--unlocking-purchased-content&#34;&gt;4 – Unlocking Purchased Content&lt;/h2&gt;
+&lt;p&gt;After a user makes a valid purchase, you&amp;rsquo;ve got to unlock the content they legitimately bought!&lt;/p&gt;
+&lt;p&gt;Each product type has its own nuances for how to unlock and provide the associated content though.&lt;/p&gt;
+&lt;p&gt;What do you need to think about, and what code do you need to write to make it happen?&lt;/p&gt;
+&lt;p&gt;To find out, you will explore these topics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Analyzing Content-providing Logic by Product Type&lt;/li&gt;
+&lt;li&gt;Persisting Purchased Products Securely&lt;/li&gt;
+&lt;li&gt;Using the iOS Keychain&lt;/li&gt;
+&lt;li&gt;Keeping Track of Consumable Product Inventory&lt;/li&gt;
+&lt;li&gt;Managing Non-Renewing Subscriptions&lt;/li&gt;
+&lt;li&gt;Synchronizing Purchases Across Devices&lt;/li&gt;
+&lt;li&gt;Handling Auto-Renewable Subscriptions&lt;/li&gt;
+&lt;li&gt;Saving Non-Consumable Transactions&lt;/li&gt;
+&lt;li&gt;Preparing for App Store Review&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;From the beginning I set out to make the course I wish &lt;em&gt;I&lt;/em&gt; had when I started learning to implement in-app purchases for &lt;em&gt;my&lt;/em&gt; apps.  My unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!&lt;/p&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS Debugging Fundamentals</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2019-12-26-ios-debugging-fundamentals/</link>
+      <pubDate>Thu, 26 Dec 2019 10:03:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2019-12-26-ios-debugging-fundamentals/</guid>
+      <description>&lt;p&gt;Bugs are bound to happen. Getting rid of them is an essential skill if you want to keep your sanity when building apps.&lt;/p&gt;
+&lt;p&gt;In this course, you will learn a set of thinking skills to couple with the fundamental tools that Xcode provides you for finding and fixing flaws in your apps.&lt;/p&gt;
+&lt;p&gt;🐞1.5 hours
+🦟To the point
+🐛Engaging storyline
+🐜Relevant demos&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;iOS Debugging Fundamentals&lt;/a&gt;&lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png&#34; alt=&#34;iOS Debugging Fundamentals&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;First, you will learn to approach debugging situations with a set of principles for strategic problem solving.&lt;/p&gt;
+&lt;p&gt;Next, you will discover how to configure breakpoints and inspect view hierarchies effectively.&lt;/p&gt;
+&lt;p&gt;Finally, you will explore how to interpret a backtrace, glean valuable information from the Xcode debug area and console, locate changes in your codebase and simulate conditions that happen in the wild.&lt;/p&gt;
+&lt;p&gt;When you are finished with this course, you will have the skills and knowledge to strategically and methodically reason about probable causes of defects that you experience at runtime.&lt;/p&gt;
+&lt;h2 id=&#34;1--debugging-as-strategic-problem-solving&#34;&gt;1 – Debugging as Strategic Problem Solving&lt;/h2&gt;
+&lt;p&gt;Debugging means a lot of things to a lot of people.&lt;/p&gt;
+&lt;p&gt;In this module, I will define the scope of debugging for you so that you’re clear on the skills you’ll walk away from this course with.&lt;/p&gt;
+&lt;p&gt;You will begin to develop a problem solving mentality and learn a useful mnemonic for R.E.P.A.I.R.-ing broken apps.&lt;/p&gt;
+&lt;p&gt;Learn how to categorize bugs into buckets for strategic resolution.&lt;/p&gt;
+&lt;p&gt;Explore some of the most common sources of bugs to complete this module.&lt;/p&gt;
+&lt;h2 id=&#34;2--correcting-unmet-expectations&#34;&gt;2 – Correcting Unmet Expectations&lt;/h2&gt;
+&lt;p&gt;Probabilistic thinking is the key component of a debugging mindset.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pausing an App to Gather Clues With Breakpoints&lt;/li&gt;
+&lt;li&gt;Combining Problem Solving with Xcode Tools&lt;/li&gt;
+&lt;li&gt;Managing Your Project’s Breakpoints&lt;/li&gt;
+&lt;li&gt;Controlling Breakpoints by Defining Trigger Conditions&lt;/li&gt;
+&lt;li&gt;Executing Actions When Breakpoints Are Triggered&lt;/li&gt;
+&lt;li&gt;Inspecting User Interface Issues&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3--addressing-app-crashes&#34;&gt;3 – Addressing App Crashes&lt;/h2&gt;
+&lt;p&gt;When an app crashes, it’s because of a critical problem that can’t be recovered from.&lt;/p&gt;
+&lt;p&gt;In this module you will work on the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understanding Exceptional Issues&lt;/li&gt;
+&lt;li&gt;Inspecting the Crash Scene with the Backtrace and Console Output&lt;/li&gt;
+&lt;li&gt;Pausing before Errors and Exceptions Cause Crashes&lt;/li&gt;
+&lt;li&gt;Avoiding Errors that Cause Crashes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4--alleviating-anomalies&#34;&gt;4 – Alleviating Anomalies&lt;/h2&gt;
+&lt;p&gt;Have you ever found yourself saying, “Something weird is going on” or “It used to work - what’s going on now??”&lt;/p&gt;
+&lt;p&gt;Have you ever experienced one of those “intermittent” bugs that seem to present themselves rarely or inconsistently and are hard to even reproduce?&lt;/p&gt;
+&lt;p&gt;Anomalous bugs can feel like they occur “out of nowhere”&amp;hellip; but do they?&lt;/p&gt;
+&lt;p&gt;To find out, you will explore these topics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reasoning About Anomalous Bugs&lt;/li&gt;
+&lt;li&gt;Inspecting App Changes&lt;/li&gt;
+&lt;li&gt;Simulating Real-World Conditions With Xcode&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;My unwavering goal is to help you filter the noise and learn as efficiently as possible.&lt;/p&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS Data Persistence: The Big Picture</title>
+      <link>https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/</link>
+      <pubDate>Tue, 30 Apr 2019 10:03:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve all been there. Do a search on the topic of &amp;ldquo;saving data in iOS” and you&amp;rsquo;ll get &lt;em&gt;dozens&lt;/em&gt; of search results mentioning at least six different frameworks and platforms, and a month’s worth of reading.&lt;/p&gt;
+&lt;p&gt;Wouldn&amp;rsquo;t it be nice to distill the possibilities down into &lt;em&gt;just what you need&lt;/em&gt; in order to start down a path for persisting data in your app?&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;&lt;a href=&#34;http://bit.ly/ios-data-persistence-bp&#34;&gt;iOS Data Persistence: The Big Picture&lt;/a&gt;” will be worth the hour of your time.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ios-data-persistence-bp&#34; target=&#34;_blank&#34;&gt;iOS Data Persistence: The Big Picture&lt;/a&gt;&lt;a href=&#34;http://bit.ly/ios-data-persistence-bp&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001-1024x576.png&#34; alt=&#34;iOS Data Persistence: The Big Picture&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001.png 1280w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;During this one hour course, you will learn the &lt;em&gt;reasons&lt;/em&gt; for saving data to help ground you as you begin to traverse the data persistence landscape.&lt;/p&gt;
+&lt;p&gt;You will discover how to use technologies like &lt;strong&gt;User Defaults&lt;/strong&gt; and &lt;strong&gt;Property Lists&lt;/strong&gt;, and I will guide you on how to work with Swift’s &lt;strong&gt;Encodable&lt;/strong&gt; and &lt;strong&gt;Decodable&lt;/strong&gt; protocols.&lt;/p&gt;
+&lt;p&gt;You will understand what you’re getting into if you choose to work with &lt;strong&gt;SQLite&lt;/strong&gt;, &lt;strong&gt;Core Data&lt;/strong&gt;, or &lt;strong&gt;Realm Database&lt;/strong&gt; for local data persistence.&lt;/p&gt;
+&lt;p&gt;You will know how it feels to reach for a remote data storage option like &lt;strong&gt;CloudKit&lt;/strong&gt;, &lt;strong&gt;Realm Platform&lt;/strong&gt;, or &lt;strong&gt;Firebase&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, you will see a clear picture of what it’s like to design a &lt;strong&gt;document-based application&lt;/strong&gt; and integrate your app’s data with the &lt;strong&gt;iOS Files app&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;When you’re finished with this course, you will have the skills and knowledge you need to make an informed decision about putting a reliable data storage plan for your iOS app into action.&lt;/p&gt;
+&lt;h2 id=&#34;1--establishing-the-data-persistence-landscape&#34;&gt;1 – Establishing the Data Persistence Landscape&lt;/h2&gt;
+&lt;p&gt;During the course, you will have the opportunity to experience a variety of data persistence scenarios and technologies.&lt;/p&gt;
+&lt;p&gt;You’ll get general feel for setup requirements and a taste of what it’s like to work with each solution in code.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To start you off on the right footing, this module will establish the data persistence possibilities and focus in on the &lt;em&gt;reasons&lt;/em&gt; for saving data so that you&amp;rsquo;re persisting with a purpose.&lt;/li&gt;
+&lt;li&gt;You will be introduced to a player profile matrix to help you analyze your data persistence options from a number of angles.&lt;/li&gt;
+&lt;li&gt;Finally, you will get the feel for working with the Swift &lt;code&gt;Encodable&lt;/code&gt; and &lt;code&gt;Decodable&lt;/code&gt; protocols.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2--saving-settings-and-configuration&#34;&gt;2 – Saving Settings and Configuration&lt;/h2&gt;
+&lt;p&gt;Users are picky, aren’t they? Everybody has preferences though, so it’s no wonder that you as a developer are often tasked with letting your users to customize their experience within your app.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You will learn how to manage user preferences with the &lt;code&gt;UserDefaults&lt;/code&gt; system that&amp;rsquo;s built in to iOS&lt;/li&gt;
+&lt;li&gt;Next, you will explore synchronizing settings with iCloud Key-Value Store&lt;/li&gt;
+&lt;li&gt;Finally, you will understand how to ship configuration for your app with Property Lists that are included in your application bundle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4--saving-objects-and-object-graphs&#34;&gt;4 – Saving Objects and Object Graphs&lt;/h2&gt;
+&lt;p&gt;What if you only wanted to load a subset of the data into memory instead of being locked in to an all-or-nothing situation with &lt;code&gt;UserDefaults&lt;/code&gt; or Property Lists?&lt;/p&gt;
+&lt;p&gt;What if you needed to save a more complex data model that includes relationships?&lt;/p&gt;
+&lt;p&gt;For that, you’ll need to know about saving and sharing objects and object graphs…&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Six Technologies/Frameworks&lt;/strong&gt; will be featured in this module:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SQLite&lt;/li&gt;
+&lt;li&gt;Core Data&lt;/li&gt;
+&lt;li&gt;Realm Database&lt;/li&gt;
+&lt;li&gt;CloudKit&lt;/li&gt;
+&lt;li&gt;Realm Platform&lt;/li&gt;
+&lt;li&gt;Firebase&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The goal is to help you answer &lt;strong&gt;two questions&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“What am I getting myself into if I pick one persistence technology over another?”&lt;/li&gt;
+&lt;li&gt;“How does it feel to work with this persistence technology in code?”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You will answer these questions by…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Scanning the arena of persistence options and explore what sets these technologies apart from &lt;code&gt;UserDefaults&lt;/code&gt; and Property Lists.&lt;/li&gt;
+&lt;li&gt;Surveying the setup process to see what it takes to get up and running with each technology in the list&lt;/li&gt;
+&lt;li&gt;Exploring the data modeling process to wrap your head around what the data structure design process is like for each technology in the list&lt;/li&gt;
+&lt;li&gt;Getting the feel for working with data so that you understand what it&amp;rsquo;s like to create objects, update them, delete them, query and filter them, and watch for data changes so that you can update your user interface appropriately&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5--saving-data-as-documents-and-files&#34;&gt;5 – Saving Data as Documents and Files&lt;/h2&gt;
+&lt;p&gt;What if you need to encapsulate chunks of content together and save it all as a packaged up file…as a single unit with a custom file extension?&lt;/p&gt;
+&lt;p&gt;For that, you need to know about saving data as documents and files.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You will explore the use-case for building a &amp;ldquo;document-based application”&lt;/li&gt;
+&lt;li&gt;Next you will walk through designing a document as a subclass of &lt;code&gt;UIDocument&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;You will learn to create and load documents from a Document Browser&lt;/li&gt;
+&lt;li&gt;Customizing your app&amp;rsquo;s file extension is a key step that you will work through&lt;/li&gt;
+&lt;li&gt;You will spend some time understanding how to interact with document data in code as &lt;em&gt;users&lt;/em&gt; interact with the user interface&lt;/li&gt;
+&lt;li&gt;Finally, you will answer the question, “How do I get my app’s files to show up in the iOS Files app?”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;My goal is to help you filter the noise… to help you distill an overwhelming amount of information down into the big picture possibilities so that you’re on a trajectory for being able to make an informed decision about putting a reliable data storage plan for your iOS app into action.&lt;/p&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Journey in iOS Development Series – In the Beginning…</title>
+      <link>https://www.andrewcbancroft.com/2013/03/16/learning-ios-development/</link>
+      <pubDate>Sat, 16 Mar 2013 19:51:59 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/03/16/learning-ios-development/</guid>
+      <description>&lt;p&gt;Today I&amp;rsquo;m starting a series related to my journey in learning to develop iOS apps. As lightbulbs come on for me, I plan to write up what I&amp;rsquo;m learning, if nothing else for my own reference. But I do hope my readers enjoy the discoveries I make along the way.&lt;/p&gt;
+&lt;p&gt;These first few blogs will be somewhat autobiographical, so hopefully I don&amp;rsquo;t bore you to death. I&amp;rsquo;ll try and make them quick. More technical stuff will appear very soon. I thought to write a short article about how I got started. If I had an &amp;ldquo;In the beginning…” moment, what would that be?&lt;/p&gt;
+&lt;h2 id=&#34;the-early-days&#34;&gt;The Early Days&lt;/h2&gt;
+&lt;p&gt;It seems like just yesterday I was a little boy visiting my Grandpa&amp;rsquo;s house in Lawton, OK, eager to play on Grandpa&amp;rsquo;s computer. Computers in the early 90&amp;rsquo;s were still not quite the commodity they are in 2013. We didn&amp;rsquo;t own one yet, but &lt;em&gt;Grandpa&lt;/em&gt; did.&lt;/p&gt;
+&lt;p&gt;If I had to point to an &amp;ldquo;In the beginning…” stage, it&amp;rsquo;d be the times when Grandpa sat down with me and taught me about computers. Not just games (although I did enjoy Submarine and Wheel of Fortune for DOS a &lt;em&gt;lot&lt;/em&gt;) – he taught me the basics of how to instruct a computer.  He taught me to program. He was a Master of DOS and a QBasic Guru. If I had to guess, he still prefers elements of both today. :]&lt;/p&gt;
+&lt;p&gt;He is, quite simply, an amazing man. He is now a retired entrepreneur, but when he was running his music store there were always those &amp;ldquo;things that needed to be done”.  He viewed the &amp;ldquo;gotta do it&amp;rsquo;s” as an opportunity to automate by programming a computer to do it &lt;em&gt;for&lt;/em&gt; __him, rather than do it by hand. He&amp;rsquo;s showed me how he programmed apps to produce his financial statements, track his budget, print invoices, and all kinds of other &amp;ldquo;by hand” stuff that he was able to make &amp;ldquo;automagically” with a computer. It was (and still is) fascinating to me.&lt;/p&gt;
+&lt;p&gt;In addition to those early years of influence, I&amp;rsquo;ve learned from Grandpa that even though &amp;ldquo;there&amp;rsquo;s an app for that” already, it doesn&amp;rsquo;t mean it&amp;rsquo;ll work for you how you want it to work. Grandpa could be happy with 99% of an app&amp;rsquo;s functionality, but there&amp;rsquo;d always be that &lt;em&gt;one thing&lt;/em&gt; that bugged him. What did he do? He wrote his own. He made it work how &lt;em&gt;he&lt;/em&gt; wanted it to work. He may not have been inventing a new wheel every time, but because he could program, he could improve the existing wheel to his liking.&lt;/p&gt;
+&lt;p&gt;All of this has served to motivate me in my pursuit of programming in general.  I love my Grandpa.  My Grandpa loves computers.  The little kid inside of me is yelling, &amp;ldquo;Me too!  Me too!” to this day.&lt;/p&gt;
+&lt;p&gt;My Grandpa just turned 81 and he still loves the computing world.  It&amp;rsquo;s been great fun to watch him use his latest computer: his iPhone.  It&amp;rsquo;s been even &lt;em&gt;more&lt;/em&gt; fun to show him the little apps I&amp;rsquo;m making as I learn to program for iOS.&lt;/p&gt;
+&lt;p&gt;Next up will be a post on how I&amp;rsquo;ve approached learning to program for iOS.  What&amp;rsquo;s my strategy and how is it going so far?  See you again soon with all that and more.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,65 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xcode 6 Beta 4 on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/xcode-6-beta-4/</link>
+    <description>Recent content about iOS development with Swift in Xcode 6 Beta 4  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Jul 2014 04:04:43 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/xcode-6-beta-4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift Access Control – Implications for Unit Testing</title>
+      <link>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</link>
+      <pubDate>Wed, 23 Jul 2014 04:04:43 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</guid>
+      <description>&lt;p&gt;If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier…”, you&amp;rsquo;re not alone!&lt;/p&gt;
+&lt;h3 id=&#34;unit-tests-and-swift-access-control&#34;&gt;Unit Tests and Swift Access Control&lt;/h3&gt;
+&lt;p&gt;When Swift access control came into the picture, we suddenly had a little more to consider. From the Apple docs:&lt;/p&gt;
+&lt;p&gt;Swift access control has three access levels:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private entities can only be accessed from within the source file where they are defined.&lt;/li&gt;
+&lt;li&gt;internal entities can be accessed anywhere within the target where they are defined.&lt;/li&gt;
+&lt;li&gt;public entities can be accessed from anywhere within the target and from any other context&lt;br&gt;
+that imports the current target’s module.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By default, most entities in a source file have internal access.&lt;br&gt;
+So given the following…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Out of the box, your unit tests are part of a separate test target&lt;/li&gt;
+&lt;li&gt;The default access control for a class is &lt;em&gt;internal&lt;/em&gt;, (meaning that if you do not explicitly specify an access control on the class / properties / functions, they&amp;rsquo;re marked internal behind the scenes)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;… we now know why the unit tests break, unless we make a few tweaks:  classes marked internal are only seen &lt;em&gt;within a set of specified targets&lt;/em&gt; and our unit tests are in a separate target that our class is not a part of by default.&lt;/p&gt;
+&lt;h3 id=&#34;options&#34;&gt;Options&lt;/h3&gt;
+&lt;p&gt;It seems to me that we have two options:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Change the access control on our class to &lt;em&gt;public&lt;/em&gt;.  Additionally, mark any methods we intend to test with &lt;em&gt;public&lt;/em&gt; also.&lt;/li&gt;
+&lt;li&gt;Add the class(es) you want to be able to write unit tests for to the tests target.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+&lt;p&gt;I found option #2 to be the easiest to implement at first. &lt;em&gt;However&lt;/em&gt;, it turns out that this can lead to some &lt;a href=&#34;https://github.com/Quick/Quick/issues/91&#34;&gt;really obscure issues&lt;/a&gt;. An &lt;a href=&#34;https://twitter.com/modocache/status/549042409838219264&#34;&gt;enlightening Twitter conversation&lt;/a&gt; also shed some light on the subject, and pointed to the solution of testing only publicly accessible behavior that your Types expose, rather than trying to test internal implementation. That probably deserves a blog entry of its own, but for now, I’ll leave it to say that I’d recommend not adding your .swift source files to your test target, but rather to adjust the access control modifiers of the things you want to test to public (ie, Option # 1).&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  You might also enjoy&lt;/p&gt; 
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/&#34; title=&#34;Don’t Write Legacy Swift&#34;&gt;Don&#39;t Write Legacy Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/&#34; title=&#34;Getting Started with Unit Testing in Swift&#34;&gt;Getting Started with Unit Testing in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/&#34; title=&#34;TDD for iOS in Swift – What’s the Goal?&#34;&gt;TDD for iOS in Swift – What’s the Goal?&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

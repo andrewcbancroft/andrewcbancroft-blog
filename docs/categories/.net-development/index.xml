@@ -1,0 +1,412 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>.Net Development on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/categories/.net-development/</link>
+    <description>Recent content about iOS development with Swift in .Net Development  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Apr 2017 13:35:04 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/categories/.net-development/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Every Developer is an API Designer</title>
+      <link>https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/</link>
+      <pubDate>Tue, 25 Apr 2017 13:35:04 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/</guid>
+      <description>&lt;p&gt;Every function; every class; every struct and enum and protocol is an API.&lt;/p&gt;
+&lt;h1 id=&#34;you-8212-are-an-api-designer&#34;&gt;YOU — are an API designer&lt;/h1&gt;
+&lt;p&gt;As developers, we move into and out of the role of &amp;ldquo;API Designer” &lt;em&gt;constantly&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Have you ever thought about that? &lt;em&gt;You&lt;/em&gt; are an API designer! You create Application Programming Interfaces &lt;em&gt;all the time&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;I believe that everything we create has design built in, whether we&amp;rsquo;ve thought much about it or not.&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t know why that thought changed my mindset so much, but it did. Maybe it&amp;rsquo;s because I always associated APIs with massive frameworks, standard libraries, and 3rd party code modules. It&amp;rsquo;s as if I thought there was a special class of developer that did that work, and all my job entailed was putting the jigsaw puzzle together.&lt;/p&gt;
+&lt;p&gt;But when you and I design and create Types of any kind, be they data structures or functions, we ourselves, as &amp;ldquo;regular developers”, are in the business of creating APIs. We&amp;rsquo;re building ways for ourselves and others to &amp;ldquo;connect” to and interact with our code… to interface with it and &lt;em&gt;use&lt;/em&gt; it in order to perform work.&lt;/p&gt;
+&lt;p&gt;You may be building these things for your team to use, or you may be building them for the future [you] to use. The fact is, we slip in and out of consuming &lt;em&gt;and creating&lt;/em&gt; APIs all the time.&lt;/p&gt;
+&lt;h1 id=&#34;being-mindful-of-shifting-roles&#34;&gt;Being mindful of shifting roles&lt;/h1&gt;
+&lt;p&gt;It&amp;rsquo;s been helpful for me to recognize when I shift in and out of each role, because creating an API applies a different aspect of the programming mind than consuming an API does.&lt;/p&gt;
+&lt;p&gt;When you &lt;em&gt;create&lt;/em&gt; an API, you&amp;rsquo;ve got to be super conscious of your decisions. Types matter. Names matter. Inputs, outputs, dependencies and the like all matter when you&amp;rsquo;re creating an API. &lt;strong&gt;Why?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Because other people (or you!) will have to deal with what you create in a direct way. Sure, everyone might be concerned about the implementation and whether or not it has bugs or not. But they&amp;rsquo;ll be &lt;em&gt;most&lt;/em&gt; concerned about how to use the thing… the API… to get work done.&lt;/p&gt;
+&lt;p&gt;When we drop out of the mode of designing and creating APIs into API &lt;em&gt;consumer&lt;/em&gt; mode, we experience the ramifications of our API designs directly.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Why is this property named &lt;em&gt;that&lt;/em&gt;??”&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Does this function really need &lt;em&gt;all these parameters&lt;/em&gt;?”&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;This function returns &lt;em&gt;what&lt;/em&gt;?”&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;I wish this concept was represented as a ___ instead of a ___…”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When you&amp;rsquo;re cognizant of what you&amp;rsquo;re doing with respect to creating and consuming APIs, it&amp;rsquo;s a huge help to your team and to [future you].&lt;/p&gt;
+&lt;h1 id=&#34;apis-and-team-mates&#34;&gt;APIs and team mates&lt;/h1&gt;
+&lt;p&gt;I was working with a teammate, and we were having a discussion about the Type of a property in a class we were building together.&lt;/p&gt;
+&lt;p&gt;The original API was a property of Type &lt;code&gt;String&lt;/code&gt;, and the name of the property was &lt;code&gt;FieldNames&lt;/code&gt;. I thought to myself, &amp;ldquo;Huh… FieldName&lt;strong&gt;s&lt;/strong&gt;… plural… Why is this Typed as a &lt;code&gt;String&lt;/code&gt;? Either the name should be singular, or the Type should be switched out.”&lt;/p&gt;
+&lt;p&gt;We ended up switching that out to a Type that conveyed the idea of being able to store multiple things in that property.&lt;/p&gt;
+&lt;p&gt;The point? Something as small as the letter &lt;code&gt;s&lt;/code&gt; and the Type of a property made a head-scratching difference in my understanding of the API. I didn&amp;rsquo;t know how to use it until I asked. And that&amp;rsquo;s a tiny bit dangerous if the person who built it isn&amp;rsquo;t there to ask, anymore, right?&lt;/p&gt;
+&lt;h1 id=&#34;1-takeaway&#34;&gt;#1 Takeaway&lt;/h1&gt;
+&lt;p&gt;The number one takeway I want you to glean is this: Whether you realize it or not, if you&amp;rsquo;re in the software development business, you&amp;rsquo;re in the API design business. For me that meant becoming super conscious of the kind of code I&amp;rsquo;m writing, depending on which role I&amp;rsquo;m in as the keystrokes flow. Maybe this realization will impact you as well!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TypeScript Build Errors When Publishing ASP.Net Web Project</title>
+      <link>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</link>
+      <pubDate>Wed, 29 Jun 2016 18:41:59 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</guid>
+      <description>&lt;p&gt;I had TypeScript files building and running perfectly when I&amp;rsquo;d debug locally, but when I changed over to publish the project, I got build errors galore:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cannot find module ___&lt;/p&gt;
+&lt;p&gt;TS6053 – File ___ not found&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I had forgotten that I set up my TypeScript Build configuration for &lt;em&gt;Debug&lt;/em&gt;, but I hadn&amp;rsquo;t changed anything for the &lt;em&gt;Release&lt;/em&gt; configuration in Visual Studio.&lt;/p&gt;
+&lt;p&gt;Obviously, that would produce different build results, right? It was just a little mysterious to me until I noticed the configuration differences.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re running into similar errors when building / publishing your project using the Release configuration, right-click your ASP.Net web project, go down to TypeScript Build, and make sure that your configuration settings are the same between Debug and Release. In particular, my &amp;ldquo;Module System” settings were different until I adjusted things.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/06/2016-06-29_13-39-22.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/06/2016-06-29_13-39-22.png&#34; alt=&#34;TypeScript Configuration&#34; width=&#34;830&#34; height=&#34;714&#34; class=&#34;alignnone size-full wp-image-12988&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/06/2016-06-29_13-39-22.png 830w, https://www.andrewcbancroft.com/wp-content/uploads/2016/06/2016-06-29_13-39-22-300x258.png 300w&#34; sizes=&#34;(max-width: 830px) 100vw, 830px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>401 Unauthorized Browsing Site From Local IIS Instance</title>
+      <link>https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/</link>
+      <pubDate>Thu, 21 Jan 2016 17:16:23 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/</guid>
+      <description>&lt;p&gt;I spent waaaaay way way way too long fighting this one, so I&amp;rsquo;m saving everything I found on the issue so that I never lose it.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;setup&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;setup&#34;&gt;Setup&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Running Internet Information Services (IIS) 8.5 on my laptop.&lt;/li&gt;
+&lt;li&gt;Set up a site with an ASP.Net MVC web application Windows Authentication.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;problem&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Browsing the site locally continually prompts for my domain username and password.&lt;/li&gt;
+&lt;li&gt;Credentials are never accepted / I&amp;rsquo;m never authenticated.&lt;/li&gt;
+&lt;li&gt;Cancelling the login prompt ultimately responds with 401 Unauthorized.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When accessing the site with Fiddler, IIS simply responds with 401 Unauthorized.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;solution&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;solution-with-original-sources&#34;&gt;Solution (with original sources)&lt;/h3&gt;
+&lt;p&gt;An incredibly helpful StackOverflow titled &lt;a href=&#34;http://stackoverflow.com/questions/7387156/unable-to-get-windows-authentication-to-work-through-local-iis&#34;&gt;Unable to get windows authentication to work through local IIS&lt;/a&gt; provided the solution.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Its&lt;/em&gt; source was a KnowledgeBase article from Microsoft: &lt;a href=&#34;https://support.microsoft.com/en-us/kb/896861&#34;&gt;https://support.microsoft.com/en-us/kb/896861&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Set the&lt;br&gt;
+DisableStrictNameChecking&lt;br&gt;
+registry entry to 1. For more information about how to do this, refer to article &lt;a href=&#34;http://support.microsoft.com/kb/281308&#34;&gt;281308&lt;/a&gt; in the Microsoft Knowledge Base&lt;/li&gt;
+&lt;li&gt;Click Start, click Run, type regedit, and then click OK.&lt;/li&gt;
+&lt;li&gt;In Registry Editor, locate and then click the following registry key:&lt;br&gt;
+&lt;strong&gt;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Right-click &lt;strong&gt;MSV1_0&lt;/strong&gt;, point to New, and then click Multi-String Value.&lt;/li&gt;
+&lt;li&gt;Type &lt;strong&gt;BackConnectionHostNames&lt;/strong&gt;, and then press ENTER.&lt;/li&gt;
+&lt;li&gt;Right-click BackConnectionHostNames, and then click Modify.&lt;/li&gt;
+&lt;li&gt;In the Value data box, type the host name or the host names for the sites that are on the local computer, and then click OK.&lt;/li&gt;
+&lt;li&gt;Quit Registry Editor, and then restart the IISAdmin service. (to do this, I ran iisreset from a Powershell prompt)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using PowerShell to Install a DLL into the GAC</title>
+      <link>https://www.andrewcbancroft.com/2015/12/16/using-powershell-to-install-a-dll-into-the-gac/</link>
+      <pubDate>Wed, 16 Dec 2015 17:45:55 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/12/16/using-powershell-to-install-a-dll-into-the-gac/</guid>
+      <description>&lt;p&gt;A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.&lt;/p&gt;
+&lt;p&gt;An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;#Note that you should be running PowerShell as an Administrator&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;System.Reflection.Assembly&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;System.EnterpriseServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$publish&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;New-Object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;EnterpriseServices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Internal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Publish&lt;/span&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$publish&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;GacInstall&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\Path\To\DLL.dll&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;#If installing into the GAC on a server hosting web applications in IIS, you need to restart IIS for the applications to pick up the change.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;#Uncomment the next line if necessary...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;#iisreset&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Diagnosing “Restore failed” with ASP.NET 5 on Mac</title>
+      <link>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
+      <pubDate>Sun, 09 Aug 2015 20:57:02 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
+      <description>&lt;p&gt;Following along with Steve Smith&amp;rsquo;s &lt;a href=&#34;http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html&#34;&gt;&amp;ldquo;Your First ASP.NET 5 Application on a Mac”&lt;/a&gt;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;rsquo;t work due to a problem with restoring the project&amp;rsquo;s dependencies.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;retracing-steps&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;retracing-my-steps&#34;&gt;Retracing my steps&lt;/h3&gt;
+&lt;p&gt;I &lt;a href=&#34;http://docs.asp.net/en/latest/getting-started/installing-on-mac.html&#34;&gt;got ASP.NET installed on my Mac&lt;/a&gt;, and I even got a cool little template going using &lt;a href=&#34;http://yeoman.io/&#34;&gt;Yeoman&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I opened up my scaffolded project using Visual Studio Code, and began the dependency restore process. But it failed. So I troubleshooted (troubleshot?), and it failed some more.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Restore failed Unknown header: 3208085783”.&lt;/p&gt;
+&lt;p&gt;I found David Fowler&amp;rsquo;s &lt;a href=&#34;http://davidfowl.com/diagnosing-dependency-issues-with-asp-net-5/&#34;&gt;&amp;ldquo;Diagnosing Dependency Issues with ASP.NET 5”&lt;/a&gt;, but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make sure your DNX and packages are on the same version &amp;ldquo;train”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;My issue wasn&amp;rsquo;t with DNX, but with &lt;strong&gt;Mono&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;mis-matched-mono&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mis-matched-mono-versions&#34;&gt;Mis-matched Mono versions&lt;/h3&gt;
+&lt;p&gt;When I followed the instructions for installing ASP.NET, I distinctly remember installing Mono using the installer package available at their website.&lt;/p&gt;
+&lt;p&gt;What I &lt;em&gt;failed&lt;/em&gt; to realize, however, was that a while back (long enough ago to where it didn&amp;rsquo;t hit me until just a few minutes ago), I installed Mono using Homebrew.&lt;/p&gt;
+&lt;p&gt;So despite my efforts to install Mono using the installer package, the Mono that everything in my system was using was the one installed by Homebrew, which was version 3.10.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;resolved&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;resolved&#34;&gt;Resolved&lt;/h3&gt;
+&lt;p&gt;To resolve the issue, I went ahead and just ran &lt;code&gt;brew upgrade mono&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Verifying that Mono was successfully upgraded via a &lt;code&gt;mono --version&lt;/code&gt; command, I retried the dependency restoration in my scaffolded ASP.NET 5 application.&lt;/p&gt;
+&lt;p&gt;The result?&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dnu restore&lt;/code&gt; produced a wonderfully green, &amp;ldquo;Restore complete”!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SQL Sever Synonyms, Entity Framework, and Integrated Security</title>
+      <link>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</link>
+      <pubDate>Fri, 01 May 2015 17:44:31 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</guid>
+      <description>&lt;p&gt;&lt;a name=&#34;scenario&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;scenario&#34;&gt;Scenario&lt;/h3&gt;
+&lt;p&gt;This may be an edge case, but I spent enough time (a couple of &lt;em&gt;days&lt;/em&gt;) spinning on this that I thought it warranted a signpost on the Internet.&lt;/p&gt;
+&lt;p&gt;Suppose you have the following scenario before you:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Basics&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You&amp;rsquo;re building an ASP.Net web application&lt;/li&gt;
+&lt;li&gt;Entity Framework has been chosen as your ORM&lt;/li&gt;
+&lt;li&gt;SQL Server (any version supporting &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonyms&lt;/a&gt;) is your backend database server of choice&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Details&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You&amp;rsquo;re using &amp;ldquo;Integrated Security=True” in your connection string to the database (in web.config)&lt;/li&gt;
+&lt;li&gt;The Application Pool in which your app resides is running under a domain service account (ie, not the default identity)&lt;/li&gt;
+&lt;li&gt;Your application primarily talks to one database, but there is information in &lt;em&gt;another&lt;/em&gt; database that you need to pull into your app&lt;/li&gt;
+&lt;li&gt;To access the data in that other database, you&amp;rsquo;ve chosen to create a &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonym&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Every bullet point in this scenario is normal and valid, until you get to the part about using &amp;ldquo;Integrated Security=True” in your connection string…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;login-failed&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;login-failed-for-user-8216nt-authorityanonymous-logon&#34;&gt;Login failed for user ‘NT AUTHORITY\ANONYMOUS LOGON&#39;&lt;/h3&gt;
+&lt;p&gt;If you had chosen to use SQL Server authentication in your conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&amp;rsquo;s what I had been doing in my own application. I started running into the &amp;ldquo;Login failed…” error message once I switched to Integrated Security.&lt;/p&gt;
+&lt;p&gt;For some reason &amp;ldquo;Integrated Security=True” that throws Entity Framework for a loop. It accesses the database used in the &lt;code&gt;DbContext&lt;/code&gt; instance just fine, but the second a line of code needs to use the object mapped to the &lt;em&gt;Synonym&lt;/em&gt;, &lt;strong&gt;boom&lt;/strong&gt;… crash… error…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;reolving-error&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;resolving-the-error&#34;&gt;Resolving the error&lt;/h3&gt;
+&lt;p&gt;It turns out that the resolution is really, really simple. Instead of using a Synonym, use a View. You don&amp;rsquo;t have to change a single line of .Net code. Just make sure the view is named the same as the Synonym was (and drop the Synonym from the database, of course).&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;creating-view&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;creating-the-view&#34;&gt;Creating the view&lt;/h4&gt;
+&lt;p&gt;A Synonym essentially maps to an entire table, so the View&amp;rsquo;s structure could literally be a simple &lt;code&gt;select * from [fully.qualified.database.objectName]&lt;/code&gt;. If your DBA hates &lt;code&gt;select *&lt;/code&gt;, you&amp;rsquo;ll end up listing out every column that your Entity Framework object lists as one of its Properties.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;granting-permissions&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;granting-permissions&#34;&gt;Granting permissions&lt;/h4&gt;
+&lt;p&gt;If the service account that&amp;rsquo;s running your Application Pool doesn&amp;rsquo;t already have permission to the database objects you created the View for, you need to go in and grant appropriate permissions to that account. Otherwise, you&amp;rsquo;re likely to get an error stating&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The server principal &amp;ldquo;Domain\PrincipalName” is not able to access the database &amp;ldquo;DatabaseName” under the current security context.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Be specific and granular with the permission you grant to the account. If you&amp;rsquo;re just pulling in data for your app to display, only give the account SELECT permission on the database object your View references.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;In essence, using a Synonym that references a database object in &lt;em&gt;another database&lt;/em&gt; with Entity Framework and Integrated Security just doesn&amp;rsquo;t work out in the end. Somehow, the security context loses the identity of the account running the application pool, and the dreated Login failed for user ‘NT AUTHORITY\ANONYMOUS LOGON&amp;rsquo; rears its ugly head. Thankfully, the solution is simple: Create a View instead of a Synonym, grant approprate permissions, and you&amp;rsquo;ll be off and running (and you&amp;rsquo;ll avoid usernames and passwords in your web.config)!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testing is to Software as Experiment is to Science</title>
+      <link>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</link>
+      <pubDate>Thu, 30 Apr 2015 04:01:24 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;The principle of science, the definition, almost, is the following: The test of all knowledge is experiment.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The sole test of the validity of any idea is experiment.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;These quote came from &lt;a href=&#34;http://www.feynmanlectures.caltech.edu/I_01.html#Ch1-S1&#34;&gt;Chapter 1&lt;/a&gt; and &lt;a href=&#34;http://www.feynmanlectures.caltech.edu/I_02.html&#34;&gt;Chapter 2&lt;/a&gt; of the &lt;a href=&#34;http://www.feynmanlectures.caltech.edu/&#34;&gt;Feynman Lectures on Physics&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not a physicist, but the software developer in me resonated with the connection between &lt;em&gt;experimentation&lt;/em&gt; and &lt;em&gt;validation&lt;/em&gt; of what we know about the world around us. Almost immediately, I related it to the world of software.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;validity-confirmed-by-experiments&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;validity-is-confirmed-by-experiments-tests&#34;&gt;Validity is confirmed by experiments (tests)&lt;/h3&gt;
+&lt;p&gt;The universe around us is an immense mystery. We have many ideas about it, but the ideas that are validated by experiment are the ones we cling to more tightly than the ones that remain in the realm of guess and theory.&lt;/p&gt;
+&lt;p&gt;How do we know that things are valid within a software application? The answer, of course, is by &lt;em&gt;testing&lt;/em&gt; that software… experimenting with it, if you will, and observing the outcomes of those experiments.&lt;/p&gt;
+&lt;p&gt;Your software is a universe of mystery until it&amp;rsquo;s tested.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;repeated-experiments-most-valuable&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;repeated-experiments-tests-are-most-valuable&#34;&gt;Repeated experiments (tests) are most valuable&lt;/h3&gt;
+&lt;p&gt;Experiments that are conducted &lt;em&gt;multiple times&lt;/em&gt; are significantly more valuable than a single observation made from a single experiment. Repeated experiments increase the probability that what was observed was not an accident, but was truly the result of correct procedure validating a correct hypothesis. Performing the experiments as identically as possible to one other is the key to trusting the results.&lt;/p&gt;
+&lt;p&gt;Likewise, repeated testing of software is far more valuable than testing it once and walking away. Repeated tests done identically over time provide the reassurance we need to know &lt;em&gt;for sure&lt;/em&gt; that our software behaves as we expect as it morphs to accommodate new ideas and new needs.&lt;/p&gt;
+&lt;p&gt;Sure, we could spin up the app in a simulator and click/tap through it to see if pressing [Button X] does what its label implies it will do. But I&amp;rsquo;ve heard it said that if we have to do it more than once, it should be &lt;em&gt;automated&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Testing is one of those things that needs to be done often. Pretty much any time the app&amp;rsquo;s code changes (even just a little bit!), there is warrant to check and make sure the universe as we knew it still obeys all the laws we previously discovered.&lt;/p&gt;
+&lt;p&gt;Repeated tests are just as valuable to software as repeated experiment is to science. The more we can automate them, the greater the consistency in our repeated observations of how the software behaves.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;experimentation-creative-effort&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;experimentation-testing-is-a-creative-effort&#34;&gt;Experimentation (testing) is a creative effort&lt;/h3&gt;
+&lt;p&gt;Designing the right experiment to elicit the right conditions to make that &lt;em&gt;one critical&lt;/em&gt; observation is a creative process. Sometimes, scientists have to go to great lengths to make their observations. But they all find it worth it when their experiment yields results!&lt;/p&gt;
+&lt;p&gt;I work with some amazing scientists on a day-to-day basis. Watching them work and hearing about some of the things they have to do in order to test their ideas is so fascinating to me. For example, one of our Principal Investigators is making observations about how microgravity affects a plant&amp;rsquo;s cell walls. To do that, he had to literally &lt;a href=&#34;http://www.noble.org/blog/plants-in-space/archive/&#34;&gt;launch his plant&amp;rsquo;s seeds into space&lt;/a&gt;! &lt;a href=&#34;http://www.nasa.gov/mission_pages/station/research/experiments/1062.html&#34;&gt;They&amp;rsquo;re aboard the International Space Station&lt;/a&gt;. Growing plants! In &lt;em&gt;space&lt;/em&gt;! I&amp;rsquo;m blown away by these guys!&lt;/p&gt;
+&lt;p&gt;While we needn&amp;rsquo;t launch our code into space just to experiment with it, sometimes we have to get creative in order to make the observations we need to make from our code. Automated testing isn&amp;rsquo;t easy. Running the app and clicking a button and watching what happens with our own eyes is easy, but it&amp;rsquo;s tedious and I&amp;rsquo;m lazy!&lt;/p&gt;
+&lt;p&gt;Creating the right environment (in code) for a test to verify what it needs can take effort, but in the end, when the test yields results time after time after time, I&amp;rsquo;ve always found that it&amp;rsquo;s worth it!&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;My hope is that seeing automated unit testing from a slightly different perspective has sparked some thoughts and ideas in your mind. How can you begin experiment with your code with automated tests? How can you begin to make repeatable observations about your code so that you know, &lt;em&gt;for sure&lt;/em&gt;, that it works, even &lt;em&gt;after&lt;/em&gt; you go about making changes to it as time goes along?&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve devoted a bit time to writing about unit testing in Swift since the language was released. I hope this article adds something unique to the collection and that it gets you motivated to validate your software universe with tests!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/&#34; title=&#34;Getting Started with Unit Testing in Swift&#34;&gt;Getting Started with Unit Testing in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Up and Running with Unity IOC Container for ASP.Net MVC</title>
+      <link>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</link>
+      <pubDate>Mon, 27 Oct 2014 18:07:21 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</guid>
+      <description>&lt;p&gt;The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.  However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running. &lt;/p&gt;
+&lt;p&gt;The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP.Net MVC project.&lt;/p&gt;
+&lt;h3 id=&#34;assumptions&#34;&gt;Assumptions:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Using Visual Studio 2013
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Using ASP.Net MVC 5&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Have already created a new, fresh solution (File –&amp;gt; New Project, etc)&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;walkthrough&#34;&gt;Walkthrough&lt;/h3&gt;
+&lt;p&gt;Begin by right-clicking your solution, and choosing to “Manage NuGet Packages for Solution…”:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; display: inline; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb.png&#34; width=&#34;504&#34; height=&#34;367&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Next, choose to search for packages found at nuget.org.  In the search bar in the upper right, type in “Unity”, and press enter.  Choose to install “Unity bootstrapper for ASP.NET MVC”:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8.png&#34;&gt;&lt;img title=&#34;SNAGHTMLb1d5c8&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; display: inline; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;SNAGHTMLb1d5c8&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8_thumb.png&#34; width=&#34;504&#34; height=&#34;325&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image1.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb1.png&#34; width=&#34;309&#34; height=&#34;398&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now that the appropriate NuGet package is installed, you’re set to start using the Unity IOC Container. &lt;/p&gt;
+&lt;h3 id=&#34;using-unity-for-dependency-injection-and-management&#34;&gt;Using Unity for Dependency Injection and Management&lt;/h3&gt;
+&lt;p&gt;I’ve contrived an example and tried to show side-by-side views of the bare minimums you need to program in order to start taking advantage of Unity for managing your dependencies.   I’m going to show how to inject a concrete implementation of a very simple Interface into the HomeController. The steps go something like this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create an Interface (in this example, I called it IUnityExample) which specifies that an implementer of this interface must define an itWorksMessage method that returns a string.
+&lt;ul&gt;
+&lt;li&gt;Create a new class called UnityExample.   Specify that it implements IUnityExample in the class declaration line.  Implement the required itWorksMessage method.
+&lt;ul&gt;
+&lt;li&gt;In HomeController.cs, declare a private variable to hold an instance of an IUnityExample.
+&lt;ul&gt;
+&lt;li&gt;In HomeController.cs, declare a new constructor which takes an IUnityExample (to be injected by Unity) and sets the privately declared IUnityExample variable to the instance that’s passed in.
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Utilize the itWorksMessage somehow.  In my example, I set the return value to a new dynamic property called ViewBag.Message inside the Index method.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In UnityConfig.cs, register IUnityExample and UnityExample with the container inside the RegisterTypes method.&lt;/ol&gt;
+Let’s pause here and show that side-by-side view I referred to a second ago.  Perhaps visualizing the files in play will help bring the whole picture into view:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image5.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb5.png&#34; width=&#34;720&#34; height=&#34;308&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;At this point, we’re done with writing C# code, and we’re ready to move into the View layer.  This final step will access ViewBag.Message, and display it at the bottom of the page.  It’s fairly straight-forward.  Inside Views –&amp;gt; Home –&amp;gt; Index.cshtml, simply add a &lt;div&gt; that contains @ViewBag.Message:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image3.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb3.png&#34; width=&#34;624&#34; height=&#34;217&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To confirm everything works, run your solution and verify the results!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image4.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb4.png&#34; width=&#34;720&#34; height=&#34;263&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;In this article, you’ve seen how to use NuGet to install the required components to get up and running with the Unity Inversion of Control container.  Additionally, you saw a bare-bones example demonstrating the steps required to start using Unity to manage your dependencies with ASP.Net MVC.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Date, Date?, and the ToString Method in VB.Net</title>
+      <link>https://www.andrewcbancroft.com/2014/10/03/dates-and-the-tostring-method-in-vb-net/</link>
+      <pubDate>Fri, 03 Oct 2014 17:28:05 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/03/dates-and-the-tostring-method-in-vb-net/</guid>
+      <description>&lt;p&gt;I just spent the last 45 minutes frustrated as to why I was getting the following exception&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format.png&#34;&gt;&lt;img class=&#34;alignnone size-large wp-image-5421&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-1024x351.png&#34; alt=&#34;Input string was not in the correct format&#34; width=&#34;730&#34; height=&#34;250&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-1024x351.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-300x102.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-1200x411.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format.png 1440w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Input string was not in a correct format.” and &amp;ldquo;[InvalidCastException: Conversion from string &amp;ldquo;MMMM dd, yyyy” to type ‘Integer&amp;rsquo; is not valid.]&lt;/p&gt;
+&lt;p&gt;I kept thinking to myself, &amp;ldquo;How hard can this possibly be?!!  I&amp;rsquo;ve done this a thousand times — Why is it wanting to convert my format string into an Integer??!  AAHHH!!”.  Consulting &lt;a title=&#34;MSDN - Custom Date and Time Format Strings&#34; href=&#34;http://msdn.microsoft.com/en-us/library/8kb3ddd4(v=vs.110).aspx?cs-save-lang=1&amp;cs-lang=vb#code-snippet-1&#34; target=&#34;_blank&#34;&gt;MSDN on the matter&lt;/a&gt; only confirmed that I knew what I was doing with the string formatter.&lt;/p&gt;
+&lt;p&gt;What got me in the end is that it turns out I &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; know what I was doing with my &lt;em&gt;Date&lt;/em&gt; object.  In fact, I wasn&amp;rsquo;t dealing with a &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt; object at all.  I was dealing with a &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;Date?&lt;/span&gt; object (that is, a &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Nullable(of Date)&lt;/span&gt;. &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt; and &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date?&lt;/span&gt;  are not the same. And it &lt;em&gt;matters&lt;/em&gt;, because the &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;ToString()&lt;/span&gt; method of &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt; has _different overloads _than the &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;ToString()&lt;/span&gt; method of &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date?&lt;/span&gt;.  Only the &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt; type allows you to put in a format string to fancy up how the date is displayed when it&amp;rsquo;s converted to a string.&lt;/p&gt;
+&lt;h3 id=&#34;my-solution&#34;&gt;My solution:&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt; Wrap my &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;Date?&lt;/span&gt; object instance in a &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;CType&lt;/span&gt;, converting to type &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt; Call &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;ToString()&lt;/span&gt; on the &lt;em&gt;converted&lt;/em&gt; value:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;CType(someObject.dateInstance, Date).ToString(&amp;#34;MMMM dd, yyyy&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Sanity… &lt;em&gt;recovered.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>NuGet app.config / web.config Transformation Trouble</title>
+      <link>https://www.andrewcbancroft.com/2014/06/16/nuget-appconfig-webconfig-transformation-trouble/</link>
+      <pubDate>Mon, 16 Jun 2014 17:57:20 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/06/16/nuget-appconfig-webconfig-transformation-trouble/</guid>
+      <description>&lt;p&gt;I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file.  Try as I may, I couldn&amp;rsquo;t get NuGet to apply the transforms to my project&amp;rsquo;s web.config file even though I was following &lt;a title=&#34;NuGet Configuration File and Source Code Transformations Documentation&#34; href=&#34;http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations&#34; target=&#34;_blank&#34;&gt;NuGet documentation&amp;rsquo;s&lt;/a&gt; instructions to a tee.&lt;/p&gt;
+&lt;p&gt;It turns out that my problem was related to about 3 things all working together in tandem to defeat me:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;First&lt;/strong&gt;, the project I was testing the installation of this NuGet package on was already checked into source control (TFS).  To test out the package, I would install it and when things didn&amp;rsquo;t work how I wanted, I&amp;rsquo;d just &amp;ldquo;undo pending changes” to get everything back to the last stable state.  Or so I thought (more on this in a moment)…&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Second&lt;/strong&gt;, I had the idea to add app.config.transform and web.config.transform files to my NuGet package Content folder &lt;em&gt;after&lt;/em&gt; I&amp;rsquo;d already installed &amp;ldquo;version 1” of the package in my project, and rather than bump the version of the package with the transforms in it &lt;em&gt;up&lt;/em&gt;, I left it the same because I was still technically editing and troubleshooting the first version of the package (in my mind anyways).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Third&lt;/strong&gt;, my solution was configured for &amp;ldquo;NuGet Package Restore”:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/06/Enable-NuGet-Package-Restore.png&#34;&gt;&lt;img class=&#34;alignnone wp-image-1201 size-full&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/06/Enable-NuGet-Package-Restore.png&#34; alt=&#34;Enable NuGet Package Restore&#34; width=&#34;632&#34; height=&#34;514&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/06/Enable-NuGet-Package-Restore.png 632w, https://www.andrewcbancroft.com/wp-content/uploads/2014/06/Enable-NuGet-Package-Restore-300x243.png 300w&#34; sizes=&#34;(max-width: 632px) 100vw, 632px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;so-what-was-going-on&#34;&gt;So what was going on?&lt;/h4&gt;
+&lt;p&gt;Choosing &amp;ldquo;Enable NuGet Package Restore” keeps your NuGet packages folder contents from being checked into source control by adding a NuGet config file with a setting disabling source control integration.  We&amp;rsquo;d rather just let NuGet restore them if they&amp;rsquo;re missing when we build, rather than check in the packages folder to source control.&lt;/p&gt;
+&lt;p&gt;What this meant for me, however, is that all my &amp;ldquo;undo pending changes” actions were doing absolutely nothing to undo the installation of the NuGet package I was developing and troubleshooting.  My troubleshooting workflow of [Install package -&amp;gt; Check web.config -&amp;gt; :[ &lt;em&gt;Still&lt;/em&gt; missing connection strings -&amp;gt; Undo pending changes -&amp;gt; Fiddle with NuGet Package -&amp;gt; Rinse and repeat] could have been infinite, because the &amp;ldquo;undo pending changes” step wasn&amp;rsquo;t undoing the NuGet package installation, because _the NuGet package files weren&amp;rsquo;t part of the pending change set _due to my &amp;ldquo;Enable NuGet Package Restore” setting.  The NuGet package was still in the packages folder on my hard disk, which had another hidden consequence: each subsequent &amp;ldquo;installation” of the NuGet package effectively did nothing because it was already there.  Remember, I didn&amp;rsquo;t bump the version number of the package, so I&amp;rsquo;m guessing NuGet already saw the files there and just updated the config file and called it good.  None of the updates I was making to the package were ever updated.&lt;/p&gt;
+&lt;h4 id=&#34;solution&#34;&gt;Solution?&lt;/h4&gt;
+&lt;p&gt;I went back to the last stable checked-in state for my solution.&lt;br&gt;
+Next, I navigated to my solution folder by right-clicking my solution and choosing &amp;ldquo;Open Folder in File Explorer”:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/06/Open-Folder-in-File-Explorer.png&#34;&gt;&lt;img class=&#34;alignnone wp-image-1271 &#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/06/Open-Folder-in-File-Explorer.png&#34; alt=&#34;Open Folder in File Explorer&#34; width=&#34;381&#34; height=&#34;407&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/06/Open-Folder-in-File-Explorer.png 500w, https://www.andrewcbancroft.com/wp-content/uploads/2014/06/Open-Folder-in-File-Explorer-280x300.png 280w&#34; sizes=&#34;(max-width: 381px) 100vw, 381px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I double-clicked on the packages folder:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/06/Packages-Folder.png&#34;&gt;&lt;img class=&#34;alignnone  wp-image-1281&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/06/Packages-Folder.png&#34; alt=&#34;Packages Folder&#34; width=&#34;586&#34; height=&#34;199&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/06/Packages-Folder.png 727w, https://www.andrewcbancroft.com/wp-content/uploads/2014/06/Packages-Folder-300x101.png 300w&#34; sizes=&#34;(max-width: 586px) 100vw, 586px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Finally, I deleted the folder for the package I was developing.&lt;/p&gt;
+&lt;p&gt;After these steps were performed, installing the NuGet package again worked perfectly – the config transforms were applied and life was good.&lt;/p&gt;
+&lt;p&gt;Alternatively, I suppose I could have upped the version number of my package and things would have been fine as well.  But I always tend to make things more complicated than they need to be. :]&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>DotNetZip – Solving Mac Decompression Issues</title>
+      <link>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</link>
+      <pubDate>Sat, 28 Dec 2013 20:55:27 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</guid>
+      <description>&lt;p&gt;As part of a ASP.Net Web API service that I&amp;rsquo;m co-developing, I have gotten familiar with the &lt;a title=&#34;DotNetZip Codeplex Page&#34; href=&#34;http://dotnetzip.codeplex.com/&#34; target=&#34;_blank&#34;&gt;DotNetZip Library&lt;/a&gt;.  It&amp;rsquo;s fantastic.  We&amp;rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.&lt;/p&gt;
+&lt;p&gt;During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.&lt;/p&gt;
+&lt;h2 id=&#34;synopsis&#34;&gt;Synopsis:&lt;/h2&gt;
+&lt;p&gt;Problem:  On a Mac, a zip file would be downloaded, but it could not be extracted.  Double-clicking the zip file resulted in the creation of a .cpgz file.&lt;/p&gt;
+&lt;p&gt;Solution:  In ASP.Net code, change&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/zip”&lt;/p&gt;
+&lt;p&gt;to&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/octet-stream”&lt;/p&gt;
+&lt;h2 id=&#34;problem-details&#34;&gt;Problem Details:&lt;/h2&gt;
+&lt;p&gt;A zip archive would download as normal, but as things were wrapping up, Safari would try to decompress the file and it would fail.&lt;/p&gt;
+&lt;p&gt;Error from Safari&amp;rsquo;s download manager area:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed.png&#34;&gt;&lt;img class=&#34;alignnone size-medium wp-image-585&#34; style=&#34;src=&amp;quot;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed-300x43.png&amp;quot;&#34; width=&#34;300&#34; height=&#34;43&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Furthermore, when attempting to simply extract the files directly using the built in Mac Archive Utility (by double-clicking the zip file), the utility would actually re-archive the file, rather than extract it.  The end result was the creation of a .cpgz file.  Attempting to decompress &lt;em&gt;that&lt;/em&gt; file would result in creating another .zip file, which, when double-clicked, created another .cpgz file, and so on, and so on.&lt;/p&gt;
+&lt;p&gt;Archive Utility re-archiving the zip file when double-clicked (rather than &lt;em&gt;un&lt;/em&gt;-archiving it)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM.png&#34;&gt;&lt;img class=&#34;alignnone size-medium wp-image-586&#34; alt=&#34;Screen Shot 2013-10-10 at 4.13.48 PM&#34; src=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM-300x106.png&#34; width=&#34;300&#34; height=&#34;106&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Creation of .cpgz file:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png&#34;&gt;&lt;img class=&#34;alignnone size-full wp-image-584&#34; alt=&#34;Created_cpgz_file&#34; src=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png&#34; width=&#34;280&#34; height=&#34;22&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Needless to say, the solution to this problem, though somewhat mysterious, was quite simple for me.&lt;/p&gt;
+&lt;p&gt;In my ASP.Net code, I was writing the zip file to the Response OutputStream.  I had added a content type of &amp;ldquo;application/zip” to the response.  This is what was breaking the zip files on a Mac.  Buried &lt;a title=&#34;DotNetZip Library Forum&#34; href=&#34;http://dotnetzip.codeplex.com/discussions/59740&#34; target=&#34;_blank&#34;&gt;in the DotNetZip Library&amp;rsquo;s forum was a post&lt;/a&gt; recommending changing the content type to &amp;ldquo;application/octet-stream” instead.  That single changed fixed the issue for standard zip files!&lt;/p&gt;
+&lt;h2 id=&#34;solution-details&#34;&gt;Solution Details:&lt;/h2&gt;
+&lt;p&gt;Change&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/zip”&lt;/p&gt;
+&lt;p&gt;to&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/octet-stream”&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,408 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Functional Programming on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/functional-programming/</link>
+    <description>Recent content about iOS development with Swift in Functional Programming  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Mar 2016 18:11:02 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift Functions as Types</title>
+      <link>https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/</link>
+      <pubDate>Fri, 18 Mar 2016 18:11:02 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/</guid>
+      <description>&lt;p&gt;For the well-versed functional programmer, the fact that [functions in Swift are &lt;em&gt;Types&lt;/em&gt;][1] is no surprise. But I&amp;rsquo;m relatively new to the game on that front, so when I first encountered the idea of thinking of a function as a Type back when Swift was announced in 2014, it was a real eye-opener for me.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;swift-types-general&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;swift-types-in-general&#34;&gt;Swift Types (in general)&lt;/h1&gt;
+&lt;p&gt;In order to understand &lt;em&gt;functions&lt;/em&gt; as Types, it&amp;rsquo;s probably a good idea to know what folks are talking about when they use the term &amp;ldquo;Type” in a general sense.&lt;/p&gt;
+&lt;p&gt;In Swift, we&amp;rsquo;ve got two kinds of Types when we talk about them generally:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Named Types&lt;/li&gt;
+&lt;li&gt;Compound Types&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;named-types&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;named-types&#34;&gt;Named Types&lt;/h2&gt;
+&lt;p&gt;Named Types are those which are defined and identified by the &lt;em&gt;name&lt;/em&gt; that they&amp;rsquo;re given. Classes, structs, enums, and protocols fit this category of Type.&lt;/p&gt;
+&lt;p&gt;To define a Named Type, you&amp;rsquo;d do something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SomeNewClassType&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SomeNewStructType&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;enum&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SomeNewEnumType&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;protocol&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SomeNewProtocolType&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Initializing instances of Types and using their properties and methods, passing them around to functions that require parameters of those Types, or setting them as values to properties of other Types are all pretty standard thoughts that come to mind when using named Types.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;compound-types&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;compound-types&#34;&gt;Compound Types&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Compound&lt;/em&gt; Types, on the other hand, don&amp;rsquo;t have names. Rather, they have &amp;ldquo;signatures” that define and identify them as Types. Swift has two compound Types: functions and tuples.&lt;/p&gt;
+&lt;p&gt;Now I know what you might be thinking: &amp;ldquo;Functions have names!”&lt;/p&gt;
+&lt;p&gt;Indeed many do. But when we&amp;rsquo;re thinking about them in terms of their &lt;em&gt;Type-ness&lt;/em&gt;, we&amp;rsquo;ve got to go beyond the name to the function&amp;rsquo;s &amp;ldquo;signature” characteristics.&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;name&lt;/em&gt; of a function (or tuple, since they can be type-aliased) is simply how we &lt;em&gt;refer&lt;/em&gt; to the function in code to execute it or pass it around as an argument.&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;signature” of the function, however, is the part that characterizes the function as a &lt;em&gt;Type&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;I want to analyze what I&amp;rsquo;m talking about when I refer to a function&amp;rsquo;s &amp;ldquo;signature”, because that really is as the heart of my goal for this blog entry…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;function-types&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;function-types&#34;&gt;Function Types&lt;/h1&gt;
+&lt;p&gt;What exactly makes up a function&amp;rsquo;s &lt;em&gt;Type-ness&lt;/em&gt; or &amp;ldquo;signature” as I&amp;rsquo;ve been calling it? Two things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Type(s) of its &lt;strong&gt;parameters&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;The Type that the function &lt;strong&gt;returns&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Combining the Type(s) that the function receives as inputs, and the Type that it returns composes to give the function &lt;em&gt;its&lt;/em&gt; Type / &amp;ldquo;signature”.&lt;/p&gt;
+&lt;h1 id=&#34;reading-a-functions-type&#34;&gt;Reading a function&amp;rsquo;s Type&lt;/h1&gt;
+&lt;p&gt;It always helps me to visualize, so take apart an example.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;ve lived long on the Internet, you&amp;rsquo;re bound to have run across a Star Wars name generator… Plug in your name, and maybe a birth year, and out comes some crazy &amp;ldquo;Star Wars name” for you.&lt;/p&gt;
+&lt;p&gt;The function definition (minus the body) might look like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;generateStarWarsName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;firstName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lastName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;birthYear&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If someone were to ask you, &amp;ldquo;What is the &lt;code&gt;generateStarWarsName&lt;/code&gt; function&amp;rsquo;s Type?”, you could answer: &amp;ldquo;&lt;code&gt;generateStarWarsName&lt;/code&gt; is a function Type that has three parameters, the first two of Type String, the last of Type Int, and that returns a value of Type String.”&lt;/p&gt;
+&lt;p&gt;Wordy? Yes. But it does explain in precise terms what the function&amp;rsquo;s Type is.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;function-type-notation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;function-type-notation&#34;&gt;Function Type notation&lt;/h1&gt;
+&lt;p&gt;Rather than write out the paragraph describing the function&amp;rsquo;s Type, it&amp;rsquo;s far more convenient to indicate a the Type of a function using a standard notation. This notation is also the syntax that the Swift compiler uses when it&amp;rsquo;s trying to work with function Types.&lt;/p&gt;
+&lt;p&gt;Essentially, it boils down to stripping away the function&amp;rsquo;s name and the parameter names to leave behind the raw Type information that composes to give the function &lt;em&gt;its&lt;/em&gt; Type.&lt;/p&gt;
+&lt;p&gt;Given the above &lt;code&gt;generateStarWarsName&lt;/code&gt; function, we could notate its Type as follows:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;(String, String, Int) -&amp;gt; String&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;See how that works?&lt;/p&gt;
+&lt;p&gt;Remove &amp;ldquo;generateStarWarsName”, &amp;ldquo;firstName: &amp;ldquo;, &amp;ldquo;lastName: &amp;ldquo;, and &amp;ldquo;birthYear: ” and you&amp;rsquo;re left with that raw Type information. What remains is the function&amp;rsquo;s Type notation.&lt;/p&gt;
+&lt;p&gt;It tells you (and the Swift compiler) everything you need to know to be able identify the Type of that function… it&amp;rsquo;s &amp;ldquo;signature”, if you will.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;gotchas&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gotchas&#34;&gt;Gotchas&lt;/h2&gt;
+&lt;p&gt;A couple of gotchas when it comes to notating a function&amp;rsquo;s Type:&lt;/p&gt;
+&lt;p&gt;1 – If a function takes no parameters, the &amp;ldquo;parameter portion” of the Type notation will simply be &lt;code&gt;()&lt;/code&gt; with nothing between the parentheses.&lt;/p&gt;
+&lt;p&gt;So for example, the Type notation of&lt;br&gt;
+&lt;code&gt;func returnHelloString() -&amp;gt; String {}&lt;/code&gt;&lt;br&gt;
+is &lt;code&gt;() -&amp;gt; String&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;2 – If a function has no return type (ie, it doesn&amp;rsquo;t return anything), the &amp;ldquo;return type portion” of the Type notation will be &lt;code&gt;-&amp;gt; Void&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So for example, the Type notation of&lt;br&gt;
+&lt;code&gt;func sayHello() {}&lt;/code&gt;&lt;br&gt;
+is &lt;code&gt;() -&amp;gt; Void&lt;/code&gt;, since it takes no parameters, &lt;em&gt;and&lt;/em&gt; returns nothing.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;practice&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;practice&#34;&gt;Practice&lt;/h1&gt;
+&lt;p&gt;Here are a few more examples for you to practice function Type identification. Can you write out the correct notation for each function&amp;rsquo;s Type?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;complimentMe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a id=&#34;show-answer-1&#34; style=&#34;cursor: pointer;&#34;&gt;Show answer&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;answer-1&#34; style=&#34;display: none;&#34;&gt;
+  `(String) -&gt; String`
+&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;countToTen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... prints 1 to 10 to the console ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a id=&#34;show-answer-2&#34; style=&#34;cursor: pointer;&#34;&gt;Show answer&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;answer-2&#34; style=&#34;display: none;&#34;&gt;
+  `() -&gt; Void`&lt;/p&gt; 
+  &lt;p&gt;
+    Notice that while `countToTen` doesn&#39;t have the &#34;-&gt; Void&amp;#8221; in its definition, it &lt;em&gt;is&lt;/em&gt; listed in the function&#39;s Type notation for clarity.
+  &lt;/p&gt;
+  &lt;p&gt;
+    When you read this function&#39;s Type, you&#39;d say, &#34;This is a function Type which takes no parameters and returns Void.&amp;#8221;
+  &lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;addInts&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;first&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;second&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a id=&#34;show-answer-3&#34; style=&#34;cursor: pointer;&#34;&gt;Show answer&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;answer-3&#34; style=&#34;display: none;&#34;&gt;
+  `(Int, Int) -&gt; Int`
+&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;fadeIn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;duration&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSTimeInterval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSTimeInterval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Bool&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a id=&#34;show-answer-4&#34; style=&#34;cursor: pointer;&#34;&gt;Show answer&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;answer-4&#34; style=&#34;display: none;&#34;&gt;
+  `(NSTimeInterval, NSTimeInterval, (Bool) -&gt; Void)) -&gt; Void`&lt;/p&gt; 
+  &lt;p&gt;
+    This one&#39;s actually a more complicated &#34;compound Type&amp;#8221; – note the third parameter which indicates that `fadeIn` receives a function Type &lt;em&gt;as one of its inputs&lt;/em&gt;. Remember that since functions are Types, they carry the characteristic of being able to be passed around to other functions as parameters, or stored in variables/constants! &lt;/div&gt; 
+&lt;pre&gt;&lt;code&gt;&amp;lt;p&amp;gt;
+&amp;lt;/p&amp;gt;
+
+```swift
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;func increment(input: Int) -&amp;gt; Int {
+return input + 1
+}&lt;/p&gt;
+&lt;p&gt;func decrement(input: Int) -&amp;gt; Int {
+return input - 1
+}&lt;/p&gt;
+&lt;p&gt;func chooseAdjustmentFunction(increase: Bool) -&amp;gt; (Int) -&amp;gt; Int {
+return increase ? increment : decrement
+}&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    
+    &amp;lt;p&amp;gt;
+      &amp;lt;a id=&amp;#34;show-answer-5&amp;#34; style=&amp;#34;cursor: pointer;&amp;#34;&amp;gt;Show answer&amp;lt;/a&amp;gt;
+    &amp;lt;/p&amp;gt;
+    
+    &amp;lt;div id=&amp;#34;answer-5&amp;#34; style=&amp;#34;display: none;&amp;#34;&amp;gt;
+      increment: `(Int) -&amp;gt; Int`&amp;lt;br /&amp;gt; decrement: `(Int) -&amp;gt; Int`&amp;lt;/p&amp;gt; 
+      
+      &amp;lt;p&amp;gt;
+        chooseAdjustmentFunction(_:): `(Bool) -&amp;gt; (Int) -&amp;gt; Int`
+      &amp;lt;/p&amp;gt;
+      
+      &amp;lt;p&amp;gt;
+        This one&amp;#39;s complicated in a slightly different way. This time, it&amp;#39;s the return Type of the function that&amp;#39;s kind of crazy.
+      &amp;lt;/p&amp;gt;
+      
+      &amp;lt;p&amp;gt;
+        Read this as, &amp;#34;A function Type which takes as Bool as a parameter and returns a function Type which takes an Int as a parameter and returns an Int.&amp;amp;#8221;
+      &amp;lt;/p&amp;gt;
+      
+      &amp;lt;p&amp;gt;
+        You can see how the Types of the `increment` and `decrement` functions &amp;lt;em&amp;gt;match&amp;lt;/em&amp;gt; the return Type of the `chooseAdjustmentFunction` function. &amp;lt;/div&amp;gt; 
+        
+        &amp;lt;h1&amp;gt;
+          Wrapping up
+        &amp;lt;/h1&amp;gt;
+        
+        &amp;lt;p&amp;gt;
+          Knowing that functions are Types in Swift is a powerful thing. Being able to correctly articulate the Type of a function, and produce its notation in valid Swift syntax is even &amp;lt;em&amp;gt;more&amp;lt;/em&amp;gt; powerful, because it&amp;#39;s at that point when you&amp;#39;ll be able to recognize which kinds of functions are valid to pass as parameters to &amp;lt;em&amp;gt;other&amp;lt;/em&amp;gt; functions, or to assign as properties of other Types. It can also play a role in Swift&amp;#39;s pattern matching features. But alas, those topics for another day!
+        &amp;lt;/p&amp;gt;
+        
+        &amp;lt;p&amp;gt;
+          &amp;lt;a name=&amp;#34;related&amp;#34; class=&amp;#34;jump-target&amp;#34;&amp;gt;&amp;lt;/a&amp;gt;
+        &amp;lt;/p&amp;gt;
+        
+        &amp;lt;div class=&amp;#34;resources&amp;#34;&amp;gt;
+          &amp;lt;div class=&amp;#34;resources-header&amp;#34;&amp;gt;
+            You might also enjoy&amp;amp;#8230;
+          &amp;lt;/div&amp;gt;
+          
+          &amp;lt;ul class=&amp;#34;resources-content&amp;#34;&amp;gt;
+            &amp;lt;li&amp;gt;
+              &amp;lt;i class=&amp;#34;fa fa-angle-right&amp;#34;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;a href=&amp;#34;https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/&amp;#34; title=&amp;#34;Immutable Types with Changing State in Swift&amp;#34;&amp;gt;Immutable Types with Changing State in Swift&amp;lt;/a&amp;gt;
+            &amp;lt;/li&amp;gt;
+            &amp;lt;li&amp;gt;
+              &amp;lt;i class=&amp;#34;fa fa-angle-right&amp;#34;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;a href=&amp;#34;https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/&amp;#34; title=&amp;#34;Conveniently Transforming Immutable Types in Swift&amp;#34;&amp;gt;Conveniently Transforming Immutable Types in Swift&amp;lt;/a&amp;gt;
+            &amp;lt;/li&amp;gt;
+          &amp;lt;/ul&amp;gt;
+        &amp;lt;/div&amp;gt;
+        
+        &amp;lt;p&amp;gt;
+          &amp;lt;a name=&amp;#34;share&amp;#34; class=&amp;#34;jump-target&amp;#34;&amp;gt;&amp;lt;/a&amp;gt;
+        &amp;lt;/p&amp;gt;
+        
+        &amp;lt;p&amp;gt;
+        &amp;lt;/p&amp;gt;
+
+ [1]: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html#//apple_ref/doc/uid/TP40014097-CH10-ID158
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Conveniently Transforming Immutable Types in Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/</link>
+      <pubDate>Tue, 20 Jan 2015 12:30:51 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/</guid>
+      <description>&lt;p&gt;A few weeks ago I wrote about &lt;a href=&#34;http://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/&#34;&gt;Immutable Types and Changing State in Swift&lt;/a&gt;, where I hoped to convey an &amp;ldquo;aha!-moment” that happened for me.&lt;/p&gt;
+&lt;p&gt;Since then, I&amp;rsquo;ve learned a bit more. For example, the technique I presented for transforming instances of a Type immutably actually come for free when you use a value Type, such as a Struct! Check out &lt;a href=&#34;https://twitter.com/NatashaTheRobot&#34;&gt;@NatashaTheRobot&amp;rsquo;s&lt;/a&gt; writeup on the subject, titled &lt;a href=&#34;http://natashatherobot.com/mutating-functions-swift-structs/&#34;&gt;&amp;ldquo;Mutating Functions in Swift Structs”&lt;/a&gt;, for more information.&lt;/p&gt;
+&lt;p&gt;But let&amp;rsquo;s say, for whatever reason, you&amp;rsquo;d like to use a &lt;em&gt;reference&lt;/em&gt; Type, such as a Class. In that case, the technique I presented in the aforementioned blog entry works out quite nicely. &lt;em&gt;Until….&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;many-init-parameters--pain&#34;&gt;Many init parameters == Pain&lt;/h3&gt;
+&lt;p&gt;… It works great right up until you have more than a few immutable properties that you need to transform.&lt;/p&gt;
+&lt;p&gt;I want to thank &lt;a href=&#34;https://twitter.com/Jarsen&#34;&gt;@Jarsen&lt;/a&gt; for his &lt;a href=&#34;http://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/#comment-1788688298&#34;&gt;comment&lt;/a&gt;. He pointed out the exact pain point I was feeling, since I was actually using my own advice in a personal project. Not only that, he offers a solution in the form of a &lt;a href=&#34;https://gist.github.com/jarsen/41de7401d49cd2348e5f&#34;&gt;GitHub gist&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m bringing in his example so that we have it before us with a few minor modifications to make it relevant for this blog entry. However, I want to give 100% credit to Jarsen for his insight.&lt;/p&gt;
+&lt;h3 id=&#34;its-all-about-convenience&#34;&gt;It&amp;rsquo;s all about convenience&lt;/h3&gt;
+&lt;p&gt;The gist of Jarsen&amp;rsquo;s solution was to create a second helper initializer which would help setting the values for all the properties easier. Take a look:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Scorekeeper&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;runningScore&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;climbingScore&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// potentially more properties&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;runningScore&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;climbingScore&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;runningScore&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;runningScore&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;climbingScore&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;climbingScore&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// second helper initializer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scoreKeeper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Scorekeeper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;runningScore&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;climbingScore&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;runningScore&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;runningScore&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;??&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;scoreKeeper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;runningScore&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;climbingScore&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;climbingScore&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;??&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;scoreKeeper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;climbingScore&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;incrementRunningScoreBy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;points&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Scorekeeper&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Scorekeeper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scoreKeeper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;runningScore&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;runningScore&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;points&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// other functions to transform Scorekeeper by incrementing other score properties&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note the use of optionals, and the corresponding nil-coalescing operator (&lt;code&gt;??&lt;/code&gt;) in the helper initializer&amp;rsquo;s implementation. It&amp;rsquo;s simple, &lt;em&gt;and&lt;/em&gt; it&amp;rsquo;s concise. I like it!&lt;/p&gt;
+&lt;p&gt;The bottom line is that I couldn&amp;rsquo;t help but share Jarsen&amp;rsquo;s tip. I thought it deserved a little more attention than to be stuck down in the comment section where folks may or may not find it and be helped.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Immutable Types with Changing State in Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</link>
+      <pubDate>Tue, 06 Jan 2015 12:00:50 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</guid>
+      <description>&lt;p&gt;Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&amp;rsquo;ve seen a lot in the functional programming arena as it relates to Swift.&lt;/p&gt;
+&lt;p&gt;As I seek to improve my functional programming thought processes and to practice what I&amp;rsquo;m learning, I found myself struggling with a fundamental concept: &lt;strong&gt;immutability&lt;/strong&gt;. &lt;em&gt;Especially&lt;/em&gt; when I&amp;rsquo;m designing something that, at the very least, &lt;em&gt;appears&lt;/em&gt; to require the ability to change state at some point in time.&lt;/p&gt;
+&lt;h3 id=&#34;immutable-changes--a-contradiction-in-terms&#34;&gt;Immutable changes – A contradiction in terms?&lt;/h3&gt;
+&lt;p&gt;Immutability and changing state was a real struggle for me. The two seemed contradictory actually. How am I supposed to handle changes with things that &lt;em&gt;can&amp;rsquo;t change&lt;/em&gt;??!&lt;/p&gt;
+&lt;p&gt;And then, with the help of Stack Overflow, a lightbulb came on. As I was perusing FP topics, I ran across a question that expressed exactly what I was feeling. &lt;a href=&#34;http://stackoverflow.com/questions/1020653/how-can-you-do-anything-useful-without-mutable-state&#34;&gt;&amp;ldquo;How can you do anything useful without mutable state?”&lt;/a&gt;, the questioner asked. The answer is what illuminated things for me. The key quote from the Stack Overflow answer:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In functional languages, rather than mutating the state of objects, we simply return a new object with the changes we want.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So… instead of thinking about state changes as &lt;em&gt;mutations&lt;/em&gt;, think of them as reasons to create something &lt;em&gt;new&lt;/em&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;getting-practical-with-swift&#34;&gt;Getting practical with Swift&lt;/h3&gt;
+&lt;p&gt;If I&amp;rsquo;m going to get pragmatic with this, I have some design decisions to make if I&amp;rsquo;m going to try and avoid mutating the state of my objects. Rather than design my Types with the intent to update stored properties in-place, I should think about designing them so that the state-change process would actually produce a whole &lt;em&gt;new&lt;/em&gt; instance with the transformed (updated) value.&lt;/p&gt;
+&lt;h3 id=&#34;see-it-in-action&#34;&gt;See it in action&lt;/h3&gt;
+&lt;p&gt;I&amp;rsquo;m a visual person, so for those of you who need to see it in action like me, here&amp;rsquo;s a short example: Suppose that you&amp;rsquo;re designing a class that stores a counter (or a score or a total… something like that), and provides a function to let you increment that count.&lt;/p&gt;
+&lt;h3 id=&#34;the-mutating-way&#34;&gt;The mutating way&lt;/h3&gt;
+&lt;p&gt;We could design this class in one of two ways: declare a variable stored property to hold the count. The method would then reassign incremented values to it. This is the &lt;em&gt;opposite&lt;/em&gt; of immutable changes:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Scorekeeper {
+    var runningScore: Int
+    
+    init (score: Int = 0) {
+        self.runningScore = score
+    }
+    
+    func incrementScoreBy(points: Int) {
+        runningScore += points
+    }
+}
+
+let scoreKeeper = Scorekeeper()
+scoreKeeper.incrementScoreBy(5)
+println(scoreKeeper.runningScore)
+// prints 5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;
+    
+    
+    ### The immutable way
+    
+    
+    OR, rather than mutating the existing variable, we could go an alternate route:  The second way to design the class is to declare a constant stored property.  The method would then produce _new_ instance that stored the new state:
+    
+    
+        class Scorekeeper {
+            let runningScore: Int
+            
+            init (score: Int = 0) {
+                self.runningScore = score
+            }
+            
+            func incrementScoreBy(points: Int) -&amp;gt; Scorekeeper {
+                return Scorekeeper(score: self.runningScore + points)
+            }
+        }
+        
+        let scorekeeper = Scorekeeper()
+        let scorekeeperWithIncreasedScore = scorekeeper.incrementScoreBy(5)
+        println(scorekeeperWithIncreasedScore.runningScore)
+        // prints 5
+        
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;    &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;
+    
+    
+    ### Observations
+    
+    
+    As I look at the code I&#39;ve just presented, I notice a few things as I contrast the two examples:
+    
+    
+    
+    
+    
+      * The first example uses var to declare the stored property of my Scorekeeper class.  It _has_ to be var so that the value of the property can be changed (mutated).
+    
+    
+      * The second example uses let exclusively.  No in-place mutations occur, so constants are perfectly reasonable to use.
+    
+    
+    
+    * * *
+    
+    
+    
+    
+    
+      * The first example&#39;s design lends itself to produce interesting and unpredictable side-effects.  If multiple clients hold a reference to my scorekeeper instance, there are two ways for the runningScore to change out from underneath any of those clients:  First, I could simply reassign a value to the runningScore directly.  Second, I could call incrementScoreBy().  Either way, unintended consequences may arise because of the mutation.
+    
+    
+      * In the second example, it&#39;s _impossible_ to cause those unintended consequences.  runningScore can&#39;t be changed directly (it&#39;s a constant), and incrementScoreBy() returns a whole _new_ instance, so all clients would be dealing with the instance that they expect to be dealing with.  No values can be changed out from underneath them.
+    
+    
+    
+    * * *
+    
+    
+    
+    
+    
+      * The first example&#39;s incrementScoreBy method has no return value.  While I can envision writing a unit test for this, it&#39;s not obvious at first glance what I should do.  The method produces a side-effect in my existing instance that I need to know about in order to get the XCTAssert right.
+    
+    
+      * The second example&#39;s incrementScoreBy method returns a new Scorekeeper instance.  The unit test for this (to me) is a little more clear.  I simply inspect the value of runningScore of the new instance, and assert that it is [x] points higher than the old instance.  I still have both the old scorekeeper instance _and_ the new scorekeeperWithIncreasedScore, so everything I&#39;d need to ensure the correct point increase occurred is at my disposal.
+    
+    
+    
+    ### Conclusion
+    
+    
+    I hear so much benefit that comes from avoiding mutable state, so it was satisfying to finally let my mind reconcile how to manage the state of my own Types immutably.  With the iOS frameworks we have to work with, immutability is a challenge, and _total_ immutable state is not possible (think of the user interface layer where state is stored and updated out of necessity because of how _Apple&#39;s_ frameworks and tools are designed). Nonetheless, I found this discovery to be really exciting all the same.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Resolving “Variable used within its own initial value” Error in Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</link>
+      <pubDate>Mon, 20 Oct 2014 13:50:52 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</guid>
+      <description>&lt;p&gt;While experimenting with a few things today, I experienced this compiler error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Variable used within its own initial value&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let me describe the situation I was in…&lt;/p&gt;
+&lt;p&gt;I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&amp;rsquo;ve recently learned about in Scala.  Essentially, I was trying to implement a factorial function as a &lt;em&gt;closure&lt;/em&gt;, and I was trying to do it &lt;em&gt;recursively&lt;/em&gt; (that is, without using a for/while loop).  Here&amp;rsquo;s what I wanted to do:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;factorial&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you&amp;rsquo;ve seen factorial before, the above implementation isn&amp;rsquo;t new.  The &amp;ldquo;base case” that will let the recursion stop is the expression &lt;code&gt;if (n == 0)&lt;/code&gt;, and the recursive case is in the &lt;code&gt;else&lt;/code&gt; block, where &lt;code&gt;factorial&lt;/code&gt; gets called &lt;em&gt;again&lt;/em&gt; within its own body&amp;rsquo;s definition.  Only problem is… this doesn&amp;rsquo;t work in Swift 1.0.&lt;/p&gt;
+&lt;p&gt;Apparently, the closure (which is being initialized and assigned to the constant named &amp;ldquo;factorial”) hasn&amp;rsquo;t had a chance to fully initialize itself before the name &lt;code&gt;factorial&lt;/code&gt; is used within the body.&lt;/p&gt;
+&lt;p&gt;The frustrating part is that &lt;a title=&#34;Rob Napier on Immutability and Swift&#34; href=&#34;http://robnapier.net/llama-calculus&#34; target=&#34;_blank&#34;&gt;I &lt;em&gt;really&lt;/em&gt; didn&amp;rsquo;t want to type the letters v-a-r&lt;/a&gt; to implement my solution.  But alas, as &lt;a title=&#34;Stack Overflow - Handle Closure Recursively&#34; href=&#34;http://stackoverflow.com/questions/25103534/how-to-handle-closure-recursivity&#34; target=&#34;_blank&#34;&gt;Stack Overflow&lt;/a&gt; says, the following solution to the &amp;ldquo;initial value” error works:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Produces the correct result of 120&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Of course, there&amp;rsquo;s absolutely no reason for the implementation to be a closure – I was simply experimenting.  Here&amp;rsquo;s the solution that I actually prefer… a good ole named function definition:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Produces the correct result of 120&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

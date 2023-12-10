@@ -44,11 +44,10 @@ If you&rsquo;ve got a property on an Entity that is of Type decimal, but down in
 <meta property="article:modified_time" content="2017-03-29T20:57:27+00:00" />
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Entity Framework Tip – Specifying Decimal Precision"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Entity Framework Tip – Specifying Decimal Precision"/>
 <meta name="twitter:description" content="By default, Entity Framework takes the .Net decimal Type and maps it to SQL Server&rsquo;s decimal(18,2) data type.
 If you&rsquo;ve got a property on an Entity that is of Type decimal, but down in your database, you&rsquo;re allowing for greater precision than 2 decimal places (scale is actually the proper term for the number of places after the decimal), you need to tell Entity Framework this information. Otherwise, decimal values that you save to your database will be truncated at the default 2 decimal places."/>
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.121.1">
 
     
 <script type="application/ld+json">
@@ -210,7 +209,7 @@ MathJax.Hub.Config({
 <p>To tell Entity Framework that you need different precision than <code>decimal(18,2)</code>, you need to <strong>open your DbContext</strong> implementation.</p>
 <p>Then take a look at your <code>OnModelCreating</code> override.</p>
 <p>If you haven&rsquo;t implemented an override yet, go ahead and create one. If you&rsquo;ve already got some Code First stuff in your <code>OnModelCreating</code> override, add to it by following this example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="n">OnModelCreating</span><span class="p">(</span><span class="n">DbModelBuilder</span> <span class="n">modelBuilder</span><span class="p">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnModelCreating</span><span class="p">(</span><span class="n">DbModelBuilder</span> <span class="n">modelBuilder</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&lt;</span><span class="n">NameOfEntity</span><span class="p">&gt;()</span>
 </span></span><span class="line"><span class="ln">4</span><span class="cl">                <span class="p">.</span><span class="n">Property</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">NameOfProperty</span><span class="p">)</span>
@@ -237,7 +236,7 @@ MathJax.Hub.Config({
     </aside>
 
     <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     window.disqus_config = function () {
     
     

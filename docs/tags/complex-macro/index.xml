@@ -1,0 +1,102 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Complex Macro on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/complex-macro/</link>
+    <description>Recent content about iOS development with Swift in Complex Macro  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Jan 2015 13:00:51 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/complex-macro/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Converting Complex Objective-C Macros to Swift Functions</title>
+      <link>https://www.andrewcbancroft.com/2015/01/29/converting-complex-objective-c-macros-swift-functions/</link>
+      <pubDate>Thu, 29 Jan 2015 13:00:51 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/01/29/converting-complex-objective-c-macros-swift-functions/</guid>
+      <description>&lt;p&gt;The question of how to convert &lt;code&gt;#define&lt;/code&gt; macros from Objective-C to Swift is explained fairly simply in the [Apple developer documentation on the subject][1]. For &lt;em&gt;simple&lt;/em&gt; macros, it&amp;rsquo;s a matter of rewriting them as global constants. In fact, if you&amp;rsquo;re using the hybrid Objective-C — Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the [alternative to Objective-C macros][2] a while back.&lt;/p&gt;
+&lt;p&gt;Where we run into trouble is when we need to port &lt;em&gt;complex&lt;/em&gt; Objective-C macros to Swift. According to the [same documentation from Apple][1],&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Complex macros are used in C and Objective-C but have no counterpart in Swift.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Yikes!&lt;/p&gt;
+&lt;p&gt;Thankfully there &lt;em&gt;is&lt;/em&gt; a silver lining after that scary first sentence:&lt;/p&gt;
+&lt;p&gt;[&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/complex_macros.png&#34; alt=&#34;Complex Macros Explanation&#34; width=&#34;670&#34; height=&#34;168&#34; class=&#34;alignnone size-full wp-image-11214&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/01/complex_macros.png 670w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/complex_macros-300x75.png 300w&#34; sizes=&#34;(max-width: 670px) 100vw, 670px&#34; /&gt;][3]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In Swift, you can use functions and generics to achieve the same results without any compromises.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That makes sense, actually! Complex Objective-C macros tend to look a &lt;em&gt;lot&lt;/em&gt; like functions, so the transition to Swift was straightforward in a case I ran across recently.&lt;/p&gt;
+&lt;h2 id=&#34;two-examples&#34;&gt;Two Examples:&lt;/h2&gt;
+&lt;h3 id=&#34;a-simple-example&#34;&gt;A simple example&lt;/h3&gt;
+&lt;p&gt;What could we do in Swift to convert an Objective-C macro that looks something like this?&lt;/p&gt;
+&lt;pre class=&#34;lang:objc decode:true &#34; &gt;#define SQUARE_NUMBER(n) n * n
+```
+
+One thing we could do is write a function that produces the same thing:
+
+```swift
+func squareNumber(n: Int) -&gt; Int {
+    return n * n
+}
+```
+
+### A little more complicated
+
+An example situation that came to me on Twitter took the form of converting a macro that was a little more complicated than the simple example just presented. The input to the complex macro was a color, represented as a hexadecimal value, along with an alpha, represented as a float. The output? A `UIColor` instance based on some bitwise manipulations to that hex value.
+
+I&#39;ve created a GitHub example if you&#39;d like to play around with everything. The relevant code is reproduced below&amp;#8230;
+
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fab fa-github fa-lg&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/andrewcbancroft/ConvertComplexMacroExample&#34; onclick=&#34;_gaq.push([&#39;_trackEvent&#39;, &#39;outbound-article&#39;, &#39;https://github.com/andrewcbancroft/ConvertComplexMacroExample&#39;, &#39;Example Xcode Project&#39;]);&#34; title=&#34;Convert Complex Macro Example Project&#34;&gt;Example Xcode Project&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+The macro form looked like this:
+
+&lt;pre class=&#34;lang:objc decode:true &#34; &gt;#define UIColorFromRGB(rgbValue, alphaValue) \
+[UIColor colorWithRed:((float)((rgbValue &gt;&gt; 16) &amp; 0xFF))/255.0 \
+green:((float)((rgbValue &gt;&gt; 8) &amp; 0xFF))/255.0 \
+blue:((float)((rgbValue &gt;&gt; 0) &amp; 0xFF))/255.0 \
+alpha:alphaValue]
+```
+
+Rewriting it as a Swift function:
+
+```swift
+func UIColorFromRGB(rgb: Int, alpha: Float) -&gt; UIColor {
+    let red = CGFloat(Float(((rgb&gt;&gt;16) &amp; 0xFF)) / 255.0)
+    let green = CGFloat(Float(((rgb&gt;&gt;8) &amp; 0xFF)) / 255.0)
+    let blue = CGFloat(Float(((rgb&gt;&gt;0) &amp; 0xFF)) / 255.0)
+    let alpha = CGFloat(alpha)
+    
+    return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+}
+```
+
+The main thing to keep in mind is that the output of the macro/function is the focus. The internals could change to better-adapt to Swift&#39;s features if you desire. If the macro was ugly inside, make it nice in Swift!
+
+### Where should the function go?
+
+  * For organization&#39;s sake, you could create a new .swift file and place the function inside it at the global level. This would provide the most convenient transition for your Objective-C to Swift conversion, because `#defines` were available wherever you imported the Objective-C header file.
+  * Alternatively, you could encapsulate the function in a class/struct/enum.
+
+### Wrapping up
+
+With the power of Swift functions and the ability to even declare and use them globally, converting complex macros to a better Swift alternative is much less daunting than you might expect.
+
+ [1]: https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-XID_20
+ [2]: http://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/
+ [3]: http://www.andrewcbancroft.com/wp-content/uploads/2015/01/complex_macros.png</description>
+    </item>
+    
+  </channel>
+</rss>

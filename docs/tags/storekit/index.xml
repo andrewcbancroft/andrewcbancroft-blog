@@ -1,0 +1,201 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>StoreKit on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/storekit/</link>
+    <description>Recent content about iOS development with Swift in StoreKit  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/storekit/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>StoreKit Testing Swift Start</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/iap/storekit-testing-swift-start/</link>
+      <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/iap/storekit-testing-swift-start/</guid>
+      <description>&lt;h1 id=&#34;manually-testing-storekit-code&#34;&gt;Manually Testing StoreKit Code&lt;/h1&gt;
+&lt;h2 id=&#34;development-workflow-changes&#34;&gt;Development Workflow Changes&lt;/h2&gt;
+&lt;p&gt;The previous workflow for setting up in-app purchases was a bit disjointed.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;d have to create your app in Xcode&amp;hellip; then jump out to App Store Connect to define your app &lt;em&gt;there&lt;/em&gt;&amp;hellip; set up your digital products &lt;em&gt;there&lt;/em&gt; (in App Store Connect)&amp;hellip; and then jump &lt;em&gt;back&lt;/em&gt; to Xcode to write your StoreKit code.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Now&lt;/strong&gt;, you can get started in Xcode, and &lt;em&gt;stay&lt;/em&gt; in Xcode.  Here&amp;rsquo;s how:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Go to the File menu&lt;/li&gt;
+&lt;li&gt;Click New ➡️ File&lt;/li&gt;
+&lt;li&gt;Type &amp;ldquo;storekit&amp;rdquo; into the filter&lt;/li&gt;
+&lt;li&gt;Click Next to add a StoreKit Configuration File ✅&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;add-storekit-configuration.gif&#34; alt=&#34;Add StoreKit Configuration File&#34;&gt;&lt;/p&gt;
+&lt;p&gt;From there, you get to add the digital products you intend to offer in your app, all without leaving Xcode!&lt;/p&gt;
+&lt;p&gt;Xcode offers support for configuring all three product types:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Consumable&lt;/li&gt;
+&lt;li&gt;Non-Consumable&lt;/li&gt;
+&lt;li&gt;Auto-Renewable Subscription&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‼️Note: It appears that Non-Renewing Subscriptions are no longer encouraged&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;set-up-products.png&#34; alt=&#34;Set Up Products&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Once you have all of your products configured and your Store view written, you&amp;rsquo;ll want to &lt;em&gt;use&lt;/em&gt; your configuration for testing.&lt;/p&gt;
+&lt;p&gt;To do it, you need to edit your app&amp;rsquo;s scheme:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Click your app target in the toolbar&lt;/li&gt;
+&lt;li&gt;Click Edit Scheme&amp;hellip;&lt;/li&gt;
+&lt;li&gt;Click Options&lt;/li&gt;
+&lt;li&gt;Find StoreKit Configuration, and select the configuration you&amp;rsquo;ve added for your project in the dropdown ✅&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;edit-scheme.gif&#34; alt=&#34;Edit Scheme&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;making-test-purchases&#34;&gt;Making Test Purchases&lt;/h2&gt;
+&lt;p&gt;Now to actually test things!&lt;/p&gt;
+&lt;p&gt;To test things locally, you don&amp;rsquo;t need to create a sandbox tester account first (something &lt;em&gt;else&lt;/em&gt; you used to have to do before testing in-app purchases).&lt;/p&gt;
+&lt;p&gt;Everything happens locally.&lt;/p&gt;
+&lt;p&gt;All of your code that would be communicating with the App Store itself in Production, is &amp;ldquo;taken care of&amp;rdquo; by Xcode.&lt;/p&gt;
+&lt;p&gt;So you may be wondering&amp;hellip;&lt;/p&gt;
+&lt;p&gt;❓&amp;quot;Do my SKPaymentTransactionObserver functions get executed when they&amp;rsquo;re supposed to?&amp;quot;&lt;/p&gt;
+&lt;p&gt;👉&lt;strong&gt;Yes&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;❓&amp;quot;Do I get a receipt for the purchase?&amp;quot;&lt;/p&gt;
+&lt;p&gt;👉&lt;strong&gt;Yes&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;❓&amp;quot;Can I use that receipt to validate successfully?&amp;quot;&lt;/p&gt;
+&lt;p&gt;👉&lt;strong&gt;Kinda&lt;/strong&gt;. Receipts from the local Xcode environment are not signed with the same signature as the Sandbox and Production environments are, so they cannot be used if you&amp;rsquo;re implementing server-side receipt validation.&lt;/p&gt;
+&lt;h2 id=&#34;development-workflow-enhancements&#34;&gt;Development Workflow Enhancements&lt;/h2&gt;
+&lt;h3 id=&#34;storekit-transaction-manager&#34;&gt;StoreKit Transaction Manager&lt;/h3&gt;
+&lt;p&gt;How often does your implementation work perfectly &lt;strong&gt;the first time&lt;/strong&gt;?&lt;/p&gt;
+&lt;p&gt;Rarely?&lt;/p&gt;
+&lt;p&gt;Yeah&amp;hellip; I&amp;rsquo;m with you.&lt;/p&gt;
+&lt;p&gt;With the new &lt;strong&gt;StoreKit Transaction Manager&lt;/strong&gt;, it&amp;rsquo;s easy to &amp;ldquo;clear things out&amp;rdquo; so that previous test purchases that didn&amp;rsquo;t go so well can be tried again fresh, as if a purchase never happened.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;storekit-transaction-manager.gif&#34; alt=&#34;StoreKit Transaction Manager&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: If you don&amp;rsquo;t see the StoreKit Transaction Manager icon in the debug console, make sure you&amp;rsquo;ve added the In-App Purchasing capability to your app.  Then try again.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;test-edge-cases&#34;&gt;Test Edge Cases&lt;/h3&gt;
+&lt;p&gt;To support testing out what could be considered &amp;ldquo;edge cases&amp;rdquo; in the in-app purchasing experience, Xcode 12 also has the ability to simulate things like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Time Rate for Auto-Renewable Subscription expiration&lt;/li&gt;
+&lt;li&gt;Interrupted purchases&lt;/li&gt;
+&lt;li&gt;Failed transactions&lt;/li&gt;
+&lt;li&gt;Ask To Buy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;edge-cases.png&#34; alt=&#34;Edge Cases&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;auto-renewable-subscription-testing-enhancements&#34;&gt;Auto-Renewable Subscription Testing Enhancements&lt;/h3&gt;
+&lt;p&gt;Testing subscription expiration is important for preserving the revenue you intend to generate from auto-renewable subscriptions.&lt;/p&gt;
+&lt;p&gt;The challenge is that you and I don&amp;rsquo;t have time to wait!&lt;/p&gt;
+&lt;p&gt;Previously, you could update your product in App Store Connect to have a shorter duration, and the Sandbox environment would interpret, say, a six month subscription to be &amp;ldquo;30 minutes&amp;rdquo; worth of time.&lt;/p&gt;
+&lt;p&gt;But that&amp;rsquo;s still a long time to wait between making a subscription purchase, and trying out expiration logic, isn&amp;rsquo;t it?&lt;/p&gt;
+&lt;p&gt;Problem. Solved.  Now you can select even shorter durations for testing subscription expiration using the Time Rate menu option in Xcode&amp;rsquo;s editor menu &lt;strong&gt;when you&amp;rsquo;re on the StoreKit configuration page&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;time-rate.png&#34; alt=&#34;Time Rate&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Remember: To see this editor menu, you have to be in the StoreKit configuration file of your app.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If a second equals a day, and there&amp;rsquo;s 30ish days in a month, a six month subscription should expire and auto-renew in &lt;strong&gt;three-ish&lt;/strong&gt; minutes now.&lt;/p&gt;
+&lt;p&gt;A huge help for impatient types like myself!&lt;/p&gt;
+&lt;h1 id=&#34;automated-testing-for-storekit-code&#34;&gt;Automated Testing for StoreKit Code&lt;/h1&gt;
+&lt;p&gt;Tired of launching your app and clicking around manually to test things out?&lt;/p&gt;
+&lt;p&gt;Not only is that tedious, you and I are bound to either miss something, or test inconsistently, leading to a potentially sub-par end-user experience.&lt;/p&gt;
+&lt;p&gt;Apple has given us a new &lt;strong&gt;StoreKitTest framework&lt;/strong&gt; that you can use within XCTest!&lt;/p&gt;
+&lt;p&gt;Everything that you can point-and-click on is fully testable with unit and UI tests with zero human interaction.&lt;/p&gt;
+&lt;p&gt;To get started using this new framework, it&amp;rsquo;s &lt;code&gt;import StoreKitTest&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;is-the-sandbox-environment-still-useful&#34;&gt;Is the Sandbox Environment Still Useful?&lt;/h1&gt;
+&lt;p&gt;Super useful.&lt;/p&gt;
+&lt;p&gt;Testing things out locally is amazingly powerful for getting you started, but before you deploy your app to the App Store and send it into review, you still have to&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Set up your products in App Store Connect &amp;hellip; right now the Xcode configuration doesn&amp;rsquo;t get &amp;ldquo;pushed up&amp;rdquo; to App Store Connect, so it&amp;rsquo;s a double-entry world right now.&lt;/li&gt;
+&lt;li&gt;Set up a Sandbox tester account in App Store Connect so that you can&amp;hellip;&lt;/li&gt;
+&lt;li&gt;Test out your in-app purchasing workflow and receipt validation logic with receipts signed by a &amp;ldquo;real&amp;rdquo; App Store environment (just like your TestFlight testers and your &lt;strong&gt;App Reviewer&lt;/strong&gt; will use)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And if you&amp;rsquo;re using App Store server notifications to detect changes to auto-renewable subscriptions, you need to test those out as well.&lt;/p&gt;
+&lt;p&gt;So for all of these reasons, the Sandbox environment is still there, and is still useful.&lt;/p&gt;
+&lt;p&gt;Alas, &lt;em&gt;some&lt;/em&gt; manual testing is still required, but can you imagine some of the possibilities for getting started with implementing in-app purchases, right in Xcode, on day zero of your project?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implementing In-App Purchases on iOS</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/</link>
+      <pubDate>Tue, 09 Jun 2020 10:03:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/</guid>
+      <description>&lt;p&gt;Monetizing apps is challenging. In this course, Implementing In-App Purchases on iOS, you’ll learn to offer digital products and services directly within your app as in-app purchases.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://bit.ly/implementing-in-app-purchases-ios&#34; target=&#34;_blank&#34;&gt;Implementing In-App Purchases on iOS&lt;/a&gt;&lt;a href=&#34;https://bit.ly/implementing-in-app-purchases-ios&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/implementing-in-app-purchases-ios-title.png&#34; alt=&#34;Implementing In-App Purchases on iOS&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;First, you’ll explore how to translate business requirements into digital products and configure them in App Store Connect and Xcode.&lt;/p&gt;
+&lt;p&gt;Next, you’ll discover how to build and test a store within your app using StoreKit.&lt;/p&gt;
+&lt;p&gt;Finally, you’ll learn how to make sure purchases made within your app are authentic, and unlock content that’s been purchased by your users.&lt;/p&gt;
+&lt;p&gt;When you’re finished with this course, you’ll have the skills and knowledge needed to implement in-app purchases on iOS!&lt;/p&gt;
+&lt;h2 id=&#34;1--preparing-to-implement-in-app-purchases&#34;&gt;1 – Preparing to Implement In-App Purchases&lt;/h2&gt;
+&lt;p&gt;Prepare to implement in-app purchases by understanding what’s involved from a big picture standpoint.&lt;/p&gt;
+&lt;p&gt;You will learn to configure digital products in App Store Connect and Xcode to kick off your in-app purchase learning adventure.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Perks (And the Work) Ahead of You&lt;/li&gt;
+&lt;li&gt;First Things First - Checking off the Prerequisites&lt;/li&gt;
+&lt;li&gt;Matching Product Types to Business Requirements&lt;/li&gt;
+&lt;li&gt;Setting Up Products in App Store Connect&lt;/li&gt;
+&lt;li&gt;Setting Up an Auto-Renewable Subscription&lt;/li&gt;
+&lt;li&gt;Configuring an Xcode Project for In-App Purchases&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2--building-in-app-purchase-functionality-with-storekit&#34;&gt;2 – Building In-App Purchase Functionality with StoreKit&lt;/h2&gt;
+&lt;p&gt;The focus of this module is on the StoreKit APIs for working with digital products and App Store Connect.&lt;/p&gt;
+&lt;p&gt;You will learn to build and test a fully-working store view that will support in-app purchases.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Using StoreKit to Build In-App Purchase Functionality: A Roadmap&lt;/li&gt;
+&lt;li&gt;Retrieving a Set of Products for Purchase from the App Store&lt;/li&gt;
+&lt;li&gt;Displaying Products in a User Interface&lt;/li&gt;
+&lt;li&gt;Implementing a “Buy” Button&lt;/li&gt;
+&lt;li&gt;Preparing to Test Purchases by Setting up a Sandbox Tester Account&lt;/li&gt;
+&lt;li&gt;Making Test Purchases&lt;/li&gt;
+&lt;li&gt;Implementing a “Restore Purchases” Button&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3--protecting-your-revenue-by-verifying-purchase-authenticity&#34;&gt;3 – Protecting Your Revenue by Verifying Purchase Authenticity&lt;/h2&gt;
+&lt;p&gt;After all your hard work to implement in-app purchases, how awful would it be if malicious users &lt;em&gt;stole&lt;/em&gt; the content you&amp;rsquo;ve labored to create?&lt;/p&gt;
+&lt;p&gt;In this module, you will learn to implement measures to protect revenue generated through in-app purchases by validating App Store receipts.&lt;/p&gt;
+&lt;p&gt;Receipt validation is a notoriously burdensome hassle. But it doesn&amp;rsquo;t have to be!&lt;/p&gt;
+&lt;p&gt;I will teach you how to implement server-side receipt validation from end-to-end with &lt;em&gt;no&lt;/em&gt; third-party libraries, &lt;em&gt;no&lt;/em&gt; complicated server setup, and &lt;em&gt;no&lt;/em&gt; platform-specific proprietary tools.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s the roadmap of topics incluced:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Verifying Purchase Authenticity by Validating App Store Receipts&lt;/li&gt;
+&lt;li&gt;Weighing Strategies for Receipt Validation&lt;/li&gt;
+&lt;li&gt;Charting the Course for Server-side Receipt Validation&lt;/li&gt;
+&lt;li&gt;Sending the Receipt from Your App to Your Server&lt;/li&gt;
+&lt;li&gt;Writing Server-side Code to Forward the Receipt to the App Store for Validation&lt;/li&gt;
+&lt;li&gt;Handling the Response from the App Store on Your Server&lt;/li&gt;
+&lt;li&gt;Accounting for the Sandbox Environment on Your Server&lt;/li&gt;
+&lt;li&gt;Handling the Response from Your Server in Your App&lt;/li&gt;
+&lt;li&gt;The Case of the Missing Receipt: Requesting a Refresh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4--unlocking-purchased-content&#34;&gt;4 – Unlocking Purchased Content&lt;/h2&gt;
+&lt;p&gt;After a user makes a valid purchase, you&amp;rsquo;ve got to unlock the content they legitimately bought!&lt;/p&gt;
+&lt;p&gt;Each product type has its own nuances for how to unlock and provide the associated content though.&lt;/p&gt;
+&lt;p&gt;What do you need to think about, and what code do you need to write to make it happen?&lt;/p&gt;
+&lt;p&gt;To find out, you will explore these topics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Analyzing Content-providing Logic by Product Type&lt;/li&gt;
+&lt;li&gt;Persisting Purchased Products Securely&lt;/li&gt;
+&lt;li&gt;Using the iOS Keychain&lt;/li&gt;
+&lt;li&gt;Keeping Track of Consumable Product Inventory&lt;/li&gt;
+&lt;li&gt;Managing Non-Renewing Subscriptions&lt;/li&gt;
+&lt;li&gt;Synchronizing Purchases Across Devices&lt;/li&gt;
+&lt;li&gt;Handling Auto-Renewable Subscriptions&lt;/li&gt;
+&lt;li&gt;Saving Non-Consumable Transactions&lt;/li&gt;
+&lt;li&gt;Preparing for App Store Review&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;From the beginning I set out to make the course I wish &lt;em&gt;I&lt;/em&gt; had when I started learning to implement in-app purchases for &lt;em&gt;my&lt;/em&gt; apps.  My unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!&lt;/p&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

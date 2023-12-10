@@ -1,0 +1,58 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Documentation on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/documentation/</link>
+    <description>Recent content about iOS development with Swift in Documentation  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Sep 2014 03:44:16 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/documentation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Create Documentation for your Swift Playground</title>
+      <link>https://www.andrewcbancroft.com/2014/09/09/create-documentation-for-your-swift-playground/</link>
+      <pubDate>Wed, 10 Sep 2014 03:44:16 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/09/09/create-documentation-for-your-swift-playground/</guid>
+      <description>&lt;p&gt;As I opened Apple&amp;rsquo;s latest &lt;a title=&#34;Apple Swift Developer Blog - Patterns Playground&#34; href=&#34;https://developer.apple.com/swift/blog/?id=13&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Patterns Playground” blog post&lt;/a&gt;, I was impressed with the look and feel.  Rather than create the documentation as comment blocks, they managed to put in sharp-looking notes and explanations before each code example / experiment.  It&amp;rsquo;s like an interactive book, reminiscent of the Swift Programming Language iBook!  Here&amp;rsquo;s a snippet of what their Playground looks like:&lt;/p&gt;
+&lt;p&gt;[&lt;img class=&#34;alignnone size-large wp-image-4771&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground-1024x511.png&#34; alt=&#34;Apple&#39;s Patterns Playground&#34; width=&#34;730&#34; height=&#34;364&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground-1024x511.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground-300x149.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground.png 1080w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;][1]&lt;/p&gt;
+&lt;p&gt;Of course, my immediate question / thought was, &amp;ldquo;How&amp;rsquo;d they &lt;em&gt;do&lt;/em&gt; that?!  Can &lt;em&gt;I&lt;/em&gt; do that?  I want to do that!”.  I didn&amp;rsquo;t know it at the time of this publication, but apparently Apple has some &lt;a title=&#34;Apple Developer Documentation - Interactive Learning Playgrounds&#34; href=&#34;https://developer.apple.com/library/prerelease/ios/documentation/Swift/Reference/Playground_Ref/Chapters/InteractiveLearning.html&#34; target=&#34;_blank&#34;&gt;pre-release documentation out on developer.apple.com&lt;/a&gt;, detailing how all this is done.  I (as usual) did it the hard way and hacked my way through it.  I figured I&amp;rsquo;d go ahead and share my discoveries alongside the official documentation from Apple.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m already a believer in using Playgrounds for teaching.  The read-example-experiment loop is so easy in the Playground environment.  I think using this documentation technique has the potential to enhance the Playground experience &lt;em&gt;even more&lt;/em&gt; to create professional, sharp-looking educational material_.  _&lt;/p&gt;
+&lt;p&gt;For this post, I wanted to take a simple example (the File -&amp;gt; New Playground playground) and convert the comment-style documentation into &amp;ldquo;fancy” documentation.&lt;/p&gt;
+&lt;h3 id=&#34;before&#34;&gt;Before:&lt;/h3&gt;
+&lt;p&gt;[&lt;img class=&#34;alignnone size-large wp-image-4751&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_before-1024x108.png&#34; alt=&#34;Before view of Playground&#34; width=&#34;730&#34; height=&#34;76&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_before-1024x108.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_before-300x31.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_before.png 1142w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;][2]&lt;/p&gt;
+&lt;h3 id=&#34;after&#34;&gt;After:&lt;/h3&gt;
+&lt;p&gt;[&lt;img class=&#34;alignnone size-large wp-image-4761&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_after-1024x239.png&#34; alt=&#34;After view of Playground&#34; width=&#34;730&#34; height=&#34;170&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_after-1024x239.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_after-300x70.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_after.png 1139w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;][3]&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s explore.&lt;/p&gt;
+&lt;h2 id=&#34;the-gist&#34;&gt;The Gist&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Create yourself a playground (and note where you save it).&lt;/li&gt;
+&lt;li&gt;Navigate to where the .playground file is saved in Finder.&lt;/li&gt;
+&lt;li&gt;Right-click the .playground file, and choose &amp;ldquo;Show Package Contents”.&lt;/li&gt;
+&lt;li&gt;Add a new folder named &amp;ldquo;Documentation”.&lt;/li&gt;
+&lt;li&gt;Create a new HTML file in the Documentation folder.  It should contain the HTML markup and the text explanation that you&amp;rsquo;d like to enhance your playground with.  Make sure it is a well-formed HTML document by the time you&amp;rsquo;re finished creating it. I describe a quick way to jumpstart your documentation process at the end of this article…&lt;/li&gt;
+&lt;li&gt;Although optional, I&amp;rsquo;d recommend styling your HTML file with appropriate CSS.  Adding a CSS file and referencing it within the HTML file you created is probably a good idea (and this is allowed for Playground documentation).&lt;/li&gt;
+&lt;li&gt;Open contents.xcplayground with the text editor of your choice by right-clicking and choosing &amp;ldquo;Open With”.&lt;/li&gt;
+&lt;li&gt;Modify the XML so that the &lt;sections&gt; element contains a &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;&lt;documentation&gt;&lt;/span&gt; node as shown in the highlighted code lines in the example below.  Be sure to replace the relative-path value with the name of the HTML file you created in step 5 (I named mine &amp;ldquo;doc-fragment-0.html”): &lt;pre class=&#34;lang:xhtml mark:2-3 decode:true &#34; title=&#34;contents.xcplayground Snippet&#34;&gt;&lt;sections&gt;
+&lt;documentation relative-path=&#39;doc-fragment-0.html&#39;&gt;
+&lt;/documentation&gt;
+&lt;code source-file-name=&#39;section-2.swift&#39;/&gt;
+&lt;/sections&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
+  9.  Save, and open the playground in Xcode 6.  Your Playground should now contain documentation!
+
+As a way to jump-start my own Playground documentation, I simply borrowed one of the HTML files and the CSS file from Apple&amp;#39;s Patterns Playground.  Then I modified the markup to contain the educational material I wanted for _my_ playground, customized the styles to what I wanted, added the &amp;lt;span class=&amp;#34;lang:default decode:true  crayon-inline &amp;#34;&amp;gt;&amp;lt;documentation&amp;gt;&amp;lt;/span&amp;gt; node to the contents.xcplayground file, saved, and voila:  Fancy documentation!
+
+&amp;amp;nbsp;
+
+ [1]: http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground.png
+ [2]: http://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_before.png
+ [3]: http://www.andrewcbancroft.com/wp-content/uploads/2014/09/MyPlayground_WithDocumentation_playground_after.png
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,149 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Featured on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/categories/featured/</link>
+    <description>Recent content about iOS development with Swift in Featured  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Feb 2016 18:23:49 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/categories/featured/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Managing Xcode Project Dependencies with CocoaPods</title>
+      <link>https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/</link>
+      <pubDate>Wed, 03 Feb 2016 18:23:49 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/</guid>
+      <description>&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;I try to get as practical as possible in the course. As you&amp;rsquo;re watching you&amp;rsquo;ll be &amp;ldquo;embedded” into a team of iOS developers, and you&amp;rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through &lt;em&gt;not&lt;/em&gt; having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.&lt;/p&gt;
+&lt;p&gt;The course is a progressive journey. First, the team has problems managing dependencies without a dependency manager. Then, they bring in CocoaPods to help them find and organize 3rd party libraries. &lt;em&gt;Then&lt;/em&gt;, they start to think, &amp;ldquo;Hey, what if we could create our &lt;em&gt;own&lt;/em&gt; CocoaPod libraries?”. Finally, they use that knowledge of how to create a CocoaPod library to set up a private repository to share code internally between projects with their team.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve got four modules that cover the following topics:&lt;/p&gt;
+&lt;h2 id=&#34;1---introducing-project-dependency-management&#34;&gt;1 - Introducing Project Dependency Management&lt;/h2&gt;
+&lt;p&gt;I teach the basic concepts and definitions associated with &amp;ldquo;project dependency management”. What is it all about? Why does it matter? And most importantly, how is it done in the Apple Ecosystem?&lt;/p&gt;
+&lt;h2 id=&#34;2---managing-dependencies-with-cocoapods&#34;&gt;2 - Managing Dependencies with CocoaPods&lt;/h2&gt;
+&lt;p&gt;I guide you through installing CocoaPods, configuring your Xcode project to use CocoaPods, and working with the CocoaPods command line utility.&lt;/p&gt;
+&lt;h2 id=&#34;3---creating-cocoapod-libraries&#34;&gt;3 - Creating CocoaPod Libraries&lt;/h2&gt;
+&lt;p&gt;This is where things turned really fun for me. :] In this module of the course, I teach you how to create a CocoaPod library, host its source code on GitHub, and publish the library to the CocoaPods Trunk.&lt;/p&gt;
+&lt;h2 id=&#34;4---hosting-a-private-cocoapods-repository&#34;&gt;4 - Hosting a Private CocoaPods Repository&lt;/h2&gt;
+&lt;p&gt;As the capstone to the course, I teach you how to set up a private spec repository and how to configure CocoaPods to utilize it. It really is the culmination of everything learned in the prior modules, but it&amp;rsquo;s also one of the most practical strategies for sharing code between your various Xcode projects that I&amp;rsquo;ve found to-date.&lt;/p&gt;
+&lt;p&gt;In addition to the four modules of content, the course comes with an example Swift iOS app if you&amp;rsquo;re a Pluralsight Plus subscriber!&lt;/p&gt;
+&lt;h1 id=&#34;something-for-everyone&#34;&gt;Something for Everyone&lt;/h1&gt;
+&lt;p&gt;The course is targeted at beginning to intermediate level developers. I assume no prior knowledge of how to work with a dependency manager.&lt;/p&gt;
+&lt;p&gt;That being the case, I do my best to offer something for everyone. If you&amp;rsquo;ve never used a dependency manager on another platform before, I&amp;rsquo;ve got you covered – I&amp;rsquo;ll take you step by step through using CocoaPods.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re already using CocoaPods in your Xcode project, maybe you can benefit from the modules on creating CocoaPod libraries yourself! If you&amp;rsquo;re already creating libraries and contributing to the open source community, what about setting up that private spec repository to share with your team internally?&lt;/p&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Swift Unit Testing – Verifying Method Calls</title>
+      <link>https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/</link>
+      <pubDate>Mon, 22 Dec 2014 13:09:28 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/</guid>
+      <description>&lt;p&gt;In this unit testing screencast for Swift developers, we explore how to use Test Driven Development to verify method calls.&lt;/p&gt;
+&lt;h3 id=&#34;getting-started-guide&#34;&gt;Getting Started Guide&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;re new to unit testing or are trying to get set up with unit testing in a Swift project, you might &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/&#34;&gt;check out my getting started guide&lt;/a&gt; before jumping into the screencast.&lt;/p&gt;
+&lt;h3 id=&#34;screencast&#34;&gt;Screencast&lt;/h3&gt;
+&lt;p&gt;&lt;span class=&#34;text-center&#34;&gt;&lt;a href=&#34;http://youtu.be/hC2Dni9SAWY&#34; target=&#34;_blank&#34;&gt;Large / Full-Screen Viewing&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;github-example&#34;&gt;GitHub Example&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/andrewcbancroft/SwiftTDDVerifyMethodCalls&#34;&gt;GitHub repo&lt;/a&gt; of the example developed in the screencast.&lt;/p&gt;
+&lt;h3 id=&#34;screencast-transcript&#34;&gt;Screencast Transcript&lt;/h3&gt;
+&lt;h4 id=&#34;001&#34;&gt;[0:01]&lt;/h4&gt;
+&lt;p&gt;Hi, I&amp;rsquo;m Andrew from andrewcbancroft.com, and I&amp;rsquo;m bringing you a test driven development example for iOS in Swift.&lt;/p&gt;
+&lt;p&gt;The goal of this video is to teach you how to write a unit test to verify that a method was called.&lt;/p&gt;
+&lt;h4 id=&#34;021&#34;&gt;[0:21]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll begin in Xcode 6.1.1 with a side-by-side view of my TestCase class, and my primary View Controller class. This is what Xcode generated for me when I chose to create a new Single View Application.&lt;/p&gt;
+&lt;h4 id=&#34;038&#34;&gt;[0:38]&lt;/h4&gt;
+&lt;p&gt;Imagine a scenario with me: Suppose that as part of your application&amp;rsquo;s requirements, you mush show an Alert View after your primary view loads. How would we go about using Test Driven Development to implement this &amp;ldquo;feature”?&lt;/p&gt;
+&lt;h4 id=&#34;053&#34;&gt;[0:53]&lt;/h4&gt;
+&lt;p&gt;Well, we&amp;rsquo;d write a test, of course – I&amp;rsquo;ll name it something appropriate like &amp;ldquo;testUIAlertViewShowsAfterViewLoads”&lt;/p&gt;
+&lt;h4 id=&#34;104&#34;&gt;[1:04]&lt;/h4&gt;
+&lt;p&gt;Next, I need to create an instance of my ViewController class so that I can test it.&lt;br&gt;
+But immediately, I run into trouble. It seems that my TestCase class can&amp;rsquo;t &amp;ldquo;see” my View Controller class.&lt;/p&gt;
+&lt;h4 id=&#34;117&#34;&gt;[1:17]&lt;/h4&gt;
+&lt;p&gt;Thankfully, it&amp;rsquo;s a simple fix: Simply add the View Controller class to your Test target.&lt;/p&gt;
+&lt;h4 id=&#34;126&#34;&gt;[1:26]&lt;/h4&gt;
+&lt;p&gt;With everything compiling now, we can move to the next line of test code.&lt;/p&gt;
+&lt;h4 id=&#34;132&#34;&gt;[1:32]&lt;/h4&gt;
+&lt;p&gt;First off, in order to test my View Controller&amp;rsquo;s Alert View functionality, the Alert View has got to be visible to my test. The easiest thing for me to do at this point is to assume that there will be a property on my View Controller that I can set. This allows me to perform a kind of dependency injection known as &amp;ldquo;setter injection”. All it really means is that the property is dual-purpose. When the app runs on my iPhone, it&amp;rsquo;ll use a real UIAlertView. But when I run it in my tests, I can plug in a UIAlertView that I control the behavior of, so that I can verify what I need to in my tests.&lt;/p&gt;
+&lt;h4 id=&#34;216&#34;&gt;[2:16]&lt;/h4&gt;
+&lt;p&gt;The ability to swap in a kind of Alert View that I control really is the &amp;ldquo;magic sauce” to this whole test-driven operation. In order to know whether or not a UI element was &amp;ldquo;shown” in a unit test without actually showing something on the screen in a simulator or device, I need to invent something known as a test-double. A fake object, if you will.&lt;/p&gt;
+&lt;h4 id=&#34;244&#34;&gt;[2:44]&lt;/h4&gt;
+&lt;p&gt;My Fake Alert View will have some special capabilities that allow me to know whether the &amp;ldquo;show()” method was called on it. At the same time, it needs to be able to be substituted in my View Controller for a real UIAlertView.&lt;/p&gt;
+&lt;h4 id=&#34;300&#34;&gt;[3:00]&lt;/h4&gt;
+&lt;p&gt;Since Swift supports object-oriented design, we have inheritance at our disposal here.&lt;/p&gt;
+&lt;h4 id=&#34;307&#34;&gt;[3:07]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll create a nested class inside my test function called FakeAlertView. Notice that it&amp;rsquo;s a subclass of UIAlertView. What&amp;rsquo;s great about this is that it meets both of my testing requirements: I can control it&amp;rsquo;s behavior, and it can be substituted anywhere a UIAlertView is needed.&lt;/p&gt;
+&lt;h4 id=&#34;328&#34;&gt;[3:28]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll finish fleshing out this fake object in a minute. Now that Xcode isn&amp;rsquo;t complaining about not knowing what a FakeAlertView is, I&amp;rsquo;ll turn my attention to a new compiler complaint: I don&amp;rsquo;t have an alertView property on my View Controller yet, so I&amp;rsquo;ll add one.&lt;/p&gt;
+&lt;h4 id=&#34;350&#34;&gt;[3:50]&lt;/h4&gt;
+&lt;p&gt;There&amp;rsquo;s just a little more setup that&amp;rsquo;s needed in order to be able to verify that the show method was called. Since show() doesn&amp;rsquo;t return anything, we need some way to know that its logic was executed. I&amp;rsquo;ll do two things to expose this:&lt;/p&gt;
+&lt;h4 id=&#34;406&#34;&gt;[4:06]&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;I&amp;rsquo;ll have a boolean property called showWasCalled on my FakeAlertView that is initially set to false.&lt;/li&gt;
+&lt;li&gt;I&amp;rsquo;ll override the show() method in this fake UIAlertView subclass. Inside the method body, I&amp;rsquo;ll reassign the value of showWasCalled to true. That will be enough for me to use inside an XCTAssert, which is coming up.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;435&#34;&gt;[4:35]&lt;/h4&gt;
+&lt;p&gt;We&amp;rsquo;re nearing the finish line here. All that&amp;rsquo;s left is to call my View Controller&amp;rsquo;s viewDidLoad method, and write my assertion.&lt;/p&gt;
+&lt;h4 id=&#34;444&#34;&gt;[4:44]&lt;/h4&gt;
+&lt;p&gt;The only thing I&amp;rsquo;d tell you to make note of is that we need to cast the View Controller&amp;rsquo;s UIAlertView instance to a FakeAlertView so that we can access the showWasCalled property.&lt;/p&gt;
+&lt;h4 id=&#34;457&#34;&gt;[4:57]&lt;/h4&gt;
+&lt;p&gt;Running the test at this point should produce a failing test, which is exactly what we want (because there&amp;rsquo;s no code that calls the alertView&amp;rsquo;s show() method in viewDidLoad()).&lt;/p&gt;
+&lt;h4 id=&#34;508&#34;&gt;[5:08]&lt;/h4&gt;
+&lt;p&gt;The last step to this adventure is to write the production code to pass the test. In viewDidLoad, I call my alertView&amp;rsquo;s show method and re-run the tests.&lt;/p&gt;
+&lt;h4 id=&#34;519&#34;&gt;[5:19]&lt;/h4&gt;
+&lt;p&gt;And we&amp;rsquo;re green! Which means we&amp;rsquo;ve managed to successfully verify that a method was called.&lt;/p&gt;
+&lt;h4 id=&#34;527&#34;&gt;[5:27]&lt;/h4&gt;
+&lt;p&gt;Thanks for watching – I have other resources related to Swift and iOS development at andrewcbancroft.com.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Swift Unit Testing Resources</title>
+      <link>https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/</link>
+      <pubDate>Fri, 19 Dec 2014 12:00:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/</guid>
+      <description>&lt;p&gt;As I&amp;rsquo;ve researched Test Driven Development practices in general, and for iOS / Mac applications, I&amp;rsquo;ve been helped by several sources. I&amp;rsquo;ve also discovered a few things the hard way, so I&amp;rsquo;m combining and maintaining this list of resources to help point you in some helpful directions as you adventure in unit testing your iOS apps.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;pluralsight&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pluralsight-courses&#34;&gt;Pluralsight Courses&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.pluralsight.com/courses/play-by-play-wilson-tdd&#34;&gt;Play by Play: TDD with Brad Wilson&lt;/a&gt; – Awesome, awesome course. I learned some really great techniques from this one. The course is geared toward .Net development using Visual Studio, C#, and Moq, but you should still watch it if you&amp;rsquo;ve got a subscription – the techniques used can be done on other platforms. I&amp;rsquo;ve been practicing the techniques in Swift (minus the mocking framework).&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.pluralsight.com/courses/tdd-as-design-tool&#34;&gt;TDD as a Design Tool&lt;/a&gt; – Geared toward web development with JavaScript / AngularJS, but has some useful patterns.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;blogs&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;blogs&#34;&gt;Blogs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://roadfiresoftware.com/2014/06/unit-testing-with-swift/&#34;&gt;How to write unit tests in Swift with XCTest&lt;/a&gt; – Josh Brown gives a nice overview of the unit testing capabilities offered in Xcode and how Swift can be used as the testing language of choice.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://natashatherobot.com/swift-unit-testing-tips-and-tricks/&#34;&gt;Swift: Unit Testing Tips and Tricks&lt;/a&gt; – &lt;a href=&#34;https://twitter.com/NatashaTheRobot&#34;&gt;@NatashaTheRobot&lt;/a&gt; offers some practical advice in a tips and tricks style blog post.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://iosunittesting.com/&#34;&gt;iOS Unit Testing&lt;/a&gt; – Some good introductory articles to browse. Offers a few things in Swift, but much of his content is in Objective-C.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://swiftcast.tv/articles/introduction-to-xctest&#34;&gt;Write your first Unit Test in Swift&lt;/a&gt; – Learn how to write the most basic, but still useful, Unit Tests in Swift with XCTest.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;user-group&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;user-group-talks&#34;&gt;User Group Talks&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://vimeo.com/102163542&#34;&gt;Adam Leonard – Test-Driven Development in Swift using Quick (July 2014)&lt;/a&gt; – Talk given by &lt;a href=&#34;https://twitter.com/adamjleonard&#34;&gt;@adamjleonard&lt;/a&gt; at a Brooklyn Swift Developers Meetup in July.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;at-acb&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;at-andrewcbancroftcom&#34;&gt;At andrewcbancroft.com&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/&#34;&gt;Don&amp;rsquo;t Write Legacy Swift&lt;/a&gt; – Motivations for testing your code.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/&#34;&gt;TDD for iOS in Swift – What’s the Goal?&lt;/a&gt; – Before actually doing Test Driven Development (TDD) for your iOS / Mac app, it’s really important to ask a very fundamental question: What’s the goal? I discuss two goals for testing your iOS / Mac apps.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/&#34; title=&#34;Improvements to Unit Testing in Swift with Xcode 7&#34;&gt;Improvements to Unit Testing in Swift with Xcode 7&lt;/a&gt; Much of the pain involved in getting set up to write unit tests in Swift has been alleviated by improvements in Xcode 7. This article analyzes these improvements to ease your unit testing workflow.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift&#34;&gt;Getting Started with Unit Testing in Swift&lt;/a&gt; – While getting set up to write unit tests in Swift isn&amp;rsquo;t &lt;em&gt;difficult&lt;/em&gt;, it isn&amp;rsquo;t exactly &lt;em&gt;intuitive&lt;/em&gt;. This 5-step guide will get your project set up to write unit tests in Swift.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2015/03/10/an-almost-tdd-workflow-in-swift/&#34; title=&#34;An (Almost) TDD Workflow in Swift&#34;&gt;An (Almost) TDD Workflow in Swift&lt;/a&gt; – When I find myself staring at the screen, paralyzed because I’m “not supposed to write actual production code until the test is written”, I often turn to the workflow that describe in this post, to help me break through to being productive.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/&#34; title=&#34;Unit Testing Model Layer with Core Data and Swift&#34;&gt;Unit Testing Model Layer with Core Data and Swift&lt;/a&gt; – Exploration of testing when your project uses Core Data. This post provides a walk-through of setting up an in-memory data store to test with NSManagedObjects.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/&#34;&gt;Swift Unit Testing – Verifying Method Calls&lt;/a&gt; – Screencast showing how to verify method calls in Swift unit tests.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt; – Pointer on how to make code from your main project visible in your Test project.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/&#34;&gt;Creating &amp;ldquo;Mocks” and &amp;ldquo;Stubs” in Swift&lt;/a&gt; – Essentially a discovery I made about how to create fake objects and override those objects&amp;rsquo; methods. You&amp;rsquo;d do this to isolate and control the object&amp;rsquo;s behavior in order to enable or ease the testing process.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

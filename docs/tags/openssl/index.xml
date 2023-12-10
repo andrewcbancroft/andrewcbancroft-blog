@@ -1,0 +1,432 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenSSL on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/openssl/</link>
+    <description>Recent content about iOS development with Swift in OpenSSL  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Jun 2016 03:44:58 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Extracting a PKCS7 Container for Receipt Validation with Swift</title>
+      <link>https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/</link>
+      <pubDate>Fri, 10 Jun 2016 03:44:58 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/</guid>
+      <description>&lt;p&gt;So you&amp;rsquo;ve &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/&#34;&gt;prepared to test receipt validation&lt;/a&gt; by setting up your app in iTunes Connect.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &amp;ldquo;envelope&amp;rdquo; for the receipt. Perhaps you&amp;rsquo;ve even done it &lt;a href=&#34;https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/&#34;&gt;the &amp;ldquo;easy way&amp;rdquo; with CocoaPods&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ve &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/&#34;&gt;located and loaded&lt;/a&gt; the receipt for validation.&lt;/p&gt;
+&lt;p&gt;Now you&amp;rsquo;re ready to extract the PKCS #7 container and work with it.&lt;/p&gt;
+&lt;p&gt;The aim of this guide is to get you started using the OpenSSL library in your Swift code by employing it to extract the receipt contents from its PKCS #7 container.&lt;/p&gt;
+&lt;p&gt;Just want the code? Here you go!&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fab fa-github fa-lg&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/andrewcbancroft/SwiftyLocalReceiptValidator&#34;&gt;Swifty Local Receipt Validator&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;recap&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;recap-from-the-previous-guide&#34;&gt;Recap from the previous guide&lt;/h2&gt;
+&lt;p&gt;In &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/&#34;&gt;Loading a Receipt for Validation with Swift&lt;/a&gt;, I began the process of breaking out the various steps of the receipt validation process into separate single-responsibility structs with clearly named functions to help clarify what each piece of code is doing.&lt;/p&gt;
+&lt;p&gt;Recall that I&amp;rsquo;ve created a &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-validator-implementation&#34;&gt;main Type called &lt;code&gt;ReceiptValidator&lt;/code&gt;&lt;/a&gt;, with references to several smaller single-responsibility Types that it uses to accomplish the overall validation process. So accordingly, as of my last post in the series, I&amp;rsquo;ve &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation&#34;&gt;created a &lt;code&gt;ReceiptLoader&lt;/code&gt;&lt;/a&gt; that finds the receipt on the file system and loads it into memory.&lt;/p&gt;
+&lt;p&gt;If a validation step ever fails along the way, I&amp;rsquo;ve decided to take advantage of Swift&amp;rsquo;s error throwing features to clearly describe what failed. So far, there&amp;rsquo;s only one case:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;enum&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ReceiptValidationError&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Error&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;case&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;couldNotFindReceipt&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;I&amp;rsquo;ll expand this enum Type to cover more failure conditions in this guide.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;receipt-extractor-outline&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;receiptextractor-struct-outline&#34;&gt;ReceiptExtractor struct outline&lt;/h2&gt;
+&lt;p&gt;The OpenSSL library comes to us in the form of a C static library. It&amp;rsquo;s not a beautiful API to say the least. The names of the Types and functions are really cryptic at times, so I&amp;rsquo;ve decided it&amp;rsquo;s best for my own memory to wrap each step in small function routines that are named for what they do.&lt;/p&gt;
+&lt;p&gt;So supposing you&amp;rsquo;ve &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/&#34;&gt;located and loaded&lt;/a&gt; the receipt data, or used &lt;a href=&#34;https://developer.apple.com/library/ios/documentation/StoreKit/Reference/StoreKit_Collection/&#34;&gt;Store Kit&lt;/a&gt; to request a receipt from Apple… Take a look at this new &lt;code&gt;ReceiptExtractor&lt;/code&gt; skeleton of a struct to get an idea of what&amp;rsquo;s going to be required to extract the PKCS7 container for the receipt:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ReceiptExtractor&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;extractPKCS7Container&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;receiptData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;UnsafeMutablePointer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// use Open SSL to extract the PKCS7 container&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// throw a ReceiptValidationError if something goes wrong in this process&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;new-receiptvalidationerror-cases&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;new-receiptvalidationerror-cases&#34;&gt;New ReceiptValidationError cases&lt;/h2&gt;
+&lt;p&gt;When extracting the receipt information from the PKCS7 container, there are going to be things that would cause overall validation to fail. For example, if the &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/#receipt-loader-implementation&#34;&gt;receipt &lt;code&gt;Data&lt;/code&gt; instance&lt;/a&gt; ends up being empty, that&amp;rsquo;s a validation failure. The PKCS7 container needs to have information inside of it for validation to pass (obviously).&lt;/p&gt;
+&lt;p&gt;So in this guide, I&amp;rsquo;ll expand the &lt;code&gt;ReceiptValidationError&lt;/code&gt; enum to have the following cases:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;enum&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ReceiptValidationError&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Error&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;case&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;couldNotFindReceipt&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;case&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;emptyReceiptContents&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;prep-pkcs7-union-accessors&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;preparation-step-pkcs7-union-accessors&#34;&gt;Preparation step: PKCS7 union accessors&lt;/h2&gt;
+&lt;p&gt;Before attempting to work with OpenSSL&amp;rsquo;s PKCS7 functions, you&amp;rsquo;ve got to do a little prep work to get the functions to play nicely with Swift.&lt;/p&gt;
+&lt;p&gt;Unfortunately, Swift doesn&amp;rsquo;t work well with &lt;a href=&#34;https://en.wikipedia.org/wiki/Union_type#C.2FC.2B.2B&#34;&gt;C union types&lt;/a&gt;. It simply can&amp;rsquo;t see things defined with a C union.&lt;/p&gt;
+&lt;p&gt;Thankfully, we can work around the problem by creating some wrappers. If you&amp;rsquo;ll add two new files to your project and implement them, you&amp;rsquo;ll be on your way. They are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pkcs7_union_accessors.h&lt;/li&gt;
+&lt;li&gt;pkcs7_union_accessors.c&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;pkcs7-union-accessors-h-implementation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;pkcs7_union_accessorsh-implementation&#34;&gt;pkcs7_union_accessors.h implementation&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#ifndef pkcs7_union_accessors_h
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define pkcs7_union_accessors_h
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;openssl/pkcs7.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ASN1_OCTET_STRING&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PKCS7_SIGNED&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_sign&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PKCS7_ENVELOPE&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_enveloped&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PKCS7_SIGN_ENVELOPE&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_signed_and_enveloped&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PKCS7_DIGEST&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_digest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PKCS7_ENCRYPT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_encrypted&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ASN1_TYPE&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_other&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#endif &lt;/span&gt;&lt;span class=&#34;cm&#34;&gt;/* pkcs7_union_accessors_h */&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;pkcs7-union-accessors-c-implementation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;pkcs7_union_accessorsc-implementation&#34;&gt;pkcs7_union_accessors.c implementation&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;pkcs7_union_accessors.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;inline&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;inline&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ASN1_OCTET_STRING&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;inline&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PKCS7_SIGNED&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_sign&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sign&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;inline&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PKCS7_ENVELOPE&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_enveloped&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;enveloped&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;inline&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PKCS7_SIGN_ENVELOPE&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_signed_and_enveloped&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signed_and_enveloped&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;inline&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PKCS7_DIGEST&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_digest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;digest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;inline&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PKCS7_ENCRYPT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_encrypted&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encrypted&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;inline&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ASN1_TYPE&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_other&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;other&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;bridging-header-updates&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;bridging-header-updates&#34;&gt;Bridging header updates&lt;/h4&gt;
+&lt;p&gt;After you create the union accessor files, you need to update your project&amp;rsquo;s bridging header to import the new header file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#import &amp;lt;openssl/pkcs7.h&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#import &amp;lt;openssl/objects.h&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#import &amp;#34;pkcs7_union_accessors.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;receiptextractor-implementation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;receiptextractor-struct-implementation&#34;&gt;ReceiptExtractor struct implementation&lt;/h2&gt;
+&lt;p&gt;Now it&amp;rsquo;s time to dive into the actual implementation of what I&amp;rsquo;m calling a &lt;code&gt;ReceiptExtractor&lt;/code&gt;. Have a look at the code with some explanatory comments following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ReceiptExtractor&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;extractPKCS7Container&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;receiptData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;UnsafeMutablePointer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;receiptBIO&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BIO_new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BIO_s_mem&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;       
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;BIO_write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;receiptBIO&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;receiptData&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;receiptData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;receiptPKCS7Container&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;d2i_PKCS7_bio&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;receiptBIO&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;guard&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;receiptPKCS7Container&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;throw&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ReceiptValidationError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;emptyReceiptContents&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;pkcs7DataTypeCode&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OBJ_obj2nid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pkcs7_d_sign&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;receiptPKCS7Container&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pointee&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;contents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pointee&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;guard&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pkcs7DataTypeCode&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NID_pkcs7_data&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;throw&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ReceiptValidationError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;emptyReceiptContents&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;receiptPKCS7Container&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;receiptextractor-explanation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;receiptextractor-struct-explanation&#34;&gt;ReceiptExtractor struct explanation&lt;/h2&gt;
+&lt;p&gt;Most of the code above is a Swift translation of what&amp;rsquo;s found at &lt;a href=&#34;https://www.objc.io/issues/17-security/receipt-validation/&#34;&gt;Objc.io&amp;rsquo;s Receipt Validation guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I did a little research over at the OpenSSL site though, and thought it might be helpful for the curious to know what some of these non-intuitive function names stand for and what they do.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;BIO_new&lt;/code&gt; for example. &amp;ldquo;BIO&amp;rdquo; stands for &amp;ldquo;Basic I/O&amp;rdquo;. It&amp;rsquo;s an abstraction over the underlying basic input and output operations that your app uses for cryptographic operations.&lt;/p&gt;
+&lt;p&gt;What we&amp;rsquo;re doing with &lt;code&gt;BIO_new(BIO_s_mem())&lt;/code&gt; is saying that we want a new Basic I/O mechanism that uses &lt;em&gt;memory&lt;/em&gt; for its I/O operations.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;BIO_write&lt;/code&gt; takes the &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/&#34;&gt;&lt;code&gt;receiptData&lt;/code&gt; that was located and loaded&lt;/a&gt;, and writes the entire length of its bytes to memory (the &lt;code&gt;receiptBIO&lt;/code&gt; that was created first).&lt;/p&gt;
+&lt;p&gt;To get the actual PKCS #7 container, the &lt;code&gt;d2i_PKCS7_bio&lt;/code&gt; function is used.&lt;/p&gt;
+&lt;p&gt;Once we have the container in hand, it&amp;rsquo;s a matter of making sure it has contents.&lt;/p&gt;
+&lt;p&gt;I couldn&amp;rsquo;t find a lot of information about the call to &lt;code&gt;pkcs7_d_sign&lt;/code&gt;, but the primary point of line 13 above is to get a &amp;ldquo;numerical identifier&amp;rdquo;, which is what &amp;ldquo;NID&amp;rdquo; stands for in &lt;code&gt;OBJ_obj2nid&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Digging into the PKCS #7 container, you can access the right property and convert it to a numerical identifier that you can check.&lt;/p&gt;
+&lt;p&gt;As long as the NID returned is equal to the &lt;code&gt;NID_pkcs7_data&lt;/code&gt; constant value, things are good. If they&amp;rsquo;re not, that means the receipt has no information and validation fails (thus, the guard and throw statement in lines 14-15).&lt;/p&gt;
+&lt;p&gt;If everything passes the guard, though, the PKCS #7 container is returned, and we&amp;rsquo;re ready for the next step of the receipt validation process, which is to verify the signature on the receipt with Apple&amp;rsquo;s root certificate. &lt;em&gt;That&lt;/em&gt;, however, will happen in another entry to this series.&lt;/p&gt;
+&lt;p&gt;Until next time!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy...
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/&#34; title=&#34;Preparing to Test Receipt Validation for iOS&#34;&gt;Preparing to Test Receipt Validation for iOS&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/&#34; title=&#34;Loading a Receipt for Validation with Swift&#34;&gt;Loading a Receipt for Validation with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/&#34; title=&#34;OpenSSL for iOS &amp;#038; Swift the Easy Way&#34;&gt;OpenSSL for iOS &amp; Swift the Easy Way&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/&#34; title=&#34;Receipt Validation – Verifying a Receipt Signature in Swift&#34;&gt;Receipt Validation – Verifying a Receipt Signature in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/&#34; title=&#34;Receipt Validation – Parse and Decode a Receipt with Swift&#34;&gt;Receipt Validation – Parse and Decode a Receipt with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/&#34; title=&#34;Finalizing Receipt Validation in Swift – Computing a GUID Hash&#34;&gt;Finalizing Receipt Validation in Swift – Computing a GUID Hash&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>OpenSSL for iOS and Swift the Easy Way</title>
+      <link>https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/</link>
+      <pubDate>Tue, 22 Sep 2015 04:39:28 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m currently working on outfitting an app I&amp;rsquo;m working on to be able to &lt;a href=&#34;https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html#//apple_ref/doc/uid/TP40010573-CH1-SW2&#34;&gt;validate receipts&lt;/a&gt; to verify purchases of the app.&lt;/p&gt;
+&lt;p&gt;Little did I know, this adventure would introduce the need to understand how to use cryptography in order to work with the receipt.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;cryptography-library-needed&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;cryptography-library-needed&#34;&gt;Cryptography library needed&lt;/h2&gt;
+&lt;p&gt;In order to even &amp;ldquo;open&amp;rdquo; the receipt itself, we&amp;rsquo;ve got to work with something called a &amp;ldquo;PKCS #7 container&amp;rdquo;. Once we get the container open, we need to be able to validate Apple&amp;rsquo;s certificate that they use to sign every purchase of every app.&lt;/p&gt;
+&lt;p&gt;All of this requires the use of a cryptography library, and OpenSSL seems to be the common choice, due to its being open source.&lt;/p&gt;
+&lt;p&gt;I found that figuring out what to do to get OpenSSL into my project was harder than I wanted it to be. It turns out that there are a few to do this, but I wanted the easiest to implement (and the easiest to maintain). The options I was able to identify are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Build the binaries for each platform yourself. To do this you&amp;rsquo;ve got to make sure you build for both the simulator and the device by running special config routines and using makefiles and what-not. It seemed error-prone, and I&amp;rsquo;m not confident enough in my ability to know whether or not I&amp;rsquo;ve done it right.&lt;/li&gt;
+&lt;li&gt;Download a pre-built static library – however, this introduces a risk that I wasn&amp;rsquo;t really willing to take. How do I trust that pre-built library? If there&amp;rsquo;s a vulnerability there, how do I easily upgrade the library to the patched version? Every recommendation I&amp;rsquo;ve seen thus far says, &amp;ldquo;Always build your own static library, rather than download it already-built from somewhere&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Cocoapods. Simply put, this was the easiest route for me.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;cocoapods&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;openssl-for-ios-with-cocoapods&#34;&gt;OpenSSL for iOS with Cocoapods&lt;/h2&gt;
+&lt;p&gt;How easy is it to get started with OpenSSL for iOS with Cocoapods?&lt;/p&gt;
+&lt;p&gt;Pretty easy.&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t have Cocoapods yet, you can head over to &lt;a href=&#34;http://cocoapods.org&#34;&gt;Cocoapods.org&lt;/a&gt; and follow their instructions for installing. It&amp;rsquo;s literally one command at the terminal:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo gem install cocoapods&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Once Cocoapods is installed, open your project in Xcode and add a new empty file (File -&amp;gt; New File -&amp;gt; Other -&amp;gt; Empty) called Podfile.&lt;/p&gt;
+&lt;p&gt;In its contents, you simply add a reference to the OpenSSL library:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;target &lt;span class=&#34;s1&#34;&gt;&amp;#39;NameOfYourApp&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    pod &lt;span class=&#34;s1&#34;&gt;&amp;#39;OpenSSL&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;~&amp;gt; 1.0&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Note that there are several ‘OpenSSL&amp;rsquo; Cocoapod specs out there to choose from. I originally tried one that looked like it was for iOS (OpenSSL-iOS), but I was never able to get Swift code to recognize the C functions and types.&lt;/p&gt;
+&lt;p&gt;The one that seemed to still pull the source from openssl.org and build it when the pod is installed was simply named ‘OpenSSL&amp;rsquo; and I&amp;rsquo;ve verified that my Swift code can ‘see&amp;rsquo; the C code without running into ‘unresolved identifier&amp;rsquo; compiler errors.&lt;/p&gt;
+&lt;p&gt;Once the Podfile is created and configured, save it and close Xcode. Then head to the Terminal.&lt;/p&gt;
+&lt;p&gt;Navigate to your Xcode project folder where the Podfile is located and run &lt;code&gt;pod install&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Once it&amp;rsquo;s finished doing its thing (be patient… it took several minutes for me), you can open the new .xcworkspace file that Cocoapods created for you. You&amp;rsquo;ll have everything in your project configured to depend on the OpenSSL library through the new Pods project that&amp;rsquo;s been added to your Workspace.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;bridging-header&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;bridging-header&#34;&gt;Bridging header&lt;/h3&gt;
+&lt;p&gt;In order to use OpenSSL with Swift, you&amp;rsquo;re going to need to create an Objective-C bridging header to access the functionality provided in the OpenSSL libraries.&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t already have an Objective-C bridging header, it&amp;rsquo;s simple to get one added automatically by Xcode for you:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Choose File -&amp;gt; New -&amp;gt; File&lt;/li&gt;
+&lt;li&gt;Choose Source under iOS (on the left&lt;/li&gt;
+&lt;li&gt;Choose Objective-C File&lt;/li&gt;
+&lt;li&gt;Name it &amp;ldquo;bridge&amp;rdquo; (or anything, really – it&amp;rsquo;s a dummy file that you&amp;rsquo;ll delete after Xcode generates the bridging header)&lt;/li&gt;
+&lt;li&gt;Choose Next, and then Create&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Xcode will prompt you to create the bridging header – you should let it. Once it&amp;rsquo;s created, you can delete &amp;ldquo;bridge.m&amp;rdquo; (the Objective-C .m file that you just created in the steps above).&lt;/p&gt;
+&lt;p&gt;Within the bridging header, you can insert some &lt;code&gt;#import&lt;/code&gt; statements to make the OpenSSL library components visible to your Swift project. For example, to start off, you could flesh out the bridging header with a couple of OpenSSL header files:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;openssl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;pkcs7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;h&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;openssl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;objects&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;h&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Others that you may need in your Swift project&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;xcode-7-bitcode&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;xcode-7--bitcode&#34;&gt;Xcode 7 &amp;amp; Bitcode&lt;/h3&gt;
+&lt;p&gt;When you build and run your newly configured project in the Simulator, things are going to work fine.&lt;/p&gt;
+&lt;p&gt;When you build it for your device, however, it will fail.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;…Pods/OpenSSL/lib/libcrypto.a(bio_lib.o)&amp;rsquo; does not contain bitcode. You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target. for architecture arm64&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;At the time of this writing, there is somthing in OpenSSL that doesn&amp;rsquo;t support Xcode 7&amp;rsquo;s Bitcode feature. Eventually (hopefully) they&amp;rsquo;ll fix it, but for now, if you want to use OpenSSL in a Swift project using Xcode 7, you&amp;rsquo;ll have to turn off Bitcode.&lt;/p&gt;
+&lt;p&gt;Click on your project, and then click on your app target under ‘Targets&amp;rsquo; in the project settings window.&lt;/p&gt;
+&lt;p&gt;Find Build Options and set Enable Bitcode to ‘No&#39;&lt;/p&gt;
+&lt;p&gt;If you try re-building against the device with this setting set to ‘No&amp;rsquo;, it should build and run without issue.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;That&amp;rsquo;s all there is to getting OpenSSL built and added as a reference in your app. &lt;em&gt;Now&lt;/em&gt; will come the fun part of using it with Swift, but I will save that for another entry.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/&#34; title=&#34;Preparing to Test Receipt Validation for iOS&#34;&gt;Preparing to Test Receipt Validation for iOS&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/&#34; title=&#34;Loading a Receipt for Validation with Swift&#34;&gt;Loading a Receipt for Validation with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/&#34; title=&#34;Extracting a PKCS7 Container for Receipt Validation with Swift&#34;&gt;Extracting a PKCS7 Container for Receipt Validation with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/&#34; title=&#34;Receipt Validation – Verifying a Receipt Signature in Swift&#34;&gt;Receipt Validation – Verifying a Receipt Signature in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/&#34; title=&#34;Receipt Validation – Parse and Decode a Receipt with Swift&#34;&gt;Receipt Validation – Parse and Decode a Receipt with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/&#34; title=&#34;Finalizing Receipt Validation in Swift – Computing a GUID Hash&#34;&gt;Finalizing Receipt Validation in Swift – Computing a GUID Hash&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

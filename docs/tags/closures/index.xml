@@ -1,0 +1,283 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Closures on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/closures/</link>
+    <description>Recent content about iOS development with Swift in Closures  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Jun 2017 04:00:41 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/closures/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Why is it called a “Closure” anyway? A Swift Conceptual Look.</title>
+      <link>https://www.andrewcbancroft.com/2017/06/05/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/</link>
+      <pubDate>Tue, 06 Jun 2017 04:00:41 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/06/05/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/</guid>
+      <description>&lt;p&gt;&lt;a name=&#34;whats-in-a-name&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;whats-in-a-name&#34;&gt;What&amp;rsquo;s in a name?&lt;/h1&gt;
+&lt;p&gt;If a programming language comes with a named feature, you can be pretty sure it was named that way for a reason. It&amp;rsquo;s a safe bet that the language designers were &lt;em&gt;purposeful&lt;/em&gt; in their naming, so if you can figure out that essential &amp;ldquo;Why&amp;rsquo;d they name it that?” question, you might be that much closer to understanding the feature or concept.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;why-closure&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;why-closure8221&#34;&gt;Why &amp;ldquo;closure”?&lt;/h1&gt;
+&lt;p&gt;Now the challenge: Actually figuring out the answer to that &amp;ldquo;Why?” question.&lt;/p&gt;
+&lt;p&gt;Swift is being developed in the open, and often times that gives curious minds insight into things like naming decisions. But closures in Swift have been around for longer than Swift has been open sourced.&lt;/p&gt;
+&lt;p&gt;That being the case, I really couldn&amp;rsquo;t find much in terms of the conversation around why closures are named &amp;ldquo;closures”.&lt;/p&gt;
+&lt;p&gt;Closures exist in other languages, so maybe Swift just &lt;em&gt;borrowed&lt;/em&gt; the name. But that doesn&amp;rsquo;t help us answer the &lt;em&gt;bottom line&lt;/em&gt; reason for naming closures &amp;ldquo;closures”.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;unpacking&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;unpacking-closure8221-thanks-thesauruscom&#34;&gt;Unpacking &amp;ldquo;closure” (thanks, thesaurus.com!)&lt;/h2&gt;
+&lt;p&gt;So… I set out on a word adventure to help shed some light on what meaning is to be conveyed by the term &amp;ldquo;closure”.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s one thing to know that &amp;ldquo;closures are self-contained blocks of functionality that can be passed around and used in your code.” (&lt;a href=&#34;https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html&#34;&gt;Apple Developer Docs&lt;/a&gt;), but seriously — why not just call them &amp;ldquo;functions”??&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s unpack the word if we can. I put &amp;ldquo;closure” into thesaurus.com, and among the synonyms that I think best clarify the term &amp;ldquo;closure” in programming languages are these:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Plug&lt;/li&gt;
+&lt;li&gt;Seal&lt;/li&gt;
+&lt;li&gt;Cork&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this sense, &amp;ldquo;closure” seems to convey the idea of keeping something in… &lt;em&gt;enclosing&lt;/em&gt; it.&lt;/p&gt;
+&lt;p&gt;Okay, so what is a closure enclosing? &lt;strong&gt;Great question!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Short answer? &lt;strong&gt;Variables&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Inevitably, if you peruse the Internet for what closures are, you&amp;rsquo;ll come across similar definitions to Apple&amp;rsquo;s, quoted above. Often, intermingled in the various definitions I&amp;rsquo;ve found, are phrases like &amp;ldquo;capturing &lt;strong&gt;variables&lt;/strong&gt;” or &amp;ldquo;closing over &lt;strong&gt;variables&lt;/strong&gt;&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;These phrases always seemed to muddy the water (for me, anyways). It wasn&amp;rsquo;t entirely clear what &amp;ldquo;capturing variables” or &amp;ldquo;closing over variables” meant. &lt;em&gt;Until&lt;/em&gt; I saw the synonyms, &amp;ldquo;plug”, &amp;ldquo;seal”, &amp;ldquo;cork”.&lt;/p&gt;
+&lt;p&gt;Then it clicked…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;example&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;an-example-for-your-imagination&#34;&gt;An example for your imagination&lt;/h2&gt;
+&lt;p&gt;I want you to take a function in Swift, and I want you to imagine the function as an empty swimming pool. Got it in your mind&amp;rsquo;s eye? Swimming pool. Empty (for now).&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s runtime, and your Swift program is happily executing along. Then there&amp;rsquo;s a moment in your program where your function gets called. It begins executing, and suddenly, water comes rushing in filling the pool. A dozen diving coins get tossed into the water as well!&lt;/p&gt;
+&lt;p&gt;The coins represent the local variables and constants that your function creates to do its work.&lt;/p&gt;
+&lt;p&gt;Your function executes all the way to the &lt;code&gt;return&lt;/code&gt; keyword, and at the precise moment that your function returns, the drain kicks in. Within &lt;em&gt;milliseconds&lt;/em&gt; and with &lt;em&gt;tremendous&lt;/em&gt; force, all the water is sucked out of the pool.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What do you think will happen to all the coins in the pool?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For this example, let&amp;rsquo;s just say the answer is, &amp;ldquo;they&amp;rsquo;ll go down the drain”. That would correlate pretty well with what normally happens to variables and constants that had been declared within your function when it returns.&lt;/p&gt;
+&lt;p&gt;Any variables and constants that are created inside a function are purged from memory whenever the function returns… down the drain, if you will.&lt;/p&gt;
+&lt;h3 id=&#34;unleeeees8230&#34;&gt;Unleeeees…&lt;/h3&gt;
+&lt;p&gt;What if, at some point while there&amp;rsquo;s still water in the pool, you were able to dive in, grab a few of the coins, and bottle them up?&lt;/p&gt;
+&lt;p&gt;What if you could stick them in a container and &lt;strong&gt;plug&lt;/strong&gt; it with a &lt;strong&gt;cork&lt;/strong&gt; or some other kind of &lt;strong&gt;seal&lt;/strong&gt;?&lt;/p&gt;
+&lt;p&gt;If you could do that, the coins would &lt;em&gt;survive&lt;/em&gt; the torrential drainage of the pool when the plug is pulled (i.e. the function returns). And that&amp;rsquo;s what I want you to take away from the example.&lt;/p&gt;
+&lt;p&gt;A closure acts as a mechanism for diving into the pool, scooping up the coins (i.e. variables and constants) it needs, and &lt;strong&gt;sealing&lt;/strong&gt; itself, such that whenever its parent function (the pool) drains, it and the coins inside &lt;strong&gt;survive&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;in-practice&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;closures-in-practice&#34;&gt;Closures in practice&lt;/h1&gt;
+&lt;p&gt;When you hear that closures are &amp;ldquo;self-contained blocks of functionality that can be passed around and used in your code.”, you may not realize that they can go grab variables from their environment, package them up, and seal themselves tight, thus safeguarding those variables.&lt;/p&gt;
+&lt;p&gt;As it turns out, every closure you create has this capability built in.&lt;/p&gt;
+&lt;p&gt;Not all closures &lt;em&gt;need&lt;/em&gt; to go out and capture variables, but all closures in Swift &lt;em&gt;can&lt;/em&gt; do so if it&amp;rsquo;s relevant.&lt;/p&gt;
+&lt;p&gt;And &lt;em&gt;that&lt;/em&gt; is what makes closures &amp;ldquo;closures”.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/&#34; title=&#34;What in the World is an “Escaping Closure” in Swift?&#34;&gt;What in the World is an “Escaping Closure” in Swift?&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/05/11/why-do-we-need-to-annotate-escaping-closures-in-swift/&#34; title=&#34;Why Do We Need to Annotate Escaping Closures in Swift?&#34;&gt;Why Do We Need to Annotate Escaping Closures in Swift?&lt;/a&gt;
+    &lt;/li&gt;&lt;/div&gt; 
+&lt;pre&gt;&lt;code&gt;&amp;lt;p&amp;gt;
+  &amp;lt;a name=&amp;quot;share&amp;quot; class=&amp;quot;jump-target&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;
+&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Why Do We Need to Annotate Escaping Closures in Swift?</title>
+      <link>https://www.andrewcbancroft.com/2017/05/11/why-do-we-need-to-annotate-escaping-closures-in-swift/</link>
+      <pubDate>Thu, 11 May 2017 17:58:46 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/05/11/why-do-we-need-to-annotate-escaping-closures-in-swift/</guid>
+      <description>&lt;p&gt;My last entry on &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/&#34;&gt;escaping closures&lt;/a&gt; ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that&amp;rsquo;s a different story… :]&lt;/p&gt;
+&lt;p&gt;Several readers commented here and on Medium with the question, &amp;ldquo;Why? Why do we need to mark escaping closures with &lt;code&gt;@escaping&lt;/code&gt;?”&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;do-it-self&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;do-it-yourself-compiler&#34;&gt;Do it yourself, compiler!&lt;/h1&gt;
+&lt;p&gt;Observant minds looked at the compiler&amp;rsquo;s ability to say, &amp;ldquo;Hey! This closure can escape – Annotate it with &lt;code&gt;@escaping&lt;/code&gt;!” and asked, &amp;ldquo;Well… &lt;em&gt;why&lt;/em&gt;?? If you, compiler, are smart enough to figure out that I need to annotate it, why can&amp;rsquo;t you just deal with it automatically and let me go about my business?”&lt;/p&gt;
+&lt;p&gt;Good. Question.&lt;/p&gt;
+&lt;p&gt;And one that I didn&amp;rsquo;t know the answer to. So I researched!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;insight&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;insight-from-the-swift-gurus&#34;&gt;Insight from the Swift gurus&lt;/h1&gt;
+&lt;p&gt;As I dug around in the &lt;a href=&#34;https://github.com/apple/swift&#34;&gt;Swift GitHub repository&lt;/a&gt; and the &lt;a href=&#34;https://lists.swift.org/mailman/listinfo&#34;&gt;Swift Evolution list&lt;/a&gt; I found &lt;a href=&#34;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160530/019880.html&#34;&gt;a quote from Chris Lattner&lt;/a&gt; that stuck out:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The compiler has enough logic in it to provide a great QoI (Quality of Implementation) experience when a developer doesn’t think about escaping, and tries to escape a closure – it can provide a fixit that suggests adding @escaping.”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Did you catch that?&lt;/p&gt;
+&lt;p&gt;When the Swift compiler requires us to annotate our APIs with &lt;code&gt;@escaping&lt;/code&gt;, that&amp;rsquo;s its way of doing &amp;ldquo;quality of implementation”.&lt;/p&gt;
+&lt;p&gt;Essentially, it&amp;rsquo;s a red flag saying, &amp;ldquo;You really ought to think about this whole escaping thing that you just introduced (whether you knew you were doing it or not)… it has significant impact on your implementation &lt;em&gt;and&lt;/em&gt; on the caller of your function!”&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;help&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;i-see-what-you-did-there8230-let-me-help-you-out8230&#34;&gt;I see what you did there… Let me help you out…&lt;/h1&gt;
+&lt;p&gt;The Swift compiler, for better or worse, wants to be very… &amp;ldquo;helpful”…&lt;/p&gt;
+&lt;p&gt;Some people hate it. I love it.&lt;/p&gt;
+&lt;p&gt;I &lt;em&gt;want&lt;/em&gt; to be told, &amp;ldquo;Hey, Andrew… you&amp;rsquo;re about to break stuff – don&amp;rsquo;t do that.”&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;d rather head off issues during development than at run-time.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;how-helpful&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;how-helpful-is-it-really&#34;&gt;How helpful is it, really?&lt;/h1&gt;
+&lt;p&gt;But really… How helpful is this particular compiler error? What value does this fix-it option provide?&lt;/p&gt;
+&lt;p&gt;Try this: Think about what would happen if the compiler &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; tell you about the possibility of your function&amp;rsquo;s closure escaping.&lt;/p&gt;
+&lt;p&gt;I was working the other day, cruising along writing what I thought was perfectly normal code when I hit this &amp;ldquo;annotate your function&amp;rsquo;s closure parameter with &lt;code&gt;@escaping&lt;/code&gt;” error, myself.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;&lt;code&gt;@escaping&lt;/code&gt;, Huh? What&amp;rsquo;s that?!”&lt;/p&gt;
+&lt;p&gt;1 – I wasn&amp;rsquo;t thinking about escaping closures because&lt;br&gt;
+2 – I had no idea that I &lt;em&gt;could&lt;/em&gt; think about escaping closures!!&lt;/p&gt;
+&lt;p&gt;It turns out that this could have been really bad, agreed? Asynchronous behavior in software requires a little more thought than your normal top-down procedural approach.&lt;/p&gt;
+&lt;p&gt;If the compiler hadn&amp;rsquo;t stopped me, I could have inadvertently imposed the need to think in terms of dispatch queues or asynchronous callbacks on the users of my API.&lt;/p&gt;
+&lt;p&gt;Is this only something that &amp;ldquo;newbies” need to have the compiler&amp;rsquo;s help with though?&lt;/p&gt;
+&lt;p&gt;One could argue that I probably should have been aware of this particular feature of Swift — had I been a better developer, maybe I wouldn&amp;rsquo;t need the compiler to hold my hand so much.&lt;/p&gt;
+&lt;p&gt;Okay – Fair point. That leads me to one last gleaning from Lattner&amp;rsquo;s Swift Evolution entry that I&amp;rsquo;ll comment on before wrapping up.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;resilience&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;writing-resilient-code&#34;&gt;Writing resilient code&lt;/h1&gt;
+&lt;p&gt;Let me reflect really quickly on one more quote from the &lt;a href=&#34;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160530/019880.html&#34;&gt;Swift Evolution entry&lt;/a&gt; before I end for today.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;John McCall pointed out that resilience in the type system is different than resilience in practice: &lt;strong&gt;An API changing to capture a closure and use it long after it was originally passed&lt;/strong&gt; is &lt;strong&gt;likely to break the clients&lt;/strong&gt; regardless of whether the type system captures this as an issue. He argues (and the argument is strong IMO) it is &lt;em&gt;better&lt;/em&gt; for resilient APIs to default to @noescape, &lt;strong&gt;since that forces the author of V2 to think about whether they are breaking their clients&lt;/strong&gt;. &lt;small&gt;(emphasis mine)&lt;/small&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Resilience is all about how clients are affected when you &lt;em&gt;change&lt;/em&gt; the API or its implementation.&lt;/p&gt;
+&lt;p&gt;Suppose that a team mate of mine writes a function… &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/&#34;&gt;She&amp;rsquo;s just created an API&lt;/a&gt;, true?&lt;/p&gt;
+&lt;p&gt;Suppose that the function asks for a closure, but for now it&amp;rsquo;s just a regular old closure. No escaping or anything.&lt;/p&gt;
+&lt;p&gt;Others on my team are going to start coding against that function&amp;rsquo;s signature. If the function is honest, it allows me and my team to have expectations about what it&amp;rsquo;ll do when it executes.&lt;/p&gt;
+&lt;p&gt;Now suppose that I&amp;rsquo;m going to work on version 2 of that same API. Only &lt;em&gt;now&lt;/em&gt;, I&amp;rsquo;m going to introduce the opportunity for that closure to &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/&#34;&gt;escape&lt;/a&gt; (maybe intentionally, or maybe accidentally out of ignorance).&lt;/p&gt;
+&lt;p&gt;Thaaaat&amp;rsquo;s gonna break my team. For sure.&lt;/p&gt;
+&lt;p&gt;They&amp;rsquo;re using the API as it is expecting normal synchronous behavior from the function. Now &lt;em&gt;I&amp;rsquo;ve&lt;/em&gt; gone in and fundamentally changed what their expectations should be.&lt;/p&gt;
+&lt;p&gt;In other words, I haven&amp;rsquo;t been very resilient.&lt;/p&gt;
+&lt;p&gt;The default behavior of closures passed to functions is to be &lt;code&gt;@noescape&lt;/code&gt;. If I introduce the possibility for that closure to escape, I need to be red-flag warned about that, because I need to come up with some way to communicate this breaking change to the clients of the API. And/or provide an alternative so that clients of API v1 can still use it as expected.&lt;/p&gt;
+&lt;p&gt;Most of all, I need to &lt;strong&gt;think&lt;/strong&gt; about the implications of what I&amp;rsquo;m doing, and sometimes (a lot of the times) that takes prompting.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;bottom-line&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;the-bottom-line--the-compiler-is-making-you-think&#34;&gt;The bottom line – The compiler is making you think&lt;/h1&gt;
+&lt;p&gt;All of this to say: The compiler is making you think. Not only that, it&amp;rsquo;s forcing you to conform.&lt;/p&gt;
+&lt;p&gt;From what I&amp;rsquo;ve found, that&amp;rsquo;s the idea behind &amp;ldquo;why” we need to mark escaping closures with &lt;code&gt;@escaping&lt;/code&gt; in Swift.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/&#34; title=&#34;What in the World is an “Escaping Closure” in Swift?&#34;&lt;/a&gt;What in the World is an “Escaping Closure” in Swift?
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What in the World is an “Escaping Closure” in Swift?</title>
+      <link>https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/</link>
+      <pubDate>Wed, 26 Apr 2017 14:41:07 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re mostly in the business of coding up closures to pass off to other functions as &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34;&gt;callbacks&lt;/a&gt;, you may not have run into the concept of an &amp;ldquo;escaping closure” yet.&lt;/p&gt;
+&lt;p&gt;When you step out of the role of consuming other peoples&amp;rsquo; APIs in to the realm of creating your own (and &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/&#34;&gt;you do this all the time&lt;/a&gt;!), &lt;em&gt;this&lt;/em&gt; is where you&amp;rsquo;ll likely run into the concept of an &amp;ldquo;escaping closure” in certain scenarios.&lt;/p&gt;
+&lt;p&gt;I want to start off by defining the term. Then I&amp;rsquo;ll throw out a couple of usage scenarios that cause us to need to think in terms of a closure &amp;ldquo;escaping”.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;definition&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;definition&#34;&gt;Definition&lt;/h1&gt;
+&lt;p&gt;First, a definition, shall we?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A closure is said to escape a function when the closure is passed as an argument to the function, but is called after the function returns.&lt;br&gt;
+–&lt;a href=&#34;https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID546&#34;&gt;Apple Developer Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So apparently, you can get yourself into the situation where you&amp;rsquo;re designing a function that takes in a closure as one of its parameters:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;func doSomething(completion: () -&amp;gt; Void) { ... }&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Furthermore, it appears that it&amp;rsquo;s possible to find yourself in a situation where the closure will execute, but &lt;em&gt;somehow&lt;/em&gt;, it doesn&amp;rsquo;t get executed until &lt;em&gt;after&lt;/em&gt; the function it got passed into returns. So it would go something like this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Call &lt;code&gt;doSomething&lt;/code&gt; and pass it a closure &lt;a href=&#34;https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/&#34;&gt;of Type&lt;/a&gt; &lt;code&gt;() -&amp;gt; Void&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doSomething&lt;/code&gt; performs its work and &lt;em&gt;returns&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;The closure you passed (the one of Type &lt;code&gt;() -&amp;gt; Void&lt;/code&gt;) gets executed&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Weird, huh? How in the world can that happen? &lt;a href=&#34;#usage&#34;&gt;I&amp;rsquo;ll talk about that in a second&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The point for now is this: whenever you&amp;rsquo;re in a situation like this where the closure that you pass to a function gets executed &lt;em&gt;after&lt;/em&gt; the function you passed it &lt;em&gt;to&lt;/em&gt; returns, you&amp;rsquo;ve got an &amp;ldquo;escaping closure” on your hands.&lt;/p&gt;
+&lt;p&gt;As an API &lt;em&gt;consumer&lt;/em&gt;, you might not know or care about the escap-y-ness of the closure.&lt;/p&gt;
+&lt;p&gt;As an API &lt;em&gt;designer&lt;/em&gt; (which again, &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/&#34;&gt;could be &lt;em&gt;yourself&lt;/em&gt;&lt;/a&gt;, if you&amp;rsquo;re the one writing the definition of &lt;code&gt;doSomething(completion:)&lt;/code&gt;), you &lt;em&gt;have&lt;/em&gt; to care, because the Swift compiler will be angry with errors if you don&amp;rsquo;t.&lt;/p&gt;
+&lt;p&gt;So how do &amp;ldquo;escaping closure” scenarios happen?&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;usage&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;escaping-closure-scenarios&#34;&gt;Escaping closure scenarios&lt;/h1&gt;
+&lt;p&gt;Here are a few scenarios that give rise to escaping closures.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;store-as-state&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;storing-the-closure-as-_state_&#34;&gt;Storing the closure as &lt;em&gt;state&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID546&#34;&gt;Apple&amp;rsquo;s docs&lt;/a&gt; give an example of appending a closure that&amp;rsquo;s passed into a function to a mutable array of closures within your class/struct:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;completionHandlers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;doSomething&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;completionHandlers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Presumabley then, at some later time after &lt;code&gt;doSomething&lt;/code&gt; returns, all of the completion handlers in the array will be looped over and executed (or something like that)…&lt;/p&gt;
+&lt;p&gt;As you can see, this follows the 1. Pass closure, 2. &lt;code&gt;doSomething&lt;/code&gt; returns, 3. Closure executed pattern we had before, doesn&amp;rsquo;t it?&lt;/p&gt;
+&lt;p&gt;So this is one scenario that could give rise to an escaping closure, IF you designed your system this way.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Whenever you take the closure, store it as state, and then execute it at a later time, the closure is &amp;ldquo;escaping” the function it got passed into.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;async-callbacks&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;asynchronous-asynchronous-callbacks&#34;&gt;Asynchronous asynchronous callbacks&lt;/h2&gt;
+&lt;p&gt;No, I didn&amp;rsquo;t get repetitively redundant there. Well… I did, but it was on purpose. :]&lt;/p&gt;
+&lt;p&gt;Supposing that you&amp;rsquo;re working on your &lt;code&gt;doSomething(completion:)&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;Within it, you make a call to &lt;em&gt;another&lt;/em&gt; function that performs an asynchronous action and asks for a completion closure of its own.&lt;/p&gt;
+&lt;p&gt;What if you only want to call the completion handler that was passed into &lt;code&gt;doSomething&lt;/code&gt; &lt;em&gt;after&lt;/em&gt; the asynchronous action of the &lt;em&gt;other&lt;/em&gt; function completes. That is, what if you only want the two completion handlers to be executed &lt;em&gt;together&lt;/em&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;doSomething&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;doSomeOtherAsynchronousThing&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Void&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// code that executes after the other asynchronous thing is done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here, you&amp;rsquo;ve got this nested asynchronous behavior going on, don&amp;rsquo;t you? Asynchronous asynchrony is happening.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Whenever you &lt;em&gt;defer the execution of a closure&lt;/em&gt; to a time that&amp;rsquo;s &lt;em&gt;after&lt;/em&gt; the &amp;ldquo;parent” function returns, you&amp;rsquo;ve got an &amp;ldquo;escaping closure” on your hands.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;declaring-escaping&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;declaring-this-is-an-escaping-closure8221-in-code&#34;&gt;Declaring &amp;ldquo;this is an escaping closure!” in code&lt;/h1&gt;
+&lt;p&gt;Whenever you&amp;rsquo;re implementing a function that introduces the possibility for a closure passed to it to escape, you&amp;rsquo;ll know it.&lt;/p&gt;
+&lt;p&gt;The Swift compiler will complain, and your app won&amp;rsquo;t build:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/escaping-closure.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/escaping-closure.png&#34; alt=&#34;Compiler error - Closure use of non-escaping parameter &amp;#039;completion&amp;#039; may allow it to escape&#34; width=&#34;891&#34; height=&#34;33&#34; class=&#34;alignnone size-full wp-image-13321&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/escaping-closure.png 891w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/escaping-closure-300x11.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/escaping-closure-768x28.png 768w&#34; sizes=&#34;(max-width: 891px) 100vw, 891px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What do you do to fix it?&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s pretty simple. In the declaration line of your function, you need to add the &lt;code&gt;@escaping&lt;/code&gt; attribute right before the closure&amp;rsquo;s Type declaration:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;doSomething(completion: @escaping () -&amp;gt; Void)&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h1&gt;
+&lt;p&gt;My goal was to shed some light on the concept of &amp;ldquo;escaping closures”. With the definition and the example scenarios that give rise to escaping closures, my hope is that things are a little more clear for you. Sound off in the comments if you&amp;rsquo;re still struggling, or if you&amp;rsquo;ve run across other scenarios requiring you to use the &lt;code&gt;@escaping&lt;/code&gt; attribute!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Resolving “Variable used within its own initial value” Error in Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</link>
+      <pubDate>Mon, 20 Oct 2014 13:50:52 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</guid>
+      <description>&lt;p&gt;While experimenting with a few things today, I experienced this compiler error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Variable used within its own initial value&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let me describe the situation I was in…&lt;/p&gt;
+&lt;p&gt;I was playing (in a playground, no less) with closures, trying to mimic some behavior that I&amp;rsquo;ve recently learned about in Scala.  Essentially, I was trying to implement a factorial function as a &lt;em&gt;closure&lt;/em&gt;, and I was trying to do it &lt;em&gt;recursively&lt;/em&gt; (that is, without using a for/while loop).  Here&amp;rsquo;s what I wanted to do:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;factorial&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you&amp;rsquo;ve seen factorial before, the above implementation isn&amp;rsquo;t new.  The &amp;ldquo;base case” that will let the recursion stop is the expression &lt;code&gt;if (n == 0)&lt;/code&gt;, and the recursive case is in the &lt;code&gt;else&lt;/code&gt; block, where &lt;code&gt;factorial&lt;/code&gt; gets called &lt;em&gt;again&lt;/em&gt; within its own body&amp;rsquo;s definition.  Only problem is… this doesn&amp;rsquo;t work in Swift 1.0.&lt;/p&gt;
+&lt;p&gt;Apparently, the closure (which is being initialized and assigned to the constant named &amp;ldquo;factorial”) hasn&amp;rsquo;t had a chance to fully initialize itself before the name &lt;code&gt;factorial&lt;/code&gt; is used within the body.&lt;/p&gt;
+&lt;p&gt;The frustrating part is that &lt;a title=&#34;Rob Napier on Immutability and Swift&#34; href=&#34;http://robnapier.net/llama-calculus&#34; target=&#34;_blank&#34;&gt;I &lt;em&gt;really&lt;/em&gt; didn&amp;rsquo;t want to type the letters v-a-r&lt;/a&gt; to implement my solution.  But alas, as &lt;a title=&#34;Stack Overflow - Handle Closure Recursively&#34; href=&#34;http://stackoverflow.com/questions/25103534/how-to-handle-closure-recursivity&#34; target=&#34;_blank&#34;&gt;Stack Overflow&lt;/a&gt; says, the following solution to the &amp;ldquo;initial value” error works:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Produces the correct result of 120&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Of course, there&amp;rsquo;s absolutely no reason for the implementation to be a closure – I was simply experimenting.  Here&amp;rsquo;s the solution that I actually prefer… a good ole named function definition:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;factorial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Produces the correct result of 120&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt; &lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,97 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Property Lists on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/property-lists/</link>
+    <description>Recent content about iOS development with Swift in Property Lists  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Apr 2019 10:03:33 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/property-lists/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>iOS Data Persistence: The Big Picture</title>
+      <link>https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/</link>
+      <pubDate>Tue, 30 Apr 2019 10:03:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve all been there. Do a search on the topic of &amp;ldquo;saving data in iOS” and you&amp;rsquo;ll get &lt;em&gt;dozens&lt;/em&gt; of search results mentioning at least six different frameworks and platforms, and a month’s worth of reading.&lt;/p&gt;
+&lt;p&gt;Wouldn&amp;rsquo;t it be nice to distill the possibilities down into &lt;em&gt;just what you need&lt;/em&gt; in order to start down a path for persisting data in your app?&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;&lt;a href=&#34;http://bit.ly/ios-data-persistence-bp&#34;&gt;iOS Data Persistence: The Big Picture&lt;/a&gt;” will be worth the hour of your time.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ios-data-persistence-bp&#34; target=&#34;_blank&#34;&gt;iOS Data Persistence: The Big Picture&lt;/a&gt;&lt;a href=&#34;http://bit.ly/ios-data-persistence-bp&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001-1024x576.png&#34; alt=&#34;iOS Data Persistence: The Big Picture&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2019/04/ios-data-persistence-big-picture.001.png 1280w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;During this one hour course, you will learn the &lt;em&gt;reasons&lt;/em&gt; for saving data to help ground you as you begin to traverse the data persistence landscape.&lt;/p&gt;
+&lt;p&gt;You will discover how to use technologies like &lt;strong&gt;User Defaults&lt;/strong&gt; and &lt;strong&gt;Property Lists&lt;/strong&gt;, and I will guide you on how to work with Swift’s &lt;strong&gt;Encodable&lt;/strong&gt; and &lt;strong&gt;Decodable&lt;/strong&gt; protocols.&lt;/p&gt;
+&lt;p&gt;You will understand what you’re getting into if you choose to work with &lt;strong&gt;SQLite&lt;/strong&gt;, &lt;strong&gt;Core Data&lt;/strong&gt;, or &lt;strong&gt;Realm Database&lt;/strong&gt; for local data persistence.&lt;/p&gt;
+&lt;p&gt;You will know how it feels to reach for a remote data storage option like &lt;strong&gt;CloudKit&lt;/strong&gt;, &lt;strong&gt;Realm Platform&lt;/strong&gt;, or &lt;strong&gt;Firebase&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, you will see a clear picture of what it’s like to design a &lt;strong&gt;document-based application&lt;/strong&gt; and integrate your app’s data with the &lt;strong&gt;iOS Files app&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;When you’re finished with this course, you will have the skills and knowledge you need to make an informed decision about putting a reliable data storage plan for your iOS app into action.&lt;/p&gt;
+&lt;h2 id=&#34;1--establishing-the-data-persistence-landscape&#34;&gt;1 – Establishing the Data Persistence Landscape&lt;/h2&gt;
+&lt;p&gt;During the course, you will have the opportunity to experience a variety of data persistence scenarios and technologies.&lt;/p&gt;
+&lt;p&gt;You’ll get general feel for setup requirements and a taste of what it’s like to work with each solution in code.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To start you off on the right footing, this module will establish the data persistence possibilities and focus in on the &lt;em&gt;reasons&lt;/em&gt; for saving data so that you&amp;rsquo;re persisting with a purpose.&lt;/li&gt;
+&lt;li&gt;You will be introduced to a player profile matrix to help you analyze your data persistence options from a number of angles.&lt;/li&gt;
+&lt;li&gt;Finally, you will get the feel for working with the Swift &lt;code&gt;Encodable&lt;/code&gt; and &lt;code&gt;Decodable&lt;/code&gt; protocols.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2--saving-settings-and-configuration&#34;&gt;2 – Saving Settings and Configuration&lt;/h2&gt;
+&lt;p&gt;Users are picky, aren’t they? Everybody has preferences though, so it’s no wonder that you as a developer are often tasked with letting your users to customize their experience within your app.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You will learn how to manage user preferences with the &lt;code&gt;UserDefaults&lt;/code&gt; system that&amp;rsquo;s built in to iOS&lt;/li&gt;
+&lt;li&gt;Next, you will explore synchronizing settings with iCloud Key-Value Store&lt;/li&gt;
+&lt;li&gt;Finally, you will understand how to ship configuration for your app with Property Lists that are included in your application bundle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4--saving-objects-and-object-graphs&#34;&gt;4 – Saving Objects and Object Graphs&lt;/h2&gt;
+&lt;p&gt;What if you only wanted to load a subset of the data into memory instead of being locked in to an all-or-nothing situation with &lt;code&gt;UserDefaults&lt;/code&gt; or Property Lists?&lt;/p&gt;
+&lt;p&gt;What if you needed to save a more complex data model that includes relationships?&lt;/p&gt;
+&lt;p&gt;For that, you’ll need to know about saving and sharing objects and object graphs…&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Six Technologies/Frameworks&lt;/strong&gt; will be featured in this module:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SQLite&lt;/li&gt;
+&lt;li&gt;Core Data&lt;/li&gt;
+&lt;li&gt;Realm Database&lt;/li&gt;
+&lt;li&gt;CloudKit&lt;/li&gt;
+&lt;li&gt;Realm Platform&lt;/li&gt;
+&lt;li&gt;Firebase&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The goal is to help you answer &lt;strong&gt;two questions&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“What am I getting myself into if I pick one persistence technology over another?”&lt;/li&gt;
+&lt;li&gt;“How does it feel to work with this persistence technology in code?”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You will answer these questions by…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Scanning the arena of persistence options and explore what sets these technologies apart from &lt;code&gt;UserDefaults&lt;/code&gt; and Property Lists.&lt;/li&gt;
+&lt;li&gt;Surveying the setup process to see what it takes to get up and running with each technology in the list&lt;/li&gt;
+&lt;li&gt;Exploring the data modeling process to wrap your head around what the data structure design process is like for each technology in the list&lt;/li&gt;
+&lt;li&gt;Getting the feel for working with data so that you understand what it&amp;rsquo;s like to create objects, update them, delete them, query and filter them, and watch for data changes so that you can update your user interface appropriately&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5--saving-data-as-documents-and-files&#34;&gt;5 – Saving Data as Documents and Files&lt;/h2&gt;
+&lt;p&gt;What if you need to encapsulate chunks of content together and save it all as a packaged up file…as a single unit with a custom file extension?&lt;/p&gt;
+&lt;p&gt;For that, you need to know about saving data as documents and files.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You will explore the use-case for building a &amp;ldquo;document-based application”&lt;/li&gt;
+&lt;li&gt;Next you will walk through designing a document as a subclass of &lt;code&gt;UIDocument&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;You will learn to create and load documents from a Document Browser&lt;/li&gt;
+&lt;li&gt;Customizing your app&amp;rsquo;s file extension is a key step that you will work through&lt;/li&gt;
+&lt;li&gt;You will spend some time understanding how to interact with document data in code as &lt;em&gt;users&lt;/em&gt; interact with the user interface&lt;/li&gt;
+&lt;li&gt;Finally, you will answer the question, “How do I get my app’s files to show up in the iOS Files app?”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;My goal is to help you filter the noise… to help you distill an overwhelming amount of information down into the big picture possibilities so that you’re on a trajectory for being able to make an informed decision about putting a reliable data storage plan for your iOS app into action.&lt;/p&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

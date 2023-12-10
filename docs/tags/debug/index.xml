@@ -1,0 +1,35 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Debug on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/debug/</link>
+    <description>Recent content about iOS development with Swift in Debug  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 28 Oct 2016 05:06:19 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/debug/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Disabling Xcode’s OS-Level Debug Logging</title>
+      <link>https://www.andrewcbancroft.com/2016/10/28/disabling-xcode-os-level-debug-logging/</link>
+      <pubDate>Fri, 28 Oct 2016 05:06:19 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/10/28/disabling-xcode-os-level-debug-logging/</guid>
+      <description>&lt;p&gt;Full credit to &lt;a href=&#34;https://twitter.com/rustyshelf&#34;&gt;Russell Ivanovic&lt;/a&gt; for his &lt;a href=&#34;https://twitter.com/rustyshelf/status/775505191160328194&#34;&gt;tweet&lt;/a&gt; for figuring out how to disable Xcode 8&amp;rsquo;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&amp;rsquo;s helpful to you as well.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re tired of sifting through operating system-level logging to the debug console while you&amp;rsquo;re debugging your app, it&amp;rsquo;s actually fairly easy to silence.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;edit-scheme&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Edit the scheme for your app:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png&#34; alt=&#34;Edit Scheme&#34; width=&#34;529&#34; height=&#34;182&#34; class=&#34;alignnone size-full wp-image-13064&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2.png 529w, https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-2-300x103.png 300w&#34; sizes=&#34;(max-width: 529px) 100vw, 529px&#34; /&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a name=&#34;new-environment-variable&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;br&gt;
+2. In the ‘Run&amp;rsquo; section, click on ‘Arguments&amp;rsquo; tab, and add a new Environment Variable. Use &lt;code&gt;OS_ACTIVITY_MODE&lt;/code&gt; for the name, and &lt;code&gt;disable&lt;/code&gt; for the value:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png&#34; alt=&#34;New Environment Variable&#34; width=&#34;895&#34; height=&#34;506&#34; class=&#34;alignnone size-full wp-image-13068&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4.png 895w, https://www.andrewcbancroft.com/wp-content/uploads/2016/10/DataHelper_swift-4-300x170.png 300w&#34; sizes=&#34;(max-width: 895px) 100vw, 895px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s it! Closing the Scheme editor and re-running your app will produce a beautifully silent console window, leaving you free to see what you wanted to see with &lt;code&gt;print()&lt;/code&gt;, or other app-specific info (such as runtime exceptions) without having to sift through all that OS-level logging.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

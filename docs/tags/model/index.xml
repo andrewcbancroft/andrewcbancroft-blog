@@ -1,0 +1,104 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Model on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/model/</link>
+    <description>Recent content about iOS development with Swift in Model  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 13 Jan 2015 13:00:37 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/model/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Unit Testing Model Layer with Core Data and Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</link>
+      <pubDate>Tue, 13 Jan 2015 13:00:37 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</guid>
+      <description>&lt;p&gt;&lt;small&gt;Updated on November 19, 2015 – Swift 2.0&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.&lt;/p&gt;
+&lt;p&gt;To my surprise, unit testing my Core Data model layer has been… well… amazing. With little effort, I’ve been able to write the unit tests I’ve wanted. The process went something like this for me:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/&#34;&gt;Create an &lt;code&gt;NSManagedObject&lt;/code&gt; subclass&lt;/a&gt; of the Core Data entity that I need in my unit test. (This just makes things easier from an Xcode code-completion standpoint)&lt;/li&gt;
+&lt;li&gt;Write a helper function to set up an in-memory &lt;code&gt;NSManagedObjectContext&lt;/code&gt;. Avoiding the need to use an actual sqlite database is pretty handy. It allows for quick-running tests and easy iterations over the data model itself.&lt;/li&gt;
+&lt;li&gt;Write unit tests using the in-memory &lt;code&gt;NSManagedObjectContext&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/&#34;&gt;I’ve already written about creating an &lt;code&gt;NSManagedObject&lt;/code&gt; subclass&lt;/a&gt;, so I will unpack steps 2 and 3 in this blog entry.&lt;/p&gt;
+&lt;h3 id=&#34;set-up-an-in-memory-nsmanagedobjectcontext&#34;&gt;Set up an in-memory NSManagedObjectContext&lt;/h3&gt;
+&lt;p&gt;A &lt;a href=&#34;http://stackoverflow.com/questions/1849802/how-to-unit-test-my-models-now-that-i-am-using-core-data&#34;&gt;Stack Overflow&lt;/a&gt; question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I&amp;rsquo;ve written it in Swift. In my project, I created a new Swift file called &amp;ldquo;CoreDataHelpers.swift” in my tests target. Here&amp;rsquo;s a look at the helper function:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CoreData&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;setUpInMemoryManagedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectContext&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectModel&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mergedModelFromBundles&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSBundle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mainBundle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()])&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;persistentStoreCoordinator&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSPersistentStoreCoordinator&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;managedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;managedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;persistentStoreCoordinator&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addPersistentStoreWithType&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSInMemoryStoreType&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;configuration&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Adding in-memory persistent store failed&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectContext&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;persistentStoreCoordinator&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;persistentStoreCoordinator&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;observations&#34;&gt;Observations&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll be honest, I&amp;rsquo;m only starting to put together the pieces involved in setting up the Core Data stack. Working through these unit testing techniques has solidified a &lt;em&gt;lot&lt;/em&gt;. Analyzing the helper method from the bottom up has made some sense out of how to configure everything:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I need an &lt;code&gt;NSManagedObjectContext&lt;/code&gt; whose &lt;code&gt;NSPersistentStoreCoordinator&lt;/code&gt; property uses an in-memory store.&lt;/li&gt;
+&lt;li&gt;To get such an &lt;code&gt;NSManagedObjectContext&lt;/code&gt;, I need to add a persistent store with a type of &lt;code&gt;NSInMemoryStoreType&lt;/code&gt; to an &lt;code&gt;NSPersistentStoreCoordinator&lt;/code&gt; instance. (note the line that&amp;rsquo;s highlighted)&lt;/li&gt;
+&lt;li&gt;Of course, in order to do &lt;em&gt;that&lt;/em&gt;, I need an &lt;code&gt;NSPersistentStoreCoordinator&lt;/code&gt; &lt;em&gt;instance&lt;/em&gt;, and I can&amp;rsquo;t get one of &lt;em&gt;those&lt;/em&gt; unless I initialize it with an &lt;code&gt;NSManagedObjectModel&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;To get an &lt;code&gt;NSManagedObjectModel&lt;/code&gt;, I use the class method, &lt;code&gt;mergedModelFromBundles()&lt;/code&gt; to grab it from my main bundle.&lt;/li&gt;
+&lt;li&gt;Fast-forwarding now: With a proper &lt;code&gt;NSManagedObjectModel&lt;/code&gt; instance, I can create an &lt;code&gt;NSPersistentStoreCoordinator&lt;/code&gt; instance with it and add an &lt;code&gt;NSInMemoryStoreType&lt;/code&gt; to that &lt;code&gt;persistentStoreCoordinator&lt;/code&gt;. Finally, I can initialize an &lt;code&gt;NSManagedObjectContext&lt;/code&gt;, assign the configured &lt;code&gt;persistentStoreCoordinator&lt;/code&gt; to the context, and return it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Whew! This whole process felt a lot like reading &lt;a href=&#34;http://en.wikipedia.org/wiki/If_You_Give_a_Mouse_a_Cookie&#34;&gt;If You Give a Mouse a Cookie&lt;/a&gt;, but that may be because I&amp;rsquo;ve read it a few hundred times to my 2 year old. :]&lt;/p&gt;
+&lt;h3 id=&#34;writing-the-unit-tests&#34;&gt;Writing the unit test(s)&lt;/h3&gt;
+&lt;p&gt;With the ability to get an &lt;code&gt;NSManagedObjectContext&lt;/code&gt; instance that&amp;rsquo;s using an in-memory store, the unit tests using Entities from my Core Data model are quite easy.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s a sample test:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CoreData&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;TestsUsingModelFromCoreData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;XCTestCase&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;testSomethingUsingCoreData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectContext&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;setUpInMemoryManagedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;entity&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSEntityDescription&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;insertNewObjectForEntityForName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;EntityName&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inManagedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// model setup&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// XCTAssert    &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;I was so surprised at how straightforward the test was. The helper function makes a world of difference for me. I hope it does for you, too!&lt;/p&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+  You might also enjoy&amp;#8230;
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+  &lt;li&gt;
+    &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/&#34; title=&#34;Using a Core Data Model in Swift Playgrounds&#34;&gt;Using a Core Data Model in Swift Playgrounds&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/&#34; title=&#34;Sharing a Core Data Model with a Swift Framework&#34;&gt;Sharing a Core Data Model with a Swift Framework&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/&#34; title=&#34;Core Data Cheat Sheet for Swift iOS Developers&#34;&gt;Core Data Cheat Sheet for Swift iOS Developers&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt; 
+&lt;p&gt;&lt;a name=&#34;course&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;Core Data Fundamentals with Swift&lt;/a&gt;&lt;br /&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png&#34; alt=&#34;Core Data Fundamentals with Swift&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13163&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

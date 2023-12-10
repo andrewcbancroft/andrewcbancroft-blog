@@ -1,0 +1,47 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DotNetZip on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/dotnetzip/</link>
+    <description>Recent content about iOS development with Swift in DotNetZip  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Dec 2013 20:55:27 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/dotnetzip/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DotNetZip – Solving Mac Decompression Issues</title>
+      <link>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</link>
+      <pubDate>Sat, 28 Dec 2013 20:55:27 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</guid>
+      <description>&lt;p&gt;As part of a ASP.Net Web API service that I&amp;rsquo;m co-developing, I have gotten familiar with the &lt;a title=&#34;DotNetZip Codeplex Page&#34; href=&#34;http://dotnetzip.codeplex.com/&#34; target=&#34;_blank&#34;&gt;DotNetZip Library&lt;/a&gt;.  It&amp;rsquo;s fantastic.  We&amp;rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.&lt;/p&gt;
+&lt;p&gt;During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.&lt;/p&gt;
+&lt;h2 id=&#34;synopsis&#34;&gt;Synopsis:&lt;/h2&gt;
+&lt;p&gt;Problem:  On a Mac, a zip file would be downloaded, but it could not be extracted.  Double-clicking the zip file resulted in the creation of a .cpgz file.&lt;/p&gt;
+&lt;p&gt;Solution:  In ASP.Net code, change&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/zip”&lt;/p&gt;
+&lt;p&gt;to&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/octet-stream”&lt;/p&gt;
+&lt;h2 id=&#34;problem-details&#34;&gt;Problem Details:&lt;/h2&gt;
+&lt;p&gt;A zip archive would download as normal, but as things were wrapping up, Safari would try to decompress the file and it would fail.&lt;/p&gt;
+&lt;p&gt;Error from Safari&amp;rsquo;s download manager area:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed.png&#34;&gt;&lt;img class=&#34;alignnone size-medium wp-image-585&#34; style=&#34;src=&amp;quot;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed-300x43.png&amp;quot;&#34; width=&#34;300&#34; height=&#34;43&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Furthermore, when attempting to simply extract the files directly using the built in Mac Archive Utility (by double-clicking the zip file), the utility would actually re-archive the file, rather than extract it.  The end result was the creation of a .cpgz file.  Attempting to decompress &lt;em&gt;that&lt;/em&gt; file would result in creating another .zip file, which, when double-clicked, created another .cpgz file, and so on, and so on.&lt;/p&gt;
+&lt;p&gt;Archive Utility re-archiving the zip file when double-clicked (rather than &lt;em&gt;un&lt;/em&gt;-archiving it)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM.png&#34;&gt;&lt;img class=&#34;alignnone size-medium wp-image-586&#34; alt=&#34;Screen Shot 2013-10-10 at 4.13.48 PM&#34; src=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM-300x106.png&#34; width=&#34;300&#34; height=&#34;106&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Creation of .cpgz file:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png&#34;&gt;&lt;img class=&#34;alignnone size-full wp-image-584&#34; alt=&#34;Created_cpgz_file&#34; src=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png&#34; width=&#34;280&#34; height=&#34;22&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Needless to say, the solution to this problem, though somewhat mysterious, was quite simple for me.&lt;/p&gt;
+&lt;p&gt;In my ASP.Net code, I was writing the zip file to the Response OutputStream.  I had added a content type of &amp;ldquo;application/zip” to the response.  This is what was breaking the zip files on a Mac.  Buried &lt;a title=&#34;DotNetZip Library Forum&#34; href=&#34;http://dotnetzip.codeplex.com/discussions/59740&#34; target=&#34;_blank&#34;&gt;in the DotNetZip Library&amp;rsquo;s forum was a post&lt;/a&gt; recommending changing the content type to &amp;ldquo;application/octet-stream” instead.  That single changed fixed the issue for standard zip files!&lt;/p&gt;
+&lt;h2 id=&#34;solution-details&#34;&gt;Solution Details:&lt;/h2&gt;
+&lt;p&gt;Change&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/zip”&lt;/p&gt;
+&lt;p&gt;to&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/octet-stream”&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

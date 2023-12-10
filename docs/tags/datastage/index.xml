@@ -1,0 +1,78 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataStage on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/datastage/</link>
+    <description>Recent content about iOS development with Swift in DataStage  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Mar 2013 17:52:13 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/datastage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DataStage Range Lookup Failure – What Gives?</title>
+      <link>https://www.andrewcbancroft.com/2013/03/25/datastage-range-lookup-failure-what-gives/</link>
+      <pubDate>Mon, 25 Mar 2013 17:52:13 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/03/25/datastage-range-lookup-failure-what-gives/</guid>
+      <description>&lt;p&gt;I just spent the majority of my morning trying to figure out why in the world my range lookup kept failing.  Hopefully this will save you some time in troubleshooting &lt;em&gt;your&lt;/em&gt; range lookup failures.  To cut right to the chase, &lt;strong&gt;my resolution involved &lt;em&gt;sorting&lt;/em&gt; my reference source prior to doing the lookup&lt;/strong&gt;.  Adding a sort stage with the appropriate sort keys prior to doing the lookup solved my problem.  I probably learned this in a training at some point, but I just didn’t retain it.  So I learned it again the hard way.&lt;/p&gt;
+&lt;p&gt;For those who’d like to see a bit more of the details involved, feel free to have a look below.&lt;/p&gt;
+&lt;h3 id=&#34;scenario&#34;&gt;Scenario:&lt;/h3&gt;
+&lt;p&gt;I have a list of funding transactions in my data pipeline that lack some information, namely, the student’s major at the time he/she was funded.  They key phrase there is “&lt;em&gt;at the time he/she was funded”.&lt;/em&gt; &lt;/p&gt;
+&lt;p&gt;To assist in supplementing my fact record (the funding transaction) with this student demographic information, I have constructed a snapshot table in the data warehouse that captures a student’s major as a sort of “slowly changing dimension”.  Each time a change in the student’s major is detected, new records are inserted and effective and expiration dates are adjusted.  I’d like to supplement my funding record with this student major information by doing a lookup.  Here is the information I have to work with, just to be clear:&lt;/p&gt;
+&lt;p&gt;My source data pipeline starts with my funding transactions.  It contains&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Student ID (Key)
+&lt;ul&gt;
+&lt;li&gt;Transaction Date (will help me with my lookup)
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Other columns that aren’t relevant to this particular task&lt;/ul&gt;
+I also have a slowly changing dimension that tracks a historical record of each student’s major for various time intervals.  It contains&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Student ID (Key)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Effective Date of the student’s major (will help with lookup)
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Expiration Date of the student’s major (will help with lookup)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Student’s major (the information I want to use to supplement my fact row)&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;range-lookup-my-failing-setup&#34;&gt;Range Lookup (My [failing] Setup):&lt;/h3&gt;
+&lt;p&gt;To accomplish my goal of supplementing the fact record with the student’s major, I needed to do a range lookup.  Below are sample screenshots of how I was attempting to set things up:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;View of the job design surface:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image9.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb9.png&#34; width=&#34;523&#34; height=&#34;478&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;View of Lookup Stage:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image10.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb10.png&#34; width=&#34;702&#34; height=&#34;326&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Notice that I use StudentID as a key so that I match the funding row to a particular student.  Now, to get his/her major at the time they were funded, I do a range lookup on the DateFunded column…&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;View of Range Lookup on DateFunded:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image11.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb11.png&#34; width=&#34;725&#34; height=&#34;517&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After compiling the job and running it, I would receive this error message: &lt;/p&gt;
+&lt;p&gt;Lookup_StudentFieldOfStudy,0: Job aborting due to &lt;strong&gt;lookup failure&lt;/strong&gt; on link: List_StudentFieldOfStudy&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image12.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb12.png&#34; width=&#34;725&#34; height=&#34;121&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;problem-solved&#34;&gt;Problem Solved:&lt;/h3&gt;
+&lt;p&gt;As stated in the introduction, to fix this problem, I simply added a sort stage prior to the lookup stage on the link serving as my reference (that is, on the link containing the value I’m trying to look up, which in my case was the student’s major/field of study).  Here are some screen shots of how my job looked after I fixed it:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;View of the job design surface:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image13.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb13.png&#34; width=&#34;691&#34; height=&#34;462&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;View of Sort Stage:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/SNAGHTML100fd47.png&#34;&gt;&lt;img title=&#34;SNAGHTML100fd47&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;SNAGHTML100fd47&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/SNAGHTML100fd47_thumb.png&#34; width=&#34;517&#34; height=&#34;397&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;An important note about the sort stage.  I needed to include &lt;strong&gt;two sort keys&lt;/strong&gt; – one to sort the students, and another to sort the effective dates of each student’s major(s).&lt;/p&gt;
+&lt;p&gt;Everything else in the job remained exactly the same.  The results were a successfully running job with no lookup failures.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

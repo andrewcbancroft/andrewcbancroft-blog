@@ -1,0 +1,251 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Framework on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/framework/</link>
+    <description>Recent content about iOS development with Swift in Framework  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Jan 2016 18:40:55 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/framework/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift Framework Woes – Unresolved Identifier? No Member?</title>
+      <link>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</link>
+      <pubDate>Fri, 08 Jan 2016 18:40:55 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s the simple things that get us, isn&amp;rsquo;t it?&lt;/p&gt;
+&lt;p&gt;I was working on a simple little framework the other day, and I&amp;rsquo;d gotten things just how I wanted… or so I thought.&lt;/p&gt;
+&lt;p&gt;I was ready to test things out and import the framework into my real app.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;import MyShinyNewFramework&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Sweet! No build errors!&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;// attempt to use things defined in the framework&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Not so sweet…&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Use of unresolved identifier ‘…&#39;&lt;/p&gt;
+&lt;p&gt;Value of type ‘…&amp;rsquo; has no member ‘…&#39;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I scrunched my forehead, puzzled, and immediately it came to me.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;public&lt;/code&gt; &lt;code&gt;public&lt;/code&gt; &lt;code&gt;public&lt;/code&gt; all the things! Or at least, the things that others need to use from the framework. :]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Of course&lt;/em&gt; a framework&amp;rsquo;s usable API needs to be public, but I write far more code that doesn&amp;rsquo;t require thought of access control modifiers than code that &lt;em&gt;does&lt;/em&gt;, so there&amp;rsquo;s always that initial head-scratching that happens when you&amp;rsquo;re to the point of testing and go, &amp;ldquo;WHAT?? Why is this not working??!”&lt;/p&gt;
+&lt;h4 id=&#34;key-takeaway&#34;&gt;Key Takeaway&lt;/h4&gt;
+&lt;p&gt;Whenever you&amp;rsquo;re developing code (such as a framework) that&amp;rsquo;s intended to be used from the perspective of another Swift module, you need to include &lt;code&gt;public&lt;/code&gt; before Types and functions that are intended to be &amp;ldquo;seen” and called from that other module. Otherwise, you&amp;rsquo;ll get those same fun compiler errors and join me in saying to yourself, &amp;ldquo;Doh! Yep… public… &lt;em&gt;again&lt;/em&gt;.”&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sharing a Core Data Model with a Swift Framework</title>
+      <link>https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/</link>
+      <pubDate>Wed, 26 Aug 2015 04:04:05 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/</guid>
+      <description>&lt;p&gt;&lt;small&gt;Updated on June 13, 2017 – Swift 3.0, Xcode 8&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Code re-use is a powerful thing, but it&amp;rsquo;s not always easy to pull off. We strive for it though, because in the long run, it makes maintaining the code far, far easier than if we just settled for copying and pasting.&lt;/p&gt;
+&lt;p&gt;With the introduction of dynamic frameworks in iOS 8, a world of possibility opened up for iOS developers to achieve some pretty cool re-use scenarios, one of which we&amp;rsquo;re going to dive into today.&lt;/p&gt;
+&lt;p&gt;Not only can we share &lt;em&gt;code&lt;/em&gt; between projects, we can also share Core Data &lt;em&gt;models&lt;/em&gt; between projects by utilizing frameworks!&lt;/p&gt;
+&lt;p&gt;Perhaps you&amp;rsquo;re working on an iOS + Mac app combination and the data model for each is identical. Maybe you&amp;rsquo;re building several iOS apps that have different user interfaces but share some underlying persistence-layer models. Whatever the case may be, wouldn&amp;rsquo;t it be awesome to design the Core Data model once and share it between your projects?&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;example-scenario&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;example-scenario&#34;&gt;Example scenario&lt;/h3&gt;
+&lt;p&gt;Our working example for this walkthrough will be the following:&lt;/p&gt;
+&lt;p&gt;Our team is building an &lt;strong&gt;iOS app&lt;/strong&gt; and a &lt;strong&gt;Mac app&lt;/strong&gt; and the &lt;strong&gt;underlying data model will be exactly the same&lt;/strong&gt; between them. The only difference between the apps will be the target platform.&lt;/p&gt;
+&lt;p&gt;The app will target car enthusiasts everywhere – we will empower car fanatics to manage of a list of their favorite cars.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll be creating two Xcode projects during this walkthrough: One will be the framework and will be called &amp;ldquo;CarKit”. The other will be a single view iOS application. We won&amp;rsquo;t actually dive into the Mac project, but one could imagine the process being very similar for importing CarKit into the Mac application when it came time to build that one.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m providing a completed CarKit + Carz package for you to look at over at GitHub:&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fab fa-github fa-lg&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/andrewcbancroft/CoreDataFrameworkExample&#34; title=&#34;Core Data Framework Example&#34;&gt;CarKit + Carz Core Data Framework Example&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;Let&amp;rsquo;s get started!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;create-swift-framework-project&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;creating-a-swift-framework-project&#34;&gt;Creating a Swift framework project&lt;/h3&gt;
+&lt;p&gt;To get started with creating a Swift framework, begin with Xcode&amp;rsquo;s New Project dialog (File -&amp;gt; New -&amp;gt; Project…). Typically we stay in the realm of the &amp;ldquo;iOS Application” project templates, but if you click &amp;ldquo;Framework &amp;amp; library”, you&amp;rsquo;ll see the option to create a new Cocoa Touch Framework:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/01-New-Project-Framework.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/01-New-Project-Framework.png&#34; alt=&#34;01 - New Project - Framework&#34; width=&#34;778&#34; height=&#34;490&#34; class=&#34;alignnone size-full wp-image-12239&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/01-New-Project-Framework.png 778w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/01-New-Project-Framework-300x189.png 300w&#34; sizes=&#34;(max-width: 778px) 100vw, 778px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In keeping with Apple&amp;rsquo;s &amp;ldquo;___Kit” theme, we&amp;rsquo;ll name our framework &amp;ldquo;CarKit”:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/02-Project-Name.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/02-Project-Name.png&#34; alt=&#34;02 - Project Name&#34; width=&#34;760&#34; height=&#34;467&#34; class=&#34;alignnone size-full wp-image-12240&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/02-Project-Name.png 760w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/02-Project-Name-300x184.png 300w&#34; sizes=&#34;(max-width: 760px) 100vw, 760px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;add-data-model-file&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;add-a-data-model-file&#34;&gt;Add a data model file&lt;/h4&gt;
+&lt;p&gt;Once the framework project has been created, we&amp;rsquo;re set to drop in a new Data Model file from Xcode&amp;rsquo;s new file dialog (File -&amp;gt; New -&amp;gt; File…). Choose Core Data, and then Data Model:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/03-New-File-Core-Data-Data-Model.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/03-New-File-Core-Data-Data-Model.png&#34; alt=&#34;03 - New File - Core Data - Data Model&#34; width=&#34;750&#34; height=&#34;444&#34; class=&#34;alignnone size-full wp-image-12241&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/03-New-File-Core-Data-Data-Model.png 750w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/03-New-File-Core-Data-Data-Model-300x178.png 300w&#34; sizes=&#34;(max-width: 750px) 100vw, 750px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Give the data model file a name that seems to fit your situation. For our example, let&amp;rsquo;s name it &amp;ldquo;CarModel”:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/04-Model-Name.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/04-Model-Name.png&#34; alt=&#34;04 - Model Name&#34; width=&#34;748&#34; height=&#34;740&#34; class=&#34;alignnone size-full wp-image-12242&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/04-Model-Name.png 748w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/04-Model-Name-300x297.png 300w&#34; sizes=&#34;(max-width: 748px) 100vw, 748px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;add-model-attributes&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;add-model-attributes&#34;&gt;Add model attributes&lt;/h4&gt;
+&lt;p&gt;Next it&amp;rsquo;s time to actually add attributes to the model. Since our theme is cars here, we&amp;rsquo;ll stick with three simple attributes: &lt;code&gt;year&lt;/code&gt;, &lt;code&gt;make&lt;/code&gt;, and &lt;code&gt;model&lt;/code&gt;:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/05-Complete-Model.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/05-Complete-Model-1024x656.png&#34; alt=&#34;05 - Complete Model&#34; width=&#34;1024&#34; height=&#34;656&#34; class=&#34;alignnone size-large wp-image-12243&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/05-Complete-Model-1024x656.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/05-Complete-Model-300x192.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/05-Complete-Model.png 1399w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;create-nsmanagedobject-subclass&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;create-nsmanagedobject-subclass&#34;&gt;Create NSManagedObject subclass&lt;/h4&gt;
+&lt;p&gt;With the model attributes all configured, it&amp;rsquo;s time to create an &lt;code&gt;NSManagedObject&lt;/code&gt; subclass. This will make consuming the model much easier in client applications. I&amp;rsquo;ve actually &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/&#34;&gt;written up a full walk through on creating an NSManagedObject subclass in Swift&lt;/a&gt; as there are some nuances. Feel free to read up on that if you so desire!&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/06-NSManagedObject-Subclass.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/06-NSManagedObject-Subclass.png&#34; alt=&#34;06 - NSManagedObject Subclass&#34; width=&#34;517&#34; height=&#34;490&#34; class=&#34;alignnone size-full wp-image-12244&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/06-NSManagedObject-Subclass.png 517w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/06-NSManagedObject-Subclass-300x284.png 300w&#34; sizes=&#34;(max-width: 517px) 100vw, 517px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Be absolutely sure to mark your &lt;code&gt;NSManagedObject&lt;/code&gt; subclass and its properties &lt;code&gt;public&lt;/code&gt; – otherwise, the client app won&amp;rsquo;t be able to see the class or its properties:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/061-NSManagedObjectSubclass-Public.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/061-NSManagedObjectSubclass-Public.png&#34; alt=&#34;061 - NSManagedObjectSubclass Public&#34; width=&#34;671&#34; height=&#34;351&#34; class=&#34;alignnone size-full wp-image-12255&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/061-NSManagedObjectSubclass-Public.png 671w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/061-NSManagedObjectSubclass-Public-300x157.png 300w&#34; sizes=&#34;(max-width: 671px) 100vw, 671px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As I point out in &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/&#34;&gt;Implement NSManagedObject Subclass in Swift&lt;/a&gt;, you need to set the Module property in the Data Model Inspector to be CarKit (which is the same as the &amp;ldquo;Current Project Module” option for this example):&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/07-Change-Entity-Class.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/07-Change-Entity-Class-1024x213.png&#34; alt=&#34;07 - Change Entity Class&#34; width=&#34;1024&#34; height=&#34;213&#34; class=&#34;alignnone size-large wp-image-12245&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/07-Change-Entity-Class-1024x213.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/07-Change-Entity-Class-300x62.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/07-Change-Entity-Class-768x160.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/07-Change-Entity-Class.png 1404w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;build-inspect-outputs&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;build-and-inspect-outputs&#34;&gt;Build and inspect outputs&lt;/h4&gt;
+&lt;p&gt;We&amp;rsquo;ve got a framework, and we&amp;rsquo;ve got a Data Model with attributes and an &lt;code&gt;NSManagedObject&lt;/code&gt; subclass all appropriately implemented. Now it&amp;rsquo;s time to build the project and inspect the output of the build!&lt;/p&gt;
+&lt;p&gt;Command + B to build, and then head up to the File menu and choose Project Settings:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/08-Window-Projects.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/08-Window-Projects.png&#34; alt=&#34;08 - Window - Projects&#34; width=&#34;292&#34; height=&#34;492&#34; class=&#34;alignnone size-full wp-image-12246&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/08-Window-Projects.png 292w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/08-Window-Projects-178x300.png 178w&#34; sizes=&#34;(max-width: 292px) 100vw, 292px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In the Project Settings area that appears, click the small gray arrow under the &amp;ldquo;Derived Data” section:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/09-CarKit-Projects-Window.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/09-CarKit-Projects-Window.png&#34; alt=&#34;09 - CarKit - Projects Window&#34; width=&#34;612&#34; height=&#34;374&#34; class=&#34;alignnone size-full wp-image-12247&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/09-CarKit-Projects-Window.png 612w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/09-CarKit-Projects-Window-300x183.png 300w&#34; sizes=&#34;(max-width: 612px) 100vw, 612px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Next, find the derived data folder for your project. It should be named the same as your project with a set of random characters after. Sometimes there will be multiple folders that could be your project. You can look at the last modified date to help figure you figure out which one was most recently built and choose that one.&lt;/p&gt;
+&lt;p&gt;Expand the Build folder down to Build -&amp;gt; Products -&amp;gt; Debug-iphonesimulator. There you should see the CarKit.framework artifact, and within it, everything that&amp;rsquo;s needed to be able to utilize the data model in a client application. Awesome!&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd-1024x733.png&#34; alt=&#34;10 - CarKit - Finder - Includes momd&#34; width=&#34;1024&#34; height=&#34;733&#34; class=&#34;alignnone size-large wp-image-12248&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd-1024x733.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd-300x215.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd-768x550.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/10-CarKit-Finder-Includes-momd.png 1064w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This framework is not production-ready. It&amp;rsquo;s a little more involved to create a framework that one can run on a device / pass validation when submitting to the app store. The development of the framework remains the same, but the &lt;em&gt;build&lt;/em&gt; phases and procedures must be modified to make it &amp;ldquo;universal”. Rather than overly complicate this walkthrough, I recommend reviewing &amp;ldquo;&lt;a href=&#34;https://kodmunki.wordpress.com/2015/03/04/cocoa-touch-frameworks-for-ios8-remix/&#34;&gt;Universal Cocoa Touch Frameworks for iOS 8 – (Remix)&lt;/a&gt; by &lt;a href=&#34;https://twitter.com/kodmunki&#34;&gt;@kodmunki&lt;/a&gt; to create a &amp;ldquo;universal” framework capable of being run in the simulator and on iOS devices.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;create-framework-dependent-app&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;creating-the-framework-dependent-app&#34;&gt;Creating the framework-dependent app&lt;/h3&gt;
+&lt;p&gt;With the framework built, it&amp;rsquo;s time to create the iOS app that will utilize that framework and its packaged assets! Begin a new project from File -&amp;gt; New -&amp;gt; Project and select &amp;ldquo;Single View Application”. I&amp;rsquo;ll name our example app &amp;ldquo;Carz”. &lt;strong&gt;Ensure that &amp;ldquo;Use Core Data” is selected&lt;/strong&gt; so that you get the boilerplate Core Data code put into your project by Xcode:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/11-New-Single-View-App-Carz.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/11-New-Single-View-App-Carz.png&#34; alt=&#34;11 - New Single View App - Carz&#34; width=&#34;755&#34; height=&#34;492&#34; class=&#34;alignnone size-full wp-image-12249&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/11-New-Single-View-App-Carz.png 755w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/11-New-Single-View-App-Carz-300x195.png 300w&#34; sizes=&#34;(max-width: 755px) 100vw, 755px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;remove-xcode-generated-xcdatamodeld&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;remove-xcode-generated-xcdatamodeld-file&#34;&gt;Remove Xcode-generated .xcdatamodeld file&lt;/h4&gt;
+&lt;p&gt;When you select &amp;ldquo;Use Core Data” in the project creation window, Xcode automatically generates some boilerplate code, which we want. But it also gives us a &amp;ldquo;Carz.xcdatamodeld” file, which we will not need because we&amp;rsquo;ll use the model that&amp;rsquo;s found in CarKit. Remove the &amp;ldquo;Carz.xcdatamodeld” file that Xcode provides for you:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/12-Remove-default-data-model-from-new-project.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/12-Remove-default-data-model-from-new-project-1024x475.png&#34; alt=&#34;12 - Remove default data model from new project&#34; width=&#34;1024&#34; height=&#34;475&#34; class=&#34;alignnone size-large wp-image-12250&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/12-Remove-default-data-model-from-new-project-1024x475.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/12-Remove-default-data-model-from-new-project-300x139.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/12-Remove-default-data-model-from-new-project.png 1394w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;obtain-framework-bundle-identifier&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;obtain-framework-bundle-identifier&#34;&gt;Obtain framework Bundle Identifier&lt;/h4&gt;
+&lt;p&gt;Speaking of using the CarKit Core Data model, we&amp;rsquo;re now ready to configure that piece of the app. To do this part, you will need to know the Bundle Identifier from your framework project. To find out what it is, jump back over to the framework project, click the top-level node in the project navigator, click on the framework target name, and look under the General tab of the project configuration. There you&amp;rsquo;ll find the Bundle Identifier, which you can copy to your clipboard:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/13-CarKit-Bundle-Identifier.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/13-CarKit-Bundle-Identifier-1024x301.png&#34; alt=&#34;13 - CarKit Bundle Identifier&#34; width=&#34;1024&#34; height=&#34;301&#34; class=&#34;alignnone size-large wp-image-12251&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/13-CarKit-Bundle-Identifier-1024x301.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/13-CarKit-Bundle-Identifier-300x88.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/13-CarKit-Bundle-Identifier.png 1137w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;replace-managed-object-model-property&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;replace-managedobjectmodel-property-initialization&#34;&gt;Replace managedObjectModel property initialization&lt;/h4&gt;
+&lt;p&gt;Out of the box, Xcode generates some code to help locate your Core Data model file. The boilerplate &lt;code&gt;managedObjectModel&lt;/code&gt; property looks like this:&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;lazy&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectModel&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;modelURL&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSBundle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mainBundle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;URLForResource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;DataModelFileName&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;withExtension&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;momd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;contentsOfURL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;modelURL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}()&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+However, this won&amp;rsquo;t work for us, because we&amp;rsquo;re going to use the data model from CarKit, and CarKit is not in the &lt;code&gt;mainBundle()&lt;/code&gt;. This is why we jumped over and copied the Bundle Identifier for CarKit in the previous step. To locate the data model file in &lt;em&gt;that&lt;/em&gt; bundle, you&amp;rsquo;ll replace the &lt;code&gt;managedObjectModel&lt;/code&gt; initialization step to the following (for CarKit):&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;lazy&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectModel&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;carKitBundle&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Bundle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;identifier&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;com.andrewcbancroft.CarKit&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;modelURL&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;carKitBundle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;forResource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;CarModel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;withExtension&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;momd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;contentsOf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;modelURL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}()&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-1024x394.png&#34; alt=&#34;16 - AppDelegate&#34; width=&#34;1024&#34; height=&#34;394&#34; class=&#34;alignnone size-large wp-image-12253&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-1024x394.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-300x115.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate-768x296.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/16-AppDelegate.png 1213w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Recall that &amp;ldquo;CarModel” is the name of the Core Data model we created for the framework in CarKit. We simply look for that artifact by calling &lt;code&gt;URLForResource:withExtension:&lt;/code&gt; on the &lt;code&gt;carKitBundle&lt;/code&gt; to initialize an &lt;code&gt;NSManagedObjectModel&lt;/code&gt; instance.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;add-carkit-framework&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;add-carkit-framework-to-project-and-embed-binary&#34;&gt;Add CarKit framework to project and embed binary&lt;/h4&gt;
+&lt;p&gt;Now it&amp;rsquo;s time to actually bring in the framework for use within our app. I typically open up a Finder window and drag over a copy of the framework (in this case, the CarKit.framework file) into my project. Feel free to organize it into a &amp;ldquo;lib” folder.&lt;/p&gt;
+&lt;p&gt;Assuming that you go through all the necessary steps to make the framework production-ready, you&amp;rsquo;ll want to embed the binary and ensure that it&amp;rsquo;s referenced in the &amp;ldquo;Linked Frameworks and Libraries” portion of your project configuration:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/15-Embed-CarKit-and-Link-CarKit.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/15-Embed-CarKit-and-Link-CarKit-1024x634.png&#34; alt=&#34;15 - Embed CarKit and Link CarKit&#34; width=&#34;1024&#34; height=&#34;634&#34; class=&#34;alignnone size-large wp-image-12252&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/15-Embed-CarKit-and-Link-CarKit-1024x634.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/15-Embed-CarKit-and-Link-CarKit-300x186.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/15-Embed-CarKit-and-Link-CarKit.png 1399w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;take-for-test-drive&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;taking-the-model-out-for-a-test-drive-pun-intended&#34;&gt;Taking the model out for a test drive (pun intended)&lt;/h4&gt;
+&lt;p&gt;It&amp;rsquo;s simple enough to try things out by writing a simple little snippet of code in the &lt;code&gt;AppDelegate&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;application&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;application&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIApplication&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;didFinishLaunchingWithOptions&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;launchOptions&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UIApplicationLaunchOptionsKey&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Any&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]?)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Bool&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Override point for customization after application launch.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;newCar&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSEntityDescription&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;insertNewObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;forEntityName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Car&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;into&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Car&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;newCar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;year&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2015&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;newCar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Tesla&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;newCar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;model&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;S&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;save&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;fetchRequest&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSFetchRequestResult&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;entityName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Car&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;cars&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fetch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Car&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;terminator&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+This code simply obtains a new Car object, sets some properties, and saves it all with the &lt;code&gt;managedObjectContext&lt;/code&gt; instance that&amp;rsquo;s configured in the &lt;code&gt;AppDelegate&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Then it goes and performs a fetch request to grab all the &lt;code&gt;Car&lt;/code&gt; objects and prints them. The results? See for yourself:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-1024x592.png&#34; alt=&#34;17 - Final Result&#34; width=&#34;1024&#34; height=&#34;592&#34; class=&#34;alignnone size-large wp-image-12254&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-1024x592.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-300x173.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result-768x444.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2015/08/17-Final-Result.png 1470w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;This walkthrough guided you through the process of creating a framework for the purpose of sharing a Core Data model with multiple projects. My hope is that you&amp;rsquo;re now empowered to make use of _re_use by utilizing Swift frameworks to share even portions of your persistence layer!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/&#34; title=&#34;Using a Core Data Model in Swift Playgrounds&#34;&gt;Using a Core Data Model in Swift Playgrounds&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/&#34; title=&#34;Using Swift to Seed a Core Data Database&#34;&gt;Using Swift to Seed a Core Data Database&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/&#34; title=&#34;Core Data Cheat Sheet for Swift iOS Developers&#34;&gt;Core Data Cheat Sheet for Swift iOS Developers&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/&#34; title=&#34;Unit Testing Model Layer with Core Data and Swift&#34;&gt;Unit Testing Model Layer with Core Data and Swift&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;course&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;Core Data Fundamentals with Swift&lt;/a&gt;&lt;br /&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png&#34; alt=&#34;Core Data Fundamentals with Swift&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13163&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

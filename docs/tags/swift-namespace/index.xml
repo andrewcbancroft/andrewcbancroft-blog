@@ -1,0 +1,87 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Swift Namespace on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/swift-namespace/</link>
+    <description>Recent content about iOS development with Swift in Swift Namespace  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Jul 2014 04:08:12 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/swift-namespace/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Implement NSManagedObject Subclass in Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</link>
+      <pubDate>Fri, 18 Jul 2014 04:08:12 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</guid>
+      <description>&lt;p&gt;&lt;small&gt;Updated on July 8, 2016 – Xcode 7&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;My goal with this blog entry is to help get you set up to create NSManagedObject subclasses in Swift for the Entities in your Core Data model.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;example&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;example&#34;&gt;Example&lt;/h1&gt;
+&lt;p&gt;Let&amp;rsquo;s look at a fabricated example: Say that you&amp;rsquo;ve got a Core Data project and you&amp;rsquo;re creating Entities.  For my simple project, I&amp;rsquo;ll create an Entity called &amp;ldquo;MyEntity” with an attribute called &amp;ldquo;myAttribute”.&lt;/p&gt;
+&lt;p&gt;After you create an NSManagedObject subclass for the Entity and come back to the data model screen to specify the &amp;ldquo;Class” in the inspector area, you &lt;em&gt;must&lt;/em&gt; prefix the name of the class with &amp;ldquo;YourProjectName.” (don&amp;rsquo;t forget the dot).  Forgetting to do this will lead to run-time errors when you start interacting with instances of your NSManagedObject subclass.&lt;/p&gt;
+&lt;p&gt;&lt;a title=&#34;Documentation specifying module name prefix requirement&#34; href=&#34;https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/BuildingCocoaApps/WritingSwiftClassesWithObjective-CBehavior.html&#34; target=&#34;_blank&#34;&gt;Apple specifies this in their documentation page&lt;/a&gt;, but it was a subtle mention at the end of the document and I just happened upon it as I was troubleshooting this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color: #414141;&#34;&gt;Swift classes are namespaced—they’re scoped to the module (typically, the project) they are compiled in. To use a Swift subclass of the &lt;/span&gt;&lt;code&gt;NSManagedObject&lt;/code&gt;&lt;span style=&#34;color: #414141;&#34;&gt; class with your Core Data model, prefix the class name in the Class field in the model entity inspector with the name of your module.&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a name=&#34;walkthrough&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;walk-through&#34;&gt;Walk-through&lt;/h1&gt;
+&lt;p&gt;&lt;a name=&#34;create-entity&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;create-an-entity&#34;&gt;Create an Entity&lt;/h2&gt;
+&lt;p&gt;In your .xcdatamodeld file, create an Entity to your liking.  In my example, I named the Entity &amp;ldquo;MyEntity” and I gave it an attribute called &amp;ldquo;myAttribute” with a data type of String.&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManagedObjectSubclassExample.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManagedObjectSubclassExample-1024x783.png&#34; alt=&#34;Create Entity and Attribute&#34; width=&#34;730&#34; height=&#34;558&#34; class=&#34;alignnone size-large wp-image-1901&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManagedObjectSubclassExample-1024x783.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManagedObjectSubclassExample-300x229.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManagedObjectSubclassExample.png 1202w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;create-nsmanagedobject-subclass&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;create-an-nsmanagedobject-subclass-for-that-entity&#34;&gt;Create an NSManagedObject Subclass for that Entity&lt;/h2&gt;
+&lt;p&gt;On the Menu, click Editor, then &amp;ldquo;Create NSManagedObject Subclass…”&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM-1024x700.png&#34; alt=&#34;Create NSManagedObject Subclass&#34; width=&#34;730&#34; height=&#34;499&#34; class=&#34;alignnone size-large wp-image-1961&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM-1024x700.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM-300x205.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/Fullscreen_7_17_14__9_59_PM.png 1524w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Make sure you choose &amp;ldquo;Swift” as your language of choice as you click Next through the wizard and Xcode will generate you a file that is appropriate for your Entity.  The files it created for me (Xcode 7.1.1) look like this:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1-1024x298.png&#34; alt=&#34;NSManagedObject Class file&#34; width=&#34;1024&#34; height=&#34;298&#34; class=&#34;alignnone size-large wp-image-12993&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1-1024x298.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1-300x87.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_1.png 1390w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_2.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_2-1024x274.png&#34; alt=&#34;NSManagedObject Properties file&#34; width=&#34;1024&#34; height=&#34;274&#34; class=&#34;alignnone size-large wp-image-12992&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_2-1024x274.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_2-300x80.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_2.png 1395w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;verify-class-module&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;verify-nsmanagedobject-class-in-the-data-model-inspector8221&#34;&gt;Verify NSManagedObject class in the &amp;ldquo;Data Model Inspector”&lt;/h2&gt;
+&lt;p&gt;Make sure that you have your .xcdatamodeld file selected in the Navigator panel.  Then make sure your Utilities panel is visible.&lt;/p&gt;
+&lt;p&gt;Click the &amp;ldquo;Data Model Inspector” icon.  This will be the last icon in the inspector of Xcode.  You should see a section for &amp;ldquo;Entity” and within this section, two textboxes:  one for Name and one for Class. You should also see a drop-down for the Module that the NSManagedObject subclass is found in.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ll be verifying the &lt;em&gt;Class&lt;/em&gt; and the &lt;em&gt;Module&lt;/em&gt; values:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_verify_class.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_verify_class-1024x674.png&#34; alt=&#34;Verify class and module&#34; width=&#34;1024&#34; height=&#34;674&#34; class=&#34;alignnone size-large wp-image-12991&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_verify_class-1024x674.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_verify_class-300x197.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/07/NSManaged_verify_class.png 1393w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;According to the &lt;a title=&#34;Documentation specifying module name prefix requirement&#34; href=&#34;https://developer.apple.com/library/prerelease/mac/documentation/Swift/Conceptual/BuildingCocoaApps/WritingSwiftClassesWithObjective-CBehavior.html&#34; target=&#34;_blank&#34;&gt;Swift documentation&lt;/a&gt;, Swift class namespaces are scoped to the module they&amp;rsquo;re compiled in (usually the project you&amp;rsquo;re working in).  &lt;/p&gt;
+&lt;p&gt;To use the NSManagedObject subclass in your project, you just need to verify that the Module setting is set to &amp;ldquo;Current Product Module”, assuming that the NSManagedObject subclass you&amp;rsquo;re wiring this Entity to is found in that module. If it&amp;rsquo;s in &lt;em&gt;another&lt;/em&gt; module, you&amp;rsquo;ll need to adjust the Module value in the inspector appropriately.&lt;/p&gt;
+&lt;p&gt;Once the Class and Module values are verified (or set), you&amp;rsquo;ll be able to use this NSManagedObject subclass anywhere in your project.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/&#34; title=&#34;Core Data Cheat Sheet for Swift iOS Developers&#34;&lt;/a&gt;Core Data Cheat Sheet for Swift iOS Developers
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/&#34; title=&#34;Using Swift to Seed a Core Data Database&#34;&lt;/a&gt;Using Swift to Seed a Core Data Database
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/&#34; title=&#34;Displaying Data With NSFetchedResultsController and Swift&#34;&lt;/a&gt;Displaying Data With NSFetchedResultsController and Swift
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/&#34; title=&#34;Sync Table View Data: NSFetchedResultsController and Swift&#34;&lt;/a&gt;Sync Table View Data: NSFetchedResultsController and Swift
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;course&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;Core Data Fundamentals with Swift&lt;/a&gt;&lt;br /&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png&#34; alt=&#34;Core Data Fundamentals with Swift&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13163&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

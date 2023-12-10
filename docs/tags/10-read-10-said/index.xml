@@ -1,0 +1,129 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>10 Read 10 Said on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/10-read-10-said/</link>
+    <description>Recent content about iOS development with Swift in 10 Read 10 Said  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Jul 2015 03:57:33 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/10-read-10-said/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dissecting 10 Read 10 Said – My New Swift iOS App</title>
+      <link>https://www.andrewcbancroft.com/2015/07/22/dissecting-10-read-10-said-my-new-swift-ios-app/</link>
+      <pubDate>Thu, 23 Jul 2015 03:57:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/07/22/dissecting-10-read-10-said-my-new-swift-ios-app/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m very excited to announce that my new app, 10 Read 10 Said, is now available for &lt;a href=&#34;https://itunes.apple.com/us/app/10-read-10-said/id1018662429?mt=8&#34; title=&#34;10 Read 10 Said iOS App Store&#34;&gt;iOS&lt;/a&gt; and &lt;a href=&#34;https://play.google.com/store/apps/details?id=com.gibcroft.tenreadtensaid&#34; title=&#34;10 Read 10 Said Google Play Store&#34;&gt;Android&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;While the goal of the app is to help you implement the &lt;a href=&#34;http://10read10said.andrewcbancroft.com/&#34; title=&#34;10 Read 10 Said Strategy&#34;&gt;&amp;ldquo;10 Read 10 Said” strategy for memorizing Bible verses&lt;/a&gt;, my goal in this &lt;em&gt;article&lt;/em&gt; is to dissect the app, and share with you how some of the major features were implemented.&lt;/p&gt;
+&lt;p&gt;As it turns out, &lt;em&gt;most&lt;/em&gt; of the major features of the app are things that I&amp;rsquo;ve already written about over the &lt;a href=&#34;http://www.andrewcbancroft.com/category/software-development/ios-mac/swift/&#34; title=&#34;Swift Content at andrewcbancroft.com&#34;&gt;past year of producing Swift content&lt;/a&gt;! The approach I&amp;rsquo;ll take, then, is to walk through each screen and point out which articles I&amp;rsquo;ve written might pertain to the particular feature implementations that are visible from that screen.&lt;/p&gt;
+&lt;p&gt;I hope this tour satisfies the curiosity of many like myself who ask, &amp;ldquo;I wonder how they did that!”&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;demo&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;app-demo&#34;&gt;App Demo&lt;/h3&gt;
+&lt;p&gt;To demonstrate the major functionality of the app, I&amp;rsquo;ve created a short (50 second) YouTube video. Take a look, and then I&amp;rsquo;ll break down each screen:&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;verse-list&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;verse-list&#34;&gt;Verse List&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Verse-List.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Verse-List-576x1024.png&#34; alt=&#34;Verse List&#34; width=&#34;326&#34; height=&#34;774&#34; class=&#34;alignnone size-large wp-image-12126&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;navigation-controller&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;navigation-controller&#34;&gt;Navigation Controller&lt;/h4&gt;
+&lt;p&gt;To begin, the Verse List scene has been embedded in a &lt;code&gt;UINavigationController&lt;/code&gt;. This caused me to have to make a few changes in &lt;code&gt;AppDelegate&lt;/code&gt; to properly dig in to access the verse list controller and set some properties on it.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve covered the details of how to &amp;ldquo;unpack” a &lt;code&gt;UINavigationController&lt;/code&gt; and access its first &lt;em&gt;child&lt;/em&gt; view controller in my article titled &lt;a href=&#34;http://www.andrewcbancroft.com/2015/06/02/access-sub-controllers-from-a-uinavigationcontroller-in-swift/&#34;&gt;&amp;ldquo;Access Sub-Controllers from a UINavigationController in Swift”&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;table-view&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;table-view&#34;&gt;Table View&lt;/h4&gt;
+&lt;p&gt;The next most obvious thing to notice about the verse list is that it&amp;rsquo;s been implemented with a &lt;code&gt;UITableView&lt;/code&gt;. Additionally, each cell is a &amp;ldquo;custom” cell, rather than one of the default cell styles that Xcode gives you out of the box. I&amp;rsquo;ve written an article or three on these:&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    UITableView Articles
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/&#34; title=&#34;Swift How-To: Setting up a Table View&#34;&gt;Swift How-To: Setting up a Table View&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/12/custom-uitableviewcell-text-input-swift/&#34; title=&#34;Custom UITableViewCell for Text Input in Swift&#34;&gt;Custom UITableViewCell for Text Input in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/&#34; title=&#34;UITableView Swipe to Delete Workflow in Swift&#34;&gt;UITableView Swipe to Delete Workflow in Swift&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;data-source&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;data-soure&#34;&gt;Data Soure&lt;/h4&gt;
+&lt;p&gt;The verse list&amp;rsquo;s data source is an &lt;code&gt;NSFetchedResultsController&lt;/code&gt;. This, of course, implies that my underlying data framework for the app is Core Data. Here are some of the articles I&amp;rsquo;ve written on these subjects:&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;core-data&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h5 id=&#34;core-data&#34;&gt;Core Data&lt;/h5&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Core Data Articles
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/&#34; title=&#34;Core Data Cheat Sheet for Swift iOS Developers&#34;&gt;Core Data Cheat Sheet for Swift iOS Developers&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/&#34; title=&#34;Implement NSManagedObject Subclass in Swift&#34;&gt;Implement NSManagedObject Subclass in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/&#34; title=&#34;Unit Testing Model Layer with Core Data and Swift&#34;&gt;Unit Testing Model Layer with Core Data and Swift&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;ns-fetched-results-controller&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h5 id=&#34;nsfetchedresultscontroller&#34;&gt;NSFetchedResultsController&lt;/h5&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    NSFetchedResultsController Articles
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/&#34; title=&#34;Displaying Data With NSFetchedResultsController and Swift&#34;&gt;Displaying Data With NSFetchedResultsController and Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/&#34; title=&#34;Sync Table View Data: NSFetchedResultsController and Swift&#34;&gt;Sync Table View Data: NSFetchedResultsController and Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/&#34; title=&#34;Using Swift to Seed a Core Data Database&#34;&gt;Using Swift to Seed a Core Data Database&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;add-verse&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;add-verse&#34;&gt;Add Verse&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Add-Verse.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Add-Verse-576x1024.png&#34; alt=&#34;Add Verse&#34; width=&#34;326&#34; height=&#34;774&#34; class=&#34;alignnone size-large wp-image-12124&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Adding a verse and synchronizing things to the table view (and the persistent data store) involves all-things Core Data and &lt;code&gt;NSFetchedResultsController&lt;/code&gt;. Using the combination of these two made things super easy to keep up-to-date in the UI.&lt;/p&gt;
+&lt;p&gt;When you press ‘Save&amp;rsquo;, your verse gets sent to the managed object context for the app. Once it&amp;rsquo;s saved using the context, the verse list gets automatically updated using its &lt;code&gt;NSFetchedResultsController&lt;/code&gt; data source. I really liked the results!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;memorize&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;memorize&#34;&gt;Memorize&lt;/h3&gt;
+&lt;p&gt;The memorization screen brings into play a few UI elements that I&amp;rsquo;ve experimented with and written on in the past. First, let&amp;rsquo;s take a look at these two screen layouts to have the visual before us:&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;read-it-said-it&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;read-it-said-it&#34;&gt;Read It, Said It&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Read-It.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Read-It-576x1024.png&#34; alt=&#34;Memorize - Read It&#34; width=&#34;326&#34; height=&#34;774&#34; class=&#34;alignnone size-large wp-image-12123&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Said-It.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/07/Memorize-Said-It-576x1024.png&#34; alt=&#34;Memorize - Said It&#34; width=&#34;326&#34; height=&#34;774&#34; class=&#34;alignnone size-large wp-image-12122&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The most notable thing I can think of on this scene is the circular progress indicator to help visualize how close you are to completing the read / said goal.&lt;/p&gt;
+&lt;p&gt;A few other subtle notes are the fade in/out animations that happen when you complete the read goal, the said goal, and the peek/hide action. Check out the related articles for those pieces:&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    UI Articles
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/07/09/circular-progress-indicator-in-swift/&#34; title=&#34;Circular Progress Indicator in Swift&#34;&gt;Circular Progress Indicator in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/&#34; title=&#34;Fade In / Out Animations as Class Extensions in Swift&#34;&gt;Fade In / Out Animations as Class Extensions in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/06/25/swift-uicolor-extension-create-using-rgb-values-not/&#34; title=&#34;Swift UIColor Extension – Create using RGB Values (Not %)&#34;&gt;Swift UIColor Extension – Create using RGB Values (Not %)&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;While this isn&amp;rsquo;t the first app I&amp;rsquo;ve worked on and published to the App Store, it &lt;em&gt;is&lt;/em&gt; my first &lt;em&gt;personal&lt;/em&gt; project idea that&amp;rsquo;s out there. I had a lot of fun building it as a utility for myself in my own Scripture memorization efforts. My hope is that the tool (and more importantly, &lt;a href=&#34;http://10read10said.andrewcbancroft.com/&#34;&gt;the strategy&lt;/a&gt;) is helpful to others as well!&lt;/p&gt;
+&lt;p&gt;My goal in this article was to give you a &amp;ldquo;behind the scenes” look at 10 Read 10 Said. I hope your curiosity has been satisfied by some of these inside looks into the app!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

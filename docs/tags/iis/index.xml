@@ -1,0 +1,56 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IIS on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/iis/</link>
+    <description>Recent content about iOS development with Swift in IIS  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 21 Jan 2016 17:16:23 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/iis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>401 Unauthorized Browsing Site From Local IIS Instance</title>
+      <link>https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/</link>
+      <pubDate>Thu, 21 Jan 2016 17:16:23 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/</guid>
+      <description>&lt;p&gt;I spent waaaaay way way way too long fighting this one, so I&amp;rsquo;m saving everything I found on the issue so that I never lose it.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;setup&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;setup&#34;&gt;Setup&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Running Internet Information Services (IIS) 8.5 on my laptop.&lt;/li&gt;
+&lt;li&gt;Set up a site with an ASP.Net MVC web application Windows Authentication.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;problem&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Browsing the site locally continually prompts for my domain username and password.&lt;/li&gt;
+&lt;li&gt;Credentials are never accepted / I&amp;rsquo;m never authenticated.&lt;/li&gt;
+&lt;li&gt;Cancelling the login prompt ultimately responds with 401 Unauthorized.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When accessing the site with Fiddler, IIS simply responds with 401 Unauthorized.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;solution&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;solution-with-original-sources&#34;&gt;Solution (with original sources)&lt;/h3&gt;
+&lt;p&gt;An incredibly helpful StackOverflow titled &lt;a href=&#34;http://stackoverflow.com/questions/7387156/unable-to-get-windows-authentication-to-work-through-local-iis&#34;&gt;Unable to get windows authentication to work through local IIS&lt;/a&gt; provided the solution.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Its&lt;/em&gt; source was a KnowledgeBase article from Microsoft: &lt;a href=&#34;https://support.microsoft.com/en-us/kb/896861&#34;&gt;https://support.microsoft.com/en-us/kb/896861&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Set the&lt;br&gt;
+DisableStrictNameChecking&lt;br&gt;
+registry entry to 1. For more information about how to do this, refer to article &lt;a href=&#34;http://support.microsoft.com/kb/281308&#34;&gt;281308&lt;/a&gt; in the Microsoft Knowledge Base&lt;/li&gt;
+&lt;li&gt;Click Start, click Run, type regedit, and then click OK.&lt;/li&gt;
+&lt;li&gt;In Registry Editor, locate and then click the following registry key:&lt;br&gt;
+&lt;strong&gt;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Right-click &lt;strong&gt;MSV1_0&lt;/strong&gt;, point to New, and then click Multi-String Value.&lt;/li&gt;
+&lt;li&gt;Type &lt;strong&gt;BackConnectionHostNames&lt;/strong&gt;, and then press ENTER.&lt;/li&gt;
+&lt;li&gt;Right-click BackConnectionHostNames, and then click Modify.&lt;/li&gt;
+&lt;li&gt;In the Value data box, type the host name or the host names for the sites that are on the local computer, and then click OK.&lt;/li&gt;
+&lt;li&gt;Quit Registry Editor, and then restart the IISAdmin service. (to do this, I ran iisreset from a Powershell prompt)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

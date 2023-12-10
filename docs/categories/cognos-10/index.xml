@@ -1,0 +1,62 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cognos 10 on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/categories/cognos-10/</link>
+    <description>Recent content about iOS development with Swift in Cognos 10  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 06 Mar 2013 16:34:36 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/categories/cognos-10/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Report Studio Bullet Chart – Missing Target</title>
+      <link>https://www.andrewcbancroft.com/2013/03/06/report-studio-bullet-chart-missing-target/</link>
+      <pubDate>Wed, 06 Mar 2013 16:34:36 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/03/06/report-studio-bullet-chart-missing-target/</guid>
+      <description>&lt;p&gt;Today I was working on a bullet chart in Cognos Report Studio.  The chart was rendering, but the target bar would never appear.  Here’s the scenario I was in and how I resolved my issue:&lt;/p&gt;
+&lt;h1 id=&#34;my-goal&#34;&gt;My Goal:&lt;/h1&gt;
+&lt;p&gt;My goal was to show the average time to process an application against a target processing time for the current fiscal year.&lt;/p&gt;
+&lt;h1 id=&#34;my-situation&#34;&gt;My Situation:&lt;/h1&gt;
+&lt;p&gt;My “actual” value was being returned in my query to the data warehouse – It is an average of the days to process an application (defined in Framework Manager).&lt;/p&gt;
+&lt;p&gt;My “target” value does not exist in the data warehouse, so I created a calculated item in my Report Studio query to hold the target value:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/SNAGHTML6c0eff.png&#34;&gt;&lt;img style=&#34;background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;&#34; title=&#34;SNAGHTML6c0eff&#34; alt=&#34;SNAGHTML6c0eff&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/SNAGHTML6c0eff_thumb.png&#34; width=&#34;722&#34; height=&#34;452&#34; border=&#34;0&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;my-problem&#34;&gt;My Problem:&lt;/h1&gt;
+&lt;p&gt;I created a bullet chart and dragged the appropriate items to the appropriate place in the chart:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image4.png&#34;&gt;&lt;img style=&#34;background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;&#34; title=&#34;image&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb4.png&#34; width=&#34;515&#34; height=&#34;464&#34; border=&#34;0&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The result of this when I ran the report, however, was a chart with a bullet but no target:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image5.png&#34;&gt;&lt;img style=&#34;background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;&#34; title=&#34;image&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb5.png&#34; width=&#34;434&#34; height=&#34;124&#34; border=&#34;0&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;my-solution&#34;&gt;My Solution:&lt;/h1&gt;
+&lt;p&gt;As it turns out, the Aggregation Function of my “Target Completion Time” was throwing things off for the chart.  This property’s default value is “Automatic”.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Changing the Aggregation Function from “Automatic” to “Calculated” fixed the issue&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image6.png&#34;&gt;&lt;img style=&#34;background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;&#34; title=&#34;image&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb6.png&#34; width=&#34;725&#34; height=&#34;329&#34; border=&#34;0&#34; /&gt;&lt;/a&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image7.png&#34;&gt;&lt;img style=&#34;background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;&#34; title=&#34;image&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb7.png&#34; width=&#34;351&#34; height=&#34;284&#34; border=&#34;0&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;the-result&#34;&gt;The Result:&lt;/h1&gt;
+&lt;p&gt;The bullet &lt;em&gt;and&lt;/em&gt; the target now appear on my chart:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image8.png&#34;&gt;&lt;img style=&#34;background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;&#34; title=&#34;image&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb8.png&#34; width=&#34;406&#34; height=&#34;114&#34; border=&#34;0&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Removing Chart Gridlines and Plot Area Background in Report Studio</title>
+      <link>https://www.andrewcbancroft.com/2013/03/05/removing-chart-gridlines-plot-area-background-in-report-studio/</link>
+      <pubDate>Tue, 05 Mar 2013 16:48:20 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/03/05/removing-chart-gridlines-plot-area-background-in-report-studio/</guid>
+      <description>&lt;p&gt;The steps from IBM’s &lt;a href=&#34;http://pic.dhe.ibm.com/infocenter/cbi/v10r1m0/index.jsp?topic=%2Fcom.ibm.swg.im.cognos.ug_cr_rptstd.10.1.0.doc%2Fug_cr_rptstd_id6040custom_axes.html&#34; target=&#34;_blank&#34;&gt;official documentation&lt;/a&gt;, while they attempt to lead you in the direction of changing these properties of a chart, did not register with my brain for about an hour or so of clicking around, frustrated that I could not find the properties they were describing in the articl.  Just in case I could spare anyone else the frustration of trying to remove gridlines in Report Studio’s current default charts, I thought I’d post this quick article on how I solved my problem.&lt;/p&gt;
+&lt;p&gt;The documentation states, “Step 1.  Select the Y-axis or the X-axis of the chart”.&lt;/p&gt;
+&lt;p&gt;Easy enough, right?  Well as it turns out, Step 1 is where I was going wrong…&lt;/p&gt;
+&lt;p&gt;Where was I clicking?  Not the Y-axis apparently.  I was clicking the &lt;em&gt;label&lt;/em&gt; for the Y-axis:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image.png&#34;&gt;&lt;img style=&#34;background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&#34; title=&#34;image&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb.png&#34; width=&#34;725&#34; height=&#34;280&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Once I was clicking the right thing, the solution to remove the grid lines from my chart was simple.  So where did I &lt;em&gt;need&lt;/em&gt; to click?&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image1.png&#34;&gt;&lt;img style=&#34;background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&#34; title=&#34;image&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb1.png&#34; width=&#34;725&#34; height=&#34;314&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The correct properties show up in the property inspector once you’re actually clicking the axis and not the axis label.  To remove the grid lines and the alternating colors in the plot area, simply redefine the Gridlines property:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image2.png&#34;&gt;&lt;img style=&#34;background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&#34; title=&#34;image&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb2.png&#34; width=&#34;380&#34; height=&#34;486&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Clear the checkboxes for “Show alternating color bands” and “Show major gridlines” to get rid of them on the chart:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image3.png&#34;&gt;&lt;img style=&#34;background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&#34; title=&#34;image&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb3.png&#34; width=&#34;288&#34; height=&#34;393&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

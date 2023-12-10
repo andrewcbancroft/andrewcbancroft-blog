@@ -1,0 +1,90 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pluralsight on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/pluralsight/</link>
+    <description>Recent content about iOS development with Swift in Pluralsight  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 02 Apr 2017 22:04:02 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/pluralsight/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Core Data Fundamentals with Swift</title>
+      <link>https://www.andrewcbancroft.com/2017/04/02/core-data-fundamentals-swift/</link>
+      <pubDate>Sun, 02 Apr 2017 22:04:02 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/04/02/core-data-fundamentals-swift/</guid>
+      <description>&lt;p&gt;Core Data is an extremely powerful framework for managing and persisting data on your users&amp;rsquo; devices. And let&amp;rsquo;s face it: saving data to your users&amp;rsquo; devices is inevitable. The question is, which data management and persistence technology you use when the time comes for &lt;em&gt;you&lt;/em&gt; to tackle this challenge?&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;&lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34;&gt;Core Data Fundamentals with Swift&lt;/a&gt;&amp;rdquo; will give you the essential skills you need to architect an app to use Core Data.&lt;/p&gt;
+&lt;h1 id=&#34;course-trailer&#34;&gt;Course Trailer&lt;/h1&gt;
+&lt;p&gt;You can check out a trailer of the course over at Pluralsight completely free.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;Core Data Fundamentals with Swift&lt;/a&gt;&lt;br /&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png&#34; alt=&#34;Core Data Fundamentals with Swift&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13163&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;topics&#34;&gt;Topics&lt;/h1&gt;
+&lt;h2 id=&#34;1--getting-started-with-core-data&#34;&gt;1 – Getting Started with Core Data&lt;/h2&gt;
+&lt;p&gt;Module 1 is the introduction to the course with discussion of the motivating factors for using Core Data, course prerequisites, storyline overview, and a demo of the end product of the course.&lt;/p&gt;
+&lt;p&gt;I had a blast making the demo app. Essentially, I put you in the scenario where we team up to build a prototype of an app that our Human Resources department has come to us with. They came to us with an idea – Over the past year or two, they’ve noticed that employee morale is down a bit. To improve the situation, they’re implementing a new Employee Recognition program. As part of the new program, they’ve come to our internal software development team to see if it might be possible to build some kind of an app that allows employees to recognize one another for jobs well-done – electronic “Shout Outs” if you will.&lt;/p&gt;
+&lt;p&gt;And that’s where you and I come in – HR wants us to prototype something up so that they have an idea of what’s possible.&lt;/p&gt;
+&lt;p&gt;Throughout the course, we work on this prototype app together!&lt;/p&gt;
+&lt;h2 id=&#34;2--setting-up-the-core-data-stack&#34;&gt;2 -Setting up the Core Data Stack&lt;/h2&gt;
+&lt;p&gt;Working with Core Data begins with setting up the Core Data Stack. You will learn how to implement the stack, how to architect your app for testability and maintenance, and how to share Core Data components (such as NSManagedObjectContext) between view controllers.&lt;/p&gt;
+&lt;h2 id=&#34;3--creating-a-data-model&#34;&gt;3 – Creating a Data Model&lt;/h2&gt;
+&lt;p&gt;Building a data model is the foundation for persisting information with Core Data. You will learn to create a data model in Xcode, and you will understand how to work with that model in Swift code.&lt;/p&gt;
+&lt;h2 id=&#34;4--building-relationships-between-entities&#34;&gt;4 – Building Relationships Between Entities&lt;/h2&gt;
+&lt;p&gt;Understanding the importance of relationships and how to build them is vital to the efficiency and expressiveness of your Core Data model. You will learn why building relationships is worth the investment, and then you will gain the skills you need to be able to build these strategic links between Entities in Xcode.&lt;/p&gt;
+&lt;h2 id=&#34;5--saving-accessing-and-deleting-data&#34;&gt;5 – Saving, Accessing, and Deleting Data&lt;/h2&gt;
+&lt;p&gt;Having the ability to save data to a Core Data persistent store is essential. Being able to retrieve that data later on for display, for modification, or even for removal from the persistent store is also a critical. You will learn the mechanics of how to use the Core Data framework classes that are involved with saving, accessing, and deleting data in this module.&lt;/p&gt;
+&lt;h2 id=&#34;6--showing-and-synchronizing-data-with-nsfetchedresultscontroller&#34;&gt;6 – Showing and Synchronizing Data with NSFetchedResultsController&lt;/h2&gt;
+&lt;p&gt;Displaying data in a user interface and keeping it synchronized with the state of the persistent store is a critical piece of the Core Data puzzle. You will learn how to use NSFetchedResultsController for keeping table views in sync. You will also examine using the iOS Notification Center as an alternative way to detect and respond to changes in the persistent store.&lt;/p&gt;
+&lt;h2 id=&#34;7--changing-core-data-models&#34;&gt;7 – Changing Core Data Models&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s inevitable: You&amp;rsquo;re going to have to change your data model from its original form sooner or later. This module will guide you in creating new versions of your data model. You will also learn how to migrate your persistent store to new data model versions so that no data is lost as you make changes.&lt;/p&gt;
+&lt;h2 id=&#34;8--understanding-core-data-changes-in-ios-10-and-macos-sierra&#34;&gt;8 – Understanding Core Data Changes in iOS 10 and macOS Sierra&lt;/h2&gt;
+&lt;p&gt;Change is constant. Be prepared for the latest enhancements to the Core Data framework by understanding what&amp;rsquo;s new in Core Data with Apple&amp;rsquo;s latest platforms. You will learn about a new framework class called NSPersistentContainer that is designed to simplify the Core Data stack creation process. This concluding module will also point you to resources that will help you build on your new Core Data foundation.&lt;/p&gt;
+&lt;h1 id=&#34;course-resources&#34;&gt;Course Resources&lt;/h1&gt;
+&lt;p&gt;Demos of technology in action are &lt;em&gt;super&lt;/em&gt; important to me. That being the case, I tried to pack as much demo content into the course as possible. You&amp;rsquo;ll get to see the full array of dev-time experiences, not just the final &amp;ldquo;it works perfectly” outcomes.&lt;/p&gt;
+&lt;p&gt;The course also comes complete with working Xcode projects that gradually build you up to the final version of the app, one step at a time through each module.&lt;/p&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Managing Xcode Project Dependencies with CocoaPods</title>
+      <link>https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/</link>
+      <pubDate>Wed, 03 Feb 2016 18:23:49 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/</guid>
+      <description>&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;I try to get as practical as possible in the course. As you&amp;rsquo;re watching you&amp;rsquo;ll be &amp;ldquo;embedded” into a team of iOS developers, and you&amp;rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through &lt;em&gt;not&lt;/em&gt; having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.&lt;/p&gt;
+&lt;p&gt;The course is a progressive journey. First, the team has problems managing dependencies without a dependency manager. Then, they bring in CocoaPods to help them find and organize 3rd party libraries. &lt;em&gt;Then&lt;/em&gt;, they start to think, &amp;ldquo;Hey, what if we could create our &lt;em&gt;own&lt;/em&gt; CocoaPod libraries?”. Finally, they use that knowledge of how to create a CocoaPod library to set up a private repository to share code internally between projects with their team.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve got four modules that cover the following topics:&lt;/p&gt;
+&lt;h2 id=&#34;1---introducing-project-dependency-management&#34;&gt;1 - Introducing Project Dependency Management&lt;/h2&gt;
+&lt;p&gt;I teach the basic concepts and definitions associated with &amp;ldquo;project dependency management”. What is it all about? Why does it matter? And most importantly, how is it done in the Apple Ecosystem?&lt;/p&gt;
+&lt;h2 id=&#34;2---managing-dependencies-with-cocoapods&#34;&gt;2 - Managing Dependencies with CocoaPods&lt;/h2&gt;
+&lt;p&gt;I guide you through installing CocoaPods, configuring your Xcode project to use CocoaPods, and working with the CocoaPods command line utility.&lt;/p&gt;
+&lt;h2 id=&#34;3---creating-cocoapod-libraries&#34;&gt;3 - Creating CocoaPod Libraries&lt;/h2&gt;
+&lt;p&gt;This is where things turned really fun for me. :] In this module of the course, I teach you how to create a CocoaPod library, host its source code on GitHub, and publish the library to the CocoaPods Trunk.&lt;/p&gt;
+&lt;h2 id=&#34;4---hosting-a-private-cocoapods-repository&#34;&gt;4 - Hosting a Private CocoaPods Repository&lt;/h2&gt;
+&lt;p&gt;As the capstone to the course, I teach you how to set up a private spec repository and how to configure CocoaPods to utilize it. It really is the culmination of everything learned in the prior modules, but it&amp;rsquo;s also one of the most practical strategies for sharing code between your various Xcode projects that I&amp;rsquo;ve found to-date.&lt;/p&gt;
+&lt;p&gt;In addition to the four modules of content, the course comes with an example Swift iOS app if you&amp;rsquo;re a Pluralsight Plus subscriber!&lt;/p&gt;
+&lt;h1 id=&#34;something-for-everyone&#34;&gt;Something for Everyone&lt;/h1&gt;
+&lt;p&gt;The course is targeted at beginning to intermediate level developers. I assume no prior knowledge of how to work with a dependency manager.&lt;/p&gt;
+&lt;p&gt;That being the case, I do my best to offer something for everyone. If you&amp;rsquo;ve never used a dependency manager on another platform before, I&amp;rsquo;ve got you covered – I&amp;rsquo;ll take you step by step through using CocoaPods.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re already using CocoaPods in your Xcode project, maybe you can benefit from the modules on creating CocoaPod libraries yourself! If you&amp;rsquo;re already creating libraries and contributing to the open source community, what about setting up that private spec repository to share with your team internally?&lt;/p&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

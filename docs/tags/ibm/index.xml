@@ -1,0 +1,34 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IBM on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/ibm/</link>
+    <description>Recent content about iOS development with Swift in IBM  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Mar 2013 16:48:20 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/ibm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Removing Chart Gridlines and Plot Area Background in Report Studio</title>
+      <link>https://www.andrewcbancroft.com/2013/03/05/removing-chart-gridlines-plot-area-background-in-report-studio/</link>
+      <pubDate>Tue, 05 Mar 2013 16:48:20 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/03/05/removing-chart-gridlines-plot-area-background-in-report-studio/</guid>
+      <description>&lt;p&gt;The steps from IBM’s &lt;a href=&#34;http://pic.dhe.ibm.com/infocenter/cbi/v10r1m0/index.jsp?topic=%2Fcom.ibm.swg.im.cognos.ug_cr_rptstd.10.1.0.doc%2Fug_cr_rptstd_id6040custom_axes.html&#34; target=&#34;_blank&#34;&gt;official documentation&lt;/a&gt;, while they attempt to lead you in the direction of changing these properties of a chart, did not register with my brain for about an hour or so of clicking around, frustrated that I could not find the properties they were describing in the articl.  Just in case I could spare anyone else the frustration of trying to remove gridlines in Report Studio’s current default charts, I thought I’d post this quick article on how I solved my problem.&lt;/p&gt;
+&lt;p&gt;The documentation states, “Step 1.  Select the Y-axis or the X-axis of the chart”.&lt;/p&gt;
+&lt;p&gt;Easy enough, right?  Well as it turns out, Step 1 is where I was going wrong…&lt;/p&gt;
+&lt;p&gt;Where was I clicking?  Not the Y-axis apparently.  I was clicking the &lt;em&gt;label&lt;/em&gt; for the Y-axis:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image.png&#34;&gt;&lt;img style=&#34;background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&#34; title=&#34;image&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb.png&#34; width=&#34;725&#34; height=&#34;280&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Once I was clicking the right thing, the solution to remove the grid lines from my chart was simple.  So where did I &lt;em&gt;need&lt;/em&gt; to click?&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image1.png&#34;&gt;&lt;img style=&#34;background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&#34; title=&#34;image&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb1.png&#34; width=&#34;725&#34; height=&#34;314&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The correct properties show up in the property inspector once you’re actually clicking the axis and not the axis label.  To remove the grid lines and the alternating colors in the plot area, simply redefine the Gridlines property:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image2.png&#34;&gt;&lt;img style=&#34;background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&#34; title=&#34;image&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb2.png&#34; width=&#34;380&#34; height=&#34;486&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Clear the checkboxes for “Show alternating color bands” and “Show major gridlines” to get rid of them on the chart:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image3.png&#34;&gt;&lt;img style=&#34;background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&#34; title=&#34;image&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/03/image_thumb3.png&#34; width=&#34;288&#34; height=&#34;393&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

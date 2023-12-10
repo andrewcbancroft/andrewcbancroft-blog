@@ -1,0 +1,305 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Parse Migration on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/parse-migration/</link>
+    <description>Recent content about iOS development with Swift in Parse Migration  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 May 2016 03:33:03 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/parse-migration/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Parse PFCloud – “JSON text did not start with array or object”</title>
+      <link>https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/</link>
+      <pubDate>Fri, 20 May 2016 03:33:03 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s always the little things that lead to flatter foreheads (or at least it is for me).&lt;/p&gt;
+&lt;p&gt;Banging my head against the desk this evening working on a Parse migration, I finally figured out what was causing an error condition in a &lt;code&gt;PFCloud&lt;/code&gt; function call.&lt;/p&gt;
+&lt;p&gt;The request to the server succeeded, but the response was malformed somehow:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Error Domain=NSCocoaErrorDomain Code=3840 &amp;ldquo;JSON text did not start with array or object and option to allow fragments not set.” UserInfo={NSDebugDescription=JSON text did not start with array or object and option to allow fragments not set.}&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&amp;ldquo;What?? I &lt;em&gt;know&lt;/em&gt; the response is supposed to be JSON – I can even test it out and it works great in &lt;a href=&#34;https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en&#34;&gt;Postman&lt;/a&gt;.”&lt;/p&gt;
+&lt;p&gt;Weeeelll, it turns out that if you don&amp;rsquo;t get the URL to your self-hosted Parse Server correct, you&amp;rsquo;re going to get a response that&amp;rsquo;s not JSON. Doh!&lt;/p&gt;
+&lt;p&gt;I had left off the &amp;ldquo;/parse” portion of the URL to my self-hosted parse server:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;application&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;application&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIApplication&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;didFinishLaunchingWithOptions&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;launchOptions&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSObject&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;AnyObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]?)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Bool&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Override point for customization after application launch.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;configuration&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ParseClientConfiguration&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nv&#34;&gt;$0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;applicationId&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;YourAppId&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nv&#34;&gt;$0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;clientKey&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;YourClientKey&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nv&#34;&gt;$0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;server&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;https://your-self-hosted-parse-server/parse&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Parse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;initializeWithConfiguration&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;configuration&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So, the bottom-line take-away? Make sure you get the &lt;em&gt;full&lt;/em&gt; URL to your self-hosted Parse Server set to the &lt;code&gt;server&lt;/code&gt; property of your &lt;code&gt;ParseClientConfiguration&lt;/code&gt; instance. That endpoint could vary based on how you deployed the server to your cloud host of choice. For me, it was my goofy mistake of leaving off &amp;ldquo;/parse”.&lt;/p&gt;
+&lt;p&gt;Go forth and may your forehead be ever-more round than mine.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploying Parse Dashboard</title>
+      <link>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</link>
+      <pubDate>Sun, 17 Apr 2016 21:56:45 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</guid>
+      <description>&lt;p&gt;Below are steps that I&amp;rsquo;ve taken, myself, to deploy the [Parse Dashboard][1] to a cloud host, such as Azure, or Heroku.&lt;/p&gt;
+&lt;p&gt;Before you worry with a cloud host, you need a copy of the parse-dashboard to prepare for deployment…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;clone-git-repo&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;1--clone-parse-dashboard-git-repository&#34;&gt;1 – Clone parse-dashboard git repository&lt;/h1&gt;
+&lt;p&gt;First, you&amp;rsquo;ll want to clone (or fork, then clone) the [parse-dashboard git repository from GitHub][1].&lt;/p&gt;
+&lt;p&gt;I typically make folders in my ~/Developer directory for projects that I&amp;rsquo;m working on. You can make the directory in Finder, then open Terminal and &lt;code&gt;cd&lt;/code&gt; into it. Or you can just run &lt;code&gt;mkdir&lt;/code&gt; in Terminal and then &lt;code&gt;cd&lt;/code&gt; into it.&lt;/p&gt;
+&lt;p&gt;Once the directory for your parse dashboard is created, run the following command.&lt;br&gt;
+&lt;code&gt;git clone https://github.com/ParsePlatform/parse-dashboard.git&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;run-npm-install&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;2--run-npm-install&#34;&gt;2 – Run npm install&lt;/h1&gt;
+&lt;p&gt;Once the repository has been cloned to your local machine, change directory (&lt;code&gt;cd&lt;/code&gt;) into the ‘parse-dashboard&amp;rsquo; directory. You can run &lt;code&gt;ls&lt;/code&gt; at the Terminal to list out the contents of the directory you just cloned the dashboard repository into and you should see a new directory named ‘parse-dashboard&amp;rsquo;. That&amp;rsquo;s the one you need to be inside next.&lt;/p&gt;
+&lt;p&gt;So, in the ‘parse-dashboard&amp;rsquo; folder, run &lt;code&gt;npm install&lt;/code&gt; at the Terminal. It could take a minute or three for the installation of all the Node packages to complete.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;edit-config&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;3--edit-parse-dashboard-configjson&#34;&gt;3 – Edit parse-dashboard-config.json&lt;/h1&gt;
+&lt;p&gt;After the npm package installation in Step 3 is complete, you need to &lt;code&gt;cd&lt;/code&gt; into the ‘Parse-Dashboard&amp;rsquo; directory to find the parse-dashboard-config.json file. Note the capitalization of ‘Parse-Dashboard&amp;rsquo;. Earlier you &lt;code&gt;cd&lt;/code&gt;‘d into the ‘parse-dashboard&amp;rsquo; (lower-case) directory. Well, there&amp;rsquo;s &lt;em&gt;another&lt;/em&gt; directory inside named exactly the same, only the ‘P&amp;rsquo; and the ‘D&amp;rsquo; are capitalized.&lt;/p&gt;
+&lt;p&gt;You can run &lt;code&gt;ls&lt;/code&gt; inside ‘Parse-Dashboard&amp;rsquo; and should see parse-dashboard-config.json in there. If you don&amp;rsquo;t, you&amp;rsquo;re probably not in the right directory. At this point, you could actually be in Finder to locate the file if you&amp;rsquo;re more comfortable there. Just run &lt;code&gt;open .&lt;/code&gt;, and you&amp;rsquo;ll be in a Finder window at the directory you&amp;rsquo;re in inside the Terminal. Then you can just double-click the configuration file to open it up in a text editor.&lt;/p&gt;
+&lt;p&gt;Once you have it open, you need to have a few pieces of information about your self-hosted Parse server handy:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your Parse Server&amp;rsquo;s URL&lt;/li&gt;
+&lt;li&gt;Your App ID that&amp;rsquo;s configured on your Parse Server&lt;/li&gt;
+&lt;li&gt;Your Master Key that&amp;rsquo;s configured on your Parse Server&lt;/li&gt;
+&lt;li&gt;Your App&amp;rsquo;s Name (can be an arbitrary value)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Adjust your Parse Dashboard&amp;rsquo;s configuration file as follows with the values you&amp;rsquo;ve gathered:&lt;/p&gt;
+&lt;pre class=&#34;lang:js decode:true &#34; title=&#34;parse-dashboard-config.json&#34; &gt;{
+  &#34;apps&#34;: [
+    {
+        &#34;serverURL&#34;: &#34;http://url-to-your-parse-server/parse&#34;, // If your Parse Server&#39;s endpoint is not at /parse, you need to replace /parse with the correct endpoint
+        &#34;appId&#34;: &#34;your-app-Id&#34;,
+        &#34;masterKey&#34;: &#34;your-master-key&#34;,
+        &#34;appName&#34;: &#34;your-app-name&#34;
+    }
+  ],
+  &#34;users&#34;: [
+    {
+      &#34;user&#34;:&#34;username1&#34;, // Used to log in to your Parse Dashboard
+      &#34;pass&#34;:&#34;password1&#34;
+    }
+  ]
+}
+```
+
+&lt;a name=&#34;modify-git-ignore&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+# 4 – Modify local .gitignore
+
+Your local .gitignore file ignores some needed directories that, while helpful to ignore in the actual Open Source parse-dashboard repo on GitHub, are _not_ as helpful to ignore when you need to deploy the dashboard to a cloud host.
+
+Edit the .gitignore file using a text editor and remove these three lines:
+
+&lt;pre class=&#34;lang:vim decode:true &#34; title=&#34;.gitignore&#34; &gt;bundles/
+Parse-Dashboard/public/bundles/
+Parse-Dashboard/parse-dashboard-config.json
+```
+
+&lt;a name=&#34;stage-commit-changes&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+# 5 – Stage and commit all changes
+
+Stage all of the changes you&#39;ve made to the parse-dashboard-config.json and the .gitignore files, and add the files and directories that were previously ignored by git by running `git add -A`
+
+Then commit the staged changes:  
+`git commit -m &#34;Prepared app for deployment&#34;`
+
+&lt;a name=&#34;setup-private-repo&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+# 6 – Set up private git repository
+
+Since you&#39;re storing values that are intended to be kept secret (such as your app&#39;s Master Key), you need to set up a private git repository that can be used for two purposes: 1) To keep your configuration under source control and 2) to be able to use as a deployment source for your cloud host provider.
+
+The idea is that you can wire up your cloud app in Azure/Heroku/AWS/wherever to refresh itself every time you commit code to the master branch of this private repository. It&#39;s really handy for making updates.
+
+[Bitbucket][2] offers its members unlimited private repositories, so that&#39;s where I&#39;ve chosen to host mine.
+
+&lt;a name=&#34;add-remote&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+# 7 – Add new remote to your local parse-dashboard git repository
+
+With the new private repository set up, you need to add it as a remote to your local parse-dashboard repo.
+
+In the Terminal, make sure you&#39;re in the directory of your local parse-dashboard git repository and run:
+
+&lt;pre class=&#34;lang:sh decode:true &#34; title=&#34;Add new remote&#34; &gt;git remote add privateorigin https://url-to-your-private-parse-dashboard-repo
+```
+
+&lt;a name=&#34;push-changes&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+# 8 – Push to your private git repository
+
+With all the changes to your configuration committed and the new remote repository added, you can push those changes up to that repo:
+
+In the Terminal, make sure you&#39;re in the directory of your local parse-dashboard git repository and run:
+
+&lt;pre class=&#34;lang:sh decode:true &#34; title=&#34;Push changes&#34; &gt;git push -u privateorigin --all # pushes up the repo and its refs for the first time
+git push privateorigin --tags # pushes up any tags
+```
+
+&lt;a name=&#34;create-cloud-app&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+# 9 – Create app on the cloud host
+
+Now you need to create a new app in your hosting provider of choice. I typically go with [Azure][3], because I&#39;m most familiar with it. I also like that they offer a completely free option, though if you want to really run this stuff for a larger-scale &#34;production&amp;#8221; or &#34;enterprise&amp;#8221; app, it&#39;s going to cost no matter where you choose to host it.
+
+The cloud host may want to know what flavor of app you want to create. In the case of parse-dashboard, it&#39;s a Node.JS app.
+
+&lt;a name=&#34;configure-git-deployment&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+# 10 – Configure cloud host for git deployment
+
+Once you&#39;ve created a new Node app on your cloud host of choice, you need to configure it for git deployment.
+
+This step will be different for each cloud host, but the general idea is that you should be able to configure your private git repository that you set up in Step 5, to be the source from which the cloud host will go out, grab the code, and perform the necessary steps to get the Parse Dashboard bootstrapped for access.
+
+In Azure, you simply click on your app, and configure git deployment in the Deployment Source settings:
+
+[&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureGitDeployment1-1024x737.png&#34; alt=&#34;Azure Git Deployment Settings&#34; width=&#34;1024&#34; height=&#34;737&#34; class=&#34;alignnone size-large wp-image-12806&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureGitDeployment1-1024x737.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureGitDeployment1-300x216.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureGitDeployment1.png 1215w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;][4]
+
+You might check out [Heroku&#39;s startup guide][5] for help on deploying to their service.
+
+Note that instead of doing the git deployment option, you could always FTP your whole parse-dashboard directory (the one that you cloned and ran `npm install` inside), if your cloud host supports this deployment option.
+
+&lt;a name=&#34;configure-ssl&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+# 11 – Enable SSL (or run as insecure app)
+
+If you access your app after you&#39;ve deployed it to your chosen cloud host, you&#39;ll likely run into an error page stating that &#34;Parse Dashboard can only be remotely accessed via HTTPS&amp;#8221;.
+
+Configuring SSL is beyond the scope of this walk-through, but that would be the next step if you chose to do it for your production app. Note that on Azure, your App Service Plan needs to be at &#34;Basic&amp;#8221; or above. Heroku charges a monthly fee to set up an SSL endpoint as well.
+
+If you choose not to afford it or if you just want to test things out in the deployed environment to see if it&#39;s working or not, you can set up an environment variable in your app&#39;s settings on the cloud host.
+
+In Azure, you need to choose your app, then go to &#34;Application Settings&amp;#8221; in the Azure Portal. Then add a new key-value pair under App settings: PARSE\_DASHBOARD\_ALLOW\_INSECURE\_HTTP is the key, and 1 (the number 1) is the value:
+
+[&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureAppSettings1-1024x639.png&#34; alt=&#34;Azure App Settings for PARSE_DASHBOARD_ALLOW_INSECURE_HTTP&#34; width=&#34;1024&#34; height=&#34;639&#34; class=&#34;alignnone size-large wp-image-12803&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureAppSettings1-1024x639.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureAppSettings1-300x187.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureAppSettings1.png 1488w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;][6]
+
+In Heroku, you need to go to your app&#39;s Settings, and then add a new Config Var with the same key-value pair:  
+[&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/04/HerokuConfigVars-1024x489.png&#34; alt=&#34;Heroku Config Vars PARSE_DASHBOARD_ALLOW_INSECURE_HTTP&#34; width=&#34;1024&#34; height=&#34;489&#34; class=&#34;alignnone size-large wp-image-12797&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/04/HerokuConfigVars-1024x489.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/HerokuConfigVars-300x143.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2016/04/HerokuConfigVars.png 1142w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;][7]
+
+&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/&#34; title=&#34;FIX – Query in Parse Cloud Code Returns Unauthorized Error&#34;&gt;FIX – Query in Parse Cloud Code Returns Unauthorized Error&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+ [1]: https://github.com/ParsePlatform/parse-dashboard
+ [2]: http://www.bitbucket.com
+ [3]: https://azure.microsoft.com/en-us/
+ [4]: https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureGitDeployment1.png
+ [5]: https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction
+ [6]: https://www.andrewcbancroft.com/wp-content/uploads/2016/04/AzureAppSettings1.png
+ [7]: https://www.andrewcbancroft.com/wp-content/uploads/2016/04/HerokuConfigVars.png</description>
+    </item>
+    
+    <item>
+      <title>FIX – Query in Parse Cloud Code Returns Unauthorized Error</title>
+      <link>https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/</link>
+      <pubDate>Wed, 06 Apr 2016 04:27:49 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/</guid>
+      <description>&lt;p&gt;The Parse migration process has begun – I&amp;rsquo;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.&lt;/p&gt;
+&lt;p&gt;The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;problem-overview&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;problem-overview&#34;&gt;Problem Overview&lt;/h1&gt;
+&lt;p&gt;Any time I did a query in my Parse Cloud Code, the query would fail. Every time I&amp;rsquo;d make a request to my Cloud Code function, I&amp;rsquo;d get &amp;ldquo;500 Internal Server Error” as my response.&lt;/p&gt;
+&lt;p&gt;I finally wised up and adjusted my query so that I could see the specific &amp;ldquo;internal server error” that was occurring:&lt;/p&gt;
+&lt;pre class=&#34;lang:js mark:8 decode:true &#34; title=&#34;Parse Query&#34; &gt;var query = new Parse.Query(&#34;NameOfParseClassImFetching&#34;);
+
+query.find({
+    success: function(results){
+        // Do things with the results
+    },
+    error: function(error) {
+        response.error(error);
+    }
+});
+```
+
+When the details came back as to what was failing, the JSON object in the response looked like this:
+
+&lt;pre class=&#34;lang:js decode:true &#34; &gt;{
+  &#34;code&#34;: 141,
+  &#34;error&#34;: {
+    &#34;message&#34;: &#34;unauthorized&#34;
+  }
+}
+```
+
+I got to searching and found an [issue on GitHub][1] that pointed me in the right direction, but to spare you reading through the entire thread, here&#39;s the gist:
+
+&lt;a name=&#34;solution&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+# Solution
+
+I happened to be using a version of the Parse Server Example that was missing a critical line of configuration in index.js. When you configure your Parse Server by calling `new ParseServer`, you need to make sure that there&#39;s a `serverURL` property that&#39;s set to the URL of your Parse Server&#39;s API endpoint.
+
+My config didn&#39;t have this, but the moment I added it, my Cloud Code queries worked perfectly as they did before. Here&#39;s a look at my final index.js file with the relevant line highlighted:
+
+&lt;pre class=&#34;lang:js mark:18 decode:true &#34; title=&#34;index.js&#34; &gt;// Example express application adding the parse-server module to expose Parse
+// compatible API routes.
+
+var express = require(&#39;express&#39;);
+var ParseServer = require(&#39;parse-server&#39;).ParseServer;
+
+var databaseUri = process.env.DATABASE_URI || process.env.MONGOLAB_URI
+
+if (!databaseUri) {
+  console.log(&#39;DATABASE_URI not specified, falling back to localhost.&#39;);
+}
+
+var api = new ParseServer({
+  databaseURI: databaseUri || &#39;mongodb://localhost:27017/dev&#39;,
+  cloud: process.env.CLOUD_CODE_MAIN || __dirname + &#39;/cloud/main.js&#39;,
+  appId: process.env.APP_ID || &#39;myAppId&#39;,
+  masterKey: process.env.MASTER_KEY || &#39;&#39;, //Add your master key here. Keep it secret!
+  serverurl: &#39;http://url-to-your-parse-api-endpoint/parse&#39;
+});
+// Client-keys like the javascript key or the .NET key are not necessary with parse-server
+// If you wish you require them, you can set them as options in the initialization above:
+// javascriptKey, restAPIKey, dotNetKey, clientKey
+
+var app = express();
+
+// Serve the Parse API on the /parse URL prefix
+var mountPath = process.env.PARSE_MOUNT || &#39;/parse&#39;;
+app.use(mountPath, api);
+
+// Parse Server plays nicely with the rest of your web routes
+app.get(&#39;/&#39;, function(req, res) {
+  res.status(200).send(&#39;I dream of being a web site.&#39;);
+});
+
+var port = process.env.PORT || 1337;
+app.listen(port, function() {
+    console.log(&#39;parse-server-example running on port &#39; + port + &#39;.&#39;);
+});
+```
+
+I hope this little breadcrumb finds its way to someone before _they_ spend 3 hours on a silly configuration issue.
+
+&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;
+
+ [1]: https://github.com/ParsePlatform/parse-server/issues/356</description>
+    </item>
+    
+  </channel>
+</rss>

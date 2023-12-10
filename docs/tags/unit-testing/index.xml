@@ -1,0 +1,698 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unit Testing on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/unit-testing/</link>
+    <description>Recent content about iOS development with Swift in Unit Testing  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 Nov 2015 02:42:08 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/unit-testing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating Trust-able Unit Tests in Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/11/03/creating-trust-able-unit-tests-in-swift/</link>
+      <pubDate>Wed, 04 Nov 2015 02:42:08 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/11/03/creating-trust-able-unit-tests-in-swift/</guid>
+      <description>&lt;p&gt;It may come as a surprise to you, but a green-lit passing unit test is not &lt;em&gt;always&lt;/em&gt; a sign that all is well with our software. Our apps and their corresponding unit test suites always start off clean and basic and simple.&lt;/p&gt;
+&lt;p&gt;But they don&amp;rsquo;t stay that way for long.&lt;/p&gt;
+&lt;p&gt;Cycles of code changes and additions and re-writes take place throughout the days, weeks, and months of the application development cycle. The app&amp;rsquo;s code-base and unit tests become more complex as the end-product progresses along its asymptotic approach to completion.&lt;/p&gt;
+&lt;p&gt;Unit tests are only as good as they are &lt;em&gt;trust-able&lt;/em&gt;. As our products navigate their way through development iterations, how can we keep a handle on the trustworthiness of our unit tests? How can we be assured that they&amp;rsquo;re testing the right thing? How can we know that changing a unit test because a fundamental requirement has changed is still accurate when it lights up green? After all, we&amp;rsquo;re writing &lt;em&gt;code&lt;/em&gt; to test our code!&lt;/p&gt;
+&lt;p&gt;Here, I explore several categories of thought that will help you think about creating trust-able unit tests.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;organization&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;test-organization&#34;&gt;Test Organization&lt;/h3&gt;
+&lt;p&gt;How you organize the code within a single unit test can make all the difference in understanding it when you return to it later.&lt;/p&gt;
+&lt;p&gt;Having a consistent strategy for organizing the body of a test function will save you time and effort in trying to understand what&amp;rsquo;s happening. Keeping things consistent across a team of developers will make everyone more productive as well.&lt;/p&gt;
+&lt;p&gt;Two of the most common organizational structures for unit tests are the &amp;ldquo;Arrange-Act-Assert (AAA)” and the &amp;ldquo;Given-When-Then” structures:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;testAppFeatureBehavior&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Arrange&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;sut&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SystemUnderTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// configure properties as necessary to prepare the system for the next step&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Act&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;functionProducingObservableBehavior&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Assert&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;XCTAssert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(...&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expectations&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;are&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;met&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A similar pattern is the &amp;ldquo;Given-When-Then” structure:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;testAppFeatureBehavior&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Given&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;sut&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SystemUnderTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// configure properties as necessary to prepare the system for the next step&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// When&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;sut&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;functionProducingObservableBehavior&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;XCTAssert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(...&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;expectations&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;are&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;met&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;They&amp;rsquo;re exactly the same structures with different descriptive comments outlining the three phases of the test.&lt;/p&gt;
+&lt;p&gt;The outline itself can help you look at the test and verify its trustworthiness as it pertains to its logical, clear order and organization.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;length&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;test-length&#34;&gt;Test Length&lt;/h3&gt;
+&lt;p&gt;Another contributor to the trustworthiness of a given unit test is the number of lines of code it has.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s been said that a 100% guaranteed bug-free line of code is the line of code that was never written in the first place!&lt;/p&gt;
+&lt;p&gt;It makes sense that if we can keep our unit tests short and to the point, there will be a smaller chance for error than if the test body is extremely long.&lt;/p&gt;
+&lt;p&gt;Small (&lt;strong&gt;&amp;lt;20ish&lt;/strong&gt; lines of code) tests are more-trusted than large tests.&lt;/p&gt;
+&lt;p&gt;20 lines of code is sort of arbitrary, but can help alert you to when you might need to re-look at the test and apply DRY (Don&amp;rsquo;t Repeat Yourself) principles. Large test bodies may be a sign that there&amp;rsquo;s a possible opportunity to factor out common, repeated test code.&lt;/p&gt;
+&lt;p&gt;Extracting out larger portions of code into smaller named functions may also help with the clarity of your unit test code, leading you to say with greater confidence, &amp;ldquo;I trust that this test is correct”.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;complexity&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;test-complexity&#34;&gt;Test Complexity&lt;/h3&gt;
+&lt;p&gt;Unit tests should be as simple as possible. Reducing the complexity of a unit test results in clarity.&lt;/p&gt;
+&lt;p&gt;Make sure there&amp;rsquo;s a clear path through the test case.&lt;/p&gt;
+&lt;p&gt;Avoid branching logic (if-else statements) or looping constructs in your tests if at all possible. If you find the need to test two code paths of your system under test, write two tests for that, rather than applying if-else logic inside of a single unit test.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re using analytics, such as &lt;a href=&#34;https://en.wikipedia.org/wiki/Cyclomatic_complexity&#34;&gt;cyclomatic complexity&lt;/a&gt;, absolutely make sure your unit tests have as low of a cyclomatic complexity as possible.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;semantics&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;test-semantics&#34;&gt;Test Semantics&lt;/h3&gt;
+&lt;p&gt;Applying simple clean coding practices to your unit tests can also go a long way in terms of being able to trust your tests.&lt;/p&gt;
+&lt;p&gt;Use descriptive and meaningful phrases (DAMP) in your test names and variables. Be sure to update them as the semantics of your system under test change. This will provide a consistency and accuracy to the &lt;em&gt;names&lt;/em&gt; of things that will lead to a greater confidence that your tests are giving you an accurate picture of the health of your system.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/&#34; title=&#34;Don’t Write Legacy Swift&#34;&gt;Don’t Write Legacy Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/tag/unit-testing/&#34; title=&#34;Unit Testing @ andrewcbancroft.com&#34;&gt;Unit Testing @ andrewcbancroft.com&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/&#34; title=&#34;Getting Started with Unit Testing in Swift&#34;&gt;Getting Started with Unit Testing in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testability Tip for Swift Developers – Parameterize and Push</title>
+      <link>https://www.andrewcbancroft.com/2015/09/04/testability-tip-for-swift-developers-parameterize-and-push/</link>
+      <pubDate>Fri, 04 Sep 2015 18:36:52 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/09/04/testability-tip-for-swift-developers-parameterize-and-push/</guid>
+      <description>&lt;p&gt;In a previous &amp;ldquo;Testability Tip for Swift Developers”, &lt;a href=&#34;https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/&#34;&gt;I discussed the principle of observability&lt;/a&gt;. &amp;ldquo;If it&amp;rsquo;s observable, it&amp;rsquo;s testable” was the primary conclusion of the article, and I pointed toward using the &lt;code&gt;public&lt;/code&gt; access control modifier for parts of your app that you intend to test.&lt;/p&gt;
+&lt;p&gt;In this edition, I&amp;rsquo;d like to introduce a new principle that I try to adhere to when I&amp;rsquo;m unit testing, namely, &amp;ldquo;If it&amp;rsquo;s controllable, it&amp;rsquo;s testable”. Here&amp;rsquo;s what I mean by &amp;ldquo;controllable”…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;controllability&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;controllability&#34;&gt;Controllability&lt;/h3&gt;
+&lt;p&gt;In &lt;a href=&#34;https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/&#34;&gt;Testing is to Software as Experiment is to Science&lt;/a&gt;, I analyzed how testing software mirrors scientific experimentation. Good scientific experiments are controllable. That is, they are set up such that everything stays as constant as possible except the thing you&amp;rsquo;re poking at.&lt;/p&gt;
+&lt;p&gt;Changing multiple things at a time in an experiment clouds the ability to verify that [tweak x] produced [y outcome]. So a scientist will do his/her best to &lt;em&gt;control&lt;/em&gt; the environment by holding as many variables constant as possible, so that he/she can make accurate conclusions about the outcome.&lt;/p&gt;
+&lt;p&gt;The same goes for testing software. If I&amp;rsquo;m going to automate a test, I want to set up my &amp;ldquo;experiment” such that I control as much of the system as possible so that I can set up valid expectations and verify results coming from the system under test. Note that I&amp;rsquo;m using the term &amp;ldquo;system” in a very broad sense – it could be referring to an entire app, a single &amp;ldquo;object”, or a function.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;parameterize-push&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;parameterize-and-push&#34;&gt;Parameterize and push&lt;/h3&gt;
+&lt;p&gt;So where does &amp;ldquo;parameterize and push” come into play?&lt;/p&gt;
+&lt;p&gt;Parameterizing sets us up with the ability to provide &lt;em&gt;inputs&lt;/em&gt; into the system we&amp;rsquo;re testing. Anytime you have an input, you have the ability to supply a value of your choosing.&lt;/p&gt;
+&lt;p&gt;Serving as inputs to the system, you can view parameters as entry points for &lt;em&gt;controls&lt;/em&gt;. They&amp;rsquo;re &amp;ldquo;controls” because &lt;em&gt;we&lt;/em&gt; decide what those values should be before we pass them off as arguments &lt;em&gt;to&lt;/em&gt; those parameters. So long as the system we&amp;rsquo;re testing only gets the data it uses from its inputs (its parameters), we can be guaranteed predictable, controlled outputs on the other end.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;forms&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;forms-of-parameterization&#34;&gt;Forms of parameterization&lt;/h3&gt;
+&lt;p&gt;Three forms of parameterization are common:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;At the instance level through initializers&lt;/li&gt;
+&lt;li&gt;At the instance level through property setters&lt;/li&gt;
+&lt;li&gt;At the function level through function parameters&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Using an initializer, or a &lt;code&gt;public&lt;/code&gt; variable property, or by adding parameters to your functions and using only those parameters for the function&amp;rsquo;s computation and output production, you give yourself the ability to control the system in various ways that are appropriate on a test-by-test basis.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;usefulness&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;usefulness-and-examples-of-parameterization&#34;&gt;Usefulness and examples of parameterization&lt;/h3&gt;
+&lt;p&gt;Setting up your instance definitions to use a set of inputs from the very start through initialization gives you the ability to provide real &amp;ldquo;production-ready” values in your app, but fake &amp;ldquo;test-customized” values for testing. &lt;a href=&#34;https://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/&#34;&gt;Creating fake objects&lt;/a&gt; for testing is outside the scope of this article, but providing public initializers with parameters is a really great way to set yourself up for being able to test that particular instance.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Prefer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;DatabaseCommunicator&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;init&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;database&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;database&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// able to supply a controlled input via parameter, such as supplying a &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// customized &amp;#34;fake&amp;#34; database to use for testing but still supply a &amp;#34;real&amp;#34; database in real life&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// over&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;DatabaseCommunicator&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;database&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// stuck with talking to a real database...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Another viable option is to provide public variable properties that can be set after the instance is initialized. This is a little more round-about, but I would still call it a form of &amp;ldquo;parameterization” because the strategy still provides you with the same control point that an initializer with parameters does.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// prefer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;DatabaseCommunicator&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// able to supply a controlled input via property setter, such as supplying a &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// customized &amp;#34;fake&amp;#34; database to use for testing but still supply a &amp;#34;real&amp;#34; database in real life&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;database&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// over&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;DatabaseCommunicator&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;database&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// stuck with talking to a real database&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;At the function level, the usefulness of parameters is that you can supply inputs and examine outputs with ease. If you pull in data from the encapsulating instance inside the function body, say by referencing &lt;code&gt;self.somePropertyValue&lt;/code&gt;, you&amp;rsquo;ve got a bit more setup to do to be able to accurately verify results. &lt;code&gt;somePropertyValue&lt;/code&gt; needs to actually have a value before the function will produce accurate results. If you&amp;rsquo;d opted to simply define parameters for everything the function needs in order to produce its output, you can test that function in isolation far more easily and be guaranteed that your results are correct and accurate.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// prefer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;getNameFromDatabase&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;getName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// able to supply a controlled input via parameter, such as supplying a &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// customized &amp;#34;fake&amp;#34; database to use for testing but still supply a &amp;#34;real&amp;#34; database in real life&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;   
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// over&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;getNameFromDatabase&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;database&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// stuck with talking to a real database&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;getName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// and over&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;getNameFromDatabase&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;getName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// requires additional setting of the database property on &amp;#39;self&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// before you&amp;#39;re able to get results from this function&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a name=&#34;di&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;parameterization-or-dependency-injection8221&#34;&gt;Parameterization or &amp;ldquo;Dependency Injection”?&lt;/h3&gt;
+&lt;p&gt;Yes.&lt;/p&gt;
+&lt;p&gt;What I&amp;rsquo;m calling &amp;ldquo;parameterization” is really just &amp;ldquo;dependency injection”. But the term &amp;ldquo;dependency injection” can sound really daunting, while we&amp;rsquo;re used to working with parameters. I intend for the meaning of each term for the purpose of this article to be equivalent.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;Parameterizing, your instance definitions and functions provides you an immense amount of leverage when it comes to controlling your system under test. I encourage you to try this out and do your best to shift to a more parameterized approach to writing your code for improved testability. Remember, &amp;ldquo;Controllable is testable”!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/&#34; title=&#34;Testability Tip for Swift Developers – Public Over Private&#34;&gt;Testability Tip for Swift Developers – Public Over Private&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Improvements to Unit Testing in Swift with Xcode 7</title>
+      <link>https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/</link>
+      <pubDate>Wed, 10 Jun 2015 17:43:09 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/</guid>
+      <description>&lt;p&gt;One of the most exciting things that&amp;rsquo;s come out of WWDC 2015 is the fact that unit testing in Swift has been greatly simplified. The latest announcements have actually rendered a few of my articles on the subject obsolete, once Xcode 7 is in full circulation among the Swift developer community.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re using Xcode 6.x, you may still find use in a couple of my previous articles:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/&#34;&gt;Testability Tip for Swift Developers – Public Over Private&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you&amp;rsquo;re jumping headlong into Xcode 7 world, setting yourself up for unit testing is incredibly simple. Essentially, all &lt;code&gt;internal&lt;/code&gt; and &lt;code&gt;public&lt;/code&gt; Types (and members of those Types) are visible to your unit test project when you import the module using the &lt;code&gt;@testable&lt;/code&gt; keyword in front of the import. With Xcode 7, there&amp;rsquo;s no reason to change any of the access modifiers on your Types/members to support testing.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/NatashaTheRobot&#34;&gt;@natashatherobot&lt;/a&gt; has an &lt;a href=&#34;http://natashatherobot.com/swift-2-xcode-7-unit-testing-access/&#34;&gt;excellent 3-step write-up&lt;/a&gt; that I won&amp;rsquo;t repeat here. To summarize though, you&amp;rsquo;ll simply…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Code your Types (classes/structs/enums) using the default &lt;code&gt;internal&lt;/code&gt; access.&lt;/li&gt;
+&lt;li&gt;Add an import statement to the file containing your &lt;code&gt;XCTestCases&lt;/code&gt;. There&amp;rsquo;s special syntax for this now: &lt;code&gt;@testable import AppName/ModuleName&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Begin unit testing with access to all &lt;code&gt;public&lt;/code&gt; and &lt;code&gt;internal&lt;/code&gt; Types and members!&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testing is to Software as Experiment is to Science</title>
+      <link>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</link>
+      <pubDate>Thu, 30 Apr 2015 04:01:24 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;The principle of science, the definition, almost, is the following: The test of all knowledge is experiment.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The sole test of the validity of any idea is experiment.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;These quote came from &lt;a href=&#34;http://www.feynmanlectures.caltech.edu/I_01.html#Ch1-S1&#34;&gt;Chapter 1&lt;/a&gt; and &lt;a href=&#34;http://www.feynmanlectures.caltech.edu/I_02.html&#34;&gt;Chapter 2&lt;/a&gt; of the &lt;a href=&#34;http://www.feynmanlectures.caltech.edu/&#34;&gt;Feynman Lectures on Physics&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not a physicist, but the software developer in me resonated with the connection between &lt;em&gt;experimentation&lt;/em&gt; and &lt;em&gt;validation&lt;/em&gt; of what we know about the world around us. Almost immediately, I related it to the world of software.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;validity-confirmed-by-experiments&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;validity-is-confirmed-by-experiments-tests&#34;&gt;Validity is confirmed by experiments (tests)&lt;/h3&gt;
+&lt;p&gt;The universe around us is an immense mystery. We have many ideas about it, but the ideas that are validated by experiment are the ones we cling to more tightly than the ones that remain in the realm of guess and theory.&lt;/p&gt;
+&lt;p&gt;How do we know that things are valid within a software application? The answer, of course, is by &lt;em&gt;testing&lt;/em&gt; that software… experimenting with it, if you will, and observing the outcomes of those experiments.&lt;/p&gt;
+&lt;p&gt;Your software is a universe of mystery until it&amp;rsquo;s tested.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;repeated-experiments-most-valuable&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;repeated-experiments-tests-are-most-valuable&#34;&gt;Repeated experiments (tests) are most valuable&lt;/h3&gt;
+&lt;p&gt;Experiments that are conducted &lt;em&gt;multiple times&lt;/em&gt; are significantly more valuable than a single observation made from a single experiment. Repeated experiments increase the probability that what was observed was not an accident, but was truly the result of correct procedure validating a correct hypothesis. Performing the experiments as identically as possible to one other is the key to trusting the results.&lt;/p&gt;
+&lt;p&gt;Likewise, repeated testing of software is far more valuable than testing it once and walking away. Repeated tests done identically over time provide the reassurance we need to know &lt;em&gt;for sure&lt;/em&gt; that our software behaves as we expect as it morphs to accommodate new ideas and new needs.&lt;/p&gt;
+&lt;p&gt;Sure, we could spin up the app in a simulator and click/tap through it to see if pressing [Button X] does what its label implies it will do. But I&amp;rsquo;ve heard it said that if we have to do it more than once, it should be &lt;em&gt;automated&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Testing is one of those things that needs to be done often. Pretty much any time the app&amp;rsquo;s code changes (even just a little bit!), there is warrant to check and make sure the universe as we knew it still obeys all the laws we previously discovered.&lt;/p&gt;
+&lt;p&gt;Repeated tests are just as valuable to software as repeated experiment is to science. The more we can automate them, the greater the consistency in our repeated observations of how the software behaves.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;experimentation-creative-effort&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;experimentation-testing-is-a-creative-effort&#34;&gt;Experimentation (testing) is a creative effort&lt;/h3&gt;
+&lt;p&gt;Designing the right experiment to elicit the right conditions to make that &lt;em&gt;one critical&lt;/em&gt; observation is a creative process. Sometimes, scientists have to go to great lengths to make their observations. But they all find it worth it when their experiment yields results!&lt;/p&gt;
+&lt;p&gt;I work with some amazing scientists on a day-to-day basis. Watching them work and hearing about some of the things they have to do in order to test their ideas is so fascinating to me. For example, one of our Principal Investigators is making observations about how microgravity affects a plant&amp;rsquo;s cell walls. To do that, he had to literally &lt;a href=&#34;http://www.noble.org/blog/plants-in-space/archive/&#34;&gt;launch his plant&amp;rsquo;s seeds into space&lt;/a&gt;! &lt;a href=&#34;http://www.nasa.gov/mission_pages/station/research/experiments/1062.html&#34;&gt;They&amp;rsquo;re aboard the International Space Station&lt;/a&gt;. Growing plants! In &lt;em&gt;space&lt;/em&gt;! I&amp;rsquo;m blown away by these guys!&lt;/p&gt;
+&lt;p&gt;While we needn&amp;rsquo;t launch our code into space just to experiment with it, sometimes we have to get creative in order to make the observations we need to make from our code. Automated testing isn&amp;rsquo;t easy. Running the app and clicking a button and watching what happens with our own eyes is easy, but it&amp;rsquo;s tedious and I&amp;rsquo;m lazy!&lt;/p&gt;
+&lt;p&gt;Creating the right environment (in code) for a test to verify what it needs can take effort, but in the end, when the test yields results time after time after time, I&amp;rsquo;ve always found that it&amp;rsquo;s worth it!&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;My hope is that seeing automated unit testing from a slightly different perspective has sparked some thoughts and ideas in your mind. How can you begin experiment with your code with automated tests? How can you begin to make repeatable observations about your code so that you know, &lt;em&gt;for sure&lt;/em&gt;, that it works, even &lt;em&gt;after&lt;/em&gt; you go about making changes to it as time goes along?&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve devoted a bit time to writing about unit testing in Swift since the language was released. I hope this article adds something unique to the collection and that it gets you motivated to validate your software universe with tests!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/&#34; title=&#34;Getting Started with Unit Testing in Swift&#34;&gt;Getting Started with Unit Testing in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testability Tip for Swift Developers – Public Over Private</title>
+      <link>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</link>
+      <pubDate>Wed, 15 Apr 2015 18:52:11 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</guid>
+      <description>&lt;p&gt;Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a &lt;code&gt;private&lt;/code&gt; function, however, I often scratch my head and ask, &amp;ldquo;How am I supposed to test this??”.&lt;/p&gt;
+&lt;p&gt;Most experienced testers will tell you, &amp;ldquo;Don&amp;rsquo;t test private implementation – only public API”.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Okay… But how, does that private function get tested?”, I always asked.&lt;/p&gt;
+&lt;p&gt;In this article, I intend to share a testability tip catered to the Swift developer community that helps alleviate this issue with testing private functions.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;testing-and-observability&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;testing-and-observability&#34;&gt;Testing and observability&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&#34;developers-as-clients-of-apis&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;developers-as-clients-of-apis&#34;&gt;Developers as clients of APIs&lt;/h4&gt;
+&lt;p&gt;As developers, we are &amp;ldquo;clients” of APIs on a daily basis. We interact with other developers&amp;rsquo; frameworks and libraries through the visible, observable, Application Programming Interface that they&amp;rsquo;ve exposed to us. It&amp;rsquo;s the way they&amp;rsquo;ve designed for us to interact with their code.&lt;/p&gt;
+&lt;p&gt;Notice three words that I chose in that introductory paragraph:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Visible&lt;/li&gt;
+&lt;li&gt;Observable&lt;/li&gt;
+&lt;li&gt;Exposed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If we are going to use another developer&amp;rsquo;s library, &lt;em&gt;all we have&lt;/em&gt; as developers is the public interface that they&amp;rsquo;ve made visible to us… It&amp;rsquo;s the only observable thing we can look at and go, &amp;ldquo;Oh! Okay, to do this, I call &lt;em&gt;that&lt;/em&gt; function”. The only thing exposed are the functions and properties that the developer intends for us to see.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;tests-as-clients-of-apis&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;tests-as-clients-of-apis&#34;&gt;Tests as clients of APIs&lt;/h4&gt;
+&lt;p&gt;Have you ever viewed your unit test suite as a &amp;ldquo;client” of your code? It is!&lt;/p&gt;
+&lt;p&gt;And just like a developer, the unit tests in your test target interacts with &lt;em&gt;your&lt;/em&gt; app&amp;rsquo;s API through the same visible, observable, interface that you&amp;rsquo;ve exposed to them.&lt;/p&gt;
+&lt;p&gt;If you start to personify your test target and think of it in terms of &amp;ldquo;just another client of your code”, you begin to see that it really doesn&amp;rsquo;t have any more visibility of your code than another developer would if he or she were consuming it.&lt;/p&gt;
+&lt;p&gt;All of this boils down to say, if it&amp;rsquo;s observable, it&amp;rsquo;s testable. Which means, the easiest and most natural code to test is &lt;code&gt;public&lt;/code&gt; code.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;public-over-private&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;public-over-private-and-internal&#34;&gt;Public over private (and internal)&lt;/h3&gt;
+&lt;p&gt;So should &lt;em&gt;everything&lt;/em&gt; be &lt;code&gt;public&lt;/code&gt; instead of &lt;code&gt;private&lt;/code&gt; or &lt;code&gt;internal&lt;/code&gt;? Certainly not.&lt;/p&gt;
+&lt;p&gt;Object-oriented programming strives for data-hiding and encapsulation, so there &lt;em&gt;are&lt;/em&gt; reasons to keep some things non-public.&lt;/p&gt;
+&lt;p&gt;Additionally, there are &lt;a href=&#34;https://developer.apple.com/swift/blog/?id=27&#34;&gt;certain Swift compiler optimizations&lt;/a&gt; (which lead to run-time optimizations) that can be gained when you mark things in your Type as &lt;code&gt;final&lt;/code&gt;. Using the &lt;code&gt;private&lt;/code&gt; access modifier allows the compiler to &lt;em&gt;infer&lt;/em&gt; that it is &lt;code&gt;final&lt;/code&gt; because it&amp;rsquo;s narrowly scoped to the current Type &lt;em&gt;only&lt;/em&gt;. These are handy things to know, but as is always the case with optimization, avoid &lt;em&gt;premature&lt;/em&gt; optimization by &lt;em&gt;measuring first&lt;/em&gt; to decide if you really need them.&lt;/p&gt;
+&lt;p&gt;Whenever possible, I prefer &lt;code&gt;public&lt;/code&gt; over the other access modifiers to help enable testing for my apps.&lt;/p&gt;
+&lt;p&gt;So when is &amp;ldquo;whenever possible”?&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;reason-for-existence&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;public-when-part-of-a-types-reason-for-existence&#34;&gt;Public when part of a Type&amp;rsquo;s reason for existence&lt;/h4&gt;
+&lt;p&gt;Obviously, properties and functions that are part of a Type&amp;rsquo;s core purpose can be marked &lt;code&gt;public&lt;/code&gt;. My practice is to decide, &amp;ldquo;Is this function why this Type exists?”. If so, I mark it as &lt;code&gt;public&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Note also that the Type itself needs to be marked public if it&amp;rsquo;s going to be visible to your unit tests.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Instead of this (default --internal-- access)...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyClass&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;myFunc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// Performs something essential to why MyClass exists&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Make things public...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyClass&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;myFunc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// Performs something essential to why MyClass exists&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a name=&#34;new-type&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;transition-many-private-components-to-new-type&#34;&gt;Transition many private components to new Type&lt;/h4&gt;
+&lt;p&gt;Having &lt;em&gt;many&lt;/em&gt; &lt;code&gt;private&lt;/code&gt; properties and functions can be an indication that there needs to be a new Type created to encapsulate those components. I&amp;rsquo;ve heard developers talk about this situation as one that &amp;ldquo;screams, ‘New Type!&amp;rsquo;”.&lt;/p&gt;
+&lt;p&gt;If we extract out sets of related &lt;code&gt;private&lt;/code&gt; properties and functions into a new Type, those pieces of code &lt;em&gt;are the reason that Type exists&lt;/em&gt;, and thus should be marked &lt;code&gt;public&lt;/code&gt;. Testing, then, becomes a matter of writing unit tests for the new Type and its public API!&lt;/p&gt;
+&lt;p&gt;Even if you just have a few &lt;code&gt;private&lt;/code&gt; code blocks in the Type you&amp;rsquo;re trying to test, it can sometimes make your testing life easier to transition them to a new Type as &lt;code&gt;public&lt;/code&gt; components.&lt;/p&gt;
+&lt;p&gt;If I&amp;rsquo;m really uncomfortable marking functions &lt;code&gt;public&lt;/code&gt; in the Type where they currently exist, creating a new Type and marking them &lt;code&gt;public&lt;/code&gt; there is usually the better alternative, and it immediately enables testing for that set of code.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;testing-non-public&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;testing-non-public-code&#34;&gt;Testing non-public code&lt;/h3&gt;
+&lt;p&gt;As I mentioned in the beginning, it&amp;rsquo;s not good to just haphazardly go through your code and &amp;ldquo;&lt;code&gt;public&lt;/code&gt; all the things!!”. After &lt;em&gt;appropriately&lt;/em&gt; marking fundamental functions &lt;code&gt;public&lt;/code&gt; and transitioning sets of &lt;code&gt;private&lt;/code&gt; functions to new Types where they can happily live as part of &lt;em&gt;that&lt;/em&gt; Type&amp;rsquo;s public API, there will likely be a few &lt;code&gt;private&lt;/code&gt; or &lt;code&gt;internal&lt;/code&gt; things left over.&lt;/p&gt;
+&lt;p&gt;How do these get tested?&lt;/p&gt;
+&lt;p&gt;Well, ideally, these are small, simple, helper functions that are only useful when called within the Type you&amp;rsquo;re working on.&lt;/p&gt;
+&lt;p&gt;If these functions produce observable results in the places where they&amp;rsquo;re called, you end up testing these non-public components &lt;em&gt;implicitly&lt;/em&gt;, that is, by testing the things that &lt;em&gt;are&lt;/em&gt; &lt;code&gt;public&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;During the course of testing some &lt;code&gt;public&lt;/code&gt; function which calls another non-public function, that non-public function&amp;rsquo;s logic will be executed. If the outcome of that function&amp;rsquo;s execution affects the Type&amp;rsquo;s state, or the output of its &lt;code&gt;public&lt;/code&gt; parent function, those are the things that you&amp;rsquo;d be able to write unit tests for, because those are the &amp;ldquo;observation points”, so to speak.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;The bottom line is: observable == testable. Just like another developer, the suite of unit tests in your test target interacts with your app&amp;rsquo;s API through the visible, observable, interface that you&amp;rsquo;ve exposed to them. The more observable your API components are, the more testable your code becomes. Which is why I prefer &lt;code&gt;public&lt;/code&gt; over &lt;code&gt;private&lt;/code&gt; whenever possible!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/tag/unit-testing/&#34; title=&#34;Browse All Unit Testing Articles @ andrewcbancroft.com&#34;&gt;Browse All Unit Testing Articles @ andrewcbancroft.com&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34; title=&#34;Swift Access Control – Implications for Unit Testing&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Unit Testing Model Layer with Core Data and Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</link>
+      <pubDate>Tue, 13 Jan 2015 13:00:37 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</guid>
+      <description>&lt;p&gt;&lt;small&gt;Updated on November 19, 2015 – Swift 2.0&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.&lt;/p&gt;
+&lt;p&gt;To my surprise, unit testing my Core Data model layer has been… well… amazing. With little effort, I’ve been able to write the unit tests I’ve wanted. The process went something like this for me:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/&#34;&gt;Create an &lt;code&gt;NSManagedObject&lt;/code&gt; subclass&lt;/a&gt; of the Core Data entity that I need in my unit test. (This just makes things easier from an Xcode code-completion standpoint)&lt;/li&gt;
+&lt;li&gt;Write a helper function to set up an in-memory &lt;code&gt;NSManagedObjectContext&lt;/code&gt;. Avoiding the need to use an actual sqlite database is pretty handy. It allows for quick-running tests and easy iterations over the data model itself.&lt;/li&gt;
+&lt;li&gt;Write unit tests using the in-memory &lt;code&gt;NSManagedObjectContext&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/&#34;&gt;I’ve already written about creating an &lt;code&gt;NSManagedObject&lt;/code&gt; subclass&lt;/a&gt;, so I will unpack steps 2 and 3 in this blog entry.&lt;/p&gt;
+&lt;h3 id=&#34;set-up-an-in-memory-nsmanagedobjectcontext&#34;&gt;Set up an in-memory NSManagedObjectContext&lt;/h3&gt;
+&lt;p&gt;A &lt;a href=&#34;http://stackoverflow.com/questions/1849802/how-to-unit-test-my-models-now-that-i-am-using-core-data&#34;&gt;Stack Overflow&lt;/a&gt; question+answer sparked some thoughts. The idea and the code both came from there. The answer uses Objective-C, so my contribution is that I&amp;rsquo;ve written it in Swift. In my project, I created a new Swift file called &amp;ldquo;CoreDataHelpers.swift” in my tests target. Here&amp;rsquo;s a look at the helper function:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CoreData&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;setUpInMemoryManagedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectContext&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectModel&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mergedModelFromBundles&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSBundle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mainBundle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()])&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;persistentStoreCoordinator&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSPersistentStoreCoordinator&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;managedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;managedObjectModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;persistentStoreCoordinator&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addPersistentStoreWithType&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSInMemoryStoreType&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;configuration&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Adding in-memory persistent store failed&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectContext&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;persistentStoreCoordinator&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;persistentStoreCoordinator&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;observations&#34;&gt;Observations&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll be honest, I&amp;rsquo;m only starting to put together the pieces involved in setting up the Core Data stack. Working through these unit testing techniques has solidified a &lt;em&gt;lot&lt;/em&gt;. Analyzing the helper method from the bottom up has made some sense out of how to configure everything:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I need an &lt;code&gt;NSManagedObjectContext&lt;/code&gt; whose &lt;code&gt;NSPersistentStoreCoordinator&lt;/code&gt; property uses an in-memory store.&lt;/li&gt;
+&lt;li&gt;To get such an &lt;code&gt;NSManagedObjectContext&lt;/code&gt;, I need to add a persistent store with a type of &lt;code&gt;NSInMemoryStoreType&lt;/code&gt; to an &lt;code&gt;NSPersistentStoreCoordinator&lt;/code&gt; instance. (note the line that&amp;rsquo;s highlighted)&lt;/li&gt;
+&lt;li&gt;Of course, in order to do &lt;em&gt;that&lt;/em&gt;, I need an &lt;code&gt;NSPersistentStoreCoordinator&lt;/code&gt; &lt;em&gt;instance&lt;/em&gt;, and I can&amp;rsquo;t get one of &lt;em&gt;those&lt;/em&gt; unless I initialize it with an &lt;code&gt;NSManagedObjectModel&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;To get an &lt;code&gt;NSManagedObjectModel&lt;/code&gt;, I use the class method, &lt;code&gt;mergedModelFromBundles()&lt;/code&gt; to grab it from my main bundle.&lt;/li&gt;
+&lt;li&gt;Fast-forwarding now: With a proper &lt;code&gt;NSManagedObjectModel&lt;/code&gt; instance, I can create an &lt;code&gt;NSPersistentStoreCoordinator&lt;/code&gt; instance with it and add an &lt;code&gt;NSInMemoryStoreType&lt;/code&gt; to that &lt;code&gt;persistentStoreCoordinator&lt;/code&gt;. Finally, I can initialize an &lt;code&gt;NSManagedObjectContext&lt;/code&gt;, assign the configured &lt;code&gt;persistentStoreCoordinator&lt;/code&gt; to the context, and return it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Whew! This whole process felt a lot like reading &lt;a href=&#34;http://en.wikipedia.org/wiki/If_You_Give_a_Mouse_a_Cookie&#34;&gt;If You Give a Mouse a Cookie&lt;/a&gt;, but that may be because I&amp;rsquo;ve read it a few hundred times to my 2 year old. :]&lt;/p&gt;
+&lt;h3 id=&#34;writing-the-unit-tests&#34;&gt;Writing the unit test(s)&lt;/h3&gt;
+&lt;p&gt;With the ability to get an &lt;code&gt;NSManagedObjectContext&lt;/code&gt; instance that&amp;rsquo;s using an in-memory store, the unit tests using Entities from my Core Data model are quite easy.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s a sample test:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CoreData&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;TestsUsingModelFromCoreData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;XCTestCase&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;testSomethingUsingCoreData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectContext&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;setUpInMemoryManagedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;entity&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSEntityDescription&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;insertNewObjectForEntityForName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;EntityName&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inManagedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// model setup&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// XCTAssert    &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;I was so surprised at how straightforward the test was. The helper function makes a world of difference for me. I hope it does for you, too!&lt;/p&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+  You might also enjoy&amp;#8230;
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+  &lt;li&gt;
+    &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/07/10/using-a-core-data-model-in-swift-playgrounds/&#34; title=&#34;Using a Core Data Model in Swift Playgrounds&#34;&gt;Using a Core Data Model in Swift Playgrounds&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/08/25/sharing-a-core-data-model-with-a-swift-framework/&#34; title=&#34;Sharing a Core Data Model with a Swift Framework&#34;&gt;Sharing a Core Data Model with a Swift Framework&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/02/18/core-data-cheat-sheet-for-swift-ios-developers/&#34; title=&#34;Core Data Cheat Sheet for Swift iOS Developers&#34;&gt;Core Data Cheat Sheet for Swift iOS Developers&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt; 
+&lt;p&gt;&lt;a name=&#34;course&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;Core Data Fundamentals with Swift&lt;/a&gt;&lt;br /&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png&#34; alt=&#34;Core Data Fundamentals with Swift&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13163&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Unit Testing in Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/</link>
+      <pubDate>Mon, 29 Dec 2014 12:00:50 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/</guid>
+      <description>&lt;p&gt;Getting set up to write unit tests in Swift, while not &lt;em&gt;difficult&lt;/em&gt;, isn&amp;rsquo;t exactly &lt;em&gt;intuitive&lt;/em&gt;. I&amp;rsquo;ve written &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34;&gt;several posts and gathered a few resources on unit testing in Swift&lt;/a&gt;, but I haven&amp;rsquo;t yet published a &amp;ldquo;getting started” guide until now.&lt;/p&gt;
+&lt;p&gt;Where does one get started with unit testing in Swift when they&amp;rsquo;ve never gotten started before? Here are 5 steps to help you successfully begin unit testing in Swift:&lt;/p&gt;
+&lt;h3 id=&#34;1--create-your-project&#34;&gt;1 – Create your project&lt;/h3&gt;
+&lt;p&gt;The obvious first step. If you don&amp;rsquo;t already have a project going, create a new one to organize the code for your app idea. Xcode 6 will automatically generate two &amp;ldquo;targets” for you. One will be your app&amp;rsquo;s main module and contains all the code which, when compiled, is meant to be run in the iOS simulator / on an iOS device.&lt;/p&gt;
+&lt;p&gt;The other will be your test target, which, as the name implies, is where you write your unit test code.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s important to note that there are &lt;em&gt;two compilation targets&lt;/em&gt; that you&amp;rsquo;ll be working with as you unit test. Source code that&amp;rsquo;s part of one compilation target isn&amp;rsquo;t part of the other by default. This is important to at least &lt;em&gt;know&lt;/em&gt; as we move forward in this walkthrough.&lt;/p&gt;
+&lt;h3 id=&#34;2--framework-considerations-toggle-defines-module8221-in-your-build-settings&#34;&gt;2 – Framework considerations: toggle &amp;ldquo;Defines Module” in your build settings&lt;/h3&gt;
+&lt;p&gt;This step becomes especially critical if you&amp;rsquo;re using or plan to use a &lt;a href=&#34;https://github.com/Quick/Quick&#34;&gt;unit testing framework like Quick&lt;/a&gt;. It&amp;rsquo;s not required to use something like Quick, but it can enhance your testing experience if you prefer something other than the out-of-the-box &lt;code&gt;XCTestCase&lt;/code&gt; setup.&lt;/p&gt;
+&lt;p&gt;When you’re working with frameworks, &lt;a href=&#34;https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-XID_88&#34;&gt;Apple recommends&lt;/a&gt; that you make sure the &amp;ldquo;Defines Module” build setting, found under Packaging, is set to Yes.&lt;/p&gt;
+&lt;p&gt;If you are relying on, or &lt;em&gt;could&lt;/em&gt; be relying on &amp;ldquo;non-standard” .framework files for your app, make sure you toggle this flag in your Xcode build settings:&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-1024x679.png&#34; alt=&#34;Build Settings - Defines Module&#34; width=&#34;730&#34; height=&#34;484&#34; class=&#34;alignnone size-large wp-image-10371&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-1024x679.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-300x199.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj-1200x796.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_Swift_xcodeproj.png 1387w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3--import-your-main-project-module-into-your-test-files&#34;&gt;3 – Import your main project (module) into your test file(s)&lt;/h3&gt;
+&lt;p&gt;In your test target, at the top of each of your .swift files that contain your XCTestCase classes, write an import statement to bring in your main project&amp;rsquo;s module. In normal scenarios, your app&amp;rsquo;s module is named the same as your Xcode project file.&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-1024x671.png&#34; alt=&#34;Import Module for Testing&#34; width=&#34;730&#34; height=&#34;478&#34; class=&#34;alignnone size-large wp-image-10381&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-1024x671.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-300x196.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift-1200x786.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/GetStartedWithUnitTesting_SwiftTests_swift.png 1393w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;public-testable&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4--access-control-public--testable&#34;&gt;4 – Access control: Public == Testable&lt;/h3&gt;
+&lt;p&gt;Any classes/structs/enums/methods that you need to use in your tests must have a &lt;code&gt;public&lt;/code&gt; access control modifier. &lt;code&gt;Internal&lt;/code&gt; (default) and &lt;code&gt;private&lt;/code&gt; Types and functions can&amp;rsquo;t be &amp;ldquo;seen” by your unit tests, so you need to go the &lt;code&gt;public&lt;/code&gt; route if you want to test those things.&lt;/p&gt;
+&lt;p&gt;Previously I&amp;rsquo;d written on &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34;&gt;Swift access control and its implications for unit testing&lt;/a&gt;. There, I proposed simply adding your main project&amp;rsquo;s .swift source files to your test target, but it turns out that this can lead to some &lt;a href=&#34;https://github.com/Quick/Quick/issues/91&#34;&gt;really obscure issues&lt;/a&gt;. An enlightening &lt;a href=&#34;https://twitter.com/modocache/status/549042409838219264&#34;&gt;Twitter conversation&lt;/a&gt; also shed some light on the subject, and pointed to the solution of testing only publicly accessible &lt;em&gt;behavior&lt;/em&gt; that your Types expose, rather than trying to test internal implementation. That probably deserves a blog entry of its own, but for now, I&amp;rsquo;ll leave it to say that I&amp;rsquo;d recommend &lt;em&gt;not&lt;/em&gt; adding your .swift source files to your test target, but rather to adjust the access control modifiers of the things you want to test to &lt;code&gt;public&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;5--write-tests&#34;&gt;5 – Write tests!&lt;/h3&gt;
+&lt;p&gt;With your main project imported into a test file, and your Types and functions declared with appropriate &lt;code&gt;public&lt;/code&gt; accessibility, you&amp;rsquo;re all set to begin writing tests in Swift!&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;We&amp;rsquo;ve gone from 0 to ready-to-test in this getting started guide to unit testing in Swift. From here, you may be interested in pursuing other topics related to unit testing in Swift. &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34;&gt;Check out my ever-growing unit testing resource list for more information&lt;/a&gt;!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Swift Unit Testing – Verifying Method Calls</title>
+      <link>https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/</link>
+      <pubDate>Mon, 22 Dec 2014 13:09:28 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/</guid>
+      <description>&lt;p&gt;In this unit testing screencast for Swift developers, we explore how to use Test Driven Development to verify method calls.&lt;/p&gt;
+&lt;h3 id=&#34;getting-started-guide&#34;&gt;Getting Started Guide&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;re new to unit testing or are trying to get set up with unit testing in a Swift project, you might &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/&#34;&gt;check out my getting started guide&lt;/a&gt; before jumping into the screencast.&lt;/p&gt;
+&lt;h3 id=&#34;screencast&#34;&gt;Screencast&lt;/h3&gt;
+&lt;p&gt;&lt;span class=&#34;text-center&#34;&gt;&lt;a href=&#34;http://youtu.be/hC2Dni9SAWY&#34; target=&#34;_blank&#34;&gt;Large / Full-Screen Viewing&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;github-example&#34;&gt;GitHub Example&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/andrewcbancroft/SwiftTDDVerifyMethodCalls&#34;&gt;GitHub repo&lt;/a&gt; of the example developed in the screencast.&lt;/p&gt;
+&lt;h3 id=&#34;screencast-transcript&#34;&gt;Screencast Transcript&lt;/h3&gt;
+&lt;h4 id=&#34;001&#34;&gt;[0:01]&lt;/h4&gt;
+&lt;p&gt;Hi, I&amp;rsquo;m Andrew from andrewcbancroft.com, and I&amp;rsquo;m bringing you a test driven development example for iOS in Swift.&lt;/p&gt;
+&lt;p&gt;The goal of this video is to teach you how to write a unit test to verify that a method was called.&lt;/p&gt;
+&lt;h4 id=&#34;021&#34;&gt;[0:21]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll begin in Xcode 6.1.1 with a side-by-side view of my TestCase class, and my primary View Controller class. This is what Xcode generated for me when I chose to create a new Single View Application.&lt;/p&gt;
+&lt;h4 id=&#34;038&#34;&gt;[0:38]&lt;/h4&gt;
+&lt;p&gt;Imagine a scenario with me: Suppose that as part of your application&amp;rsquo;s requirements, you mush show an Alert View after your primary view loads. How would we go about using Test Driven Development to implement this &amp;ldquo;feature”?&lt;/p&gt;
+&lt;h4 id=&#34;053&#34;&gt;[0:53]&lt;/h4&gt;
+&lt;p&gt;Well, we&amp;rsquo;d write a test, of course – I&amp;rsquo;ll name it something appropriate like &amp;ldquo;testUIAlertViewShowsAfterViewLoads”&lt;/p&gt;
+&lt;h4 id=&#34;104&#34;&gt;[1:04]&lt;/h4&gt;
+&lt;p&gt;Next, I need to create an instance of my ViewController class so that I can test it.&lt;br&gt;
+But immediately, I run into trouble. It seems that my TestCase class can&amp;rsquo;t &amp;ldquo;see” my View Controller class.&lt;/p&gt;
+&lt;h4 id=&#34;117&#34;&gt;[1:17]&lt;/h4&gt;
+&lt;p&gt;Thankfully, it&amp;rsquo;s a simple fix: Simply add the View Controller class to your Test target.&lt;/p&gt;
+&lt;h4 id=&#34;126&#34;&gt;[1:26]&lt;/h4&gt;
+&lt;p&gt;With everything compiling now, we can move to the next line of test code.&lt;/p&gt;
+&lt;h4 id=&#34;132&#34;&gt;[1:32]&lt;/h4&gt;
+&lt;p&gt;First off, in order to test my View Controller&amp;rsquo;s Alert View functionality, the Alert View has got to be visible to my test. The easiest thing for me to do at this point is to assume that there will be a property on my View Controller that I can set. This allows me to perform a kind of dependency injection known as &amp;ldquo;setter injection”. All it really means is that the property is dual-purpose. When the app runs on my iPhone, it&amp;rsquo;ll use a real UIAlertView. But when I run it in my tests, I can plug in a UIAlertView that I control the behavior of, so that I can verify what I need to in my tests.&lt;/p&gt;
+&lt;h4 id=&#34;216&#34;&gt;[2:16]&lt;/h4&gt;
+&lt;p&gt;The ability to swap in a kind of Alert View that I control really is the &amp;ldquo;magic sauce” to this whole test-driven operation. In order to know whether or not a UI element was &amp;ldquo;shown” in a unit test without actually showing something on the screen in a simulator or device, I need to invent something known as a test-double. A fake object, if you will.&lt;/p&gt;
+&lt;h4 id=&#34;244&#34;&gt;[2:44]&lt;/h4&gt;
+&lt;p&gt;My Fake Alert View will have some special capabilities that allow me to know whether the &amp;ldquo;show()” method was called on it. At the same time, it needs to be able to be substituted in my View Controller for a real UIAlertView.&lt;/p&gt;
+&lt;h4 id=&#34;300&#34;&gt;[3:00]&lt;/h4&gt;
+&lt;p&gt;Since Swift supports object-oriented design, we have inheritance at our disposal here.&lt;/p&gt;
+&lt;h4 id=&#34;307&#34;&gt;[3:07]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll create a nested class inside my test function called FakeAlertView. Notice that it&amp;rsquo;s a subclass of UIAlertView. What&amp;rsquo;s great about this is that it meets both of my testing requirements: I can control it&amp;rsquo;s behavior, and it can be substituted anywhere a UIAlertView is needed.&lt;/p&gt;
+&lt;h4 id=&#34;328&#34;&gt;[3:28]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll finish fleshing out this fake object in a minute. Now that Xcode isn&amp;rsquo;t complaining about not knowing what a FakeAlertView is, I&amp;rsquo;ll turn my attention to a new compiler complaint: I don&amp;rsquo;t have an alertView property on my View Controller yet, so I&amp;rsquo;ll add one.&lt;/p&gt;
+&lt;h4 id=&#34;350&#34;&gt;[3:50]&lt;/h4&gt;
+&lt;p&gt;There&amp;rsquo;s just a little more setup that&amp;rsquo;s needed in order to be able to verify that the show method was called. Since show() doesn&amp;rsquo;t return anything, we need some way to know that its logic was executed. I&amp;rsquo;ll do two things to expose this:&lt;/p&gt;
+&lt;h4 id=&#34;406&#34;&gt;[4:06]&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;I&amp;rsquo;ll have a boolean property called showWasCalled on my FakeAlertView that is initially set to false.&lt;/li&gt;
+&lt;li&gt;I&amp;rsquo;ll override the show() method in this fake UIAlertView subclass. Inside the method body, I&amp;rsquo;ll reassign the value of showWasCalled to true. That will be enough for me to use inside an XCTAssert, which is coming up.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;435&#34;&gt;[4:35]&lt;/h4&gt;
+&lt;p&gt;We&amp;rsquo;re nearing the finish line here. All that&amp;rsquo;s left is to call my View Controller&amp;rsquo;s viewDidLoad method, and write my assertion.&lt;/p&gt;
+&lt;h4 id=&#34;444&#34;&gt;[4:44]&lt;/h4&gt;
+&lt;p&gt;The only thing I&amp;rsquo;d tell you to make note of is that we need to cast the View Controller&amp;rsquo;s UIAlertView instance to a FakeAlertView so that we can access the showWasCalled property.&lt;/p&gt;
+&lt;h4 id=&#34;457&#34;&gt;[4:57]&lt;/h4&gt;
+&lt;p&gt;Running the test at this point should produce a failing test, which is exactly what we want (because there&amp;rsquo;s no code that calls the alertView&amp;rsquo;s show() method in viewDidLoad()).&lt;/p&gt;
+&lt;h4 id=&#34;508&#34;&gt;[5:08]&lt;/h4&gt;
+&lt;p&gt;The last step to this adventure is to write the production code to pass the test. In viewDidLoad, I call my alertView&amp;rsquo;s show method and re-run the tests.&lt;/p&gt;
+&lt;h4 id=&#34;519&#34;&gt;[5:19]&lt;/h4&gt;
+&lt;p&gt;And we&amp;rsquo;re green! Which means we&amp;rsquo;ve managed to successfully verify that a method was called.&lt;/p&gt;
+&lt;h4 id=&#34;527&#34;&gt;[5:27]&lt;/h4&gt;
+&lt;p&gt;Thanks for watching – I have other resources related to Swift and iOS development at andrewcbancroft.com.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Swift Unit Testing Resources</title>
+      <link>https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/</link>
+      <pubDate>Fri, 19 Dec 2014 12:00:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/</guid>
+      <description>&lt;p&gt;As I&amp;rsquo;ve researched Test Driven Development practices in general, and for iOS / Mac applications, I&amp;rsquo;ve been helped by several sources. I&amp;rsquo;ve also discovered a few things the hard way, so I&amp;rsquo;m combining and maintaining this list of resources to help point you in some helpful directions as you adventure in unit testing your iOS apps.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;pluralsight&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pluralsight-courses&#34;&gt;Pluralsight Courses&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.pluralsight.com/courses/play-by-play-wilson-tdd&#34;&gt;Play by Play: TDD with Brad Wilson&lt;/a&gt; – Awesome, awesome course. I learned some really great techniques from this one. The course is geared toward .Net development using Visual Studio, C#, and Moq, but you should still watch it if you&amp;rsquo;ve got a subscription – the techniques used can be done on other platforms. I&amp;rsquo;ve been practicing the techniques in Swift (minus the mocking framework).&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.pluralsight.com/courses/tdd-as-design-tool&#34;&gt;TDD as a Design Tool&lt;/a&gt; – Geared toward web development with JavaScript / AngularJS, but has some useful patterns.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;blogs&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;blogs&#34;&gt;Blogs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://roadfiresoftware.com/2014/06/unit-testing-with-swift/&#34;&gt;How to write unit tests in Swift with XCTest&lt;/a&gt; – Josh Brown gives a nice overview of the unit testing capabilities offered in Xcode and how Swift can be used as the testing language of choice.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://natashatherobot.com/swift-unit-testing-tips-and-tricks/&#34;&gt;Swift: Unit Testing Tips and Tricks&lt;/a&gt; – &lt;a href=&#34;https://twitter.com/NatashaTheRobot&#34;&gt;@NatashaTheRobot&lt;/a&gt; offers some practical advice in a tips and tricks style blog post.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://iosunittesting.com/&#34;&gt;iOS Unit Testing&lt;/a&gt; – Some good introductory articles to browse. Offers a few things in Swift, but much of his content is in Objective-C.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://swiftcast.tv/articles/introduction-to-xctest&#34;&gt;Write your first Unit Test in Swift&lt;/a&gt; – Learn how to write the most basic, but still useful, Unit Tests in Swift with XCTest.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;user-group&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;user-group-talks&#34;&gt;User Group Talks&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://vimeo.com/102163542&#34;&gt;Adam Leonard – Test-Driven Development in Swift using Quick (July 2014)&lt;/a&gt; – Talk given by &lt;a href=&#34;https://twitter.com/adamjleonard&#34;&gt;@adamjleonard&lt;/a&gt; at a Brooklyn Swift Developers Meetup in July.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;at-acb&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;at-andrewcbancroftcom&#34;&gt;At andrewcbancroft.com&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/&#34;&gt;Don&amp;rsquo;t Write Legacy Swift&lt;/a&gt; – Motivations for testing your code.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/&#34;&gt;TDD for iOS in Swift – What’s the Goal?&lt;/a&gt; – Before actually doing Test Driven Development (TDD) for your iOS / Mac app, it’s really important to ask a very fundamental question: What’s the goal? I discuss two goals for testing your iOS / Mac apps.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/&#34; title=&#34;Improvements to Unit Testing in Swift with Xcode 7&#34;&gt;Improvements to Unit Testing in Swift with Xcode 7&lt;/a&gt; Much of the pain involved in getting set up to write unit tests in Swift has been alleviated by improvements in Xcode 7. This article analyzes these improvements to ease your unit testing workflow.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift&#34;&gt;Getting Started with Unit Testing in Swift&lt;/a&gt; – While getting set up to write unit tests in Swift isn&amp;rsquo;t &lt;em&gt;difficult&lt;/em&gt;, it isn&amp;rsquo;t exactly &lt;em&gt;intuitive&lt;/em&gt;. This 5-step guide will get your project set up to write unit tests in Swift.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2015/03/10/an-almost-tdd-workflow-in-swift/&#34; title=&#34;An (Almost) TDD Workflow in Swift&#34;&gt;An (Almost) TDD Workflow in Swift&lt;/a&gt; – When I find myself staring at the screen, paralyzed because I’m “not supposed to write actual production code until the test is written”, I often turn to the workflow that describe in this post, to help me break through to being productive.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/&#34; title=&#34;Unit Testing Model Layer with Core Data and Swift&#34;&gt;Unit Testing Model Layer with Core Data and Swift&lt;/a&gt; – Exploration of testing when your project uses Core Data. This post provides a walk-through of setting up an in-memory data store to test with NSManagedObjects.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/&#34;&gt;Swift Unit Testing – Verifying Method Calls&lt;/a&gt; – Screencast showing how to verify method calls in Swift unit tests.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt; – Pointer on how to make code from your main project visible in your Test project.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/&#34;&gt;Creating &amp;ldquo;Mocks” and &amp;ldquo;Stubs” in Swift&lt;/a&gt; – Essentially a discovery I made about how to create fake objects and override those objects&amp;rsquo; methods. You&amp;rsquo;d do this to isolate and control the object&amp;rsquo;s behavior in order to enable or ease the testing process.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TDD for iOS in Swift – What’s the Goal?</title>
+      <link>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</link>
+      <pubDate>Tue, 16 Dec 2014 12:00:10 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</guid>
+      <description>&lt;p&gt;Before actually &lt;em&gt;doing&lt;/em&gt; Test Driven Development (TDD) for your iOS / Mac app, it&amp;rsquo;s really important to ask a very fundamental question: What&amp;rsquo;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?&lt;/p&gt;
+&lt;h2 id=&#34;2-goals-of-tdd-in-ios&#34;&gt;2 Goals of TDD in iOS&lt;/h2&gt;
+&lt;p&gt;A recent course I watched on &lt;a href=&#34;http://www.pluralsight.com&#34; title=&#34;Pluralsight&#34;&gt;Pluralsight&lt;/a&gt; called &lt;a href=&#34;http://www.pluralsight.com/courses/tdd-as-design-tool&#34; title=&#34;Pluralsight - TDD as a Design Tool&#34;&gt;TDD as a Design Tool&lt;/a&gt; gave me some insight on two goals for doing Test Driven Development:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make sure my code is in the right place&lt;/li&gt;
+&lt;li&gt;Make sure my logic is correct&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let&amp;rsquo;s take them one at a time…&lt;/p&gt;
+&lt;h3 id=&#34;a-place-for-everything-and-everything-in-its-place&#34;&gt;A place for everything, and everything in its place&lt;/h3&gt;
+&lt;p&gt;Believe it or not, Test Driven Development is an extremely powerful tool for ensuring that code is written in the right place. But what do I mean by &amp;ldquo;the right place”?&lt;/p&gt;
+&lt;p&gt;In the object-oriented world, &amp;ldquo;places” are data structures, such as classes and structs, and their publicly accessible methods.&lt;/p&gt;
+&lt;p&gt;When I employ TDD in a project, I will tend to be driven to making sure my code ends up in the right place. I&amp;rsquo;ll give you an example:&lt;/p&gt;
+&lt;h4 id=&#34;starting-places&#34;&gt;Starting Places&lt;/h4&gt;
+&lt;p&gt;When I create a new iOS project, Xcode sets me up with a Storyboard, a blank Scene, and a View Controller. Xcode also generates a Test target for me… BUT a what am I most aware of right from the onset? The Storyboard and the View Controller.&lt;/p&gt;
+&lt;p&gt;The natural inclination, then is to start dragging things onto the design surface and wiring them up to the controller as Outlets and Actions, and off I go!&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s like I&amp;rsquo;m lead to the ever-common temptation to put &lt;em&gt;all&lt;/em&gt; my code for a given screen in the application inside its corresponding View Controller.&lt;/p&gt;
+&lt;h4 id=&#34;tdd-tension&#34;&gt;TDD Tension&lt;/h4&gt;
+&lt;p&gt;While I may be led there, and while it may seem convenient, it would seem that TDD wants to start me off in a different &amp;ldquo;place” altogether. Since TDD asserts that I should not write any code unless there&amp;rsquo;s a test requiring it to be written, I&amp;rsquo;d be driven away from my main project into my Test project. My canvas at that point is a fresh XCTestCase class.&lt;/p&gt;
+&lt;p&gt;UI at this point is not on my mind. Here, I care more about the &lt;em&gt;foundations&lt;/em&gt; of the app itself. I begin to consider the application&amp;rsquo;s domain, and its behavior &lt;em&gt;apart&lt;/em&gt; from its user interface. This is very important if I want to truly write decoupled, modular, maintainable code.&lt;/p&gt;
+&lt;p&gt;Rather than weigh down my View Controller with tons of responsibility, TDD drives me to try and build &lt;em&gt;separate&lt;/em&gt; classes to steward &lt;em&gt;small&lt;/em&gt; bits of my application. Those small classes can be tested &lt;strong&gt;much&lt;/strong&gt; more easily than trying to get an enormous View Controller instantiated and configured in my test suite.&lt;/p&gt;
+&lt;p&gt;This is just one small example of how TDD can get you off on the right track to putting code in its proper place.&lt;/p&gt;
+&lt;h3 id=&#34;your-logic-was-impeccable-captain&#34;&gt;Your logic was impeccable, Captain&lt;/h3&gt;
+&lt;p&gt;The second goal of TDD in iOS is making sure my logic is correct, or, as Spock would say, &amp;ldquo;impeccable”.&lt;/p&gt;
+&lt;p&gt;Does my application&amp;rsquo;s code do what it &lt;em&gt;should&lt;/em&gt; do? Can I write my code in such a way that I can easily verify it? TDD, by nature, pushes me in the direction of being able to verify the accuracy of my code&amp;rsquo;s logical outcomes… that is, how it behaves.&lt;/p&gt;
+&lt;h4 id=&#34;fascinating-is-a-word-i-use-for-the-unexpected&#34;&gt;Fascinating is a word I use for the unexpected&lt;/h4&gt;
+&lt;p&gt;Testing has this way of setting expectations. One thing I&amp;rsquo;ve really enjoyed about TDD&amp;rsquo;s notorious red-green-refactor cycle is that I know certainly and immediately when I&amp;rsquo;ve messed up (ie, run across a &amp;ldquo;fascinating” situation in Spock terms).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When I write the test, it should fail the first time. If it doesn&amp;rsquo;t, I&amp;rsquo;ve messed up.&lt;/li&gt;
+&lt;li&gt;When I write the code to pass the test and the test fails, I &lt;em&gt;also&lt;/em&gt; know I&amp;rsquo;ve messed up.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;With the fundamental goals of TDD in place, I feel more prepared from a foundational standpoint to venture into actuall test-driven practices for iOS.&lt;/p&gt;
+&lt;p&gt;I am learning so much in the area of testing – it&amp;rsquo;s a technique I&amp;rsquo;m practicing regularly, both in Swift and in C# (for fun and for work, respectively), so as I grow and discover ways to optimize the TDD experience in Xcode / Swift, I&amp;rsquo;ll be sharing them. Stay tuned!&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  You might also enjoy&lt;/p&gt; 
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/&#34; title=&#34;Swift Unit Testing – Verifying Method Calls&#34;&gt;Swift Unit Testing – Verifying Method Calls&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/&#34; title=&#34;How to Create Mocks and Stubs in Swift&#34;&gt;How to Create Mocks and Stubs in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34; title=&#34;Swift Access Control – Implications for Unit Testing&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Don’t Write Legacy Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/</link>
+      <pubDate>Wed, 10 Dec 2014 12:00:51 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/</guid>
+      <description>&lt;p&gt;“Legacy Swift”.  Is that an odd phrase to you, too?&lt;/p&gt;
+&lt;p&gt;“Legacy” has connotations such as “old”, “difficult-to-change”, “outdated”, etc. Juxtaposing “legacy” and “Swift” would never have crossed my mind until I read Michael Feathers’, &lt;a href=&#34;http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052&#34; title=&#34;Working Effectively With Legacy Code&#34;&gt;Working Effectively With Legacy Code&lt;/a&gt;, where he asserts,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;font face=&#34;Thread-00004318-Id-00000000&#34;&gt;Legacy code is simply code without tests.&lt;/font&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What an impact those words had on me as I’ve transitioned over to Swift from Objective-C.  If it’s true that legacy code is code without tests, it’s easy to see how you and I could be writing legacy Swift, even though Swift is a brand new language!&lt;/p&gt;
+&lt;p&gt;And whether you agree with Feathers’ definition of “legacy code” or not (he readily admits the potential for controversy with the definition), I think we can &lt;em&gt;all&lt;/em&gt; concede that unit testing our code has many benefits and leads to the ability to &lt;em&gt;consistently,&lt;/em&gt; &lt;em&gt;objectively&lt;/em&gt; &lt;em&gt;verify&lt;/em&gt;  the quality of our code at the end of the day.&lt;/p&gt;
+&lt;h3 id=&#34;legacy-swift--bad-swift&#34;&gt;Legacy Swift == Bad Swift&lt;/h3&gt;
+&lt;p&gt;Unashamedly, Feathers writes,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;font face=&#34;Thread-00004318-Id-00000000&#34;&gt;Code without tests is bad code…With tests, we can change the behavior of our code quickly and verifiably. Without them, we really don’t know if our code is getting better or worse.&lt;/font&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;font size=&#34;6&#34; face=&#34;Thread-00004318-Id-00000001&#34;&gt;My take-away from that quote is this:  The &lt;em&gt;only&lt;/em&gt;  way to consistently, objectively verify whether my code is getting better or worse is to execute it and see if the results are what I expected.  I can do this in the Simulator / on my device, over and &lt;em&gt;over&lt;/em&gt; &lt;strong&gt;&lt;em&gt;and over&lt;/em&gt;&lt;/strong&gt;, opening myself up to a never-ending, time-consuming, error-prone testing cycle, OR I can write automated unit tests and run them every time as I make incremental changes to my software.&lt;/font&gt;&lt;/p&gt;
+&lt;h3 id=&#34;testing-is-hard-for-me&#34;&gt;Testing is hard (for me)&lt;/h3&gt;
+&lt;p&gt;I have not always been the most successful at writing unit tests.  Test-driven development (TDD) is difficult for me at times.  I often find myself sitting, staring at the screen as if looking into an abyss, unsure of what I’m supposed to do next.  (Any of you TDD-ers who’ve figured out how to imagine the structure of your production code &lt;em&gt;prior to it being written&lt;/em&gt; so that a test can be crafted &lt;em&gt;first&lt;/em&gt;, let me know your tricks!)&lt;/p&gt;
+&lt;p&gt;I’m growing in this area of writing testable code, and the tests that go along with it.  Admittedly, I’m still in the stages of “this is hard”, sometimes. &lt;/p&gt;
+&lt;p&gt;I &lt;em&gt;have&lt;/em&gt; noticed, though, that coding and testing patterns are emerging in my toolbox that are making this process more and more fluid for me.&lt;/p&gt;
+&lt;h3 id=&#34;testing-is-worth-it&#34;&gt;Testing is worth it&lt;/h3&gt;
+&lt;p&gt;However difficult it is for me, I’m on board with believing that the effort put in to writing tests is worth it in the end.  I wrestle with my code to tame it with tests &lt;em&gt;from the start&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;If I’m unable to figure out test-first development on a particular problem, I strive to write the tests as jointly with my production code as possible.  At all costs, I try to avoid writing the code and saying to myself, “I’ll come back to the tests later”, because I don’t trust myself to keep that promise.&lt;/p&gt;
+&lt;p&gt;With every product I’ve written and tested, I can testify to the fact that I feel good about that code.  I know it works how I intended it to work.  I rest assured that when I make changes, I haven’t broken anything I programmed in another session.  The tests help me remember what I intended for my software to do.  I’m confident that the patterns that evolved out of the tested code are better than what I’d have implemented if I did without the tests.  It’s worth it.&lt;/p&gt;
+&lt;h3 id=&#34;what-kind-of-swift-will-you-write&#34;&gt;What kind of Swift will you write?&lt;/h3&gt;
+&lt;p&gt;The main goal of this post was to get you thinking.  Feathers got &lt;em&gt;me&lt;/em&gt; thinking, so I thought I’d pass along the challenge:  Don’t write legacy Swift! &lt;/p&gt;
+&lt;p&gt;The good news is that, as Feathers writes,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[Legacy code is code without tests] is a good working definition, and it points to a solution.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And that solution is straightforward:  Begin writing tests for your code, and you’ll avoid writing legacy Swift.&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  You might also enjoy&lt;/p&gt; 
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/&#34; title=&#34;How to Create Mocks and Stubs in Swift&#34;&gt;How to Create Mocks and Stubs in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34; title=&#34;Swift Access Control – Implications for Unit Testing&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

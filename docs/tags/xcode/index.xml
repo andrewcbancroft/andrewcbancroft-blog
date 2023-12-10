@@ -1,0 +1,194 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xcode on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/xcode/</link>
+    <description>Recent content about iOS development with Swift in Xcode  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 25 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/xcode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>4 Reasons Your iOS App Is Crashing</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/debugging/reasons-your-ios-app-is-crashing/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/debugging/reasons-your-ios-app-is-crashing/</guid>
+      <description>&lt;h2 id=&#34;cpu-cannot-execute-an-instruction&#34;&gt;CPU cannot execute an instruction&lt;/h2&gt;
+&lt;p&gt;Sometimes we developers don&amp;rsquo;t play fair with the CPU.&lt;/p&gt;
+&lt;p&gt;Suppose that I wrote some code that ended up telling the CPU to divide by zero.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s&amp;hellip; impossible&amp;hellip; for you &lt;em&gt;and&lt;/em&gt; the CPU.&lt;/p&gt;
+&lt;h2 id=&#34;ios-is-ensuring-its-own-stability&#34;&gt;iOS is ensuring its own stability&lt;/h2&gt;
+&lt;p&gt;iOS may be enforcing a fundamental requirement or policy for its own stability.&lt;/p&gt;
+&lt;p&gt;Apple isn&amp;rsquo;t going to let developers wreck the overall user experience of iOS.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your app takes forever to launch&lt;/li&gt;
+&lt;li&gt;Your app is using too much memory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;iOS will opt for killing your app to protect the user’s overall iOS experience.&lt;/p&gt;
+&lt;h2 id=&#34;swift-runtime-is-preventing-failure&#34;&gt;Swift runtime is preventing failure&lt;/h2&gt;
+&lt;p&gt;There are certain protections within the Swift runtime that may cause your app to crash.&lt;/p&gt;
+&lt;p&gt;For example, if you’ve got an array with 5 elements inside (indexed from 0 to 4), and you attempt to access the 6th one by referencing index 5, the Swift runtime will kill your app when it sees this kind of instruction.&lt;/p&gt;
+&lt;p&gt;Force-unwrapping optionals using the &lt;code&gt;!&lt;/code&gt; operator is another classic app crasher.&lt;/p&gt;
+&lt;h2 id=&#34;another-developer-is-preventing-failure&#34;&gt;Another developer is preventing failure&lt;/h2&gt;
+&lt;p&gt;Finally, it may be that the developer of a framework or function you’re using is preventing you from misusing his/her API.&lt;/p&gt;
+&lt;p&gt;Some developers will use &lt;code&gt;assert&lt;/code&gt; in a function to test that a condition is met before their function proceeds.&lt;/p&gt;
+&lt;p&gt;Guard statements mixed with a &lt;code&gt;fatalError&lt;/code&gt; in the &lt;code&gt;else&lt;/code&gt; block could also be a failure protection strategy.&lt;/p&gt;
+&lt;p&gt;In both cases your app would crash when the assert or guard conditions are not met.&lt;/p&gt;
+&lt;p&gt;While it would be nicer to see an &lt;code&gt;Error&lt;/code&gt; instead of a crash, knowing that these are posssible &amp;ldquo;under the hood&amp;rdquo; reasons for the crash you&amp;rsquo;re seeing can be helpful.&lt;/p&gt;
+&lt;h2 id=&#34;summing-up&#34;&gt;Summing Up&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s true: a crash can feel like it comes out of nowhere. Scoping the problem into four &amp;ldquo;big picture&amp;rdquo; reasons for a crash has helped me think rationally and probabilistically about what&amp;rsquo;s going on.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re getting your bearings when it comes to debugging iOS apps, I&amp;rsquo;d love to impact your learning experience. Perhaps my &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34;&gt;iOS Debugging Fudamentals&lt;/a&gt; course on Pluralsight will guide you to more efficient debugging experiences!&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;iOS Debugging Fundamentals&lt;/a&gt;&lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png&#34; alt=&#34;iOS Debugging Fundamentals&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>4 Things You Should Never Do When Debugging iOS Apps</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/debugging/4-things-never-do-when-debugging-ios-apps/</link>
+      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/debugging/4-things-never-do-when-debugging-ios-apps/</guid>
+      <description>&lt;h2 id=&#34;never-change-code-without-reproducing-the-problem-first&#34;&gt;Never change code without reproducing the problem first&lt;/h2&gt;
+&lt;p&gt;Reproducing the problem is a critical first step in debugging.&lt;/p&gt;
+&lt;p&gt;Before you start scouring your code&amp;hellip;
+Before you start setting breakpoints&amp;hellip;
+Before you start using tools or changing things&amp;hellip;&lt;/p&gt;
+&lt;p&gt;See if you can &lt;strong&gt;cause the bug to happen again&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The goal of this exercise is to &lt;strong&gt;confirm that the problem is consistent&lt;/strong&gt;. Reproducing the problem helps you &lt;strong&gt;clarify the conditions that are present when the bug happens.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Do your best to clearly state what’s going on &amp;ndash; I even write it down sometimes to document the problem and make sure I&amp;rsquo;ve got it pinned down.&lt;/p&gt;
+&lt;h2 id=&#34;never-bug-hunt-before-hypothesizing&#34;&gt;Never bug hunt before hypothesizing&lt;/h2&gt;
+&lt;p&gt;Having a plan sets you up to avoid haphazardly hoping to find the source of the problem you&amp;rsquo;re experiencing.&lt;/p&gt;
+&lt;p&gt;Before you set off to track down what&amp;rsquo;s going on, &lt;strong&gt;make an educated guess&lt;/strong&gt; about what you &lt;em&gt;think&lt;/em&gt; might be going on.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Jot down a hypothesis&lt;/strong&gt; or two (or three) and rank them in order of &lt;strong&gt;which feels more likely&lt;/strong&gt;, based on your past debugging experiences.&lt;/p&gt;
+&lt;p&gt;Pair your hypothesis with possible Xcode tools to use and spots to look within your codebase to gather evidence to support or discredit the hypothesis.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Then&lt;/em&gt;, once you have a plan, head out into the code on a mission to investigate your hypothesis.&lt;/p&gt;
+&lt;p&gt;Take appropriate action based on your findings.&lt;/p&gt;
+&lt;h2 id=&#34;never-make-code-changes-without-a-new-branch&#34;&gt;Never make code changes without a new branch&lt;/h2&gt;
+&lt;p&gt;When you&amp;rsquo;re taking action though, make sure you&amp;rsquo;ve created a new code branch &lt;strong&gt;first&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Often, your investigation of a best-guess hypothesis about a bug&amp;rsquo;s root cause means you need to change something about your app.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Without a branch, you won&amp;rsquo;t be able to roll back&lt;/strong&gt; to the original state of your code.&lt;/p&gt;
+&lt;p&gt;Set your self up to quickly iterate on evidence gathering.&lt;/p&gt;
+&lt;p&gt;Make a branch -&amp;gt; attempt a fix -&amp;gt; Did it work? Great! Does the bug persist? Rollback! (rinse and repeat)&lt;/p&gt;
+&lt;h2 id=&#34;never-change-more-than-one-thing-at-a-time&#34;&gt;Never change more than one &amp;ldquo;thing&amp;rdquo; at a time&lt;/h2&gt;
+&lt;p&gt;Imagine experiencing a bug.&lt;/p&gt;
+&lt;p&gt;Now you go in and change a line of code here, toggle an Xcode project setting there, refactor a function, and then re-run your app.&lt;/p&gt;
+&lt;p&gt;The bug is fixed!  Buuut&amp;hellip; &lt;strong&gt;which change from your list of changes was the actual fix&lt;/strong&gt;?&lt;/p&gt;
+&lt;p&gt;Never change more than one thing at a time.&lt;/p&gt;
+&lt;p&gt;Doing so not only makes the actual fix ambiguous, but could also inadvertently cause &lt;em&gt;different&lt;/em&gt; bugs that you didn&amp;rsquo;t anticipate.&lt;/p&gt;
+&lt;p&gt;Whatever you do, &lt;strong&gt;only change one thing at a time&lt;/strong&gt; when you&amp;rsquo;re attempting to fix a big.&lt;/p&gt;
+&lt;p&gt;Now&amp;hellip;what does &amp;ldquo;one thing&amp;rdquo; mean?&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;One thing&amp;rdquo; means &lt;strong&gt;&amp;ldquo;one fix strategy&amp;rdquo;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In order to attempt some bug fixes, you may have to change 2 or 3 lines of code.  That&amp;rsquo;s okay.  You&amp;rsquo;re changing them as a &amp;ldquo;unit&amp;rdquo;, of sorts, as part of a single fix strategy.&lt;/p&gt;
+&lt;p&gt;Trying more than one fix strategy at a time is what I&amp;rsquo;m cautioning against.&lt;/p&gt;
+&lt;h2 id=&#34;summing-up&#34;&gt;Summing Up&lt;/h2&gt;
+&lt;p&gt;Debugging is challenging enough as it is. Don&amp;rsquo;t make debugging harder than it needs to be. Avoid these four things and you should be a much happier developer.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re getting your bearings when it comes to debugging iOS apps, I&amp;rsquo;d love to impact your learning experience. Perhaps my &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34;&gt;iOS Debugging Fudamentals&lt;/a&gt; course on Pluralsight will guide you to more efficient debugging experiences!&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;iOS Debugging Fundamentals&lt;/a&gt;&lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png&#34; alt=&#34;iOS Debugging Fundamentals&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>What Is Debugging (And What Isn&#39;t)?</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/debugging/what-is-debugging/</link>
+      <pubDate>Mon, 30 Dec 2019 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/debugging/what-is-debugging/</guid>
+      <description>&lt;p&gt;Does it ever help you to narrow the scope of overwhelming topics like &amp;ldquo;debugging&amp;rdquo;?&lt;/p&gt;
+&lt;p&gt;It helps &lt;em&gt;me&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;When you&amp;rsquo;re new to something like iOS development, you may find yourself stepping into a world of problems.  Everyone around you is always fixing something it seems!&lt;/p&gt;
+&lt;p&gt;All kinds of problems can happen when you’re building an iOS app.&lt;/p&gt;
+&lt;p&gt;But are all problems&amp;hellip; &lt;em&gt;debugging&lt;/em&gt; problems?&lt;/p&gt;
+&lt;p&gt;TLDR; Answer: Not necessarily.&lt;/p&gt;
+&lt;p&gt;My brain appreciates focused definitions.  It lightens the the mental load a bit to &amp;ldquo;bucket&amp;rdquo; problems into categories.&lt;/p&gt;
+&lt;p&gt;Which problems don&amp;rsquo;t fit into the &amp;ldquo;debugging problems&amp;rdquo; category?  Which ones do?&lt;/p&gt;
+&lt;h2 id=&#34;non-debugging-problems&#34;&gt;Non-Debugging Problems&lt;/h2&gt;
+&lt;p&gt;This list of common problem areas definitely take up a developer&amp;rsquo;s time. But rather than lump them all in with &amp;ldquo;debugging&amp;rdquo;, I prefer to treat them as problem sets of their own.&lt;/p&gt;
+&lt;h3 id=&#34;build-problems&#34;&gt;Build Problems&lt;/h3&gt;
+&lt;p&gt;If your app won’t build, that’s definitely a must-solve problem.  However, buildtime errors are not debugging problems.&lt;/p&gt;
+&lt;h3 id=&#34;learning-curves&#34;&gt;Learning Curves&lt;/h3&gt;
+&lt;p&gt;When you’re learning a new framework or trying something you’ve never done before, it can take some time to clear the hurdle of the Swift complier as you&amp;rsquo;re coding.  Even still, this isn&amp;rsquo;t debugging.&lt;/p&gt;
+&lt;h3 id=&#34;xcode-warnings&#34;&gt;Xcode Warnings&lt;/h3&gt;
+&lt;p&gt;If Xcode is issuing warnings, you should probably take heed and resolve them before shipping to the App Store.  But I still wouldn&amp;rsquo;t call this debugging.&lt;/p&gt;
+&lt;h3 id=&#34;design-dilemmas&#34;&gt;Design Dilemmas&lt;/h3&gt;
+&lt;p&gt;Design can get controversial, but overcoming these often-subjective dilemmas is not debugging.&lt;/p&gt;
+&lt;h3 id=&#34;user-experience-debates&#34;&gt;User Experience Debates&lt;/h3&gt;
+&lt;p&gt;As with design dilemmas, user experience debates are also trouble spots for many developers.  The debates themselves, however, are not debugging.&lt;/p&gt;
+&lt;h3 id=&#34;performance-optimization&#34;&gt;Performance Optimization&lt;/h3&gt;
+&lt;p&gt;Sometimes, you get your app built and running, but you’re struggling with performance-related issues.  Even though it works (in a technical sense), it could be faster, more responsive, use less memory, etc.&lt;/p&gt;
+&lt;p&gt;Optimization, however, is big enough to be in a category of its own for me.&lt;/p&gt;
+&lt;h2 id=&#34;debugging-problems&#34;&gt;Debugging Problems&lt;/h2&gt;
+&lt;p&gt;So&amp;hellip; what &lt;em&gt;is&lt;/em&gt; debugging then?&lt;/p&gt;
+&lt;p&gt;This is how I define it in &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34;&gt;iOS Debugging Fundamentals&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;Debugging is&amp;hellip;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Investigating&lt;/strong&gt; and &lt;strong&gt;fixing flaws&lt;/strong&gt; that you and your users experience &lt;strong&gt;while your app is running&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Thinking about&lt;/strong&gt; and &lt;strong&gt;correcting defects&lt;/strong&gt; that happen at &lt;strong&gt;runtime&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Debugging is a two-part problem solving exercise: It involves thinking skills and fixing skills.  Debugging involves reasoning about the probable causes of flaws and defects in your apps. When you debug, you spend time trying to figure out the root cause of an issue you&amp;rsquo;re noticing.&lt;/p&gt;
+&lt;p&gt;Once you find the source of the problem, your job shifts to applying your programming skills and your knowledge of the app&amp;rsquo;s purpose (domain knowledge) to fix the problem.&lt;/p&gt;
+&lt;p&gt;But just as I started off this discussion by asking, &amp;ldquo;Are all problems&amp;hellip; &lt;em&gt;debugging&lt;/em&gt; problems?&amp;rdquo;, I&amp;rsquo;m able to answer &amp;ldquo;no&amp;rdquo; by emphasizing &lt;em&gt;when&lt;/em&gt; the problems occur, namely, at runtime.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s why build problems, learnig curves, Xcode warnings, design dilemmas, and UX debates aren&amp;rsquo;t considered debugging activites (in my view).&lt;/p&gt;
+&lt;p&gt;I grant that performance problems are typically noticed at runtime, &lt;em&gt;but&lt;/em&gt;, I believe this to be a separate activity, primarily because the app &lt;em&gt;works&lt;/em&gt; (even if it could work &lt;em&gt;better&lt;/em&gt;).&lt;/p&gt;
+&lt;h2 id=&#34;summing-up&#34;&gt;Summing Up&lt;/h2&gt;
+&lt;p&gt;Narrowing the scope of debugging to reasoning about, inspecting, and repairing runtime problems lifts some cognitive weight for me.&lt;/p&gt;
+&lt;p&gt;It allows me to enjoy programming a &lt;em&gt;lot&lt;/em&gt; more when I know that I&amp;rsquo;m not actually spending 99% of my time &amp;ldquo;debugging&amp;rdquo;. 😂&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re getting your bearings when it comes to debugging iOS apps, I&amp;rsquo;d love to impact your learning experience. Perhaps my &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34;&gt;iOS Debugging Fudamentals&lt;/a&gt; course on Pluralsight will guide you to more efficient debugging experiences!&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;iOS Debugging Fundamentals&lt;/a&gt;&lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png&#34; alt=&#34;iOS Debugging Fundamentals&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Showing the Live View in a Swift Playground</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/xcode/showing-live-view-in-swift-playground/</link>
+      <pubDate>Tue, 28 May 2019 05:06:19 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/xcode/showing-live-view-in-swift-playground/</guid>
+      <description>&lt;h2 id=&#34;wheres-the-live-view&#34;&gt;Where&amp;rsquo;s the Live View?&lt;/h2&gt;
+&lt;p&gt;So you&amp;rsquo;ve created a new Single View playground from the template picker&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;playground-template-selection.png&#34; alt=&#34;Playground Template Selection&#34;&gt;&lt;/p&gt;
+&lt;p&gt;You run the playground right out of the gate to see what you&amp;rsquo;ve got&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;run-playground.gif&#34; alt=&#34;Run Playground&#34;&gt;&lt;/p&gt;
+&lt;p&gt;But&amp;hellip; Where&amp;rsquo;s the Live View?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;wheres-the-live-view.png&#34; alt=&#34;Where&amp;rsquo;s the Live View?&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;showing-the-live-view&#34;&gt;Showing the Live View&lt;/h2&gt;
+&lt;p&gt;To get the live view to show up, you need to &lt;strong&gt;open the Assitant Editor&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;You can do this by clicking &lt;code&gt;View&lt;/code&gt; - &lt;code&gt;Assistant Editor&lt;/code&gt; - &lt;code&gt;Show Assistant Editor&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Or you can press &lt;code&gt;option&lt;/code&gt; + &lt;code&gt;command&lt;/code&gt; + &lt;code&gt;return&lt;/code&gt; to show it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;show-assistant-editor.png&#34; alt=&#34;Show the Assistant Editor&#34;&gt;&lt;/p&gt;
+&lt;p&gt;And we&amp;rsquo;re off to play!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;live-view-shows.png&#34; alt=&#34;Live View Shows&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

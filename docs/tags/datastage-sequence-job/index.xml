@@ -1,0 +1,32 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataStage Sequence Job on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/datastage-sequence-job/</link>
+    <description>Recent content about iOS development with Swift in DataStage Sequence Job  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 16 Apr 2013 14:15:54 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/datastage-sequence-job/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>“Unexpected System Error” in DataStage Sequence Job</title>
+      <link>https://www.andrewcbancroft.com/2013/04/16/unexpected-system-error-in-datastage-sequence-job/</link>
+      <pubDate>Tue, 16 Apr 2013 14:15:54 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/04/16/unexpected-system-error-in-datastage-sequence-job/</guid>
+      <description>&lt;p&gt;Today I was running into a mysterious error in DataStage as I was running a sequence job.  Things seemed to be going well until one of my Fact jobs at the end of the sequence reported “Aborted” in DataStage Director.  Looking into the log for this job revealed a rather vague error message:&lt;/p&gt;
+&lt;p&gt;[StageName] DB2 function SQLFetch failed:  SQLSTATE = HY000: Native Error Code = -1,042: Msg = [IBM][CLI Driver][DB2/LINUXX8664] SQL1042C  An unexpected system error occurred.  SQLSTATE=58004 (CC_DB2Connection::queryServerHostName, file CC_DB2Connection.cpp, line 3,256)&lt;/p&gt;
+&lt;p&gt;What’s strange is that the job, when re-compiled and run on its own, executes without error.  So it only fails when its run in the context of the sequence job.&lt;/p&gt;
+&lt;p&gt;To fix the issue, I simply rearranged the order of the sequence at the end.  Here is a before and after look at the sequence:&lt;/p&gt;
+&lt;h3 id=&#34;before&#34;&gt;Before:&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/04/image.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/04/image_thumb.png&#34; width=&#34;515&#34; height=&#34;496&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;after&#34;&gt;After:&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/04/image1.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2013/04/image_thumb1.png&#34; width=&#34;609&#34; height=&#34;208&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The sequence job runs every job now without error.  Now I only wish I knew &lt;em&gt;why&lt;/em&gt; this works – perhaps it’s an issue with server resources getting tied up if both Fact jobs are running at the same time?  I’ve decided to go with the above as my solution and move on, since neither Fact job takes an enormous amount of time to run.  Hopefully this solution will work for others as well!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,97 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unwind Segue on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/unwind-segue/</link>
+    <description>Recent content about iOS development with Swift in Unwind Segue  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Dec 2015 18:22:55 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/unwind-segue/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Working with Unwind Segues Programmatically in Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/</link>
+      <pubDate>Fri, 18 Dec 2015 18:22:55 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/</guid>
+      <description>&lt;p&gt;&lt;small&gt;Updated on September 20, 2016 – Xcode 8 &amp;amp; Swift 3.0&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Navigating between screens is a critical component to building iOS applications. The mechanism for navigation in Storyboard-based applications is the &lt;em&gt;segue&lt;/em&gt;. Using segues, we can travel ahead to the next screen, which is extremely common. We can also travel &lt;em&gt;backward&lt;/em&gt; in the screen &amp;ldquo;navigation stack” by programming a special kind of segue called an &lt;em&gt;unwind&lt;/em&gt; segue.&lt;/p&gt;
+&lt;p&gt;Embedding a view controller inside a navigation controller gives us some built-in forward and backward navigation, so you may be asking, &amp;ldquo;What&amp;rsquo;s the need for an unwind segue??”&lt;/p&gt;
+&lt;p&gt;Well, suppose that we need to programmatically &lt;em&gt;trigger&lt;/em&gt; the backward navigation, based on an interaction with something other than the default &amp;ldquo;back” button on the navigation bar. How would you do it? Yep – you&amp;rsquo;ve got it: by using an unwind segue.&lt;/p&gt;
+&lt;p&gt;This is a walk-through of how to work with unwind segues programmatically in Swift.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Code in the main article below is written in Swift 3.0, but code examples for Swift 2.3 are found in the &lt;a href=&#34;https://github.com/andrewcbancroft/RoasterOnTheGo/tree/swift-2.3&#34;&gt;example project&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;example&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
+&lt;p&gt;An example app called &amp;ldquo;Roasters on the Go” has been created for this walk-through to help give you some context. It&amp;rsquo;s a mock mobile order system for purchasing green, un-roasted coffee beans (so that you can roast them yourself)!&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fab fa-github fa-lg&#34;&gt;&lt;/i&gt; RoasterOnTheGo Example Project (&lt;a href=&#34;https://github.com/andrewcbancroft/RoasterOnTheGo/tree/swift-2.3&#34; title=&#34;RoasterOnTheGo - Swift 2.3&#34;&gt;Swift 2.3&lt;/a&gt; | &lt;a href=&#34;https://github.com/andrewcbancroft/RoasterOnTheGo/tree/master&#34; title=&#34;RoasterOnTheGo - Swift 3.0&#34;&gt;Swift 3.0&lt;/a&gt;)
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;We&amp;rsquo;ll start at a list of coffees categorized by region&lt;/li&gt;
+&lt;li&gt;Tapping an coffee origin country will take you to the order screen&lt;/li&gt;
+&lt;li&gt;Pressing the ‘Order Now&amp;rsquo; button will simulate the placement of an order&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tapping &amp;ldquo;OK” on the alert will trigger the unwind segue&lt;/strong&gt; (which is the goal of this walk-through)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here&amp;rsquo;s a sample of what the fake app does:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/demo.gif&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/demo.gif&#34; alt=&#34;Unwind Segue Demo&#34; width=&#34;366&#34; height=&#34;663&#34; class=&#34;alignnone size-full wp-image-12483&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The goal is to go back to the list of coffee origins after ‘OK&amp;rsquo; is pressed on the alert. Let&amp;rsquo;s look at the steps to make this happen.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;create-action&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1--create-an-unwindto___-ibaction&#34;&gt;1 – Create an unwindTo___ IBAction&lt;/h3&gt;
+&lt;p&gt;The first step is to create an IBAction that we can wire up the unwind segue to.&lt;/p&gt;
+&lt;p&gt;Supposing that you&amp;rsquo;ve got two view controller: The MenuViewController which lists out the menu of coffees to purchase, and the OrderViewController which allows your app users to buy that particular coffee.&lt;/p&gt;
+&lt;p&gt;If we&amp;rsquo;re wanting to go &lt;em&gt;from&lt;/em&gt; OrderViewController &lt;em&gt;to&lt;/em&gt; MenuViewController, we need to &lt;em&gt;create the IBAction in the &lt;strong&gt;MenuViewController&lt;/strong&gt;&lt;/em&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MenuViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UITableViewController&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;@IBAction&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;unwindToMenu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;segue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIStoryboardSegue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action-1024x534.png&#34; alt=&#34;Create an Unwind Action&#34; width=&#34;1024&#34; height=&#34;534&#34; class=&#34;alignnone size-large wp-image-12474&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action-1024x534.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action-300x156.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/01_unwind_action.png 1218w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Placing the IBAction code in the right spot is critical to the functioning of the unwind segue. In this example where we want to go from Order to Menu, if you place the IBAction in the OrderViewController, the Storyboard will let you wire it up just fine, but the transition back to the menu screen will never happen at runtime.&lt;/p&gt;
+&lt;p&gt;Therefore, it&amp;rsquo;s important to remember: Place the &amp;ldquo;unwindTo___” IBAction function in the view controller source file for the screen you&amp;rsquo;re unwinding back to.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;wire-unwind&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2--wire-up-the-unwind-segue&#34;&gt;2 – Wire up the unwind segue&lt;/h3&gt;
+&lt;p&gt;Next up is to wire connect the view controller to the unwind segue IBAction that we just created.&lt;/p&gt;
+&lt;p&gt;Here, you&amp;rsquo;re going to be looking at the screen that you&amp;rsquo;re going to unwind &lt;em&gt;from&lt;/em&gt;. In the running example, this will be the Order View Controller&amp;rsquo;s scene in the Storyboard.&lt;/p&gt;
+&lt;p&gt;To wire up the OrderViewController to its unwind segue, you need to right-click and drag (or control + drag) from the View Controller icon to the Exit icon in the Storyboard Scene:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue-1024x542.png&#34; alt=&#34;Drag to Create Segue&#34; width=&#34;1024&#34; height=&#34;542&#34; class=&#34;alignnone size-large wp-image-12473&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue-1024x542.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue-300x159.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/02_drag_to_create_segue.png 1199w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ll be presented with list of IBActions to connect to. You&amp;rsquo;ll choose the unwind segue action that was created in step 1:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue-1024x542.png&#34; alt=&#34;Create Segue&#34; width=&#34;1024&#34; height=&#34;542&#34; class=&#34;alignnone size-large wp-image-12472&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue-1024x542.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue-300x159.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/03_create_segue.png 1201w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;identifier&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3--specify-a-segue-identifier&#34;&gt;3 – Specify a segue identifier&lt;/h3&gt;
+&lt;p&gt;For this step, you&amp;rsquo;ll want to make sure that the Document Outline of the Storyboard is expanded. This will allow you to easily select the unwind segue in the outline, and specify its identifier in the Attributes Inspector of the Utilities Pane:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id-1024x566.png&#34; alt=&#34;Specify Segue Identifier&#34; width=&#34;1024&#34; height=&#34;566&#34; class=&#34;alignnone size-large wp-image-12471&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id-1024x566.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id-300x166.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/12/04_specify_segue_id.png 1200w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Since we want to take the user back to the menu when placing an order is finished, we&amp;rsquo;ll give it the identifier of &amp;ldquo;unwindToMenu”.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;trigger&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4--trigger-unwind-segue-programmatically&#34;&gt;4 – Trigger unwind segue programmatically&lt;/h3&gt;
+&lt;p&gt;The final step is to write a bit of code to trigger the unwind segue at the appropriate time.&lt;/p&gt;
+&lt;p&gt;In our example, we want to trigger it when the user taps on the ‘OK&amp;rsquo; button of the alert. Here&amp;rsquo;s a snippet of code that will accomplish that task:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;@IBAction&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;orderButtonTapped&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sender&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;alert&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIAlertController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Order Placed!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;message&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Thank you for your order.&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;We&amp;#39;ll ship it to you soon!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;preferredStyle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;OKAction&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIAlertAction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;OK&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIAlertActionStyle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;handler&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;performSegue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;withIdentifier&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;unwindToMenu&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sender&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addAction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;OKAction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;present&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;animated&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;Whenever you need to programmatically trigger backward navigation in your app, using an unwind segue can be a great feature to take advantage of. This walk-through took you step-by-step through working with unwind segues in Swift.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

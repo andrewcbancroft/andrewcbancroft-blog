@@ -1,0 +1,36 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Precision on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/precision/</link>
+    <description>Recent content about iOS development with Swift in Precision  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Mar 2017 20:57:27 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/precision/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Entity Framework Tip – Specifying Decimal Precision</title>
+      <link>https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/</link>
+      <pubDate>Wed, 29 Mar 2017 20:57:27 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/</guid>
+      <description>&lt;p&gt;By default, Entity Framework takes the .Net &lt;code&gt;decimal&lt;/code&gt; Type and maps it to SQL Server&amp;rsquo;s &lt;code&gt;decimal(18,2)&lt;/code&gt; data type.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;ve got a property on an Entity that is of Type &lt;code&gt;decimal&lt;/code&gt;, but down in your database, you&amp;rsquo;re allowing for greater precision than 2 decimal places (&lt;a href=&#34;https://docs.microsoft.com/en-us/sql/t-sql/data-types/precision-scale-and-length-transact-sql&#34;&gt;&lt;em&gt;scale&lt;/em&gt;&lt;/a&gt; is actually the proper term for the number of places after the decimal), you need to tell Entity Framework this information. Otherwise, decimal values that you save to your database will be truncated at the default &lt;strong&gt;2&lt;/strong&gt; decimal places.&lt;/p&gt;
+&lt;h2 id=&#34;updating-decimal-scale-with-entity-framework&#34;&gt;Updating decimal scale with Entity Framework&lt;/h2&gt;
+&lt;p&gt;To tell Entity Framework that you need different precision than &lt;code&gt;decimal(18,2)&lt;/code&gt;, you need to &lt;strong&gt;open your DbContext&lt;/strong&gt; implementation.&lt;/p&gt;
+&lt;p&gt;Then take a look at your &lt;code&gt;OnModelCreating&lt;/code&gt; override.&lt;/p&gt;
+&lt;p&gt;If you haven&amp;rsquo;t implemented an override yet, go ahead and create one. If you&amp;rsquo;ve already got some Code First stuff in your &lt;code&gt;OnModelCreating&lt;/code&gt; override, add to it by following this example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;protected&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;override&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OnModelCreating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DbModelBuilder&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;modelBuilder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;modelBuilder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Entity&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NameOfEntity&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Property&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NameOfProperty&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HasPrecision&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// or whatever your schema specifies&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It&amp;rsquo;s as simple as that! Once you make this update, your decimal values won&amp;rsquo;t be truncated at the second decimal place anymore. They&amp;rsquo;ll be as precise as you&amp;rsquo;ve specified in your call to &lt;code&gt;HasPrecision()&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

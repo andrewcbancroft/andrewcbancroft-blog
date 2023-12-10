@@ -1,0 +1,81 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xcode on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/categories/xcode/</link>
+    <description>Recent content about iOS development with Swift in Xcode  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 Dec 2020 04:21:19 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/categories/xcode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to Download Old Versions of Xcode</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/xcode/how-to-download-old-versions-of-xcode/</link>
+      <pubDate>Wed, 09 Dec 2020 04:21:19 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/xcode/how-to-download-old-versions-of-xcode/</guid>
+      <description>&lt;h2 id=&#34;whyyy-would-i-need-an-old-version-of-xcode&#34;&gt;Whyyy would I need an old version of Xcode?&lt;/h2&gt;
+&lt;p&gt;Valid question &amp;ndash; it&amp;rsquo;s not often you&amp;rsquo;ll need one.  Two reasons off the top of my head though:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1) To compare with your previous experience&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Perhaps you&amp;rsquo;re just wanting to see what things &amp;ldquo;used to be like&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Maybe you&amp;rsquo;re struggling with the infamous &amp;ldquo;this code worked before&amp;hellip;now it doesn&amp;rsquo;t&amp;hellip;what changed?&amp;rdquo; and you just want to build your project with a prior version of Xcode in order to rule it out as the culprit.&lt;/p&gt;
+&lt;p&gt;Grabbing an older version of Xcode could help you here.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2) To upgrade a very old project to newer versions of Swift&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I hit this one the other day. I needed to update the exercise files for my &lt;a href=&#34;http://bit.ly/core-data-swift&#34;&gt;Core Data Fundamentals with Swift&lt;/a&gt; course on &lt;a href=&#34;http://bit.ly/ps-author-page&#34;&gt;Pluralsight&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I opened the project in Xcode 12 and this popped up:
+&lt;img src=&#34;unsupported-version-of-swift.png&#34; width=&#34;50%&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Xcode &lt;em&gt;10.1&lt;/em&gt;???  That was a &lt;em&gt;while&lt;/em&gt; ago. 😅&lt;/p&gt;
+&lt;h2 id=&#34;how-to-download&#34;&gt;How to download&lt;/h2&gt;
+&lt;p&gt;Regardless of your &lt;em&gt;reason&lt;/em&gt;, the good news is that you can download old versions of Xcode (and a lot of other tools) from the Apple Developer Center.&lt;/p&gt;
+&lt;p&gt;The link is a bit hidden though, so I&amp;rsquo;ll leave it here for you as an easy-to-find breadcrumb:
+&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+Resources
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://developer.apple.com/download/more/&#34; rel=&#34;nofollow&#34;&gt;https://developer.apple.com/download/more/&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;You&amp;rsquo;ll need to sign in to your Apple Developer account, but once you&amp;rsquo;re in, you&amp;rsquo;ll have access to &lt;em&gt;lots&lt;/em&gt; of old stuff.&lt;/p&gt;
+&lt;p&gt;Every version of Xcode is available &amp;ndash; all the way back to version 1.0, released in &lt;strong&gt;2003&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ll also find prior versions of macOS, old versions of the command line tools, prior betas and release candidates of Xcode and macOS, and more.&lt;/p&gt;
+&lt;p&gt;How cool is that?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>New Delights With Xcode 11</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/xcode/new-delights-with-xcode-11/</link>
+      <pubDate>Fri, 07 Jun 2019 04:21:19 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/xcode/new-delights-with-xcode-11/</guid>
+      <description>&lt;h2 id=&#34;capabilities-search&#34;&gt;Capabilities Search&lt;/h2&gt;
+&lt;p&gt;In your project settings, you can search for capabilities you want to add (instead of scrolling down the list and turning things &amp;ldquo;on&amp;rdquo; or &amp;ldquo;off&amp;rdquo;).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;capabilities-search.gif&#34; alt=&#34;Capabilities Search&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;editor-quick-actions&#34;&gt;Editor Quick Actions&lt;/h2&gt;
+&lt;p&gt;Holding the &lt;code&gt;command&lt;/code&gt; key down while mousing over and clicking on various levels of your code presents a quick action pop-out.  Handy!  Xcode 10 had some of these as well, but Xcode 11 adds additional actions in additional areas.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;editor-quick-actions.gif&#34; alt=&#34;Editor Quick Actions&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;jump-to-code-from-minimap&#34;&gt;Jump to Code from Minimap&lt;/h2&gt;
+&lt;p&gt;The minimap in and of itself is nice, but I found the &amp;ldquo;jump to code&amp;rdquo; features smart and convenient.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;jump-to-code.gif&#34; alt=&#34;Jump to Code&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;marks-in-the-minimap&#34;&gt;Marks in the Minimap&lt;/h2&gt;
+&lt;p&gt;Have you noticed that &lt;code&gt;// Mark:&lt;/code&gt; produces &amp;ldquo;header&amp;rdquo;-like text in the minimap?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;marks-minimap.png&#34; alt=&#34;Marks in the Minimap&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;// Mark:&lt;/code&gt; also produces a thin line break in your code - I think it definitely helps spot divisions in your code and could help find what you want a little quicker.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;marks-linebreak.png&#34; alt=&#34;Marks Line Break&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;history-inspector-source-control-history&#34;&gt;History Inspector (source control history)&lt;/h2&gt;
+&lt;p&gt;There&amp;rsquo;s a little source control icon in the Inspectors pane that lets you quickly see commit history and perform quick actions.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;show-history-inspector.gif&#34; alt=&#34;Show History Inspector&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;tooltip-from-minimap&#34;&gt;Tooltip From Minimap&lt;/h2&gt;
+&lt;p&gt;If you move your mouse over the minimap, Xcode will display little tooltips out to the left that correspond to major sections of your code, such as the class/struct declaration, properties, and functions.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;tooltip-from-minimap.gif&#34; alt=&#34;Tooltip From Minimap&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

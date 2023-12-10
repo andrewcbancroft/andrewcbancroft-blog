@@ -1,0 +1,37 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Check iOS Version on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/check-ios-version/</link>
+    <description>Recent content about iOS development with Swift in Check iOS Version  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Sep 2014 04:44:36 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/check-ios-version/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift iOS Version Checking</title>
+      <link>https://www.andrewcbancroft.com/2014/09/17/swift-ios-version-check/</link>
+      <pubDate>Thu, 18 Sep 2014 04:44:36 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/09/17/swift-ios-version-check/</guid>
+      <description>&lt;p&gt;While iOS 8 is now officially in the wild, it may take a bit of time to reach the level of user adoption that iOS 7 had accumulated over the past year.  If you plan to target the widest number of users for your app (at least in these early days of the iOS 8 roll-out), it&amp;rsquo;d probably be wise to include iOS 7 in your target audience.&lt;/p&gt;
+&lt;p&gt;When accommodating iOS 7 users, you&amp;rsquo;ll inevitably run into instances where you need to check which iOS version the device is running, so that you can implement a fall-back plan for older versions of iOS.&lt;/p&gt;
+&lt;p&gt;In Objective-C, I&amp;rsquo;ve seen this accomplished by using pre-processor directives, or with introspection.  Swift, however, &lt;a title=&#34;Apple Developer Documentation - No Swift Preprocessor Directives&#34; href=&#34;https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-XID_20&#34; target=&#34;_blank&#34;&gt;has no pre-processor directives in v1.0&lt;/a&gt;, and &lt;a title=&#34;Apple Developer Documentation - NSObject Protocol&#34; href=&#34;https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Protocols/NSObject_Protocol/index.html&#34; target=&#34;_blank&#34;&gt;only objects which conform to the NSObject protocol&lt;/a&gt; can utilize the &lt;code&gt;respondsToSelector:&lt;/code&gt; method call.  What to do?&lt;/p&gt;
+&lt;p&gt;As it turns out, &lt;a title=&#34;Apple Developer Documentation - Conditionally Load Resources&#34; href=&#34;https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/TransitionGuide/SupportingEarlieriOS.html#//apple_ref/doc/uid/TP40013174-CH14-SW1&#34; target=&#34;_blank&#34;&gt;Apple has guidance&lt;/a&gt; that would actually work for both Objective-C &lt;em&gt;and&lt;/em&gt; Swift – It involves simply checking the &lt;code&gt;NSFoundationVersionNumber&lt;/code&gt; of the device against one of the pre-defined values defined in NSObjCRuntime.h.&lt;/p&gt;
+&lt;p&gt;To accomplish this in Swift, you can create a new Swift file (I called mine &amp;ldquo;iOSVersions.swift”) to hold the following code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;iOS7&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;floor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSFoundationVersionNumber&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;floor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSFoundationVersionNumber_iOS_7_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;iOS8&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;floor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSFoundationVersionNumber&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;floor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSFoundationVersionNumber_iOS_7_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Whenever you need to check which iOS version the device is running, you can simply use the iOS8 / iOS7 constants that you just defined – they&amp;rsquo;re accessible in other Swift files throughout your project:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;iOS8&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;//Do some iOS 8-specific things that may not be supported in older versions&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;//Implement your fall-back plan for older versions of iOS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With these little snippets, you should be empowered to support iOS 7 while taking advantage of new iOS 8-only features and APIs.  You can also begin to move away from deprecated ways of doing things, while not breaking your app for iOS 7 users, so long as iOS 7 retains a significant slice of the iOS version pie.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

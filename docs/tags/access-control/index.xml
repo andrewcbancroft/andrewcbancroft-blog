@@ -1,0 +1,243 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Access Control on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/access-control/</link>
+    <description>Recent content about iOS development with Swift in Access Control  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Jan 2016 18:40:55 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/access-control/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift Framework Woes – Unresolved Identifier? No Member?</title>
+      <link>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</link>
+      <pubDate>Fri, 08 Jan 2016 18:40:55 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s the simple things that get us, isn&amp;rsquo;t it?&lt;/p&gt;
+&lt;p&gt;I was working on a simple little framework the other day, and I&amp;rsquo;d gotten things just how I wanted… or so I thought.&lt;/p&gt;
+&lt;p&gt;I was ready to test things out and import the framework into my real app.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;import MyShinyNewFramework&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Sweet! No build errors!&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;// attempt to use things defined in the framework&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Not so sweet…&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Use of unresolved identifier ‘…&#39;&lt;/p&gt;
+&lt;p&gt;Value of type ‘…&amp;rsquo; has no member ‘…&#39;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I scrunched my forehead, puzzled, and immediately it came to me.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;public&lt;/code&gt; &lt;code&gt;public&lt;/code&gt; &lt;code&gt;public&lt;/code&gt; all the things! Or at least, the things that others need to use from the framework. :]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Of course&lt;/em&gt; a framework&amp;rsquo;s usable API needs to be public, but I write far more code that doesn&amp;rsquo;t require thought of access control modifiers than code that &lt;em&gt;does&lt;/em&gt;, so there&amp;rsquo;s always that initial head-scratching that happens when you&amp;rsquo;re to the point of testing and go, &amp;ldquo;WHAT?? Why is this not working??!”&lt;/p&gt;
+&lt;h4 id=&#34;key-takeaway&#34;&gt;Key Takeaway&lt;/h4&gt;
+&lt;p&gt;Whenever you&amp;rsquo;re developing code (such as a framework) that&amp;rsquo;s intended to be used from the perspective of another Swift module, you need to include &lt;code&gt;public&lt;/code&gt; before Types and functions that are intended to be &amp;ldquo;seen” and called from that other module. Otherwise, you&amp;rsquo;ll get those same fun compiler errors and join me in saying to yourself, &amp;ldquo;Doh! Yep… public… &lt;em&gt;again&lt;/em&gt;.”&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Clarifying Swift Access Control (Hint:  Swift Isn’t C#)</title>
+      <link>https://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/</link>
+      <pubDate>Fri, 24 Apr 2015 18:02:34 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/</guid>
+      <description>&lt;p&gt;As it turns out, Swift isn&amp;rsquo;t C# (or Java or VB.Net or…)! My day job keeps me busy writing C#, so I&amp;rsquo;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.&lt;/p&gt;
+&lt;p&gt;I just spent the greater part of a week experimenting with Swift extensions. I was trying to figure out some seemingly strange behavior that they were exhibiting.&lt;/p&gt;
+&lt;p&gt;After publishing &lt;a href=&#34;http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/&#34; title=&#34;3 Nuances of Swift Extensions&#34;&gt;&amp;ldquo;3 Nuances of Swift Extensions”&lt;/a&gt;, I quickly learned that I had a fundamental misunderstanding of Swift access control, thanks to some observant folks in the Swift community.&lt;/p&gt;
+&lt;p&gt;What was the hiccup? Read on to find out where I went wrong…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;how-private-is-private&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;how-private-is-private&#34;&gt;How private is private?&lt;/h3&gt;
+&lt;p&gt;One of the most surprising &amp;ldquo;nuances” from &lt;a href=&#34;http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/&#34; title=&#34;3 Nuances of Swift Extensions&#34;&gt;&amp;ldquo;3 Nuances of Swift Extensions”&lt;/a&gt; that I discovered was that if you define an extension within the same source file as another Type, the extension&amp;rsquo;s members can see the &lt;em&gt;other&lt;/em&gt; Type&amp;rsquo;s &lt;code&gt;private&lt;/code&gt; properties and functions! &amp;ldquo;Whaaat?? How is this possible?!”, I reacted.&lt;/p&gt;
+&lt;p&gt;Well… To restate the obvious, Swift isn&amp;rsquo;t C#… and it isn&amp;rsquo;t C# in more ways than just syntax.&lt;/p&gt;
+&lt;p&gt;Ever since access control modifiers were introduced in Xcode 6 Beta 4, I had it in my mind that &lt;code&gt;public&lt;/code&gt;, &lt;code&gt;private&lt;/code&gt;, and &lt;code&gt;internal&lt;/code&gt; worked just like they do in C#. Sure, I read &lt;a href=&#34;https://developer.apple.com/swift/blog/?id=5&#34;&gt;the blog article on access control published by the Swift team&lt;/a&gt;, but it was a mere cursory look. I basically saw the three key words and thought, &amp;ldquo;Ah, I got this… moving on!”&lt;/p&gt;
+&lt;p&gt;This was a fundamental mistake for me to make, and it goes to show that just because there are &lt;em&gt;similarities&lt;/em&gt; between languages, it doesn&amp;rsquo;t mean the &lt;em&gt;semantics&lt;/em&gt; of those similarities carry over.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;semantics-of-private&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;semantics-of-private&#34;&gt;Semantics of private&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;Private&lt;/code&gt; is the access modifier that got me all confused. The concept of &lt;code&gt;public&lt;/code&gt; and &lt;code&gt;internal&lt;/code&gt; carry over fairly nicely, but &lt;code&gt;private&lt;/code&gt; is the one that&amp;rsquo;s fundamentally different between C# and Swift, so that&amp;rsquo;s where I&amp;rsquo;ll focus.&lt;/p&gt;
+&lt;p&gt;In addition to this article, recommend giving &lt;a href=&#34;https://developer.apple.com/swift/blog/?id=5&#34;&gt;the Swift team&amp;rsquo;s original article on access control&lt;/a&gt; a very close read, just to make sure all the semantics of &lt;code&gt;public&lt;/code&gt; and &lt;code&gt;internal&lt;/code&gt; in Swift are clear as well.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;private-and-c-sharp&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;private-and-c&#34;&gt;Private and C#&lt;/h4&gt;
+&lt;p&gt;In C#, &lt;code&gt;private&lt;/code&gt; members of a Type are &amp;ldquo;truly” private. They are only visible &lt;em&gt;within that Type&lt;/em&gt;. The member&amp;rsquo;s visibility is limited to the curly braces enclosing the Type&amp;rsquo;s implementation. That&amp;rsquo;s it. No subclass can see &lt;code&gt;private&lt;/code&gt; members. No other Types can see those members, no matter which file those Types are defined in. &lt;code&gt;Private&lt;/code&gt; is private.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;private-and-swift&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;private-and-swift&#34;&gt;Private and Swift&lt;/h4&gt;
+&lt;p&gt;And then there&amp;rsquo;s Swift. &lt;code&gt;Private&lt;/code&gt; takes on &lt;em&gt;entirely different&lt;/em&gt; semantics in Swift, and herein lay my fundamental misunderstanding. It was obvious that I just didn&amp;rsquo;t &amp;ldquo;get it” if you read through the &lt;a href=&#34;http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/&#34; title=&#34;3 Nuances of Swift Extensions&#34;&gt;Nuances Article&lt;/a&gt;. [sigh]&lt;/p&gt;
+&lt;p&gt;In Swift, a &lt;code&gt;private&lt;/code&gt; Type, or a &lt;code&gt;public&lt;/code&gt;/&lt;code&gt;internal&lt;/code&gt; Type&amp;rsquo;s &lt;code&gt;private&lt;/code&gt; &lt;em&gt;members&lt;/em&gt; are visible to &lt;em&gt;anything else&lt;/em&gt; defined within the same &lt;strong&gt;file&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;This isn&amp;rsquo;t a characteristic that&amp;rsquo;s limited to extensions. &lt;em&gt;Anything&lt;/em&gt; defined in the same source file as something else can see everything. This is a shocker if you&amp;rsquo;re coming from C# or a similar language where the semantics of access control are used for encapsulation purposes.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;proof-by-example&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;proof-by-example&#34;&gt;Proof by example&lt;/h4&gt;
+&lt;p&gt;So suppose you have a file named Types.swift, and within you have the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Person&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Greeter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;greet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;person&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Person&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Hi, I&amp;#39;m &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;\(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;person&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you&amp;rsquo;re a C# developer, you look at that code and immediately go, &amp;ldquo;Yeah, that&amp;rsquo;s not gonna work… &lt;code&gt;name&lt;/code&gt; is &lt;code&gt;private&lt;/code&gt; to &lt;code&gt;Person&lt;/code&gt; and can&amp;rsquo;t be referenced outside that Type”.&lt;/p&gt;
+&lt;p&gt;But in Swift, this is totally legitimate. Even though &lt;code&gt;Person&lt;/code&gt; is &lt;code&gt;private&lt;/code&gt;, &lt;code&gt;Greeter&lt;/code&gt; can see &lt;code&gt;Person&lt;/code&gt; and initialize one, &lt;em&gt;and&lt;/em&gt; it can see &lt;code&gt;Person&lt;/code&gt;‘s &lt;code&gt;private&lt;/code&gt; property, &lt;code&gt;name&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Private&lt;/code&gt; in Swift simply limits visibility to Types and members within the same &lt;em&gt;source file&lt;/em&gt;. Multiple Types defined in the same source file can see other &lt;code&gt;private&lt;/code&gt; Types, as well as other Types&amp;rsquo; &lt;code&gt;private&lt;/code&gt; properties and functions. In other words, &amp;ldquo;&lt;code&gt;private&lt;/code&gt; isn&amp;rsquo;t &lt;code&gt;private&lt;/code&gt;&amp;rdquo;, if you&amp;rsquo;re thinking of private like a C# developer (or a developer familiar with other languages with access control modifiers similar to C#).&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;There is a fundamental difference in the semantics of access control between C# and Swift.&lt;/p&gt;
+&lt;p&gt;In C#, we typically think of access control in terms of inheritance characteristics. The modifiers affect the Type and revolve around the Type and its interaction with other Types.&lt;/p&gt;
+&lt;p&gt;Swift, controls access to members in terms of &lt;em&gt;source file&lt;/em&gt; and &lt;em&gt;module&lt;/em&gt;. Types defined within the same source file see everything about each other, including &lt;code&gt;private&lt;/code&gt; members. &lt;code&gt;Internal&lt;/code&gt; Types and members expand visibility to anywhere within the same module. Finally, &lt;code&gt;public&lt;/code&gt; access makes Types and their members visible &lt;em&gt;everywhere&lt;/em&gt;, even to Types defined in other modules.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/&#34; title=&#34;3 Nuances of Swift Extensions&#34;&gt;3 Nuances of Swift Extensions&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34; title=&#34;Swift Access Control – Implications for Unit Testing&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testability Tip for Swift Developers – Public Over Private</title>
+      <link>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</link>
+      <pubDate>Wed, 15 Apr 2015 18:52:11 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</guid>
+      <description>&lt;p&gt;Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a &lt;code&gt;private&lt;/code&gt; function, however, I often scratch my head and ask, &amp;ldquo;How am I supposed to test this??”.&lt;/p&gt;
+&lt;p&gt;Most experienced testers will tell you, &amp;ldquo;Don&amp;rsquo;t test private implementation – only public API”.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Okay… But how, does that private function get tested?”, I always asked.&lt;/p&gt;
+&lt;p&gt;In this article, I intend to share a testability tip catered to the Swift developer community that helps alleviate this issue with testing private functions.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;testing-and-observability&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;testing-and-observability&#34;&gt;Testing and observability&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&#34;developers-as-clients-of-apis&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;developers-as-clients-of-apis&#34;&gt;Developers as clients of APIs&lt;/h4&gt;
+&lt;p&gt;As developers, we are &amp;ldquo;clients” of APIs on a daily basis. We interact with other developers&amp;rsquo; frameworks and libraries through the visible, observable, Application Programming Interface that they&amp;rsquo;ve exposed to us. It&amp;rsquo;s the way they&amp;rsquo;ve designed for us to interact with their code.&lt;/p&gt;
+&lt;p&gt;Notice three words that I chose in that introductory paragraph:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Visible&lt;/li&gt;
+&lt;li&gt;Observable&lt;/li&gt;
+&lt;li&gt;Exposed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If we are going to use another developer&amp;rsquo;s library, &lt;em&gt;all we have&lt;/em&gt; as developers is the public interface that they&amp;rsquo;ve made visible to us… It&amp;rsquo;s the only observable thing we can look at and go, &amp;ldquo;Oh! Okay, to do this, I call &lt;em&gt;that&lt;/em&gt; function”. The only thing exposed are the functions and properties that the developer intends for us to see.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;tests-as-clients-of-apis&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;tests-as-clients-of-apis&#34;&gt;Tests as clients of APIs&lt;/h4&gt;
+&lt;p&gt;Have you ever viewed your unit test suite as a &amp;ldquo;client” of your code? It is!&lt;/p&gt;
+&lt;p&gt;And just like a developer, the unit tests in your test target interacts with &lt;em&gt;your&lt;/em&gt; app&amp;rsquo;s API through the same visible, observable, interface that you&amp;rsquo;ve exposed to them.&lt;/p&gt;
+&lt;p&gt;If you start to personify your test target and think of it in terms of &amp;ldquo;just another client of your code”, you begin to see that it really doesn&amp;rsquo;t have any more visibility of your code than another developer would if he or she were consuming it.&lt;/p&gt;
+&lt;p&gt;All of this boils down to say, if it&amp;rsquo;s observable, it&amp;rsquo;s testable. Which means, the easiest and most natural code to test is &lt;code&gt;public&lt;/code&gt; code.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;public-over-private&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;public-over-private-and-internal&#34;&gt;Public over private (and internal)&lt;/h3&gt;
+&lt;p&gt;So should &lt;em&gt;everything&lt;/em&gt; be &lt;code&gt;public&lt;/code&gt; instead of &lt;code&gt;private&lt;/code&gt; or &lt;code&gt;internal&lt;/code&gt;? Certainly not.&lt;/p&gt;
+&lt;p&gt;Object-oriented programming strives for data-hiding and encapsulation, so there &lt;em&gt;are&lt;/em&gt; reasons to keep some things non-public.&lt;/p&gt;
+&lt;p&gt;Additionally, there are &lt;a href=&#34;https://developer.apple.com/swift/blog/?id=27&#34;&gt;certain Swift compiler optimizations&lt;/a&gt; (which lead to run-time optimizations) that can be gained when you mark things in your Type as &lt;code&gt;final&lt;/code&gt;. Using the &lt;code&gt;private&lt;/code&gt; access modifier allows the compiler to &lt;em&gt;infer&lt;/em&gt; that it is &lt;code&gt;final&lt;/code&gt; because it&amp;rsquo;s narrowly scoped to the current Type &lt;em&gt;only&lt;/em&gt;. These are handy things to know, but as is always the case with optimization, avoid &lt;em&gt;premature&lt;/em&gt; optimization by &lt;em&gt;measuring first&lt;/em&gt; to decide if you really need them.&lt;/p&gt;
+&lt;p&gt;Whenever possible, I prefer &lt;code&gt;public&lt;/code&gt; over the other access modifiers to help enable testing for my apps.&lt;/p&gt;
+&lt;p&gt;So when is &amp;ldquo;whenever possible”?&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;reason-for-existence&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;public-when-part-of-a-types-reason-for-existence&#34;&gt;Public when part of a Type&amp;rsquo;s reason for existence&lt;/h4&gt;
+&lt;p&gt;Obviously, properties and functions that are part of a Type&amp;rsquo;s core purpose can be marked &lt;code&gt;public&lt;/code&gt;. My practice is to decide, &amp;ldquo;Is this function why this Type exists?”. If so, I mark it as &lt;code&gt;public&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Note also that the Type itself needs to be marked public if it&amp;rsquo;s going to be visible to your unit tests.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Instead of this (default --internal-- access)...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyClass&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;myFunc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// Performs something essential to why MyClass exists&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Make things public...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyClass&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;myFunc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// Performs something essential to why MyClass exists&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a name=&#34;new-type&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;transition-many-private-components-to-new-type&#34;&gt;Transition many private components to new Type&lt;/h4&gt;
+&lt;p&gt;Having &lt;em&gt;many&lt;/em&gt; &lt;code&gt;private&lt;/code&gt; properties and functions can be an indication that there needs to be a new Type created to encapsulate those components. I&amp;rsquo;ve heard developers talk about this situation as one that &amp;ldquo;screams, ‘New Type!&amp;rsquo;”.&lt;/p&gt;
+&lt;p&gt;If we extract out sets of related &lt;code&gt;private&lt;/code&gt; properties and functions into a new Type, those pieces of code &lt;em&gt;are the reason that Type exists&lt;/em&gt;, and thus should be marked &lt;code&gt;public&lt;/code&gt;. Testing, then, becomes a matter of writing unit tests for the new Type and its public API!&lt;/p&gt;
+&lt;p&gt;Even if you just have a few &lt;code&gt;private&lt;/code&gt; code blocks in the Type you&amp;rsquo;re trying to test, it can sometimes make your testing life easier to transition them to a new Type as &lt;code&gt;public&lt;/code&gt; components.&lt;/p&gt;
+&lt;p&gt;If I&amp;rsquo;m really uncomfortable marking functions &lt;code&gt;public&lt;/code&gt; in the Type where they currently exist, creating a new Type and marking them &lt;code&gt;public&lt;/code&gt; there is usually the better alternative, and it immediately enables testing for that set of code.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;testing-non-public&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;testing-non-public-code&#34;&gt;Testing non-public code&lt;/h3&gt;
+&lt;p&gt;As I mentioned in the beginning, it&amp;rsquo;s not good to just haphazardly go through your code and &amp;ldquo;&lt;code&gt;public&lt;/code&gt; all the things!!”. After &lt;em&gt;appropriately&lt;/em&gt; marking fundamental functions &lt;code&gt;public&lt;/code&gt; and transitioning sets of &lt;code&gt;private&lt;/code&gt; functions to new Types where they can happily live as part of &lt;em&gt;that&lt;/em&gt; Type&amp;rsquo;s public API, there will likely be a few &lt;code&gt;private&lt;/code&gt; or &lt;code&gt;internal&lt;/code&gt; things left over.&lt;/p&gt;
+&lt;p&gt;How do these get tested?&lt;/p&gt;
+&lt;p&gt;Well, ideally, these are small, simple, helper functions that are only useful when called within the Type you&amp;rsquo;re working on.&lt;/p&gt;
+&lt;p&gt;If these functions produce observable results in the places where they&amp;rsquo;re called, you end up testing these non-public components &lt;em&gt;implicitly&lt;/em&gt;, that is, by testing the things that &lt;em&gt;are&lt;/em&gt; &lt;code&gt;public&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;During the course of testing some &lt;code&gt;public&lt;/code&gt; function which calls another non-public function, that non-public function&amp;rsquo;s logic will be executed. If the outcome of that function&amp;rsquo;s execution affects the Type&amp;rsquo;s state, or the output of its &lt;code&gt;public&lt;/code&gt; parent function, those are the things that you&amp;rsquo;d be able to write unit tests for, because those are the &amp;ldquo;observation points”, so to speak.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;The bottom line is: observable == testable. Just like another developer, the suite of unit tests in your test target interacts with your app&amp;rsquo;s API through the visible, observable, interface that you&amp;rsquo;ve exposed to them. The more observable your API components are, the more testable your code becomes. Which is why I prefer &lt;code&gt;public&lt;/code&gt; over &lt;code&gt;private&lt;/code&gt; whenever possible!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/tag/unit-testing/&#34; title=&#34;Browse All Unit Testing Articles @ andrewcbancroft.com&#34;&gt;Browse All Unit Testing Articles @ andrewcbancroft.com&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34; title=&#34;Swift Access Control – Implications for Unit Testing&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Swift Access Control – Implications for Unit Testing</title>
+      <link>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</link>
+      <pubDate>Wed, 23 Jul 2014 04:04:43 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</guid>
+      <description>&lt;p&gt;If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier…”, you&amp;rsquo;re not alone!&lt;/p&gt;
+&lt;h3 id=&#34;unit-tests-and-swift-access-control&#34;&gt;Unit Tests and Swift Access Control&lt;/h3&gt;
+&lt;p&gt;When Swift access control came into the picture, we suddenly had a little more to consider. From the Apple docs:&lt;/p&gt;
+&lt;p&gt;Swift access control has three access levels:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private entities can only be accessed from within the source file where they are defined.&lt;/li&gt;
+&lt;li&gt;internal entities can be accessed anywhere within the target where they are defined.&lt;/li&gt;
+&lt;li&gt;public entities can be accessed from anywhere within the target and from any other context&lt;br&gt;
+that imports the current target’s module.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By default, most entities in a source file have internal access.&lt;br&gt;
+So given the following…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Out of the box, your unit tests are part of a separate test target&lt;/li&gt;
+&lt;li&gt;The default access control for a class is &lt;em&gt;internal&lt;/em&gt;, (meaning that if you do not explicitly specify an access control on the class / properties / functions, they&amp;rsquo;re marked internal behind the scenes)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;… we now know why the unit tests break, unless we make a few tweaks:  classes marked internal are only seen &lt;em&gt;within a set of specified targets&lt;/em&gt; and our unit tests are in a separate target that our class is not a part of by default.&lt;/p&gt;
+&lt;h3 id=&#34;options&#34;&gt;Options&lt;/h3&gt;
+&lt;p&gt;It seems to me that we have two options:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Change the access control on our class to &lt;em&gt;public&lt;/em&gt;.  Additionally, mark any methods we intend to test with &lt;em&gt;public&lt;/em&gt; also.&lt;/li&gt;
+&lt;li&gt;Add the class(es) you want to be able to write unit tests for to the tests target.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+&lt;p&gt;I found option #2 to be the easiest to implement at first. &lt;em&gt;However&lt;/em&gt;, it turns out that this can lead to some &lt;a href=&#34;https://github.com/Quick/Quick/issues/91&#34;&gt;really obscure issues&lt;/a&gt;. An &lt;a href=&#34;https://twitter.com/modocache/status/549042409838219264&#34;&gt;enlightening Twitter conversation&lt;/a&gt; also shed some light on the subject, and pointed to the solution of testing only publicly accessible behavior that your Types expose, rather than trying to test internal implementation. That probably deserves a blog entry of its own, but for now, I’ll leave it to say that I’d recommend not adding your .swift source files to your test target, but rather to adjust the access control modifiers of the things you want to test to public (ie, Option # 1).&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  You might also enjoy&lt;/p&gt; 
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/&#34; title=&#34;Don’t Write Legacy Swift&#34;&gt;Don&#39;t Write Legacy Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/&#34; title=&#34;Getting Started with Unit Testing in Swift&#34;&gt;Getting Started with Unit Testing in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/&#34; title=&#34;TDD for iOS in Swift – What’s the Goal?&#34;&gt;TDD for iOS in Swift – What’s the Goal?&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

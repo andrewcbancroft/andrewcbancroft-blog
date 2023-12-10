@@ -1,0 +1,324 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Delegation on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/delegation/</link>
+    <description>Recent content about iOS development with Swift in Delegation  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Apr 2015 01:43:55 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/delegation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How Delegation Works – A Swift Developer’s Guide</title>
+      <link>https://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/</link>
+      <pubDate>Thu, 09 Apr 2015 01:43:55 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/</guid>
+      <description>&lt;p&gt;&lt;small&gt;Updated on October 11, 2016 – Swift 3.0&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Delegation can be a difficult topic to wrap your head around. I found it easiest to break up posts on the topic to help readers who are new to the pattern grasp the concepts a little better. First, I analyzed what delegation &lt;em&gt;is&lt;/em&gt; in &lt;a href=&#34;http://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/&#34;&gt;&amp;ldquo;What is Delegation – A Swift Developer&amp;rsquo;s Guide”&lt;/a&gt;. If you&amp;rsquo;re looking for the &amp;ldquo;what is it?” &lt;em&gt;behind&lt;/em&gt; the &amp;ldquo;how does it work?”, I recommend giving that first article a read.&lt;/p&gt;
+&lt;p&gt;Once the terminology is unpacked and a high-level overview of delegation as a design pattern is understood, the next logical place to turn is to the question, &amp;ldquo;How does delegation work?”. That is the focus of this article.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;intro&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;introducing-the-players&#34;&gt;Introducing the players&lt;/h3&gt;
+&lt;p&gt;For delegation to occur in software, you’d have a situation where one class (a delegat_or_ class) would give control or responsibility for some behavioral logic to &lt;em&gt;another&lt;/em&gt; class called a delegate.&lt;/p&gt;
+&lt;p&gt;So how does one class delegate behavioral logic to another class? With iOS and Swift, the delegation design pattern is achieved by utilizing an abstraction layer called a &lt;a href=&#34;https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html&#34;&gt;protocol&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a name=&#34;abstractions&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;protocols-as-abstractions&#34;&gt;Protocols as abstractions&lt;/h4&gt;
+&lt;p&gt;I used the fancy term &amp;ldquo;abstraction layer” prior to the quote. What is that all about?&lt;/p&gt;
+&lt;p&gt;Protocols are an &amp;ldquo;abstraction”, because they do not provide implementation details in their declaration… Only function and property &lt;em&gt;names&lt;/em&gt;. Like an outline, or as Apple puts it, a blueprint.&lt;/p&gt;
+&lt;h5 id=&#34;protocols-as-blueprints&#34;&gt;Protocols as blueprints&lt;/h5&gt;
+&lt;p&gt;With a single blueprint, there can be many homes constructed. The fine details of their construction may differ, but in the end, houses of some similarity that satisfy the blueprint&amp;rsquo;s specifications are built.&lt;/p&gt;
+&lt;p&gt;So, too with a protocol: Many classes can be built that follow the protocol&amp;rsquo;s specifications. At the end of the day, the fine details of each class&amp;rsquo; implementation (the stuff between the curly braces &lt;code&gt;{ ... }&lt;/code&gt;) may differ, but if they adopt the protocol, they&amp;rsquo;ll be similar in at least the fact that they provide the named behavior it specified.&lt;/p&gt;
+&lt;h5 id=&#34;protocols-as-contracts&#34;&gt;Protocols as contracts&lt;/h5&gt;
+&lt;p&gt;Another analogy from the legal world is popular for describing protocols: Protocols are similar to &lt;em&gt;contracts&lt;/em&gt;. It&amp;rsquo;s this contractual idea that actually makes the most sense to me when it comes to delegation.&lt;/p&gt;
+&lt;p&gt;A contract is the &amp;ldquo;thing” in the middle of two parties who are trying to negotiate a deal. To one party, the contract is a &lt;em&gt;guarantee&lt;/em&gt; of some terms that will be satisfied. To the &lt;em&gt;other&lt;/em&gt; party, the contract is a set of &lt;em&gt;obligations&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;In the delegation design pattern, protocols serve the same kind middle-man role as a contract. To the delegat_or_ class, the protocol is a guarantee that some behavior will be supplied by the other party (the delegate). To the delegate class, the protocol is a set of obligations – things it must implement when it &amp;ldquo;signs the contract”, or in Swift terms, &amp;ldquo;adopts the protocol”.&lt;/p&gt;
+&lt;p&gt;While the person signing the contract probably gets something out of the deal, the focus in the analogy we&amp;rsquo;re making to protocols and the delegation pattern is on the person on the guarantee end.&lt;/p&gt;
+&lt;p&gt;That person, being guaranteed by the contract that certain terms will be executed by the person who signs the deal, is free to make decisions and take action based on that promise.&lt;/p&gt;
+&lt;p&gt;So, too with the class delegating to another class. The delegat_or_ class can make perform actions (call methods defined by the protocol) or make decisions (access properties defined by the protocol to use in its logic).&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;listing-the-players&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;listing-the-players&#34;&gt;Listing the players&lt;/h4&gt;
+&lt;p&gt;Stepping back from this description, we see three players involved:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A protocol defining the responsibilities that will be delegated&lt;/li&gt;
+&lt;li&gt;A delegat_or_, which depends on an instance of something conforming to that protocol&lt;/li&gt;
+&lt;li&gt;A delegate, which adopts the protocol and implements its requirements&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;visualize-players&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;visualize-the-players&#34;&gt;Visualize the players&lt;/h3&gt;
+&lt;p&gt;As you can see, there are a few moving parts to delegation. Sometimes it helps to visualize the players involved in the strategy. I created the following diagram for an analysis I wrote on &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/&#34;&gt;NSNotificationCenter vs Delegation&lt;/a&gt;, but I think it gets the point across for this blog entry as well:&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png&#34; alt=&#34;Delegate Environment&#34; width=&#34;948&#34; height=&#34;497&#34; class=&#34;alignnone size-full wp-image-11251&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png 948w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment-300x157.png 300w&#34; sizes=&#34;(max-width: 948px) 100vw, 948px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;code&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;an-example-in-code&#34;&gt;An example in code&lt;/h3&gt;
+&lt;p&gt;Hopefully the explanation so far has provided some good groundwork to sort out how to accomplish the delegation design pattern in code. So how &lt;em&gt;does&lt;/em&gt; it all get wired up?&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;set-up-delegator&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;setting-up-the-delegator&#34;&gt;Setting up the delegator&lt;/h4&gt;
+&lt;p&gt;A delegat_or_ class typically defines a variable property with the word &amp;ldquo;delegate” somewhere in the name (oftentimes the property is simply named &lt;code&gt;delegate&lt;/code&gt; if that&amp;rsquo;s explanatory enough). The Type of the variable property is the key to it all. The variable will be of Type &lt;code&gt;whatever-you-named-your-delegate-protocol&lt;/code&gt;. So if I named my protocol &lt;code&gt;MySpecialDelegate&lt;/code&gt;, I&amp;rsquo;d specify the Type of the delegate property to be &lt;code&gt;MySpecialDelegate&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;set-up-delegate&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;setting-up-the-delegate&#34;&gt;Setting up the delegate&lt;/h4&gt;
+&lt;p&gt;The delegate class is what &lt;em&gt;adopts&lt;/em&gt; the protocol and implements its requirements. In the class declaration, the name of the protocol(s) that the class intends to adopt are listed separated by commas after the name of the superclass (if the class inherits from a superclass):&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;class MyClass: SuperClass, Protocol1, Protocol2 { ... }&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;When the delegat_or_ class gets initialized, a second step is often to immediately assign an instance of the class that&amp;rsquo;s adopted the delegate protocol to its &lt;code&gt;delegate&lt;/code&gt; property so that everything is &amp;ldquo;wired up”.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;in-practice&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;delegation-in-practice&#34;&gt;Delegation in practice&lt;/h4&gt;
+&lt;p&gt;Working with the delegation pattern in practice usually involves interacting with the protocol from the &lt;em&gt;delegate&lt;/em&gt; end of things. Most of the time, we&amp;rsquo;re working with Apple&amp;rsquo;s APIs (such as a &lt;code&gt;UITableView&lt;/code&gt; or just about any other UI control they provide). We typically only require knowledge of the protocol&amp;rsquo;s definition so that the class we choose as our delegate can implement the right functions.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;complete-example&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;complete-example&#34;&gt;Complete example&lt;/h4&gt;
+&lt;p&gt;There may be some situations where you may decide to follow Apple&amp;rsquo;s lead and use the delegation design pattern for your own code. Maybe you&amp;rsquo;re making a special &lt;code&gt;UIView&lt;/code&gt; subclass or a special picker control (much like &lt;code&gt;UIImagePickerController&lt;/code&gt;). Or maybe you&amp;rsquo;re into game development and would like to communicate from your &lt;code&gt;SKScene&lt;/code&gt; back to the View Controller. These are just a few that came to mind, but they all present possibilities for utilizing the delegation strategy.&lt;/p&gt;
+&lt;p&gt;To give a simple example, suppose that we&amp;rsquo;ve decided to create a class to encapsulate all of the logic for a special rating picker control. We&amp;rsquo;d like to offer the ability to customize the picker some by allowing the user of our control to specify a preferred rating symbol. We&amp;rsquo;d also like to provide a feedback loop to notify the user of our control when certain events have occurred. Delegation is a great tool to provide both customization options and communication between classes. What would this example look like in code?&lt;/p&gt;
+&lt;h5 id=&#34;create-the-protocol&#34;&gt;Create the protocol&lt;/h5&gt;
+&lt;p&gt;First, the protocol:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;protocol&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;RatingPickerDelegate&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;preferredRatingSymbol&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;picker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RatingPicker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIImage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;didSelectRating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;picker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RatingPicker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;didCancel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;picker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RatingPicker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Notice how this protocol definition allows both the customization point and the feedback loop we were hoping for. It&amp;rsquo;s always nice for the delegate to have access to the public API of the instance calling its methods, so the &lt;code&gt;RatingPicker&lt;/code&gt; (or &lt;code&gt;UITableView&lt;/code&gt; or &lt;code&gt;UIScrollView&lt;/code&gt; or whatever) is often passed along as an argument.&lt;/p&gt;
+&lt;h5 id=&#34;create-the-delegator&#34;&gt;Create the delegator&lt;/h5&gt;
+&lt;p&gt;With the protocol defined, our &lt;code&gt;RatingPicker&lt;/code&gt; (the delegat_or_ in this case) can now set itself up to use that protocol:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Disclaimer:  There is much more logic that would go into a real UIView subclass or a picker control in real life&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// This example is contrived and is only meant to serve as a &amp;#34;shell&amp;#34; of what code could look like&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// that uses a delegate within its implementation&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;RatingPicker&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;weak&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;delegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RatingPickerDelegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;withDelegate&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;delegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RatingPickerDelegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;delegate&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;delegate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;setup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;preferredRatingSymbol&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;delegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;preferredRatingSymbol&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;picker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// Set up the picker with the preferred rating symbol if it was specified&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;selectRating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;selectedRating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;delegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;didSelectRating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;picker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;selectedRating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// Other logic related to selecting a rating&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;cancel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;delegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;didCancel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;picker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;25&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// Other logic related to canceling&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;26&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;27&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;delegate&lt;/code&gt; property is strongly typed to be a &lt;code&gt;RatingPickerDelegate&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Since it&amp;rsquo;s &lt;em&gt;optional&lt;/em&gt; here in this implementation, the &lt;code&gt;delegate&lt;/code&gt; is not absolutely essential for the &lt;code&gt;RatingPicker&lt;/code&gt; to work. If it were essential, we&amp;rsquo;d parameterize &lt;code&gt;init&lt;/code&gt; and assign it during initialization.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve used optional chaining to get at the &lt;code&gt;delegate&#39;s&lt;/code&gt; methods if the &lt;code&gt;delegate&lt;/code&gt; isn&amp;rsquo;t nil.&lt;/p&gt;
+&lt;h5 id=&#34;choosing-the-delegate&#34;&gt;Choosing the delegate&lt;/h5&gt;
+&lt;p&gt;Choosing the delegate class is the final decision to make. It&amp;rsquo;s not uncommon for a View Controller to take up the responsibility of being a delegate. In &lt;a href=&#34;http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/&#34;&gt;&amp;ldquo;Pick a Delegate, Any Delegate”&lt;/a&gt;, I attempted to show how it&amp;rsquo;s &lt;em&gt;not&lt;/em&gt; necessary to use the View Controller as your one stop delegate shop. For this example, I&amp;rsquo;ll avoid giving the View Controller more responsibility than it needs and I&amp;rsquo;ll create a simple handler class to assume the delegated responsibilities:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;RatingPickerHandler&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RatingPickerDelegate&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;preferredRatingSymbol&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;picker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RatingPicker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIImage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIImage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;contentsOfFile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Star.png&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;didSelectRating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;picker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RatingPicker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rating&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// do something in response to a rating being selected&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;didCancel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;picker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RatingPicker&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// do something in response to the rating picker canceling&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;Once the terminology of delegation is unpacked, understanding how it works is the next logical step for grasping the design pattern as a whole. Here we explored all the players involved in the strategy and related protocols, which are integral to the strategy, to some real-world analogies. Finally, we took a look at how delegation works in practice, and demonstrated each role in delegation with code.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/&#34; title=&#34;What is Delegation? – A Swift Developer’s Guide&#34;&gt;What is Delegation? – A Swift Developer’s Guide&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/&#34; title=&#34;Fundamentals of NSNotificationCenter in Swift&#34;&gt;Fundamentals of NSNotificationCenter in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34; title=&#34;Fundamentals of Callbacks for Swift Developers&#34;&gt;Fundamentals of Callbacks for Swift Developers&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/&#34; title=&#34;NSNotificationCenter vs Delegation – An Analysis&#34;&gt;NSNotificationCenter vs Delegation – An Analysis&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What is Delegation? – A Swift Developer’s Guide</title>
+      <link>https://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/</link>
+      <pubDate>Fri, 27 Mar 2015 03:29:01 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/</guid>
+      <description>&lt;p&gt;Of the major design patterns that are prevalent in iOS development, delegation is one that appears quite often. For many developers entering app development for the iOS platform, dealing with delegates is a new concept. It certainly was for me.&lt;/p&gt;
+&lt;p&gt;In my analysis of &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/&#34; title=&#34;NSNotificationCenter vs Delegation – An Analysis&#34;&gt;NSNotificationCenter vs Delegation&lt;/a&gt;, I wrote some about delegation, but only in comparison to how &lt;code&gt;NSNotificationCenter&lt;/code&gt; works. I haven&amp;rsquo;t yet given delegation dedicated time and analysis, but I intend to do so now.&lt;/p&gt;
+&lt;p&gt;My aim in this blog entry is to try and make some sense out of the question, &amp;ldquo;What is delegation?”. Explore with me…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;what-is-delegation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;what-is-the-delegation-design-pattern&#34;&gt;What is the delegation design pattern?&lt;/h3&gt;
+&lt;p&gt;To read that &amp;ldquo;delegation is a design pattern that [insert explanation here]” never really clicked with me. Many who are new to programming have not dealt extensively with &amp;ldquo;design patterns”, so it doesn&amp;rsquo;t always suffice to define delegation in those terms.&lt;/p&gt;
+&lt;p&gt;I suspect that since Swift has lowered the barrier to entry for iOS development, many who are new to the platform are also new to coding in general, so here&amp;rsquo;s my attempt to explain what clicked for me regarding what delegation &lt;em&gt;is&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;design-pattern&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;design-pattern&#34;&gt;Design pattern&lt;/h4&gt;
+&lt;p&gt;First, take the phrase &amp;ldquo;design pattern”.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Design&lt;/strong&gt; implies architecture. It connotes a strategy for organizing something. Design conveys the method by which components will work together to accomplish an end.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pattern&lt;/strong&gt; implies that there is some repeatable process that has honed in around a common thread… a common practice… a predictable method for doing something. &amp;ldquo;Pattern” gives the impression that such a practice has converged over time into something that is now well-known, well-understood, and commonly used. I imagine a sort of &amp;ldquo;survival of the fittest” approach to process and practice. Things that didn&amp;rsquo;t converge or that were weaker in the real world fell away and the strongest survived into this thing we call &amp;ldquo;pattern”.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;design pattern&lt;/strong&gt; in software terms, then, is a method for architecting, strategizing about, and organizing an application&amp;rsquo;s code in such a way that has been found to be commonplace, repeatable, and practically sound over time.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;delegation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;delegation&#34;&gt;Delegation&lt;/h4&gt;
+&lt;p&gt;Now take the word delegation. Three things come to my mind:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The verb, &amp;ldquo;to delegate”, meaning &amp;ldquo;to give control”&lt;/li&gt;
+&lt;li&gt;The noun, &amp;ldquo;a delegate”, meaning &amp;ldquo;a person acting for another”&lt;/li&gt;
+&lt;li&gt;The made-up noun, &amp;ldquo;a delegat_or_&amp;rdquo;, or more properly, a &lt;em&gt;principal&lt;/em&gt;, meaning &amp;ldquo;a person who delegates to another”&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In the real world, the word delegation encapsulates relationship and responsibility. A delegator/principal (noun) would delegate (verb) control or responsibility to another person called a delegate.&lt;/p&gt;
+&lt;p&gt;How could we map this to software? Well, it actually falls in line quite nicely.&lt;/p&gt;
+&lt;p&gt;Rather than &lt;em&gt;people&lt;/em&gt;, we&amp;rsquo;re dealing with instances of &lt;em&gt;classes&lt;/em&gt; (or other data structures like structs, but I&amp;rsquo;m just going to keep it simple and say &amp;ldquo;class” to encapsulate the idea). For delegation to occur in software, you&amp;rsquo;d have a situation where one class (a delegator/principal class) would delegate control or responsibility, here meaning behavioral logic, to another class called a delegate.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;how-used&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;how-is-delegation-used&#34;&gt;How is delegation used?&lt;/h3&gt;
+&lt;p&gt;So yes… delegation is a design pattern. It&amp;rsquo;s a design pattern that exists on other platforms, but it is one that has been heavily adopted by Apple and is ubiquitous throughout the iOS APIs. It&amp;rsquo;s a design pattern that shifts responsibility from one class to another, thereby creating a separation of responsibilities and concerns. But what &lt;em&gt;kinds&lt;/em&gt; of responsibilities and concerns? How is delegation used in practice?&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;communication&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;communication&#34;&gt;Communication&lt;/h4&gt;
+&lt;p&gt;In practice, delegation is most often used as a way for one class to &lt;em&gt;communicate&lt;/em&gt; to another class. Observing some of the actions that delegates perform from Apple&amp;rsquo;s own APIs give us clues about this. Take the following samples from &lt;code&gt;UITableViewDelegate&lt;/code&gt; as an example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;_will_SelectRow&lt;/strong&gt;AtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;_did_SelectRow&lt;/strong&gt;AtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;_did_HighlightRow&lt;/strong&gt;AtIndexPath:)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Or how about a sampling from &lt;code&gt;UIScrollViewDelegate&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;scrollView**&lt;em&gt;Did_Scroll**(&lt;/em&gt;:)&lt;/li&gt;
+&lt;li&gt;scrollView**&lt;em&gt;WillBegin_Dragging**(&lt;/em&gt;:)&lt;/li&gt;
+&lt;li&gt;scrollView**&lt;em&gt;WillEnd_Dragging**(&lt;/em&gt;:withVelocity:targetContentOffset:)&lt;/li&gt;
+&lt;li&gt;scrollView**&lt;em&gt;DidEnd_Dragging**(&lt;/em&gt;:willDecelerate:)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My observation of Apple&amp;rsquo;s APIs indicates to me that one of the intended uses for delegation is to allow one instance to communicate back to some &lt;em&gt;other&lt;/em&gt; instance that something will/did happen. The table view or scroll view &lt;em&gt;delegates&lt;/em&gt; the opportunity to perform some action in response to some lifecycle event to another class, namely, its delegate.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s also worth noting the scope of the communication that delegation is intended to be used for. Whereas &lt;code&gt;NSNotificationCenter&lt;/code&gt; fits the need for one instance to broadcast a message intended for more than one listening instance, delegation fits the scenario where an instance only needs to send a message to a single listener (the delegate).&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;customization&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;customization&#34;&gt;Customization&lt;/h4&gt;
+&lt;p&gt;Another common usage for delegation is to provide a delegate instance the opportunity to customize certain aspects of the delegat_ing_ instance&amp;rsquo;s internal state. Once again, clues from a few of Apple&amp;rsquo;s APIs shed some light on this usage scenario. Let&amp;rsquo;s look at &lt;code&gt;UITableViewDelegate&lt;/code&gt; first:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;height&lt;/strong&gt;ForRowAtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;editActions&lt;/strong&gt;ForRowAtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;indentationLevel&lt;/strong&gt;ForRowAtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;shouldHighlight&lt;/strong&gt;RowAtIndexPath:)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These are all customization-points that a &lt;code&gt;UITableView&lt;/code&gt; allows its delegate to have a say in. &lt;em&gt;Some&lt;/em&gt; of the methods are so important that the table view can&amp;rsquo;t display itself unless it gets this information from its delegate. The point here is that the table view is shifting responsibility for the implementation of that logic off to its delegate, allowing for greater controlled flexibility and customization.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;With delegation being such a heavily utilized strategy for organizing an iOS application&amp;rsquo;s logic, understanding what it is becomes key concern. In this article we unpacked the terms &amp;ldquo;design pattern” and &amp;ldquo;delegation” to get a grasp of why those words were chosen to describe the strategy. Finally, we looked at how the delegation pattern is used in practice, observing that two common use-cases for delegation: class-to-class communication and customization.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/&#34; title=&#34;How Delegation Works – A Swift Developer’s Guide&#34;&gt;How Delegation Works – A Swift Developer’s Guide&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/&#34; title=&#34;Fundamentals of NSNotificationCenter in Swift&#34;&gt;Fundamentals of NSNotificationCenter in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/&#34; title=&#34;NSNotificationCenter vs Delegation – An Analysis&#34;&gt;NSNotificationCenter vs Delegation – An Analysis&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34; title=&#34;Fundamentals of Callbacks for Swift Developers&#34;&gt;Fundamentals of Callbacks for Swift Developers&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pick a Delegate… Any Delegate… On Clean View Controllers in Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/</link>
+      <pubDate>Wed, 27 Aug 2014 04:43:29 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/</guid>
+      <description>&lt;p&gt;The delegation pattern is ubiquitous in iOS development – the pattern is a &amp;ldquo;&lt;a title=&#34;Cocoa Core Competencies&#34; href=&#34;https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/Delegation.html&#34; target=&#34;_blank&#34;&gt;core competency&lt;/a&gt;” for developing in Cocoa, and if you program with the iOS SDK for any length of time and you&amp;rsquo;ll end up writing some code that resembles &lt;code&gt;someInstance.delegate = someDelegate&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;One of the toughest things that I&amp;rsquo;ve experienced is choosing what &lt;code&gt;someDelegate&lt;/code&gt; is.  All too often, a View Controller ends up being assigned the responsibility of being the delegate for &lt;em&gt;everything&lt;/em&gt; in its hierarchy.  My question is:  Is there a cleaner way?&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s pick up on the example I proposed in my &lt;a href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/&#34; title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34;&gt;recent post about sending e-mails in-app&lt;/a&gt;.  For &amp;ldquo;quick and dirty” pragmatism, I just crammed everything into the View Controller with the promise of coming back and (hopefully) showing a cleaner way.  &lt;a title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample&#34; target=&#34;_blank&#34;&gt;Here is a quick link to example posed before&lt;/a&gt; if you&amp;rsquo;d like to review it before proceeding.&lt;/p&gt;
+&lt;h2 id=&#34;_what-if8230_&#34;&gt;&lt;em&gt;What if…&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;What if we could make some adjustments so that the View Controller was trimmed down to the example on the &lt;em&gt;right (click for larger view)&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison.png&#34;&gt;&lt;img class=&#34;alignnone wp-image-4321 size-large&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-1024x258.png&#34; alt=&#34;Clean View Controller Comparison&#34; width=&#34;730&#34; height=&#34;183&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-1024x258.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-300x75.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-1200x303.png 1200w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve created a &lt;a title=&#34;Swift Email Composer - GitHub&#34; href=&#34;https://github.com/andrewcbancroft/SwiftEmailComposer&#34; target=&#34;_blank&#34;&gt;fully-working example on GitHub&lt;/a&gt; if you&amp;rsquo;d like to download it and play.&lt;/p&gt;
+&lt;p&gt;So the question at hand:  Is the class labeled &amp;ldquo;Clean Example” &lt;em&gt;preferable (&lt;em&gt;ie&lt;/em&gt;, better)&lt;/em&gt;?  First, let&amp;rsquo;s explore how I accomplished the &amp;ldquo;clean” View Controller.  Then I&amp;rsquo;ll tip my hand on and share what I like about this approach…&lt;/p&gt;
+&lt;h2 id=&#34;emailcomposer&#34;&gt;EmailComposer&lt;/h2&gt;
+&lt;p&gt;In order to accomplish the self-declared Clean View Controller above, I placed all of the configuration processes and the delegate method for the &lt;code&gt;MFMailComposeViewController&lt;/code&gt; in a &lt;em&gt;new&lt;/em&gt; class called &lt;code&gt;EmailComposer&lt;/code&gt;.  It should look familiar if you recall the &lt;a title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample&#34; target=&#34;_blank&#34;&gt;previous example&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Foundation&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MessageUI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;EmailComposer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewControllerDelegate&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Did this in order to mitigate needing to import MessageUI in my View Controller&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;canSendMail&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Bool&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;canSendMail&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;configuredMailComposeViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewController&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;mailComposerVC&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mailComposeDelegate&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setToRecipients&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;someone@somewhere.com&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setSubject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Sending you an in-app e-mail...&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setMessageBody&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Sending e-mail in-app is not so bad!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;isHTML&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// &lt;/span&gt;&lt;span class=&#34;cs&#34;&gt;MARK:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt; MFMailComposeViewControllerDelegate Method&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;mailComposeController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;controller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;didFinishWithResult&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeResult&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;controller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dismissViewControllerAnimated&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;25&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So literally, the only thing I did is&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cut the function definitions for &lt;code&gt;configuredMailComposeViewController&lt;/code&gt;, and the &lt;code&gt;MFMailComposeViewControllerDelegate&lt;/code&gt; method.&lt;/li&gt;
+&lt;li&gt;Paste them into the new &lt;code&gt;EmailComposer&lt;/code&gt;  class, which inherits from &lt;code&gt;NSObject&lt;/code&gt;  (a requirement for this particular delegate protocol&amp;rsquo;s conformity), and conforms to the &lt;code&gt;MFMailComposeViewControllerDelegate&lt;/code&gt;  protocol.&lt;/li&gt;
+&lt;li&gt;Adjust my View Controller to create an instance of &lt;code&gt;EmailComposer&lt;/code&gt; , obtain a configured &lt;code&gt;MFMailComposeViewController&lt;/code&gt;, and present it whenever the user taps on a button in my UI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The View Controller in its final version is &lt;em&gt;focused&lt;/em&gt;.  It&amp;rsquo;s primary concern is presentation and handling of user interaction with the View itself, rather than needing to worry with configuring an &lt;code&gt;MFMailComposeViewController&lt;/code&gt; and its delegate callback.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EmailComposer&lt;/code&gt; is less of a hassle to test, in the sense that &lt;span style=&#34;line-height: 1.5;&#34;&gt;I no longer need to instantiate a View Controller in my &lt;/span&gt;&lt;code&gt;XCTestCase&lt;/code&gt;&lt;span style=&#34;line-height: 1.5;&#34;&gt; class just to test my &lt;/span&gt;&lt;code&gt;MFMailComposeViewController&lt;/code&gt;&lt;span style=&#34;line-height: 1.5;&#34;&gt; stuff&lt;/span&gt;&lt;span style=&#34;line-height: 1.5;&#34;&gt;.  It&amp;rsquo;s a real pain to test an actual View Controller instance, so I like that I can easily create an instance of &lt;code&gt;EmailComposer&lt;/code&gt; and test away without the bulk.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;No need to import MessageUI in my View Controller.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All in all, this is the cleanest, simplest, most balanced solution (that I could think of) to factoring out some logic to another class, so as to make my View Controller as clean as possible.&lt;/p&gt;
+&lt;p&gt;The goal was to make sure the appropriate responsibilities are assigned to the right classes.  Presentation logic is all in the View Controller.  Configuration and delegate callback implementation is done in &lt;code&gt;EmailComposer&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m thinking through applying this same idea to other more complicated examples (UITableViewDataSource and UITableViewDelegate come to mind), and I think it would do us a &lt;em&gt;lot&lt;/em&gt; of good to strategize on how to avoid making the View Controller the &amp;ldquo;catch-all” delegate / data source class for everything that&amp;rsquo;s currently on the screen_._&lt;/p&gt;
+&lt;p&gt;Hopefully these thoughts spark some ideas in the Swift community.  This post has already been revised slightly based on feedback that I&amp;rsquo;ve received from folks on Twitter.  If you have additional ideas in regards to choosing the right delegate, holler my way!  I&amp;rsquo;d love to hear from you.&lt;/p&gt;
+&lt;p&gt;Thanks for reading.&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  &lt;p&gt;
+    You might also enjoy
+  &lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Clean Coding in Swift – Functions&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/&#34;&gt;Clean Coding in Swift – Functions&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Clean Coding in Swift – Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/&#34;&gt;Clean Coding in Swift – Type Inference&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Expanded Thoughts on Swift’s Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/&#34;&gt;Expanded Thoughts on Swift’s Type Inference&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/&#34;&gt;Send Email In-App – Using MFMailComposeViewController with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Send Text Message In-App – Using MFMessageComposeViewController with Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/10/28/send-text-message-in-app-using-mfmessagecomposeviewcontroller-with-swift/&#34;&gt;Send Text Message In-App – Using MFMessageComposeViewController with Swift&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

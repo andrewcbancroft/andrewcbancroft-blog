@@ -1,0 +1,36 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xcode 7 on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/xcode-7/</link>
+    <description>Recent content about iOS development with Swift in Xcode 7  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Jun 2015 17:43:09 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/xcode-7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Improvements to Unit Testing in Swift with Xcode 7</title>
+      <link>https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/</link>
+      <pubDate>Wed, 10 Jun 2015 17:43:09 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/06/10/improvements-to-unit-testing-in-swift-with-xcode-7/</guid>
+      <description>&lt;p&gt;One of the most exciting things that&amp;rsquo;s come out of WWDC 2015 is the fact that unit testing in Swift has been greatly simplified. The latest announcements have actually rendered a few of my articles on the subject obsolete, once Xcode 7 is in full circulation among the Swift developer community.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re using Xcode 6.x, you may still find use in a couple of my previous articles:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/&#34;&gt;Testability Tip for Swift Developers – Public Over Private&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you&amp;rsquo;re jumping headlong into Xcode 7 world, setting yourself up for unit testing is incredibly simple. Essentially, all &lt;code&gt;internal&lt;/code&gt; and &lt;code&gt;public&lt;/code&gt; Types (and members of those Types) are visible to your unit test project when you import the module using the &lt;code&gt;@testable&lt;/code&gt; keyword in front of the import. With Xcode 7, there&amp;rsquo;s no reason to change any of the access modifiers on your Types/members to support testing.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/NatashaTheRobot&#34;&gt;@natashatherobot&lt;/a&gt; has an &lt;a href=&#34;http://natashatherobot.com/swift-2-xcode-7-unit-testing-access/&#34;&gt;excellent 3-step write-up&lt;/a&gt; that I won&amp;rsquo;t repeat here. To summarize though, you&amp;rsquo;ll simply…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Code your Types (classes/structs/enums) using the default &lt;code&gt;internal&lt;/code&gt; access.&lt;/li&gt;
+&lt;li&gt;Add an import statement to the file containing your &lt;code&gt;XCTestCases&lt;/code&gt;. There&amp;rsquo;s special syntax for this now: &lt;code&gt;@testable import AppName/ModuleName&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Begin unit testing with access to all &lt;code&gt;public&lt;/code&gt; and &lt;code&gt;internal&lt;/code&gt; Types and members!&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

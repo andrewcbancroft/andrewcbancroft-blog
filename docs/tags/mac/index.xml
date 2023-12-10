@@ -1,0 +1,79 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mac on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/mac/</link>
+    <description>Recent content about iOS development with Swift in Mac  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Aug 2015 20:57:02 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Diagnosing “Restore failed” with ASP.NET 5 on Mac</title>
+      <link>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
+      <pubDate>Sun, 09 Aug 2015 20:57:02 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
+      <description>&lt;p&gt;Following along with Steve Smith&amp;rsquo;s &lt;a href=&#34;http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html&#34;&gt;&amp;ldquo;Your First ASP.NET 5 Application on a Mac”&lt;/a&gt;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;rsquo;t work due to a problem with restoring the project&amp;rsquo;s dependencies.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;retracing-steps&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;retracing-my-steps&#34;&gt;Retracing my steps&lt;/h3&gt;
+&lt;p&gt;I &lt;a href=&#34;http://docs.asp.net/en/latest/getting-started/installing-on-mac.html&#34;&gt;got ASP.NET installed on my Mac&lt;/a&gt;, and I even got a cool little template going using &lt;a href=&#34;http://yeoman.io/&#34;&gt;Yeoman&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I opened up my scaffolded project using Visual Studio Code, and began the dependency restore process. But it failed. So I troubleshooted (troubleshot?), and it failed some more.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Restore failed Unknown header: 3208085783”.&lt;/p&gt;
+&lt;p&gt;I found David Fowler&amp;rsquo;s &lt;a href=&#34;http://davidfowl.com/diagnosing-dependency-issues-with-asp-net-5/&#34;&gt;&amp;ldquo;Diagnosing Dependency Issues with ASP.NET 5”&lt;/a&gt;, but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make sure your DNX and packages are on the same version &amp;ldquo;train”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;My issue wasn&amp;rsquo;t with DNX, but with &lt;strong&gt;Mono&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;mis-matched-mono&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mis-matched-mono-versions&#34;&gt;Mis-matched Mono versions&lt;/h3&gt;
+&lt;p&gt;When I followed the instructions for installing ASP.NET, I distinctly remember installing Mono using the installer package available at their website.&lt;/p&gt;
+&lt;p&gt;What I &lt;em&gt;failed&lt;/em&gt; to realize, however, was that a while back (long enough ago to where it didn&amp;rsquo;t hit me until just a few minutes ago), I installed Mono using Homebrew.&lt;/p&gt;
+&lt;p&gt;So despite my efforts to install Mono using the installer package, the Mono that everything in my system was using was the one installed by Homebrew, which was version 3.10.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;resolved&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;resolved&#34;&gt;Resolved&lt;/h3&gt;
+&lt;p&gt;To resolve the issue, I went ahead and just ran &lt;code&gt;brew upgrade mono&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Verifying that Mono was successfully upgraded via a &lt;code&gt;mono --version&lt;/code&gt; command, I retried the dependency restoration in my scaffolded ASP.NET 5 application.&lt;/p&gt;
+&lt;p&gt;The result?&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dnu restore&lt;/code&gt; produced a wonderfully green, &amp;ldquo;Restore complete”!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>DotNetZip – Solving Mac Decompression Issues</title>
+      <link>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</link>
+      <pubDate>Sat, 28 Dec 2013 20:55:27 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</guid>
+      <description>&lt;p&gt;As part of a ASP.Net Web API service that I&amp;rsquo;m co-developing, I have gotten familiar with the &lt;a title=&#34;DotNetZip Codeplex Page&#34; href=&#34;http://dotnetzip.codeplex.com/&#34; target=&#34;_blank&#34;&gt;DotNetZip Library&lt;/a&gt;.  It&amp;rsquo;s fantastic.  We&amp;rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.&lt;/p&gt;
+&lt;p&gt;During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.&lt;/p&gt;
+&lt;h2 id=&#34;synopsis&#34;&gt;Synopsis:&lt;/h2&gt;
+&lt;p&gt;Problem:  On a Mac, a zip file would be downloaded, but it could not be extracted.  Double-clicking the zip file resulted in the creation of a .cpgz file.&lt;/p&gt;
+&lt;p&gt;Solution:  In ASP.Net code, change&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/zip”&lt;/p&gt;
+&lt;p&gt;to&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/octet-stream”&lt;/p&gt;
+&lt;h2 id=&#34;problem-details&#34;&gt;Problem Details:&lt;/h2&gt;
+&lt;p&gt;A zip archive would download as normal, but as things were wrapping up, Safari would try to decompress the file and it would fail.&lt;/p&gt;
+&lt;p&gt;Error from Safari&amp;rsquo;s download manager area:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed.png&#34;&gt;&lt;img class=&#34;alignnone size-medium wp-image-585&#34; style=&#34;src=&amp;quot;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/DecompressionFailed-300x43.png&amp;quot;&#34; width=&#34;300&#34; height=&#34;43&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Furthermore, when attempting to simply extract the files directly using the built in Mac Archive Utility (by double-clicking the zip file), the utility would actually re-archive the file, rather than extract it.  The end result was the creation of a .cpgz file.  Attempting to decompress &lt;em&gt;that&lt;/em&gt; file would result in creating another .zip file, which, when double-clicked, created another .cpgz file, and so on, and so on.&lt;/p&gt;
+&lt;p&gt;Archive Utility re-archiving the zip file when double-clicked (rather than &lt;em&gt;un&lt;/em&gt;-archiving it)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM.png&#34;&gt;&lt;img class=&#34;alignnone size-medium wp-image-586&#34; alt=&#34;Screen Shot 2013-10-10 at 4.13.48 PM&#34; src=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Screen-Shot-2013-10-10-at-4.13.48-PM-300x106.png&#34; width=&#34;300&#34; height=&#34;106&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Creation of .cpgz file:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png&#34;&gt;&lt;img class=&#34;alignnone size-full wp-image-584&#34; alt=&#34;Created_cpgz_file&#34; src=&#34;http://andrewcbancroft.azurewebsites.net/wp-content/uploads/2013/10/Created_cpgz_file.png&#34; width=&#34;280&#34; height=&#34;22&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Needless to say, the solution to this problem, though somewhat mysterious, was quite simple for me.&lt;/p&gt;
+&lt;p&gt;In my ASP.Net code, I was writing the zip file to the Response OutputStream.  I had added a content type of &amp;ldquo;application/zip” to the response.  This is what was breaking the zip files on a Mac.  Buried &lt;a title=&#34;DotNetZip Library Forum&#34; href=&#34;http://dotnetzip.codeplex.com/discussions/59740&#34; target=&#34;_blank&#34;&gt;in the DotNetZip Library&amp;rsquo;s forum was a post&lt;/a&gt; recommending changing the content type to &amp;ldquo;application/octet-stream” instead.  That single changed fixed the issue for standard zip files!&lt;/p&gt;
+&lt;h2 id=&#34;solution-details&#34;&gt;Solution Details:&lt;/h2&gt;
+&lt;p&gt;Change&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/zip”&lt;/p&gt;
+&lt;p&gt;to&lt;/p&gt;
+&lt;p&gt;HttpContext.Current.Response.ContentType = &amp;ldquo;application/octet-stream”&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

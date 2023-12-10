@@ -1,0 +1,58 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Crash on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/crash/</link>
+    <description>Recent content about iOS development with Swift in Crash  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 25 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/crash/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>4 Reasons Your iOS App Is Crashing</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/debugging/reasons-your-ios-app-is-crashing/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/debugging/reasons-your-ios-app-is-crashing/</guid>
+      <description>&lt;h2 id=&#34;cpu-cannot-execute-an-instruction&#34;&gt;CPU cannot execute an instruction&lt;/h2&gt;
+&lt;p&gt;Sometimes we developers don&amp;rsquo;t play fair with the CPU.&lt;/p&gt;
+&lt;p&gt;Suppose that I wrote some code that ended up telling the CPU to divide by zero.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s&amp;hellip; impossible&amp;hellip; for you &lt;em&gt;and&lt;/em&gt; the CPU.&lt;/p&gt;
+&lt;h2 id=&#34;ios-is-ensuring-its-own-stability&#34;&gt;iOS is ensuring its own stability&lt;/h2&gt;
+&lt;p&gt;iOS may be enforcing a fundamental requirement or policy for its own stability.&lt;/p&gt;
+&lt;p&gt;Apple isn&amp;rsquo;t going to let developers wreck the overall user experience of iOS.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your app takes forever to launch&lt;/li&gt;
+&lt;li&gt;Your app is using too much memory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;iOS will opt for killing your app to protect the user’s overall iOS experience.&lt;/p&gt;
+&lt;h2 id=&#34;swift-runtime-is-preventing-failure&#34;&gt;Swift runtime is preventing failure&lt;/h2&gt;
+&lt;p&gt;There are certain protections within the Swift runtime that may cause your app to crash.&lt;/p&gt;
+&lt;p&gt;For example, if you’ve got an array with 5 elements inside (indexed from 0 to 4), and you attempt to access the 6th one by referencing index 5, the Swift runtime will kill your app when it sees this kind of instruction.&lt;/p&gt;
+&lt;p&gt;Force-unwrapping optionals using the &lt;code&gt;!&lt;/code&gt; operator is another classic app crasher.&lt;/p&gt;
+&lt;h2 id=&#34;another-developer-is-preventing-failure&#34;&gt;Another developer is preventing failure&lt;/h2&gt;
+&lt;p&gt;Finally, it may be that the developer of a framework or function you’re using is preventing you from misusing his/her API.&lt;/p&gt;
+&lt;p&gt;Some developers will use &lt;code&gt;assert&lt;/code&gt; in a function to test that a condition is met before their function proceeds.&lt;/p&gt;
+&lt;p&gt;Guard statements mixed with a &lt;code&gt;fatalError&lt;/code&gt; in the &lt;code&gt;else&lt;/code&gt; block could also be a failure protection strategy.&lt;/p&gt;
+&lt;p&gt;In both cases your app would crash when the assert or guard conditions are not met.&lt;/p&gt;
+&lt;p&gt;While it would be nicer to see an &lt;code&gt;Error&lt;/code&gt; instead of a crash, knowing that these are posssible &amp;ldquo;under the hood&amp;rdquo; reasons for the crash you&amp;rsquo;re seeing can be helpful.&lt;/p&gt;
+&lt;h2 id=&#34;summing-up&#34;&gt;Summing Up&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s true: a crash can feel like it comes out of nowhere. Scoping the problem into four &amp;ldquo;big picture&amp;rdquo; reasons for a crash has helped me think rationally and probabilistically about what&amp;rsquo;s going on.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re getting your bearings when it comes to debugging iOS apps, I&amp;rsquo;d love to impact your learning experience. Perhaps my &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34;&gt;iOS Debugging Fudamentals&lt;/a&gt; course on Pluralsight will guide you to more efficient debugging experiences!&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;iOS Debugging Fundamentals&lt;/a&gt;&lt;a href=&#34;http://bit.ly/ios-debugging-fundamentals&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-debugging-fundamentals-title.png&#34; alt=&#34;iOS Debugging Fundamentals&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

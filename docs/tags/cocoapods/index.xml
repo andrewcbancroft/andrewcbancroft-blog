@@ -1,0 +1,203 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cocoapods on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/cocoapods/</link>
+    <description>Recent content about iOS development with Swift in Cocoapods  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Feb 2016 18:23:49 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/cocoapods/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Managing Xcode Project Dependencies with CocoaPods</title>
+      <link>https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/</link>
+      <pubDate>Wed, 03 Feb 2016 18:23:49 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/</guid>
+      <description>&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;I try to get as practical as possible in the course. As you&amp;rsquo;re watching you&amp;rsquo;ll be &amp;ldquo;embedded” into a team of iOS developers, and you&amp;rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through &lt;em&gt;not&lt;/em&gt; having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.&lt;/p&gt;
+&lt;p&gt;The course is a progressive journey. First, the team has problems managing dependencies without a dependency manager. Then, they bring in CocoaPods to help them find and organize 3rd party libraries. &lt;em&gt;Then&lt;/em&gt;, they start to think, &amp;ldquo;Hey, what if we could create our &lt;em&gt;own&lt;/em&gt; CocoaPod libraries?”. Finally, they use that knowledge of how to create a CocoaPod library to set up a private repository to share code internally between projects with their team.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve got four modules that cover the following topics:&lt;/p&gt;
+&lt;h2 id=&#34;1---introducing-project-dependency-management&#34;&gt;1 - Introducing Project Dependency Management&lt;/h2&gt;
+&lt;p&gt;I teach the basic concepts and definitions associated with &amp;ldquo;project dependency management”. What is it all about? Why does it matter? And most importantly, how is it done in the Apple Ecosystem?&lt;/p&gt;
+&lt;h2 id=&#34;2---managing-dependencies-with-cocoapods&#34;&gt;2 - Managing Dependencies with CocoaPods&lt;/h2&gt;
+&lt;p&gt;I guide you through installing CocoaPods, configuring your Xcode project to use CocoaPods, and working with the CocoaPods command line utility.&lt;/p&gt;
+&lt;h2 id=&#34;3---creating-cocoapod-libraries&#34;&gt;3 - Creating CocoaPod Libraries&lt;/h2&gt;
+&lt;p&gt;This is where things turned really fun for me. :] In this module of the course, I teach you how to create a CocoaPod library, host its source code on GitHub, and publish the library to the CocoaPods Trunk.&lt;/p&gt;
+&lt;h2 id=&#34;4---hosting-a-private-cocoapods-repository&#34;&gt;4 - Hosting a Private CocoaPods Repository&lt;/h2&gt;
+&lt;p&gt;As the capstone to the course, I teach you how to set up a private spec repository and how to configure CocoaPods to utilize it. It really is the culmination of everything learned in the prior modules, but it&amp;rsquo;s also one of the most practical strategies for sharing code between your various Xcode projects that I&amp;rsquo;ve found to-date.&lt;/p&gt;
+&lt;p&gt;In addition to the four modules of content, the course comes with an example Swift iOS app if you&amp;rsquo;re a Pluralsight Plus subscriber!&lt;/p&gt;
+&lt;h1 id=&#34;something-for-everyone&#34;&gt;Something for Everyone&lt;/h1&gt;
+&lt;p&gt;The course is targeted at beginning to intermediate level developers. I assume no prior knowledge of how to work with a dependency manager.&lt;/p&gt;
+&lt;p&gt;That being the case, I do my best to offer something for everyone. If you&amp;rsquo;ve never used a dependency manager on another platform before, I&amp;rsquo;ve got you covered – I&amp;rsquo;ll take you step by step through using CocoaPods.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re already using CocoaPods in your Xcode project, maybe you can benefit from the modules on creating CocoaPod libraries yourself! If you&amp;rsquo;re already creating libraries and contributing to the open source community, what about setting up that private spec repository to share with your team internally?&lt;/p&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Considerations for Choosing 3rd Party Swift Libraries</title>
+      <link>https://www.andrewcbancroft.com/2015/10/27/considerations-for-choosing-3rd-party-swift-libraries/</link>
+      <pubDate>Tue, 27 Oct 2015 18:04:09 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/10/27/considerations-for-choosing-3rd-party-swift-libraries/</guid>
+      <description>&lt;p&gt;While relying on 3rd party dependencies can provide you the benefit of not having to spend time implementing a portion of your app, realize that you’re essentially giving away little pieces of your app when you bring in a dependency.&lt;/p&gt;
+&lt;p&gt;You’re delegating away a certain level of control off to someone else who has no knowledge of or interest in the final outcome of your team’s app.&lt;/p&gt;
+&lt;p&gt;Adding dependencies to your project doesn’t come without cost, so it’s best to count that cost up front in order to make sure it’s a good idea to pursue this option.&lt;/p&gt;
+&lt;p&gt;If you are going to seek out modules of code from a 3rd party, what are some key assessment factors that could help you in this important decision?&lt;/p&gt;
+&lt;p&gt;Josh Brown wrote a &lt;a href=&#34;http://roadfiresoftware.com/2015/08/save-your-future-self-from-broken-apps/&#34;&gt;&lt;em&gt;really&lt;/em&gt; comprehensive list of questions&lt;/a&gt; that guided me a lot in my own considerations of choosing a 3rd party library. I&amp;rsquo;m really grateful for his article – if you&amp;rsquo; haven&amp;rsquo;t read it, go check it out!&lt;/p&gt;
+&lt;p&gt;My own list that follows takes a more categorical approach for those of us who think in box-like structures. I thought of at least four broad categories that we should think about and ask questions about when it comes to choosing our dependencies.&lt;/p&gt;
+&lt;p&gt;How can you avoid depending on bad Swift libraries? What are some markers of good ones? Let&amp;rsquo;s find out!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;community&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;community-matters&#34;&gt;Community matters&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A good library has a good community surrounding it. Try using your favorite search engine to see what kind of content comes up for the dependency you’re thinking about. Search on StackOverflow to see what questions are being asked and what issues folks are running into, and what kinds of answers (if any) are being given.&lt;/p&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Take a look at the GitHub stars and forks counts. Stars are a good way for developers to flag repositories that are interesting to them. Forks indicate potential contributors to the repository, since the typical flow is to fork the project, branch, publish the branch, and submit a pull request.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;“Buzz” and “popularity” can come and go, but if folks are talking about the dependency you’re considering, that’s not a terrible sign. Unless what they’re talking about all the problems the library has, haha. In all seriousness, though, utilize social media and observe / ask around to see what other developers are saying about it before bringing it into your app.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;maintenance&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;maintenance-matters&#34;&gt;Maintenance matters&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;When was the last commit to the repository? If it was 5 years ago, this could be a red flag. Sure, it could just mean that the library is “done” and works great. But you and I both know that as the world of software moves forward, change is inevitable, and a library that doesn’t change with the times is more than likely doomed to failure. Checking the pulse of the repository on GitHub is one way to determine how well-maintained the library is.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;How many issues are open? How many are being closed as resolved? Repositories with a lot of issues open could indicate an active community… unless those issues never get closed. In which case the indicator is a less positive one. Once again, GitHub’s Pulse feature will be a good guide even on figuring out how the repository owner is responding to issues that come their way.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;documentation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;documentation-matters&#34;&gt;Documentation matters&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;If a library has no documentation to speak of, how are we as developers supposed to figure out how to use it? The better and more exhaustive the documentation, the better the chances are that the library is worth surviving the candidate list to incorporate into your project&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Even better is when the repository owner provides examples of how to use their library. Seeing examples will give you an idea of what’s possible, how nice the API is, and is overall a good reference point for integrating it with your own app. Documentation without examples is less valuable than documentation &lt;em&gt;with&lt;/em&gt; examples.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;quality&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;quality-matters&#34;&gt;Quality matters&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;If you&amp;rsquo;re using CocoaPods, know that each CocoaPod that’s submitted to the central ‘Trunk’, as they call it, receives a quality index that is based on various pieces of analysis that can be done on the repository and on the code within the pod itself. Some of the analysis that’s done is based on some of the things I just discussed, such as GitHub stars, documentation, etc. A full list of how the CocoaPods quality index is assessed and assigned can be found at &lt;a href=&#34;https://guides.cocoapods.org/making/quality-indexes&#34;&gt;https://guides.cocoapods.org/making/quality-indexes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;So there you have it – a few broad categories to think in terms of when trying to get direction on whether or not you should bring a given 3rd party library into your own Swift project.&lt;/p&gt;
+&lt;p&gt;Do you have other &amp;ldquo;box-like” categories that you use to guide your dependency decisions? Feel free to sound off in the comments with your thoughts!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>OpenSSL for iOS and Swift the Easy Way</title>
+      <link>https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/</link>
+      <pubDate>Tue, 22 Sep 2015 04:39:28 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m currently working on outfitting an app I&amp;rsquo;m working on to be able to &lt;a href=&#34;https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html#//apple_ref/doc/uid/TP40010573-CH1-SW2&#34;&gt;validate receipts&lt;/a&gt; to verify purchases of the app.&lt;/p&gt;
+&lt;p&gt;Little did I know, this adventure would introduce the need to understand how to use cryptography in order to work with the receipt.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;cryptography-library-needed&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;cryptography-library-needed&#34;&gt;Cryptography library needed&lt;/h2&gt;
+&lt;p&gt;In order to even &amp;ldquo;open&amp;rdquo; the receipt itself, we&amp;rsquo;ve got to work with something called a &amp;ldquo;PKCS #7 container&amp;rdquo;. Once we get the container open, we need to be able to validate Apple&amp;rsquo;s certificate that they use to sign every purchase of every app.&lt;/p&gt;
+&lt;p&gt;All of this requires the use of a cryptography library, and OpenSSL seems to be the common choice, due to its being open source.&lt;/p&gt;
+&lt;p&gt;I found that figuring out what to do to get OpenSSL into my project was harder than I wanted it to be. It turns out that there are a few to do this, but I wanted the easiest to implement (and the easiest to maintain). The options I was able to identify are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Build the binaries for each platform yourself. To do this you&amp;rsquo;ve got to make sure you build for both the simulator and the device by running special config routines and using makefiles and what-not. It seemed error-prone, and I&amp;rsquo;m not confident enough in my ability to know whether or not I&amp;rsquo;ve done it right.&lt;/li&gt;
+&lt;li&gt;Download a pre-built static library – however, this introduces a risk that I wasn&amp;rsquo;t really willing to take. How do I trust that pre-built library? If there&amp;rsquo;s a vulnerability there, how do I easily upgrade the library to the patched version? Every recommendation I&amp;rsquo;ve seen thus far says, &amp;ldquo;Always build your own static library, rather than download it already-built from somewhere&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Cocoapods. Simply put, this was the easiest route for me.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a name=&#34;cocoapods&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;openssl-for-ios-with-cocoapods&#34;&gt;OpenSSL for iOS with Cocoapods&lt;/h2&gt;
+&lt;p&gt;How easy is it to get started with OpenSSL for iOS with Cocoapods?&lt;/p&gt;
+&lt;p&gt;Pretty easy.&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t have Cocoapods yet, you can head over to &lt;a href=&#34;http://cocoapods.org&#34;&gt;Cocoapods.org&lt;/a&gt; and follow their instructions for installing. It&amp;rsquo;s literally one command at the terminal:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo gem install cocoapods&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Once Cocoapods is installed, open your project in Xcode and add a new empty file (File -&amp;gt; New File -&amp;gt; Other -&amp;gt; Empty) called Podfile.&lt;/p&gt;
+&lt;p&gt;In its contents, you simply add a reference to the OpenSSL library:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;target &lt;span class=&#34;s1&#34;&gt;&amp;#39;NameOfYourApp&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    pod &lt;span class=&#34;s1&#34;&gt;&amp;#39;OpenSSL&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;~&amp;gt; 1.0&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;end&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Note that there are several ‘OpenSSL&amp;rsquo; Cocoapod specs out there to choose from. I originally tried one that looked like it was for iOS (OpenSSL-iOS), but I was never able to get Swift code to recognize the C functions and types.&lt;/p&gt;
+&lt;p&gt;The one that seemed to still pull the source from openssl.org and build it when the pod is installed was simply named ‘OpenSSL&amp;rsquo; and I&amp;rsquo;ve verified that my Swift code can ‘see&amp;rsquo; the C code without running into ‘unresolved identifier&amp;rsquo; compiler errors.&lt;/p&gt;
+&lt;p&gt;Once the Podfile is created and configured, save it and close Xcode. Then head to the Terminal.&lt;/p&gt;
+&lt;p&gt;Navigate to your Xcode project folder where the Podfile is located and run &lt;code&gt;pod install&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Once it&amp;rsquo;s finished doing its thing (be patient… it took several minutes for me), you can open the new .xcworkspace file that Cocoapods created for you. You&amp;rsquo;ll have everything in your project configured to depend on the OpenSSL library through the new Pods project that&amp;rsquo;s been added to your Workspace.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;bridging-header&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;bridging-header&#34;&gt;Bridging header&lt;/h3&gt;
+&lt;p&gt;In order to use OpenSSL with Swift, you&amp;rsquo;re going to need to create an Objective-C bridging header to access the functionality provided in the OpenSSL libraries.&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t already have an Objective-C bridging header, it&amp;rsquo;s simple to get one added automatically by Xcode for you:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Choose File -&amp;gt; New -&amp;gt; File&lt;/li&gt;
+&lt;li&gt;Choose Source under iOS (on the left&lt;/li&gt;
+&lt;li&gt;Choose Objective-C File&lt;/li&gt;
+&lt;li&gt;Name it &amp;ldquo;bridge&amp;rdquo; (or anything, really – it&amp;rsquo;s a dummy file that you&amp;rsquo;ll delete after Xcode generates the bridging header)&lt;/li&gt;
+&lt;li&gt;Choose Next, and then Create&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Xcode will prompt you to create the bridging header – you should let it. Once it&amp;rsquo;s created, you can delete &amp;ldquo;bridge.m&amp;rdquo; (the Objective-C .m file that you just created in the steps above).&lt;/p&gt;
+&lt;p&gt;Within the bridging header, you can insert some &lt;code&gt;#import&lt;/code&gt; statements to make the OpenSSL library components visible to your Swift project. For example, to start off, you could flesh out the bridging header with a couple of OpenSSL header files:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;openssl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;pkcs7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;h&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;openssl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;objects&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nc&#34;&gt;h&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Others that you may need in your Swift project&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;xcode-7-bitcode&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;xcode-7--bitcode&#34;&gt;Xcode 7 &amp;amp; Bitcode&lt;/h3&gt;
+&lt;p&gt;When you build and run your newly configured project in the Simulator, things are going to work fine.&lt;/p&gt;
+&lt;p&gt;When you build it for your device, however, it will fail.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;…Pods/OpenSSL/lib/libcrypto.a(bio_lib.o)&amp;rsquo; does not contain bitcode. You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target. for architecture arm64&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;At the time of this writing, there is somthing in OpenSSL that doesn&amp;rsquo;t support Xcode 7&amp;rsquo;s Bitcode feature. Eventually (hopefully) they&amp;rsquo;ll fix it, but for now, if you want to use OpenSSL in a Swift project using Xcode 7, you&amp;rsquo;ll have to turn off Bitcode.&lt;/p&gt;
+&lt;p&gt;Click on your project, and then click on your app target under ‘Targets&amp;rsquo; in the project settings window.&lt;/p&gt;
+&lt;p&gt;Find Build Options and set Enable Bitcode to ‘No&#39;&lt;/p&gt;
+&lt;p&gt;If you try re-building against the device with this setting set to ‘No&amp;rsquo;, it should build and run without issue.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;That&amp;rsquo;s all there is to getting OpenSSL built and added as a reference in your app. &lt;em&gt;Now&lt;/em&gt; will come the fun part of using it with Swift, but I will save that for another entry.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/&#34; title=&#34;Preparing to Test Receipt Validation for iOS&#34;&gt;Preparing to Test Receipt Validation for iOS&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/&#34; title=&#34;Loading a Receipt for Validation with Swift&#34;&gt;Loading a Receipt for Validation with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/&#34; title=&#34;Extracting a PKCS7 Container for Receipt Validation with Swift&#34;&gt;Extracting a PKCS7 Container for Receipt Validation with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/&#34; title=&#34;Receipt Validation – Verifying a Receipt Signature in Swift&#34;&gt;Receipt Validation – Verifying a Receipt Signature in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/&#34; title=&#34;Receipt Validation – Parse and Decode a Receipt with Swift&#34;&gt;Receipt Validation – Parse and Decode a Receipt with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/&#34; title=&#34;Finalizing Receipt Validation in Swift – Computing a GUID Hash&#34;&gt;Finalizing Receipt Validation in Swift – Computing a GUID Hash&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,38 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KeychainItemWrapper on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/keychainitemwrapper/</link>
+    <description>Recent content about iOS development with Swift in KeychainItemWrapper  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 May 2014 18:20:56 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/keychainitemwrapper/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>iOS KeychainItemWrapper – Obstacles Overcome, Inconsistencies Resolved</title>
+      <link>https://www.andrewcbancroft.com/2014/05/21/ios-keychainitemwrapper-obstacles-overcome-inconsistencies-resolved/</link>
+      <pubDate>Wed, 21 May 2014 18:20:56 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/05/21/ios-keychainitemwrapper-obstacles-overcome-inconsistencies-resolved/</guid>
+      <description>&lt;p&gt;I had a major case of &amp;ldquo;struggleface” when trying to work with the &lt;span class=&#34;lang:default decode:true  crayon-inline&#34;&gt;KeychainItemWrapper&lt;/span&gt;  for iOS.  I wanted it to be simple – just take a username and password and put it in the iOS Keychain for secure retrieval later.  Turns out that I had to spend an entire work day and do a lot of Googling to get it working so I&amp;rsquo;m posting this to try and bring all the pieces together.&lt;/p&gt;
+&lt;h4 id=&#34;obstacle-1-automatic-reference-counting-arc&#34;&gt;Obstacle #1:  Automatic Reference Counting (ARC)&lt;/h4&gt;
+&lt;p&gt;My project uses ARC for its memory management.  As it turns out, the &lt;span class=&#34;lang:default decode:true  crayon-inline&#34;&gt;KeychainItemWrapper&lt;/span&gt;  class from Apple does not support ARC out of the box.  Step one for me should have been to find an ARC-friendly version of the class, but I had no idea until I got in there.  I attempted to retrofit the one provided by Apple, but there are a few nuances with toll-free bridging that I don&amp;rsquo;t fully understand, so I went in search of someone who&amp;rsquo;s already invented the wheel.  There&amp;rsquo;s a GitHub Gist repository that provided exactly what I needed:  &lt;a title=&#34;KeychainItemWrapper ARCified&#34; href=&#34;https://gist.github.com/dhoerl/1170641&#34; target=&#34;_blank&#34;&gt;KeychainItemWrapper ARCified&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;obstacle-2-error-message-obscurity&#34;&gt;Obstacle #2:  Error Message Obscurity&lt;/h4&gt;
+&lt;p&gt;Somehow in my novice experimentation with storing credentials in the keychain I ended up getting a &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;keychainItem&lt;/span&gt;  on the keychain for a particular test user that couldn&amp;rsquo;t be updated or removed.  I kept getting a cryptic error code (–25299) as I debugged the app when attempting to sign in with that user&amp;rsquo;s credentials.  I spent…well…too long trying to find what the keychain error codes meant.&lt;/p&gt;
+&lt;p&gt;While I started off reviewing the &lt;a title=&#34;Keychain Services Developer Documentation&#34; href=&#34;https://developer.apple.com/library/ios/documentation/Security/Reference/keychainservices/Reference/reference.html&#34; target=&#34;_blank&#34;&gt;Keychain Services developer documentation&lt;/a&gt; page, I didn&amp;rsquo;t see the section describing the result codes.  &lt;a title=&#34;Keychain Services Result Codes Section&#34; href=&#34;https://developer.apple.com/library/ios/documentation/Security/Reference/keychainservices/Reference/reference.html#jumpTo_124&#34; target=&#34;_blank&#34;&gt;This is the section&lt;/a&gt; that was most helpful in determining what &amp;ldquo;-25299” meant:  &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;errSecDuplicateItem&lt;/span&gt;  – The item already exists.  In my case, the item was in there but the keychain search method didn&amp;rsquo;t find it, so it tried to add it again, causing a &amp;ldquo;duplicate keychain item” error message.&lt;/p&gt;
+&lt;h4 id=&#34;inconsistent-behavior&#34;&gt;Inconsistent Behavior&lt;/h4&gt;
+&lt;p&gt;Eventually I got things to store to the keychain fine for &lt;em&gt;some&lt;/em&gt; test user accounts but my primary test account (the one I started with at the beginning of the day) still ran into the &amp;ldquo;duplicate keychain item” error no matter what I tried.  Signing out of my app didn&amp;rsquo;t work.  Sending a &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;resetKeychainItem&lt;/span&gt;  message to my &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;KeychainItemWrapper&lt;/span&gt;  instance didn&amp;rsquo;t work.  Even deleting the app from the simulator didn&amp;rsquo;t work.  I ended up just needing to reset my simulator completely.  This was simple to do:&lt;/p&gt;
+&lt;p&gt;iOS Simulator -&amp;gt; Reset Content and Settings…&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/05/Screen-Shot-2014-05-21-at-12.59.48-PM.png&#34;&gt;&lt;img class=&#34;alignnone wp-image-1051 size-full&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/05/Screen-Shot-2014-05-21-at-12.59.48-PM.png&#34; alt=&#34;Reset iOS Simulator&#39;s Content and Settings&#34; width=&#34;295&#34; height=&#34;208&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Things began to work perfectly after the reset.  Unfortunately, I spent the majority of the day spinning over the error message trying to find ways to programmatically either remove the &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;keychainItem&lt;/span&gt;  or reset it so that it would no longer be a duplicate.  I&amp;rsquo;d have been finished hours earlier if I would have just reset the simulator.  In fact, &lt;em&gt;since&lt;/em&gt; I reset the simulator, I&amp;rsquo;ve been unable to reproduce the scenario I&amp;rsquo;d gotten myself into.  Otherwise I would list the obstacles I was trying to work through for the rest of the day as well.&lt;/p&gt;
+&lt;p&gt;As far as I can tell, it was all stemming from whatever I did at the beginning of the day to get the malformed &lt;span class=&#34;lang:default decode:true  crayon-inline &#34;&gt;keychainItem&lt;/span&gt;  in the keychain.  The simulator reset did the trick.&lt;/p&gt;
+&lt;p&gt;Commit.&lt;br&gt;
+Breathe.&lt;br&gt;
+Go home happy.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

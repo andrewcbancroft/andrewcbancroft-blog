@@ -1,0 +1,90 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Carthage on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/carthage/</link>
+    <description>Recent content about iOS development with Swift in Carthage  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Jul 2015 04:05:05 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/carthage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Setting Up Carthage for the Terminal-Timid</title>
+      <link>https://www.andrewcbancroft.com/2015/07/29/setting-up-carthage-for-the-terminal-timid/</link>
+      <pubDate>Thu, 30 Jul 2015 04:05:05 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/07/29/setting-up-carthage-for-the-terminal-timid/</guid>
+      <description>&lt;p&gt;The old adage &amp;ldquo;Don&amp;rsquo;t go reinventing the wheel” comes into play &lt;em&gt;often&lt;/em&gt; when developing software, doesn&amp;rsquo;t it? Why build this [thing] ourselves when someone else has invented it already?&lt;/p&gt;
+&lt;p&gt;Fantastic libraries and frameworks exist out there to assist developers with common and sometimes even difficult problems. Whether it be an easier-to-use abstraction over the networking stack with &lt;a href=&#34;https://github.com/AFNetworking/AFNetworking&#34;&gt;AFNetworking&lt;/a&gt; or &lt;a href=&#34;https://github.com/Alamofire/Alamofire&#34;&gt;AlamoFire&lt;/a&gt;, or adding a popular behavior-driven development testing framework like &lt;a href=&#34;https://github.com/Quick/Quick&#34;&gt;Quick&lt;/a&gt; to our workflow, we find ourselves constantly wanting to be able to take advantage of the things that others are doing in the community so we don&amp;rsquo;t have to invent that wheel again ourselves.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;need-dependency-management&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;the-need-for-dependency-management&#34;&gt;The need for dependency management&lt;/h3&gt;
+&lt;p&gt;With that comes the need for an easy way to manage external dependencies in our projects. We find the need to make sure that our projects have the right versions of whatever libraries or frameworks we&amp;rsquo;re bringing in. We want to ensure that if we move to another machine or add folks to our teams that they can go and restore all those same external dependencies without a lot of hassle. Therein lies at least partial justification for the usage of dependency managers.&lt;/p&gt;
+&lt;p&gt;The long-running &amp;ldquo;king of the hill” of dependency management for iOS developers has been the ever-popular &lt;a href=&#34;https://cocoapods.org/&#34;&gt;CocoaPods&lt;/a&gt;. However, there&amp;rsquo;s a new kid on the block, and its picking up popularity. This &amp;ldquo;new” dependency manager is called &lt;a href=&#34;https://github.com/Carthage/Carthage&#34;&gt;Carthage&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;what-is-carthage&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;what-is-carthage&#34;&gt;What is Carthage?&lt;/h3&gt;
+&lt;p&gt;From the GitHub repository&amp;rsquo;s main page for Carthage (emphasis mine):&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Carthage is intended to be the simplest way to add frameworks to your Cocoa application… Ultimately, we created Carthage because we wanted the &lt;strong&gt;simplest tool possible&lt;/strong&gt;—a dependency manager that gets the job done &lt;strong&gt;without taking over the responsibility of Xcode&lt;/strong&gt;, and &lt;strong&gt;without creating extra work for framework authors&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I&amp;rsquo;ve used Carthage for simple tasks like bringing in Quick for unit testing. It delivers on the promise of being simple, but even in its simplicity, installing and using Carthage requires the use of the Terminal.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;terminal-tension&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;terminal-tension&#34;&gt;Terminal tension&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;ll withhold judgement of this confession, I&amp;rsquo;ll openly share that I&amp;rsquo;m not a whiz on the command line. I &lt;em&gt;have&lt;/em&gt; found that the more I spend time in the Terminal, the less timid I become. It&amp;rsquo;s been a gradual transition into spending intentional time on the command line, but I share this to simply relate to those of you who, like me, find themselves thinking, &amp;ldquo;Really? All of this involves running commands in the Terminal? Ugh…”&lt;/p&gt;
+&lt;p&gt;Hang in there. Becoming proficient at this will take practice, but it&amp;rsquo;s worth it. Carthage really does make your dependency management simpler and more shareable with your team. Even if you&amp;rsquo;re working alone, I recommend investing the time to overcoming any anxiety you may have around the Terminal.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;installing-carthage&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;installing-carthage&#34;&gt;Installing Carthage&lt;/h3&gt;
+&lt;p&gt;So here&amp;rsquo;s the deal: The folks on the Carthage team have actually made it pretty easy to install Carthage &lt;em&gt;without&lt;/em&gt; the Terminal. If you go to their &lt;a href=&#34;https://github.com/Carthage/Carthage/releases&#34;&gt;releases page on GitHub&lt;/a&gt; and download + run the Carthage.pkg file for the latest release, you&amp;rsquo;ll be set up. BUT, &lt;strong&gt;Carthage is a command-line tool&lt;/strong&gt;, so to use it, you&amp;rsquo;ll still need the Terminal.&lt;/p&gt;
+&lt;p&gt;With that in mind, I&amp;rsquo;ve decided to get used to working with this tool &lt;em&gt;totally&lt;/em&gt; from the command-line from the start, which means installing it from the Terminal window. There&amp;rsquo;s a couple more steps involved, but I&amp;rsquo;d argue that it&amp;rsquo;s good practice. If you&amp;rsquo;re wanting to overcome your anxiety around the Terminal, skip the .pkg installation method and continue on.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;terminal-installation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;terminal-installation&#34;&gt;Terminal installation&lt;/h3&gt;
+&lt;p&gt;Installing Carthage from the command line assumes that you have a package manager for OSX called &lt;a href=&#34;http://brew.sh/&#34;&gt;&amp;ldquo;Homebrew”&lt;/a&gt; installed on your Mac. If you don&amp;rsquo;t, you need it. And yes, &lt;em&gt;it&lt;/em&gt; involves the Terminal too, but don&amp;rsquo;t worry – I&amp;rsquo;ve got you covered in the steps to follow. We&amp;rsquo;ll use Homebrew to install Carthage which will be used to manage the external dependencies in our app.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;installing-homebrew&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;first-things-first--installing-homebrew&#34;&gt;First things first – installing Homebrew&lt;/h4&gt;
+&lt;p&gt;Installing Homebrew isn&amp;rsquo;t complicated. It just involves knowing the command to run in the Terminal to get it downloaded and registered in your machine.&lt;/p&gt;
+&lt;p&gt;From the &lt;a href=&#34;http://brew.sh/&#34;&gt;Homebrew homepage&lt;/a&gt; we learn that the installation simply requires us to type in the following in the Terminal:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Pasting in the command and pressing enter will immediately produce a &lt;em&gt;lot&lt;/em&gt; of stuff in the terminal window. It&amp;rsquo;s okay. Don&amp;rsquo;t panic.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s simply letting you know what&amp;rsquo;s about to happen if you agree to continue:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png&#34; alt=&#34;Homebrew Install Command&#34; width=&#34;580&#34; height=&#34;364&#34; class=&#34;alignnone size-full wp-image-12168&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command.png 580w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/homebrew_install_command-300x188.png 300w&#34; sizes=&#34;(max-width: 580px) 100vw, 580px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So it&amp;rsquo;s going to…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install some files into some directories on your computer.&lt;/li&gt;
+&lt;li&gt;Change the read-write permissions on some directories to be &lt;em&gt;group&lt;/em&gt; writable. This allows Homebrew to do its thing when you tell it to.&lt;/li&gt;
+&lt;li&gt;Change those same directories&amp;rsquo; group to &lt;strong&gt;admin&lt;/strong&gt;. So these last two bullet points go together.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You&amp;rsquo;re prompted to press ‘RETURN&amp;rsquo; to continue (or anything else to stop the installation). If you&amp;rsquo;re good with the changes it describes to you, press ‘RETURN&#39;.&lt;/p&gt;
+&lt;p&gt;Yikes! What&amp;rsquo;s all this now?&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png&#34; alt=&#34;Elevate permissions using sudo&#34; width=&#34;580&#34; height=&#34;365&#34; class=&#34;alignnone size-full wp-image-12169&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions.png 580w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/sudo_permissions-300x189.png 300w&#34; sizes=&#34;(max-width: 580px) 100vw, 580px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Well, for the installation to continue, Homebrew needs to elevate the level of permissions it has in order write all the files it needs to write and to set all the permissions it needs to set. Under the hood, it&amp;rsquo;s run a &lt;code&gt;sudo&lt;/code&gt; command. It requires your password to authorize this elevation. Go ahead and type your password, and press ‘RETURN&amp;rsquo; to continue.&lt;/p&gt;
+&lt;p&gt;The installation will continue by downloading all of the necessary files and performing all the changes it said it&amp;rsquo;d make. When it&amp;rsquo;s done, you&amp;rsquo;ll get an &amp;ldquo;Installation Successful” message:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png&#34; alt=&#34;Homebrew Installation Successful&#34; width=&#34;586&#34; height=&#34;367&#34; class=&#34;alignnone size-full wp-image-12177&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful.png 586w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/install_successful-300x188.png 300w&#34; sizes=&#34;(max-width: 586px) 100vw, 586px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sweet! To test it out, you can simply type &lt;code&gt;brew help&lt;/code&gt; like it suggests in the line below the &amp;ldquo;Installation successful!” message. It should print out a bunch of stuff to the Terminal window, explaining how to use Homebrew:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png&#34; alt=&#34;It works!&#34; width=&#34;581&#34; height=&#34;366&#34; class=&#34;alignnone size-full wp-image-12172&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works.png 581w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/it_works-300x189.png 300w&#34; sizes=&#34;(max-width: 581px) 100vw, 581px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Well done! We can now use Homebrew to install Carthage. You can use it to install all kinds of other fantastic utilities as well, but for now we&amp;rsquo;ll focus on the Carthage installation…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;now-install-carthage&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;now-to-install-carthage&#34;&gt;Now to install Carthage&lt;/h4&gt;
+&lt;p&gt;With Homebrew installed, we&amp;rsquo;re almost there. From the &lt;a href=&#34;https://github.com/Carthage/Carthage&#34;&gt;Carthage GitHub repository page&lt;/a&gt;, we learn what commands to run on the command line to get Carthage installed.&lt;/p&gt;
+&lt;p&gt;First, we run &lt;code&gt;brew update&lt;/code&gt; to make sure that Homebrew is totally up-to-date. If you just installed Homebrew for the first time, you&amp;rsquo;re probably good to go. Just to be safe though, go ahead and run it.&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png&#34; alt=&#34;Brew Update&#34; width=&#34;582&#34; height=&#34;363&#34; class=&#34;alignnone size-full wp-image-12189&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update.png 582w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Update-300x187.png 300w&#34; sizes=&#34;(max-width: 582px) 100vw, 582px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The last step is to run &lt;code&gt;brew install carthage&lt;/code&gt;. Yes. It&amp;rsquo;s that simple. Homebrew will take care of everything else for you! Here&amp;rsquo;s the final result:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png&#34; alt=&#34;Brew Install Carthage&#34; width=&#34;580&#34; height=&#34;362&#34; class=&#34;alignnone size-full wp-image-12188&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage.png 580w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Brew_Install_Carthage-300x187.png 300w&#34; sizes=&#34;(max-width: 580px) 100vw, 580px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;cartfiles&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;cartfiles&#34;&gt;Cartfiles&lt;/h3&gt;
+&lt;p&gt;Once Carthage is installed, it&amp;rsquo;s time to create your Cartfile file. After I read &lt;a href=&#34;https://github.com/Carthage/Carthage&#34;&gt;the documentation&lt;/a&gt; on how to set this up, I found myself doubting whether I&amp;rsquo;d done it right, so again, to alleviate any fears our there around the mystery of what&amp;rsquo;s going on I&amp;rsquo;ll share what I&amp;rsquo;ve discovered.&lt;/p&gt;
+&lt;p&gt;First of all, the documentation merely says, &amp;ldquo;Create a Cartfile that lists the frameworks you’d like to use in your project.” I scratched my head and asked, &amp;ldquo;Okay – well, where? And should it have a file extension?”&lt;/p&gt;
+&lt;p&gt;The answers that worked for me were, &amp;ldquo;Somewhere in your Xcode project (I put it under Supporting Files)” and &amp;ldquo;No file extension…just the name Cartfile works”.&lt;/p&gt;
+&lt;p&gt;To demonstrate, here&amp;rsquo;s a couple of screenshots depicting how to add a Cartfile to your Xcode project…&lt;/p&gt;
+&lt;p&gt;Simply add a new Empty file, found under iOS -&amp;gt; Other:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-1024x409.png&#34; alt=&#34;New empty file&#34; width=&#34;1024&#34; height=&#34;409&#34; class=&#34;alignnone size-large wp-image-12191&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-1024x409.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file-300x120.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/New-empty-file.png 1394w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In the new file dialog, simply type in &amp;ldquo;Cartfile”, and press Create:&lt;br&gt;
+&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create.png&#34; alt=&#34;Cartfile -&gt; Create&#34; width=&#34;783&#34; height=&#34;298&#34; class=&#34;alignnone size-full wp-image-12192&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create.png 783w, https://www.andrewcbancroft.com/wp-content/uploads/2015/07/Cartfile-create-300x114.png 300w&#34; sizes=&#34;(max-width: 783px) 100vw, 783px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;This is where I&amp;rsquo;m going to stop for now and defer to the &lt;a href=&#34;https://github.com/Carthage/Carthage&#34;&gt;Carthage GitHub documentation&lt;/a&gt; to explain more about what exactly to put into the Cartfile and how to run the subsequent commands to grab the libraries and frameworks you list, and build them so that they can be added to your Xcode project. I may pick this back up again, but this guide was starting to get lengthy, and I felt that actually building the frameworks from a Cartfile could very well deserve isolated treatment for the sake of clarity. If you&amp;rsquo;re interested in reading more on Carthage, sound off in the comments or shoot me an e-mail! Thanks for reading.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

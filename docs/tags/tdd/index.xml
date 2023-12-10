@@ -1,0 +1,224 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TDD on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/tdd/</link>
+    <description>Recent content about iOS development with Swift in TDD  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Apr 2015 18:52:11 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/tdd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Testability Tip for Swift Developers – Public Over Private</title>
+      <link>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</link>
+      <pubDate>Wed, 15 Apr 2015 18:52:11 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</guid>
+      <description>&lt;p&gt;Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a &lt;code&gt;private&lt;/code&gt; function, however, I often scratch my head and ask, &amp;ldquo;How am I supposed to test this??”.&lt;/p&gt;
+&lt;p&gt;Most experienced testers will tell you, &amp;ldquo;Don&amp;rsquo;t test private implementation – only public API”.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Okay… But how, does that private function get tested?”, I always asked.&lt;/p&gt;
+&lt;p&gt;In this article, I intend to share a testability tip catered to the Swift developer community that helps alleviate this issue with testing private functions.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;testing-and-observability&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;testing-and-observability&#34;&gt;Testing and observability&lt;/h3&gt;
+&lt;p&gt;&lt;a name=&#34;developers-as-clients-of-apis&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;developers-as-clients-of-apis&#34;&gt;Developers as clients of APIs&lt;/h4&gt;
+&lt;p&gt;As developers, we are &amp;ldquo;clients” of APIs on a daily basis. We interact with other developers&amp;rsquo; frameworks and libraries through the visible, observable, Application Programming Interface that they&amp;rsquo;ve exposed to us. It&amp;rsquo;s the way they&amp;rsquo;ve designed for us to interact with their code.&lt;/p&gt;
+&lt;p&gt;Notice three words that I chose in that introductory paragraph:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Visible&lt;/li&gt;
+&lt;li&gt;Observable&lt;/li&gt;
+&lt;li&gt;Exposed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If we are going to use another developer&amp;rsquo;s library, &lt;em&gt;all we have&lt;/em&gt; as developers is the public interface that they&amp;rsquo;ve made visible to us… It&amp;rsquo;s the only observable thing we can look at and go, &amp;ldquo;Oh! Okay, to do this, I call &lt;em&gt;that&lt;/em&gt; function”. The only thing exposed are the functions and properties that the developer intends for us to see.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;tests-as-clients-of-apis&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;tests-as-clients-of-apis&#34;&gt;Tests as clients of APIs&lt;/h4&gt;
+&lt;p&gt;Have you ever viewed your unit test suite as a &amp;ldquo;client” of your code? It is!&lt;/p&gt;
+&lt;p&gt;And just like a developer, the unit tests in your test target interacts with &lt;em&gt;your&lt;/em&gt; app&amp;rsquo;s API through the same visible, observable, interface that you&amp;rsquo;ve exposed to them.&lt;/p&gt;
+&lt;p&gt;If you start to personify your test target and think of it in terms of &amp;ldquo;just another client of your code”, you begin to see that it really doesn&amp;rsquo;t have any more visibility of your code than another developer would if he or she were consuming it.&lt;/p&gt;
+&lt;p&gt;All of this boils down to say, if it&amp;rsquo;s observable, it&amp;rsquo;s testable. Which means, the easiest and most natural code to test is &lt;code&gt;public&lt;/code&gt; code.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;public-over-private&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;public-over-private-and-internal&#34;&gt;Public over private (and internal)&lt;/h3&gt;
+&lt;p&gt;So should &lt;em&gt;everything&lt;/em&gt; be &lt;code&gt;public&lt;/code&gt; instead of &lt;code&gt;private&lt;/code&gt; or &lt;code&gt;internal&lt;/code&gt;? Certainly not.&lt;/p&gt;
+&lt;p&gt;Object-oriented programming strives for data-hiding and encapsulation, so there &lt;em&gt;are&lt;/em&gt; reasons to keep some things non-public.&lt;/p&gt;
+&lt;p&gt;Additionally, there are &lt;a href=&#34;https://developer.apple.com/swift/blog/?id=27&#34;&gt;certain Swift compiler optimizations&lt;/a&gt; (which lead to run-time optimizations) that can be gained when you mark things in your Type as &lt;code&gt;final&lt;/code&gt;. Using the &lt;code&gt;private&lt;/code&gt; access modifier allows the compiler to &lt;em&gt;infer&lt;/em&gt; that it is &lt;code&gt;final&lt;/code&gt; because it&amp;rsquo;s narrowly scoped to the current Type &lt;em&gt;only&lt;/em&gt;. These are handy things to know, but as is always the case with optimization, avoid &lt;em&gt;premature&lt;/em&gt; optimization by &lt;em&gt;measuring first&lt;/em&gt; to decide if you really need them.&lt;/p&gt;
+&lt;p&gt;Whenever possible, I prefer &lt;code&gt;public&lt;/code&gt; over the other access modifiers to help enable testing for my apps.&lt;/p&gt;
+&lt;p&gt;So when is &amp;ldquo;whenever possible”?&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;reason-for-existence&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;public-when-part-of-a-types-reason-for-existence&#34;&gt;Public when part of a Type&amp;rsquo;s reason for existence&lt;/h4&gt;
+&lt;p&gt;Obviously, properties and functions that are part of a Type&amp;rsquo;s core purpose can be marked &lt;code&gt;public&lt;/code&gt;. My practice is to decide, &amp;ldquo;Is this function why this Type exists?”. If so, I mark it as &lt;code&gt;public&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Note also that the Type itself needs to be marked public if it&amp;rsquo;s going to be visible to your unit tests.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Instead of this (default --internal-- access)...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyClass&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;myFunc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// Performs something essential to why MyClass exists&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Make things public...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyClass&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;myFunc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// Performs something essential to why MyClass exists&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a name=&#34;new-type&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;transition-many-private-components-to-new-type&#34;&gt;Transition many private components to new Type&lt;/h4&gt;
+&lt;p&gt;Having &lt;em&gt;many&lt;/em&gt; &lt;code&gt;private&lt;/code&gt; properties and functions can be an indication that there needs to be a new Type created to encapsulate those components. I&amp;rsquo;ve heard developers talk about this situation as one that &amp;ldquo;screams, ‘New Type!&amp;rsquo;”.&lt;/p&gt;
+&lt;p&gt;If we extract out sets of related &lt;code&gt;private&lt;/code&gt; properties and functions into a new Type, those pieces of code &lt;em&gt;are the reason that Type exists&lt;/em&gt;, and thus should be marked &lt;code&gt;public&lt;/code&gt;. Testing, then, becomes a matter of writing unit tests for the new Type and its public API!&lt;/p&gt;
+&lt;p&gt;Even if you just have a few &lt;code&gt;private&lt;/code&gt; code blocks in the Type you&amp;rsquo;re trying to test, it can sometimes make your testing life easier to transition them to a new Type as &lt;code&gt;public&lt;/code&gt; components.&lt;/p&gt;
+&lt;p&gt;If I&amp;rsquo;m really uncomfortable marking functions &lt;code&gt;public&lt;/code&gt; in the Type where they currently exist, creating a new Type and marking them &lt;code&gt;public&lt;/code&gt; there is usually the better alternative, and it immediately enables testing for that set of code.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;testing-non-public&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;testing-non-public-code&#34;&gt;Testing non-public code&lt;/h3&gt;
+&lt;p&gt;As I mentioned in the beginning, it&amp;rsquo;s not good to just haphazardly go through your code and &amp;ldquo;&lt;code&gt;public&lt;/code&gt; all the things!!”. After &lt;em&gt;appropriately&lt;/em&gt; marking fundamental functions &lt;code&gt;public&lt;/code&gt; and transitioning sets of &lt;code&gt;private&lt;/code&gt; functions to new Types where they can happily live as part of &lt;em&gt;that&lt;/em&gt; Type&amp;rsquo;s public API, there will likely be a few &lt;code&gt;private&lt;/code&gt; or &lt;code&gt;internal&lt;/code&gt; things left over.&lt;/p&gt;
+&lt;p&gt;How do these get tested?&lt;/p&gt;
+&lt;p&gt;Well, ideally, these are small, simple, helper functions that are only useful when called within the Type you&amp;rsquo;re working on.&lt;/p&gt;
+&lt;p&gt;If these functions produce observable results in the places where they&amp;rsquo;re called, you end up testing these non-public components &lt;em&gt;implicitly&lt;/em&gt;, that is, by testing the things that &lt;em&gt;are&lt;/em&gt; &lt;code&gt;public&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;During the course of testing some &lt;code&gt;public&lt;/code&gt; function which calls another non-public function, that non-public function&amp;rsquo;s logic will be executed. If the outcome of that function&amp;rsquo;s execution affects the Type&amp;rsquo;s state, or the output of its &lt;code&gt;public&lt;/code&gt; parent function, those are the things that you&amp;rsquo;d be able to write unit tests for, because those are the &amp;ldquo;observation points”, so to speak.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;The bottom line is: observable == testable. Just like another developer, the suite of unit tests in your test target interacts with your app&amp;rsquo;s API through the visible, observable, interface that you&amp;rsquo;ve exposed to them. The more observable your API components are, the more testable your code becomes. Which is why I prefer &lt;code&gt;public&lt;/code&gt; over &lt;code&gt;private&lt;/code&gt; whenever possible!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/tag/unit-testing/&#34; title=&#34;Browse All Unit Testing Articles @ andrewcbancroft.com&#34;&gt;Browse All Unit Testing Articles @ andrewcbancroft.com&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34; title=&#34;Swift Access Control – Implications for Unit Testing&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>An (Almost) TDD Workflow in Swift</title>
+      <link>https://www.andrewcbancroft.com/2015/03/10/an-almost-tdd-workflow-in-swift/</link>
+      <pubDate>Wed, 11 Mar 2015 01:46:59 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/03/10/an-almost-tdd-workflow-in-swift/</guid>
+      <description>&lt;p&gt;There are times when it feels paralyzing to write tests &lt;em&gt;first&lt;/em&gt; before any production code is written. Even with good requirements documentation, I often find myself asking, &amp;ldquo;How am I supposed to write a test to verify &lt;strong&gt;&lt;em&gt;x&lt;/em&gt;&lt;/strong&gt; about some &lt;strong&gt;&lt;em&gt;thing&lt;/em&gt;&lt;/strong&gt; that doesn&amp;rsquo;t exist in actual code yet?” It can be crippling.&lt;/p&gt;
+&lt;p&gt;The following is a workflow that&amp;rsquo;s helped me grow in my test-first development skills. When I find myself staring at the screen, paralyzed because I&amp;rsquo;m &amp;ldquo;not supposed to write actual production code until the test is written”, I often turn to the workflow that I&amp;rsquo;m about to describe to help me break through to being productive. With practice and experience, I find myself needing this strategy less and less, but I&amp;rsquo;ve found it helpful to use this (almost) TDD workflow as a gateway into full test-first development.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;setup&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;set-up-side-by-side-view-test-on-left--code-on-right&#34;&gt;Set up side-by-side view: Test on left | Code on right&lt;/h3&gt;
+&lt;p&gt;My starting place is to always have a test file open on the left, and the actual production code file that I want to write tests for on the right. This does a couple of things for me:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;It helps me avoid a lot of switching back and forth between tests and production code.&lt;/li&gt;
+&lt;li&gt;It helps me keep tests at the forefront of my mind. Without seeing them in front of me, I could more easily forget about them. Having the split IDE keeps me conscious of the need to prioritize testing.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I recently &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/&#34;&gt;wrote about a technique to seed a Core Data database&lt;/a&gt;, and with that post, I &lt;a href=&#34;https://github.com/andrewcbancroft/Zootastic&#34;&gt;included a project called &amp;ldquo;Zootastic”&lt;/a&gt; – a contrived app that modeled the storage and display of &lt;code&gt;Zoos&lt;/code&gt; (along with &lt;code&gt;Animals&lt;/code&gt; and their &lt;code&gt;Classifications&lt;/code&gt;). I created a class called &lt;code&gt;DataHelper&lt;/code&gt; which had several &lt;code&gt;seed()&lt;/code&gt; methods. For the purposes of having an example before us, suppose that I wanted to test &lt;code&gt;DataHelper&lt;/code&gt;. My screen might look something like this, with my tests on the left, and my &lt;code&gt;DataHelper&lt;/code&gt; class on the right:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/TestsLeft_CodeRight.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/TestsLeft_CodeRight-1024x208.png&#34; alt=&#34;Test on the left | Code on the right&#34; width=&#34;1024&#34; height=&#34;208&#34; class=&#34;alignnone size-large wp-image-11495&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/12/TestsLeft_CodeRight-1024x208.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/TestsLeft_CodeRight-300x61.png 300w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;write-code&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;write-the-actual-production-code&#34;&gt;Write the actual production code&lt;/h3&gt;
+&lt;p&gt;What I want is to insert 3 Zoo objects into the Core Data data store. But without the actual code before me, it&amp;rsquo;s hard to imagine what the test(s) for that code might look like.&lt;/p&gt;
+&lt;p&gt;When I get stuck in this way, I&amp;rsquo;ll go ahead and write the actual production code:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteProductionCode.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteProductionCode-1024x264.png&#34; alt=&#34;Write the production code&#34; width=&#34;1024&#34; height=&#34;264&#34; class=&#34;alignnone size-large wp-image-11497&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteProductionCode-1024x264.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteProductionCode-300x77.png 300w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;One important thing to remember is that you don&amp;rsquo;t want to write a &lt;em&gt;ton&lt;/em&gt; of code in this step… just enough to spark your brain into figuring out what kinds of tests you can write. Write small increments of code. The more you write, the harder it will be to ensure you&amp;rsquo;ve covered the code and the various edge cases that may exist. Your goal is not to write the &lt;em&gt;app&lt;/em&gt;. Your goal is to write a function, or a &lt;em&gt;part&lt;/em&gt; of the function – just enough to get you going with tests.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;write-test&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;write-a-test-that-will-exercise-the-code&#34;&gt;Write a test that will exercise the code&lt;/h3&gt;
+&lt;p&gt;Having some real code with real class names and real function names usually helps me see what I need to do in terms of testing.&lt;/p&gt;
+&lt;p&gt;In the example I have going, I&amp;rsquo;d like my &lt;code&gt;seedZoos()&lt;/code&gt; function to insert 3 &lt;code&gt;Zoo&lt;/code&gt; objects into my CoreData data store.&lt;/p&gt;
+&lt;p&gt;At this point, it&amp;rsquo;s pretty easy for me to think of the name of my first test. How about, &lt;code&gt;testSeedZoosInserts3ZooObjectsIntoDataStore()&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteTest.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteTest-1024x385.png&#34; alt=&#34;Write a test&#34; width=&#34;1024&#34; height=&#34;385&#34; class=&#34;alignnone size-large wp-image-11498&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteTest-1024x385.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/WriteTest-300x113.png 300w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;comment-code&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;comment-out-the-production-code-so-that-the-test-will-fail&#34;&gt;Comment out the production code so that the test will fail&lt;/h3&gt;
+&lt;p&gt;Running the tests right now would produce a passing test. &amp;ldquo;Great!”, you say – but here&amp;rsquo;s my issue with simply running the test, seeing it pass, and moving on &lt;em&gt;without&lt;/em&gt; ever having seen it fail:&lt;/p&gt;
+&lt;p&gt;There are &lt;em&gt;many&lt;/em&gt; ways to produce passing tests without actually verifying the results of executing the app&amp;rsquo;s code.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I could write a test with no assert. That&amp;rsquo;d be silly, but forgetting that at the end would produce a green test – and it&amp;rsquo;s easier to do than you think as you get rolling with these things. &lt;em&gt;Expecting&lt;/em&gt; the first time you run the test to produce a &lt;em&gt;failing&lt;/em&gt; test would alert you if you ran it the first time and saw a passing one.&lt;/li&gt;
+&lt;li&gt;I could write a test that asserts the wrong thing and produces a false positive. Again, expecting &amp;ldquo;fail” at first would alert me if I saw &amp;ldquo;pass” at first.&lt;/li&gt;
+&lt;li&gt;Suppose I copied and pasted a test and intended to replace the implementation to test my new code. But I get distracted between when I pasted it and when I ran it for the first time. If I ran it, saw &amp;ldquo;pass” and moved on, the test wouldn&amp;rsquo;t be doing its job – it&amp;rsquo;d be testing something that I already tested, and not these new lines of code I just produced!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The point is this: There are too many ways to write a test that doesn&amp;rsquo;t truly test your code. Suffice it to say, you should &lt;em&gt;always&lt;/em&gt; make the test fail so that you know it&amp;rsquo;s wired up to the right production code. Thus, this crucial step: &lt;strong&gt;comment out the production code&lt;/strong&gt;. It&amp;rsquo;ll ensure you get a failing test on the first run (if you&amp;rsquo;re truly testing the right thing).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/CommentProductionCode.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/CommentProductionCode-1024x379.png&#34; alt=&#34;Comment out the production code&#34; width=&#34;1024&#34; height=&#34;379&#34; class=&#34;alignnone size-large wp-image-11492&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/12/CommentProductionCode-1024x379.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/CommentProductionCode-300x111.png 300w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;run-test-fail&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;run-the-test-and-verify-that-it-fails&#34;&gt;Run the test and verify that it fails&lt;/h3&gt;
+&lt;p&gt;With the production code I just wrote commented out, I run the test. My expectation at this point is that it will &lt;em&gt;fail&lt;/em&gt;, because the &lt;code&gt;seedZoos()&lt;/code&gt; function does &lt;em&gt;not&lt;/em&gt; currently insert any &lt;code&gt;Zoo&lt;/code&gt; objects into the data store.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Fail.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Fail-1024x380.png&#34; alt=&#34;Run test - the test should fail&#34; width=&#34;1024&#34; height=&#34;380&#34; class=&#34;alignnone size-large wp-image-11493&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Fail-1024x380.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Fail-300x111.png 300w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If the test doesn&amp;rsquo;t fail, something is wrong.&lt;/strong&gt; Check the basics: Did you include an assert at the end of the test? Are you exercising the right production code? Continue troubleshooting and re-running the test until it fails.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;uncomment-code&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;uncomment-the-production-code-so-that-the-test-will-pass&#34;&gt;Uncomment the production code so that the test will pass&lt;/h3&gt;
+&lt;p&gt;Once I&amp;rsquo;ve been able to make the test fail, I uncomment the production code.&lt;/p&gt;
+&lt;p&gt;The idea here is that once the production code is now &amp;ldquo;live”, the test that&amp;rsquo;s currently failing should &lt;em&gt;pass&lt;/em&gt;, now that production code is performing appropriate logic to meet the test&amp;rsquo;s assertion requirements. We know that the test currently fails, so if it passes &lt;em&gt;after&lt;/em&gt; we uncomment the production code, the only reason it could pass is because the production code is doing the right thing for that particular test&amp;rsquo;s assertion. Nothing else about our work environment changed, so nothing else except the uncommented production code could have been the cause of the passing test.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s a view of the IDE in the state right before I run the test again to watch it pass:&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/UncommentProductionCode.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/UncommentProductionCode-1024x380.png&#34; alt=&#34;Uncomment the production code&#34; width=&#34;1024&#34; height=&#34;380&#34; class=&#34;alignnone size-large wp-image-11496&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/12/UncommentProductionCode-1024x380.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/UncommentProductionCode-300x111.png 300w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;run-test-pass&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;run-the-test-and-verify-that-it-passes&#34;&gt;Run the test and verify that it passes&lt;/h3&gt;
+&lt;p&gt;The last step in this (almost) TDD workflow is to run the test one more time. This time it should pass:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Pass.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Pass-1024x382.png&#34; alt=&#34;Run test - the test should pass&#34; width=&#34;1024&#34; height=&#34;382&#34; class=&#34;alignnone size-large wp-image-11494&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Pass-1024x382.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/12/RunTest_Pass-300x112.png 300w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If the test &lt;em&gt;doesn&amp;rsquo;t&lt;/em&gt; pass, then something is wrong.&lt;/strong&gt; Check the basics: Does the test assert the right thing? Does the production code perform correct logic that would satisfy the test&amp;rsquo;s assertion? Continue troubleshooting and revise the necessary code until you have a passing test.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;rinse-repeat&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;rinse-and-repeat&#34;&gt;Rinse and repeat&lt;/h3&gt;
+&lt;p&gt;You can perform this workflow as my times as you need. This is a stepping stone, so the hope is that eventually you&amp;rsquo;ll be able to write the tests &lt;em&gt;first&lt;/em&gt;. It takes a little practice, but using this technique has, in my experience, been a gateway to true Test Driven Development.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TDD for iOS in Swift – What’s the Goal?</title>
+      <link>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</link>
+      <pubDate>Tue, 16 Dec 2014 12:00:10 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</guid>
+      <description>&lt;p&gt;Before actually &lt;em&gt;doing&lt;/em&gt; Test Driven Development (TDD) for your iOS / Mac app, it&amp;rsquo;s really important to ask a very fundamental question: What&amp;rsquo;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?&lt;/p&gt;
+&lt;h2 id=&#34;2-goals-of-tdd-in-ios&#34;&gt;2 Goals of TDD in iOS&lt;/h2&gt;
+&lt;p&gt;A recent course I watched on &lt;a href=&#34;http://www.pluralsight.com&#34; title=&#34;Pluralsight&#34;&gt;Pluralsight&lt;/a&gt; called &lt;a href=&#34;http://www.pluralsight.com/courses/tdd-as-design-tool&#34; title=&#34;Pluralsight - TDD as a Design Tool&#34;&gt;TDD as a Design Tool&lt;/a&gt; gave me some insight on two goals for doing Test Driven Development:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make sure my code is in the right place&lt;/li&gt;
+&lt;li&gt;Make sure my logic is correct&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let&amp;rsquo;s take them one at a time…&lt;/p&gt;
+&lt;h3 id=&#34;a-place-for-everything-and-everything-in-its-place&#34;&gt;A place for everything, and everything in its place&lt;/h3&gt;
+&lt;p&gt;Believe it or not, Test Driven Development is an extremely powerful tool for ensuring that code is written in the right place. But what do I mean by &amp;ldquo;the right place”?&lt;/p&gt;
+&lt;p&gt;In the object-oriented world, &amp;ldquo;places” are data structures, such as classes and structs, and their publicly accessible methods.&lt;/p&gt;
+&lt;p&gt;When I employ TDD in a project, I will tend to be driven to making sure my code ends up in the right place. I&amp;rsquo;ll give you an example:&lt;/p&gt;
+&lt;h4 id=&#34;starting-places&#34;&gt;Starting Places&lt;/h4&gt;
+&lt;p&gt;When I create a new iOS project, Xcode sets me up with a Storyboard, a blank Scene, and a View Controller. Xcode also generates a Test target for me… BUT a what am I most aware of right from the onset? The Storyboard and the View Controller.&lt;/p&gt;
+&lt;p&gt;The natural inclination, then is to start dragging things onto the design surface and wiring them up to the controller as Outlets and Actions, and off I go!&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s like I&amp;rsquo;m lead to the ever-common temptation to put &lt;em&gt;all&lt;/em&gt; my code for a given screen in the application inside its corresponding View Controller.&lt;/p&gt;
+&lt;h4 id=&#34;tdd-tension&#34;&gt;TDD Tension&lt;/h4&gt;
+&lt;p&gt;While I may be led there, and while it may seem convenient, it would seem that TDD wants to start me off in a different &amp;ldquo;place” altogether. Since TDD asserts that I should not write any code unless there&amp;rsquo;s a test requiring it to be written, I&amp;rsquo;d be driven away from my main project into my Test project. My canvas at that point is a fresh XCTestCase class.&lt;/p&gt;
+&lt;p&gt;UI at this point is not on my mind. Here, I care more about the &lt;em&gt;foundations&lt;/em&gt; of the app itself. I begin to consider the application&amp;rsquo;s domain, and its behavior &lt;em&gt;apart&lt;/em&gt; from its user interface. This is very important if I want to truly write decoupled, modular, maintainable code.&lt;/p&gt;
+&lt;p&gt;Rather than weigh down my View Controller with tons of responsibility, TDD drives me to try and build &lt;em&gt;separate&lt;/em&gt; classes to steward &lt;em&gt;small&lt;/em&gt; bits of my application. Those small classes can be tested &lt;strong&gt;much&lt;/strong&gt; more easily than trying to get an enormous View Controller instantiated and configured in my test suite.&lt;/p&gt;
+&lt;p&gt;This is just one small example of how TDD can get you off on the right track to putting code in its proper place.&lt;/p&gt;
+&lt;h3 id=&#34;your-logic-was-impeccable-captain&#34;&gt;Your logic was impeccable, Captain&lt;/h3&gt;
+&lt;p&gt;The second goal of TDD in iOS is making sure my logic is correct, or, as Spock would say, &amp;ldquo;impeccable”.&lt;/p&gt;
+&lt;p&gt;Does my application&amp;rsquo;s code do what it &lt;em&gt;should&lt;/em&gt; do? Can I write my code in such a way that I can easily verify it? TDD, by nature, pushes me in the direction of being able to verify the accuracy of my code&amp;rsquo;s logical outcomes… that is, how it behaves.&lt;/p&gt;
+&lt;h4 id=&#34;fascinating-is-a-word-i-use-for-the-unexpected&#34;&gt;Fascinating is a word I use for the unexpected&lt;/h4&gt;
+&lt;p&gt;Testing has this way of setting expectations. One thing I&amp;rsquo;ve really enjoyed about TDD&amp;rsquo;s notorious red-green-refactor cycle is that I know certainly and immediately when I&amp;rsquo;ve messed up (ie, run across a &amp;ldquo;fascinating” situation in Spock terms).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When I write the test, it should fail the first time. If it doesn&amp;rsquo;t, I&amp;rsquo;ve messed up.&lt;/li&gt;
+&lt;li&gt;When I write the code to pass the test and the test fails, I &lt;em&gt;also&lt;/em&gt; know I&amp;rsquo;ve messed up.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;With the fundamental goals of TDD in place, I feel more prepared from a foundational standpoint to venture into actuall test-driven practices for iOS.&lt;/p&gt;
+&lt;p&gt;I am learning so much in the area of testing – it&amp;rsquo;s a technique I&amp;rsquo;m practicing regularly, both in Swift and in C# (for fun and for work, respectively), so as I grow and discover ways to optimize the TDD experience in Xcode / Swift, I&amp;rsquo;ll be sharing them. Stay tuned!&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  You might also enjoy&lt;/p&gt; 
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34; title=&#34;Swift Unit Testing Resources&#34;&gt;Swift Unit Testing Resources&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/&#34; title=&#34;Swift Unit Testing – Verifying Method Calls&#34;&gt;Swift Unit Testing – Verifying Method Calls&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/&#34; title=&#34;How to Create Mocks and Stubs in Swift&#34;&gt;How to Create Mocks and Stubs in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/&#34; title=&#34;Swift Access Control – Implications for Unit Testing&#34;&gt;Swift Access Control – Implications for Unit Testing&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

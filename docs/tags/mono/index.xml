@@ -1,0 +1,46 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mono on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/mono/</link>
+    <description>Recent content about iOS development with Swift in Mono  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Aug 2015 20:57:02 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/mono/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Diagnosing “Restore failed” with ASP.NET 5 on Mac</title>
+      <link>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
+      <pubDate>Sun, 09 Aug 2015 20:57:02 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
+      <description>&lt;p&gt;Following along with Steve Smith&amp;rsquo;s &lt;a href=&#34;http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html&#34;&gt;&amp;ldquo;Your First ASP.NET 5 Application on a Mac”&lt;/a&gt;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;rsquo;t work due to a problem with restoring the project&amp;rsquo;s dependencies.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;retracing-steps&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;retracing-my-steps&#34;&gt;Retracing my steps&lt;/h3&gt;
+&lt;p&gt;I &lt;a href=&#34;http://docs.asp.net/en/latest/getting-started/installing-on-mac.html&#34;&gt;got ASP.NET installed on my Mac&lt;/a&gt;, and I even got a cool little template going using &lt;a href=&#34;http://yeoman.io/&#34;&gt;Yeoman&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I opened up my scaffolded project using Visual Studio Code, and began the dependency restore process. But it failed. So I troubleshooted (troubleshot?), and it failed some more.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Restore failed Unknown header: 3208085783”.&lt;/p&gt;
+&lt;p&gt;I found David Fowler&amp;rsquo;s &lt;a href=&#34;http://davidfowl.com/diagnosing-dependency-issues-with-asp-net-5/&#34;&gt;&amp;ldquo;Diagnosing Dependency Issues with ASP.NET 5”&lt;/a&gt;, but none of the things he mentioned helped resolve my exact issue. But something he said, caused me to think:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make sure your DNX and packages are on the same version &amp;ldquo;train”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;My issue wasn&amp;rsquo;t with DNX, but with &lt;strong&gt;Mono&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;mis-matched-mono&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mis-matched-mono-versions&#34;&gt;Mis-matched Mono versions&lt;/h3&gt;
+&lt;p&gt;When I followed the instructions for installing ASP.NET, I distinctly remember installing Mono using the installer package available at their website.&lt;/p&gt;
+&lt;p&gt;What I &lt;em&gt;failed&lt;/em&gt; to realize, however, was that a while back (long enough ago to where it didn&amp;rsquo;t hit me until just a few minutes ago), I installed Mono using Homebrew.&lt;/p&gt;
+&lt;p&gt;So despite my efforts to install Mono using the installer package, the Mono that everything in my system was using was the one installed by Homebrew, which was version 3.10.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;resolved&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;resolved&#34;&gt;Resolved&lt;/h3&gt;
+&lt;p&gt;To resolve the issue, I went ahead and just ran &lt;code&gt;brew upgrade mono&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Verifying that Mono was successfully upgraded via a &lt;code&gt;mono --version&lt;/code&gt; command, I retried the dependency restoration in my scaffolded ASP.NET 5 application.&lt;/p&gt;
+&lt;p&gt;The result?&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dnu restore&lt;/code&gt; produced a wonderfully green, &amp;ldquo;Restore complete”!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

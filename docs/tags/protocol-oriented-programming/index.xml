@@ -1,0 +1,59 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Protocol Oriented Programming on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/protocol-oriented-programming/</link>
+    <description>Recent content about iOS development with Swift in Protocol Oriented Programming  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 12 Jun 2016 20:59:48 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/protocol-oriented-programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Is Protocol Oriented Swift Better than Object Oriented Swift?</title>
+      <link>https://www.andrewcbancroft.com/2016/06/12/is-protocol-oriented-swift-better-than-object-oriented-swift/</link>
+      <pubDate>Sun, 12 Jun 2016 20:59:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/06/12/is-protocol-oriented-swift-better-than-object-oriented-swift/</guid>
+      <description>&lt;p&gt;A &lt;a href=&#34;https://www.reddit.com/r/swift/comments/4nme0c/eli5_what_does_protocol_oriented_programming_mean/&#34;&gt;question was asked on Reddit&lt;/a&gt; and showed up in my feed as I was browsing this weekend:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What does protocol oriented programming mean, and why is it better than OOP?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I really like a few things that were said in &lt;a href=&#34;https://www.reddit.com/r/swift/comments/4nme0c/eli5_what_does_protocol_oriented_programming_mean/d453ryv&#34;&gt;one of the top &amp;ldquo;Explain Like I&amp;rsquo;m 5” comments&lt;/a&gt; that was posted in response to the question by &lt;a href=&#34;https://www.reddit.com/user/CodaFi&#34;&gt;CodaFi&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;explain-like-im-five8221--a-laundry-service-example&#34;&gt;&amp;ldquo;Explain Like I&amp;rsquo;m Five” – A laundry service example&lt;/h1&gt;
+&lt;p&gt;First, the example provided was very understandable. I highly recommend you &lt;a href=&#34;https://www.reddit.com/r/swift/comments/4nme0c/eli5_what_does_protocol_oriented_programming_mean/d453ryv&#34;&gt;jump over&lt;/a&gt; and just read through what the commenter wrote.&lt;/p&gt;
+&lt;p&gt;The theme was &amp;ldquo;laundry service”. Supposing that there was a &lt;code&gt;Laundry&lt;/code&gt; object that encapsulated certain laundry-related functions… &amp;ldquo;Launder my clothes, please” — &amp;ldquo;Okay, here&amp;rsquo;s your clothes!”. You as a client simply interact with &lt;code&gt;Laundry&lt;/code&gt; by saying &amp;ldquo;Launder, please!”. The &lt;code&gt;Laundry&lt;/code&gt; object goes off and does its thing, which could range from simple to incredibly complex – the beauty is that as a client, as a person needing laundry done, you don&amp;rsquo;t care. As long as the laundry gets done and you get your clothes back, life is great!&lt;/p&gt;
+&lt;h1 id=&#34;problems8221-with-object-orientation&#34;&gt;&amp;ldquo;Problems” with Object Orientation&lt;/h1&gt;
+&lt;p&gt;In my guide on &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34;&gt;the Fundamentals of Callbacks for Swift Developers&lt;/a&gt;, I describe the scenario that we&amp;rsquo;re all in as developers:&lt;/p&gt;
+&lt;p&gt;When we’re building software, we’re either &lt;em&gt;using&lt;/em&gt; code built by others, or &lt;em&gt;creating&lt;/em&gt; code for others to use, are we not? We’re either using code that “hooks into” what other developers have designed and made available to us, or we’re creating code that other code will “hook into” and interact with, even if the “other code” is written by us in our own app.&lt;/p&gt;
+&lt;p&gt;We wear two hats at once, when it comes to being clients and creators of code.&lt;/p&gt;
+&lt;p&gt;But what if we&amp;rsquo;re working with a &lt;code&gt;Laundry&lt;/code&gt; object as a &lt;em&gt;developer/creator&lt;/em&gt;, and not as a &lt;em&gt;client&lt;/em&gt; (ie, someone who needs laundry done). What if we, as developers, get handed a &lt;code&gt;Laundry&lt;/code&gt; object in a library and we want to customize its behavior… maybe improve the performance of &lt;code&gt;launderClothes()&lt;/code&gt;, or override the implementation it to use some amazing new laundry service.&lt;/p&gt;
+&lt;p&gt;The way we&amp;rsquo;d do that is by crating a &lt;em&gt;subclass&lt;/em&gt;. Here&amp;rsquo;s the beef with Object Orientation, according to the commenter:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[Object Orientation] encourages &amp;ldquo;encapsulating complexity” by exposing state and internals through inheritance.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Unpacking that: Software has innate complexity. Objects are &amp;ldquo;things” that encapsulate that complexity. They do it in a certain &lt;em&gt;way&lt;/em&gt; though: They expose certain pieces of state and pieces of functionality. The way those abstractions over complexity get propagated and customized through the system is through this mechanism called inheritance.&lt;/p&gt;
+&lt;p&gt;But the commenter cites this methodology as &amp;ldquo;trouble” though. Why? Well…&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;I may not want to know how my dry cleaning got done, but if I wanted to design a better route to go from dirty clothes to clean clothes, I would necessarily &lt;em&gt;have&lt;/em&gt; to know every last detail of the steps that were performed so I can try to refine them in my subclass.”&lt;/p&gt;
+&lt;p&gt;So the commenter is coming at it from the point of a developer/creator. It&amp;rsquo;s pointed out that to truly be able to improve performance or refine algorithms in a subclass, we necessarily have to know every detail of the steps that were performed in the superclass. And it&amp;rsquo;s not always the case that we can discover that superclass implementation to improve upon it.&lt;/p&gt;
+&lt;h1 id=&#34;shifting-to-protocol-orientation&#34;&gt;Shifting to Protocol Orientation&lt;/h1&gt;
+&lt;p&gt;So… Protocol Orientation? If it&amp;rsquo;s better, how is it better?&lt;/p&gt;
+&lt;p&gt;I love how the commenter takes the object oriented example of laundry service, and refines it with nuances that come out of thinking in terms of protocols rather than just objects. Really. &lt;a href=&#34;https://www.reddit.com/r/swift/comments/4nme0c/eli5_what_does_protocol_oriented_programming_mean/d453ryv&#34;&gt;Have a look&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The primary difference we see is that rather than having a &lt;code&gt;Laundry&lt;/code&gt; object… a single one… that does laundry in its own particular way, a shift occurs: We begin to deal in terms of describing &lt;em&gt;ways&lt;/em&gt; to get laundry done.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If I want my laundry done one particular way by &lt;em&gt;one particular guy&lt;/em&gt; I go Object-Oriented and stop caring about how things get done. But if I want to generalize over the &lt;em&gt;ways&lt;/em&gt; to get laundry done I need to go Protocol-Oriented and stop caring about everything else.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In Protocol Orientation, the only thing that matters is the &lt;em&gt;interface&lt;/em&gt;… the things that clients will interact with. Describe that to the best of your ability with a protocol, and let something else come along and worry about the &lt;em&gt;how&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;In the end, the only thing that a person needing laundry done needs to know is what interface is available for them to accomplish the laundering they have need of completing.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Being able to sit down and think about how something would look if you removed state and inheritance from the picture and just thought about the bare minimum required interface to that particular task is a far more powerful and simple approach to programming that enables reuse far easier than OO ever did.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;takeaways&#34;&gt;Takeaways&lt;/h1&gt;
+&lt;p&gt;The take-away point for me in this thread on Protocol Orientation is this: Protocols are about &lt;em&gt;generalizing&lt;/em&gt;. They&amp;rsquo;re about the &lt;em&gt;interface&lt;/em&gt;. It&amp;rsquo;s about a mindset and a focus (an &lt;em&gt;orientation&lt;/em&gt;) toward thinking of &lt;em&gt;ways&lt;/em&gt; to do certain things, and describing them clearly in the form of a Type in Swift.&lt;/p&gt;
+&lt;p&gt;Once the &lt;em&gt;way to do&lt;/em&gt; something is described, other things, concrete &lt;em&gt;Types&lt;/em&gt;, can come along and implement those in an infinite variety of ways.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,35 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SSAS on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/ssas/</link>
+    <description>Recent content about iOS development with Swift in SSAS  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 30 Jun 2012 19:44:36 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/ssas/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)</title>
+      <link>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</link>
+      <pubDate>Sat, 30 Jun 2012 19:44:36 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</guid>
+      <description>&lt;p&gt;You can visit Part 1 of this troubleshooting series by &lt;a href=&#34;http://andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/&#34; title=&#34;Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)&#34;&gt;clicking here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;During our configuration of Reporting Services for SharePoint I ran into another common issue.&lt;/p&gt;
+&lt;p&gt;I consulted MSDN once again and followed the directions &lt;a title=&#34;PowerPivot BI Semantic Model Connection (.bism) &#34; href=&#34;http://msdn.microsoft.com/en-us/library/gg471575.aspx&#34; target=&#34;_blank&#34;&gt;given at this MSDN article&lt;/a&gt;.  Even after following all these instructions, when I would attempt to create a new BI Semantic Model Connection in the SharePoint library, I would receive the following error:&lt;/p&gt;
+&lt;div class=&#34;note&#34;&gt;
+  Cannot connect to the server or database.
+&lt;/div&gt;
+&lt;p&gt;Even after adding the Reporting Services service account to the SSAS Tabular instance as a server administrator, we still hit this error.&lt;/p&gt;
+&lt;p&gt;Once again I found little documentation out there as I was troubleshooting, presumably because SQL Server 2012 is still quite new.  Here&amp;rsquo;s what we did to fix our problem:&lt;/p&gt;
+&lt;div class=&#34;note&#34;&gt;
+  &lt;strong&gt;The Analysis Services service must be running under a domain account.&lt;/strong&gt;  When I installed SSAS, I took all the defaults for the server installation.  The SSAS service was running under some default built-in account which ended up being the problem.
+&lt;/div&gt;
+&lt;p&gt;Once we switched this to run under a domain account, I was able to create BI Semantic Model Connections using this library document type with no issues.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

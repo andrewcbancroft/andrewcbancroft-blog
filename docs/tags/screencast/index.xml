@@ -1,0 +1,88 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Screencast on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/screencast/</link>
+    <description>Recent content about iOS development with Swift in Screencast  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 May 2015 02:31:38 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/screencast/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift How-To:  Setting up a Table View</title>
+      <link>https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/</link>
+      <pubDate>Tue, 19 May 2015 02:31:38 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/05/18/swift-how-to-setting-up-a-table-view/</guid>
+      <description>&lt;p&gt;Think of this screencast as the &amp;ldquo;Hello World” of creating a view controller with a table view. I cover organizing things in the Storyboard, Auto Layout constraints, and the implementation of the data source protocol methods for a table view.&lt;/p&gt;
+&lt;h3 id=&#34;screencast&#34;&gt;Screencast&lt;/h3&gt;
+&lt;h3 id=&#34;screencast-transcript&#34;&gt;Screencast Transcript&lt;/h3&gt;
+&lt;h4 id=&#34;001&#34;&gt;[0:01]&lt;/h4&gt;
+&lt;p&gt;Hi, I&amp;rsquo;m Andrew from andrewcbancroft.com.&lt;/p&gt;
+&lt;p&gt;I use table views fairly often in my examples, so I&amp;rsquo;ve decided to create a short walkthrough of how to set up a table view in Swift.&lt;/p&gt;
+&lt;p&gt;Think of this as the &amp;ldquo;Hello World” of creating a view controller with a table view.&lt;/p&gt;
+&lt;h4 id=&#34;016&#34;&gt;[0:16]&lt;/h4&gt;
+&lt;p&gt;In this walkthrough, I&amp;rsquo;m using Xcode 6.3.1, which has me writing Swift 1.2 syntax in a couple of spots.&lt;/p&gt;
+&lt;h4 id=&#34;024&#34;&gt;[0:24]&lt;/h4&gt;
+&lt;p&gt;To get started, I&amp;rsquo;m going to drop into the search bar of the Object Library, which is in the Utilities Pane to hunt for a table view.&lt;/p&gt;
+&lt;p&gt;Once I&amp;rsquo;ve narrowed the results and located the Table View control, I&amp;rsquo;ll click and drag one onto my Storyboard scene.&lt;/p&gt;
+&lt;h4 id=&#34;041&#34;&gt;[0:41]&lt;/h4&gt;
+&lt;p&gt;With the table view in place, filling the entire scene, I&amp;rsquo;ll control + click and drag up to the yellow View Controller icon to wire up my the table view&amp;rsquo;s dataSource… and delegate properties.&lt;/p&gt;
+&lt;h4 id=&#34;056&#34;&gt;[0:56]&lt;/h4&gt;
+&lt;p&gt;Now I need to connect the table view to my View Controller source file. To bring up the assistant editor, I&amp;rsquo;ll option+click the ViewController.swift file in the Project Navigator.&lt;/p&gt;
+&lt;h4 id=&#34;106&#34;&gt;[1:06]&lt;/h4&gt;
+&lt;p&gt;With the table view and the source side by side, once again, I&amp;rsquo;ll control + click the table view, and drag over to the ViewController source file to create an IBOutlet property for my table view.&lt;/p&gt;
+&lt;h4 id=&#34;121&#34;&gt;[1:21]&lt;/h4&gt;
+&lt;p&gt;Next up is to specify that my ViewController class will conform to the UITableViewDataSource protocol… and the UITableViewDelegate protocols.&lt;/p&gt;
+&lt;h4 id=&#34;131&#34;&gt;[1:31]&lt;/h4&gt;
+&lt;p&gt;Of course, at this point, I haven&amp;rsquo;t actually implemented any of the required protocol methods, so I get a compiler error saying so.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve written up a handy UITableViewDataSource cheat sheet over at my website (andrewcbancroft.com). I&amp;rsquo;ll go grab that code and paste it into my View Controller.&lt;/p&gt;
+&lt;h4 id=&#34;151&#34;&gt;[1:51]&lt;/h4&gt;
+&lt;p&gt;Here I am at andrewcbancroft.com – I&amp;rsquo;ve searched for &amp;ldquo;UITableViewDataSource” and located my cheet sheet.&lt;/p&gt;
+&lt;h4 id=&#34;202&#34;&gt;[2:02]&lt;/h4&gt;
+&lt;p&gt;Scrolling down, I find the code I need, switch the code snippet plugin to &amp;ldquo;raw” mode, select everything, and copy.&lt;/p&gt;
+&lt;h4 id=&#34;212&#34;&gt;[2:12]&lt;/h4&gt;
+&lt;p&gt;Switching back over to my Xcode window, I paste the code snippet in.&lt;/p&gt;
+&lt;h4 id=&#34;216&#34;&gt;[2:16]&lt;/h4&gt;
+&lt;p&gt;As I mentioned in the beginning, this walkthrough can be thought of as the &amp;ldquo;Hello World” of table view setup. With that in mind, for now, I&amp;rsquo;ll create a dataSourceArray with some dummy data in it, just to get things compiling and displaying data.&lt;/p&gt;
+&lt;h4 id=&#34;231&#34;&gt;[2:31]&lt;/h4&gt;
+&lt;p&gt;Now that I&amp;rsquo;ve got the data source geared to go, I need some cells to display data in.&lt;/p&gt;
+&lt;p&gt;For this task, I&amp;rsquo;ll close the assistant editor…&lt;/p&gt;
+&lt;p&gt;Next, I&amp;rsquo;ll click to open the document outline. I find that working with the view hierarchy is &lt;em&gt;much&lt;/em&gt; easier to manipulate using this outline, rather than clicking to try and select the right thing in the Storyboard Scene.&lt;/p&gt;
+&lt;h4 id=&#34;255&#34;&gt;[2:55]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll select the table view, and open the Utilities pane to get access to the Attributes inspector.&lt;/p&gt;
+&lt;h4 id=&#34;301&#34;&gt;[3:01]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;m going to configure this table view to have one kind of prototype cell.&lt;/p&gt;
+&lt;h4 id=&#34;306&#34;&gt;[3:06]&lt;/h4&gt;
+&lt;p&gt;Increasing the Prototype Cells count added a new node to the document outline&amp;rsquo;s view hierarchy.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll expand the Table View and click on the Table View Cell to do a bit more configuration.&lt;/p&gt;
+&lt;h4 id=&#34;319&#34;&gt;[3:19]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll set the Style to Basic…&lt;/p&gt;
+&lt;p&gt;Then I&amp;rsquo;ll give it an identitifer of &amp;ldquo;BasicCell”.&lt;/p&gt;
+&lt;p&gt;I need this &amp;ldquo;BasicCell” string for one of my other data source proocol methods, so I&amp;rsquo;ll select it, and copy it.&lt;/p&gt;
+&lt;h4 id=&#34;337&#34;&gt;[3:37]&lt;/h4&gt;
+&lt;p&gt;Back in my ViewController.swift source file, I&amp;rsquo;ll paste that &amp;ldquo;BasicCell” string as the argument to dequeReusableCellWithIdentifier.&lt;/p&gt;
+&lt;h4 id=&#34;348&#34;&gt;[3:48]&lt;/h4&gt;
+&lt;p&gt;The last step to get things wired up is to set the cell&amp;rsquo;s textLabel.text property.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll use the dataSourceArray&amp;rsquo;s values here.&lt;/p&gt;
+&lt;p&gt;Simply indexing into the array at the indexPath.row value that&amp;rsquo;s currently being rendered in the table view will grab the string out of the array and assign it to the textLabel.text property of the cell.&lt;/p&gt;
+&lt;h4 id=&#34;413&#34;&gt;[4:13]&lt;/h4&gt;
+&lt;p&gt;When I run the app and observe the table view&amp;rsquo;s behavior, I&amp;rsquo;m not quite satisfied with it. The status bar overlaps the rows and makes the text hard to read.&lt;/p&gt;
+&lt;p&gt;Additionally, the table view doesn&amp;rsquo;t extend all the way to the bottom when I run it in the iPhone 6 sized simulator.&lt;/p&gt;
+&lt;h4 id=&#34;430&#34;&gt;[4:30]&lt;/h4&gt;
+&lt;p&gt;I&amp;rsquo;ll stop the app and make an adjustment in the Storyboard.&lt;/p&gt;
+&lt;h4 id=&#34;434&#34;&gt;[4:34]&lt;/h4&gt;
+&lt;p&gt;Selecting the table view from the document outline will allow me to grab the top edge and drag the hight downward slowly until it &amp;ldquo;snaps” into place where the bottom of the status bar would appear to be.&lt;/p&gt;
+&lt;h4 id=&#34;448&#34;&gt;[4:48]&lt;/h4&gt;
+&lt;p&gt;Next, I&amp;rsquo;ll set some constraints. Within the document outline, I&amp;rsquo;ll control + click from the Table View to the View and set constraints for &amp;ldquo;Top Space to Top Layout Guide”, Center Horizontally, Center Vertically, and Equal Widths.&lt;/p&gt;
+&lt;h4 id=&#34;517&#34;&gt;[5:17]&lt;/h4&gt;
+&lt;p&gt;Running the app one more time gives me the behavior I want!&lt;/p&gt;
+&lt;h4 id=&#34;531&#34;&gt;[5:31]&lt;/h4&gt;
+&lt;p&gt;Thanks for watching – I have other resources r elated to Swift and iOS development at andrewcbancroft.com, and you can find me on Twitter: &lt;a href=&#34;https://twitter.com/andrewcbancroft&#34;&gt;@andrewcbancroft&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

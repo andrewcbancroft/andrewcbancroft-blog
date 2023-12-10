@@ -1,0 +1,97 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>View Controllers on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/view-controllers/</link>
+    <description>Recent content about iOS development with Swift in View Controllers  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Aug 2014 04:43:29 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/view-controllers/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pick a Delegate… Any Delegate… On Clean View Controllers in Swift</title>
+      <link>https://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/</link>
+      <pubDate>Wed, 27 Aug 2014 04:43:29 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/</guid>
+      <description>&lt;p&gt;The delegation pattern is ubiquitous in iOS development – the pattern is a &amp;ldquo;&lt;a title=&#34;Cocoa Core Competencies&#34; href=&#34;https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/Delegation.html&#34; target=&#34;_blank&#34;&gt;core competency&lt;/a&gt;” for developing in Cocoa, and if you program with the iOS SDK for any length of time and you&amp;rsquo;ll end up writing some code that resembles &lt;code&gt;someInstance.delegate = someDelegate&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;One of the toughest things that I&amp;rsquo;ve experienced is choosing what &lt;code&gt;someDelegate&lt;/code&gt; is.  All too often, a View Controller ends up being assigned the responsibility of being the delegate for &lt;em&gt;everything&lt;/em&gt; in its hierarchy.  My question is:  Is there a cleaner way?&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s pick up on the example I proposed in my &lt;a href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/&#34; title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34;&gt;recent post about sending e-mails in-app&lt;/a&gt;.  For &amp;ldquo;quick and dirty” pragmatism, I just crammed everything into the View Controller with the promise of coming back and (hopefully) showing a cleaner way.  &lt;a title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample&#34; target=&#34;_blank&#34;&gt;Here is a quick link to example posed before&lt;/a&gt; if you&amp;rsquo;d like to review it before proceeding.&lt;/p&gt;
+&lt;h2 id=&#34;_what-if8230_&#34;&gt;&lt;em&gt;What if…&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;What if we could make some adjustments so that the View Controller was trimmed down to the example on the &lt;em&gt;right (click for larger view)&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison.png&#34;&gt;&lt;img class=&#34;alignnone wp-image-4321 size-large&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-1024x258.png&#34; alt=&#34;Clean View Controller Comparison&#34; width=&#34;730&#34; height=&#34;183&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-1024x258.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-300x75.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-1200x303.png 1200w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve created a &lt;a title=&#34;Swift Email Composer - GitHub&#34; href=&#34;https://github.com/andrewcbancroft/SwiftEmailComposer&#34; target=&#34;_blank&#34;&gt;fully-working example on GitHub&lt;/a&gt; if you&amp;rsquo;d like to download it and play.&lt;/p&gt;
+&lt;p&gt;So the question at hand:  Is the class labeled &amp;ldquo;Clean Example” &lt;em&gt;preferable (&lt;em&gt;ie&lt;/em&gt;, better)&lt;/em&gt;?  First, let&amp;rsquo;s explore how I accomplished the &amp;ldquo;clean” View Controller.  Then I&amp;rsquo;ll tip my hand on and share what I like about this approach…&lt;/p&gt;
+&lt;h2 id=&#34;emailcomposer&#34;&gt;EmailComposer&lt;/h2&gt;
+&lt;p&gt;In order to accomplish the self-declared Clean View Controller above, I placed all of the configuration processes and the delegate method for the &lt;code&gt;MFMailComposeViewController&lt;/code&gt; in a &lt;em&gt;new&lt;/em&gt; class called &lt;code&gt;EmailComposer&lt;/code&gt;.  It should look familiar if you recall the &lt;a title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample&#34; target=&#34;_blank&#34;&gt;previous example&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Foundation&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MessageUI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;EmailComposer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewControllerDelegate&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Did this in order to mitigate needing to import MessageUI in my View Controller&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;canSendMail&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Bool&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;canSendMail&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;configuredMailComposeViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewController&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;mailComposerVC&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mailComposeDelegate&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setToRecipients&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;someone@somewhere.com&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setSubject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Sending you an in-app e-mail...&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setMessageBody&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Sending e-mail in-app is not so bad!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;isHTML&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mailComposerVC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// &lt;/span&gt;&lt;span class=&#34;cs&#34;&gt;MARK:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt; MFMailComposeViewControllerDelegate Method&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;mailComposeController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;controller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;didFinishWithResult&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MFMailComposeResult&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;controller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dismissViewControllerAnimated&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;completion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;25&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So literally, the only thing I did is&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cut the function definitions for &lt;code&gt;configuredMailComposeViewController&lt;/code&gt;, and the &lt;code&gt;MFMailComposeViewControllerDelegate&lt;/code&gt; method.&lt;/li&gt;
+&lt;li&gt;Paste them into the new &lt;code&gt;EmailComposer&lt;/code&gt;  class, which inherits from &lt;code&gt;NSObject&lt;/code&gt;  (a requirement for this particular delegate protocol&amp;rsquo;s conformity), and conforms to the &lt;code&gt;MFMailComposeViewControllerDelegate&lt;/code&gt;  protocol.&lt;/li&gt;
+&lt;li&gt;Adjust my View Controller to create an instance of &lt;code&gt;EmailComposer&lt;/code&gt; , obtain a configured &lt;code&gt;MFMailComposeViewController&lt;/code&gt;, and present it whenever the user taps on a button in my UI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The View Controller in its final version is &lt;em&gt;focused&lt;/em&gt;.  It&amp;rsquo;s primary concern is presentation and handling of user interaction with the View itself, rather than needing to worry with configuring an &lt;code&gt;MFMailComposeViewController&lt;/code&gt; and its delegate callback.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;EmailComposer&lt;/code&gt; is less of a hassle to test, in the sense that &lt;span style=&#34;line-height: 1.5;&#34;&gt;I no longer need to instantiate a View Controller in my &lt;/span&gt;&lt;code&gt;XCTestCase&lt;/code&gt;&lt;span style=&#34;line-height: 1.5;&#34;&gt; class just to test my &lt;/span&gt;&lt;code&gt;MFMailComposeViewController&lt;/code&gt;&lt;span style=&#34;line-height: 1.5;&#34;&gt; stuff&lt;/span&gt;&lt;span style=&#34;line-height: 1.5;&#34;&gt;.  It&amp;rsquo;s a real pain to test an actual View Controller instance, so I like that I can easily create an instance of &lt;code&gt;EmailComposer&lt;/code&gt; and test away without the bulk.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;No need to import MessageUI in my View Controller.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All in all, this is the cleanest, simplest, most balanced solution (that I could think of) to factoring out some logic to another class, so as to make my View Controller as clean as possible.&lt;/p&gt;
+&lt;p&gt;The goal was to make sure the appropriate responsibilities are assigned to the right classes.  Presentation logic is all in the View Controller.  Configuration and delegate callback implementation is done in &lt;code&gt;EmailComposer&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m thinking through applying this same idea to other more complicated examples (UITableViewDataSource and UITableViewDelegate come to mind), and I think it would do us a &lt;em&gt;lot&lt;/em&gt; of good to strategize on how to avoid making the View Controller the &amp;ldquo;catch-all” delegate / data source class for everything that&amp;rsquo;s currently on the screen_._&lt;/p&gt;
+&lt;p&gt;Hopefully these thoughts spark some ideas in the Swift community.  This post has already been revised slightly based on feedback that I&amp;rsquo;ve received from folks on Twitter.  If you have additional ideas in regards to choosing the right delegate, holler my way!  I&amp;rsquo;d love to hear from you.&lt;/p&gt;
+&lt;p&gt;Thanks for reading.&lt;/p&gt;
+&lt;div class=&#34;related-posts&#34;&gt;
+  &lt;p&gt;
+    You might also enjoy
+  &lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Clean Coding in Swift – Functions&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/&#34;&gt;Clean Coding in Swift – Functions&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Clean Coding in Swift – Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/&#34;&gt;Clean Coding in Swift – Type Inference&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Expanded Thoughts on Swift’s Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/&#34;&gt;Expanded Thoughts on Swift’s Type Inference&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/&#34;&gt;Send Email In-App – Using MFMailComposeViewController with Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a title=&#34;Send Text Message In-App – Using MFMessageComposeViewController with Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/10/28/send-text-message-in-app-using-mfmessagecomposeviewcontroller-with-swift/&#34;&gt;Send Text Message In-App – Using MFMessageComposeViewController with Swift&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

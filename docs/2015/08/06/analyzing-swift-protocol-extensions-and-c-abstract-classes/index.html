@@ -43,10 +43,9 @@
 <meta property="article:modified_time" content="2015-08-07T03:52:25+00:00" />
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Analyzing Swift Protocol Extensions and C# Abstract Classes"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Analyzing Swift Protocol Extensions and C# Abstract Classes"/>
 <meta name="twitter:description" content="Being a C# developer by day and a Swift developer by night has me constantly thinking about the similarities and differences between these two languages. I genuinely enjoy programming with each, and I love it when I can take a strategy that works well in one language, and see where that might cross over to the other. One of the areas I&rsquo;ve been pondering as of late is the idea of how Swift and C# compare in terms of protocol extensions and abstract classes."/>
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.121.1">
 
     
 <script type="application/ld+json">
@@ -239,11 +238,11 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="c1">// Other things that an Athlete may be able to do</span>
 </span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>Using an abstract class may look very similar. The primary difference is in the declaration of each method, where we mark each of them <code>virtual</code>, so that they can be overridden in a subclass to provide that customization point I talked about earlier:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">public</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">Athlete</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span> <span class="kd">abstract</span> <span class="k">class</span> <span class="nc">Athlete</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">public</span> <span class="k">abstract</span> <span class="k">void</span> <span class="n">Run</span><span class="p">();</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="k">public</span> <span class="k">abstract</span> <span class="k">void</span> <span class="n">Swim</span><span class="p">();</span>
-</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="k">public</span> <span class="k">abstract</span> <span class="k">void</span> <span class="n">Cycle</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="kd">public</span> <span class="kd">abstract</span> <span class="k">void</span> <span class="n">Run</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="kd">public</span> <span class="kd">abstract</span> <span class="k">void</span> <span class="n">Swim</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="kd">public</span> <span class="kd">abstract</span> <span class="k">void</span> <span class="n">Cycle</span><span class="p">();</span>
 </span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="c1">// Other things that an Athlete may be able to do</span>
 </span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="p">}</span></span></span></code></pre></div>
 <p>Right off, you might be asking, &ldquo;Should a marathon runner have to be able to swim and cycle??”. It&rsquo;s a great question, and I&rsquo;ll address it further down in the article when I discuss <a href="#refactoring">&ldquo;refactoring for enhanced composability with Swift protocol extensions”</a>.</p>
@@ -269,24 +268,24 @@ MathJax.Hub.Config({
 <h5 id="default-implementation-with-c">Default implementation with C#</h5>
 <p>In C#, abstract classes allow us to do just that. Here&rsquo;s how a default implementation might be written:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="n">Run</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="kd">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="n">Run</span><span class="p">()</span>
 </span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="c1">// run with average speed and endurance</span>
 </span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln"> 6</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="n">Swim</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kd">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="n">Swim</span><span class="p">()</span>
 </span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="c1">// swim with average speed and endurance</span>
 </span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">11</span><span class="cl">
-</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="n">Cycle</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="kd">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="n">Cycle</span><span class="p">()</span>
 </span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="c1">// cycle with average speed and endurance</span>
 </span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span></span></span></code></pre></div>
 <p>So now, when we want to model a <code>MarathonRunner</code>, we can override his/her ability to run, swim, and cycle as appropriate:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="n">Run</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kd">public</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">Run</span><span class="p">()</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="ln">4</span><span class="cl">        <span class="c1">// run with average speed and __insane__ endurance</span>
 </span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="p">}</span>
@@ -419,7 +418,7 @@ MathJax.Hub.Config({
     </aside>
 
     <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     window.disqus_config = function () {
     
     

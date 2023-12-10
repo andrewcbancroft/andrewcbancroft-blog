@@ -1,0 +1,204 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Swift Optionals on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/swift-optionals/</link>
+    <description>Recent content about iOS development with Swift in Swift Optionals  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 23 Apr 2017 20:03:34 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/swift-optionals/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Core Data Model Attributes and NSManagedObject Property Types Must Match!</title>
+      <link>https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</link>
+      <pubDate>Sun, 23 Apr 2017 20:03:34 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</guid>
+      <description>&lt;p&gt;I admit – it might have taken me less time to figure out my runtime exception if I hadn&amp;rsquo;t just migrated my project to Swift 3 when I encountered the bug.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s the problem isn&amp;rsquo;t it? You go in… you intend to do one thing. Before long, you&amp;rsquo;ve got 15 files with an &lt;code&gt;M&lt;/code&gt; out to the right. The project builds (finally), but ah – then there&amp;rsquo;s &lt;em&gt;runtime&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;When the crash occurs, you&amp;rsquo;re never sure if it was an &lt;em&gt;existing&lt;/em&gt; problem, or if it was caused by the code conversion. Who knows – maybe it&amp;rsquo;s both?&lt;/p&gt;
+&lt;p&gt;Perhaps this is a story more about code conversion than it is about Core Data. In any case, perhaps it&amp;rsquo;ll help a poor soul struggling to figure out why &lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png&#34; alt=&#34;EXC_BAD_INSTRUCTION&#34; width=&#34;364&#34; height=&#34;12&#34; class=&#34;alignnone size-full wp-image-13265&#34; style=&#34;display:inline-block;&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png 364w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION-300x10.png 300w&#34; sizes=&#34;(max-width: 364px) 100vw, 364px&#34; /&gt;&lt;/a&gt; just happened.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;match&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;data-model-attributes-and-nsmanagedobject-property-types--match-em&#34;&gt;Data model Attributes and NSManagedObject property types – Match &amp;rsquo;em!&lt;/h1&gt;
+&lt;p&gt;Whenever you&amp;rsquo;re creating a subclass of &lt;code&gt;NSManagedObject&lt;/code&gt; for the Entities in your data model, you&amp;rsquo;re in a mapping process.&lt;/p&gt;
+&lt;p&gt;Each Attribute on an Entity maps over to a &lt;em&gt;property&lt;/em&gt; on the &lt;code&gt;NSManagedObjectSubclass&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Not only must the &lt;em&gt;names&lt;/em&gt; of those Attributes and properties match, but the &lt;em&gt;Types&lt;/em&gt; of each must match as well.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;optionals-types&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;optionals-are-types&#34;&gt;Optionals are Types&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;String&lt;/code&gt; isn&amp;rsquo;t the same as &lt;code&gt;String?&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Date&lt;/code&gt; isn&amp;rsquo;t the same as &lt;code&gt;Date?&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;They&amp;rsquo;re different &lt;em&gt;Types&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;So what happens if you specify that a certain Attribute named, say, &lt;code&gt;createdOn&lt;/code&gt; is a &lt;code&gt;Date&lt;/code&gt; with the Optional checkbox checked in the data model designer like this:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png&#34; alt=&#34;createdOn as Optional attribute&#34; width=&#34;358&#34; height=&#34;110&#34; class=&#34;alignnone size-full wp-image-13268&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute.png 358w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/optional-attribute-300x92.png 300w&#34; sizes=&#34;(max-width: 358px) 100vw, 358px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And over in the implementation of your &lt;code&gt;NSManagedObject&lt;/code&gt; subclass, you have code that&amp;rsquo;s written like this:&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;@NSManaged&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;createdOn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Date&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//instead of Date? (ie, the ? is missing)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+What&amp;rsquo;ll happen? Well, I can tell you what&amp;rsquo;ll happen. :]&lt;/p&gt;
+&lt;p&gt;When you run the app and attempt to load objects from your persistent store that have been saved with &lt;code&gt;nil&lt;/code&gt; for the &lt;code&gt;createdOn&lt;/code&gt; value, your app will blow up:&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png&#34; alt=&#34;EXC_BAD_INSTRUCTION&#34; width=&#34;364&#34; height=&#34;12&#34; class=&#34;alignnone size-full wp-image-13265&#34; style=&#34;display:inline-block;&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION.png 364w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/EXC_BAD_INSTRUCTION-300x10.png 300w&#34; sizes=&#34;(max-width: 364px) 100vw, 364px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Xcode isn&amp;rsquo;t entirely unhelpful. While the &lt;code&gt;EXC_BAD_INSTRUCTION&lt;/code&gt; message in the text editor isn&amp;rsquo;t very illuminating, the Debug Navigator on the left (&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/debug-nav.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/debug-nav.png&#34; alt=&#34;Debug navigator - 6th icon from left in the left sidebar&#34; width=&#34;251&#34; height=&#34;30&#34; class=&#34;alignnone size-full wp-image-13279&#34; style=&#34;display:inline-block;&#34; /&gt;&lt;/a&gt;) provides some clues.&lt;/p&gt;
+&lt;p&gt;For me, it displayed just the breadcrumb that made me go, &amp;ldquo;Oh! Let me go check and see if I&amp;rsquo;ve got a Type mis-match between my data model and my &lt;code&gt;NSManagedObject&lt;/code&gt; subclass”:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch.png&#34; alt=&#34;Unconditionally bridge from Objective C NSDate? to Date&#34; width=&#34;452&#34; height=&#34;88&#34; class=&#34;alignnone size-full wp-image-13271&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch.png 452w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/TypeMismatch-300x58.png 300w&#34; sizes=&#34;(max-width: 452px) 100vw, 452px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Interesting… It looks like there was an attempt to go from an &lt;code&gt;NSDate?&lt;/code&gt; (&lt;em&gt;optional&lt;/em&gt;) instance to a &lt;code&gt;Date&lt;/code&gt; (&lt;em&gt;non&lt;/em&gt;-optional).&lt;/p&gt;
+&lt;p&gt;The issue isn&amp;rsquo;t that I&amp;rsquo;ve got a mismatch between &lt;code&gt;NSDate&lt;/code&gt; and &lt;code&gt;Date&lt;/code&gt;. The runtime can swap those around and substitute them easily.&lt;/p&gt;
+&lt;p&gt;Rather, it&amp;rsquo;s that I&amp;rsquo;m trying to go from &lt;em&gt;optional&lt;/em&gt;, where &lt;code&gt;nil&lt;/code&gt; is fine, to &lt;em&gt;non&lt;/em&gt;-optional, where &lt;code&gt;nil&lt;/code&gt;…well…crashes things.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;lessons-learned&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;lessons-learned&#34;&gt;Lessons learned&lt;/h1&gt;
+&lt;p&gt;What have I learned?&lt;/p&gt;
+&lt;p&gt;1 – Map Attributes to &lt;code&gt;NSManagedObject&lt;/code&gt; subclass properties carefully.&lt;br&gt;
+2 – Don&amp;rsquo;t accidentally miss a &lt;code&gt;?&lt;/code&gt; to indicate that a property is optional if I&amp;rsquo;ve got it marked as optional in the data model&lt;br&gt;
+3 – Read the Debug Navigator. It&amp;rsquo;s not just a list of gibberish – it can actually provide helpful clues so you know where to go look to solve your problem!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;course&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;Core Data Fundamentals with Swift&lt;/a&gt;&lt;br /&gt; &lt;a href=&#34;http://bit.ly/ps-core-data-swift&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png&#34; alt=&#34;Core Data Fundamentals with Swift&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13163&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-1024x576.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-300x169.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift-768x432.png 768w, https://www.andrewcbancroft.com/wp-content/uploads/2017/04/ps-core-data-fundamentals-swift.png 1539w&#34; sizes=&#34;(max-width: 1024px) 100vw, 1024px&#34; /&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to Unwrap Multiple Optionals with One If-Let in Swift</title>
+      <link>https://www.andrewcbancroft.com/2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/</link>
+      <pubDate>Wed, 19 Apr 2017 17:25:41 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/</guid>
+      <description>&lt;p&gt;What do you do when you&amp;rsquo;ve got two (or more) optionals that you need to safely unwrap and work with?&lt;/p&gt;
+&lt;h1 id=&#34;code-examples&#34;&gt;Code examples&lt;/h1&gt;
+&lt;p&gt;Suppose that you&amp;rsquo;ve got two arrays, both of which are optional. What I want to do right now is walk through a couple of scenarios where I unwrap them at the same time and print them to the console with a single &lt;code&gt;if-let&lt;/code&gt; statement.&lt;/p&gt;
+&lt;p&gt;First, watch &lt;em&gt;how&lt;/em&gt; it&amp;rsquo;s done to accomplish the goal of this article&amp;rsquo;s title. :]&lt;/p&gt;
+&lt;p&gt;Then, compare what you expected to be the print output, to the &lt;em&gt;actual&lt;/em&gt; output to make sure your understanding of how the syntax works is complete.&lt;/p&gt;
+&lt;p&gt;Ready?&lt;/p&gt;
+&lt;h2 id=&#34;scenario-1-both-arrays-are-initialized-non-nil&#34;&gt;Scenario 1: Both arrays are initialized (non-nil)&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;greetings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Howdy!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Hello!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;salutations&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Hi!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Hey!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;g&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;greetings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;salutations&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Output:&lt;/strong&gt;&lt;br&gt;
+[&amp;ldquo;Howdy!”, &amp;ldquo;Hello!”]&lt;br&gt;
+[&amp;ldquo;Hi!”, &amp;ldquo;Hey!”]&lt;/p&gt;
+&lt;h3 id=&#34;breaking-it-down&#34;&gt;Breaking it down&lt;/h3&gt;
+&lt;p&gt;The syntax for unwrapping multiple optionals with a single if-let block is straightforward. It&amp;rsquo;s &lt;code&gt;if&lt;/code&gt; followed by a series of &lt;code&gt;let [constantName] = [optionalName]&lt;/code&gt; statements, separated by commas.&lt;/p&gt;
+&lt;p&gt;The output of this one is pretty much what you&amp;rsquo;d expect, too. The string form of the arrays is printed to the console window in Xcode or in your Playground.&lt;/p&gt;
+&lt;h2 id=&#34;scenario-2-one-array-is-initialized-non-nil-and-the-other-is-nil&#34;&gt;Scenario 2: One array is initialized (non-nil), and the other is nil&lt;/h2&gt;
+&lt;p&gt;Now suppose that the arrays looked like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;greetings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]?&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Howdy!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Hello!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;salutations&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;g&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;greetings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;salutations&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Question: What do you think will be printed?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;[&amp;ldquo;Howdy!”, &amp;ldquo;Hello!”] and &amp;ldquo;nil”&lt;/li&gt;
+&lt;li&gt;Just [&amp;ldquo;Howdy!”, &amp;ldquo;Hello!”]&lt;/li&gt;
+&lt;li&gt;Nothing will be printed&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you chose door number &lt;strong&gt;3&lt;/strong&gt;, you&amp;rsquo;d be correct.&lt;/p&gt;
+&lt;p&gt;The if-let block between the {}&amp;rsquo;s is only executed if &lt;strong&gt;both&lt;/strong&gt; &lt;code&gt;greetings&lt;/code&gt; and &lt;code&gt;salutations&lt;/code&gt; are non-nil.&lt;/p&gt;
+&lt;h1 id=&#34;takeaway&#34;&gt;Takeaway&lt;/h1&gt;
+&lt;p&gt;Unwrapping multiple optionals with a single if-let statement is pretty easy: &lt;code&gt;if&lt;/code&gt; followed by a series of &lt;code&gt;let [constantName] = [optionalName]&lt;/code&gt; statements, separated by commas.&lt;/p&gt;
+&lt;p&gt;The behavior is similar to using the &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; operator in a normal &lt;code&gt;if&lt;/code&gt; condition. It&amp;rsquo;s like saying &amp;ldquo;if this optional is non-nil AND this optional is non-nil, then do this”&lt;/p&gt;
+&lt;p&gt;If you expect to work with one of the optionals in the list even if the other is nil, you&amp;rsquo;re going to need to split that up into multiple if-lets:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;g&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;greetings&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;salutations&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;bp&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Force Unwrapping Swift Optionals:  Code Smell!</title>
+      <link>https://www.andrewcbancroft.com/2016/06/13/force-unwrapping-swift-optionals-code-smell/</link>
+      <pubDate>Tue, 14 Jun 2016 03:54:57 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/06/13/force-unwrapping-swift-optionals-code-smell/</guid>
+      <description>&lt;p&gt;Do you find your Swift code riddled with &lt;code&gt;!&lt;/code&gt;‘s?&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m becoming more and more uncomfortable with seeing &lt;code&gt;!&lt;/code&gt; throughout my Swift code. It&amp;rsquo;s just a matter of time before it&amp;rsquo;s going to bite me.&lt;/p&gt;
+&lt;p&gt;Often, I do it because it&amp;rsquo;s the &amp;ldquo;easy thing” to do at the time. But it&amp;rsquo;s &lt;em&gt;dangerous&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Swift optionals are trying to &lt;em&gt;help&lt;/em&gt; us. They force us to deal with the possibility of something not having a value.&lt;/p&gt;
+&lt;p&gt;By force unwrapping an optional with the &lt;code&gt;!&lt;/code&gt; operator, we&amp;rsquo;re declaring, &amp;ldquo;This will &lt;em&gt;never&lt;/em&gt; be without a value”. Really? Never? Are you sure? Only a Sith deals in those kinds of absolutes.&lt;/p&gt;
+&lt;p&gt;When a function returns an optional, or a property is declared as optional, we are, &lt;em&gt;at the very least&lt;/em&gt;, meant to assume that there is a &lt;em&gt;possibility&lt;/em&gt; of &lt;code&gt;nil&lt;/code&gt; lying underneath.&lt;/p&gt;
+&lt;p&gt;Therefore, I&amp;rsquo;m considering it a sort of &amp;ldquo;code smell” when I see it in my own code. It&amp;rsquo;s not too much to throw an &lt;code&gt;if let&lt;/code&gt; or a &lt;code&gt;guard let&lt;/code&gt; in there to handle the possibility of &lt;code&gt;nil&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;two-exceptions&#34;&gt;Two exceptions&lt;/h1&gt;
+&lt;p&gt;Two exceptions to the code smell rule:&lt;/p&gt;
+&lt;h2 id=&#34;1--iboutlet-and-ibaction&#34;&gt;1 – IBOutlet and IBAction&lt;/h2&gt;
+&lt;p&gt;IBOutlets and IBActions are force-unwrapped, but that&amp;rsquo;s because they get injected when the Storyboard is loaded at run-time. It&amp;rsquo;s assumed that these are connected and will be supplied when the scene is loaded. If they get unwired somehow, we &lt;em&gt;want&lt;/em&gt; an instant crash so we know to go back to the Storyboard and re-wire things to the view controller.&lt;/p&gt;
+&lt;h2 id=&#34;2--required-properties-to-be-set-in-prepareforsegue&#34;&gt;2 – Required properties to be set in prepareForSegue&lt;/h2&gt;
+&lt;p&gt;Along those same lines, I consider properties that &lt;em&gt;must&lt;/em&gt; be set when navigating to a new view controller to be in the same category as an IBOutlet or an IBAction. I want to know right away if I forget to set those in &lt;code&gt;prepareForSegue&lt;/code&gt; in the parent view controller. So I&amp;rsquo;ll often force unwrap the optional in the declaration so that there&amp;rsquo;s an as-immediate-as-possible crash if it&amp;rsquo;s not set.&lt;/p&gt;
+&lt;p&gt;Hopefully when you&amp;rsquo;re working with optionals from here on, you&amp;rsquo;ll take a second sniff when you see the &lt;code&gt;!&lt;/code&gt; operator.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Swift Optionals?  Don’t Forget to Unwrap!</title>
+      <link>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</link>
+      <pubDate>Sat, 26 Jul 2014 02:23:53 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</guid>
+      <description>&lt;p&gt;There is a compiler error that throws me off every time I see it.  It takes the form,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‘ClassName?&amp;rsquo; does not have a member named ‘memberName&#39;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This can happen when you&amp;rsquo;ve declared a variable as an optional, but forget to &lt;em&gt;unwrap&lt;/em&gt; that optional when you attempt to call a method on it.&lt;/p&gt;
+&lt;p&gt;For example, given this class definition:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Bird&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;family&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kd&#34;&gt;init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;family&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;family&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;family&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;color&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;color&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;isSwift&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Bool&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;family&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Apodidae&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If, say in a ViewController, I declare a variable that I intend to reference an &lt;em&gt;optional&lt;/em&gt; &lt;code&gt;Bird&lt;/code&gt; instance like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;birdInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Bird&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And then I later initialize this variable with a &lt;code&gt;Bird&lt;/code&gt; instance, perhaps in &lt;code&gt;viewDidLoad()&lt;/code&gt; :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;birdInstance&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Bird&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;family&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Apodidae&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Black&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If I attempt to invoke the &lt;code&gt;isSwift&lt;/code&gt; method on the &lt;code&gt;birdInstance&lt;/code&gt; later  on, I&amp;rsquo;ll get a compiler error:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;bp&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;birdInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;isSwift&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;error: ‘Bird?&amp;rsquo; does not have a member named ‘isSwift&#39;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This may seem pretty basic — after all, I declared the &lt;code&gt;birdInstance&lt;/code&gt; as an optional and I know optionals need special treatment.  How could I make this mistake??  Perhaps this is just a consequence of my current stage in life, trying to code in 15-30 minute spurts with my 1 1/2 year old running around, haha.&lt;/p&gt;
+&lt;p&gt;We all deal with this though:  it&amp;rsquo;s fairly easy to write some code and come back to it later and not remember how you declared your variable in an earlier coding session.  Then when you&amp;rsquo;re presented a message saying that your class doesn&amp;rsquo;t have a member named &amp;ldquo;___”, you immediately go to the class definition and see the function there, plain as day.  It&amp;rsquo;s easy to spend 3-5 minutes scratching your head thinking, &amp;ldquo;What in the world??!” … And then you realize – it&amp;rsquo;s that &lt;em&gt;optional declaration&lt;/em&gt; that you forgot to handle.&lt;/p&gt;
+&lt;p&gt;To fix this, of course, you can do any number of things, depending on your situation.&lt;/p&gt;
+&lt;h5 id=&#34;force-unwrap-the-optional-and-invoke-the-method&#34;&gt;Force unwrap the optional and invoke the method:&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;birdInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;isSwift&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// Force unwrapped -- **CAUTION** make sure that birdInstance gets instantiated before you do this,&amp;amp;nbsp;or you&amp;#39;ll get a runtime error&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;employ-optional-chaining-and-invoke-the-method&#34;&gt;Employ optional chaining and invoke the method:&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;birdInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;isSwift&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;declare-the-variable-as-implicitly-unwrapped-optional-then-invoke-the-method-later-without-extra-exclamation-or-question-marks&#34;&gt;Declare the variable as implicitly unwrapped optional, then invoke the method later without extra exclamation or question marks:&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;birdInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Bird&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// Implicitly unwrapped -- **CAUTION** make sure that birdInstance gets instantiated before you use it, or you&amp;#39;ll get a runtime error&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;birdInstance&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Bird&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;family&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Apodidae&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Black&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Some time later, invoke isSwift&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;bp&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;birdInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;isSwift&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a title=&#34;CompileSwift - Optionals&#34; href=&#34;http://www.compileswift.com/intermediate/optionals/?utm_content=bufferfba01&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer&#34; target=&#34;_blank&#34;&gt;A blog post by Peter Witham over at CompileSwift&lt;/a&gt; was the article that caused me to think, &amp;ldquo;OH!  I haven&amp;rsquo;t done anything with my optional…&lt;em&gt;that&amp;rsquo;s&lt;/em&gt; the problem”.  Credit to you, sir, for your post!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

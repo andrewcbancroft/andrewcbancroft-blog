@@ -1,0 +1,679 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SwiftUI on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/swiftui/</link>
+    <description>Recent content about iOS development with Swift in SwiftUI  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Aug 2021 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/swiftui/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Building iOS User Interfaces with SwiftUI</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2021-08-22-building-ios-user-interfaces-swiftui/</link>
+      <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2021-08-22-building-ios-user-interfaces-swiftui/</guid>
+      <description>&lt;p&gt;Designing efficient and dynamic apps is essential for taking your iOS developer skills to the next level.&lt;/p&gt;
+&lt;p&gt;In this course, Building iOS User Interfaces with SwiftUI, you&amp;rsquo;ll build upon the basic knowledge of iOS development you’ve already gained in order to build compelling iOS apps that engage your users.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://bit.ly/building-ios-ui-swiftui&#34; target=&#34;_blank&#34;&gt;Building iOS User Interfaces with SwiftUI&lt;/a&gt;&lt;a href=&#34;https://bit.ly/building-ios-ui-swiftui&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/building-ios-user-interfaces-swiftui.png&#34; alt=&#34;Building iOS User Interfaces with SwiftUI&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;First, you&amp;rsquo;ll see the tools and learn how to create iOS apps with adaptive user interfaces that work on multiple devices.&lt;/p&gt;
+&lt;p&gt;Next, you’ll learn how to manage iOS projects and define the building blocks of your own iOS applications.&lt;/p&gt;
+&lt;p&gt;Finally, you&amp;rsquo;ll explore working with data-driven controls and understand navigation options.&lt;/p&gt;
+&lt;p&gt;When you’re finished with this course, you&amp;rsquo;ll know current best practices, iOS architecture, and the most important ideas you need to feel comfortable bringing your developer skills into the iOS and Apple developer world.&lt;/p&gt;
+&lt;h2 id=&#34;1---designing-interfaces-with-swiftui&#34;&gt;1 - Designing Interfaces with SwiftUI&lt;/h2&gt;
+&lt;p&gt;In this introductory module, we begin where the iOS Getting Started course left off and prepare you to handle next-level interface building with SwiftUI.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Design User Interfaces with SwiftUI&lt;/li&gt;
+&lt;li&gt;The Snowhaven Renovation Scenario&lt;/li&gt;
+&lt;li&gt;Defining SwiftUI Views&lt;/li&gt;
+&lt;li&gt;Creating Basic Designs and Layouts&lt;/li&gt;
+&lt;li&gt;Representing Data in User Interfaces&lt;/li&gt;
+&lt;li&gt;Customizing the Appearance of Views&lt;/li&gt;
+&lt;li&gt;Changing the Size and Scale of Views&lt;/li&gt;
+&lt;li&gt;Adding Effects to Views&lt;/li&gt;
+&lt;li&gt;Layering Views with ZStacks&lt;/li&gt;
+&lt;li&gt;Implementing Navigation and Displaying a Modal View&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2---handling-user-input&#34;&gt;2 - Handling User Input&lt;/h2&gt;
+&lt;p&gt;There’s no such thing as an app without data.
+In this module, I set you up for building dynamic, interactive applications by unpacking questions like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How do we model real-world objects and concepts as data that SwiftUI can work with?&lt;/li&gt;
+&lt;li&gt;How do we integrate data into an app, so it’s usable in the right views at the right time?&lt;/li&gt;
+&lt;li&gt;And how do we load data that’s been saved… display it… and, most importantly, for this module…change it using different editing controls with SwiftUI…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Working with Data in SwiftUI&lt;/li&gt;
+&lt;li&gt;Establishing an App’s Data Flow&lt;/li&gt;
+&lt;li&gt;Loading and Displaying Data&lt;/li&gt;
+&lt;li&gt;Editing Text Data with Text Fields&lt;/li&gt;
+&lt;li&gt;Persisting (or Cancelling) Data Changes&lt;/li&gt;
+&lt;li&gt;Working with Picker Views&lt;/li&gt;
+&lt;li&gt;Switching Between Binary Options with Toggles&lt;/li&gt;
+&lt;li&gt;Editing Numeric Data with Text Fields&lt;/li&gt;
+&lt;li&gt;Displaying Editing Controls in a Form&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3---bringing-apps-to-life-with-drawing-animation-and-gestures&#34;&gt;3 - Bringing Apps to Life with Drawing, Animation, and Gestures&lt;/h2&gt;
+&lt;p&gt;SwiftUI provides you with all the tools necessary to make your apps even more dynamic by responding to user gestures like taps and swipes… The framework also gives you everything you need to express your creativity by drawing your own graphics, and adding animations throughout your apps to bring things to life.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understanding the SwiftUI Drawing System&lt;/li&gt;
+&lt;li&gt;Drawing with Paths&lt;/li&gt;
+&lt;li&gt;Using GeometryReader&lt;/li&gt;
+&lt;li&gt;Applying Transformations to Paths&lt;/li&gt;
+&lt;li&gt;Building Reusable Shapes&lt;/li&gt;
+&lt;li&gt;Understanding Animations&lt;/li&gt;
+&lt;li&gt;Adding Basic Animation&lt;/li&gt;
+&lt;li&gt;Animating View Hierarchy Changes with Transitions&lt;/li&gt;
+&lt;li&gt;Combining Multiple Animations and Transitions&lt;/li&gt;
+&lt;li&gt;Responding to Gestures&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4---integrating-swiftui-and-uikit&#34;&gt;4 - Integrating SwiftUI and UIKit&lt;/h2&gt;
+&lt;p&gt;By now, you know that SwiftUI is wonderful, but&amp;hellip; it’s not the only Apple UI framework used in today’s Apple Developer world. &lt;strong&gt;UIKit&lt;/strong&gt; is still very widely used and even includes some UI components that are not currently available in the SwiftUI framework.&lt;/p&gt;
+&lt;p&gt;As we wrap up the course, I explore the answer to this question: How can we, as developers, mix SwiftUI and UIKit to leverage the power of both frameworks?&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Integrate SwiftUI and UIKit&lt;/li&gt;
+&lt;li&gt;Representing UIKit ViewControllers in SwiftUI&lt;/li&gt;
+&lt;li&gt;Making SwiftUI Views Compatible with UIKit&lt;/li&gt;
+&lt;li&gt;Representing UIKit Views in SwiftUI&lt;/li&gt;
+&lt;li&gt;Sharing State Between SwiftUI and UIKit&lt;/li&gt;
+&lt;li&gt;Coordinating User Interaction Between UIViewControllers and SwiftUI&lt;/li&gt;
+&lt;li&gt;Coordinating User Interaction Between UIViews and SwiftUI&lt;/li&gt;
+&lt;li&gt;Applying the Finishing Touches&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;From the beginning my unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!&lt;/p&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS 14 Getting Started</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2020-12-04-ios-14-getting-started/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2020-12-04-ios-14-getting-started/</guid>
+      <description>&lt;p&gt;Developing for iOS is a valuable and in-demand skill, but if you haven&amp;rsquo;t developed in the Apple world before, it can be surprisingly different.&lt;/p&gt;
+&lt;p&gt;In this course, iOS 14: Getting Started, you&amp;rsquo;ll quickly get up and running using Xcode 12, Swift 5, and SwiftUI to build great iOS apps and tap into the latest features in iOS 14.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://bit.ly/iOS14-getting-started&#34; target=&#34;_blank&#34;&gt;iOS 14 Getting Started&lt;/a&gt;&lt;a href=&#34;https://bit.ly/iOS14-getting-started&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/ios-14-getting-started.png&#34; alt=&#34;iOS 14 Getting Started&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;First, you&amp;rsquo;ll see the tools and learn how to create iOS apps with adaptive user interfaces that work on multiple devices.&lt;/p&gt;
+&lt;p&gt;Next, you’ll learn how to manage iOS projects and define the building blocks of your own iOS applications.&lt;/p&gt;
+&lt;p&gt;Finally, you&amp;rsquo;ll explore working with data-driven controls and understand navigation options.&lt;/p&gt;
+&lt;p&gt;When you’re finished with this course, you&amp;rsquo;ll know current best practices, iOS architecture, and the most important ideas you need to feel comfortable bringing your developer skills into the iOS and Apple developer world.&lt;/p&gt;
+&lt;h2 id=&#34;1--preparing-to-build-ios-applications&#34;&gt;1 – Preparing to Build iOS Applications&lt;/h2&gt;
+&lt;p&gt;Prepare to implement iOS apps by understanding what’s involved from a big picture standpoint.&lt;/p&gt;
+&lt;p&gt;We begin at the beginning to bring you up to speed and set the foundation for the remainder of the course.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What You Need for Building iOS Apps&lt;/li&gt;
+&lt;li&gt;Creating an iOS Project with Xcode&lt;/li&gt;
+&lt;li&gt;Exploring an iOS Project&lt;/li&gt;
+&lt;li&gt;How to Learn iOS&lt;/li&gt;
+&lt;li&gt;The Night Watch Scenario&lt;/li&gt;
+&lt;li&gt;Working with Xcode Projects&lt;/li&gt;
+&lt;li&gt;Grasping the Basics of the Xcode Development Environment&lt;/li&gt;
+&lt;li&gt;Summary&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2---building-single-view-applications&#34;&gt;2 - Building Single View Applications&lt;/h2&gt;
+&lt;p&gt;Building single view applications is the starting point for most of us who are learning to build iOS apps because they allow us a simplified architecture that focuses on a single screen performing a single responsibility.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Build Single View Apps&lt;/li&gt;
+&lt;li&gt;Understanding the SwiftUI Framework&lt;/li&gt;
+&lt;li&gt;Understanding Views&lt;/li&gt;
+&lt;li&gt;Combining and Laying out Views&lt;/li&gt;
+&lt;li&gt;Understanding the SwiftUI Layout System&lt;/li&gt;
+&lt;li&gt;Aligning and Positioning Views&lt;/li&gt;
+&lt;li&gt;Customizing UI Appearance&lt;/li&gt;
+&lt;li&gt;Developing a SwiftUI Mindset&lt;/li&gt;
+&lt;li&gt;Using Icons and Symbols&lt;/li&gt;
+&lt;li&gt;Managing Views with Groups&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3---creating-data-driven-lists&#34;&gt;3 - Creating Data-driven Lists&lt;/h2&gt;
+&lt;p&gt;Just about any day in which you use an iPhone or iPad for more than a few minutes, you&amp;rsquo;ll almost certainly end up in an app that uses a List View.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s the most common way to show a structured, scrollable series of items, and List Views are a core competency for an iOS developer working in SwiftUI, so it&amp;rsquo;s the first complex control we dive into.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Work with Lists&lt;/li&gt;
+&lt;li&gt;Understanding Lists&lt;/li&gt;
+&lt;li&gt;Creating a List&lt;/li&gt;
+&lt;li&gt;Controlling a List with Data&lt;/li&gt;
+&lt;li&gt;Using ForEach to Supply List Content&lt;/li&gt;
+&lt;li&gt;Adding Sections and Headings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4---building-ios-apps-with-multiple-screens&#34;&gt;4 - Building iOS Apps with Multiple Screens&lt;/h2&gt;
+&lt;p&gt;Here I cover how to create apps multiple screens and how to think about and enable navigation between them.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Defining Apps with Multiple Screens&lt;/li&gt;
+&lt;li&gt;Implementing Navigation Views&lt;/li&gt;
+&lt;li&gt;Adding Navigation to an Existing Project&lt;/li&gt;
+&lt;li&gt;Extracting Reusable Subviews&lt;/li&gt;
+&lt;li&gt;Creating a Tabbed Application&lt;/li&gt;
+&lt;li&gt;Recapping Multi-view Applications&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5---adding-behavior-and-working-with-data&#34;&gt;5 - Adding Behavior and Working With Data&lt;/h2&gt;
+&lt;p&gt;The thing that makes an app come alive is the behavior we add, and the dynamic responses to that behavior that get reflected in the user interface.&lt;/p&gt;
+&lt;p&gt;In any application, a user interface has one critical job: to accurately represent the &lt;strong&gt;data&lt;/strong&gt; of our application in what it displays on the screen.&lt;/p&gt;
+&lt;p&gt;In SwiftUI, data and behavior go hand-in-hand, and I cover how to respond to user interaction in this module.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Add Basic Behavior&lt;/li&gt;
+&lt;li&gt;Extending the Data Model&lt;/li&gt;
+&lt;li&gt;Understanding the View Update Cycle in SwiftUI&lt;/li&gt;
+&lt;li&gt;Adding Basic Behavior&lt;/li&gt;
+&lt;li&gt;Connecting a Subview to a Parent View’s Data&lt;/li&gt;
+&lt;li&gt;Using Classes as Data Models&lt;/li&gt;
+&lt;li&gt;Sharing a Data Model through the SwiftUI Environment&lt;/li&gt;
+&lt;li&gt;Bringing the Data Model and Behavior to the Night Watch App&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;6---putting-it-all-together&#34;&gt;6 - Putting It All Together&lt;/h2&gt;
+&lt;p&gt;There’s nothing like practicing your skills in new contexts to refine them and solidify what you’ve learned.&lt;/p&gt;
+&lt;p&gt;We go into some additional controls and techniques for building apps with SwiftUI before concluding the course.&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applying What You’ve Learned&lt;/li&gt;
+&lt;li&gt;Integrating the Extended Data Model&lt;/li&gt;
+&lt;li&gt;Adding the Mark Complete Behavior&lt;/li&gt;
+&lt;li&gt;Adding a Toolbar and Toggle Control&lt;/li&gt;
+&lt;li&gt;Implementing Swipe and Move Actions for a List&lt;/li&gt;
+&lt;li&gt;Resetting the List&lt;/li&gt;
+&lt;li&gt;Showing an Alert&lt;/li&gt;
+&lt;li&gt;Creating an Adaptive UI&lt;/li&gt;
+&lt;li&gt;Adding and Customizing Layout Variations&lt;/li&gt;
+&lt;li&gt;Getting Ready for the App Store&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;7---publishing-to-the-app-store&#34;&gt;7 - Publishing to the App Store&lt;/h2&gt;
+&lt;p&gt;Finishing an app and getting it out the door to your users is one of the best feelings in the world.&lt;/p&gt;
+&lt;p&gt;Beyond the emotional aspect of publishing an app though, more and more employers want to see job candidates who have published at least one app to the App Store.&lt;/p&gt;
+&lt;p&gt;So in this final module, I complete the journey by setting you up to get an app into the App Store and bolster your resume!&lt;/p&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Publish Your App&lt;/li&gt;
+&lt;li&gt;Adding Images and App Icons&lt;/li&gt;
+&lt;li&gt;Responding to Dark Mode&lt;/li&gt;
+&lt;li&gt;Creating an iOS App Launch Screen&lt;/li&gt;
+&lt;li&gt;Submitting an App for Review&lt;/li&gt;
+&lt;li&gt;Continuing Your iOS Developer Journey&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;feedback-welcome&#34;&gt;Feedback Welcome!&lt;/h1&gt;
+&lt;p&gt;From the beginning my unwavering goal is to help you filter the noise and learn as efficiently as possible.  My hope is that this course benefits you in your iOS development career!&lt;/p&gt;
+&lt;p&gt;I welcome feedback on this course, and on other iOS development courses you might be interested in seeing in the Pluralsight library. Happy learning!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What Are All of the Possible Environment Keys in SwiftUI?</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-environment-keys-possible/</link>
+      <pubDate>Tue, 08 Sep 2020 05:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-environment-keys-possible/</guid>
+      <description>&lt;p&gt;This is merely a breadcrumb for finding the Apple Developer documentation page where all of the possible SwiftUI Environment keys are listed.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+Resources
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://developer.apple.com/documentation/swiftui/environmentvalues&#34; rel=&#34;nofollow&#34; target=&#34;_blank&#34;&gt;Apple Documentation ➡️ SwiftUI ➡️ State and Data Flow ➡️ EnvironmentValues&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to Use @FetchRequest in SwiftUI</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-to-use-fetchrequest-swiftui/</link>
+      <pubDate>Sat, 03 Aug 2019 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/how-to-use-fetchrequest-swiftui/</guid>
+      <description>&lt;p&gt;Once you&amp;rsquo;ve &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/&#34;&gt;passed an NSManagedObjectContext instance to your SwiftUI View&lt;/a&gt;, you&amp;rsquo;ll need to pull data out of your Core Data persistent store with a fetch request.&lt;/p&gt;
+&lt;h2 id=&#34;first-things-first&#34;&gt;First Things First&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The remainder of this how-to assumes that you&amp;rsquo;ve already got a way to initialize the Core Data stack. Ticking the &amp;lsquo;Use Core Data&amp;rsquo; checkbox when you start a new app will place some boilerplate code in &lt;code&gt;AppDelegate&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@Environment(\.managedobjectcontext)&lt;/code&gt; must &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/&#34;&gt;be assigned&lt;/a&gt; before the View is initialized for &lt;code&gt;@FetchRequest&lt;/code&gt; to work.&lt;/li&gt;
+&lt;li&gt;Code examples are taken from my &amp;ldquo;Blog Idea List&amp;rdquo; sample project that includes a single Core Data Entity named &lt;code&gt;BlogIdea&lt;/code&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png&#34; alt=&#34;Blog Idea Entity&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+Resources
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-file-code&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt; Blog Idea List SwiftUI Example Xcode Project&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;You can refer to my &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction to using Core Data with SwiftUI&lt;/a&gt; to review all of the steps in one spot.  It includes an example project with all of the pieces stitched together!&lt;/p&gt;
+&lt;h2 id=&#34;breaking-down-the-code&#34;&gt;Breaking Down the Code&lt;/h2&gt;
+&lt;p&gt;There are three key components to this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A way to configure an &lt;code&gt;NSFetchRequest&lt;/code&gt; &lt;em&gt;with&lt;/em&gt; an &lt;code&gt;NSSortDescriptor&lt;/code&gt; added. Your app will blow up 💥 if you don&amp;rsquo;t have one added to your fetch request.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;@FetchRequest&lt;/code&gt; property wrapper in your SwiftUI view.&lt;/li&gt;
+&lt;li&gt;A SwiftUI View that displays the results of the executed fetch request.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The following code snippets provide you an example of how to weave all three components together.&lt;/p&gt;
+&lt;p&gt;Comments with ❇️ symbols will explain the details inline.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;BlogIdea.swift&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Foundation&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CoreData&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// ❇️ BlogIdea code generation is turned OFF in the xcdatamodeld file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSManagedObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Identifiable&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;@NSManaged&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ideaTitle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;@NSManaged&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ideaDescription&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;extension&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;BlogIdea&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ❇️ The @FetchRequest property wrapper in the ContentView will call this function&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;allIdeasFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;NSFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// ❇️ The @FetchRequest property wrapper in the ContentView requires a sort descriptor&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sortDescriptors&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NSSortDescriptor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;ideaTitle&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ascending&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ContentView.swift&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SwiftUI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SwiftUIView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ❇️ The BlogIdea class has an `allIdeasFetchRequest` static function that can be used here&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;allIdeasFetchRequest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;blogIdeas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FetchedResults&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BlogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;List&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;blogIdeas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;blogIdea&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;blogIdea&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ideaTitle&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;??&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Note that you don&amp;rsquo;t actually need to hold a reference to the &lt;code&gt;@Environment&lt;/code&gt;&amp;rsquo;s &lt;code&gt;managedObjectContext&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;@Environment&lt;/code&gt;&amp;rsquo;s &lt;code&gt;managedObjectContext&lt;/code&gt; must be set! But you don&amp;rsquo;t have to &amp;ldquo;call&amp;rdquo; it or use it directly to make the fetch request &amp;ldquo;go&amp;rdquo;.&lt;/p&gt;
+&lt;h2 id=&#34;wheres-the-call-to-perform-the-fetch-request&#34;&gt;Where&amp;rsquo;s the Call to Perform the Fetch Request?&lt;/h2&gt;
+&lt;p&gt;With most Core Data apps, you&amp;rsquo;re going to see a call to &lt;code&gt;fetch(_:)&lt;/code&gt; somewhere in your code.&lt;/p&gt;
+&lt;p&gt;This happens &amp;ldquo;behind the scenes&amp;rdquo; when you use the &lt;code&gt;@FetchRequest&lt;/code&gt; property wrapper in your SwiftUI view. No need to use your managed object context to perform the fetch request manually.&lt;/p&gt;
+&lt;p&gt;For a more complete guide to using Core Data with SwiftUI, you can refer to the &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction I published&lt;/a&gt;.  It includes an example project with all of the pieces stitched together!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to Pass NSManagedObjectContext to a SwiftUI View</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/</link>
+      <pubDate>Fri, 02 Aug 2019 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/passing-nsmanagedobjectcontext-to-swiftui-view/</guid>
+      <description>&lt;p&gt;Step one to &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;using Core Data with SwiftUI&lt;/a&gt; is to initialize the Core Data stack and pass an instance of your &lt;code&gt;NSManagedObjectContext&lt;/code&gt; to your view.&lt;/p&gt;
+&lt;h2 id=&#34;first-things-first&#34;&gt;First Things First&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The remainder of this how-to assumes that you&amp;rsquo;ve already got a way to initialize the Core Data stack. Ticking the &amp;lsquo;Use Core Data&amp;rsquo; checkbox when you start a new app will place some boilerplate code in &lt;code&gt;AppDelegate&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Code examples are taken from my &amp;ldquo;Blog Idea List&amp;rdquo; sample project that includes a single Core Data Entity named &lt;code&gt;BlogIdea&lt;/code&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/blog-idea-entity.png&#34; alt=&#34;Blog Idea Entity&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+Resources
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-file-code&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt; Blog Idea List SwiftUI Example Xcode Project&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;You can refer to my &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction to using Core Data with SwiftUI&lt;/a&gt; to review all of the steps in one spot.  It includes an example project with all of the pieces stitched together!&lt;/p&gt;
+&lt;h2 id=&#34;breaking-down-the-code&#34;&gt;Breaking Down the Code&lt;/h2&gt;
+&lt;p&gt;There are two key components to this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;the Core Data Stack&lt;/li&gt;
+&lt;li&gt;the SwiftUI &lt;code&gt;@Environment&lt;/code&gt;&amp;rsquo;s &lt;code&gt;managedObjectContext&lt;/code&gt; variable.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&amp;ldquo;Passing in&amp;rdquo; your managed object context will probably happen early on in your app&amp;rsquo;s launch sequence.  &lt;code&gt;SceneDelegate&lt;/code&gt; is where I pass mine in with the Blog Idea List app.&lt;/p&gt;
+&lt;p&gt;On the receiving end is your SwiftUI View.  An &lt;code&gt;@Environment&lt;/code&gt; property wrapper needs to be set up in order to pull &lt;em&gt;out&lt;/em&gt; the managed object context so you can use it.&lt;/p&gt;
+&lt;p&gt;The following code snippets provide you glimpses into both sides of the coin.  Comments with ❇️ symbols will explain the details inline.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SceneDelegate.swift&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;scene&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;scene&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIScene&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;willConnectTo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UISceneSession&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;options&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;connectionOptions&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIScene&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ConnectionOptions&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;windowScene&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;scene&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;?&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIWindowScene&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;window&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIWindow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;windowScene&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;windowScene&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// ❇️ Get the managedObjectContext from the persistent container&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// ❇️ This assumes you&amp;#39;ve left the Core Data stack creation code within AppDelegate&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectContext&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UIApplication&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shared&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;delegate&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AppDelegate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;persistentContainer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;viewContext&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// ❇️ Pass it to the ContentView through the &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// ❇️ managedObjectContext @Environment variable&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;contentView&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ContentView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                            &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;environment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rootViewController&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIHostingController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rootView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;contentView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kc&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;window&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;window&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;makeKeyAndVisible&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ContentView.swift&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SwiftUI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SwiftUIView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ❇️ Access the @Environment&amp;#39;s managedObjectContext variable&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ❇️ and keep a reference to use later&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Environment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;managedObjectContext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;managedObjectContext&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// ❇️ Use self.managedObjectContext however you need within your SwiftUI view!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;For a more complete guide to using Core Data with SwiftUI, you can refer to the &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/using-core-data-with-swiftui-introduction/&#34;&gt;introduction I published&lt;/a&gt;.  It includes an &lt;a href=&#34;https://github.com/andrewcbancroft/BlogIdeaList-SwiftUI&#34;&gt;example project&lt;/a&gt; with all of the pieces stitched together!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Apple&#39;s SwiftUI Essentials Tutorial Series as Playgrounds</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/</link>
+      <pubDate>Sat, 06 Jul 2019 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-essentials-playgrounds/</guid>
+      <description>&lt;p&gt;&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+Resources
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-file-code&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/andrewcbancroft/swiftui-essentials-playgrounds&#34;&gt;SwiftUI Essentials Tutorials as Playgrounds&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-link&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://developer.apple.com/tutorials/swiftui&#34; rel=&#34;nofollow&#34;&gt;Apple&#39;s SwiftUI tutorials&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;why-playgrounds&#34;&gt;Why Playgrounds?&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve been making my way through &lt;a href=&#34;https://developer.apple.com/tutorials/swiftui&#34; rel=&#34;nofollow&#34;&gt;Apple&amp;rsquo;s SwiftUI tutorials&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re anything like me, you learn by tinkering with things. Change the modifiers, reposition &lt;code&gt;Text&lt;/code&gt;, use a different &lt;code&gt;Image&lt;/code&gt;, and see what happens.&lt;/p&gt;
+&lt;p&gt;BUT.&lt;/p&gt;
+&lt;p&gt;Without macOS Catalina, iterating quickly on these tinker sessions involves starting and stopping a simulator to see the changes.&lt;/p&gt;
+&lt;p&gt;#annoying, right?&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;However&lt;/em&gt;&amp;hellip; since you can &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/&#34;&gt;use SwiftUI in a Playground&lt;/a&gt;, I decided to take my learning experience out of the sample Xcode projects that Apple provides, and turn them into Playgrounds.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve &lt;a href=&#34;https://github.com/andrewcbancroft/swiftui-essentials-playgrounds&#34;&gt;pushed them to GitHub&lt;/a&gt;, &lt;em&gt;just in case&lt;/em&gt; they&amp;rsquo;d be useful to you.&lt;/p&gt;
+&lt;h2 id=&#34;repository-structure&#34;&gt;Repository Structure&lt;/h2&gt;
+&lt;p&gt;Each tutorial in the Essentials series has its own completed Playground.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/&#34;&gt;Download or clone&lt;/a&gt; the repository to experiment with the SwiftUI tutorials individually in a Playground environment.&lt;/p&gt;
+&lt;p&gt;Run the playground, and &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/xcode/showing-live-view-in-swift-playground/&#34;&gt;show the live preview&lt;/a&gt; to see it in action.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;run-preview.gif&#34; alt=&#34;Run and Preview&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;creating-and-combining-views&#34;&gt;Creating and Combining Views&lt;/h3&gt;
+&lt;p&gt;All resources required for generating the SwiftUI preview have been added under the Resources folder.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;creating-combining-views.png&#34; alt=&#34;Creating and Combining Views&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;building-lists-and-navigation&#34;&gt;Building Lists and Navigation&lt;/h3&gt;
+&lt;p&gt;All resources required for generating the SwiftUI preview have been added under the Resources folder.&lt;/p&gt;
+&lt;p&gt;Helper code for loading the JSON data file and generating images in the UI at different sizes has been placed in the &lt;code&gt;Data Helpers.swift&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Model Objects.swift&lt;/code&gt; contains the code for the &lt;code&gt;Landmark&lt;/code&gt; and &lt;code&gt;Coordinates&lt;/code&gt; types.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;building-lists-and-navigation.gif&#34; alt=&#34;Building Lists and Navigation&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;handling-user-input&#34;&gt;Handling User Input&lt;/h3&gt;
+&lt;p&gt;All resources required for generating the SwiftUI preview have been added under the Resources folder.&lt;/p&gt;
+&lt;p&gt;Helper code for loading the JSON data file &lt;strong&gt;including the new isFavorite property&lt;/strong&gt;, and generating images in the UI at different sizes has been placed in the &lt;code&gt;Data Helpers.swift&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Model Objects.swift&lt;/code&gt; contains the code for the &lt;code&gt;Landmark&lt;/code&gt; and &lt;code&gt;Coordinates&lt;/code&gt; types.  It also adds the &lt;code&gt;UserData&lt;/code&gt; bindable object.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;handling-user-input.gif&#34; alt=&#34;Handling User Input&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using SwiftUI in a Playground</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/</link>
+      <pubDate>Thu, 13 Jun 2019 04:00:18 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re looking for a quicker way to iterate while you&amp;rsquo;re building SwiftUI views, and you don&amp;rsquo;t have macOS Catalina installed, you might enjoy the Playground experience more than you enjoy pressing &lt;code&gt;command + R&lt;/code&gt; every time you make a change and want to see it in the user interface.&lt;/p&gt;
+&lt;p&gt;How do you do it?  Here&amp;rsquo;s a code snippet to copy-paste into a Playground to get you going.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;UIKit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;PlaygroundSupport&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;SwiftUI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Make a SwiftUI view&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ContentView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;SwiftUI in a Playground!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Make a UIHostingController&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;viewController&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIHostingController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rootView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ContentView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Assign it to the playground&amp;#39;s liveView&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PlaygroundPage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;current&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;liveView&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;viewController&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// RUN!&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;result.png&#34; alt=&#34;Result&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SwiftUI is Declarative.  What Does That Mean?</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-does-declarative-mean/</link>
+      <pubDate>Tue, 04 Jun 2019 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/swiftui-what-does-declarative-mean/</guid>
+      <description>&lt;p&gt;&amp;ldquo;Declarative&amp;rdquo; is one of Swift UI&amp;rsquo;s four core principles.&lt;/p&gt;
+&lt;p&gt;Aside from taking for granted that declarative is just &amp;ldquo;better&amp;rdquo; than &lt;em&gt;whatever else&lt;/em&gt;, how about a visual to understand the declarative way of thinking?&lt;/p&gt;
+&lt;p&gt;Imagine yourself in a restaurant (sit-down or fast food, whichever).&lt;/p&gt;
+&lt;p&gt;When you want a burger, which best describes what you do?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;burger-imperative.png&#34; alt=&#34;Burger Imperative&#34;&gt;&lt;/p&gt;
+&lt;p&gt;or&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;burger-declarative.png&#34; alt=&#34;Burger Declarative&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Saying &lt;strong&gt;what&lt;/strong&gt; you want (aka, being &amp;ldquo;declarative&amp;rdquo;) is what the most probable thing you&amp;rsquo;d do in a restaurant.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s exactly the recipe you use when you&amp;rsquo;re working with SwiftUI.&lt;/p&gt;
+&lt;h2 id=&#34;in-summary&#34;&gt;In Summary&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;burger-declarative-animation.gif&#34; alt=&#34;Burger Declarative Animation&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Taking First Steps With SwiftUI</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/taking-first-steps-with-swiftui/</link>
+      <pubDate>Mon, 03 Jun 2019 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/taking-first-steps-with-swiftui/</guid>
+      <description>&lt;p&gt;&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+&lt;div class=&#34;resources-header&#34;&gt;
+Resources
+&lt;/div&gt;
+&lt;ul class=&#34;resources-content&#34;&gt;
+&lt;li&gt;
+&lt;i class=&#34;fas fa-book&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://developer.apple.com/tutorials/swiftui/creating-and-combining-views&#34; rel=&#34;nofollow&#34;&gt;Tutorial Reference&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;enabling-swiftui&#34;&gt;Enabling SwiftUI&lt;/h2&gt;
+&lt;p&gt;Opting in to using SwiftUI is as easy as creating a new project with Xcode 11 and clicking the &amp;ldquo;Use SwiftUI&amp;rdquo; checkbox.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;enable-swiftui.png&#34; alt=&#34;Check Use SwiftUI&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;starting-point&#34;&gt;Starting Point&lt;/h2&gt;
+&lt;p&gt;Xcode will give you two structs to start with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One that describes the &lt;code&gt;View&lt;/code&gt;&amp;rsquo;s content and layout&lt;/li&gt;
+&lt;li&gt;One that declares a preview for that &lt;code&gt;View&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;View&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ContentView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// This is where you describe the view&amp;#39;s content, layout, and behavior&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A view&amp;rsquo;s content, layout, and behavior get described in the &lt;code&gt;body&lt;/code&gt; property.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Preview&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ContentView_Previews&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PreviewProvider&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;previews&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;ContentView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;seeing-what-youre-doing&#34;&gt;Seeing What You&amp;rsquo;re Doing&lt;/h2&gt;
+&lt;p&gt;Xcode gives you a canvas so that you can visually see what your SwiftUI code is doing.&lt;/p&gt;
+&lt;p&gt;Open it by clicking &lt;code&gt;Editor &amp;gt; Editor and Canvas&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;wait-wheres-the-canvas&#34;&gt;Wait, Where&amp;rsquo;s the Canvas?&lt;/h2&gt;
+&lt;p&gt;If you don&amp;rsquo;t have the option to view the canvas in Xcode, it&amp;rsquo;s because this feature requires you to be running macOS Catalina.&lt;/p&gt;
+&lt;p&gt;Don&amp;rsquo;t feel left out of the SwiftUI fun, though!  Just press &lt;code&gt;command&lt;/code&gt; + &lt;code&gt;R&lt;/code&gt; to see everything load up in the iOS 13 Simulator.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re learning, you might opt to use &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/ui-work/using-swiftui-in-playground/&#34;&gt;SwiftUI in a Playground&lt;/a&gt; for a more convenient workflow!&lt;/p&gt;
+&lt;h2 id=&#34;syncing-changes-between-swiftui-code-and-xcodes-canvas&#34;&gt;Syncing Changes Between SwiftUI Code and Xcode&amp;rsquo;s Canvas&lt;/h2&gt;
+&lt;p&gt;Changing and saving your SwiftUI view code automatically updates the canvas preview.&lt;/p&gt;
+&lt;p&gt;Changing the view using Xcode&amp;rsquo;s view inspector automatically updates your SwiftUI code!&lt;/p&gt;
+&lt;p&gt;I love this quote:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Your code is always the source of truth for the view. When you use the inspector to change or remove a modifier, Xcode updates your code immediately to match.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;combining-views--the-key-is-stacks&#34;&gt;Combining Views:  The Key is Stacks&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ContentView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// This is where you describe the view&amp;#39;s content, layout, and behavior&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A view&amp;rsquo;s content, layout, and behavior get described in the &lt;code&gt;body&lt;/code&gt; property.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;body&lt;/code&gt; only returns a single view, though.&lt;/p&gt;
+&lt;p&gt;To combine multiple views together, you use a &lt;strong&gt;stack&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Stacks can be vertical (&lt;code&gt;VStack&lt;/code&gt;), horizontal (&lt;code&gt;HStack&lt;/code&gt;), or &amp;ldquo;back-to-front&amp;rdquo; (&lt;code&gt;ZStack&lt;/code&gt;).&lt;/p&gt;
+&lt;h2 id=&#34;spacing-things-out&#34;&gt;Spacing Things Out&lt;/h2&gt;
+&lt;p&gt;Use a &lt;code&gt;Spacer&lt;/code&gt; to make a containing view expand out to use all of its parent view&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ContentView&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;View&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;VStack&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;alignment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;leading&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;spacing&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Turtle Rock&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;font&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;HStack&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Joshua Tree National Park&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;font&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subheadline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;Spacer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// Make the horizontal stack use up all the horizontal space of the parent VStack&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;Text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;California&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;font&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subheadline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;giving-views-some-breathing-room&#34;&gt;Giving Views Some Breathing Room&lt;/h2&gt;
+&lt;p&gt;Use the &lt;code&gt;padding()&lt;/code&gt; modifier to give a view some breathing room.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

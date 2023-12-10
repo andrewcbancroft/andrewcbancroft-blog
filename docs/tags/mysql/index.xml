@@ -1,0 +1,36 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/mysql/</link>
+    <description>Recent content about iOS development with Swift in MySQL  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 19 Jan 2015 18:40:12 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fix MAMP, MySQL Workbench “Failed to Connect to MySQL”</title>
+      <link>https://www.andrewcbancroft.com/2015/01/19/fix-mamp-mysql-workbench-failed-connect-mysql/</link>
+      <pubDate>Mon, 19 Jan 2015 18:40:12 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/01/19/fix-mamp-mysql-workbench-failed-connect-mysql/</guid>
+      <description>&lt;p&gt;Installing &lt;a href=&#34;http://www.mamp.info/&#34;&gt;MAMP&lt;/a&gt; was easy. I did, however, spend at least 45 minutes trying to get MySQL Workbench to connect to my local MySQL database server. The solution was simple, but getting there led me around the Internet and back with little help. Hopefully this signpost will help others having connection issues with MySQL Workbench to MAMP MySQL servers as well.&lt;/p&gt;
+&lt;p&gt;Once MAMP is installed and the MySQL server has started, you&amp;rsquo;ll be taken to a start screen that looks something like this:&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen.png&#34; alt=&#34;MAMP Start Screen Port Number&#34; width=&#34;601&#34; height=&#34;411&#34; class=&#34;alignnone size-full wp-image-11187&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen.png 601w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_StartScreen-300x205.png 300w&#34; sizes=&#34;(max-width: 601px) 100vw, 601px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The information presented there is misleading.&lt;/strong&gt; The start page instructs you to use port 3306. So I did:&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen.png&#34; alt=&#34;Settings based on MAMP Start Screen&#34; width=&#34;897&#34; height=&#34;515&#34; class=&#34;alignnone size-full wp-image-11185&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen.png 897w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnStartScreen-300x172.png 300w&#34; sizes=&#34;(max-width: 897px) 100vw, 897px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;When testing the connection, however, I got the dreaded &amp;ldquo;Failed to Connect to MySQL at localhost”:&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection.png&#34; alt=&#34;Error on Test Connection&#34; width=&#34;412&#34; height=&#34;146&#34; class=&#34;alignnone size-full wp-image-11184&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection.png 412w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/ErrorOnTestConnection-300x106.png 300w&#34; sizes=&#34;(max-width: 412px) 100vw, 412px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It turns out that MAMP has a preferences panel wherein you can configure the ports for your Apache and MySQL servers. And of course, MySQL was &lt;em&gt;not&lt;/em&gt; set to use port 3306, as the start page led me to believe. Rather, it was set to use port 8889:&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_Preferences_Port.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_Preferences_Port.png&#34; alt=&#34;MAMP Preferences Port Number&#34; width=&#34;529&#34; height=&#34;400&#34; class=&#34;alignnone size-full wp-image-11186&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_Preferences_Port.png 529w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/MAMP_Preferences_Port-300x227.png 300w&#34; sizes=&#34;(max-width: 529px) 100vw, 529px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Adjusting the settings to use the port listed in the MAMP preferences pane led to a successful connection!&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnMAMPPreferences1.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnMAMPPreferences1.png&#34; alt=&#34;Settings based on MAMP Preferences&#34; width=&#34;897&#34; height=&#34;515&#34; class=&#34;alignnone size-full wp-image-11198&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnMAMPPreferences1.png 897w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/SettingsBasedOnMAMPPreferences1-300x172.png 300w&#34; sizes=&#34;(max-width: 897px) 100vw, 897px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Good to go!&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/GoodToGo.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/01/GoodToGo.png&#34; alt=&#34;Good to go!&#34; width=&#34;414&#34; height=&#34;144&#34; class=&#34;alignnone size-full wp-image-11190&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/01/GoodToGo.png 414w, https://www.andrewcbancroft.com/wp-content/uploads/2015/01/GoodToGo-300x104.png 300w&#34; sizes=&#34;(max-width: 414px) 100vw, 414px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

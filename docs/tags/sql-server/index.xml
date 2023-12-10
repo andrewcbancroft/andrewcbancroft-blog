@@ -1,0 +1,126 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL Server on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/sql-server/</link>
+    <description>Recent content about iOS development with Swift in SQL Server  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Mar 2017 16:38:33 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/sql-server/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Solving ‘Spatial types and functions are not available’ with Entity Framework</title>
+      <link>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</link>
+      <pubDate>Mon, 27 Mar 2017 16:38:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</guid>
+      <description>&lt;p&gt;Using SQL Server&amp;rsquo;s Geospatial features with Entity Framework is awesome. I was crusing along just fine with using &lt;code&gt;DbGeography&lt;/code&gt; for an ASP.Net application I&amp;rsquo;m working on… Right up until I deployed to the server. Yep. It worked on &lt;em&gt;my&lt;/em&gt; machine, but alas, I was hitting a runtime exception on my test server.&lt;/p&gt;
+&lt;p&gt;This was the exception:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Spatial types and functions are not available for this provider because the assembly ‘Microsoft.SqlServer.Types&amp;rsquo; version 10 or higher could not be found.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Luckily, I ran across a &lt;a href=&#34;http://stackoverflow.com/questions/13174197/microsoft-sqlserver-types-version-10-or-higher-could-not-be-found-on-azure&#34;&gt;Stack Overflow answer&lt;/a&gt; that &lt;em&gt;almost&lt;/em&gt; helped me get all the way there in solving this exception. It was actually &lt;a href=&#34;http://stackoverflow.com/a/40166192/3198996&#34;&gt;the second-most up-voted answer&lt;/a&gt; that helped me the most. You&amp;rsquo;re welcome to reference these if you want, but since the info is scattered between the question and the two answers, I&amp;rsquo;m assembling it here for your convenience.&lt;/p&gt;
+&lt;h1 id=&#34;fixing-8216spatial-types-and-functions-are-not-available&#34;&gt;Fixing ‘Spatial types and functions are not available&#39;&lt;/h1&gt;
+&lt;h2 id=&#34;1--install-the-microsoftsqlservertypes-package-from-nuget&#34;&gt;1 – Install the Microsoft.SqlServer.Types package from NuGet&lt;/h2&gt;
+&lt;p&gt;You can install it using the NuGet Package Manager UI, or from the command line:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/03/NuGetPM_MSSqlServerTypes1.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/03/NuGetPM_MSSqlServerTypes1.png&#34; alt=&#34;NuGetPM_MSSqlServerTypes&#34; width=&#34;985&#34; height=&#34;270&#34; class=&#34;alignnone size-full wp-image-13100&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2017/03/NuGetPM_MSSqlServerTypes1.png 985w, https://www.andrewcbancroft.com/wp-content/uploads/2017/03/NuGetPM_MSSqlServerTypes1-300x82.png 300w&#34; sizes=&#34;(max-width: 985px) 100vw, 985px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;gt; Install-Package Microsoft.SqlServer.Types&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2--follow-readmehtm-instructions&#34;&gt;2 – Follow readme.htm instructions&lt;/h2&gt;
+&lt;p&gt;After you install the NuGet package, a readme.htm file is opened and displayed to you. If you don&amp;rsquo;t see it for some reason, a new SqlServerTypes folder was added to your project. You can expand it and double-click readme.htm to open it.&lt;/p&gt;
+&lt;p&gt;Follow the instructions within.&lt;/p&gt;
+&lt;p&gt;Depending on the type of app you&amp;rsquo;re deploying, you need to perform different steps. I happened to be deploying an ASP.Net MVC app, so I followed the instructions for adding a line of code to Global.asax.cs. Your situation may be different, but the Readme instructions are clear on what to do.&lt;/p&gt;
+&lt;h3 id=&#34;aspnet-web-_applications_&#34;&gt;ASP.Net Web &lt;em&gt;Applications&lt;/em&gt;&lt;/h3&gt;
+&lt;p&gt;Open Global.asax.cs and add the following to the list of registrations in &lt;code&gt;Application_Start()&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;protected&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Application_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Enables use of spatial data types&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;SqlServerTypes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Utilities&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LoadNativeAssemblies&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Server&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MapPath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;~/bin&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Other registrations...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;aspnet-_websites_&#34;&gt;Asp.Net &lt;em&gt;Websites&lt;/em&gt;&lt;/h3&gt;
+&lt;p&gt;Open Default.aspx.cs and add&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;partial&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;_Default&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Web&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UI&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Page&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;_isSqlTypesLoaded&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;_Default&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;_isSqlTypesLoaded&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;SqlServerTypes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Utilities&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LoadNativeAssemblies&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Server&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MapPath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;~&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;_isSqlTypesLoaded&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;desktop-applications&#34;&gt;Desktop Applications&lt;/h3&gt;
+&lt;p&gt;Add the following before any spatial operations are performed.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;SqlServerTypes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Utilities&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LoadNativeAssemblies&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AppDomain&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CurrentDomain&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BaseDirectory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3--tell-entity-framework-which-version-of-the-assembly-to-use&#34;&gt;3 – Tell Entity Framework which version of the assembly to use&lt;/h3&gt;
+&lt;p&gt;Most of the explanations of how to solve the &amp;ldquo;‘Microsoft.SqlServer.Types&amp;rsquo; version 10 or higher” error stopped at step 2.&lt;/p&gt;
+&lt;p&gt;After performing the steps that readme.htm outlined, I re-deployed the app, and things were still broken. Same exception. What gives??&lt;/p&gt;
+&lt;p&gt;This is where that &lt;a href=&#34;http://stackoverflow.com/a/40166192/3198996&#34;&gt;second-most-popular answer&lt;/a&gt; came into play. It gave me the clue I needed.&lt;/p&gt;
+&lt;p&gt;Back in Global.asax.cs (or wherever you performed the steps for #2 above), add the following”&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    SqlProviderServices.SqlServerTypesAssemblyName =
+    &amp;#34;Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91&amp;#34;;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Depending on which version of the NuGet package you installed, you need to adjust the Version number from 14.0.0.0 to the correct version, as appropriate. I installed the latest, which at the time is version 14.x, so that&amp;rsquo;s what I put in.&lt;/p&gt;
+&lt;h4 id=&#34;-the-sqlservertypesassemblyname-property-doesnt-exist-&#34;&gt;??? The SqlServerTypesAssemblyName property doesn&amp;rsquo;t exist! ???&lt;/h4&gt;
+&lt;p&gt;In my case, I ran into another small hurdle. When I tried to set the &lt;code&gt;SqlServerTypesAssemblyName&lt;/code&gt; property, it didn&amp;rsquo;t exist!&lt;/p&gt;
+&lt;p&gt;Upon further inspection, I discovered that I only had Entity Framework version 6.1.**** installed. I updated to 6.1.&lt;strong&gt;3&lt;/strong&gt;, and the property lit up. I set it appropriately, redeployed the app, and it magically worked.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s hoping that this helps bring together several pieces of information to get you going with using SQL Server Geospatial data types with Entity Framework!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SQL Sever Synonyms, Entity Framework, and Integrated Security</title>
+      <link>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</link>
+      <pubDate>Fri, 01 May 2015 17:44:31 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</guid>
+      <description>&lt;p&gt;&lt;a name=&#34;scenario&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;scenario&#34;&gt;Scenario&lt;/h3&gt;
+&lt;p&gt;This may be an edge case, but I spent enough time (a couple of &lt;em&gt;days&lt;/em&gt;) spinning on this that I thought it warranted a signpost on the Internet.&lt;/p&gt;
+&lt;p&gt;Suppose you have the following scenario before you:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Basics&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You&amp;rsquo;re building an ASP.Net web application&lt;/li&gt;
+&lt;li&gt;Entity Framework has been chosen as your ORM&lt;/li&gt;
+&lt;li&gt;SQL Server (any version supporting &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonyms&lt;/a&gt;) is your backend database server of choice&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Details&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You&amp;rsquo;re using &amp;ldquo;Integrated Security=True” in your connection string to the database (in web.config)&lt;/li&gt;
+&lt;li&gt;The Application Pool in which your app resides is running under a domain service account (ie, not the default identity)&lt;/li&gt;
+&lt;li&gt;Your application primarily talks to one database, but there is information in &lt;em&gt;another&lt;/em&gt; database that you need to pull into your app&lt;/li&gt;
+&lt;li&gt;To access the data in that other database, you&amp;rsquo;ve chosen to create a &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonym&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Every bullet point in this scenario is normal and valid, until you get to the part about using &amp;ldquo;Integrated Security=True” in your connection string…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;login-failed&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;login-failed-for-user-8216nt-authorityanonymous-logon&#34;&gt;Login failed for user ‘NT AUTHORITY\ANONYMOUS LOGON&#39;&lt;/h3&gt;
+&lt;p&gt;If you had chosen to use SQL Server authentication in your conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&amp;rsquo;s what I had been doing in my own application. I started running into the &amp;ldquo;Login failed…” error message once I switched to Integrated Security.&lt;/p&gt;
+&lt;p&gt;For some reason &amp;ldquo;Integrated Security=True” that throws Entity Framework for a loop. It accesses the database used in the &lt;code&gt;DbContext&lt;/code&gt; instance just fine, but the second a line of code needs to use the object mapped to the &lt;em&gt;Synonym&lt;/em&gt;, &lt;strong&gt;boom&lt;/strong&gt;… crash… error…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;reolving-error&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;resolving-the-error&#34;&gt;Resolving the error&lt;/h3&gt;
+&lt;p&gt;It turns out that the resolution is really, really simple. Instead of using a Synonym, use a View. You don&amp;rsquo;t have to change a single line of .Net code. Just make sure the view is named the same as the Synonym was (and drop the Synonym from the database, of course).&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;creating-view&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;creating-the-view&#34;&gt;Creating the view&lt;/h4&gt;
+&lt;p&gt;A Synonym essentially maps to an entire table, so the View&amp;rsquo;s structure could literally be a simple &lt;code&gt;select * from [fully.qualified.database.objectName]&lt;/code&gt;. If your DBA hates &lt;code&gt;select *&lt;/code&gt;, you&amp;rsquo;ll end up listing out every column that your Entity Framework object lists as one of its Properties.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;granting-permissions&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;granting-permissions&#34;&gt;Granting permissions&lt;/h4&gt;
+&lt;p&gt;If the service account that&amp;rsquo;s running your Application Pool doesn&amp;rsquo;t already have permission to the database objects you created the View for, you need to go in and grant appropriate permissions to that account. Otherwise, you&amp;rsquo;re likely to get an error stating&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The server principal &amp;ldquo;Domain\PrincipalName” is not able to access the database &amp;ldquo;DatabaseName” under the current security context.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Be specific and granular with the permission you grant to the account. If you&amp;rsquo;re just pulling in data for your app to display, only give the account SELECT permission on the database object your View references.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;In essence, using a Synonym that references a database object in &lt;em&gt;another database&lt;/em&gt; with Entity Framework and Integrated Security just doesn&amp;rsquo;t work out in the end. Somehow, the security context loses the identity of the account running the application pool, and the dreated Login failed for user ‘NT AUTHORITY\ANONYMOUS LOGON&amp;rsquo; rears its ugly head. Thankfully, the solution is simple: Create a View instead of a Synonym, grant approprate permissions, and you&amp;rsquo;ll be off and running (and you&amp;rsquo;ll avoid usernames and passwords in your web.config)!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

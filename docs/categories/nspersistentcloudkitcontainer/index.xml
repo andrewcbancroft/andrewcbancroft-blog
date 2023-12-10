@@ -1,0 +1,73 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NSPersistentCloudKitContainer on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/categories/nspersistentcloudkitcontainer/</link>
+    <description>Recent content about iOS development with Swift in NSPersistentCloudKitContainer  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Jul 2019 04:40:54 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/categories/nspersistentcloudkitcontainer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>NSPersistentCloudKitContainer Buggy Behavior List</title>
+      <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/nspersistentcloudkitcontainer-buggy-behavior-list/</link>
+      <pubDate>Thu, 11 Jul 2019 04:40:54 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/nspersistentcloudkitcontainer-buggy-behavior-list/</guid>
+      <description>&lt;p&gt;&lt;code&gt;NSPersistentCloudKitContainer&lt;/code&gt; is brand new with Xcode 11 and iOS 13.&lt;/p&gt;
+&lt;p&gt;It works&amp;hellip; kind of&amp;hellip; sometimes&amp;hellip;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m keeping this list of buggy behavior to help keep my head straight.  I&amp;rsquo;ve also filed bug reports on each.&lt;/p&gt;
+&lt;p&gt;Hopefully others in the iOS community who are experimenting with &lt;code&gt;NSPersistentCloudKitContainer&lt;/code&gt; can confirm or deny these same oddities.  If they&amp;rsquo;re fixed in a subsequent beta, I&amp;rsquo;ll come back here and note it!&lt;/p&gt;
+&lt;h2 id=&#34;which-beta-version-does-this-affect&#34;&gt;Which Beta Version Does This Affect?&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve tested out each of these on iOS 13 Beta 5 and Xcode 11 Beta 5.&lt;/p&gt;
+&lt;h2 id=&#34;enabling-cloudkit-doesnt-create-a-default-container&#34;&gt;Enabling CloudKit doesn&amp;rsquo;t create a default container&lt;/h2&gt;
+&lt;p&gt;In Xcode 11, adding the iCloud capability and clicking the CloudKit checkbox is not automatically creating a default container for new apps that I&amp;rsquo;m testing&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Xcode 10&lt;/strong&gt;
+&lt;img src=&#34;XC10_CKDefaultContainer.gif&#34; alt=&#34;Xcode 10 - Creates Default Container&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Xcode 11&lt;/strong&gt;
+&lt;img src=&#34;XC11_NoCKDefaultContainer.gif&#34; alt=&#34;Xcode 11 - Does Not Create Default Container&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;existing-data-doesnt-sync&#34;&gt;Existing data doesn&amp;rsquo;t sync&lt;/h2&gt;
+&lt;p&gt;Suppose that&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You have an existing Core Data app&lt;/li&gt;
+&lt;li&gt;The app is installed on two devices with the same user signed in to iCloud&lt;/li&gt;
+&lt;li&gt;Data has been saved independently on both devices&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now suppose that you want to take advantage of the automagic syncing offered with &lt;code&gt;NSPersistendCloudKitContainer&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Set up your app to work with &lt;code&gt;NSPersistentCloudKitContainer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Rebuild your app and install it on both devices&lt;/li&gt;
+&lt;li&gt;Launch the app on both devices&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You might expect the existing data to show up on both devices.  &lt;strong&gt;It doesn&amp;rsquo;t.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If you add &lt;em&gt;new&lt;/em&gt; data on one device, &lt;em&gt;only the new data&lt;/em&gt; that gets saved &lt;em&gt;after&lt;/em&gt; the &lt;code&gt;NSPersistentCloudKitContainer&lt;/code&gt; conversion gets synced.  Existing data never does.&lt;/p&gt;
+&lt;p&gt;🤷🏼‍♂️&lt;/p&gt;
+&lt;h2 id=&#34;data-only-syncs-after-you-close-and-re-launch-your-app&#34;&gt;Data only syncs after you close and re-launch your app&lt;/h2&gt;
+&lt;p&gt;I really thought I had this figured out.  Beta 5 has proved me wrong.&lt;/p&gt;
+&lt;p&gt;In Beta 2, simply &lt;a href=&#34;https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/#reflecting-changes-in-the-ui&#34;&gt;setting &lt;code&gt;automaticallyMergesChangesFromParent&lt;/code&gt; on the container&amp;rsquo;s &lt;code&gt;viewContext&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt;&lt;/a&gt; seemed to work.&lt;/p&gt;
+&lt;p&gt;Not with Beta 5.&lt;/p&gt;
+&lt;p&gt;You can save new data and wait (and wait&amp;hellip; and wait&amp;hellip;).  It doesn&amp;rsquo;t show up in the UI until after you re-launch the app.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s what I&amp;rsquo;m experiencing:&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/DLAwrSCl3Cc&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&#34;record-accessor-methods-missing-in-xcode&#34;&gt;Record accessor methods missing in Xcode&lt;/h2&gt;
+&lt;p&gt;&amp;ldquo;On &lt;em&gt;my&lt;/em&gt; machine&amp;rdquo;, attempting to use the &lt;code&gt;record(for:)&lt;/code&gt; methods on &lt;code&gt;NSPersistentCloudKitContainer&lt;/code&gt; produce the following error message:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Value of type &amp;lsquo;NSPersistentCloudKitContainer&amp;rsquo; has no member &amp;lsquo;record&amp;rsquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;no-record-method.png&#34; alt=&#34;Has no member &amp;lsquo;record&amp;rsquo;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I can &amp;ldquo;Jump to definition&amp;rdquo; and the methods appear to be there&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;jump-definition.gif&#34; alt=&#34;Jump to Definition&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Attempting to use the function in code doesn&amp;rsquo;t work&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;no-member.gif&#34; alt=&#34;No Member&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

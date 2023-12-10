@@ -1,0 +1,89 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UIColor on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/uicolor/</link>
+    <description>Recent content about iOS development with Swift in UIColor  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Jan 2018 12:35:04 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/uicolor/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift 4 Upgrade Error: ‘init(colorLiteralRed:green:blue:alpha:)’ is unavailable</title>
+      <link>https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/</link>
+      <pubDate>Wed, 24 Jan 2018 12:35:04 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/</guid>
+      <description>&lt;p&gt;I upgraded a project to Swift 4 today and hit a compiler error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‘init(colorLiteralRed:green:blue:alpha:)&amp;rsquo; is unavailable: This initializer is only meant to be used by color literals.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The fix is pretty simple: &lt;strong&gt;Don&amp;rsquo;t use that initializer&lt;/strong&gt;! (thank you, Captain Obvious!)&lt;/p&gt;
+&lt;p&gt;The correct initializer to use for specifying a red, green, blue, and alpha to get a &lt;code&gt;UIColor&lt;/code&gt; instance in Swift 4 is:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;UIColor(red:green:blue:alpha:)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;So essentially, just replace &lt;code&gt;colorLiteralRed:&lt;/code&gt;, and replace it with just &lt;code&gt;red:&lt;/code&gt;, and the compiler error will go away. Here&amp;rsquo;s an example of how to call it:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;let color = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1.0)&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Swift UIColor Extension – Create using RGB Values (Not %)</title>
+      <link>https://www.andrewcbancroft.com/2015/06/25/swift-uicolor-extension-create-using-rgb-values-not/</link>
+      <pubDate>Fri, 26 Jun 2015 03:11:48 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/06/25/swift-uicolor-extension-create-using-rgb-values-not/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ll say it up front – I&amp;rsquo;m not a great designer. What tends to happen with me and projects is that I end up saving all-things color until the &lt;em&gt;end&lt;/em&gt; of a project. You know… the old procrastinator&amp;rsquo;s motto: &amp;ldquo;If you don&amp;rsquo;t get it done today and tomorrow doesn&amp;rsquo;t come, then you ain&amp;rsquo;t gotta do it!”&lt;/p&gt;
+&lt;p&gt;So the other day came and I had to &amp;ldquo;do color”…&lt;/p&gt;
+&lt;p&gt;Thankfully, a buddy of mine has good skills in the area, and gave me a color palette to use. Score!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;working-with-colors&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;working-with-colors&#34;&gt;Working with colors&lt;/h3&gt;
+&lt;p&gt;I decided it might be nice to go ahead and encapsulate my color scheme in code and set the various tints and font colors and navigation bar backgrounds to their appropriate values in code.&lt;/p&gt;
+&lt;p&gt;This seemed like a really nice way to keep all the color stuff in once place, so that if I ever needed to change things, I&amp;rsquo;d be able to do it in one spot, and the whole app would just magically take on the adjustments.&lt;/p&gt;
+&lt;p&gt;Inevitably, I&amp;rsquo;d need to create myself some &lt;code&gt;UIColor&lt;/code&gt; instances.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;baffled&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;baffled&#34;&gt;Baffled&lt;/h3&gt;
+&lt;p&gt;For those of us who spend a lot of time designing in the Storyboard, as opposed to creating views and layouts directly in code, coming up against the &lt;code&gt;UIColor&lt;/code&gt; API when you haven&amp;rsquo;t in a while can be…well…baffling. Not because it&amp;rsquo;s &amp;ldquo;hard” but because it&amp;rsquo;s not as intuitive as it looks on first-sight. Here&amp;rsquo;s what I mean…&lt;/p&gt;
+&lt;p&gt;My color-adept friend had given me some hex color values. Looking at &lt;code&gt;UIColor&lt;/code&gt; of course, there&amp;rsquo;s no initializer or class function to create a color with such a value. No worries, though – there are plenty of converters out there!&lt;/p&gt;
+&lt;p&gt;So I got my red, green, and blue values all in order and did the thing that seemed most obvious: I supplied &lt;code&gt;UIColor&lt;/code&gt;‘s init method with those values, verbatim:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;let primaryColor = UIColor(red: 39.0, green: 44.0, blue: 79.0, alpha: 1.0)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And then I realized that I hit the same &amp;ldquo;gotcha” that I had before. &lt;code&gt;UIColor&lt;/code&gt; takes a &lt;em&gt;percentage&lt;/em&gt; of red, green, and blue, not the &lt;em&gt;value&lt;/em&gt; of red, green, and blue. I needed to divide the values by 255.0 each in order to obtain a value between 0 and 1 as the initializer requires. Sure, this is in &lt;a href=&#34;https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIColor_Class/#//apple_ref/occ/instm/UIColor/initWithRed:green:blue:alpha:&#34;&gt;the documentation&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The red component of the color object, specified as a value from 0.0 to 1.0.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Similar instructions appear for green, blue, and alpha.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s easy enough to fix, but man – that sure seems like an easy-to-fall-for mistake if you&amp;rsquo;re coming to this API after spending time away from it, or if you&amp;rsquo;re brand new to iOS development.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;uicolor-extension&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;uicolor-extension&#34;&gt;UIColor extension&lt;/h3&gt;
+&lt;p&gt;Having to divide the RGB values by 255.0 every time was just annoying enough that I created a &lt;code&gt;UIColor&lt;/code&gt; extension to help me be able to do the intuitive thing and just supply the RGB values verbatim, like I&amp;rsquo;d done to begin with. Here it is for your enjoyment:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;extension&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;UIColor&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;colorWithRedValue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(#&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;redValue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CGFloat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;greenValue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CGFloat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;blueValue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CGFloat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;alpha&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CGFloat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIColor&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIColor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;red&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redValue&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;255.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;green&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;greenValue&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;255.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;blue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;blueValue&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;255.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;alpha&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;alpha&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;I feel a little silly for having made this mistake, but hey – making the mistake is a good way to remember what not to do in the future. And now that I&amp;rsquo;ve written an extension (and this blog post), maybe I&amp;rsquo;ll be set for next time I spend extended periods of time avoiding colors.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/&#34; title=&#34;Fade In / Out Animations as Class Extensions in Swift&#34;&gt;Fade In / Out Animations as Class Extensions in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/15/rotate-animation-in-swift/&#34; title=&#34;Rotate Animation in Swift&#34;&gt;Rotate Animation in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/&#34; title=&#34;Slide In Animation in Swift&#34;&gt;Slide In Animation in Swift&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

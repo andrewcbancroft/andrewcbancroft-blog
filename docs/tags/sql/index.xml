@@ -1,0 +1,29 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/sql/</link>
+    <description>Recent content about iOS development with Swift in SQL  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Jun 2012 19:25:15 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>From SQL Queries to Data Modeling</title>
+      <link>https://www.andrewcbancroft.com/2012/06/16/from-sql-queries-to-data-modeling/</link>
+      <pubDate>Sat, 16 Jun 2012 19:25:15 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2012/06/16/from-sql-queries-to-data-modeling/</guid>
+      <description>&lt;p&gt;This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I&amp;rsquo;m pretty stoked about some of the amazing features of SQL Server 2012&amp;rsquo;s BI stack.&lt;/p&gt;
+&lt;p&gt;During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model. I walked away from session after session thinking, &amp;ldquo;Man, this is so doable now!!”. This was the single most impressive and perspective altering concept that flooded into my brain this week.&lt;/p&gt;
+&lt;p&gt;There comes a time in every organization that necessitates a paradigm shift: One that involves a move &lt;em&gt;toward&lt;/em&gt; data &lt;em&gt;modeling&lt;/em&gt; and a &lt;em&gt;away&lt;/em&gt; from SQL query writing for the purpose of supplying data sets to reports. By no means am I suggesting that writing SQL will disappear for database / BI Developers – but as a means to serving as the backbone of an organization&amp;rsquo;s reporting infrastructure, there will inevitably come a time that employing more and more people capable of writing SQL will be unsustainable.&lt;/p&gt;
+&lt;p&gt;The reasons for this are clear: As an enterprise continuously builds or purchases data collection systems, the users of those systems expect to be able to get &lt;em&gt;information&lt;/em&gt; back out. So they ask questions. Unpredictable combinations of questions. They are too numerous and too diverse for even a dedicated team of reporting people to write SQL to a database every time a business person has a question they want to ask of their data. For a while, parameterized reports suffice for most questions. But still the organization grows and evolves, and decision makers expect that they should be able to analyze information at their convenience, not at the mercy of the IT Department&amp;rsquo;s work schedule.&lt;/p&gt;
+&lt;p&gt;Microsoft has worked hard to give BI developers effective ways to build models so as to enable us to write less SQL (at least when it comes to supplying answers to the multitude of questions that come our way) and empower our business folks to create their own reports that are based on the model we build. In my view, this is the direction that we must inevitably go. Without this, IT becomes a significant bottleneck to the progress that could be made from timely data analysis.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m personally looking forward to using SQL Server 2012 to promote better query-ability and visibility of the information my customers are dying to get their hands on!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

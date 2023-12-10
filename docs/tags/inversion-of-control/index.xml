@@ -1,0 +1,79 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Inversion of Control on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/inversion-of-control/</link>
+    <description>Recent content about iOS development with Swift in Inversion of Control  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Oct 2014 18:07:21 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/inversion-of-control/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Up and Running with Unity IOC Container for ASP.Net MVC</title>
+      <link>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</link>
+      <pubDate>Mon, 27 Oct 2014 18:07:21 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</guid>
+      <description>&lt;p&gt;The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.  However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running. &lt;/p&gt;
+&lt;p&gt;The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP.Net MVC project.&lt;/p&gt;
+&lt;h3 id=&#34;assumptions&#34;&gt;Assumptions:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Using Visual Studio 2013
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Using ASP.Net MVC 5&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Have already created a new, fresh solution (File –&amp;gt; New Project, etc)&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;walkthrough&#34;&gt;Walkthrough&lt;/h3&gt;
+&lt;p&gt;Begin by right-clicking your solution, and choosing to “Manage NuGet Packages for Solution…”:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; display: inline; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb.png&#34; width=&#34;504&#34; height=&#34;367&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Next, choose to search for packages found at nuget.org.  In the search bar in the upper right, type in “Unity”, and press enter.  Choose to install “Unity bootstrapper for ASP.NET MVC”:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8.png&#34;&gt;&lt;img title=&#34;SNAGHTMLb1d5c8&#34; style=&#34;border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; display: inline; border-top-width: 0px&#34; border=&#34;0&#34; alt=&#34;SNAGHTMLb1d5c8&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/SNAGHTMLb1d5c8_thumb.png&#34; width=&#34;504&#34; height=&#34;325&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image1.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb1.png&#34; width=&#34;309&#34; height=&#34;398&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now that the appropriate NuGet package is installed, you’re set to start using the Unity IOC Container. &lt;/p&gt;
+&lt;h3 id=&#34;using-unity-for-dependency-injection-and-management&#34;&gt;Using Unity for Dependency Injection and Management&lt;/h3&gt;
+&lt;p&gt;I’ve contrived an example and tried to show side-by-side views of the bare minimums you need to program in order to start taking advantage of Unity for managing your dependencies.   I’m going to show how to inject a concrete implementation of a very simple Interface into the HomeController. The steps go something like this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create an Interface (in this example, I called it IUnityExample) which specifies that an implementer of this interface must define an itWorksMessage method that returns a string.
+&lt;ul&gt;
+&lt;li&gt;Create a new class called UnityExample.   Specify that it implements IUnityExample in the class declaration line.  Implement the required itWorksMessage method.
+&lt;ul&gt;
+&lt;li&gt;In HomeController.cs, declare a private variable to hold an instance of an IUnityExample.
+&lt;ul&gt;
+&lt;li&gt;In HomeController.cs, declare a new constructor which takes an IUnityExample (to be injected by Unity) and sets the privately declared IUnityExample variable to the instance that’s passed in.
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Utilize the itWorksMessage somehow.  In my example, I set the return value to a new dynamic property called ViewBag.Message inside the Index method.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In UnityConfig.cs, register IUnityExample and UnityExample with the container inside the RegisterTypes method.&lt;/ol&gt;
+Let’s pause here and show that side-by-side view I referred to a second ago.  Perhaps visualizing the files in play will help bring the whole picture into view:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image5.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb5.png&#34; width=&#34;720&#34; height=&#34;308&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;At this point, we’re done with writing C# code, and we’re ready to move into the View layer.  This final step will access ViewBag.Message, and display it at the bottom of the page.  It’s fairly straight-forward.  Inside Views –&amp;gt; Home –&amp;gt; Index.cshtml, simply add a &lt;div&gt; that contains @ViewBag.Message:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image3.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb3.png&#34; width=&#34;624&#34; height=&#34;217&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To confirm everything works, run your solution and verify the results!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image4.png&#34;&gt;&lt;img title=&#34;image&#34; style=&#34;border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px; display: inline&#34; border=&#34;0&#34; alt=&#34;image&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/image_thumb4.png&#34; width=&#34;720&#34; height=&#34;263&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;In this article, you’ve seen how to use NuGet to install the required components to get up and running with the Unity Inversion of Control container.  Additionally, you saw a bare-bones example demonstrating the steps required to start using Unity to manage your dependencies with ASP.Net MVC.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

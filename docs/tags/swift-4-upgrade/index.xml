@@ -1,0 +1,32 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Swift 4 Upgrade on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/swift-4-upgrade/</link>
+    <description>Recent content about iOS development with Swift in Swift 4 Upgrade  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Jan 2018 12:35:04 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/swift-4-upgrade/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swift 4 Upgrade Error: ‘init(colorLiteralRed:green:blue:alpha:)’ is unavailable</title>
+      <link>https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/</link>
+      <pubDate>Wed, 24 Jan 2018 12:35:04 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2018/01/24/swift-4-upgrade-uicolor-init-unavailable/</guid>
+      <description>&lt;p&gt;I upgraded a project to Swift 4 today and hit a compiler error:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‘init(colorLiteralRed:green:blue:alpha:)&amp;rsquo; is unavailable: This initializer is only meant to be used by color literals.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The fix is pretty simple: &lt;strong&gt;Don&amp;rsquo;t use that initializer&lt;/strong&gt;! (thank you, Captain Obvious!)&lt;/p&gt;
+&lt;p&gt;The correct initializer to use for specifying a red, green, blue, and alpha to get a &lt;code&gt;UIColor&lt;/code&gt; instance in Swift 4 is:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;UIColor(red:green:blue:alpha:)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;So essentially, just replace &lt;code&gt;colorLiteralRed:&lt;/code&gt;, and replace it with just &lt;code&gt;red:&lt;/code&gt;, and the compiler error will go away. Here&amp;rsquo;s an example of how to call it:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;let color = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1.0)&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

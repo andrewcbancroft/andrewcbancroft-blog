@@ -1,0 +1,43 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Logon Failed on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/logon-failed/</link>
+    <description>Recent content about iOS development with Swift in Logon Failed  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 17 Oct 2012 15:29:23 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/logon-failed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Resolving “UDA-SQL-0569 Unable to load the driver manager library ( db2cli.dll )” with Framework Manager 10.1</title>
+      <link>https://www.andrewcbancroft.com/2012/10/17/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/</link>
+      <pubDate>Wed, 17 Oct 2012 15:29:23 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2012/10/17/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/</guid>
+      <description>&lt;p&gt;When installing Framework Manager 10.1 and attempting to use it for the first time, things went down hill nearly immediately.  I made sure to install a copy of the DB2 client on my development machine, but I still ran into issues connecting to data sources in Framework Manager.&lt;/p&gt;
+&lt;p&gt;For those who need to install a DB2 client, IBM provides those downloads &lt;a href=&#34;http://www-01.ibm.com/support/docview.wss?rs=4020&amp;amp;uid=swg21385217&#34;&gt;here&lt;/a&gt; for DB2 10.1.  For other versions, you can go &lt;a href=&#34;http://www-01.ibm.com/support/docview.wss?uid=swg27016878&#34;&gt;here&lt;/a&gt;.  [Added 3/19/2013]&lt;/p&gt;
+&lt;p&gt;A good explanation of what each DB2 client &amp;ldquo;package” includes and what they&amp;rsquo;re used for can be found &lt;a href=&#34;http://www.db2dean.com/Previous/DB2Client.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Steps that I was taking:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Load Framework Manager and open a project&lt;/li&gt;
+&lt;li&gt;Expand Data Sources&lt;/li&gt;
+&lt;li&gt;Right-Click Data Source and click Test&lt;/li&gt;
+&lt;li&gt;The following happens:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2012/10/SNAGHTML194624.png&#34;&gt;&lt;img style=&#34;background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border-width: 0px;&#34; title=&#34;SNAGHTML194624&#34; alt=&#34;SNAGHTML194624&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2012/10/SNAGHTML194624_thumb.png&#34; width=&#34;666&#34; height=&#34;208&#34; border=&#34;0&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Text from dialog box:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;QE-DEF-0285 The logon failed.&lt;br&gt;
+QE-DEF-0325 The logon failed for the following reason:&lt;br&gt;
+RQP-DEF-0068 Unable to connect to at least one database during a multi-database attach to 1 database(s) in:&lt;br&gt;
+DW&lt;br&gt;
+UDA-SQL-0569 Unable to load the driver manager library ( db2cli.dll ).&lt;br&gt;
+UDA-SQL-0571 The operating system returned an error message ( The specified module could not be found. ).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How I resolved this:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I simply moved C:Program FilesIBMSQLLIBBIN placed in PATH variable near the front of the list of directories. Depending on your installation directory, you may need to change the path above to fit your environment.  But this seems to have resolved my problem entirely.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

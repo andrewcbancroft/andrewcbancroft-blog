@@ -45,12 +45,11 @@ Spatial types and functions are not available for this provider because the asse
 <meta property="article:modified_time" content="2017-03-27T16:38:33+00:00" />
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Solving ‘Spatial types and functions are not available’ with Entity Framework"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Solving ‘Spatial types and functions are not available’ with Entity Framework"/>
 <meta name="twitter:description" content="Using SQL Server&rsquo;s Geospatial features with Entity Framework is awesome. I was crusing along just fine with using DbGeography for an ASP.Net application I&rsquo;m working on… Right up until I deployed to the server. Yep. It worked on my machine, but alas, I was hitting a runtime exception on my test server.
 This was the exception:
 Spatial types and functions are not available for this provider because the assembly ‘Microsoft.SqlServer.Types&rsquo; version 10 or higher could not be found."/>
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.121.1">
 
     
 <script type="application/ld+json">
@@ -224,7 +223,7 @@ MathJax.Hub.Config({
 <p>Depending on the type of app you&rsquo;re deploying, you need to perform different steps. I happened to be deploying an ASP.Net MVC app, so I followed the instructions for adding a line of code to Global.asax.cs. Your situation may be different, but the Readme instructions are clear on what to do.</p>
 <h3 id="aspnet-web-_applications_">ASP.Net Web <em>Applications</em></h3>
 <p>Open Global.asax.cs and add the following to the list of registrations in <code>Application_Start()</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">protected</span> <span class="k">void</span> <span class="n">Application_Start</span><span class="p">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">Application_Start</span><span class="p">()</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="c1">// Enables use of spatial data types</span>
 </span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="n">SqlServerTypes</span><span class="p">.</span><span class="n">Utilities</span><span class="p">.</span><span class="n">LoadNativeAssemblies</span><span class="p">(</span><span class="n">Server</span><span class="p">.</span><span class="n">MapPath</span><span class="p">(</span><span class="s">&#34;~/bin&#34;</span><span class="p">));</span>
@@ -233,16 +232,16 @@ MathJax.Hub.Config({
 </span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="aspnet-_websites_">Asp.Net <em>Websites</em></h3>
 <p>Open Default.aspx.cs and add</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">_Default</span> <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">Page</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="kd">partial</span> <span class="k">class</span> <span class="nc">_Default</span> <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">UI</span><span class="p">.</span><span class="n">Page</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">static</span> <span class="kt">bool</span> <span class="n">_isSqlTypesLoaded</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">static</span> <span class="kt">bool</span> <span class="n">_isSqlTypesLoaded</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="ln"> 4</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">public</span> <span class="n">_Default</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="kd">public</span> <span class="n">_Default</span><span class="p">()</span>
 </span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">_isSqlTypesLoaded</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="n">SqlServerTypes</span><span class="p">.</span><span class="n">Utilities</span><span class="p">.</span><span class="n">LoadNativeAssemblies</span><span class="p">(</span><span class="n">Server</span><span class="p">.</span><span class="n">MapPath</span><span class="p">(</span><span class="s">&#34;~&#34;</span><span class="p">));</span>
-</span></span><span class="line"><span class="ln">10</span><span class="cl">            <span class="n">_isSqlTypesLoaded</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">            <span class="n">_isSqlTypesLoaded</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="ln">12</span><span class="cl">        
 </span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">}</span>
@@ -280,7 +279,7 @@ MathJax.Hub.Config({
     </aside>
 
     <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     window.disqus_config = function () {
     
     

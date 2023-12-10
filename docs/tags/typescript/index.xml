@@ -1,0 +1,32 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeScript on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/typescript/</link>
+    <description>Recent content about iOS development with Swift in TypeScript  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Jun 2016 18:41:59 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TypeScript Build Errors When Publishing ASP.Net Web Project</title>
+      <link>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</link>
+      <pubDate>Wed, 29 Jun 2016 18:41:59 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</guid>
+      <description>&lt;p&gt;I had TypeScript files building and running perfectly when I&amp;rsquo;d debug locally, but when I changed over to publish the project, I got build errors galore:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cannot find module ___&lt;/p&gt;
+&lt;p&gt;TS6053 – File ___ not found&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I had forgotten that I set up my TypeScript Build configuration for &lt;em&gt;Debug&lt;/em&gt;, but I hadn&amp;rsquo;t changed anything for the &lt;em&gt;Release&lt;/em&gt; configuration in Visual Studio.&lt;/p&gt;
+&lt;p&gt;Obviously, that would produce different build results, right? It was just a little mysterious to me until I noticed the configuration differences.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re running into similar errors when building / publishing your project using the Release configuration, right-click your ASP.Net web project, go down to TypeScript Build, and make sure that your configuration settings are the same between Debug and Release. In particular, my &amp;ldquo;Module System” settings were different until I adjusted things.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/06/2016-06-29_13-39-22.png&#34;&gt;&lt;img src=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/06/2016-06-29_13-39-22.png&#34; alt=&#34;TypeScript Configuration&#34; width=&#34;830&#34; height=&#34;714&#34; class=&#34;alignnone size-full wp-image-12988&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2016/06/2016-06-29_13-39-22.png 830w, https://www.andrewcbancroft.com/wp-content/uploads/2016/06/2016-06-29_13-39-22-300x258.png 300w&#34; sizes=&#34;(max-width: 830px) 100vw, 830px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,86 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/categories/c/</link>
+    <description>Recent content about iOS development with Swift in C  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 24 Jun 2012 14:23:33 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/categories/c/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pointer Pointer #2</title>
+      <link>https://www.andrewcbancroft.com/2012/06/24/pointer-pointer-2/</link>
+      <pubDate>Sun, 24 Jun 2012 14:23:33 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2012/06/24/pointer-pointer-2/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.com/2012/06/17/pointer-pointer-1/&#34; title=&#34;Pointer Pointer #1&#34;&gt;Pointer Pointer #1 can be found here&lt;/a&gt; – it deals with how the &amp;ldquo;*” symbol is used in different places when dealing with pointers.&lt;/p&gt;
+&lt;p&gt;A second pointer I have on pointers that helped me is this:&lt;/p&gt;
+&lt;p&gt;A pointer stores an address of where some piece of data &amp;ldquo;lives” (begins its bit pattern) in memory.  What recently became clear to me is that a pointer, itself,_ _is &lt;em&gt;also&lt;/em&gt; stored as a bit pattern in memory.&lt;/p&gt;
+&lt;p&gt;Here some example code and its output to help visualize what I&amp;rsquo;m saying:&lt;/p&gt;
+&lt;p&gt;[cpp wraplines=”true”]&lt;br&gt;
+#include &amp;lt;stdio.h&amp;gt;&lt;/p&gt;
+&lt;p&gt;int main(int argc, char *argv[])&lt;br&gt;
+{&lt;br&gt;
+int *intPointer;&lt;/p&gt;
+&lt;p&gt;int i = 10;&lt;/p&gt;
+&lt;p&gt;intPointer = &amp;amp;i;&lt;/p&gt;
+&lt;p&gt;printf(&amp;ldquo;intPointer stores the address of i, which is: %pn&amp;rdquo;, intPointer);&lt;br&gt;
+printf(&amp;ldquo;intPointer, itself, is stored at an address, which is different than the address intPointer stores: %pn&amp;rdquo;, &amp;amp;intPointer);&lt;/p&gt;
+&lt;p&gt;return 0;&lt;br&gt;
+}&lt;br&gt;
+[/cpp]&lt;/p&gt;
+&lt;p&gt;Output (on my machine):&lt;/p&gt;
+&lt;p class=&#34;note&#34;&gt;
+  intPointer stores the address of i, which is: &lt;strong&gt;0x7fff6bacab9c&lt;/strong&gt;&lt;br /&gt; intPointer, itself, is stored at an address, which is different than the address intPointer stores: &lt;strong&gt;0x7fff6bacaba0&lt;/strong&gt;
+&lt;/p&gt;
+&lt;p&gt;This may or may not be obvious to you (it wasn&amp;rsquo;t to me until I understood a tiny bit of what&amp;rsquo;s happening a little further down in the computer&amp;rsquo;s layers of abstraction).  When it comes down to it, all of our C code is an abstraction.  C, and any high-level programming language removes the complexity of having to figure out how to lay down bit patterns in memory (among other things).&lt;/p&gt;
+&lt;p&gt;The key insight I gained from this discovery is that &lt;em&gt;any&lt;/em&gt; type of variable, including pointers, that we declare and use in C code eventually translates to some bit pattern in memory that our computers use to do work with.  It took realizing that pointers, themselves were stored in memory to see this, but I&amp;rsquo;m glad it finally came to light because it&amp;rsquo;s helped de-mystify some of the mystery world of pointers.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pointer Pointer #1</title>
+      <link>https://www.andrewcbancroft.com/2012/06/17/pointer-pointer-1/</link>
+      <pubDate>Sun, 17 Jun 2012 19:45:05 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2012/06/17/pointer-pointer-1/</guid>
+      <description>&lt;p&gt;Part of my confusion with the C family of languages has been how the * symbol worked in the various places it&amp;rsquo;s used in relation to pointers. A key insight helped de-mystify a lot for me:&lt;/p&gt;
+&lt;p&gt;The * symbol is used as both a &lt;em&gt;type&lt;/em&gt; declaration &lt;em&gt;and&lt;/em&gt; as an &lt;em&gt;operator&lt;/em&gt; (the de-reference operator).&lt;/p&gt;
+&lt;div&gt;
+  Example:
+&lt;/div&gt;
+&lt;pre class=&#34;brush: c&#34;&gt;// * used as a type declaration
+    int *intPointer;
+
+    // declare a regular integer variable named i
+    int i = 10;
+
+    // set where intPointer points to by assigning it the address of i
+    intPointer = &amp;i;
+
+    // * used as the de-reference operator
+    printf(&#34;Value returned when intPointer is de-referenced: %dn&#34;, *intPointer);
+```
+
+On line 2 the variable intPointer is declared to be a variable of _type_ pointer to an integer.
+
+On line 8 I tell intPointer where to point to, namely the address of i in memory.  It&#39;s like intPointer is asking, &#34;Which integer do I point to?&amp;#8221; and the answer comes, &#34;This one&amp;#8230;the one at the address of i&amp;#8221;, which is expressed in C as &amp;i.
+
+After intPointer is set to point to some spot (address) in memory, the _value_ of whatever it points to can be accessed by applying the de-reference operator, which just so happens to use the same * that was used to declare the variable intPointer on line 2. And that&#39;s precisely where my brain went cross-eyed.
+
+Since * is used to declare a variable of type pointer to &lt;span style=&#34;text-decoration: underline;&#34;&gt;[some type of data]&lt;/span&gt; _and_ as the de-reference operator which gets at the value that a pointer variable points to, my mind had a hard time separating what was happening.
+
+Line 11 is where intPointer is &#34;de-referenced&amp;#8221; to get the value stored at the location in memory where intPointer points to. It says, &#34;Follow intPointer to where it&#39;s pointing to in memory (which in this case is the address of the variable i), open the box there, and let me see the value that&#39;s at that spot.&amp;#8221;  When I run this code, the number 10 is printed to the console as expected.
+
+In summary:  Pointer pointer #1 attempts to make clear that the * symbol&#39;s meaning is overloaded.  Not only is it used for multiplication, but when dealing with pointers it&#39;s used to declare a variable of type pointer to &lt;span style=&#34;text-decoration: underline;&#34;&gt;[some type of data]&lt;/span&gt; _and_ as the de-reference operator which gets at the value that a pointer variable points to.
+
+[A second pointer pointer can be found here.][1]  It deals with the difference between the address the pointer holds and the address that holds the pointer.
+
+ [1]: http://andrewcbancroft.com/2012/06/24/pointer-pointer-2/ &#34;Pointer Pointer #2&#34;</description>
+    </item>
+    
+  </channel>
+</rss>

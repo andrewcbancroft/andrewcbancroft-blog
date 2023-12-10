@@ -1,0 +1,39 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VB.Net on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/vb.net/</link>
+    <description>Recent content about iOS development with Swift in VB.Net  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 Oct 2014 17:28:05 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/vb.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Date, Date?, and the ToString Method in VB.Net</title>
+      <link>https://www.andrewcbancroft.com/2014/10/03/dates-and-the-tostring-method-in-vb-net/</link>
+      <pubDate>Fri, 03 Oct 2014 17:28:05 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2014/10/03/dates-and-the-tostring-method-in-vb-net/</guid>
+      <description>&lt;p&gt;I just spent the last 45 minutes frustrated as to why I was getting the following exception&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format.png&#34;&gt;&lt;img class=&#34;alignnone size-large wp-image-5421&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-1024x351.png&#34; alt=&#34;Input string was not in the correct format&#34; width=&#34;730&#34; height=&#34;250&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-1024x351.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-300x102.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-1200x411.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format.png 1440w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Input string was not in a correct format.” and &amp;ldquo;[InvalidCastException: Conversion from string &amp;ldquo;MMMM dd, yyyy” to type ‘Integer&amp;rsquo; is not valid.]&lt;/p&gt;
+&lt;p&gt;I kept thinking to myself, &amp;ldquo;How hard can this possibly be?!!  I&amp;rsquo;ve done this a thousand times — Why is it wanting to convert my format string into an Integer??!  AAHHH!!”.  Consulting &lt;a title=&#34;MSDN - Custom Date and Time Format Strings&#34; href=&#34;http://msdn.microsoft.com/en-us/library/8kb3ddd4(v=vs.110).aspx?cs-save-lang=1&amp;cs-lang=vb#code-snippet-1&#34; target=&#34;_blank&#34;&gt;MSDN on the matter&lt;/a&gt; only confirmed that I knew what I was doing with the string formatter.&lt;/p&gt;
+&lt;p&gt;What got me in the end is that it turns out I &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; know what I was doing with my &lt;em&gt;Date&lt;/em&gt; object.  In fact, I wasn&amp;rsquo;t dealing with a &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt; object at all.  I was dealing with a &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;Date?&lt;/span&gt; object (that is, a &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Nullable(of Date)&lt;/span&gt;. &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt; and &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date?&lt;/span&gt;  are not the same. And it &lt;em&gt;matters&lt;/em&gt;, because the &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;ToString()&lt;/span&gt; method of &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt; has _different overloads _than the &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;ToString()&lt;/span&gt; method of &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date?&lt;/span&gt;.  Only the &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt; type allows you to put in a format string to fancy up how the date is displayed when it&amp;rsquo;s converted to a string.&lt;/p&gt;
+&lt;h3 id=&#34;my-solution&#34;&gt;My solution:&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt; Wrap my &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;Date?&lt;/span&gt; object instance in a &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;CType&lt;/span&gt;, converting to type &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline&#34;&gt;Date&lt;/span&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt; Call &lt;span class=&#34;theme:vs2012 lang:vbnet decode:true  crayon-inline &#34;&gt;ToString()&lt;/span&gt; on the &lt;em&gt;converted&lt;/em&gt; value:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;CType(someObject.dateInstance, Date).ToString(&amp;#34;MMMM dd, yyyy&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Sanity… &lt;em&gt;recovered.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

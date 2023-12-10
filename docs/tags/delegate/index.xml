@@ -1,0 +1,182 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Delegate on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/delegate/</link>
+    <description>Recent content about iOS development with Swift in Delegate  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 Mar 2015 03:29:01 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/delegate/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>What is Delegation? – A Swift Developer’s Guide</title>
+      <link>https://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/</link>
+      <pubDate>Fri, 27 Mar 2015 03:29:01 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/</guid>
+      <description>&lt;p&gt;Of the major design patterns that are prevalent in iOS development, delegation is one that appears quite often. For many developers entering app development for the iOS platform, dealing with delegates is a new concept. It certainly was for me.&lt;/p&gt;
+&lt;p&gt;In my analysis of &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/&#34; title=&#34;NSNotificationCenter vs Delegation – An Analysis&#34;&gt;NSNotificationCenter vs Delegation&lt;/a&gt;, I wrote some about delegation, but only in comparison to how &lt;code&gt;NSNotificationCenter&lt;/code&gt; works. I haven&amp;rsquo;t yet given delegation dedicated time and analysis, but I intend to do so now.&lt;/p&gt;
+&lt;p&gt;My aim in this blog entry is to try and make some sense out of the question, &amp;ldquo;What is delegation?”. Explore with me…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;what-is-delegation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;what-is-the-delegation-design-pattern&#34;&gt;What is the delegation design pattern?&lt;/h3&gt;
+&lt;p&gt;To read that &amp;ldquo;delegation is a design pattern that [insert explanation here]” never really clicked with me. Many who are new to programming have not dealt extensively with &amp;ldquo;design patterns”, so it doesn&amp;rsquo;t always suffice to define delegation in those terms.&lt;/p&gt;
+&lt;p&gt;I suspect that since Swift has lowered the barrier to entry for iOS development, many who are new to the platform are also new to coding in general, so here&amp;rsquo;s my attempt to explain what clicked for me regarding what delegation &lt;em&gt;is&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;design-pattern&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;design-pattern&#34;&gt;Design pattern&lt;/h4&gt;
+&lt;p&gt;First, take the phrase &amp;ldquo;design pattern”.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Design&lt;/strong&gt; implies architecture. It connotes a strategy for organizing something. Design conveys the method by which components will work together to accomplish an end.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pattern&lt;/strong&gt; implies that there is some repeatable process that has honed in around a common thread… a common practice… a predictable method for doing something. &amp;ldquo;Pattern” gives the impression that such a practice has converged over time into something that is now well-known, well-understood, and commonly used. I imagine a sort of &amp;ldquo;survival of the fittest” approach to process and practice. Things that didn&amp;rsquo;t converge or that were weaker in the real world fell away and the strongest survived into this thing we call &amp;ldquo;pattern”.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;design pattern&lt;/strong&gt; in software terms, then, is a method for architecting, strategizing about, and organizing an application&amp;rsquo;s code in such a way that has been found to be commonplace, repeatable, and practically sound over time.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;delegation&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;delegation&#34;&gt;Delegation&lt;/h4&gt;
+&lt;p&gt;Now take the word delegation. Three things come to my mind:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The verb, &amp;ldquo;to delegate”, meaning &amp;ldquo;to give control”&lt;/li&gt;
+&lt;li&gt;The noun, &amp;ldquo;a delegate”, meaning &amp;ldquo;a person acting for another”&lt;/li&gt;
+&lt;li&gt;The made-up noun, &amp;ldquo;a delegat_or_&amp;rdquo;, or more properly, a &lt;em&gt;principal&lt;/em&gt;, meaning &amp;ldquo;a person who delegates to another”&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In the real world, the word delegation encapsulates relationship and responsibility. A delegator/principal (noun) would delegate (verb) control or responsibility to another person called a delegate.&lt;/p&gt;
+&lt;p&gt;How could we map this to software? Well, it actually falls in line quite nicely.&lt;/p&gt;
+&lt;p&gt;Rather than &lt;em&gt;people&lt;/em&gt;, we&amp;rsquo;re dealing with instances of &lt;em&gt;classes&lt;/em&gt; (or other data structures like structs, but I&amp;rsquo;m just going to keep it simple and say &amp;ldquo;class” to encapsulate the idea). For delegation to occur in software, you&amp;rsquo;d have a situation where one class (a delegator/principal class) would delegate control or responsibility, here meaning behavioral logic, to another class called a delegate.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;how-used&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;how-is-delegation-used&#34;&gt;How is delegation used?&lt;/h3&gt;
+&lt;p&gt;So yes… delegation is a design pattern. It&amp;rsquo;s a design pattern that exists on other platforms, but it is one that has been heavily adopted by Apple and is ubiquitous throughout the iOS APIs. It&amp;rsquo;s a design pattern that shifts responsibility from one class to another, thereby creating a separation of responsibilities and concerns. But what &lt;em&gt;kinds&lt;/em&gt; of responsibilities and concerns? How is delegation used in practice?&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;communication&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;communication&#34;&gt;Communication&lt;/h4&gt;
+&lt;p&gt;In practice, delegation is most often used as a way for one class to &lt;em&gt;communicate&lt;/em&gt; to another class. Observing some of the actions that delegates perform from Apple&amp;rsquo;s own APIs give us clues about this. Take the following samples from &lt;code&gt;UITableViewDelegate&lt;/code&gt; as an example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;_will_SelectRow&lt;/strong&gt;AtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;_did_SelectRow&lt;/strong&gt;AtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;_did_HighlightRow&lt;/strong&gt;AtIndexPath:)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Or how about a sampling from &lt;code&gt;UIScrollViewDelegate&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;scrollView**&lt;em&gt;Did_Scroll**(&lt;/em&gt;:)&lt;/li&gt;
+&lt;li&gt;scrollView**&lt;em&gt;WillBegin_Dragging**(&lt;/em&gt;:)&lt;/li&gt;
+&lt;li&gt;scrollView**&lt;em&gt;WillEnd_Dragging**(&lt;/em&gt;:withVelocity:targetContentOffset:)&lt;/li&gt;
+&lt;li&gt;scrollView**&lt;em&gt;DidEnd_Dragging**(&lt;/em&gt;:willDecelerate:)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My observation of Apple&amp;rsquo;s APIs indicates to me that one of the intended uses for delegation is to allow one instance to communicate back to some &lt;em&gt;other&lt;/em&gt; instance that something will/did happen. The table view or scroll view &lt;em&gt;delegates&lt;/em&gt; the opportunity to perform some action in response to some lifecycle event to another class, namely, its delegate.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s also worth noting the scope of the communication that delegation is intended to be used for. Whereas &lt;code&gt;NSNotificationCenter&lt;/code&gt; fits the need for one instance to broadcast a message intended for more than one listening instance, delegation fits the scenario where an instance only needs to send a message to a single listener (the delegate).&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;customization&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;customization&#34;&gt;Customization&lt;/h4&gt;
+&lt;p&gt;Another common usage for delegation is to provide a delegate instance the opportunity to customize certain aspects of the delegat_ing_ instance&amp;rsquo;s internal state. Once again, clues from a few of Apple&amp;rsquo;s APIs shed some light on this usage scenario. Let&amp;rsquo;s look at &lt;code&gt;UITableViewDelegate&lt;/code&gt; first:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;height&lt;/strong&gt;ForRowAtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;editActions&lt;/strong&gt;ForRowAtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;indentationLevel&lt;/strong&gt;ForRowAtIndexPath:)&lt;/li&gt;
+&lt;li&gt;tableView(_:&lt;strong&gt;shouldHighlight&lt;/strong&gt;RowAtIndexPath:)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These are all customization-points that a &lt;code&gt;UITableView&lt;/code&gt; allows its delegate to have a say in. &lt;em&gt;Some&lt;/em&gt; of the methods are so important that the table view can&amp;rsquo;t display itself unless it gets this information from its delegate. The point here is that the table view is shifting responsibility for the implementation of that logic off to its delegate, allowing for greater controlled flexibility and customization.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;With delegation being such a heavily utilized strategy for organizing an iOS application&amp;rsquo;s logic, understanding what it is becomes key concern. In this article we unpacked the terms &amp;ldquo;design pattern” and &amp;ldquo;delegation” to get a grasp of why those words were chosen to describe the strategy. Finally, we looked at how the delegation pattern is used in practice, observing that two common use-cases for delegation: class-to-class communication and customization.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/&#34; title=&#34;How Delegation Works – A Swift Developer’s Guide&#34;&gt;How Delegation Works – A Swift Developer’s Guide&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/&#34; title=&#34;Fundamentals of NSNotificationCenter in Swift&#34;&gt;Fundamentals of NSNotificationCenter in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/&#34; title=&#34;NSNotificationCenter vs Delegation – An Analysis&#34;&gt;NSNotificationCenter vs Delegation – An Analysis&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34; title=&#34;Fundamentals of Callbacks for Swift Developers&#34;&gt;Fundamentals of Callbacks for Swift Developers&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>NSNotificationCenter vs Delegation – An Analysis</title>
+      <link>https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/</link>
+      <pubDate>Thu, 05 Feb 2015 13:00:26 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/&#34;&gt;Fundamentals of NSNotificationCenter in Swift&lt;/a&gt;, a &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/#comment-1762533966&#34;&gt;commenter asked&lt;/a&gt; me to elaborate on a response I&amp;rsquo;d given to a dialog going on below the blog post. I had stated:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you need a more structured environment around your [instance]-to-[instance] communication, delegates … are probably a better choice [than NSNotificationCenter].&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I&amp;rsquo;ve been thinking for some time since I responded with that comment. What &lt;em&gt;do&lt;/em&gt; I mean when I say &amp;ldquo;if you need a more structured environment”… What does that even look like? Why are delegates a better choice when I need such &amp;ldquo;structure”?&lt;/p&gt;
+&lt;h3 id=&#34;structured-environment-whats-that&#34;&gt;Structured environment? What&amp;rsquo;s that?&lt;/h3&gt;
+&lt;p&gt;&amp;ldquo;Structured environment” may be a bit vague. Here&amp;rsquo;s what I was thinking when I wrote it: At the time of the comment, I was imagining what a solution implemented with NSNotificationCenter, and a solution implemented with a delegate look like….&lt;/p&gt;
+&lt;h3 id=&#34;questions&#34;&gt;Questions&lt;/h3&gt;
+&lt;p&gt;First, I tried to step into the role of each instance, and in a role-playing sort of way, ask:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;As a &lt;strong&gt;notifier&lt;/strong&gt; / &lt;strong&gt;delegator&lt;/strong&gt; instance: &amp;ldquo;What do I expect to happen as I send this notification or invoke this method on my delegate? What clues from my execution context inform that expectation?”&lt;/li&gt;
+&lt;li&gt;As a &lt;strong&gt;notifier&lt;/strong&gt; / &lt;strong&gt;delegator&lt;/strong&gt; instance: &amp;ldquo;What control do I appear to have over the sequence of events that happen as a result of sending this notification or invoking this method on my delegate?”&lt;/li&gt;
+&lt;li&gt;As a &lt;strong&gt;listener&lt;/strong&gt; / &lt;strong&gt;delegate&lt;/strong&gt; instance: &amp;ldquo;What impact does acting on this notification or executing this delegate method have on the system as a whole?”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And then shifting out of the role-playing mentality, stepping back and asking a question of clarity:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Which strategy seems to provide greater clarity and structure to the &lt;em&gt;entire application environment&lt;/em&gt;?”&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Which strategy would most help another developer who might see this code and try to trace the logic and impact of the code?”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The measurement of a more or less &amp;ldquo;structured environment”, then, would be influenced by the answers to the questions of &lt;strong&gt;expectations&lt;/strong&gt;, &lt;strong&gt;perceived control&lt;/strong&gt;, &lt;strong&gt;impact&lt;/strong&gt;, and &lt;strong&gt;clarity&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s explore some of those answers from the perspective of each communication strategy, starting with NSNotificationCenter.&lt;/p&gt;
+&lt;h3 id=&#34;answers-from-the-nsnotificationcenter-perspective&#34;&gt;Answers from the NSNotificationCenter Perspective&lt;/h3&gt;
+&lt;p&gt;With NSNotificationCenter as an instance-to-instance communication strategy, we have the following environment:&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png&#34; alt=&#34;Notification Center Environment&#34; width=&#34;945&#34; height=&#34;374&#34; class=&#34;alignnone size-full wp-image-11252&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment.png 945w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Notification_Center_Environment-300x119.png 300w&#34; sizes=&#34;(max-width: 945px) 100vw, 945px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Note that Listeners 1 to n may or may not exist. The graphic is assuming that 1+ Listener instances have &amp;ldquo;tuned in” to a particular notification key.&lt;/p&gt;
+&lt;h5 id=&#34;expectations&#34;&gt;Expectations&lt;/h5&gt;
+&lt;p&gt;What do I expect to happen? Well, the most reasonable thing I (as a &amp;ldquo;notifier instance”) can expect is for some other &amp;ldquo;listener instance” somewhere to tune in to the notification key I&amp;rsquo;m broadcasting. I have no way of knowing what would happen after that. It&amp;rsquo;s up to the listener to do something intelligent with the notification that [x event] occurred. I, as a notifier, can expect nothing more.&lt;/p&gt;
+&lt;h5 id=&#34;perceived-control&#34;&gt;Perceived Control&lt;/h5&gt;
+&lt;p&gt;It appears that I, as a notifier, have no control over the sequence of events that would occur as a result of my broadcast. That&amp;rsquo;s by design – the interaction between me and any listener is weak at best.&lt;/p&gt;
+&lt;p&gt;This can be a fantastic thing! There&amp;rsquo;s freedom in saying &amp;ldquo;Hey! This happened!” and then being done. But it&amp;rsquo;s also &amp;ldquo;less structured”, as I&amp;rsquo;m terming it.&lt;/p&gt;
+&lt;h5 id=&#34;impact&#34;&gt;Impact&lt;/h5&gt;
+&lt;p&gt;The impact on the system as a whole has the potential to be significant. With NSNotificationCenter, it depends on how many listener instances there are and what each of them does in response to the notification. One could design the system to localize the impacts to the context of the listening instance. I&amp;rsquo;ve heard of and seen ugly situations that trigger cascading effects that make deciphering the impact of a notification much harder.&lt;/p&gt;
+&lt;h5 id=&#34;clarity&#34;&gt;Clarity&lt;/h5&gt;
+&lt;p&gt;We lose a good deal of clarity when heavy usage of NSNotificationCenter occurs in an application. There may be appropriate times to use NSNotificationCenter in your app. Keep in mind that it becomes much more difficult to sort out various interactions when more and more listener instances are responding a notification. Trying to reason about how the system as a whole arrived at its current state isn&amp;rsquo;t as easy when NSNotificationCenter enters the picture. Other developers with less knowledge of the app as a whole would suffer from this loss of clarity.&lt;/p&gt;
+&lt;h3 id=&#34;answers-from-the-delegate-perspective&#34;&gt;Answers from the Delegate Perspective&lt;/h3&gt;
+&lt;p&gt;With a delegate, we have a significantly different strategy at hand. To put it before us:&lt;br&gt;
+&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png&#34;&gt;&lt;img src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png&#34; alt=&#34;Delegate Environment&#34; width=&#34;948&#34; height=&#34;497&#34; class=&#34;alignnone size-full wp-image-11251&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment.png 948w, https://www.andrewcbancroft.com/wp-content/uploads/2015/02/Delegate_Environment-300x157.png 300w&#34; sizes=&#34;(max-width: 948px) 100vw, 948px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h5 id=&#34;expectations-1&#34;&gt;Expectations&lt;/h5&gt;
+&lt;p&gt;The delegation strategy deals with protocols. Protocols by nature give us reliable a way to…&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Count on the implementation of needed/expected behavior, and&lt;/li&gt;
+&lt;li&gt;Predict what the behavior of the adopter of that protocol will be. By practicing good naming conventions, I, as a delegator, find it reasonable to expect that invoking a method on my delegate will do whatever the name of that method implies.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;perceived-control-1&#34;&gt;Perceived Control&lt;/h5&gt;
+&lt;p&gt;It would appear that as a delegator, I can control the sequence of events that need to take place by choosing when to invoke methods on my delegate. A strategy using NSNotificationCenter can only send out a notification into the ether, and hope that something acts on it. A strategy using delegation has a &lt;em&gt;delegate&lt;/em&gt; which adopts a protocol. Every method is at my disposal to call in whatever order makes sense.&lt;/p&gt;
+&lt;h5 id=&#34;impact-1&#34;&gt;Impact&lt;/h5&gt;
+&lt;p&gt;The impact on the system as a whole still has the potential to be significant. Since there&amp;rsquo;s one-to-one communication going on between a delegator and its delegate, the determining factor on how broad the impact is tends to lean on the design of the system as a whole. Design patterns that minimize or eliminate global state reduce this potentially broad impact.&lt;/p&gt;
+&lt;p&gt;One advantage that the delegation pattern has is that the delegate conforms to a protocol and a protocol, along with its specified methods, have &lt;em&gt;names&lt;/em&gt;. However small that knowledge is, it could give us clues about what impact of executing the delegate&amp;rsquo;s methods might have on the system.&lt;/p&gt;
+&lt;h5 id=&#34;clarity-1&#34;&gt;Clarity&lt;/h5&gt;
+&lt;p&gt;With the advantage of dealing with intelligently named protocols and clearly outlined method names, the delegation strategy would win the battle of clarity in my opinion. I can look at the delegator instance and say, &amp;ldquo;When execution of this instance&amp;rsquo;s logic gets to this point, reliance on the delegate kicks in and [x, y, and z] happens. I can jump over to the delegate&amp;rsquo;s implementation and say, &amp;ldquo;[x] does this, [y] does that, and [z] does this other thing.” Other developers with less knowledge of the app as a whole would enjoy this added clarity quite readily.&lt;/p&gt;
+&lt;h3 id=&#34;in-summary&#34;&gt;In Summary&lt;/h3&gt;
+&lt;p&gt;Here, I&amp;rsquo;ve analyzed NSNotificationCenter, side by side with the delegation pattern, by imagining myself in the role of each instance (notifier, listener | delegator, delegate). I assessed each strategy in terms of expectations, perceived control, impact, and clarity, attempting to shed light on what it means for an environment to be &amp;ldquo;more structured” or &amp;ldquo;less structured”. My hope was to shed light on my use of the term &amp;ldquo;structured environment”, and to share my thoughts on some of the implications of using each strategy.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;related&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    You might also enjoy&amp;#8230;
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/&#34; title=&#34;What is Delegation? – A Swift Developer’s Guide&#34;&gt;What is Delegation? – A Swift Developer’s Guide&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2015/04/08/how-delegation-works-a-swift-developer-guide/&#34; title=&#34;How Delegation Works – A Swift Developer’s Guide&#34;&gt;How Delegation Works – A Swift Developer’s Guide&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/&#34; title=&#34;Fundamentals of NSNotificationCenter in Swift&#34;&gt;Fundamentals of NSNotificationCenter in Swift&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fa fa-angle-right&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34; title=&#34;Fundamentals of Callbacks for Swift Developers&#34;&gt;Fundamentals of Callbacks for Swift Developers&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -44,11 +44,10 @@ An alternative, however, is to use PowerShell to install the DLL into the GAC. T
 <meta property="article:modified_time" content="2015-12-16T17:45:55+00:00" />
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Using PowerShell to Install a DLL into the GAC"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Using PowerShell to Install a DLL into the GAC"/>
 <meta name="twitter:description" content="A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.
 An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs."/>
-<meta name="generator" content="Hugo 0.101.0" />
+<meta name="generator" content="Hugo 0.121.1">
 
     
 <script type="application/ld+json">
@@ -207,9 +206,9 @@ MathJax.Hub.Config({
     <p>A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.</p>
 <p>An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="c">#Note that you should be running PowerShell as an Administrator</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="no">[System.Reflection.Assembly]</span><span class="p">::</span><span class="n">Load</span><span class="p">(</span><span class="s2">&#34;System.EnterpriseServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&#34;</span><span class="p">)</span>            
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="nv">$publish</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">EnterpriseServices</span><span class="p">.</span><span class="n">Internal</span><span class="p">.</span><span class="n">Publish</span>            
-</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nv">$publish</span><span class="p">.</span><span class="n">GacInstall</span><span class="p">(</span><span class="s2">&#34;C:\Path\To\DLL.dll&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="p">[</span><span class="no">System.Reflection.Assembly</span><span class="p">]::</span><span class="n">Load</span><span class="p">(</span><span class="s2">&#34;System.EnterpriseServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&#34;</span><span class="p">)</span>            
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="nv">$publish</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">EnterpriseServices</span><span class="p">.</span><span class="py">Internal</span><span class="p">.</span><span class="py">Publish</span>            
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nv">$publish</span><span class="p">.</span><span class="py">GacInstall</span><span class="p">(</span><span class="s2">&#34;C:\Path\To\DLL.dll&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="ln">5</span><span class="cl">
 </span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="c">#If installing into the GAC on a server hosting web applications in IIS, you need to restart IIS for the applications to pick up the change.</span>
 </span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="c">#Uncomment the next line if necessary...</span>
@@ -221,7 +220,7 @@ MathJax.Hub.Config({
     </aside>
 
     <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     window.disqus_config = function () {
     
     

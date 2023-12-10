@@ -1,0 +1,61 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>.Net on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/.net/</link>
+    <description>Recent content about iOS development with Swift in .Net  from Andrew Bancroft.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 May 2015 17:44:31 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.andrewcbancroft.com/tags/.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SQL Sever Synonyms, Entity Framework, and Integrated Security</title>
+      <link>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</link>
+      <pubDate>Fri, 01 May 2015 17:44:31 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</guid>
+      <description>&lt;p&gt;&lt;a name=&#34;scenario&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;scenario&#34;&gt;Scenario&lt;/h3&gt;
+&lt;p&gt;This may be an edge case, but I spent enough time (a couple of &lt;em&gt;days&lt;/em&gt;) spinning on this that I thought it warranted a signpost on the Internet.&lt;/p&gt;
+&lt;p&gt;Suppose you have the following scenario before you:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Basics&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You&amp;rsquo;re building an ASP.Net web application&lt;/li&gt;
+&lt;li&gt;Entity Framework has been chosen as your ORM&lt;/li&gt;
+&lt;li&gt;SQL Server (any version supporting &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonyms&lt;/a&gt;) is your backend database server of choice&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Details&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You&amp;rsquo;re using &amp;ldquo;Integrated Security=True” in your connection string to the database (in web.config)&lt;/li&gt;
+&lt;li&gt;The Application Pool in which your app resides is running under a domain service account (ie, not the default identity)&lt;/li&gt;
+&lt;li&gt;Your application primarily talks to one database, but there is information in &lt;em&gt;another&lt;/em&gt; database that you need to pull into your app&lt;/li&gt;
+&lt;li&gt;To access the data in that other database, you&amp;rsquo;ve chosen to create a &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/ms187552.aspx&#34;&gt;Synonym&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Every bullet point in this scenario is normal and valid, until you get to the part about using &amp;ldquo;Integrated Security=True” in your connection string…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;login-failed&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;login-failed-for-user-8216nt-authorityanonymous-logon&#34;&gt;Login failed for user ‘NT AUTHORITY\ANONYMOUS LOGON&#39;&lt;/h3&gt;
+&lt;p&gt;If you had chosen to use SQL Server authentication in your conenction string, and passed in a username and password for a SQL Server login that had permissions to the database, things would have worked out perfectly. I know this because that&amp;rsquo;s what I had been doing in my own application. I started running into the &amp;ldquo;Login failed…” error message once I switched to Integrated Security.&lt;/p&gt;
+&lt;p&gt;For some reason &amp;ldquo;Integrated Security=True” that throws Entity Framework for a loop. It accesses the database used in the &lt;code&gt;DbContext&lt;/code&gt; instance just fine, but the second a line of code needs to use the object mapped to the &lt;em&gt;Synonym&lt;/em&gt;, &lt;strong&gt;boom&lt;/strong&gt;… crash… error…&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;reolving-error&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;resolving-the-error&#34;&gt;Resolving the error&lt;/h3&gt;
+&lt;p&gt;It turns out that the resolution is really, really simple. Instead of using a Synonym, use a View. You don&amp;rsquo;t have to change a single line of .Net code. Just make sure the view is named the same as the Synonym was (and drop the Synonym from the database, of course).&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;creating-view&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;creating-the-view&#34;&gt;Creating the view&lt;/h4&gt;
+&lt;p&gt;A Synonym essentially maps to an entire table, so the View&amp;rsquo;s structure could literally be a simple &lt;code&gt;select * from [fully.qualified.database.objectName]&lt;/code&gt;. If your DBA hates &lt;code&gt;select *&lt;/code&gt;, you&amp;rsquo;ll end up listing out every column that your Entity Framework object lists as one of its Properties.&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;granting-permissions&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;granting-permissions&#34;&gt;Granting permissions&lt;/h4&gt;
+&lt;p&gt;If the service account that&amp;rsquo;s running your Application Pool doesn&amp;rsquo;t already have permission to the database objects you created the View for, you need to go in and grant appropriate permissions to that account. Otherwise, you&amp;rsquo;re likely to get an error stating&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The server principal &amp;ldquo;Domain\PrincipalName” is not able to access the database &amp;ldquo;DatabaseName” under the current security context.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Be specific and granular with the permission you grant to the account. If you&amp;rsquo;re just pulling in data for your app to display, only give the account SELECT permission on the database object your View references.&lt;/p&gt;
+&lt;h3 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h3&gt;
+&lt;p&gt;In essence, using a Synonym that references a database object in &lt;em&gt;another database&lt;/em&gt; with Entity Framework and Integrated Security just doesn&amp;rsquo;t work out in the end. Somehow, the security context loses the identity of the account running the application pool, and the dreated Login failed for user ‘NT AUTHORITY\ANONYMOUS LOGON&amp;rsquo; rears its ugly head. Thankfully, the solution is simple: Create a View instead of a Synonym, grant approprate permissions, and you&amp;rsquo;ll be off and running (and you&amp;rsquo;ll avoid usernames and passwords in your web.config)!&lt;/p&gt;
+&lt;p&gt;&lt;a name=&#34;share&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
