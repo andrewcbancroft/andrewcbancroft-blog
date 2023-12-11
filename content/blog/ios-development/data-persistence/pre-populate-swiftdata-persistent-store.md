@@ -129,12 +129,29 @@ let appContainer: ModelContainer = {
 }() // The "()" here runs the closure immediately
 ```
 
-You need to the `appContainer` declaration with the `@MainActor` attribute because `container`'s `mainContext` is annotated with the `@MainActor` attribute. You’ll get a compiler error like this if you don’t:
+You need to annotate the `appContainer` declaration with the `@MainActor` attribute because `container`'s `mainContext` is annotated with the `@MainActor` attribute. You’ll get a compiler error like this if you don’t:
 
 > Main actor-isolated property 'mainContext' can not be referenced from a non-isolated context
 
+Once you add `@MainActor` to the `appContainer`, you're likely to see a warning if you're using Swift 5.9:
 
-Once you have the `appContainer` instance, you can modify your SwiftUI view, or one of your app instance’s `WindowGroup`s to have a model container:
+> Stored property 'sharedModelContainer' within struct cannot have a global actor; this is an error in Swift 6
+
+To silence this warning and prepare your app for Swift 6, you can move where you add `@MainActor` from the `appContainer` to the `App` declaration:
+
+```swift {linenos=table, hl_lines=[2]}
+@main
+@MainActor
+struct TrySwiftDataApp: App {    
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
+
+Now you can modify your SwiftUI view, or one of your app instance’s `WindowGroup`s to have a model container:
 
 ```swift {linenos=table,hl_lines=[7]}
 @main

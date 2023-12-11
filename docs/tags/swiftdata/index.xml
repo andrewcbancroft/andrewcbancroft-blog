@@ -166,11 +166,40 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line hl&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}()&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// The &amp;#34;()&amp;#34; here runs the closure immediately&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;You need to the &lt;code&gt;appContainer&lt;/code&gt; declaration with the &lt;code&gt;@MainActor&lt;/code&gt; attribute because &lt;code&gt;container&lt;/code&gt;&amp;rsquo;s &lt;code&gt;mainContext&lt;/code&gt; is annotated with the &lt;code&gt;@MainActor&lt;/code&gt; attribute. You’ll get a compiler error like this if you don’t:&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;You need to annotate the &lt;code&gt;appContainer&lt;/code&gt; declaration with the &lt;code&gt;@MainActor&lt;/code&gt; attribute because &lt;code&gt;container&lt;/code&gt;&amp;rsquo;s &lt;code&gt;mainContext&lt;/code&gt; is annotated with the &lt;code&gt;@MainActor&lt;/code&gt; attribute. You’ll get a compiler error like this if you don’t:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Main actor-isolated property &amp;lsquo;mainContext&amp;rsquo; can not be referenced from a non-isolated context&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Once you have the &lt;code&gt;appContainer&lt;/code&gt; instance, you can modify your SwiftUI view, or one of your app instance’s &lt;code&gt;WindowGroup&lt;/code&gt;s to have a model container:&lt;/p&gt;
+&lt;p&gt;Once you add &lt;code&gt;@MainActor&lt;/code&gt; to the &lt;code&gt;appContainer&lt;/code&gt;, you&amp;rsquo;re likely to see a warning if you&amp;rsquo;re using Swift 5.9:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Stored property &amp;lsquo;sharedModelContainer&amp;rsquo; within struct cannot have a global actor; this is an error in Swift 6&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To silence this warning and prepare your app for Swift 6, you can move where you add &lt;code&gt;@MainActor&lt;/code&gt; from the &lt;code&gt;appContainer&lt;/code&gt; to the &lt;code&gt;App&lt;/code&gt; declaration:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line hl&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MainActor&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;TrySwiftDataApp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;App&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;some&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Scene&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;WindowGroup&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;ContentView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Now you can modify your SwiftUI view, or one of your app instance’s &lt;code&gt;WindowGroup&lt;/code&gt;s to have a model container:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1

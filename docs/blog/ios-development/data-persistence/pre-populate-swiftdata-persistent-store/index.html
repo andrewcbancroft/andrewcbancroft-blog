@@ -61,7 +61,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/pre-populate-swiftdata-persistent-store\/",
-  "wordCount": "1586",
+  "wordCount": "1668",
   "datePublished": "2023-06-15T00:00:00Z",
   "dateModified": "2023-06-15T00:00:00Z",
   "author": {
@@ -383,11 +383,40 @@ MathJax.Hub.Config({
 </span></span><span class="line hl"><span class="cl"><span class="p">}()</span> <span class="c1">// The &#34;()&#34; here runs the closure immediately</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>You need to the <code>appContainer</code> declaration with the <code>@MainActor</code> attribute because <code>container</code>&rsquo;s <code>mainContext</code> is annotated with the <code>@MainActor</code> attribute. You’ll get a compiler error like this if you don’t:</p>
+</div><p>You need to annotate the <code>appContainer</code> declaration with the <code>@MainActor</code> attribute because <code>container</code>&rsquo;s <code>mainContext</code> is annotated with the <code>@MainActor</code> attribute. You’ll get a compiler error like this if you don’t:</p>
 <blockquote>
 <p>Main actor-isolated property &lsquo;mainContext&rsquo; can not be referenced from a non-isolated context</p>
 </blockquote>
-<p>Once you have the <code>appContainer</code> instance, you can modify your SwiftUI view, or one of your app instance’s <code>WindowGroup</code>s to have a model container:</p>
+<p>Once you add <code>@MainActor</code> to the <code>appContainer</code>, you&rsquo;re likely to see a warning if you&rsquo;re using Swift 5.9:</p>
+<blockquote>
+<p>Stored property &lsquo;sharedModelContainer&rsquo; within struct cannot have a global actor; this is an error in Swift 6</p>
+</blockquote>
+<p>To silence this warning and prepare your app for Swift 6, you can move where you add <code>@MainActor</code> from the <code>appContainer</code> to the <code>App</code> declaration:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="hl"><span class="lnt">2
+</span></span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="p">@</span><span class="n">main</span>
+</span></span><span class="line hl"><span class="cl"><span class="p">@</span><span class="n">MainActor</span>
+</span></span><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">TrySwiftDataApp</span><span class="p">:</span> <span class="n">App</span> <span class="p">{</span>    
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">Scene</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WindowGroup</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ContentView</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now you can modify your SwiftUI view, or one of your app instance’s <code>WindowGroup</code>s to have a model container:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
