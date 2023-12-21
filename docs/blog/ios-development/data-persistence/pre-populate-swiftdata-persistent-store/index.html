@@ -61,7 +61,7 @@
     "width": "1024"
   },
   "url": "https:\/\/www.andrewcbancroft.com\/blog\/ios-development\/data-persistence\/pre-populate-swiftdata-persistent-store\/",
-  "wordCount": "1668",
+  "wordCount": "1670",
   "datePublished": "2023-06-15T00:00:00Z",
   "dateModified": "2023-06-15T00:00:00Z",
   "author": {
@@ -419,24 +419,26 @@ MathJax.Hub.Config({
 </div><p>Now you can modify your SwiftUI view, or one of your app instance’s <code>WindowGroup</code>s to have a model container:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="hl"><span class="lnt">7
-</span></span><span class="lnt">8
-</span><span class="lnt">9
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="hl"><span class="lnt"> 7
+</span></span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="p">@</span><span class="n">main</span>
+</span></span><span class="line"><span class="cl"><span class="p">@</span><span class="n">MainActor</span>
 </span></span><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">TrySwiftDataApp</span><span class="p">:</span> <span class="n">App</span> <span class="p">{</span>    
 </span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nv">body</span><span class="p">:</span> <span class="n">some</span> <span class="n">Scene</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">WindowGroup</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">ContentView</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="n">modelContainer</span><span class="p">(</span><span class="n">appContainer</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">modelContainer</span><span class="p">(</span><span class="n">appContainer</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>

@@ -155,6 +155,7 @@ Now you can modify your SwiftUI view, or one of your app instance’s `WindowGro
 
 ```swift {linenos=table,hl_lines=[7]}
 @main
+@MainActor
 struct TrySwiftDataApp: App {    
     var body: some Scene {
         WindowGroup {
