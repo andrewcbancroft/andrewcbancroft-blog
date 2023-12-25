@@ -46,6 +46,9 @@
 {{ end }}
 
 {{ define "main" }}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
 {{ $dateFormat := default " January 2, 2006" (index .Site.Params "date_format") }}
 
 <main>
@@ -422,4 +425,5 @@
         </div>
     </div>
 </main>
+</div></div></div>
 {{ end }}

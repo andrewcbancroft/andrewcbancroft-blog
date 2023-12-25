@@ -1,0 +1,9 @@
+{{ define "title" }}
+  {{ .Title | markdownify }}
+{{ end }}
+
+{{ define "main" }}
+<main>
+  {{ .Content }}
+</main>
+{{ end }}
