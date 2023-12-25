@@ -1,5 +1,16 @@
 {{ define "title" }}{{ .Title | markdownify }}{{ end }}
-
+{{ define "ads" }}
+<!-- Google tag (gtag.js) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6356224024630676"
+crossorigin="anonymous"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6356224024630676",
+    enable_page_level_ads: true,
+    overlays: { bottom: true }
+});
+</script>
+{{ end }}
 {{ define "schema-dot-org" }}
 <script type="application/ld+json">
 {
@@ -51,6 +62,9 @@
 {{ end }}
 
 {{ define "main" }}
+<div class="container">
+  <div class="row">
+      <div class="col-sm-12">
 {{ $dateFormat := default " January 2, 2006" (index .Site.Params "date_format") }}
 
 <article>
@@ -138,6 +152,6 @@
     {{- end }}
 
     {{ template "_internal/disqus.html" . }}
-  </article>
-
+</article>
+</div></div></div>
 {{ end }}
