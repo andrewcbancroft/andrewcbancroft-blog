@@ -3,12 +3,15 @@ title: "Andrew Bancroft - Portfolio"
 author: "Andrew Bancroft"
 date: 2017-12-20T11:53:49-07:00
 description: ""
-type: page
+type: portfolio_page
 draft: false
 outputs:
     - html
 ---
-
+<main>
+<div class="container">
+  <div class="row">
+      <div class="col-sm-12">
 <div class="site-intro">
     <div class="grav-inner">
         <div class="grav-grav">
@@ -23,23 +26,68 @@ outputs:
 
 Hi 👋🏻 I'm Andrew.
 
-I’m a relentless learner, passionate about discovery and about sharing new insights that come my way. I write about technology and software development with a primary emphasis on <a href="https://www.andrewcbancroft.com/#ios-development">app development in Swift</a>.
+I am a people-driven, creative, impactful <span style="font-variant:small-caps;color:#3e8bc5">teacher</span> with more than 15 years of experience helping others succeed with technology.
 
-Teaching is one of my passions. As an [Author for Pluralsight](https://www.pluralsight.com/authors/andrew-bancroft), I've published a few courses to their library:
+I have <span style="font-variant:small-caps;color:#3e8bc5">broad experience</span> in web and mobile software development, data analytics, and cloud platforms, and an <span style="font-variant:small-caps;color:#3e8bc5">established record</span> of leading the delivery of solutions to complex technology problems that advance business objectives and delight customers.
+</div></div></div>
 
-* [iOS Debugging Fundamentals](http://bit.ly/ios-debugging-fundamentals)
-* [iOS Data Persistence: The BigPicure](http://bit.ly/ios-data-persistence-bp)
-* [CloudKit Fundamentals](http://bit.ly/cloudkit-fundamentals)
-* [Core Data Fundamentals with Swift](http://bit.ly/ps-core-data-swift)
-* [Managing Xcode Project Dependencies with CocoaPods](https://www.pluralsight.com/courses/cocoapods-xcode-project-dependencies)
+# Courses
 
-You can connect with me on <a title="twitter.com/andrewcbancroft" href="https://twitter.com/andrewcbancroft">X</a>, <a title="GitHub - andrewcbancroft" href="https://github.com/andrewcbancroft" target="_blank">GitHub</a>, or <a title="Youtube - andrewcbancroft" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg">YouTube</a>!
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="ios-17-fundamentals-title.png" class="card-img-top" />
+                    <div class="card-body">
+                        <p class="card-text">Building for iOS is an incredibly valuable skill for any developer. This course will teach you to make apps using Xcode, Swift, and SwiftUI that support the features users will expect when they upgrade to iOS 17.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            </div>
+                            <small class="text-body-secondary">Dec 7, 2023</small>
+                            <small class="text-body-secondary">5h 5m</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="building-ios-user-interfaces-with-swiftui-title.png" class="card-img-top" />
+                    <div class="card-body">
+                        <p class="card-text">This course will teach you to make iOS apps with engaging user interfaces using Xcode, Swift, and SwiftUI.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            </div>
+                            <small class="text-body-secondary">Aug 22, 2021</small>
+                            <small class="text-body-secondary">3h 16m</small> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="ios-14-getting-started-title.png" class="card-img-top" />
+                    <div class="card-body">
+                        <p class="card-text">This course will teach you to make iOS apps with adaptive user interfaces that work on multiple devices using Xcode, Swift, and SwiftUI.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            </div>
+                            <small class="text-body-secondary">Dec 3, 2020</small>
+                            <small class="text-body-secondary">4h 49m</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
 
- [1]: http://www.andrewcbancroft.com/category/software-development/ios-mac/swift/
- [2]: http://www.andrewcbancroft.com/category/software-development/net/cs/
- [3]: https://www.dataday.life
- [4]: https://www.pluralsight.com/authors/andrew-bancroft
- [5]: http://bit.ly/cloudkit-fundamentals
- [6]: http://bit.ly/ps-core-data-swift
- [7]: https://www.pluralsight.com/courses/cocoapods-xcode-project-dependencies
- [8]: https://twitter.com/andrewcbancroft "twitter.com/andrewcbancroft"
+# Software
+
+# Data Analytics
+
+# Strategy & Leadership
