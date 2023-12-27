@@ -36,14 +36,90 @@ outputs:
 <main>
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
-    <!-- <ul class="nav nav-pills nav-fill">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Courses</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Apps</a>
-        </li>
-    </ul> -->
+        <h1>Apps</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col d-flex align-items-stretch">
+                <div class="card shadow-sm">
+                    <a data-bs-toggle="modal" data-bs-target="#express-chiropractic-modal" href="#"><img src="express-chiropractic.png"
+                            class="card-img-top" alt="Express Chiropractic" /></a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Express Chiropractic</h5>
+                        <p class="card-text">My business partner and I created a cross-platform mobile app for Express Chiropractic to enhance the overall customer experience for their practice members. The app enabled people to:
+                            <ul>
+                                <li>Choose a home location</li>
+                                <li>Check if the location is currently open or closed before heading out the door</li>
+                                <li>View the location's regular weekly scheduled hours and any changes in the regular schedule</li>
+                                <li>Receive important announcements from clinics via push notification</li>
+                            </ul>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-body-secondary">ReactNative | Firebase</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex align-items-stretch">
+                <div class="card shadow-sm">
+                    <a data-bs-toggle="modal" data-bs-target="#express-chiropractic-admin-modal" href="#"><img src="express-chiropractic-admin.png"
+                            class="card-img-top" alt="Express Chiropractic Admin" /></a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Express Chiropractic Admin</h5>
+                        <p class="card-text">My business partner and I built a back-end admin panel to allow Express Chiropractic employees to:
+                            <ul>
+                                <li>Customize text and images that the mobile app displays</li>
+                                <li>Manage regular weekly scheduled hours</li>
+                                <li>Make changes in schedule</li>
+                                <li>Send push notifications to clients</li>
+                            </ul>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-body-secondary">React | Firebase</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex align-items-stretch">
+                <div class="card shadow-sm">
+                    <a data-bs-toggle="modal" data-bs-target="#paradigm-hormones-modal" href="#"><img src="paradigm-hormones.png"
+                            class="card-img-top" alt="Paradigm Hormones" /></a>
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Paradigm Hormones</h5>
+                        <p class="card-text">My business partner and I built a web application for Paradigm Hormones to:
+                            <ul>
+                                <li>Enable clinicians to enter patient parameters</li>
+                                <li>Assist clinicians in calculating appropriate hormone replacement levels</li>
+                            </ul>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-body-secondary">React | Firebase</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex align-items-stretch">
+                <div class="card shadow-sm">
+                    <a data-bs-toggle="modal" data-bs-target="#ten-read-ten-said-modal" href="#"><img src="ten-read-ten-said.png"
+                            class="card-img-top" alt="10 Read 10 Said" /></a>
+                    <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">10 Read 10 Said</h5>
+                        <p class="card-text">One of the first apps I built for myself as a way to facilitate the "10 Read 10 Said" memorization strategy:
+                            <ul>
+                                <li>Enter text to memorize</li>
+                                <li>Read the text out loud 10 times while looking at it</li>
+                                <li>Say the text again out loud 10 times without looking</li>
+                            </ul>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-body-secondary">Swift | SwiftUI</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
     <h1>Courses</h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col d-flex align-items-stretch">
@@ -185,54 +261,6 @@ outputs:
     </div>
 </div>
 
-<div class="album py-5 bg-body-tertiary">
-    <div class="container">
-        <h1>Apps</h1>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col d-flex align-items-stretch">
-                <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#ten-read-ten-said-modal" href="#"><img src="ten-read-ten-said.png"
-                            class="card-img-top" alt="10 Read 10 Said" /></a>
-                    <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">10 Read 10 Said</h5>
-                        <p class="card-text">More than just an app, 10 Read 10 Said is a strategy to help you commit
-                            Scripture to memory. It's simple:
-                            <ul>
-                                <li>Choose a verse you'd like to memorize</li>
-                                <li>Read the verse out loud 10 times while looking at the text</li>
-                                <li>Say the verse again out loud 10 times without looking</li>
-                            </ul>
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <small class="text-body-secondary">Swift | SwiftUI</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col d-flex align-items-stretch">
-                <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#express-chiropractic-modal" href="#"><img src="express-chiropractic.png"
-                            class="card-img-top" alt="Express Chiropractic" /></a>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Express Chiropractic</h5>
-                        <p class="card-text">The new Express Chiropractic app is designed to enhance the overall customer experience for our practice members. With the upgraded Express Chiropractic app you will be able to:
-                            <ul>
-                                <li>Check if we are currently open or closed before you head out the door</li>
-                                <li>View our regular weekly scheduled hours</li>
-                                <li>View any changes in schedule</li>
-                                <li>Receive important announcements from Clinics related via Push Notifications</li>
-                            </ul>
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <small class="text-body-secondary">ReactNative, Firebase</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="ten-read-ten-said-modal" tabindex="-1" aria-labelledby="10 Read 10 Said Modal" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
@@ -254,11 +282,45 @@ outputs:
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="express-chiropractic-modal-label">10 Read 10 Said</h1>
+                <h1 class="modal-title fs-5" id="express-chiropractic-modal-label">Express Chiropractic</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <img src="express-chiropractic.png" class="img-fluid"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="express-chiropractic-admin-modal" tabindex="-1" aria-labelledby="Express Chiropractic Admin Modal" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="express-chiropractic-admin-modal-label">Express Chiropractic Admin</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="express-chiropractic-admin.png" class="img-fluid"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="paradigm-hormones-modal" tabindex="-1" aria-labelledby="Paradigm Hormones" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="paradigm-hormones-modal-label">Paradigm Hormones</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="paradigm-hormones.png" class="img-fluid"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
