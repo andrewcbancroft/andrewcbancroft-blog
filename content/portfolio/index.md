@@ -8,7 +8,7 @@ outputs:
     - html
 ---
  <section class="p-5 text-center container">
-  <div class="row py-5">
+  <div class="row pt-5">
     <div class="col-lg-6 col-md-8 mx-auto">
         <div class="site-intro grav-inner">
           <div class="grav-grav">
@@ -34,13 +34,25 @@ outputs:
 </section>
 
 <main>
-<div class="album py-5 bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" aria-current="page" href="#apps">Apps</a>
+        <a class="nav-link" href="#courses">Courses</a>
+        <a class="nav-link" href="#robotics">Robotics</a>
+        <a class="nav-link" href="#skill-assessments">Skill Assessments</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div id="apps" class="album py-5 bg-body-tertiary">
     <div class="container">
         <h1>Apps</h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col d-flex align-items-stretch">
                 <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#noble-oe-modal" href="#"><img src="noble-oe-main.png"
+                    <a data-bs-toggle="modal" data-bs-target="#noble-oe-modal" role="button"><img src="noble-oe-main.png"
                             class="card-img-top" alt="Noble Open Enrollment" /></a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Open Enrollment</h5>
@@ -61,7 +73,7 @@ outputs:
             </div>
             <div class="col d-flex align-items-stretch">
                 <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#noble-materials-inventory-modal" href="#"><img src="noble-materials-inventory.png"
+                    <a data-bs-toggle="modal" data-bs-target="#noble-materials-inventory-modal" role="button"><img src="noble-materials-inventory.png"
                             class="card-img-top" alt="Noble Materials Inventory" /></a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Materials Inventory</h5>
@@ -81,7 +93,7 @@ outputs:
             </div>
             <div class="col d-flex align-items-stretch">
                 <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#noble-rdms-modal" href="#"><img src="noble-rdms.png"
+                    <a data-bs-toggle="modal" data-bs-target="#noble-rdms-modal" role="button"><img src="noble-rdms.png"
                             class="card-img-top" alt="Noble Research Data Management System" /></a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Research Data Management System</h5>
@@ -101,12 +113,12 @@ outputs:
             </div>
             <div class="col d-flex align-items-stretch">
                 <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#noble-jr-beef-modal" href="#"><img src="noble-jr-beef.png"
+                    <a data-bs-toggle="modal" data-bs-target="#noble-jr-beef-modal" role="button"><img src="noble-jr-beef.png"
                             class="card-img-top" alt="Noble Jr. Beef" /></a>
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Jr. Beef - My Steer</h5>
+                        <h5 class="card-title">Jr. Beef</h5>
                         <h6 class="text-body-secondary">Noble Research Institute</h6>
-                            <p class="card-text">I led the development of Noble's first native iOS app called Jr. Beef - My Steer. This app enabled high school students who participated in Noble's annual steer raising competition to:
+                            <p class="card-text">I led the development of Noble's first native iOS app called Jr. Beef. This app enabled high school students who participated in Noble's annual steer raising competition to:
                             <ul>
                                 <li>Create records of steers</li>
                                 <li>Record steer weights over time</li>
@@ -123,7 +135,7 @@ outputs:
             </div>
             <div class="col d-flex align-items-stretch">
                 <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#noble-ag-tools-modal" href="#"><img src="noble-ag-tools.png"
+                    <a data-bs-toggle="modal" data-bs-target="#noble-ag-tools-modal" role="button"><img src="noble-ag-tools.png"
                             class="card-img-top" alt="Noble Research Data Management System" /></a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Ag Tools</h5>
@@ -138,7 +150,7 @@ outputs:
             </div>
             <div class="col d-flex align-items-stretch">
                 <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#express-chiropractic-modal" href="#"><img src="express-chiropractic.png"
+                    <a data-bs-toggle="modal" data-bs-target="#express-chiropractic-modal" role="button"><img src="express-chiropractic.png"
                             class="card-img-top" alt="Express Chiropractic" /></a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Express Chiropractic</h5>
@@ -159,7 +171,7 @@ outputs:
             </div>
             <div class="col d-flex align-items-stretch">
                 <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#express-chiropractic-admin-modal" href="#"><img src="express-chiropractic-admin.png"
+                    <a data-bs-toggle="modal" data-bs-target="#express-chiropractic-admin-modal" role="button"><img src="express-chiropractic-admin.png"
                             class="card-img-top" alt="Express Chiropractic Admin" /></a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Express Chiropractic Admin</h5>
@@ -180,7 +192,7 @@ outputs:
             </div>
             <div class="col d-flex align-items-stretch">
                 <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#paradigm-hormones-modal" href="#"><img src="paradigm-hormones.png"
+                    <a data-bs-toggle="modal" data-bs-target="#paradigm-hormones-modal" role="button"><img src="paradigm-hormones.png"
                             class="card-img-top" alt="Paradigm Hormones" /></a>
                     <div class="card-body d-flex flex-column">
                     <h5 class="card-title">Paradigm Hormones</h5>
@@ -199,7 +211,7 @@ outputs:
             </div>
             <div class="col d-flex align-items-stretch">
                 <div class="card shadow-sm">
-                    <a data-bs-toggle="modal" data-bs-target="#ten-read-ten-said-modal" href="#"><img src="ten-read-ten-said.png"
+                    <a data-bs-toggle="modal" data-bs-target="#ten-read-ten-said-modal" role="button"><img src="ten-read-ten-said.png"
                             class="card-img-top" alt="10 Read 10 Said" /></a>
                     <div class="card-body d-flex flex-column">
                     <h5 class="card-title">10 Read 10 Said</h5>
@@ -220,7 +232,7 @@ outputs:
         </div>
     </div>
 </div>
-<div class="album py-5 bg-body-tertiary">
+<div id="courses" class="album py-5 bg-body-tertiary">
     <div class="container">
     <h1>Courses</h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -362,7 +374,29 @@ outputs:
         </div>
     </div>
 </div>
-<div class="album py-5 bg-body-tertiary">
+<div id="robotics" class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <h1>Robotics</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col d-flex align-items-stretch">
+                <div class="card shadow-sm">
+                    <a data-bs-toggle="modal" data-bs-target="#jr-botball-modal" role="button"><img src="jr-botball.png"
+                            class="card-img-top" alt="Jr. Botball" /></a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Jr. Botball</h5>
+                        <h6 class="text-body-secondary">Noble Research Institute</h6>
+                        <p class="card-text">I volunteered to teach a group of 4th and 5th grade students from local elementary schools basic programming skills, the engineering design process, and robotics to prepare them for the Jr. Botball Challenge.
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-body-secondary">C</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="skill-assessments" class="album py-5 bg-body-tertiary">
     <div class="container">
     <h1>Skill Assessments</h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -443,7 +477,7 @@ outputs:
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="ten-read-ten-said.png" class="img-fluid" />
+                <img src="ten-read-ten-said.png" class="d-block w-50" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -460,7 +494,7 @@ outputs:
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="express-chiropractic.png" class="img-fluid"/>
+                <img src="express-chiropractic.png" class="d-block w-50"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -477,7 +511,7 @@ outputs:
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="express-chiropractic-admin.png" class="img-fluid"/>
+                <img src="express-chiropractic-admin.png" class="d-block w-50"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -494,7 +528,7 @@ outputs:
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="paradigm-hormones.png" class="img-fluid"/>
+                <img src="paradigm-hormones.png" class="d-block w-50"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -613,7 +647,7 @@ outputs:
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="noble-materials-inventory.png" class="img-fluid"/>
+                <img src="noble-materials-inventory-demo.gif" class="d-block w-50"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -622,15 +656,15 @@ outputs:
     </div>
 </div>
 
-<div class="modal fade" id="noble-jr-beef-modal" tabindex="-1" aria-labelledby="Jr. Beef - My Steer" aria-hidden="true">
+<div class="modal fade" id="noble-jr-beef-modal" tabindex="-1" aria-labelledby="Jr. Beef" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="noble-jr-beef-modal-label">Jr. Beef - My Steer</h1>
+                <h1 class="modal-title fs-5" id="noble-jr-beef-modal-label">Jr. Beef</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="noble-jr-beef.png" class="img-fluid"/>
+                <img src="noble-jr-beef-demo.gif" class="d-block w-50"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -647,7 +681,45 @@ outputs:
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="noble-ag-tools.png" class="img-fluid"/>
+                <img src="noble-ag-tools-demo.gif" class="d-block w-50"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="jr-botball-modal" tabindex="-1" aria-labelledby="Jr. Botball Modal" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="jr-botball-modal-label">Jr. Botball</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="jr-botball-carousel" class="carousel slide" data-bs-theme="dark">
+                    <div class="carousel-inner">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#jr-botball-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#jr-botball-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        </div>
+                        <div class="carousel-item active">
+                            <img src="jr-botball-grab-bottle.gif" class="d-block w-50" alt="Open Enrollment Change Address">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="jr-botball-follow-line.gif" class="d-block w-50" alt="Open Enrollment Change Dependents"/>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#jr-botball-carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon text-seconary" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#jr-botball-carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon text-seconary" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
