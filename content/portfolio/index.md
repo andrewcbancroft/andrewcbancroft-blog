@@ -26,10 +26,10 @@ outputs:
 <div class="container">
     <h5>Hi 👋🏻 I’m Andrew.</h5>
     <p>
-    I am a people-driven, creative, impactful <span style="font-variant:small-caps;color:#3e8bc5">developer and teacher</span> with more than 15 years of experience helping others succeed with technology.
+    I am a people-driven, creative, impactful <span style="font-variant:small-caps;color:#3e8bc5">leader, developer, and teacher</span> with more than 15 years of experience helping others succeed with technology.
     </p>
     <p>
-    I have <span style="font-variant:small-caps;color:#3e8bc5">broad experience</span> in web and mobile software development, data analytics, and cloud platforms, and an <span style="font-variant:small-caps;color:#3e8bc5">established record</span> of leading the delivery of solutions to complex technology problems that advance business objectives and delight customers.
+    I have <span style="font-variant:small-caps;color:#3e8bc5">broad experience</span> in data analytics, data governance, cloud platforms, software development, and education, and an <span style="font-variant:small-caps;color:#3e8bc5">established record</span> of leading the delivery of solutions to complex technology problems that advance business objectives and delight customers.
     </p>
 </div>
 </section>
