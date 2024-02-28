@@ -41,6 +41,7 @@ outputs:
       <div class="navbar-nav">
         <a class="nav-link" aria-current="page" href="#apps">Apps</a>
         <a class="nav-link" href="#courses">Courses</a>
+        <a class="nav-link" href="#data">Data Analytics</a>
         <a class="nav-link" href="#robotics">Robotics</a>
         <a class="nav-link" href="#skill-assessments">Skill Assessments</a>
       </div>
@@ -368,6 +369,28 @@ outputs:
                             </div>
                             <small class="text-body-secondary">Feb 1, 2016</small>
                             <small class="text-body-secondary">1h 39m</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="data" class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <h1>Data & Analytics</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col d-flex align-items-stretch">
+                <div class="card shadow-sm">
+                    <a data-bs-toggle="modal" data-bs-target="#beef-cattle-operations-dashboard-modal" role="button"><img src="beef-cattle-operations-dashboard.png"
+                            class="card-img-top" alt="US Beef Cattle Operations" /></a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">US Beef Cattle Operations Dashboard</h5>
+                        <h6 class="text-body-secondary">Noble Research Institute</h6>
+                        <p class="card-text">In my role as Principal Data Architect, I created several dimensional models using data from the US Census of Agriculture and presented intuitive, query-able data sets to our product and marketing teams to assist in their outreach efforts to our nation's farmers and ranchers. This is an example of one of the "starter" dashboards I created for them.
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <small class="text-body-secondary">Azure Databricks | SQL | Power BI</small>
                         </div>
                     </div>
                 </div>
@@ -706,10 +729,10 @@ outputs:
                             <button type="button" data-bs-target="#jr-botball-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         </div>
                         <div class="carousel-item active">
-                            <img src="jr-botball-grab-bottle.gif" class="d-block w-50" alt="Open Enrollment Change Address">
+                            <img src="jr-botball-grab-bottle.gif" class="d-block w-50" alt="Jr. Botball - Grab Bottle">
                         </div>
                         <div class="carousel-item">
-                            <img src="jr-botball-follow-line.gif" class="d-block w-50" alt="Open Enrollment Change Dependents"/>
+                            <img src="jr-botball-follow-line.gif" class="d-block w-50" alt="Jr. Botball - Follow Line"/>
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#jr-botball-carousel" data-bs-slide="prev">
@@ -717,6 +740,44 @@ outputs:
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#jr-botball-carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon text-seconary" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="beef-cattle-operations-dashboard-modal" tabindex="-1" aria-labelledby="Beef Cattle Operations Dashboard" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="beef-cattle-operations-dashboard-modal-label">Beef Cattle Operations Dashboard</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="beef-cattle-operations-dashboard-carousel" class="carousel slide" data-bs-theme="dark">
+                    <div class="carousel-inner">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#beef-cattle-operations-dashboard-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#beef-cattle-operations-dashboard-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        </div>
+                        <div class="carousel-item active">
+                            <img src="beef-cattle-operations-dashboard.png" class="d-block w-50" alt="Beef Cattle Operations Dashboard">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="cattle-sheep-goats-dashboard.png" class="d-block w-50" alt="Cattle/Sheep/Goats Dashboard"/>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#beef-cattle-operations-dashboard-carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon text-seconary" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#beef-cattle-operations-dashboard-carousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon text-seconary" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
