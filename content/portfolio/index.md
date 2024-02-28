@@ -41,7 +41,7 @@ outputs:
       <div class="navbar-nav">
         <a class="nav-link" aria-current="page" href="#apps">Apps</a>
         <a class="nav-link" href="#courses">Courses</a>
-        <a class="nav-link" href="#data">Data Analytics</a>
+        <a class="nav-link" href="#data">Data & Analytics</a>
         <a class="nav-link" href="#robotics">Robotics</a>
         <a class="nav-link" href="#skill-assessments">Skill Assessments</a>
       </div>
