@@ -5,10 +5,103 @@
     <description>Recent content about iOS development with Swift in iOS  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Apr 2024 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/tags/ios/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SwiftUI Fundamentals</title>
+      <link>https://www.andrewcbancroft.com/pluralsight/2024-04-08-swiftui-fundamentals/</link>
+      <pubDate>Mon, 08 Apr 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/pluralsight/2024-04-08-swiftui-fundamentals/</guid>
+      <description>&lt;p&gt;Developing for iOS is a valuable and in-demand skill, but if you haven&amp;rsquo;t developed in the Apple world before, it can be surprisingly different.&lt;/p&gt;
+&lt;p&gt;In this course, SwiftUI Fundamentals, you&amp;rsquo;ll quickly get up and running using Xcode 15, Swift, and SwiftUI to establish the foundational skills you need to build great user interfaces for iOS.&lt;/p&gt;
+&lt;div class=&#34;resources&#34;&gt;
+  &lt;div class=&#34;resources-header&#34;&gt;
+    Resources
+  &lt;/div&gt;
+  &lt;ul class=&#34;resources-content&#34;&gt;
+    &lt;li&gt;
+      &lt;i class=&#34;fas fa-video&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://bit.ly/swiftui-fundamentals&#34; target=&#34;_blank&#34;&gt;SwiftUI Fundamentals&lt;/a&gt;&lt;a href=&#34;https://bit.ly/swiftui-fundamentals&#34; target=&#34;_blank&#34;&gt;&lt;br /&gt; &lt;img src=&#34;https://www.andrewcbancroft.com/images/social-assets/swiftui-fundamentals-title.png&#34; alt=&#34;SwiftUI Fundamentals&#34; width=&#34;1024&#34; height=&#34;576&#34; class=&#34;alignnone size-large wp-image-13737&#34;/&gt;&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
+&lt;p&gt;First, you&amp;rsquo;ll see the tools and learn how to use SwiftUI to create single-screen applications with adaptive user interfaces that work on multiple devices.&lt;/p&gt;
+&lt;p&gt;Next, you’ll learn how to bring your own style to a SwiftUI user interface by customizing its appearance.&lt;/p&gt;
+&lt;p&gt;Finally, you&amp;rsquo;ll explore working with data-driven controls and understand navigation options for multi-screen applications.&lt;/p&gt;
+&lt;p&gt;When you’re finished with this course, you&amp;rsquo;ll know current best practices, iOS architecture, and the most important ideas you need to feel comfortable bringing your developer skills into the iOS and Apple developer world.&lt;/p&gt;
+&lt;h2 id=&#34;1---building-single-view-applications&#34;&gt;1 - Building Single-view Applications&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Version Check: What You Need to Get Started&lt;/li&gt;
+&lt;li&gt;The Night Watch Scenario&lt;/li&gt;
+&lt;li&gt;Creating a Single-view App&lt;/li&gt;
+&lt;li&gt;Understanding the SwiftUI Framework&lt;/li&gt;
+&lt;li&gt;Creating Xcode Previews&lt;/li&gt;
+&lt;li&gt;Understanding Views&lt;/li&gt;
+&lt;li&gt;Combining and Laying out Views&lt;/li&gt;
+&lt;li&gt;Understanding the SwiftUI Layout System&lt;/li&gt;
+&lt;li&gt;Aligning and Positioning Views&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2---customizing-ui-appearance&#34;&gt;2 - Customizing UI Appearance&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applying View Modifiers&lt;/li&gt;
+&lt;li&gt;Developing a SwiftUI Mindset&lt;/li&gt;
+&lt;li&gt;Using Icons and Symbols&lt;/li&gt;
+&lt;li&gt;Implementing Custom View Modifiers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3---creating-data-driven-lists&#34;&gt;3 - Creating Data-driven Lists&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Work with Lists&lt;/li&gt;
+&lt;li&gt;Understanding Lists&lt;/li&gt;
+&lt;li&gt;Creating a List&lt;/li&gt;
+&lt;li&gt;Controlling a List with Data&lt;/li&gt;
+&lt;li&gt;Using Loops to Supply Content for Lists&lt;/li&gt;
+&lt;li&gt;Adding Sections and Headings&lt;/li&gt;
+&lt;li&gt;Creating Grid Layouts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4---building-ios-apps-with-multiple-screens&#34;&gt;4 - Building iOS Apps with Multiple Screens&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Defining Apps with Multiple Screens&lt;/li&gt;
+&lt;li&gt;Implementing Navigation Stacks&lt;/li&gt;
+&lt;li&gt;Adding Navigation to an Existing Project&lt;/li&gt;
+&lt;li&gt;Extracting Reusable Subviews&lt;/li&gt;
+&lt;li&gt;Creating a Tabbed Application&lt;/li&gt;
+&lt;li&gt;Recapping Multi-view Applications&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5---adding-behavior-and-working-with-data&#34;&gt;5 - Adding Behavior and Working With Data&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparing to Add Basic Behavior&lt;/li&gt;
+&lt;li&gt;Extending the Data Model&lt;/li&gt;
+&lt;li&gt;Understanding the View Update Cycle in SwiftUI&lt;/li&gt;
+&lt;li&gt;Adding Basic Behavior&lt;/li&gt;
+&lt;li&gt;Connecting a Subview to a Parent View’s Data&lt;/li&gt;
+&lt;li&gt;Using Classes as Data Models&lt;/li&gt;
+&lt;li&gt;Sharing a Data Model through the SwiftUI Environment&lt;/li&gt;
+&lt;li&gt;Bringing the Data Model and Behavior to the Night Watch App&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;6---putting-it-all-together&#34;&gt;6 - Putting It All Together&lt;/h2&gt;
+&lt;p&gt;Topics in this module include&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applying What You’ve Learned&lt;/li&gt;
+&lt;li&gt;Integrating the Extended Data Model&lt;/li&gt;
+&lt;li&gt;Adding the Mark Complete Behavior&lt;/li&gt;
+&lt;li&gt;Adding a Toolbar and Toggle Control&lt;/li&gt;
+&lt;li&gt;Implementing Swipe and Move Actions for a List&lt;/li&gt;
+&lt;li&gt;Resetting the List&lt;/li&gt;
+&lt;li&gt;Showing an Alert&lt;/li&gt;
+&lt;li&gt;Adding Images to a SwiftUI Application&lt;/li&gt;
+&lt;li&gt;Continuing your iOS Developer Journey&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>iOS 17 Fundamentals</title>
