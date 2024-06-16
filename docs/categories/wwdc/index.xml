@@ -5,10 +5,51 @@
     <description>Recent content about iOS development with Swift in WWDC  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Jun 2024 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/categories/wwdc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Download macOS Beta Installer</title>
+      <link>https://www.andrewcbancroft.com/blog/musings/download-macos-beta-installer/</link>
+      <pubDate>Sun, 16 Jun 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.andrewcbancroft.com/blog/musings/download-macos-beta-installer/</guid>
+      <description>&lt;p&gt;When you log into the Apple Developer portal, you can easily download a restore image (ipsw file) for beta versions of macOS, but it’s not helpful if you want to install macOS on a separate volume on your existing Mac.&lt;/p&gt;
+&lt;p&gt;The actual macOS installer is much more useful. The only issue is that it’s not exactly intuitive to download.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s how to do it:&lt;/p&gt;
+&lt;h2 id=&#34;step-1-turn-on-beta-updates&#34;&gt;Step 1: Turn on Beta Updates&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Open the Settings app on your mac&lt;/li&gt;
+&lt;li&gt;Click General&lt;/li&gt;
+&lt;li&gt;Click Software Update&lt;/li&gt;
+&lt;li&gt;Turn on Beta Updates for macOS Sequoia&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;step-2-use-terminal-to-download-the-installer&#34;&gt;Step 2: Use Terminal to download the installer&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Open a terminal window&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;softwareupdate --download --fetch-full-installer --full-installer-version 15.0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When you run that command, you&amp;rsquo;ll see a message in the console:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Scanning for 15.0 installer&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If you skipped Step 1 and didn&amp;rsquo;t already opt in to receiving beta updates from Apple, you may get an error message:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Install failed with error: Update not found&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If you&amp;rsquo;ve got Beta updates turned on though, you should see the softwareupdate utility begin to download the installer.&lt;/p&gt;
+&lt;p&gt;Don&amp;rsquo;t worry if you see the words &amp;ldquo;Installing xx%&amp;rdquo;. It&amp;rsquo;s not actually going to update your primary operating system.
+It&amp;rsquo;s actually just downloading the installer to your Applications folder.&lt;/p&gt;
+&lt;h2 id=&#34;step-3-find-the-installer-in-your-applications-folder&#34;&gt;Step 3: Find the installer in your Applications folder&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Open Finder and navigate to your Applications folder&lt;/li&gt;
+&lt;li&gt;You should be able to find the &lt;code&gt;Install macOS 15 beta&lt;/code&gt; application if the download was successful&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once you’ve got the installer, you can install macOS on a separate volume on the same Mac that you’re running the currently-released version of macOS!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>WWDC - The Worldwide Developer Community</title>
