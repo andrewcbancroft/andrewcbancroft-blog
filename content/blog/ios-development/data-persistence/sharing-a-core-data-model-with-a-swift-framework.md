@@ -1,4 +1,5 @@
 ---
+newsletter_variant: reader
 title: Sharing a Core Data Model with a Swift Framework
 author: Andrew
 type: blog

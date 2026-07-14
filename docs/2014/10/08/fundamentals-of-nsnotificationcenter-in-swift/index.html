@@ -336,6 +336,55 @@ MathJax.Hub.Config({
 </div>
 <p><a name="share" class="jump-target"></a></p>
 
+
+    <div class="newsletter-signup newsletter-signup--general">
+  <p class="newsletter-hook">Hard technical ideas, explained until they actually click. One carefully built lesson a week — no fluff, no jargon, occasional jokes.</p>
+  <form class="newsletter-form" data-newsletter-form action="" method="post" novalidate>
+    <input type="hidden" name="tag" value="general" data-newsletter-source>
+    <div class="newsletter-fields">
+      <label class="visually-hidden" for="newsletter-email-general">Email address</label>
+      <input class="form-control newsletter-email" id="newsletter-email-general"
+        type="email" name="email" placeholder="you@example.com"
+        autocomplete="email" required>
+      <button class="btn newsletter-button" type="submit">Get the next lesson</button>
+    </div>
+    <p class="newsletter-privacy">Your email gets you the weekly lesson and nothing else. Unsubscribe anytime, instantly.</p>
+    <p class="newsletter-message" data-newsletter-message hidden aria-live="polite"></p>
+  </form>
+</div>
+<script>
+  (function () {
+    var VALID_SOURCES = ["whale", "reader", "general", "newsletter-page"];
+    var srcParam = new URLSearchParams(window.location.search).get("src");
+    document.querySelectorAll("form[data-newsletter-form]").forEach(function (form) {
+      var sourceInput = form.querySelector("[data-newsletter-source]");
+      if (srcParam && VALID_SOURCES.indexOf(srcParam) !== -1 && sourceInput.value === "newsletter-page") {
+        sourceInput.value = srcParam;
+      }
+      form.addEventListener("submit", function (event) {
+        var email = form.querySelector("input[type=email]");
+        if (!email.value || email.validity.typeMismatch || email.validity.valueMissing) {
+          event.preventDefault();
+          email.reportValidity();
+          return;
+        }
+        if (typeof gtag === "function") {
+          gtag("event", "newsletter_signup", { source: sourceInput.value });
+        }
+        var message = form.querySelector("[data-newsletter-message]");
+        if (!form.getAttribute("action")) {
+          
+          event.preventDefault();
+          console.log("newsletter-signup (sandbox)", { email: email.value, source: sourceInput.value });
+          form.querySelector(".newsletter-fields").hidden = true;
+          message.textContent = "Thanks! You're on the list. Watch your inbox for the next lesson.";
+          message.hidden = false;
+        }
+      });
+    });
+  })();
+</script>
+
     <aside>
       
       
@@ -390,6 +439,7 @@ MathJax.Hub.Config({
 
     <footer class="footer text-center">
         <div class="container">
+            <span class="text-muted"><a href="https://www.andrewcbancroft.com/newsletter/">Get one carefully built lesson a week &rarr;</a></span><br>
             <span class="text-muted">This project contains 188 pages and is available on <a
                     href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
                 Copyright &copy; Andrew Bancroft, <time datetime="2012">2012</time>-<time datetime="2024">2024</time>.</span>

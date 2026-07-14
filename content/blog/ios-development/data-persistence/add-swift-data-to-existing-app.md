@@ -1,4 +1,5 @@
 ---
+newsletter_variant: reader
 title: "Add SwiftData to an Existing App"
 description: "Are you looking to add SwiftData to your existing app but don't know where to start? Let's explore the steps you need to take."
 author: Andrew

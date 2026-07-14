@@ -130,6 +130,8 @@ crossorigin="anonymous"></script>
 
     {{ .Content }}
 
+    {{ partial "newsletter-signup.html" (dict "page" . "source" (.Params.newsletter_variant | default "general")) }}
+
     {{- if not .Params.exclude_related }}
     <aside>
       {{ $related := .Site.Pages.Related . | first 5 }}

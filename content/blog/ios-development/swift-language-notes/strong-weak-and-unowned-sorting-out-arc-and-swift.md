@@ -1,4 +1,5 @@
 ---
+newsletter_variant: reader
 title: Strong, Weak, and Unowned – Sorting out ARC and Swift
 author: Andrew
 type: blog

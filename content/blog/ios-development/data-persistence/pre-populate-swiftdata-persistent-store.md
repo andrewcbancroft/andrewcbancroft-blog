@@ -1,4 +1,5 @@
 ---
+newsletter_variant: reader
 title: "Pre-populate a SwiftData Persistent Store"
 description: "Learn how to pre-populte your SwiftData persistent store in a variety of scenarios."
 author: Andrew

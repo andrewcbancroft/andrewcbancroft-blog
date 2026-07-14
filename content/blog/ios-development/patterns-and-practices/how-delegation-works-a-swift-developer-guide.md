@@ -1,4 +1,5 @@
 ---
+newsletter_variant: reader
 title: How Delegation Works – A Swift Developer’s Guide
 author: Andrew
 type: blog

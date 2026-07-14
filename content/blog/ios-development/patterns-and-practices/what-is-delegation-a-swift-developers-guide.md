@@ -1,4 +1,5 @@
 ---
+newsletter_variant: reader
 title: What is Delegation? – A Swift Developer’s Guide
 author: Andrew
 type: blog

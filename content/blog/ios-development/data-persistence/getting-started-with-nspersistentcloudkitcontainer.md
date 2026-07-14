@@ -1,4 +1,5 @@
 ---
+newsletter_variant: reader
 title: "Getting Started With NSPersistentCloudKitContainer"
 description: "Provides an example project and walkthrough for saving and syncing a single Core Data Entity with CloudKit using NSPersistentCloudKitContainer"
 author: Andrew

@@ -1,4 +1,5 @@
 ---
+newsletter_variant: whale
 title: "Make a Bash Script Executable"
 description: "Explains how to make a bash script, enable execution, and run it at the command line."
 author: Andrew
