@@ -922,3 +922,41 @@ div.math{
 .newsletter-page .newsletter-signup {
   margin-top: 1rem;
 }
+
+/* Weekly-unit post fields (archetypes/weekly-unit.md) */
+.one-idea {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid #2e6792;
+  background-color: #f7fafc;
+  border-radius: 0 6px 6px 0;
+}
+
+.one-idea-header {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #2e6792;
+  margin-bottom: 0.4rem;
+}
+
+.one-idea p {
+  margin: 0;
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 1.5rem 0;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 6px;
+}

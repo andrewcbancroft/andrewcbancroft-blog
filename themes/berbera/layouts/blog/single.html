@@ -152,6 +152,21 @@ crossorigin="anonymous"></script>
 
     <p>{{ .Params.introtext }}</p>
 
+    {{- with .Params.one_idea }}
+    <aside class="one-idea">
+      <div class="one-idea-header">The one idea</div>
+      <p>{{ . }}</p>
+    </aside>
+    {{- end }}
+
+    {{- with .Params.video_id }}
+    <div class="video-embed">
+      <iframe src="https://www.youtube-nocookie.com/embed/{{ . }}" title="{{ $.Title }} (video)"
+        loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    {{- end }}
+
     {{- if .Params.toc }}
     <aside class="toc">
       <div class="toc-header">Jump to...</div>
