@@ -73,9 +73,11 @@
     --color-on-primary: #FFFFFF;
 
     --color-code-accent: #F0906E;
-    /* code blocks keep the light chroma theme in dark mode
-       (readable, and avoids maintaining a second syntax palette);
-       --color-code-ink / --color-code-bg stay light on purpose */
+    /* code blocks use the github-dark Chroma theme (see css/syntax.css).
+       These match its surface so the pre chrome (border, base text) agrees. */
+    --color-code-ink: #E6EDF3;
+    --color-code-bg: #0D1117;
+    --color-code-border: #30363D;
 
     color-scheme: dark;
   }

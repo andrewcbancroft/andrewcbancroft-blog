@@ -845,18 +845,6 @@ div.math{
   opacity: 0.01;
 }
 
-/* Code blocks keep the light chroma syntax theme in dark mode;
-   give them a visible edge against the dark surface. */
-@media (prefers-color-scheme: dark) {
-  .chroma,
-  pre {
-    background-color: #F6F8FA;
-  }
-  pre code {
-    color: #565E66;
-  }
-}
-
 /* Newsletter signup component (layouts/partials/newsletter-signup.html) */
 .newsletter-signup {
   margin: 2.5rem 0 1.5rem 0;
