@@ -22,10 +22,10 @@
             window.cookieconsent.initialise({
                 "palette": {
                     "popup": {
-                        "background": "#3e8bc5"
+                        "background": "#1668A8"
                     },
                     "button": {
-                        "background": "#8ec760",
+                        "background": "#114E7F",
                         "text": "#ffffff"
                     }
                 }
@@ -46,10 +46,25 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
         integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template (tokens.css is the single source of color/type truth) -->
+    <link href="{{ "css/tokens.css" | absURL }}" rel="stylesheet">
     <link href="{{ "css/custom.css" | absURL }}" rel="stylesheet">
     <link href="{{ "css/syntax.css" | absURL }}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+    <script>
+        // Keep Bootstrap 5.3 components (dropdowns, cards, form controls) in
+        // sync with the OS color scheme; the site's own colors come from
+        // css/tokens.css via prefers-color-scheme.
+        (function () {
+            var mq = window.matchMedia("(prefers-color-scheme: dark)");
+            function apply() {
+                document.documentElement.setAttribute("data-bs-theme", mq.matches ? "dark" : "light");
+            }
+            apply();
+            mq.addEventListener("change", apply);
+        })();
+    </script>
 
     {{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"

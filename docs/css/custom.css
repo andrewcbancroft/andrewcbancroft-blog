@@ -1,32 +1,7 @@
 @charset "UTF-8";
 
-/* ---------------------------------------------------------
-/* Computer Modern font
----------------------------------------------------------*/
-
-@font-face {
-  font-family: "Computer Modern";
-  src: url(../fonts/cmunbi.ttf);
-  font-weight: bold;
-  font-style: italic, oblique;
-}
-@font-face {
-  font-family: "Computer Modern";
-  src: url(../fonts/cmunbx.ttf);
-  font-weight: bold;
-}
-@font-face {
-  font-family: "Computer Modern";
-  src: url(../fonts/cmunti.ttf);
-  font-style: italic, oblique;
-}
-@font-face {
-  font-family: "Computer Modern";
-  src: url(../fonts/cmunrm.ttf);
-  font-weight: normal;
-  font-style: normal;
-}
-
+/* All color and type values come from css/tokens.css — edit tokens there,
+   not hex values here. */
 
 /* ---------------------------------------------------------
 /* Fontawesome
@@ -74,28 +49,28 @@
     text-align: center
 }
 .fa-tag:before {
-    content: ""
+    content: ""
 }
 .fa-folder:before {
-    content: ""
+    content: ""
 }
 .fa-facebook:before {
-    content: ""
+    content: ""
 }
 .fa-google-plus:before {
-    content: ""
+    content: ""
 }
 .fa-linkedin:before {
-    content: ""
+    content: ""
 }
 .fa-rss:before {
-    content: ""
+    content: ""
 }
 .fa-rss-square:before {
-    content: ""
+    content: ""
 }
 .fa-twitter:before {
-    content: ""
+    content: ""
 }
 .sr-only {
     position: absolute;
@@ -127,8 +102,9 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  color: #505050;
-  font-family: 'Muli', sans-serif;
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+  font-family: var(--font-ui);
 }
 .footer {
   position: absolute;
@@ -159,12 +135,15 @@ body > .container {
 }
 
 a {
-  color: #3e8bc5
-  ;
+  color: var(--color-link);
 }
 
 a:hover {
-  color: #91C5F2;
+  color: var(--color-link-hover);
+}
+
+.text-muted {
+  color: var(--color-ink-muted) !important;
 }
 
 .content {
@@ -178,17 +157,17 @@ a:hover {
 }
 
 .resources {
-  border: solid 1px #ccc;
+  border: solid 1px var(--color-border);
 }
 
 .resources .resources-header {
   padding: .1em .5em .1em .5em;
-  background-color: #eaeaed;
+  background-color: var(--color-surface-subtle);
   font-size: 1.25em;
 }
 
 .resources .resources-download-instructions {
-  padding: .75em .5em 0 .5em;  
+  padding: .75em .5em 0 .5em;
   font-size: 1.00em;
 }
 
@@ -203,8 +182,10 @@ Header
 ---------------------------------------------------------*/
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Muli', sans-serif;
+  font-family: var(--font-ui);
   font-weight: bold;
+  color: var(--color-heading);
+  line-height: var(--leading-heading);
 }
 
 /**
@@ -213,7 +194,7 @@ h1, h2, h3, h4, h5, h6 {
  .header {
   padding: 1.777em 1.125em 2.665em 1.125em;
   margin-bottom: 4.209em;
-  background-color: #3e8bc5;
+  background-color: var(--color-primary);
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -228,7 +209,7 @@ h1, h2, h3, h4, h5, h6 {
 
    .header {
     padding-top: 7.478em;
-    background-color: #3e8bc5;
+    background-color: var(--color-primary);
   }
   .background-contrast .header {
     margin-left: -3.157em;
@@ -251,31 +232,25 @@ h1, h2, h3, h4, h5, h6 {
   }
   .site-title,
 .site-description {
-  color: #fff;
+  color: var(--color-on-primary);
 }
 .site-title a,
 .site-description a {
-  color: #fff;
+  color: var(--color-on-primary);
 }
 
   .site-title {
-    font-weight: 400;
     margin: 0;
-    margin-bottom: 1rem;
-    color: #444854;
     line-height: 1.333;
     position: relative;
     text-align: left;
     font-size: 4.209em;
     letter-spacing: -2px;
     font-weight: 300;
-    color: #fff;
+    color: var(--color-on-primary);
     margin-bottom: 0;
   }
   .site-title small {
-    filter: alpha(opacity=1.0 * 100);
-    -moz-opacity: 0.8;
-    -khtml-opacity: 0.8;
     opacity: 0.8;
   }
   .site-title a {
@@ -304,15 +279,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 4px;
-    filter: alpha(opacity=1.0 * 100);
-    -moz-opacity: 0.75;
-    -khtml-opacity: 0.75;
-    opacity: 0.75;
+    opacity: 0.9;
   }
 
 .about-me-blurb {
   padding: 2em;
-  background-color: #f7f6f6;
+  background-color: var(--color-surface-subtle);
 }
 
 /* ---------------------------------------------------------
@@ -337,11 +309,11 @@ nav#TableOfContents li a::before {
 
 .toc-header {
   padding: .1em .5em .1em .5em;
-  background-color: #eaeaed;
+  background-color: var(--color-surface-subtle);
   font-size: 1.25em;
 }
 .toc {
-  border: solid 1px #ccc;
+  border: solid 1px var(--color-border);
 }
 
 /* ---------------------------------------------------------
@@ -349,12 +321,12 @@ Navbar
 ---------------------------------------------------------*/
 
 .navbar {
-  background-color: #2e6792;
+  background-color: var(--color-primary-deep);
   border-bottom: 0px;
 }
 
 .navbar .navbar-brand, .navbar .navbar-brand:hover {
-  color: #fff;
+  color: var(--color-on-primary);
   letter-spacing: 1px;
   font-weight: 700;
   text-transform: uppercase;
@@ -362,14 +334,14 @@ Navbar
 }
 
 .navbar-nav > li > a {
-  color: #fff;
+  color: var(--color-on-primary);
   text-transform: uppercase;
   font-size: .8em;
   font-weight: 500;
 }
 
 .navbar-nav > li > a:hover {
-  color: #fff;
+  color: var(--color-on-primary);
 }
 
 .navbar-nav .nav-link.show {
@@ -377,11 +349,11 @@ Navbar
 }
 
 .nav-item.dropdown .dropdown-item:active {
-  background-color: #e9ecef !important;
-  color: #6c757d !important;
+  background-color: var(--color-surface-subtle) !important;
+  color: var(--color-ink-muted) !important;
 }
 
-.navbar-toggler-icon { 
+.navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
 }
 
@@ -422,18 +394,19 @@ Homepage
 }
 
 .homepage h3.section_header {
-  background-color: #5cc2fe;
-  color: #212529;
+  background-color: var(--color-primary-tint);
+  color: var(--color-heading);
   padding: 10px 20px 10px 20px;
-  border: solid 1px #e6e6e6;
+  border: solid 1px var(--color-border);
+  border-left: 4px solid var(--color-primary);
   margin-bottom: 20px;
 }
 
 .homepage h3.category_header {
-  background-color: #f7f6f6;
-  color: rgb(84, 84, 84);
+  background-color: var(--color-surface-subtle);
+  color: var(--color-ink);
   padding: 10px 20px 10px 20px;
-  border: solid 1px #e6e6e6;
+  border: solid 1px var(--color-border);
   margin-bottom: 20px;
 }
 
@@ -461,10 +434,13 @@ Homepage cards
 .homepage .card{
   border-radius: 0rem;
   margin-bottom: 20px;
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
 }
 
 .homepage .card-header {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var(--color-surface);
+  border-bottom-color: var(--color-border);
 }
 
 .homepage .card-body ul{
@@ -508,26 +484,26 @@ Homepage cards
     -moz-columns: 1;
     columns: 1;
   }
- 
+
   @media (min-width: 480px) {
     .homepage .article_list {
       -webkit-columns: 1;
       -moz-columns: 1;
       columns: 1;
     }
-    
+
     .homepage .article_list li{
       font-size: 1.2em;
     }
   }
-  
+
 
 /* ---------------------------------------------------------
 Technical Notes
 ---------------------------------------------------------*/
 
 .technica_note, .page {
-  font-family: 'Muli', sans-serif;
+  font-family: var(--font-ui);
 }
 
 .technical_note .technical_note_date{
@@ -568,12 +544,12 @@ Technical Notes
 }
 
 /* ---------------------------------------------------------
-Articles
+Articles — long-form reading typography
 ---------------------------------------------------------*/
 
 .article h1{
   font-weight: bold;
-  font-family: 'Muli', sans-serif;
+  font-family: var(--font-ui);
   text-align: center;
   margin-bottom:10px;
 }
@@ -583,11 +559,15 @@ Articles
 }
 
 .article .content{
-  font-family: "Computer Modern", serif;
+  font-family: var(--font-body);
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .article .content p, .article .content li{
-  font-size: 1.25em;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
 }
 
 .article .content p{
@@ -601,40 +581,43 @@ Articles
 
 .article .content blockquote{
   font-style: italic;
-  padding: 0 4em 0 4em;
-  line-height: 1.4em;
-  color: #776f68;
+  padding: 0 2.5em 0 2.5em;
+  line-height: var(--leading-body);
+  color: var(--color-ink-muted);
+  border-left: 3px solid var(--color-border);
 }
 
 .article .article_date{
-  font-size: 1.4em;
+  font-size: 1.2em;
   text-align: center;
-  font-family: 'Muli', sans-serif;
+  font-family: var(--font-ui);
+  color: var(--color-ink-muted);
 }
 
 .article h2{
   font-size: 1.6em;
-  margin-top: 1em;
+  margin-top: 1.5em;
   margin-bottom: .5em;
-  font-family: 'Muli', sans-serif;
+  font-family: var(--font-ui);
   font-weight: bold;
 }
 
 .article h3{
-  font-size: 1.4em;
-  font-family: 'Muli', sans-serif;
+  font-size: 1.35em;
+  margin-top: 1.25em;
+  font-family: var(--font-ui);
   font-weight: bold;
 }
 
 .article h4{
   font-size: 1.2em;
-  font-family: 'Muli', sans-serif;
+  font-family: var(--font-ui);
   font-weight: bold;
 }
 
 .article h5{
   font-size: 1.1em;
-  font-family: 'Muli', sans-serif;
+  font-family: var(--font-ui);
   font-weight: bold;
 }
 
@@ -644,16 +627,16 @@ Biography
 
 .biography{
   padding: 1em;
-  border: solid 1px #e6e6e6;
+  border: solid 1px var(--color-border);
   margin-top: 3em;
 }
 
 .biography p{
   margin: 0;
   font-style: italic;
-  font-family: "Computer Modern";
+  font-family: var(--font-body);
   font-size: 1.2em;
-  color:#666666;
+  color: var(--color-ink-muted);
 }
 
 /* ---------------------------------------------------------
@@ -661,17 +644,22 @@ Code
 ---------------------------------------------------------*/
 
 pre code{
-  color:#747474;
+  color: var(--color-code-ink);
+  font-family: var(--font-mono);
 }
 
 pre {
   padding: .5em;
   display: block;
   margin-bottom: 0em;
+  background-color: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-radius: 4px;
 }
 
 code{
-  color: #F05138;
+  color: var(--color-code-accent);
+  font-family: var(--font-mono);
 }
 /* ---------------------------------------------------------
 Images
@@ -680,7 +668,6 @@ Images
 img{
   max-width: 100%;
   height: auto;
-  width: 100%\9; /* ie8 */
   display:block;
     margin-left: auto;
     margin-right: auto;
@@ -692,7 +679,7 @@ Bug reporting
 
 .bug_reporting{
     padding: 1em;
-    border: solid 1px #e6e6e6;
+    border: solid 1px var(--color-border);
     margin-top: 3em;
 
 }
@@ -709,7 +696,7 @@ Bug reporting
 
 .wip{
     padding: 1em;
-    border: solid 1px #5dc2ff;
+    border: solid 1px var(--color-primary);
     margin-top: 3em;
     margin-bottom: 3em;
 }
@@ -754,11 +741,12 @@ table{
 }
 
 table,tr,th,td{
-  font-family: sans-serif;
-  border:1px solid black;
+  font-family: var(--font-ui);
+  border:1px solid var(--color-border);
   border-collapse:collapse;
   padding: 5px;
   font-size: .95em;
+  color: var(--color-ink);
 }
 
 td, th{
@@ -827,9 +815,9 @@ div.math{
   font-weight: 700;
   line-height: 14px;
   width: 65px;
-  color: #fff;
-  background-color: #2e6792;
-  border: 1.25px solid #2e6792;
+  color: var(--color-on-primary);
+  background-color: var(--color-primary-deep);
+  border: 1.25px solid var(--color-primary-deep);
   border-top-left-radius: 0;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 0;
@@ -838,16 +826,16 @@ div.math{
   padding: 4px 4px 5px 4px;
   margin: 0 0 0 1px;
   cursor: pointer;
-  
+
 }
 
 .copy-code-button:hover,
 .copy-code-button:focus,
 .copy-code-button:active,
 .copy-code-button:active:hover {
-  color: #fff;
-  background-color: #3e8bc5;
-  opacity: 0.8;
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  opacity: 0.9;
 }
 
 .copyable-text-area {
@@ -857,21 +845,33 @@ div.math{
   opacity: 0.01;
 }
 
+/* Code blocks keep the light chroma syntax theme in dark mode;
+   give them a visible edge against the dark surface. */
+@media (prefers-color-scheme: dark) {
+  .chroma,
+  pre {
+    background-color: #F6F8FA;
+  }
+  pre code {
+    color: #565E66;
+  }
+}
+
 /* Newsletter signup component (layouts/partials/newsletter-signup.html) */
 .newsletter-signup {
   margin: 2.5rem 0 1.5rem 0;
   padding: 1.25rem 1.5rem;
-  border: 1px solid #d9e2ea;
-  border-left: 4px solid #2e6792;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
   border-radius: 6px;
-  background-color: #f7fafc;
+  background-color: var(--color-surface-subtle);
 }
 
 .newsletter-signup--whale {
   margin: 1.5rem 0 1rem 0;
   padding: 0.75rem 1rem;
   border: none;
-  border-top: 1px solid #d9e2ea;
+  border-top: 1px solid var(--color-border);
   border-radius: 0;
   background-color: transparent;
 }
@@ -893,29 +893,29 @@ div.math{
 }
 
 .newsletter-button {
-  color: #fff;
-  background-color: #2e6792;
-  border-color: #2e6792;
+  color: var(--color-on-primary);
+  background-color: var(--color-primary-deep);
+  border-color: var(--color-primary-deep);
   white-space: nowrap;
 }
 
 .newsletter-button:hover,
 .newsletter-button:focus,
 .newsletter-button:active {
-  color: #fff;
-  background-color: #3e8bc5;
-  border-color: #3e8bc5;
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .newsletter-privacy {
-  font-size: 0.85rem;
-  color: #6c757d;
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
   margin: 0.6rem 0 0 0;
 }
 
 .newsletter-message {
   font-weight: 700;
-  color: #2e6792;
+  color: var(--color-link);
   margin: 0.6rem 0 0 0;
 }
 
@@ -927,8 +927,8 @@ div.math{
 .one-idea {
   margin: 1.5rem 0;
   padding: 1rem 1.25rem;
-  border-left: 4px solid #2e6792;
-  background-color: #f7fafc;
+  border-left: 4px solid var(--color-primary);
+  background-color: var(--color-primary-tint);
   border-radius: 0 6px 6px 0;
 }
 
@@ -937,7 +937,7 @@ div.math{
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #2e6792;
+  color: var(--color-link);
   margin-bottom: 0.4rem;
 }
 
