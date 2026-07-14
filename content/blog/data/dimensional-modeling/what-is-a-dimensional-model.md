@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/dimensional-modeling/what-is-a-dimensional-model/
     - /what-is-a-dimensional-model/
 ---
 

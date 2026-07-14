@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/machine-learning/stages-to-machine-learning/
     - /stages-to-machine-learning/
 ---
 

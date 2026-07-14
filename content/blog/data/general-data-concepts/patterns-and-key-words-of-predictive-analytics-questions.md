@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/general-data-concepts/patterns-and-key-words-of-predictive-analytics-questions/
     - /patterns-and-key-words-of-predictive-analytics-questions/
 ---
 

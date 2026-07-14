@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/dimensional-modeling/winning-with-dimensional-models-in-age-of-big-data/
     - /winning-with-dimensional-models-in-age-of-big-data/
 ---
 

@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/azure/create-hdinsight-cluster-azure-powershell/
     - /create-hdinsight-cluster-azure-powershell/
 ---
 

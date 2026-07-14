@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/sql-server/where-is-sql-server-2017-reporting-services-product-key/
     - /where-is-sql-server-2017-reporting-services-product-key/
 ---
 

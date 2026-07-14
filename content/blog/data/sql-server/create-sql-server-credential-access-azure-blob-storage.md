@@ -6,6 +6,8 @@ description: "PowerShell script for creating a SQL Server Credential to access A
 type: technical_note
 draft: false
 comments: true
+aliases:
+    - /notes/sql-server/create-sql-server-credential-access-azure-blob-storage/
 ---
 
 ## Prerequisites:

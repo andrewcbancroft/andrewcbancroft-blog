@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/general-data-concepts/data-analysis-vs-data-analytics-examining-suffix/
     - /data-analysis-vs-data-analytics-examining-suffix/
 ---
 

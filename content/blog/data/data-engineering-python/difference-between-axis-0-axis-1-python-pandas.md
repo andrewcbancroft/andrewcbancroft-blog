@@ -8,6 +8,8 @@ type: technical_note
 draft: false
 comments: true
 wip: false
+aliases:
+    - /notes/data-engineering-python/difference-between-axis-0-axis-1-python-pandas/
 ---
 Sometimes, functions ask you to specify an `axis`.  The documentation can often feel vague and/or technical.
 

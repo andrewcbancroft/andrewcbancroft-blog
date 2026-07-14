@@ -6,6 +6,8 @@ description: "Several examples of how to load a csv file into an R dataframe"
 type: technical_note
 draft: false
 comments: true
+aliases:
+    - /notes/data-engineering-r/load-csv-file-with-r-windows/
 ---
 ## Prerequisites
 

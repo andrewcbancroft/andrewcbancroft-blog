@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/azure/azure-stream-analytics-resolving-sample-no-events-found/
     - /azure-stream-analytics-resolving-sample-no-events-found/
 ---
 

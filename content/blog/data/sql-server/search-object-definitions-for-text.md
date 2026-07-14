@@ -7,6 +7,7 @@ type: technical_note
 draft: false
 comments: true
 aliases:
+    - /notes/sql-server/search-object-definitions-for-text/
     - /sqlserverscripts/search-object-definitions-for-text/
 ---
 

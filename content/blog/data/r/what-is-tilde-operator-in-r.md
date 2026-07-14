@@ -7,6 +7,8 @@ type: blog
 draft: false
 comments: true
 wip: true
+aliases:
+    - /blog/r/what-is-tilde-operator-in-r/
 ---
 
 What is the tilde (`~`) "symbol" in R? 

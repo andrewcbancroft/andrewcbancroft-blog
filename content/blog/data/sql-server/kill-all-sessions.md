@@ -7,6 +7,7 @@ type: technical_note
 draft: false
 comments: true
 aliases:
+    - /notes/sql-server/kill-all-sessions/
     - /sqlserverscripts/kill-all-sessions/
 ---
 

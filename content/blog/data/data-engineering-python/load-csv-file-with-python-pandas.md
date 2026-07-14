@@ -6,6 +6,8 @@ description: "Several examples of how to load a csv file into a Pandas dataframe
 type: technical_note
 draft: false
 comments: true
+aliases:
+    - /notes/data-engineering-python/load-csv-file-with-python-pandas/
 ---
 <a name="resources" class="jump-target"></a>
 <div class="resources">

@@ -7,6 +7,7 @@ description: ""
 type: blog
 draft: false
 aliases:
+    - /blog/general-data-concepts/what-is-data-like-im-five/
     - /what-is-data-like-im-five/
 ---
 

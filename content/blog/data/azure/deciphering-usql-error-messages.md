@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/azure/deciphering-usql-error-messages/
     - /deciphering-usql-error-messages/
 ---
 

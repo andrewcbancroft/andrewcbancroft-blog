@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/azure/u-sql-pickiness-resolving-common-syntax-errors/
     - /u-sql-pickiness-resolving-common-syntax-errors/
 ---
 

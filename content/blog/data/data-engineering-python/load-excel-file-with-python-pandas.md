@@ -6,6 +6,8 @@ description: "Several examples of how to load an excel file into a Pandas datafr
 type: technical_note
 draft: false
 comments: true
+aliases:
+    - /notes/data-engineering-python/load-excel-file-with-python-pandas/
 ---
 <a name="resources" class="jump-target"></a>
 <div class="resources">

@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/machine-learning/predictive-analytics-vs-machine-learning-whats-the-difference/
     - /predictive-analytics-vs-machine-learning-whats-the-difference/
 ---
 

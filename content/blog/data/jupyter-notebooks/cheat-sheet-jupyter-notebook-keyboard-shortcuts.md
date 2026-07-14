@@ -6,6 +6,8 @@ description: "A collection of my most-used keyboard shortcuts when working in Ju
 type: blog
 draft: false
 comments: true
+aliases:
+    - /notes/jupyter-notebooks/cheat-sheet-jupyter-notebook-keyboard-shortcuts/
 ---
 
 ## Command Mode (Blue)

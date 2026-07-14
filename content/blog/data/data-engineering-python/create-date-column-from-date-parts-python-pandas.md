@@ -7,6 +7,8 @@ type: technical_note
 draft: true
 comments: true
 wip: true
+aliases:
+    - /notes/data-engineering-python/create-date-column-from-date-parts-python-pandas/
 ---
 
 ```python

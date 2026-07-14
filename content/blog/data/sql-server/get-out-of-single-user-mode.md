@@ -7,6 +7,7 @@ type: technical_note
 draft: false
 comments: true
 aliases:
+    - /notes/sql-server/get-out-of-single-user-mode/
     - /sqlserverscripts/get-out-of-single-user-mode/
 ---
 

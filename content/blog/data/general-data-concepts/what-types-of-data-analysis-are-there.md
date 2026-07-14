@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/general-data-concepts/what-types-of-data-analysis-are-there/
     - /what-types-of-data-analysis-are-there/
 ---
 

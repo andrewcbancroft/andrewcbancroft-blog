@@ -7,6 +7,8 @@ type: blog
 draft: false
 wip: true
 comments: true
+aliases:
+    - /blog/statistics/mnemonic-for-remembering-type-i-type-ii-errors/
 ---
 
 Step away from inferential statistics for a while and the interpretation of Type I and Type II errors in hypothesis testing could slip away.

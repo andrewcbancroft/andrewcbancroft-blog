@@ -7,6 +7,7 @@ type: blog
 draft: false
 comments: true
 aliases:
+    - /blog/sql-server/ssis-flat-file-destination-cannot-open-the-datafile/
     - /SSIS-flat-file-destination-cannot-open-the-datafile/
 ---
 
