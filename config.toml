@@ -15,6 +15,9 @@ disqusShortname="andrewcbancroft"
 [markup.goldmark.renderer]
 unsafe= true
 
+[params]
+author = "Andrew Bancroft"
+
 # Newsletter signup configuration (provider-agnostic).
 # The form partial (layouts/partials/newsletter-signup.html) reads everything
 # from here so the ESP can be swapped without touching templates.

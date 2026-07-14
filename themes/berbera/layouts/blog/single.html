@@ -55,6 +55,37 @@ crossorigin="anonymous"></script>
   ,"description": {{ printf "\"%s\"" .Description | safeJS }}
 }
 </script>
+{{- /* Category pages don't exist as standalone URLs on this site (sections
+       are disabled); the homepage topic anchors are the real category
+       navigation, so breadcrumb items point there. */ -}}
+{{- $crumbs := slice (dict "name" "Home" "item" (printf "%s" .Site.BaseURL)) -}}
+{{- $dir := trim .File.Dir "/" -}}
+{{- $parts := split $dir "/" -}}
+{{- $inData := false -}}
+{{- range $parts -}}
+  {{- if or (eq . "blog") (eq . "") -}}{{- else -}}
+    {{- $anchor := . -}}
+    {{- if eq . "data" -}}{{- $inData = true -}}{{- else if $inData -}}{{- $anchor = printf "data-%s" . -}}{{- end -}}
+    {{- $crumbs = $crumbs | append (dict "name" (humanize .) "item" (printf "%s#%s" $.Site.BaseURL (lower $anchor))) -}}
+  {{- end -}}
+{{- end -}}
+{{- $crumbs = $crumbs | append (dict "name" .Title "item" .Permalink) -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{- range $i, $c := $crumbs }}{{ if $i }},{{ end }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $i 1 }},
+      "name": {{ $c.name | jsonify | safeJS }},
+      "item": {{ $c.item | jsonify | safeJS }}
+    }
+    {{- end }}
+  ]
+}
+</script>
 
 {{ end }}
 

@@ -1,3 +1,25 @@
+{{ define "schema-dot-org" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://www.andrewcbancroft.com/#person",
+  "name": "Andrew Bancroft",
+  "url": "https://www.andrewcbancroft.com/",
+  "image": "https://secure.gravatar.com/avatar/693d6ce36672340c22f55dd4f44f9f69?s=512&d=mm&r=g",
+  "jobTitle": "Software Developer, Teacher, Pluralsight Author",
+  "description": "Teaches hard technical ideas until they actually click. Swift, iOS, data, and AI tooling, one carefully built lesson a week.",
+  "sameAs": [
+    "https://github.com/andrewcbancroft",
+    "https://www.linkedin.com/in/andrewcbancroft/",
+    "https://twitter.com/andrewcbancroft",
+    "https://hachyderm.io/@andrewcbancroft",
+    "https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg",
+    "https://www.pluralsight.com/authors/andrew-bancroft"
+  ]
+}
+</script>
+{{ end }}
 {{ define "header" }}
 <header class="header header-index content-wrapper">
     <div class="site-intro">
@@ -384,7 +406,7 @@
         </div>
 
         {{ range slice
-            (dict "id" "data-general-concepts" "title" "General Data Concepts" "dir" "/blog/data/general-data-concepts/")
+            (dict "id" "data-general-data-concepts" "title" "General Data Concepts" "dir" "/blog/data/general-data-concepts/")
             (dict "id" "data-dimensional-modeling" "title" "Dimensional Modeling" "dir" "/blog/data/dimensional-modeling/")
             (dict "id" "data-machine-learning" "title" "Machine Learning" "dir" "/blog/data/machine-learning/")
             (dict "id" "data-statistics" "title" "Statistics" "dir" "/blog/data/statistics/")
