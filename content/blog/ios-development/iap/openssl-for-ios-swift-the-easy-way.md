@@ -15,6 +15,8 @@ tags:
   - OpenSSL
   - Swift
 exclude_related: true
+dead_tech: true
+dead_tech_note: "on-device OpenSSL receipt validation has been superseded by StoreKit 2's built-in transaction verification."
 ---
 I'm currently working on outfitting an app I'm working on to be able to [validate receipts][1] to verify purchases of the app.
 

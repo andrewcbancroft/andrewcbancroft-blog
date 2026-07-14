@@ -15,6 +15,8 @@ tags:
   - Receipt Validation
   - Swift
 exclude_related: true
+dead_tech: true
+dead_tech_note: "on-device OpenSSL receipt validation has been superseded by StoreKit 2's built-in transaction verification."
 ---
 Local receipt validation in Swift doesn't seem to be widely written about. I've been able to find snippets of code scattered across the Internet, but nothing that brought everything together in one spot so that I could wrap my head around the whole process.
 

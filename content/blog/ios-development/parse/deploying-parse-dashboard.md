@@ -12,6 +12,8 @@ tags:
   - Parse
   - Parse Migration
 
+dead_tech: true
+dead_tech_note: "Parse's hosted platform was shut down in January 2017."
 ---
 Below are steps that I've taken, myself, to deploy the [Parse Dashboard][1] to a cloud host, such as Azure, or Heroku.
 

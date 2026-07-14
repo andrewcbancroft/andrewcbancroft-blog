@@ -1,0 +1,45 @@
+{{- /* Honest era labeling for the archive (Commit 8). Front-matter driven:
+         era_banner: false     suppresses the banner entirely
+         dead_tech: true       renders the stronger retired-tech variant
+         dead_tech_note:       one-line specifics for the retired tech
+         modern_equivalent:    site-relative path of a current post to link forward to
+       Threshold: posts dated before 2021 on fast-moving tracks (iOS, .NET,
+       Azure) get the banner automatically; pre-2021 Swift predates
+       async/await-era Swift. Slow-aging tracks (musings, non-Azure data)
+       render nothing: their content is not misleading, and the whales in
+       particular must stay quiet vending machines. */ -}}
+{{- $year := .Date.Year -}}
+{{- $era := partial "era-label.html" . -}}
+{{- $dir := .File.Dir -}}
+{{- $fastTrack := or (in $dir "ios-development") (in $dir "dot-net-development") (in $dir "data/azure") -}}
+{{- if ne .Params.era_banner false -}}
+  {{- if .Params.dead_tech -}}
+  <aside class="era-banner era-banner--dead">
+    <p>
+      <strong>Retired tech:</strong>
+      {{ .Params.dead_tech_note | default "the platform or API this post teaches has been retired." }}
+      This post is kept for historical and legacy-maintenance reference.
+      {{- with .Params.modern_equivalent }}
+        {{- with site.GetPage . }} For the current approach, see <a href="{{ .RelPermalink }}">{{ .Title }}</a>.{{ end }}
+      {{- end }}
+    </p>
+  </aside>
+  {{- else if and $fastTrack (lt $year 2021) -}}
+  <aside class="era-banner">
+    <p>
+      <strong>Time capsule:</strong>
+      first published in {{ $year }}{{ with $era }}, in the {{ . }}{{ end }}.
+      {{ if in $dir "ios-development" -}}
+        The concepts here still apply; Swift's syntax has moved on since.
+      {{- else if in $dir "data/azure" -}}
+        Azure services change quickly, so screens and menu names have likely moved.
+      {{- else -}}
+        The concepts here still apply; the tooling has moved on since.
+      {{- end }}
+      {{- with .Params.modern_equivalent }}
+        {{- with site.GetPage . }} For a current take, see <a href="{{ .RelPermalink }}">{{ .Title }}</a>.{{ end }}
+      {{- end }}
+    </p>
+  </aside>
+  {{- end -}}
+{{- end -}}

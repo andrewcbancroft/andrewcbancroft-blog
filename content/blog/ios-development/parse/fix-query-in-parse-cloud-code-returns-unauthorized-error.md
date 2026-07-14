@@ -12,6 +12,8 @@ tags:
   - Parse Migration
   - Swift
 
+dead_tech: true
+dead_tech_note: "Parse's hosted platform was shut down in January 2017."
 ---
 The Parse migration process has begun – I've got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.
 

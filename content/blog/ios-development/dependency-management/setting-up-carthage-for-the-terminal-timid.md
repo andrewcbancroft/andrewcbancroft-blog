@@ -13,6 +13,8 @@ tags:
   - Homebrew
   - Swift
 
+dead_tech: true
+dead_tech_note: "Carthage-era dependency workflows have been superseded by Swift Package Manager."
 ---
 The old adage "Don't go reinventing the wheel&#8221; comes into play _often_ when developing software, doesn't it? Why build this [thing] ourselves when someone else has invented it already?
 

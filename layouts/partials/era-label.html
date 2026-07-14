@@ -1,0 +1,22 @@
+{{- /* Returns a toolchain-era label for posts on fast-moving tracks, or ""
+       when the year alone is the honest label (musings, slow-aging data).
+       Used by the era banner and fed into BlogPosting JSON-LD keywords. */ -}}
+{{- $year := .Date.Year -}}
+{{- $dir := .File.Dir -}}
+{{- $label := "" -}}
+{{- if in $dir "ios-development" -}}
+  {{- if le $year 2013 }}{{ $label = "pre-Swift (Objective-C) era" }}
+  {{- else if eq $year 2014 }}{{ $label = "Swift 1 era" }}
+  {{- else if eq $year 2015 }}{{ $label = "Swift 2 era" }}
+  {{- else if eq $year 2016 }}{{ $label = "Swift 3 era" }}
+  {{- else if eq $year 2017 }}{{ $label = "Swift 4 era" }}
+  {{- else if le $year 2019 }}{{ $label = "Swift 4.2–5.0 era" }}
+  {{- else if le $year 2022 }}{{ $label = "Swift 5.x / SwiftUI 1–3 era" }}
+  {{- else }}{{ $label = "Swift 5.9+ / SwiftData era" }}
+  {{- end -}}
+{{- else if in $dir "data/azure" -}}
+  {{- $label = printf "%d-era Azure" $year -}}
+{{- else if in $dir "dot-net-development" -}}
+  {{- $label = printf "%d-era .NET" $year -}}
+{{- end -}}
+{{- return $label -}}

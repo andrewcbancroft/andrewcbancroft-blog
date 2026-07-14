@@ -9,6 +9,8 @@ comments: true
 aliases:
     - /blog/azure/u-sql-pickiness-resolving-common-syntax-errors/
     - /u-sql-pickiness-resolving-common-syntax-errors/
+dead_tech: true
+dead_tech_note: "U-SQL and Azure Data Lake Analytics were retired by Microsoft in 2024."
 ---
 
 Newbies to U-SQL from T-SQL will soon run face-first into the wall that I ran into.

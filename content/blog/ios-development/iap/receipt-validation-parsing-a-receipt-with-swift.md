@@ -15,6 +15,8 @@ tags:
   - Swift
 toc: true
 exclude_related: true
+dead_tech: true
+dead_tech_note: "on-device OpenSSL receipt validation has been superseded by StoreKit 2's built-in transaction verification."
 ---
 The aim of this guide is to help you parse a receipt and decode it so that you have readable pieces of metadata to inspect and finalize all of the receipt validation steps.
 

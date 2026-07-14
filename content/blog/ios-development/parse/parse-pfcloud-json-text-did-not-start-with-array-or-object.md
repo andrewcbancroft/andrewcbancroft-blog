@@ -13,6 +13,8 @@ tags:
   - Parse Migration
   - Swift
 
+dead_tech: true
+dead_tech_note: "Parse's hosted platform was shut down in January 2017."
 ---
 It's always the little things that lead to flatter foreheads (or at least it is for me).
 

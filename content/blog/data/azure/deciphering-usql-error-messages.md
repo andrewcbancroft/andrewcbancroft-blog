@@ -9,6 +9,8 @@ comments: true
 aliases:
     - /blog/azure/deciphering-usql-error-messages/
     - /deciphering-usql-error-messages/
+dead_tech: true
+dead_tech_note: "U-SQL and Azure Data Lake Analytics were retired by Microsoft in 2024."
 ---
 
 It's inevitable - you're going to encounter job failures when working with Azure Data Lake Analytics U-SQL jobs.

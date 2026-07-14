@@ -14,6 +14,8 @@ tags:
   - Receipt Validation
   - Swift
 exclude_related: true
+dead_tech: true
+dead_tech_note: "on-device OpenSSL receipt validation has been superseded by StoreKit 2's built-in transaction verification."
 ---
 
 After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I've decided to combine everything into the following guide. Whether you're working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application.

@@ -15,6 +15,8 @@ tags:
   - Swift
 toc: true
 exclude_related: true
+dead_tech: true
+dead_tech_note: "on-device OpenSSL receipt validation has been superseded by StoreKit 2's built-in transaction verification."
 ---
 
 So you've [prepared to test receipt validation][1] by setting up your app in iTunes Connect.

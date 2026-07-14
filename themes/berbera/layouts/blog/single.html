@@ -47,10 +47,14 @@ crossorigin="anonymous"></script>
     "@type": "Person",
     "name": "{{ .Params.author | default .Site.Params.author }}"
   }
-  {{- if or (.Params.categories) (.Params.tags) -}}
+  {{- $kw := union (.Params.categories | default slice) (.Params.tags | default slice) }}
+  {{- with partial "era-label.html" . }}{{ $kw = $kw | append . }}{{ end }}
+  {{- with $kw -}}
   ,
-  "keywords": "{{ delimit (union .Params.categories .Params.tags) ", " }}"
+  "keywords": "{{ delimit . ", " }}"
   {{- end }}
+  ,
+  "temporalCoverage": "{{ .Date.Format "2006" }}"
 
   ,"description": {{ printf "\"%s\"" .Description | safeJS }}
 }
@@ -130,6 +134,7 @@ crossorigin="anonymous"></script>
       {{- end }}
     </header>
     <div class="content">
+    {{ partial "era-banner.html" . }}
     {{- if .Params.wip }}
     <aside class="wip">
         <div>

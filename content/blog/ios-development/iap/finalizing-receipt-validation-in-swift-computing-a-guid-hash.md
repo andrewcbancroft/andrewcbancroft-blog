@@ -14,6 +14,8 @@ tags:
   - Receipt Validation
   - Swift
 exclude_related: true
+dead_tech: true
+dead_tech_note: "on-device OpenSSL receipt validation has been superseded by StoreKit 2's built-in transaction verification."
 ---
 The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that's stored within your receipt itself.
 
