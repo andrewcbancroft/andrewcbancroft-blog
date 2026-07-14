@@ -14,7 +14,6 @@
       <title>Why is it called a “Closure” anyway? A Swift Conceptual Look.</title>
       <link>https://www.andrewcbancroft.com/2017/06/05/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/</link>
       <pubDate>Tue, 06 Jun 2017 04:00:41 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/06/05/why-is-it-called-a-closure-anyway-a-swift-conceptual-look/</guid>
       <description>&lt;p&gt;&lt;a name=&#34;whats-in-a-name&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;whats-in-a-name&#34;&gt;What&amp;rsquo;s in a name?&lt;/h1&gt;
@@ -84,7 +83,6 @@
       <title>Why Do We Need to Annotate Escaping Closures in Swift?</title>
       <link>https://www.andrewcbancroft.com/2017/05/11/why-do-we-need-to-annotate-escaping-closures-in-swift/</link>
       <pubDate>Thu, 11 May 2017 17:58:46 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/05/11/why-do-we-need-to-annotate-escaping-closures-in-swift/</guid>
       <description>&lt;p&gt;My last entry on &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/&#34;&gt;escaping closures&lt;/a&gt; ended up having way more interaction than I anticipated! It goes to show that you never know what the impact of a piece of writing will have. But that&amp;rsquo;s a different story… :]&lt;/p&gt;
 &lt;p&gt;Several readers commented here and on Medium with the question, &amp;ldquo;Why? Why do we need to mark escaping closures with &lt;code&gt;@escaping&lt;/code&gt;?”&lt;/p&gt;
@@ -160,7 +158,6 @@
       <title>What in the World is an “Escaping Closure” in Swift?</title>
       <link>https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/</link>
       <pubDate>Wed, 26 Apr 2017 14:41:07 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/04/26/what-in-the-world-is-an-escaping-closure-in-swift/</guid>
       <description>&lt;p&gt;If you&amp;rsquo;re mostly in the business of coding up closures to pass off to other functions as &lt;a href=&#34;https://www.andrewcbancroft.com/2016/02/15/fundamentals-of-callbacks-for-swift-developers/&#34;&gt;callbacks&lt;/a&gt;, you may not have run into the concept of an &amp;ldquo;escaping closure” yet.&lt;/p&gt;
 &lt;p&gt;When you step out of the role of consuming other peoples&amp;rsquo; APIs in to the realm of creating your own (and &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/&#34;&gt;you do this all the time&lt;/a&gt;!), &lt;em&gt;this&lt;/em&gt; is where you&amp;rsquo;ll likely run into the concept of an &amp;ldquo;escaping closure” in certain scenarios.&lt;/p&gt;
@@ -189,7 +186,7 @@
 &lt;h1 id=&#34;escaping-closure-scenarios&#34;&gt;Escaping closure scenarios&lt;/h1&gt;
 &lt;p&gt;Here are a few scenarios that give rise to escaping closures.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;store-as-state&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;storing-the-closure-as-_state_&#34;&gt;Storing the closure as &lt;em&gt;state&lt;/em&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;storing-the-closure-as-state&#34;&gt;Storing the closure as &lt;em&gt;state&lt;/em&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-ID546&#34;&gt;Apple&amp;rsquo;s docs&lt;/a&gt; give an example of appending a closure that&amp;rsquo;s passed into a function to a mutable array of closures within your class/struct:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;completionHandlers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
@@ -233,7 +230,6 @@
       <title>Resolving “Variable used within its own initial value” Error in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</link>
       <pubDate>Mon, 20 Oct 2014 13:50:52 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</guid>
       <description>&lt;p&gt;While experimenting with a few things today, I experienced this compiler error:&lt;/p&gt;
 &lt;blockquote&gt;

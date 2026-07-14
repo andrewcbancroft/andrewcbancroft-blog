@@ -14,7 +14,6 @@
       <title>Entity Framework Tip – Specifying Decimal Precision</title>
       <link>https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/</link>
       <pubDate>Wed, 29 Mar 2017 20:57:27 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/</guid>
       <description>&lt;p&gt;By default, Entity Framework takes the .Net &lt;code&gt;decimal&lt;/code&gt; Type and maps it to SQL Server&amp;rsquo;s &lt;code&gt;decimal(18,2)&lt;/code&gt; data type.&lt;/p&gt;
 &lt;p&gt;If you&amp;rsquo;ve got a property on an Entity that is of Type &lt;code&gt;decimal&lt;/code&gt;, but down in your database, you&amp;rsquo;re allowing for greater precision than 2 decimal places (&lt;a href=&#34;https://docs.microsoft.com/en-us/sql/t-sql/data-types/precision-scale-and-length-transact-sql&#34;&gt;&lt;em&gt;scale&lt;/em&gt;&lt;/a&gt; is actually the proper term for the number of places after the decimal), you need to tell Entity Framework this information. Otherwise, decimal values that you save to your database will be truncated at the default &lt;strong&gt;2&lt;/strong&gt; decimal places.&lt;/p&gt;
@@ -36,7 +35,6 @@
       <title>Solving ‘Spatial types and functions are not available’ with Entity Framework</title>
       <link>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</link>
       <pubDate>Mon, 27 Mar 2017 16:38:33 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/03/27/solving-spatial-types-and-functions-are-not-available-with-entity-framework/</guid>
       <description>&lt;p&gt;Using SQL Server&amp;rsquo;s Geospatial features with Entity Framework is awesome. I was crusing along just fine with using &lt;code&gt;DbGeography&lt;/code&gt; for an ASP.Net application I&amp;rsquo;m working on… Right up until I deployed to the server. Yep. It worked on &lt;em&gt;my&lt;/em&gt; machine, but alas, I was hitting a runtime exception on my test server.&lt;/p&gt;
 &lt;p&gt;This was the exception:&lt;/p&gt;
@@ -54,7 +52,7 @@
 &lt;p&gt;After you install the NuGet package, a readme.htm file is opened and displayed to you. If you don&amp;rsquo;t see it for some reason, a new SqlServerTypes folder was added to your project. You can expand it and double-click readme.htm to open it.&lt;/p&gt;
 &lt;p&gt;Follow the instructions within.&lt;/p&gt;
 &lt;p&gt;Depending on the type of app you&amp;rsquo;re deploying, you need to perform different steps. I happened to be deploying an ASP.Net MVC app, so I followed the instructions for adding a line of code to Global.asax.cs. Your situation may be different, but the Readme instructions are clear on what to do.&lt;/p&gt;
-&lt;h3 id=&#34;aspnet-web-_applications_&#34;&gt;ASP.Net Web &lt;em&gt;Applications&lt;/em&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;aspnet-web-applications&#34;&gt;ASP.Net Web &lt;em&gt;Applications&lt;/em&gt;&lt;/h3&gt;
 &lt;p&gt;Open Global.asax.cs and add the following to the list of registrations in &lt;code&gt;Application_Start()&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;protected&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Application_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
@@ -63,7 +61,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// Other registrations...&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;aspnet-_websites_&#34;&gt;Asp.Net &lt;em&gt;Websites&lt;/em&gt;&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;aspnet-websites&#34;&gt;Asp.Net &lt;em&gt;Websites&lt;/em&gt;&lt;/h3&gt;
 &lt;p&gt;Open Default.aspx.cs and add&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;partial&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;_Default&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Web&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UI&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Page&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
@@ -101,7 +99,6 @@
       <title>SQL Sever Synonyms, Entity Framework, and Integrated Security</title>
       <link>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</link>
       <pubDate>Fri, 01 May 2015 17:44:31 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</guid>
       <description>&lt;p&gt;&lt;a name=&#34;scenario&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;scenario&#34;&gt;Scenario&lt;/h3&gt;

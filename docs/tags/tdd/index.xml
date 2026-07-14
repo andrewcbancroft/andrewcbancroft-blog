@@ -14,7 +14,6 @@
       <title>Testability Tip for Swift Developers – Public Over Private</title>
       <link>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</link>
       <pubDate>Wed, 15 Apr 2015 18:52:11 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</guid>
       <description>&lt;p&gt;Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a &lt;code&gt;private&lt;/code&gt; function, however, I often scratch my head and ask, &amp;ldquo;How am I supposed to test this??”.&lt;/p&gt;
 &lt;p&gt;Most experienced testers will tell you, &amp;ldquo;Don&amp;rsquo;t test private implementation – only public API”.&lt;/p&gt;
@@ -102,7 +101,6 @@
       <title>An (Almost) TDD Workflow in Swift</title>
       <link>https://www.andrewcbancroft.com/2015/03/10/an-almost-tdd-workflow-in-swift/</link>
       <pubDate>Wed, 11 Mar 2015 01:46:59 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/03/10/an-almost-tdd-workflow-in-swift/</guid>
       <description>&lt;p&gt;There are times when it feels paralyzing to write tests &lt;em&gt;first&lt;/em&gt; before any production code is written. Even with good requirements documentation, I often find myself asking, &amp;ldquo;How am I supposed to write a test to verify &lt;strong&gt;&lt;em&gt;x&lt;/em&gt;&lt;/strong&gt; about some &lt;strong&gt;&lt;em&gt;thing&lt;/em&gt;&lt;/strong&gt; that doesn&amp;rsquo;t exist in actual code yet?” It can be crippling.&lt;/p&gt;
 &lt;p&gt;The following is a workflow that&amp;rsquo;s helped me grow in my test-first development skills. When I find myself staring at the screen, paralyzed because I&amp;rsquo;m &amp;ldquo;not supposed to write actual production code until the test is written”, I often turn to the workflow that I&amp;rsquo;m about to describe to help me break through to being productive. With practice and experience, I find myself needing this strategy less and less, but I&amp;rsquo;ve found it helpful to use this (almost) TDD workflow as a gateway into full test-first development.&lt;/p&gt;
@@ -165,7 +163,6 @@
       <title>TDD for iOS in Swift – What’s the Goal?</title>
       <link>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</link>
       <pubDate>Tue, 16 Dec 2014 12:00:10 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</guid>
       <description>&lt;p&gt;Before actually &lt;em&gt;doing&lt;/em&gt; Test Driven Development (TDD) for your iOS / Mac app, it&amp;rsquo;s really important to ask a very fundamental question: What&amp;rsquo;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?&lt;/p&gt;
 &lt;h2 id=&#34;2-goals-of-tdd-in-ios&#34;&gt;2 Goals of TDD in iOS&lt;/h2&gt;

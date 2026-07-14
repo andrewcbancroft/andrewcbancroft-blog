@@ -14,7 +14,6 @@
       <title>Accessing the Root View Controller at Launch on iOS 13 with SceneDelegate</title>
       <link>https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/</link>
       <pubDate>Fri, 07 Jun 2019 18:20:41 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/blog/ios-development/ui-work/accessing-root-view-controller-ios13-scenedelegate/</guid>
       <description>&lt;p&gt;A new &lt;a href=&#34;https://developer.apple.com/documentation/uikit/uiwindowscenedelegate&#34; rel=&#34;nofollow&#34;&gt;SceneDelegate&lt;/a&gt; was introduced for Storyboard-based apps in iOS 13, and with it came some changes in how you&amp;rsquo;re able to access your app&amp;rsquo;s root view controller at app launch.&lt;/p&gt;
 &lt;h2 id=&#34;the-old-way&#34;&gt;The Old Way&lt;/h2&gt;

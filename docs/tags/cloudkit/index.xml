@@ -14,7 +14,6 @@
       <title>iOS Data Persistence: The Big Picture</title>
       <link>https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/</link>
       <pubDate>Tue, 30 Apr 2019 10:03:33 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2019/04/30/ios-data-persistence-the-big-picture/</guid>
       <description>&lt;p&gt;We&amp;rsquo;ve all been there. Do a search on the topic of &amp;ldquo;saving data in iOS” and you&amp;rsquo;ll get &lt;em&gt;dozens&lt;/em&gt; of search results mentioning at least six different frameworks and platforms, and a month’s worth of reading.&lt;/p&gt;
 &lt;p&gt;Wouldn&amp;rsquo;t it be nice to distill the possibilities down into &lt;em&gt;just what you need&lt;/em&gt; in order to start down a path for persisting data in your app?&lt;/p&gt;
@@ -97,7 +96,6 @@
       <title>CloudKit Fundamentals</title>
       <link>https://www.andrewcbancroft.com/2018/09/24/cloudkit-fundamentals/</link>
       <pubDate>Mon, 24 Sep 2018 17:58:49 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2018/09/24/cloudkit-fundamentals/</guid>
       <description>&lt;p&gt;At the core of developing a seamless and collaborative data sharing experience for Apple’s platforms is a thorough knowledge of CloudKit.&lt;/p&gt;
 &lt;p&gt;In this course, you’ll learn to leverage Apple’s flagship framework to achieve your app’s remote data storage and data sharing requirements.&lt;/p&gt;
@@ -202,14 +200,11 @@
       <title>The Case for CloudKit</title>
       <link>https://www.andrewcbancroft.com/2018/08/06/case-for-cloudkit/</link>
       <pubDate>Mon, 06 Aug 2018 11:58:32 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2018/08/06/case-for-cloudkit/</guid>
       <description>&lt;p&gt;When it comes to remote backend services for mobile apps, you’ve got options. What&amp;rsquo;s the case for CloudKit? Where does Apple&amp;rsquo;s remote data storage and sharing solution fit into the Apple Developer&amp;rsquo;s toolbox?&lt;/p&gt;
 &lt;p&gt;I recently put out a survey on Twitter, just to get a feel for what folks are using.&lt;/p&gt;
 &lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/iosdev?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#iosdev&lt;/a&gt; folks:  When your app needs a backend (ie, a remote server / remote database), what do you use?&lt;br&gt;&lt;br&gt;I’m also interested in the “why” - reply with a tweet if you care to share! Thanks! 🙌🏻&lt;/p&gt;&amp;mdash; Andrew Bancroft (@andrewcbancroft) &lt;a href=&#34;https://twitter.com/andrewcbancroft/status/1020265988561022976?ref_src=twsrc%5Etfw&#34;&gt;July 20, 2018&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-
-
 &lt;p&gt;The clear winer was Firebase, followed by folks implementing their own backend server architecture. Dead last? A tie between Realm and CloudKit.&lt;/p&gt;
 &lt;p&gt;”Hmm&amp;hellip;”, I thought, “What’s up? Why no love for CloudKit?&amp;quot;&lt;/p&gt;
 &lt;p&gt;Of the options on my own survey, I’ve had experience building apps using three of the four: CloudKit, Firebase, and “rolling my own backend” with an app built for my employer.&lt;/p&gt;
@@ -278,7 +273,7 @@
 &lt;p&gt;This tradeoff is qualified with the words &amp;ldquo;no &lt;em&gt;native&lt;/em&gt; Android support&amp;rdquo; for a reason. CloudKit JS may actually open the door for folks developing cross platform apps, though it may take some hacking.&lt;/p&gt;
 &lt;p&gt;Expect some challenges on the Android side of things, but don&amp;rsquo;t completely count CloudKit out.&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;jump-target&#34; name=&#34;data-storage-only&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;data-storage-and-sharing-_only_-with-cloudkit&#34;&gt;Data storage and sharing &lt;em&gt;only&lt;/em&gt; with CloudKit&lt;/h3&gt;
+&lt;h3 id=&#34;data-storage-and-sharing-only-with-cloudkit&#34;&gt;Data storage and sharing &lt;em&gt;only&lt;/em&gt; with CloudKit&lt;/h3&gt;
 &lt;p&gt;With CloudKit, you get a fully-functional remote data storage and sharing service. If you&amp;rsquo;re wanting to leverage some advanced functionality like &amp;ldquo;cloud functions&amp;rdquo;, analytics for your app, non-Apple ID authentication, remote machine learning services, and the like, you won&amp;rsquo;t find those features in CloudKit.&lt;/p&gt;
 &lt;p&gt;This doesn&amp;rsquo;t mean that Apple leaves you nanging when it comes to authentication, analytics, machine learning, etc.&lt;/p&gt;
 &lt;p&gt;Don&amp;rsquo;t forget that you&amp;rsquo;ll have built-in Apple ID authentication as I mentioned above, and analytics are provided through iTunes Connect.&lt;/p&gt;

@@ -1,0 +1,80 @@
+{{- /*
+  Newsletter signup component (provider-agnostic).
+
+  Usage:
+    {{ partial "newsletter-signup.html" (dict "page" . "source" "general") }}
+
+  Parameters:
+    page     (required) the current page context (used for the script-once guard)
+    source   (required) attribution tag: "whale" | "reader" | "general" | "newsletter-page"
+    showHook (optional, default true) render the hook copy above the form
+    hook     (optional) override the hook copy chosen by source
+
+  Endpoint, field names, and provider come from [params.newsletter] in
+  config.toml. With provider = "stub" (or an empty action) the form runs in
+  sandbox mode: no network submit, but the GA4 newsletter_signup event still
+  fires with the source param, and the confirmation message renders.
+
+  On /newsletter/ the hidden source field is overridden by a ?src= query
+  param (validated against the four known sources) so that quiet links like
+  /newsletter/?src=whale preserve the attribution of the page class that
+  produced the visit.
+*/ -}}
+{{- $cfg := .page.Site.Params.newsletter -}}
+{{- $source := .source -}}
+{{- $showHook := ne .showHook false -}}
+{{- $hookA := "Hard technical ideas, explained until they actually click. One carefully built lesson a week — no fluff, no jargon, occasional jokes." -}}
+{{- $hookB := "For people who need the <em>why</em> before the <em>how</em>. I teach programming, data, and other hard things one idea at a time, in order, until the whole thing clicks." -}}
+{{- $hook := .hook | default (cond (eq $source "reader") $hookB $hookA) -}}
+<div class="newsletter-signup newsletter-signup--{{ $source }}">
+  {{- if $showHook }}
+  <p class="newsletter-hook">{{ $hook | safeHTML }}</p>
+  {{- end }}
+  <form class="newsletter-form" data-newsletter-form action="{{ $cfg.action }}" method="post" novalidate>
+    <input type="hidden" name="{{ $cfg.sourceFieldName }}" value="{{ $source }}" data-newsletter-source>
+    <div class="newsletter-fields">
+      <label class="visually-hidden" for="newsletter-email-{{ $source }}">Email address</label>
+      <input class="form-control newsletter-email" id="newsletter-email-{{ $source }}"
+        type="email" name="{{ $cfg.emailFieldName }}" placeholder="you@example.com"
+        autocomplete="email" required>
+      <button class="btn newsletter-button" type="submit">Get the next lesson</button>
+    </div>
+    <p class="newsletter-privacy">Your email gets you the weekly lesson and nothing else. Unsubscribe anytime, instantly.</p>
+    <p class="newsletter-message" data-newsletter-message hidden aria-live="polite"></p>
+  </form>
+</div>
+{{- if not (.page.Scratch.Get "newsletterScriptRendered") }}
+{{- .page.Scratch.Set "newsletterScriptRendered" true }}
+<script>
+  (function () {
+    var VALID_SOURCES = ["whale", "reader", "general", "newsletter-page"];
+    var srcParam = new URLSearchParams(window.location.search).get("src");
+    document.querySelectorAll("form[data-newsletter-form]").forEach(function (form) {
+      var sourceInput = form.querySelector("[data-newsletter-source]");
+      if (srcParam && VALID_SOURCES.indexOf(srcParam) !== -1 && sourceInput.value === "newsletter-page") {
+        sourceInput.value = srcParam;
+      }
+      form.addEventListener("submit", function (event) {
+        var email = form.querySelector("input[type=email]");
+        if (!email.value || email.validity.typeMismatch || email.validity.valueMissing) {
+          event.preventDefault();
+          email.reportValidity();
+          return;
+        }
+        if (typeof gtag === "function") {
+          gtag("event", "newsletter_signup", { source: sourceInput.value });
+        }
+        var message = form.querySelector("[data-newsletter-message]");
+        if (!form.getAttribute("action")) {
+          // Sandbox mode: no ESP configured yet. Confirm locally instead of submitting.
+          event.preventDefault();
+          console.log("newsletter-signup (sandbox)", { email: email.value, source: sourceInput.value });
+          form.querySelector(".newsletter-fields").hidden = true;
+          message.textContent = "Thanks! You're on the list. Watch your inbox for the next lesson.";
+          message.hidden = false;
+        }
+      });
+    });
+  })();
+</script>
+{{- end }}

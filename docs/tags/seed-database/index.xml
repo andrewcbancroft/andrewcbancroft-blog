@@ -14,7 +14,6 @@
       <title>Using Swift to Seed a Core Data Database</title>
       <link>https://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/</link>
       <pubDate>Thu, 26 Feb 2015 03:44:53 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/</guid>
       <description>&lt;p&gt;Designing an application&amp;rsquo;s UI can be difficult without actual data to present. Early on in the design process, data sourced from something like an array can suffice. Later on, however, our data sources become more dependent on actual data stores, such as what Core Data provides us.&lt;/p&gt;
 &lt;p&gt;During development, I&amp;rsquo;ve found that it&amp;rsquo;s often convenient to seed a Core Data database with sample data so that I can preview how it&amp;rsquo;ll look in my application. Along with that, it&amp;rsquo;s nice to start with a fresh copy of the data each time I run the app. Let&amp;rsquo;s explore how to accomplish this task in Swift!&lt;/p&gt;

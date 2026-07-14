@@ -14,7 +14,6 @@
       <title>Enums Instead of Booleans – An Example Implementation</title>
       <link>https://www.andrewcbancroft.com/2015/04/01/enums-instead-of-booleans-an-example-implementation/</link>
       <pubDate>Wed, 01 Apr 2015 12:00:52 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/04/01/enums-instead-of-booleans-an-example-implementation/</guid>
       <description>&lt;p&gt;This blog entry was inspired by &lt;a href=&#34;http://www.objc.io/snippets/12.html&#34;&gt;Objc.io&amp;rsquo;s snippet titled &amp;ldquo;Enums instead of Booleans”&lt;/a&gt;. I really loved the clarity that using enumerations brought to even the simplest of examples that was presented in that snippet. If you haven&amp;rsquo;t seen it, check it out before continuing on!&lt;/p&gt;
 &lt;p&gt;Objc.io&amp;rsquo;s snippet focused primarily on the definition and &lt;em&gt;consumption&lt;/em&gt; of the enumeration values. What I&amp;rsquo;d like to focus on here is the implementation of the thing that &lt;em&gt;produces&lt;/em&gt; those values for the switch-case that will consume them later on.&lt;/p&gt;

@@ -14,7 +14,6 @@
       <title>Sort It Out – Sorting an Array in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/08/16/sort-yourself-out-sorting-an-array-in-swift/</link>
       <pubDate>Sat, 16 Aug 2014 18:06:26 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/16/sort-yourself-out-sorting-an-array-in-swift/</guid>
       <description>&lt;p&gt;I had a question come to me today regarding sorting an array of integers that are actually &lt;em&gt;encoded&lt;/em&gt; as strings in the array.  Data comes to is in a variety of encodings/types, so it&amp;rsquo;s quite common to need to adjust things to the right state for working with.  Let&amp;rsquo;s take a look at how to solve this one.&lt;/p&gt;
 &lt;h2 id=&#34;the-dilemma&#34;&gt;The Dilemma&lt;/h2&gt;
@@ -32,7 +31,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;str1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;toInt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;str2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;toInt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This code produces our desired output:  &lt;code&gt;[&amp;quot;1&amp;amp;#8221;, &amp;quot;2&amp;amp;#8221;, &amp;quot;50&amp;amp;#8221;, &amp;quot;55&amp;amp;#8221;, &amp;quot;98&amp;amp;#8221;, &amp;quot;103&amp;amp;#8221;, &amp;quot;1000&amp;amp;#8221;]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&#34;thenbspdetails&#34;&gt;The Details&lt;/h2&gt;
+&lt;h2 id=&#34;thedetails&#34;&gt;The Details&lt;/h2&gt;
 &lt;p&gt;Swift&amp;rsquo;s sorted function takes two arguments:  an Array, and a Closure.  The part that may be confusing is the closure argument.  Isolated it looks like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;str1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;str2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Bool&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;

@@ -14,7 +14,6 @@
       <title>Sync Table View Data: NSFetchedResultsController and Swift</title>
       <link>https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/</link>
       <pubDate>Fri, 29 May 2015 03:20:54 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on September 23, 2015 – Swift 2.0&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;My goal with this article is to help you utilize the full power of &lt;code&gt;NSFetchedResultsController&lt;/code&gt;.&lt;/p&gt;
@@ -177,7 +176,6 @@
       <title>Displaying Data With NSFetchedResultsController and Swift</title>
       <link>https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/</link>
       <pubDate>Thu, 05 Mar 2015 15:14:53 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/</guid>
       <description>&lt;p&gt;The combination of an &lt;code&gt;NSFetchedResultsController&lt;/code&gt; and a &lt;code&gt;UITableView&lt;/code&gt; provides a powerful way to integrate Core Data with a user interface. The greatest benefits of using &lt;code&gt;NSFetchedResultsController&lt;/code&gt; come when we use it to automatically update a table view when objects are added, updated, or removed from a Core Data data store. First things first, though…&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/&#34;&gt;With a Core Data data store seeded with data&lt;/a&gt;, the next logical step is to &lt;em&gt;display&lt;/em&gt; that data somewhere other than the console. This post will be devoted to figuring out how to set up an &lt;code&gt;NSFetchedResultsController&lt;/code&gt; to display data inside a &lt;code&gt;UITableView&lt;/code&gt;.&lt;/p&gt;

@@ -14,7 +14,6 @@
       <title>Every Developer is an API Designer</title>
       <link>https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/</link>
       <pubDate>Tue, 25 Apr 2017 13:35:04 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/</guid>
       <description>&lt;p&gt;Every function; every class; every struct and enum and protocol is an API.&lt;/p&gt;
 &lt;h1 id=&#34;you-8212-are-an-api-designer&#34;&gt;YOU — are an API designer&lt;/h1&gt;
@@ -50,7 +49,6 @@
       <title>TypeScript Build Errors When Publishing ASP.Net Web Project</title>
       <link>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</link>
       <pubDate>Wed, 29 Jun 2016 18:41:59 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/06/29/typescript-build-errors-when-publishing-asp-net-web-project/</guid>
       <description>&lt;p&gt;I had TypeScript files building and running perfectly when I&amp;rsquo;d debug locally, but when I changed over to publish the project, I got build errors galore:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -68,7 +66,6 @@
       <title>401 Unauthorized Browsing Site From Local IIS Instance</title>
       <link>https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/</link>
       <pubDate>Thu, 21 Jan 2016 17:16:23 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/01/21/401-unauthorized-browsing-site-from-local-iis-instance/</guid>
       <description>&lt;p&gt;I spent waaaaay way way way too long fighting this one, so I&amp;rsquo;m saving everything I found on the issue so that I never lose it.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;setup&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -110,7 +107,6 @@ registry entry to 1. For more information about how to do this, refer to article
       <title>Using PowerShell to Install a DLL into the GAC</title>
       <link>https://www.andrewcbancroft.com/2015/12/16/using-powershell-to-install-a-dll-into-the-gac/</link>
       <pubDate>Wed, 16 Dec 2015 17:45:55 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/12/16/using-powershell-to-install-a-dll-into-the-gac/</guid>
       <description>&lt;p&gt;A couple of ways exist to install a DLL into the Global Assembly Cache (GAC). Using gacutil.exe is one, but this comes as part of a Visual Studio installation, and in a server environment, you may not have the luxury of installing Visual Studio, just to get the utility installed.&lt;/p&gt;
 &lt;p&gt;An alternative, however, is to use PowerShell to install the DLL into the GAC. The following code snippet should take care of your needs.&lt;/p&gt;
@@ -129,7 +125,6 @@ registry entry to 1. For more information about how to do this, refer to article
       <title>Diagnosing “Restore failed” with ASP.NET 5 on Mac</title>
       <link>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
       <pubDate>Sun, 09 Aug 2015 20:57:02 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
       <description>&lt;p&gt;Following along with Steve Smith&amp;rsquo;s &lt;a href=&#34;http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html&#34;&gt;&amp;ldquo;Your First ASP.NET 5 Application on a Mac”&lt;/a&gt;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;rsquo;t work due to a problem with restoring the project&amp;rsquo;s dependencies.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;retracing-steps&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -161,7 +156,6 @@ registry entry to 1. For more information about how to do this, refer to article
       <title>SQL Sever Synonyms, Entity Framework, and Integrated Security</title>
       <link>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</link>
       <pubDate>Fri, 01 May 2015 17:44:31 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/05/01/using-sql-sever-synonyms-entity-framework-integrated-security/</guid>
       <description>&lt;p&gt;&lt;a name=&#34;scenario&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;scenario&#34;&gt;Scenario&lt;/h3&gt;
@@ -208,7 +202,6 @@ registry entry to 1. For more information about how to do this, refer to article
       <title>Testing is to Software as Experiment is to Science</title>
       <link>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</link>
       <pubDate>Thu, 30 Apr 2015 04:01:24 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/04/29/testing-is-to-software-as-experiment-is-to-science/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;The principle of science, the definition, almost, is the following: The test of all knowledge is experiment.&lt;/p&gt;
@@ -261,7 +254,6 @@ registry entry to 1. For more information about how to do this, refer to article
       <title>Up and Running with Unity IOC Container for ASP.Net MVC</title>
       <link>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</link>
       <pubDate>Mon, 27 Oct 2014 18:07:21 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</guid>
       <description>&lt;p&gt;The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.  However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running. &lt;/p&gt;
 &lt;p&gt;The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP.Net MVC project.&lt;/p&gt;
@@ -326,7 +318,6 @@ Let’s pause here and show that side-by-side view I referred to a second ago. 
       <title>Date, Date?, and the ToString Method in VB.Net</title>
       <link>https://www.andrewcbancroft.com/2014/10/03/dates-and-the-tostring-method-in-vb-net/</link>
       <pubDate>Fri, 03 Oct 2014 17:28:05 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/03/dates-and-the-tostring-method-in-vb-net/</guid>
       <description>&lt;p&gt;I just spent the last 45 minutes frustrated as to why I was getting the following exception&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format.png&#34;&gt;&lt;img class=&#34;alignnone size-large wp-image-5421&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-1024x351.png&#34; alt=&#34;Input string was not in the correct format&#34; width=&#34;730&#34; height=&#34;250&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-1024x351.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-300x102.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format-1200x411.png 1200w, https://www.andrewcbancroft.com/wp-content/uploads/2014/10/Input-string-was-not-in-the-correct-format.png 1440w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
@@ -351,7 +342,6 @@ Let’s pause here and show that side-by-side view I referred to a second ago. 
       <title>NuGet app.config / web.config Transformation Trouble</title>
       <link>https://www.andrewcbancroft.com/2014/06/16/nuget-appconfig-webconfig-transformation-trouble/</link>
       <pubDate>Mon, 16 Jun 2014 17:57:20 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/06/16/nuget-appconfig-webconfig-transformation-trouble/</guid>
       <description>&lt;p&gt;I recently hit a road bump when developing a NuGet package. Mid-way through making the package, I decided I wanted to include couple of transforms to add some default connection strings to an app.config or a web.config file.  Try as I may, I couldn&amp;rsquo;t get NuGet to apply the transforms to my project&amp;rsquo;s web.config file even though I was following &lt;a title=&#34;NuGet Configuration File and Source Code Transformations Documentation&#34; href=&#34;http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations&#34; target=&#34;_blank&#34;&gt;NuGet documentation&amp;rsquo;s&lt;/a&gt; instructions to a tee.&lt;/p&gt;
 &lt;p&gt;It turns out that my problem was related to about 3 things all working together in tandem to defeat me:&lt;/p&gt;
@@ -379,7 +369,6 @@ Next, I navigated to my solution folder by right-clicking my solution and choosi
       <title>DotNetZip – Solving Mac Decompression Issues</title>
       <link>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</link>
       <pubDate>Sat, 28 Dec 2013 20:55:27 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</guid>
       <description>&lt;p&gt;As part of a ASP.Net Web API service that I&amp;rsquo;m co-developing, I have gotten familiar with the &lt;a title=&#34;DotNetZip Codeplex Page&#34; href=&#34;http://dotnetzip.codeplex.com/&#34; target=&#34;_blank&#34;&gt;DotNetZip Library&lt;/a&gt;.  It&amp;rsquo;s fantastic.  We&amp;rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.&lt;/p&gt;
 &lt;p&gt;During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.&lt;/p&gt;

@@ -14,7 +14,6 @@
       <title>StoreKit Testing Swift Start</title>
       <link>https://www.andrewcbancroft.com/blog/ios-development/iap/storekit-testing-swift-start/</link>
       <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/blog/ios-development/iap/storekit-testing-swift-start/</guid>
       <description>&lt;h1 id=&#34;manually-testing-storekit-code&#34;&gt;Manually Testing StoreKit Code&lt;/h1&gt;
 &lt;h2 id=&#34;development-workflow-changes&#34;&gt;Development Workflow Changes&lt;/h2&gt;
@@ -54,11 +53,11 @@
 &lt;p&gt;Everything happens locally.&lt;/p&gt;
 &lt;p&gt;All of your code that would be communicating with the App Store itself in Production, is &amp;ldquo;taken care of&amp;rdquo; by Xcode.&lt;/p&gt;
 &lt;p&gt;So you may be wondering&amp;hellip;&lt;/p&gt;
-&lt;p&gt;❓&amp;quot;Do my SKPaymentTransactionObserver functions get executed when they&amp;rsquo;re supposed to?&amp;quot;&lt;/p&gt;
+&lt;p&gt;❓&amp;ldquo;Do my SKPaymentTransactionObserver functions get executed when they&amp;rsquo;re supposed to?&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;👉&lt;strong&gt;Yes&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;❓&amp;quot;Do I get a receipt for the purchase?&amp;quot;&lt;/p&gt;
+&lt;p&gt;❓&amp;ldquo;Do I get a receipt for the purchase?&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;👉&lt;strong&gt;Yes&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;❓&amp;quot;Can I use that receipt to validate successfully?&amp;quot;&lt;/p&gt;
+&lt;p&gt;❓&amp;ldquo;Can I use that receipt to validate successfully?&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;👉&lt;strong&gt;Kinda&lt;/strong&gt;. Receipts from the local Xcode environment are not signed with the same signature as the Sandbox and Production environments are, so they cannot be used if you&amp;rsquo;re implementing server-side receipt validation.&lt;/p&gt;
 &lt;h2 id=&#34;development-workflow-enhancements&#34;&gt;Development Workflow Enhancements&lt;/h2&gt;
 &lt;h3 id=&#34;storekit-transaction-manager&#34;&gt;StoreKit Transaction Manager&lt;/h3&gt;
@@ -115,7 +114,6 @@
       <title>iOS Receipt Validation: Understanding and Troubleshooting the Original App Version Field</title>
       <link>https://www.andrewcbancroft.com/blog/ios-development/iap/ios-receipt-validation-understanding-troubleshooting-original-app-version-field/</link>
       <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/blog/ios-development/iap/ios-receipt-validation-understanding-troubleshooting-original-app-version-field/</guid>
       <description>&lt;h2 id=&#34;setting-the-stage-with-a-use-case-for-checking-the-original_application_version&#34;&gt;Setting the stage with a use case for checking the original_application_version&lt;/h2&gt;
 &lt;p&gt;The task appears to be simple.  Suppose that&amp;hellip;&lt;/p&gt;
@@ -207,7 +205,6 @@
       <title>Local Receipt Validation for iOS in Swift From Start to Finish</title>
       <link>https://www.andrewcbancroft.com/2017/08/01/local-receipt-validation-swift-start-finish/</link>
       <pubDate>Tue, 01 Aug 2017 17:55:09 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/08/01/local-receipt-validation-swift-start-finish/</guid>
       <description>&lt;p&gt;Local receipt validation in Swift doesn&amp;rsquo;t seem to be widely written about. I&amp;rsquo;ve been able to find snippets of code scattered across the Internet, but nothing that brought everything together in one spot so that I could wrap my head around the whole process.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ve been working on some code for a while, and this post is my attempt to bring it all together from start to finish.&lt;/p&gt;
@@ -246,7 +243,6 @@
       <title>Finalizing Receipt Validation in Swift – Computing a GUID Hash</title>
       <link>https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/</link>
       <pubDate>Mon, 31 Jul 2017 12:36:26 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/07/31/finalizing-receipt-validation-in-swift-computing-a-guid-hash/</guid>
       <description>&lt;p&gt;The aim of this guide is to help you finalize the receipt validation process by computing the GUID hash for your app, and comparing it to the hash that&amp;rsquo;s stored within your receipt itself.&lt;/p&gt;
 &lt;p&gt;This is a continuation of my receipt validation series. I&amp;rsquo;m assuming that…&lt;/p&gt;
@@ -617,7 +613,6 @@ Here are a few ideas:&lt;/p&gt;
       <title>Receipt Validation –  Parse and Decode a Receipt with Swift</title>
       <link>https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/</link>
       <pubDate>Fri, 28 Jul 2017 03:41:33 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/07/27/receipt-validation-parsing-a-receipt-with-swift/</guid>
       <description>&lt;p&gt;The aim of this guide is to help you parse a receipt and decode it so that you have readable pieces of metadata to inspect and finalize all of the receipt validation steps.&lt;/p&gt;
 &lt;p&gt;This is a continuation of my receipt validation series. I&amp;rsquo;m assuming that…&lt;/p&gt;
@@ -1563,7 +1558,6 @@ Here are a few ideas:&lt;/p&gt;
       <title>Receipt Validation – Verifying a Receipt Signature in Swift</title>
       <link>https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/</link>
       <pubDate>Sun, 16 Jul 2017 21:43:21 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/07/16/receipt-validation-verifying-a-receipt-signature-in-swift/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;You&amp;rsquo;ve &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/&#34;&gt;prepared to test receipt validation&lt;/a&gt; by setting up your app in iTunes Connect.&lt;/li&gt;
@@ -2052,7 +2046,6 @@ Here are a few ideas:&lt;/p&gt;
       <title>Extracting a PKCS7 Container for Receipt Validation with Swift</title>
       <link>https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/</link>
       <pubDate>Fri, 10 Jun 2016 03:44:58 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/06/09/extracting-a-pkcs7-container-for-receipt-validation-with-swift/</guid>
       <description>&lt;p&gt;So you&amp;rsquo;ve &lt;a href=&#34;https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/&#34;&gt;prepared to test receipt validation&lt;/a&gt; by setting up your app in iTunes Connect.&lt;/p&gt;
 &lt;p&gt;You&amp;rsquo;ve brought in a cryptography library like OpenSSL to be able to work with the PKCS #7 container that acts as the &amp;ldquo;envelope&amp;rdquo; for the receipt. Perhaps you&amp;rsquo;ve even done it &lt;a href=&#34;https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/&#34;&gt;the &amp;ldquo;easy way&amp;rdquo; with CocoaPods&lt;/a&gt;.&lt;/p&gt;
@@ -2160,9 +2153,9 @@ Here are a few ideas:&lt;/p&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#ifndef pkcs7_union_accessors_h
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define pkcs7_union_accessors_h
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;openssl/pkcs7.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ASN1_OCTET_STRING&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PKCS7_SIGNED&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_sign&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
@@ -2215,7 +2208,7 @@ Here are a few ideas:&lt;/p&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;pkcs7_union_accessors.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;inline&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;pkcs7_d_char&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PKCS7&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
@@ -2359,7 +2352,6 @@ Here are a few ideas:&lt;/p&gt;
       <title>Loading a Receipt for Validation with Swift</title>
       <link>https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/</link>
       <pubDate>Wed, 14 Oct 2015 03:24:02 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/10/13/loading-a-receipt-for-validation-with-swift/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m working through a progression of entries on the process of validating receipts with OpenSSL for iOS in Swift.&lt;/p&gt;
 &lt;p&gt;Just want the code? Here you go!&lt;/p&gt;
@@ -2658,7 +2650,6 @@ If the result does not match the hash in the receipt, validation fails.&lt;/p&gt
       <title>Preparing to Test Receipt Validation for iOS</title>
       <link>https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/</link>
       <pubDate>Mon, 05 Oct 2015 18:25:09 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/10/05/preparing-to-test-receipt-validation-for-ios/</guid>
       <description>&lt;p&gt;After having to piece together each step along the path of preparing to test receipt validation for iOS apps, I&amp;rsquo;ve decided to combine everything into the following guide. Whether you&amp;rsquo;re working to implement receipt validation for a new iOS app, or for an existing one, this walk-through should provide guidance to get you ready to work with receipts in your iOS application.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;app-record-setup&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -2693,7 +2684,7 @@ If the result does not match the hash in the receipt, validation fails.&lt;/p&gt
 &lt;p&gt;&lt;a name=&#34;ios-device-setup&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;ios-device-setup&#34;&gt;iOS Device Setup&lt;/h3&gt;
 &lt;h5 id=&#34;1--on-your-physical-device-not-in-the-simulator-open-settings-and-navigate-to-app-and-itunes-stores8221&#34;&gt;1 – On your physical device (not in the Simulator), open Settings and navigate to &amp;ldquo;App and iTunes Stores”.&lt;/h5&gt;
-&lt;h5 id=&#34;2--sign-out-of-your-regular-apple-id-but-_do-not_-re-sign-in-using-your-new-sandbox-tester-apple-id-that-you-just-set-up-doing-this-will-pose-the-risk-of-invalidating-your-sandbox-user-test-account-this-is-explained-over-in-the-apple-developer-documentation8&#34;&gt;2 – Sign out of your regular Apple ID, but &lt;em&gt;do not&lt;/em&gt; re-sign in using your new Sandbox Tester Apple ID that you just set up. Doing this will pose the risk of invalidating your Sandbox User test account. This is explained over in the &lt;a href=&#34;https://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Chapters/SettingUpUserAccounts.html#//apple_ref/doc/uid/TP40011225-CH25-SW9&#34;&gt;Apple Developer documentation&lt;/a&gt;:&lt;/h5&gt;
+&lt;h5 id=&#34;2--sign-out-of-your-regular-apple-id-but-do-not-re-sign-in-using-your-new-sandbox-tester-apple-id-that-you-just-set-up-doing-this-will-pose-the-risk-of-invalidating-your-sandbox-user-test-account-this-is-explained-over-in-the-apple-developer-documentation&#34;&gt;2 – Sign out of your regular Apple ID, but &lt;em&gt;do not&lt;/em&gt; re-sign in using your new Sandbox Tester Apple ID that you just set up. Doing this will pose the risk of invalidating your Sandbox User test account. This is explained over in the &lt;a href=&#34;https://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Chapters/SettingUpUserAccounts.html#//apple_ref/doc/uid/TP40011225-CH25-SW9&#34;&gt;Apple Developer documentation&lt;/a&gt;:&lt;/h5&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Important: If you mistakenly use a sandbox tester account to log in to a production environment on your test device instead of your test environment, the sandbox account becomes invalid and can’t be used again. If this happens, create a new sandbox tester account with a new email address.&lt;/p&gt;
 &lt;/blockquote&gt;

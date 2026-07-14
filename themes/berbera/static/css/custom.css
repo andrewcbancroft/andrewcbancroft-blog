@@ -856,3 +856,69 @@ div.math{
   z-index: -1;
   opacity: 0.01;
 }
+
+/* Newsletter signup component (layouts/partials/newsletter-signup.html) */
+.newsletter-signup {
+  margin: 2.5rem 0 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #d9e2ea;
+  border-left: 4px solid #2e6792;
+  border-radius: 6px;
+  background-color: #f7fafc;
+}
+
+.newsletter-signup--whale {
+  margin: 1.5rem 0 1rem 0;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-top: 1px solid #d9e2ea;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.newsletter-hook {
+  font-size: 1.05rem;
+  margin-bottom: 0.9rem;
+}
+
+.newsletter-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.newsletter-email {
+  flex: 1 1 14rem;
+  max-width: 24rem;
+}
+
+.newsletter-button {
+  color: #fff;
+  background-color: #2e6792;
+  border-color: #2e6792;
+  white-space: nowrap;
+}
+
+.newsletter-button:hover,
+.newsletter-button:focus,
+.newsletter-button:active {
+  color: #fff;
+  background-color: #3e8bc5;
+  border-color: #3e8bc5;
+}
+
+.newsletter-privacy {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin: 0.6rem 0 0 0;
+}
+
+.newsletter-message {
+  font-weight: 700;
+  color: #2e6792;
+  margin: 0.6rem 0 0 0;
+}
+
+.newsletter-page .newsletter-signup {
+  margin-top: 1rem;
+}

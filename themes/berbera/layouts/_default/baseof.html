@@ -47,8 +47,8 @@
         integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
 
     <!-- Custom styles for this template -->
-    <link href="{{ .Site.BaseURL }}/css/custom.css" rel="stylesheet">
-    <link href="{{ .Site.BaseURL }}/css/syntax.css" rel="stylesheet">
+    <link href="{{ "css/custom.css" | absURL }}" rel="stylesheet">
+    <link href="{{ "css/syntax.css" | absURL }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
 
     {{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}

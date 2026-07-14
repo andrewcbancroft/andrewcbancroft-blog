@@ -14,7 +14,6 @@
       <title>Managing Xcode Project Dependencies with CocoaPods</title>
       <link>https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/</link>
       <pubDate>Wed, 03 Feb 2016 18:23:49 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/02/03/managing-xcode-project-dependencies-with-cocoapods/</guid>
       <description>&lt;h1 id=&#34;course-outline&#34;&gt;Course Outline&lt;/h1&gt;
 &lt;p&gt;I try to get as practical as possible in the course. As you&amp;rsquo;re watching you&amp;rsquo;ll be &amp;ldquo;embedded” into a team of iOS developers, and you&amp;rsquo;ll explore the problems that CocoaPods can solve for you by watching the team struggle through &lt;em&gt;not&lt;/em&gt; having a dependency manager, and then sharing in their victories as they bring in CocoaPods to ease that dependency management struggle.&lt;/p&gt;
@@ -42,7 +41,6 @@
       <title>Considerations for Choosing 3rd Party Swift Libraries</title>
       <link>https://www.andrewcbancroft.com/2015/10/27/considerations-for-choosing-3rd-party-swift-libraries/</link>
       <pubDate>Tue, 27 Oct 2015 18:04:09 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/10/27/considerations-for-choosing-3rd-party-swift-libraries/</guid>
       <description>&lt;p&gt;While relying on 3rd party dependencies can provide you the benefit of not having to spend time implementing a portion of your app, realize that you’re essentially giving away little pieces of your app when you bring in a dependency.&lt;/p&gt;
 &lt;p&gt;You’re delegating away a certain level of control off to someone else who has no knowledge of or interest in the final outcome of your team’s app.&lt;/p&gt;
@@ -92,7 +90,6 @@
       <title>OpenSSL for iOS and Swift the Easy Way</title>
       <link>https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/</link>
       <pubDate>Tue, 22 Sep 2015 04:39:28 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/09/21/openssl-for-ios-swift-the-easy-way/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m currently working on outfitting an app I&amp;rsquo;m working on to be able to &lt;a href=&#34;https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html#//apple_ref/doc/uid/TP40010573-CH1-SW2&#34;&gt;validate receipts&lt;/a&gt; to verify purchases of the app.&lt;/p&gt;
 &lt;p&gt;Little did I know, this adventure would introduce the need to understand how to use cryptography in order to work with the receipt.&lt;/p&gt;

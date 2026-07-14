@@ -14,7 +14,6 @@
       <title>NSPersistentCloudKitContainer Buggy Behavior List</title>
       <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/nspersistentcloudkitcontainer-buggy-behavior-list/</link>
       <pubDate>Thu, 11 Jul 2019 04:40:54 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/nspersistentcloudkitcontainer-buggy-behavior-list/</guid>
       <description>&lt;p&gt;&lt;code&gt;NSPersistentCloudKitContainer&lt;/code&gt; is brand new with Xcode 11 and iOS 13.&lt;/p&gt;
 &lt;p&gt;It works&amp;hellip; kind of&amp;hellip; sometimes&amp;hellip;&lt;/p&gt;
@@ -51,10 +50,9 @@
 &lt;p&gt;Not with Beta 5.&lt;/p&gt;
 &lt;p&gt;You can save new data and wait (and wait&amp;hellip; and wait&amp;hellip;).  It doesn&amp;rsquo;t show up in the UI until after you re-launch the app.&lt;/p&gt;
 &lt;p&gt;Here&amp;rsquo;s what I&amp;rsquo;m experiencing:&lt;/p&gt;
-
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/DLAwrSCl3Cc&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+			&lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/DLAwrSCl3Cc?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+		&lt;/div&gt;
 
 &lt;h2 id=&#34;record-accessor-methods-missing-in-xcode&#34;&gt;Record accessor methods missing in Xcode&lt;/h2&gt;
 &lt;p&gt;&amp;ldquo;On &lt;em&gt;my&lt;/em&gt; machine&amp;rdquo;, attempting to use the &lt;code&gt;record(for:)&lt;/code&gt; methods on &lt;code&gt;NSPersistentCloudKitContainer&lt;/code&gt; produce the following error message:&lt;/p&gt;
@@ -73,7 +71,6 @@
       <title>Getting Started With NSPersistentCloudKitContainer</title>
       <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/</link>
       <pubDate>Tue, 11 Jun 2019 04:40:54 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/getting-started-with-nspersistentcloudkitcontainer/</guid>
       <description>&lt;h2 id=&#34;first-things-first&#34;&gt;First Things First&lt;/h2&gt;
 &lt;ul&gt;
@@ -225,10 +222,9 @@ Resources
 &lt;p&gt;At this point no additional configuration has happened. The Core Data stack is the unmodified Xcode generated code, and the fetched results controller is hooked up to the managed object context for your app, ready to fetch Blog Ideas and help get them into the table view.&lt;/p&gt;
 &lt;p&gt;If you open the project, build and run on two devices, and begin adding Blog Ideas, updating them, deleting them, etc. what happens?&lt;/p&gt;
 &lt;p&gt;The first observation is that&amp;hellip;things&amp;hellip;don&amp;rsquo;t&amp;hellip;seem to be working&amp;hellip;&lt;/p&gt;
-
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/DLAwrSCl3Cc&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+			&lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/DLAwrSCl3Cc?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+		&lt;/div&gt;
 
 &lt;p&gt;&amp;hellip;At least not how I thought they would.&lt;/p&gt;
 &lt;p&gt;I &lt;em&gt;expected&lt;/em&gt; my Blog List view to automatically update in response to changes made on my other device, buuut&amp;hellip; nope.  Thankfully it&amp;rsquo;s an &amp;ldquo;easy&amp;rdquo; fix.&lt;/p&gt;
@@ -290,7 +286,6 @@ Resources
       <title>First Impressions of NSPersistentCloudKitContainer</title>
       <link>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/first-impressions-of-nspersistentcloudkitcontainer/</link>
       <pubDate>Thu, 06 Jun 2019 04:40:54 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/blog/ios-development/data-persistence/first-impressions-of-nspersistentcloudkitcontainer/</guid>
       <description>&lt;p&gt;&lt;a name=&#34;resources&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;resources&#34;&gt;

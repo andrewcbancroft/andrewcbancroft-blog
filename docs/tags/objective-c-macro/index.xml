@@ -14,7 +14,6 @@
       <title>Swift Alternative to Objective-C Macros</title>
       <link>https://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/</link>
       <pubDate>Wed, 01 Oct 2014 17:58:46 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve previously written about &lt;a title=&#34;Replace Magic Strings with Enumerations in Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/09/02/replace-magic-strings-with-enumerations-in-swift/&#34; target=&#34;_blank&#34;&gt;using enumerations in Swift to encapsulate special values&lt;/a&gt; that could end up falling into the &amp;ldquo;magic string” category if they were to simply be scattered in-line throughout your code. The primary example I proposed for such a &amp;ldquo;magic string” replacement was Storyboard Segue Identifiers.  These special identifiers have such a specific purpose that felt to me like a natural fit to create a Type in the form of an enumeration (which I called SegueIdentifier) to group them all together in one place so that I could easily find them and modify them, should I ever need to do so.&lt;/p&gt;
 &lt;p&gt;I still like that solution for &lt;em&gt;groups&lt;/em&gt; of things, but it&amp;rsquo;s a lot of &amp;ldquo;ceremony” to use enumerations for encapsulating &lt;em&gt;everything&lt;/em&gt; that may have been implemented as a macro expression or a static global constant in Objective-C.&lt;/p&gt;

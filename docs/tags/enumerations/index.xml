@@ -14,7 +14,6 @@
       <title>Distinguishing Between Multiple UIActionSheets with Swift</title>
       <link>https://www.andrewcbancroft.com/2014/11/16/distinguishing-between-multiple-uiactionsheets-with-swift/</link>
       <pubDate>Mon, 17 Nov 2014 04:17:39 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/11/16/distinguishing-between-multiple-uiactionsheets-with-swift/</guid>
       <description>&lt;p&gt;The challenge when dealing with the presentation and handling of more than one &lt;code&gt;UIActionSheet&lt;/code&gt; in a single View Controller is made clear by asking, &amp;ldquo;How am I going to tell which action sheet I&amp;rsquo;m dealing with so that I can handle the user&amp;rsquo;s choice appropriately?”&lt;/p&gt;
 &lt;p&gt;Presumably, the user&amp;rsquo;s interaction with one of the action sheets will be different than the other(s), so you&amp;rsquo;ll need to think through how to distinguish between them, in order to respond to that interaction appropriately.&lt;/p&gt;
@@ -91,7 +90,6 @@
       <title>Replace Magic Strings with Enumerations in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/09/02/replace-magic-strings-with-enumerations-in-swift/</link>
       <pubDate>Wed, 03 Sep 2014 01:55:54 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/09/02/replace-magic-strings-with-enumerations-in-swift/</guid>
       <description>&lt;p&gt;&amp;ldquo;What can I do to avoid these ‘magic strings&amp;rsquo; in my code?” – This was the question I asked myself recently as I found myself in &lt;code&gt;prepareForSegue&lt;/code&gt; comparing &lt;code&gt;segue.segueIdentifier&lt;/code&gt; to in-line hard-coded Strings.  This kind of in-line hard-coding of a String for comparison purposes is what I mean by &amp;ldquo;magic strings” in this article.  I knew this felt like a bad idea, but the solution to a cleaner option wasn&amp;rsquo;t readily apparent to me.&lt;/p&gt;
 &lt;p&gt;I &lt;em&gt;used&lt;/em&gt; to do things like create static string constants, or &lt;code&gt;#define&lt;/code&gt; expressions so that I could easily change these values if I ever needed to update them for some reason.  You know… back in a former Objective-C developer life when these tactics were available to me.  But these options don&amp;rsquo;t exist in Swift.  What to do??&lt;/p&gt;

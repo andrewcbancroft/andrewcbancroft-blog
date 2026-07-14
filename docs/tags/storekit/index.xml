@@ -14,7 +14,6 @@
       <title>StoreKit Testing Swift Start</title>
       <link>https://www.andrewcbancroft.com/blog/ios-development/iap/storekit-testing-swift-start/</link>
       <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/blog/ios-development/iap/storekit-testing-swift-start/</guid>
       <description>&lt;h1 id=&#34;manually-testing-storekit-code&#34;&gt;Manually Testing StoreKit Code&lt;/h1&gt;
 &lt;h2 id=&#34;development-workflow-changes&#34;&gt;Development Workflow Changes&lt;/h2&gt;
@@ -54,11 +53,11 @@
 &lt;p&gt;Everything happens locally.&lt;/p&gt;
 &lt;p&gt;All of your code that would be communicating with the App Store itself in Production, is &amp;ldquo;taken care of&amp;rdquo; by Xcode.&lt;/p&gt;
 &lt;p&gt;So you may be wondering&amp;hellip;&lt;/p&gt;
-&lt;p&gt;❓&amp;quot;Do my SKPaymentTransactionObserver functions get executed when they&amp;rsquo;re supposed to?&amp;quot;&lt;/p&gt;
+&lt;p&gt;❓&amp;ldquo;Do my SKPaymentTransactionObserver functions get executed when they&amp;rsquo;re supposed to?&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;👉&lt;strong&gt;Yes&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;❓&amp;quot;Do I get a receipt for the purchase?&amp;quot;&lt;/p&gt;
+&lt;p&gt;❓&amp;ldquo;Do I get a receipt for the purchase?&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;👉&lt;strong&gt;Yes&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;❓&amp;quot;Can I use that receipt to validate successfully?&amp;quot;&lt;/p&gt;
+&lt;p&gt;❓&amp;ldquo;Can I use that receipt to validate successfully?&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;👉&lt;strong&gt;Kinda&lt;/strong&gt;. Receipts from the local Xcode environment are not signed with the same signature as the Sandbox and Production environments are, so they cannot be used if you&amp;rsquo;re implementing server-side receipt validation.&lt;/p&gt;
 &lt;h2 id=&#34;development-workflow-enhancements&#34;&gt;Development Workflow Enhancements&lt;/h2&gt;
 &lt;h3 id=&#34;storekit-transaction-manager&#34;&gt;StoreKit Transaction Manager&lt;/h3&gt;
@@ -115,7 +114,6 @@
       <title>Implementing In-App Purchases on iOS</title>
       <link>https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/</link>
       <pubDate>Tue, 09 Jun 2020 10:03:33 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/pluralsight/2020-06-15-implementing-in-app-purchases-on-ios/</guid>
       <description>&lt;p&gt;Monetizing apps is challenging. In this course, Implementing In-App Purchases on iOS, you’ll learn to offer digital products and services directly within your app as in-app purchases.&lt;/p&gt;
 &lt;div class=&#34;resources&#34;&gt;

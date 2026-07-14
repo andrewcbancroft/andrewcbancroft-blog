@@ -14,7 +14,6 @@
       <title>Core Data Model Attributes and NSManagedObject Property Types Must Match!</title>
       <link>https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</link>
       <pubDate>Sun, 23 Apr 2017 20:03:34 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/04/23/core-data-model-attributes-and-nsmanagedobject-property-types-must-match/</guid>
       <description>&lt;p&gt;I admit – it might have taken me less time to figure out my runtime exception if I hadn&amp;rsquo;t just migrated my project to Swift 3 when I encountered the bug.&lt;/p&gt;
 &lt;p&gt;That&amp;rsquo;s the problem isn&amp;rsquo;t it? You go in… you intend to do one thing. Before long, you&amp;rsquo;ve got 15 files with an &lt;code&gt;M&lt;/code&gt; out to the right. The project builds (finally), but ah – then there&amp;rsquo;s &lt;em&gt;runtime&lt;/em&gt;.&lt;/p&gt;
@@ -74,7 +73,6 @@ What&amp;rsquo;ll happen? Well, I can tell you what&amp;rsquo;ll happen. :]&lt;/
       <title>How to Unwrap Multiple Optionals with One If-Let in Swift</title>
       <link>https://www.andrewcbancroft.com/2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/</link>
       <pubDate>Wed, 19 Apr 2017 17:25:41 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/04/19/how-to-unwrap-multiple-optionals-with-one-if-let-in-swift/</guid>
       <description>&lt;p&gt;What do you do when you&amp;rsquo;ve got two (or more) optionals that you need to safely unwrap and work with?&lt;/p&gt;
 &lt;h1 id=&#34;code-examples&#34;&gt;Code examples&lt;/h1&gt;
@@ -129,7 +127,6 @@ What&amp;rsquo;ll happen? Well, I can tell you what&amp;rsquo;ll happen. :]&lt;/
       <title>Force Unwrapping Swift Optionals:  Code Smell!</title>
       <link>https://www.andrewcbancroft.com/2016/06/13/force-unwrapping-swift-optionals-code-smell/</link>
       <pubDate>Tue, 14 Jun 2016 03:54:57 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/06/13/force-unwrapping-swift-optionals-code-smell/</guid>
       <description>&lt;p&gt;Do you find your Swift code riddled with &lt;code&gt;!&lt;/code&gt;‘s?&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m becoming more and more uncomfortable with seeing &lt;code&gt;!&lt;/code&gt; throughout my Swift code. It&amp;rsquo;s just a matter of time before it&amp;rsquo;s going to bite me.&lt;/p&gt;
@@ -152,7 +149,6 @@ What&amp;rsquo;ll happen? Well, I can tell you what&amp;rsquo;ll happen. :]&lt;/
       <title>Swift Optionals?  Don’t Forget to Unwrap!</title>
       <link>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</link>
       <pubDate>Sat, 26 Jul 2014 02:23:53 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</guid>
       <description>&lt;p&gt;There is a compiler error that throws me off every time I see it.  It takes the form,&lt;/p&gt;
 &lt;blockquote&gt;

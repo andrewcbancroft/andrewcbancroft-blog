@@ -14,7 +14,6 @@
       <title>Resolving “UDA-SQL-0569 Unable to load the driver manager library ( db2cli.dll )” with Framework Manager 10.1</title>
       <link>https://www.andrewcbancroft.com/2012/10/17/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/</link>
       <pubDate>Wed, 17 Oct 2012 15:29:23 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/10/17/resolving-uda-sql-0569-unable-to-load-the-driver-manager-library-db2cli-dll-with-framework-manager-10-1/</guid>
       <description>&lt;p&gt;When installing Framework Manager 10.1 and attempting to use it for the first time, things went down hill nearly immediately.  I made sure to install a copy of the DB2 client on my development machine, but I still ran into issues connecting to data sources in Framework Manager.&lt;/p&gt;
 &lt;p&gt;For those who need to install a DB2 client, IBM provides those downloads &lt;a href=&#34;http://www-01.ibm.com/support/docview.wss?rs=4020&amp;amp;uid=swg21385217&#34;&gt;here&lt;/a&gt; for DB2 10.1.  For other versions, you can go &lt;a href=&#34;http://www-01.ibm.com/support/docview.wss?uid=swg27016878&#34;&gt;here&lt;/a&gt;.  [Added 3/19/2013]&lt;/p&gt;

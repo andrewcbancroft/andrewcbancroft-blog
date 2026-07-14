@@ -14,7 +14,6 @@
       <title>Beginner’s Guide to Event Kit in Swift – Requesting Permission</title>
       <link>https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/</link>
       <pubDate>Thu, 14 May 2015 20:37:52 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on October 26, 2016 – Swift 3.0&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;EventKit provides a set of classes for accessing and manipulating a user&amp;rsquo;s calendar events and reminders. In the tutorial that follows, my goal is to walk you through the first steps of setting up an app that utilizes EventKit. I will demonstrate how to request permission to the user&amp;rsquo;s calendar and show a couple of examples for how to handle the user&amp;rsquo;s response (for when they grant access, or &lt;em&gt;deny&lt;/em&gt; it).&lt;/p&gt;
@@ -225,13 +224,12 @@
       <title>Fundamentals of NSNotificationCenter in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/</link>
       <pubDate>Wed, 08 Oct 2014 18:27:47 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on September 19, 2016 – Xcode 8 &amp;amp; Swift 3.0&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;The goal of this post is to help you grasp the fundamentals of using &lt;code&gt;NSNotificationCenter&lt;/code&gt; in your Swift iOS app. The topic isn&amp;rsquo;t necessarily new, and there&amp;rsquo;s no difference except syntax between Objective-C and Swift implementations involving &lt;code&gt;NSNotificationCenter&lt;/code&gt;. Even still, I&amp;rsquo;m hoping to add to the understanding of this useful tool by giving a fully-working example on GitHub (&lt;a title=&#34;GitHub - Swift NSNotificationCenter Example&#34; href=&#34;https://github.com/andrewcbancroft/SwiftNSNotificationCenter/tree/swift-2.3&#34; target=&#34;_blank&#34;&gt;Swift 2.3&lt;/a&gt; and &lt;a title=&#34;GitHub - Swift NSNotificationCenter Example&#34; href=&#34;https://github.com/andrewcbancroft/SwiftNSNotificationCenter&#34; target=&#34;_blank&#34;&gt;Swift 3.0&lt;/a&gt;), and by sharing the insight that&amp;rsquo;s clicked in my own brain as I explain the example.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Code in the main article below is written in Swift 3.0, but code examples for Swift 2.3 are found in the &lt;a href=&#34;https://github.com/andrewcbancroft/SwiftNSNotificationCenter/tree/swift-2.3&#34;&gt;example project&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;what-is-it&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;first-things-first-what-_is_-this-thing&#34;&gt;First things first: What &lt;em&gt;is&lt;/em&gt; this thing?&lt;/h3&gt;
+&lt;h3 id=&#34;first-things-first-what-is-this-thing&#34;&gt;First things first: What &lt;em&gt;is&lt;/em&gt; this thing?&lt;/h3&gt;
 &lt;p&gt;When I first heard &lt;code&gt;NSNotificationCenter&lt;/code&gt;, I thought &amp;ldquo;push notifications”. However, &lt;code&gt;NSNotificationCenter&lt;/code&gt; has nothing to do with sending or receiving push notifications in iOS. Rather, it is a communication tool internal to your app. It provides a way for one instance of a class/struct to notify one or more &lt;em&gt;other&lt;/em&gt; class/struct instances about something. The goal in doing this is to enable those 1+ other class or struct instances to take appropriate action based the communication they receive. An common analogy comes to mind: think &amp;ldquo;radio tower”. &lt;code&gt;NSNotificationCenter&lt;/code&gt; is the central hub that acts as a &lt;em&gt;broadcaster&lt;/em&gt; of notifications. If that still seems vague, hang tight – seeing the example below should help it all come together for you.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;should-i-use-it&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;should-i-use-it&#34;&gt;Should I use it?&lt;/h3&gt;
@@ -343,7 +341,6 @@
       <title>Create Sound Clips from iTunes</title>
       <link>https://www.andrewcbancroft.com/2012/06/18/create-sound-clips-from-itunes/</link>
       <pubDate>Tue, 19 Jun 2012 00:48:38 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/06/18/create-sound-clips-from-itunes/</guid>
       <description>&lt;ol&gt;
 &lt;li&gt;Open iTunes.&lt;/li&gt;

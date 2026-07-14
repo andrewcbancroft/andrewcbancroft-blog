@@ -14,7 +14,6 @@
       <title>What is Delegation? – A Swift Developer’s Guide</title>
       <link>https://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/</link>
       <pubDate>Fri, 27 Mar 2015 03:29:01 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/03/26/what-is-delegation-a-swift-developers-guide/</guid>
       <description>&lt;p&gt;Of the major design patterns that are prevalent in iOS development, delegation is one that appears quite often. For many developers entering app development for the iOS platform, dealing with delegates is a new concept. It certainly was for me.&lt;/p&gt;
 &lt;p&gt;In my analysis of &lt;a href=&#34;http://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/&#34; title=&#34;NSNotificationCenter vs Delegation – An Analysis&#34;&gt;NSNotificationCenter vs Delegation&lt;/a&gt;, I wrote some about delegation, but only in comparison to how &lt;code&gt;NSNotificationCenter&lt;/code&gt; works. I haven&amp;rsquo;t yet given delegation dedicated time and analysis, but I intend to do so now.&lt;/p&gt;
@@ -100,7 +99,6 @@
       <title>NSNotificationCenter vs Delegation – An Analysis</title>
       <link>https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/</link>
       <pubDate>Thu, 05 Feb 2015 13:00:26 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/</guid>
       <description>&lt;p&gt;In &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/&#34;&gt;Fundamentals of NSNotificationCenter in Swift&lt;/a&gt;, a &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/#comment-1762533966&#34;&gt;commenter asked&lt;/a&gt; me to elaborate on a response I&amp;rsquo;d given to a dialog going on below the blog post. I had stated:&lt;/p&gt;
 &lt;blockquote&gt;

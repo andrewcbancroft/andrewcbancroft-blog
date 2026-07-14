@@ -14,7 +14,6 @@
       <title>Converting Complex Objective-C Macros to Swift Functions</title>
       <link>https://www.andrewcbancroft.com/2015/01/29/converting-complex-objective-c-macros-swift-functions/</link>
       <pubDate>Thu, 29 Jan 2015 13:00:51 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/01/29/converting-complex-objective-c-macros-swift-functions/</guid>
       <description>&lt;p&gt;The question of how to convert &lt;code&gt;#define&lt;/code&gt; macros from Objective-C to Swift is explained fairly simply in the [Apple developer documentation on the subject][1]. For &lt;em&gt;simple&lt;/em&gt; macros, it&amp;rsquo;s a matter of rewriting them as global constants. In fact, if you&amp;rsquo;re using the hybrid Objective-C — Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the [alternative to Objective-C macros][2] a while back.&lt;/p&gt;
 &lt;p&gt;Where we run into trouble is when we need to port &lt;em&gt;complex&lt;/em&gt; Objective-C macros to Swift. According to the [same documentation from Apple][1],&lt;/p&gt;

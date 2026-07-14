@@ -14,7 +14,6 @@
       <title>DataStage Range Lookup Failure – What Gives?</title>
       <link>https://www.andrewcbancroft.com/2013/03/25/datastage-range-lookup-failure-what-gives/</link>
       <pubDate>Mon, 25 Mar 2013 17:52:13 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2013/03/25/datastage-range-lookup-failure-what-gives/</guid>
       <description>&lt;p&gt;I just spent the majority of my morning trying to figure out why in the world my range lookup kept failing.  Hopefully this will save you some time in troubleshooting &lt;em&gt;your&lt;/em&gt; range lookup failures.  To cut right to the chase, &lt;strong&gt;my resolution involved &lt;em&gt;sorting&lt;/em&gt; my reference source prior to doing the lookup&lt;/strong&gt;.  Adding a sort stage with the appropriate sort keys prior to doing the lookup solved my problem.  I probably learned this in a training at some point, but I just didn’t retain it.  So I learned it again the hard way.&lt;/p&gt;
 &lt;p&gt;For those who’d like to see a bit more of the details involved, feel free to have a look below.&lt;/p&gt;

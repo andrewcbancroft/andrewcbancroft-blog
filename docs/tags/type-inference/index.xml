@@ -14,7 +14,6 @@
       <title>Expanded Thoughts on Swift’s Type Inference</title>
       <link>https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/</link>
       <pubDate>Thu, 21 Aug 2014 02:19:45 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/</guid>
       <description>&lt;p&gt;In my recent &lt;a title=&#34;Clean Coding in Swift – Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/&#34; target=&#34;_blank&#34;&gt;op-ed on clean coding in Swift focused on Type Inference&lt;/a&gt;, I began by saying,&lt;/p&gt;
 &lt;p&gt;Quick!  Tell me!  What is the Type of the &lt;code&gt;birdDetails&lt;/code&gt; constant in this code example:&lt;/p&gt;
@@ -58,7 +57,6 @@
       <title>Clean Coding in Swift – Type Inference</title>
       <link>https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/</link>
       <pubDate>Wed, 13 Aug 2014 04:22:25 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/</guid>
       <description>&lt;p&gt;Quick!  Tell me!  What is the Type of the &lt;code&gt;birdDetails&lt;/code&gt;constant in this code example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;birdDetails&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;birdDetailsFromStorage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;

@@ -1,20 +1,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>#define on Andrew Bancroft</title>
-    <link>https://www.andrewcbancroft.com/tags/#define/</link>
-    <description>Recent content about iOS development with Swift in #define  from Andrew Bancroft.</description>
+    <title>#Define on Andrew Bancroft</title>
+    <link>https://www.andrewcbancroft.com/tags/%23define/</link>
+    <description>Recent content about iOS development with Swift in #Define  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 29 Jan 2015 13:00:51 +0000</lastBuildDate>
     
-        <atom:link href="https://www.andrewcbancroft.com/tags/#define/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.andrewcbancroft.com/tags/%23define/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Converting Complex Objective-C Macros to Swift Functions</title>
       <link>https://www.andrewcbancroft.com/2015/01/29/converting-complex-objective-c-macros-swift-functions/</link>
       <pubDate>Thu, 29 Jan 2015 13:00:51 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/01/29/converting-complex-objective-c-macros-swift-functions/</guid>
       <description>&lt;p&gt;The question of how to convert &lt;code&gt;#define&lt;/code&gt; macros from Objective-C to Swift is explained fairly simply in the [Apple developer documentation on the subject][1]. For &lt;em&gt;simple&lt;/em&gt; macros, it&amp;rsquo;s a matter of rewriting them as global constants. In fact, if you&amp;rsquo;re using the hybrid Objective-C — Swift approach to writing your app, Swift sees those simple macros and automatically makes them available to your Swift code. I also gave some tips on the [alternative to Objective-C macros][2] a while back.&lt;/p&gt;
 &lt;p&gt;Where we run into trouble is when we need to port &lt;em&gt;complex&lt;/em&gt; Objective-C macros to Swift. According to the [same documentation from Apple][1],&lt;/p&gt;
@@ -102,7 +101,6 @@ With the power of Swift functions and the ability to even declare and use them g
       <title>Swift Alternative to Objective-C Macros</title>
       <link>https://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/</link>
       <pubDate>Wed, 01 Oct 2014 17:58:46 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve previously written about &lt;a title=&#34;Replace Magic Strings with Enumerations in Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/09/02/replace-magic-strings-with-enumerations-in-swift/&#34; target=&#34;_blank&#34;&gt;using enumerations in Swift to encapsulate special values&lt;/a&gt; that could end up falling into the &amp;ldquo;magic string” category if they were to simply be scattered in-line throughout your code. The primary example I proposed for such a &amp;ldquo;magic string” replacement was Storyboard Segue Identifiers.  These special identifiers have such a specific purpose that felt to me like a natural fit to create a Type in the form of an enumeration (which I called SegueIdentifier) to group them all together in one place so that I could easily find them and modify them, should I ever need to do so.&lt;/p&gt;
 &lt;p&gt;I still like that solution for &lt;em&gt;groups&lt;/em&gt; of things, but it&amp;rsquo;s a lot of &amp;ldquo;ceremony” to use enumerations for encapsulating &lt;em&gt;everything&lt;/em&gt; that may have been implemented as a macro expression or a static global constant in Objective-C.&lt;/p&gt;

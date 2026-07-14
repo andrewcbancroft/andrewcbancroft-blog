@@ -4,7 +4,7 @@ description: "One of the most important parts of debugging is gathering informat
 author: Andrew
 type: blog
 draft: true
-date: 2020-02-06:00:00+00:00
+date: 2020-02-06T00:00:00+00:00
 wip: false
 showrecent: true
 disppsdebugbadge: true

@@ -14,7 +14,6 @@
       <title>Core Data: Solving Ambiguous Type / Redeclaration of Type</title>
       <link>https://www.andrewcbancroft.com/2017/03/28/core-data-solving-ambiguous-type-redeclaration-of-type/</link>
       <pubDate>Wed, 29 Mar 2017 02:57:05 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/03/28/core-data-solving-ambiguous-type-redeclaration-of-type/</guid>
       <description>&lt;p&gt;I just finished roasting some coffee from Peru. I&amp;rsquo;ve never had it before, but it got me thinking about my &lt;a href=&#34;https://github.com/andrewcbancroft/RoasterOnTheGo&#34;&gt;Roaster On the Go&lt;/a&gt; &amp;ldquo;app” as I thought about the context that I could use to show you the solution to the compiler error described in the title. I used this to demonstrate &lt;a href=&#34;https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/&#34;&gt;Working with Unwind Segues Programmatically in Swift&lt;/a&gt;, but now I&amp;rsquo;m going to use it to show you how to resolve these errors that can crop up when you&amp;rsquo;re implementing &lt;code&gt;NSManagedObject&lt;/code&gt; subclasses for your Core Data Entities.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;scenario&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -88,7 +87,6 @@
       <title>Implement NSManagedObject Subclass in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</link>
       <pubDate>Fri, 18 Jul 2014 04:08:12 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on July 8, 2016 – Xcode 7&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;My goal with this blog entry is to help get you set up to create NSManagedObject subclasses in Swift for the Entities in your Core Data model.&lt;/p&gt;

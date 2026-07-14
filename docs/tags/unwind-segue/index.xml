@@ -14,7 +14,6 @@
       <title>Working with Unwind Segues Programmatically in Swift</title>
       <link>https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/</link>
       <pubDate>Fri, 18 Dec 2015 18:22:55 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/12/18/working-with-unwind-segues-programmatically-in-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on September 20, 2016 – Xcode 8 &amp;amp; Swift 3.0&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;Navigating between screens is a critical component to building iOS applications. The mechanism for navigation in Storyboard-based applications is the &lt;em&gt;segue&lt;/em&gt;. Using segues, we can travel ahead to the next screen, which is extremely common. We can also travel &lt;em&gt;backward&lt;/em&gt; in the screen &amp;ldquo;navigation stack” by programming a special kind of segue called an &lt;em&gt;unwind&lt;/em&gt; segue.&lt;/p&gt;

@@ -14,7 +14,6 @@
       <title>UITableView Swipe to Delete Workflow in Swift</title>
       <link>https://www.andrewcbancroft.com/2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/</link>
       <pubDate>Fri, 17 Jul 2015 04:00:18 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/07/16/uitableview-swipe-to-delete-workflow-in-swift/</guid>
       <description>&lt;p&gt;Data management applications, by which I mean an app where you&amp;rsquo;re allowing users to add, edit, and delete bits of data as part of your app&amp;rsquo;s core function, very likely use a table view (or two) to visualize lists of information that users of the app can interact with.&lt;/p&gt;
 &lt;p&gt;Making &lt;em&gt;changes&lt;/em&gt; to the information listed in the table view and signaling those changes in a fluent way becomes a top concern for these types of apps. How do we allow users to add or remove &amp;ldquo;records” to the system? Furthermore, how do we signal that those changes were effective and refresh the view of the data in the UI?&lt;/p&gt;

@@ -14,3 +14,25 @@ disqusShortname="andrewcbancroft"
 
 [markup.goldmark.renderer]
 unsafe= true
+
+# Newsletter signup configuration (provider-agnostic).
+# The form partial (layouts/partials/newsletter-signup.html) reads everything
+# from here so the ESP can be swapped without touching templates.
+#
+# provider = "stub" keeps the form in sandbox mode: no network submit, the
+# GA4 newsletter_signup event still fires, and a success message renders.
+# To go live with Buttondown:
+#   provider = "buttondown"
+#   action   = "https://buttondown.com/api/emails/embed-subscribe/<username>"
+#   emailFieldName  = "email"
+#   sourceFieldName = "tag"
+# To go live with Kit (ConvertKit):
+#   provider = "kit"
+#   action   = "https://app.kit.com/forms/<form-id>/subscriptions"
+#   emailFieldName  = "email_address"
+#   sourceFieldName = "fields[source]"
+[params.newsletter]
+provider = "stub"
+action = ""
+emailFieldName = "email"
+sourceFieldName = "tag"

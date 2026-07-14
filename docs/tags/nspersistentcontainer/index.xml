@@ -14,7 +14,6 @@
       <title>Using an Existing SQLite Store with NSPersistentContainer</title>
       <link>https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/</link>
       <pubDate>Mon, 10 Jul 2017 18:02:05 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/07/10/using-an-existing-sqlite-store-with-nspersistentcontainer/</guid>
       <description>&lt;p&gt;If you&amp;rsquo;ve been creating the Core Data Stack &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/&#34;&gt;without NSPersistentContainer&lt;/a&gt; and you&amp;rsquo;re thinking about switching things up to &lt;em&gt;use&lt;/em&gt; &lt;code&gt;NSPersistentContainer&lt;/code&gt;, you need to think about your existing SQLite persistent store.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/&#34;&gt;Creating the stack with NSPersistentContainer&lt;/a&gt; handles the creation of SQLite stores internally, so brand new setups using &lt;code&gt;NSPersistentContainer&lt;/code&gt; are pretty easy.&lt;/p&gt;
@@ -89,7 +88,6 @@
       <title>A Swift Implementation of the Core Data Stack Using NSPersistentContainer</title>
       <link>https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/</link>
       <pubDate>Mon, 15 May 2017 18:19:46 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/05/15/a-swift-implementation-of-the-core-data-stack-using-nspersistentcontainer/</guid>
       <description>&lt;p&gt;If you&amp;rsquo;re targeting &lt;strong&gt;iOS 10 and above&lt;/strong&gt;, you&amp;rsquo;ve got the opportunity to pick your poison when it comes to creating the Core Data stack.&lt;/p&gt;
 &lt;p&gt;You could opt for the process I described in &lt;a href=&#34;https://www.andrewcbancroft.com/2017/04/16/creating-the-core-data-stack-with-backwards-compatibility-in-swift/&#34;&gt;Creating the Core Data Stack with Backwards Compatibility in Swift&lt;/a&gt; — that process still works perfectly fine in iOS 10+.&lt;/p&gt;

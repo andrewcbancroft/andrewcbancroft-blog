@@ -14,7 +14,6 @@
       <title>SSRS: Which server sent my e-mail subscription?</title>
       <link>https://www.andrewcbancroft.com/2012/07/25/ssrs-which-server-sent-my-e-mail-subscription/</link>
       <pubDate>Wed, 25 Jul 2012 13:56:24 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/07/25/ssrs-which-server-sent-my-e-mail-subscription/</guid>
       <description>&lt;p&gt;I was recently troubleshooting a seemingly bizarre issue I was having with one of our report subscriptions – the production version was running normally, but our customer suddenly began receiving a very old version of the same report subscription.  After disabling the subscription from all non-production servers that I knew about, the customer continued to receive the rogue e-mail.  I needed to figure out which “mystery” report server was sending the e-mail subscription.&lt;/p&gt;
 &lt;p&gt;The answer was simple once I stepped back from the problem and remembered that there’s such a thing as a header to an e-mail that gives details about where the e-mail is coming from.&lt;/p&gt;
@@ -30,7 +29,6 @@
       <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)</title>
       <link>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</link>
       <pubDate>Sat, 30 Jun 2012 19:44:36 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</guid>
       <description>&lt;p&gt;You can visit Part 1 of this troubleshooting series by &lt;a href=&#34;http://andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/&#34; title=&#34;Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)&#34;&gt;clicking here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;During our configuration of Reporting Services for SharePoint I ran into another common issue.&lt;/p&gt;
@@ -51,7 +49,6 @@
       <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)</title>
       <link>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/</link>
       <pubDate>Sat, 30 Jun 2012 19:06:39 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/</guid>
       <description>&lt;p&gt;I recently worked with our SharePoint administrator to install SQL Server 2012 Reporting Services in SharePoint Integrated Mode to take advantage of PowerView.  By following the installation instructions &lt;a title=&#34;Install Reporting Services SharePoint Mode as a Single Server Farm&#34; href=&#34;http://msdn.microsoft.com/en-us/library/gg492276.aspx&#34; target=&#34;_blank&#34;&gt;found at this MSDN article&lt;/a&gt;, we were able to painlessly install both Reporting Services and the Reporting Services Add-in from the SQL Server installation media.&lt;/p&gt;
 &lt;p&gt;Then began the configuration process.  Since everyone&amp;rsquo;s environment is different, I found it difficult to troubleshoot some of the odd behavior that we were running in to.  In Part 1 of this post I want to focus on what we did to overcome a specific error we were receiving:&lt;/p&gt;

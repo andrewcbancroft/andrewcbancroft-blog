@@ -14,7 +14,6 @@
       <title>Send Email In-App – Using MFMailComposeViewController with Swift</title>
       <link>https://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/</link>
       <pubDate>Tue, 26 Aug 2014 03:48:30 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on October 11, 2016 – Swift 3.0&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;In this writing, I want explore how to use &lt;code&gt;MFMailComposeViewController&lt;/code&gt; with Swift to send e-mails within your app as a walkthrough. My focus here is &amp;ldquo;quick and dirty” pragmatism, so that we can easily see what the inter-working components of &lt;code&gt;MFMailComposeViewController&lt;/code&gt; are. That being said, here&amp;rsquo;s an important &lt;em&gt;disclaimer&lt;/em&gt; – I&amp;rsquo;m going to overload the View Controller&amp;rsquo;s responsibilities in the examples to follow.&lt;/p&gt;

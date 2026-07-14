@@ -14,7 +14,6 @@
       <title>Swift Framework Woes – Unresolved Identifier? No Member?</title>
       <link>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</link>
       <pubDate>Fri, 08 Jan 2016 18:40:55 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/01/08/swift-framework-woes-unresolved-identifier-no-member/</guid>
       <description>&lt;p&gt;It&amp;rsquo;s the simple things that get us, isn&amp;rsquo;t it?&lt;/p&gt;
 &lt;p&gt;I was working on a simple little framework the other day, and I&amp;rsquo;d gotten things just how I wanted… or so I thought.&lt;/p&gt;
@@ -39,7 +38,6 @@
       <title>Clarifying Swift Access Control (Hint:  Swift Isn’t C#)</title>
       <link>https://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/</link>
       <pubDate>Fri, 24 Apr 2015 18:02:34 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/04/24/clarifying-swift-access-control-hint-swift-isnt-c-sharp/</guid>
       <description>&lt;p&gt;As it turns out, Swift isn&amp;rsquo;t C# (or Java or VB.Net or…)! My day job keeps me busy writing C#, so I&amp;rsquo;ll reference it as my go-to comparison language for this article. The conclusion, however, carries over to other languages that have access control modifiers.&lt;/p&gt;
 &lt;p&gt;I just spent the greater part of a week experimenting with Swift extensions. I was trying to figure out some seemingly strange behavior that they were exhibiting.&lt;/p&gt;
@@ -104,7 +102,6 @@
       <title>Testability Tip for Swift Developers – Public Over Private</title>
       <link>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</link>
       <pubDate>Wed, 15 Apr 2015 18:52:11 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/04/15/testability-tip-for-swift-developers-public-over-private/</guid>
       <description>&lt;p&gt;Quite often in unit testing, especially when practicing Test-Driven Development, I find myself wanting to test every single line of code. When I run up against a &lt;code&gt;private&lt;/code&gt; function, however, I often scratch my head and ask, &amp;ldquo;How am I supposed to test this??”.&lt;/p&gt;
 &lt;p&gt;Most experienced testers will tell you, &amp;ldquo;Don&amp;rsquo;t test private implementation – only public API”.&lt;/p&gt;
@@ -192,7 +189,6 @@
       <title>Swift Access Control – Implications for Unit Testing</title>
       <link>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</link>
       <pubDate>Wed, 23 Jul 2014 04:04:43 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</guid>
       <description>&lt;p&gt;If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier…”, you&amp;rsquo;re not alone!&lt;/p&gt;
 &lt;h3 id=&#34;unit-tests-and-swift-access-control&#34;&gt;Unit Tests and Swift Access Control&lt;/h3&gt;

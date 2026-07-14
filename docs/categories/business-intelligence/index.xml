@@ -14,7 +14,6 @@
       <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 2)</title>
       <link>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</link>
       <pubDate>Sat, 30 Jun 2012 19:44:36 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-2/</guid>
       <description>&lt;p&gt;You can visit Part 1 of this troubleshooting series by &lt;a href=&#34;http://andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/&#34; title=&#34;Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)&#34;&gt;clicking here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;During our configuration of Reporting Services for SharePoint I ran into another common issue.&lt;/p&gt;
@@ -35,7 +34,6 @@
       <title>Troubleshooting SQL Server 2012 Reporting Services and SharePoint 2010 Integration (Part 1)</title>
       <link>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/</link>
       <pubDate>Sat, 30 Jun 2012 19:06:39 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/06/30/troubleshooting-sql-server-2012-reporting-services-and-sharepoint-2010-integration-part-1/</guid>
       <description>&lt;p&gt;I recently worked with our SharePoint administrator to install SQL Server 2012 Reporting Services in SharePoint Integrated Mode to take advantage of PowerView.  By following the installation instructions &lt;a title=&#34;Install Reporting Services SharePoint Mode as a Single Server Farm&#34; href=&#34;http://msdn.microsoft.com/en-us/library/gg492276.aspx&#34; target=&#34;_blank&#34;&gt;found at this MSDN article&lt;/a&gt;, we were able to painlessly install both Reporting Services and the Reporting Services Add-in from the SQL Server installation media.&lt;/p&gt;
 &lt;p&gt;Then began the configuration process.  Since everyone&amp;rsquo;s environment is different, I found it difficult to troubleshoot some of the odd behavior that we were running in to.  In Part 1 of this post I want to focus on what we did to overcome a specific error we were receiving:&lt;/p&gt;
@@ -72,7 +70,6 @@
       <title>From SQL Queries to Data Modeling</title>
       <link>https://www.andrewcbancroft.com/2012/06/16/from-sql-queries-to-data-modeling/</link>
       <pubDate>Sat, 16 Jun 2012 19:25:15 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/06/16/from-sql-queries-to-data-modeling/</guid>
       <description>&lt;p&gt;This past week I had the opportunity to attend Microsoft TechEd 2012. Lots and lots of great material presented – I&amp;rsquo;m pretty stoked about some of the amazing features of SQL Server 2012&amp;rsquo;s BI stack.&lt;/p&gt;
 &lt;p&gt;During the course of the week I discovered something that has been emerging in my thought process for a while, but sort of hit the level of practicality as I saw one particular feature demonstrated: the BI Semantic Model. I walked away from session after session thinking, &amp;ldquo;Man, this is so doable now!!”. This was the single most impressive and perspective altering concept that flooded into my brain this week.&lt;/p&gt;

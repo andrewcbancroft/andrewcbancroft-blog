@@ -14,7 +14,6 @@
       <title>Swift Functions as Types</title>
       <link>https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/</link>
       <pubDate>Fri, 18 Mar 2016 18:11:02 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/03/18/swift-functions-as-types/</guid>
       <description>&lt;p&gt;For the well-versed functional programmer, the fact that [functions in Swift are &lt;em&gt;Types&lt;/em&gt;][1] is no surprise. But I&amp;rsquo;m relatively new to the game on that front, so when I first encountered the idea of thinking of a function as a Type back when Swift was announced in 2014, it was a real eye-opener for me.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;swift-types-general&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -199,7 +198,6 @@ return increase ? increment : decrement
       <title>Conveniently Transforming Immutable Types in Swift</title>
       <link>https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/</link>
       <pubDate>Tue, 20 Jan 2015 12:30:51 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/01/20/conveniently-transforming-immutable-types-swift/</guid>
       <description>&lt;p&gt;A few weeks ago I wrote about &lt;a href=&#34;http://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/&#34;&gt;Immutable Types and Changing State in Swift&lt;/a&gt;, where I hoped to convey an &amp;ldquo;aha!-moment” that happened for me.&lt;/p&gt;
 &lt;p&gt;Since then, I&amp;rsquo;ve learned a bit more. For example, the technique I presented for transforming instances of a Type immutably actually come for free when you use a value Type, such as a Struct! Check out &lt;a href=&#34;https://twitter.com/NatashaTheRobot&#34;&gt;@NatashaTheRobot&amp;rsquo;s&lt;/a&gt; writeup on the subject, titled &lt;a href=&#34;http://natashatherobot.com/mutating-functions-swift-structs/&#34;&gt;&amp;ldquo;Mutating Functions in Swift Structs”&lt;/a&gt;, for more information.&lt;/p&gt;
@@ -241,7 +239,6 @@ return increase ? increment : decrement
       <title>Immutable Types with Changing State in Swift</title>
       <link>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</link>
       <pubDate>Tue, 06 Jan 2015 12:00:50 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</guid>
       <description>&lt;p&gt;Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&amp;rsquo;ve seen a lot in the functional programming arena as it relates to Swift.&lt;/p&gt;
 &lt;p&gt;As I seek to improve my functional programming thought processes and to practice what I&amp;rsquo;m learning, I found myself struggling with a fundamental concept: &lt;strong&gt;immutability&lt;/strong&gt;. &lt;em&gt;Especially&lt;/em&gt; when I&amp;rsquo;m designing something that, at the very least, &lt;em&gt;appears&lt;/em&gt; to require the ability to change state at some point in time.&lt;/p&gt;
@@ -358,7 +355,6 @@ println(scoreKeeper.runningScore)
       <title>Resolving “Variable used within its own initial value” Error in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</link>
       <pubDate>Mon, 20 Oct 2014 13:50:52 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/20/resolving-variable-used-within-its-own-initial-value-error-in-swift-2/</guid>
       <description>&lt;p&gt;While experimenting with a few things today, I experienced this compiler error:&lt;/p&gt;
 &lt;blockquote&gt;

@@ -14,7 +14,6 @@
       <title>DotNetZip – Solving Mac Decompression Issues</title>
       <link>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</link>
       <pubDate>Sat, 28 Dec 2013 20:55:27 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</guid>
       <description>&lt;p&gt;As part of a ASP.Net Web API service that I&amp;rsquo;m co-developing, I have gotten familiar with the &lt;a title=&#34;DotNetZip Codeplex Page&#34; href=&#34;http://dotnetzip.codeplex.com/&#34; target=&#34;_blank&#34;&gt;DotNetZip Library&lt;/a&gt;.  It&amp;rsquo;s fantastic.  We&amp;rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.&lt;/p&gt;
 &lt;p&gt;During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.&lt;/p&gt;

@@ -14,7 +14,6 @@
       <title>Pointer Pointer #2</title>
       <link>https://www.andrewcbancroft.com/2012/06/24/pointer-pointer-2/</link>
       <pubDate>Sun, 24 Jun 2012 14:23:33 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/06/24/pointer-pointer-2/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://andrewcbancroft.com/2012/06/17/pointer-pointer-1/&#34; title=&#34;Pointer Pointer #1&#34;&gt;Pointer Pointer #1 can be found here&lt;/a&gt; – it deals with how the &amp;ldquo;*” symbol is used in different places when dealing with pointers.&lt;/p&gt;
 &lt;p&gt;A second pointer I have on pointers that helped me is this:&lt;/p&gt;
@@ -45,7 +44,6 @@ printf(&amp;ldquo;intPointer, itself, is stored at an address, which is differen
       <title>Pointer Pointer #1</title>
       <link>https://www.andrewcbancroft.com/2012/06/17/pointer-pointer-1/</link>
       <pubDate>Sun, 17 Jun 2012 19:45:05 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2012/06/17/pointer-pointer-1/</guid>
       <description>&lt;p&gt;Part of my confusion with the C family of languages has been how the * symbol worked in the various places it&amp;rsquo;s used in relation to pointers. A key insight helped de-mystify a lot for me:&lt;/p&gt;
 &lt;p&gt;The * symbol is used as both a &lt;em&gt;type&lt;/em&gt; declaration &lt;em&gt;and&lt;/em&gt; as an &lt;em&gt;operator&lt;/em&gt; (the de-reference operator).&lt;/p&gt;

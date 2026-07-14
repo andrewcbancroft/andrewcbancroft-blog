@@ -14,7 +14,6 @@
       <title>Parse PFCloud – “JSON text did not start with array or object”</title>
       <link>https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/</link>
       <pubDate>Fri, 20 May 2016 03:33:03 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/05/19/parse-pfcloud-json-text-did-not-start-with-array-or-object/</guid>
       <description>&lt;p&gt;It&amp;rsquo;s always the little things that lead to flatter foreheads (or at least it is for me).&lt;/p&gt;
 &lt;p&gt;Banging my head against the desk this evening working on a Parse migration, I finally figured out what was causing an error condition in a &lt;code&gt;PFCloud&lt;/code&gt; function call.&lt;/p&gt;
@@ -45,7 +44,6 @@
       <title>Deploying Parse Dashboard</title>
       <link>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</link>
       <pubDate>Sun, 17 Apr 2016 21:56:45 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</guid>
       <description>&lt;p&gt;Below are steps that I&amp;rsquo;ve taken, myself, to deploy the [Parse Dashboard][1] to a cloud host, such as Azure, or Heroku.&lt;/p&gt;
 &lt;p&gt;Before you worry with a cloud host, you need a copy of the parse-dashboard to prepare for deployment…&lt;/p&gt;
@@ -214,7 +212,6 @@ In Heroku, you need to go to your app&#39;s Settings, and then add a new Config 
       <title>FIX – Query in Parse Cloud Code Returns Unauthorized Error</title>
       <link>https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/</link>
       <pubDate>Wed, 06 Apr 2016 04:27:49 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/</guid>
       <description>&lt;p&gt;The Parse migration process has begun – I&amp;rsquo;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.&lt;/p&gt;
 &lt;p&gt;The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!&lt;/p&gt;

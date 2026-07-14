@@ -14,7 +14,6 @@
       <title>Diagnosing “Restore failed” with ASP.NET 5 on Mac</title>
       <link>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
       <pubDate>Sun, 09 Aug 2015 20:57:02 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
       <description>&lt;p&gt;Following along with Steve Smith&amp;rsquo;s &lt;a href=&#34;http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html&#34;&gt;&amp;ldquo;Your First ASP.NET 5 Application on a Mac”&lt;/a&gt;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;rsquo;t work due to a problem with restoring the project&amp;rsquo;s dependencies.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;retracing-steps&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -46,7 +45,6 @@
       <title>Up and Running with Unity IOC Container for ASP.Net MVC</title>
       <link>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</link>
       <pubDate>Mon, 27 Oct 2014 18:07:21 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/27/up-and-running-with-unity-ioc-container-for-asp-net-mvc/</guid>
       <description>&lt;p&gt;The process for creating an ASP.Net MVC web application that relies on the Unity Inversion of Control (IOC) container has gotten quite a bit more streamlined since I first started working with it.  However, since I don’t start brand new software projects often, it’s often the case that it takes me a few minutes to figure out which NuGet package to install to get things up and running. &lt;/p&gt;
 &lt;p&gt;The following is a quick-reference for myself, and for anyone else who’s interested in getting up and running quickly with the Unity IOC container for an ASP.Net MVC project.&lt;/p&gt;

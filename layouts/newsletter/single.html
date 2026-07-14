@@ -1,0 +1,20 @@
+{{ define "title" }}{{ .Title | markdownify }} | {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <article>
+        <div class="page newsletter-page">
+          <header>
+            <h1 class="article-title">{{ .Title }}</h1>
+          </header>
+          <div class="content">
+            {{ .Content }}
+          </div>
+          {{ partial "newsletter-signup.html" (dict "page" . "source" "newsletter-page" "showHook" false) }}
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+{{ end }}

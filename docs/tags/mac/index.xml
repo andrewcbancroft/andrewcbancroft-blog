@@ -14,7 +14,6 @@
       <title>Diagnosing “Restore failed” with ASP.NET 5 on Mac</title>
       <link>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</link>
       <pubDate>Sun, 09 Aug 2015 20:57:02 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/08/09/diagnosing-restore-failed-with-asp-net-5-on-mac/</guid>
       <description>&lt;p&gt;Following along with Steve Smith&amp;rsquo;s &lt;a href=&#34;http://docs.asp.net/en/latest/tutorials/your-first-mac-aspnet.html&#34;&gt;&amp;ldquo;Your First ASP.NET 5 Application on a Mac”&lt;/a&gt;, I found myself frustrated that, despite all my efforts, the simple little sample project I was trying to get running just wouldn&amp;rsquo;t work due to a problem with restoring the project&amp;rsquo;s dependencies.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;retracing-steps&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -46,7 +45,6 @@
       <title>DotNetZip – Solving Mac Decompression Issues</title>
       <link>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</link>
       <pubDate>Sat, 28 Dec 2013 20:55:27 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2013/12/28/dotnetzip-solving-mac-decompression-issues/</guid>
       <description>&lt;p&gt;As part of a ASP.Net Web API service that I&amp;rsquo;m co-developing, I have gotten familiar with the &lt;a title=&#34;DotNetZip Codeplex Page&#34; href=&#34;http://dotnetzip.codeplex.com/&#34; target=&#34;_blank&#34;&gt;DotNetZip Library&lt;/a&gt;.  It&amp;rsquo;s fantastic.  We&amp;rsquo;re using it to gather up a set of requested files from network storage, package them in a zip archive, and stream them back to a client via a web application.&lt;/p&gt;
 &lt;p&gt;During testing, things worked great on Windows machines, but the moment we tested using a Mac, we ran into issues.&lt;/p&gt;

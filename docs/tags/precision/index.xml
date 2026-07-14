@@ -14,7 +14,6 @@
       <title>Entity Framework Tip – Specifying Decimal Precision</title>
       <link>https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/</link>
       <pubDate>Wed, 29 Mar 2017 20:57:27 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/03/29/entity-framework-tip-specifying-decimal-precision/</guid>
       <description>&lt;p&gt;By default, Entity Framework takes the .Net &lt;code&gt;decimal&lt;/code&gt; Type and maps it to SQL Server&amp;rsquo;s &lt;code&gt;decimal(18,2)&lt;/code&gt; data type.&lt;/p&gt;
 &lt;p&gt;If you&amp;rsquo;ve got a property on an Entity that is of Type &lt;code&gt;decimal&lt;/code&gt;, but down in your database, you&amp;rsquo;re allowing for greater precision than 2 decimal places (&lt;a href=&#34;https://docs.microsoft.com/en-us/sql/t-sql/data-types/precision-scale-and-length-transact-sql&#34;&gt;&lt;em&gt;scale&lt;/em&gt;&lt;/a&gt; is actually the proper term for the number of places after the decimal), you need to tell Entity Framework this information. Otherwise, decimal values that you save to your database will be truncated at the default &lt;strong&gt;2&lt;/strong&gt; decimal places.&lt;/p&gt;

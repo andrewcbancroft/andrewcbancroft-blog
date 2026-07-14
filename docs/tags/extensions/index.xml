@@ -14,7 +14,6 @@
       <title>3 Nuances of Swift Extensions</title>
       <link>https://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/</link>
       <pubDate>Wed, 22 Apr 2015 17:52:36 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/04/22/3-nuances-of-swift-extensions/</guid>
       <description>&lt;p&gt;How often do we take an initial cursory look at some documentation, shake our heads and say, &amp;ldquo;Ok, sure! Got it!”, and then some time later get to the actual usage of that perceived understanding only to find out, &amp;ldquo;Woah – this is behaving differently than I expected! I wonder if the documentation says anything about this?!”&lt;/p&gt;
 &lt;p&gt;A few discussions I&amp;rsquo;ve had recently have prompted me to question what I thought I knew about Swift extensions. I have read documentation about extensions and I &lt;em&gt;thought&lt;/em&gt; I understood them pretty thoroughly. However, these conversations, along with some experimentation done on my own revealed a few nuances that I didn&amp;rsquo;t pick up on before.&lt;/p&gt;
@@ -153,7 +152,6 @@
       <title>Send a Type to Obedience School – Using Swift Extensions for Additional Protocol Conformance</title>
       <link>https://www.andrewcbancroft.com/2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/</link>
       <pubDate>Tue, 02 Dec 2014 19:15:33 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/</guid>
       <description>&lt;p&gt;Did you know that you can make &lt;em&gt;any&lt;/em&gt; Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don&amp;rsquo;t have the source code for, adopt a protocol that it doesn&amp;rsquo;t normally conform to out of the box?&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;You can&lt;/strong&gt; – &lt;em&gt;even if you don&amp;rsquo;t have the original source code for that Type&lt;/em&gt;! It&amp;rsquo;s a powerful and intriguing proposition. Let&amp;rsquo;s explore how this is possible.&lt;/p&gt;

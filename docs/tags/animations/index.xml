@@ -14,7 +14,6 @@
       <title>Slide In Animation in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/</link>
       <pubDate>Wed, 24 Sep 2014 18:25:52 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/</guid>
       <description>&lt;p&gt;In a previous post about &lt;a title=&#34;Fade In / Out Animations as Class Extensions in Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/&#34; target=&#34;_blank&#34;&gt;fade animations&lt;/a&gt; in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call &lt;code&gt;fadeIn()&lt;/code&gt; or &lt;code&gt;fadeOut()&lt;/code&gt; on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them &lt;em&gt;somewhere&lt;/em&gt;. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews.&lt;/p&gt;
 &lt;p&gt;Well, I liked the idea so much that when it came time for me to implement a slide animation, I kept the same strategy, and I&amp;rsquo;d like to share my implementation with you today.&lt;/p&gt;

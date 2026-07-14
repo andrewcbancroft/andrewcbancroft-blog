@@ -1,0 +1,17 @@
+{{- /*
+  Local replacement for Hugo's internal `tweet` shortcode, removed in v0.156.
+  Emits the cached oEmbed HTML for known tweet ids (byte-identical to what the
+  old shortcode fetched at build time), and a plain embed-blockquote fallback
+  for any id without a cached entry. widgets.js renders both identically.
+*/ -}}
+{{- $id := printf "%v" (.Get 0) -}}
+{{- $cached := dict
+  "1020265988561022976" `<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/iosdev?src=hash&amp;ref_src=twsrc%5Etfw">#iosdev</a> folks:  When your app needs a backend (ie, a remote server / remote database), what do you use?<br><br>I’m also interested in the “why” - reply with a tweet if you care to share! Thanks! 🙌🏻</p>&mdash; Andrew Bancroft (@andrewcbancroft) <a href="https://twitter.com/andrewcbancroft/status/1020265988561022976?ref_src=twsrc%5Etfw">July 20, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`
+-}}
+{{- with index $cached $id -}}
+{{ . | safeHTML }}
+{{- else -}}
+<blockquote class="twitter-tweet"><a href="https://twitter.com/i/status/{{ $id }}">View tweet</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+{{- end -}}

@@ -1,4 +1,4 @@
-{{ define "title" }}{{ .Title | markdownify }}{{ end }} {{ define "schema-dot-org" }}
+{{ define "title" }}{{ .Title | markdownify }}{{ end }}
 {{ define "ads" }}
 <!-- Google tag (gtag.js) -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6356224024630676"
@@ -11,6 +11,7 @@ crossorigin="anonymous"></script>
 });
 </script>
 {{ end }}
+{{ define "schema-dot-org" }}
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
@@ -42,9 +43,6 @@ crossorigin="anonymous"></script>
   {{- if not .Lastmod.IsZero }}
   "dateModified": "{{ .Lastmod.Format $ISO8601 }}",
   {{- end }}
-  {{- with .Site.Social.GooglePlus }}
-  "publisher": "{{ printf "%s" . }}",
-  {{- end }}
   "author": {
     "@type": "Person",
     "name": "{{ .Params.author | default .Site.Params.author }}"
@@ -60,9 +58,6 @@ crossorigin="anonymous"></script>
 
 {{ end }}
 
-<div class="container">
-  <div class="row">
-      <div class="col-sm-12">
 {{ define "main" }} {{ $dateFormat := default " January 2, 2006" (index .Site.Params "date_format") }}
 
 

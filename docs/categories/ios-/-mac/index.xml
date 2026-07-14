@@ -1,10 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>iOS / Mac on Andrew Bancroft</title>
+    <title>IOS / Mac on Andrew Bancroft</title>
     <link>https://www.andrewcbancroft.com/categories/ios-/-mac/</link>
-    <description>Recent content about iOS development with Swift in iOS / Mac  from Andrew Bancroft.</description>
+    <description>Recent content about iOS development with Swift in IOS / Mac  from Andrew Bancroft.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Tue, 25 Apr 2017 13:35:04 +0000</lastBuildDate>
     
         <atom:link href="https://www.andrewcbancroft.com/categories/ios-/-mac/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +14,6 @@
       <title>Every Developer is an API Designer</title>
       <link>https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/</link>
       <pubDate>Tue, 25 Apr 2017 13:35:04 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/04/25/every-developer-api-designer/</guid>
       <description>&lt;p&gt;Every function; every class; every struct and enum and protocol is an API.&lt;/p&gt;
 &lt;h1 id=&#34;you-8212-are-an-api-designer&#34;&gt;YOU — are an API designer&lt;/h1&gt;
@@ -49,7 +49,6 @@
       <title>Solving React Native’s “No bundle url present” Error</title>
       <link>https://www.andrewcbancroft.com/2017/04/22/solving-react-natives-no-bundle-url-present-error/</link>
       <pubDate>Sat, 22 Apr 2017 17:49:11 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2017/04/22/solving-react-natives-no-bundle-url-present-error/</guid>
       <description>&lt;p&gt;I hit the &amp;ldquo;No bundle url present.” roadblock today and had to dig a bit to find the solution. I&amp;rsquo;m going to describe how I encountered the problem, and provide the solution that&amp;rsquo;s worked more than once for me, ever since I found the suggestion in the React Native GitHub repository.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;problem&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -82,7 +81,6 @@
       <title>Disabling Xcode’s OS-Level Debug Logging</title>
       <link>https://www.andrewcbancroft.com/2016/10/28/disabling-xcode-os-level-debug-logging/</link>
       <pubDate>Fri, 28 Oct 2016 05:06:19 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/10/28/disabling-xcode-os-level-debug-logging/</guid>
       <description>&lt;p&gt;Full credit to &lt;a href=&#34;https://twitter.com/rustyshelf&#34;&gt;Russell Ivanovic&lt;/a&gt; for his &lt;a href=&#34;https://twitter.com/rustyshelf/status/775505191160328194&#34;&gt;tweet&lt;/a&gt; for figuring out how to disable Xcode 8&amp;rsquo;s extremely chatty debug console logging. I just wanted this here for my own reference, but perhaps it&amp;rsquo;s helpful to you as well.&lt;/p&gt;
 &lt;p&gt;If you&amp;rsquo;re tired of sifting through operating system-level logging to the debug console while you&amp;rsquo;re debugging your app, it&amp;rsquo;s actually fairly easy to silence.&lt;/p&gt;
@@ -103,7 +101,6 @@
       <title>Deploying Parse Dashboard</title>
       <link>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</link>
       <pubDate>Sun, 17 Apr 2016 21:56:45 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/04/17/deploying-parse-dashboard/</guid>
       <description>&lt;p&gt;Below are steps that I&amp;rsquo;ve taken, myself, to deploy the [Parse Dashboard][1] to a cloud host, such as Azure, or Heroku.&lt;/p&gt;
 &lt;p&gt;Before you worry with a cloud host, you need a copy of the parse-dashboard to prepare for deployment…&lt;/p&gt;
@@ -272,7 +269,6 @@ In Heroku, you need to go to your app&#39;s Settings, and then add a new Config 
       <title>FIX – Query in Parse Cloud Code Returns Unauthorized Error</title>
       <link>https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/</link>
       <pubDate>Wed, 06 Apr 2016 04:27:49 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2016/04/05/fix-query-in-parse-cloud-code-returns-unauthorized-error/</guid>
       <description>&lt;p&gt;The Parse migration process has begun – I&amp;rsquo;ve got a couple of small apps that used this backend as a service because the backend was simple and Parse was free.&lt;/p&gt;
 &lt;p&gt;The migration has gone fairly smooth so far, but I hit a wall and have been struggling to figure out the solution for about 3 hours. 3 hours too many, haha!&lt;/p&gt;
@@ -363,7 +359,6 @@ I hope this little breadcrumb finds its way to someone before _they_ spend 3 hou
       <title>NSNotificationCenter vs Delegation – An Analysis</title>
       <link>https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/</link>
       <pubDate>Thu, 05 Feb 2015 13:00:26 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/02/05/nsnotificationcenter-vs-delegation-analysis/</guid>
       <description>&lt;p&gt;In &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/&#34;&gt;Fundamentals of NSNotificationCenter in Swift&lt;/a&gt;, a &lt;a href=&#34;http://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/#comment-1762533966&#34;&gt;commenter asked&lt;/a&gt; me to elaborate on a response I&amp;rsquo;d given to a dialog going on below the blog post. I had stated:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -445,7 +440,6 @@ I hope this little breadcrumb finds its way to someone before _they_ spend 3 hou
       <title>Unit Testing Model Layer with Core Data and Swift</title>
       <link>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</link>
       <pubDate>Tue, 13 Jan 2015 13:00:37 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on November 19, 2015 – Swift 2.0&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;As I approached testing my Core Data model, I have to admit I was apprehensive. How in the world was I going to write unit tests for my model layer that depended on a database. Past experience with trying to write tests with databases was painful. I feared the same would be the case with Core Data.&lt;/p&gt;
@@ -535,7 +529,6 @@ I hope this little breadcrumb finds its way to someone before _they_ spend 3 hou
       <title>Immutable Types with Changing State in Swift</title>
       <link>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</link>
       <pubDate>Tue, 06 Jan 2015 12:00:50 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2015/01/06/immutable-types-changing-state-swift/</guid>
       <description>&lt;p&gt;Dabble in Swift for long and the functional programming paradigm will most certainly appear on your radar. From conferences to books to blog posts, I&amp;rsquo;ve seen a lot in the functional programming arena as it relates to Swift.&lt;/p&gt;
 &lt;p&gt;As I seek to improve my functional programming thought processes and to practice what I&amp;rsquo;m learning, I found myself struggling with a fundamental concept: &lt;strong&gt;immutability&lt;/strong&gt;. &lt;em&gt;Especially&lt;/em&gt; when I&amp;rsquo;m designing something that, at the very least, &lt;em&gt;appears&lt;/em&gt; to require the ability to change state at some point in time.&lt;/p&gt;
@@ -652,7 +645,6 @@ println(scoreKeeper.runningScore)
       <title>Getting Started with Unit Testing in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/</link>
       <pubDate>Mon, 29 Dec 2014 12:00:50 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/12/29/getting-started-unit-testing-swift/</guid>
       <description>&lt;p&gt;Getting set up to write unit tests in Swift, while not &lt;em&gt;difficult&lt;/em&gt;, isn&amp;rsquo;t exactly &lt;em&gt;intuitive&lt;/em&gt;. I&amp;rsquo;ve written &lt;a href=&#34;http://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/&#34;&gt;several posts and gathered a few resources on unit testing in Swift&lt;/a&gt;, but I haven&amp;rsquo;t yet published a &amp;ldquo;getting started” guide until now.&lt;/p&gt;
 &lt;p&gt;Where does one get started with unit testing in Swift when they&amp;rsquo;ve never gotten started before? Here are 5 steps to help you successfully begin unit testing in Swift:&lt;/p&gt;
@@ -683,7 +675,6 @@ println(scoreKeeper.runningScore)
       <title>Swift Unit Testing – Verifying Method Calls</title>
       <link>https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/</link>
       <pubDate>Mon, 22 Dec 2014 13:09:28 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/12/22/swift-unit-testing-verifying-method-calls/</guid>
       <description>&lt;p&gt;In this unit testing screencast for Swift developers, we explore how to use Test Driven Development to verify method calls.&lt;/p&gt;
 &lt;h3 id=&#34;getting-started-guide&#34;&gt;Getting Started Guide&lt;/h3&gt;
@@ -747,7 +738,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Swift Unit Testing Resources</title>
       <link>https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/</link>
       <pubDate>Fri, 19 Dec 2014 12:00:33 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/12/19/swift-unit-testing-resources/</guid>
       <description>&lt;p&gt;As I&amp;rsquo;ve researched Test Driven Development practices in general, and for iOS / Mac applications, I&amp;rsquo;ve been helped by several sources. I&amp;rsquo;ve also discovered a few things the hard way, so I&amp;rsquo;m combining and maintaining this list of resources to help point you in some helpful directions as you adventure in unit testing your iOS apps.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;pluralsight&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -790,7 +780,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>TDD for iOS in Swift – What’s the Goal?</title>
       <link>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</link>
       <pubDate>Tue, 16 Dec 2014 12:00:10 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/12/16/tdd-ios-swift-whats-goal/</guid>
       <description>&lt;p&gt;Before actually &lt;em&gt;doing&lt;/em&gt; Test Driven Development (TDD) for your iOS / Mac app, it&amp;rsquo;s really important to ask a very fundamental question: What&amp;rsquo;s the goal? What am I aiming for when I say I want to drive my iOS development with tests?&lt;/p&gt;
 &lt;h2 id=&#34;2-goals-of-tdd-in-ios&#34;&gt;2 Goals of TDD in iOS&lt;/h2&gt;
@@ -849,7 +838,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Don’t Write Legacy Swift</title>
       <link>https://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/</link>
       <pubDate>Wed, 10 Dec 2014 12:00:51 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/12/10/dont-write-legacy-swift/</guid>
       <description>&lt;p&gt;“Legacy Swift”.  Is that an odd phrase to you, too?&lt;/p&gt;
 &lt;p&gt;“Legacy” has connotations such as “old”, “difficult-to-change”, “outdated”, etc. Juxtaposing “legacy” and “Swift” would never have crossed my mind until I read Michael Feathers’, &lt;a href=&#34;http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052&#34; title=&#34;Working Effectively With Legacy Code&#34;&gt;Working Effectively With Legacy Code&lt;/a&gt;, where he asserts,&lt;/p&gt;
@@ -897,7 +885,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Send a Type to Obedience School – Using Swift Extensions for Additional Protocol Conformance</title>
       <link>https://www.andrewcbancroft.com/2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/</link>
       <pubDate>Tue, 02 Dec 2014 19:15:33 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/12/02/send-a-type-to-obedience-school-using-swift-extensions-for-additional-protocol-conformance/</guid>
       <description>&lt;p&gt;Did you know that you can make &lt;em&gt;any&lt;/em&gt; Type (here meaning Class, Enumeration, or Struct), even already-existing ones that you don&amp;rsquo;t have the source code for, adopt a protocol that it doesn&amp;rsquo;t normally conform to out of the box?&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;You can&lt;/strong&gt; – &lt;em&gt;even if you don&amp;rsquo;t have the original source code for that Type&lt;/em&gt;! It&amp;rsquo;s a powerful and intriguing proposition. Let&amp;rsquo;s explore how this is possible.&lt;/p&gt;
@@ -934,7 +921,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Swift UITableViewDataSource Cheat Sheet</title>
       <link>https://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/</link>
       <pubDate>Mon, 24 Nov 2014 22:04:28 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/11/24/swift-uitableviewdatasource-cheat-sheet/</guid>
       <description>&lt;p&gt;iOS developers will quickly recognize that there are a set of methods that always tend to get implemented when dealing with &lt;code&gt;UITableViews&lt;/code&gt; . The problem I consistently face is &lt;em&gt;remembering&lt;/em&gt; that set of methods that belong to the &lt;code&gt;UITableViewDataSource&lt;/code&gt; (and &lt;code&gt;UITableViewDelegate&lt;/code&gt; ) protocols. I find myself option-clicking the protocol name to remember the method signatures I need, since Xcode doesn&amp;rsquo;t have a way to stub out the methods involved with a protocol (C# developers working in Visual Studio like myself are spoiled!).&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m sure cheat sheets like this already exist, but I thought, &amp;ldquo;Why not have one that I can reference from my &lt;em&gt;own&lt;/em&gt; blog?”… In fact, I&amp;rsquo;ve gone ahead and turned the code below into a snippet in Xcode, but just in case I ever lose that, I&amp;rsquo;ve got this post, which stubs out dummy implementations of the three most common &lt;code&gt;UITableViewDataSource&lt;/code&gt; protocol methods.&lt;/p&gt;
@@ -962,7 +948,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>The 5 W’s of Swift Extensions</title>
       <link>https://www.andrewcbancroft.com/2014/11/03/the-5-ws-of-swift-extensions/</link>
       <pubDate>Mon, 03 Nov 2014 19:04:19 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/11/03/the-5-ws-of-swift-extensions/</guid>
       <description>&lt;p&gt;For newcomers to Swift, the concept of extending a Type may be new, so I thought I&amp;rsquo;d share a high-level overview of Swift extensions in the style of asking the 5 W&amp;rsquo;s: Who? What? When? Where? Why?&lt;/p&gt;
 &lt;h3 id=&#34;who&#34;&gt;Who&lt;/h3&gt;
@@ -1028,7 +1013,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Send Text Message In-App – Using MFMessageComposeViewController with Swift</title>
       <link>https://www.andrewcbancroft.com/2014/10/28/send-text-message-in-app-using-mfmessagecomposeviewcontroller-with-swift/</link>
       <pubDate>Tue, 28 Oct 2014 11:00:37 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/28/send-text-message-in-app-using-mfmessagecomposeviewcontroller-with-swift/</guid>
       <description>&lt;p&gt;In a &lt;a href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/&#34;&gt;previous walkthrough on sending e-mails in-app&lt;/a&gt;, I explored how to use &lt;code&gt;MFMailComposeViewController&lt;/code&gt; to allow a user to compose an e-mail without ever leaving your app. I then &lt;a href=&#34;http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/&#34;&gt;followed up with a proposal for better-segregating the responsibilities&lt;/a&gt; of composing an e-mail and responding to the delegate callbacks out of the View Controller.&lt;/p&gt;
 &lt;p&gt;I say all this because today, I&amp;rsquo;d like to walk you through sending a &lt;em&gt;text message&lt;/em&gt; in-app using the same pattern as the &lt;em&gt;second&lt;/em&gt; article. This walkthrough should be fairly straight-forward on its own, but if you&amp;rsquo;d like to reference &lt;a href=&#34;http://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/&#34;&gt;my previous post on clean view controllers&lt;/a&gt;, it could be helpful in understanding why I&amp;rsquo;m not just shoving everything into the View Controller and calling it good.&lt;/p&gt;
@@ -1137,13 +1121,12 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Fundamentals of NSNotificationCenter in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/</link>
       <pubDate>Wed, 08 Oct 2014 18:27:47 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/08/fundamentals-of-nsnotificationcenter-in-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on September 19, 2016 – Xcode 8 &amp;amp; Swift 3.0&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;The goal of this post is to help you grasp the fundamentals of using &lt;code&gt;NSNotificationCenter&lt;/code&gt; in your Swift iOS app. The topic isn&amp;rsquo;t necessarily new, and there&amp;rsquo;s no difference except syntax between Objective-C and Swift implementations involving &lt;code&gt;NSNotificationCenter&lt;/code&gt;. Even still, I&amp;rsquo;m hoping to add to the understanding of this useful tool by giving a fully-working example on GitHub (&lt;a title=&#34;GitHub - Swift NSNotificationCenter Example&#34; href=&#34;https://github.com/andrewcbancroft/SwiftNSNotificationCenter/tree/swift-2.3&#34; target=&#34;_blank&#34;&gt;Swift 2.3&lt;/a&gt; and &lt;a title=&#34;GitHub - Swift NSNotificationCenter Example&#34; href=&#34;https://github.com/andrewcbancroft/SwiftNSNotificationCenter&#34; target=&#34;_blank&#34;&gt;Swift 3.0&lt;/a&gt;), and by sharing the insight that&amp;rsquo;s clicked in my own brain as I explain the example.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Code in the main article below is written in Swift 3.0, but code examples for Swift 2.3 are found in the &lt;a href=&#34;https://github.com/andrewcbancroft/SwiftNSNotificationCenter/tree/swift-2.3&#34;&gt;example project&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;what-is-it&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;first-things-first-what-_is_-this-thing&#34;&gt;First things first: What &lt;em&gt;is&lt;/em&gt; this thing?&lt;/h3&gt;
+&lt;h3 id=&#34;first-things-first-what-is-this-thing&#34;&gt;First things first: What &lt;em&gt;is&lt;/em&gt; this thing?&lt;/h3&gt;
 &lt;p&gt;When I first heard &lt;code&gt;NSNotificationCenter&lt;/code&gt;, I thought &amp;ldquo;push notifications”. However, &lt;code&gt;NSNotificationCenter&lt;/code&gt; has nothing to do with sending or receiving push notifications in iOS. Rather, it is a communication tool internal to your app. It provides a way for one instance of a class/struct to notify one or more &lt;em&gt;other&lt;/em&gt; class/struct instances about something. The goal in doing this is to enable those 1+ other class or struct instances to take appropriate action based the communication they receive. An common analogy comes to mind: think &amp;ldquo;radio tower”. &lt;code&gt;NSNotificationCenter&lt;/code&gt; is the central hub that acts as a &lt;em&gt;broadcaster&lt;/em&gt; of notifications. If that still seems vague, hang tight – seeing the example below should help it all come together for you.&lt;/p&gt;
 &lt;p&gt;&lt;a name=&#34;should-i-use-it&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;should-i-use-it&#34;&gt;Should I use it?&lt;/h3&gt;
@@ -1255,7 +1238,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Swift Alternative to Objective-C Macros</title>
       <link>https://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/</link>
       <pubDate>Wed, 01 Oct 2014 17:58:46 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/10/01/swift-alternative-to-objective-c-macros/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve previously written about &lt;a title=&#34;Replace Magic Strings with Enumerations in Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/09/02/replace-magic-strings-with-enumerations-in-swift/&#34; target=&#34;_blank&#34;&gt;using enumerations in Swift to encapsulate special values&lt;/a&gt; that could end up falling into the &amp;ldquo;magic string” category if they were to simply be scattered in-line throughout your code. The primary example I proposed for such a &amp;ldquo;magic string” replacement was Storyboard Segue Identifiers.  These special identifiers have such a specific purpose that felt to me like a natural fit to create a Type in the form of an enumeration (which I called SegueIdentifier) to group them all together in one place so that I could easily find them and modify them, should I ever need to do so.&lt;/p&gt;
 &lt;p&gt;I still like that solution for &lt;em&gt;groups&lt;/em&gt; of things, but it&amp;rsquo;s a lot of &amp;ldquo;ceremony” to use enumerations for encapsulating &lt;em&gt;everything&lt;/em&gt; that may have been implemented as a macro expression or a static global constant in Objective-C.&lt;/p&gt;
@@ -1288,7 +1270,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Slide In Animation in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/</link>
       <pubDate>Wed, 24 Sep 2014 18:25:52 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/09/24/slide-in-animation-in-swift/</guid>
       <description>&lt;p&gt;In a previous post about &lt;a title=&#34;Fade In / Out Animations as Class Extensions in Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/&#34; target=&#34;_blank&#34;&gt;fade animations&lt;/a&gt; in Swift, I demonstrated how to use a class extension to add the ability for any UIView instance to easily call &lt;code&gt;fadeIn()&lt;/code&gt; or &lt;code&gt;fadeOut()&lt;/code&gt; on itself. This strategy was nice – the animations, while simple, would have cluttered my code each time I used them, had I not encapsulated them &lt;em&gt;somewhere&lt;/em&gt;. Employing class extensions in Swift seemed a natural way to provide this functionality to UIViews.&lt;/p&gt;
 &lt;p&gt;Well, I liked the idea so much that when it came time for me to implement a slide animation, I kept the same strategy, and I&amp;rsquo;d like to share my implementation with you today.&lt;/p&gt;
@@ -1466,7 +1447,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Swift iOS Version Checking</title>
       <link>https://www.andrewcbancroft.com/2014/09/17/swift-ios-version-check/</link>
       <pubDate>Thu, 18 Sep 2014 04:44:36 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/09/17/swift-ios-version-check/</guid>
       <description>&lt;p&gt;While iOS 8 is now officially in the wild, it may take a bit of time to reach the level of user adoption that iOS 7 had accumulated over the past year.  If you plan to target the widest number of users for your app (at least in these early days of the iOS 8 roll-out), it&amp;rsquo;d probably be wise to include iOS 7 in your target audience.&lt;/p&gt;
 &lt;p&gt;When accommodating iOS 7 users, you&amp;rsquo;ll inevitably run into instances where you need to check which iOS version the device is running, so that you can implement a fall-back plan for older versions of iOS.&lt;/p&gt;
@@ -1489,7 +1469,6 @@ But immediately, I run into trouble. It seems that my TestCase class can&amp;rsq
       <title>Create Documentation for your Swift Playground</title>
       <link>https://www.andrewcbancroft.com/2014/09/09/create-documentation-for-your-swift-playground/</link>
       <pubDate>Wed, 10 Sep 2014 03:44:16 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/09/09/create-documentation-for-your-swift-playground/</guid>
       <description>&lt;p&gt;As I opened Apple&amp;rsquo;s latest &lt;a title=&#34;Apple Swift Developer Blog - Patterns Playground&#34; href=&#34;https://developer.apple.com/swift/blog/?id=13&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Patterns Playground” blog post&lt;/a&gt;, I was impressed with the look and feel.  Rather than create the documentation as comment blocks, they managed to put in sharp-looking notes and explanations before each code example / experiment.  It&amp;rsquo;s like an interactive book, reminiscent of the Swift Programming Language iBook!  Here&amp;rsquo;s a snippet of what their Playground looks like:&lt;/p&gt;
 &lt;p&gt;[&lt;img class=&#34;alignnone size-large wp-image-4771&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground-1024x511.png&#34; alt=&#34;Apple&#39;s Patterns Playground&#34; width=&#34;730&#34; height=&#34;364&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground-1024x511.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground-300x149.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/09/Patterns_playground.png 1080w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;][1]&lt;/p&gt;
@@ -1533,7 +1512,6 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Replace Magic Strings with Enumerations in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/09/02/replace-magic-strings-with-enumerations-in-swift/</link>
       <pubDate>Wed, 03 Sep 2014 01:55:54 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/09/02/replace-magic-strings-with-enumerations-in-swift/</guid>
       <description>&lt;p&gt;&amp;ldquo;What can I do to avoid these ‘magic strings&amp;rsquo; in my code?” – This was the question I asked myself recently as I found myself in &lt;code&gt;prepareForSegue&lt;/code&gt; comparing &lt;code&gt;segue.segueIdentifier&lt;/code&gt; to in-line hard-coded Strings.  This kind of in-line hard-coding of a String for comparison purposes is what I mean by &amp;ldquo;magic strings” in this article.  I knew this felt like a bad idea, but the solution to a cleaner option wasn&amp;rsquo;t readily apparent to me.&lt;/p&gt;
 &lt;p&gt;I &lt;em&gt;used&lt;/em&gt; to do things like create static string constants, or &lt;code&gt;#define&lt;/code&gt; expressions so that I could easily change these values if I ever needed to update them for some reason.  You know… back in a former Objective-C developer life when these tactics were available to me.  But these options don&amp;rsquo;t exist in Swift.  What to do??&lt;/p&gt;
@@ -1596,12 +1574,11 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Pick a Delegate… Any Delegate… On Clean View Controllers in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/</link>
       <pubDate>Wed, 27 Aug 2014 04:43:29 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/26/pick-a-delegate-clean-view-controllers-in-swift/</guid>
       <description>&lt;p&gt;The delegation pattern is ubiquitous in iOS development – the pattern is a &amp;ldquo;&lt;a title=&#34;Cocoa Core Competencies&#34; href=&#34;https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/Delegation.html&#34; target=&#34;_blank&#34;&gt;core competency&lt;/a&gt;” for developing in Cocoa, and if you program with the iOS SDK for any length of time and you&amp;rsquo;ll end up writing some code that resembles &lt;code&gt;someInstance.delegate = someDelegate&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;One of the toughest things that I&amp;rsquo;ve experienced is choosing what &lt;code&gt;someDelegate&lt;/code&gt; is.  All too often, a View Controller ends up being assigned the responsibility of being the delegate for &lt;em&gt;everything&lt;/em&gt; in its hierarchy.  My question is:  Is there a cleaner way?&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s pick up on the example I proposed in my &lt;a href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/&#34; title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34;&gt;recent post about sending e-mails in-app&lt;/a&gt;.  For &amp;ldquo;quick and dirty” pragmatism, I just crammed everything into the View Controller with the promise of coming back and (hopefully) showing a cleaner way.  &lt;a title=&#34;Send Email In-App – Using MFMailComposeViewController with Swift&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift#//acbref-MFMailComposeViewControllerExample&#34; target=&#34;_blank&#34;&gt;Here is a quick link to example posed before&lt;/a&gt; if you&amp;rsquo;d like to review it before proceeding.&lt;/p&gt;
-&lt;h2 id=&#34;_what-if8230_&#34;&gt;&lt;em&gt;What if…&lt;/em&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;what-if8230&#34;&gt;&lt;em&gt;What if…&lt;/em&gt;&lt;/h2&gt;
 &lt;p&gt;What if we could make some adjustments so that the View Controller was trimmed down to the example on the &lt;em&gt;right (click for larger view)&lt;/em&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison.png&#34;&gt;&lt;img class=&#34;alignnone wp-image-4321 size-large&#34; src=&#34;http://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-1024x258.png&#34; alt=&#34;Clean View Controller Comparison&#34; width=&#34;730&#34; height=&#34;183&#34; srcset=&#34;https://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-1024x258.png 1024w, https://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-300x75.png 300w, https://www.andrewcbancroft.com/wp-content/uploads/2014/08/Clean-View-Controller-Comparison-1200x303.png 1200w&#34; sizes=&#34;(max-width: 730px) 100vw, 730px&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;ve created a &lt;a title=&#34;Swift Email Composer - GitHub&#34; href=&#34;https://github.com/andrewcbancroft/SwiftEmailComposer&#34; target=&#34;_blank&#34;&gt;fully-working example on GitHub&lt;/a&gt; if you&amp;rsquo;d like to download it and play.&lt;/p&gt;
@@ -1679,7 +1656,6 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Send Email In-App – Using MFMailComposeViewController with Swift</title>
       <link>https://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/</link>
       <pubDate>Tue, 26 Aug 2014 03:48:30 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on October 11, 2016 – Swift 3.0&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;In this writing, I want explore how to use &lt;code&gt;MFMailComposeViewController&lt;/code&gt; with Swift to send e-mails within your app as a walkthrough. My focus here is &amp;ldquo;quick and dirty” pragmatism, so that we can easily see what the inter-working components of &lt;code&gt;MFMailComposeViewController&lt;/code&gt; are. That being said, here&amp;rsquo;s an important &lt;em&gt;disclaimer&lt;/em&gt; – I&amp;rsquo;m going to overload the View Controller&amp;rsquo;s responsibilities in the examples to follow.&lt;/p&gt;
@@ -1790,7 +1766,6 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Expanded Thoughts on Swift’s Type Inference</title>
       <link>https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/</link>
       <pubDate>Thu, 21 Aug 2014 02:19:45 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/20/expanded-thoughts-on-swifts-type-inference/</guid>
       <description>&lt;p&gt;In my recent &lt;a title=&#34;Clean Coding in Swift – Type Inference&#34; href=&#34;http://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/&#34; target=&#34;_blank&#34;&gt;op-ed on clean coding in Swift focused on Type Inference&lt;/a&gt;, I began by saying,&lt;/p&gt;
 &lt;p&gt;Quick!  Tell me!  What is the Type of the &lt;code&gt;birdDetails&lt;/code&gt; constant in this code example:&lt;/p&gt;
@@ -1834,7 +1809,6 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Sort It Out – Sorting an Array in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/08/16/sort-yourself-out-sorting-an-array-in-swift/</link>
       <pubDate>Sat, 16 Aug 2014 18:06:26 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/16/sort-yourself-out-sorting-an-array-in-swift/</guid>
       <description>&lt;p&gt;I had a question come to me today regarding sorting an array of integers that are actually &lt;em&gt;encoded&lt;/em&gt; as strings in the array.  Data comes to is in a variety of encodings/types, so it&amp;rsquo;s quite common to need to adjust things to the right state for working with.  Let&amp;rsquo;s take a look at how to solve this one.&lt;/p&gt;
 &lt;h2 id=&#34;the-dilemma&#34;&gt;The Dilemma&lt;/h2&gt;
@@ -1852,7 +1826,7 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;str1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;toInt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;str2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;toInt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This code produces our desired output:  &lt;code&gt;[&amp;quot;1&amp;amp;#8221;, &amp;quot;2&amp;amp;#8221;, &amp;quot;50&amp;amp;#8221;, &amp;quot;55&amp;amp;#8221;, &amp;quot;98&amp;amp;#8221;, &amp;quot;103&amp;amp;#8221;, &amp;quot;1000&amp;amp;#8221;]&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&#34;thenbspdetails&#34;&gt;The Details&lt;/h2&gt;
+&lt;h2 id=&#34;thedetails&#34;&gt;The Details&lt;/h2&gt;
 &lt;p&gt;Swift&amp;rsquo;s sorted function takes two arguments:  an Array, and a Closure.  The part that may be confusing is the closure argument.  Isolated it looks like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;str1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;str2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Bool&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt;
@@ -1869,7 +1843,6 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Clean Coding in Swift – Type Inference</title>
       <link>https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/</link>
       <pubDate>Wed, 13 Aug 2014 04:22:25 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/12/clean-coding-in-swift-type-inference/</guid>
       <description>&lt;p&gt;Quick!  Tell me!  What is the Type of the &lt;code&gt;birdDetails&lt;/code&gt;constant in this code example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;birdDetails&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;birdDetailsFromStorage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
@@ -1930,7 +1903,6 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Clean Coding in Swift – Functions</title>
       <link>https://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/</link>
       <pubDate>Thu, 07 Aug 2014 18:16:23 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/08/07/clean-coding-in-swift-functions/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been thinking a lot about how the principles of clean coding (Bob Martin&amp;rsquo;s &amp;ldquo;&lt;a title=&#34;Amazon - Clean Code&#34; href=&#34;http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882&#34; target=&#34;_blank&#34;&gt;Clean Code&lt;/a&gt;&amp;rdquo;) apply in Swift. How do I express clean code in this language? Conversely, how do I &lt;em&gt;avoid&lt;/em&gt; writing &lt;em&gt;cryptic&lt;/em&gt; code in Swift? What language features help me write clear and self-explanatory code and what language features present the potential for tempting me to write obscure code in Swift?&lt;/p&gt;
 &lt;p&gt;I am beginning a commentary series that I hope will encourage clean coding practice in myself and in the Swift developer community. Dialog on these topics is welcomed – I have not &amp;ldquo;arrived”, so please – help me help the Swift community for the better!&lt;/p&gt;
@@ -2003,7 +1975,6 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Fade In / Out Animations as Class Extensions in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/</link>
       <pubDate>Sun, 27 Jul 2014 20:13:53 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/07/27/fade-in-out-animations-as-class-extensions-with-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on December 6, 2016 – Xcode 8 &amp;amp; Swift 3.0&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;The question has been &lt;a title=&#34;Fade In / Out - Stack Overflow&#34; href=&#34;http://stackoverflow.com/questions/20891614/fade-in-fade-out-animation&#34; target=&#34;_blank&#34;&gt;asked (and solved) on StackOverflow in Objective-C&lt;/a&gt;, but my aim in this post is to take the Objective-C implementation and leverage Swift &lt;em&gt;extensions&lt;/em&gt; to make this job even easier to achieve and reuse.&lt;/p&gt;
@@ -2021,7 +1992,7 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
   &lt;/ul&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;a name=&#34;fade-without-extension&#34; class=&#34;jump-target&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;fade-_without_-an-extension&#34;&gt;Fade &lt;em&gt;without&lt;/em&gt; an extension&lt;/h3&gt;
+&lt;h3 id=&#34;fade-without-an-extension&#34;&gt;Fade &lt;em&gt;without&lt;/em&gt; an extension&lt;/h3&gt;
 &lt;p&gt;Below is an example of how my view controller may look if I want to click a button and have it fade out a label, set the text, and fade it back in again:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ViewController&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UIViewController&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;@IBOutlet&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;weak&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;birdTypeLabel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UILabel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;!&lt;/span&gt;
@@ -2148,7 +2119,6 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Swift Optionals?  Don’t Forget to Unwrap!</title>
       <link>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</link>
       <pubDate>Sat, 26 Jul 2014 02:23:53 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/07/25/swift-optionals-dont-forget-to-unwrap/</guid>
       <description>&lt;p&gt;There is a compiler error that throws me off every time I see it.  It takes the form,&lt;/p&gt;
 &lt;blockquote&gt;
@@ -2200,7 +2170,6 @@ As a way to jump-start my own Playground documentation, I simply borrowed one o
       <title>Swift Access Control – Implications for Unit Testing</title>
       <link>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</link>
       <pubDate>Wed, 23 Jul 2014 04:04:43 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/07/22/swift-access-control-implications-for-unit-testing/</guid>
       <description>&lt;p&gt;If you find yourself with broken unit tests, failing to build with the error, “Use of unresolved identifier…”, you&amp;rsquo;re not alone!&lt;/p&gt;
 &lt;h3 id=&#34;unit-tests-and-swift-access-control&#34;&gt;Unit Tests and Swift Access Control&lt;/h3&gt;
@@ -2251,7 +2220,6 @@ So given the following…&lt;/p&gt;
       <title>Implement NSManagedObject Subclass in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</link>
       <pubDate>Fri, 18 Jul 2014 04:08:12 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/07/17/implement-nsmanagedobject-subclass-in-swift/</guid>
       <description>&lt;p&gt;&lt;small&gt;Updated on July 8, 2016 – Xcode 7&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;My goal with this blog entry is to help get you set up to create NSManagedObject subclasses in Swift for the Entities in your Core Data model.&lt;/p&gt;
@@ -2324,7 +2292,6 @@ So given the following…&lt;/p&gt;
       <title>How to Create Mocks and Stubs in Swift</title>
       <link>https://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/</link>
       <pubDate>Tue, 15 Jul 2014 05:12:16 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/07/15/how-to-create-mocks-and-stubs-in-swift/</guid>
       <description>&lt;p&gt;Without 100% support for a mocking framework like &lt;a title=&#34;OCMock&#34; href=&#34;http://ocmock.org/&#34; target=&#34;_blank&#34;&gt;OCMock&lt;/a&gt;, I found myself needing to get creative when building mock objects and method stubs in Swift unit tests.  The great thing about testing is that you&amp;rsquo;re…well… &lt;em&gt;testing things out&lt;/em&gt; to see if they&amp;rsquo;ll work, and I found a solution that I&amp;rsquo;m pretty happy with for now.  I&amp;rsquo;m open to better ways, so leave a comment if you&amp;rsquo;ve had good results using a different design!&lt;/p&gt;
 &lt;p&gt;The process is essentially this (example to follow):&lt;/p&gt;
@@ -2341,7 +2308,7 @@ So given the following…&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s see those 8 steps in action for those of us who are more visually inclined.&lt;/p&gt;
 &lt;p&gt;EDIT:  July 22, 2014 – I&amp;rsquo;ve added a simple Xcode Project to GitHub for those interested in seeing the setup directly in Xcode at  &lt;a title=&#34;GitHub - MocksAndStubs&#34; href=&#34;https://github.com/andrewcbancroft/MocksAndStubs&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;https://github.com/andrewcbancroft/MocksAndStubs&#34;&gt;https://github.com/andrewcbancroft/MocksAndStubs&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The scenario that I&amp;rsquo;d like to use a mock class in is this:  I have a CoreData application and I&amp;rsquo;d like to be able to mock the &lt;code&gt;NSManagedObjectContext&lt;/code&gt;  so that instead of making actual database fetch requests, I can just provide stubs of various sorts with the kinds of responses I&amp;rsquo;d expect from the real database calls to ensure my class will do the right thing based on predictable results.  To do this I begin at step 1…&lt;/p&gt;
-&lt;h4 id=&#34;1-nbspensure-that-thenbspclass-that-you-would-like-to-test-is-designed-so-that-you-can-substitute-your-mock-for-the-real-one-thats-used-in-your-class-implementation&#34;&gt;1.  Ensure that the class that you would like to test is designed so that you can substitute your mock for the real one that&amp;rsquo;s used in your class&amp;rsquo; implementation&lt;/h4&gt;
+&lt;h4 id=&#34;1-ensure-that-theclass-that-you-would-like-to-test-is-designed-so-that-you-can-substitute-your-mock-for-the-real-one-thats-used-in-your-class-implementation&#34;&gt;1.  Ensure that the class that you would like to test is designed so that you can substitute your mock for the real one that&amp;rsquo;s used in your class&amp;rsquo; implementation&lt;/h4&gt;
 &lt;p&gt;In the example class below, I intend to provide the &lt;code&gt;NSManagedObjectContext&lt;/code&gt;  dependency through the class&amp;rsquo; initializer which will set a property that is used by my class&amp;rsquo; methods later on, but you could easily use some other way of performing &amp;ldquo;dependency injection”.  The initializer strategy just makes it super clear in &lt;em&gt;my&lt;/em&gt; mind what the class&amp;rsquo; dependencies are, so that&amp;rsquo;s what I&amp;rsquo;m going to do here.  Have a look:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Foundation&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CoreData&lt;/span&gt;
@@ -2372,12 +2339,12 @@ So given the following…&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I want to test if &lt;code&gt;databaseHasRecordsForSomeEntity&lt;/code&gt;  does what I intend it to do. So…&lt;/p&gt;
-&lt;h4 id=&#34;2-nbspcreate-annbspxctestcasenbspnbspclass-with-a-test-function-in-your-unit-test-project&#34;&gt;2.  Create an &lt;code&gt;XCTestCase&lt;/code&gt;  class with a test function in your unit test project&lt;/h4&gt;
+&lt;h4 id=&#34;2-create-anxctestcaseclass-with-a-test-function-in-your-unit-test-project&#34;&gt;2.  Create an &lt;code&gt;XCTestCase&lt;/code&gt;  class with a test function in your unit test project&lt;/h4&gt;
 &lt;p&gt;Just listing this for completeness&lt;/p&gt;
 &lt;p&gt;Next comes the way to make the mock.  Read steps 3-5 and then look below for a code example of what the skeleton will look like.&lt;/p&gt;
-&lt;h4 id=&#34;3-nbspwithin-the-function-body-createnbspanbsp_nested_nbspclass&#34;&gt;3.  Within the function body create a &lt;em&gt;nested&lt;/em&gt; class&lt;/h4&gt;
-&lt;h4 id=&#34;4-nbspmake-the-nested-class-inherit-from-the-real-object-youre-trying-to-mock--create-a-method-stub-for&#34;&gt;4.  Make the nested class inherit from the real object you&amp;rsquo;re trying to mock / create a method stub for&lt;/h4&gt;
-&lt;h4 id=&#34;5-nbspyou-can-give-the-nested-class-a-name-such-as-mockobjectname&#34;&gt;5.  You can give the nested class a name such as Mock[ObjectName]&lt;/h4&gt;
+&lt;h4 id=&#34;3-within-the-function-body-createanestedclass&#34;&gt;3.  Within the function body create a &lt;em&gt;nested&lt;/em&gt; class&lt;/h4&gt;
+&lt;h4 id=&#34;4-make-the-nested-class-inherit-from-the-real-object-youre-trying-to-mock--create-a-method-stub-for&#34;&gt;4.  Make the nested class inherit from the real object you&amp;rsquo;re trying to mock / create a method stub for&lt;/h4&gt;
+&lt;h4 id=&#34;5-you-can-give-the-nested-class-a-name-such-as-mockobjectname&#34;&gt;5.  You can give the nested class a name such as Mock[ObjectName]&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;UIKit&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;XCTest&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CoreData&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// &amp;lt;-- Make sure to import CoreData or you will get errors when you try to use NSManagedObjectContext&lt;/span&gt;
@@ -2401,7 +2368,7 @@ So given the following…&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;nbsp6-nbspconfigure-the-mock-object-however-you-need-by-setting-its-properties-or-overriding-its-function-implementations-with-stubbed-implementations--no-need-to-override-every-function8230-only-the-ones-that-your-class-calls-during-the-test-at-hand&#34;&gt; 6.  Configure the mock object however you need by setting its properties or overriding its function implementations with stubbed implementations – no need to override every function… only the one(s) that your class calls during the test at hand&lt;/h4&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;6-configure-the-mock-object-however-you-need-by-setting-its-properties-or-overriding-its-function-implementations-with-stubbed-implementations--no-need-to-override-every-function8230-only-the-ones-that-your-class-calls-during-the-test-at-hand&#34;&gt; 6.  Configure the mock object however you need by setting its properties or overriding its function implementations with stubbed implementations – no need to override every function… only the one(s) that your class calls during the test at hand&lt;/h4&gt;
 &lt;p&gt;For my example, I&amp;rsquo;m going to stub out the &lt;code&gt;executeFetchRequest&lt;/code&gt;  method so that it returns an array with one object in it.  This is really the part where you have to determine what you&amp;rsquo;re testing and what you expect the stubbed results to be.  Whatever you decide, the way to stub a method is simply to override it in the mock you&amp;rsquo;re implementing.  Here&amp;rsquo;s how I implemented the &lt;code&gt;executeFetchRequest&lt;/code&gt;  stub for my example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Yay for verbose test names!  :]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;testDatabaseHasRecordsForSomeEntityReturnsTrueWhenFetchRequestReturnsNonEmptyArray&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
@@ -2412,8 +2379,8 @@ So given the following…&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We&amp;rsquo;re ready to perform the test and assert the results.  Read steps 7-8 and take a look at the code example below step 8:&lt;/p&gt;
-&lt;h4 id=&#34;7-nbspinstantiate-the-class-youre-testing-and-pass-in-an-instance-of-thenbspmock-object-you-just-nested-in-the-test-function-to-yournbspclass-somehow-either-through-its-initializer-by-setting-a-property-on-the-class-or-by-passing-it-into-the-method-under-test-via-parameter-8212-however-you-intended-to-8216inject-the-mock-from-step-1-is-what-you-should-do&#34;&gt;7.  Instantiate the class you&amp;rsquo;re testing and pass in an instance of the mock object you just nested in the test function to your class somehow (either through its initializer, by setting a property on the class, or by passing it into the method under test via parameter — however you intended to ‘inject&amp;rsquo; the mock from step 1 is what you should do)&lt;/h4&gt;
-&lt;h4 id=&#34;8-nbspxctassert8230&#34;&gt;8.  XCTAssert…&lt;/h4&gt;
+&lt;h4 id=&#34;7-instantiate-the-class-youre-testing-and-pass-in-an-instance-of-themock-object-you-just-nested-in-the-test-function-to-yourclass-somehow-either-through-its-initializer-by-setting-a-property-on-the-class-or-by-passing-it-into-the-method-under-test-via-parameter-8212-however-you-intended-to-8216inject-the-mock-from-step-1-is-what-you-should-do&#34;&gt;7.  Instantiate the class you&amp;rsquo;re testing and pass in an instance of the mock object you just nested in the test function to your class somehow (either through its initializer, by setting a property on the class, or by passing it into the method under test via parameter — however you intended to ‘inject&amp;rsquo; the mock from step 1 is what you should do)&lt;/h4&gt;
+&lt;h4 id=&#34;8-xctassert8230&#34;&gt;8.  XCTAssert…&lt;/h4&gt;
 &lt;p&gt;From step 1, I intended to pass an NSManagedObjectContext instance to the initializer of MyClass, so that&amp;rsquo;s what I&amp;rsquo;ll do in my test.  I&amp;rsquo;ll then perform the XCTAssert on the return value of my method under test:&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Yay for verbose test names!  :]&lt;/span&gt;
@@ -2474,7 +2441,6 @@ So given the following…&lt;/p&gt;
       <title>iOS KeychainItemWrapper – Obstacles Overcome, Inconsistencies Resolved</title>
       <link>https://www.andrewcbancroft.com/2014/05/21/ios-keychainitemwrapper-obstacles-overcome-inconsistencies-resolved/</link>
       <pubDate>Wed, 21 May 2014 18:20:56 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2014/05/21/ios-keychainitemwrapper-obstacles-overcome-inconsistencies-resolved/</guid>
       <description>&lt;p&gt;I had a major case of &amp;ldquo;struggleface” when trying to work with the &lt;span class=&#34;lang:default decode:true  crayon-inline&#34;&gt;KeychainItemWrapper&lt;/span&gt;  for iOS.  I wanted it to be simple – just take a username and password and put it in the iOS Keychain for secure retrieval later.  Turns out that I had to spend an entire work day and do a lot of Googling to get it working so I&amp;rsquo;m posting this to try and bring all the pieces together.&lt;/p&gt;
 &lt;h4 id=&#34;obstacle-1-automatic-reference-counting-arc&#34;&gt;Obstacle #1:  Automatic Reference Counting (ARC)&lt;/h4&gt;
@@ -2498,7 +2464,6 @@ Go home happy.&lt;/p&gt;
       <title>How Old is Silas Allen?</title>
       <link>https://www.andrewcbancroft.com/2013/03/31/how-old-is-silas-allen/</link>
       <pubDate>Sun, 31 Mar 2013 14:36:07 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2013/03/31/how-old-is-silas-allen/</guid>
       <description>&lt;p&gt;&amp;ldquo;Ooooohh, now… how old is he??”  I love this question.  Really!  I do!  Every time I&amp;rsquo;m asked I get to talk about my kid, and that&amp;rsquo;s always fun.  But today, things just got even &lt;em&gt;more&lt;/em&gt; fun.  Now, instead of just telling people his approximate age, I can &lt;strong&gt;show&lt;/strong&gt; them his &lt;em&gt;precise&lt;/em&gt; age down to the second!&lt;/p&gt;
 &lt;p&gt;As some of you know, I&amp;rsquo;ve been nerding out on learning to build iOS apps for iPhone and iPad.  Well, to celebrate Silas turning another month old, I built a little app that tells me how many years, months, weeks, days, hours, minutes, and seconds he is old.  I also built in functionality so that I can see how much longer it will be until his birthday (actually, I think I just thought of a bug with that part, but it won&amp;rsquo;t show itself until 2014 so I have time…it shouldn&amp;rsquo;t be nearly as bad as the Y2K panic – but date math is non-trivial, just so you know). _&lt;br&gt;
@@ -2513,7 +2478,6 @@ _&lt;/p&gt;
       <title>Journey in iOS Development Series – In the Beginning…</title>
       <link>https://www.andrewcbancroft.com/2013/03/16/learning-ios-development/</link>
       <pubDate>Sat, 16 Mar 2013 19:51:59 +0000</pubDate>
-      
       <guid>https://www.andrewcbancroft.com/2013/03/16/learning-ios-development/</guid>
       <description>&lt;p&gt;Today I&amp;rsquo;m starting a series related to my journey in learning to develop iOS apps. As lightbulbs come on for me, I plan to write up what I&amp;rsquo;m learning, if nothing else for my own reference. But I do hope my readers enjoy the discoveries I make along the way.&lt;/p&gt;
 &lt;p&gt;These first few blogs will be somewhat autobiographical, so hopefully I don&amp;rsquo;t bore you to death. I&amp;rsquo;ll try and make them quick. More technical stuff will appear very soon. I thought to write a short article about how I got started. If I had an &amp;ldquo;In the beginning…” moment, what would that be?&lt;/p&gt;
