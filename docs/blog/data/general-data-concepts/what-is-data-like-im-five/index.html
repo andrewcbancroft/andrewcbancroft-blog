@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-89T75EE32J"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-89T75EE32J');
+    </script>
+    
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6356224024630676"
+crossorigin="anonymous"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6356224024630676",
+    enable_page_level_ads: true,
+    overlays: { bottom: true }
+});
+</script>
+
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#3e8bc5"
+                    },
+                    "button": {
+                        "background": "#8ec760",
+                        "text": "#ffffff"
+                    }
+                }
+            })
+        });
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/data/general-data-concepts/what-is-data-like-im-five/">
+	<meta property="og:site_name" content="Andrew Bancroft">
+	<meta property="og:title" content="What is Data? (Like I&#39;m 5)">
+	<meta property="og:description" content="“Daddy, what is your job? What do you do there??”, asks my 5 year old in a curious tone as he tries to figure out why I went to work today instead of staying home to play with him.
+“Weeeell…” (not a confident start to my response, I know…).
+“Iiiiii…help people with data.” 😬
+“Data? What’s data??”
+[Think, Andrew! Think! … Iiit’s the… recorded facts (numbers and such) that we use to interperet reality… no… sratch that. It’s the observations we made about a process or event that we bothered to write in our notebook or store in our computer… man, this is hard…]">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="blog">
+		<meta property="article:published_time" content="2017-12-16T00:00:00+00:00">
+		<meta property="article:modified_time" content="2017-12-16T00:00:00+00:00">
+
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="What is Data? (Like I&#39;m 5)">
+	<meta name="twitter:description" content="“Daddy, what is your job? What do you do there??”, asks my 5 year old in a curious tone as he tries to figure out why I went to work today instead of staying home to play with him.
+“Weeeell…” (not a confident start to my response, I know…).
+“Iiiiii…help people with data.” 😬
+“Data? What’s data??”
+[Think, Andrew! Think! … Iiit’s the… recorded facts (numbers and such) that we use to interperet reality… no… sratch that. It’s the observations we made about a process or event that we bothered to write in our notebook or store in our computer… man, this is hard…]">
+<meta name="generator" content="Hugo 0.164.0">
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What is Data? (Like I'm 5)",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/data\/general-data-concepts\/what-is-data-like-im-five\/",
+  "wordCount": "1286",
+  "datePublished": "2017-12-16T00:00:00Z",
+  "dateModified": "2017-12-16T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Bancroft"
+  }
+
+  ,"description": ""
+}
+</script>
+
+
+
+    <title>What is Data? (Like I&rsquo;m 5)</title>
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet">
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com/"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.andrewcbancroft.com/#pluralsight-courses">Pluralsight Courses</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Topics
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <h6 class="dropdown-header">iOS Development</h6>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-persistence">Data Persistence</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#dependency-management">Dependency
+                                Management</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#debugging">Debugging</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#eventkit">Event Kit</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#iap">In-App Purchases</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#parse">Parse</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#patterns-and-practices">Patterns and
+                                Practices</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#react-native">React Native</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#swift-five">"Swift Five" Series</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#swift-how-tos">Swift How-To's</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#swift-language-notes">Swift Language
+                                Notes</a>
+                            
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#testing">Testing</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#ui-work">User Interface Work</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#xcode">Xcode</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Data</h6>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-general-concepts">General Data Concepts</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-dimensional-modeling">Dimensional Modeling</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-machine-learning">Machine Learning</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-statistics">Statistics</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-engineering-python">Data Engineering with Python</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-engineering-r">Data Engineering with R</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-r">R</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-jupyter-notebooks">Jupyter Notebooks</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-sql-server">SQL Server</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-azure">Azure</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#dot-net-development">.Net Development</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#musings">Musings</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/portfolio"><i
+                                class="fas fa-briefcase"></i> Portfolio</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft"><i
+                                    class="fas fa-play"></i> Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft"><i class="fab fa-github"></i>
+                                GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/"><i
+                                    class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a class="dropdown-item" rel="me" href="https://hachyderm.io/@andrewcbancroft"><i
+                                    class="fab fa-mastodon"></i> Mastodon</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft"><i
+                                    class="fab fa-x-twitter"></i> X</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg"><i
+                                    class="fab fa-youtube"></i> YouTube</a>
+                            <a class="dropdown-item" href="https://dataday.life"><i class="fas fa-link"></i>
+                                www.dataday.life</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/index.xml"><i class="fas fa-rss"></i> Feed</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+<div class="container">
+  <div class="row">
+      <div class="col-sm-12">
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">What is Data? (Like I&#39;m 5)</h1>
+    </header>
+    <div class="content">
+
+    <p></p>
+
+    <p>“Daddy, what is your job? What do you <em>do</em> there??”, asks my 5 year old in a curious tone as he tries to figure out why I went to <em>work</em> today instead of staying home to play with <em>him</em>.</p>
+<p>“Weeeell&hellip;” (not a confident start to my response, I know&hellip;).</p>
+<p>“Iiiiii&hellip;help people with <em>data</em>.” 😬</p>
+<p>“<em>Data</em>?  What’s <em>data</em>??”</p>
+<blockquote>
+<p>[Think, Andrew! Think! &hellip; Iiit&rsquo;s the&hellip; recorded facts (numbers and such) that we use to interperet reality&hellip; no&hellip; sratch that.  It&rsquo;s the observations we made about a process or event that we bothered to write in our notebook or store in our computer&hellip; man, this is <em>hard</em>&hellip;]</p>
+</blockquote>
+<p>Ugh. 😞</p>
+<p>“Hey!  Wanna go ride bikes??”</p>
+<hr>
+<p>Yeah, I know.  Lame.</p>
+<p>But it got me thinking.  How <em>could</em> I have explained data to my 5 year old?</p>
+<p>Better yet, could that explanation be valuable to someone <em>older</em> than a 5 year old?</p>
+<hr>
+<h2 id="data">Data</h2>
+<p>Data.  Where do I start?</p>
+<p>Let&rsquo;s take a walk&hellip;</p>
+<p>Imagine with me that we&rsquo;re on a bug hunt (c&rsquo;mon, you&rsquo;re 5, remember?). We&rsquo;ve just unearthed a spectacular rock.  What&rsquo;s underneath?  <em>A mother lode of bugs</em>, of course!</p>
+<p>&ldquo;Quick!&rdquo;, I say, &ldquo;Let&rsquo;s get out our handy dandy <em>notebook</em>!&rdquo; (as I channel <a href="https://en.wikipedia.org/wiki/Blue%27s_Clues">Blues Clues</a>).</p>
+<p>In the notebook, we write down a bunch of things:</p>
+<ul>
+<li>The <strong>names</strong> of each kind of bug we saw</li>
+<li>The <strong>colors</strong> of each one</li>
+<li><strong>How fast</strong> (slow, medium, speedy) each one moved</li>
+<li><strong>How many</strong> we counted</li>
+</ul>
+<p>We snag a few bugs to take back to &ldquo;the lab&rdquo; (the dining room, of course) to inspect more deelpy.</p>
+<p>On our &ldquo;lab bench&rdquo; (the dining room table, of course), we pick a beetle, and try to hold him down so he can&rsquo;t move.  That way we can take a few more measurements for our notebook:</p>
+<ul>
+<li><strong>How heavy</strong> it is</li>
+<li><strong>Number of</strong> legs</li>
+<li><strong>How long</strong> the beetle is</li>
+<li><strong>How wide</strong> it is</li>
+</ul>
+<p>We bust out the magnifying glass and observe a bit more:</p>
+<ul>
+<li>It has <em>wings</em> (physical trait)</li>
+<li>It has <em>antennas</em> (another physical trait)</li>
+</ul>
+<p>&ldquo;All right, beetle back in the bug box!  Next specimen!&rdquo;</p>
+<p>This one&rsquo;s a rolly polly. Same routine:</p>
+<ul>
+<li><strong>How heavy</strong></li>
+<li><strong>Number of</strong> legs (asking a rolly polly to be still so we can count is unrealistic, so we took a picture and counted what we saw in the photo)</li>
+<li><strong>How long</strong></li>
+<li><strong>How wide</strong></li>
+</ul>
+<p>Again with the magnifying glass:</p>
+<ul>
+<li>No wings on this one</li>
+<li>Has antennas though!</li>
+</ul>
+<hr>
+<p>Here&rsquo;s the point of this riveting adventure:  Everything we wrote down in the notebook? <strong>Data</strong>.</p>
+<p>We looked at something we saw in the world and jotted down what we noticed.</p>
+<p>We put in to <em>words</em> or measured in <em>numbers</em> what we noticed about&hellip;bugs, in this case.</p>
+<p>Names (kinds, species), color, slow/medium/fast.  Has wings (or not), Has antennas (or not).</p>
+<p>How many bugs total, how heavy, how many legs on each, how long, how wide.</p>
+<p>Each word and each number that we bothered to write down is <strong>data</strong>.</p>
+<hr>
+<p>Data is <em>everywhere</em>&hellip;at least, the <em>potential</em> for there to be data is everywhere.</p>
+<p>I suppose it&rsquo;s not actually data until it&rsquo;s &ldquo;captured&rdquo; and saved so that we can look at it again later.</p>
+<p>Anytime something happens in the world and we succeed at saving a <em>description</em> that event, <strong>what we saved is data</strong>.</p>
+<p>I think we&rsquo;re making some progress!</p>
+<hr>
+<h2 id="two-kinds-of-data">Two Kinds of Data</h2>
+<p>I wonder if you noticed the way I grouped a few of the observations we made about the bugs.</p>
+<p>Sometimes we used <em>words</em> to describe what we saw: &ldquo;Black&rdquo;, &ldquo;Red&rdquo;, &ldquo;Has Antennas&rdquo;, &ldquo;Slow&rdquo;.</p>
+<p>Other times we used <em>numbers</em>: &ldquo;1&rdquo; (gram), &ldquo;29.2&rdquo; (millimeters), &ldquo;100&rdquo; (legs)</p>
+<p>Let&rsquo;s use some words split up the two kinds:</p>
+<ul>
+<li>Quantitative (Numerical)</li>
+<li>Qualitative (Categorical)</li>
+</ul>
+<h3 id="quantitative-numerical">Quantitative (Numerical)</h3>
+<p><a name="quantitative-data"></a>Quantitative/numerical data describe things we see about the world in terms of <strong>numbers</strong>.</p>
+<p>&ldquo;Numerical&rdquo; and &ldquo;number&rdquo; go together pretty well. It&rsquo;s that &ldquo;Q&rdquo; word, &ldquo;quantitative&rdquo;, that gives people trouble sometimes.</p>
+<p>If you listen for the word &ldquo;<strong>quant</strong>ity&rdquo; in the word &ldquo;<strong>quant</strong>itative&rdquo;, that could give you the hint for putting the term together with numbers.</p>
+<p>In general, quantitative/numerical data describes &ldquo;how much-ness&rdquo; or &ldquo;how many-ness&rdquo; of something we notice about the world.</p>
+<p>If you can measure it, count it, weigh it&hellip; if you can <strong>add up</strong> the things you wrote down, or <strong>do other &ldquo;math-y&rdquo; things</strong> to the data, then you&rsquo;ve got quantitative/numerical data.</p>
+<h3 id="qualitative-categorical">Qualitative (Categorical)</h3>
+<p><a name="qualitative-data"></a>Qualitative and categorical mean the same thing, but it might not be clear <em>what</em> they mean right away.</p>
+<p>One way to look at it is that it&rsquo;s <em>anything that&rsquo;s not quantitative/numerical</em>, since there are only two overall kinds of data.  That&rsquo;s not so helpful for understanding the term though.</p>
+<p>Let&rsquo;s listen to the words again&hellip;</p>
+<p>Do you hear &ldquo;<strong>qual</strong>ity&rdquo; in &ldquo;<strong>qual</strong>itative&rdquo; or &ldquo;<strong>categor</strong>y&rdquo; in &ldquo;<strong>categor</strong>ical&rdquo;&quot;?</p>
+<p>When we describe the qualities of something, what we&rsquo;re noticing are its features. The bugs can be red or black or gray. They can be fast or slow. They can have wings (or not)&hellip; have antennas (or not).</p>
+<p>It&rsquo;s as if you can split them up into groups, or <em>categories</em>, based on how similar they are to one another&hellip;. winged bugs in this box&hellip; black winged ones in this compartment, and red winged ones in this other. Slow black winged bugs in this sub-compartment; fast black winged bugs in this other.  It&rsquo;s easy to group qualitative/categorical data like this.</p>
+<p>That&rsquo;s one way to think about what makes qualitative/categorical data qualitative (or categorical).</p>
+<p>Another way involves math:
+We all know what to do with 1 + 1, right?  We <strong>add it up</strong>, and get <strong>2</strong> as the answer.</p>
+<p>Here&rsquo;s one for you though: What about &ldquo;black&rdquo; + &ldquo;red&rdquo;?  Now, I mean&hellip; if you said &ldquo;dark red&rdquo;, I can see what you did there, but we typically don&rsquo;t think about doing math with words, do we?</p>
+<p>&ldquo;Rolly Polly&rdquo; + &ldquo;Beetle&rdquo; doesn&rsquo;t make much sense, does it&hellip;</p>
+<p>&ldquo;Has antennas&rdquo; divided by &ldquo;slow&rdquo; equals &hellip;well&hellip; nonsense, right?</p>
+<h3 id="rule-of-thumb--quantitative-or-qualitative--numerical-or-categorical">Rule of Thumb:  Quantitative? or Qualitative? &hellip; Numerical? or Categorical?</h3>
+<p>So here&rsquo;s the rule of thumb:  If you can do math with the data, it&rsquo;s <strong>quant</strong>itative/numerical, rather than <strong>qual</strong>itative/categorical.</p>
+<p><em>Word</em>-y data is the kind of data that ends up being <strong>quali</strong>tative/categorical in nature.</p>
+<h3 id="numbers-can-be-qualitativecategorical">Numbers Can Be Qualitative/categorical</h3>
+<p>Notice what I said in that &ldquo;rule of thumb&rdquo; statement:  If you can <strong>do math</strong> with the data, it&rsquo;s quantitative/numerical.</p>
+<p>I did <em>not</em> say, &ldquo;if the data is a number, it&rsquo;s quantitative/numerical&rdquo;.</p>
+<p>Why?</p>
+<p>Because there are examples of data that happen to be numbers, but you&rsquo;d never do math with them. Here are some examples:</p>
+<ul>
+<li>Special labels (like zip codes, which refer to a place on a map, and happen to be numbers, but dom&rsquo;t make sense to say, &ldquo;Hey, can you ad zip code 33617 and zip code 73505?&rdquo;)</li>
+<li>Rankings (numbers used to label something like who came in 1st, 2nd, or 3rd in a race.  It doesn&rsquo;t make sense to say &ldquo;What&rsquo;s 1st place divided by 3rd place?&rdquo;, for example)</li>
+<li>Sequences (numbers used to tell which order things are in, like assigning numbers to steps in a process, or assigning numbers to spots where someone should stand in line.)</li>
+<li>Identifiers (numbers that are used once and only once to label something or someone&hellip;maybe something like a driver&rsquo;s license number.)</li>
+</ul>
+<h2 id="in-review">In Review</h2>
+<ul>
+<li>We&rsquo;ve looked at data in simple terms, and defined it as the <em>words</em> or <em>numbers</em> that we notice or measure about the world around us and just so happen to bother to save, either on paper, or digitally in a computer (preferably the latter, because then we can do cool things later on with it <em>much</em> more easily).</li>
+<li>There are two types of data:  Quantitative/Numerical and Qualitative/Categorical</li>
+<li>Deciding what kind a particular piece of data is doesn&rsquo;t have to be hard.  The general rule of thumb is: If you can do math with the data, it&rsquo;s quantitative/numerical.  Otherwise it&rsquo;s qualitative/categorical.</li>
+</ul>
+
+
+    <div class="newsletter-signup newsletter-signup--reader">
+  <p class="newsletter-hook">For people who need the <em>why</em> before the <em>how</em>. I teach programming, data, and other hard things one idea at a time, in order, until the whole thing clicks.</p>
+  <form class="newsletter-form" data-newsletter-form action="" method="post" novalidate>
+    <input type="hidden" name="tag" value="reader" data-newsletter-source>
+    <div class="newsletter-fields">
+      <label class="visually-hidden" for="newsletter-email-reader">Email address</label>
+      <input class="form-control newsletter-email" id="newsletter-email-reader"
+        type="email" name="email" placeholder="you@example.com"
+        autocomplete="email" required>
+      <button class="btn newsletter-button" type="submit">Get the next lesson</button>
+    </div>
+    <p class="newsletter-privacy">Your email gets you the weekly lesson and nothing else. Unsubscribe anytime, instantly.</p>
+    <p class="newsletter-message" data-newsletter-message hidden aria-live="polite"></p>
+  </form>
+</div>
+<script>
+  (function () {
+    var VALID_SOURCES = ["whale", "reader", "general", "newsletter-page"];
+    var srcParam = new URLSearchParams(window.location.search).get("src");
+    document.querySelectorAll("form[data-newsletter-form]").forEach(function (form) {
+      var sourceInput = form.querySelector("[data-newsletter-source]");
+      if (srcParam && VALID_SOURCES.indexOf(srcParam) !== -1 && sourceInput.value === "newsletter-page") {
+        sourceInput.value = srcParam;
+      }
+      form.addEventListener("submit", function (event) {
+        var email = form.querySelector("input[type=email]");
+        if (!email.value || email.validity.typeMismatch || email.validity.valueMissing) {
+          event.preventDefault();
+          email.reportValidity();
+          return;
+        }
+        if (typeof gtag === "function") {
+          gtag("event", "newsletter_signup", { source: sourceInput.value });
+        }
+        var message = form.querySelector("[data-newsletter-message]");
+        if (!form.getAttribute("action")) {
+          
+          event.preventDefault();
+          console.log("newsletter-signup (sandbox)", { email: email.value, source: sourceInput.value });
+          form.querySelector(".newsletter-fields").hidden = true;
+          message.textContent = "Thanks! You're on the list. Watch your inbox for the next lesson.";
+          message.hidden = false;
+        }
+      });
+    });
+  })();
+</script>
+
+    <aside>
+      
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+</article>
+</div></div></div>
+
+
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted"><a href="https://www.andrewcbancroft.com/newsletter/">Get one carefully built lesson a week &rarr;</a></span><br>
+            <span class="text-muted">This project contains 213 pages and is available on <a
+                    href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
+                Copyright &copy; Andrew Bancroft, <time datetime="2012">2012</time>-<time datetime="2024">2024</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    
+    <script>
+        function createCopyButton(highlightDiv) {
+            const button = document.createElement("button");
+            button.className = "copy-code-button";
+            button.type = "button";
+            button.innerText = "Copy";
+            button.addEventListener("click", () =>
+                copyCodeToClipboard(button, highlightDiv)
+            );
+            addCopyButtonToDom(button, highlightDiv);
+        }
+
+        async function copyCodeToClipboard(button, highlightDiv) {
+            const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+                .innerText;
+            try {
+                result = await navigator.permissions.query({ name: "clipboard-write" });
+                if (result.state == "granted" || result.state == "prompt") {
+                    await navigator.clipboard.writeText(codeToCopy);
+                } else {
+                    copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+                }
+            } catch (_) {
+                copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+            } finally {
+                codeWasCopied(button);
+            }
+        }
+
+        function copyCodeBlockExecCommand(codeToCopy, highlightDiv) {
+            const textArea = document.createElement("textArea");
+            textArea.contentEditable = "true";
+            textArea.readOnly = "false";
+            textArea.className = "copyable-text-area";
+            textArea.value = codeToCopy;
+            highlightDiv.insertBefore(textArea, highlightDiv.firstChild);
+            const range = document.createRange();
+            range.selectNodeContents(textArea);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+            document.execCommand("copy");
+            highlightDiv.removeChild(textArea);
+        }
+
+        function codeWasCopied(button) {
+            button.blur();
+            button.innerText = "Copied!";
+            setTimeout(function () {
+                button.innerText = "Copy";
+            }, 2000);
+        }
+
+        function addCopyButtonToDom(button, highlightDiv) {
+            highlightDiv.insertBefore(button, highlightDiv.firstChild);
+            const wrapper = document.createElement("div");
+            wrapper.className = "highlight-wrapper";
+            highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
+            wrapper.appendChild(highlightDiv);
+        }
+
+        document
+            .querySelectorAll(".highlight")
+            .forEach((highlightDiv) => createCopyButton(highlightDiv));
+
+    </script>
+</body>
+
+</html>

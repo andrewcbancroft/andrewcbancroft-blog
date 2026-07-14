@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-89T75EE32J"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-89T75EE32J');
+    </script>
+    
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6356224024630676"
+crossorigin="anonymous"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6356224024630676",
+    enable_page_level_ads: true,
+    overlays: { bottom: true }
+});
+</script>
+
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#3e8bc5"
+                    },
+                    "button": {
+                        "background": "#8ec760",
+                        "text": "#ffffff"
+                    }
+                }
+            })
+        });
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/data/machine-learning/predictive-analytics-vs-machine-learning-whats-the-difference/">
+	<meta property="og:site_name" content="Andrew Bancroft">
+	<meta property="og:title" content="Predictive Analytics vs Machine Learning - What&#39;s the Difference?">
+	<meta property="og:description" content="Are predictive analytics and machine learning the same thing? If they are not, what is the difference?">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="blog">
+		<meta property="article:published_time" content="2018-02-05T00:00:00+00:00">
+		<meta property="article:modified_time" content="2018-02-05T00:00:00+00:00">
+
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Predictive Analytics vs Machine Learning - What&#39;s the Difference?">
+	<meta name="twitter:description" content="Are predictive analytics and machine learning the same thing? If they are not, what is the difference?">
+<meta name="generator" content="Hugo 0.164.0">
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Predictive Analytics vs Machine Learning - What's the Difference?",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/data\/machine-learning\/predictive-analytics-vs-machine-learning-whats-the-difference\/",
+  "wordCount": "1070",
+  "datePublished": "2018-02-05T00:00:00Z",
+  "dateModified": "2018-02-05T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Bancroft"
+  }
+
+  ,"description": "Are predictive analytics and machine learning the same thing? If they are not, what is the difference?"
+}
+</script>
+
+
+
+    <title>Predictive Analytics vs Machine Learning - What&rsquo;s the Difference?</title>
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet">
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com/"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.andrewcbancroft.com/#pluralsight-courses">Pluralsight Courses</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Topics
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <h6 class="dropdown-header">iOS Development</h6>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-persistence">Data Persistence</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#dependency-management">Dependency
+                                Management</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#debugging">Debugging</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#eventkit">Event Kit</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#iap">In-App Purchases</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#parse">Parse</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#patterns-and-practices">Patterns and
+                                Practices</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#react-native">React Native</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#swift-five">"Swift Five" Series</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#swift-how-tos">Swift How-To's</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#swift-language-notes">Swift Language
+                                Notes</a>
+                            
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#testing">Testing</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#ui-work">User Interface Work</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#xcode">Xcode</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Data</h6>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-general-concepts">General Data Concepts</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-dimensional-modeling">Dimensional Modeling</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-machine-learning">Machine Learning</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-statistics">Statistics</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-engineering-python">Data Engineering with Python</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-engineering-r">Data Engineering with R</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-r">R</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-jupyter-notebooks">Jupyter Notebooks</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-sql-server">SQL Server</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-azure">Azure</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#dot-net-development">.Net Development</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#musings">Musings</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/portfolio"><i
+                                class="fas fa-briefcase"></i> Portfolio</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft"><i
+                                    class="fas fa-play"></i> Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft"><i class="fab fa-github"></i>
+                                GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/"><i
+                                    class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a class="dropdown-item" rel="me" href="https://hachyderm.io/@andrewcbancroft"><i
+                                    class="fab fa-mastodon"></i> Mastodon</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft"><i
+                                    class="fab fa-x-twitter"></i> X</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg"><i
+                                    class="fab fa-youtube"></i> YouTube</a>
+                            <a class="dropdown-item" href="https://dataday.life"><i class="fas fa-link"></i>
+                                www.dataday.life</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/index.xml"><i class="fas fa-rss"></i> Feed</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+<div class="container">
+  <div class="row">
+      <div class="col-sm-12">
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">Predictive Analytics vs Machine Learning - What&#39;s the Difference?</h1>
+    </header>
+    <div class="content">
+
+    <p></p>
+
+    <p>There&rsquo;s a strong temptation to equate &ldquo;predictive analytics&rdquo; and &ldquo;machine learning&rdquo;. It&rsquo;s not uncommon to throw the terms around interchangeably, which signals that the two are strongly related.</p>
+<p>BUT. Is there a <em>difference</em> that sometimes gets lost when we substitute one term for the other? If there <em>is</em> a difference, is it important to distinguish?</p>
+<h2 id="predictive-analytics-a-method-for-analysis">Predictive Analytics: A Method for Analysis</h2>
+<p>In <a href="https://www.andrewcbancroft.com/blog/data/general-data-concepts/data-analysis-vs-data-analytics-examining-suffix/">Breaking Down Data Analysis vs Data Analytics: A Look at the Suffix</a>, I reasoned that analytics essentially &ldquo;denotes the body of facts… the knowledge about… the principles for: analysis. Analytics is about methodology. It’s about the approach to performing analysis. It’s the <em>science</em> of analysis.&rdquo;</p>
+<p>In <a href="https://www.andrewcbancroft.com/blog/data/general-data-concepts/what-types-of-data-analysis-are-there/">What Types of Data Analysis Are There?</a>, I noted that predictive <em>analysis</em> is what you&rsquo;re doing when you analyze data in a way that can produce predictions of measurements for specific &ldquo;units&rdquo; within a population (as opposed to inferential analysis where the measurement predictions are made for the population as a whole).</p>
+<p>Combining the two concepts of &ldquo;analytics&rdquo; and &ldquo;predictive analysis&rdquo; ought to lend us to a natural definition for &ldquo;predictive analytics&rdquo;.</p>
+<blockquote>
+<p>Predictive analytics refers to the principles and methods for making measurement predictions for specific &ldquo;units&rdquo; within a population.</p>
+</blockquote>
+<p>Predictive analytics is concerned with the principles and methods for, say&hellip;</p>
+<ul>
+<li>Taking an individual customer from the population of a company&rsquo;s customer base, analyzing data about him/her, and predicting the liklihood that he/she will purchase [this product] if we run [this marketing campaign] targeted at them</li>
+<li>Taking a single house from the population of homes in a city or neighborhood, and predicting the selling price</li>
+</ul>
+<p>Predictive analytics encapsulates the principles and methods for computing estimations for these measurements (or any number of others that <a href="https://www.andrewcbancroft.com/blog/data/general-data-concepts/patterns-and-key-words-of-predictive-analytics-questions/">fit the pattern of questions</a> for predictive analytics to provide the answer for).</p>
+<p>The thing about &ldquo;predictive analytics&rdquo; as a term, is that it&rsquo;s pretty abstract.  Notably missing in these &ldquo;principles and methods&rdquo; is the <strong>how to do it</strong>.</p>
+<p><em>That</em> is what &ldquo;machine learning&rdquo; is.</p>
+<h2 id="machine-learning--a-way-to-do-predictive-analytics">Machine Learning:  A Way to do Predictive Analytics</h2>
+<p>Machine learning is a way to <em>do</em> predictive analytics.</p>
+<p>It is one way to take this idea of predicting measurements for an &ldquo;individual unit&rdquo; within a population, and turn it into a reality.</p>
+<p><em>One</em> way?  So&hellip; there are <em>other ways</em> to do predictive analytics??</p>
+<p>I can think of at least one&hellip;</p>
+<h2 id="before-there-were-machines-to-learn">Before There Were Machines to Learn</h2>
+<p>Before there were machines, there were&hellip; <em>people</em>.</p>
+<p>People (statisticians in particular) have been doing predictive analysis for decades, if not centuries. It may have taken longer and been more tedius and error-prone, but steps that are taken to figure out &ldquo;the answer&rdquo; in machine learning have been do-able by humans for a long time&hellip; they are not &ldquo;new&rdquo;.</p>
+<p>Sooooo&hellip; why &ldquo;machine learning&rdquo;?</p>
+<p>In short, it&rsquo;s a <em>scale</em> problem with modern data sets. The data sets of the 21st century are much larger than ever before in history.</p>
+<p>While it&rsquo;s <em>possible</em> for people to compute the outputs that a machine learning algorithm can produce, it&rsquo;s <em>unnecessary</em>.  Due to the scale of data in today&rsquo;s world, it&rsquo;s also insanely impractical for many data sets.</p>
+<h2 id="automating-the-humans-steps">Automating the Human&rsquo;s Steps</h2>
+<p>If you handed me a small data set and said, &ldquo;Manually find a way to produce a predicted house price for a home in [this neighborhood]&rdquo;, I could probably swing it.</p>
+<p>If you handed me another similar data set and asked me to do the same thing, I could probably do it again, assuming I remember all the steps.  On the second round, I might even be brilliant enough to <em>write the steps down</em>.</p>
+<p>If you came to me again (and again, and again), I could follow the steps one by one to produce predictions.  I&rsquo;d just be really tired, bored, and annoyed.</p>
+<p>Naturally, you might ask, &ldquo;Why not <em>automate the steps</em>?&rdquo;</p>
+<p>That&rsquo;s the idea behind machine learning!</p>
+<p>&ldquo;Machine learning&rdquo; simply describes what computers do when they execute <em>programs</em> to produce predictions.</p>
+<p>Computer scientists take the specific steps that need to be followed in order to produce a prediction (an <em>algorithm</em>, if you will) and <em>write code</em> to let a computer (a <em>machine</em>) do those steps and produce the prediction.</p>
+<p>Same results.  Without goof-ups.  Faster.</p>
+<p>Happier Andrew.</p>
+<p>That is machine learning&hellip; it involves the encoding of the steps that need to be taken in order to produce measurement predictions of all kinds in such a way that a computer can <em>execute</em> those steps and produce the result we want.</p>
+<h2 id="the-bottom-line">The Bottom-Line</h2>
+<p>Predictive analytics and machine learning are not &ldquo;the same&rdquo;.</p>
+<p>Predictive analytics is about [the way(s)], in general, to make estimations about specific people (or specific animals or widgets or [whatever] the &ldquo;unit&rdquo; of interest is from your population of &ldquo;units&rdquo;).</p>
+<p>Machine learning <em>is</em> one of those ways to make those predictions a reality.</p>
+<p>The means to do something&hellip;the methods and strategies and ways we approach accomplishing a goal&hellip;are not the same thing as the goal itself. They&rsquo;re two distinct things, aren&rsquo;t they?</p>
+<p>If I say, &ldquo;My goal is to save $1000 by Christmas.&rdquo;, I could go about achieving that goal in a dozen ways.  I might begin a saving strategy that involves setting back about $83 / month, the goal and the strategy are two separate things.  I might take on a side project to earn extra money, or sell stuff on Craigslist. In either case, the strategy <em>accomplishes</em> the goal.</p>
+<p>Predictive analytics is the goal.  Machine learning is a strategy used to <em>accomplish</em> the goal.</p>
+<h2 id="theyre-different--so-what">They&rsquo;re Different &ndash; So What?</h2>
+<p>So who cares if they&rsquo;re different?  Is it even an important distinction to make?  What&rsquo;s the harm in swapping in &ldquo;machine learning&rdquo; for &ldquo;predictive analytics&rdquo;, or vice-versa?</p>
+<p>One could make the argument that it only matters if you&rsquo;re OCD about terms.  My take on it is that &ldquo;data science&rdquo; is already this nebulous, vague, muddy-water field, so any effort we can make to be precise about our terms can help clarify what we mean is helpful.</p>
+<p>Is it <em>harmful</em> to equate predictive analytics and machine learning? I suppose that depends on your view of how important it is to be clear and precise so as not to cause confusion.</p>
+<p>Having to Google &ldquo;Predictive analytics vs machine learning&rdquo; is one clue that the water is already muddy enough.  Life and death may not be at stake, but I think it&rsquo;s <em>helpful</em> to develop the right mental model for all of these pieces to fit together in the world of data science.</p>
+
+
+    <div class="newsletter-signup newsletter-signup--general">
+  <p class="newsletter-hook">Hard technical ideas, explained until they actually click. One carefully built lesson a week — no fluff, no jargon, occasional jokes.</p>
+  <form class="newsletter-form" data-newsletter-form action="" method="post" novalidate>
+    <input type="hidden" name="tag" value="general" data-newsletter-source>
+    <div class="newsletter-fields">
+      <label class="visually-hidden" for="newsletter-email-general">Email address</label>
+      <input class="form-control newsletter-email" id="newsletter-email-general"
+        type="email" name="email" placeholder="you@example.com"
+        autocomplete="email" required>
+      <button class="btn newsletter-button" type="submit">Get the next lesson</button>
+    </div>
+    <p class="newsletter-privacy">Your email gets you the weekly lesson and nothing else. Unsubscribe anytime, instantly.</p>
+    <p class="newsletter-message" data-newsletter-message hidden aria-live="polite"></p>
+  </form>
+</div>
+<script>
+  (function () {
+    var VALID_SOURCES = ["whale", "reader", "general", "newsletter-page"];
+    var srcParam = new URLSearchParams(window.location.search).get("src");
+    document.querySelectorAll("form[data-newsletter-form]").forEach(function (form) {
+      var sourceInput = form.querySelector("[data-newsletter-source]");
+      if (srcParam && VALID_SOURCES.indexOf(srcParam) !== -1 && sourceInput.value === "newsletter-page") {
+        sourceInput.value = srcParam;
+      }
+      form.addEventListener("submit", function (event) {
+        var email = form.querySelector("input[type=email]");
+        if (!email.value || email.validity.typeMismatch || email.validity.valueMissing) {
+          event.preventDefault();
+          email.reportValidity();
+          return;
+        }
+        if (typeof gtag === "function") {
+          gtag("event", "newsletter_signup", { source: sourceInput.value });
+        }
+        var message = form.querySelector("[data-newsletter-message]");
+        if (!form.getAttribute("action")) {
+          
+          event.preventDefault();
+          console.log("newsletter-signup (sandbox)", { email: email.value, source: sourceInput.value });
+          form.querySelector(".newsletter-fields").hidden = true;
+          message.textContent = "Thanks! You're on the list. Watch your inbox for the next lesson.";
+          message.hidden = false;
+        }
+      });
+    });
+  })();
+</script>
+
+    <aside>
+      
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+</article>
+</div></div></div>
+
+
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted"><a href="https://www.andrewcbancroft.com/newsletter/">Get one carefully built lesson a week &rarr;</a></span><br>
+            <span class="text-muted">This project contains 213 pages and is available on <a
+                    href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
+                Copyright &copy; Andrew Bancroft, <time datetime="2012">2012</time>-<time datetime="2024">2024</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    
+    <script>
+        function createCopyButton(highlightDiv) {
+            const button = document.createElement("button");
+            button.className = "copy-code-button";
+            button.type = "button";
+            button.innerText = "Copy";
+            button.addEventListener("click", () =>
+                copyCodeToClipboard(button, highlightDiv)
+            );
+            addCopyButtonToDom(button, highlightDiv);
+        }
+
+        async function copyCodeToClipboard(button, highlightDiv) {
+            const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+                .innerText;
+            try {
+                result = await navigator.permissions.query({ name: "clipboard-write" });
+                if (result.state == "granted" || result.state == "prompt") {
+                    await navigator.clipboard.writeText(codeToCopy);
+                } else {
+                    copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+                }
+            } catch (_) {
+                copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+            } finally {
+                codeWasCopied(button);
+            }
+        }
+
+        function copyCodeBlockExecCommand(codeToCopy, highlightDiv) {
+            const textArea = document.createElement("textArea");
+            textArea.contentEditable = "true";
+            textArea.readOnly = "false";
+            textArea.className = "copyable-text-area";
+            textArea.value = codeToCopy;
+            highlightDiv.insertBefore(textArea, highlightDiv.firstChild);
+            const range = document.createRange();
+            range.selectNodeContents(textArea);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+            document.execCommand("copy");
+            highlightDiv.removeChild(textArea);
+        }
+
+        function codeWasCopied(button) {
+            button.blur();
+            button.innerText = "Copied!";
+            setTimeout(function () {
+                button.innerText = "Copy";
+            }, 2000);
+        }
+
+        function addCopyButtonToDom(button, highlightDiv) {
+            highlightDiv.insertBefore(button, highlightDiv.firstChild);
+            const wrapper = document.createElement("div");
+            wrapper.className = "highlight-wrapper";
+            highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
+            wrapper.appendChild(highlightDiv);
+        }
+
+        document
+            .querySelectorAll(".highlight")
+            .forEach((highlightDiv) => createCopyButton(highlightDiv));
+
+    </script>
+</body>
+
+</html>

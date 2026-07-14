@@ -376,6 +376,44 @@
             </div>
         </div>
 
+        <span id="data" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <h3 class="category_header">Data</h3>
+            </div>
+        </div>
+
+        {{ range slice
+            (dict "id" "data-general-concepts" "title" "General Data Concepts" "dir" "/blog/data/general-data-concepts/")
+            (dict "id" "data-dimensional-modeling" "title" "Dimensional Modeling" "dir" "/blog/data/dimensional-modeling/")
+            (dict "id" "data-machine-learning" "title" "Machine Learning" "dir" "/blog/data/machine-learning/")
+            (dict "id" "data-statistics" "title" "Statistics" "dir" "/blog/data/statistics/")
+            (dict "id" "data-engineering-python" "title" "Data Engineering with Python" "dir" "/blog/data/data-engineering-python/")
+            (dict "id" "data-engineering-r" "title" "Data Engineering with R" "dir" "/blog/data/data-engineering-r/")
+            (dict "id" "data-r" "title" "R" "dir" "/blog/data/r/")
+            (dict "id" "data-jupyter-notebooks" "title" "Jupyter Notebooks" "dir" "/blog/data/jupyter-notebooks/")
+            (dict "id" "data-sql-server" "title" "SQL Server" "dir" "/blog/data/sql-server/")
+            (dict "id" "data-azure" "title" "Azure" "dir" "/blog/data/azure/")
+        }}
+        <span id="{{ .id }}" class="jump-target"></span>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">{{ .title }}</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where $.Site.RegularPages "File.Dir" "in" .dir).ByTitle }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+
         <span id="dot-net-development" class="jump-target"></span>
         <div class="row" id="">
             <div class="col-sm-12">

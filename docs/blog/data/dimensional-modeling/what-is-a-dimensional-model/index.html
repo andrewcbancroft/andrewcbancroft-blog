@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-89T75EE32J"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-89T75EE32J');
+    </script>
+    
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6356224024630676"
+crossorigin="anonymous"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6356224024630676",
+    enable_page_level_ads: true,
+    overlays: { bottom: true }
+});
+</script>
+
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#3e8bc5"
+                    },
+                    "button": {
+                        "background": "#8ec760",
+                        "text": "#ffffff"
+                    }
+                }
+            })
+        });
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/data/dimensional-modeling/what-is-a-dimensional-model/">
+	<meta property="og:site_name" content="Andrew Bancroft">
+	<meta property="og:title" content="What is a Dimensional Model?">
+	<meta property="og:description" content="Unpack the term dimensional model to see if we can make heads of tails of what the words mean when they are put together in this term.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="blog">
+		<meta property="article:published_time" content="2017-12-26T00:00:00+00:00">
+		<meta property="article:modified_time" content="2017-12-26T00:00:00+00:00">
+
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="What is a Dimensional Model?">
+	<meta name="twitter:description" content="Unpack the term dimensional model to see if we can make heads of tails of what the words mean when they are put together in this term.">
+<meta name="generator" content="Hugo 0.164.0">
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What is a Dimensional Model?",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/data\/dimensional-modeling\/what-is-a-dimensional-model\/",
+  "wordCount": "947",
+  "datePublished": "2017-12-26T00:00:00Z",
+  "dateModified": "2017-12-26T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Bancroft"
+  }
+
+  ,"description": "Unpack the term dimensional model to see if we can make heads of tails of what the words mean when they are put together in this term."
+}
+</script>
+
+
+
+    <title>What is a Dimensional Model?</title>
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    
+
+    
+    <link href="https://www.andrewcbancroft.com/css/custom.css" rel="stylesheet">
+    <link href="https://www.andrewcbancroft.com/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com/"><i class="fas fa-home"></i> Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.andrewcbancroft.com/#pluralsight-courses">Pluralsight Courses</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Topics
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <h6 class="dropdown-header">iOS Development</h6>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-persistence">Data Persistence</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#dependency-management">Dependency
+                                Management</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#debugging">Debugging</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#eventkit">Event Kit</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#iap">In-App Purchases</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#parse">Parse</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#patterns-and-practices">Patterns and
+                                Practices</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#react-native">React Native</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#swift-five">"Swift Five" Series</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#swift-how-tos">Swift How-To's</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#swift-language-notes">Swift Language
+                                Notes</a>
+                            
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#testing">Testing</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#ui-work">User Interface Work</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#xcode">Xcode</a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Data</h6>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-general-concepts">General Data Concepts</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-dimensional-modeling">Dimensional Modeling</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-machine-learning">Machine Learning</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-statistics">Statistics</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-engineering-python">Data Engineering with Python</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-engineering-r">Data Engineering with R</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-r">R</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-jupyter-notebooks">Jupyter Notebooks</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-sql-server">SQL Server</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data-azure">Azure</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#dot-net-development">.Net Development</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#musings">Musings</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/portfolio"><i
+                                class="fas fa-briefcase"></i> Portfolio</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft"><i
+                                    class="fas fa-play"></i> Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft"><i class="fab fa-github"></i>
+                                GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/"><i
+                                    class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a class="dropdown-item" rel="me" href="https://hachyderm.io/@andrewcbancroft"><i
+                                    class="fab fa-mastodon"></i> Mastodon</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft"><i
+                                    class="fab fa-x-twitter"></i> X</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg"><i
+                                    class="fab fa-youtube"></i> YouTube</a>
+                            <a class="dropdown-item" href="https://dataday.life"><i class="fas fa-link"></i>
+                                www.dataday.life</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/index.xml"><i class="fas fa-rss"></i> Feed</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+<div class="container">
+  <div class="row">
+      <div class="col-sm-12">
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">What is a Dimensional Model?</h1>
+    </header>
+    <div class="content">
+
+    <p></p>
+
+    <h2 id="measurements-and-descriptions">Measurements and Descriptions</h2>
+<p>There are endless ways to measure and describe the world around us.</p>
+<p>When you boil <a href="https://www.andrewcbancroft.com/blog/data/general-data-concepts/what-is-data-like-im-five/">data</a> down to the essentials, what you get are&hellip;</p>
+<ol>
+<li>Measurement(s)</li>
+<li>Descriptions of the measurement(s)</li>
+</ol>
+<p>It doesn&rsquo;t matter what industry you&rsquo;re in. It doesn&rsquo;t matter the process that captured the data you&rsquo;re looking at. At the end of the day, you&rsquo;ve got <em><a href="https://www.andrewcbancroft.com/blog/data/general-data-concepts/what-is-data-like-im-five/#quantitative-numerical">numbers</a> and <a href="https://www.andrewcbancroft.com/blog/data/general-data-concepts/what-is-data-like-im-five/#qualitative-categorical">classifications</a></em> as measurements, and you&rsquo;ve got the <em>context</em> describing the <em>who, what, when, where, why, and how</em> of those measurements.</p>
+<hr>
+<h2 id="dimensional-model---breaking-it-down">&ldquo;Dimensional Model&rdquo; - Breaking it Down</h2>
+<p>Let&rsquo;s unpack the term &ldquo;dimensional model&rdquo; to see if we can make heads of tails of what the words mean when they&rsquo;re put together in this term.</p>
+<p>I&rsquo;ll start with the noun (model) and then look at the adjective (dimensional).</p>
+<h3 id="model">Model</h3>
+<p>What&rsquo;s a <em>model</em>?</p>
+<p>The first images that come to mind for me involve cars, trains, and rocket ships.  When you think about the hobby of model-making, what you have is an activity where you take [something] (like a car, train, or rocket) and create [something else] (the model) that <em>represents</em> the original.</p>
+<p>Let&rsquo;s keep that word:  <strong>represent</strong></p>
+<p>Another image that comes to mind is a <em>person</em> who is a model. You think about the man or woman walking down the runway, showing off what a particular designer&rsquo;s outfit should look like on an &ldquo;ideal&rdquo; person.</p>
+<p>Let&rsquo;s keep that word too:  <strong>ideal</strong></p>
+<p>The world is complicated. Sometimes, in order to shut out the noise, we create something that portrays the <em>general concept</em> of something that would otherwise be difficult to understand.</p>
+<p><strong>General concept</strong> is the last word we&rsquo;ll keep for now.</p>
+<p>So what do we have?</p>
+<blockquote>
+<p>A model is a <strong>representation</strong> of data that portrays its <strong>general concept(s)</strong>, in a way that is <strong>ideal</strong> for understanding the patterns and information that the data contains.</p>
+</blockquote>
+<p><a name="kind-of-model"></a>
+That last part, &ldquo;ideal for understanding the patterns and information that the data contains&rdquo; leaves the door open to the possibility that there might be different <em>kinds</em> of models that are more or less ideal for different analyses.</p>
+<p>The first half remains true to all models.  Models are representations of data.  And models boil things down to the general concept(s) that exist within the data. The goal for models is to help humans see, understand, and interpret the patterns and information within data.</p>
+<h3 id="dimensional">Dimensional</h3>
+<p>What does the word &ldquo;dimension&rdquo; being to mind for you?</p>
+<p>I immediately thought of shapes (2 <em>dimensional</em> or 3 <em>dimensional</em> shapes).</p>
+<p>In a 2D shape, the dimensions are length and width, aren&rsquo;t they?  A square or rectangle has sides that are [x] units long by [y] units wide.  3D shapes add a dimension:  depth.</p>
+<p>In the case of shapes, a dimension is [the thing] that answers the question &ldquo;how long?&rdquo; or &ldquo;how wide?&rdquo; or &ldquo;how deep?&rdquo;.</p>
+<p>Outside the world of geometry, the word &ldquo;dimension&rdquo; carries the idea of the <strong>characteristics</strong> or <strong>qualities</strong> of something.</p>
+<p>If I say, &ldquo;When I look at the diamond <strong>from this angle</strong>, it explodes with brilliance!&rdquo;, I&rsquo;m substituting &ldquo;from this angle&rdquo; for a way to describe the diamond&rsquo;s <strong>facets</strong>&hellip; its <strong>dimensionality</strong>, if you will.</p>
+<p>If I say, &ldquo;Wow, when you add jalapeños to the salsa, it adds a whole new <strong>dimension</strong> of flavor!&rdquo;, you see how the word dimension gets at an essential <strong>feature</strong> of the salsa&rsquo;s flavor.</p>
+<p>Coffee from different regions of the world have distinct flavor <strong>profile</strong>s - different <em>dimensions</em> to their taste.</p>
+<p>The same goes with wines and cheeses and teas and on and on with just about anything you can think of.</p>
+<blockquote>
+<p>The word dimensional tells us that the <strong>characteristics</strong>, <strong>qualities</strong>, <strong>features</strong>, and <strong>facets</strong> of something are what&rsquo;s important.</p>
+</blockquote>
+<h3 id="dimensions-of-what">Dimensions of What??</h3>
+<p>So we&rsquo;ve got a representation of data (a model).
+We&rsquo;ve got characteristics&hellip;qualities&hellip;features&hellip;facets&hellip; (dimensions).</p>
+<p>The question now becomes&hellip; dimensions of&hellip; <em>what</em>?? The answer gives us the distinguishing characteristic of dimensional models that makes them ideal for understanding the patterns and information that the data contains.</p>
+<h3 id="the-defining-characteristic-of-a-dimensional-model">The Defining Characteristic of a Dimensional Model</h3>
+<p>The defining characteristic of a dimensional model is that it captures and highlights the characteristics, qualities, features, and facets of <em>the event that generated the measurements</em>.</p>
+<p>Dimensional models make the numbers visible, true&hellip; but they also make a point to bring <em>meaning</em> to the numbers by making the who, what, when, where, why, and how <em>behind the generation of those numbers</em> into the forefront.</p>
+<p><a href="https://www.andrewcbancroft.com/blog/data/general-data-concepts/what-is-data-like-im-five/#qualitative-categorical">Qualitative data</a>, in and of itself, is descriptive by nature. It&rsquo;s the qualitative data <em>about the situation that caused a measurement to be recorded</em> that gives dimensional models their &ldquo;ideal&rdquo; edge when it comes to understanding the patterns and information that the data contains.</p>
+<p>There are a few things that have to happen for that to be possible:</p>
+<ol>
+<li>You&rsquo;ve got to <strong>define a &ldquo;measurement event&rdquo;</strong> &ndash; the action or process that causes you to capture and save data in the first place</li>
+<li>You&rsquo;ve got to <strong>detect when that event has occurred</strong>, either physically or in some automated way (like with a sensor)</li>
+<li>You&rsquo;ve got to capture and save the measurements that matter, <strong>and</strong> the 5 W&rsquo;s + How + any other qualitative information that you think are important to describing that event</li>
+</ol>
+<h3 id="putting-it-all-together--dimensional--model">Putting it all Together:  &ldquo;Dimensional&rdquo; + &ldquo;Model&rdquo;</h3>
+<p>&ldquo;Model&rdquo; is the noun; &ldquo;dimensional&rdquo; is the adjective.  When you put them together, you might get something like this:</p>
+<p>A dimensional model is a <strong>representation of data</strong> that&hellip;</p>
+<ul>
+<li><strong>Portrays its measurements</strong> in a way that highlights the <strong>characteristics</strong>, <strong>qualities</strong>, <strong>features</strong>, and <strong>facets</strong> of the event that generated the measurements (the who, what, when, where, how, of the data collection situation)</li>
+<li>Therefore, a dimensional model is <strong>ideal for understanding the patterns and information that the data contains</strong> in a way that is widely approachable by analysts of all kinds</li>
+</ul>
+
+
+    <div class="newsletter-signup newsletter-signup--general">
+  <p class="newsletter-hook">Hard technical ideas, explained until they actually click. One carefully built lesson a week — no fluff, no jargon, occasional jokes.</p>
+  <form class="newsletter-form" data-newsletter-form action="" method="post" novalidate>
+    <input type="hidden" name="tag" value="general" data-newsletter-source>
+    <div class="newsletter-fields">
+      <label class="visually-hidden" for="newsletter-email-general">Email address</label>
+      <input class="form-control newsletter-email" id="newsletter-email-general"
+        type="email" name="email" placeholder="you@example.com"
+        autocomplete="email" required>
+      <button class="btn newsletter-button" type="submit">Get the next lesson</button>
+    </div>
+    <p class="newsletter-privacy">Your email gets you the weekly lesson and nothing else. Unsubscribe anytime, instantly.</p>
+    <p class="newsletter-message" data-newsletter-message hidden aria-live="polite"></p>
+  </form>
+</div>
+<script>
+  (function () {
+    var VALID_SOURCES = ["whale", "reader", "general", "newsletter-page"];
+    var srcParam = new URLSearchParams(window.location.search).get("src");
+    document.querySelectorAll("form[data-newsletter-form]").forEach(function (form) {
+      var sourceInput = form.querySelector("[data-newsletter-source]");
+      if (srcParam && VALID_SOURCES.indexOf(srcParam) !== -1 && sourceInput.value === "newsletter-page") {
+        sourceInput.value = srcParam;
+      }
+      form.addEventListener("submit", function (event) {
+        var email = form.querySelector("input[type=email]");
+        if (!email.value || email.validity.typeMismatch || email.validity.valueMissing) {
+          event.preventDefault();
+          email.reportValidity();
+          return;
+        }
+        if (typeof gtag === "function") {
+          gtag("event", "newsletter_signup", { source: sourceInput.value });
+        }
+        var message = form.querySelector("[data-newsletter-message]");
+        if (!form.getAttribute("action")) {
+          
+          event.preventDefault();
+          console.log("newsletter-signup (sandbox)", { email: email.value, source: sourceInput.value });
+          form.querySelector(".newsletter-fields").hidden = true;
+          message.textContent = "Thanks! You're on the list. Watch your inbox for the next lesson.";
+          message.hidden = false;
+        }
+      });
+    });
+  })();
+</script>
+
+    <aside>
+      
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+</article>
+</div></div></div>
+
+
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted"><a href="https://www.andrewcbancroft.com/newsletter/">Get one carefully built lesson a week &rarr;</a></span><br>
+            <span class="text-muted">This project contains 213 pages and is available on <a
+                    href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
+                Copyright &copy; Andrew Bancroft, <time datetime="2012">2012</time>-<time datetime="2024">2024</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    
+    <script>
+        function createCopyButton(highlightDiv) {
+            const button = document.createElement("button");
+            button.className = "copy-code-button";
+            button.type = "button";
+            button.innerText = "Copy";
+            button.addEventListener("click", () =>
+                copyCodeToClipboard(button, highlightDiv)
+            );
+            addCopyButtonToDom(button, highlightDiv);
+        }
+
+        async function copyCodeToClipboard(button, highlightDiv) {
+            const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+                .innerText;
+            try {
+                result = await navigator.permissions.query({ name: "clipboard-write" });
+                if (result.state == "granted" || result.state == "prompt") {
+                    await navigator.clipboard.writeText(codeToCopy);
+                } else {
+                    copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+                }
+            } catch (_) {
+                copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+            } finally {
+                codeWasCopied(button);
+            }
+        }
+
+        function copyCodeBlockExecCommand(codeToCopy, highlightDiv) {
+            const textArea = document.createElement("textArea");
+            textArea.contentEditable = "true";
+            textArea.readOnly = "false";
+            textArea.className = "copyable-text-area";
+            textArea.value = codeToCopy;
+            highlightDiv.insertBefore(textArea, highlightDiv.firstChild);
+            const range = document.createRange();
+            range.selectNodeContents(textArea);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+            document.execCommand("copy");
+            highlightDiv.removeChild(textArea);
+        }
+
+        function codeWasCopied(button) {
+            button.blur();
+            button.innerText = "Copied!";
+            setTimeout(function () {
+                button.innerText = "Copy";
+            }, 2000);
+        }
+
+        function addCopyButtonToDom(button, highlightDiv) {
+            highlightDiv.insertBefore(button, highlightDiv.firstChild);
+            const wrapper = document.createElement("div");
+            wrapper.className = "highlight-wrapper";
+            highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
+            wrapper.appendChild(highlightDiv);
+        }
+
+        document
+            .querySelectorAll(".highlight")
+            .forEach((highlightDiv) => createCopyButton(highlightDiv));
+
+    </script>
+</body>
+
+</html>
