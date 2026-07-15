@@ -23,14 +23,14 @@
 {{- $cfg := .page.Site.Params.newsletter -}}
 {{- $source := .source -}}
 {{- $showHook := ne .showHook false -}}
-{{- $hookA := "Hard technical ideas, explained until they actually click. One carefully built lesson a week — no fluff, no jargon, occasional jokes." -}}
-{{- $hookB := "For people who need the <em>why</em> before the <em>how</em>. I teach programming, data, and other hard things one idea at a time, in order, until the whole thing clicks." -}}
+{{- $hookA := "Don't just copy it. Understand it. I explain programming and data topics from the ground up, why before how, minus the fluff." -}}
+{{- $hookB := "For people who need the <em>why</em> before the <em>how</em>. I teach programming and data one idea at a time, in order, until the whole thing clicks." -}}
 {{- $hook := .hook | default (cond (eq $source "reader") $hookB $hookA) -}}
 {{- if eq $source "whale" -}}
 {{- /* Whale pages get one quiet line below the solution, never a form.
        The ?src=whale param carries attribution through to the signup. */ -}}
 <div class="newsletter-signup newsletter-signup--whale">
-  <p class="newsletter-hook">Got what you needed? I write one short lesson a week that makes confusing dev &amp; data stuff click. <a href="/newsletter/?src=whale"><strong>Get the next one &rarr;</strong></a></p>
+  <p class="newsletter-hook">Got what you needed? I write short lessons that explain dev and data topics from the ground up. <a href="/newsletter/?src=whale"><strong>Get the next one &rarr;</strong></a></p>
 </div>
 {{- else -}}
 <div class="newsletter-signup newsletter-signup--{{ $source }}">
@@ -46,7 +46,7 @@
         autocomplete="email" required>
       <button class="btn newsletter-button" type="submit">Get the next lesson</button>
     </div>
-    <p class="newsletter-privacy">Your email gets you the weekly lesson and nothing else. Unsubscribe anytime, instantly.</p>
+    <p class="newsletter-privacy">Your email gets you new lessons and nothing else. Unsubscribe anytime, instantly.</p>
     <p class="newsletter-message" data-newsletter-message hidden aria-live="polite"></p>
   </form>
 </div>

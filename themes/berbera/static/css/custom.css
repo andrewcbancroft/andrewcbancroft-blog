@@ -357,6 +357,15 @@ Navbar
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
 }
 
+/* The fixed-top collapsed menu had no internal scroll, so long menus
+clipped on short viewports; cap its height and let it scroll. */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    max-height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+  }
+}
+
 /* ---------------------------------------------------------
 Homepage
 ---------------------------------------------------------*/
@@ -547,6 +556,14 @@ Technical Notes
 Articles: long-form reading typography
 ---------------------------------------------------------*/
 
+/* Cap the whole article shell so the header (badges, title, date)
+   shares a column with the prose instead of spanning the container. */
+.article {
+  max-width: var(--measure-wide);
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .article h1{
   font-weight: bold;
   font-family: var(--font-ui);
@@ -560,9 +577,26 @@ Articles: long-form reading typography
 
 .article .content{
   font-family: var(--font-body);
-  max-width: var(--measure);
+}
+
+/* Prose children hold the reading measure; the min() keeps replaced
+   elements (images) from overflowing narrow viewports. */
+.article .content > * {
+  max-width: min(var(--measure), 100%);
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Breakout children: code, tables, media use the wider column.
+   .highlight-wrapper is the runtime wrapper the copy-code script
+   (baseof.html) puts around each .highlight. */
+.article .content > .highlight,
+.article .content > .highlight-wrapper,
+.article .content > pre,
+.article .content > table,
+.article .content > figure,
+.article .content > .video-embed {
+  max-width: min(var(--measure-wide), 100%);
 }
 
 .article .content p, .article .content li{

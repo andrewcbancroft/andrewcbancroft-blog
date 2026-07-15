@@ -21,7 +21,8 @@
   --text-small: 0.875rem;
   --leading-body: 1.7;
   --leading-heading: 1.3;
-  --measure: 72ch;             /* comfortable prose measure */
+  --measure: 75ch;             /* comfortable prose measure */
+  --measure-wide: 60rem;       /* breakout width: title, callouts, code, media */
 
   /* ---- brand anchors ---- */
   --signal-blue: #1668A8;

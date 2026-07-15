@@ -10,6 +10,16 @@ pygmentsOptions="linenos=inline"
 canonifyURLs=true
 publishDir="docs"
 disableKinds = ["section", "taxonomy", "taxonomyTerm"]
+
+# Generate /robots.txt (template lives in the theme) so crawlers get an
+# explicit allow + a Sitemap pointer. Without this Hugo emits no robots.txt
+# and the path 404s.
+enableRobotsTXT = true
+
+# Use git commit dates for each page's Lastmod (Hugo's default lastmod
+# resolution already prefers ":git"). This makes sitemap.xml <lastmod>
+# reflect real modification history instead of only the original publish date.
+enableGitInfo = true
 disqusShortname="andrewcbancroft"
 
 [markup.goldmark.renderer]

@@ -1,23 +1,19 @@
 ---
-title: "One Lesson a Week"
-description: "Hard technical ideas, explained until they actually click. One carefully built lesson a week — no fluff, no jargon, occasional jokes."
+title: "Why Before How"
+description: "Don't just copy it. Understand it. I explain programming and data topics from the ground up, why before how, minus the fluff."
 type: newsletter
 url: /newsletter/
 exclude_related: true
 ---
 
-**Hard technical ideas, explained until they actually click. One carefully built lesson a week — no fluff, no jargon, occasional jokes.**
+**Don't just copy it. Understand it. I explain programming and data topics from the ground up, why before how, minus the fluff.**
 
 ## What you'll get
 
-Every week, I send one lesson that takes a single confusing idea and explains it until it clicks. Not a link roundup. Not a firehose. One idea, taught properly, in the order that makes the next idea easier.
+Each lesson takes one confusing idea and explains it from the ground up: the problem it solves, why the approach works, and only the details that matter. Not a link roundup. Not a firehose. One idea, taught properly, in the order that makes the next idea easier.
 
-Recent and upcoming topics span the range of things I teach: what Swift's `weak` and `unowned` actually do, why `axis=0` in pandas means what it means, how delegation works (and why it's everywhere), and what makes a bash script executable.
+The topics vary. The pattern doesn't: take something confusing, find the problem it actually solves, and build the explanation from the ground up.
 
 ## When
 
-Once a week. That's the whole schedule. If I miss a week, it's because the lesson wasn't good enough yet.
-
-## Your email
-
-Your address is used to send you the lesson and for nothing else. No sharing, no selling, and unsubscribing takes one click.
+When it's ready. I'd rather send you one lesson that actually clicks than hit a schedule with filler.
