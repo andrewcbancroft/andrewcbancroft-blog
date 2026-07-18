@@ -1,10 +1,12 @@
 ---
-title: "Why Before How"
+title: "Bit by Bit"
 description: "Don't just copy it. Understand it. I explain programming and data topics from the ground up, why before how, minus the fluff."
 type: newsletter
 url: /newsletter/
 exclude_related: true
 ---
+
+*Why before how.*
 
 **Don't just copy it. Understand it. I explain programming and data topics from the ground up, why before how, minus the fluff.**
 
