@@ -1,0 +1,16 @@
+{
+  "name": "andrewcbancroft-blog-tooling",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build-time tooling for andrewcbancroft.com (Hugo). Currently: OG image generation.",
+  "scripts": {
+    "og": "node scripts/og/build-og.mjs",
+    "og:force": "node scripts/og/build-og.mjs --force",
+    "prebuild": "node scripts/og/build-og.mjs"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.60",
+    "gray-matter": "^4.0.3"
+  }
+}
