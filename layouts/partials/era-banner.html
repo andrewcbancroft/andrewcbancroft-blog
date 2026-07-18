@@ -28,13 +28,11 @@
   <aside class="era-banner">
     <p>
       <strong>Time capsule:</strong>
-      first published in {{ $year }}{{ with $era }}, in the {{ . }}{{ end }}.
-      {{ if in $dir "ios-development" -}}
-        The concepts here still apply; Swift's syntax has moved on since.
-      {{- else if in $dir "data/azure" -}}
-        Azure services change quickly, so screens and menu names have likely moved.
+      First published in {{ $year }}{{ with $era }}, in the {{ . }}{{ end }}.
+      {{ if in $dir "data/azure" -}}
+        Menus and screens may have moved on since, but the concepts here still apply.
       {{- else -}}
-        The concepts here still apply; the tooling has moved on since.
+        Syntax may have moved on since, but the concepts here still apply.
       {{- end }}
       {{- with .Params.modern_equivalent }}
         {{- with site.GetPage . }} For a current take, see <a href="{{ .RelPermalink }}">{{ .Title }}</a>.{{ end }}
