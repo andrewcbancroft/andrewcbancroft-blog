@@ -45,13 +45,13 @@ const TITLE_SIZE = 58, TITLE_LH = Math.round(58 * 1.16), TITLE_LS = -1;
 const KICK_SIZE = 23, KICK_LS = 3.5;
 const COL_W = W - PAD_X * 2 - MARK - GAP;
 
-function palette(mode) {
+export function palette(mode) {
   return mode === 'light'
     ? { bg: '#FFFFFF', fg: '#1F2937', accent: '#0891B2', dot: '#0891B2', sub: '#1668A8', bracket: '#1668A8', bracketW: 6 }
     : { bg: '#0C447C', fg: '#FFFFFF', accent: '#9CC4E6', dot: '#9CC4E6', sub: '#FFFFFF', bracket: '#FFFFFF', bracketW: 5.5 };
 }
 
-function drawMark(ctx, C, x, y, size) {
+export function drawMark(ctx, C, x, y, size) {
   const s = size / 64;
   ctx.save();
   ctx.translate(x, y);
