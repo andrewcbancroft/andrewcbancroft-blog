@@ -331,6 +331,15 @@ Navbar
   font-weight: 700;
   text-transform: uppercase;
   font-size: .9em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-brand .brand-mark {
+  height: 26px;
+  width: 26px;
+  margin-right: .5em;
+  flex: none;
 }
 
 .navbar-nav > li > a {
