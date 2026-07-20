@@ -27,3 +27,8 @@ content/blog/drafts/
 
 # OG design handoff / reference material (not needed to build the site)
 design_handoff_og_images/
+
+# BITS slide-deck brand fonts (Instrument Sans / IBM Plex Mono). Reference
+# material for Keynote, not a site asset: the site loads its faces from Google
+# Fonts. Kept local so it doesn't bloat the published blog repo.
+fonts/

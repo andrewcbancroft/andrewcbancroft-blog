@@ -1,0 +1,1026 @@
+@charset "UTF-8";
+
+/* All color and type values come from css/tokens.css; edit tokens there,
+   not hex values here. */
+
+/* ---------------------------------------------------------
+/* Fontawesome
+---------------------------------------------------------*/
+
+/*!
+ *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+
+@font-face {
+    font-family: FontAwesome;
+    src: url(../fonts/fontawesome-webfont.eot?v=4.7.0);
+    src: url(../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0) format("embedded-opentype"), url(../fonts/fontawesome-webfont.woff2?v=4.7.0) format("woff2"), url(../fonts/fontawesome-webfont.woff?v=4.7.0) format("woff"), url(../fonts/fontawesome-webfont.ttf?v=4.7.0) format("truetype"), url(../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+.fa-lg {
+    font-size: 1.333333em;
+    line-height: .75em;
+    vertical-align: -15%
+}
+.fa-2x {
+    font-size: 2em
+}
+.fa-3x {
+    font-size: 3em
+}
+.fa-4x {
+    font-size: 4em
+}
+.fa-5x {
+    font-size: 5em
+}
+.fa-fw {
+    width: 1.285714em;
+    text-align: center
+}
+.fa-tag:before {
+    content: ""
+}
+.fa-folder:before {
+    content: ""
+}
+.fa-facebook:before {
+    content: ""
+}
+.fa-google-plus:before {
+    content: ""
+}
+.fa-linkedin:before {
+    content: ""
+}
+.fa-rss:before {
+    content: ""
+}
+.fa-rss-square:before {
+    content: ""
+}
+.fa-twitter:before {
+    content: ""
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0
+}
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto
+}
+
+/* ---------------------------------------------------------
+/* Sticky footer styles
+---------------------------------------------------------*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+  font-family: var(--font-ui);
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  font-size: 15px;
+}
+
+/* ---------------------------------------------------------
+Basic page styling
+---------------------------------------------------------*/
+/* Not required for template or sticky footer method. */
+
+.homepage-conatiner {
+  max-width: 940px;
+}
+
+body > .container {
+  padding: 80px 15px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+a {
+  color: var(--color-link);
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+.text-muted {
+  color: var(--color-ink-muted) !important;
+}
+
+.content {
+  font-size: 1.1em;
+}
+
+.jump-target {
+  position: relative;
+  display: block;
+  top: -70px;
+}
+
+.resources {
+  border: solid 1px var(--color-border);
+}
+
+.resources .resources-header {
+  padding: .1em .5em .1em .5em;
+  background-color: var(--color-surface-subtle);
+  font-size: 1.25em;
+}
+
+.resources .resources-download-instructions {
+  padding: .75em .5em 0 .5em;
+  font-size: 1.00em;
+}
+
+.resources .resources-content {
+  padding: .75em .5em 0 .5em;
+}
+.resources .resources-content li {
+  list-style: none;
+}
+/* ---------------------------------------------------------
+Header
+---------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-ui);
+  font-weight: bold;
+  color: var(--color-heading);
+  line-height: var(--leading-heading);
+}
+
+/**
+ * Header
+ */
+ .header {
+  padding: 1.777em 1.125em 2.665em 1.125em;
+  margin-bottom: 4.209em;
+  background-color: var(--color-primary);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.header p.toggle-container {
+  width: 2.369em;
+  height: 2.369em;
+  margin: 0 0 1.777em;
+}
+.header-index {
+  margin-bottom: 0;
+}
+
+   .header {
+    padding-top: 7.478em;
+    background-color: var(--color-primary);
+  }
+  .background-contrast .header {
+    margin-left: -3.157em;
+    margin-right: -3.157em;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .background-contrast .footer {
+    margin-left: -3.157em;
+    margin-right: -3.157em;
+    padding-left: 3.157em;
+    padding-right: 3.157em;
+  }
+  .background-contrast .main-nav {
+    max-width: 69.75em;
+    margin: 0 auto;
+  }
+  .csstransforms3d.csstransitions .background-contrast .main-nav {
+    left: auto;
+  }
+  .site-title,
+.site-description {
+  color: var(--color-on-primary);
+}
+.site-title a,
+.site-description a {
+  color: var(--color-on-primary);
+}
+
+  .site-title {
+    margin: 0;
+    line-height: 1.333;
+    position: relative;
+    text-align: left;
+    font-size: 4.209em;
+    letter-spacing: -2px;
+    font-weight: 300;
+    color: var(--color-on-primary);
+    margin-bottom: 0;
+  }
+  .site-title small {
+    opacity: 0.8;
+  }
+  .site-title a {
+    text-decoration: none;
+  }
+
+.site-intro .avatar {
+  width: 128px;
+  height: auto;
+  display: block;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-box-shadow: 0 0 0 0.618em rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 0.618em rgba(0, 0, 0, 0.05);
+}
+.site-intro .grav-clone {
+  display: none;
+}
+  .site-intro .site-title,
+  .site-intro .site-description {
+    text-align: center;
+  }
+
+  .site-description {
+    font-size: .844em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    opacity: 0.9;
+  }
+
+.about-me-blurb {
+  padding: 2em;
+  background-color: var(--color-surface-subtle);
+}
+
+/* ---------------------------------------------------------
+Table of Contents
+---------------------------------------------------------*/
+nav#TableOfContents {
+  margin-top: 0.75em;
+}
+nav#TableOfContents ul {
+   padding-inline-start: 0.5em;
+}
+
+nav#TableOfContents li {
+  list-style: none;
+  font-size: 22px;
+}
+
+
+nav#TableOfContents li a::before {
+  content: "‣ ";
+}
+
+.toc-header {
+  padding: .1em .5em .1em .5em;
+  background-color: var(--color-surface-subtle);
+  font-size: 1.25em;
+}
+.toc {
+  border: solid 1px var(--color-border);
+}
+
+/* ---------------------------------------------------------
+Navbar
+---------------------------------------------------------*/
+
+.navbar {
+  background-color: var(--color-primary-deep);
+  border-bottom: 0px;
+}
+
+.navbar .navbar-brand, .navbar .navbar-brand:hover {
+  color: var(--color-on-primary);
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: .9em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-brand .brand-mark {
+  height: 26px;
+  width: 26px;
+  margin-right: .5em;
+  flex: none;
+}
+
+.navbar-nav > li > a {
+  color: var(--color-on-primary);
+  text-transform: uppercase;
+  font-size: .8em;
+  font-weight: 500;
+}
+
+.navbar-nav > li > a:hover {
+  color: var(--color-on-primary);
+}
+
+.navbar-nav .nav-link.show {
+  color: #e9ecef;
+}
+
+.nav-item.dropdown .dropdown-item:active {
+  background-color: var(--color-surface-subtle) !important;
+  color: var(--color-ink-muted) !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
+}
+
+/* The fixed-top collapsed menu had no internal scroll, so long menus
+clipped on short viewports; cap its height and let it scroll. */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    max-height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+  }
+}
+
+/* ---------------------------------------------------------
+Homepage
+---------------------------------------------------------*/
+
+.search table tr td {
+  border-color: transparent;
+}
+
+.homepage h1 {
+  text-align: center;
+  margin: 0px 0px 30px 0px;
+  line-height: 1em;
+}
+
+.homepage h1 .main_line{
+  font-size: .85em;
+  font-weight: 700;
+}
+
+.homepage h1 .minor_line{
+  font-size: .75em;
+  font-weight: 400;
+}
+
+.homepage h2 {
+  text-align: center;
+  font-size: 1.85em;
+  font-weight: 700;
+  margin: 20px 0px 20px 0px
+}
+
+.homepage h3 {
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+.homepage h3.section_header {
+  background-color: var(--color-primary-tint);
+  color: var(--color-heading);
+  padding: 10px 20px 10px 20px;
+  border: solid 1px var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.homepage h3.category_header {
+  background-color: var(--color-surface-subtle);
+  color: var(--color-ink);
+  padding: 10px 20px 10px 20px;
+  border: solid 1px var(--color-border);
+  margin-bottom: 20px;
+}
+
+.homepage h4 {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+.homepage h4 .card_header {
+  font-size: 1.2em;
+}
+
+.homepage p{
+  font-size: 1.1em;
+}
+
+.homepage .blurb{
+  margin-bottom: 1.5em;
+}
+
+/* ---------------------------------------------------------
+Homepage cards
+---------------------------------------------------------*/
+
+.homepage .card{
+  border-radius: 0rem;
+  margin-bottom: 20px;
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.homepage .card-header {
+  background-color: var(--color-surface);
+  border-bottom-color: var(--color-border);
+}
+
+.homepage .card-body ul{
+    padding-left: 20px;
+    margin-bottom: 0;
+  }
+
+  .homepage .card-body li{
+    font-size: 1.05em;
+  }
+
+  .recent-work-body li {
+    list-style: none;
+  }
+
+  .homepage .card-body .publish-date{
+    margin-bottom: 5px;
+  }
+
+  .homepage .card-body .excerpt{
+    margin-bottom: 15px;
+  }
+
+@media (min-width: 480px) {
+  .homepage .card-body {
+    -webkit-columns: 384px 2;
+      -moz-columns: 384px 2;
+          columns: 384px 2;
+  }}
+
+  .homepage .article_list li{
+    font-size: 1em;
+  }
+
+  .article_list .date_published {
+    font-size: .7em;
+  }
+
+  .homepage .article_list {
+    -webkit-columns: 1;
+    -moz-columns: 1;
+    columns: 1;
+  }
+
+  @media (min-width: 480px) {
+    .homepage .article_list {
+      -webkit-columns: 1;
+      -moz-columns: 1;
+      columns: 1;
+    }
+
+    .homepage .article_list li{
+      font-size: 1.2em;
+    }
+  }
+
+
+/* ---------------------------------------------------------
+Technical Notes
+---------------------------------------------------------*/
+
+.technica_note, .page {
+  font-family: var(--font-ui);
+}
+
+.technical_note .technical_note_date{
+  margin-bottom:1em;
+}
+
+.technical_note .mjx-math{
+  font-size: 1.1em;
+}
+
+.technical_note h1, .page h1{
+  font-size: 1.8rem;
+}
+
+.technical_note h2{
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: .5em;
+}
+
+.technical_note h3{
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+.technical_note h4{
+  font-size: 1.05em;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+.technical_note h5{
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+/* ---------------------------------------------------------
+Articles: long-form reading typography
+---------------------------------------------------------*/
+
+/* Cap the whole article shell so the header (badges, title, date)
+   shares a column with the prose instead of spanning the container. */
+.article {
+  max-width: var(--measure-wide);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article h1{
+  font-weight: bold;
+  font-family: var(--font-ui);
+  text-align: center;
+  margin-bottom:10px;
+}
+
+.article header {
+  margin: 30px 0 30px 0;
+}
+
+.article .content{
+  font-family: var(--font-body);
+}
+
+/* Prose children hold the reading measure; the min() keeps replaced
+   elements (images) from overflowing narrow viewports. */
+.article .content > * {
+  max-width: min(var(--measure), 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Breakout children: code, tables, media use the wider column.
+   .highlight-wrapper is the runtime wrapper the copy-code script
+   (baseof.html) puts around each .highlight. */
+.article .content > .highlight,
+.article .content > .highlight-wrapper,
+.article .content > pre,
+.article .content > table,
+.article .content > figure,
+.article .content > .video-embed {
+  max-width: min(var(--measure-wide), 100%);
+}
+
+.article .content p, .article .content li{
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.article .content p{
+  padding-top:.25em;
+  padding-bottom:.25em;
+}
+
+.article .content p .mjx-math {
+  font-size: 1em;
+}
+
+.article .content blockquote{
+  font-style: italic;
+  padding: 0 2.5em 0 2.5em;
+  line-height: var(--leading-body);
+  color: var(--color-ink-muted);
+  border-left: 3px solid var(--color-border);
+}
+
+.article .article_date{
+  font-size: 1.2em;
+  text-align: center;
+  font-family: var(--font-ui);
+  color: var(--color-ink-muted);
+}
+
+.article h2{
+  font-size: 1.6em;
+  margin-top: 1.5em;
+  margin-bottom: .5em;
+  font-family: var(--font-ui);
+  font-weight: bold;
+}
+
+.article h3{
+  font-size: 1.35em;
+  margin-top: 1.25em;
+  font-family: var(--font-ui);
+  font-weight: bold;
+}
+
+.article h4{
+  font-size: 1.2em;
+  font-family: var(--font-ui);
+  font-weight: bold;
+}
+
+.article h5{
+  font-size: 1.1em;
+  font-family: var(--font-ui);
+  font-weight: bold;
+}
+
+/* ---------------------------------------------------------
+Biography
+---------------------------------------------------------*/
+
+.biography{
+  padding: 1em;
+  border: solid 1px var(--color-border);
+  margin-top: 3em;
+}
+
+.biography p{
+  margin: 0;
+  font-style: italic;
+  font-family: var(--font-body);
+  font-size: 1.2em;
+  color: var(--color-ink-muted);
+}
+
+/* ---------------------------------------------------------
+Code
+---------------------------------------------------------*/
+
+pre code{
+  color: var(--color-code-ink);
+  font-family: var(--font-mono);
+}
+
+pre {
+  padding: .5em;
+  display: block;
+  margin-bottom: 0em;
+  background-color: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-radius: 4px;
+}
+
+code{
+  color: var(--color-code-accent);
+  font-family: var(--font-mono);
+}
+/* ---------------------------------------------------------
+Images
+---------------------------------------------------------*/
+
+img{
+  max-width: 100%;
+  height: auto;
+  display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---------------------------------------------------------
+Bug reporting
+---------------------------------------------------------*/
+
+.bug_reporting{
+    padding: 1em;
+    border: solid 1px var(--color-border);
+    margin-top: 3em;
+
+}
+
+.bug_reporting h4{
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+.bug_reporting p{
+    margin: 0;
+    font-size: 16px;
+}
+
+.wip{
+    padding: 1em;
+    border: solid 1px var(--color-primary);
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.wip h4{
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+.wip p{
+    margin: 0;
+    font-size: 16px;
+}
+
+
+
+/* ---------------------------------------------------------
+Flashcards
+---------------------------------------------------------*/
+
+.flashcard {
+  max-height: 400px !important;
+  -webkit-box-shadow: 8px 8px 5px -4px rgba(140,140,140,0.8);
+  -moz-box-shadow: 8px 8px 5px -4px rgba(140,140,140,0.8);
+  box-shadow: 8px 8px 5px -4px rgba(140,140,140,0.8);
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.flashcard_ad {
+  margin-bottom: 1.5em;
+  font-size: 1.05em;
+}
+
+/* ---------------------------------------------------------
+Tables
+---------------------------------------------------------*/
+
+table{
+  margin: 1em;
+}
+
+table,tr,th,td{
+  font-family: var(--font-ui);
+  border:1px solid var(--color-border);
+  border-collapse:collapse;
+  padding: 5px;
+  font-size: .95em;
+  color: var(--color-ink);
+}
+
+td, th{
+  text-align:left;
+  vertical-align:middle;
+  word-break:break-all;
+}
+
+th{
+  font-weight:bold;
+}
+
+/* ---------------------------------------------------------
+Render Math
+---------------------------------------------------------*/
+
+div.math{
+  font-size: 1em;
+}
+
+/*
+  Copy Code button
+*/
+.highlight-wrapper {
+  display: block;
+}
+
+.highlight {
+  position: relative;
+  z-index: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.highlight > .chroma {
+  position: static;
+  z-index: 1;
+}
+
+.chroma {
+  overflow: auto;
+}
+
+.chroma .lntable {
+  width: 100%;
+  margin: 0;
+  border-spacing: 0;
+  border: 0;
+  overflow: auto;
+}
+
+.chroma .lntd:first-child {
+  margin: 0;
+}
+
+.chroma .lntd:last-child {
+  margin: 0;
+}
+
+.copy-code-button {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 14px;
+  width: 65px;
+  color: var(--color-on-primary);
+  background-color: var(--color-primary-deep);
+  border: 1.25px solid var(--color-primary-deep);
+  border-top-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  white-space: nowrap;
+  padding: 4px 4px 5px 4px;
+  margin: 0 0 0 1px;
+  cursor: pointer;
+
+}
+
+.copy-code-button:hover,
+.copy-code-button:focus,
+.copy-code-button:active,
+.copy-code-button:active:hover {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  opacity: 0.9;
+}
+
+.copyable-text-area {
+  position: absolute;
+  height: 0;
+  z-index: -1;
+  opacity: 0.01;
+}
+
+/* Newsletter signup component (layouts/partials/newsletter-signup.html) */
+.newsletter-signup {
+  margin: 2.5rem 0 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 6px;
+  background-color: var(--color-surface-subtle);
+}
+
+.newsletter-signup--whale {
+  margin: 1.5rem 0 1rem 0;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-top: 1px solid var(--color-border);
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.newsletter-hook {
+  font-size: 1.05rem;
+  margin-bottom: 0.9rem;
+}
+
+.newsletter-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.newsletter-email {
+  flex: 1 1 14rem;
+  max-width: 24rem;
+}
+
+.newsletter-button {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary-deep);
+  border-color: var(--color-primary-deep);
+  white-space: nowrap;
+}
+
+.newsletter-button:hover,
+.newsletter-button:focus,
+.newsletter-button:active {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.newsletter-privacy {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+  margin: 0.6rem 0 0 0;
+}
+
+.newsletter-message {
+  font-weight: 700;
+  color: var(--color-link);
+  margin: 0.6rem 0 0 0;
+}
+
+.newsletter-page .newsletter-signup {
+  margin-top: 1rem;
+}
+
+/* Era banners (layouts/partials/era-banner.html): honest archive labels */
+.era-banner {
+  margin: 0 0 1.5rem 0;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 6px;
+  background-color: var(--color-surface-subtle);
+}
+
+.era-banner p {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.95rem !important;
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+}
+
+.era-banner strong {
+  color: var(--color-ink);
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.04em;
+}
+
+.era-banner--dead {
+  border-left-color: var(--color-code-accent);
+}
+
+.era-banner--dead strong {
+  color: var(--color-code-accent);
+}
+
+/* Weekly-unit post fields (archetypes/weekly-unit.md) */
+.one-idea {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--color-primary);
+  background-color: var(--color-primary-tint);
+  border-radius: 0 6px 6px 0;
+}
+
+.one-idea-header {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-link);
+  margin-bottom: 0.4rem;
+}
+
+.one-idea p {
+  margin: 0;
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 1.5rem 0;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 6px;
+}

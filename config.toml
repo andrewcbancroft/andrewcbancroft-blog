@@ -11,6 +11,12 @@ canonifyURLs=true
 publishDir="docs"
 disableKinds = ["section", "taxonomy", "taxonomyTerm"]
 
+# Never render unfinished drafts into the published site. The draft source lives
+# in content/blog/drafts/ (gitignored, kept local per .gitignore). This excludes
+# the whole directory from the build regardless of per-file front matter, so a
+# future draft dropped there can't leak into docs/.
+ignoreFiles = ["content/blog/drafts/"]
+
 # Generate /robots.txt (template lives in the theme) so crawlers get an
 # explicit allow + a Sitemap pointer. Without this Hugo emits no robots.txt
 # and the path 404s.
