@@ -23,7 +23,7 @@ You can go to any web page, right-click it, and **view the source**. 🤯
 
 I could not believe that was allowed. But I was in tinker nerd heaven. I could go to *any web page* on the *entire Internet* and view its source to see what was under the hood. 
 
-So...what do you think I did? *Nailed it.* I went straight to my favorite Star Wars page, right-clicked, View[ed] Source, and **behold**. There it was in all its HTML glory. Every piece of what made that page *that page*, sitting right out in the open before my eyes.
+So...what do you think I did? *Nailed it.* I went straight to my favorite Star Wars page, right-clicked, View(ed) Source, and **behold**. There it was in all its HTML glory. Every piece of what made that page *that page*, sitting right out in the open before my eyes.
 
 My next thought was, "I'm going to remake this. And then I'm going to make it *mine*."
 
