@@ -6,6 +6,8 @@ type: blog
 date: 2026-07-22T09:00:00-05:00
 displaydate: true
 showrecent: true
+aliases:
+  - /blog/musings/how-i-learned-to-copy-and-paste/
 tags:
   - Learning
   - AI

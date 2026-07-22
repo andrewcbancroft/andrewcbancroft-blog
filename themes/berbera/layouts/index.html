@@ -45,7 +45,8 @@
         <h5>Hi 👋🏻 I’m Andrew.</h5>
         <p>I’ve spent more than 15 years as a developer and teacher, helping people succeed with technology. I write about software and data from the ground up: <a
             href="#ios-development">iOS development in Swift</a>, <a
-            href="#data">data engineering and analysis</a>, and how AI is changing the way we learn and build.</p>
+            href="#data">data engineering and analysis</a>, and <a
+            href="#ai">how AI is changing the way we learn and build</a>.</p>
         <p>Structured explanations. Only the details that matter. Why before how.</p>
     </div>
 </div>
@@ -436,6 +437,29 @@
             </div>
         </div>
         {{ end }}
+
+        <span id="ai" class="jump-target"></span>
+        <div class="row" id="">
+            <div class="col-sm-12">
+                <h3 class="category_header">AI</h3>
+            </div>
+        </div>
+
+        <div class="row" id="ai-general">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <ul>
+                            {{ range (where .Site.RegularPages "File.Dir" "in" "/blog/ai/").ByDate.Reverse }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <span id="dot-net-development" class="jump-target"></span>
         <div class="row" id="">
