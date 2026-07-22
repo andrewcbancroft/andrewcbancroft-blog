@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-89T75EE32J"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-89T75EE32J');
+    </script>
+    
+    
+    
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#1668A8"
+                    },
+                    "button": {
+                        "background": "#114E7F",
+                        "text": "#ffffff"
+                    }
+                }
+            })
+        });
+    </script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link rel="icon" href="https://www.andrewcbancroft.com/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="https://www.andrewcbancroft.com/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.andrewcbancroft.com/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.andrewcbancroft.com/favicon-16.png">
+<link rel="apple-touch-icon" href="https://www.andrewcbancroft.com/apple-touch-icon.png">
+
+
+
+<meta name="description" content="How I taught myself web development by hand-typing every line, and why I still won&#39;t copy and paste the things I actually want to understand, including the output of AI.">
+<link rel="canonical" href="https://www.andrewcbancroft.com/blog/musings/how-i-learned-to-copy-and-paste/">
+
+
+  
+  
+  
+    
+  
+<meta property="og:title" content="How I Learned to Copy and Paste, and Why I Never Do">
+<meta property="og:description" content="How I taught myself web development by hand-typing every line, and why I still won&#39;t copy and paste the things I actually want to understand, including the output of AI.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.andrewcbancroft.com/blog/musings/how-i-learned-to-copy-and-paste/">
+<meta property="og:site_name" content="Andrew Bancroft">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.andrewcbancroft.com/og/og-how-i-learned-to-copy-and-paste.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="How I Learned to Copy and Paste, and Why I Never Do">
+
+<meta property="article:published_time" content="2026-07-22T09:00:00-05:00">
+<meta property="article:modified_time" content="2026-07-22T09:00:00-05:00">
+<meta property="article:author" content="Andrew Bancroft">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How I Learned to Copy and Paste, and Why I Never Do">
+<meta name="twitter:description" content="How I taught myself web development by hand-typing every line, and why I still won&#39;t copy and paste the things I actually want to understand, including the output of AI.">
+<meta name="twitter:image" content="https://www.andrewcbancroft.com/og/og-how-i-learned-to-copy-and-paste.png">
+<meta name="generator" content="Hugo 0.164.0">
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How I Learned to Copy and Paste, and Why I Never Do",
+  "url": "https:\/\/www.andrewcbancroft.com\/blog\/musings\/how-i-learned-to-copy-and-paste\/",
+  "wordCount": "969",
+  "datePublished": "2026-07-22T09:00:00-0500",
+  "dateModified": "2026-07-22T09:00:00-0500",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew"
+  },
+  "keywords": "Learning, AI"
+  ,
+  "temporalCoverage": "2026"
+
+  ,"description": "How I taught myself web development by hand-typing every line, and why I still won't copy and paste the things I actually want to understand, including the output of AI."
+}
+</script><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Home",
+      "item": "https://www.andrewcbancroft.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Musings",
+      "item": "https://www.andrewcbancroft.com/#musings"
+    },
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "How I Learned to Copy and Paste, and Why I Never Do",
+      "item": "https://www.andrewcbancroft.com/blog/musings/how-i-learned-to-copy-and-paste/"
+    }
+  ]
+}
+</script>
+
+
+
+    <title>How I Learned to Copy and Paste, and Why I Never Do</title>
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    
+
+    
+    
+    
+    
+    <link href="https://www.andrewcbancroft.com/css/tokens.1eb591b05263d83439a3d33133a3e8bb845574c91c8f21b76a84d805770cedc3.css" rel="stylesheet">
+    <link href="https://www.andrewcbancroft.com/css/custom.f6f2b4b0441dedd71b1d1e2b64f6978a0b4d1b8dc1b511243279b124be473280.css" rel="stylesheet">
+    <link href="https://www.andrewcbancroft.com/css/syntax.63ab2518b1177501a642c836709e8e2f3e3e2af85e992096662af373648571f1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+    <script>
+        
+        
+        
+        (function () {
+            var mq = window.matchMedia("(prefers-color-scheme: dark)");
+            function apply() {
+                document.documentElement.setAttribute("data-bs-theme", mq.matches ? "dark" : "light");
+            }
+            apply();
+            mq.addEventListener("change", apply);
+        })();
+    </script>
+
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://www.andrewcbancroft.com/"><svg class="brand-mark" width="26" height="26" viewBox="3.43 3.43 57.14 57.14" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25 10 L7 32 L25 54"/>
+    <path d="M39 10 L57 32 L39 54"/>
+  </g>
+  <rect x="21" y="21" width="22" height="22" rx="5.5" fill="#06B6D4"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="miter">
+    <path d="M25.8 40.2 L32 26.7 L38.2 40.2"/>
+    <path d="M23.9 35.5 L36 34.8"/>
+  </g>
+</svg>
+Andrew Bancroft</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ms-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.andrewcbancroft.com/#pluralsight-courses">Pluralsight Courses</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Topics
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#ios-development">iOS Development</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#data">Data</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#dot-net-development">.NET Development</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/#musings">Musings</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Connect With Me
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/portfolio"><i
+                                class="fas fa-briefcase"></i> Portfolio</a>
+                            <a class="dropdown-item" href="https://www.pluralsight.com/authors/andrew-bancroft"><i
+                                    class="fas fa-play"></i> Pluralsight Courses</a>
+                            <a class="dropdown-item" href="https://github.com/andrewcbancroft"><i class="fab fa-github"></i>
+                                GitHub</a>
+                            <a class="dropdown-item" href="https://www.linkedin.com/in/andrewcbancroft/"><i
+                                    class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a class="dropdown-item" rel="me" href="https://hachyderm.io/@andrewcbancroft"><i
+                                    class="fab fa-mastodon"></i> Mastodon</a>
+                            <a class="dropdown-item" href="https://twitter.com/andrewcbancroft"><i
+                                    class="fab fa-x-twitter"></i> X</a>
+                            <a class="dropdown-item" href="https://www.youtube.com/channel/UCDPV9kMhP-b5EFRI7d812pg"><i
+                                    class="fab fa-youtube"></i> YouTube</a>
+                            <a class="dropdown-item" href="https://dataday.life"><i class="fas fa-link"></i>
+                                www.dataday.life</a>
+                            <a class="dropdown-item" href="https://www.andrewcbancroft.com/index.xml"><i class="fas fa-rss"></i> Feed</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+<div class="container">
+  <div class="row">
+      <div class="col-sm-12">
+
+
+<article>
+  <div class="article">
+    <header>
+      <h1 class="article-title">How I Learned to Copy and Paste, and Why I Never Do</h1>
+      <div class="article_date">
+        <time datetime=" 2026-07-22T09:00:00-05:00 "> July 22, 2026</time>
+      </div>
+    </header>
+    <div class="content">
+    
+
+    <p></p>
+
+    <p>It was the mid 1990s and I was about thirteen. These were the days of Netscape Navigator and internet connections that made sound (if you know, you know) and delivered web pages slower than molasses flowin&rsquo; up hill on a cold winter&rsquo;s day. So&hellip; the pages were simple. And I had a Star Wars fan page I loved. I would look at it and think, &ldquo;I want to know how to make something like that.&rdquo;</p>
+<p>I had a friend who was, like me, a tad bit on the nerdy side. One day the two of us decided we wanted to learn how to build a web page. He had already figured out <em>the secret</em>:</p>
+<p>You can go to any web page, right-click it, and <strong>view the source</strong>. 🤯</p>
+<p>I could not believe that was allowed. But I was in tinker nerd heaven. I could go to <em>any web page</em> on the <em>entire Internet</em> and view its source to see what was under the hood.</p>
+<p>So&hellip;what do you think I did? <em>Nailed it.</em> I went straight to my favorite Star Wars page, right-clicked, View[ed] Source, and <strong>behold</strong>. There it was in all its HTML glory. Every piece of what made that page <em>that page</em>, sitting right out in the open before my eyes.</p>
+<p>My next thought was, &ldquo;I&rsquo;m going to remake this. And then I&rsquo;m going to make it <em>mine</em>.&rdquo;</p>
+<p>So here&rsquo;s what I did: I put the source code on one side of my screen. I opened up plain old Notepad on the other. And I started typing. Exactly what I saw. Every. Single. Character.</p>
+<blockquote>
+<p>Angle bracket, HTML, close angle bracket. Angle bracket, body, close angle bracket. And on, and on, until I had typed out by hand every single line of markup that made up that page.</p>
+</blockquote>
+<p>Most people would consider that painstaking, but I was on a dopamine high. I&rsquo;d type a few lines, save my HTML file, and refresh my browser to see the changes I&rsquo;d just made. That immediate feedback loop was exactly the hit my thirteen-year-old brain was chasing.</p>
+<p>Fast forward.</p>
+<p>A few days later my friend and I got together again. I showed him the page I had built, and I walked him through how I did it. &ldquo;You right-click, you view source, and then you just&hellip; type it all into a new Notepad file with a .html extension,&rdquo; I remember saying with enthusiasm!</p>
+<p>He looked at me. &ldquo;Bro. Why didn&rsquo;t you just&hellip; <em>copy and paste</em>?&rdquo;</p>
+<p>And I said, in a true &ldquo;bless your heart&rdquo; moment, &ldquo;What&rsquo;s&hellip; copy and paste? 👀&rdquo;</p>
+<p>He looked at me like I was a complete idiot. But I wasn&rsquo;t playing dumb.</p>
+<p>So&hellip;kind friend as he was, he showed me. &ldquo;You select the text you want, Control-C. You put your cursor where you want a copy of that text to go and press Control-V. Because obviously, &lsquo;V&rsquo; is for paste.&rdquo;</p>
+<p>Control-C, Control-V. So easy!</p>
+<p>In a millisecond, my friend re-created the web page it had taken me <em>days</em> to hand type.</p>
+<p>But here is what I walked away with that he didn&rsquo;t.</p>
+<p><strong>I knew how to build the thing.</strong></p>
+<p>He could replicate it. I could <em>extend</em> it.</p>
+<p>I could take the page apart and put it back together and evolve my <em>own</em> from it, because every single line had passed through my fingertips on the way to the screen.</p>
+<p>I know how this sounds. The kid who hand-typed a webpage because he didn&rsquo;t know <code>Ctrl+C</code> is now going to tell you there&rsquo;s something to doing it the slow way. Fair enough. But it stuck!</p>
+<p>And by &ldquo;it stuck&rdquo; I mean, <strong>this became my method</strong>.</p>
+<p>As a technology practitioner, of course I (used to) search the Internet. Not too long ago, I&rsquo;d find help on Stack Overflow or someone&rsquo;s blog or in a forum post. Would I copy and paste what I found? Honestly, <em>sometimes</em>. Sorry&hellip; the title was a lie. BUT. Here&rsquo;s the truth: when I actually want to understand something&hellip; when I want it to live in my own head and stick around, <code>Ctrl+C</code> is a forbidden key combination for me.</p>
+<p>And now, all these years later, the most tempting copy-and-paste machine anyone has ever built is built into my IDEs and running in all my terminals.</p>
+<p>I&rsquo;m no longer writing a lot of code &ldquo;by hand&rdquo;. I&rsquo;m describing goals, intentions, and motivations. I&rsquo;m creating plans so that I can let a swarm of AI agents tackle the implementation.</p>
+<p>Whenever I hand a problem to an AI, the AI hands me back way more than a line of copy-pasteable code. In many cases, my AI hands me the <strong>whole thing</strong>, not just snippets.</p>
+<p>I&rsquo;m not here to wag my finger at the robots or those of us who now rely on them. I&rsquo;m also not going to pretend that the fast path isn&rsquo;t sitting right there in front of us. So I let my AIs generate. Truly, I do.</p>
+<p>And then I do what I&rsquo;ve always done: I slow down, and I pull up some of the generated code on one side of my screen, and an empty editor on the other. And just like I typed out that Star Wars page in Notepad, I hand-type what I see, asking at every line, &ldquo;Do I understand why this one is here? Could I have written it myself?&rdquo; And if my honest answer is, &ldquo;No,&rdquo; I pause and ask my AI Friend to be my tutor and have them explain until I get it.</p>
+<p>So while AI can build an entire solution to my problem in minutes, I&rsquo;m still in the business of trying to become someone who could have built it on my own.</p>
+<p>And for me that means copy and paste (and &ldquo;gen it and forget it&rdquo;) are forbidden.</p>
+<p>When I want to understand, it&rsquo;s &ldquo;by hand&rdquo;.</p>
+
+
+    <div class="newsletter-signup newsletter-signup--general">
+  <p class="newsletter-hook">Don't just copy it. Understand it. I explain programming and data topics from the ground up, why before how, minus the fluff.</p>
+  <form class="newsletter-form" data-newsletter-form action="https://app.kit.com/forms/9699642/subscriptions" method="post" novalidate>
+    <input type="hidden" name="fields[source]" value="general" data-newsletter-source>
+    <div class="newsletter-fields">
+      <label class="visually-hidden" for="newsletter-email-general">Email address</label>
+      <input class="form-control newsletter-email" id="newsletter-email-general"
+        type="email" name="email_address" placeholder="you@example.com"
+        autocomplete="email" required>
+      <button class="btn newsletter-button" type="submit">Get the next lesson</button>
+    </div>
+    <p class="newsletter-privacy">Your email gets you new lessons and nothing else. Unsubscribe anytime, instantly.</p>
+    <p class="newsletter-message" data-newsletter-message hidden aria-live="polite"></p>
+  </form>
+</div>
+<script>
+  (function () {
+    var VALID_SOURCES = ["whale", "reader", "general", "newsletter-page"];
+    var srcParam = new URLSearchParams(window.location.search).get("src");
+    document.querySelectorAll("form[data-newsletter-form]").forEach(function (form) {
+      var sourceInput = form.querySelector("[data-newsletter-source]");
+      if (srcParam && VALID_SOURCES.indexOf(srcParam) !== -1 && sourceInput.value === "newsletter-page") {
+        sourceInput.value = srcParam;
+      }
+      form.addEventListener("submit", function (event) {
+        
+        
+        event.preventDefault();
+        var email = form.querySelector("input[type=email]");
+        if (!email.value || email.validity.typeMismatch || email.validity.valueMissing) {
+          email.reportValidity();
+          return;
+        }
+        var message = form.querySelector("[data-newsletter-message]");
+        var fields = form.querySelector(".newsletter-fields");
+        var button = form.querySelector("button[type=submit]");
+        var action = form.getAttribute("action");
+        function fireEvent() {
+          if (typeof gtag === "function") {
+            gtag("event", "newsletter_signup", { source: sourceInput.value });
+          }
+        }
+        function showSuccess() {
+          fields.hidden = true;
+          
+          
+          message.textContent = "Almost in. I just sent you an email. Open it, click the link inside, and you're set.";
+          message.hidden = false;
+        }
+        function showError() {
+          if (button) { button.disabled = false; }
+          message.textContent = "Hmm, that didn't go through. Mind trying once more?";
+          message.hidden = false;
+        }
+        if (!action) {
+          
+          console.log("newsletter-signup (sandbox)", { email: email.value, source: sourceInput.value });
+          fireEvent();
+          showSuccess();
+          return;
+        }
+        if (button) { button.disabled = true; }
+        
+        
+        fetch(action, {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: new URLSearchParams(new FormData(form))
+        }).then(function (response) {
+          if (!response.ok) { throw new Error("subscribe failed: " + response.status); }
+          fireEvent();
+          showSuccess();
+        }).catch(function () {
+          showError();
+        });
+      });
+    });
+  })();
+</script>
+
+    <aside>
+      
+      
+    </aside>
+
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "andrewcbancroft" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+</article>
+</div></div></div>
+
+
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted"><a href="https://www.andrewcbancroft.com/newsletter/">Get the next lesson &rarr;</a></span><br>
+            <span class="text-muted">This project contains 212 pages and is available on <a
+                    href="https://github.com/andrewcbancroft/andrewcbancroft-blog/tree/master/content/blog">GitHub</a>.
+                Copyright &copy; Andrew Bancroft, <time datetime="2012">2012</time>-<time datetime="2024">2024</time>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    
+    <script>
+        function createCopyButton(highlightDiv) {
+            const button = document.createElement("button");
+            button.className = "copy-code-button";
+            button.type = "button";
+            button.innerText = "Copy";
+            button.addEventListener("click", () =>
+                copyCodeToClipboard(button, highlightDiv)
+            );
+            addCopyButtonToDom(button, highlightDiv);
+        }
+
+        async function copyCodeToClipboard(button, highlightDiv) {
+            const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code")
+                .innerText;
+            try {
+                result = await navigator.permissions.query({ name: "clipboard-write" });
+                if (result.state == "granted" || result.state == "prompt") {
+                    await navigator.clipboard.writeText(codeToCopy);
+                } else {
+                    copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+                }
+            } catch (_) {
+                copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+            } finally {
+                codeWasCopied(button);
+            }
+        }
+
+        function copyCodeBlockExecCommand(codeToCopy, highlightDiv) {
+            const textArea = document.createElement("textArea");
+            textArea.contentEditable = "true";
+            textArea.readOnly = "false";
+            textArea.className = "copyable-text-area";
+            textArea.value = codeToCopy;
+            highlightDiv.insertBefore(textArea, highlightDiv.firstChild);
+            const range = document.createRange();
+            range.selectNodeContents(textArea);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+            document.execCommand("copy");
+            highlightDiv.removeChild(textArea);
+        }
+
+        function codeWasCopied(button) {
+            button.blur();
+            button.innerText = "Copied!";
+            setTimeout(function () {
+                button.innerText = "Copy";
+            }, 2000);
+        }
+
+        function addCopyButtonToDom(button, highlightDiv) {
+            highlightDiv.insertBefore(button, highlightDiv.firstChild);
+            const wrapper = document.createElement("div");
+            wrapper.className = "highlight-wrapper";
+            highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
+            wrapper.appendChild(highlightDiv);
+        }
+
+        document
+            .querySelectorAll(".highlight")
+            .forEach((highlightDiv) => createCopyButton(highlightDiv));
+
+    </script>
+</body>
+
+</html>
