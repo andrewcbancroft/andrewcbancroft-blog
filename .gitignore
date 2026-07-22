@@ -32,3 +32,14 @@ design_handoff_og_images/
 # material for Keynote, not a site asset: the site loads its faces from Google
 # Fonts. Kept local so it doesn't bloat the published blog repo.
 fonts/
+
+# Local-only agent instructions and writing voiceprint. This is a public repo;
+# these hold personal strategy and voice notes and must stay off it. Claude Code
+# reads them from disk regardless of git tracking. (Purged from history 2026-07-20.)
+/CLAUDE.md
+/.claude/voiceprint.md
+
+# Internal project working docs (strategy, traffic/revenue analysis, experiment
+# thresholds, ESP/brand decisions, redirect runbook, lead-magnet brief). Kept
+# local, never published to this public repo. (Purged from history 2026-07-20.)
+/project-docs/
