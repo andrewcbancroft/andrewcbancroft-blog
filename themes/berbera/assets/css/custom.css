@@ -588,10 +588,13 @@ Articles: long-form reading typography
   font-family: var(--font-body);
 }
 
-/* Prose children hold the reading measure; the min() keeps replaced
-   elements (images) from overflowing narrow viewports. */
+/* Prose children fill the wide column so body text lines up with the
+   full width of code blocks. The min() keeps replaced elements (images)
+   from overflowing narrow viewports. To restore the narrow reading
+   measure, swap --measure-wide back to --measure here (code stays wide
+   via the breakout rule below). */
 .article .content > * {
-  max-width: min(var(--measure), 100%);
+  max-width: min(var(--measure-wide), 100%);
   margin-left: auto;
   margin-right: auto;
 }
