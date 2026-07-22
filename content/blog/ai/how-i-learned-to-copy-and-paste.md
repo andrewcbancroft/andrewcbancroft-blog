@@ -29,7 +29,9 @@ My next thought was, "I'm going to remake this. And then I'm going to make it *m
 
 So here's what I did: I put the source code on one side of my screen. I opened up plain old Notepad on the other. And I started typing. Exactly what I saw. Every. Single. Character.
 
-> Angle bracket, HTML, close angle bracket. Angle bracket, body, close angle bracket. And on, and on, until I had typed out by hand every single line of markup that made up that page.
+> Angle bracket, HTML, close angle bracket. Angle bracket, body, close angle bracket.
+
+And on, and on, until I had typed out by hand every single line of markup that made up that page.
 
 Most people would consider that painstaking, but I was on a dopamine high. I'd type a few lines, save my HTML file, and refresh my browser to see the changes I'd just made. That immediate feedback loop was exactly the hit my thirteen-year-old brain was chasing.
 
